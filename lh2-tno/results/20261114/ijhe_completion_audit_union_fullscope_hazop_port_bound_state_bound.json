@@ -18,7 +18,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261111\\native_generic_scope_packets_isolation\\isolation_branch_audit.json",
+        "record": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\isolation_branch_audit.json",
         "schema_version": "prism.native_scope_isolation_branch_catalog_audit.v1",
         "status": "DIAGNOSTIC_ISOLATION_BRANCH_CATALOG_EXECUTED",
         "catalog_status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
@@ -81,7 +81,7 @@
       "name": "diagnostic_native_isolation_event_reconciliation",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\native_isolation_event_reconciliation.json",
+        "record": "lh2-tno\\results\\20261114\\native_isolation_event_reconciliation.json",
         "schema_version": "prism.native_isolation_event_reconciliation.v1",
         "status": "NATIVE_ISOLATION_EVENT_ROWS_RECONCILED_DIAGNOSTIC",
         "event_count": 24,
@@ -123,7 +123,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261114\\native_isolation_catalog_facility_chain_fullscope_hazop_port_bound\\verification.json",
+        "record": "lh2-tno\\results\\20261114\\native_isolation_catalog_facility_chain_fullscope_hazop_port_bound\\verification.json",
         "schema_version": "prism.native_isolation_catalog_facility_chain.v1",
         "status": "NATIVE_ISOLATION_CATALOG_FACILITY_CHAIN_EXECUTED_DIAGNOSTIC",
         "frequency_event_count": 24,
@@ -611,7 +611,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261111\\native_isolation_catalog_facility_chain_near_receptor_v3\\verification.json",
+        "record": "lh2-tno\\results\\20261111\\native_isolation_catalog_facility_chain_near_receptor_v3\\verification.json",
         "facility_id": "generic-lh2-near-receptor-diagnostic",
         "facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
         "conditional_diagnostic_facility_risk_available": true,
@@ -668,7 +668,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261114\\base_state_snapshot_binding_audit_port_bound.json",
+        "record": "lh2-tno\\results\\20261114\\base_state_snapshot_binding_audit_port_bound.json",
         "schema_version": "prism.state_snapshot_binding_audit.v1",
         "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
         "record_count": 24,
@@ -693,7 +693,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261111\\native_generic_scope_packets_isolation\\verification.json",
+        "record": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\verification.json",
         "schema_version": "prism.native_generic_scope_packet_catalog.v1",
         "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
         "frequency_event_count": 24,
@@ -751,7 +751,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261024\\native_generic_scope_packet_evidence_qualification_readiness_v14.json",
+        "record": "lh2-tno\\results\\20261024\\native_generic_scope_packet_evidence_qualification_readiness_v14.json",
         "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
         "worklist_event_count": 24,
         "candidate_event_count": 24,
@@ -788,7 +788,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "release_ledger_schema": "prism.release_termination_inventory_ledger.v1",
         "trace_row_count": 44,
         "expected_case_count": 44,
@@ -819,7 +819,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "status": "PARTIAL_FACILITY_SCOPE",
         "conditional_diagnostic_facility_risk_available": true,
         "conditional_diagnostic_facility_annual_ir_low_high": {
@@ -4649,7 +4649,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "source": "facility_assessment",
         "trace_status": "ALIGNED",
         "frequency_port_binding": {
@@ -4689,7 +4689,7 @@
       "diagnostic_only": false,
       "blocking_reason": "facility release boundary is not closed across all declared cases",
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "schema": "prism.facility_release_boundary_gate.v1",
         "schema_version": "prism.facility_release_boundary_gate.v1",
         "strict_release_boundary_ready": false,
@@ -4843,7 +4843,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261106\\slabx_lh2_validation_audit_recomputed.json",
+        "record": "lh2-tno\\results\\20261106\\slabx_lh2_validation_audit_recomputed.json",
         "schema_version": "prism.slabx_lh2_validation_audit.v1",
         "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
         "model": {
@@ -4901,7 +4901,7 @@
         "structural_diagnostic_coverage": true,
         "native_scope_catalog_structural_coverage": true,
         "native_scope_catalog_evidence": {
-          "record": "results\\20261111\\native_generic_scope_packets_isolation\\verification.json",
+          "record": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\verification.json",
           "schema_version": "prism.native_generic_scope_packet_catalog.v1",
           "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
           "frequency_event_count": 24,
@@ -5126,7 +5126,7 @@
         "domain_count": 8,
         "blocking_reason_count": 0,
         "claims_closed": true,
-        "record": "results\\20261114\\validation_evidence_matrix_with_provider_intake.json"
+        "record": "lh2-tno\\results\\20261114\\validation_evidence_matrix_with_provider_intake.json"
       },
       "blocking_reason": null,
       "diagnostic_only": true,
@@ -5136,7 +5136,7 @@
       "name": "diagnostic_hazop_integrated_risk",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261014\\hazop_provider_bound_integrated_risk.json",
+        "record": "lh2-tno\\results\\20261014\\hazop_provider_bound_integrated_risk.json",
         "schema_version": "prism.hazop_integrated_risk.v1",
         "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
         "current_status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
@@ -5172,7 +5172,7 @@
       "name": "diagnostic_hazop_selection_event_binding",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_selection_event_binding.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_selection_event_binding.json",
         "schema_version": "prism.hazop_event_selection_binding_audit.v1",
         "status": "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
         "selected_scenario_count": 12,
@@ -5199,7 +5199,7 @@
       "name": "diagnostic_hazop_extension_mode_evidence_request",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_extension_mode_evidence_request.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_extension_mode_evidence_request.json",
         "schema_version": "prism.hazop_extension_mode_binding_evidence_request.v1",
         "status": "NO_HAZOP_EXTENSION_MODE_GAP",
         "source_unbound_event_count": 0,
@@ -5221,7 +5221,7 @@
       "name": "diagnostic_hazop_operating_mode_evidence",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261014\\support_center_hazop_operating_mode_evidence_audit.json",
+        "record": "lh2-tno\\results\\20261014\\support_center_hazop_operating_mode_evidence_audit.json",
         "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",
         "status": "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD",
         "sequence_source_count": 3,
@@ -5258,7 +5258,7 @@
       "name": "diagnostic_reviewed_signal_unit_evidence",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261014\\support_center_reviewed_signal_unit_evidence.json",
+        "record": "lh2-tno\\results\\20261014\\support_center_reviewed_signal_unit_evidence.json",
         "schema_version": "prism.reviewed_signal_unit_evidence.v1",
         "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
         "source_document_sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
@@ -5311,7 +5311,7 @@
       "name": "diagnostic_observed_hazop_runtime_mode_selection",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261110\\inspection_center_observed_hazop_runtime_audit.json",
+        "record": "lh2-tno\\results\\20261110\\inspection_center_observed_hazop_runtime_audit.json",
         "schema_version": "prism.observed_hazop_runtime_audit.v1",
         "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
         "runtime_frame_count": 3,
@@ -5341,7 +5341,7 @@
       "name": "diagnostic_observed_hazop_provider_event_binding",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261110\\inspection_center_observed_hazop_provider_event_binding.json",
+        "record": "lh2-tno\\results\\20261110\\inspection_center_observed_hazop_provider_event_binding.json",
         "schema_version": "prism.observed_hazop_provider_event_binding.v1",
         "status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
         "selected_scenario_count": 3,
@@ -5368,7 +5368,7 @@
       "name": "diagnostic_observed_hazop_provider_consequence_chain",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261110\\inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json",
+        "record": "lh2-tno\\results\\20261110\\inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json",
         "schema_version": "prism.observed_hazop_provider_consequence_chain.v1",
         "status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
         "selected_scenario_count": 3,
@@ -5405,7 +5405,7 @@
       "name": "diagnostic_observed_hazop_storage_isolation_branch_evidence",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261110\\observed_hazop_storage_isolation_branch_evidence.json",
+        "record": "lh2-tno\\results\\20261110\\observed_hazop_storage_isolation_branch_evidence.json",
         "schema_version": "prism.observed_hazop_storage_isolation_branch_evidence.v1",
         "status": "SYNTHETIC_ISOLATION_BRANCH_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -5446,7 +5446,7 @@
       "name": "diagnostic_observed_hazop_vaporizer_isolation_branch_evidence",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261110\\observed_hazop_vaporizer_isolation_branch_evidence.json",
+        "record": "lh2-tno\\results\\20261110\\observed_hazop_vaporizer_isolation_branch_evidence.json",
         "schema_version": "prism.observed_hazop_vaporizer_isolation_branch_evidence.v1",
         "status": "SYNTHETIC_VAPORIZER_ISOLATION_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -5482,7 +5482,7 @@
       "name": "diagnostic_facility_evidence_request_coverage",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_evidence_request.json",
+        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_evidence_request.json",
         "schema_version": "prism.facility_evidence_request.v1",
         "status": "OPEN_EVIDENCE_REQUEST",
         "case_request_count": 44,
@@ -5516,7 +5516,7 @@
       "name": "diagnostic_release_boundary_case_audit",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
+        "record": "lh2-tno\\results\\20261114\\release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
         "schema_version": "prism.release_boundary_case_audit.v1",
         "status": "CASE_BOUNDARY_PARTIAL",
         "case_count": 44,
@@ -5538,13 +5538,14 @@
           "two_sided_rupture": 2
         },
         "provider_termination_evidence_supplied": true,
-        "provider_termination_evidence_catalog_path": "results\\20261114\\provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json",
-        "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_PARTIAL",
+        "provider_termination_evidence_catalog_path": "lh2-tno\\results\\20261114\\provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json",
+        "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY",
         "provider_termination_evidence_status_counts": {
-          "NOT_SUPPLIED": 29,
-          "VALID": 15
+          "INVALID": 2,
+          "NOT_SUPPLIED": 10,
+          "VALID": 32
         },
-        "provider_termination_evidence_used_case_count": 15,
+        "provider_termination_evidence_used_case_count": 32,
         "provider_qualification_status_counts": {
           "BLOCKED": 44
         },
@@ -5561,7 +5562,7 @@
       "name": "diagnostic_conditional_facility_release_trace",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\conditional_facility_risk_view_with_release_trace.json",
+        "record": "lh2-tno\\results\\20261114\\conditional_facility_risk_view_with_release_trace.json",
         "schema_version": "prism.conditional_facility_release_trace.v1",
         "source_status": "CASE_BOUNDARY_PARTIAL",
         "case_count": 44,
@@ -5573,14 +5574,14 @@
           "case_count": 44,
           "strict_release_boundary_eligible_case_count": 13,
           "strict_release_boundary_blocked_case_count": 31,
-          "numerically_closed_case_count": 30,
-          "numerically_open_case_count": 14,
-          "operator_review_required_case_count": 17,
+          "numerically_closed_case_count": 32,
+          "numerically_open_case_count": 12,
+          "operator_review_required_case_count": 19,
           "consequence_domain_truncated_case_count": 1,
           "numerical_closure_status_counts": {
             "NUMERICALLY_CLOSED": 13,
-            "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 17,
-            "NUMERICALLY_OPEN": 14
+            "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 19,
+            "NUMERICALLY_OPEN": 12
           },
           "consequence_domain_status_counts": {
             "CLOSED": 43,
@@ -5716,7 +5717,7 @@
       "name": "diagnostic_conditional_facility_promotion_gates",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\conditional_facility_risk_view_with_release_trace.json",
+        "record": "lh2-tno\\results\\20261114\\conditional_facility_risk_view_with_release_trace.json",
         "gate_statuses": {
           "release_boundary": "BLOCKED",
           "provider_qualification": "BLOCKED",

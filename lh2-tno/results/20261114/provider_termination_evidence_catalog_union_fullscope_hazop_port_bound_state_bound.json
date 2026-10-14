@@ -1,34 +1,14 @@
 {
   "schema_version": "prism.provider_termination_evidence_catalog.v1",
-  "status": "EVIDENCE_CATALOG_PARTIAL",
-  "row_count": 10,
-  "event_count": 10,
+  "status": "EVIDENCE_CATALOG_READY",
+  "row_count": 29,
+  "event_count": 29,
   "duplicate_event_ids": [],
-  "errors": [
-    "005_liquid-transfer-line-01_AREA_0.01pct: provider_run_meta is missing",
-    "006_liquid-transfer-line-01_AREA_0.1pct: provider_run_meta is missing",
-    "007_liquid-transfer-line-01_AREA_1pct: provider_run_meta is missing",
-    "008_liquid-transfer-line-01_AREA_10pct: provider_run_meta is missing",
-    "009_liquid-transfer-line-01_AREA_100pct: provider_run_meta is missing",
-    "010_transfer-valve-01_AREA_0.01pct: provider_run_meta is missing",
-    "011_transfer-valve-01_AREA_0.1pct: provider_run_meta is missing",
-    "012_transfer-valve-01_AREA_1pct: provider_run_meta is missing",
-    "013_transfer-valve-01_AREA_10pct: provider_run_meta is missing",
-    "014_transfer-valve-01_AREA_100pct: provider_run_meta is missing",
-    "015_pressure-relief-vent-01_G1: provider_run_meta is missing",
-    "016_liquid-transfer-pump-01_G1: provider_run_meta is missing",
-    "017_liquid-transfer-pump-01_G2: provider_run_meta is missing",
-    "018_ambient-vaporizer-01_G1: provider_run_meta is missing",
-    "019_ambient-vaporizer-01_G2: provider_run_meta is missing",
-    "020_ambient-vaporizer-01_G3: provider_run_meta is missing",
-    "021_reliquefier-01_G4: [Errno 2] No such file or directory: 'results\\\\20261111\\\\native_generic_scope_packets_isolation\\\\events\\\\021_reliquefier-01_G4\\\\resolved_release.json'",
-    "022_reliquefier-01_G5: [Errno 2] No such file or directory: 'results\\\\20261111\\\\native_generic_scope_packets_isolation\\\\events\\\\022_reliquefier-01_G5\\\\resolved_release.json'",
-    "023_reliquefier-01_G6: provider_run_meta is missing"
-  ],
+  "errors": [],
   "source_records": [
     "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation",
-    "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
-    "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json"
+    "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+    "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\resolved_releases.json"
   ],
   "rows": [
     {
@@ -45,8 +25,8 @@
       "operator_limited": true,
       "physical_validation_claim": false,
       "source": {
-        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
-        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
         "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
       }
     },
@@ -64,8 +44,8 @@
       "operator_limited": true,
       "physical_validation_claim": false,
       "source": {
-        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
-        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
         "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
       }
     },
@@ -83,8 +63,8 @@
       "operator_limited": true,
       "physical_validation_claim": false,
       "source": {
-        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
-        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
         "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
       }
     },
@@ -102,8 +82,8 @@
       "operator_limited": true,
       "physical_validation_claim": false,
       "source": {
-        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
-        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
         "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
       }
     },
@@ -121,10 +101,464 @@
       "operator_limited": true,
       "physical_validation_claim": false,
       "source": {
-        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
-        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
         "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
       }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "a638f9d2f9b2c270975e20bb6b35812e1f4e1753e1548d4918a40dc483068407",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 4.7591905520014575e-06,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": null,
+      "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "max_abs_mass_residual_kg": 0.0,
+      "provider_residual_mass_kg": 0.0
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "9e3d8d63604568b956662dea7ea36cdad2057e294a7fad25d1de2638f254a0ca",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 4.758412078620518e-05,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": null,
+      "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "max_abs_mass_residual_kg": 0.0,
+      "provider_residual_mass_kg": 0.0
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "1f44835da5eff88e625ae2b6f591a2f3084875929c0f74d2eed8433daa440ee7",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.0004750626227775085,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\007_liquid-transfer-line-01_AREA_1pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\007_liquid-transfer-line-01_AREA_1pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": null,
+      "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "max_abs_mass_residual_kg": 0.0,
+      "provider_residual_mass_kg": 0.0
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "1f18394a3d5d7dfa3332aa426bae2b25e4c3f3ec430d9dd740fdb246ee26a821",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.004673369291283811,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\008_liquid-transfer-line-01_AREA_10pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\008_liquid-transfer-line-01_AREA_10pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": null,
+      "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "max_abs_mass_residual_kg": 0.0,
+      "provider_residual_mass_kg": 0.0
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "786c90a02e6fae8b442aaaf0ee8723b308129c937c1a03265a63d12849274a1c",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.04473063270730533,
+      "duration_s": 0.30000000000000004,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\009_liquid-transfer-line-01_AREA_100pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\009_liquid-transfer-line-01_AREA_100pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": null,
+      "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "max_abs_mass_residual_kg": 0.0,
+      "provider_residual_mass_kg": 0.0
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "9b837de142516329e65db7c24b7816ecfce3c004982e00376481510260a27297",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 1.8985903127889936e-05,
+      "cumulative_mass_out_kg": 1.582158593990828e-05,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\010_transfer-valve-01_AREA_0.01pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\010_transfer-valve-01_AREA_0.01pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "bd33e46eb899d151696065a2a1489c7be03e5a1db0a921b5cdbdd0ecd9439c37",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.0001898590312788994,
+      "cumulative_mass_out_kg": 0.00015821585939908284,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\011_transfer-valve-01_AREA_0.1pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\011_transfer-valve-01_AREA_0.1pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "6e6860e162c489f5b81efa43c6881a5cbfe3570fae44b203b4a57af76d4f19ed",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.0018985903127889947,
+      "cumulative_mass_out_kg": 0.001582158593990829,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\012_transfer-valve-01_AREA_1pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\012_transfer-valve-01_AREA_1pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "fffed864878f499c2534d609f61c22f4838ff3aa8f13225582c6505605ad214d",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.018985903127889944,
+      "cumulative_mass_out_kg": 0.015821585939908286,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\013_transfer-valve-01_AREA_10pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\013_transfer-valve-01_AREA_10pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "2c5b0a273281fb9eff50ab0fac1bfa80199817ee82f7752a150087d703c5b653",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.1898590312788994,
+      "cumulative_mass_out_kg": 0.15821585939908284,
+      "duration_s": 0.3,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\014_transfer-valve-01_AREA_100pct\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\014_transfer-valve-01_AREA_100pct\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "provider_result_digest": "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75",
+      "termination_basis": "emergency_relief_discharge",
+      "available_mass_kg": 0.0008087150217064195,
+      "cumulative_mass_out_kg": 0.0006739291847553497,
+      "duration_s": 0.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\015_pressure-relief-vent-01_G1\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\015_pressure-relief-vent-01_G1\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\015_pressure-relief-vent-01_G1\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "provider_result_digest": "8de252cd6c117e4804f1a42ed8bca42b961c1c0fbf53d3ecace33ce46d758c13",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 0.0560663237977497,
+      "duration_s": 0.30000000000000004,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\016_liquid-transfer-pump-01_G1\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\016_liquid-transfer-pump-01_G1\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "provider_result_digest": "8930c89e45b3808486014f79c1da59742e986916b9690ebde5f037a319be4435",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 0.0005606632379774973,
+      "duration_s": 0.30000000000000004,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\017_liquid-transfer-pump-01_G2\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\017_liquid-transfer-pump-01_G2\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "provider_result_digest": "ade32dda3c6911c1ed75aca690b3756ee86942a455086b155afffa38990c49d5",
+      "termination_basis": "inventory_depletion_releasable_mass",
+      "available_mass_kg": 4.956379784841933e-06,
+      "cumulative_mass_out_kg": 4.956379784841932e-06,
+      "duration_s": 1.6000000000000003,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\018_ambient-vaporizer-01_G1\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\018_ambient-vaporizer-01_G1\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\018_ambient-vaporizer-01_G1\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "available_mass_definition": "cumulative releasable mass until atmospheric-pressure equilibrium",
+      "remaining_releasable_mass_kg": 8.470329472543003e-22,
+      "provider_residual_mass_kg": -4.0657581468206416e-20
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "provider_result_digest": "4f7a02ef16c308f36af674af23520467d0b13955442f7e6b5460fa6d963e9875",
+      "termination_basis": "inventory_over_600s",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 4.956379784841932e-06,
+      "duration_s": 600.0,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\019_ambient-vaporizer-01_G2\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\019_ambient-vaporizer-01_G2\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\019_ambient-vaporizer-01_G2\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "provider_result_digest": "6a617c9bba76e2566636f4d6d7dd930923ca49b1cbe2233df21c539af32cbe67",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.221896865709533e-06,
+      "duration_s": 0.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\020_ambient-vaporizer-01_G3\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\020_ambient-vaporizer-01_G3\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\020_ambient-vaporizer-01_G3\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "provider_result_digest": "4db10be6b5362f052b3c47300e948a50dc6f9b1b69cff23fc35c529757ab6855",
+      "provider_result_digests": [
+        "ea4d5877c94a26b850b5db636b5bf809968aa6b8d0bc298a3ee9648086feb16a",
+        "427527d0aa74c74c82e063675464a73fbe9aa404ef77cca7d092f9a305ce9854"
+      ],
+      "termination_basis": "two_sided_rupture",
+      "available_mass_kg": [
+        0.0008238536226639276,
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        3.595846016954127e-08,
+        3.595846016954127e-08
+      ],
+      "max_abs_mass_residual_kg": 1.3234889800848443e-23,
+      "duration_s": [
+        1e-05,
+        1e-05
+      ],
+      "endpoint_count": 2,
+      "termination_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\021_reliquefier-01_G4\\verification.json",
+        "provider_export_schema": "prism.resolved_release_set.v1"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "provider_result_digest": "9d60cdc0cd1c876b7e054f9982495124e09d760a41f0a2ee72be3e015d76293f",
+      "provider_result_digests": [
+        "3efe25b8ead45ff22dcc5d2ebdde6e2d5fc49c275b9c31124e6142dd34754f0b",
+        "fa33c6d5fc2b200b7fbb4ba1f4de32e70719d5501854efaf236a0a08ec7f4669"
+      ],
+      "termination_basis": "two_sided_rupture",
+      "available_mass_kg": [
+        0.0008238536226639276,
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        3.595846016954127e-08,
+        3.595846016954127e-08
+      ],
+      "max_abs_mass_residual_kg": 1.3234889800848443e-23,
+      "duration_s": [
+        1e-05,
+        1e-05
+      ],
+      "endpoint_count": 2,
+      "termination_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\022_reliquefier-01_G5\\verification.json",
+        "provider_export_schema": "prism.resolved_release_set.v1"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "provider_result_digest": "e1552148519310fd384d14b3e1302ae3156d630baac62d27c6d83fcb8b029477",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 1.6805075003306098e-06,
+      "duration_s": 0.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\023_reliquefier-01_G6\\resolved_release.json",
+        "verification": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\023_reliquefier-01_G6\\verification.json",
+        "provider_response": "lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation\\events\\023_reliquefier-01_G6\\provider_response.json",
+        "provider_response_status": "prism.external_accident_history.v1"
+      },
+      "isolation_success": true,
+      "isolation_time_s": 0.1,
+      "post_isolation_observation_s": 0.2,
+      "post_isolation_zero_flow": true,
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "max_abs_mass_residual_kg": null,
+      "provider_residual_mass_kg": null
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -140,8 +574,8 @@
       "operator_limited": false,
       "physical_validation_claim": false,
       "source": {
-        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
-        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "provider_response": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
         "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
         "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
       }
@@ -160,8 +594,8 @@
       "operator_limited": false,
       "physical_validation_claim": false,
       "source": {
-        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
-        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "provider_response": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
         "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
         "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
       }
@@ -180,8 +614,8 @@
       "operator_limited": false,
       "physical_validation_claim": false,
       "source": {
-        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
-        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "provider_response": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
         "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
         "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
       }
@@ -200,8 +634,8 @@
       "operator_limited": false,
       "physical_validation_claim": false,
       "source": {
-        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
-        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "provider_response": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
         "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
         "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
       }
@@ -220,8 +654,8 @@
       "operator_limited": false,
       "physical_validation_claim": false,
       "source": {
-        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
-        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "provider_response": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "lh2-tno\\results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
         "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
         "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
       }

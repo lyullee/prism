@@ -27,8 +27,8 @@
 | `dynamiclh2poolx_evidence_audit.json` | JUEL hold-out·HSE Test 6 반경/질량수지 근거 | 소스 해시 변화가 기록된 제한 pool/spreading component evidence; 방출·대기확산·시설 QRA 검증 아님 |
 | `validation_evidence_matrix_with_provider_intake.json` | 물리·관측·provider 검증근거 경계 | 시설 QRA 보류를 명시 |
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
-| `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 13개 국소 경계 통과, 31개 보류; 수치 종료 30개(운영자 검토 17개); 시설 QRA 승격 0 |
-| `provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json` | 저장탱크 sidecar·inventory-depletion 응답의 명시적 종료 근거 | 10개 event row, 15개 case에 digest·질량·양의 임계값·잔차 대조; qualification/시설 QRA 승격 아님 |
+| `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 13개 국소 경계 통과, 31개 보류; 수치 종료 32개(운영자 검토 19개); 시설 QRA 승격 0 |
+| `provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json` | native provider response와 inventory-depletion 응답의 명시적 종료 근거 | 29개 event row, 32개 case 사용; digest·질량·격리/endpoint·잔차 대조; qualification/시설 QRA 승격 아님 |
 | `conditional_facility_risk_view_with_release_trace.json` | 조건부 시설 IR/F-N, case-keyed 방출→risk trace, 문헌 빈도 trace | 44 case·176 atom, 5개 빈도 시나리오·순위 안정성; diagnostic-only, promotion false |
 | `hazop_provider_bound_integrated_risk.json` | 현재 모니터링·예측 상태의 HAZOP→provider·SLABx-LH2→시설 handoff | current 1건·forecast 1건 정량평가와 campaign handoff 연결 PASS; synthetic/provider-bound 진단 전용 |
 | `support_center_hazop_operating_mode_evidence_audit.json` | 검사센터 운전순서에서 일반 모드·HAZOP 정성 근거 추출 | 52개 모드 행; 빈도·방출 생성 없음 |
@@ -138,8 +138,8 @@ python scripts/build_ijhe_completion_audit.py `
 해석은 [`케이스별 방출 경계 승격 표`](PRISM_release_boundary_case_audit_20261114.md)에
 기록되어 있다.
 
-방출 경계 표는 이제 strict 결과와 수치 종료를 분리한다. 44개 case 중 30개가
-`numerical_release_closed=true`이고, 그중 17개는 운영자 제한으로 인해
+방출 경계 표는 이제 strict 결과와 수치 종료를 분리한다. 44개 case 중 32개가
+`numerical_release_closed=true`이고, 그중 19개는 운영자 제한으로 인해
 `NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`이다. 이 보조 분류는 방출 시간·초기
 재고·누적 방출·잔여 재고·잔여율을 함께 보존해 방출 장부가 피해영향 모델로 전달된
 경로를 확인하게 하지만, provider 자격·독립 물리검증·시설 QRA 승격 조건을 낮추지

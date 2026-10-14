@@ -14,11 +14,13 @@ from typing import Any, Mapping, Sequence
 
 
 SCHEMA = "prism.release_boundary_case_audit.v1"
-_ALLOWED_BASES = {"reviewed_isolation_success", "inventory_depletion"}
+_ALLOWED_BASES = {"reviewed_isolation_success", "inventory_depletion", "two_sided_rupture"}
 _TOLERANCE_KG = 1e-8
 _TERMINATION_EVIDENCE_BASES = {
+    "reviewed_isolation_success",
     "inventory_depletion_positive_threshold",
     "inventory_depletion_releasable_mass",
+    "two_sided_rupture",
 }
 
 
@@ -49,6 +51,17 @@ def _same_mass(left: Any, right: Any, tolerance: float) -> bool:
         left_value is not None
         and right_value is not None
         and math.isclose(left_value, right_value, rel_tol=1e-8, abs_tol=tolerance)
+    )
+
+
+def _same_mass_vector(left: Any, right: Any, tolerance: float) -> bool:
+    """Compare scalar or endpoint-vector masses without collapsing endpoints."""
+
+    left_values = _finite_values(left)
+    right_values = _finite_values(right)
+    return bool(left_values) and len(left_values) == len(right_values) and all(
+        _same_mass(left_value, right_value, tolerance)
+        for left_value, right_value in zip(left_values, right_values)
     )
 
 
@@ -128,23 +141,29 @@ def _audit_termination_evidence(
         if isinstance(raw, str) and raw:
             expected_digests.add(raw)
     digest = candidate.get("provider_result_digest")
+    candidate_digests = candidate.get("provider_result_digests")
     checks = result["checks"]
     checks["event_id_matches"] = (
         candidate.get("event_id") is None
         or str(candidate.get("event_id")) == str(row.get("event_id"))
     )
-    checks["provider_result_digest_matches"] = (
-        isinstance(digest, str) and bool(expected_digests) and digest in expected_digests
-    )
+    if isinstance(candidate_digests, Sequence) and not isinstance(candidate_digests, (str, bytes)):
+        checks["provider_result_digest_matches"] = bool(expected_digests) and {
+            str(value) for value in candidate_digests if value is not None
+        } == expected_digests
+    else:
+        checks["provider_result_digest_matches"] = (
+            isinstance(digest, str) and bool(expected_digests) and digest in expected_digests
+        )
     available = _finite_values(provider.get("available_mass_kg"))
     released = _finite_values(provider.get("cumulative_mass_out_kg"))
     candidate_available = candidate.get("available_mass_kg")
     candidate_released = candidate.get("cumulative_mass_out_kg")
-    checks["available_mass_matches"] = bool(available) and _same_mass(
-        candidate_available, available[0], residual_tolerance_kg
+    checks["available_mass_matches"] = bool(available) and _same_mass_vector(
+        candidate_available, available, residual_tolerance_kg
     )
-    checks["cumulative_release_matches"] = bool(released) and _same_mass(
-        candidate_released, released[0], residual_tolerance_kg
+    checks["cumulative_release_matches"] = bool(released) and _same_mass_vector(
+        candidate_released, released, residual_tolerance_kg
     )
     basis = candidate.get("termination_basis")
     checks["supported_basis"] = basis in _TERMINATION_EVIDENCE_BASES
@@ -152,7 +171,38 @@ def _audit_termination_evidence(
     threshold = _finite(candidate.get("threshold_mass_kg"))
     provider_residual = _finite(candidate.get("provider_residual_mass_kg"))
     max_residual = _finite(candidate.get("max_abs_mass_residual_kg"))
-    if basis == "inventory_depletion_positive_threshold":
+    if basis == "reviewed_isolation_success":
+        isolation_success = candidate.get("isolation_success")
+        isolation_time = _finite(candidate.get("isolation_time_s"))
+        observation = _finite(candidate.get("post_isolation_observation_s"))
+        provenance = candidate.get("termination_provenance")
+        checks["isolation_success_declared"] = isolation_success is True
+        checks["isolation_time_present"] = isolation_time is not None and isolation_time >= 0.0
+        checks["post_isolation_observation_present"] = observation is not None and observation > 0.0
+        checks["termination_provenance_present"] = isinstance(provenance, str) and bool(provenance.strip())
+        # Reviewed isolation closes the outlet boundary even when the
+        # upstream component retains inventory.  A provider mass residual is
+        # checked when the packet supplies one; otherwise the case-level mass
+        # ledger and explicit isolation state remain the governing checks.
+        post_isolation_zero_flow = candidate.get("post_isolation_zero_flow")
+        checks["post_isolation_zero_flow"] = (
+            post_isolation_zero_flow is True or post_isolation_zero_flow is None
+        )
+        checks["mass_residual_closed"] = (
+            max_residual is None or abs(max_residual) <= residual_tolerance_kg
+        )
+        checks["boundary_closed"] = all(
+            checks[name]
+            for name in (
+                "isolation_success_declared",
+                "isolation_time_present",
+                "post_isolation_observation_present",
+                "termination_provenance_present",
+                "post_isolation_zero_flow",
+                "mass_residual_closed",
+            )
+        )
+    elif basis == "inventory_depletion_positive_threshold":
         checks["threshold_positive"] = threshold is not None and threshold > residual_tolerance_kg
         checks["remaining_at_or_below_threshold"] = (
             remaining is not None
@@ -193,6 +243,25 @@ def _audit_termination_evidence(
                 "releasable_definition_present",
                 "releasable_remaining_closed",
                 "provider_residual_closed",
+            )
+        )
+    elif basis == "two_sided_rupture":
+        endpoint_count = candidate.get("endpoint_count")
+        checks["endpoint_count_matches"] = (
+            isinstance(endpoint_count, int)
+            and not isinstance(endpoint_count, bool)
+            and endpoint_count == len(expected_digests)
+            and endpoint_count >= 2
+        )
+        provenance = candidate.get("termination_provenance")
+        checks["termination_provenance_present"] = isinstance(provenance, str) and bool(provenance.strip())
+        checks["mass_residual_closed"] = max_residual is not None and abs(max_residual) <= residual_tolerance_kg
+        checks["boundary_closed"] = all(
+            checks[name]
+            for name in (
+                "endpoint_count_matches",
+                "termination_provenance_present",
+                "mass_residual_closed",
             )
         )
     else:
@@ -306,6 +375,16 @@ def _case_reasons(
             and (not values or any(value is None or abs(value) > residual_tolerance_kg for value in values))
         ):
             reasons.append("provider_inventory_residual_not_depleted")
+    if basis == "two_sided_rupture":
+        evidence_status = (
+            termination_evidence_audit.get("status")
+            if isinstance(termination_evidence_audit, Mapping)
+            else None
+        )
+        if evidence_status == "INVALID":
+            reasons.append("provider_termination_evidence_invalid")
+        elif evidence_status != "VALID":
+            reasons.append("two_sided_provider_termination_evidence_not_supplied")
     mass = _as_mapping(row.get("mass_ledger"))
     residual = _finite(mass.get("end_to_end_residual_kg"))
     if residual is None or abs(residual) > residual_tolerance_kg:
@@ -367,6 +446,16 @@ def _termination_reasons(
             and (not values or any(value is None or abs(value) > residual_tolerance_kg for value in values))
         ):
             reasons.append("provider_inventory_residual_not_depleted")
+    if basis == "two_sided_rupture":
+        evidence_status = (
+            termination_evidence_audit.get("status")
+            if isinstance(termination_evidence_audit, Mapping)
+            else None
+        )
+        if evidence_status == "INVALID":
+            reasons.append("provider_termination_evidence_invalid")
+        elif evidence_status != "VALID":
+            reasons.append("two_sided_provider_termination_evidence_not_supplied")
     mass = _as_mapping(row.get("mass_ledger"))
     residual = _finite(mass.get("end_to_end_residual_kg"))
     if residual is None or abs(residual) > residual_tolerance_kg:
@@ -459,6 +548,10 @@ def _required_evidence(
     if "provider_termination_evidence_invalid" in reason_set:
         requirements.append(
             "provider termination ledger with matching event, packet digest, masses and explicit threshold or releasable-inventory basis"
+        )
+    if "two_sided_provider_termination_evidence_not_supplied" in reason_set:
+        requirements.append(
+            "paired endpoint histories with both result digests, shared inventory provenance and common mass-residual closure"
         )
     if "end_to_end_mass_residual_not_closed" in reason_set:
         requirements.append("end-to-end source-to-consequence mass reconciliation with residual")

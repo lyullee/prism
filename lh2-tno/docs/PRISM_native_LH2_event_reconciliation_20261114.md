@@ -35,20 +35,21 @@
 
 ## 명시적 provider 종료 증거의 추가 대조
 
-`results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json`은 이미 저장된 provider 산출물에서 양의 재고 임계값 종료 증거를 추출한다.
+`results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json`은 이미 저장된 provider 산출물에서 명시적 종료·격리·endpoint 결합 증거를 추출한다.
 
-- 저장탱크 5개 packet sidecar와 inventory-depletion 5개 provider 응답을 대조해 총 10개 event row를 만들었다.
-- 10개 row 모두 packet result digest, 초기 재고, 누적 방출량, 임계값, 종료 시 잔여량, 질량 잔차가 일치한다.
+- native 24개 event의 `resolved_release(.json|_set.json)`, `verification.json`, `provider_response(.json|_endpoints.json)`를 읽고 inventory-depletion extension 5개를 합쳐 총 29개 event row를 만들었다.
+- 저장탱크·inventory-depletion·격리 성공·양단 endpoint row는 packet result digest, 초기 재고, 누적 방출량, 종료 상태와 질량 잔차를 case ledger와 다시 대조한다.
 - 양의 임계값은 잔여질량을 0으로 바꾸지 않는다. `remaining_mass_kg <= threshold_mass_kg`와 provider 질량 잔차만 방출 경계 판단에 사용한다.
 - annual condition이 두 개인 inventory-depletion extension은 같은 provider event 증거를 두 case에 재사용하되, case key와 digest는 각 행에서 다시 확인한다.
-- 이 증거를 release-boundary audit에 연결한 결과 15개 case가 추가로 수치 종료되었다. 전체 수치 종료는 30/44 case(그중 17개는 `NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`), strict boundary는 13/44 통과다.
-- native catalog의 나머지 19개 event는 provider termination sidecar가 없어 카탈로그에 `errors`로 남겼다. 이 행들에는 종료 증거를 추정하지 않는다.
+- 양단 파열은 두 endpoint digest, endpoint 수, 공통 provider inventory provenance와 packet 질량잔차를 함께 확인하며 endpoint를 하나의 누출로 합치지 않는다.
+- 이 증거를 release-boundary audit에 연결한 결과 32개 case가 명시적 종료 증거를 사용했다. 전체 수치 종료는 32/44 case(그중 19개는 `NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`), strict boundary는 13/44 통과다.
+- 29개 event row 중 27개는 종료 증거가 유효하고, 2개는 `emergency_relief_discharge`·`inventory_over_600s`라는 현재 미지원 종료 basis로 기록만 한다. vertical handoff의 synthetic horizon 등 별도 event는 여전히 `NOT_SUPPLIED`이다.
 
 이 카탈로그는 provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격을 주장하지 않는 진단 장부다.
 
 ## 남은 승격 조건
 
-1. 남은 `EXECUTED_OPERATOR_LIMITED`, synthetic horizon, emergency relief, two-sided rupture, inventory-over-600s 행에 provider 소유의 종료·차단·재고 경계 기록을 붙인다. 현재 strict boundary 보류는 31개다.
+1. 남은 `EXECUTED_OPERATOR_LIMITED`, synthetic horizon, emergency relief, inventory-over-600s 행에 provider 소유의 종료·차단·재고 경계 기록을 붙인다. 양단 파열의 수치 종료는 닫혔지만 operator-limited와 provider 자격 gate는 남아 있다. 현재 strict boundary 보류는 31개다.
 2. 각 provider packet의 source/result digest와 qualification sidecar를 제출한다.
 3. 액화수소 방출·pool/확산·점화/피해 영향에 대한 독립 물리검증을 사고군별로 연결한다.
 4. 위 증거가 충족된 뒤에만 시설 전체 IR/F-N을 promotion 대상으로 재평가한다.

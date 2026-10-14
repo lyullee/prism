@@ -239,3 +239,63 @@ def test_case_audit_rejects_termination_evidence_digest_mismatch():
         "release_boundary_blocking_reasons"
     ]
     assert report["provider_termination_evidence_invalid_case_count"] == 1
+
+
+def test_case_audit_accepts_provider_owned_reviewed_isolation_evidence():
+    case = _case("reviewed-isolation")
+    row = _ledger_row("reviewed-isolation")
+    evidence = {
+        "rows": [{
+            "event_id": "reviewed-isolation",
+            "provider_result_digest": "result",
+            "termination_basis": "reviewed_isolation_success",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "isolation_success": True,
+            "isolation_time_s": 0.1,
+            "post_isolation_observation_s": 0.2,
+            "termination_provenance": "provider outlet remained closed through observation",
+            "post_isolation_zero_flow": True,
+        }],
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "VALID"
+    assert result["provider_termination_evidence_used"] is True
+    assert result["residual_closure_basis"] == "reviewed_isolation_success"
+
+
+def test_case_audit_accepts_paired_two_sided_provider_evidence():
+    case = _case("two-sided")
+    case["provider_packet_identity"]["provider_result_digests"] = ["left", "right"]
+    row = _ledger_row("two-sided", basis="two_sided_rupture")
+    row["provider"].update({
+        "duration_s": [0.5, 0.5],
+        "available_mass_kg": [10.0, 10.0],
+        "cumulative_mass_out_kg": [3.0, 3.0],
+        "residual_mass_kg": [7.0, 7.0],
+    })
+    evidence = {
+        "rows": [{
+            "event_id": "two-sided",
+            "provider_result_digest": "set-digest",
+            "provider_result_digests": ["left", "right"],
+            "termination_basis": "two_sided_rupture",
+            "available_mass_kg": [10.0, 10.0],
+            "cumulative_mass_out_kg": [3.0, 3.0],
+            "max_abs_mass_residual_kg": 0.0,
+            "endpoint_count": 2,
+            "termination_provenance": "paired endpoint histories share one provider inventory",
+        }],
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "VALID"
+    assert result["provider_termination_evidence_used"] is True
+    assert result["numerical_closure_status"] == "NUMERICALLY_CLOSED"

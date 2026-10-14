@@ -4460,14 +4460,14 @@
       "case_count": 44,
       "strict_release_boundary_eligible_case_count": 13,
       "strict_release_boundary_blocked_case_count": 31,
-      "numerically_closed_case_count": 30,
-      "numerically_open_case_count": 14,
-      "operator_review_required_case_count": 17,
+      "numerically_closed_case_count": 32,
+      "numerically_open_case_count": 12,
+      "operator_review_required_case_count": 19,
       "consequence_domain_truncated_case_count": 1,
       "numerical_closure_status_counts": {
         "NUMERICALLY_CLOSED": 13,
-        "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 17,
-        "NUMERICALLY_OPEN": 14
+        "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 19,
+        "NUMERICALLY_OPEN": 12
       },
       "consequence_domain_status_counts": {
         "CLOSED": 43,
@@ -5017,13 +5017,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "a638f9d2f9b2c270975e20bb6b35812e1f4e1753e1548d4918a40dc483068407",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5103,13 +5116,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "9e3d8d63604568b956662dea7ea36cdad2057e294a7fad25d1de2638f254a0ca",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5189,13 +5215,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "1f44835da5eff88e625ae2b6f591a2f3084875929c0f74d2eed8433daa440ee7",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5275,13 +5314,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "1f18394a3d5d7dfa3332aa426bae2b25e4c3f3ec430d9dd740fdb246ee26a821",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5361,13 +5413,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "786c90a02e6fae8b442aaaf0ee8723b308129c937c1a03265a63d12849274a1c",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5447,13 +5512,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "9b837de142516329e65db7c24b7816ecfce3c004982e00376481510260a27297",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5533,13 +5611,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "bd33e46eb899d151696065a2a1489c7be03e5a1db0a921b5cdbdd0ecd9439c37",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5619,13 +5710,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "6e6860e162c489f5b81efa43c6881a5cbfe3570fae44b203b4a57af76d4f19ed",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5705,13 +5809,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "fffed864878f499c2534d609f61c22f4838ff3aa8f13225582c6505605ad214d",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5791,13 +5908,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "2c5b0a273281fb9eff50ab0fac1bfa80199817ee82f7752a150087d703c5b653",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -5875,12 +6005,22 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
+        "provider_termination_evidence_status": "INVALID",
         "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
-        "provider_termination_evidence_blocking_reasons": [],
+        "provider_termination_evidence_basis": "emergency_relief_discharge",
+        "provider_termination_evidence_digest": "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": false,
+          "boundary_closed": false
+        },
+        "provider_termination_evidence_blocking_reasons": [
+          "provider_termination_evidence_supported_basis",
+          "provider_termination_evidence_boundary_closed"
+        ],
         "residual_closure_basis": "provider_residual_mass",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5961,13 +6101,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "8de252cd6c117e4804f1a42ed8bca42b961c1c0fbf53d3ecace33ce46d758c13",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -6047,13 +6200,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "8930c89e45b3808486014f79c1da59742e986916b9690ebde5f037a319be4435",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
@@ -6129,13 +6295,23 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "inventory_depletion_releasable_mass",
+        "provider_termination_evidence_digest": "ade32dda3c6911c1ed75aca690b3756ee86942a455086b155afffa38990c49d5",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "releasable_definition_present": true,
+          "releasable_remaining_closed": true,
+          "provider_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "inventory_depletion_releasable_mass",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
         "release_boundary_blocking_reasons": [],
@@ -6211,12 +6387,22 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
+        "provider_termination_evidence_status": "INVALID",
         "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
-        "provider_termination_evidence_blocking_reasons": [],
+        "provider_termination_evidence_basis": "inventory_over_600s",
+        "provider_termination_evidence_digest": "4f7a02ef16c308f36af674af23520467d0b13955442f7e6b5460fa6d963e9875",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": false,
+          "boundary_closed": false
+        },
+        "provider_termination_evidence_blocking_reasons": [
+          "provider_termination_evidence_supported_basis",
+          "provider_termination_evidence_boundary_closed"
+        ],
         "residual_closure_basis": "provider_residual_mass",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6293,13 +6479,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "6a617c9bba76e2566636f4d6d7dd930923ca49b1cbe2233df21c539af32cbe67",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
         "release_boundary_blocking_reasons": [],
@@ -6370,31 +6569,38 @@
         "isolation_status": "not_declared",
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
-        "release_termination_reasons": [
-          "termination_basis_two_sided_rupture_is_not_allowed"
-        ],
+        "release_termination_reasons": [],
         "operational_execution_reasons": [
           "status_executed_operator_limited"
         ],
         "consequence_domain_reasons": [],
-        "numerical_release_closed": false,
-        "numerical_closure_status": "NUMERICALLY_OPEN",
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
         "consequence_domain_status": "CLOSED",
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "two_sided_rupture",
+        "provider_termination_evidence_digest": "4db10be6b5362f052b3c47300e948a50dc6f9b1b69cff23fc35c529757ab6855",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "endpoint_count_matches": true,
+          "termination_provenance_present": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "two_sided_rupture",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
-          "status_executed_operator_limited",
-          "termination_basis_two_sided_rupture_is_not_allowed"
+          "status_executed_operator_limited"
         ],
         "provider_qualification_status": "BLOCKED",
         "provider_qualification_blocking_reasons": [
@@ -6461,31 +6667,38 @@
         "isolation_status": "not_declared",
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
-        "release_termination_reasons": [
-          "termination_basis_two_sided_rupture_is_not_allowed"
-        ],
+        "release_termination_reasons": [],
         "operational_execution_reasons": [
           "status_executed_operator_limited"
         ],
         "consequence_domain_reasons": [],
-        "numerical_release_closed": false,
-        "numerical_closure_status": "NUMERICALLY_OPEN",
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
         "consequence_domain_status": "CLOSED",
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "two_sided_rupture",
+        "provider_termination_evidence_digest": "9d60cdc0cd1c876b7e054f9982495124e09d760a41f0a2ee72be3e015d76293f",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "endpoint_count_matches": true,
+          "termination_provenance_present": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "two_sided_rupture",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
-          "status_executed_operator_limited",
-          "termination_basis_two_sided_rupture_is_not_allowed"
+          "status_executed_operator_limited"
         ],
         "provider_qualification_status": "BLOCKED",
         "provider_qualification_blocking_reasons": [
@@ -6555,13 +6768,26 @@
         "provider_input_origins": [
           "model_prediction"
         ],
-        "provider_termination_evidence_status": "NOT_SUPPLIED",
-        "provider_termination_evidence_used": false,
-        "provider_termination_evidence_basis": null,
-        "provider_termination_evidence_digest": null,
-        "provider_termination_evidence_checks": {},
+        "provider_termination_evidence_status": "VALID",
+        "provider_termination_evidence_used": true,
+        "provider_termination_evidence_basis": "reviewed_isolation_success",
+        "provider_termination_evidence_digest": "e1552148519310fd384d14b3e1302ae3156d630baac62d27c6d83fcb8b029477",
+        "provider_termination_evidence_checks": {
+          "event_id_matches": true,
+          "provider_result_digest_matches": true,
+          "available_mass_matches": true,
+          "cumulative_release_matches": true,
+          "supported_basis": true,
+          "isolation_success_declared": true,
+          "isolation_time_present": true,
+          "post_isolation_observation_present": true,
+          "termination_provenance_present": true,
+          "post_isolation_zero_flow": true,
+          "mass_residual_closed": true,
+          "boundary_closed": true
+        },
         "provider_termination_evidence_blocking_reasons": [],
-        "residual_closure_basis": "provider_residual_mass",
+        "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
         "release_boundary_blocking_reasons": [],
@@ -30615,8 +30841,7 @@
       "status_executed_operator_limited",
       "termination_basis_emergency_relief_discharge_is_not_allowed",
       "termination_basis_inventory_over_600s_is_not_allowed",
-      "termination_basis_synthetic_diagnostic_horizon_is_not_allowed",
-      "termination_basis_two_sided_rupture_is_not_allowed"
+      "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
     ],
     "residual_tolerance_kg": 1e-08,
     "provider_qualification_evaluated": false,
@@ -30699,19 +30924,20 @@
       "policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates"
     },
     "case_audit_status": "CASE_BOUNDARY_PARTIAL",
-    "numerically_closed_case_count": 30,
-    "numerically_open_case_count": 14,
-    "operator_review_required_case_count": 17,
+    "numerically_closed_case_count": 32,
+    "numerically_open_case_count": 12,
+    "operator_review_required_case_count": 19,
     "numerical_closure_status_counts": {
       "NUMERICALLY_CLOSED": 13,
-      "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 17,
-      "NUMERICALLY_OPEN": 14
+      "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 19,
+      "NUMERICALLY_OPEN": 12
     },
     "provider_termination_evidence_status_counts": {
-      "NOT_SUPPLIED": 29,
-      "VALID": 15
+      "INVALID": 2,
+      "NOT_SUPPLIED": 10,
+      "VALID": 32
     },
-    "provider_termination_evidence_used_case_count": 15
+    "provider_termination_evidence_used_case_count": 32
   },
   "qualification": {
     "facility_total_risk_available": false,
@@ -30739,8 +30965,8 @@
     "frequency": "explicit supplied literature frequencies only; no inference or learning",
     "promotion": "this envelope is diagnostic-only until qualified provider coverage, strict scope, and independent physical validation gates close"
   },
-  "source_assessment_path": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json",
+  "source_assessment_path": "lh2-tno/results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json",
   "source_assessment_sha256": "425f01aa1638c85580fbb1bb5d6164df983148ad49e3bab89eb961c59cba5a38",
-  "release_boundary_case_audit_path": "results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
-  "release_boundary_case_audit_sha256": "b94f77e34bcbb6a75a1d34588258046c63f873f5d1d3ec401e7aba94f1edf5f4"
+  "release_boundary_case_audit_path": "lh2-tno/results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
+  "release_boundary_case_audit_sha256": "29600c7898ca46e0c754f76e1ed37a4756df16f47554f0a3d83aa5500342bc11"
 }

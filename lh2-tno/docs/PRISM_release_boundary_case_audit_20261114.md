@@ -40,18 +40,20 @@ python scripts/audit_release_boundary_cases.py `
 - 전체 union 총 44개 case
 - 개별 방출 경계 조건을 만족한 case 13개
 - 방출 경계에서 보류된 case 31개
-- 수치상 종료가 닫힌 case 30개(그중 운영자 검토 필요 17개)
-- 수치상 종료가 열린 case 14개
-- 명시적 provider 종료 증거 catalog: 10개 event row가 15개 case에 연결
+- 수치상 종료가 닫힌 case 32개(그중 운영자 검토 필요 19개)
+- 수치상 종료가 열린 case 12개
+- 명시적 provider 종료 증거 catalog: 29개 event row가 32개 case에 연결(27개 valid, 2개 unsupported basis)
 - provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격은 0건
 - 전체 상태: `CASE_BOUNDARY_PARTIAL`
 
 여기서 strict 경계를 통과한 13개는 `reviewed_isolation_success` 또는
 명시적 `inventory_depletion_positive_threshold`를 포함한 종료 기준, 질량 잔차, 계산
-상태를 개별적으로 통과했다는 뜻입니다. 추가로 17개는 같은 수치 조건은 닫혔지만
+상태를 개별적으로 통과했다는 뜻입니다. 추가로 19개는 같은 수치 조건은 닫혔지만
 `EXECUTED_OPERATOR_LIMITED`라서
-운영자 독립 종료 증거가 필요합니다. 어느 쪽도 실제 현장 자료라는 뜻은 아닙니다.
-현재 30개 모두 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증
+운영자 독립 종료 증거가 필요합니다. 양단 파열 2건은 두 endpoint의 digest와 공통
+질량잔차를 확인해 수치 종료로 분류되지만, `EXECUTED_OPERATOR_LIMITED` 상태는
+그대로 보존합니다. 어느 쪽도 실제 현장 자료라는 뜻은 아닙니다.
+현재 32개 모두 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증
 주장이 없으므로 시설 QRA에 자동으로 들어가지 않습니다. 양의 임계값 종료는 잔여질량을
 0으로 치환하지 않고 provider digest·질량·임계값·잔차가 맞는 경우에만 닫습니다.
 
@@ -63,8 +65,9 @@ python scripts/audit_release_boundary_cases.py `
   재고 소진이나 검토된 차단 성공으로 바꾸어 쓰지 않습니다.
 - `termination_basis_emergency_relief_discharge_is_not_allowed`: 비상 방출은 계산됐지만
   현재 strict release boundary 정책의 종료 기준에 포함되지 않습니다.
-- `termination_basis_two_sided_rupture_is_not_allowed`: 양단 파열의 양쪽 재고와 종료
-  경계가 닫히지 않았습니다.
+- `termination_basis_two_sided_rupture_is_not_allowed`: 이전 호환 입력에서 양단 파열
+  endpoint 결합 근거가 없을 때만 나타납니다. 최신 native set은 양쪽 digest·endpoint
+  수·공통 질량잔차를 확인하지만 운영자 제한과 provider 자격 gate는 별도로 남습니다.
 - `provider_inventory_residual_not_depleted`: 재고 소진이라고 적혔지만 provider 잔여
   질량이 허용 잔차 안으로 닫히지 않았습니다.
 - `provider_termination_evidence_invalid`: 종료 증거의 event/digest/질량/임계값 중

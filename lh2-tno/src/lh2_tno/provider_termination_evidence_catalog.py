@@ -40,14 +40,140 @@ def _storage_rows(catalog_dir: Path) -> tuple[list[dict[str, Any]], list[str]]:
     errors: list[str] = []
     for event_dir in sorted(path for path in events_dir.iterdir() if path.is_dir()):
         packet_path = event_dir / "resolved_release.json"
+        if not packet_path.exists():
+            packet_path = event_dir / "resolved_release_set.json"
         verification_path = event_dir / "verification.json"
         try:
             packet = _read_json(packet_path)
             verification = _read_json(verification_path)
+            if packet.get("provider_export_schema") == "prism.resolved_release_set.v1":
+                releases = packet.get("releases")
+                endpoint_rows = [release for release in releases if isinstance(release, Mapping)] if isinstance(releases, list) else []
+                endpoint_digests = [
+                    release.get("provider_result_digest")
+                    for release in endpoint_rows
+                    if isinstance(release.get("provider_result_digest"), str)
+                ]
+                event_id = packet.get("event_id")
+                if not isinstance(event_id, str) or not event_id:
+                    errors.append(f"{event_dir.name}: resolved release set event_id is missing")
+                    continue
+                if len(endpoint_rows) != 2 or len(endpoint_digests) != 2:
+                    errors.append(f"{event_id}: two-sided provider endpoint set is incomplete")
+                    continue
+                verification_endpoint_count = verification.get("strict_packet_endpoint_count")
+                if verification_endpoint_count != len(endpoint_rows):
+                    errors.append(f"{event_id}: endpoint count does not match verification")
+                    continue
+                rows.append({
+                    "event_id": event_id,
+                    "component_id": packet.get("component_id"),
+                    "provider_result_digest": packet.get("provider_result_digest"),
+                    "provider_result_digests": endpoint_digests,
+                    "termination_basis": packet.get("rupture_mode"),
+                    "available_mass_kg": [
+                        release.get("available_mass_kg") for release in endpoint_rows
+                    ],
+                    "cumulative_mass_out_kg": [
+                        release.get("cumulative_mass_out_kg") for release in endpoint_rows
+                    ],
+                    "max_abs_mass_residual_kg": abs(float(verification.get("strict_packet_mass_residual_kg")))
+                    if _number(verification.get("strict_packet_mass_residual_kg")) is not None
+                    else None,
+                    "duration_s": [release.get("duration_s") for release in endpoint_rows],
+                    "endpoint_count": len(endpoint_rows),
+                    "termination_provenance": packet.get("inventory_provenance"),
+                    "operator_limited": True,
+                    "physical_validation_claim": verification.get("physical_validation_claim") is True,
+                    "source": {
+                        "packet": str(packet_path),
+                        "verification": str(verification_path),
+                        "provider_export_schema": packet.get("provider_export_schema"),
+                    },
+                })
+                continue
             meta = verification.get("provider_run_meta")
             if not isinstance(meta, Mapping):
-                errors.append(f"{event_dir.name}: provider_run_meta is missing")
-                continue
+                # Native accident exports use the same resolved-release and
+                # verification contract, but their termination fields live in
+                # provider_response.data/provider_meta.  Preserve those rows
+                # instead of misclassifying them as absent evidence.
+                response_path = event_dir / "provider_response.json"
+                try:
+                    response = _read_json(response_path)
+                    data = response.get("data")
+                    provider_meta = data.get("provider_meta") if isinstance(data, Mapping) else None
+                    if not isinstance(data, Mapping) or not isinstance(provider_meta, Mapping):
+                        errors.append(f"{event_dir.name}: provider_run_meta and native provider response are missing")
+                        continue
+                    event_id = data.get("event_id") or packet.get("event_id")
+                    digest = packet.get("provider_result_digest")
+                    if not isinstance(event_id, str) or not event_id:
+                        errors.append(f"{event_dir.name}: packet/provider response event_id is missing")
+                        continue
+                    if not isinstance(digest, str) or not digest:
+                        errors.append(f"{event_dir.name}: packet provider_result_digest is missing")
+                        continue
+                    verification_digest = verification.get("provider_result_digest")
+                    if verification_digest != digest:
+                        errors.append(f"{event_id}: packet and verification digests do not agree")
+                        continue
+                    termination_basis = data.get("termination_basis")
+                    row: dict[str, Any] = {
+                        "event_id": event_id,
+                        "component_id": data.get("component_id") or packet.get("component_id"),
+                        "provider_result_digest": digest,
+                        "termination_basis": termination_basis,
+                        "available_mass_kg": data.get("available_mass_kg"),
+                        "cumulative_mass_out_kg": data.get("cumulative_mass_out_kg"),
+                        "duration_s": data.get("duration_s") or verification.get("duration_s"),
+                        "operator_limited": False,
+                        "physical_validation_claim": verification.get("physical_validation_claim") is True,
+                        "source": {
+                            "packet": str(packet_path),
+                            "verification": str(verification_path),
+                            "provider_response": str(response_path),
+                            "provider_response_status": response.get("provider_export_schema"),
+                        },
+                    }
+                    if termination_basis == "reviewed_isolation_success":
+                        row.update({
+                            "isolation_success": verification.get("isolation_success", provider_meta.get("isolation_success")),
+                            "isolation_time_s": verification.get("isolation_time_s", provider_meta.get("isolation_time_s")),
+                            "post_isolation_observation_s": verification.get(
+                                "post_isolation_observation_s", provider_meta.get("post_isolation_observation_s")
+                            ),
+                            "post_isolation_zero_flow": provider_meta.get("post_isolation_zero_flow"),
+                            "termination_provenance": data.get("termination_provenance"),
+                            "max_abs_mass_residual_kg": verification.get("mass_residual_kg"),
+                            "provider_residual_mass_kg": verification.get("mass_residual_kg"),
+                        })
+                    elif termination_basis == "inventory_depletion":
+                        definition = provider_meta.get("available_mass_definition")
+                        available = _number(data.get("available_mass_kg"))
+                        released = _number(data.get("cumulative_mass_out_kg"))
+                        if isinstance(definition, str) and "releasable" in definition.lower():
+                            row.update({
+                                "termination_basis": "inventory_depletion_releasable_mass",
+                                "available_mass_definition": definition,
+                                "remaining_releasable_mass_kg": (
+                                    max(0.0, available - released)
+                                    if available is not None and released is not None
+                                    else None
+                                ),
+                                "provider_residual_mass_kg": provider_meta.get("residual_mass_kg"),
+                            })
+                        else:
+                            row.update({
+                                "threshold_mass_kg": data.get("depletion_threshold_kg"),
+                                "remaining_mass_kg": data.get("remaining_inventory_kg"),
+                                "max_abs_mass_residual_kg": data.get("max_total_mass_residual_kg"),
+                            })
+                    rows.append(row)
+                    continue
+                except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:
+                    errors.append(f"{event_dir.name}: native provider response error: {error}")
+                    continue
             event_id = packet.get("event_id")
             digest = packet.get("provider_result_digest")
             if not isinstance(event_id, str) or not event_id:

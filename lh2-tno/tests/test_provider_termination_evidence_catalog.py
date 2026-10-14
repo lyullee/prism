@@ -59,3 +59,63 @@ def test_catalog_binds_storage_sidecar_and_inventory_response(tmp_path):
     ]["provider_result_digest"] == "inventory-digest"
     assert report["provider_qualification_claim"] is False
     assert report["facility_qra_claim"] is False
+
+
+def test_catalog_reads_native_isolation_and_two_sided_set_artifacts(tmp_path):
+    storage = tmp_path / "native"
+    isolation = storage / "events" / "001_line"
+    two_sided = storage / "events" / "002_set"
+    isolation.mkdir(parents=True)
+    two_sided.mkdir(parents=True)
+    (isolation / "resolved_release.json").write_text(json.dumps({
+        "provider_export_schema": "prism.resolved_release.v1",
+        "event_id": "native/line",
+        "component_id": "line-1",
+        "provider_result_digest": "line-result",
+    }), encoding="utf-8")
+    (isolation / "verification.json").write_text(json.dumps({
+        "provider_result_digest": "line-result",
+        "termination_basis": "reviewed_isolation_success",
+        "isolation_success": True,
+        "isolation_time_s": 0.1,
+        "post_isolation_observation_s": 0.2,
+        "physical_validation_claim": False,
+        "mass_residual_kg": 0.0,
+    }), encoding="utf-8")
+    (isolation / "provider_response.json").write_text(json.dumps({
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "data": {
+            "event_id": "native/line",
+            "component_id": "line-1",
+            "termination_basis": "reviewed_isolation_success",
+            "termination_provenance": "provider outlet closed",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "duration_s": 0.3,
+            "provider_meta": {"isolation_success": True},
+        },
+    }), encoding="utf-8")
+    (two_sided / "resolved_release_set.json").write_text(json.dumps({
+        "provider_export_schema": "prism.resolved_release_set.v1",
+        "event_id": "native/set",
+        "component_id": "reliquefier-1",
+        "rupture_mode": "two_sided_rupture",
+        "provider_result_digest": "set-result",
+        "inventory_provenance": "shared provider inventory",
+        "releases": [
+            {"provider_result_digest": "left", "available_mass_kg": 10.0, "cumulative_mass_out_kg": 3.0, "duration_s": 0.5},
+            {"provider_result_digest": "right", "available_mass_kg": 10.0, "cumulative_mass_out_kg": 3.0, "duration_s": 0.5},
+        ],
+    }), encoding="utf-8")
+    (two_sided / "verification.json").write_text(json.dumps({
+        "strict_packet_endpoint_count": 2,
+        "strict_packet_mass_residual_kg": 0.0,
+        "physical_validation_claim": False,
+    }), encoding="utf-8")
+
+    report = build_provider_termination_evidence_catalog(storage_catalog_dir=storage)
+    assert report["status"] == "EVIDENCE_CATALOG_READY"
+    assert report["row_count"] == 2
+    rows = {row["event_id"]: row for row in report["rows"]}
+    assert rows["native/line"]["termination_basis"] == "reviewed_isolation_success"
+    assert rows["native/set"]["provider_result_digests"] == ["left", "right"]
