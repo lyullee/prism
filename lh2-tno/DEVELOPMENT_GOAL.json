@@ -3890,6 +3890,7 @@
     "release_boundary_case_source_alignment": "ALIGNED",
     "strict_release_boundary_eligible_case_count": 3,
     "strict_release_boundary_blocked_case_count": 41,
+    "release_boundary_evidence_request_open_count": 44,
     "facility_qra_promotion": false
   }
 }

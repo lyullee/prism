@@ -4831,6 +4831,7 @@
     "release_boundary_case_source_alignment": "ALIGNED",
     "strict_release_boundary_eligible_case_count": 3,
     "strict_release_boundary_blocked_case_count": 41,
+    "release_boundary_evidence_request_open_count": 44,
     "facility_qra_promotion": false,
     "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix, a 44-case facility evidence-request catalog and a 44-case release-boundary audit are recorded; 3 individual release boundaries pass and 41 remain withheld. The latest IJHE audit has 31 checks (27 PASS, 4 BLOCKED). Qualified provider promotion, independent physical validation and facility IR/F-N remain withheld."
   }
