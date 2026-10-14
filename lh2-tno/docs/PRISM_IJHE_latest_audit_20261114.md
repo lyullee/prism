@@ -29,6 +29,7 @@
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
 | `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 13개 국소 경계 통과, 31개 보류; 수치 종료 32개(운영자 검토 19개); 시설 QRA 승격 0 |
 | `provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json` | native provider response와 inventory-depletion 응답의 명시적 종료 근거 | 29개 event row, 32개 case 사용; digest·질량·격리/endpoint·잔차 대조; qualification/시설 QRA 승격 아님 |
+| `vertical_handoff_termination_evidence_search.json` | 수직 handoff packet의 실제 종료 기준 검색 | 5개 event·10개 case를 확인했지만 모두 `synthetic_diagnostic_horizon`; `NOT_SUPPLIED` 유지, 종료 경계 승격 없음 |
 | `conditional_facility_risk_view_with_release_trace.json` | 조건부 시설 IR/F-N, case-keyed 방출→risk trace, 문헌 빈도 trace | 44 case·176 atom, 5개 빈도 시나리오·순위 안정성; diagnostic-only, promotion false |
 | `hazop_provider_bound_integrated_risk.json` | 현재 모니터링·예측 상태의 HAZOP→provider·SLABx-LH2→시설 handoff | current 1건·forecast 1건 정량평가와 campaign handoff 연결 PASS; synthetic/provider-bound 진단 전용 |
 | `support_center_hazop_operating_mode_evidence_audit.json` | 검사센터 운전순서에서 일반 모드·HAZOP 정성 근거 추출 | 52개 모드 행; 빈도·방출 생성 없음 |

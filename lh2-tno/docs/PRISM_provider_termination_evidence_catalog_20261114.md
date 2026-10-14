@@ -29,6 +29,14 @@
 
 카탈로그는 29개 event row를 모두 구조적으로 읽는다. 그중 27개는 현재 종료 evidence basis를 통과하고, 2개(`emergency_relief_discharge`, `inventory_over_600s`)는 명시적 provider 결과를 보존하지만 현재 release-boundary basis로는 `INVALID`로 남긴다. vertical handoff synthetic horizon 등 별도 event는 `NOT_SUPPLIED`로 남겨 종료 시간을 0 또는 재고 소진으로 추정하지 않는다.
 
+이 판단은 수직 packet을 확인하지 못해서 생긴 빈칸이 아니다. 별도 검색 결과
+[`vertical_handoff_termination_evidence_search.json`](../results/20261114/vertical_handoff_termination_evidence_search.json)는
+`results/20261020/vertical_vent_all_bins`의 5개 area-bin과 공통 verification을 읽고,
+2026-10-24 rebound chain의 10개 case와 연결했다. 다섯 packet 모두 provider 종료 기준이
+`synthetic_diagnostic_horizon`이고 handoff provenance에도 독립 검증 부재가 적혀 있어,
+5개 event·10개 case를 `NOT_SUPPLIED`로 분류했다. 방출시간이나 질량잔차가 수치상
+존재한다는 이유만으로 차단 성공 또는 재고소진으로 바꾸지 않는다.
+
 ## 방출 경계 감사에 반영한 결과
 
 44개 facility case 중 32개 case가 이 카탈로그와 digest·질량·종료/endpoint 조건을 일치시킨다. annual condition이 두 개인 inventory-depletion event는 동일 provider packet을 사용하지만 case key가 다른 두 행으로 각각 대조한다.
@@ -61,3 +69,12 @@ python scripts/audit_release_boundary_cases.py `
 ```
 
 이 재현 경로는 release ledger의 잔여질량을 수정하지 않고, 명시적 provider 종료 증거가 있는 case에만 경계 근거를 추가한다.
+
+수직 handoff의 미공급 종료 증거 검색은 다음 명령으로 재현한다.
+
+```powershell
+python scripts/audit_vertical_termination_evidence.py `
+  --vertical-catalog-dir results/20261020/vertical_vent_all_bins `
+  --vertical-chain-audit results/20261024/native_generic_scope_vertical_handoff_chain_v1.json `
+  --output results/20261114/vertical_handoff_termination_evidence_search.json
+```

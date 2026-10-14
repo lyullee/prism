@@ -46,6 +46,14 @@ python scripts/audit_release_boundary_cases.py `
 - provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격은 0건
 - 전체 상태: `CASE_BOUNDARY_PARTIAL`
 
+수직 handoff 5개 event와 10개 case는 별도 종료 증거 검색도 수행했습니다. 검색 결과는
+[`vertical_handoff_termination_evidence_search.json`](../results/20261114/vertical_handoff_termination_evidence_search.json)이며,
+다섯 area-bin packet의 `provider_result_digest`, 방출시간, 질량 적분과 handoff provenance를
+읽었지만 종료 기준은 모두 `synthetic_diagnostic_horizon`이었습니다. 따라서 이 자료는
+계산 결과가 없다는 뜻이 아니라, provider가 실제 차단 성공·재고소진까지 계속 계산했다는
+증거가 없다는 뜻입니다. 5개 event와 10개 case를 `NOT_SUPPLIED`로 명시하고,
+release-boundary catalog에는 억지로 추가하지 않았습니다.
+
 여기서 strict 경계를 통과한 13개는 `reviewed_isolation_success` 또는
 명시적 `inventory_depletion_positive_threshold`를 포함한 종료 기준, 질량 잔차, 계산
 상태를 개별적으로 통과했다는 뜻입니다. 추가로 19개는 같은 수치 조건은 닫혔지만
