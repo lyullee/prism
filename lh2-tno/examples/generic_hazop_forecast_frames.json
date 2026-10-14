@@ -1,0 +1,74 @@
+[
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 0.0,
+    "forecast_time_s": 0.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic simulation forecast",
+    "values": {
+      "tank_pressure": {
+        "quantity": "pressure",
+        "value_si": 500000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 10.0,
+    "forecast_time_s": 10.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic simulation forecast",
+    "values": {
+      "tank_pressure": {
+        "quantity": "pressure",
+        "value_si": 650000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 20.0,
+    "forecast_time_s": 20.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic simulation forecast",
+    "values": {
+      "tank_pressure": {
+        "quantity": "pressure",
+        "value_si": 700000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 30.0,
+    "forecast_time_s": 30.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic simulation forecast",
+    "values": {
+      "tank_pressure": {
+        "quantity": "pressure",
+        "value_si": 500000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  }
+]

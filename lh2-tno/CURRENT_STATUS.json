@@ -3888,7 +3888,7 @@
     "example_state": "examples/generic_hazop_state_frame.json",
     "example_record": "results/hazop_current/selection.json",
     "example_status": "SCENARIOS_SELECTED; receiving mode and high-pressure deviation selected vessel_hole",
-    "targeted_test_count": 25,
+    "targeted_test_count": 29,
     "runtime_gate": {
       "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
       "schema_version": "prism.hazop_runtime_consequence_gate.v1",
@@ -3905,6 +3905,12 @@
       "facility_branch_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_branches",
       "facility_branch_campaign_handoff_schema": "prism.hazop_facility_campaign_branches.v1",
       "facility_branch_partition_required": true,
+      "forecast_risk_scan_function": "lh2_tno.hazop_forecast.run_hazop_forecast_risk_scan",
+      "forecast_risk_scan_schema": "prism.hazop_forecast_risk_scan.v1",
+      "forecast_trigger_policy": "entry_or_each_step_explicit",
+      "forecast_quantitative_evaluator_required": true,
+      "forecast_frequency_inference": false,
+      "forecast_qra_promotion": false,
       "facility_annual_qra_promotion": false,
       "consequence_called_without_provider": false,
       "targeted_status": "PASS"
@@ -3923,7 +3929,7 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 969,
+    "tests": 973,
     "failures": 0,
     "skipped": 0,
     "scope": "current lh2-tno package after HAZOP/mode adapter and facility campaign handoff changes"

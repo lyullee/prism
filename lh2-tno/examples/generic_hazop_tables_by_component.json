@@ -1,0 +1,31 @@
+{
+  "storage-tank-01": {
+    "schema_version": "prism.hazop_operating_mode_selection.v1",
+    "id": "generic-outdoor-lh2-hazop-v1",
+    "facility_id": "generic-outdoor-lh2",
+    "operating_modes": ["receiving", "supply", "standby"],
+    "configuration_origin": "synthetic",
+    "source_provenance": "generic diagnostic table; replace with reviewed facility HAZOP and P&ID references",
+    "rows": [
+      {
+        "id": "TK01-receiving-high-pressure",
+        "component_id": "storage-tank-01",
+        "component_kind": "storage_tank",
+        "operating_modes": ["receiving"],
+        "variable_tag": "tank_pressure",
+        "quantity": "pressure",
+        "trigger": "at_or_above",
+        "threshold_high_si": 600000.0,
+        "scenario_family": "vessel_hole",
+        "release_mode": "hole",
+        "priority": "high",
+        "deviation_label": "high pressure",
+        "cause_summary": "receiving pressure exceeds the declared criterion",
+        "consequence_summary": "tank wall release requires an equipment provider packet",
+        "safeguards": ["PSV", "ESD"],
+        "provenance": "synthetic diagnostic HAZOP row"
+      }
+    ],
+    "notes": ["Synthetic forecast example; no frequency or provider release is created."]
+  }
+}
