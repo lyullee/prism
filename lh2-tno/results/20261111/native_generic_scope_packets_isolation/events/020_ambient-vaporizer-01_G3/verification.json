@@ -1,0 +1,51 @@
+{
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.DynamicVaporizer",
+  "mode": "vaporizer",
+  "provider_result_digest": "6a617c9bba76e2566636f4d6d7dd930923ca49b1cbe2233df21c539af32cbe67",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "ambient-vaporizer-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 300.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {},
+    "source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "383c2d9f61e54579f8c5d1496da036fb6828610e786172e0258792af4887f709",
+    "provider_echo_digest": "383c2d9f61e54579f8c5d1496da036fb6828610e786172e0258792af4887f709",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.5,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 0.0,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "termination_basis": "reviewed_isolation_success",
+  "isolation": {
+    "requested": true,
+    "isolation_time_s": 0.1,
+    "post_isolation_observation_s": 0.2,
+    "provider_isolation_success": true
+  },
+  "limitations": [
+    "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
+    "isolation command is a diagnostic provider contract, not field isolation reliability",
+    "no site calibration, failure frequency or independent physical validation"
+  ]
+}

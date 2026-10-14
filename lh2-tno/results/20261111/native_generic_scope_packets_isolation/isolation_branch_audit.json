@@ -1,0 +1,63 @@
+{
+  "schema_version": "prism.native_scope_isolation_branch_catalog_audit.v1",
+  "status": "DIAGNOSTIC_ISOLATION_BRANCH_CATALOG_EXECUTED",
+  "catalog_status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
+  "frequency_event_count": 24,
+  "exact_native_packet_count": 24,
+  "uncomputed_event_count": 0,
+  "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+  "isolation_success_count": 14,
+  "isolation_success_by_component": {
+    "liquid-transfer-line-01": 5,
+    "transfer-valve-01": 5,
+    "liquid-transfer-pump-01": 2,
+    "ambient-vaporizer-01": 1,
+    "reliquefier-01": 1
+  },
+  "termination_basis_counts": {
+    "inventory_depletion": 6,
+    "reviewed_isolation_success": 14,
+    "emergency_relief_discharge": 1,
+    "inventory_over_600s": 1,
+    "two_sided_rupture": 2
+  },
+  "timing": {
+    "event_elapsed_s": {
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": 2.314700400005677,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": 11.364381699997466,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": 3.447839499989641,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": 2.920248399983393,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": 3.50250370001595,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": 1.4862165000085952,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": 1.5178463999909582,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": 1.4870291000115685,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": 1.4785024000011617,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": 1.5201580000139074,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": 1.3802073999977438,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": 1.392545099995914,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": 1.3703195999987656,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": 1.3877585000009276,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": 1.3691878000099678,
+      "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": 1.3075026000005892,
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G1": 1.3671253000065917,
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G2": 1.3400400999962585,
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": 1.9006648000067798,
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": 30.280869599999278,
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": 1.3671092000004137,
+      "generic-lh2-full-scope-frequency-example/reliquefier/G4": 2.0362118000048213,
+      "generic-lh2-full-scope-frequency-example/reliquefier/G5": 2.0632118999928934,
+      "generic-lh2-full-scope-frequency-example/reliquefier/G6": 1.4838377999985823
+    },
+    "total_elapsed_s": 81.08601760002784,
+    "measurement": "wall-clock subprocess time; diagnostic exporter execution only"
+  },
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "all catalog inputs use the synthetic generic outdoor manifest and diagnostic exporter states",
+    "reviewed_isolation_success means the external actuator reached zero opening and the declared observation returned zero flow",
+    "the branch does not estimate field isolation reliability or accident frequency",
+    "qualified provider evidence, independent physical validation, and facility IR/F-N promotion remain withheld"
+  ]
+}

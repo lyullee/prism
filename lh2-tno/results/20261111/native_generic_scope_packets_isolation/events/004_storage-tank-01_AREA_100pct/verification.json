@@ -1,0 +1,76 @@
+{
+  "status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+  "provider_result_digest": "77f0fce14bead315f16567ba441127d9204fc1575e0fe09c353566f58d6a51be",
+  "provider_run_meta": {
+    "status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED",
+    "available_mass_kg": 0.028492061899609754,
+    "threshold_mass_kg": 0.028392061899609754,
+    "remaining_mass_kg": 0.026829495278777732,
+    "cumulative_mass_out_kg": 0.0016625666208320196,
+    "duration_s": 1e-06,
+    "interval_count": 1,
+    "max_abs_mass_residual_kg": 2.3852447794681098e-18,
+    "max_abs_energy_residual_j": 1.0271922744354214,
+    "termination_basis": "inventory_depletion_positive_threshold",
+    "operator_limited": true,
+    "physical_validation_claim": false
+  },
+  "strict_packet_duration_s": 1e-06,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": -7.105427357601002e-15,
+  "provider_packet_promoted": false,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "storage-tank-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 204952.5178434031,
+    "temperature_k": 22.96893651066565,
+    "mass_kg": 0.028492061899609754,
+    "liquid_fraction": null,
+    "phase": "liquid",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 204952.5178434031,
+        "sensor_location": "storage-tank-01.liquid_cell_0",
+        "quality": "valid"
+      },
+      "initial_temperature": {
+        "quantity": "temperature",
+        "value_si": 22.96893651066565,
+        "sensor_location": "storage-tank-01.liquid_cell_0",
+        "quality": "valid"
+      },
+      "initial_mass": {
+        "quantity": "mass",
+        "value_si": 0.028492061899609754,
+        "sensor_location": "storage-tank-01.inventory",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+    "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+    "digest_match": true
+  },
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic LayeredTank geometry, opening and atmospheric boundary",
+    "liquid-port ground interception is explicit; flash and airborne-liquid physics are not supplied",
+    "provider packet remains synthetic_diagnostic and is not a qualified facility release"
+  ]
+}

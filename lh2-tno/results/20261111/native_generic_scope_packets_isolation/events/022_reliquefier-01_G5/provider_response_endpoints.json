@@ -1,0 +1,300 @@
+{
+  "reliquefier-accident-out-1": {
+    "provider_export_schema": "prism.external_accident_history.v1",
+    "provider_state_snapshot_digest": "f97892c044a268ec9f7278ce9f0cf1e594ebacfe2d3ebcb71f520350f930022b",
+    "provider_model": "lh2dt.DynamicReliquefier",
+    "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+    "data": {
+      "event_kind": "accidental_leak",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "port_id": "reliquefier-accident-out-1",
+      "duration_s": 1e-05,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 3.595846016954127e-08,
+      "cumulative_static_enthalpy_out_j": 0.14233132189981074,
+      "termination_provenance": "external DynamicReliquefier shared inventory over declared two-sided rupture horizon",
+      "termination_basis": "two_sided_rupture",
+      "fluid": "Hydrogen",
+      "steps": [
+        {
+          "time_s": 0.0,
+          "mass_flow_kg_s": 0.0036109484328547665,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958283.5276541375,
+          "temperature_k": 300.0002044224795,
+          "density_kg_m3": 0.08184043204976539,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.88422418717339,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 1e-06,
+          "mass_flow_kg_s": 0.0036075923610407487,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958268.2690534587,
+          "temperature_k": 299.9991383433027,
+          "density_kg_m3": 0.08184072277536539,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.80036538473381,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 2e-06,
+          "mass_flow_kg_s": 0.003604236281453894,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958253.0247352617,
+          "temperature_k": 299.9980732617316,
+          "density_kg_m3": 0.08184101323097624,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.7165072805699,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 3e-06,
+          "mass_flow_kg_s": 0.0036008801941222568,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958237.7946996354,
+          "temperature_k": 299.99700917777324,
+          "density_kg_m3": 0.08184130341659017,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.6326498745512,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 4e-06,
+          "mass_flow_kg_s": 0.0035975240990676048,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958222.578946667,
+          "temperature_k": 299.9959460914345,
+          "density_kg_m3": 0.08184159333219958,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.54879316639047,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 4.9999999999999996e-06,
+          "mass_flow_kg_s": 0.0035941679963168373,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958207.3774764487,
+          "temperature_k": 299.99488400272276,
+          "density_kg_m3": 0.08184188297779668,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.4649371559284,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 5.999999999999999e-06,
+          "mass_flow_kg_s": 0.0035908118858929256,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958192.1902890676,
+          "temperature_k": 299.9938229116446,
+          "density_kg_m3": 0.08184217235337397,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.38108184290763,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 6.999999999999999e-06,
+          "mass_flow_kg_s": 0.003587455767823371,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958177.0173846134,
+          "temperature_k": 299.99276281820715,
+          "density_kg_m3": 0.0818424614589237,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.29722722718377,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 8e-06,
+          "mass_flow_kg_s": 0.0035840996421295664,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958161.8587631728,
+          "temperature_k": 299.9917037224173,
+          "density_kg_m3": 0.0818427502944382,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.21337330846029,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 9e-06,
+          "mass_flow_kg_s": 0.003580743508839304,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958146.7144248346,
+          "temperature_k": 299.9906456242818,
+          "density_kg_m3": 0.08184303885991,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.12952008659973,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        }
+      ],
+      "provider_meta": {
+        "model_class": "lh2dt.DynamicReliquefier",
+        "rupture_endpoint": "reliquefier-accident-out-1",
+        "shared_initial_mass_kg": 0.0008238536226639276,
+        "shared_final_mass_kg": 0.0008237817057435886,
+        "shared_total_cumulative_mass_kg": 7.191692033908254e-08,
+        "opening_diameter_m": 0.025
+      }
+    }
+  },
+  "reliquefier-accident-out-2": {
+    "provider_export_schema": "prism.external_accident_history.v1",
+    "provider_state_snapshot_digest": "f97892c044a268ec9f7278ce9f0cf1e594ebacfe2d3ebcb71f520350f930022b",
+    "provider_model": "lh2dt.DynamicReliquefier",
+    "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+    "data": {
+      "event_kind": "accidental_leak",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "port_id": "reliquefier-accident-out-2",
+      "duration_s": 1e-05,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 3.595846016954127e-08,
+      "cumulative_static_enthalpy_out_j": 0.14233132189981074,
+      "termination_provenance": "external DynamicReliquefier shared inventory over declared two-sided rupture horizon",
+      "termination_basis": "two_sided_rupture",
+      "fluid": "Hydrogen",
+      "steps": [
+        {
+          "time_s": 0.0,
+          "mass_flow_kg_s": 0.0036109484328547665,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958283.5276541375,
+          "temperature_k": 300.0002044224795,
+          "density_kg_m3": 0.08184043204976539,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.88422418717339,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 1e-06,
+          "mass_flow_kg_s": 0.0036075923610407487,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958268.2690534587,
+          "temperature_k": 299.9991383433027,
+          "density_kg_m3": 0.08184072277536539,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.80036538473381,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 2e-06,
+          "mass_flow_kg_s": 0.003604236281453894,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958253.0247352617,
+          "temperature_k": 299.9980732617316,
+          "density_kg_m3": 0.08184101323097624,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.7165072805699,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 3e-06,
+          "mass_flow_kg_s": 0.0036008801941222568,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958237.7946996354,
+          "temperature_k": 299.99700917777324,
+          "density_kg_m3": 0.08184130341659017,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.6326498745512,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 4e-06,
+          "mass_flow_kg_s": 0.0035975240990676048,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958222.578946667,
+          "temperature_k": 299.9959460914345,
+          "density_kg_m3": 0.08184159333219958,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.54879316639047,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 4.9999999999999996e-06,
+          "mass_flow_kg_s": 0.0035941679963168373,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958207.3774764487,
+          "temperature_k": 299.99488400272276,
+          "density_kg_m3": 0.08184188297779668,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.4649371559284,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 5.999999999999999e-06,
+          "mass_flow_kg_s": 0.0035908118858929256,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958192.1902890676,
+          "temperature_k": 299.9938229116446,
+          "density_kg_m3": 0.08184217235337397,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.38108184290763,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 6.999999999999999e-06,
+          "mass_flow_kg_s": 0.003587455767823371,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958177.0173846134,
+          "temperature_k": 299.99276281820715,
+          "density_kg_m3": 0.0818424614589237,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.29722722718377,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 8e-06,
+          "mass_flow_kg_s": 0.0035840996421295664,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958161.8587631728,
+          "temperature_k": 299.9917037224173,
+          "density_kg_m3": 0.0818427502944382,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.21337330846029,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        },
+        {
+          "time_s": 9e-06,
+          "mass_flow_kg_s": 0.003580743508839304,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 3958146.7144248346,
+          "temperature_k": 299.9906456242818,
+          "density_kg_m3": 0.08184303885991,
+          "effective_area_m2": 0.0004908738521234052,
+          "velocity_m_s": 89.12952008659973,
+          "area_provenance": "explicit full-bore rupture endpoint area",
+          "velocity_origin": "mass_continuity_from_declared_area"
+        }
+      ],
+      "provider_meta": {
+        "model_class": "lh2dt.DynamicReliquefier",
+        "rupture_endpoint": "reliquefier-accident-out-2",
+        "shared_initial_mass_kg": 0.0008238536226639276,
+        "shared_final_mass_kg": 0.0008237817057435886,
+        "shared_total_cumulative_mass_kg": 7.191692033908254e-08,
+        "opening_diameter_m": 0.025
+      }
+    }
+  }
+}

@@ -89,6 +89,11 @@ def main() -> int:
         help="optional exact native generic-scope catalog verification",
     )
     parser.add_argument(
+        "--native-scope-isolation-branch-catalog-audit",
+        type=Path,
+        help="optional diagnostic native generic-scope isolation-branch catalog audit",
+    )
+    parser.add_argument(
         "--state-snapshot-binding-audit",
         type=Path,
         help="optional state-snapshot/provider-echo binding audit",
@@ -395,6 +400,15 @@ def main() -> int:
             native_scope_packet_catalog_verification["_record_path"] = str(
                 args.native_scope_packet_catalog_verification
             )
+        native_scope_isolation_branch_catalog_audit = (
+            _object(args.native_scope_isolation_branch_catalog_audit)
+            if args.native_scope_isolation_branch_catalog_audit
+            else None
+        )
+        if native_scope_isolation_branch_catalog_audit is not None:
+            native_scope_isolation_branch_catalog_audit["_record_path"] = str(
+                args.native_scope_isolation_branch_catalog_audit
+            )
         state_snapshot_binding_audit = (
             _object(args.state_snapshot_binding_audit)
             if args.state_snapshot_binding_audit
@@ -672,6 +686,7 @@ def main() -> int:
             observed_hazop_provider_consequence_chain=observed_hazop_provider_consequence_chain,
             observed_hazop_storage_isolation_branch_evidence=observed_hazop_storage_isolation_branch_evidence,
             observed_hazop_vaporizer_isolation_branch_evidence=observed_hazop_vaporizer_isolation_branch_evidence,
+            native_scope_isolation_branch_catalog_audit=native_scope_isolation_branch_catalog_audit,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

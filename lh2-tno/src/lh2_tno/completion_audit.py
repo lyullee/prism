@@ -108,6 +108,7 @@ def build_ijhe_completion_audit(
     observed_hazop_provider_consequence_chain: Mapping[str, Any] | None = None,
     observed_hazop_storage_isolation_branch_evidence: Mapping[str, Any] | None = None,
     observed_hazop_vaporizer_isolation_branch_evidence: Mapping[str, Any] | None = None,
+    native_scope_isolation_branch_catalog_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -459,6 +460,85 @@ def build_ijhe_completion_audit(
                     "model and keeps its diagnostic adapter separate from accident release. "
                     "The evidence does not generate an accident, infer frequency, qualify a provider "
                     "packet, or promote facility IR/F-N."
+                ),
+            }
+        )
+    if native_scope_isolation_branch_catalog_audit is not None:
+        isolation_catalog = native_scope_isolation_branch_catalog_audit
+        component_success = isolation_catalog.get("isolation_success_by_component")
+        termination_counts = isolation_catalog.get("termination_basis_counts")
+        isolation_timing = isolation_catalog.get("timing")
+        event_elapsed = (
+            isolation_timing.get("event_elapsed_s")
+            if isinstance(isolation_timing, Mapping)
+            else None
+        )
+        total_elapsed = (
+            isolation_timing.get("total_elapsed_s")
+            if isinstance(isolation_timing, Mapping)
+            else None
+        )
+        isolation_catalog_valid = (
+            isolation_catalog.get("schema_version")
+            == "prism.native_scope_isolation_branch_catalog_audit.v1"
+            and isolation_catalog.get("status")
+            == "DIAGNOSTIC_ISOLATION_BRANCH_CATALOG_EXECUTED"
+            and isolation_catalog.get("catalog_status")
+            == "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
+            and isinstance(isolation_catalog.get("frequency_event_count"), int)
+            and isolation_catalog.get("frequency_event_count") > 0
+            and isolation_catalog.get("exact_native_packet_count")
+            == isolation_catalog.get("frequency_event_count")
+            and isolation_catalog.get("uncomputed_event_count") == 0
+            and isolation_catalog.get("state_snapshot_binding_status")
+            == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+            and isinstance(isolation_catalog.get("isolation_success_count"), int)
+            and isolation_catalog.get("isolation_success_count") > 0
+            and isinstance(component_success, Mapping)
+            and bool(component_success)
+            and isinstance(termination_counts, Mapping)
+            and bool(termination_counts)
+            and isinstance(isolation_timing, Mapping)
+            and isinstance(event_elapsed, Mapping)
+            and len(event_elapsed) == isolation_catalog.get("frequency_event_count")
+            and all(_finite(value) and value >= 0 for value in event_elapsed.values())
+            and _finite(total_elapsed)
+            and total_elapsed >= 0
+            and isolation_catalog.get("provider_packet_promoted") is False
+            and isolation_catalog.get("physical_validation_claim") is False
+            and isolation_catalog.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_scope_isolation_branch_catalog",
+                "status": "PASS" if isolation_catalog_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if isolation_catalog_valid
+                    else "native isolation-branch catalog is missing exact packets, state binding, timing, or diagnostic-only controls"
+                ),
+                "evidence": {
+                    "record": isolation_catalog.get("_record_path"),
+                    "schema_version": isolation_catalog.get("schema_version"),
+                    "status": isolation_catalog.get("status"),
+                    "catalog_status": isolation_catalog.get("catalog_status"),
+                    "frequency_event_count": isolation_catalog.get("frequency_event_count"),
+                    "exact_native_packet_count": isolation_catalog.get("exact_native_packet_count"),
+                    "uncomputed_event_count": isolation_catalog.get("uncomputed_event_count"),
+                    "state_snapshot_binding_status": isolation_catalog.get("state_snapshot_binding_status"),
+                    "isolation_success_count": isolation_catalog.get("isolation_success_count"),
+                    "isolation_success_by_component": component_success,
+                    "termination_basis_counts": termination_counts,
+                    "timing": isolation_timing,
+                    "provider_packet_promoted": isolation_catalog.get("provider_packet_promoted"),
+                    "physical_validation_claim": isolation_catalog.get("physical_validation_claim"),
+                    "facility_qra_claim": isolation_catalog.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The optional native LH2 isolation branch catalog records diagnostic isolation outcomes, "
+                    "termination bases, and wall-clock timing while keeping frequency, field reliability, "
+                    "physical validation, and facility IR/F-N promotion withheld."
                 ),
             }
         )

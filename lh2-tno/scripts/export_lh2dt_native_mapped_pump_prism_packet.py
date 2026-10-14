@@ -326,6 +326,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "available_mass_kg": data.get("available_mass_kg"),
         "cumulative_mass_out_kg": data.get("cumulative_mass_out_kg"),
         "upstream_reserve_remaining_kg": float(data.get("available_mass_kg", 0.0)) - float(data.get("cumulative_mass_out_kg", 0.0)),
+        "state_snapshot": snapshot.to_mapping(),
+        "state_snapshot_digest": snapshot.digest(),
+        "provider_echo_digest": native_response.get("provider_state_snapshot_digest"),
+        "state_snapshot_handoff": {
+            "present": True,
+            "digest": snapshot.digest(),
+            "provider_echo_digest": native_response.get("provider_state_snapshot_digest"),
+            "digest_match": native_response.get("provider_state_snapshot_digest") == snapshot.digest(),
+        },
         "pump_operating_point": {
             "mass_flow_kg_s": point.get("mass_flow_kg_s"),
             "pressure_rise_pa": point.get("pressure_rise_pa"),

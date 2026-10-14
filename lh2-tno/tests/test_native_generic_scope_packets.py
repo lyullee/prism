@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+from pathlib import Path
+from types import SimpleNamespace
+
 from scripts.build_native_generic_scope_packet_catalog import _validate_packet
+from scripts.build_native_generic_scope_packet_catalog import _spec
+from lh2_tno.equipment_manifest import EquipmentManifest
 from scripts.export_lh2dt_dynamic_vaporizer_inventory_prism_packet import _coarsen_steps
 
 
@@ -55,3 +60,50 @@ def test_native_packet_identity_validator_rejects_wrong_port():
         "port_id": "other-port",
     }
     assert _validate_packet(spec, "release", packet) == ["port_id mismatch"]
+
+
+def _event(component_id: str, event_id: str, *, diameter: float = 0.0025, mode: str = "hole"):
+    return SimpleNamespace(
+        id=event_id,
+        model_component_id=component_id,
+        profile="diagnostic",
+        loc="AREA_1%",
+        release=SimpleNamespace(hole_diameter_m=diameter, mode=mode),
+    )
+
+
+def test_optional_isolation_catalog_selects_native_pipe_and_records_controls():
+    manifest = EquipmentManifest.from_json(
+        Path(__file__).parents[1] / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    spec = _spec(
+        _event("liquid-transfer-line-01", "facility/line/G1"),
+        manifest,
+        Path(".tmp"),
+        Path("C:/lh2dt"),
+        event_index=0,
+        isolation_time_s=0.1,
+        post_isolation_observation_s=0.2,
+    )
+    assert spec["script"] == "export_lh2dt_native_dynamic_pipe_prism_packet.py"
+    assert "--isolation-time-s" in spec["command"]
+    assert "--post-isolation-observation-s" in spec["command"]
+    assert "--failure-opening-diameter-m" in spec["command"]
+
+
+def test_optional_isolation_catalog_uses_native_pump_adapter():
+    manifest = EquipmentManifest.from_json(
+        Path(__file__).parents[1] / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    spec = _spec(
+        _event("liquid-transfer-pump-01", "facility/pump/G1"),
+        manifest,
+        Path(".tmp"),
+        Path("C:/lh2dt"),
+        event_index=0,
+        isolation_time_s=0.1,
+        post_isolation_observation_s=0.2,
+    )
+    assert spec["script"] == "export_lh2dt_native_mapped_pump_prism_packet.py"
+    assert "--horizon-s" in spec["command"]
+    assert "--isolation-time-s" in spec["command"]

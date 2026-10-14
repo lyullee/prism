@@ -2622,6 +2622,65 @@ def test_completion_audit_records_exact_native_scope_catalog_separately_from_pro
     assert report["complete_facility_qra_claim"] is False
 
 
+def _native_isolation_catalog(**overrides):
+    record = {
+        "schema_version": "prism.native_scope_isolation_branch_catalog_audit.v1",
+        "status": "DIAGNOSTIC_ISOLATION_BRANCH_CATALOG_EXECUTED",
+        "catalog_status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
+        "frequency_event_count": 2,
+        "exact_native_packet_count": 2,
+        "uncomputed_event_count": 0,
+        "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+        "isolation_success_count": 1,
+        "isolation_success_by_component": {"transfer-line": 1},
+        "termination_basis_counts": {"reviewed_isolation_success": 1, "inventory_depletion": 1},
+        "timing": {
+            "event_elapsed_s": {"event-1": 0.2, "event-2": 0.3},
+            "total_elapsed_s": 0.5,
+        },
+        "provider_packet_promoted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_native_isolation_branch_catalog_diagnostic():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_scope_isolation_branch_catalog_audit=_native_isolation_catalog(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_scope_isolation_branch_catalog"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["isolation_success_count"] == 1
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_malformed_native_isolation_branch_catalog_diagnostic():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_scope_isolation_branch_catalog_audit=_native_isolation_catalog(
+            state_snapshot_binding_status="DECLARED_DIGEST_ONLY"
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_scope_isolation_branch_catalog"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_records_observed_state_evidence_without_accident_promotion():
     model_binding = {
         "schema": "prism.observed_state_model_binding_audit.v1",

@@ -18,6 +18,7 @@ import math
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -71,6 +72,8 @@ def _spec(
     root: Path,
     *,
     event_index: int,
+    isolation_time_s: float | None = None,
+    post_isolation_observation_s: float | None = None,
 ) -> dict[str, Any]:
     """Return one reproducible exporter command specification."""
     event_dir = output_dir / "events" / f"{event_index:03d}_{event.model_component_id}_{event.loc.replace('%', 'pct')}"
@@ -92,30 +95,72 @@ def _spec(
             "--port-id", port, "--nozzle-height-m", "1.0",
         ]
     elif event.model_component_id == "liquid-transfer-line-01":
-        script = "export_lh2dt_dynamic_pipe_prism_packet.py"
-        args = [
-            "--duration-s", "0.001", "--time-step-s", "0.0001",
-            "--length-m", "1.0", "--inner-diameter-m", repr(float(event.release.hole_diameter_m)),
-            "--port-id", port, "--nozzle-height-m", "1.0",
-        ]
+        if isolation_time_s is None:
+            script = "export_lh2dt_dynamic_pipe_prism_packet.py"
+            args = [
+                "--duration-s", "0.001", "--time-step-s", "0.0001",
+                "--length-m", "1.0", "--inner-diameter-m", repr(float(event.release.hole_diameter_m)),
+                "--port-id", port, "--nozzle-height-m", "1.0",
+            ]
+        else:
+            # The native adapter owns an explicit isolation clock and checks
+            # the post-isolation zero-flow observation.  Keep the declared
+            # pipe diameter separate from the frequency-bin failure opening.
+            script = "export_lh2dt_native_dynamic_pipe_prism_packet.py"
+            total_duration = isolation_time_s + float(post_isolation_observation_s or 0.0)
+            args = [
+                "--length-m", "10.0", "--pipe-diameter-m", "0.025",
+                "--failure-opening-diameter-m", repr(float(event.release.hole_diameter_m)),
+                "--initial-pressure-pa-abs", "250000", "--initial-temperature-k", "20.5",
+                "--source-mode", "two_phase", "--initial-quality", "0.1",
+                "--horizon-s", repr(total_duration), "--time-step-s", "0.05",
+                "--isolation-time-s", repr(isolation_time_s),
+                "--post-isolation-observation-s", repr(float(post_isolation_observation_s)),
+                "--port-id", port, "--nozzle-height-m", "1.0",
+            ]
     elif event.model_component_id == "transfer-valve-01":
         script = "export_lh2dt_valve_prism_packet.py"
         args = [
-            "--duration-s", "0.2", "--time-step-s", "0.02",
+            "--duration-s", repr(
+                isolation_time_s + float(post_isolation_observation_s or 0.0)
+                if isolation_time_s is not None else 0.2
+            ), "--time-step-s", "0.05",
             "--opening-diameter-m", repr(float(event.release.hole_diameter_m)),
             "--port-id", port, "--nozzle-height-m", "0.5",
         ]
+        if isolation_time_s is not None:
+            args.extend([
+                "--isolation-time-s", repr(isolation_time_s),
+                "--post-isolation-observation-s", repr(float(post_isolation_observation_s)),
+                "--stroke-time-s", "0.05",
+            ])
     elif event.model_component_id == "pressure-relief-vent-01":
         script = "export_lh2dt_vent_stack_prism_packet.py"
         args = ["--port-id", port, "--nozzle-height-m", "2.0"]
     elif event.model_component_id == "liquid-transfer-pump-01":
-        script = "export_lh2dt_mapped_pump_prism_packet.py"
+        script = (
+            "export_lh2dt_native_mapped_pump_prism_packet.py"
+            if isolation_time_s is not None
+            else "export_lh2dt_mapped_pump_prism_packet.py"
+        )
         args = [
-            "--duration-s", "0.2", "--time-step-s", "0.02",
-            "--opening-diameter-m", repr(float(event.release.hole_diameter_m)),
+            ("--horizon-s" if isolation_time_s is not None else "--duration-s"),
+            repr(
+                isolation_time_s + float(post_isolation_observation_s or 0.0)
+                if isolation_time_s is not None else 0.2
+            ), "--time-step-s", "0.05",
+            ("--failure-opening-diameter-m" if isolation_time_s is not None else "--opening-diameter-m"),
+            repr(float(event.release.hole_diameter_m)),
             "--port-id", port, "--nozzle-height-m", "0.5",
-            "--coupled-outlet-boundary",
         ]
+        if isolation_time_s is not None:
+            args.extend([
+                "--isolation-time-s", repr(isolation_time_s),
+                "--post-isolation-observation-s", repr(float(post_isolation_observation_s)),
+                "--available-mass-kg", "1.0",
+            ])
+        else:
+            args.append("--coupled-outlet-boundary")
     elif event.model_component_id == "ambient-vaporizer-01":
         if event.release.mode == "instantaneous_inventory":
             script = "export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py"
@@ -135,6 +180,15 @@ def _spec(
                 "--mode", "vaporizer", "--opening-diameter-m", repr(float(event.release.hole_diameter_m)),
                 "--port-id", port,
             ]
+            if isolation_time_s is not None:
+                args.extend([
+                    "--duration-s", repr(
+                        isolation_time_s + 0.2 + float(post_isolation_observation_s or 0.0)
+                    ),
+                    "--isolation-time-s", repr(isolation_time_s),
+                    "--stroke-time-s", "0.2",
+                    "--post-isolation-observation-s", repr(float(post_isolation_observation_s)),
+                ])
     elif event.model_component_id == "reliquefier-01":
         if event.release.mode == "two_sided_rupture":
             script = "export_lh2dt_reliquefier_two_sided_prism_packet.py"
@@ -148,6 +202,15 @@ def _spec(
                 "--mode", "reliquefier", "--opening-diameter-m", repr(float(event.release.hole_diameter_m)),
                 "--port-id", port,
             ]
+            if isolation_time_s is not None:
+                args.extend([
+                    "--duration-s", repr(
+                        isolation_time_s + 0.2 + float(post_isolation_observation_s or 0.0)
+                    ),
+                    "--isolation-time-s", repr(isolation_time_s),
+                    "--stroke-time-s", "0.2",
+                    "--post-isolation-observation-s", repr(float(post_isolation_observation_s)),
+                ])
     else:
         raise ValueError(f"no native exporter mapping for {event.model_component_id}")
     # Two-sided exporter needs the exact event id but creates its own two endpoint ports.
@@ -241,6 +304,11 @@ def _retry_commands(spec: dict[str, Any]) -> list[list[str]]:
         retry = _replace_flag(retry, "--max-intervals", "256")
         return [retry]
     if spec["component_id"] == "liquid-transfer-line-01" and float(spec["opening_diameter_m"]) >= 0.02:
+        if "--horizon-s" in command:
+            # Native isolation packets use a fixed short horizon and the
+            # declared zero-flow observation; do not remove that observation
+            # in a numerical retry.
+            return []
         retry = _replace_flag(command, "--duration-s", "0.0001")
         retry = _replace_flag(retry, "--time-step-s", "0.00001")
         return [retry]
@@ -288,22 +356,31 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
     state_binding_records: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
     for event_index, event in enumerate(events):
-        spec = _spec(event, manifest, output_dir, args.lh2dt_root.resolve(), event_index=event_index)
+        spec = _spec(
+            event, manifest, output_dir, args.lh2dt_root.resolve(),
+            event_index=event_index,
+            isolation_time_s=args.isolation_time_s,
+            post_isolation_observation_s=args.post_isolation_observation_s,
+        )
         attempts: list[dict[str, Any]] = []
         commands = [spec["command"], *_retry_commands(spec)]
         completed = None
+        event_elapsed_s = 0.0
         for attempt_index, command in enumerate(commands):
             if attempt_index > 0:
                 # The previous provider may have written partial diagnostics
                 # before failing.  A retry must be read as one atomic packet.
                 shutil.rmtree(spec["event_dir"], ignore_errors=True)
                 Path(spec["event_dir"]).mkdir(parents=True, exist_ok=True)
+            started = time.perf_counter()
             completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+            event_elapsed_s += time.perf_counter() - started
             attempts.append({
                 "attempt_index": attempt_index,
                 "command": command,
                 "returncode": completed.returncode,
                 "stderr_tail": completed.stderr[-2000:],
+                "elapsed_s": event_elapsed_s,
             })
             if completed.returncode == 0:
                 break
@@ -317,6 +394,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             "event_dir": str(Path(spec["event_dir"]).relative_to(output_dir)).replace("\\", "/"),
             "returncode": completed.returncode,
             "attempts": attempts,
+            "elapsed_s": event_elapsed_s,
         }
         if completed.returncode != 0:
             row["status"] = "UNCOMPUTED_EXPORT_FAILED"
@@ -341,7 +419,19 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             "status": "EXACT_NATIVE_PACKET",
             "packet_kind": kind,
             "retry_used": len(attempts) > 1,
+            "diagnostic_termination_basis": packet.get("termination_basis"),
+            "diagnostic_duration_s": packet.get("duration_s"),
         })
+        provider_verification = _load_state_binding_record(spec)
+        isolation = provider_verification.get("isolation")
+        if isinstance(isolation, dict):
+            row["isolation_requested"] = isolation.get("requested")
+            row["isolation_success"] = isolation.get(
+                "provider_isolation_success", isolation.get("isolation_success")
+            )
+        else:
+            row["isolation_requested"] = provider_verification.get("isolation_time_s") is not None
+            row["isolation_success"] = provider_verification.get("isolation_success", False)
         successful.append((spec, kind, packet))
         rows.append(row)
         state_binding_records.append(_load_state_binding_record(spec))
@@ -400,6 +490,29 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             "packet identity coverage does not establish qualified provider evidence or facility IR/F-N",
             "failed exports remain explicit uncomputed worklist events",
         ],
+        "isolation_branch": {
+            "requested": args.isolation_time_s is not None,
+            "isolation_time_s": args.isolation_time_s,
+            "post_isolation_observation_s": args.post_isolation_observation_s,
+            "purpose": (
+                "diagnostic provider actuator/zero-flow branch; field isolation reliability is not inferred"
+                if args.isolation_time_s is not None
+                else "default bounded diagnostic exporters"
+            ),
+        },
+        "timing": {
+            "event_elapsed_s": {
+                str(row.get("event_id")): row.get("elapsed_s")
+                for row in rows
+                if isinstance(row, dict) and row.get("event_id")
+            },
+            "total_elapsed_s": sum(
+                float(row.get("elapsed_s", 0.0))
+                for row in rows
+                if isinstance(row, dict)
+            ),
+            "measurement": "wall-clock subprocess time; diagnostic exporter execution only",
+        },
     }
     _save(output_dir / "verification.json", verification)
     return verification
@@ -411,7 +524,20 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--frequency-plan", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--isolation-time-s", type=float, default=None,
+        help="optional diagnostic isolation command time for compatible equipment exporters",
+    )
+    parser.add_argument(
+        "--post-isolation-observation-s", type=float, default=None,
+        help="required positive zero-flow observation when --isolation-time-s is supplied",
+    )
     args = parser.parse_args()
+    if args.isolation_time_s is not None:
+        if args.isolation_time_s <= 0.0:
+            raise SystemExit("--isolation-time-s must be positive")
+        if args.post_isolation_observation_s is None or args.post_isolation_observation_s <= 0.0:
+            raise SystemExit("--post-isolation-observation-s must be positive with --isolation-time-s")
     try:
         result = build_catalog(args)
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:

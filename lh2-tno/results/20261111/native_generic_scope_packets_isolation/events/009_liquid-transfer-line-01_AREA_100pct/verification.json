@@ -1,0 +1,69 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "provider_result_digest": "786c90a02e6fae8b442aaaf0ee8723b308129c937c1a03265a63d12849274a1c",
+  "provider_packet_promoted": false,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "liquid-transfer-line-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 250000.0,
+    "temperature_k": 23.859662429550244,
+    "mass_kg": 0.10622803086219497,
+    "liquid_fraction": null,
+    "phase": "two_phase",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 250000.0,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      },
+      "initial_quality": {
+        "quantity": "level_fraction",
+        "value_si": 0.1,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
+  "provider_echo_digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
+    "provider_echo_digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
+    "digest_match": true
+  },
+  "phase_basis": "two_phase",
+  "source_phase": "twophase",
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.30000000000000004,
+  "available_mass_kg": 0.10622803086219497,
+  "cumulative_mass_out_kg": 0.04473063270730533,
+  "mass_residual_kg": 0.0,
+  "isolation_time_s": 0.1,
+  "post_isolation_observation_s": 0.2,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+    "native provider history remains diagnostic until independent qualification is supplied",
+    "airborne liquid remains zero under the native provider contract"
+  ]
+}
