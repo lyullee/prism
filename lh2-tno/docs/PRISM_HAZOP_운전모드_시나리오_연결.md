@@ -116,6 +116,8 @@ python scripts/audit_hazop_scenario_trace.py `
 
 `HAZOP_SCENARIO_TRACE_COMPLETE`이면 event·case·risk atom·provider 요청의 ID가 일치한다는 뜻이고, `HAZOP_SCENARIO_TRACE_BLOCKED`이면 누락 또는 충돌을 뜻한다. 일반 campaign에서 ID를 사용하지 않으면 `NO_HAZOP_SCENARIO_ID_DECLARED`로 남으며 ID나 빈도를 추정하지 않는다.
 
+`build_hazop_facility_campaign_result(...)`와 `build_hazop_facility_campaign_branches(...)`는 이 감사기를 handoff 안에서 자동 실행한다. 성공한 결과에는 `hazop_scenario_trace_audit`가 함께 들어가며, event·case·risk atom의 시나리오 ID가 완전하지 않으면 시설 원장을 반환하지 않고 `HazopFacilityCampaignError`로 중단한다. 이 검사는 HAZOP ID의 전달 경로를 닫는 연결 검사일 뿐이며, 문헌 빈도·provider 자격·SLABx-LH2 물리검증·시설 QRA를 승인하거나 PRISM 단독 모델로 대체하지 않는다.
+
 시설 원장으로 병합된 뒤에도 mode를 잃지 않는다. `scenario_branch_accounting`의 `annual_conditions`, `release_branches`, `ignition_branches` 각 행에 `operating_modes` 목록을 보존하고, `component_contributions`, `component_coverage`, 설비 위험순위에도 같은 목록을 남긴다. 따라서 같은 방출·점화 branch가 `receiving`과 `supply`에서 모두 발생했는지, 어느 설비가 어떤 mode에 연결됐는지 확인할 수 있다. 목록은 위험 원자의 mode를 정렬해 보여주는 추적용 메타데이터이며, 조건부 빈도를 합산하거나 mode별 빈도를 추정하지 않는다. mode가 없는 legacy risk atom은 빈 목록으로 남아 기존 입력을 임의로 보완하지 않는다.
 
 여러 HAZOP branch를 동시에 시설 원장에 연결해야 할 때는 `build_hazop_facility_campaign_branches(...)`를 사용한다. 이 함수는 branch별 `scenario_id`에 대한 문헌 사건 빈도와 `branch_partition_groups`를 호출자가 명시하도록 요구하고, 같은 분할 그룹 안의 확률 합이 정확히 1일 때만 branch별 캠페인을 만든다. 분할 확률은 각 연간 조건의 명시적 release branch 확률에 곱해지며, 센서 신호에서 빈도를 학습하거나 누락 branch를 0으로 대체하지 않는다. 사건 ID가 겹치거나 확률·분할 그룹·scenario binding이 빠지면 해당 결과를 합치지 않고 오류로 남긴다. 성공 결과의 schema는 `prism.hazop_facility_campaign_branches.v1`이며, 기존 시설 원장과 동일하게 `facility_annual_qra_promotion=false`를 유지한다.

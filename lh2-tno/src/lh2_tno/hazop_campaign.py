@@ -20,6 +20,7 @@ from typing import Any
 
 from .contracts import canonical_digest
 from .facility_ledger import merge_facility_campaign_results
+from .hazop_scenario_trace_audit import audit_hazop_scenario_trace
 from .realtime_campaign import (
     IGNITION_BRANCHES,
     build_realtime_facility_campaign_result,
@@ -332,6 +333,18 @@ def build_hazop_facility_campaign_result(
         [campaign],
         expected_component_ids=tuple(sorted(required_components)),
     )
+    scenario_trace_audit = audit_hazop_scenario_trace(
+        {
+            "schema_version": "prism.hazop_facility_campaign_handoff.v1",
+            "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+            "campaign": campaign,
+        }
+    )
+    if scenario_trace_audit["status"] != "HAZOP_SCENARIO_TRACE_COMPLETE":
+        raise HazopFacilityCampaignError(
+            "HAZOP campaign scenario identity trace failed: "
+            + "; ".join(scenario_trace_audit.get("errors", []))
+        )
     return {
         "schema_version": "prism.hazop_facility_campaign_handoff.v1",
         "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
@@ -340,6 +353,7 @@ def build_hazop_facility_campaign_result(
         "snapshot": snapshot,
         "campaign": campaign,
         "facility_ledger": facility_ledger,
+        "hazop_scenario_trace_audit": scenario_trace_audit,
         "policy": {
             "hazop_scenario_id_bound": True,
             "one_active_hazop_branch_per_component": True,
@@ -617,6 +631,18 @@ def build_hazop_facility_campaign_branches(
         [combined],
         expected_component_ids=component_ids,
     )
+    scenario_trace_audit = audit_hazop_scenario_trace(
+        {
+            "schema_version": "prism.hazop_facility_campaign_branches.v1",
+            "status": "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
+            "campaign": combined,
+        }
+    )
+    if scenario_trace_audit["status"] != "HAZOP_SCENARIO_TRACE_COMPLETE":
+        raise HazopFacilityCampaignError(
+            "HAZOP branch campaign scenario identity trace failed: "
+            + "; ".join(scenario_trace_audit.get("errors", []))
+        )
     return {
         "schema_version": "prism.hazop_facility_campaign_branches.v1",
         "status": "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
@@ -626,6 +652,7 @@ def build_hazop_facility_campaign_branches(
         "branch_campaigns": branch_campaigns,
         "campaign": combined,
         "facility_ledger": facility_ledger,
+        "hazop_scenario_trace_audit": scenario_trace_audit,
         "policy": {
             "branch_partition_explicit": True,
             "frequency_inference_performed": False,
