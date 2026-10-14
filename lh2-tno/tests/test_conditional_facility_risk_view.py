@@ -44,6 +44,9 @@ def _assessment() -> dict:
         "facility_risk_ledger": {
             "event_count": 2,
             "case_count": 3,
+            "cases": [
+                {"event_id": "event-1", "elapsed_ms": 12.5, "stage_elapsed_ms": {"source": 4.0}}
+            ],
             "component_contributions": {"tank-01": {"risk_atom_count": 4}},
             "scenario_family_contributions": {"vessel_hole": {"risk_atom_count": 4}},
             "scenario_branch_accounting": {"status": "EXPLICIT_BRANCH_ACCOUNTING"},
@@ -131,5 +134,9 @@ def test_view_exposes_case_release_trace_without_opening_facility_promotion() ->
     assert trace["rows"][0]["risk_atom_accounting"] == {
         "risk_atom_count": 1,
         "nonzero_receptor_harm_atom_count": 1,
+    }
+    assert trace["rows"][0]["calculation_timing"] == {
+        "elapsed_ms": 12.5,
+        "stage_elapsed_ms": {"source": 4.0},
     }
     assert view["qualification"]["promotion_allowed"] is False

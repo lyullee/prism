@@ -7,6 +7,7 @@
 - 설비·port·운전 모드·HAZOP 시나리오·기상 조건
 - provider가 선언한 방출 종료 기준과 방출 지속시간
 - 초기 재고, 누적 방출량, 잔여 재고, 잔여율
+- case별 전체 처리시간과 source·pool·확산·점화/피해 단계별 처리시간
 - 수치상 종료 상태와 strict 방출 경계 승격 상태
 - 같은 case key를 사용한 risk atom 수와 비영 피해 atom 수
 
@@ -25,7 +26,8 @@ python scripts/build_conditional_facility_risk_view.py `
 ```
 
 권위 실행 결과는 [`conditional_facility_risk_view_with_release_trace.json`](../results/20261114/conditional_facility_risk_view_with_release_trace.json)이다.
-34개 event, 44개 case, 176개 risk atom과 방출 trace 44행이 일치하며, summary는
+34개 event, 44개 case, 176개 risk atom과 방출 trace 44행이 일치하며, 각 행의
+`calculation_timing`에 실제 assessment 처리시간이 복사된다. summary는
 수치상 종료 15개·운영자 검토 필요 12개·수치상 열림 29개를 재현한다.
 
 이 view는 **조건부 진단 출력**이다. `qualification.promotion_allowed`는 항상

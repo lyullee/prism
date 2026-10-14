@@ -36,6 +36,89 @@
     ],
     "curve_uses_threshold": "N >= 1 expected deaths"
   },
+  "timing": {
+    "campaign_count": 3,
+    "fresh_physics_cases": 44,
+    "case_min_ms": 1335.1443000137806,
+    "case_median_ms": 3033.8640500194742,
+    "case_max_ms": 18322.318000005907,
+    "case_p95_ms": 10739.593875002178,
+    "case_p99_ms": 17025.963029997656,
+    "campaign_elapsed_ms": 203388.11250006256,
+    "campaign_elapsed_ms_sum": 203388.11250006256,
+    "campaign_elapsed_ms_min": 19298.20160008967,
+    "campaign_elapsed_ms_median": 20644.581399974413,
+    "campaign_elapsed_ms_max": 163445.32949999848,
+    "campaign_elapsed_ms_p95": 149165.25468999607,
+    "campaign_elapsed_ms_p99": 160589.314537998,
+    "stage_elapsed_ms": {
+      "cloud_observation": {
+        "sample_count": 42,
+        "sum_ms": 8249.378199980129,
+        "median_ms": 91.6115500003798,
+        "max_ms": 930.441400007112,
+        "p95_ms": 404.9582699924938,
+        "p99_ms": 899.5726230047874
+      },
+      "endpoint_a": {
+        "sample_count": 2,
+        "sum_ms": 6119.259699989925,
+        "median_ms": 3059.6298499949626,
+        "max_ms": 3077.1174999972573,
+        "p95_ms": 3075.368734997028,
+        "p99_ms": 3076.7677469972114
+      },
+      "endpoint_aggregation": {
+        "sample_count": 2,
+        "sum_ms": 12389.510499997414,
+        "median_ms": 6194.755249998707,
+        "max_ms": 6194.9718999967445,
+        "p95_ms": 6194.950234996941,
+        "p99_ms": 6194.967566996784
+      },
+      "endpoint_b": {
+        "sample_count": 2,
+        "sum_ms": 6268.0120000150055,
+        "median_ms": 3134.0060000075027,
+        "max_ms": 3151.227000009385,
+        "p95_ms": 3149.5049000091967,
+        "p99_ms": 3150.8825800093473
+      },
+      "fire_explosion_damage_risk": {
+        "sample_count": 42,
+        "sum_ms": 3353.847599864821,
+        "median_ms": 70.25104999775067,
+        "max_ms": 115.69360000430606,
+        "p95_ms": 107.18760500385542,
+        "p99_ms": 114.22264300243113
+      },
+      "near_field_and_dispersion": {
+        "sample_count": 42,
+        "sum_ms": 135513.79359985003,
+        "median_ms": 1609.4670500096981,
+        "max_ms": 16626.192299998365,
+        "p95_ms": 9353.113489990928,
+        "p99_ms": 15380.463305997244
+      },
+      "pool": {
+        "sample_count": 42,
+        "sum_ms": 3510.402600033558,
+        "median_ms": 0.005249996320344508,
+        "max_ms": 323.6151000019163,
+        "p95_ms": 280.3059850026329,
+        "p99_ms": 309.388059000048
+      },
+      "source": {
+        "sample_count": 42,
+        "sum_ms": 29441.982199947233,
+        "median_ms": 700.4151500295848,
+        "max_ms": 730.1701999967918,
+        "p95_ms": 722.5236099911854,
+        "p99_ms": 727.7452960039955
+      }
+    },
+    "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+  },
   "component_contributions": {
     "ambient-vaporizer-01": {
       "event_count": 3,
@@ -4467,6 +4550,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 4882.495300000301,
+          "stage_elapsed_ms": {
+            "source": 695.3724000049988,
+            "pool": 220.30420000373852,
+            "near_field_and_dispersion": 3472.5981000083266,
+            "cloud_observation": 140.30679999268614,
+            "fire_explosion_damage_risk": 98.86460000416264
+          }
         }
       },
       {
@@ -4539,6 +4632,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 7294.059299994842,
+          "stage_elapsed_ms": {
+            "source": 688.2177000079537,
+            "pool": 158.35140000854153,
+            "near_field_and_dispersion": 5224.031499994453,
+            "cloud_observation": 855.1517000014428,
+            "fire_explosion_damage_risk": 115.69360000430606
+          }
         }
       },
       {
@@ -4611,6 +4714,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 5776.773299992783,
+          "stage_elapsed_ms": {
+            "source": 686.8837999936659,
+            "pool": 143.51339999120682,
+            "near_field_and_dispersion": 4405.494599996018,
+            "cloud_observation": 214.4034999946598,
+            "fire_explosion_damage_risk": 99.09189998870715
+          }
         }
       },
       {
@@ -4683,6 +4796,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 3041.303699996206,
+          "stage_elapsed_ms": {
+            "source": 689.3476999975974,
+            "pool": 156.0472999990452,
+            "near_field_and_dispersion": 1816.7940999992425,
+            "cloud_observation": 89.89969998947345,
+            "fire_explosion_damage_risk": 68.15639999695122
+          }
         }
       },
       {
@@ -4755,6 +4878,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 3210.4554000106873,
+          "stage_elapsed_ms": {
+            "source": 688.5293000086676,
+            "pool": 201.351199997589,
+            "near_field_and_dispersion": 1895.4221999883885,
+            "cloud_observation": 99.51279999222606,
+            "fire_explosion_damage_risk": 86.25819999724627
+          }
         }
       },
       {
@@ -4824,6 +4957,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 5643.934499996249,
+          "stage_elapsed_ms": {
+            "source": 686.7400999908568,
+            "pool": 124.737100006314,
+            "near_field_and_dispersion": 4160.427700000582,
+            "cloud_observation": 315.2212999993935,
+            "fire_explosion_damage_risk": 100.98119999747723
+          }
         }
       },
       {
@@ -4893,6 +5036,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 7687.101400006213,
+          "stage_elapsed_ms": {
+            "source": 693.7251000053948,
+            "pool": 134.87499998882413,
+            "near_field_and_dispersion": 6157.7026000013575,
+            "cloud_observation": 327.20070000505075,
+            "fire_explosion_damage_risk": 112.10589999973308
+          }
         }
       },
       {
@@ -4962,6 +5115,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 11060.398200002965,
+          "stage_elapsed_ms": {
+            "source": 693.721599993296,
+            "pool": 206.71290000609588,
+            "near_field_and_dispersion": 9462.757499990403,
+            "cloud_observation": 332.2270000062417,
+            "fire_explosion_damage_risk": 102.8980999981286
+          }
         }
       },
       {
@@ -5031,6 +5194,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 15307.538999986718,
+          "stage_elapsed_ms": {
+            "source": 685.8571000047959,
+            "pool": 288.9149999973597,
+            "near_field_and_dispersion": 13587.828899995657,
+            "cloud_observation": 366.42000000574626,
+            "fire_explosion_damage_risk": 103.25679999368731
+          }
         }
       },
       {
@@ -5100,6 +5273,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 18322.318000005907,
+          "stage_elapsed_ms": {
+            "source": 689.9802999978419,
+            "pool": 265.30329999513924,
+            "near_field_and_dispersion": 16626.192299998365,
+            "cloud_observation": 351.6376999905333,
+            "fire_explosion_damage_risk": 107.21220000414178
+          }
         }
       },
       {
@@ -5169,6 +5352,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 7558.70639999921,
+          "stage_elapsed_ms": {
+            "source": 688.7615999876289,
+            "pool": 126.32749999465887,
+            "near_field_and_dispersion": 6087.490099991555,
+            "cloud_observation": 303.80239999794867,
+            "fire_explosion_damage_risk": 80.5259000044316
+          }
         }
       },
       {
@@ -5238,6 +5431,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 7010.933300000033,
+          "stage_elapsed_ms": {
+            "source": 686.2180000025546,
+            "pool": 163.60670000722166,
+            "near_field_and_dispersion": 5524.649300001329,
+            "cloud_observation": 254.5313000009628,
+            "fire_explosion_damage_risk": 102.37920000508893
+          }
         }
       },
       {
@@ -5307,6 +5510,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 8921.702699997695,
+          "stage_elapsed_ms": {
+            "source": 689.430700003868,
+            "pool": 323.6151000019163,
+            "near_field_and_dispersion": 7269.877300001099,
+            "cloud_observation": 288.6368999897968,
+            "fire_explosion_damage_risk": 92.84409999963827
+          }
         }
       },
       {
@@ -5376,6 +5589,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 8828.022400004556,
+          "stage_elapsed_ms": {
+            "source": 694.0291999926558,
+            "pool": 243.01269999705255,
+            "near_field_and_dispersion": 7207.938200008357,
+            "cloud_observation": 314.7125999967102,
+            "fire_explosion_damage_risk": 106.7202999984147
+          }
         }
       },
       {
@@ -5445,6 +5668,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 8314.229600000544,
+          "stage_elapsed_ms": {
+            "source": 690.4956999933347,
+            "pool": 281.09560000302736,
+            "near_field_and_dispersion": 6769.4053999875905,
+            "cloud_observation": 255.30010000511538,
+            "fire_explosion_damage_risk": 72.42540000879671
+          }
         }
       },
       {
@@ -5512,6 +5745,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 3988.3201000047848,
+          "stage_elapsed_ms": {
+            "source": 707.1078000008129,
+            "pool": 0.005400012014433742,
+            "near_field_and_dispersion": 2660.138899998856,
+            "cloud_observation": 277.8317999909632,
+            "fire_explosion_damage_risk": 101.19300000951625
+          }
         }
       },
       {
@@ -5581,6 +5824,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 7594.875399998273,
+          "stage_elapsed_ms": {
+            "source": 701.2032999919029,
+            "pool": 251.25080000725575,
+            "near_field_and_dispersion": 6046.411600007559,
+            "cloud_observation": 271.41950000077486,
+            "fire_explosion_damage_risk": 76.77139999577776
+          }
         }
       },
       {
@@ -5650,6 +5903,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 6459.232000008342,
+          "stage_elapsed_ms": {
+            "source": 679.171799987671,
+            "pool": 221.2565999943763,
+            "near_field_and_dispersion": 5028.53419999883,
+            "cloud_observation": 222.21589999389835,
+            "fire_explosion_damage_risk": 82.88259999244474
+          }
         }
       },
       {
@@ -5713,6 +5976,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 4234.4939000031445,
+          "stage_elapsed_ms": {
+            "source": 689.2430000007153,
+            "pool": 0.006999995093792677,
+            "near_field_and_dispersion": 2846.2503000046127,
+            "cloud_observation": 406.98659999179654,
+            "fire_explosion_damage_risk": 67.77539999166038
+          }
         }
       },
       {
@@ -5780,6 +6053,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2183.4341999929165,
+          "stage_elapsed_ms": {
+            "source": 712.8183000022545,
+            "pool": 0.023100001271814108,
+            "near_field_and_dispersion": 245.9332999860635,
+            "cloud_observation": 930.441400007112,
+            "fire_explosion_damage_risk": 67.833300010534
+          }
         }
       },
       {
@@ -5843,6 +6126,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1453.2122999953572,
+          "stage_elapsed_ms": {
+            "source": 688.8108999992255,
+            "pool": 0.005099995178170502,
+            "near_field_and_dispersion": 374.09820000175387,
+            "cloud_observation": 93.32340001128614,
+            "fire_explosion_damage_risk": 66.33760000113398
+          }
         }
       },
       {
@@ -5919,6 +6212,14 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 6195.382500009146,
+          "stage_elapsed_ms": {
+            "endpoint_a": 3077.1174999972573,
+            "endpoint_b": 3116.7850000056205,
+            "endpoint_aggregation": 6194.9718999967445
+          }
         }
       },
       {
@@ -5995,6 +6296,14 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 6195.25099999737,
+          "stage_elapsed_ms": {
+            "endpoint_a": 3042.142199992668,
+            "endpoint_b": 3151.227000009385,
+            "endpoint_aggregation": 6194.538600000669
+          }
         }
       },
       {
@@ -6058,6 +6367,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1988.577299998724,
+          "stage_elapsed_ms": {
+            "source": 681.5324000053806,
+            "pool": 0.005399997462518513,
+            "near_field_and_dispersion": 824.8195000051055,
+            "cloud_observation": 129.3738999956986,
+            "fire_explosion_damage_risk": 67.57439998909831
+          }
         }
       },
       {
@@ -6129,6 +6448,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1370.5579999368638,
+          "stage_elapsed_ms": {
+            "source": 713.9642999973148,
+            "pool": 0.0039000296965241432,
+            "near_field_and_dispersion": 247.6794000249356,
+            "cloud_observation": 78.4059000434354,
+            "fire_explosion_damage_risk": 72.91339989751577
+          }
         }
       },
       {
@@ -6200,6 +6529,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1335.1443000137806,
+          "stage_elapsed_ms": {
+            "source": 709.0314999222755,
+            "pool": 0.003800028935074806,
+            "near_field_and_dispersion": 244.03929989784956,
+            "cloud_observation": 77.11670000571758,
+            "fire_explosion_damage_risk": 68.34100000560284
+          }
         }
       },
       {
@@ -6271,6 +6610,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1472.1859999699518,
+          "stage_elapsed_ms": {
+            "source": 699.2930000415072,
+            "pool": 0.003800028935074806,
+            "near_field_and_dispersion": 359.3961000442505,
+            "cloud_observation": 81.69080002699047,
+            "fire_explosion_damage_risk": 70.11249999050051
+          }
         }
       },
       {
@@ -6342,6 +6691,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1487.2869999380782,
+          "stage_elapsed_ms": {
+            "source": 704.4187999563292,
+            "pool": 0.004100031219422817,
+            "near_field_and_dispersion": 362.21389996353537,
+            "cloud_observation": 88.24399998411536,
+            "fire_explosion_damage_risk": 68.6692000599578
+          }
         }
       },
       {
@@ -6413,6 +6772,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1839.6285999333486,
+          "stage_elapsed_ms": {
+            "source": 704.778799903579,
+            "pool": 0.00409991480410099,
+            "near_field_and_dispersion": 752.4168000090867,
+            "cloud_observation": 79.15070001035929,
+            "fire_explosion_damage_risk": 67.85620003938675
+          }
         }
       },
       {
@@ -6484,6 +6853,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1743.9486000221223,
+          "stage_elapsed_ms": {
+            "source": 702.3170999018475,
+            "pool": 0.003999914042651653,
+            "near_field_and_dispersion": 647.9182000039145,
+            "cloud_observation": 79.65550001244992,
+            "fire_explosion_damage_risk": 67.57799990009516
+          }
         }
       },
       {
@@ -6555,6 +6934,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2491.9376999605447,
+          "stage_elapsed_ms": {
+            "source": 705.7098000077531,
+            "pool": 0.0039000296965241432,
+            "near_field_and_dispersion": 1402.1400000201538,
+            "cloud_observation": 76.69540005736053,
+            "fire_explosion_damage_risk": 70.48129988834262
+          }
         }
       },
       {
@@ -6626,6 +7015,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2495.277400012128,
+          "stage_elapsed_ms": {
+            "source": 700.9118000278249,
+            "pool": 0.003999914042651653,
+            "near_field_and_dispersion": 1401.3539000879973,
+            "cloud_observation": 77.47539994306862,
+            "fire_explosion_damage_risk": 66.41780002973974
+          }
         }
       },
       {
@@ -6697,6 +7096,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 3115.870299981907,
+          "stage_elapsed_ms": {
+            "source": 702.10960006807,
+            "pool": 0.004100031219422817,
+            "near_field_and_dispersion": 2007.979999994859,
+            "cloud_observation": 79.68670001719147,
+            "fire_explosion_damage_risk": 66.948699997738
+          }
         }
       },
       {
@@ -6768,6 +7177,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 3026.4244000427425,
+          "stage_elapsed_ms": {
+            "source": 699.9185000313446,
+            "pool": 0.004100031219422817,
+            "near_field_and_dispersion": 1914.5440999418497,
+            "cloud_observation": 75.29859989881516,
+            "fire_explosion_damage_risk": 67.86409998312593
+          }
         }
       },
       {
@@ -6836,6 +7255,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1905.8875000337139,
+          "stage_elapsed_ms": {
+            "source": 721.434099948965,
+            "pool": 0.004500034265220165,
+            "near_field_and_dispersion": 818.1917999172583,
+            "cloud_observation": 82.00439997017384,
+            "fire_explosion_damage_risk": 70.38960000500083
+          }
         }
       },
       {
@@ -6904,6 +7333,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1936.4053000463173,
+          "stage_elapsed_ms": {
+            "source": 730.1701999967918,
+            "pool": 0.004200031980872154,
+            "near_field_and_dispersion": 829.2389999842271,
+            "cloud_observation": 81.34629996493459,
+            "fire_explosion_damage_risk": 68.49870004225522
+          }
         }
       },
       {
@@ -6972,6 +7411,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1503.7869999650866,
+          "stage_elapsed_ms": {
+            "source": 709.5896999817342,
+            "pool": 0.00409991480410099,
+            "near_field_and_dispersion": 460.58060007635504,
+            "cloud_observation": 56.54530005995184,
+            "fire_explosion_damage_risk": 68.18110006861389
+          }
         }
       },
       {
@@ -7040,6 +7489,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1481.4238999970257,
+          "stage_elapsed_ms": {
+            "source": 716.503500007093,
+            "pool": 0.004100031219422817,
+            "near_field_and_dispersion": 430.5719999829307,
+            "cloud_observation": 55.62140000984073,
+            "fire_explosion_damage_risk": 68.28959996346384
+          }
         }
       },
       {
@@ -7108,6 +7567,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1941.9722000602633,
+          "stage_elapsed_ms": {
+            "source": 709.2289000283927,
+            "pool": 0.00400003045797348,
+            "near_field_and_dispersion": 896.8380000442266,
+            "cloud_observation": 56.07160006184131,
+            "fire_explosion_damage_risk": 68.16899997647852
+          }
         }
       },
       {
@@ -7176,6 +7645,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 1925.7216000696644,
+          "stage_elapsed_ms": {
+            "source": 724.2558000143617,
+            "pool": 0.003999914042651653,
+            "near_field_and_dispersion": 869.8036000132561,
+            "cloud_observation": 56.95550004020333,
+            "fire_explosion_damage_risk": 67.82230001408607
+          }
         }
       },
       {
@@ -7244,6 +7723,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2035.3367999196053,
+          "stage_elapsed_ms": {
+            "source": 722.5702999858186,
+            "pool": 0.00400003045797348,
+            "near_field_and_dispersion": 978.6248999880627,
+            "cloud_observation": 55.1580999745056,
+            "fire_explosion_damage_risk": 67.24520004354417
+          }
         }
       },
       {
@@ -7312,6 +7801,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2015.073399990797,
+          "stage_elapsed_ms": {
+            "source": 720.5259000184014,
+            "pool": 0.0039000296965241432,
+            "near_field_and_dispersion": 964.1412999480963,
+            "cloud_observation": 56.15449999459088,
+            "fire_explosion_damage_risk": 67.00749997980893
+          }
         }
       },
       {
@@ -7380,6 +7879,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2176.953300018795,
+          "stage_elapsed_ms": {
+            "source": 716.4163000416011,
+            "pool": 0.004100031219422817,
+            "near_field_and_dispersion": 1123.5886999638751,
+            "cloud_observation": 56.872199987992644,
+            "fire_explosion_damage_risk": 67.24560004658997
+          }
         }
       },
       {
@@ -7448,6 +7957,16 @@
         "risk_atom_accounting": {
           "risk_atom_count": 4,
           "nonzero_receptor_harm_atom_count": 0
+        },
+        "calculation_timing": {
+          "elapsed_ms": 2170.188899966888,
+          "stage_elapsed_ms": {
+            "source": 721.6365000931546,
+            "pool": 0.004100031219422817,
+            "near_field_and_dispersion": 1107.7361999778077,
+            "cloud_observation": 58.672199957072735,
+            "fire_explosion_damage_risk": 74.03529994189739
+          }
         }
       }
     ],

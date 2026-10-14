@@ -51,6 +51,19 @@ def _build_release_trace(
     atoms = ledger.get("risk_atoms", [])
     if not isinstance(atoms, list):
         atoms = []
+    cases = ledger.get("cases", [])
+    if not isinstance(cases, list):
+        cases = []
+    case_timing: dict[str, dict[str, Any]] = {}
+    for case in cases:
+        if not isinstance(case, Mapping):
+            continue
+        timing_fields = {
+            field: case[field]
+            for field in ("elapsed_ms", "stage_elapsed_ms")
+            if field in case
+        }
+        case_timing[_case_key(case)] = timing_fields
     atom_counts: dict[str, dict[str, int]] = {}
     for atom in atoms:
         if not isinstance(atom, Mapping):
@@ -134,6 +147,7 @@ def _build_release_trace(
             key,
             {"risk_atom_count": 0, "nonzero_receptor_harm_atom_count": 0},
         )
+        row["calculation_timing"] = case_timing.get(key, {})
         trace_rows.append(row)
     return {
         "schema_version": "prism.conditional_facility_release_trace.v1",
@@ -253,6 +267,7 @@ def build_conditional_facility_risk_view(
         "conditional_expected_death_fn_diagnostics": source.get(
             "conditional_diagnostic_facility_expected_death_fn_diagnostics"
         ),
+        "timing": source.get("timing"),
         "component_contributions": dict(component_contributions),
         "component_risk_ranking": source.get("component_risk_ranking"),
         "scenario_family_contributions": dict(family_contributions),
