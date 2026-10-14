@@ -123,6 +123,19 @@ python scripts/scan_hazop_forecast.py `
 생성된 scan은 `scripts/build_ijhe_completion_audit.py --hazop-forecast-scan`으로 IJHE 감사 원장에 넣을 수 있다. 감사 결과는 예측 trigger의 입력 모드·시간축·보류 회계와 `timing.wall_elapsed_ms`·`timing.quantitative_evaluation_elapsed_ms`의 존재를 확인한다. `fresh_physics_claim=true`이거나 처리시간이 없으면 진단 check를 통과시키지 않는다. 이 진단 check 자체로 시설 QRA를 승격하지 않는다.
 감사기는 trigger·재평가·해제 항목의 `operating_mode` 존재와 각 scenario row의 mode 일치를 함께 확인한다. mode가 빠지거나 scenario와 다르면 예측 경로 check는 차단되며, 누락 mode를 다른 시점의 값으로 보정하지 않는다.
 
+현재·예측 통합 원장을 완료 감사에 연결할 때는 다음처럼 `--hazop-integrated-risk`를 추가한다.
+
+```powershell
+python scripts/build_ijhe_completion_audit.py `
+  --current-status CURRENT_STATUS.json `
+  --scope-matrix <scope-matrix.json> `
+  --campaign-result <campaign-result.json> `
+  --hazop-integrated-risk results/20261108/hazop_integrated_risk_diagnostic.json `
+  --output results/20261108/ijhe_completion_audit_with_integrated_hazop_diagnostic.json
+```
+
+감사기의 `diagnostic_hazop_integrated_risk`는 `current`·`forecast` 원장의 schema와 상태, 설비 ID 목록, `shared_component_scenario_keys`, 운전 모드 추적 플래그, 빈도·시설 QRA 승격 차단 정책을 다시 확인한다. 통합 원장이 partial이어도 정량평가 보류를 숨기지 않고 진단 PASS로 기록할 수 있지만, unsafe promotion flag가 있거나 설비 범위가 없으면 BLOCKED가 된다.
+
 다설비 예측을 연결할 때 release resolver는 `(component_id, scenario_id)` 튜플을 키로 사용할 수 있다. 이 키가 있으면 같은 HAZOP 행 ID가 여러 설비에 재사용되어도 설비별 provider 방출이 섞이지 않는다. 단일 설비 예제에서는 기존 `scenario_id` 키도 호환되며, 실행 결과에는 실제로 선택된 resolver 키 범위가 기록된다.
 
 ## 결과 읽기
