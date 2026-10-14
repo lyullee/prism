@@ -340,7 +340,292 @@ def build_hazop_facility_campaign_result(
     }
 
 
+def _combine_hazop_branch_campaigns(
+    campaigns: Sequence[Mapping[str, Any]],
+    *,
+    facility_id: str,
+    expected_component_ids: Sequence[str],
+) -> dict[str, Any]:
+    """Combine branch campaigns into one ledger input without re-owning assets."""
+
+    if not campaigns:
+        raise HazopFacilityCampaignError("at least one HAZOP branch campaign is required")
+    events: list[dict[str, Any]] = []
+    cases: list[dict[str, Any]] = []
+    uncomputed: list[dict[str, Any]] = []
+    risk_atoms: list[dict[str, Any]] = []
+    annual_conditions: dict[str, dict[str, Any]] = {}
+    exclusions: dict[str, str] = {}
+    component_rows: list[dict[str, Any]] = []
+    seen_event_ids: set[str] = set()
+    provider_packet_case_count = 0
+    qualified_provider_packet_case_count = 0
+    synthetic_release_horizon_present = False
+    generated_frequency = 0.0
+    timing_rows: list[Mapping[str, Any]] = []
+    for index, campaign in enumerate(campaigns):
+        if not isinstance(campaign, Mapping):
+            raise HazopFacilityCampaignError(f"branch campaign {index} is not a mapping")
+        if campaign.get("facility_id") != facility_id:
+            raise HazopFacilityCampaignError(
+                f"branch campaign {index} belongs to another facility"
+            )
+        for event in campaign.get("events", ()):
+            if not isinstance(event, Mapping) or not event.get("id"):
+                raise HazopFacilityCampaignError(f"branch campaign {index} has an invalid event")
+            event_id = str(event["id"])
+            if event_id in seen_event_ids:
+                raise HazopFacilityCampaignError(
+                    "the same literature event ID appears in multiple HAZOP branches; "
+                    "provide distinct event identities or a reviewed shared-event partition: "
+                    + event_id
+                )
+            seen_event_ids.add(event_id)
+            events.append(copy.deepcopy(dict(event)))
+        for condition in campaign.get("annual_conditions", ()):
+            if not isinstance(condition, Mapping) or not condition.get("id"):
+                raise HazopFacilityCampaignError(
+                    f"branch campaign {index} has an invalid annual condition"
+                )
+            condition_id = str(condition["id"])
+            previous = annual_conditions.get(condition_id)
+            normalized = copy.deepcopy(dict(condition))
+            if previous is not None and canonical_digest(previous) != canonical_digest(normalized):
+                raise HazopFacilityCampaignError(
+                    f"annual condition {condition_id} conflicts across HAZOP branches"
+                )
+            annual_conditions[condition_id] = normalized
+        for key in ("cases", "uncomputed_cases", "risk_atoms"):
+            values = campaign.get(key, ())
+            if not isinstance(values, Sequence) or isinstance(values, (str, bytes)):
+                raise HazopFacilityCampaignError(
+                    f"branch campaign {index} has invalid {key}"
+                )
+            target = {
+                "cases": cases,
+                "uncomputed_cases": uncomputed,
+                "risk_atoms": risk_atoms,
+            }[key]
+            target.extend(copy.deepcopy(list(values)))
+        raw_exclusions = campaign.get("excluded_model_components", {})
+        if isinstance(raw_exclusions, Mapping):
+            for component_id, reason in raw_exclusions.items():
+                existing = exclusions.get(str(component_id))
+                if existing is not None and existing != str(reason):
+                    raise HazopFacilityCampaignError(
+                        f"component exclusion conflicts across HAZOP branches: {component_id}"
+                    )
+                exclusions[str(component_id)] = str(reason)
+        coverage = campaign.get("coverage")
+        if isinstance(coverage, Mapping):
+            generated_frequency += float(coverage.get("generated_initiation_frequency_per_year") or 0.0)
+            rows = coverage.get("by_component")
+            if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)):
+                component_rows.extend(copy.deepcopy(list(rows)))
+        provider_packet_case_count += int(campaign.get("provider_packet_case_count") or 0)
+        qualified_provider_packet_case_count += int(
+            campaign.get("qualified_provider_packet_case_count") or 0
+        )
+        synthetic_release_horizon_present |= campaign.get("synthetic_release_horizon_present") is True
+        timing = campaign.get("timing")
+        if isinstance(timing, Mapping):
+            timing_rows.append(timing)
+    return {
+        "schema_version": "prism.hazop_facility_branch_campaign_result.v1",
+        "status": "PARTIAL_DECLARED_SCOPE",
+        "facility_id": facility_id,
+        "campaign_digest": canonical_digest(
+            {"branch_campaign_digests": [c.get("campaign_digest") for c in campaigns]}
+        ),
+        "scope_provenance": "explicit HAZOP branch partition and annual scenario bindings",
+        "events": events,
+        "annual_conditions": [annual_conditions[key] for key in sorted(annual_conditions)],
+        "cases": cases,
+        "uncomputed_cases": uncomputed,
+        "risk_atoms": risk_atoms,
+        "excluded_model_components": exclusions,
+        "coverage": {
+            "generated_initiation_frequency_per_year": generated_frequency,
+            "fully_executed_case_weighted_frequency_per_year": 0.0,
+            "fraction_of_generated_initiation_frequency": None,
+            "meaning": "explicit HAZOP branch coverage; qualified facility risk remains closed",
+            "by_component": component_rows,
+        },
+        "declared_scope_numerically_complete": False,
+        "synthetic_release_horizon_present": synthetic_release_horizon_present,
+        "known_contribution_annual_ir_low_high": None,
+        "known_contribution_expected_death_fn_low_high": None,
+        "declared_scope_annual_ir_low_high": None,
+        "declared_scope_expected_death_fn_low_high": None,
+        "total_facility_annual_ir_low_high": None,
+        "total_facility_expected_death_fn_low_high": None,
+        "timing": {
+            "branch_campaign_count": len(campaigns),
+            "branch_rows": timing_rows,
+            "distribution": "explicit HAZOP branch campaign set; not sustained throughput",
+        },
+        "provider_packet_case_count": provider_packet_case_count,
+        "qualified_provider_packet_case_count": qualified_provider_packet_case_count,
+        "provider_packet_promoted": False,
+        "provider_packet_missing_evidence_cases": [],
+        "physical_validation_claim": False,
+        "complete_facility_qra_claim": False,
+        "one_hz_fresh_physics_demonstrated": False,
+        "semantics": {
+            "branch_partition": "branch probability is multiplied into the explicit release-branch probability for each annual binding",
+            "facility_promotion": "always withheld until scope, provider qualification and physical validation gates close",
+        },
+    }
+
+
+def build_hazop_facility_campaign_branches(
+    runtime_result: Mapping[str, Any],
+    *,
+    annual_conditions: Sequence[Mapping[str, Any]],
+    scenario_bindings: Sequence[Mapping[str, Any]],
+    branch_probabilities: Mapping[str, Any],
+    branch_partition_groups: Mapping[str, Any],
+    expected_component_ids: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Build a facility ledger from multiple HAZOP branches with explicit partitions.
+
+    Each selected HAZOP scenario is evaluated in its own campaign first.  The
+    supplied branch probability is multiplied into that scenario's explicit
+    release-branch probability.  Probabilities are required to close to one
+    within each named partition group; no probability is inferred from sensors,
+    HAZOP row order, or equal weighting.
+    """
+    if not isinstance(runtime_result, Mapping):
+        raise TypeError("runtime_result must be a mapping")
+    facility_id = _name(runtime_result.get("facility_id"), "runtime_result.facility_id")
+    components_raw = runtime_result.get("components")
+    if not isinstance(components_raw, Mapping) or not components_raw:
+        raise HazopFacilityCampaignError("runtime result components must be nonempty")
+    component_ids = tuple(sorted(str(value) for value in components_raw))
+    expected = tuple(sorted(_name(value, "expected_component_ids[]") for value in expected_component_ids))
+    if expected and set(expected) != set(component_ids):
+        raise HazopFacilityCampaignError(
+            "expected_component_ids must exactly match the HAZOP runtime component set"
+        )
+    branch_rows: dict[tuple[str, str], Mapping[str, Any]] = {}
+    for component_id in component_ids:
+        row = components_raw[component_id]
+        if not isinstance(row, Mapping) or row.get("status") != "CONSEQUENCE_BRANCHES_EVALUATED":
+            raise HazopFacilityCampaignError(
+                f"component {component_id} is not fully HAZOP-evaluated"
+            )
+        branches = row.get("branches")
+        if not isinstance(branches, Sequence) or isinstance(branches, (str, bytes)) or not branches:
+            raise HazopFacilityCampaignError(f"component {component_id} has no active HAZOP branches")
+        for branch in branches:
+            if not isinstance(branch, Mapping):
+                raise HazopFacilityCampaignError(f"component {component_id} has an invalid branch")
+            scenario_id = _name(branch.get("scenario_id"), f"{component_id}.scenario_id")
+            key = (component_id, scenario_id)
+            if key in branch_rows:
+                raise HazopFacilityCampaignError(f"duplicate HAZOP branch: {component_id}/{scenario_id}")
+            branch_rows[key] = branch
+    probability_map = {
+        _name(key, "branch_probabilities key"): _probability(value, f"branch_probabilities[{key}]")
+        for key, value in branch_probabilities.items()
+    }
+    group_map = {
+        _name(key, "branch_partition_groups key"): _name(value, f"branch_partition_groups[{key}]")
+        for key, value in branch_partition_groups.items()
+    }
+    scenario_ids = {scenario_id for _, scenario_id in branch_rows}
+    if set(probability_map) != scenario_ids or set(group_map) != scenario_ids:
+        raise HazopFacilityCampaignError(
+            "branch probabilities and partition groups must cover exactly every selected HAZOP scenario_id"
+        )
+    partitions: dict[str, float] = {}
+    for scenario_id, probability in probability_map.items():
+        group = group_map[scenario_id]
+        partitions[group] = partitions.get(group, 0.0) + probability
+    if any(not math.isclose(value, 1.0, rel_tol=0.0, abs_tol=1.0e-10) for value in partitions.values()):
+        raise HazopFacilityCampaignError(
+            "each HAZOP branch partition group must close to one"
+        )
+    binding_groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for index, raw in enumerate(scenario_bindings):
+        if not isinstance(raw, Mapping):
+            raise HazopFacilityCampaignError(f"scenario_bindings[{index}] must be a mapping")
+        component_id = _name(raw.get("component_id"), f"scenario_bindings[{index}].component_id")
+        scenario_id = _name(raw.get("hazop_scenario_id"), f"scenario_bindings[{index}].hazop_scenario_id")
+        key = (component_id, scenario_id)
+        if key not in branch_rows:
+            raise HazopFacilityCampaignError(
+                f"scenario binding references an unselected HAZOP branch: {component_id}/{scenario_id}"
+            )
+        binding_groups.setdefault(key, []).append(dict(raw))
+    if set(binding_groups) != set(branch_rows):
+        missing = sorted(set(branch_rows) - set(binding_groups))
+        raise HazopFacilityCampaignError(
+            "every selected HAZOP branch needs an explicit scenario binding: " + str(missing)
+        )
+    branch_campaigns: list[dict[str, Any]] = []
+    for (component_id, scenario_id), branch in sorted(branch_rows.items()):
+        row = components_raw[component_id]
+        branch_runtime = dict(runtime_result)
+        branch_runtime["component_count"] = 1
+        branch_runtime["components"] = {
+            component_id: {
+                **dict(row),
+                "branches": [dict(branch)],
+            }
+        }
+        risk = branch.get("risk")
+        annual_ir = risk.get("annual_ir_low_high") if isinstance(risk, Mapping) else None
+        branch_runtime["conditional_current_weather_risk"] = {
+            "annual_ir_low_high_by_receptor": copy.deepcopy(annual_ir),
+        }
+        adjusted_bindings: list[dict[str, Any]] = []
+        branch_probability = probability_map[scenario_id]
+        for binding in binding_groups[(component_id, scenario_id)]:
+            release_probability = _probability(
+                binding.get("release_branch_probability"),
+                f"{component_id}/{scenario_id}.release_branch_probability",
+            )
+            adjusted = dict(binding)
+            adjusted["release_branch_probability"] = release_probability * branch_probability
+            adjusted_bindings.append(adjusted)
+        handoff = build_hazop_facility_campaign_result(
+            branch_runtime,
+            annual_conditions=annual_conditions,
+            scenario_bindings=adjusted_bindings,
+            expected_component_ids=(component_id,),
+        )
+        branch_campaigns.append(handoff["campaign"])
+    combined = _combine_hazop_branch_campaigns(
+        branch_campaigns,
+        facility_id=facility_id,
+        expected_component_ids=component_ids,
+    )
+    facility_ledger = merge_facility_campaign_results(
+        [combined],
+        expected_component_ids=component_ids,
+    )
+    return {
+        "schema_version": "prism.hazop_facility_campaign_branches.v1",
+        "status": "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
+        "facility_id": facility_id,
+        "branch_probabilities": probability_map,
+        "branch_partition_groups": group_map,
+        "branch_campaigns": branch_campaigns,
+        "campaign": combined,
+        "facility_ledger": facility_ledger,
+        "policy": {
+            "branch_partition_explicit": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+        },
+    }
+
+
 __all__ = [
     "HazopFacilityCampaignError",
     "build_hazop_facility_campaign_result",
+    "build_hazop_facility_campaign_branches",
 ]

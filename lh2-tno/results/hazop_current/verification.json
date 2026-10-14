@@ -2,7 +2,7 @@
   "schema_version": "prism.hazop_operating_mode_verification.v1",
   "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED",
   "tests": {
-    "targeted_test_count": 33,
+    "targeted_test_count": 25,
     "targeted_status": "PASS"
   },
   "runtime_gate": {
@@ -20,6 +20,9 @@
     "facility_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_result",
     "facility_campaign_handoff_schema": "prism.hazop_facility_campaign_handoff.v1",
     "facility_campaign_handoff_requires_single_branch": true,
+    "facility_branch_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_branches",
+    "facility_branch_campaign_handoff_schema": "prism.hazop_facility_campaign_branches.v1",
+    "facility_branch_partition_required": true,
     "facility_campaign_handoff_outputs": [
       "campaign",
       "facility_ledger"
@@ -36,11 +39,11 @@
   },
   "source_sha256": {
     "src/lh2_tno/hazop.py": "A12ED5DAFDFEA9081A56B9F651D9BE88F864464BF5F54B2F4CAFF4B7534E2EBD",
-    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "CA2350C7F5FBE697B9255D0D7FC79041CF5B1F82FEDBCA283328644975F9BCC1",
+    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "C8A16A4A9EC5FB800EA56D796E6E14575996F43FE18EDD6A3EDC2911F92359BF",
     "examples/generic_hazop_operating_modes.json": "F8ECDF09FF931EEFC97223BE7687A70CEDB9146C3EEA3532DC0DD9791DE65B23",
     "examples/generic_hazop_state_frame.json": "AB0FBA86F6884B696B1EA59A840A0928A8B71C3495BEC0DFB6903B7EE4FD52DB",
     "results/hazop_current/selection.json": "4EF5B229796C4B8BEF2BCC2A7C57B99B107EBFFB62FE849D39C7A11439C42D85",
-    "src/lh2_tno/hazop_campaign.py": "2C342ED5C3B8AD8D852ED8600B88A82F20E8B5ECF650592C1CF490B2EF40A180"
+    "src/lh2_tno/hazop_campaign.py": "CEF0B218CD9F5C1F56DD8B36DE2BA1213230838AD127F2D1ACF164FF6CDCB195"
   },
   "policy": {
     "operating_mode_taken_from_input": true,

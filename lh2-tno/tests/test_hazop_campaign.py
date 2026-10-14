@@ -4,6 +4,7 @@ import pytest
 
 from lh2_tno.hazop_campaign import (
     HazopFacilityCampaignError,
+    build_hazop_facility_campaign_branches,
     build_hazop_facility_campaign_result,
 )
 
@@ -97,6 +98,12 @@ def _runtime_result(*, branch_count=1):
     }
     branches = []
     for index in range(branch_count):
+        branch_consequence = deepcopy(consequence)
+        branch_risk = deepcopy(risk)
+        if index:
+            event_id = f"evt-tk01-hole-{index}"
+            branch_consequence["equipment_release_path"]["boundaries"][0]["event_id"] = event_id
+            branch_risk["risk_atom"]["event_id"] = event_id
         branches.append(
             {
                 "scenario_id": "TK01-high-pressure-receiving"
@@ -106,9 +113,9 @@ def _runtime_result(*, branch_count=1):
                 "release_mode": "hole",
                 "result": {
                     "status": "CONSEQUENCE_EVALUATED",
-                    "consequence": deepcopy(consequence),
+                    "consequence": branch_consequence,
                 },
-                "risk": deepcopy(risk),
+                "risk": branch_risk,
             }
         )
     return {
@@ -208,5 +215,55 @@ def test_hazop_bridge_rejects_multiple_active_branches_without_partition():
             _runtime_result(branch_count=2),
             annual_conditions=_annual_conditions(),
             scenario_bindings=[_binding()],
+            expected_component_ids=("TK-01",),
+        )
+
+
+def test_hazop_branch_bridge_uses_explicit_partition_for_facility_ledger():
+    second = _binding()
+    second.update(
+        hazop_scenario_id="TK01-secondary-1",
+        event_id="evt-tk01-hole-1",
+    )
+    result = build_hazop_facility_campaign_branches(
+        _runtime_result(branch_count=2),
+        annual_conditions=_annual_conditions(),
+        scenario_bindings=[_binding(), second],
+        branch_probabilities={
+            "TK01-high-pressure-receiving": 0.6,
+            "TK01-secondary-1": 0.4,
+        },
+        branch_partition_groups={
+            "TK01-high-pressure-receiving": "pressure-deviation",
+            "TK01-secondary-1": "pressure-deviation",
+        },
+        expected_component_ids=("TK-01",),
+    )
+    assert result["status"] == "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED"
+    assert result["policy"]["branch_partition_explicit"] is True
+    assert len(result["campaign"]["risk_atoms"]) == 8
+    assert result["facility_ledger"]["conditional_diagnostic_facility_risk_available"] is True
+    assert result["facility_ledger"]["facility_total_risk_available"] is False
+
+
+def test_hazop_branch_bridge_rejects_open_partition():
+    second = _binding()
+    second.update(
+        hazop_scenario_id="TK01-secondary-1",
+        event_id="evt-tk01-hole-1",
+    )
+    with pytest.raises(HazopFacilityCampaignError, match="partition group must close"):
+        build_hazop_facility_campaign_branches(
+            _runtime_result(branch_count=2),
+            annual_conditions=_annual_conditions(),
+            scenario_bindings=[_binding(), second],
+            branch_probabilities={
+                "TK01-high-pressure-receiving": 0.6,
+                "TK01-secondary-1": 0.3,
+            },
+            branch_partition_groups={
+                "TK01-high-pressure-receiving": "pressure-deviation",
+                "TK01-secondary-1": "pressure-deviation",
+            },
             expected_component_ids=("TK-01",),
         )

@@ -47,6 +47,8 @@ SLABx-LH2/피해영향/점화/시설 IR·F-N 경로
 
 HAZOP 결과를 이 기존 시설 원장으로 넘겨야 할 때는 `build_hazop_facility_campaign_result(...)`를 사용한다. 이 handoff는 설비마다 정확히 하나의 `CONSEQUENCE_EVALUATED` branch, provider 방출 종료·재고 경계, 현재 기상 IR, 점화 branch를 요구한다. `scenario_bindings`에는 반드시 `hazop_scenario_id`를 넣어야 하며, 선택된 운전 모드 시나리오 ID와 다르면 캠페인을 만들지 않는다. 연간 기상·인구·차단 branch별 피해는 호출자가 명시적으로 공급하고, 누락된 branch나 빈도는 0으로 채우지 않는다. 여러 HAZOP branch가 동시에 활성화된 경우에는 이 handoff가 보류되며, 먼저 branch별 사건 빈도와 release/isolation partition을 별도로 닫아야 한다. 성공하면 `campaign`와 함께 기존 `merge_facility_campaign_results(...)`가 계산한 `facility_ledger`도 반환한다. 이 ledger는 설비별 risk atom을 시설 조건부 IR/F-N으로 합산하되, 결과 상태는 `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED`이고 qualified provider, 독립 물리 검증, 전체 사고범위가 닫히기 전에는 시설 QRA 승격이 계속 `false`다.
 
+여러 HAZOP branch를 동시에 시설 원장에 연결해야 할 때는 `build_hazop_facility_campaign_branches(...)`를 사용한다. 이 함수는 branch별 `scenario_id`에 대한 문헌 사건 빈도와 `branch_partition_groups`를 호출자가 명시하도록 요구하고, 같은 분할 그룹 안의 확률 합이 정확히 1일 때만 branch별 캠페인을 만든다. 분할 확률은 각 연간 조건의 명시적 release branch 확률에 곱해지며, 센서 신호에서 빈도를 학습하거나 누락 branch를 0으로 대체하지 않는다. 사건 ID가 겹치거나 확률·분할 그룹·scenario binding이 빠지면 해당 결과를 합치지 않고 오류로 남긴다. 성공 결과의 schema는 `prism.hazop_facility_campaign_branches.v1`이며, 기존 시설 원장과 동일하게 `facility_annual_qra_promotion=false`를 유지한다.
+
 ## 결과 읽기
 
 | 결과 | 뜻 |
@@ -74,6 +76,6 @@ python scripts/evaluate_hazop_operating_mode.py `
 
 이 모듈은 설비-neutral HAZOP 판단과 scenario dispatch boundary를 닫는다. 사고 family catalog와 provider packet catalog에 없는 사건은 선택하지 않으며, HAZOP 이탈이 있어도 빈도와 피해 결과를 자동으로 만들지 않는다.
 
-현재 HAZOP·runtime mode 회귀검사는 33개, 전체 패키지 검사는 **967 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff를 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
+현재 HAZOP·runtime mode 회귀검사는 25개, 전체 패키지 검사는 **969 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff를 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
 
 남은 엄격 문턱은 실제 설비별 HAZOP·P&ID identity, provider의 차단·재고·종료 이력, 문헌 빈도 event binding, SLABx-LH2 독립 비교, 시설 전체 사고 family coverage와 IR/F-N 승격이다. 현재 검사센터 자료는 정상 상태 신호의 후보 입력으로만 취급한다.
