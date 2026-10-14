@@ -174,24 +174,46 @@ def _provider_mass_balance(
         "post_isolation_observation_s",
     ):
         if key in metadata:
+            # Some native providers keep the optional isolation fields in
+            # their metadata schema and emit JSON null when no isolation
+            # clock was requested.  Null means "not declared" here; a
+            # declared value is still validated strictly below.
+            if metadata[key] is None:
+                continue
             value = _finite(metadata[key], f"provider data.provider_meta.{key}")
+            if (
+                key == "post_isolation_observation_s"
+                and metadata.get("isolation_time_s") is None
+            ):
+                # Native models commonly serialize their unused default
+                # observation delay as 0.0.  It has no meaning without an
+                # isolation clock, while a positive delay is a malformed
+                # provider contract and must remain rejected.
+                if value != 0.0:
+                    raise EquipmentReleaseExportError(
+                        "provider data.provider_meta.post_isolation_observation_s "
+                        "requires isolation_time_s"
+                    )
+                continue
             if value < 0.0:
                 raise EquipmentReleaseExportError(
                     f"provider data.provider_meta.{key} must be non-negative"
                 )
             payload[key] = value
     if "residual_mass_kg" in metadata:
-        payload["reported_residual_mass_kg"] = _finite(
-            metadata["residual_mass_kg"],
-            "provider data.provider_meta.residual_mass_kg",
-        )
+        if metadata["residual_mass_kg"] is not None:
+            payload["reported_residual_mass_kg"] = _finite(
+                metadata["residual_mass_kg"],
+                "provider data.provider_meta.residual_mass_kg",
+            )
     if "isolation_success" in metadata:
         value = metadata["isolation_success"]
-        if not isinstance(value, bool):
-            raise EquipmentReleaseExportError(
-                "provider data.provider_meta.isolation_success must be boolean"
-            )
-        payload["isolation_success"] = value
+        if value is not None:
+            if not isinstance(value, bool):
+                raise EquipmentReleaseExportError(
+                    "provider data.provider_meta.isolation_success must be boolean"
+                )
+            payload["isolation_success"] = value
 
     initial = payload.get("initial_mass_kg")
     cumulative_in = payload.get("cumulative_mass_in_kg", 0.0)

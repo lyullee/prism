@@ -1,0 +1,24 @@
+{
+  "schema_version": "prism.native_lh2dt_layered_tank_smoke.v1",
+  "status": "EXECUTED_OPERATOR_LIMITED_NATIVE_DIAGNOSTIC",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "provider_result_digest": "35a93dc3865e3b1885537acae13ed0bb8f22ff33926e5feade6ee0b49b1bc29d",
+  "strict_packet_duration_s": 0.05,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 0.0,
+  "native_export_elapsed_ms": 1446.1140999919735,
+  "consequence_chain_executed": true,
+  "consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "consequence_chain_elapsed_ms": 19117.342699988512,
+  "qualified_provider_packet_count": 0,
+  "provider_packet_promoted": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "limitations": [
+    "synthetic LayeredTank geometry, initial state, opening and atmospheric boundary",
+    "native method currently preserves ground liquid and does not promote airborne liquid",
+    "no initiating frequency or qualified provider evidence was attached"
+  ]
+}

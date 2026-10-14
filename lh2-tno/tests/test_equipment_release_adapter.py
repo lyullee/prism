@@ -96,6 +96,22 @@ def test_adapter_preserves_provider_mass_balance_without_calling_residual_deplet
     assert balance.isolation_success is True
 
 
+def test_adapter_accepts_null_optional_isolation_metadata_when_clock_not_requested():
+    response = _response()
+    response["data"]["provider_meta"] = {
+        "initial_mass_kg": 1.0,
+        "final_mass_kg": 0.985,
+        "residual_mass_kg": 0.985,
+        "isolation_time_s": None,
+        "post_isolation_observation_s": 0.0,
+        "isolation_success": None,
+    }
+    release = _build(response)
+    assert release.provider_mass_balance is not None
+    assert release.provider_mass_balance.isolation_time_s is None
+    assert release.provider_mass_balance.isolation_success is None
+
+
 def test_gas_adapter_preserves_explicit_hydrogen_property_basis():
     response = _response()
     response["data"]["fluid"] = "Hydrogen"
