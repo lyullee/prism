@@ -3879,7 +3879,7 @@
   "slabx_lh2_independent_comparison_independent_physical_validation_claim": false,
   "slabx_lh2_independent_comparison_facility_qra_claim": false,
   "hazop_operating_mode_selection": {
-    "status": "IMPLEMENTED_DIAGNOSTIC_ONLY",
+    "status": "IMPLEMENTED_RUNTIME_GATE_DIAGNOSTIC_ONLY",
     "module": "src/lh2_tno/hazop.py",
     "schema": "prism.hazop_operating_mode_selection.v1",
     "state_schema": "prism.hazop_state_frame.v1",
@@ -3888,7 +3888,16 @@
     "example_state": "examples/generic_hazop_state_frame.json",
     "example_record": "results/hazop_current/selection.json",
     "example_status": "SCENARIOS_SELECTED; receiving mode and high-pressure deviation selected vessel_hole",
-    "targeted_test_count": 21,
+    "targeted_test_count": 26,
+    "runtime_gate": {
+      "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
+      "schema_version": "prism.hazop_runtime_consequence_gate.v1",
+      "single_clean_scenario_required": true,
+      "provider_packet_scenario_contract_checked": true,
+      "multiple_active_rows_auto_merged": false,
+      "consequence_called_without_provider": false,
+      "targeted_status": "PASS"
+    },
     "operating_mode_taken_from_input": true,
     "selected_scenario_count": 1,
     "release_packet_created": false,
@@ -3903,7 +3912,7 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 955,
+    "tests": 960,
     "failures": 0,
     "skipped": 0,
     "scope": "current lh2-tno package after HAZOP/mode adapter changes"

@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 import pytest
 
 from lh2_tno.hazop import (
@@ -9,6 +11,7 @@ from lh2_tno.hazop import (
     evaluate_hazop,
     evaluate_hazop_runtime_frame,
     hazop_state_from_runtime_frame,
+    run_hazop_runtime_consequence,
 )
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames
 
@@ -194,3 +197,142 @@ def test_runtime_frame_without_mode_is_withheld_from_hazop():
     payload["state_snapshot_digest"] = "z" * 64
     with pytest.raises(Exception):
         HazopStateFrame.model_validate(payload)
+
+
+def _runtime_frame_for_gate():
+    source = {
+        "source_id": "historian-tank-01",
+        "source_sha256": "a" * 64,
+        "component_id": "TK-01",
+        "origin": "historian_measured",
+        "operating_mode": "receiving",
+        "samples": [{
+            "captured_at_s": 3.0,
+            "values": {"pressure": {"value_si": 650000.0, "sensor_location": "vapour"}},
+        }],
+    }
+    return build_observed_state_runtime_frames([source])["frames"][0]
+
+
+class _FakeMonitor:
+    def __init__(self, request):
+        self.request = request
+        self.called = False
+
+    def update_from_runtime_frame(self, template, frame, *, now_s, release_resolver, mapping_digest=None):
+        self.called = True
+        request = release_resolver(template, {"operating_mode": "receiving"})
+        return {"request": request, "now_s": now_s, "mapping_digest": mapping_digest}
+
+
+def _provider_request(*, source_operator="equipment_liquid_release", basis="model_pressure_equalization"):
+    return SimpleNamespace(
+        component_id="TK-01",
+        resolved_release=None,
+        resolved_release_set=None,
+        resolved_liquid_release=SimpleNamespace(event_kind="accidental_leak"),
+        source_operator=source_operator,
+        release_termination=SimpleNamespace(basis=basis),
+    )
+
+
+def _gate_table():
+    table = table_payload()
+    table["rows"][0]["variable_tag"] = "pressure"
+    return table
+
+
+def test_runtime_gate_withholds_before_provider_when_hazop_is_normal():
+    monitor = _FakeMonitor(_provider_request())
+    result = run_hazop_runtime_consequence(
+        _gate_table(),
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=monitor,
+        release_resolver=lambda template, normalized: _provider_request(),
+    )
+    assert result["status"] == "CONSEQUENCE_EVALUATED"
+    assert monitor.called is True
+    assert result["policy"]["consequence_calculated"] is True
+
+
+def test_runtime_gate_requires_explicit_provider_release():
+    result = run_hazop_runtime_consequence(
+        _gate_table(),
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=_FakeMonitor(_provider_request()),
+        release_resolver=None,
+    )
+    assert result["status"] == "WITHHELD_PROVIDER_RELEASE_REQUIRED"
+    assert result["consequence"] is None
+
+
+def test_runtime_gate_rejects_provider_scenario_contract_mismatch():
+    monitor = _FakeMonitor(_provider_request(source_operator="equipment_two_sided_rupture", basis="two_sided_rupture"))
+    result = run_hazop_runtime_consequence(
+        _gate_table(),
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=monitor,
+        release_resolver=lambda template, normalized: _provider_request(
+            source_operator="equipment_two_sided_rupture", basis="two_sided_rupture"
+        ),
+    )
+    assert result["status"] == "CONSEQUENCE_REJECTED"
+    assert result["error_type"] == "HazopSelectionError"
+
+
+def test_runtime_gate_requires_explicit_branch_dispatch_for_multiple_rows():
+    table = _gate_table()
+    extra = dict(table["rows"][0])
+    extra["id"] = "TK01-liquid-branch-receiving"
+    extra["scenario_family"] = "liquid_two_phase"
+    table["rows"].append(extra)
+    monitor = _FakeMonitor(_provider_request())
+    result = run_hazop_runtime_consequence(
+        table,
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=monitor,
+        release_resolver=lambda template, normalized: _provider_request(),
+    )
+    assert result["status"] == "WITHHELD_SCENARIO_BRANCH_DISPATCH_REQUIRED"
+    assert monitor.called is False
+
+
+def test_runtime_gate_executes_existing_consequence_monitor_after_provider_match(tmp_path):
+    from lh2_tno.provider_release import build_consequence_request_from_provider_release
+    from lh2_tno.service import ConsequenceService, RealtimeConsequenceMonitor
+    from test_consequence_service import Pipeline, request
+    from test_provider_release import _defaults, _liquid_release
+
+    release = _liquid_release().model_copy(update={"component_id": "TK-01"})
+    defaults = _defaults()
+    defaults.update({
+        "component_id": "TK-01",
+        "source_operator": "equipment_liquid_release",
+        "release_termination": {
+            "basis": "model_pressure_equalization",
+            "time_s": 0.2,
+            "provenance": "runtime gate integration test",
+        },
+        "source_duration_mode": "model_natural",
+    })
+    provider_request = build_consequence_request_from_provider_release(release, defaults)
+    monitor = RealtimeConsequenceMonitor(ConsequenceService(Pipeline(tmp_path)))
+    result = run_hazop_runtime_consequence(
+        _gate_table(),
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=request().model_copy(update={"component_id": "TK-01"}),
+        monitor=monitor,
+        release_resolver=lambda template, normalized: provider_request,
+    )
+    assert result["status"] == "CONSEQUENCE_EVALUATED"
+    assert result["consequence"]["telemetry_boundary"]["equipment_release_resolved"] is True
+    assert result["consequence"]["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"

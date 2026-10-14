@@ -15,7 +15,11 @@ from typing import Any, Literal
 
 from pydantic import Field, model_validator
 
-from .accident_scenario_catalog import scenario_definition, scenario_families_for_release
+from .accident_scenario_catalog import (
+    scenario_definition,
+    scenario_families_for_release,
+    scenario_families_for_request,
+)
 from .contracts import Contract, Name, Nonnegative
 from .state_snapshot import StateMeasurement
 
@@ -373,8 +377,156 @@ def evaluate_hazop_runtime_frame(
     return evaluate_hazop(table, state)
 
 
+def run_hazop_runtime_consequence(
+    table: HazopTable | Mapping[str, Any],
+    frame: Mapping[str, Any],
+    *,
+    now_s: float,
+    template: Any,
+    monitor: Any,
+    release_resolver: Any,
+    mapping_digest: str | None = None,
+) -> dict[str, Any]:
+    """Gate one runtime consequence update with the mode-specific HAZOP result.
+
+    The existing runtime monitor still owns normalization, provider packet
+    validation, termination, SLABx-LH2 execution, and consequence output.  This
+    adapter only decides whether that monitor may be called.  A single selected
+    HAZOP row is required because a provider resolver returns one release
+    request; multiple active rows must be dispatched as separate branches by
+    the calling application.  The provider request is checked against the
+    selected component kind, release mode, and accident family before any
+    consequence calculation is accepted.
+    """
+    selection = evaluate_hazop_runtime_frame(
+        table,
+        frame,
+        now_s=now_s,
+        mapping_digest=mapping_digest,
+    )
+    base: dict[str, Any] = {
+        "schema_version": "prism.hazop_runtime_consequence_gate.v1",
+        "selection": selection,
+        "consequence": None,
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "provider_release_created_by_prism": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_claim": False,
+        },
+    }
+    if selection["status"] != "SCENARIOS_SELECTED":
+        base.update({
+            "status": f"WITHHELD_HAZOP_{selection['status']}",
+            "reason": (
+                "HAZOP did not produce one clean active scenario; provider release "
+                "and consequence calculation were not called"
+            ),
+        })
+        return base
+    selected = selection["selected_scenarios"]
+    if len(selected) != 1:
+        base.update({
+            "status": "WITHHELD_SCENARIO_BRANCH_DISPATCH_REQUIRED",
+            "reason": (
+                "one runtime frame selected multiple accident branches; each branch "
+                "requires an explicit provider request and separate consequence call"
+            ),
+        })
+        return base
+    if not callable(release_resolver):
+        base.update({
+            "status": "WITHHELD_PROVIDER_RELEASE_REQUIRED",
+            "reason": "selected HAZOP scenario has no equipment provider release resolver",
+        })
+        return base
+    update = getattr(monitor, "update_from_runtime_frame", None)
+    if not callable(update):
+        raise HazopSelectionError(
+            "monitor must provide update_from_runtime_frame for the HAZOP runtime gate"
+        )
+
+    scenario = selected[0]
+
+    def guarded_resolver(template_arg: Any, normalized: Mapping[str, Any]) -> Any:
+        request = release_resolver(template_arg, normalized)
+        if getattr(request, "component_id", None) != scenario["component_id"]:
+            raise HazopSelectionError(
+                "provider release component does not match the selected HAZOP component"
+            )
+        families = scenario_families_for_request(
+            scenario["component_kind"],
+            scenario["release_mode"],
+            request,
+        )
+        if scenario["scenario_family"] not in families:
+            raise HazopSelectionError(
+                "provider release does not support the selected HAZOP scenario family"
+            )
+        definition = scenario_definition(scenario["scenario_family"])
+        source_operator = getattr(request, "source_operator", None)
+        if source_operator not in definition["required_source_operators"]:
+            raise HazopSelectionError(
+                "provider source operator does not satisfy the selected HAZOP scenario family"
+            )
+        termination = getattr(request, "release_termination", None)
+        if termination is None or termination.basis not in definition["termination_bases"]:
+            raise HazopSelectionError(
+                "provider termination basis does not satisfy the selected HAZOP scenario family"
+            )
+        owners = []
+        for attribute in ("resolved_release", "resolved_liquid_release"):
+            owner = getattr(request, attribute, None)
+            if owner is not None:
+                owners.append(owner)
+        release_set = getattr(request, "resolved_release_set", None)
+        if release_set is not None:
+            owners.extend(release_set.releases)
+        expected_event_kind = (
+            "emergency_relief"
+            if scenario["release_mode"] == "maximum_relief_discharge"
+            else "accidental_leak"
+        )
+        if not owners or any(
+            getattr(owner, "event_kind", None) != expected_event_kind for owner in owners
+        ):
+            raise HazopSelectionError(
+                "provider event kind does not satisfy the selected HAZOP release mode"
+            )
+        return request
+
+    try:
+        consequence = update(
+            template,
+            frame,
+            now_s=float(now_s),
+            release_resolver=guarded_resolver,
+            mapping_digest=mapping_digest,
+        )
+    except Exception as error:
+        base.update({
+            "status": "CONSEQUENCE_REJECTED",
+            "error_type": type(error).__name__,
+            "reason": str(error),
+        })
+        return base
+    base.update({
+        "status": "CONSEQUENCE_EVALUATED",
+        "consequence": consequence,
+        "policy": {
+            **base["policy"],
+            "consequence_calculated": True,
+            "provider_release_required": True,
+            "provider_release_validated_by_scenario": True,
+        },
+    })
+    return base
+
+
 __all__ = [
     "HAZOP_SCHEMA", "HAZOP_STATE_SCHEMA", "HazopSelectionError",
     "HazopRow", "HazopTable", "HazopStateFrame", "evaluate_hazop",
     "hazop_state_from_runtime_frame", "evaluate_hazop_runtime_frame",
+    "run_hazop_runtime_consequence",
 ]

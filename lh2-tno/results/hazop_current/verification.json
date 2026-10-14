@@ -2,7 +2,16 @@
   "schema_version": "prism.hazop_operating_mode_verification.v1",
   "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED",
   "tests": {
-    "targeted_test_count": 21,
+    "targeted_test_count": 26,
+    "targeted_status": "PASS"
+  },
+  "runtime_gate": {
+    "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
+    "schema_version": "prism.hazop_runtime_consequence_gate.v1",
+    "single_clean_scenario_required": true,
+    "provider_packet_scenario_contract_checked": true,
+    "multiple_active_rows_auto_merged": false,
+    "consequence_called_without_provider": false,
     "targeted_status": "PASS"
   },
   "example": {
@@ -15,8 +24,8 @@
     "facility_qra_claim": false
   },
   "source_sha256": {
-    "src/lh2_tno/hazop.py": "4E126247A2574CDBFD74310028A1F4EB59225DDB11DC7CF83F63C1D240168770",
-    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "9743B959AF0F99D90D622ED83E636EDA748B5730F4AD885010318745735CF156",
+    "src/lh2_tno/hazop.py": "D46DA1522F24E0BF2BB589C57D44E2D2C214893911C5EE00BB972296ABA66B47",
+    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "974A21F28077FE79406C756F777F3F253E898B02B445F270B2F6DDDCD8050377",
     "examples/generic_hazop_operating_modes.json": "F8ECDF09FF931EEFC97223BE7687A70CEDB9146C3EEA3532DC0DD9791DE65B23",
     "examples/generic_hazop_state_frame.json": "AB0FBA86F6884B696B1EA59A840A0928A8B71C3495BEC0DFB6903B7EE4FD52DB",
     "results/hazop_current/selection.json": "4EF5B229796C4B8BEF2BCC2A7C57B99B107EBFFB62FE849D39C7A11439C42D85"

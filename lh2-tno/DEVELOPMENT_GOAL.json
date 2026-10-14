@@ -5,13 +5,22 @@
   "objective": "선언한 옥외 LH2 적용범위의 주요 사고를 설비 상태부터 시설 IR/F-N까지 계산하고, 미계산 사고·문헌 빈도 불확실성·물리 검증 근거·신규 처리시간을 명확히 보고하여 IJHE 연구를 준비한다.",
   "completion_record": "docs/PRISM_IJHE_완성목표_20261009.md",
   "hazop_operating_mode_selection": {
-    "status": "IMPLEMENTED_DIAGNOSTIC_ONLY",
+    "status": "IMPLEMENTED_RUNTIME_GATE_DIAGNOSTIC_ONLY",
     "module": "src/lh2_tno/hazop.py",
     "schema": "prism.hazop_operating_mode_selection.v1",
     "state_schema": "prism.hazop_state_frame.v1",
     "documentation": "docs/PRISM_HAZOP_운전모드_시나리오_연결.md",
     "operating_mode_and_state_are_joint_inputs": true,
     "scenario_selection_only": true,
+    "runtime_gate_integration_test": "provider liquid packet -> existing RealtimeConsequenceMonitor -> consequence result",
+    "runtime_consequence_gate": {
+      "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
+      "schema_version": "prism.hazop_runtime_consequence_gate.v1",
+      "single_clean_scenario_required": true,
+      "provider_packet_scenario_contract_checked": true,
+      "multiple_active_rows_auto_merged": false,
+      "consequence_called_without_provider": false
+    },
     "frequency_inference": false,
     "release_packet_creation": false,
     "facility_qra_promotion": false,
