@@ -49,6 +49,29 @@ def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidenc
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_distinguishes_numerical_scope_from_qualification_gap():
+    matrix = {
+        **_matrix(complete=False),
+        "gap_summary": {
+            "families_with_numerical_case_gap": [],
+            "families_with_qualification_gap": ["pipe_hole"],
+        },
+        "conditional_uncomputed_case_count": 0,
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        matrix,
+        _campaign_result(total=False),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "declared_major_accident_scope"
+    )
+    assert check["status"] == "BLOCKED"
+    assert "qualification" in check["blocking_reason"]
+    assert check["evidence"]["families_with_numerical_case_gap"] == []
+
+
 def test_completion_audit_records_forecast_hazop_trigger_without_qra_promotion():
     report = build_ijhe_completion_audit(
         _status(validated=False),

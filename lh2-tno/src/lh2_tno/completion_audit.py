@@ -2591,6 +2591,29 @@ def build_ijhe_completion_audit(
             for row in scope_matrix["rows"]
         )
     )
+    scope_gap_summary = scope_matrix.get("gap_summary")
+    scope_numerical_gap_families = (
+        scope_gap_summary.get("families_with_numerical_case_gap", [])
+        if isinstance(scope_gap_summary, Mapping)
+        else []
+    )
+    scope_qualification_gap_families = (
+        scope_gap_summary.get("families_with_qualification_gap", [])
+        if isinstance(scope_gap_summary, Mapping)
+        else []
+    )
+    if scope_numerical_gap_families or scope_matrix.get("conditional_uncomputed_case_count", 0):
+        scope_blocking_reason = (
+            "one or more declared accident families still have numerical case gaps or "
+            "uncomputed cases"
+        )
+    elif scope_qualification_gap_families:
+        scope_blocking_reason = (
+            "declared accident families have numerical diagnostic outputs, but provider "
+            "qualification or independent physical-validation evidence remains open"
+        )
+    else:
+        scope_blocking_reason = "one or more declared accident families are missing, partial, or uncomputed"
     checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",
@@ -2761,8 +2784,10 @@ def build_ijhe_completion_audit(
                 "matrix_status": scope_matrix.get("matrix_complete"),
                 "blocking_reasons": scope_matrix.get("blocking_reasons", []),
                 "required_family_count": len(scope_matrix.get("required_families", [])),
+                "families_with_numerical_case_gap": scope_numerical_gap_families,
+                "families_with_qualification_gap": scope_qualification_gap_families,
             },
-            "one or more declared accident families are missing, partial, or uncomputed",
+            scope_blocking_reason,
         ),
         {
             "name": "conditional_accident_scope_accounting",
@@ -2864,7 +2889,6 @@ def build_ijhe_completion_audit(
     # that blocker, but expose a separate diagnostic result when every
     # declared family has a numerical case and the remaining gaps are only
     # provider/qualification evidence.
-    scope_gap_summary = scope_matrix.get("gap_summary")
     if isinstance(scope_gap_summary, Mapping) or "numerically_executed_case_count" in scope_matrix:
         numerical_gap_families = (
             scope_gap_summary.get("families_with_numerical_case_gap", [])
