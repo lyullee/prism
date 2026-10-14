@@ -5,6 +5,12 @@
 모드, HAZOP 시나리오, 종료 기준, 종료 시간, 질량 잔차, provider 입력 원점을 함께
 기록합니다.
 
+각 행의 `required_evidence`에는 현재 보류 사유를 닫기 위해 필요한 자료가 자동으로
+적혀 있습니다. 예를 들어 운영자 제한 행은 provider 소유 시간 이력과 차단 또는
+재고소진 종료 근거를 요구하고, `two_sided_rupture`는 양쪽 출구의 재고·결합 이력을
+요구합니다. 모든 행은 실제 source/result digest, qualification sidecar, 독립 검증이
+들어오기 전까지 `evidence_request_status=OPEN`으로 남습니다.
+
 ## 현재 권위 실행
 
 IJHE용 권위 입력은 전체 union 시설 평가입니다.

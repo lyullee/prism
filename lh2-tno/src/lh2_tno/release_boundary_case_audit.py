@@ -131,6 +131,68 @@ def _case_reasons(
     return list(dict.fromkeys(reasons))
 
 
+def _required_evidence(
+    boundary_reasons: Sequence[str],
+    provider_reasons: Sequence[str],
+) -> list[str]:
+    """Translate observable blockers into an actionable evidence request.
+
+    The request is descriptive only.  It never manufactures a provider packet,
+    an isolation success probability, a frequency, or a consequence result.
+    """
+
+    requirements: list[str] = []
+    reason_set = set(boundary_reasons)
+    if any(reason.startswith("status_") for reason in reason_set):
+        requirements.append(
+            "provider-owned release time history with an explicit successful termination event"
+        )
+    if "status_executed_operator_limited" in reason_set:
+        requirements.append(
+            "provider-owned transient state and operator-independent isolation or inventory closure evidence"
+        )
+    for reason in reason_set:
+        if reason.startswith("termination_basis_"):
+            basis = reason.removeprefix("termination_basis_").removesuffix("_is_not_allowed")
+            if basis == "synthetic_diagnostic_horizon":
+                requirements.append(
+                    "provider run continued to a reviewed isolation success or positive-inventory depletion boundary"
+                )
+            elif basis == "inventory_over_600s":
+                requirements.append(
+                    "complete provider history beyond the 600 s horizon or an explicit physical termination boundary"
+                )
+            elif basis == "emergency_relief_discharge":
+                requirements.append(
+                    "qualified relief-discharge setpoint, capacity and provider-owned termination history"
+                )
+            elif basis == "two_sided_rupture":
+                requirements.append(
+                    "paired outlet histories with endpoint inventories and same-event coupling closure"
+                )
+            else:
+                requirements.append(f"reviewed provider termination evidence for {basis}")
+    if "provider_inventory_residual_not_depleted" in reason_set:
+        requirements.append(
+            "provider initial/final inventory and mass balance proving residual mass is within tolerance"
+        )
+    if "end_to_end_mass_residual_not_closed" in reason_set:
+        requirements.append("end-to-end source-to-consequence mass reconciliation with residual")
+    if "provider_mass_balance_not_closed" in reason_set:
+        requirements.append("provider mass and energy balance closure with residual diagnostics")
+    if "consequence_domain_truncated" in reason_set:
+        requirements.append(
+            "expanded consequence domain or an independent flammability-boundary closure"
+        )
+    if provider_reasons:
+        requirements.extend([
+            "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+            "provider qualification sidecar bound to the exact source/result artifacts",
+            "independent physical-validation record or an explicitly reviewed validation gap",
+        ])
+    return list(dict.fromkeys(requirements))
+
+
 def build_release_boundary_case_audit(
     facility_assessment: Mapping[str, Any],
     *,
@@ -182,6 +244,7 @@ def build_release_boundary_case_audit(
         case = cases_by_key.get(_case_key(ledger_row), {})
         reasons = _case_reasons(case, ledger_row, residual_tolerance_kg=tolerance)
         provider_blockers = _provider_blockers(case, ledger_row)
+        required_evidence = _required_evidence(reasons, provider_blockers)
         termination = _as_mapping(ledger_row.get("termination"))
         identity = _as_mapping(case.get("provider_packet_identity"))
         boundary_ok = not reasons
@@ -210,6 +273,8 @@ def build_release_boundary_case_audit(
             "strict_release_boundary_eligible": boundary_ok,
             "strict_release_boundary_status": "ELIGIBLE" if boundary_ok else "PROMOTION_BLOCKED",
             "release_boundary_blocking_reasons": reasons,
+            "required_evidence": required_evidence,
+            "evidence_request_status": "OPEN" if required_evidence else "NONE",
             "provider_qualification_status": "BLOCKED" if provider_blockers else "REVIEW_REQUIRED",
             "provider_qualification_blocking_reasons": provider_blockers,
             "facility_qra_promotion_eligible": False,

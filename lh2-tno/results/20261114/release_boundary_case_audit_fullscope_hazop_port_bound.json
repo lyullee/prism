@@ -60,6 +60,16 @@
         "provider_inventory_residual_not_depleted",
         "consequence_domain_truncated"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
+        "expanded consequence domain or an independent flammability-boundary closure",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -109,6 +119,15 @@
         "status_executed_operator_limited",
         "provider_inventory_residual_not_depleted"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -158,6 +177,15 @@
         "status_executed_operator_limited",
         "provider_inventory_residual_not_depleted"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -207,6 +235,15 @@
         "status_executed_operator_limited",
         "provider_inventory_residual_not_depleted"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -256,6 +293,15 @@
         "status_executed_operator_limited",
         "provider_inventory_residual_not_depleted"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -304,6 +350,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -352,6 +406,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -400,6 +462,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -448,6 +518,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -496,6 +574,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -544,6 +630,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -592,6 +686,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -640,6 +742,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -688,6 +798,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -736,6 +854,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -782,6 +908,13 @@
       "release_boundary_blocking_reasons": [
         "termination_basis_emergency_relief_discharge_is_not_allowed"
       ],
+      "required_evidence": [
+        "qualified relief-discharge setpoint, capacity and provider-owned termination history",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -830,6 +963,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -878,6 +1019,14 @@
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -922,6 +1071,12 @@
       "strict_release_boundary_eligible": true,
       "strict_release_boundary_status": "ELIGIBLE",
       "release_boundary_blocking_reasons": [],
+      "required_evidence": [
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -968,6 +1123,13 @@
       "release_boundary_blocking_reasons": [
         "termination_basis_inventory_over_600s_is_not_allowed"
       ],
+      "required_evidence": [
+        "complete provider history beyond the 600 s horizon or an explicit physical termination boundary",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1012,6 +1174,12 @@
       "strict_release_boundary_eligible": true,
       "strict_release_boundary_status": "ELIGIBLE",
       "release_boundary_blocking_reasons": [],
+      "required_evidence": [
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1060,6 +1228,15 @@
         "status_executed_operator_limited",
         "termination_basis_two_sided_rupture_is_not_allowed"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "paired outlet histories with endpoint inventories and same-event coupling closure",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1108,6 +1285,15 @@
         "status_executed_operator_limited",
         "termination_basis_two_sided_rupture_is_not_allowed"
       ],
+      "required_evidence": [
+        "provider-owned release time history with an explicit successful termination event",
+        "provider-owned transient state and operator-independent isolation or inventory closure evidence",
+        "paired outlet histories with endpoint inventories and same-event coupling closure",
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1152,6 +1338,12 @@
       "strict_release_boundary_eligible": true,
       "strict_release_boundary_status": "ELIGIBLE",
       "release_boundary_blocking_reasons": [],
+      "required_evidence": [
+        "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
+        "provider qualification sidecar bound to the exact source/result artifacts",
+        "independent physical-validation record or an explicitly reviewed validation gap"
+      ],
+      "evidence_request_status": "OPEN",
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",

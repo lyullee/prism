@@ -58,6 +58,8 @@ def test_case_audit_keeps_release_boundary_and_provider_qualification_separate()
     assert row["strict_release_boundary_status"] == "ELIGIBLE"
     assert row["facility_qra_promotion_eligible"] is False
     assert "provider_input_is_not_actual_field_data" in row["provider_qualification_blocking_reasons"]
+    assert row["evidence_request_status"] == "OPEN"
+    assert any("qualification sidecar" in item for item in row["required_evidence"])
 
 
 def test_case_audit_blocks_horizon_and_operator_limited_rows():
@@ -82,6 +84,7 @@ def test_case_audit_blocks_horizon_and_operator_limited_rows():
     assert "status_executed_operator_limited" in reasons
     assert "termination_basis_inventory_over_600s_is_not_allowed" in reasons
     assert "provider_inventory_residual_not_depleted" in reasons
+    assert all(row["required_evidence"] for row in report["rows"])
 
 
 def test_case_audit_records_domain_truncation_and_does_not_promote_facility_qra():
