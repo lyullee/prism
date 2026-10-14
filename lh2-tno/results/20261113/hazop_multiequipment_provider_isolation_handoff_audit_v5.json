@@ -1,0 +1,23 @@
+{
+  "schema_version": "prism.hazop_campaign_handoff_audit.v1",
+  "status": "HAZOP_CAMPAIGN_HANDOFF_AUDITED_CHAIN_PARTIAL",
+  "handoff_schema_version": "prism.hazop_facility_campaign_handoff.v1",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "campaign_digest": "758054c578e9274d793d7271ed9b4cfeaa0d830b95af6fbabe5de96d230ae25c",
+  "hazop_scenario_trace_status": "HAZOP_SCENARIO_TRACE_COMPLETE",
+  "equipment_state_release_status": "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN",
+  "risk_atom_chain_status": "PARTIAL_RISK_ATOM_CHAIN",
+  "chain_closed": false,
+  "embedded_audit_mismatch_count": 0,
+  "blocking_reasons": [],
+  "policy": {
+    "hazop_scenario_id_inferred": false,
+    "frequency_inference_performed": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_promotion": false,
+    "partial_chain_is_not_complete": true,
+    "diagnostic_only": true
+  },
+  "interpretation": "The HAZOP handoff embeds reproducible identity and chain diagnostics. A partial state/release or release/damage chain remains visible and is not promoted."
+}

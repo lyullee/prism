@@ -131,3 +131,21 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
 같은 스냅샷의 범위 카탈로그에는 12개 선언 사고군 중 현재 대표 행으로 실제 dispatch된 5개와 적용 가능하지만 아직 dispatch하지 않은 7개가 분리되어 있다. 예를 들어 저장탱크의 이번 대표 행은 `liquid_two_phase`이므로 `vessel_hole`은 자동으로 완료 처리되지 않는다.
 
 따라서 이 결과의 의미는 “모든 구성요소를 같은 코드 경로로 계산할 수 있다”는 진단 증거다. 이것은 현장 ESD/밸브 고장확률, 차단 성공확률, 실제 plant geometry·인구·기상, 또는 IJHE용 qualified facility IR/F-N을 확정하지 않는다. 다음 승격 조건은 각 설비의 reviewed actuator/isolation 시험자료, 현장 포트·좌표 확인, 사고빈도 근거와 독립 SLABx-LH2 holdout 검증이다.
+
+## 최신 코드 재현과 독립 HAZOP 선택 감사 (2026-11-13)
+
+현재 `FrequencyEvent` 계약과 다중 설비 실행기를 기준으로 같은 격리계약 경로를 다시 실행했다.
+
+```powershell
+python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
+  --backend-config results/20261020/equipment_campaign_all_bins_generic_facility/backend_config.json `
+  --isolation-packet-root results/20261014/hazop_isolation_packets `
+  --annual-conditions examples/generic_lh2_near_receptor_annual_conditions.json `
+  --output results/20261113/hazop_multiequipment_provider_isolation_diagnostic_v5.json
+```
+
+이번 결과는 7개 설비 모두가 HAZOP 선택, provider packet, 방출 종료·재고 장부, SLABx-LH2 피해, 현재 기상 IR 원자까지 도달했다. 각 설비의 명시적 운전 모드는 저장탱크 `receiving`, 배관·밸브·펌프·기화기 `supply`, 벤트·재액화기 `standby`로 기록됐다. 실행 시간은 약 50.1초였고 모든 설비 monitor deadline은 30초 이내였다. 이 실행은 새 사고빈도를 만들지 않으며, 시설 전체 QRA 승격도 하지 않는다.
+
+실행기 내부에는 `audit_observed_hazop_runtime()`을 이용한 독립 선택 감사도 저장한다. [`hazop_multiequipment_observed_runtime_audit_v5.json`](../results/20261113/hazop_multiequipment_observed_runtime_audit_v5.json)은 7개 frame을 다시 평가해 7개 HAZOP 시나리오를 선택했고, 상태는 `OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED`, 운전 모드 추론은 `false`다. provider handoff를 재계산한 [`hazop_multiequipment_provider_isolation_handoff_audit_v5.json`](../results/20261113/hazop_multiequipment_provider_isolation_handoff_audit_v5.json)은 HAZOP scenario trace를 `COMPLETE`로 확인했지만, 상태→방출과 방출→risk atom은 provider·물리 검증 제한 때문에 `PARTIAL`로 남겼다.
+
+대표 경로가 7개 모두 실행됐다는 사실은 전체 12개 사고군이나 24개 문헌 event가 현장용으로 닫혔다는 뜻이 아니다. 최신 결과의 `scope_catalog`는 5개 사고군을 이번 대표 HAZOP 행으로 dispatch하고 7개 적용 가능 사고군을 `APPLICABLE_NOT_DISPATCHED`로 남긴다. 합성 provider, 진단 geometry·인구·기상, 독립 물리검증 부재와 미계산 사고는 계속 별도 보류한다.

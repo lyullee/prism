@@ -43,6 +43,7 @@ from lh2_tno.frequency import FrequencyPlan, generate_events  # noqa: E402
 from lh2_tno.hazop import run_hazop_facility_runtime  # noqa: E402
 from lh2_tno.hazop_campaign import build_hazop_facility_campaign_result  # noqa: E402
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames  # noqa: E402
+from lh2_tno.observed_hazop_runtime import audit_observed_hazop_runtime  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     load_provider_emergency_relief,
@@ -344,6 +345,40 @@ def _runtime_sources(specs: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]
 
 def _scenario_id(spec: Mapping[str, Any]) -> str:
     return f"{spec['component_id']}-mode-deviation:{spec['operating_mode']}:{spec['scenario_family']}"
+
+
+def _audit_runtime_hazop_selection(
+    table: Mapping[str, Any],
+    frames: Mapping[str, Any],
+    *,
+    now_s: float,
+) -> dict[str, Any]:
+    """Re-evaluate the same field frames through the independent HAZOP audit.
+
+    ``run_hazop_facility_runtime`` performs the selection that dispatches
+    provider callbacks.  This second audit uses the observed-runtime contract
+    and records the table/frame selection separately, so a successful provider
+    consequence cannot hide a missing mode, missing signal, or accidental
+    scenario inference.  It never creates a release or assigns a frequency.
+    """
+    rows = table.get("rows")
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
+        raise ValueError("HAZOP multi-equipment table rows must be an array")
+    tables: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            raise ValueError("HAZOP multi-equipment table rows must contain objects")
+        component_id = str(row.get("component_id") or "").strip()
+        if not component_id:
+            raise ValueError("HAZOP multi-equipment row has no component_id")
+        component_table = copy.deepcopy(dict(table))
+        component_table["rows"] = [copy.deepcopy(dict(row))]
+        tables[component_id] = component_table
+    table_set = {
+        "schema_version": "prism.hazop_runtime_table_set.v1",
+        "tables": tables,
+    }
+    return audit_observed_hazop_runtime(frames, table_set, now_s=float(now_s))
 
 
 def _build_scope_catalog(
@@ -753,6 +788,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     }
     frames_output = build_observed_state_runtime_frames(_runtime_sources(COMPONENT_SPECS))
     frames = {str(frame["component_id"]): frame for frame in frames_output["frames"]}
+    observed_hazop_runtime_audit = _audit_runtime_hazop_selection(
+        table,
+        frames_output,
+        now_s=float(args.now_s),
+    )
     bindings: dict[str, Any] = {}
     resolvers: dict[tuple[str, str], Any] = {}
     component_input: dict[str, Any] = {}
@@ -866,6 +906,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "withheld_component_ids": withheld_ids,
         "table": table,
         "frames": frames_output,
+        "observed_hazop_runtime_audit": observed_hazop_runtime_audit,
         "component_input": component_input,
         "scope_catalog": scope_catalog,
         "packet_override": packet_override,
@@ -901,6 +942,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "facility_scope_complete": False,
             "synthetic_diagnostic_inputs_present": True,
             "annual_condition_source": annual_condition_source,
+            "observed_hazop_runtime_audit_status": observed_hazop_runtime_audit["status"],
+            "observed_hazop_mode_inference_performed": observed_hazop_runtime_audit["policy"][
+                "operating_mode_inferred"
+            ],
         },
         "interpretation": (
             "This record proves multi-equipment HAZOP dispatch and records the branches that cross "
@@ -947,6 +992,10 @@ def main() -> int:
         "runtime_status": result["current"].get("status"),
         "risk_atom_count": len(result["current"].get("risk_atoms", [])),
         "facility_handoff": result["facility_handoff"] is not None,
+        "observed_hazop_runtime_audit_status": result["observed_hazop_runtime_audit"]["status"],
+        "observed_hazop_selected_scenario_count": result["observed_hazop_runtime_audit"][
+            "selected_scenario_count"
+        ],
         "facility_qra_promotion": result["policy"]["facility_qra_promotion"],
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))

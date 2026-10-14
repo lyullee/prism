@@ -131,3 +131,27 @@ def test_scope_catalog_keeps_applicable_undispatched_families_explicit(
     assert rows["vessel_hole"]["status"] == "DISPATCHED_DIAGNOSTIC"
     assert rows["pipe_hole"]["status"] == "APPLICABLE_NOT_DISPATCHED"
     assert rows["vertical_handoff"]["status"] == "APPLICABLE_NOT_DISPATCHED"
+
+
+def test_runtime_hazop_selection_is_reaudited_from_the_same_mode_frames() -> None:
+    table = {
+        "schema_version": "prism.hazop_operating_mode_selection.v1",
+        "id": "test-multi-hazop",
+        "facility_id": "test-facility",
+        "operating_modes": ["receiving", "supply", "standby"],
+        "configuration_origin": "synthetic",
+        "source_provenance": "test HAZOP table",
+        "rows": [MODULE._scenario_row(spec) for spec in MODULE.COMPONENT_SPECS],
+    }
+    frames_output = MODULE.build_observed_state_runtime_frames(
+        MODULE._runtime_sources(MODULE.COMPONENT_SPECS)
+    )
+    report = MODULE._audit_runtime_hazop_selection(
+        table,
+        frames_output,
+        now_s=12.1,
+    )
+    assert report["status"] == "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED"
+    assert report["evaluated_frame_count"] == len(MODULE.COMPONENT_SPECS)
+    assert report["selected_scenario_count"] == len(MODULE.COMPONENT_SPECS)
+    assert report["policy"]["operating_mode_inferred"] is False

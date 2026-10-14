@@ -1,0 +1,386 @@
+{
+  "schema_version": "prism.observed_hazop_runtime_audit.v1",
+  "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+  "runtime_frame_count": 7,
+  "evaluated_frame_count": 7,
+  "selected_scenario_count": 7,
+  "operating_mode_counts": {
+    "receiving": 1,
+    "supply": 4,
+    "standby": 2
+  },
+  "status_counts": {
+    "SCENARIOS_SELECTED": 7
+  },
+  "rows": [
+    {
+      "component_id": "storage-tank-01",
+      "source_id": "synthetic-multi-hazop-storage-tank-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "receiving",
+      "state_snapshot_digest": "b5fe541de36c9d56a049aff6317299bde5aba9c6c45473a8a0f71a3cece6a1cc",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "11992c9c6cbfb7b205016be368715a7a961a84d83fa8c1c4b21b91f271dbd9c7",
+      "state_digest": "06dacb27e6331441f46aa8da0ee7d3eb1b1ebeaa6a83825ab3cf71ffe36d9059",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "storage-tank-01-mode-deviation:receiving:liquid_two_phase",
+          "hazop_row_id": "storage-tank-01-mode-deviation",
+          "component_id": "storage-tank-01",
+          "component_kind": "storage_tank",
+          "operating_mode": "receiving",
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "storage-tank-01-mode-deviation",
+          "component_id": "storage-tank-01",
+          "operating_mode": "receiving",
+          "variable_tag": "tank_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "source_id": "synthetic-multi-hazop-liquid-transfer-line-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "supply",
+      "state_snapshot_digest": "ab4f4fa17e195afce909dd16fb9ba2dbf99e9a1c1cf8151ecf55fcb7c047e5d2",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "5bf2d7e915fae46fadf54a0ba12170e01af54c79fd0e914a4873543a9d1916f8",
+      "state_digest": "d28c69161a8e82532796b8e2173c69f654140509ad940be785c2bec71476acc0",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "liquid-transfer-line-01-mode-deviation:supply:pipe_hole",
+          "hazop_row_id": "liquid-transfer-line-01-mode-deviation",
+          "component_id": "liquid-transfer-line-01",
+          "component_kind": "pipe",
+          "operating_mode": "supply",
+          "scenario_family": "pipe_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "liquid-transfer-line-01-mode-deviation",
+          "component_id": "liquid-transfer-line-01",
+          "operating_mode": "supply",
+          "variable_tag": "line_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "pipe_hole",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "source_id": "synthetic-multi-hazop-transfer-valve-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "supply",
+      "state_snapshot_digest": "1cc509c2f8683a40d9566af5b66abcab5efc956011b9b760e499bb048b7dc952",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "05533fe0db18191632e49d0d6ae77ad0f50dab03a2c75bb06ae6c52120bba9cf",
+      "state_digest": "42f64853667ee19c3866aa89822f3c58bf2ba2287fc8dc0aaec01926fc573a39",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "transfer-valve-01-mode-deviation:supply:liquid_two_phase",
+          "hazop_row_id": "transfer-valve-01-mode-deviation",
+          "component_id": "transfer-valve-01",
+          "component_kind": "valve",
+          "operating_mode": "supply",
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "transfer-valve-01-mode-deviation",
+          "component_id": "transfer-valve-01",
+          "operating_mode": "supply",
+          "variable_tag": "valve_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "pressure-relief-vent-01",
+      "source_id": "synthetic-multi-hazop-pressure-relief-vent-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "standby",
+      "state_snapshot_digest": "a9042ecf0b5ba27d6fb44d93a22aa7dcab12b792d9f9ecff64f53fed5dd6e826",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "11e36fc7911401af7649398459d57994bed649aafd9b2355568c142928485bc0",
+      "state_digest": "e20aca9635cb3a1541b3ecc49e6780388e7604a4c9335841cb736140c35946a6",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "pressure-relief-vent-01-mode-deviation:standby:vent_hole",
+          "hazop_row_id": "pressure-relief-vent-01-mode-deviation",
+          "component_id": "pressure-relief-vent-01",
+          "component_kind": "vent_stack",
+          "operating_mode": "standby",
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "pressure-relief-vent-01-mode-deviation",
+          "component_id": "pressure-relief-vent-01",
+          "operating_mode": "standby",
+          "variable_tag": "vent_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "source_id": "synthetic-multi-hazop-liquid-transfer-pump-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "supply",
+      "state_snapshot_digest": "f2f25b476c06244e7055387c347e43172678f7848417b51a92b59917914d3f5b",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "e28874fb7764e61d16940007b2dc0c23d79d357a7bc09a5fa2843869a9c81c19",
+      "state_digest": "a7de3725dddbf575cf83945aa1a9d8c0c694b6b25b3f1812c22e7d92fc590df8",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase",
+          "hazop_row_id": "liquid-transfer-pump-01-mode-deviation",
+          "component_id": "liquid-transfer-pump-01",
+          "component_kind": "pump",
+          "operating_mode": "supply",
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "liquid-transfer-pump-01-mode-deviation",
+          "component_id": "liquid-transfer-pump-01",
+          "operating_mode": "supply",
+          "variable_tag": "pump_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "ambient-vaporizer-01",
+      "source_id": "synthetic-multi-hazop-ambient-vaporizer-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "supply",
+      "state_snapshot_digest": "f8f38bb638794e848d348427c9de78c924fd4f03c0341257683b6fc297f4a820",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "8c86d518ca5ecc1d0d62d03f3ca39061d202a9c79af78f1532206192b7734720",
+      "state_digest": "416de980f01e92de1d78d49f97e317901a62d5ad2f70090b698b4e21be62a9b6",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion",
+          "hazop_row_id": "ambient-vaporizer-01-mode-deviation",
+          "component_id": "ambient-vaporizer-01",
+          "component_kind": "vaporizer",
+          "operating_mode": "supply",
+          "scenario_family": "inventory_depletion",
+          "release_mode": "instantaneous_inventory",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "ambient-vaporizer-01-mode-deviation",
+          "component_id": "ambient-vaporizer-01",
+          "operating_mode": "supply",
+          "variable_tag": "vaporizer_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "inventory_depletion",
+          "release_mode": "instantaneous_inventory",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "reliquefier-01",
+      "source_id": "synthetic-multi-hazop-reliquefier-01",
+      "captured_at_s": 12.0,
+      "operating_mode": "standby",
+      "state_snapshot_digest": "012cfa579cbdeafdbed58f9c475e43de89f2df78c5f4d5d095b18f91862b24a4",
+      "table_id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "table_digest": "8f1dfd9b23367d3eca9e11ef4efc2fd7f9e45e1822ebba367d960748df6853aa",
+      "state_digest": "ec73f6c6ea7978b29adf9308acb5d9017e00c8a9fb3760b3c445ec66636001c2",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "reliquefier-01-mode-deviation:standby:two_sided_rupture",
+          "hazop_row_id": "reliquefier-01-mode-deviation",
+          "component_id": "reliquefier-01",
+          "component_kind": "reliquefier",
+          "operating_mode": "standby",
+          "scenario_family": "two_sided_rupture",
+          "release_mode": "two_sided_rupture",
+          "priority": "high",
+          "measured_value_si": 650000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "reliquefier-01-mode-deviation",
+          "component_id": "reliquefier-01",
+          "operating_mode": "standby",
+          "variable_tag": "reliquefier_pressure",
+          "deviation": "mode-specific pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "two_sided_rupture",
+          "release_mode": "two_sided_rupture",
+          "status": "DEVIATION",
+          "value_si": 650000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "operating_mode_inferred": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Observed state and explicit operating mode selected HAZOP scenarios. Each selected scenario still requires a qualified provider release, literature frequency binding, and the downstream SLABx-LH2/TNO chain."
+}
