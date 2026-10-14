@@ -43,6 +43,12 @@
 
 권위 결과는 `results/20261110/inspection_center_observed_state_runtime_frames_with_modes.json`와 `results/20261110/inspection_center_observed_hazop_runtime_audit.json`이다.
 
+이 원장을 최신 native 시설 원장과 문헌 빈도 민감도 장부에 함께 넣은 완료 감사는
+`results/20261110/ijhe_completion_audit_with_observed_hazop_runtime_frequency.json`이다.
+27개 검사 중 운전 모드 런타임 선택, 문헌 빈도 시나리오 5개와 재합산 일치는 PASS이며,
+qualified provider packet·방출경계·독립 물리검증·완전 사고범위·시설 IR/F-N은 여전히
+차단된다.
+
 ## 재현 명령
 
 ```powershell
