@@ -2828,6 +2828,75 @@ def build_ijhe_completion_audit(
             "sensor-conditioned realtime monitor contract is missing",
         ),
     ])
+    # A strict scope matrix also includes qualification readiness. Preserve
+    # that blocker, but expose a separate diagnostic result when every
+    # declared family has a numerical case and the remaining gaps are only
+    # provider/qualification evidence.
+    scope_gap_summary = scope_matrix.get("gap_summary")
+    if isinstance(scope_gap_summary, Mapping) or "numerically_executed_case_count" in scope_matrix:
+        numerical_gap_families = (
+            scope_gap_summary.get("families_with_numerical_case_gap", [])
+            if isinstance(scope_gap_summary, Mapping)
+            else None
+        )
+        qualification_gap_families = (
+            scope_gap_summary.get("families_with_qualification_gap", [])
+            if isinstance(scope_gap_summary, Mapping)
+            else None
+        )
+        numerical_scope_valid = (
+            isinstance(scope_matrix.get("required_families"), list)
+            and bool(scope_matrix.get("required_families"))
+            and isinstance(scope_matrix.get("rows"), list)
+            and len(scope_matrix.get("rows", []))
+            == len(scope_matrix.get("required_families", []))
+            and isinstance(numerical_gap_families, list)
+            and not numerical_gap_families
+            and scope_matrix.get("not_numerically_executed_case_count") == 0
+            and scope_matrix.get("conditional_uncomputed_case_count") == 0
+            and isinstance(scope_matrix.get("numerically_executed_case_count"), int)
+            and scope_matrix.get("numerically_executed_case_count", 0) > 0
+        )
+        checks.append(
+            {
+                "name": "diagnostic_numerical_scope_coverage",
+                "status": "PASS" if numerical_scope_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": scope_matrix.get("_record_path"),
+                    "required_family_count": (
+                        len(scope_matrix.get("required_families", []))
+                        if isinstance(scope_matrix.get("required_families"), list)
+                        else None
+                    ),
+                    "scope_row_count": (
+                        len(scope_matrix.get("rows", []))
+                        if isinstance(scope_matrix.get("rows"), list)
+                        else None
+                    ),
+                    "numerically_executed_case_count": scope_matrix.get(
+                        "numerically_executed_case_count"
+                    ),
+                    "conditional_uncomputed_case_count": scope_matrix.get(
+                        "conditional_uncomputed_case_count"
+                    ),
+                    "not_numerically_executed_case_count": scope_matrix.get(
+                        "not_numerically_executed_case_count"
+                    ),
+                    "families_with_numerical_case_gap": numerical_gap_families,
+                    "families_with_qualification_gap": qualification_gap_families,
+                    "matrix_complete": scope_matrix.get("matrix_complete"),
+                    "facility_qra_claim": False,
+                },
+                "interpretation": (
+                    "Every declared accident family has a numerical diagnostic case in the "
+                    "scope matrix; any remaining family gap is an evidence/qualification gap. "
+                    "This does not make operator-limited or synthetic cases qualified and does "
+                    "not promote facility IR/F-N."
+                ),
+            }
+        )
     if validation_evidence_matrix is not None:
         matrix_status = validation_evidence_matrix.get("status")
         matrix_claims_closed = all(

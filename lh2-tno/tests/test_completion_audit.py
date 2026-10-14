@@ -897,6 +897,41 @@ def test_completion_audit_blocks_incomplete_facility_claim():
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_exposes_numerical_scope_coverage_separately_from_qualification():
+    scope = {
+        **_matrix(False),
+        "required_families": ["vessel_hole", "vertical_handoff"],
+        "rows": [
+            {"family": "vessel_hole", "status": "PARTIAL"},
+            {"family": "vertical_handoff", "status": "PARTIAL"},
+        ],
+        "gap_summary": {
+            "families_with_numerical_case_gap": [],
+            "families_with_qualification_gap": ["vessel_hole", "vertical_handoff"],
+        },
+        "numerically_executed_case_count": 15,
+        "conditional_uncomputed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+    }
+    report = build_ijhe_completion_audit(
+        _status(False),
+        scope,
+        _campaign_result(False),
+        None,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_numerical_scope_coverage"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["families_with_numerical_case_gap"] == []
+    assert check["evidence"]["families_with_qualification_gap"] == [
+        "vessel_hole", "vertical_handoff"
+    ]
+    assert report["status"] == "INCOMPLETE_EVIDENCE"
+
+
 def test_completion_audit_exposes_facility_frequency_port_binding_diagnostic():
     port_binding = {
         "schema_version": "prism.frequency_port_binding.v1",

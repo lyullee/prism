@@ -4207,6 +4207,34 @@
       "blocking_reason": null
     },
     {
+      "name": "diagnostic_numerical_scope_coverage",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": null,
+        "required_family_count": 12,
+        "scope_row_count": 12,
+        "numerically_executed_case_count": 44,
+        "conditional_uncomputed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "families_with_numerical_case_gap": [],
+        "families_with_qualification_gap": [
+          "vessel_hole",
+          "pipe_hole",
+          "valve_hole",
+          "pump_hole",
+          "liquid_two_phase",
+          "inventory_depletion",
+          "two_sided_rupture",
+          "vertical_handoff"
+        ],
+        "matrix_complete": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "Every declared accident family has a numerical diagnostic case in the scope matrix; any remaining family gap is an evidence/qualification gap. This does not make operator-limited or synthetic cases qualified and does not promote facility IR/F-N."
+    },
+    {
       "name": "validation_evidence_matrix",
       "status": "PASS",
       "evidence": {
