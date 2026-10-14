@@ -104,6 +104,7 @@ def build_ijhe_completion_audit(
     hazop_operating_mode_evidence: Mapping[str, Any] | None = None,
     reviewed_signal_unit_evidence: Mapping[str, Any] | None = None,
     observed_hazop_runtime_audit: Mapping[str, Any] | None = None,
+    observed_hazop_provider_binding: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3909,6 +3910,77 @@ def build_ijhe_completion_audit(
             "SLABx-LH2 consequence, and facility IR/F-N remain separate gates."
         )
         checks.append(runtime_check)
+    if observed_hazop_provider_binding is not None:
+        provider_binding = observed_hazop_provider_binding
+        policy = provider_binding.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        rows = provider_binding.get("rows")
+        provider_binding_valid = (
+            provider_binding.get("schema_version")
+            == "prism.observed_hazop_provider_event_binding.v1"
+            and provider_binding.get("status")
+            == "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC"
+            and isinstance(rows, list)
+            and bool(rows)
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status") == "EXPLICIT_PROVIDER_EVENT_BOUND"
+                and isinstance(row.get("scenario_id"), str)
+                and isinstance(row.get("provider_event_id"), str)
+                and isinstance(row.get("provider_component_id"), str)
+                and isinstance(row.get("provider_port_id"), str)
+                and row.get("frequency_assignment")
+                == "not_performed; literature event identity only"
+                and row.get("provider_release_created") is False
+                and isinstance(row.get("checks"), Mapping)
+                and all(row["checks"].get(key) is True for key in (
+                    "explicit_mapping_present",
+                    "provider_event_present",
+                    "provider_component_matches_mapping",
+                    "provider_port_present",
+                    "scenario_family_compatible",
+                    "release_mode_compatible",
+                    "literature_frequency_present",
+                ))
+                for row in rows
+            )
+            and isinstance(provider_binding.get("selected_scenario_count"), int)
+            and provider_binding.get("selected_scenario_count", 0) == len(rows)
+            and provider_binding.get("bound_scenario_count") == len(rows)
+            and not provider_binding.get("blocking_reasons")
+            and policy.get("operating_mode_taken_from_explicit_runtime_input") is True
+            and policy.get("operating_mode_inferred") is False
+            and policy.get("literature_event_identity_bound") is True
+            and policy.get("frequency_assignment_performed") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("sensor_frequency_learning_used") is False
+            and policy.get("provider_release_created") is False
+            and policy.get("consequence_calculated") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("diagnostic_only") is True
+        )
+        provider_binding_check = _check(
+            "diagnostic_observed_hazop_provider_event_binding",
+            provider_binding_valid,
+            {
+                "record": provider_binding.get("_record_path"),
+                "schema_version": provider_binding.get("schema_version"),
+                "status": provider_binding.get("status"),
+                "selected_scenario_count": provider_binding.get("selected_scenario_count"),
+                "bound_scenario_count": provider_binding.get("bound_scenario_count"),
+                "provider_worklist_event_count": provider_binding.get("provider_worklist_event_count"),
+                "policy": dict(policy),
+            },
+            "observed HAZOP scenarios are missing an explicit compatible literature event or the diagnostic binding permits frequency/release promotion",
+        )
+        provider_binding_check["diagnostic_only"] = True
+        provider_binding_check["interpretation"] = (
+            "The selected HAZOP scenarios have explicit provider-event, component, "
+            "and accident-port identities. The literature frequency remains a ledger "
+            "reference only; provider release, SLABx-LH2 consequence and facility QRA "
+            "remain separate qualification gates."
+        )
+        checks.append(provider_binding_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

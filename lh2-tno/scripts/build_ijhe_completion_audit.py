@@ -179,6 +179,11 @@ def main() -> int:
         help="optional observed-state plus explicit operating-mode HAZOP selection audit",
     )
     parser.add_argument(
+        "--observed-hazop-provider-binding",
+        type=Path,
+        help="optional explicit observed-HAZOP to literature provider-event binding audit",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -517,6 +522,15 @@ def main() -> int:
         )
         if observed_hazop_runtime_audit is not None:
             observed_hazop_runtime_audit["_record_path"] = str(args.observed_hazop_runtime_audit)
+        observed_hazop_provider_binding = (
+            _object(args.observed_hazop_provider_binding)
+            if args.observed_hazop_provider_binding
+            else None
+        )
+        if observed_hazop_provider_binding is not None:
+            observed_hazop_provider_binding["_record_path"] = str(
+                args.observed_hazop_provider_binding
+            )
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -612,6 +626,7 @@ def main() -> int:
             hazop_operating_mode_evidence=hazop_operating_mode_evidence,
             reviewed_signal_unit_evidence=reviewed_signal_unit_evidence,
             observed_hazop_runtime_audit=observed_hazop_runtime_audit,
+            observed_hazop_provider_binding=observed_hazop_provider_binding,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

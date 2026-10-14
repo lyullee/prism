@@ -1,0 +1,37 @@
+{
+  "schema_version": "prism.observed_hazop_provider_event_binding_map.v1",
+  "status": "DIAGNOSTIC_EXPLICIT_MAPPING",
+  "description": "Diagnostic-only mapping from the inspection-center HAZOP runtime scenarios to generic LH2 literature provider events. The provider events are not qualified facility release packets.",
+  "bindings": [
+    {
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "provider_component_id": "storage-tank-01",
+      "provider_port_id": "tank-accident-out",
+      "mapping_basis": "scenario-family and release-mode compatible diagnostic storage-shell event"
+    },
+    {
+      "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "provider_component_id": "pressure-relief-vent-01",
+      "provider_port_id": "vent-accident-out",
+      "mapping_basis": "scenario-family and release-mode compatible diagnostic relief-discharge event"
+    },
+    {
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_component_id": "ambient-vaporizer-01",
+      "provider_port_id": "vaporizer-accident-out",
+      "mapping_basis": "scenario-family and release-mode compatible diagnostic vaporizer-hole event"
+    }
+  ],
+  "policy": {
+    "explicit_mapping_required": true,
+    "frequency_assignment_performed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  }
+}

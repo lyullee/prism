@@ -67,6 +67,30 @@ python scripts/audit_observed_hazop_runtime.py `
 
 IJHE 완료 감사에는 `--observed-hazop-runtime-audit` 옵션으로 이 원장을 넣을 수 있다. 감사는 정성적 모드·시나리오 연결만 PASS로 기록하고, 시설 QRA·빈도·물리검증 차단 항목을 해제하지 않는다.
 
+## HAZOP 시나리오와 문헌 provider event의 명시적 연결
+
+HAZOP가 고른 시나리오를 정량 계산으로 넘길 때는 시나리오 이름만으로 설비나 누출구를 추측하지 않는다. 다음 매핑 파일에서 각 `scenario_id`를 문헌 기반 `provider_event_id`, provider `component_id`, `accident_port_id`에 하나씩 명시한다.
+
+`examples/inspection_center_hazop_provider_event_bindings.json`은 진단용 세 연결을 담고 있다.
+
+| HAZOP 시나리오 | 문헌 event | 방출 port | 현재 packet 상태 |
+| --- | --- | --- | --- |
+| 인수 고압 → `vessel_hole` | storage-shell `AREA_0.01%` | `tank-accident-out` | `UNCOMPUTED_PROVIDER_PACKET` |
+| 대기 벤트 압력 → `vent_hole` | pressure-relief-vent `G1` | `vent-accident-out` | `UNCOMPUTED_PROVIDER_PACKET` |
+| 공급 기화기 고압 → `vaporizer_hole` | ambient-vaporizer `G3` | `vaporizer-accident-out` | `UNCOMPUTED_PROVIDER_PACKET` |
+
+아래 명령은 event family, release mode, port, 양의 문헌 빈도 필드가 서로 맞는지 검사한다.
+
+```powershell
+python scripts/audit_observed_hazop_provider_binding.py `
+  --observed-hazop-runtime-audit results/20261110/inspection_center_observed_hazop_runtime_audit.json `
+  --provider-worklist results/20261110/native_full_scope_frequency_assessment_latest2/provider_worklist.json `
+  --binding-map examples/inspection_center_hazop_provider_event_bindings.json `
+  --output results/20261110/inspection_center_observed_hazop_provider_event_binding.json
+```
+
+현재 결과는 3/3 시나리오가 명시적 event identity에 연결된 `OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC`이다. 이는 빈도 값을 센서에 할당하거나 누출 packet을 만드는 단계가 아니다. provider packet·방출 종료·차단·재고 폐합·SLABx-LH2 검증이 없는 동안에는 시설 IR/F-N에 자동 포함되지 않는다. 이를 최신 IJHE 감사에 넣으면 `diagnostic_observed_hazop_provider_event_binding=PASS`가 추가되지만 전체 상태는 `INCOMPLETE_EVIDENCE`로 남는다.
+
 ## 다음 승격 조건
 
 이 진단 결과를 실제 시설 위험평가 입력으로 승격하려면 설비별 검토된 P&ID/HAZOP asset identity, 단위·교정 확인, provider가 계산한 사고 방출 이력과 종료·차단·재고 폐합, 해당 사고의 문헌 빈도, SLABx-LH2 독립 검증이 필요하다. 하나라도 없으면 해당 사고는 조건부 결과로만 남기고 시설 전체 IR/F-N에 포함하지 않는다.

@@ -3247,3 +3247,77 @@ def test_completion_audit_blocks_observed_hazop_runtime_promotion_claim():
         if item["name"] == "diagnostic_observed_hazop_runtime_mode_selection"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _observed_hazop_provider_binding(**overrides):
+    record = {
+        "schema_version": "prism.observed_hazop_provider_event_binding.v1",
+        "status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
+        "selected_scenario_count": 1,
+        "bound_scenario_count": 1,
+        "provider_worklist_event_count": 1,
+        "blocking_reasons": [],
+        "rows": [{
+            "scenario_id": "scenario-1",
+            "provider_event_id": "event-1",
+            "provider_component_id": "component-1",
+            "provider_port_id": "port-1",
+            "status": "EXPLICIT_PROVIDER_EVENT_BOUND",
+            "frequency_assignment": "not_performed; literature event identity only",
+            "provider_release_created": False,
+            "checks": {
+                "explicit_mapping_present": True,
+                "provider_event_present": True,
+                "provider_component_matches_mapping": True,
+                "provider_port_present": True,
+                "scenario_family_compatible": True,
+                "release_mode_compatible": True,
+                "literature_frequency_present": True,
+            },
+        }],
+        "policy": {
+            "operating_mode_taken_from_explicit_runtime_input": True,
+            "operating_mode_inferred": False,
+            "literature_event_identity_bound": True,
+            "frequency_assignment_performed": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created": False,
+            "consequence_calculated": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_observed_hazop_provider_event_binding():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_provider_binding=_observed_hazop_provider_binding(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_provider_event_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_observed_hazop_provider_frequency_promotion():
+    unsafe = _observed_hazop_provider_binding()
+    unsafe["policy"]["frequency_assignment_performed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_provider_binding=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_provider_event_binding"
+    )
+    assert check["status"] == "BLOCKED"
