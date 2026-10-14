@@ -13,7 +13,11 @@
       "quantity": "pressure",
       "pressure_basis": "unresolved",
       "evidence": [
-        {"page": 9, "anchor": "PT-1206", "context": "압력해소 확인 1 bar 이하"}
+        {
+          "page": 9,
+          "anchor": "PT-1206",
+          "context": "압력해소 확인 1 bar 이하"
+        }
       ]
     },
     "PT1105A": {
@@ -21,7 +25,11 @@
       "quantity": "pressure",
       "pressure_basis": "unresolved",
       "evidence": [
-        {"page": 24, "anchor": "PT-1105A", "context": "탱크 6.5 bar 도달 시 6.0 bar까지 BOG 개방"}
+        {
+          "page": 24,
+          "anchor": "PT-1105A",
+          "context": "탱크 6.5 bar 도달 시 6.0 bar까지 BOG 개방"
+        }
       ]
     },
     "PT1105B": {
@@ -29,28 +37,56 @@
       "quantity": "pressure",
       "pressure_basis": "unresolved",
       "evidence": [
-        {"page": 24, "anchor": "PT-1105B", "context": "TK-1102 내부 압력 확인"}
+        {
+          "page": 24,
+          "anchor": "PT-1105B",
+          "context": "TK-1102 내부 압력 확인"
+        }
       ]
     },
     "TT1106": {
       "unit": "degC",
       "quantity": "temperature",
       "evidence": [
-        {"page": 11, "anchor": "TT-1106", "context": "공급배관 쿨다운 -50°C 이하 확인"}
+        {
+          "page": 11,
+          "anchor": "TT-1106",
+          "context": "공급배관 쿨다운 -50°C 이하 확인"
+        }
       ]
     },
     "TT1111": {
       "unit": "degC",
       "quantity": "temperature",
       "evidence": [
-        {"page": 8, "anchor": "TT-1111", "context": "저장탱크 내조 온도 -156°C 이하 확인"}
+        {
+          "page": 8,
+          "anchor": "TT-1111",
+          "context": "저장탱크 내조 온도 -156°C 이하 확인"
+        }
       ]
     },
     "TT1112": {
       "unit": "degC",
       "quantity": "temperature",
       "evidence": [
-        {"page": 8, "anchor": "TT-1112", "context": "저장탱크 내조 온도 -156°C 이하 확인"}
+        {
+          "page": 8,
+          "anchor": "TT-1112",
+          "context": "저장탱크 내조 온도 -156°C 이하 확인"
+        }
+      ]
+    },
+    "PT1107": {
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {
+          "page": 20,
+          "anchor": "PT-1107",
+          "context": "기체수소 공급 압력 확인 (*bar)"
+        }
       ]
     }
   },
@@ -65,5 +101,6 @@
     "state_snapshot_binding_allowed": false,
     "frequency_inference_performed": false,
     "provider_packet_created": false
-  }
+  },
+  "review_basis_note": "PT1107 added from explicit supply-mode pressure-unit anchor; no numeric-range inference"
 }

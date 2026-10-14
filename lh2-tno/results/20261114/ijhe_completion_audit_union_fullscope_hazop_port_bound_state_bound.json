@@ -5165,8 +5165,8 @@
         "schema_version": "prism.reviewed_signal_unit_evidence.v1",
         "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
         "source_document_sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
-        "signal_count": 6,
-        "reviewed_signal_count": 6,
+        "signal_count": 7,
+        "reviewed_signal_count": 7,
         "observed_unmapped_tags": [
           "DPT1101",
           "DPT11012",
@@ -5177,7 +5177,6 @@
           "PT1105BMPA",
           "PT1106",
           "PT1106MPA",
-          "PT1107",
           "PT1107MPA",
           "PT1111",
           "PT1111MPA",

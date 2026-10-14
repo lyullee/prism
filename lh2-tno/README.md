@@ -65,7 +65,7 @@
 
 **검사지원센터 운전모드·HAZOP 근거 감사 (2026-10-14):** 센터의 인수 19행, 저장·벤트 3행, 공급 30행(기체수소 18행·액화수소 12행)을 명시적 운전모드와 정성 HAZOP 근거로 보존했습니다. `scripts/audit_hazop_operating_mode_evidence.py`는 CSV·설명 PDF/PPTX의 해시와 절차별 고장·위험·조치를 기록하고, 수치 시계열은 PT/TT/DPT 단위·태그 매핑이 검토될 때까지 `WITHHELD`로 둡니다. 이 자료는 일반 LH2 시설의 HAZOP 입력과 운전모드 사전으로 재사용할 수 있지만 정상 시계열에서 빈도·방출 packet을 만들지 않습니다. 최신 결과는 [`support_center_hazop_operating_mode_evidence_audit.json`](results/20261014/support_center_hazop_operating_mode_evidence_audit.json)이며 설명은 [`검사지원센터 HAZOP 운전모드 근거 감사`](docs/PRISM_검사지원센터_HAZOP_운전모드_근거감사_20261014.md)입니다.
 
-운전절차서의 문서 anchor로 PT1206·PT1105A/B의 bar, TT1106·TT1111/1112의 °C 단위 일부를 확인하는 [`reviewed signal-unit evidence`](results/20261014/support_center_reviewed_signal_unit_evidence.json)도 추가했습니다. 미검토 DPT/PT 태그, 압력 basis, calibration·quality와 state adapter가 남아 `diagnostic_reviewed_signal_unit_evidence=PASS`는 부분 근거 회계만 의미합니다. 완료 감사에는 `--reviewed-signal-unit-evidence results/20261014/support_center_reviewed_signal_unit_evidence.json`을 함께 넣어 이 제한을 기록합니다.
+운전절차서의 문서 anchor로 PT1206·PT1105A/B·PT1107의 bar, TT1106·TT1111/1112의 °C 단위 일부를 확인하는 [`reviewed signal-unit evidence`](results/20261014/support_center_reviewed_signal_unit_evidence.json)도 추가했습니다. 미검토 DPT/PT 태그, 압력 basis, calibration·quality와 state adapter가 남아 `diagnostic_reviewed_signal_unit_evidence=PASS`는 부분 근거 회계만 의미합니다. 완료 감사에는 `--reviewed-signal-unit-evidence results/20261014/support_center_reviewed_signal_unit_evidence.json`을 함께 넣어 이 제한을 기록합니다.
 
 이 근거를 IJHE 완료 감사에 표시하려면 `scripts/build_ijhe_completion_audit.py --hazop-operating-mode-evidence results/20261014/support_center_hazop_operating_mode_evidence_audit.json`을 추가합니다. 완료 감사의 `diagnostic_hazop_operating_mode_evidence=PASS`는 52개 정성 행과 명시적 모드 회계가 닫혔다는 뜻이고, 전체 시설 QRA나 수치 상태 바인딩을 열지는 않습니다.
 

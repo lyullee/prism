@@ -46,7 +46,7 @@ HAZOP 표: 값/이탈 기준 + 모드별 절차
 
 따라서 최신 산출물의 상태는 `HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD`다. 이는 운전모드·HAZOP 정성 근거가 없다는 뜻이 아니라, 수치 상태를 정량평가에 연결하는 마지막 계측 게이트가 열리지 않았다는 뜻이다.
 
-운전절차서에서 일부 계측 단위도 확인해 별도 근거 장부를 추가했다. `PT1206`, `PT1105A/B`는 문서의 bar 기준, `TT1106`, `TT1111/1112`는 문서의 °C 기준에 연결된다. 결과는 [`support_center_reviewed_signal_unit_evidence.json`](../results/20261014/support_center_reviewed_signal_unit_evidence.json)에 문서 해시와 페이지 anchor로 기록했다. `DPT1101/1102`, `PT1111`과 일부 변형 태그는 원시 시계열 단위 또는 압력 기준이 확인되지 않아 계속 미검토로 남는다. 따라서 일부 단위 근거가 있어도 전체 상태 snapshot 연결은 열리지 않는다.
+운전절차서에서 일부 계측 단위도 확인해 별도 근거 장부를 추가했다. `PT1206`, `PT1105A/B`, `PT1107`은 문서의 bar 기준, `TT1106`, `TT1111/1112`는 문서의 °C 기준에 연결된다. 결과는 [`support_center_reviewed_signal_unit_evidence.json`](../results/20261014/support_center_reviewed_signal_unit_evidence.json)에 문서 해시와 페이지 anchor로 기록했다. `DPT1101/1102`, `PT1111`과 일부 변형 태그는 원시 시계열 단위 또는 압력 기준이 확인되지 않아 계속 미검토로 남는다. 따라서 일부 단위 근거가 있어도 전체 상태 snapshot 연결은 열리지 않는다.
 
 ## 재현 명령
 

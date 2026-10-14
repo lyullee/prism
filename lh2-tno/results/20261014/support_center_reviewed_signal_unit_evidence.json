@@ -5,10 +5,10 @@
   "source_document_sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
   "declared_source_document_sha256": null,
   "source_document_digest_match": true,
-  "signal_count": 6,
-  "reviewed_signal_count": 6,
+  "signal_count": 7,
+  "reviewed_signal_count": 7,
   "observed_header_count": 21,
-  "observed_mapped_signal_count": 6,
+  "observed_mapped_signal_count": 7,
   "mapped_but_not_observed_tags": [],
   "observed_unmapped_tags": [
     "DPT1101",
@@ -20,7 +20,6 @@
     "PT1105BMPA",
     "PT1106",
     "PT1106MPA",
-    "PT1107",
     "PT1107MPA",
     "PT1111",
     "PT1111MPA",
@@ -115,6 +114,21 @@
           "anchor": "TT-1112",
           "anchor_found": true,
           "context": "저장탱크 내조 온도 -156°C 이하 확인"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    },
+    {
+      "tag": "PT1107",
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {
+          "page": 20,
+          "anchor": "PT-1107",
+          "anchor_found": true,
+          "context": "기체수소 공급 압력 확인 (*bar)"
         }
       ],
       "status": "REVIEWED_ANCHOR_FOUND"
