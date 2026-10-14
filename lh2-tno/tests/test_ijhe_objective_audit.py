@@ -791,6 +791,82 @@ def test_objective_audit_blocks_provider_evidence_catalog_packet_drift():
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
 
 
+def test_objective_audit_records_event_level_provider_release_closure():
+    inputs = _inputs()
+    inputs["generic_provider_closure_audit"] = {
+        "schema_version": "prism.generic_provider_release_closure_audit.v1",
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "event_count": 2,
+        "event_closure_status_counts": {
+            "CLOSURE_EVIDENCE_OPEN": 1,
+            "CLOSURE_READY_FOR_QUALIFICATION": 1,
+        },
+        "closure_ready_event_count": 1,
+        "closure_open_event_count": 1,
+        "packet_path_count": 2,
+        "provider_packet_count": 2,
+        "closure_ready_packet_path_count": 1,
+        "closure_ready_provider_packet_count": 1,
+        "qualified_provider_packet_count": 0,
+        "frequency_from_provider_packet": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "promotion_gates": {
+            "closure_ready": False,
+            "qualified_provider_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "diagnostic_only": True,
+        },
+        "_record_path": "provider-release-closure.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_provider_release_closure"
+    )
+    assert row["status"] == "PASS"
+    assert row["observed"]["closure_open_event_count"] == 1
+    assert row["observed"]["closure_counts_match"] is True
+    assert report["strict_facility_qra_claim"] is False
+
+
+def test_objective_audit_blocks_provider_release_closure_count_drift():
+    inputs = _inputs()
+    inputs["generic_provider_closure_audit"] = {
+        "schema_version": "prism.generic_provider_release_closure_audit.v1",
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "event_count": 2,
+        "event_closure_status_counts": {"CLOSURE_EVIDENCE_OPEN": 2},
+        "closure_ready_event_count": 0,
+        "closure_open_event_count": 1,
+        "packet_path_count": 2,
+        "provider_packet_count": 2,
+        "closure_ready_packet_path_count": 0,
+        "closure_ready_provider_packet_count": 0,
+        "qualified_provider_packet_count": 0,
+        "frequency_from_provider_packet": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "promotion_gates": {
+            "closure_ready": False,
+            "qualified_provider_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "diagnostic_only": True,
+        },
+        "_record_path": "provider-release-closure-drift.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_provider_release_closure"
+    )
+    assert row["status"] == "BLOCKED_EVIDENCE"
+    assert row["observed"]["closure_counts_match"] is False
+    assert report["strict_facility_qra_claim"] is False
+
+
 def test_objective_audit_records_provider_sidecar_audit_without_promotion():
     inputs = _inputs()
     inputs["generic_provider_evidence_requests"] = {

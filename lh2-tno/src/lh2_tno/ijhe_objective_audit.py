@@ -112,6 +112,9 @@ def build_ijhe_objective_coverage_audit(
     generic_provider_evidence_requests_path = _record_path(
         generic_provider_evidence_requests, None
     )
+    generic_provider_closure_path = _record_path(
+        generic_provider_closure_audit, None
+    )
     generic_provider_evidence_audit_path = _record_path(
         generic_provider_evidence_audit, None
     )
@@ -1914,6 +1917,144 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "catalog는 자료 수집의 누락을 방지하는 진단 장부다. 종료시간, 재고, 빈도, "
                 "물리검증 또는 시설 QRA를 추정하거나 자동 승격하지 않는다."
+            ),
+        ))
+
+    # The packet-count comparison above does not prove that every event has a
+    # closure decision. Keep the provider-owned release-closure audit as a
+    # separate diagnostic row so an open event, malformed status count, or an
+    # accidental promotion flag is visible in the IJHE evidence ledger.
+    provider_closure = generic_provider_closure_audit
+    closure_status_counts = (
+        provider_closure.get("event_closure_status_counts", {})
+        if isinstance(provider_closure, Mapping)
+        else {}
+    )
+    if not isinstance(closure_status_counts, Mapping):
+        closure_status_counts = {}
+    closure_event_count = (
+        _int(provider_closure.get("event_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_ready_event_count = (
+        _int(provider_closure.get("closure_ready_event_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_open_event_count = (
+        _int(provider_closure.get("closure_open_event_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_packet_path_count = (
+        _int(provider_closure.get("packet_path_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_provider_packet_count = (
+        _int(provider_closure.get("provider_packet_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_ready_packet_path_count = (
+        _int(provider_closure.get("closure_ready_packet_path_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_ready_provider_packet_count = (
+        _int(provider_closure.get("closure_ready_provider_packet_count"))
+        if isinstance(provider_closure, Mapping)
+        else None
+    )
+    closure_promotion_gates = (
+        provider_closure.get("promotion_gates", {})
+        if isinstance(provider_closure, Mapping)
+        else {}
+    )
+    if not isinstance(closure_promotion_gates, Mapping):
+        closure_promotion_gates = {}
+    closure_counts_match = (
+        closure_event_count is not None
+        and closure_ready_event_count is not None
+        and closure_open_event_count is not None
+        and closure_ready_event_count + closure_open_event_count == closure_event_count
+        and closure_status_counts.get("CLOSURE_READY_FOR_QUALIFICATION", 0)
+        == closure_ready_event_count
+        and closure_status_counts.get("CLOSURE_EVIDENCE_OPEN", 0)
+        == closure_open_event_count
+        and closure_packet_path_count is not None
+        and closure_provider_packet_count is not None
+        and closure_ready_packet_path_count is not None
+        and closure_ready_provider_packet_count is not None
+        and 0 <= closure_ready_packet_path_count <= closure_packet_path_count
+        and 0 <= closure_ready_provider_packet_count <= closure_provider_packet_count
+    )
+    provider_closure_input_ok = (
+        isinstance(provider_closure, Mapping)
+        and provider_closure.get("schema_version")
+        == "prism.generic_provider_release_closure_audit.v1"
+        and provider_closure.get("status")
+        in {"CLOSURE_EVIDENCE_OPEN", "CLOSURE_READY_FOR_QUALIFICATION"}
+        and closure_counts_match
+        and provider_closure.get("qualified_provider_packet_count") == 0
+        and provider_closure.get("frequency_from_provider_packet") is False
+        and provider_closure.get("physical_validation_claim") is False
+        and provider_closure.get("facility_qra_claim") is False
+        and closure_promotion_gates.get("closure_ready") is False
+        and closure_promotion_gates.get("qualified_provider_packet_allowed") is False
+        and closure_promotion_gates.get("frequency_inference_allowed") is False
+        and closure_promotion_gates.get("facility_qra_allowed") is False
+        and closure_promotion_gates.get("diagnostic_only") is True
+        and (
+            not isinstance(provider_catalog, Mapping)
+            or closure_provider_packet_count == provider_catalog_packet_count
+        )
+    )
+    if generic_provider_closure_audit is not None:
+        rows.append(_row(
+            "diagnostic_generic_provider_release_closure",
+            "generic LH2 provider의 사건별 방출 종료·차단·재고 closure 상태와 승격 차단을 직접 검증해야 한다",
+            "PASS" if provider_closure_input_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(generic_provider_closure_path,),
+            observed={
+                "schema_version": (
+                    provider_closure.get("schema_version")
+                    if isinstance(provider_closure, Mapping)
+                    else None
+                ),
+                "status": (
+                    provider_closure.get("status")
+                    if isinstance(provider_closure, Mapping)
+                    else None
+                ),
+                "event_count": closure_event_count,
+                "closure_ready_event_count": closure_ready_event_count,
+                "closure_open_event_count": closure_open_event_count,
+                "packet_path_count": closure_packet_path_count,
+                "provider_packet_count": closure_provider_packet_count,
+                "closure_ready_packet_path_count": closure_ready_packet_path_count,
+                "closure_ready_provider_packet_count": closure_ready_provider_packet_count,
+                "closure_counts_match": closure_counts_match,
+                "catalog_packet_count": provider_catalog_packet_count,
+                "catalog_packet_count_match": (
+                    not isinstance(provider_catalog, Mapping)
+                    or closure_provider_packet_count == provider_catalog_packet_count
+                ),
+                "qualified_provider_packet_count": (
+                    provider_closure.get("qualified_provider_packet_count")
+                    if isinstance(provider_closure, Mapping)
+                    else None
+                ),
+                "promotion_gates": dict(closure_promotion_gates),
+                "input_valid": provider_closure_input_ok,
+            },
+            blocking_reason=None if provider_closure_input_ok else (
+                "generic provider release-closure audit가 malformed이거나 사건·packet 수와 승격 차단 정책이 일치하지 않는다"
+            ),
+            interpretation=(
+                "열린 closure 사건은 provider 자료 수집 대기 상태로 남긴다. 이 행이 PASS여도 "
+                "종료근거가 모든 사건에서 확보됐다는 뜻이 아니며, qualified provider·빈도 추론·시설 QRA를 열지 않는다."
             ),
         ))
 

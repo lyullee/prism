@@ -233,7 +233,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --output results/20261106/ijhe_objective_coverage_audit_with_release_closure.json
 ```
 
-출력의 `diagnostic_release_closure_worklist` 행은 종료·격리·재고·질량잔차 closure가 열려 있으면 `BLOCKED_EVIDENCE`로 표시하고, 모든 case가 닫힌 경우에만 `PASS`가 된다. 이 행은 기존 core/strict blocker 목록과 분리된 진단 행이다. 따라서 worklist가 닫혀도 qualified provider evidence, 독립 물리검증, 시설 QRA 승격은 별도 gate를 통과해야 한다.
+출력의 `diagnostic_release_closure_worklist` 행은 종료·격리·재고·질량잔차 closure가 열려 있으면 `BLOCKED_EVIDENCE`로 표시하고, 모든 case가 닫힌 경우에만 `PASS`가 된다. generic provider closure audit를 함께 전달하면 `diagnostic_generic_provider_release_closure` 행이 사건별 종료 상태 집계와 packet 수를 직접 검증한다. 열린 사건이 있어도 집계와 승격 차단 플래그가 일관되면 이 진단 행은 `PASS`가 될 수 있으며, 이는 자료 수집 원장이 정합하다는 뜻이다. 두 행은 기존 core/strict blocker 목록과 분리된 진단 행이다. 따라서 worklist나 closure audit가 닫혀도 qualified provider evidence, 독립 물리검증, 시설 QRA 승격은 별도 gate를 통과해야 한다.
 
 이 연결을 적용한 현재 원장은 [`ijhe_objective_coverage_audit_with_release_closure.json`](../results/20261106/ijhe_objective_coverage_audit_with_release_closure.json)과 [`v060_readiness_report_with_release_closure_objective.json`](../results/20261106/v060_readiness_report_with_release_closure_objective.json)이다. 전자는 25개 objective 행 중 일반 시설 설비·사고군·문헌빈도 행과 관측 정상상태 모델 binding 행을 진단 `PASS`로 기록하고, 종료 closure 행은 `BLOCKED_EVIDENCE`로 기록한다. 관측 모델 binding은 3/3 component·3개 진단 adapter를 확인한다. 후자는 기존 readiness invariant 13개와 strict blocker 4개를 그대로 통과시킨다.
 

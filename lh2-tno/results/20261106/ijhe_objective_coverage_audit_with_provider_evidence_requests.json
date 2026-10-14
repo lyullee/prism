@@ -827,11 +827,44 @@
       "interpretation": "catalog는 자료 수집의 누락을 방지하는 진단 장부다. 종료시간, 재고, 빈도, 물리검증 또는 시설 QRA를 추정하거나 자동 승격하지 않는다."
     },
     {
-      "id": "diagnostic_generic_provider_evidence_audit",
-      "requirement": "provider evidence catalog 각 packet의 qualification sidecar exact-match 감사가 실행되어야 한다",
+      "id": "diagnostic_generic_provider_release_closure",
+      "requirement": "generic LH2 provider의 사건별 방출 종료·차단·재고 closure 상태와 승격 차단을 직접 검증해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "results/20261106/generic_lh2_provider_evidence_audit_current.json"
+        "results\\20261106\\generic_lh2_provider_release_closure_current.json"
+      ],
+      "observed": {
+        "schema_version": "prism.generic_provider_release_closure_audit.v1",
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "event_count": 24,
+        "closure_ready_event_count": 9,
+        "closure_open_event_count": 15,
+        "packet_path_count": 24,
+        "provider_packet_count": 26,
+        "closure_ready_packet_path_count": 9,
+        "closure_ready_provider_packet_count": 11,
+        "closure_counts_match": true,
+        "catalog_packet_count": 26,
+        "catalog_packet_count_match": true,
+        "qualified_provider_packet_count": 0,
+        "promotion_gates": {
+          "closure_ready": false,
+          "qualified_provider_packet_allowed": false,
+          "frequency_inference_allowed": false,
+          "facility_qra_allowed": false,
+          "diagnostic_only": true
+        },
+        "input_valid": true
+      },
+      "blocking_reason": null,
+      "interpretation": "열린 closure 사건은 provider 자료 수집 대기 상태로 남긴다. 이 행이 PASS여도 종료근거가 모든 사건에서 확보됐다는 뜻이 아니며, qualified provider·빈도 추론·시설 QRA를 열지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_provider_evidence_audit",
+      "requirement": "provider evidence catalog의 각 packet에 qualification sidecar exact-match 감사가 실행되어야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261106\\generic_lh2_provider_evidence_audit_current.json"
       ],
       "observed": {
         "schema_version": "prism.generic_provider_evidence_audit.v1",
@@ -844,7 +877,7 @@
         "audit_matches_catalog": true
       },
       "blocking_reason": null,
-      "interpretation": "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계이며 독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
+      "interpretation": "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계다. 독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
     }
   ],
   "core_chain_check_ids": [
