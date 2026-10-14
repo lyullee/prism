@@ -228,7 +228,7 @@ provider는 실제 차단 명령, 검출 지연, 재고/에너지 장부, 종료
   --output results/20261011/equipment_accident_export_interface_audit.json
 ```
 
-현재 portable test suite는 차단시계 전달·echo 검사를 포함해 **1003 passed**이다. native 사고 export와 차단시계가 존재해도 합성 입력·독립 물리검증·문헌 빈도 binding·전체 사고범위·시설 IR/F-N gate는 별도로 닫아야 한다.
+현재 portable test suite는 차단시계 전달·echo 검사를 포함해 **1005 passed**이다. native 사고 export와 차단시계가 존재해도 합성 입력·독립 물리검증·문헌 빈도 binding·전체 사고범위·시설 IR/F-N gate는 별도로 닫아야 한다.
 ## 2026-10-24 native export 재감사
 
 초기 문서의 “전용 메서드가 없다”는 문장은 2026-10-11 시점의 기록이다. 최신 외부 소스 감사에서는 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기 7개가 `export_accident_history(request)`를 구현한 것을 확인했다. [`native_equipment_model_binding_audit_v1.json`](../results/20261024/native_equipment_model_binding_audit_v1.json)은 native 사고 인터페이스 7개와 진단 adapter 7개를 별도로 세며, qualified provider packet은 0개로 유지한다. 따라서 native export 존재는 계약 연결을 완료한 것이고, 현장 provider 자격·독립 물리검증·시설 IR/F-N 완료를 의미하지 않는다.
