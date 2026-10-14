@@ -32,6 +32,7 @@ from lh2_tno.service import (  # noqa: E402
     ConsequenceService,
     RealtimeConsequenceMonitor,
     RealtimeFrequencyBinding,
+    _realtime_current_weather_risk,
 )
 
 
@@ -125,6 +126,153 @@ def _facility_campaign_evaluator(*, event: object, scenario_id: str, annual_cond
             scenario_bindings=[binding],
             expected_component_ids=("storage-tank-01",),
         )
+
+    return evaluate
+
+
+def _forecast_facility_campaign_evaluator(
+    *,
+    event: object,
+    scenario_id: str,
+    frequency_binding: RealtimeFrequencyBinding,
+    annual_conditions: list[dict],
+) -> object:
+    """Build one conditional facility handoff for every evaluated forecast trigger.
+
+    The forecast scan stores a consequence-gate result inside each evaluated
+    ``scenario_entries[].evaluation`` row rather than pretending that a future
+    state is a current runtime snapshot.  This adapter reconstructs only the
+    explicit one-branch handoff required by the existing facility campaign
+    contract.  It reuses the provider harm and the reviewed literature event;
+    it does not infer a future frequency, merge repeated forecast times, or
+    promote a facility total.
+    """
+
+    def evaluate(forecast: dict) -> dict:
+        campaigns: list[dict] = []
+        for entry in forecast.get("scenario_entries", []):
+            if not isinstance(entry, dict):
+                continue
+            evaluation = entry.get("evaluation")
+            result = evaluation.get("result") if isinstance(evaluation, dict) else None
+            if not isinstance(result, dict) or result.get("status") != "CONSEQUENCE_EVALUATED":
+                continue
+            component_id = str(entry.get("component_id") or "")
+            entry_scenario_id = str(entry.get("scenario_id") or "")
+            if component_id != "storage-tank-01" or entry_scenario_id != scenario_id:
+                raise ValueError("forecast facility handoff received an unexpected component/scenario")
+            selection = result.get("selection")
+            selected = selection.get("selected_scenarios") if isinstance(selection, dict) else None
+            if not isinstance(selected, list) or len(selected) != 1 or not isinstance(selected[0], dict):
+                raise ValueError("forecast consequence lacks one selected HAZOP scenario")
+            scenario_family = str(selected[0].get("scenario_family") or "")
+            operating_mode = str(entry.get("operating_mode") or "")
+            consequence = result.get("consequence")
+            if not isinstance(consequence, dict):
+                raise ValueError("forecast consequence result lacks consequence data")
+            risk = _realtime_current_weather_risk(consequence, frequency_binding)
+            if risk.get("status") != "AVAILABLE_CURRENT_WEATHER_IR":
+                raise ValueError("forecast consequence cannot produce an explicit frequency-bound IR atom")
+            data = consequence.get("data")
+            receptor_rows = data.get("receptors", []) if isinstance(data, dict) else []
+            branch_harm: dict[str, dict[str, list[float]]] = {}
+            for receptor in receptor_rows:
+                if not isinstance(receptor, dict):
+                    raise ValueError("forecast provider receptor row is not an object")
+                values = receptor.get("branch_harm_low_high")
+                if not isinstance(values, list) or len(values) != 2:
+                    raise ValueError("forecast provider receptor lacks two branch harm endpoints")
+                branch_harm[str(receptor["id"])] = {
+                    name: [float(values[0][name]), float(values[1][name])]
+                    for name in ("direct_fire", "delayed_flash_fire", "delayed_explosion", "no_ignition")
+                }
+            forecast_time = float(entry.get("forecast_time_s", 0.0))
+            condition = copy.deepcopy(annual_conditions[0])
+            condition["id"] = f"synthetic-forecast-weather-D-3ms-t{forecast_time:g}"
+            condition["provenance"] = (
+                "synthetic diagnostic forecast condition; not a site weather distribution"
+            )
+            binding = {
+                "component_id": component_id,
+                "operating_mode": operating_mode,
+                "hazop_scenario_id": entry_scenario_id,
+                "event_id": str(event.id),
+                "asset_id": str(event.asset_id),
+                "annual_condition_id": condition["id"],
+                "release_branch_id": "provider-inventory-depletion",
+                "release_branch_probability": 1.0,
+                "ignition_branch_probabilities": data["ignition_branch_probabilities"],
+                "branch_harm_low_high": branch_harm,
+                "scenario_families": [scenario_family],
+            }
+            runtime_result = {
+                "schema_version": "prism.hazop_facility_runtime.v1",
+                "facility_id": str(result["selection"]["facility_id"]),
+                "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+                "component_count": 1,
+                "components": {
+                    component_id: {
+                        "status": "CONSEQUENCE_BRANCHES_EVALUATED",
+                        "component_id": component_id,
+                        "selection": copy.deepcopy(selection),
+                        "branches": [{
+                            "scenario_id": entry_scenario_id,
+                            "scenario_family": scenario_family,
+                            "operating_mode": operating_mode,
+                            "result": copy.deepcopy(result),
+                            "risk": risk,
+                        }],
+                        "policy": copy.deepcopy(result.get("policy", {})),
+                    }
+                },
+                "risk_atoms": [{
+                    "component_id": component_id,
+                    "scenario_id": entry_scenario_id,
+                    "scenario_family": scenario_family,
+                    "operating_mode": operating_mode,
+                    "risk": risk,
+                }],
+                "conditional_current_weather_risk": {
+                    "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+                    "annual_ir_low_high_by_receptor": copy.deepcopy(risk["annual_ir_low_high"]),
+                    "risk_atom_count": 1,
+                    "frequency_learning": False,
+                },
+                "facility_annual_ir_available": False,
+                "facility_fn_available": False,
+            }
+            handoff = build_hazop_facility_campaign_result(
+                runtime_result,
+                annual_conditions=[condition],
+                scenario_bindings=[binding],
+                expected_component_ids=(component_id,),
+            )
+            campaigns.append({
+                "forecast_time_s": forecast_time,
+                "component_id": component_id,
+                "scenario_id": entry_scenario_id,
+                "campaign": handoff["campaign"],
+                "facility_ledger": handoff["facility_ledger"],
+                "hazop_scenario_trace_audit": handoff["hazop_scenario_trace_audit"],
+                "equipment_state_release_audit": handoff["equipment_state_release_audit"],
+                "risk_atom_chain_audit": handoff["risk_atom_chain_audit"],
+            })
+        return {
+            "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+            "facility_id": forecast.get("facility_id"),
+            "forecast_trigger_count": forecast.get("trigger_count"),
+            "forecast_evaluated_count": forecast.get("evaluated_count"),
+            "campaign_count": len(campaigns),
+            "campaigns": campaigns,
+            "conditional_diagnostic_facility_risk_available": bool(campaigns),
+            "policy": {
+                "forecast_time_is_not_annual_probability": True,
+                "frequency_inference_performed": False,
+                "sensor_frequency_learning_used": False,
+                "physical_validation_claim": False,
+                "facility_qra_promotion": False,
+            },
+        }
 
     return evaluate
 
@@ -236,6 +384,12 @@ def run(args: argparse.Namespace) -> dict:
             scenario_id=scenario_id,
             annual_conditions=annual_conditions,
         ),
+        forecast_facility_campaign_evaluator=_forecast_facility_campaign_evaluator(
+            event=event,
+            scenario_id=scenario_id,
+            frequency_binding=frequency_binding,
+            annual_conditions=annual_conditions,
+        ),
     )
     # Reweight the saved HAZOP risk atoms with the published literature bounds.
     # This changes no provider or consequence physics and does not create a
@@ -299,6 +453,12 @@ def run(args: argparse.Namespace) -> dict:
             "conditional_diagnostic_facility_fn_available": result["facility_campaign"].get("facility_ledger", {}).get("conditional_diagnostic_facility_expected_death_fn_low_high") is not None,
             "facility_total_risk_available": result["facility_campaign"].get("facility_ledger", {}).get("facility_total_risk_available") is True,
             "qualified_facility_ir_fn_available": result["facility_campaign"].get("facility_ledger", {}).get("qualified_facility_qra_available") is True,
+        },
+        "forecast_facility_campaign": {
+            "status": result["forecast_facility_campaign"].get("status"),
+            "campaign_count": result["forecast_facility_campaign"].get("campaign_count", 0),
+            "conditional_diagnostic_facility_risk_available": result["forecast_facility_campaign"].get("conditional_diagnostic_facility_risk_available") is True,
+            "facility_qra_promotion": result["forecast_facility_campaign"].get("policy", {}).get("facility_qra_promotion") is True,
         },
     }
     _save(args.output, result)
