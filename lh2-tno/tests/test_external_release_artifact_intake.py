@@ -18,8 +18,8 @@ def _release(origin: str = "synthetic") -> dict:
         "termination_basis": "inventory_depletion",
         "duration_s": 2.0,
         "available_mass_kg": 10.0,
-        "provider_source_digest": "source",
-        "provider_result_digest": "result",
+        "provider_source_digest": "a" * 64,
+        "provider_result_digest": "b" * 64,
         "steps": [{"time_s": 0.0, "mass_flow_kg_s": 1.0}],
     }
 
@@ -51,7 +51,18 @@ def test_external_release_intake_walks_release_set_and_nearby_qualification(tmp_
     path.write_text(json.dumps({"releases": [_release("provider_actual")]}), encoding="utf-8")
     sidecar = tmp_path / "qualification.json"
     sidecar.write_text(
-        json.dumps({"schema_version": "prism.provider_qualification_evidence.v1"}),
+        json.dumps({
+            "schema_version": "prism.provider_qualification_evidence.v1",
+            "status": "qualified_actual",
+            "provider_origin": "reviewed_actual",
+            "evidence_id": "evidence-1",
+            "exact_digest_binding": True,
+            "event_id": "tank/leak-1",
+            "component_id": "tank-1",
+            "port_ids": ["tank-1.out"],
+            "provider_source_digests": ["a" * 64],
+            "provider_result_digests": ["b" * 64],
+        }),
         encoding="utf-8",
     )
 

@@ -101,8 +101,23 @@ def _candidate_files(paths: Iterable[str | Path], roots: Iterable[str | Path]) -
     return sorted(found.values(), key=lambda item: str(item).casefold())
 
 
-def _nearby_qualification(path: Path) -> tuple[bool, list[str]]:
+def _digest_ok(value: Any) -> bool:
+    if not isinstance(value, str) or len(value) != 64:
+        return False
+    try:
+        int(value, 16)
+    except ValueError:
+        return False
+    return True
+
+
+def _nearby_qualification(
+    path: Path,
+    release: Mapping[str, Any],
+) -> tuple[bool, list[str], bool, list[str]]:
     matches: list[str] = []
+    exact_matches: list[str] = []
+    mismatch_reasons: list[str] = []
     # Sidecars are deliberately searched only in the artifact directory and
     # one explicit parent.  A qualification record elsewhere must be supplied
     # and digest-bound by the provider packet audit instead of being guessed.
@@ -112,11 +127,60 @@ def _nearby_qualification(path: Path) -> tuple[bool, list[str]]:
         if candidate == path:
             continue
         try:
-            if _contains_qualification(_read_json(candidate)):
+            payload = _read_json(candidate)
+            records: list[Mapping[str, Any]] = []
+            def _collect(value: Any) -> None:
+                if isinstance(value, Mapping):
+                    if value.get("schema_version") == QUALIFICATION_SCHEMA:
+                        records.append(value)
+                    for child in value.values():
+                        _collect(child)
+                elif isinstance(value, list):
+                    for child in value:
+                        _collect(child)
+            _collect(payload)
+            if records:
                 matches.append(str(candidate))
+            for record in records:
+                origins = record.get("provider_origin")
+                if isinstance(origins, str):
+                    origins = [origins]
+                declared_ports = record.get("port_ids")
+                if declared_ports is None and "port_id" in record:
+                    declared_ports = [record.get("port_id")]
+                declared_sources = record.get("provider_source_digests")
+                if declared_sources is None and "provider_source_digest" in record:
+                    declared_sources = [record.get("provider_source_digest")]
+                declared_results = record.get("provider_result_digests")
+                if declared_results is None and "provider_result_digest" in record:
+                    declared_results = [record.get("provider_result_digest")]
+                exact = (
+                    record.get("status") == "qualified_actual"
+                    and isinstance(origins, list)
+                    and bool(origins)
+                    and set(str(item) for item in origins).issubset(
+                        {"native_provider", "reviewed_actual"}
+                    )
+                    and isinstance(record.get("evidence_id"), str)
+                    and bool(record.get("evidence_id").strip())
+                    and record.get("exact_digest_binding") is True
+                    and record.get("event_id") == release.get("event_id")
+                    and record.get("component_id") == release.get("component_id")
+                    and declared_ports == [release.get("port_id")]
+                    and _digest_ok(release.get("provider_source_digest"))
+                    and _digest_ok(release.get("provider_result_digest"))
+                    and declared_sources == [release.get("provider_source_digest")]
+                    and declared_results == [release.get("provider_result_digest")]
+                )
+                if exact:
+                    exact_matches.append(str(candidate))
+                else:
+                    mismatch_reasons.append(
+                        f"qualification sidecar does not exactly match {candidate}"
+                    )
         except ExternalReleaseArtifactIntakeError:
             continue
-    return bool(matches), matches
+    return bool(matches), matches, bool(exact_matches), list(dict.fromkeys(mismatch_reasons))
 
 
 def _closure_summary(release: Mapping[str, Any]) -> dict[str, Any]:
@@ -174,14 +238,16 @@ def audit_external_release_artifacts(
             errors.append({"path": str(path), "error": str(error)})
             continue
         releases = _walk_releases(payload)
-        qualification_present, qualification_paths = _nearby_qualification(path)
+        # The sidecar is checked against each release row, not merely detected
+        # by filename.  Presence and exact digest-bound qualification are kept
+        # separate so an invalid or unrelated sidecar cannot open promotion.
         if not releases:
             artifacts.append({
                 "path": str(path),
                 "sha256": digest,
                 "release_count": 0,
-                "qualification_sidecar_present": qualification_present,
-                "qualification_sidecar_paths": qualification_paths,
+                "qualification_sidecar_present": False,
+                "qualification_sidecar_paths": [],
                 "diagnostic_only": True,
                 "blocking_reasons": ["no release-shaped record found"],
             })
@@ -199,7 +265,13 @@ def audit_external_release_artifacts(
                 )
             )
             origin = release.get("input_origin")
-            qualification_bound = qualification_present and schema == RELEASE_SCHEMA
+            (
+                qualification_present,
+                qualification_paths,
+                qualification_bound,
+                qualification_mismatch_reasons,
+            ) = _nearby_qualification(path, release)
+            qualification_bound = qualification_bound and schema == RELEASE_SCHEMA
             reasons: list[str] = []
             if not shape_valid:
                 reasons.append("release identity or time-series fields are incomplete")
@@ -209,6 +281,8 @@ def audit_external_release_artifacts(
                 reasons.append("input_origin is not a qualified observed/provider export")
             if not qualification_present:
                 reasons.append("no nearby prism.provider_qualification_evidence.v1 sidecar")
+            elif not qualification_bound:
+                reasons.extend(qualification_mismatch_reasons)
             closure = _closure_summary(release)
             if closure.get("closure_ready") is not True:
                 reasons.extend(str(item) for item in closure.get("blocking_reasons", []))
@@ -230,6 +304,7 @@ def audit_external_release_artifacts(
                 "qualification_sidecar_present": qualification_present,
                 "qualification_sidecar_paths": qualification_paths,
                 "qualification_bound": qualification_bound,
+                "qualification_mismatch_reasons": qualification_mismatch_reasons,
                 "closure_audit": closure,
                 "diagnostic_only": True,
                 "blocking_reasons": reasons,
