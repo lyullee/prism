@@ -6,8 +6,8 @@
 <text x="122" y="151" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="27" font-weight="400" fill="#BAD4E5" text-anchor="start"><tspan x="122" dy="0">현장 입력 + 운전 모드 → HAZOP 시나리오 → 모델 협업 정량평가 → 현재 대응·미래 선제조치</tspan></text>
 <text x="90" y="221" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#216A91" text-anchor="start"><tspan x="90" dy="0">01  감시와 위험 시나리오 결정</tspan></text>
 <rect x="90" y="246" width="630" height="90" rx="20" fill="#FFFFFF" stroke="#6FCAD3" stroke-width="3"/>
-<text x="118" y="284" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#167785" text-anchor="start"><tspan x="118" dy="0">현장 모니터링 입력</tspan></text>
-<text x="118" y="318" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">센서·설비 상태 + 운전 모드(인수·공급·대기)</tspan></text>
+<text x="118" y="284" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#167785" text-anchor="start"><tspan x="118" dy="0">현장 모니터링 시스템</tspan></text>
+<text x="118" y="318" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">센서·설비 상태 + 운전 모드 함께 전달</tspan></text>
 <rect x="90" y="348" width="630" height="88" rx="20" fill="#FFFFFF" stroke="#B7CADB" stroke-width="3"/>
 <text x="118" y="385" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#285A80" text-anchor="start"><tspan x="118" dy="0">HAZOP 테이블 연계</tspan></text>
 <text x="118" y="419" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">모드별 이탈 기준·원인·결과·기존 방호</tspan></text>
@@ -36,7 +36,8 @@
 <rect x="565" y="675" width="375" height="128" rx="20" fill="#EFFAFB" stroke="#8BD7DF" stroke-width="2"/>
 <text x="595" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="595" dy="0">즉시 분석 요청</tspan><tspan x="595" dy="37.0">확정 시나리오 + 현재 상태</tspan></text>
 <rect x="1005" y="638" width="620" height="202" rx="22" fill="#EDF5F9" stroke="#8EB8D0" stroke-width="3"/>
-<text x="1038" y="684" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="32" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량위험평가 계층</tspan></text>
+<text x="1038" y="684" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="32" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">모델 협업·정량평가 계층</tspan></text>
+<text x="1594" y="684" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="17" font-weight="600" fill="#5C7B8E" text-anchor="end"><tspan x="1594" dy="0">PRISM · 모듈 연결·실행</tspan></text>
 <rect x="1035" y="704" width="280" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
 <text x="1052" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1052" dy="0">설비·공정 모델</tspan><tspan x="1052" dy="22" font-size="17" font-weight="500">방출·재고·차단</tspan></text>
 <rect x="1335" y="704" width="260" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
@@ -44,7 +45,7 @@
 <rect x="1035" y="770" width="280" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
 <text x="1052" y="793" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1052" dy="0">SLABx-LH2</tspan><tspan x="1052" dy="22" font-size="17" font-weight="500">누출·확산·피해</tspan></text>
 <rect x="1335" y="770" width="260" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
-<text x="1352" y="793" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">위험도 엔진 (PRISM)</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">빈도 × 피해영향 → IR/F-N</tspan></text>
+<text x="1352" y="793" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">위험도·IR/F-N 계산</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">빈도 × 피해영향 → IR/F-N</tspan></text>
 <rect x="1690" y="675" width="580" height="128" rx="20" fill="#E1F3EC" stroke="#48A483" stroke-width="2"/>
 <text x="1722" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#174F43" text-anchor="start"><tspan x="1722" dy="0">현재 위험도 → 비상대응·안전관리</tspan><tspan x="1722" dy="37.0">관리자 화면에 대응안 표시</tspan></text>
 <path d="M 501 739 H 550" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
@@ -59,7 +60,8 @@
 <rect x="565" y="979" width="375" height="129" rx="20" fill="#FFF7EE" stroke="#F3C38E" stroke-width="2"/>
 <text x="595" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="595" dy="0">위험조건 도달 판단</tspan><tspan x="595" dy="37.0">도달 시 추가 분석 요청</tspan></text>
 <rect x="1005" y="952" width="620" height="203" rx="22" fill="#EDF5F9" stroke="#8EB8D0" stroke-width="3"/>
-<text x="1038" y="998" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="32" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량위험평가 계층</tspan></text>
+<text x="1038" y="998" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="32" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">모델 협업·정량평가 계층</tspan></text>
+<text x="1594" y="998" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="17" font-weight="600" fill="#5C7B8E" text-anchor="end"><tspan x="1594" dy="0">PRISM · 모듈 연결·실행</tspan></text>
 <rect x="1035" y="1018" width="280" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
 <text x="1052" y="1041" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1052" dy="0">설비·공정 모델</tspan><tspan x="1052" dy="22" font-size="17" font-weight="500">예측 방출·재고·차단</tspan></text>
 <rect x="1335" y="1018" width="260" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
@@ -67,7 +69,7 @@
 <rect x="1035" y="1084" width="280" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
 <text x="1052" y="1107" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1052" dy="0">SLABx-LH2</tspan><tspan x="1052" dy="22" font-size="17" font-weight="500">미래 누출·확산·피해</tspan></text>
 <rect x="1335" y="1084" width="260" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
-<text x="1352" y="1107" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">위험도 엔진 (PRISM)</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">빈도 × 피해영향 → 미래 IR/F-N</tspan></text>
+<text x="1352" y="1107" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">위험도·IR/F-N 계산</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">빈도 × 피해영향 → 미래 IR/F-N</tspan></text>
 <rect x="1690" y="979" width="580" height="129" rx="20" fill="#FFF0DF" stroke="#E4A05C" stroke-width="2"/>
 <text x="1722" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#7D4B23" text-anchor="start"><tspan x="1722" dy="0">미래 위험도 → 선제 안전조치</tspan><tspan x="1722" dy="37.0">관리자 화면에 예상 위험 표시</tspan></text>
 <path d="M 501 1043 H 550" fill="none" stroke="#E28B43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-E28B43)"/>
@@ -78,5 +80,5 @@
 <rect x="90" y="1234" width="2220" height="78" rx="18" fill="#E9F0F5"/>
 <text x="120" y="1266" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="800" fill="#315B77" text-anchor="start"><tspan x="120" dy="0">해석 기준</tspan></text>
 <text x="265" y="1266" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="265" dy="0">모든 모델은 동일한 시나리오 ID·설비 ID·운전 모드·시간축으로 연결</tspan></text>
-<text x="265" y="1297" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="265" dy="0">빈도·피해영향·위험도 계산 결과를 묶어 현재 대응과 미래 선제조치에 사용</tspan></text>
+<text x="265" y="1297" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="265" dy="0">PRISM은 모듈 간 실행 순서와 결과 전달을 조정하고, 결과는 현재 대응과 미래 선제조치에 사용</tspan></text>
 </svg>
