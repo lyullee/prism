@@ -1798,6 +1798,45 @@ def test_completion_audit_records_partial_provider_worklist_coverage():
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_accepts_exact_native_scope_packet_evidence_without_promoting_provider():
+    native_evidence = {
+        "schema_version": "prism.native_scope_packet_evidence.v1",
+        "status": "EXACT_NATIVE_SCOPE_PACKET_EVIDENCE",
+        "rows": [
+            {
+                "event_id": "event-1",
+                "component_id": "tank-1",
+                "evidence": {
+                    "exact_opening_match": True,
+                    "strict_packet_valid": True,
+                },
+            }
+        ],
+        "event_count": 1,
+        "exact_event_count": 1,
+        "frequency_bound": False,
+        "qualified_provider_packet_count": 0,
+        "provider_packet_promoted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        diagnostic_worklist_evidence=native_evidence,
+    )
+    packet_check = next(
+        item
+        for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_packet_coverage_evidence"
+    )
+    assert packet_check["status"] == "PASS"
+    assert packet_check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_accepts_complete_structural_worklist_without_qualifying_provider():
     report = build_ijhe_completion_audit(
         _status(False),

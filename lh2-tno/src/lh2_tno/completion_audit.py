@@ -1223,12 +1223,31 @@ def build_ijhe_completion_audit(
         )
     if diagnostic_worklist_evidence is not None:
         evidence = diagnostic_worklist_evidence
-        worklist_count = evidence.get("worklist_event_count")
-        candidate_count = evidence.get("candidate_event_count")
-        exact_count = evidence.get("exact_match_event_count")
-        strict_count = evidence.get("strict_packet_valid_event_count")
+        native_scope_evidence = (
+            evidence.get("schema_version")
+            == "prism.native_scope_packet_evidence.v1"
+            and evidence.get("status") == "EXACT_NATIVE_SCOPE_PACKET_EVIDENCE"
+        )
+        worklist_count = evidence.get("worklist_event_count", evidence.get("event_count"))
+        candidate_count = evidence.get("candidate_event_count", evidence.get("event_count"))
+        exact_count = evidence.get("exact_match_event_count", evidence.get("exact_event_count"))
+        strict_count = evidence.get(
+            "strict_packet_valid_event_count", evidence.get("exact_event_count")
+        )
         chain_count = evidence.get("consequence_chain_event_count")
-        coverage_valid = (
+        native_rows = evidence.get("rows", [])
+        native_rows_valid = (
+            isinstance(native_rows, list)
+            and len(native_rows) == evidence.get("event_count")
+            and all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("evidence"), Mapping)
+                and row["evidence"].get("exact_opening_match") is True
+                and row["evidence"].get("strict_packet_valid") is True
+                for row in native_rows
+            )
+        )
+        partial_coverage_valid = (
             isinstance(evidence.get("status"), str)
             and evidence.get("status", "").startswith("PARTIAL_DIAGNOSTIC_EVIDENCE")
             and isinstance(worklist_count, int)
@@ -1244,6 +1263,20 @@ def build_ijhe_completion_audit(
             and evidence.get("facility_qra_claim") is False
             and evidence.get("physical_validation_claim") is False
         )
+        native_coverage_valid = (
+            native_scope_evidence
+            and native_rows_valid
+            and isinstance(worklist_count, int)
+            and worklist_count > 0
+            and exact_count == worklist_count
+            and strict_count == worklist_count
+            and evidence.get("qualified_provider_packet_count") == 0
+            and evidence.get("frequency_bound") is False
+            and evidence.get("provider_packet_promoted") is False
+            and evidence.get("facility_qra_claim") is False
+            and evidence.get("physical_validation_claim") is False
+        )
+        coverage_valid = partial_coverage_valid or native_coverage_valid
         structural_worklist_coverage = bool(
             coverage_valid
             and exact_count == worklist_count
