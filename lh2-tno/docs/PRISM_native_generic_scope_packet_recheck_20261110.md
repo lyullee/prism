@@ -142,4 +142,6 @@ python scripts/audit_facility_chain_closure.py `
 - SLABx-LH2의 독립 실험·실증 검증 자료와 시설별 물리검증 evidence가 아직 연결되지 않았다.
 - 따라서 `facility_total_risk_available=false`, `provider_packet_promoted=false`, `physical_validation_claim=false`, `facility_qra_claim=false`를 유지한다.
 
+최신 입력을 반영한 IJHE completion audit는 21개 검사 중 14개를 통과하고 7개를 차단했다. 새로 확인된 diagnostic packet·상태 snapshot·campaign chain·문헌 빈도 불확실성·처리시간 검사는 통과했으며, 남은 차단은 시설 release boundary, qualified provider packet, major accident scope, 적격 시설 IR/F-N, 독립 물리검증, 실시간 monitor contract와 설비 모델 binding gate다. 감사 원장은 `results/20261110/native_full_scope_frequency_assessment_latest2/ijhe_completion_audit_latest2.json`이다.
+
 이번 재검증으로 “설비별 native 상태·방출 → SLABx-LH2/피해 → 점화·노출 → 문헌 빈도 기반 시설 원장”이라는 계산 연결은 24개 선언 사건에 대해 실행 가능한 상태가 됐다. 위 차단 항목을 해소하기 전까지는 일반 시설의 인증된 전체 위험도라고 표시하지 않는다.
