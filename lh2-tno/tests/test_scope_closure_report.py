@@ -1,0 +1,92 @@
+from lh2_tno.scope_closure_report import build_scope_closure_report
+
+
+def _inputs():
+    scope = {
+        "schema_version": "prism.major_accident_scope.v1",
+        "environment": "outdoor",
+        "scope": "outdoor_major_accidents",
+        "required_families": ["vessel_hole", "pipe_hole"],
+        "rows": [
+            {
+                "family": "vessel_hole",
+                "status": "PARTIAL",
+                "conditional_status": "EXECUTED",
+                "applicability": "APPLICABLE",
+                "generated_event_count": 2,
+                "case_count": 2,
+                "executed_case_count": 2,
+                "fully_validated_case_count": 0,
+                "uncomputed_case_count": 2,
+                "operator_limited_case_count": 2,
+                "qualified_evidence_withheld_case_count": 2,
+                "event_ids": ["v-1", "v-2"],
+                "uncomputed_reasons": ["provider packet required"],
+                "strict_gate_categories": ["MISSING_PROVIDER_CASES"],
+            },
+            {
+                "family": "pipe_hole",
+                "status": "EXCLUDED",
+                "conditional_status": "NOT_APPLICABLE",
+                "applicability": "EXCLUDED",
+                "generated_event_count": 0,
+                "case_count": 0,
+                "executed_case_count": 0,
+                "fully_validated_case_count": 0,
+                "uncomputed_case_count": 0,
+                "operator_limited_case_count": 0,
+                "qualified_evidence_withheld_case_count": 0,
+                "event_ids": [],
+            },
+        ],
+    }
+    assessment = {
+        "facility_id": "facility-01",
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+        "strict_release_boundary": {
+            "strict_release_boundary_ready": False,
+            "case_count": 2,
+            "withheld_case_count": 2,
+            "blocking_reasons": ["withheld"],
+        },
+        "conditional_diagnostic_facility_coverage": {
+            "event_count": 2,
+            "conditional_executed_case_count": 2,
+            "strict_uncomputed_case_count": 2,
+            "qualified_evidence_withheld_case_count": 2,
+            "component_case_accounting": {
+                "tank-01": {
+                    "status": "PARTIAL",
+                    "event_count": 2,
+                    "conditional_case_count": 2,
+                    "numerically_executed_case_count": 2,
+                    "strict_uncomputed_case_count": 2,
+                    "operator_limited_case_count": 2,
+                    "qualified_evidence_withheld_case_count": 2,
+                    "event_ids": ["v-1", "v-2"],
+                    "strict_gate_categories": ["MISSING_PROVIDER_CASES"],
+                }
+            },
+        },
+        "facility_risk_ledger": {"uncomputed_cases": [{"event_id": "v-1"}]},
+    }
+    return scope, assessment
+
+
+def test_scope_closure_report_preserves_partial_and_excluded_rows():
+    report = build_scope_closure_report(*_inputs())
+    assert report["schema_version"] == "prism.outdoor_scope_closure_report.v1"
+    assert report["status"] == "SCOPE_CLOSURE_DIAGNOSTIC_PARTIAL"
+    assert report["declared_event_count"] == 2
+    assert report["uncomputed_event_ids"] == ["v-1"]
+    assert report["family_status_counts"]["PARTIAL_STRICT_CASES_WITHHELD"] == 1
+    assert report["family_status_counts"]["EXCLUDED_OR_NOT_APPLICABLE"] == 1
+    assert report["component_rows"][0]["closure_status"] == "PARTIAL_STRICT_CASES_WITHHELD"
+
+
+def test_scope_closure_report_never_promotes_qra():
+    report = build_scope_closure_report(*_inputs())
+    assert report["policy"]["missing_accidents_are_not_inferred"] is True
+    assert report["policy"]["provider_packet_promoted"] is False
+    assert report["policy"]["facility_qra_claim"] is False
