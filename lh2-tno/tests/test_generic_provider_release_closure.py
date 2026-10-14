@@ -166,3 +166,43 @@ def test_campaign_audit_uses_packet_releasable_inventory_ledger(tmp_path):
     assert report["closure_ready_event_count"] == 1
     row = report["event_rows"][0]["packet_rows"][0]
     assert row["termination_evidence_used"] is True
+
+
+def test_campaign_audit_accepts_native_threshold_mass_metadata_alias(tmp_path):
+    packet = _release()
+    packet["termination_basis"] = "inventory_depletion"
+    (tmp_path / "resolved_release.json").write_text(
+        json.dumps(packet), encoding="utf-8"
+    )
+    # Native layered-tank exports place the positive threshold in the raw
+    # provider response as ``threshold_mass_kg`` rather than the worker
+    # adapter's ``depletion_threshold_kg`` spelling.
+    (tmp_path / "verification.json").write_text(
+        json.dumps({"provider_result_digest": packet["provider_result_digest"]}),
+        encoding="utf-8",
+    )
+    (tmp_path / "provider_response.json").write_text(
+        json.dumps({
+            "data": {
+                "provider_meta": {
+                    "termination_basis": "inventory_depletion_positive_threshold",
+                    "threshold_mass_kg": 0.9,
+                    "remaining_mass_kg": 0.8,
+                    "max_abs_mass_residual_kg": 0.0,
+                }
+            }
+        }),
+        encoding="utf-8",
+    )
+    evidence_path = tmp_path / "evidence.json"
+    evidence_path.write_text(json.dumps({
+        "rows": [{
+            "event_id": "event-threshold-alias",
+            "evidence": {"resolved_packet_paths": ["resolved_release.json"]},
+        }]
+    }), encoding="utf-8")
+
+    report = audit_generic_provider_release_closure(evidence_path)
+
+    assert report["closure_ready_event_count"] == 1
+    assert report["event_rows"][0]["packet_rows"][0]["termination_evidence_used"] is True
