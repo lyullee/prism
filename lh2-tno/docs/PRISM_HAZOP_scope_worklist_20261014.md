@@ -26,6 +26,12 @@ python scripts/build_hazop_scope_worklist.py `
 
 `--strict`를 붙이면 남은 scope 또는 provider gap이 있을 때 종료 코드 2를 반환한다. 기본 실행은 gap을 장부로 저장하고 정상 종료하므로 후속 검토·증거 요청 단계에서 사용할 수 있다.
 
+IJHE 완료 감사에 연결할 때는 `scripts/build_ijhe_completion_audit.py`에
+`--hazop-scope-worklist examples/hazop_scope_worklist_execution_20261014.json`을
+추가한다. 감사의 `diagnostic_hazop_scope_worklist` 검사는 장부의 구조와
+fail-closed 정책이 맞는지를 확인하며, `SCOPE_GAPS_EXPLICIT` 자체를 완료로
+승격하지 않는다.
+
 ## 현재 진단 snapshot의 의미
 
 현재 snapshot은 12개 사고군, 8개 manifest component, 24개 문헌 frequency event를 기준으로 다음을 기록한다.

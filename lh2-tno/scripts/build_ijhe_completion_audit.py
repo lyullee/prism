@@ -154,6 +154,11 @@ def main() -> int:
         help="optional multi-equipment HAZOP/provider/SLABx-LH2 diagnostic ledger",
     )
     parser.add_argument(
+        "--hazop-scope-worklist",
+        type=Path,
+        help="optional HAZOP family/component to provider-event scope worklist",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -457,6 +462,13 @@ def main() -> int:
             hazop_multiequipment_diagnostic["_record_path"] = str(
                 args.hazop_multiequipment_diagnostic
             )
+        hazop_scope_worklist = (
+            _object(args.hazop_scope_worklist)
+            if args.hazop_scope_worklist
+            else None
+        )
+        if hazop_scope_worklist is not None:
+            hazop_scope_worklist["_record_path"] = str(args.hazop_scope_worklist)
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -547,6 +559,7 @@ def main() -> int:
             external_release_artifact_intake=external_release_artifact_intake,
             external_model_root_review=external_model_root_review,
             hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,
+            hazop_scope_worklist=hazop_scope_worklist,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

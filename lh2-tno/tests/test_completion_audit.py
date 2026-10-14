@@ -2931,3 +2931,63 @@ def test_completion_audit_blocks_multi_equipment_hazop_chain_with_unsafe_policy(
         if item["name"] == "diagnostic_hazop_multiequipment_provider_chain"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _scope_worklist(**overrides):
+    record = {
+        "schema": "prism.hazop_scope_worklist.v1",
+        "status": "SCOPE_GAPS_EXPLICIT",
+        "family_summary": [{"family": "pipe_hole"}],
+        "family_component_rows": [{"family": "pipe_hole", "component_id": "pipe-01"}],
+        "provider_event_rows": [{"event_id": "event-01"}],
+        "summary": {
+            "family_component_row_count": 1,
+            "dispatched_diagnostic_component_count": 0,
+            "applicable_not_dispatched_component_count": 1,
+            "no_frequency_binding_component_count": 0,
+            "provider_event_count": 1,
+            "provider_uncomputed_event_count": 1,
+            "frequency_inference_performed": False,
+            "packet_substitution_performed": False,
+        },
+        "policy": {
+            "diagnostic_dispatch_does_not_promote_provider_packet": True,
+            "missing_family_is_not_substituted": True,
+            "frequency_inference_performed": False,
+            "provider_packet_created": False,
+            "frequency_preserved_per_event": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_hazop_scope_worklist_accounting():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_scope_worklist=_scope_worklist(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_scope_worklist"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_hazop_scope_worklist_packet_promotion():
+    unsafe = _scope_worklist()
+    unsafe["policy"]["provider_packet_created"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_scope_worklist=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_scope_worklist"
+    )
+    assert check["status"] == "BLOCKED"

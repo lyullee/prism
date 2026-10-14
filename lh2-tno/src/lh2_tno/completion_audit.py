@@ -99,6 +99,7 @@ def build_ijhe_completion_audit(
     hazop_scenario_trace_audit: Mapping[str, Any] | None = None,
     external_model_root_review: Mapping[str, Any] | None = None,
     hazop_multiequipment_diagnostic: Mapping[str, Any] | None = None,
+    hazop_scope_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3596,6 +3597,72 @@ def build_ijhe_completion_audit(
             "does not promote a complete facility annual IR/F-N result."
         )
         checks.append(multi_check)
+    if hazop_scope_worklist is not None:
+        scope_worklist = hazop_scope_worklist
+        summary = scope_worklist.get("summary")
+        summary = summary if isinstance(summary, Mapping) else {}
+        policy = scope_worklist.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        family_rows = scope_worklist.get("family_component_rows")
+        event_rows = scope_worklist.get("provider_event_rows")
+        family_summary = scope_worklist.get("family_summary")
+        count_fields = (
+            "family_component_row_count",
+            "dispatched_diagnostic_component_count",
+            "applicable_not_dispatched_component_count",
+            "no_frequency_binding_component_count",
+            "provider_event_count",
+            "provider_uncomputed_event_count",
+        )
+        counts_valid = all(
+            isinstance(summary.get(field), int) and summary.get(field) >= 0
+            for field in count_fields
+        )
+        scope_worklist_valid = (
+            scope_worklist.get("schema") == "prism.hazop_scope_worklist.v1"
+            and scope_worklist.get("status") in {"SCOPE_GAPS_EXPLICIT", "PROVIDER_SCOPE_COMPLETE"}
+            and isinstance(family_rows, list)
+            and isinstance(event_rows, list)
+            and isinstance(family_summary, list)
+            and bool(family_summary)
+            and counts_valid
+            and summary.get("family_component_row_count") == len(family_rows)
+            and summary.get("provider_event_count") == len(event_rows)
+            and summary.get("dispatched_diagnostic_component_count")
+            + summary.get("applicable_not_dispatched_component_count")
+            + summary.get("no_frequency_binding_component_count")
+            == summary.get("family_component_row_count")
+            and summary.get("provider_uncomputed_event_count") <= summary.get("provider_event_count")
+            and summary.get("frequency_inference_performed") is False
+            and summary.get("packet_substitution_performed") is False
+            and policy.get("diagnostic_dispatch_does_not_promote_provider_packet") is True
+            and policy.get("missing_family_is_not_substituted") is True
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("provider_packet_created") is False
+            and policy.get("frequency_preserved_per_event") is True
+        )
+        scope_worklist_check = _check(
+            "diagnostic_hazop_scope_worklist",
+            scope_worklist_valid,
+            {
+                "record": scope_worklist.get("_record_path"),
+                "schema": scope_worklist.get("schema"),
+                "status": scope_worklist.get("status"),
+                "summary": dict(summary),
+                "family_summary_count": len(family_summary) if isinstance(family_summary, list) else None,
+                "family_component_row_count": len(family_rows) if isinstance(family_rows, list) else None,
+                "provider_event_row_count": len(event_rows) if isinstance(event_rows, list) else None,
+                "policy": dict(policy),
+            },
+            "HAZOP scope/provider worklist is missing exact event accounting or permits diagnostic substitution, frequency inference, or packet promotion",
+        )
+        scope_worklist_check["diagnostic_only"] = True
+        scope_worklist_check["interpretation"] = (
+            "The scope worklist proves that representative HAZOP dispatch, applicable-but-uncomputed "
+            "families, missing frequency bindings, and provider packet requirements remain separate. "
+            "A PASS records accounting integrity; it does not claim full facility QRA coverage."
+        )
+        checks.append(scope_worklist_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")
