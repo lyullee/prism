@@ -116,6 +116,23 @@ python scripts/run_native_full_scope_frequency_assessment.py `
 
 최신 24-case fresh-physics 실행은 약 149.4초였다. case별 중앙값은 약 4.01초, p95는 약 16.18초, 최대는 약 20.96초였다. 이 수치는 한 번의 캠페인 실행에서 얻은 처리시간이며 1 Hz fresh-physics 보장이나 서비스 수준 인증이 아니다. 실시간 모니터링에서는 exact cache, 위험조건 도달 case 선택, warm worker와 별도 지연시간 검증이 필요하다.
 
+캠페인 결과를 별도 chain-closure 감사로 재합산했을 때 24/24 event가 packet identity를 소비했고, packet이 없는 event는 0건, IR aggregate closure와 F/N aggregate closure는 모두 `true`였다. 이 감사가 의미하는 것은 계산 원장의 합산 일관성이다. qualified provider, 독립 물리검증, 시설 전체 QRA 승격을 의미하지 않는다.
+
+```powershell
+python scripts/audit_native_packet_campaign_execution.py `
+  --campaign results/20261110/native_generic_scope_campaign_latest2.json `
+  --result results/20261110/native_full_scope_frequency_assessment_latest2/campaign_result.json `
+  --provenance results/20261110/native_full_scope_frequency_assessment_latest2/binding_provenance.json `
+  --state-snapshot-audit results/20261110/native_generic_scope_packets_latest2/state_snapshot_binding_audit.json `
+  --output results/20261110/native_full_scope_frequency_assessment_latest2/native_packet_campaign_execution_ledger.json
+
+python scripts/audit_facility_chain_closure.py `
+  --campaign-result results/20261110/native_full_scope_frequency_assessment_latest2/campaign_result.json `
+  --packet-evidence results/20261110/native_generic_scope_packets_latest2/native_scope_packet_evidence.json `
+  --packet-root results/20261110/native_generic_scope_packets_latest2 `
+  --output results/20261110/native_full_scope_frequency_assessment_latest2/facility_chain_closure_audit.json
+```
+
 ## 남은 차단 항목
 
 - 24개 packet은 모두 synthetic diagnostic이며 qualified actual provider packet은 0개다.
