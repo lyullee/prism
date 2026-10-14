@@ -15,6 +15,7 @@ import ast
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 from typing import Any, Mapping
 
 
@@ -54,6 +55,66 @@ def _tree_digest(root: Path) -> str:
         digest.update(str(path.relative_to(root)).replace("\\", "/").encode("utf-8"))
         digest.update(path.read_bytes())
     return digest.hexdigest()
+
+
+def _git_provenance(root: Path) -> dict[str, Any]:
+    """Return best-effort Git provenance without making Git a hard dependency.
+
+    The source tree digest remains the primary identity.  Git metadata is
+    supplementary because an external model may be supplied as an unpacked
+    directory, and a dirty worktree must never be silently treated as a
+    released or field-qualified model.
+    """
+    base: dict[str, Any] = {
+        "repository_detected": False,
+        "head": None,
+        "worktree_clean": None,
+        "dirty_paths": [],
+        "status": "NOT_A_GIT_REPOSITORY",
+    }
+    try:
+        head = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "HEAD"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return base
+    if head.returncode != 0 or not head.stdout.strip():
+        return base
+    base.update({
+        "repository_detected": True,
+        "head": head.stdout.strip(),
+    })
+    try:
+        status = subprocess.run(
+            ["git", "-C", str(root), "status", "--porcelain=v1", "--untracked-files=all"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        base["status"] = "GIT_HEAD_FOUND_STATUS_UNAVAILABLE"
+        return base
+    if status.returncode != 0:
+        base["status"] = "GIT_HEAD_FOUND_STATUS_ERROR"
+        return base
+    dirty_paths = []
+    for line in status.stdout.splitlines():
+        if not line.strip():
+            continue
+        # Porcelain v1 starts with two status columns and a space.  Retain
+        # the path only; the status code is not needed by the contract audit.
+        dirty_paths.append(line[3:] if len(line) >= 4 else line)
+    base.update({
+        "worktree_clean": not dirty_paths,
+        "dirty_paths": dirty_paths,
+        "status": "GIT_WORKTREE_CLEAN" if not dirty_paths else "GIT_WORKTREE_DIRTY",
+    })
+    return base
 
 
 def _source_path(external_root: Path, source_path: str | None, model_package: str) -> Path | None:
@@ -192,6 +253,7 @@ def audit_external_model_contract(
         "status": status,
         "external_model_root": str(root),
         "external_model_source_digest": _tree_digest(root),
+        "external_model_git_provenance": _git_provenance(root),
         "binding_catalog_sha256": catalog_digest,
         "binding_count": len(rows),
         "native_accident_export_component_count": sum(row["native_accident_export_method"] for row in rows),

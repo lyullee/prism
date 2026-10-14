@@ -1,0 +1,222 @@
+{
+  "schema_version": "prism.external_model_contract_audit.v1",
+  "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
+  "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models",
+  "external_model_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "external_model_git_provenance": {
+    "repository_detected": true,
+    "head": "b483f7921d7e67a269947f36393fdd3b9ab9e7b3",
+    "worktree_clean": false,
+    "dirty_paths": [
+      "CHANGELOG.md",
+      "src/lh2dt/vaporizer.py",
+      "docs/vaporizer_design_point.md",
+      "tests/test_vaporizer_design_point.py"
+    ],
+    "status": "GIT_WORKTREE_DIRTY"
+  },
+  "binding_catalog_sha256": "a697d0b63853aef660ad4b27bb8fe1bc2a63e0b8bec4d2dd99a43f433f3c3461",
+  "binding_count": 8,
+  "native_accident_export_component_count": 7,
+  "native_accident_export_missing_components": [],
+  "unresolved_components": [],
+  "diagnostic_adapter_contract_verified_count": 7,
+  "rows": [
+    {
+      "component_kind": "storage_tank",
+      "model_package": "lh2dt.layered_tank",
+      "model_class": "LayeredTank",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\layered_tank.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [
+        "simulate"
+      ],
+      "native_class_bases": [],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+        "provider_class": "LayeredTankAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "pipe",
+      "model_package": "lh2dt.dynamic_pipe",
+      "model_class": "DynamicHEMPipe",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\dynamic_pipe.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [
+        "step"
+      ],
+      "native_class_bases": [],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_dynamic_pipe_prism_packet.py",
+        "provider_class": "DynamicPipeAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "valve",
+      "model_package": "lh2dt.valve",
+      "model_class": "StrokeLimitedCommandedValve",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\valve.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [
+        "evaluate"
+      ],
+      "native_class_bases": [],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_valve_prism_packet.py",
+        "provider_class": "ValveAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "vent_stack",
+      "model_package": "lh2dt.vent_stack",
+      "model_class": "VentStack",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\vent_stack.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [
+        "evaluate"
+      ],
+      "native_class_bases": [],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_vent_stack_prism_packet.py",
+        "provider_class": "VentStackAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "pump",
+      "model_package": "lh2dt.pump",
+      "model_class": "MappedPump",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\pump.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [
+        "evaluate"
+      ],
+      "native_class_bases": [],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_mapped_pump_prism_packet.py",
+        "provider_class": "MappedPumpAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "vaporizer",
+      "model_package": "lh2dt.dynamic_vaporizer",
+      "model_class": "DynamicVaporizer",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\dynamic_vaporizer.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [
+        "step"
+      ],
+      "native_class_bases": [],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_dynamic_vaporizer_prism_packet.py",
+        "provider_class": "DynamicVaporizerAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "reliquefier",
+      "model_package": "lh2dt.dynamic_reliquefier",
+      "model_class": "DynamicReliquefier",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\dynamic_reliquefier.py",
+      "source_exists": true,
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
+      "native_normal_state_methods": [],
+      "native_class_bases": [
+        "DynamicVaporizer"
+      ],
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
+      "diagnostic_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_reliquefier_two_sided_prism_packet.py",
+        "provider_class": "TwoSidedReliquefierProvider",
+        "evidence_status": "synthetic_diagnostic"
+      },
+      "diagnostic_adapter_contract_verified": true,
+      "blocking_reasons": []
+    },
+    {
+      "component_kind": "boundary",
+      "model_package": "prism.interface",
+      "model_class": "FacilityBoundary",
+      "source_path": null,
+      "source_exists": false,
+      "native_accident_export_method": false,
+      "native_termination_ledger_methods": [],
+      "native_normal_state_methods": [],
+      "native_class_bases": [],
+      "native_audit_status": "NOT_EXTERNAL_MODEL",
+      "diagnostic_adapter": {
+        "status": "missing"
+      },
+      "diagnostic_adapter_contract_verified": false,
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "provider_packet_promoted": false,
+  "frequency_inference_performed": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "promotion_policy": {
+    "native_method_presence_is_not_a_qualified_packet": true,
+    "diagnostic_wrapper_is_not_native_external_model": true,
+    "normal_state_method_is_not_an_accident_release": true,
+    "evaluate_simulate_fallback": false
+  }
+}

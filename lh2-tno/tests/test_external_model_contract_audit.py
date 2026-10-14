@@ -31,6 +31,7 @@ def test_external_audit_distinguishes_native_missing_from_wrapper(tmp_path):
     assert report["native_accident_export_component_count"] == 0
     assert report["rows"][0]["native_normal_state_methods"] == ["simulate"]
     assert report["provider_packet_promoted"] is False
+    assert report["external_model_git_provenance"]["repository_detected"] is False
 
 
 def test_external_audit_records_native_export_and_adapter_contract(tmp_path):
@@ -56,3 +57,4 @@ def test_external_audit_records_native_export_and_adapter_contract(tmp_path):
     assert report["status"] == "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND"
     assert report["native_accident_export_component_count"] == 1
     assert report["diagnostic_adapter_contract_verified_count"] == 1
+    assert report["external_model_git_provenance"]["status"] == "NOT_A_GIT_REPOSITORY"
