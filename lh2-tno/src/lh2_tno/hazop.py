@@ -531,19 +531,23 @@ def run_hazop_runtime_consequence_branches(
     now_s: float,
     template: Any,
     monitor: Any,
-    release_resolvers: Mapping[str, Any],
+    release_resolvers: Mapping[Any, Any],
     mapping_digest: str | None = None,
 ) -> dict[str, Any]:
     """Dispatch several active HAZOP rows as separate consequence branches.
 
-    The resolver map is keyed by each selected ``scenario_id``.  Each branch
+    The resolver map may be keyed by ``(component_id, scenario_id)`` for
+    facility-wide uniqueness, or by the legacy ``scenario_id`` key.  Each branch
     is evaluated through :func:`run_hazop_runtime_consequence` with a one-row
     HAZOP table, so no provider history, termination basis, or frequency is
     silently shared between simultaneous accident hypotheses.  Missing branch
     resolvers remain explicitly withheld while other valid branches may run.
     """
     if not isinstance(release_resolvers, Mapping):
-        raise HazopSelectionError("release_resolvers must map scenario_id to a provider resolver")
+        raise HazopSelectionError(
+            "release_resolvers must map (component_id, scenario_id) or scenario_id "
+            "to a provider resolver"
+        )
     selection = evaluate_hazop_runtime_frame(
         table,
         frame,
@@ -585,7 +589,12 @@ def run_hazop_runtime_consequence_branches(
         if row is None:
             raise HazopSelectionError("selected HAZOP row disappeared during branch dispatch")
         branch_table = table_model.model_copy(update={"rows": (row,)})
-        resolver = release_resolvers.get(scenario["scenario_id"])
+        component_id = str(frame.get("component_id") or scenario["component_id"])
+        resolver = release_resolvers.get((component_id, scenario["scenario_id"]))
+        resolver_key = "component_scenario"
+        if resolver is None:
+            resolver = release_resolvers.get(scenario["scenario_id"])
+            resolver_key = "scenario"
         branch = run_hazop_runtime_consequence(
             branch_table,
             frame,
@@ -597,6 +606,10 @@ def run_hazop_runtime_consequence_branches(
         )
         result["branches"].append({
             "scenario_id": scenario["scenario_id"],
+            "resolver_binding": {
+                "key_type": resolver_key,
+                "component_id": component_id,
+            },
             "scenario_family": scenario["scenario_family"],
             "release_mode": scenario["release_mode"],
             "result": branch,
@@ -622,15 +635,15 @@ def run_hazop_facility_runtime(
     *,
     now_s: float,
     component_bindings: Mapping[str, Any],
-    release_resolvers: Mapping[str, Any],
+    release_resolvers: Mapping[Any, Any],
     mapping_digest: str | None = None,
 ) -> dict[str, Any]:
     """Coordinate HAZOP-gated consequence branches for several components.
 
     ``component_bindings`` contains the existing runtime monitor and template
-    for each component.  ``release_resolvers`` is keyed by HAZOP
-    ``scenario_id`` so one provider history cannot be reused for another
-    accident branch.  The returned facility ledger exposes conditional
+    for each component.  ``release_resolvers`` may be keyed by
+    ``(component_id, scenario_id)`` for facility-wide uniqueness, with the
+    legacy ``scenario_id`` key supported as a fallback.  The returned facility ledger exposes conditional
     current-weather IR contributions when a single branch per component has a
     reviewed frequency binding.  It deliberately withholds annual facility
     IR/F-N: HAZOP deviations are an operator-triggered view, not a replacement
@@ -639,7 +652,10 @@ def run_hazop_facility_runtime(
     if not isinstance(frames, Mapping) or not isinstance(component_bindings, Mapping):
         raise HazopSelectionError("frames and component_bindings must be mappings")
     if not isinstance(release_resolvers, Mapping):
-        raise HazopSelectionError("release_resolvers must map scenario_id to a resolver")
+        raise HazopSelectionError(
+            "release_resolvers must map (component_id, scenario_id) or scenario_id "
+            "to a resolver"
+        )
     if not component_bindings:
         raise HazopSelectionError("component_bindings must not be empty")
     facility_id = (
@@ -687,17 +703,13 @@ def run_hazop_facility_runtime(
                 raise HazopSelectionError(
                     "component binding must expose template and monitor"
                 )
-            branch_resolvers = {
-                row["scenario_id"]: release_resolvers.get(row["scenario_id"])
-                for row in selection["selected_scenarios"]
-            }
             branch_result = run_hazop_runtime_consequence_branches(
                 table,
                 frame,
                 now_s=now_s,
                 template=template,
                 monitor=monitor,
-                release_resolvers=branch_resolvers,
+                release_resolvers=release_resolvers,
                 mapping_digest=mapping_digest,
             )
             frequency = getattr(binding, "frequency_binding", None)

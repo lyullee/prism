@@ -352,14 +352,14 @@ def test_runtime_gate_dispatches_multiple_active_rows_as_separate_branches():
     resolvers = {}
     for row in selection["selected_scenarios"]:
         if row["scenario_family"] == "liquid_two_phase":
-            resolvers[row["scenario_id"]] = (
+            resolvers[("TK-01", row["scenario_id"])] = (
                 lambda template, normalized: _provider_request(
                     source_operator="equipment_inventory_depletion",
                     basis="inventory_depletion",
                 )
             )
         else:
-            resolvers[row["scenario_id"]] = (
+            resolvers[("TK-01", row["scenario_id"])] = (
                 lambda template, normalized: _provider_request()
             )
     monitor = _FakeMonitor(_provider_request())
