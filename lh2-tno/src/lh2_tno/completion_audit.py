@@ -5019,7 +5019,8 @@ def build_ijhe_completion_audit(
         )
         checks.append(boundary_check)
     if conditional_facility_release_trace is not None:
-        trace = conditional_facility_release_trace
+        view_payload = conditional_facility_release_trace
+        trace = view_payload
         # The CLI receives the complete conditional view.  Accept its nested
         # ``release_trace`` envelope as well as a bare trace object so the
         # completion audit validates exactly what the digital-twin consumer
@@ -5089,6 +5090,106 @@ def build_ijhe_completion_audit(
             "risk-atom accounting at the same case key. It remains diagnostic and does not promote facility IR/F-N."
         )
         checks.append(trace_check)
+        frequency_trace = view_payload.get("frequency_uncertainty")
+        if not isinstance(frequency_trace, Mapping):
+            # Permit a direct frequency trace in focused/unit-level callers.
+            if view_payload.get("schema_version") == (
+                "prism.conditional_facility_frequency_trace.v1"
+            ):
+                frequency_trace = view_payload
+        if isinstance(frequency_trace, Mapping):
+            frequency_rows = frequency_trace.get("scenarios")
+            frequency_rows = frequency_rows if isinstance(frequency_rows, list) else []
+            scenario_ids = frequency_trace.get("scenario_ids")
+            scenario_ids = scenario_ids if isinstance(scenario_ids, list) else []
+            scenario_ids_valid = (
+                len(scenario_ids) == len(frequency_rows)
+                and len(scenario_ids) > 0
+                and all(isinstance(value, str) and value for value in scenario_ids)
+                and len(set(scenario_ids)) == len(scenario_ids)
+            )
+            frequency_rows_valid = all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("id"), str)
+                and row.get("id") in scenario_ids
+                and isinstance(row.get("asset_quantiles"), Mapping)
+                and isinstance(row.get("event_quantiles"), Mapping)
+                and isinstance(row.get("provenance"), str)
+                and isinstance(row.get("correlation_assumption"), str)
+                and isinstance(row.get("conditional_diagnostic_facility_annual_ir_low_high"), Mapping)
+                and isinstance(row.get("conditional_diagnostic_facility_expected_death_fn_low_high"), list)
+                and len(row.get("conditional_diagnostic_facility_expected_death_fn_low_high")) == 2
+                for row in frequency_rows
+            )
+            asset_rank_stability = frequency_trace.get("asset_rank_stability")
+            family_rank_stability = frequency_trace.get(
+                "scenario_family_rank_stability"
+            )
+            rank_stability_valid = all(
+                isinstance(value, Mapping)
+                and value.get("scenario_count") == len(frequency_rows)
+                and isinstance(value.get("top_ids_by_endpoint"), list)
+                and isinstance(value.get("top_id_consistent_by_endpoint"), list)
+                and isinstance(value.get("top_id_consistent"), bool)
+                for value in (asset_rank_stability, family_rank_stability)
+            )
+            port_binding = frequency_trace.get("frequency_port_binding")
+            port_binding_valid = (
+                isinstance(port_binding, Mapping)
+                and port_binding.get("status") == "ALIGNED"
+                and port_binding.get("frequency_inference_allowed") is False
+            )
+            frequency_valid = (
+                frequency_trace.get("schema_version")
+                == "prism.conditional_facility_frequency_trace.v1"
+                and frequency_trace.get("scenario_count") == len(frequency_rows)
+                and scenario_ids_valid
+                and frequency_rows_valid
+                and rank_stability_valid
+                and port_binding_valid
+                and frequency_trace.get("statistical_confidence_interval") is False
+                and frequency_trace.get("facility_credible_interval") is False
+                and frequency_trace.get("provider_packet_promoted") is False
+                and frequency_trace.get("complete_facility_qra_claim") is False
+                and frequency_trace.get("physical_validation_claim") is False
+                and isinstance(frequency_trace.get("semantics"), str)
+            )
+            frequency_check = _check(
+                "diagnostic_conditional_facility_frequency_trace",
+                frequency_valid,
+                {
+                    "record": frequency_trace.get("_record_path"),
+                    "schema_version": frequency_trace.get("schema_version"),
+                    "scenario_count": frequency_trace.get("scenario_count"),
+                    "scenario_ids": scenario_ids,
+                    "asset_rank_stability": asset_rank_stability,
+                    "scenario_family_rank_stability": family_rank_stability,
+                    "frequency_port_binding": port_binding,
+                    "statistical_confidence_interval": frequency_trace.get(
+                        "statistical_confidence_interval"
+                    ),
+                    "facility_credible_interval": frequency_trace.get(
+                        "facility_credible_interval"
+                    ),
+                    "provider_packet_promoted": frequency_trace.get(
+                        "provider_packet_promoted"
+                    ),
+                    "complete_facility_qra_claim": frequency_trace.get(
+                        "complete_facility_qra_claim"
+                    ),
+                    "physical_validation_claim": frequency_trace.get(
+                        "physical_validation_claim"
+                    ),
+                },
+                "conditional facility frequency trace is missing scenario provenance/rank stability or carries an unsafe inference or promotion claim",
+            )
+            frequency_check["diagnostic_only"] = True
+            frequency_check["interpretation"] = (
+                "The digital-twin view carries explicit literature-frequency scenarios, quantile "
+                "provenance and rank-stability evidence. It records that no frequency inference, "
+                "facility credible interval, provider promotion or physical-validation claim was made."
+            )
+            checks.append(frequency_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

@@ -99,6 +99,8 @@ def _build_release_trace(
         for field in selected_summary_fields
         if field in audit
     }
+
+
     summary["risk_atom_count"] = len(atoms)
     trace_rows: list[dict[str, Any]] = []
     trace_fields = (
@@ -177,6 +179,120 @@ def _build_release_trace(
     }
 
 
+def _build_frequency_trace(
+    frequency_uncertainty: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Expose literature-frequency scenarios without copying the full ledger.
+
+    The facility assessment stores a large scenario object containing branch
+    accounting and every event row.  A digital-twin consumer needs the
+    scenario identity, quantile provenance, conditional IR/F-N result and
+    rank-stability evidence; this helper exports those fields while keeping
+    the no-inference and no-promotion claims explicit.
+    """
+
+    raw_scenarios = frequency_uncertainty.get("scenarios")
+    if not isinstance(raw_scenarios, list) or not raw_scenarios:
+        raise ValueError("frequency_uncertainty.scenarios must be a non-empty list")
+    scenarios: list[dict[str, Any]] = []
+    for raw in raw_scenarios:
+        if not isinstance(raw, Mapping):
+            raise ValueError("frequency_uncertainty.scenarios must contain objects")
+        definition = raw.get("scenario")
+        if not isinstance(definition, Mapping):
+            raise ValueError("frequency uncertainty scenario definition is missing")
+        scenario = {
+            "id": definition.get("id"),
+            "asset_quantiles": dict(definition.get("asset_quantiles", {}))
+            if isinstance(definition.get("asset_quantiles"), Mapping)
+            else {},
+            "event_quantiles": dict(definition.get("event_quantiles", {}))
+            if isinstance(definition.get("event_quantiles"), Mapping)
+            else {},
+            "provenance": definition.get("provenance"),
+            "correlation_assumption": definition.get("correlation_assumption"),
+            "conditional_diagnostic_facility_annual_ir_low_high": raw.get(
+                "conditional_diagnostic_facility_annual_ir_low_high"
+            ),
+            "conditional_diagnostic_facility_expected_death_fn_low_high": raw.get(
+                "conditional_diagnostic_facility_expected_death_fn_low_high"
+            ),
+            "conditional_diagnostic_facility_expected_death_fn_diagnostics": raw.get(
+                "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+            ),
+            "conditional_diagnostic_facility_risk_available": raw.get(
+                "conditional_diagnostic_facility_risk_available"
+            ),
+            "asset_known_annual_expected_fatalities_low_high": raw.get(
+                "asset_known_annual_expected_fatalities_low_high"
+            ),
+            "asset_rank_by_known_expected_fatalities_low_high": raw.get(
+                "asset_rank_by_known_expected_fatalities_low_high"
+            ),
+            "scenario_family_known_expected_fatalities_low_high": raw.get(
+                "scenario_family_known_expected_fatalities_low_high"
+            ),
+            "scenario_family_rank_by_known_expected_fatalities_low_high": raw.get(
+                "scenario_family_rank_by_known_expected_fatalities_low_high"
+            ),
+            "event_frequency_per_year": raw.get("event_frequency_per_year"),
+            "uncomputed_cases": raw.get("uncomputed_cases"),
+            "provider_packet_promoted": raw.get("provider_packet_promoted"),
+            "qualified_provider_packet_case_count": raw.get(
+                "qualified_provider_packet_case_count"
+            ),
+            "complete_facility_qra_claim": raw.get("complete_facility_qra_claim"),
+            "physical_validation_claim": raw.get("physical_validation_claim"),
+        }
+        scenarios.append(scenario)
+    frequency_port_binding = frequency_uncertainty.get("frequency_port_binding")
+    return {
+        "schema_version": "prism.conditional_facility_frequency_trace.v1",
+        "campaign_digest": frequency_uncertainty.get("campaign_digest"),
+        "physical_risk_atoms_digest": frequency_uncertainty.get(
+            "physical_risk_atoms_digest"
+        ),
+        "scenario_count": len(scenarios),
+        "scenario_ids": [scenario.get("id") for scenario in scenarios],
+        "fresh_physics_executed": frequency_uncertainty.get("fresh_physics_executed"),
+        "statistical_confidence_interval": frequency_uncertainty.get(
+            "statistical_confidence_interval"
+        ),
+        "facility_credible_interval": frequency_uncertainty.get(
+            "facility_credible_interval"
+        ),
+        "frequency_port_binding": (
+            dict(frequency_port_binding)
+            if isinstance(frequency_port_binding, Mapping)
+            else None
+        ),
+        "conditional_diagnostic_facility_risk": frequency_uncertainty.get(
+            "conditional_diagnostic_facility_risk"
+        ),
+        "frequency_inference_allowed": (
+            frequency_port_binding.get("frequency_inference_allowed")
+            if isinstance(frequency_port_binding, Mapping)
+            else None
+        ),
+        "asset_rank_stability": frequency_uncertainty.get("asset_rank_stability"),
+        "scenario_family_rank_stability": frequency_uncertainty.get(
+            "scenario_family_rank_stability"
+        ),
+        "provider_packet_promoted": frequency_uncertainty.get(
+            "provider_packet_promoted"
+        ),
+        "qualified_provider_packet_case_count": frequency_uncertainty.get(
+            "qualified_provider_packet_case_count"
+        ),
+        "complete_facility_qra_claim": frequency_uncertainty.get(
+            "complete_facility_qra_claim"
+        ),
+        "physical_validation_claim": frequency_uncertainty.get(
+            "physical_validation_claim"
+        ),
+        "scenarios": scenarios,
+        "semantics": frequency_uncertainty.get("semantics"),
+    }
 def build_conditional_facility_risk_view(
     assessment: Mapping[str, Any],
     provider_mass_balance_audit: Mapping[str, Any] | None = None,
@@ -246,6 +362,17 @@ def build_conditional_facility_risk_view(
         if release_audit is not None
         else None
     )
+    frequency_uncertainty = source.get("frequency_uncertainty")
+    if isinstance(frequency_uncertainty, Mapping):
+        frequency_uncertainty = dict(frequency_uncertainty)
+        frequency_uncertainty["frequency_port_binding"] = source.get(
+            "frequency_port_binding", ledger.get("frequency_port_binding")
+        )
+    frequency_trace = (
+        _build_frequency_trace(frequency_uncertainty)
+        if isinstance(frequency_uncertainty, Mapping)
+        else None
+    )
 
     return {
         "schema_version": "prism.conditional_facility_risk_view.v1",
@@ -274,6 +401,7 @@ def build_conditional_facility_risk_view(
         "scenario_branch_accounting": dict(branch_accounting),
         "release_termination_inventory_ledger": dict(release_ledger),
         "release_trace": release_trace,
+        "frequency_uncertainty": frequency_trace,
         "provider_mass_balance_audit": (
             {
                 "schema_version": mass_balance_audit.get("schema_version"),

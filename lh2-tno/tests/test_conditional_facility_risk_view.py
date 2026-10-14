@@ -140,3 +140,53 @@ def test_view_exposes_case_release_trace_without_opening_facility_promotion() ->
         "stage_elapsed_ms": {"source": 4.0},
     }
     assert view["qualification"]["promotion_allowed"] is False
+
+
+def test_view_preserves_literature_frequency_scenarios_and_rank_stability() -> None:
+    assessment = _assessment()
+    assessment["frequency_port_binding"] = {"frequency_inference_allowed": False}
+    assessment["frequency_uncertainty"] = {
+        "campaign_digest": "c" * 64,
+        "physical_risk_atoms_digest": "d" * 64,
+        "scenarios": [
+            {
+                "scenario": {
+                    "id": "published",
+                    "asset_quantiles": {"tank-01": "published"},
+                    "event_quantiles": {},
+                    "provenance": "literature catalogue; no inference",
+                    "correlation_assumption": "within_asset_shared_quantile",
+                },
+                "conditional_diagnostic_facility_annual_ir_low_high": {
+                    "worker-01": [1.0e-6, 2.0e-6]
+                },
+                "conditional_diagnostic_facility_expected_death_fn_low_high": [[], []],
+                "conditional_diagnostic_facility_risk_available": True,
+                "asset_rank_by_known_expected_fatalities_low_high": [{"tank-01": 1}, {"tank-01": 1}],
+                "scenario_family_rank_by_known_expected_fatalities_low_high": [{"vessel_hole": 1}, {"vessel_hole": 1}],
+                "provider_packet_promoted": False,
+                "qualified_provider_packet_case_count": 0,
+                "complete_facility_qra_claim": False,
+                "physical_validation_claim": False,
+            }
+        ],
+        "fresh_physics_executed": False,
+        "statistical_confidence_interval": False,
+        "facility_credible_interval": False,
+        "conditional_diagnostic_facility_risk": "diagnostic only",
+        "asset_rank_stability": {"top_id_consistent": True},
+        "scenario_family_rank_stability": {"top_id_consistent": True},
+        "provider_packet_promoted": False,
+        "qualified_provider_packet_case_count": 0,
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+        "semantics": "explicit literature quantiles; no inference",
+    }
+    view = build_conditional_facility_risk_view(assessment)
+    frequency = view["frequency_uncertainty"]
+    assert frequency["schema_version"] == "prism.conditional_facility_frequency_trace.v1"
+    assert frequency["scenario_count"] == 1
+    assert frequency["frequency_inference_allowed"] is False
+    assert frequency["scenarios"][0]["id"] == "published"
+    assert frequency["asset_rank_stability"]["top_id_consistent"] is True
+    assert frequency["provider_packet_promoted"] is False

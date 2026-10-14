@@ -162,7 +162,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1194 passed, 1 warning",
+  "latest_local_full_test_run": "1196 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -4832,8 +4832,8 @@
     "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 4,
-    "completion_audit_check_count": 40,
-    "completion_audit_pass_count": 36,
+    "completion_audit_check_count": 41,
+    "completion_audit_pass_count": 37,
     "completion_audit_blocked_count": 4,
     "release_boundary_case_count": 44,
     "release_boundary_case_source_alignment": "ALIGNED",
@@ -4842,7 +4842,7 @@
     "release_boundary_evidence_request_open_count": 44,
     "release_boundary_evidence_request_alignment": "ALIGNED",
     "facility_qra_promotion": false,
-    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix, a 44-case facility evidence-request catalog and a 44-case release-boundary audit are recorded; 3 individual release boundaries pass and 41 remain withheld. The provider-bound HAZOP integrated-risk diagnostic links one current and one forecast consequence evaluation through the existing facility handoff, while retaining synthetic-provider, declared-sensitivity, timing and fail-closed promotion limits. Inspection-center data are linked only as state/mode/HAZOP and diagnostic isolation evidence; they are not converted into frequency or qualified accident releases. The release-boundary ledger additionally reports 15 numerically closed cases (12 operator-review-required) and 29 numerically open cases without changing the strict gate. The latest IJHE audit has 40 checks (36 PASS, 4 BLOCKED), including the case-keyed conditional release-to-risk trace view. Qualified provider promotion, independent physical validation and facility IR/F-N remain withheld.",
+    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix, a 44-case facility evidence-request catalog and a 44-case release-boundary audit are recorded; 3 individual release boundaries pass and 41 remain withheld. The provider-bound HAZOP integrated-risk diagnostic links one current and one forecast consequence evaluation through the existing facility handoff, while retaining synthetic-provider, declared-sensitivity, timing and fail-closed promotion limits. Inspection-center data are linked only as state/mode/HAZOP and diagnostic isolation evidence; they are not converted into frequency or qualified accident releases. The release-boundary ledger additionally reports 15 numerically closed cases (12 operator-review-required) and 29 numerically open cases without changing the strict gate. The latest IJHE audit has 41 checks (37 PASS, 4 BLOCKED), including the case-keyed conditional release-to-risk trace view and the five-scenario literature-frequency trace. Qualified provider promotion, independent physical validation and facility IR/F-N remain withheld.",
     "release_boundary_numerically_closed_case_count": 15,
     "release_boundary_numerically_open_case_count": 29,
     "release_boundary_operator_review_required_case_count": 12,
@@ -4858,6 +4858,11 @@
     "conditional_facility_release_trace_case_count": 44,
     "conditional_facility_release_trace_risk_atom_count": 176,
     "conditional_facility_release_trace_promotion_allowed": false,
-    "conditional_facility_release_trace_policy": "same case key preserves duration/inventory/closure and risk-atom accounting; missing or open cases are not assigned zero risk"
+    "conditional_facility_release_trace_policy": "same case key preserves duration/inventory/closure and risk-atom accounting; missing or open cases are not assigned zero risk",
+    "conditional_facility_frequency_trace_schema": "prism.conditional_facility_frequency_trace.v1",
+    "conditional_facility_frequency_trace_scenario_count": 5,
+    "conditional_facility_frequency_trace_status": "PASS_DIAGNOSTIC_ONLY",
+    "conditional_facility_frequency_trace_inference_allowed": false,
+    "conditional_facility_frequency_trace_rank_stability": "asset and scenario-family top-rank consistency recorded"
   }
 }

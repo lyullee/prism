@@ -5490,6 +5490,78 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The digital-twin view connects provider release duration, isolation/inventory closure and risk-atom accounting at the same case key. It remains diagnostic and does not promote facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_conditional_facility_frequency_trace",
+      "status": "PASS",
+      "evidence": {
+        "record": null,
+        "schema_version": "prism.conditional_facility_frequency_trace.v1",
+        "scenario_count": 5,
+        "scenario_ids": [
+          "native-isolation-catalog-literature-published",
+          "native-isolation-catalog-literature-p05",
+          "native-isolation-catalog-literature-p95",
+          "native-full-scope-independent-event-low",
+          "native-full-scope-independent-event-high"
+        ],
+        "asset_rank_stability": {
+          "scenario_count": 5,
+          "top_ids_by_endpoint": [
+            [
+              "ambient-vaporizer"
+            ],
+            [
+              "ambient-vaporizer"
+            ]
+          ],
+          "top_id_consistent_by_endpoint": [
+            true,
+            true
+          ],
+          "top_id_consistent": true,
+          "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
+        },
+        "scenario_family_rank_stability": {
+          "scenario_count": 5,
+          "top_ids_by_endpoint": [
+            [
+              "inventory_depletion"
+            ],
+            [
+              "inventory_depletion"
+            ]
+          ],
+          "top_id_consistent_by_endpoint": [
+            true,
+            true
+          ],
+          "top_id_consistent": true,
+          "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
+        },
+        "frequency_port_binding": {
+          "schema_version": "prism.frequency_port_binding.v1",
+          "port_scoped_event_count": 34,
+          "port_unbound_event_count": 0,
+          "all_events_port_scoped": true,
+          "case_port_binding_mismatch_count": 0,
+          "risk_atom_port_binding_mismatch_count": 0,
+          "mismatch_count": 0,
+          "mismatch_examples": [],
+          "status": "ALIGNED",
+          "frequency_inference_allowed": false,
+          "facility_qra_allowed": true,
+          "policy": "Facility merge preserves reviewed event port_ids in cases and risk_atoms; missing or mismatched rows are withheld and no accident port is inferred; facility QRA also requires every event to have an explicit reviewed port."
+        },
+        "statistical_confidence_interval": false,
+        "facility_credible_interval": false,
+        "provider_packet_promoted": false,
+        "complete_facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The digital-twin view carries explicit literature-frequency scenarios, quantile provenance and rank-stability evidence. It records that no frequency inference, facility credible interval, provider promotion or physical-validation claim was made."
     }
   ],
   "blocking_reasons": [

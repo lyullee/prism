@@ -10,6 +10,8 @@
 - case별 전체 처리시간과 source·pool·확산·점화/피해 단계별 처리시간
 - 수치상 종료 상태와 strict 방출 경계 승격 상태
 - 같은 case key를 사용한 risk atom 수와 비영 피해 atom 수
+- 문헌 빈도 p05·published·p95 및 상관 가정별 시나리오
+- 설비·사고군 순위 안정성과 포트 결합 상태
 
 case key는 `event_id|release_branch_id|annual_condition_id`이며, 방출 trace의
 `risk_atom_count`는 해당 case가 피해영향·점화 계산에 실제로 사용된 atom 수를
@@ -29,6 +31,13 @@ python scripts/build_conditional_facility_risk_view.py `
 34개 event, 44개 case, 176개 risk atom과 방출 trace 44행이 일치하며, 각 행의
 `calculation_timing`에 실제 assessment 처리시간이 복사된다. summary는
 수치상 종료 15개·운영자 검토 필요 12개·수치상 열림 29개를 재현한다.
+
+같은 view의 `frequency_uncertainty`는 5개 문헌 빈도 시나리오
+(`published`, `p05`, `p95`, independent-event low/high)을 보존한다. 각 시나리오는
+자산·사건 분위수 출처, 상관 가정, 조건부 IR/F-N, 미계산 case와 순위 안정성을
+포함한다. `frequency_port_binding.status=ALIGNED`와
+`frequency_inference_allowed=false`를 함께 기록하므로, 문헌 값을 센서값에서
+추론하거나 시설 credible interval로 과장하지 않는다.
 
 이 view는 **조건부 진단 출력**이다. `qualification.promotion_allowed`는 항상
 `false`이며, qualified provider packet·독립 물리검증·전체 사고범위·시설 전체

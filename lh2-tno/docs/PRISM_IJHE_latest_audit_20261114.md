@@ -25,7 +25,7 @@
 | `validation_evidence_matrix_with_provider_intake.json` | 물리·관측·provider 검증근거 경계 | 시설 QRA 보류를 명시 |
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
 | `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 3개 국소 경계 통과, 41개 보류; 시설 QRA 승격 0 |
-| `conditional_facility_risk_view_with_release_trace.json` | 조건부 시설 IR/F-N과 case-keyed 방출→risk trace | 44 case·176 atom 연결; diagnostic-only, promotion false |
+| `conditional_facility_risk_view_with_release_trace.json` | 조건부 시설 IR/F-N, case-keyed 방출→risk trace, 문헌 빈도 trace | 44 case·176 atom, 5개 빈도 시나리오·순위 안정성; diagnostic-only, promotion false |
 | `hazop_provider_bound_integrated_risk.json` | 현재 모니터링·예측 상태의 HAZOP→provider·SLABx-LH2→시설 handoff | current 1건·forecast 1건 정량평가와 campaign handoff 연결 PASS; synthetic/provider-bound 진단 전용 |
 | `support_center_hazop_operating_mode_evidence_audit.json` | 검사센터 운전순서에서 일반 모드·HAZOP 정성 근거 추출 | 52개 모드 행; 빈도·방출 생성 없음 |
 | `support_center_reviewed_signal_unit_evidence.json` | 문서 anchor 기반 일부 PT/TT 단위 확인 | 부분 근거; 미검토 tag·calibration은 보류 |
@@ -71,7 +71,7 @@ python scripts/build_ijhe_completion_audit.py `
 
 ## 판정
 
-현재 결과는 40개 검사 중 36개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+현재 결과는 41개 검사 중 37개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
 
 통과한 진단 연결은 다음을 뜻한다.
 
@@ -79,6 +79,8 @@ python scripts/build_ijhe_completion_audit.py `
 - 방출량·지속시간·차단·재고 장부가 피해계산 입력으로 전달된다.
 - SLABx-LH2 확산·pool 결과가 점화·피해 risk atom으로 전달된다.
 - 문헌 빈도 불확실성과 처리시간이 별도 장부로 기록된다.
+- 조건부 view가 5개 문헌 빈도 시나리오, 분위수 출처, 상관 가정, 설비·사고군
+  순위 안정성, 명시적 포트 결합과 빈도 추론 금지를 전달한다.
 - HAZOP 운전 모드는 명시적 입력으로만 선택된다.
 - 검사센터 실측 상태와 운전 모드가 HAZOP 선택·provider binding·격리 branch 진단에 연결된다.
 - 조건부 시설 view에서 44개 case의 방출 지속시간·재고·종료 상태와 176개 risk atom의
@@ -112,4 +114,10 @@ python scripts/build_ijhe_completion_audit.py `
 case·176개 risk atom과 일치하고 각 행에 case key, 방출 종료 메타데이터, risk atom
 accounting을 갖는지 확인한다. 이 검사는 디지털트윈 전달 경로의 구조를 검증하는
 진단 검사이며, qualified provider 또는 시설 IR/F-N 승격 검사는 아니다.
+
+`diagnostic_conditional_facility_frequency_trace` 검사는 같은 view의 5개 문헌 빈도
+시나리오가 고유 ID, 분위수 출처, 상관 가정, 조건부 IR/F-N, 순위 안정성 및 포트
+결합 상태를 갖는지 확인한다. `frequency_inference_allowed=false`,
+`facility_credible_interval=false`, `complete_facility_qra_claim=false`를 함께
+검사하므로 이 결과는 빈도 민감도 장부이지 현장 빈도 학습이나 시설 전체 QRA가 아니다.
 
