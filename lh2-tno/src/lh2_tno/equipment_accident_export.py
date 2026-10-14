@@ -954,7 +954,13 @@ def _export(
         "direction_enu": scenario.direction_enu,
         "ambient_pressure_pa_abs": scenario.ambient_pressure_pa_abs,
         "ambient_temperature_k": scenario.ambient_temperature_k,
-        "failure_opening_diameter_m": None,
+        # The accident request owns the declared failed opening.  Preserve it
+        # when adapting the provider response so liquid/gas adapters can
+        # validate the geometry instead of treating a finite-hole release as
+        # an opening-free inventory event.  Inventory and relief requests use
+        # their dedicated export paths and therefore remain opening-free when
+        # their contracts require it.
+        "failure_opening_diameter_m": scenario.failure_opening_diameter_m,
         "provider_result": response,
     }
     try:

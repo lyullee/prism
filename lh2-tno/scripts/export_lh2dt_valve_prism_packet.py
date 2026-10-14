@@ -252,6 +252,25 @@ class ValveAccidentProvider:
             if isolation_success
             else "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping"
         )
+        provider_meta = {
+            "model_class": "lh2dt.StrokeLimitedCommandedValve",
+            "mass_flow_kg_s": flow,
+            "gas_quality": gas_fraction,
+            "choked": bool(result.choked),
+            "throat_pressure_pa": float(result.throat_pressure_Pa),
+            "mass_flux_kg_m2_s": float(result.mass_flux_kg_m2_s),
+            "initial_mass_kg": available_mass,
+            "final_mass_kg": available_mass - cumulative_mass,
+            "residual_mass_kg": available_mass - cumulative_mass,
+            "final_opening": float(actuator.opening),
+            "post_isolation_zero_flow": zero_flow_after_isolation,
+        }
+        if self.isolation_time_s is not None:
+            provider_meta.update({
+                "isolation_time_s": self.isolation_time_s,
+                "post_isolation_observation_s": self.post_isolation_observation_s,
+                "isolation_success": isolation_success,
+            })
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
             "provider_state_snapshot_digest": request["state_snapshot_digest"],
@@ -275,22 +294,7 @@ class ValveAccidentProvider:
                 "reference_area_provenance": "external StrokeLimitedCommandedValve full-open bore",
                 "droplet_partition_provenance": "provider atmospheric liquid partition; airborne liquid explicitly zero",
                 "steps": steps,
-                "provider_meta": {
-                    "model_class": "lh2dt.StrokeLimitedCommandedValve",
-                    "mass_flow_kg_s": flow,
-                    "gas_quality": gas_fraction,
-                    "choked": bool(result.choked),
-                    "throat_pressure_pa": float(result.throat_pressure_Pa),
-                    "mass_flux_kg_m2_s": float(result.mass_flux_kg_m2_s),
-                    "initial_mass_kg": available_mass,
-                    "final_mass_kg": available_mass - cumulative_mass,
-                    "residual_mass_kg": available_mass - cumulative_mass,
-                    "isolation_time_s": self.isolation_time_s,
-                    "post_isolation_observation_s": self.post_isolation_observation_s,
-                    "isolation_success": isolation_success,
-                    "final_opening": float(actuator.opening),
-                    "post_isolation_zero_flow": zero_flow_after_isolation,
-                },
+                "provider_meta": provider_meta,
             },
         }
 

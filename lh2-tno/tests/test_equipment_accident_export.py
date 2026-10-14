@@ -127,6 +127,7 @@ def test_explicit_provider_export_is_strictly_promoted_but_diagnostic_is_not_qua
     provider = _Provider()
     result = export_equipment_gas_accident_history(provider, _request())
     assert result.release.duration_s == pytest.approx(0.2)
+    assert result.release.failure_opening_diameter_m == pytest.approx(0.1)
     assert result.provider_method == "export_accident_history"
     assert result.promotion_status == "DIAGNOSTIC_PACKET_NOT_PROMOTED"
     assert result.provider_packet_promoted is False
