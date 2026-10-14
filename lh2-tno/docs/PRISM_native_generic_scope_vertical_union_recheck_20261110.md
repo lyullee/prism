@@ -61,3 +61,25 @@ python scripts/run_native_full_scope_union_assessment.py `
 - fresh physics 처리시간은 1 Hz를 보장하지 않으며, exact cache 경로만 진단적으로 1 Hz 조건을 만족한다.
 
 따라서 최신 상태는 `INCOMPLETE_EVIDENCE`이며, 이 결합은 `vertical_handoff` 누락을 줄인 개발 단계의 증거다. 최종 승격에는 실제 설비별 packet, 독립 SLABx-LH2/실증 비교, 실제 수용점·기상·인구자료, 그리고 모든 선언 사고군의 release-boundary 폐합이 추가로 필요하다.
+
+## 사고 포트 결합 재검증
+
+확장 사건의 빈도 포트가 비어 있던 문제를 기존 명시적 crosswalk로 보완했다. 수직 handoff 5개와 재고 소진 5개 사건에 각각 `terminal_pipe.out`을 검토된 빈도 포트로 지정하고, provider가 내보낸 출구 포트를 빈도 근거로 추정하지 않았다.
+
+```powershell
+python scripts/bind_frequency_port_result.py `
+  --campaign-result results/20261020/vertical_vent_all_bins/campaign_result.json `
+  --event-port-map results/20261014/goal_continuation_port_bound/vertical_event_port_map.json `
+  --output results/20261110/native_full_scope_union_assessment_latest2_near_vertical/vertical_campaign_result_port_bound.json `
+  --audit results/20261110/native_full_scope_union_assessment_latest2_near_vertical/vertical_frequency_port_binding_audit.json
+
+python scripts/bind_frequency_port_result.py `
+  --campaign-result results/20261009/equipment_inventory_campaign/campaign_result.json `
+  --event-port-map results/20261014/goal_continuation_port_bound/inventory_event_port_map.json `
+  --output results/20261110/native_full_scope_union_assessment_latest2_near_vertical/inventory_campaign_result_port_bound.json `
+  --audit results/20261110/native_full_scope_union_assessment_latest2_near_vertical/inventory_frequency_port_binding_audit.json
+```
+
+포트 결합 후 시설 평가의 `frequency_port_binding`은 34/34 port-scoped event, 0 unbound, 0 case mismatch, 0 risk-atom mismatch, `ALIGNED`다. 이 검사는 빈도와 사고 포트의 장부 정합성만 확인하며 빈도를 새로 추정하거나 provider packet을 적격으로 승격하지 않는다.
+
+최신 결합 감사 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_completion_audit_latest4_port_bound.json`은 34개 검사 중 29개를 통과하고 5개를 차단한다. 포트 결합과 설비 모델→사고 방출 인터페이스 검사는 통과했지만, 실제 provider packet·모든 방출 종료경계·독립 검증이 없으므로 시설 전체 QRA는 계속 보류한다.
