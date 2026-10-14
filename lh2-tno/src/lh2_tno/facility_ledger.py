@@ -679,6 +679,7 @@ def _component_risk_ranking(
                 "component_id": str(component_id),
                 "event_count": int(contribution.get("event_count", 0)),
                 "risk_atom_count": int(contribution.get("risk_atom_count", 0)),
+                "operating_modes": sorted(contribution.get("operating_modes", ())),
                 "status": coverage.get("status"),
                 "peak_annual_ir_low_high": peaks,
                 "peak_receptor_id_low_high": peak_receptors,
@@ -1268,9 +1269,18 @@ def merge_facility_campaign_results(
             "MISSING_COVERAGE_LEDGER" if component_id in expected_components else "UNKNOWN_COMPONENT",
         )
         strict_count = component_strict_uncomputed_counts.get(component_id, 0)
+        component_operating_modes = sorted(
+            {
+                atom["operating_mode"].strip()
+                for atom in component_atoms.get(component_id, [])
+                if isinstance(atom.get("operating_mode"), str)
+                and atom["operating_mode"].strip()
+            }
+        )
         component_coverage[component_id] = {
             "component_id": component_id,
             "status": component_status,
+            "operating_modes": component_operating_modes,
             "event_count": len(component_event_ids.get(component_id, set())),
             "event_ids": sorted(component_event_ids.get(component_id, set())),
             "conditional_case_count": component_conditional_case_count,
@@ -1313,6 +1323,14 @@ def merge_facility_campaign_results(
                 if str(event["model_component_id"]) == component_id
             ),
             "risk_atom_count": len(atoms),
+            "operating_modes": sorted(
+                {
+                    atom["operating_mode"].strip()
+                    for atom in atoms
+                    if isinstance(atom.get("operating_mode"), str)
+                    and atom["operating_mode"].strip()
+                }
+            ),
             "annual_ir_low_high": component_ir,
             "expected_death_fn_low_high": [
                 _fn_curve(atoms, endpoint) for endpoint in range(2)
@@ -1337,6 +1355,14 @@ def merge_facility_campaign_results(
         scenario_family_contributions[family] = {
             "event_count": len({str(atom["event_id"]) for atom in atoms}),
             "risk_atom_count": len(atoms),
+            "operating_modes": sorted(
+                {
+                    atom["operating_mode"].strip()
+                    for atom in atoms
+                    if isinstance(atom.get("operating_mode"), str)
+                    and atom["operating_mode"].strip()
+                }
+            ),
             "annual_ir_low_high": family_ir,
             "expected_death_fn_low_high": [
                 _fn_curve(atoms, endpoint) for endpoint in range(2)

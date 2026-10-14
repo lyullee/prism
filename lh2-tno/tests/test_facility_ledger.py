@@ -554,6 +554,18 @@ def test_facility_ledger_preserves_operating_modes_in_each_branch_view():
         "receiving",
         "supply",
     ]
+    assert merged["component_contributions"]["tank-mode"]["operating_modes"] == [
+        "receiving",
+        "supply",
+    ]
+    assert merged["component_coverage"]["tank-mode"]["operating_modes"] == [
+        "receiving",
+        "supply",
+    ]
+    assert merged["component_risk_ranking"]["rows"][0]["operating_modes"] == [
+        "receiving",
+        "supply",
+    ]
     assert branches["release_branches"]["release-1"][
         "weighted_frequency_per_year"
     ] == pytest.approx(3e-3)

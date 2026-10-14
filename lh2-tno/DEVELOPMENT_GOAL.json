@@ -2352,7 +2352,7 @@
   ],
   "facility_scenario_branch_accounting_status": "EXPLICIT_BRANCH_ACCOUNTING; diagnostic only; no frequency inference or branch reallocation",
   "facility_scenario_branch_operating_mode_trace_implemented": true,
-  "facility_scenario_branch_operating_mode_trace_output": "operating_modes on annual_conditions, release_branches and ignition_branches; legacy atoms without a mode remain []",
+  "facility_scenario_branch_operating_mode_trace_output": "operating_modes on annual_conditions, release_branches, ignition_branches, component_contributions, component_coverage and component risk ranking; legacy atoms without a mode remain []",
   "facility_scenario_branch_operating_mode_trace_policy": "Mode is diagnostic identity metadata only; it is sorted and preserved through facility aggregation without frequency inference or branch reallocation.",
   "facility_scenario_branch_accounting_cross_product": "Each validated risk atom retains one annual condition, release/termination branch, and ignition branch; overlapping scenario-family views are not re-summed.",
   "facility_scenario_branch_accounting_latest_summary": "Latest 29-event/136-atom merged diagnostic: 3 annual conditions, 2 release branches, 4 ignition branches, 12 observed condition×release×ignition combinations; facility total remains withheld.",
