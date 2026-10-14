@@ -3202,5 +3202,12 @@
   "ijhe_completion_audit_external_document_evidence_record": "results/20261107/ijhe_completion_audit_with_external_document_evidence.json",
   "ijhe_completion_audit_external_document_evidence_status": "PASS_DIAGNOSTIC_ONLY; candidate pump documents are integrated into the completion audit without physical-validation, frequency or facility-QRA promotion",
   "ijhe_completion_audit_external_document_evidence_check_name": "diagnostic_external_document_evidence",
-  "ijhe_completion_audit_external_document_evidence_promotion": false
+  "ijhe_completion_audit_external_document_evidence_promotion": false,
+  "ijhe_completion_audit_latest_full_evidence_record": "results/20261107/ijhe_completion_audit_full_evidence_with_external_documents.json",
+  "ijhe_completion_audit_latest_full_evidence_status": "INCOMPLETE_EVIDENCE; 39 checks; 6 strict blocking reasons; external document check PASS diagnostic-only",
+  "ijhe_completion_audit_latest_full_evidence_check_count": 39,
+  "ijhe_completion_audit_latest_full_evidence_blocking_reason_count": 6,
+  "ijhe_completion_audit_latest_full_evidence_physical_validation_claim": false,
+  "ijhe_completion_audit_latest_full_evidence_facility_qra_claim": false,
+  "ijhe_completion_audit_latest_full_evidence_doc": "docs/PRISM_최신전체증거_완료감사_20261107.md"
 }
