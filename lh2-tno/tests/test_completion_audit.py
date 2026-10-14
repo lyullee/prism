@@ -61,6 +61,7 @@ def test_completion_audit_records_forecast_hazop_trigger_without_qra_promotion()
             "steps": [{"forecast_time_s": 10.0}],
             "scenario_entries": [{
                 "trigger_type": "RISK_CONDITION_REACHED",
+                "operating_mode": "receiving",
                 "evaluation": {"status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR"},
             }],
             "trigger_count": 1,
@@ -73,6 +74,7 @@ def test_completion_audit_records_forecast_hazop_trigger_without_qra_promotion()
             },
             "policy": {
                 "operating_mode_taken_from_forecast_input": True,
+                "operating_mode_trace_recorded": True,
                 "frequency_inference_performed": False,
                 "sensor_frequency_learning_used": False,
                 "facility_qra_promotion": False,
@@ -118,6 +120,57 @@ def test_completion_audit_blocks_forecast_scan_without_processing_timing():
     )
     assert check["status"] == "BLOCKED"
     assert "processing" in check["blocking_reason"]
+
+
+def test_completion_audit_blocks_forecast_mode_trace_mismatch():
+    forecast = {
+        "schema_version": "prism.hazop_forecast_risk_scan.v1",
+        "status": "FORECAST_RISK_SCAN_COMPLETE",
+        "forecast_origin": "model_prediction",
+        "steps": [{
+            "forecast_time_s": 10.0,
+            "components": [{
+                "component_id": "TK-01",
+                "scenarios": [{
+                    "scenario_id": "scenario-01",
+                    "operating_mode": "supply",
+                    "scenario": {"operating_mode": "receiving"},
+                }],
+            }],
+        }],
+        "scenario_entries": [{
+            "trigger_type": "RISK_CONDITION_REACHED",
+            "operating_mode": "supply",
+        }],
+        "trigger_count": 1,
+        "evaluated_count": 0,
+        "withheld_count": 1,
+        "timing": {
+            "wall_elapsed_ms": 0.8,
+            "quantitative_evaluation_elapsed_ms": 0.0,
+            "fresh_physics_claim": False,
+        },
+        "policy": {
+            "operating_mode_taken_from_forecast_input": True,
+            "operating_mode_trace_recorded": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_forecast_scan=forecast,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_forecast_risk_scan"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["operating_mode_trace_valid"] is False
 
 
 def test_completion_audit_records_domain_recovery_without_promoting_qra():

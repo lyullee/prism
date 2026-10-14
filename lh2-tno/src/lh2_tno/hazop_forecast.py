@@ -532,6 +532,7 @@ def run_hazop_forecast_risk_scan(
         },
         "policy": {
             "operating_mode_taken_from_forecast_input": True,
+            "operating_mode_trace_recorded": True,
             "frequency_inference_performed": False,
             "sensor_frequency_learning_used": False,
             "release_packet_created_by_scan": False,

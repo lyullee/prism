@@ -2792,6 +2792,43 @@ def build_ijhe_completion_audit(
         evaluated_count = hazop_forecast_scan.get("evaluated_count")
         withheld_count = hazop_forecast_scan.get("withheld_count")
         forecast_timing = hazop_forecast_scan.get("timing")
+        mode_trace_valid = True
+        if isinstance(scenario_entries, list):
+            for entry in scenario_entries:
+                if not isinstance(entry, Mapping):
+                    mode_trace_valid = False
+                    break
+                if entry.get("trigger_type") in {
+                    "RISK_CONDITION_REACHED",
+                    "ACTIVE_CONDITION_RECHECK",
+                    "RISK_CONDITION_CLEARED",
+                }:
+                    mode = entry.get("operating_mode")
+                    if not isinstance(mode, str) or not mode.strip():
+                        mode_trace_valid = False
+                        break
+        if mode_trace_valid and isinstance(steps, list):
+            for step in steps:
+                if not isinstance(step, Mapping):
+                    mode_trace_valid = False
+                    break
+                for component in step.get("components", ()):
+                    if not isinstance(component, Mapping):
+                        mode_trace_valid = False
+                        break
+                    for scenario_row in component.get("scenarios", ()):
+                        if not isinstance(scenario_row, Mapping):
+                            mode_trace_valid = False
+                            break
+                        scenario = scenario_row.get("scenario")
+                        if isinstance(scenario, Mapping):
+                            if scenario_row.get("operating_mode") != scenario.get("operating_mode"):
+                                mode_trace_valid = False
+                                break
+                    if not mode_trace_valid:
+                        break
+                if not mode_trace_valid:
+                    break
         timing_valid = (
             isinstance(forecast_timing, Mapping)
             and _finite(forecast_timing.get("wall_elapsed_ms"))
@@ -2815,10 +2852,12 @@ def build_ijhe_completion_audit(
             and withheld_count >= 0
             and trigger_count == evaluated_count + withheld_count
             and forecast_policy.get("operating_mode_taken_from_forecast_input") is True
+            and forecast_policy.get("operating_mode_trace_recorded") is True
             and forecast_policy.get("frequency_inference_performed") is False
             and forecast_policy.get("sensor_frequency_learning_used") is False
             and forecast_policy.get("facility_qra_promotion") is False
             and forecast_policy.get("diagnostic_only") is True
+            and mode_trace_valid
             and timing_valid
         )
         forecast_check = _check(
@@ -2835,6 +2874,7 @@ def build_ijhe_completion_audit(
                 "evaluated_count": evaluated_count,
                 "withheld_count": withheld_count,
                 "timing": dict(forecast_timing) if isinstance(forecast_timing, Mapping) else None,
+                "operating_mode_trace_valid": mode_trace_valid,
                 "policy": dict(forecast_policy),
             },
             "forecast HAZOP scan is missing a valid state-origin, trigger accounting, processing timing, or fail-closed policy",

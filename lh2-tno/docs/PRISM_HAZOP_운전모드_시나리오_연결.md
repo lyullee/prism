@@ -81,6 +81,7 @@ python scripts/scan_hazop_forecast.py `
 ```
 
 생성된 scan은 `scripts/build_ijhe_completion_audit.py --hazop-forecast-scan`으로 IJHE 감사 원장에 넣을 수 있다. 감사 결과는 예측 trigger의 입력 모드·시간축·보류 회계와 `timing.wall_elapsed_ms`·`timing.quantitative_evaluation_elapsed_ms`의 존재를 확인한다. `fresh_physics_claim=true`이거나 처리시간이 없으면 진단 check를 통과시키지 않는다. 이 진단 check 자체로 시설 QRA를 승격하지 않는다.
+감사기는 trigger·재평가·해제 항목의 `operating_mode` 존재와 각 scenario row의 mode 일치를 함께 확인한다. mode가 빠지거나 scenario와 다르면 예측 경로 check는 차단되며, 누락 mode를 다른 시점의 값으로 보정하지 않는다.
 
 다설비 예측을 연결할 때 release resolver는 `(component_id, scenario_id)` 튜플을 키로 사용할 수 있다. 이 키가 있으면 같은 HAZOP 행 ID가 여러 설비에 재사용되어도 설비별 provider 방출이 섞이지 않는다. 단일 설비 예제에서는 기존 `scenario_id` 키도 호환되며, 실행 결과에는 실제로 선택된 resolver 키 범위가 기록된다.
 
@@ -111,6 +112,6 @@ python scripts/evaluate_hazop_operating_mode.py `
 
 이 모듈은 설비-neutral HAZOP 판단과 scenario dispatch boundary를 닫는다. 사고 family catalog와 provider packet catalog에 없는 사건은 선택하지 않으며, HAZOP 이탈이 있어도 빈도와 피해 결과를 자동으로 만들지 않는다.
 
-현재 HAZOP·runtime mode·forecast 연결을 포함한 관련 집중 검사는 45개, 전체 패키지 검사는 **992 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 예측 공정상태가 위험조건에 처음 도달한 시점의 정량평가 trigger와 기존 runtime consequence gate 재사용 경로, 조건 해제 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff, 운전 모드가 campaign와 provider evidence request까지 보존되는 경로와 중복 mode 충돌 차단을 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
+현재 HAZOP·runtime mode·forecast 연결을 포함한 관련 집중 검사는 45개, 전체 패키지 검사는 **993 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 예측 공정상태가 위험조건에 처음 도달한 시점의 정량평가 trigger와 기존 runtime consequence gate 재사용 경로, 조건 해제 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff, 운전 모드가 campaign와 provider evidence request까지 보존되는 경로와 중복 mode 충돌 차단을 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
 
 남은 엄격 문턱은 실제 설비별 HAZOP·P&ID identity, provider의 차단·재고·종료 이력, 문헌 빈도 event binding, SLABx-LH2 독립 비교, 시설 전체 사고 family coverage와 IR/F-N 승격이다. 현재 검사센터 자료는 정상 상태 신호의 후보 입력으로만 취급한다.

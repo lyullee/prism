@@ -54,6 +54,12 @@
       "forecast_runtime_evaluator_uses_existing_gate": true,
       "forecast_trigger_policy": "entry_or_each_step_explicit",
       "forecast_quantitative_evaluator_required": true,
+      "forecast_operating_mode_trace_recorded": true,
+      "forecast_operating_mode_trace_fields": [
+        "scenario_entries[].operating_mode",
+        "steps[].components[].scenarios[].operating_mode",
+        "RISK_CONDITION_CLEARED.operating_mode"
+      ],
       "forecast_frequency_inference": false,
       "forecast_qra_promotion": false,
       "forecast_completion_audit_check": "diagnostic_hazop_forecast_risk_scan",
@@ -153,7 +159,7 @@
     "field accident-frequency collection and sensor-frequency learning",
     "indoor dispersion, DDT/detonation and full domino interaction"
   ],
-  "next_priority": "Close the remaining scope-ledger consistency, provider qualification, physical-validation and accident-family scope gates. The targeted AREA_0.01% deadline retry is complete; do not convert operator-limited cases into qualified facility risk.",
+  "next_priority": "Close the remaining provider qualification, physical-validation and accident-family scope gates. The current 34-event scope ledger is consistent; do not convert operator-limited cases into qualified facility risk.",
   "layered_tank_worklist_packet_campaign_implemented": true,
   "layered_tank_worklist_packet_campaign_status": "SYNTHETIC_STRUCTURAL_ONLY; storage-tank-01 five area-bin packets exact-match 5/24 worklist events",
   "layered_tank_worklist_packet_campaign_record": "results/20261010/layered_tank_worklist_packets/campaign_verification.json",
@@ -258,7 +264,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "992 passed",
+  "latest_local_full_test_run": "993 passed",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
   "equipment_campaign_compiler_record": "docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md",
@@ -2334,7 +2340,7 @@
     "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
     "NO_RISK_ATOMS"
   ],
-  "full_portable_test_count_latest": 992,
+  "full_portable_test_count_latest": 993,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": [
@@ -2740,7 +2746,7 @@
   "ijhe_objective_coverage_audit_with_external_field_record": "results/20261103/ijhe_objective_coverage_audit_with_external_field.json",
   "ijhe_objective_coverage_audit_with_external_field_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 16 checks, core blockers 0, strict blockers 4; external field row PASS as diagnostic-only with hash drift retained",
   "ijhe_objective_coverage_audit_external_field_diagnostic_policy": "External outdoor observations are audited separately and cannot promote provider release, accident frequency, physical validation or facility QRA; current bundle has source_boundary/weather/common_clock hash drift",
-  "full_portable_test_status_latest": "992 passed",
+  "full_portable_test_status_latest": "993 passed",
   "external_field_model_comparison_contract_implemented": true,
   "external_field_model_comparison_module": "src/lh2_tno/field_model_comparison.py",
   "external_field_model_comparison_schema": "prism.external_field_model_comparison.v1",

@@ -135,6 +135,7 @@
           "scenarios": [
             {
               "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+              "operating_mode": "receiving",
               "status": "QUANTITATIVE_EVALUATION_REQUESTED",
               "scenario": {
                 "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
@@ -241,6 +242,7 @@
           "scenarios": [
             {
               "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+              "operating_mode": "receiving",
               "status": "ACTIVE_CONDITION",
               "scenario": {
                 "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
@@ -333,6 +335,7 @@
     {
       "component_id": "storage-tank-01",
       "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+      "operating_mode": "receiving",
       "forecast_time_s": 10.0,
       "trigger_type": "RISK_CONDITION_REACHED",
       "evaluation": {
@@ -346,6 +349,7 @@
     {
       "component_id": "storage-tank-01",
       "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+      "operating_mode": "receiving",
       "forecast_time_s": 30.0,
       "trigger_type": "RISK_CONDITION_CLEARED",
       "evaluation": null
@@ -355,7 +359,7 @@
   "evaluated_count": 0,
   "withheld_count": 1,
   "timing": {
-    "wall_elapsed_ms": 0.6592999998247251,
+    "wall_elapsed_ms": 0.6896000049891882,
     "quantitative_evaluation_elapsed_ms": 0.0,
     "trigger_count": 1,
     "evaluated_count": 0,
@@ -365,6 +369,7 @@
   },
   "policy": {
     "operating_mode_taken_from_forecast_input": true,
+    "operating_mode_trace_recorded": true,
     "frequency_inference_performed": false,
     "sensor_frequency_learning_used": false,
     "release_packet_created_by_scan": false,
