@@ -3855,11 +3855,12 @@
     "native_scope_packet_catalog_verification": "results/20261111/native_generic_scope_packets_isolation/verification.json",
     "native_scope_isolation_branch_catalog_audit": "results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json",
     "native_isolation_catalog_facility_chain_verification": "results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/verification.json",
-    "validation_evidence_matrix": "results/20261014/validation_evidence_matrix_with_dynamiclh2poolx.json",
+    "validation_evidence_matrix": "results/20261114/validation_evidence_matrix_with_provider_intake.json",
     "slabx_validation_evidence": "results/20261106/slabx_lh2_validation_audit_recomputed.json",
     "facility_evidence_request": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_evidence_request.json",
     "diagnostic_worklist_evidence": "results/20261024/native_generic_scope_packet_evidence_qualification_readiness_v14.json",
     "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
+    "release_boundary_case_audit": "results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,
     "merged_case_count": 44,
@@ -3882,6 +3883,13 @@
     "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 4,
+    "completion_audit_check_count": 31,
+    "completion_audit_pass_count": 27,
+    "completion_audit_blocked_count": 4,
+    "release_boundary_case_count": 44,
+    "release_boundary_case_source_alignment": "ALIGNED",
+    "strict_release_boundary_eligible_case_count": 3,
+    "strict_release_boundary_blocked_case_count": 41,
     "facility_qra_promotion": false
   }
 }
