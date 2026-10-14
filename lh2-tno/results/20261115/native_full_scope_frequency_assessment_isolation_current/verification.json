@@ -1,0 +1,167 @@
+{
+  "schema_version": "prism.native_full_scope_frequency_assessment.v1",
+  "status": "NATIVE_FULL_SCOPE_FREQUENCY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-full-scope-example",
+  "configuration_origin": "synthetic",
+  "equipment_component_count": 8,
+  "frequency_asset_count": 7,
+  "frequency_event_count": 24,
+  "campaign_case_count": 24,
+  "executed_case_count": 24,
+  "fully_validated_case_count": 5,
+  "operator_limited_case_count": 19,
+  "strict_uncomputed_case_count": 19,
+  "risk_atom_count": 96,
+  "frequency_checks": {
+    "event_count": 24,
+    "risk_atom_count": 96,
+    "risk_atom_frequency_match_count": 96,
+    "risk_atom_frequency_mismatch_count": 0,
+    "risk_atom_frequency_mismatch_event_ids": [],
+    "frequency_is_taken_from_catalogue_event": true
+  },
+  "frequency_scenario_count": 3,
+  "provider_worklist_event_count": 24,
+  "provider_worklist_packet_count": 0,
+  "provider_worklist_status": "READY_FOR_PROVIDER_PACKETS",
+  "provider_worklist_alignment_status": "ALIGNED",
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "facility_total_risk_available": false,
+  "scope_matrix_status": "PARTIAL_DECLARED_SCOPE",
+  "scope_matrix_complete": false,
+  "scope_matrix_blocking_reasons": [
+    "vessel_hole: PARTIAL",
+    "pipe_hole: PARTIAL",
+    "valve_hole: PARTIAL",
+    "pump_hole: PARTIAL",
+    "liquid_two_phase: PARTIAL",
+    "inventory_depletion: PARTIAL",
+    "two_sided_rupture: PARTIAL",
+    "vertical_handoff: NO_EVENT_GENERATED",
+    "campaign does not provide total facility annual IR"
+  ],
+  "timing": {
+    "runner_elapsed_ms": 147268.6945000023,
+    "campaign": {
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1462.1804999915184,
+      "case_median_ms": 6121.991400003026,
+      "case_max_ms": 13208.075100003043,
+      "case_p95_ms": 11891.171990011204,
+      "case_p99_ms": 12956.516878005496,
+      "campaign_elapsed_ms": 147268.4401000006,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    },
+    "assessment": {
+      "campaign_count": 1,
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1462.1804999915184,
+      "case_median_ms": 6121.991400003026,
+      "case_max_ms": 13208.075100003043,
+      "case_p95_ms": 11891.171990011204,
+      "case_p99_ms": 12956.516878005496,
+      "campaign_elapsed_ms": 147268.4401000006,
+      "campaign_elapsed_ms_sum": 147268.4401000006,
+      "campaign_elapsed_ms_min": 147268.4401000006,
+      "campaign_elapsed_ms_median": 147268.4401000006,
+      "campaign_elapsed_ms_max": 147268.4401000006,
+      "campaign_elapsed_ms_p95": 147268.4401000006,
+      "campaign_elapsed_ms_p99": 147268.4401000006,
+      "stage_elapsed_ms": {
+        "cloud_observation": {
+          "sample_count": 22,
+          "sum_ms": 6010.780099997646,
+          "median_ms": 252.34765000641346,
+          "max_ms": 908.6115000100108,
+          "p95_ms": 678.1124199907933,
+          "p99_ms": 863.3392590058791
+        },
+        "endpoint_a": {
+          "sample_count": 2,
+          "sum_ms": 6153.881999998703,
+          "median_ms": 3076.9409999993513,
+          "max_ms": 3097.3251999967033,
+          "p95_ms": 3095.286779996968,
+          "p99_ms": 3096.9175159967563
+        },
+        "endpoint_aggregation": {
+          "sample_count": 2,
+          "sum_ms": 12506.637200000114,
+          "median_ms": 6253.318600000057,
+          "max_ms": 6282.360299999709,
+          "p95_ms": 6279.456129999744,
+          "p99_ms": 6281.779465999716
+        },
+        "endpoint_b": {
+          "sample_count": 2,
+          "sum_ms": 6350.641099998029,
+          "median_ms": 3175.3205499990145,
+          "max_ms": 3183.9507999975467,
+          "p95_ms": 3183.0877749976935,
+          "p99_ms": 3183.778194997576
+        },
+        "fire_explosion_damage_risk": {
+          "sample_count": 22,
+          "sum_ms": 1784.8228000220843,
+          "median_ms": 77.42924999911338,
+          "max_ms": 144.5543000008911,
+          "p95_ms": 100.17987999963225,
+          "p99_ms": 135.3093020006781
+        },
+        "near_field_and_dispersion": {
+          "sample_count": 22,
+          "sum_ms": 93787.51070001454,
+          "median_ms": 4187.803250002617,
+          "max_ms": 11656.612299993867,
+          "p95_ms": 8967.56280500267,
+          "p99_ms": 11106.558900995731
+        },
+        "pool": {
+          "sample_count": 22,
+          "sum_ms": 12199.431899993215,
+          "median_ms": 165.5264500004705,
+          "max_ms": 8892.03409999027,
+          "p95_ms": 323.3072150069347,
+          "p99_ms": 7093.090456993807
+        },
+        "source": {
+          "sample_count": 22,
+          "sum_ms": 15461.881399998674,
+          "median_ms": 703.1205999956001,
+          "max_ms": 739.9359999981243,
+          "p95_ms": 730.5702299941913,
+          "p99_ms": 738.0187419972208
+        }
+      },
+      "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+    }
+  },
+  "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "manifest and annual conditions are synthetic generic outdoor inputs",
+    "literature rates are applied to generated events; no field-frequency or sensor-frequency learning is used",
+    "19 cases have numerical outputs but remain EXECUTED_OPERATOR_LIMITED because the provider boundary is constant-state or otherwise open",
+    "vertical handoff is retained as an explicit accident-family scope row and remains uncomputed in this campaign",
+    "conditional IR/F-N is the sum of evaluated atoms and is not a qualified facility total or credible interval",
+    "provider qualification and independent physical validation remain closed"
+  ]
+}

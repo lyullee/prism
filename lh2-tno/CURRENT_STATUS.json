@@ -4950,8 +4950,8 @@
     "vertical_handoff_termination_evidence_search_status": "SEARCH_COMPLETE_EVIDENCE_OPEN; 5 event rows and 10 case rows explicitly remain NOT_SUPPLIED because provider termination_basis is synthetic_diagnostic_horizon",
     "vertical_handoff_termination_evidence_promotion": false
   },
-  "latest_authoritative_union_result": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/campaign_result.json",
-  "latest_authoritative_facility_assessment": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/facility_assessment.json",
+  "latest_authoritative_union_result": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
+  "latest_authoritative_facility_assessment": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "latest_authoritative_conditional_risk_view": "results/20261115/conditional_facility_risk_view_with_release_trace.json",
   "latest_ijhe_completion_audit": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_port_bound.json",
   "latest_release_boundary_case_audit": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff.json",
@@ -4994,5 +4994,16 @@
   "latest_native_lh2dt_frequency_case_facility_total_risk_available": false,
   "latest_native_lh2dt_frequency_case_provider_packet_promoted": false,
   "latest_native_lh2dt_frequency_case_physical_validation_claim": false,
-  "latest_native_lh2dt_frequency_case_facility_qra_claim": false
+  "latest_native_lh2dt_frequency_case_facility_qra_claim": false,
+  "latest_authoritative_union_verification": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/verification.json",
+  "latest_union_status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC; isolation-bound native frequency case rebound into 34 events, 44 cases, 176 risk atoms",
+  "latest_union_isolation_case_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
+  "latest_union_isolation_case_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+  "latest_union_isolation_case_provider_termination_basis": "reviewed_isolation_success",
+  "latest_union_isolation_case_provider_result_digest": "3d737384a6d02cad8877da680ccaaf78dbe751d57b3ccc2b14683d51ecaef6fd",
+  "latest_union_isolation_case_provider_mass_residual_kg": 0.0,
+  "latest_union_isolation_case_native_export_elapsed_ms": 155.66809999290854,
+  "latest_union_isolation_case_consequence_chain_elapsed_ms": 146119.21319999965,
+  "latest_union_isolation_case_facility_total_risk_available": false,
+  "latest_union_isolation_case_facility_qra_claim": false
 }

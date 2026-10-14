@@ -21,6 +21,17 @@ basis를 보존한다. 최신 감사는 50개 검사 중 46개 PASS·4개 BLOCKE
 [`수직 handoff 재고소진 연결 기록`](docs/PRISM_vertical_inventory_handoff_20261115.md)과
 [`PRISM IJHE 최신 감사`](docs/PRISM_IJHE_latest_audit_20261115.md)에 있다.
 
+
+**최신 격리 branch의 시설 union 재결합 (2026-11-15):** `LH2_VESSEL AREA_0.01%` 문헌
+빈도 행을 현재 native `LayeredTank` 사고 exporter로 계산하고, provider의
+`reviewed_isolation_success` 종료 경계를 기존 24개 기본 사건·수직 handoff 5개·재고소진
+5개 원장에 다시 결합했다. 대상 사건은 `tank-accident-out` 포트와 SLABx-LH2 피해 chain을
+통과하며 provider 질량 잔차는 `0 kg`이다. 최신 union은 **34개 event·44개 case·176개
+risk atom**을 유지하고 `NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC`으로 기록된다. native export는
+약 `155.7 ms`, 전체 chain은 약 `146.1 s`였다. 이는 빈도→설비 방출→격리→피해→시설
+ledger 연결을 닫은 진단 증거이며, 실제 현장 빈도·qualified provider·독립 물리검증·시설
+전체 IR/F-N을 의미하지 않는다. 상세 결과는 [`격리 branch union 재결합 기록`](docs/PRISM_native_frequency_isolation_union_20261115.md)과
+[`최신 isolation union`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/)에서 확인한다.
 현장 빈도 학습, 센서 역추론, 실내, 폭굉, 전체 도미노는 여전히 필수 범위에서
 제외하고 문헌 빈도만 사용한다. 지원되지 않은 사고는 다른 사고로 대체하지 않고
 `PARTIAL`, `BLOCKED_REVIEW`, `UNCOMPUTED` 또는 증거요청으로 남긴다.

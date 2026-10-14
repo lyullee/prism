@@ -1,0 +1,290 @@
+{
+  "schema_version": "prism.extension_state_snapshot_coverage.v1",
+  "status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_COMPLETE",
+  "policy": {
+    "canonical_state_required": true,
+    "provider_echo_required": true,
+    "release_values_may_reconstruct_state": false,
+    "result_digest_may_reconstruct_state": false,
+    "diagnostic_only": true,
+    "facility_qra_claim": false
+  },
+  "source_families": {
+    "vertical_handoff": 5,
+    "inventory_depletion": 5
+  },
+  "event_count": 10,
+  "bound_event_count": 10,
+  "unbound_event_count": 0,
+  "provider_identity_missing_event_count": 0,
+  "provider_identity_missing_event_ids": [],
+  "missing_event_ids": [],
+  "rows": [
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "inventory-depletion-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "inventory-depletion-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "inventory-depletion-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "inventory-depletion-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_bound": true,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "inventory-depletion-pipe-01"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "state_snapshot_digest": null,
+      "provider_state_snapshot_digest": null,
+      "reason": "canonical state snapshot is carried in every case identity and echoed by the provider",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    }
+  ],
+  "source_record_paths": {
+    "vertical_handoff": null,
+    "inventory_depletion": null
+  },
+  "state_snapshot_audit_record_path": null,
+  "interpretation": "Extension events remain unbound until a canonical EquipmentStateSnapshot payload is supplied and echoed by the provider. A release boundary, flow history, or result digest is evidence of the release calculation only and cannot be promoted to state."
+}

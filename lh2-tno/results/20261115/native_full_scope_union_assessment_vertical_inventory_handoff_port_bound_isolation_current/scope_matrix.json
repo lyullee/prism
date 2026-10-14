@@ -1,0 +1,607 @@
+{
+  "schema_version": "prism.major_accident_scope.v1",
+  "facility_id": "generic-lh2-full-scope-example",
+  "scope": "outdoor_major_accidents",
+  "required_families": [
+    "vessel_hole",
+    "pipe_hole",
+    "valve_hole",
+    "vent_hole",
+    "pump_hole",
+    "vaporizer_hole",
+    "reliquefier_hole",
+    "liquid_two_phase",
+    "inventory_depletion",
+    "inventory_over_600s",
+    "two_sided_rupture",
+    "vertical_handoff"
+  ],
+  "rows": [
+    {
+      "family": "vessel_hole",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "conditional_executed_case_count": 5,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 5,
+      "strict_uncomputed_case_count": 5,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 5,
+      "numerically_executed_case_count": 5,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "5 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 5
+      },
+      "generated_initiation_frequency_per_year": 0.0008248999999999999,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "pipe_hole",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "generated_event_count": 15,
+      "case_count": 25,
+      "executed_case_count": 25,
+      "conditional_executed_case_count": 25,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 10,
+      "operator_limited_case_count": 15,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 15,
+      "strict_uncomputed_case_count": 15,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 15,
+      "numerically_executed_case_count": 25,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "15 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED": 10,
+        "EXECUTED_OPERATOR_LIMITED": 15
+      },
+      "generated_initiation_frequency_per_year": 0.00021996,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "valve_hole",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "conditional_executed_case_count": 5,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 5,
+      "strict_uncomputed_case_count": 5,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 5,
+      "numerically_executed_case_count": 5,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "5 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 5
+      },
+      "generated_initiation_frequency_per_year": 0.0002072,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "vent_hole",
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "strict_uncomputed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
+      "generated_initiation_frequency_per_year": 2e-05,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "pump_hole",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "generated_event_count": 2,
+      "case_count": 2,
+      "executed_case_count": 2,
+      "conditional_executed_case_count": 2,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 2,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 2,
+      "strict_uncomputed_case_count": 2,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 2,
+      "numerically_executed_case_count": 2,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "2 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 2
+      },
+      "generated_initiation_frequency_per_year": 0.0006000000000000001,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "vaporizer_hole",
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "strict_uncomputed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
+      "generated_initiation_frequency_per_year": 0.001,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "reliquefier_hole",
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "strict_uncomputed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
+      "generated_initiation_frequency_per_year": 0.01,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "liquid_two_phase",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 17,
+      "case_count": 17,
+      "executed_case_count": 17,
+      "conditional_executed_case_count": 17,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 17,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 17,
+      "strict_uncomputed_case_count": 17,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 17,
+      "numerically_executed_case_count": 17,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "17 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 17
+      },
+      "generated_initiation_frequency_per_year": 0.0016384799999999999,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "inventory_depletion",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 28,
+      "case_count": 38,
+      "executed_case_count": 38,
+      "conditional_executed_case_count": 38,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 11,
+      "operator_limited_case_count": 27,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 27,
+      "strict_uncomputed_case_count": 27,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 27,
+      "numerically_executed_case_count": 38,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "27 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED": 11,
+        "EXECUTED_OPERATOR_LIMITED": 27
+      },
+      "generated_initiation_frequency_per_year": 0.00190206,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "inventory_over_600s",
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "strict_uncomputed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
+      "generated_initiation_frequency_per_year": 5e-05,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "two_sided_rupture",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5"
+      ],
+      "generated_event_count": 2,
+      "case_count": 2,
+      "executed_case_count": 2,
+      "conditional_executed_case_count": 2,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 2,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 2,
+      "strict_uncomputed_case_count": 2,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 2,
+      "numerically_executed_case_count": 2,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "2 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 2
+      },
+      "generated_initiation_frequency_per_year": 0.00101,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    },
+    {
+      "family": "vertical_handoff",
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "case_count": 10,
+      "executed_case_count": 10,
+      "conditional_executed_case_count": 10,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 10,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 10,
+      "strict_uncomputed_case_count": 10,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 10,
+      "numerically_executed_case_count": 10,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "10 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 10
+      },
+      "generated_initiation_frequency_per_year": 0.0002072,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source": "facility_ledger_event_and_case_metadata"
+    }
+  ],
+  "gap_summary": {
+    "schema_version": "prism.scope_gap_summary.v1",
+    "families_with_numerical_case_gap": [],
+    "families_with_qualification_gap": [
+      "vessel_hole",
+      "pipe_hole",
+      "valve_hole",
+      "pump_hole",
+      "liquid_two_phase",
+      "inventory_depletion",
+      "two_sided_rupture",
+      "vertical_handoff"
+    ],
+    "families_complete": [
+      "vent_hole",
+      "vaporizer_hole",
+      "reliquefier_hole",
+      "inventory_over_600s"
+    ],
+    "family_count": 12,
+    "numerical_case_gap_family_count": 0,
+    "qualification_gap_family_count": 8,
+    "complete_family_count": 4,
+    "family_rows_are_not_additive": true,
+    "interpretation": "A qualification gap means a numerical diagnostic exists but cannot be promoted to qualified facility QRA. A numerical case gap means no consequence result exists and must remain outside the facility total."
+  },
+  "event_count": 34,
+  "case_count": 44,
+  "conditional_executed_case_count": 44,
+  "conditional_uncomputed_case_count": 0,
+  "not_numerically_executed_case_count": 0,
+  "qualified_evidence_withheld_case_count": 29,
+  "numerically_executed_case_count": 44,
+  "conditional_chain_complete": true,
+  "conditional_chain_blocking_reasons": [],
+  "facility_total_risk_available": false,
+  "matrix_complete": false,
+  "blocking_reasons": [
+    "vessel_hole: PARTIAL",
+    "pipe_hole: PARTIAL",
+    "valve_hole: PARTIAL",
+    "pump_hole: PARTIAL",
+    "liquid_two_phase: PARTIAL",
+    "inventory_depletion: PARTIAL",
+    "two_sided_rupture: PARTIAL",
+    "vertical_handoff: PARTIAL"
+  ],
+  "source_facility_ledger_digest": "1edc95f7da3ab1b7226ba5a03351a2616a8d7bfa16f4f6f79110f8a4990681c6",
+  "source": "facility_ledger_event_and_case_metadata",
+  "physical_validation_claim": false,
+  "interpretation": "The final scope matrix is regenerated from the merged facility ledger. Source campaign matrices remain provenance views; overlapping family rows are not additive and the ledger's exact event/case identities are authoritative.",
+  "source_campaign_scope_matrices": [
+    {
+      "facility_id": null,
+      "source": "prism.major_accident_scope.v1",
+      "digest": "2458c4874f9f0d78582da89f779636d9933e3373447025de08473043510b20a1"
+    },
+    {
+      "facility_id": "generic-lh2-full-scope-example",
+      "source": "prism.major_accident_scope.v1",
+      "digest": "015f82a4d4cb8357ac66e9400ba1cf864fe8d2f0f608a9fcb1fd84082a1e28f5"
+    },
+    {
+      "facility_id": "generic-lh2-full-scope-example",
+      "source": "prism.major_accident_scope.v1",
+      "digest": "a1433c3b8b1dee06f44d4d656671ad28491b067fb1faa86d530d0c080ff6c8db"
+    }
+  ],
+  "provider_worklist_alignment": {
+    "schema": "prism.accident_scenario_worklist_alignment.v1",
+    "status": "ALIGNED",
+    "worklist_event_count": 24,
+    "campaign_event_count": 24,
+    "aligned_event_count": 24,
+    "missing_event_ids": [],
+    "duplicate_event_ids": [],
+    "empty_family_item_ids": [],
+    "unknown_family_item_ids": [],
+    "primary_family_mismatches": [],
+    "port_binding_mismatches": [],
+    "extra_campaign_event_ids": [],
+    "primary_family_counts": {
+      "inventory_depletion": 1,
+      "inventory_over_600s": 1,
+      "pipe_hole": 5,
+      "pump_hole": 2,
+      "reliquefier_hole": 1,
+      "two_sided_rupture": 2,
+      "valve_hole": 5,
+      "vaporizer_hole": 1,
+      "vent_hole": 1,
+      "vessel_hole": 5
+    },
+    "blocking_reasons": [],
+    "frequency_inference_performed": false,
+    "provider_packet_created": false,
+    "scope": "base source worklist only",
+    "facility_merge_additional_campaigns": 2,
+    "facility_merge_alignment_claim": false,
+    "interpretation": "The ALIGNED record applies to the 24-event base worklist. Namespaced vertical-handoff and inventory-depletion extensions remain separate diagnostic campaigns."
+  }
+}
