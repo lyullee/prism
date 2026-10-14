@@ -2188,8 +2188,8 @@
   },
   "ijhe_completion_audit_all_bin_facility_total_risk_available": false,
   "ijhe_completion_audit_all_bin_physical_validation_claim": false,
-  "facility_evidence_request_latest_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",
-  "facility_evidence_request_latest_status": "OPEN_EVIDENCE_REQUEST; 44/44 case requests, 12 family requests and 9 component requests structurally covered; qualified provider packet and facility QRA promotion false",
+  "facility_evidence_request_latest_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json",
+  "facility_evidence_request_latest_status": "OPEN_EVIDENCE_REQUEST; 12 outdoor accident families and 24 strict case requests enumerated; no frequency inference or provider/QRA promotion",
   "facility_evidence_request_latest_event_count": 34,
   "facility_evidence_request_latest_risk_atom_count": 176,
   "facility_evidence_request_latest_two_sided_interaction_requirements": true,
@@ -3576,7 +3576,8 @@
       "case_p99_ms": 77886.09374800177,
       "campaign_elapsed_ms": 240916.15869999805,
       "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
-    }
+    },
+    "facility_evidence_request": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json"
   },
   "latest_conditional_facility_ir_fn_status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK; 24 events, 96 risk atoms and 5 no-inference literature scenarios independently audited; strict facility IR/F-N promotion remains withheld for 20 operator-limited cases and zero qualified provider packets",
   "previous_full_evidence_audit_record": "results/20261108/ijhe_completion_audit_full_evidence_with_structural_worklist_and_requests.json",
@@ -3764,7 +3765,8 @@
       "case_p99_ms": 77886.09374800177,
       "campaign_elapsed_ms": 240916.15869999805,
       "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
-    }
+    },
+    "facility_evidence_request": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json"
   },
   "isolation_packet_overlay_latest_record": "results/20261109/generic_scope_packet_evidence_source_state_closure_rebound_isolation_overlay.json",
   "isolation_packet_overlay_latest_status": "12 exact event/component/port-matched reviewed-isolation packets connected diagnostically; provider promotion and facility QRA remain false",
@@ -3780,5 +3782,7 @@
     "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
-  ]
+  ],
+  "facility_evidence_request_latest_family_count": 12,
+  "facility_evidence_request_latest_case_request_count": 24
 }
