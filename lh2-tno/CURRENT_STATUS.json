@@ -1,5 +1,5 @@
 {
-  "date_kst": "2026-11-13",
+  "date_kst": "2026-11-14",
   "package_version": "0.6.2",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
@@ -4712,5 +4712,24 @@
   "facility_evidence_request_latest_family_count": 12,
   "facility_evidence_request_latest_case_request_count": 24,
   "ijhe_audit_latest_blocking_reason_count": 6,
-  "facility_evidence_request_latest_family_request_count": 12
+  "facility_evidence_request_latest_family_request_count": 12,
+  "latest_full_scope_hazop_selection_audit": {
+    "record": "results/20261114/full_scope_hazop_runtime_audit.json",
+    "table_set": "results/20261114/full_scope_hazop_runtime_audit_table_set.json",
+    "observed_runtime_audit": "results/20261114/full_scope_hazop_runtime_audit_observed_runtime.json",
+    "event_binding_audit": "results/20261114/full_scope_hazop_runtime_audit_event_binding.json",
+    "facility_chain": "results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop",
+    "scope_closure_report": "results/20261114/scope_closure_report_fullscope_hazop.json",
+    "status": "FULL_SCOPE_HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+    "base_hazop_table_count": 7,
+    "added_scope_rows": 3,
+    "selected_scenario_count": 10,
+    "frequency_event_count": 24,
+    "bound_event_count": 24,
+    "unbound_event_count": 0,
+    "frequency_assignment_performed": false,
+    "provider_release_created": false,
+    "facility_qra_promotion": false,
+    "interpretation": "HAZOP family and frequency-event identity is closed for the declared 24-event campaign; provider qualification, independent physical validation, strict release closure and facility IR/F-N remain withheld."
+  }
 }

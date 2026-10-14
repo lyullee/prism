@@ -32,6 +32,11 @@ def main() -> int:
         type=Path,
         help="Optional HAZOP event/mode/scenario binding audit produced by the facility-chain runner",
     )
+    parser.add_argument(
+        "--hazop-selection-event-binding",
+        type=Path,
+        help="Optional audit linking selected HAZOP scenarios to frequency event bins",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     frequency_scenarios = (
@@ -40,11 +45,17 @@ def main() -> int:
     hazop_mode_binding = (
         _object(args.hazop_mode_binding) if args.hazop_mode_binding else None
     )
+    hazop_selection_event_binding = (
+        _object(args.hazop_selection_event_binding)
+        if args.hazop_selection_event_binding
+        else None
+    )
     report = build_scope_closure_report(
         _object(args.scope_matrix),
         _object(args.facility_assessment),
         frequency_scenarios,
         hazop_mode_binding,
+        hazop_selection_event_binding,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

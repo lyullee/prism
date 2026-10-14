@@ -55,6 +55,7 @@ def build_scope_closure_report(
     facility_assessment: Mapping[str, Any],
     frequency_scenarios_record: Mapping[str, Any] | None = None,
     hazop_mode_binding_record: Mapping[str, Any] | None = None,
+    hazop_selection_event_binding_record: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return a compact, fail-closed scope/family/component ledger."""
     matrix_rows = scope_matrix.get("rows")
@@ -268,6 +269,45 @@ def build_scope_closure_report(
             "mode_inference_performed": False,
             "scenario_inference_performed": False,
         },
+        "hazop_selection_event_binding": {
+            "status": (
+                "REPORTED"
+                if isinstance(hazop_selection_event_binding_record, Mapping)
+                and hazop_selection_event_binding_record.get("status")
+                == "HAZOP_SELECTION_EVENT_BINDING_COMPLETE"
+                and hazop_selection_event_binding_record.get("unbound_event_count") == 0
+                and not hazop_selection_event_binding_record.get("errors")
+                else "MISSING"
+            ),
+            "selected_scenario_count": (
+                hazop_selection_event_binding_record.get("selected_scenario_count")
+                if isinstance(hazop_selection_event_binding_record, Mapping)
+                else None
+            ),
+            "frequency_event_count": (
+                hazop_selection_event_binding_record.get("frequency_event_count")
+                if isinstance(hazop_selection_event_binding_record, Mapping)
+                else None
+            ),
+            "bound_event_count": (
+                hazop_selection_event_binding_record.get("bound_event_count")
+                if isinstance(hazop_selection_event_binding_record, Mapping)
+                else None
+            ),
+            "unbound_event_count": (
+                hazop_selection_event_binding_record.get("unbound_event_count")
+                if isinstance(hazop_selection_event_binding_record, Mapping)
+                else None
+            ),
+            "errors": (
+                list(hazop_selection_event_binding_record.get("errors", []))
+                if isinstance(hazop_selection_event_binding_record, Mapping)
+                and isinstance(hazop_selection_event_binding_record.get("errors", []), list)
+                else []
+            ),
+            "scenario_family_inference_performed": False,
+            "frequency_assignment_performed": False,
+        },
     }
     return {
         "schema_version": "prism.outdoor_scope_closure_report.v1",
@@ -317,6 +357,11 @@ def build_scope_closure_report(
             if isinstance(hazop_mode_binding_record, Mapping)
             else None
         ),
+        "hazop_selection_event_binding": (
+            dict(hazop_selection_event_binding_record)
+            if isinstance(hazop_selection_event_binding_record, Mapping)
+            else None
+        ),
         "policy": {
             "missing_accidents_are_not_inferred": True,
             "operator_limited_cases_are_not_qualified": True,
@@ -326,6 +371,8 @@ def build_scope_closure_report(
             "facility_qra_claim": bool(facility_assessment.get("complete_facility_qra_claim", False)),
             "hazop_mode_inference_performed": False,
             "hazop_scenario_inference_performed": False,
+            "hazop_selection_event_family_inference_performed": False,
+            "hazop_selection_event_frequency_assignment_performed": False,
         },
         "interpretation": (
             "This report makes the declared outdoor accident scope and all strict-withheld rows visible. "

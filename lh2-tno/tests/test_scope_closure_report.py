@@ -151,3 +151,23 @@ def test_scope_closure_report_records_complete_hazop_mode_binding():
     )
     assert report["evidence_gates"]["hazop_mode_binding"]["status"] == "REPORTED"
     assert report["policy"]["hazop_mode_inference_performed"] is False
+
+
+def test_scope_closure_report_records_hazop_selection_event_expansion():
+    scope, assessment = _inputs()
+    report = build_scope_closure_report(
+        scope,
+        assessment,
+        None,
+        None,
+        {
+            "status": "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+            "selected_scenario_count": 2,
+            "frequency_event_count": 4,
+            "bound_event_count": 4,
+            "unbound_event_count": 0,
+            "errors": [],
+        },
+    )
+    assert report["evidence_gates"]["hazop_selection_event_binding"]["status"] == "REPORTED"
+    assert report["policy"]["hazop_selection_event_frequency_assignment_performed"] is False

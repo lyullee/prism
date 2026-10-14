@@ -3794,5 +3794,22 @@
   "ijhe_audit_latest_blocking_reason_count": 6,
   "facility_evidence_request_latest_family_request_count": 12,
   "current_union_risk_atom_chain_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_chain_closure_audit.json",
-  "current_union_risk_atom_chain_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 24 events, 24 cases and 96 risk atoms reach the facility damage ledger; operator-limited and synthetic evidence remain diagnostic-only"
+  "current_union_risk_atom_chain_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 24 events, 24 cases and 96 risk atoms reach the facility damage ledger; operator-limited and synthetic evidence remain diagnostic-only",
+  "latest_full_scope_hazop_selection_status": "FULL_SCOPE_HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+  "latest_full_scope_hazop_selection_record": "results/20261114/full_scope_hazop_runtime_audit.json",
+  "latest_full_scope_hazop_selection_event_binding_record": "results/20261114/full_scope_hazop_runtime_audit_event_binding.json",
+  "latest_full_scope_hazop_selection_counts": {
+    "base_hazop_table_count": 7,
+    "added_scope_rows": 3,
+    "selected_scenario_count": 10,
+    "frequency_event_count": 24,
+    "bound_event_count": 24,
+    "unbound_event_count": 0
+  },
+  "latest_full_scope_hazop_selection_policy": {
+    "scenario_family_inference_performed": false,
+    "frequency_assignment_performed": false,
+    "provider_release_created": false,
+    "facility_qra_promotion": false
+  }
 }

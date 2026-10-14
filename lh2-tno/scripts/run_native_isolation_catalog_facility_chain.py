@@ -32,6 +32,9 @@ from lh2_tno.hazop_event_mode_binding import (  # noqa: E402
     apply_hazop_event_mode_bindings,
     audit_hazop_event_mode_binding,
 )
+from lh2_tno.hazop_event_selection_audit import (  # noqa: E402
+    audit_hazop_selection_event_bindings,
+)
 from lh2_tno.native_packet_campaign import (  # noqa: E402
     build_native_packet_campaign_execution_ledger,
 )
@@ -168,6 +171,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     mode_binding = (
         _object(args.hazop_mode_binding) if args.hazop_mode_binding is not None else None
     )
+    hazop_runtime_audit = (
+        _object(args.hazop_runtime_audit) if args.hazop_runtime_audit is not None else None
+    )
     if mode_binding is not None:
         source_campaign = apply_hazop_event_mode_bindings(
             source_campaign,
@@ -201,6 +207,32 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         result,
         provider_worklist=provider_worklist,
     )
+    hazop_selection_event_audit = None
+    if hazop_runtime_audit is not None and mode_binding is not None:
+        families_by_event: dict[str, set[str]] = {}
+        for case in result.get("cases", []):
+            if not isinstance(case, dict):
+                continue
+            event_id = case.get("event_id")
+            families = case.get("scenario_families", [])
+            if not isinstance(event_id, str) or not isinstance(families, list):
+                continue
+            families_by_event.setdefault(event_id, set()).update(
+                str(family) for family in families if isinstance(family, str) and family
+            )
+        frequency_event_rows = [
+            {
+                **event,
+                "scenario_families": sorted(families_by_event.get(str(event.get("id")), set())),
+            }
+            for event in result.get("events", [])
+            if isinstance(event, dict)
+        ]
+        hazop_selection_event_audit = audit_hazop_selection_event_bindings(
+            hazop_runtime_audit,
+            mode_binding,
+            frequency_event_rows,
+        )
     scenarios = _frequency_scenarios(events)
     assessment = build_facility_assessment(
         [result],
@@ -240,6 +272,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     _write(output / "facility_assessment.json", assessment)
     _write(output / "hazop_event_mode_binding.json", hazop_mode_audit)
+    if hazop_selection_event_audit is not None:
+        _write(output / "hazop_selection_event_binding.json", hazop_selection_event_audit)
     _write(output / "packet_rebind_provenance.json", provenance)
     _write(output / "native_packet_campaign_execution_ledger.json", execution_ledger)
     _write(
@@ -298,6 +332,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "hazop_mode_binding_source": (
                 str(args.hazop_mode_binding) if args.hazop_mode_binding is not None else None
             ),
+            "hazop_selection_event_binding_status": (
+                hazop_selection_event_audit.get("status")
+                if hazop_selection_event_audit is not None
+                else None
+            ),
+            "hazop_selection_event_bound_event_count": (
+                hazop_selection_event_audit.get("bound_event_count")
+                if hazop_selection_event_audit is not None
+                else None
+            ),
+            "hazop_selection_event_unbound_event_count": (
+                hazop_selection_event_audit.get("unbound_event_count")
+                if hazop_selection_event_audit is not None
+                else None
+            ),
             "limitations": [
                 "catalog packets and facility geometry are synthetic diagnostic inputs",
                 "operator-limited or domain-incomplete release boundaries remain withheld from strict QRA",
@@ -333,6 +382,11 @@ def main() -> int:
         "--hazop-mode-binding",
         type=Path,
         help="Optional exact event-level operating-mode/scenario binding record",
+    )
+    parser.add_argument(
+        "--hazop-runtime-audit",
+        type=Path,
+        help="Optional observed HAZOP runtime selection audit to check against event bins",
     )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()

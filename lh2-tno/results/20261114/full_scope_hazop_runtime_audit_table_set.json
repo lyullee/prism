@@ -1,0 +1,407 @@
+{
+  "schema_version": "prism.hazop_runtime_table_set.v1",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "tables": {
+    "storage-tank-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "storage-tank-01-mode-deviation",
+          "component_id": "storage-tank-01",
+          "component_kind": "storage_tank",
+          "operating_modes": [
+            "receiving"
+          ],
+          "variable_tag": "tank_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only."
+      ]
+    },
+    "liquid-transfer-line-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "liquid-transfer-line-01-mode-deviation",
+          "component_id": "liquid-transfer-line-01",
+          "component_kind": "pipe",
+          "operating_modes": [
+            "supply"
+          ],
+          "variable_tag": "line_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "pipe_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only."
+      ]
+    },
+    "transfer-valve-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "transfer-valve-01-mode-deviation",
+          "component_id": "transfer-valve-01",
+          "component_kind": "valve",
+          "operating_modes": [
+            "supply"
+          ],
+          "variable_tag": "valve_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only."
+      ]
+    },
+    "pressure-relief-vent-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "pressure-relief-vent-01-mode-deviation",
+          "component_id": "pressure-relief-vent-01",
+          "component_kind": "vent_stack",
+          "operating_modes": [
+            "standby"
+          ],
+          "variable_tag": "vent_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only."
+      ]
+    },
+    "liquid-transfer-pump-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "liquid-transfer-pump-01-mode-deviation",
+          "component_id": "liquid-transfer-pump-01",
+          "component_kind": "pump",
+          "operating_modes": [
+            "supply"
+          ],
+          "variable_tag": "pump_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "liquid_two_phase",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only."
+      ]
+    },
+    "ambient-vaporizer-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "ambient-vaporizer-01-mode-deviation",
+          "component_id": "ambient-vaporizer-01",
+          "component_kind": "vaporizer",
+          "operating_modes": [
+            "supply"
+          ],
+          "variable_tag": "vaporizer_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "inventory_depletion",
+          "release_mode": "instantaneous_inventory",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        },
+        {
+          "id": "ambient-vaporizer-01-full-scope-inventory_over_600s",
+          "component_id": "ambient-vaporizer-01",
+          "component_kind": "vaporizer",
+          "operating_modes": [
+            "supply"
+          ],
+          "variable_tag": "vaporizer_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "inventory_over_600s",
+          "release_mode": "inventory_over_600s",
+          "priority": "high",
+          "deviation_label": "full-scope inventory_over_600s deviation",
+          "cause_summary": "explicit campaign event family requires a HAZOP selection row",
+          "consequence_summary": "qualitative scope binding only; provider release remains separate",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic full-scope HAZOP selection-audit row derived from the explicit campaign family; replace with reviewed facility HAZOP/P&ID evidence"
+        },
+        {
+          "id": "ambient-vaporizer-01-full-scope-vaporizer_hole",
+          "component_id": "ambient-vaporizer-01",
+          "component_kind": "vaporizer",
+          "operating_modes": [
+            "supply"
+          ],
+          "variable_tag": "vaporizer_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "vaporizer_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "full-scope vaporizer_hole deviation",
+          "cause_summary": "explicit campaign event family requires a HAZOP selection row",
+          "consequence_summary": "qualitative scope binding only; provider release remains separate",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic full-scope HAZOP selection-audit row derived from the explicit campaign family; replace with reviewed facility HAZOP/P&ID evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only.",
+        "Full-scope selection audit rows were added from explicit campaign event families; they are synthetic qualitative bindings and do not create provider packets or frequencies."
+      ]
+    },
+    "reliquefier-01": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "generic-outdoor-lh2-hazop-multi-equipment-provider-bound-v1",
+      "facility_id": "generic-lh2-near-receptor-diagnostic",
+      "operating_modes": [
+        "receiving",
+        "standby",
+        "supply"
+      ],
+      "configuration_origin": "synthetic",
+      "source_provenance": "synthetic multi-equipment HAZOP diagnostic; replace with reviewed facility HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "reliquefier-01-mode-deviation",
+          "component_id": "reliquefier-01",
+          "component_kind": "reliquefier",
+          "operating_modes": [
+            "standby"
+          ],
+          "variable_tag": "reliquefier_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "two_sided_rupture",
+          "release_mode": "two_sided_rupture",
+          "priority": "high",
+          "deviation_label": "mode-specific pressure deviation",
+          "cause_summary": "synthetic diagnostic state reaches the declared HAZOP criterion",
+          "consequence_summary": "bind the matching equipment provider packet before consequence evaluation",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic generic facility HAZOP diagnostic; replace with reviewed P&ID/HAZOP evidence"
+        },
+        {
+          "id": "reliquefier-01-full-scope-reliquefier_hole",
+          "component_id": "reliquefier-01",
+          "component_kind": "reliquefier",
+          "operating_modes": [
+            "standby"
+          ],
+          "variable_tag": "reliquefier_pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "reliquefier_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "full-scope reliquefier_hole deviation",
+          "cause_summary": "explicit campaign event family requires a HAZOP selection row",
+          "consequence_summary": "qualitative scope binding only; provider release remains separate",
+          "safeguards": [
+            "ESD",
+            "PSV"
+          ],
+          "provenance": "synthetic full-scope HAZOP selection-audit row derived from the explicit campaign family; replace with reviewed facility HAZOP/P&ID evidence"
+        }
+      ],
+      "notes": [
+        "One row per generic equipment kind is used to exercise the existing multi-component runtime coordinator.",
+        "The selected operating mode is supplied by the state frame and is never inferred from pressure.",
+        "Synthetic packets, horizons, geometry rebasing, and receptor occupancy remain diagnostic evidence only.",
+        "Full-scope selection audit rows were added from explicit campaign event families; they are synthetic qualitative bindings and do not create provider packets or frequencies."
+      ]
+    }
+  },
+  "scope_audit": {
+    "status": "FULL_SCOPE_HAZOP_ROWS_EXPANDED",
+    "base_table_count": 7,
+    "added_row_count": 3,
+    "added_rows": [
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "operating_mode": "supply",
+        "scenario_family": "inventory_over_600s",
+        "release_mode": "inventory_over_600s",
+        "hazop_row_id": "ambient-vaporizer-01-full-scope-inventory_over_600s"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "operating_mode": "supply",
+        "scenario_family": "vaporizer_hole",
+        "release_mode": "hole",
+        "hazop_row_id": "ambient-vaporizer-01-full-scope-vaporizer_hole"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "operating_mode": "standby",
+        "scenario_family": "reliquefier_hole",
+        "release_mode": "hole",
+        "hazop_row_id": "reliquefier-01-full-scope-reliquefier_hole"
+      }
+    ],
+    "blocking_reasons": [],
+    "frequency_inference_performed": false,
+    "provider_release_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false
+  }
+}
