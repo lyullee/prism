@@ -5030,6 +5030,40 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The request ledger makes every HAZOP-unbound extension event explicit and lists the runtime mode, reviewed scenario identity, equipment boundary, timestamp digest, and provenance needed before that event can enter automatic scenario selection. It never supplies those values itself."
+    },
+    {
+      "name": "diagnostic_facility_evidence_request_coverage",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_evidence_request.json",
+        "schema_version": "prism.facility_evidence_request.v1",
+        "status": "OPEN_EVIDENCE_REQUEST",
+        "case_request_count": 44,
+        "assessment_case_count": 44,
+        "family_request_count": 12,
+        "component_request_count": 9,
+        "blocking_reason_count": 21,
+        "case_identity_complete": true,
+        "facility_total_risk_available": false,
+        "complete_facility_qra_claim": false,
+        "promotion_gate": {
+          "qualified_provider_packet_required": true,
+          "provider_packet_evidence_schema": "prism.provider_packet_evidence.v1",
+          "provider_qualification_schema": "prism.provider_qualification_evidence.v1",
+          "exact_event_component_port_and_digest_match_required": true,
+          "independent_physical_validation_required": true,
+          "complete_declared_scope_required": true,
+          "facility_ir_fn_remains_withheld_until_all_true": true
+        },
+        "frequency_policy": {
+          "use_documented_literature_frequency_only": true,
+          "infer_frequency_from_provider_or_sensor": false,
+          "reallocate_frequency_between_families": false
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The evidence-request catalog makes each missing facility case actionable and preserves its promotion gate. It requests provider evidence but never invents termination, inventory, frequency or facility IR/F-N."
     }
   ],
   "blocking_reasons": [
