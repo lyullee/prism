@@ -4,6 +4,7 @@ import pytest
 
 import lh2_tno.integrated_risk as integrated_risk
 from lh2_tno.integrated_risk import IntegratedRiskError, run_hazop_integrated_risk
+from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames
 
 
 def _table():
@@ -107,3 +108,74 @@ def test_integrated_risk_can_be_current_only(monkeypatch):
     )
     assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
     assert result["forecast"]["status"] == "FORECAST_NOT_REQUESTED"
+
+
+def test_integrated_risk_runs_from_observed_custom_tag_to_forecast_path():
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    table = json.loads(
+        (root / "examples" / "generic_hazop_operating_modes.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    tables = json.loads(
+        (root / "examples" / "generic_hazop_tables_by_component.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    source = {
+        "source_id": "synthetic-integrated-tank-01",
+        "source_path": "synthetic://prism/integrated",
+        "source_sha256": "b" * 64,
+        "format": "json",
+        "component_id": "storage-tank-01",
+        "origin": "synthetic",
+        "samples": [{
+            "captured_at_s": 12.0,
+            "operating_mode": "receiving",
+            "values": {
+                "tank_pressure": {
+                    "quantity": "pressure",
+                    "value_si": 500000.0,
+                    "sensor_location": "storage-tank-01.vapour",
+                }
+            },
+        }],
+    }
+    current_frame = build_observed_state_runtime_frames([source])["frames"][0]
+    forecast_frame = {
+        "schema_version": "prism.hazop_state_frame.v1",
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "storage-tank-01",
+        "captured_at_s": 0.0,
+        "forecast_time_s": 0.0,
+        "origin": "model_prediction",
+        "operating_mode": "receiving",
+        "source_provenance": "synthetic integrated forecast frame",
+        "values": {
+            "tank_pressure": {
+                "quantity": "pressure",
+                "value_si": 500000.0,
+                "sensor_location": "storage-tank-01.vapour",
+                "quality": "valid",
+            }
+        },
+    }
+    result = run_hazop_integrated_risk(
+        table,
+        {"storage-tank-01": current_frame},
+        now_s=12.0,
+        component_bindings={"storage-tank-01": object()},
+        release_resolvers={},
+        forecast_frames=[forecast_frame],
+        forecast_tables_by_component=tables,
+        forecast_component_ids=("storage-tank-01",),
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
+    assert result["current"]["status"] == "FACILITY_HAZOP_RUNTIME_EVALUATED"
+    assert result["current"]["components"]["storage-tank-01"]["selection"]["operating_mode"] == "receiving"
+    assert result["forecast"]["trigger_count"] == 0
+    assert result["forecast"]["withheld_count"] == 0
+    assert result["policy"]["facility_qra_promotion"] is False
