@@ -17,7 +17,8 @@
       "src/lh2_tno/hazop_campaign.py",
       "src/lh2_tno/realtime_campaign.py",
       "src/lh2_tno/facility_evidence_request.py",
-      "src/lh2_tno/hazop_forecast.py"
+      "src/lh2_tno/hazop_forecast.py",
+      "src/lh2_tno/completion_audit.py"
     ],
     "hazop_operating_mode_campaign_trace_policy": "live frame mode must match the HAZOP campaign binding and is preserved on campaign event/case/risk atom and provider evidence requests; no frequency inference or QRA promotion",
     "hazop_operating_mode_campaign_trace_status": "IMPLEMENTED_DIAGNOSTIC_ONLY; qualified provider, independent physical validation and facility QRA remain withheld",
