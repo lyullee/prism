@@ -26,10 +26,24 @@ def main() -> int:
         type=Path,
         help="optional exact facility case evidence-request catalog",
     )
+    parser.add_argument(
+        "--provider-termination-evidence",
+        type=Path,
+        help="optional provider-owned termination evidence catalog",
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--residual-tolerance-kg", type=float, default=1e-8)
     args = parser.parse_args()
     try:
+        provider_termination_evidence = (
+            _object(args.provider_termination_evidence)
+            if args.provider_termination_evidence
+            else None
+        )
+        if provider_termination_evidence is not None:
+            provider_termination_evidence["_record_path"] = str(
+                args.provider_termination_evidence
+            )
         report = build_release_boundary_case_audit(
             _object(args.facility_assessment),
             residual_tolerance_kg=args.residual_tolerance_kg,
@@ -37,6 +51,9 @@ def main() -> int:
                 _object(args.facility_evidence_request)
                 if args.facility_evidence_request
                 else None
+            ),
+            provider_termination_evidence=(
+                provider_termination_evidence
             ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:

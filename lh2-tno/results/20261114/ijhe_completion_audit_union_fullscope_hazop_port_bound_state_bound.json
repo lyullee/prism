@@ -5527,8 +5527,8 @@
         "release_audit_evidence_request_alignment": "ALIGNED",
         "release_audit_evidence_request_rows_match": true,
         "facility_evidence_request_case_count": 44,
-        "strict_release_boundary_eligible_case_count": 3,
-        "strict_release_boundary_blocked_case_count": 41,
+        "strict_release_boundary_eligible_case_count": 13,
+        "strict_release_boundary_blocked_case_count": 31,
         "termination_basis_counts": {
           "emergency_relief_discharge": 1,
           "inventory_depletion": 16,
@@ -5537,6 +5537,14 @@
           "synthetic_diagnostic_horizon": 10,
           "two_sided_rupture": 2
         },
+        "provider_termination_evidence_supplied": true,
+        "provider_termination_evidence_catalog_path": "results\\20261114\\provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json",
+        "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_PARTIAL",
+        "provider_termination_evidence_status_counts": {
+          "NOT_SUPPLIED": 29,
+          "VALID": 15
+        },
+        "provider_termination_evidence_used_case_count": 15,
         "provider_qualification_status_counts": {
           "BLOCKED": 44
         },
@@ -5563,16 +5571,16 @@
         "rows": 44,
         "summary": {
           "case_count": 44,
-          "strict_release_boundary_eligible_case_count": 3,
-          "strict_release_boundary_blocked_case_count": 41,
-          "numerically_closed_case_count": 15,
-          "numerically_open_case_count": 29,
-          "operator_review_required_case_count": 12,
+          "strict_release_boundary_eligible_case_count": 13,
+          "strict_release_boundary_blocked_case_count": 31,
+          "numerically_closed_case_count": 30,
+          "numerically_open_case_count": 14,
+          "operator_review_required_case_count": 17,
           "consequence_domain_truncated_case_count": 1,
           "numerical_closure_status_counts": {
-            "NUMERICALLY_CLOSED": 3,
-            "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 12,
-            "NUMERICALLY_OPEN": 29
+            "NUMERICALLY_CLOSED": 13,
+            "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 17,
+            "NUMERICALLY_OPEN": 14
           },
           "consequence_domain_status_counts": {
             "CLOSED": 43,

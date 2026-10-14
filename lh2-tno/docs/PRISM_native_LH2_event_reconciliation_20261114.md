@@ -33,9 +33,22 @@
 
 이 결과는 방출 경로가 코드에서 끊기지 않았음을 보여준다. 현장 provider 자격이나 독립 실험 검증을 대신하지 않으므로 시설 전체 IR/F-N 승격 조건을 열지 않는다.
 
+## 명시적 provider 종료 증거의 추가 대조
+
+`results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json`은 이미 저장된 provider 산출물에서 양의 재고 임계값 종료 증거를 추출한다.
+
+- 저장탱크 5개 packet sidecar와 inventory-depletion 5개 provider 응답을 대조해 총 10개 event row를 만들었다.
+- 10개 row 모두 packet result digest, 초기 재고, 누적 방출량, 임계값, 종료 시 잔여량, 질량 잔차가 일치한다.
+- 양의 임계값은 잔여질량을 0으로 바꾸지 않는다. `remaining_mass_kg <= threshold_mass_kg`와 provider 질량 잔차만 방출 경계 판단에 사용한다.
+- annual condition이 두 개인 inventory-depletion extension은 같은 provider event 증거를 두 case에 재사용하되, case key와 digest는 각 행에서 다시 확인한다.
+- 이 증거를 release-boundary audit에 연결한 결과 15개 case가 추가로 수치 종료되었다. 전체 수치 종료는 30/44 case(그중 17개는 `NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`), strict boundary는 13/44 통과다.
+- native catalog의 나머지 19개 event는 provider termination sidecar가 없어 카탈로그에 `errors`로 남겼다. 이 행들에는 종료 증거를 추정하지 않는다.
+
+이 카탈로그는 provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격을 주장하지 않는 진단 장부다.
+
 ## 남은 승격 조건
 
-1. `EXECUTED_OPERATOR_LIMITED`, synthetic horizon, emergency relief, two-sided rupture, inventory residual 행에 provider 소유의 종료·차단·재고 경계 기록을 붙인다.
+1. 남은 `EXECUTED_OPERATOR_LIMITED`, synthetic horizon, emergency relief, two-sided rupture, inventory-over-600s 행에 provider 소유의 종료·차단·재고 경계 기록을 붙인다. 현재 strict boundary 보류는 31개다.
 2. 각 provider packet의 source/result digest와 qualification sidecar를 제출한다.
 3. 액화수소 방출·pool/확산·점화/피해 영향에 대한 독립 물리검증을 사고군별로 연결한다.
 4. 위 증거가 충족된 뒤에만 시설 전체 IR/F-N을 promotion 대상으로 재평가한다.
@@ -48,4 +61,4 @@ python scripts/build_native_isolation_event_reconciliation.py `
   --output results/20261114/native_isolation_event_reconciliation.json
 ```
 
-전체 IJHE 감사에는 `--native-isolation-event-reconciliation` 입력으로 연결되며, 최신 감사는 44개 검사 중 40개 PASS·4개 BLOCKED 상태를 유지한다.
+전체 IJHE 감사에는 `--native-isolation-event-reconciliation`과 provider 종료 evidence catalog가 입력으로 연결되며, 최신 감사는 44개 검사 중 40개 PASS·4개 BLOCKED 상태를 유지한다.

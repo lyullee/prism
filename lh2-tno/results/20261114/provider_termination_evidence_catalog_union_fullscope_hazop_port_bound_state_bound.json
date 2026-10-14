@@ -1,0 +1,236 @@
+{
+  "schema_version": "prism.provider_termination_evidence_catalog.v1",
+  "status": "EVIDENCE_CATALOG_PARTIAL",
+  "row_count": 10,
+  "event_count": 10,
+  "duplicate_event_ids": [],
+  "errors": [
+    "005_liquid-transfer-line-01_AREA_0.01pct: provider_run_meta is missing",
+    "006_liquid-transfer-line-01_AREA_0.1pct: provider_run_meta is missing",
+    "007_liquid-transfer-line-01_AREA_1pct: provider_run_meta is missing",
+    "008_liquid-transfer-line-01_AREA_10pct: provider_run_meta is missing",
+    "009_liquid-transfer-line-01_AREA_100pct: provider_run_meta is missing",
+    "010_transfer-valve-01_AREA_0.01pct: provider_run_meta is missing",
+    "011_transfer-valve-01_AREA_0.1pct: provider_run_meta is missing",
+    "012_transfer-valve-01_AREA_1pct: provider_run_meta is missing",
+    "013_transfer-valve-01_AREA_10pct: provider_run_meta is missing",
+    "014_transfer-valve-01_AREA_100pct: provider_run_meta is missing",
+    "015_pressure-relief-vent-01_G1: provider_run_meta is missing",
+    "016_liquid-transfer-pump-01_G1: provider_run_meta is missing",
+    "017_liquid-transfer-pump-01_G2: provider_run_meta is missing",
+    "018_ambient-vaporizer-01_G1: provider_run_meta is missing",
+    "019_ambient-vaporizer-01_G2: provider_run_meta is missing",
+    "020_ambient-vaporizer-01_G3: provider_run_meta is missing",
+    "021_reliquefier-01_G4: [Errno 2] No such file or directory: 'results\\\\20261111\\\\native_generic_scope_packets_isolation\\\\events\\\\021_reliquefier-01_G4\\\\resolved_release.json'",
+    "022_reliquefier-01_G5: [Errno 2] No such file or directory: 'results\\\\20261111\\\\native_generic_scope_packets_isolation\\\\events\\\\022_reliquefier-01_G5\\\\resolved_release.json'",
+    "023_reliquefier-01_G6: provider_run_meta is missing"
+  ],
+  "source_records": [
+    "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261111\\native_generic_scope_packets_isolation",
+    "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+    "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json"
+  ],
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "ff9082d0079b51b9569dea616172e4b54c1d81a117b84547119e0af6aef58008",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.008166514093845672,
+      "threshold_mass_kg": 0.028392061899609754,
+      "remaining_mass_kg": 0.02032554780576408,
+      "max_abs_mass_residual_kg": 1.734723475976807e-18,
+      "duration_s": 0.05,
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
+        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
+        "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "ddcdd2065f524292b7eb2aa93631a15662a126f63d71ebeb8796161bdb853148",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.00010057792972414069,
+      "threshold_mass_kg": 0.028392061899609754,
+      "remaining_mass_kg": 0.02839148396988562,
+      "max_abs_mass_residual_kg": 5.753894810698462e-18,
+      "duration_s": 5.999999999999993e-05,
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
+        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
+        "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "c51997811fae138e6348b88c605bfe0fcfcb1fd481403099cb63245315eb2983",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.00010057966768755135,
+      "threshold_mass_kg": 0.028392061899609754,
+      "remaining_mass_kg": 0.0283914822319222,
+      "max_abs_mass_residual_kg": 5.6276869015575715e-18,
+      "duration_s": 5.999999999999999e-06,
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
+        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
+        "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "89b8306b4968aa355e7fbdfadeae53cb261d5859a10c920a7eb0992332fd86b3",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.00016756351240572947,
+      "threshold_mass_kg": 0.028392061899609754,
+      "remaining_mass_kg": 0.028324498387204022,
+      "max_abs_mass_residual_kg": 2.0057740190981832e-18,
+      "duration_s": 1e-06,
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
+        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
+        "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "77f0fce14bead315f16567ba441127d9204fc1575e0fe09c353566f58d6a51be",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.0016625666208320196,
+      "threshold_mass_kg": 0.028392061899609754,
+      "remaining_mass_kg": 0.026829495278777732,
+      "max_abs_mass_residual_kg": 2.3852447794681098e-18,
+      "duration_s": 1e-06,
+      "operator_limited": true,
+      "physical_validation_claim": false,
+      "source": {
+        "packet": "results\\20261111\\native_generic_scope_packets_isolation\\events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
+        "verification": "results\\20261111\\native_generic_scope_packets_isolation\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
+        "provider_run_meta_status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 1.2125616572864818e-07,
+      "threshold_mass_kg": 0.00013405,
+      "remaining_mass_kg": 0.00013404630215277215,
+      "max_abs_mass_residual_kg": 1.3413560813159897e-20,
+      "duration_s": 1.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 4.022010171050504e-07,
+      "threshold_mass_kg": 0.00013405,
+      "remaining_mass_kg": 0.00013376535730139574,
+      "max_abs_mass_residual_kg": 2.276401045745932e-21,
+      "duration_s": 0.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 2.6216519132821583e-06,
+      "threshold_mass_kg": 0.00013405,
+      "remaining_mass_kg": 0.00013154590640521862,
+      "max_abs_mass_residual_kg": 2.117582368135751e-21,
+      "duration_s": 0.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 2.1140345784364108e-05,
+      "threshold_mass_kg": 0.00013405,
+      "remaining_mass_kg": 0.00011302721253413668,
+      "max_abs_mass_residual_kg": 3.3881317890172014e-21,
+      "duration_s": 0.5,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 2.6236186797952155e-05,
+      "threshold_mass_kg": 0.00013405,
+      "remaining_mass_kg": 0.00010793137152054863,
+      "max_abs_mass_residual_kg": 3.3881317890172014e-21,
+      "duration_s": 0.0625,
+      "operator_limited": false,
+      "physical_validation_claim": false,
+      "source": {
+        "provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+        "resolved_releases": "results\\20261009\\equipment_inventory_campaign\\resolved_releases.json",
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+        "provider_termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+      }
+    }
+  ],
+  "provider_qualification_claim": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "policy": "explicit provider termination evidence only; positive thresholds are not converted to zero inventory; qualification, frequency inference and facility IR/F-N remain closed"
+}

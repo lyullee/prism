@@ -31,25 +31,29 @@ IJHE용 권위 입력은 전체 union 시설 평가입니다.
 python scripts/audit_release_boundary_cases.py `
   --facility-assessment results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json `
   --facility-evidence-request results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_evidence_request.json `
+  --provider-termination-evidence results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json `
   --output results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json
 ```
 
 전체 union 결과는 [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)이며, 24개 native isolation subset 결과도 [`release_boundary_case_audit_fullscope_hazop_port_bound.json`](../results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json)으로 보존합니다. 전체 결과는 44개 case 요청과 복합키 정렬을 독립적으로 확인하고, 요청 ID와 필수 provider 증거 수를 각 행에 복사합니다. IJHE 완료 감사도 이 정렬 결과를 재검증합니다.
 
 - 전체 union 총 44개 case
-- 개별 방출 경계 조건을 만족한 case 3개
-- 방출 경계에서 보류된 case 41개
-- 수치상 종료가 닫힌 case 15개(그중 운영자 검토 필요 12개)
-- 수치상 종료가 열린 case 29개
+- 개별 방출 경계 조건을 만족한 case 13개
+- 방출 경계에서 보류된 case 31개
+- 수치상 종료가 닫힌 case 30개(그중 운영자 검토 필요 17개)
+- 수치상 종료가 열린 case 14개
+- 명시적 provider 종료 증거 catalog: 10개 event row가 15개 case에 연결
 - provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격은 0건
 - 전체 상태: `CASE_BOUNDARY_PARTIAL`
 
-여기서 strict 경계를 통과한 3개는 `reviewed_isolation_success` 또는
-`inventory_depletion`이라는 종료 기준, 질량 잔차, 계산 상태를 개별적으로 통과했다는
-뜻입니다. 추가로 12개는 같은 수치 조건은 닫혔지만 `EXECUTED_OPERATOR_LIMITED`라서
+여기서 strict 경계를 통과한 13개는 `reviewed_isolation_success` 또는
+명시적 `inventory_depletion_positive_threshold`를 포함한 종료 기준, 질량 잔차, 계산
+상태를 개별적으로 통과했다는 뜻입니다. 추가로 17개는 같은 수치 조건은 닫혔지만
+`EXECUTED_OPERATOR_LIMITED`라서
 운영자 독립 종료 증거가 필요합니다. 어느 쪽도 실제 현장 자료라는 뜻은 아닙니다.
-현재 15개 모두 provider 원점이 `model_prediction`이고 독립 물리검증 주장이 없으므로
-시설 QRA에 자동으로 들어가지 않습니다.
+현재 30개 모두 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증
+주장이 없으므로 시설 QRA에 자동으로 들어가지 않습니다. 양의 임계값 종료는 잔여질량을
+0으로 치환하지 않고 provider digest·질량·임계값·잔차가 맞는 경우에만 닫습니다.
 
 ## 보류 사유를 읽는 법
 
@@ -63,6 +67,8 @@ python scripts/audit_release_boundary_cases.py `
   경계가 닫히지 않았습니다.
 - `provider_inventory_residual_not_depleted`: 재고 소진이라고 적혔지만 provider 잔여
   질량이 허용 잔차 안으로 닫히지 않았습니다.
+- `provider_termination_evidence_invalid`: 종료 증거의 event/digest/질량/임계값 중
+  하나가 소비 case와 맞지 않아 증거를 사용하지 않았습니다.
 - `consequence_domain_truncated`: 피해 계산 영역 밖의 가연성 여부가 완전히 입증되지
   않았습니다.
 

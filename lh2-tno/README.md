@@ -28,12 +28,14 @@
 [`external_provider_validation_intake.json`](results/20261114/external_provider_validation_intake.json)으로 분류했다. 외부 `resolved_release` 7건 중 `actual` 원점은 0건이고, 모두 `model_prediction` 또는 합성 경계이며 qualification sidecar와 exact provider 검증 매칭도 0건이다. 이 자료는 구성요소·경계 근거로만 기록되고 provider 방출 자격·빈도·시설 IR/F-N을 열지 않는다. 통합 matrix는 [`validation_evidence_matrix_with_provider_intake.json`](results/20261114/validation_evidence_matrix_with_provider_intake.json), 분류 규칙과 재현 명령은 [`외부 provider 검증근거 intake`](docs/PRISM_external_provider_validation_intake_20261114.md)에서 확인할 수 있다.
 
 **케이스별 방출 경계 승격 표 (2026-11-14):** 최신 전체 union 44개 시설 case를 설비·포트·운전
-모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 3개와 보류된 41개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 3개 행도 provider 원점이 `model_prediction`이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
-이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 15개는
-종료 시간·재고·질량 잔차가 수치상 닫혔고, 그중 12개는 `EXECUTED_OPERATOR_LIMITED`라서
-운영자 독립 종료 근거를 기다린다. 나머지 29개는 종료 기준 또는 잔여 재고가 아직
+모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 13개와 보류된 31개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 13개 행도 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
+이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 30개는
+종료 시간·재고·질량 잔차가 수치상 닫혔고, 그중 17개는 `EXECUTED_OPERATOR_LIMITED`라서
+운영자 독립 종료 근거를 기다린다. 나머지 14개는 종료 기준 또는 잔여 재고가 아직
 열려 있다. 수치상 닫혔다는 사실은 provider qualification이나 시설 IR/F-N 승격을
 의미하지 않는다.
+
+저장탱크 sidecar와 inventory-depletion provider 응답의 명시적 양의 임계값 종료 근거는 [`provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json)에 별도 보존한다. 10개 event row가 15개 case에 재사용되지만, 초기질량·누적 방출량·임계값·잔여량·질량 잔차·provider result digest가 모두 맞을 때만 수치 종료로 반영한다. 잔여량을 0으로 만들거나 빈도를 추정하지 않는다. 자세한 규칙과 재현 명령은 [`provider 종료 증거 카탈로그`](docs/PRISM_provider_termination_evidence_catalog_20261114.md)에 있다.
 
 조건부 시설 위험 view [`conditional_facility_risk_view_with_release_trace.json`](results/20261114/conditional_facility_risk_view_with_release_trace.json)은 이 44개 case의 방출 지속시간·초기/누적/잔여 재고·잔여율·case별 처리시간과 risk atom 연결 수를 한 출력으로 제공한다. 같은 출력의 `frequency_uncertainty`에는 5개 문헌 빈도 시나리오, 분위수 출처, 상관 가정, 설비·사고군 순위 안정성과 포트 결합 상태가 포함된다. 디지털트윈 소비자는 같은 `event × release branch × annual condition` 키로 방출·피해영향·처리시간·빈도 민감도를 추적할 수 있지만, 이 view도 `promotion_allowed=false`인 진단 출력이며 시설 전체 QRA로 승격하지 않는다. 구현과 재현 명령은 [`조건부 시설 위험도와 방출 추적 view`](docs/PRISM_conditional_facility_release_trace_20261114.md)에 기록되어 있다.
 

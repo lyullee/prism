@@ -16,6 +16,10 @@ from typing import Any, Mapping, Sequence
 SCHEMA = "prism.release_boundary_case_audit.v1"
 _ALLOWED_BASES = {"reviewed_isolation_success", "inventory_depletion"}
 _TOLERANCE_KG = 1e-8
+_TERMINATION_EVIDENCE_BASES = {
+    "inventory_depletion_positive_threshold",
+    "inventory_depletion_releasable_mass",
+}
 
 
 def _finite(value: Any) -> float | None:
@@ -34,6 +38,184 @@ def _as_rows(value: Any) -> list[Mapping[str, Any]]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
         return []
     return [row for row in value if isinstance(row, Mapping)]
+
+
+def _same_mass(left: Any, right: Any, tolerance: float) -> bool:
+    """Compare provider-owned masses without accepting missing values."""
+
+    left_value = _finite(left)
+    right_value = _finite(right)
+    return (
+        left_value is not None
+        and right_value is not None
+        and math.isclose(left_value, right_value, rel_tol=1e-8, abs_tol=tolerance)
+    )
+
+
+def _termination_evidence_candidates(
+    provider_termination_evidence: Mapping[str, Any] | None,
+    *,
+    case_key: str,
+    event_id: Any,
+) -> list[Mapping[str, Any]]:
+    """Return candidate provider termination ledgers for one facility case.
+
+    The catalog accepts either a reviewer-facing ``rows`` array or a simple
+    event-id keyed mapping.  Event-id matching is intentionally a fallback for
+    annual-condition duplicates: one provider packet may support several
+    weather branches, but the packet digest and masses still have to match the
+    consuming facility row.
+    """
+
+    if not isinstance(provider_termination_evidence, Mapping):
+        return []
+    raw_rows = provider_termination_evidence.get("rows")
+    rows = _as_rows(raw_rows) if raw_rows is not None else []
+    if not rows:
+        for key, value in provider_termination_evidence.items():
+            if key in {"schema_version", "policy", "rows", "diagnostic_only"}:
+                continue
+            if isinstance(value, Mapping):
+                row = dict(value)
+                row.setdefault("event_id", key)
+                rows.append(row)
+    candidates: list[Mapping[str, Any]] = []
+    for row in rows:
+        row_key = row.get("case_key")
+        row_event = row.get("event_id")
+        if row_key == case_key or (row_event is not None and str(row_event) == str(event_id)):
+            candidates.append(row)
+    return candidates
+
+
+def _audit_termination_evidence(
+    case: Mapping[str, Any],
+    row: Mapping[str, Any],
+    candidate: Mapping[str, Any] | None,
+    *,
+    residual_tolerance_kg: float,
+) -> dict[str, Any]:
+    """Validate an explicit provider termination ledger at the facility grain.
+
+    A positive threshold is a real provider stopping rule, not zero inventory.
+    It can therefore close the release *boundary* only when the threshold,
+    remaining mass, packet digest, and provider mass residual all agree.  This
+    function never changes the residual to zero and never qualifies the
+    provider or promotes facility IR/F-N.
+    """
+
+    result: dict[str, Any] = {
+        "status": "NOT_SUPPLIED" if candidate is None else "INVALID",
+        "used": False,
+        "basis": candidate.get("termination_basis") if candidate else None,
+        "provider_result_digest": candidate.get("provider_result_digest") if candidate else None,
+        "source": candidate.get("source") if candidate else None,
+        "checks": {},
+        "blocking_reasons": [],
+    }
+    if candidate is None:
+        return result
+    identity = _as_mapping(case.get("provider_packet_identity"))
+    provider = _as_mapping(row.get("provider"))
+    raw_digests = identity.get("provider_result_digests")
+    expected_digests = {
+        str(value)
+        for value in raw_digests
+        if value is not None
+    } if isinstance(raw_digests, Sequence) and not isinstance(raw_digests, (str, bytes)) else set()
+    if not expected_digests:
+        raw = identity.get("provider_result_digests")
+        if isinstance(raw, str) and raw:
+            expected_digests.add(raw)
+    digest = candidate.get("provider_result_digest")
+    checks = result["checks"]
+    checks["event_id_matches"] = (
+        candidate.get("event_id") is None
+        or str(candidate.get("event_id")) == str(row.get("event_id"))
+    )
+    checks["provider_result_digest_matches"] = (
+        isinstance(digest, str) and bool(expected_digests) and digest in expected_digests
+    )
+    available = _finite_values(provider.get("available_mass_kg"))
+    released = _finite_values(provider.get("cumulative_mass_out_kg"))
+    candidate_available = candidate.get("available_mass_kg")
+    candidate_released = candidate.get("cumulative_mass_out_kg")
+    checks["available_mass_matches"] = bool(available) and _same_mass(
+        candidate_available, available[0], residual_tolerance_kg
+    )
+    checks["cumulative_release_matches"] = bool(released) and _same_mass(
+        candidate_released, released[0], residual_tolerance_kg
+    )
+    basis = candidate.get("termination_basis")
+    checks["supported_basis"] = basis in _TERMINATION_EVIDENCE_BASES
+    remaining = _finite(candidate.get("remaining_mass_kg"))
+    threshold = _finite(candidate.get("threshold_mass_kg"))
+    provider_residual = _finite(candidate.get("provider_residual_mass_kg"))
+    max_residual = _finite(candidate.get("max_abs_mass_residual_kg"))
+    if basis == "inventory_depletion_positive_threshold":
+        checks["threshold_positive"] = threshold is not None and threshold > residual_tolerance_kg
+        checks["remaining_at_or_below_threshold"] = (
+            remaining is not None
+            and threshold is not None
+            and remaining <= threshold + residual_tolerance_kg
+        )
+        checks["remaining_matches_provider_ledger"] = (
+            bool(available)
+            and bool(released)
+            and remaining is not None
+            and _same_mass(remaining, available[0] - released[0], residual_tolerance_kg)
+        )
+        checks["mass_residual_closed"] = max_residual is not None and abs(max_residual) <= residual_tolerance_kg
+        checks["boundary_closed"] = all(
+            checks[name]
+            for name in (
+                "threshold_positive",
+                "remaining_at_or_below_threshold",
+                "remaining_matches_provider_ledger",
+                "mass_residual_closed",
+            )
+        )
+    elif basis == "inventory_depletion_releasable_mass":
+        definition = candidate.get("available_mass_definition")
+        releasable_remaining = _finite(candidate.get("remaining_releasable_mass_kg"))
+        checks["releasable_definition_present"] = (
+            isinstance(definition, str) and "releasable mass" in definition.lower()
+        )
+        checks["releasable_remaining_closed"] = (
+            releasable_remaining is not None and abs(releasable_remaining) <= residual_tolerance_kg
+        )
+        checks["provider_residual_closed"] = (
+            provider_residual is not None and abs(provider_residual) <= residual_tolerance_kg
+        )
+        checks["boundary_closed"] = all(
+            checks[name]
+            for name in (
+                "releasable_definition_present",
+                "releasable_remaining_closed",
+                "provider_residual_closed",
+            )
+        )
+    else:
+        checks["boundary_closed"] = False
+    for name, ok in checks.items():
+        if not ok:
+            result["blocking_reasons"].append(f"provider_termination_evidence_{name}")
+    if checks.get("boundary_closed") and all(
+        checks.get(name) is True
+        for name in (
+            "event_id_matches",
+            "provider_result_digest_matches",
+            "available_mass_matches",
+            "cumulative_release_matches",
+            "supported_basis",
+        )
+    ):
+        result["status"] = "VALID"
+        result["used"] = True
+        result["blocking_reasons"] = []
+    else:
+        result["blocking_reasons"] = list(dict.fromkeys(result["blocking_reasons"]))
+    return result
 
 
 def _case_key(row: Mapping[str, Any]) -> str:
@@ -91,6 +273,7 @@ def _case_reasons(
     row: Mapping[str, Any],
     *,
     residual_tolerance_kg: float,
+    termination_evidence_audit: Mapping[str, Any] | None = None,
 ) -> list[str]:
     reasons: list[str] = []
     status = str(row.get("status", "UNKNOWN"))
@@ -111,7 +294,17 @@ def _case_reasons(
             if isinstance(residuals, Sequence) and not isinstance(residuals, (str, bytes))
             else []
         )
-        if not values or any(value is None or abs(value) > residual_tolerance_kg for value in values):
+        evidence_status = (
+            termination_evidence_audit.get("status")
+            if isinstance(termination_evidence_audit, Mapping)
+            else None
+        )
+        if evidence_status == "INVALID":
+            reasons.append("provider_termination_evidence_invalid")
+        if (
+            evidence_status != "VALID"
+            and (not values or any(value is None or abs(value) > residual_tolerance_kg for value in values))
+        ):
             reasons.append("provider_inventory_residual_not_depleted")
     mass = _as_mapping(row.get("mass_ledger"))
     residual = _finite(mass.get("end_to_end_residual_kg"))
@@ -135,6 +328,7 @@ def _termination_reasons(
     row: Mapping[str, Any],
     *,
     residual_tolerance_kg: float,
+    termination_evidence_audit: Mapping[str, Any] | None = None,
 ) -> list[str]:
     """Return only release-termination and mass-closure reasons.
 
@@ -161,7 +355,17 @@ def _termination_reasons(
             if isinstance(residuals, Sequence) and not isinstance(residuals, (str, bytes))
             else []
         )
-        if not values or any(value is None or abs(value) > residual_tolerance_kg for value in values):
+        evidence_status = (
+            termination_evidence_audit.get("status")
+            if isinstance(termination_evidence_audit, Mapping)
+            else None
+        )
+        if evidence_status == "INVALID":
+            reasons.append("provider_termination_evidence_invalid")
+        if (
+            evidence_status != "VALID"
+            and (not values or any(value is None or abs(value) > residual_tolerance_kg for value in values))
+        ):
             reasons.append("provider_inventory_residual_not_depleted")
     mass = _as_mapping(row.get("mass_ledger"))
     residual = _finite(mass.get("end_to_end_residual_kg"))
@@ -252,6 +456,10 @@ def _required_evidence(
         requirements.append(
             "provider initial/final inventory and mass balance proving residual mass is within tolerance"
         )
+    if "provider_termination_evidence_invalid" in reason_set:
+        requirements.append(
+            "provider termination ledger with matching event, packet digest, masses and explicit threshold or releasable-inventory basis"
+        )
     if "end_to_end_mass_residual_not_closed" in reason_set:
         requirements.append("end-to-end source-to-consequence mass reconciliation with residual")
     if "provider_mass_balance_not_closed" in reason_set:
@@ -274,6 +482,7 @@ def build_release_boundary_case_audit(
     *,
     residual_tolerance_kg: float = _TOLERANCE_KG,
     facility_evidence_request: Mapping[str, Any] | None = None,
+    provider_termination_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a case-level release-boundary promotion table.
 
@@ -361,10 +570,36 @@ def build_release_boundary_case_audit(
     for ledger_row in ledger_rows:
         event_id = str(ledger_row.get("event_id"))
         case = cases_by_key.get(_case_key(ledger_row), {})
-        reasons = _case_reasons(case, ledger_row, residual_tolerance_kg=tolerance)
+        evidence_candidates = _termination_evidence_candidates(
+            provider_termination_evidence,
+            case_key=_case_key(ledger_row),
+            event_id=event_id,
+        )
+        evidence_audit = _audit_termination_evidence(
+            case,
+            ledger_row,
+            evidence_candidates[0] if evidence_candidates else None,
+            residual_tolerance_kg=tolerance,
+        )
+        if len(evidence_candidates) > 1:
+            evidence_audit["status"] = "INVALID"
+            evidence_audit["used"] = False
+            evidence_audit.setdefault("blocking_reasons", []).append(
+                "provider_termination_evidence_ambiguous"
+            )
+            evidence_audit["blocking_reasons"] = list(dict.fromkeys(
+                evidence_audit["blocking_reasons"]
+            ))
+        reasons = _case_reasons(
+            case,
+            ledger_row,
+            residual_tolerance_kg=tolerance,
+            termination_evidence_audit=evidence_audit,
+        )
         termination_reasons = _termination_reasons(
             ledger_row,
             residual_tolerance_kg=tolerance,
+            termination_evidence_audit=evidence_audit,
         )
         operational_reasons = [
             f"status_{str(ledger_row.get('status', 'UNKNOWN')).lower()}"
@@ -396,6 +631,11 @@ def build_release_boundary_case_audit(
         else:
             numerical_closure_status = "NUMERICALLY_OPEN"
         domain_status = "TRUNCATED" if domain_reasons else "CLOSED"
+        residual_closure_basis = (
+            evidence_audit.get("basis")
+            if evidence_audit.get("status") == "VALID"
+            else "provider_residual_mass"
+        )
         rows.append({
             "event_id": ledger_row.get("event_id"),
             "case_key": _case_key(ledger_row),
@@ -418,6 +658,15 @@ def build_release_boundary_case_audit(
             "isolation_status": ledger_row.get("isolation_status"),
             "inventory_status": ledger_row.get("inventory_status"),
             "end_to_end_residual_kg": _as_mapping(ledger_row.get("mass_ledger")).get("end_to_end_residual_kg"),
+            "provider_termination_evidence_status": evidence_audit.get("status"),
+            "provider_termination_evidence_used": evidence_audit.get("used") is True,
+            "provider_termination_evidence_basis": evidence_audit.get("basis"),
+            "provider_termination_evidence_digest": evidence_audit.get("provider_result_digest"),
+            "provider_termination_evidence_checks": dict(evidence_audit.get("checks", {})),
+            "provider_termination_evidence_blocking_reasons": list(
+                evidence_audit.get("blocking_reasons", [])
+            ),
+            "residual_closure_basis": residual_closure_basis,
             "release_termination_reasons": termination_reasons,
             "operational_execution_reasons": operational_reasons,
             "consequence_domain_reasons": domain_reasons,
@@ -446,6 +695,9 @@ def build_release_boundary_case_audit(
     numerical_closure_counts = Counter(row["numerical_closure_status"] for row in rows)
     domain_status_counts = Counter(row["consequence_domain_status"] for row in rows)
     provider_status_counts = Counter(row["provider_qualification_status"] for row in rows)
+    termination_evidence_status_counts = Counter(
+        row["provider_termination_evidence_status"] for row in rows
+    )
     reasons = [reason for row in rows for reason in row["release_boundary_blocking_reasons"]]
     return {
         "schema_version": SCHEMA,
@@ -484,6 +736,26 @@ def build_release_boundary_case_audit(
         ),
         "consequence_domain_truncated_case_count": domain_status_counts.get("TRUNCATED", 0),
         "provider_qualification_status_counts": dict(sorted(provider_status_counts.items())),
+        "provider_termination_evidence_status_counts": dict(
+            sorted(termination_evidence_status_counts.items())
+        ),
+        "provider_termination_evidence_supplied": provider_termination_evidence is not None,
+        "provider_termination_evidence_catalog_path": (
+            provider_termination_evidence.get("_record_path")
+            if isinstance(provider_termination_evidence, Mapping)
+            else None
+        ),
+        "provider_termination_evidence_catalog_status": (
+            provider_termination_evidence.get("status")
+            if isinstance(provider_termination_evidence, Mapping)
+            else None
+        ),
+        "provider_termination_evidence_used_case_count": sum(
+            row["provider_termination_evidence_used"] is True for row in rows
+        ),
+        "provider_termination_evidence_invalid_case_count": termination_evidence_status_counts.get(
+            "INVALID", 0
+        ),
         "termination_basis_counts": dict(sorted(Counter(
             row["termination"]["basis"] for row in rows
         ).items())),

@@ -130,6 +130,13 @@ def _build_release_trace(
         "numerical_closure_status",
         "consequence_domain_status",
         "provider_input_origins",
+        "provider_termination_evidence_status",
+        "provider_termination_evidence_used",
+        "provider_termination_evidence_basis",
+        "provider_termination_evidence_digest",
+        "provider_termination_evidence_checks",
+        "provider_termination_evidence_blocking_reasons",
+        "residual_closure_basis",
         "strict_release_boundary_eligible",
         "strict_release_boundary_status",
         "release_boundary_blocking_reasons",
@@ -445,6 +452,54 @@ def build_conditional_facility_risk_view(
     release_gate_closed = (
         isinstance(strict_release_blocked, int) and strict_release_blocked == 0
     )
+    if isinstance(release_audit, Mapping) and isinstance(release_summary, Mapping):
+        # The facility assessment may predate a later case-level termination
+        # evidence reconciliation.  Keep its original gate for provenance,
+        # but expose the authoritative external audit counts and reasons so a
+        # digital-twin consumer cannot see stale residual blockers.
+        source_gate = dict(strict_release_boundary) if isinstance(
+            strict_release_boundary, Mapping
+        ) else {}
+        case_audit_reasons = sorted({
+            str(reason)
+            for row in release_audit.get("rows", [])
+            if isinstance(row, Mapping)
+            for reason in row.get("release_boundary_blocking_reasons", [])
+            if reason is not None
+        })
+        strict_release_boundary = dict(source_gate)
+        strict_release_boundary.update({
+            "source_assessment_gate": source_gate,
+            "case_audit_status": release_audit.get("status"),
+            "case_count": release_summary.get("case_count"),
+            "withheld_case_count": release_summary.get(
+                "strict_release_boundary_blocked_case_count"
+            ),
+            "strict_release_boundary_ready": release_gate_closed,
+            "numerically_closed_case_count": release_summary.get(
+                "numerically_closed_case_count"
+            ),
+            "numerically_open_case_count": release_summary.get(
+                "numerically_open_case_count"
+            ),
+            "operator_review_required_case_count": release_summary.get(
+                "operator_review_required_case_count"
+            ),
+            "numerical_closure_status_counts": release_summary.get(
+                "numerical_closure_status_counts"
+            ),
+            "provider_termination_evidence_status_counts": release_audit.get(
+                "provider_termination_evidence_status_counts"
+            ),
+            "provider_termination_evidence_used_case_count": release_audit.get(
+                "provider_termination_evidence_used_case_count"
+            ),
+            "blocking_reasons": case_audit_reasons,
+            "provider_qualification_evaluated": False,
+            "independent_physical_validation_claim": False,
+            "frequency_inference_performed": False,
+            "facility_ir_fn_promotion": False,
+        })
     provider_case_count = source.get("provider_packet_case_count")
     qualified_provider_case_count = source.get(
         "qualified_provider_packet_case_count"

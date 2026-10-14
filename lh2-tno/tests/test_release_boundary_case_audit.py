@@ -168,3 +168,74 @@ def test_case_audit_blocks_missing_facility_evidence_request_case():
     assert report["status"] == "CASE_BOUNDARY_BLOCKED"
     assert report["facility_evidence_request_alignment_status"] == "BLOCKED"
     assert report["rows"][0]["facility_evidence_request_match"] is False
+
+
+def test_case_audit_accepts_explicit_positive_threshold_without_zeroing_residual():
+    case = _case("inventory-threshold")
+    row = _ledger_row(
+        "inventory-threshold",
+        basis="inventory_depletion",
+        provider_residual=[7.0],
+    )
+    evidence = {
+        "schema_version": "prism.provider_termination_evidence_catalog.v1",
+        "rows": [{
+            "event_id": "inventory-threshold",
+            "provider_result_digest": "result",
+            "termination_basis": "inventory_depletion_positive_threshold",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "threshold_mass_kg": 7.1,
+            "remaining_mass_kg": 7.0,
+            "max_abs_mass_residual_kg": 0.0,
+        }],
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "VALID"
+    assert result["provider_termination_evidence_used"] is True
+    assert result["residual_closure_basis"] == "inventory_depletion_positive_threshold"
+    assert "provider_inventory_residual_not_depleted" not in result[
+        "release_boundary_blocking_reasons"
+    ]
+    assert result["residual_mass_kg"] == [7.0]
+    assert report["strict_release_boundary_eligible_case_count"] == 1
+    assert report["numerically_closed_case_count"] == 1
+
+
+def test_case_audit_rejects_termination_evidence_digest_mismatch():
+    case = _case("inventory-bad-evidence")
+    row = _ledger_row(
+        "inventory-bad-evidence",
+        basis="inventory_depletion",
+        provider_residual=[7.0],
+    )
+    evidence = {
+        "rows": [{
+            "event_id": "inventory-bad-evidence",
+            "provider_result_digest": "wrong-result",
+            "termination_basis": "inventory_depletion_positive_threshold",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "threshold_mass_kg": 7.1,
+            "remaining_mass_kg": 7.0,
+            "max_abs_mass_residual_kg": 0.0,
+        }],
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "INVALID"
+    assert result["provider_termination_evidence_used"] is False
+    assert "provider_termination_evidence_invalid" in result[
+        "release_boundary_blocking_reasons"
+    ]
+    assert "provider_inventory_residual_not_depleted" in result[
+        "release_boundary_blocking_reasons"
+    ]
+    assert report["provider_termination_evidence_invalid_case_count"] == 1

@@ -5048,6 +5048,21 @@ def build_ijhe_completion_audit(
                 "strict_release_boundary_eligible_case_count": eligible_count,
                 "strict_release_boundary_blocked_case_count": blocked_count,
                 "termination_basis_counts": boundary.get("termination_basis_counts"),
+                "provider_termination_evidence_supplied": boundary.get(
+                    "provider_termination_evidence_supplied"
+                ),
+                "provider_termination_evidence_catalog_path": boundary.get(
+                    "provider_termination_evidence_catalog_path"
+                ),
+                "provider_termination_evidence_catalog_status": boundary.get(
+                    "provider_termination_evidence_catalog_status"
+                ),
+                "provider_termination_evidence_status_counts": boundary.get(
+                    "provider_termination_evidence_status_counts"
+                ),
+                "provider_termination_evidence_used_case_count": boundary.get(
+                    "provider_termination_evidence_used_case_count"
+                ),
                 "provider_qualification_status_counts": boundary.get(
                     "provider_qualification_status_counts"
                 ),

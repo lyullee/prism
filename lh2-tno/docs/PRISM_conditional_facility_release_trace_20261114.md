@@ -30,7 +30,9 @@ python scripts/build_conditional_facility_risk_view.py `
 권위 실행 결과는 [`conditional_facility_risk_view_with_release_trace.json`](../results/20261114/conditional_facility_risk_view_with_release_trace.json)이다.
 34개 event, 44개 case, 176개 risk atom과 방출 trace 44행이 일치하며, 각 행의
 `calculation_timing`에 실제 assessment 처리시간이 복사된다. summary는
-수치상 종료 15개·운영자 검토 필요 12개·수치상 열림 29개를 재현한다.
+수치상 종료 30개·운영자 검토 필요 17개·수치상 열림 14개를 재현한다. 이 중
+15개 case는 별도 provider 종료 evidence catalog의 digest·질량·양의 임계값·질량
+잔차가 일치하여 닫혔고, 임계값을 넘은 잔여량을 0으로 바꾸지 않았다.
 
 같은 view의 `frequency_uncertainty`는 5개 문헌 빈도 시나리오
 (`published`, `p05`, `p95`, independent-event low/high)을 보존한다. 각 시나리오는

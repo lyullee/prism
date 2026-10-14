@@ -15,24 +15,33 @@
   "facility_evidence_request_missing_case_keys": [],
   "facility_evidence_request_orphan_case_keys": [],
   "facility_evidence_request_duplicate_case_keys": [],
-  "strict_release_boundary_eligible_case_count": 3,
-  "strict_release_boundary_blocked_case_count": 41,
-  "numerically_closed_case_count": 15,
-  "numerically_open_case_count": 29,
+  "strict_release_boundary_eligible_case_count": 13,
+  "strict_release_boundary_blocked_case_count": 31,
+  "numerically_closed_case_count": 30,
+  "numerically_open_case_count": 14,
   "numerical_closure_status_counts": {
-    "NUMERICALLY_CLOSED": 3,
-    "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 12,
-    "NUMERICALLY_OPEN": 29
+    "NUMERICALLY_CLOSED": 13,
+    "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 17,
+    "NUMERICALLY_OPEN": 14
   },
   "consequence_domain_status_counts": {
     "CLOSED": 43,
     "TRUNCATED": 1
   },
-  "operator_review_required_case_count": 12,
+  "operator_review_required_case_count": 17,
   "consequence_domain_truncated_case_count": 1,
   "provider_qualification_status_counts": {
     "BLOCKED": 44
   },
+  "provider_termination_evidence_status_counts": {
+    "NOT_SUPPLIED": 29,
+    "VALID": 15
+  },
+  "provider_termination_evidence_supplied": true,
+  "provider_termination_evidence_catalog_path": "results\\20261114\\provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json",
+  "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_PARTIAL",
+  "provider_termination_evidence_used_case_count": 15,
+  "provider_termination_evidence_invalid_case_count": 0,
   "termination_basis_counts": {
     "emergency_relief_discharge": 1,
     "inventory_depletion": 16,
@@ -84,17 +93,33 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -7.806255641895632e-18,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "ff9082d0079b51b9569dea616172e4b54c1d81a117b84547119e0af6aef58008",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
       ],
       "consequence_domain_reasons": [
         "consequence_domain_truncated"
       ],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
       "consequence_domain_status": "TRUNCATED",
       "provider_input_origins": [
         "model_prediction"
@@ -103,13 +128,11 @@
       "strict_release_boundary_status": "PROMOTION_BLOCKED",
       "release_boundary_blocking_reasons": [
         "status_executed_operator_limited",
-        "provider_inventory_residual_not_depleted",
         "consequence_domain_truncated"
       ],
       "required_evidence": [
         "provider-owned release time history with an explicit successful termination event",
         "provider-owned transient state and operator-independent isolation or inventory closure evidence",
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "expanded consequence domain or an independent flammability-boundary closure",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
@@ -175,15 +198,31 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -2.14806397370833e-20,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "ddcdd2065f524292b7eb2aa93631a15662a126f63d71ebeb8796161bdb853148",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
       ],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
@@ -191,13 +230,11 @@
       "strict_release_boundary_eligible": false,
       "strict_release_boundary_status": "PROMOTION_BLOCKED",
       "release_boundary_blocking_reasons": [
-        "status_executed_operator_limited",
-        "provider_inventory_residual_not_depleted"
+        "status_executed_operator_limited"
       ],
       "required_evidence": [
         "provider-owned release time history with an explicit successful termination event",
         "provider-owned transient state and operator-independent isolation or inventory closure evidence",
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -262,15 +299,31 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -5.902760851178405e-20,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "c51997811fae138e6348b88c605bfe0fcfcb1fd481403099cb63245315eb2983",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
       ],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
@@ -278,13 +331,11 @@
       "strict_release_boundary_eligible": false,
       "strict_release_boundary_status": "PROMOTION_BLOCKED",
       "release_boundary_blocking_reasons": [
-        "status_executed_operator_limited",
-        "provider_inventory_residual_not_depleted"
+        "status_executed_operator_limited"
       ],
       "required_evidence": [
         "provider-owned release time history with an explicit successful termination event",
         "provider-owned transient state and operator-independent isolation or inventory closure evidence",
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -349,15 +400,31 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -1.0577323928838075e-19,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "89b8306b4968aa355e7fbdfadeae53cb261d5859a10c920a7eb0992332fd86b3",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
       ],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
@@ -365,13 +432,11 @@
       "strict_release_boundary_eligible": false,
       "strict_release_boundary_status": "PROMOTION_BLOCKED",
       "release_boundary_blocking_reasons": [
-        "status_executed_operator_limited",
-        "provider_inventory_residual_not_depleted"
+        "status_executed_operator_limited"
       ],
       "required_evidence": [
         "provider-owned release time history with an explicit successful termination event",
         "provider-owned transient state and operator-independent isolation or inventory closure evidence",
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -436,15 +501,31 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -8.673617379884035e-19,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "77f0fce14bead315f16567ba441127d9204fc1575e0fe09c353566f58d6a51be",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
       ],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
@@ -452,13 +533,11 @@
       "strict_release_boundary_eligible": false,
       "strict_release_boundary_status": "PROMOTION_BLOCKED",
       "release_boundary_blocking_reasons": [
-        "status_executed_operator_limited",
-        "provider_inventory_residual_not_depleted"
+        "status_executed_operator_limited"
       ],
       "required_evidence": [
         "provider-owned release time history with an explicit successful termination event",
         "provider-owned transient state and operator-independent isolation or inventory closure evidence",
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -523,6 +602,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -1.4427299128566867e-22,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -606,6 +692,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -8.525477135461645e-21,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -689,6 +782,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 6.542689745034449e-20,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -772,6 +872,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -8.673617379884035e-18,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -855,6 +962,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -6.245004513516506e-17,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -938,6 +1052,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.7617023488948199e-22,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1021,6 +1142,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -2.1647729574584157e-19,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1104,6 +1232,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -3.888421754884625e-18,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1187,6 +1322,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -3.122502256758253e-17,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1270,6 +1412,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 2.7755575615628914e-16,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1351,6 +1500,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_emergency_relief_discharge_is_not_allowed"
       ],
@@ -1433,6 +1589,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.5959455978986625e-16,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1516,6 +1679,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.8202184342472387e-18,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [
         "status_executed_operator_limited"
@@ -1597,6 +1767,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
@@ -1672,6 +1849,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_over_600s",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_inventory_over_600s_is_not_allowed"
       ],
@@ -1752,6 +1936,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
@@ -1833,6 +2024,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_two_sided_rupture_is_not_allowed"
       ],
@@ -1924,6 +2122,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_two_sided_rupture_is_not_allowed"
       ],
@@ -2009,6 +2214,13 @@
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
@@ -2085,6 +2297,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2171,6 +2390,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2257,6 +2483,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2343,6 +2576,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2429,6 +2669,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2515,6 +2762,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2601,6 +2855,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2687,6 +2948,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2773,6 +3041,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2859,6 +3134,13 @@
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "provider_termination_evidence_status": "NOT_SUPPLIED",
+      "provider_termination_evidence_used": false,
+      "provider_termination_evidence_basis": null,
+      "provider_termination_evidence_digest": null,
+      "provider_termination_evidence_checks": {},
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
         "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
       ],
@@ -2945,24 +3227,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3026,24 +3321,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3107,24 +3415,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3188,24 +3509,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3269,24 +3603,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3350,24 +3697,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3431,24 +3791,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3512,24 +3885,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3593,24 +3979,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
@@ -3674,24 +4073,37 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
-      "release_termination_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "provider_termination_evidence_status": "VALID",
+      "provider_termination_evidence_used": true,
+      "provider_termination_evidence_basis": "inventory_depletion_positive_threshold",
+      "provider_termination_evidence_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006",
+      "provider_termination_evidence_checks": {
+        "event_id_matches": true,
+        "provider_result_digest_matches": true,
+        "available_mass_matches": true,
+        "cumulative_release_matches": true,
+        "supported_basis": true,
+        "threshold_positive": true,
+        "remaining_at_or_below_threshold": true,
+        "remaining_matches_provider_ledger": true,
+        "mass_residual_closed": true,
+        "boundary_closed": true
+      },
+      "provider_termination_evidence_blocking_reasons": [],
+      "residual_closure_basis": "inventory_depletion_positive_threshold",
+      "release_termination_reasons": [],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
-      "numerical_release_closed": false,
-      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
       "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
-      "strict_release_boundary_eligible": false,
-      "strict_release_boundary_status": "PROMOTION_BLOCKED",
-      "release_boundary_blocking_reasons": [
-        "provider_inventory_residual_not_depleted"
-      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
       "required_evidence": [
-        "provider initial/final inventory and mass balance proving residual mass is within tolerance",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"
