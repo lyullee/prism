@@ -57,4 +57,12 @@ python scripts/run_lh2dt_native_layered_tank_smoke.py `
   --lh2dt-root "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\lh2dt_models" `
   --output-dir results/20261115/native_layered_tank_current_chain `
   --run-consequence-chain
-```\n
+```
+
+같은 현재 source digest로 `DynamicHEMPipe` 2상 사고도 별도 재실행했다.
+0.06 s `reviewed_isolation_success` packet이 생성되고, 동일한
+`validate_lh2dt_prism_packet_chain.py`를 통과해 `END_TO_END_DIAGNOSTIC_EXECUTED`를
+기록했다. 결과는
+[`native_dynamic_pipe_current`](../results/20261115/native_dynamic_pipe_current/)에
+있다. 이 배관 실행 역시 synthetic geometry와 no-frequency 진단이며, 두 endpoint
+상호작용이나 시설 전체 QRA를 의미하지 않는다.

@@ -62,7 +62,8 @@ export 응답을 현재 PRISM strict liquid packet으로 변환하고 같은 pac
 SLABx-LH2/피해 chain까지 전달하는 smoke를 다시 실행했습니다. native 방출 질량·에너지
 잔차는 모두 0이고 chain 상태는 `END_TO_END_DIAGNOSTIC_EXECUTED`입니다. 이번 실행에서
 발견된 optional isolation `null` metadata 계약도 수정했습니다. 합성 geometry·상태이므로
-qualified provider·독립 검증·시설 IR/F-N 승격은 계속 차단합니다. [실행 기록](docs/PRISM_native_lh2dt_current_chain_20261115.md)
+qualified provider·독립 검증·시설 IR/F-N 승격은 계속 차단합니다. 저장탱크와
+DynamicHEMPipe 현재 소스 재실행 기록은 [native chain 기록](docs/PRISM_native_lh2dt_current_chain_20261115.md)에서 확인할 수 있습니다.
 
 **케이스별 방출 경계 승격 표 (2026-11-14):** 최신 전체 union 44개 시설 case를 설비·포트·운전
 모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 13개와 보류된 31개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 13개 행도 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
