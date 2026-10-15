@@ -2,7 +2,7 @@
   "date_kst": "2026-11-15",
   "package_version": "0.6.3",
   "release_candidate": "v0.6.3",
-  "release_status": "github_release_published_pypi_0.6.3_zenodo_version_record_pending_authentication",
+  "release_status": "github_release_published_pypi_0.6.3_zenodo_version_doi_reserved_pending_final_publish",
   "latest_ijhe_requirement_traceability": "docs/PRISM_IJHE_requirement_traceability_20261115.md",
   "equipment_provider_state_handoff_record": "docs/PRISM_equipment_provider_state_handoff_20261115.md",
   "equipment_provider_port_and_source_state_preserved": true,
@@ -5022,5 +5022,8 @@
   "latest_release_boundary_case_audit_status": "CASE_BOUNDARY_PARTIAL; 44 cases, 32 provider-evidence-valid, 10 not supplied, 2 invalid, 3 strict eligible, 41 blocked",
   "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 53 checks, 48 PASS, 5 BLOCKED",
   "pypi_release_url": "https://pypi.org/project/prism-risk/0.6.3/",
-  "zenodo_v063_version_doi_status": "pending Zenodo account authentication and version publication"
+  "zenodo_v063_version_doi_status": "reserved_pending_final_publish_confirmation",
+  "zenodo_v063_version_doi": "10.5281/zenodo.23387052",
+  "latest_english_user_manual": "docs/PRISM_USER_MANUAL_en.md",
+  "latest_english_interface_guide": "docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md"
 }
