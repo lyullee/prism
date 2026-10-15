@@ -2,7 +2,7 @@
   "date_kst": "2026-11-15",
   "package_version": "0.6.3",
   "release_candidate": "v0.6.3",
-  "release_status": "prepared_pending_GitHub_tag_PyPI_and_Zenodo_version_record",
+  "release_status": "github_release_published_pypi_0.6.3_zenodo_version_record_pending_authentication",
   "latest_ijhe_requirement_traceability": "docs/PRISM_IJHE_requirement_traceability_20261115.md",
   "equipment_provider_state_handoff_record": "docs/PRISM_equipment_provider_state_handoff_20261115.md",
   "equipment_provider_port_and_source_state_preserved": true,
@@ -381,7 +381,7 @@
   "zenodo_publication_status": "published_and_doi_resolver_verified",
   "public_artifacts_scope": "PRISM own source, examples, tests, documentation and wheel; external providers and raw field data excluded",
   "zenodo_concept_doi": "10.5281/zenodo.23241358",
-  "github_release_url": "https://github.com/lyullee/prism/releases/tag/v0.6.2",
+  "github_release_url": "https://github.com/lyullee/prism/releases/tag/v0.6.3",
   "release_git_commit": "783b8860c709fd0b7d944b0fe5e9b19d5cd95e15",
   "publication_workflow_run": "https://github.com/lyullee/prism/actions/runs/37833213191",
   "publication_record": "docs/PRISM_v062_PyPI_DOI_배포기록_20261009.md",
@@ -991,7 +991,12 @@
   "external_model_native_contract_audit_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
   "external_model_native_contract_audit_test_status": "7 native exports; 7 adapter contracts; external model source HEAD b483f7921d7e67a269947f36393fdd3b9ab9e7b3; worktree dirty; no qualified packet promotion",
   "external_model_native_contract_audit_git_status": "GIT_WORKTREE_DIRTY",
-  "external_model_native_contract_audit_git_dirty_paths": ["CHANGELOG.md", "src/lh2dt/vaporizer.py", "docs/vaporizer_design_point.md", "tests/test_vaporizer_design_point.py"],
+  "external_model_native_contract_audit_git_dirty_paths": [
+    "CHANGELOG.md",
+    "src/lh2dt/vaporizer.py",
+    "docs/vaporizer_design_point.md",
+    "tests/test_vaporizer_design_point.py"
+  ],
   "external_lh2dt_current_layered_tank_chain_record": "results/20261115/native_layered_tank_current_chain/verification.json",
   "external_lh2dt_current_layered_tank_chain_status": "EXECUTED_OPERATOR_LIMITED_NATIVE_DIAGNOSTIC; current native packet reached SLABx-LH2 consequence chain",
   "external_lh2dt_current_layered_tank_chain_consequence_record": "results/20261115/native_layered_tank_current_chain/consequence_chain/verification.json",
@@ -4989,8 +4994,8 @@
   "latest_native_lh2dt_frequency_case_provider_result_digest": "3d737384a6d02cad8877da680ccaaf78dbe751d57b3ccc2b14683d51ecaef6fd",
   "latest_native_lh2dt_frequency_case_provider_termination_basis": "reviewed_isolation_success",
   "latest_native_lh2dt_frequency_case_provider_isolation_success": true,
-  "latest_native_lh2dt_frequency_case_provider_isolation_time_s": 0.00005,
-  "latest_native_lh2dt_frequency_case_provider_post_isolation_observation_s": 0.00005,
+  "latest_native_lh2dt_frequency_case_provider_isolation_time_s": 5e-05,
+  "latest_native_lh2dt_frequency_case_provider_post_isolation_observation_s": 5e-05,
   "latest_native_lh2dt_frequency_case_provider_available_mass_kg": 71.7644005715206,
   "latest_native_lh2dt_frequency_case_provider_final_mass_kg": 71.7643992311117,
   "latest_native_lh2dt_frequency_case_native_export_elapsed_ms": 155.66809999290854,
@@ -5015,5 +5020,7 @@
   "latest_provider_termination_variant_catalog": "results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json",
   "latest_provider_termination_variant_catalog_status": "EVIDENCE_CATALOG_READY; 35 rows, 34 event IDs, distinct provider digests preserved",
   "latest_release_boundary_case_audit_status": "CASE_BOUNDARY_PARTIAL; 44 cases, 32 provider-evidence-valid, 10 not supplied, 2 invalid, 3 strict eligible, 41 blocked",
-  "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 53 checks, 48 PASS, 5 BLOCKED"
+  "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 53 checks, 48 PASS, 5 BLOCKED",
+  "pypi_release_url": "https://pypi.org/project/prism-risk/0.6.3/",
+  "zenodo_v063_version_doi_status": "pending Zenodo account authentication and version publication"
 }

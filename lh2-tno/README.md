@@ -6,6 +6,8 @@
 
 ## v0.6.3 사용 시작 및 연결 문서
 
+배포 링크: [GitHub Release v0.6.3](https://github.com/lyullee/prism/releases/tag/v0.6.3) · [PyPI prism-risk 0.6.3](https://pypi.org/project/prism-risk/0.6.3/) · [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
+
 최신 배포 후보는 **v0.6.3**이며, 설치·실행·결과 해석은 [사용자 매뉴얼](docs/PRISM_USER_MANUAL_ko.md), 설비 디지털트윈·HAZOP·provider 연결은 [인터페이스 연결 가이드](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)에서 단계별로 설명한다.
 
 ```powershell
@@ -29,6 +31,7 @@ python -m pytest -q
 - [IJHE 요구사항 추적표](docs/PRISM_IJHE_requirement_traceability_20261115.md)
 - [최신 IJHE 감사](docs/PRISM_IJHE_latest_audit_20261115.md)
 - [설비 provider 상태 handoff 기록](docs/PRISM_equipment_provider_state_handoff_20261115.md)
+- [v0.6.3 PyPI·DOI 배포 기록](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)
 
 ## 최신 v0.6.2 IJHE 기준점 (2026-11-15)
 
