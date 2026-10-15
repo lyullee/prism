@@ -8,7 +8,7 @@
 
 배포 링크: [GitHub Release v0.6.3](https://github.com/lyullee/prism/releases/tag/v0.6.3) · [PyPI prism-risk 0.6.3](https://pypi.org/project/prism-risk/0.6.3/) · [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
 
-최신 배포 후보는 **v0.6.3**이며, 설치·실행·결과 해석은 [사용자 매뉴얼](docs/PRISM_USER_MANUAL_ko.md), 설비 디지털트윈·HAZOP·provider 연결은 [인터페이스 연결 가이드](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)에서 단계별로 설명한다.
+최신 배포는 **v0.6.3**이며, 설치·실행·결과 해석은 [사용자 매뉴얼](docs/PRISM_USER_MANUAL_ko.md), 설비 디지털트윈·HAZOP·provider 연결은 [인터페이스 연결 가이드](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)에서 단계별로 설명한다.
 
 ```powershell
 python -m pip install "prism-risk[test]==0.6.3"
