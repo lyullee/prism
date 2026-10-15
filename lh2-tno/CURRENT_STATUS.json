@@ -1,6 +1,8 @@
 {
   "date_kst": "2026-11-15",
-  "package_version": "0.6.2",
+  "package_version": "0.6.3",
+  "release_candidate": "v0.6.3",
+  "release_status": "prepared_pending_GitHub_tag_PyPI_and_Zenodo_version_record",
   "latest_ijhe_requirement_traceability": "docs/PRISM_IJHE_requirement_traceability_20261115.md",
   "equipment_provider_state_handoff_record": "docs/PRISM_equipment_provider_state_handoff_20261115.md",
   "equipment_provider_port_and_source_state_preserved": true,

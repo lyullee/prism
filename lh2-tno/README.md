@@ -4,6 +4,32 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
+## v0.6.3 사용 시작 및 연결 문서
+
+최신 배포 후보는 **v0.6.3**이며, 설치·실행·결과 해석은 [사용자 매뉴얼](docs/PRISM_USER_MANUAL_ko.md), 설비 디지털트윈·HAZOP·provider 연결은 [인터페이스 연결 가이드](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)에서 단계별로 설명한다.
+
+```powershell
+python -m pip install "prism-risk[test]==0.6.3"
+prism --describe-modes
+```
+
+가장 먼저 실행할 명령은 다음과 같다.
+
+```powershell
+lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
+python -m pytest -q
+```
+
+문헌 빈도는 별도 `FrequencyPlan`으로만 연결하고, 설비 provider가 없는 사고는 자동 대체하지 않는다. 현재 계산 연결은 연구용 진단 경로이며, 시설 전체 QRA·독립 물리검증·1 Hz 신규 물리 계산의 완료를 주장하지 않는다.
+
+### 문서 바로가기
+
+- [상세 사용자 매뉴얼](docs/PRISM_USER_MANUAL_ko.md)
+- [설비·HAZOP·provider 인터페이스 연결 가이드](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)
+- [IJHE 요구사항 추적표](docs/PRISM_IJHE_requirement_traceability_20261115.md)
+- [최신 IJHE 감사](docs/PRISM_IJHE_latest_audit_20261115.md)
+- [설비 provider 상태 handoff 기록](docs/PRISM_equipment_provider_state_handoff_20261115.md)
+
 ## 최신 v0.6.2 IJHE 기준점 (2026-11-15)
 
 수직 handoff의 종료 경계를 실제로 연장 추정하지 않고, provider가 이미 계산한
