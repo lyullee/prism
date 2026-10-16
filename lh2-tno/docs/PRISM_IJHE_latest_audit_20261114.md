@@ -42,6 +42,7 @@
 | `observed_hazop_storage_isolation_branch_evidence.json` / `observed_hazop_vaporizer_isolation_branch_evidence.json` | 저장탱크·기화기 차단 성공 branch와 zero-flow evidence | explicit controls·branch probability·diagnostic gate 확인 |
 | `facility_evidence_request.json` | case/family별 누락 증거 요청 | 44 case와 12 family를 추적 |
 | `native_generic_scope_packet_evidence_qualification_readiness_v14.json` | provider qualification readiness | 24/24 `BLOCKED_REVIEW` |
+| `inspection_center_facility_ijhe_handoff_audit.json` | reconstructed facility HAZOP bridge + explicit annual handoff traceability | 8/8 structural checks pass; diagnostic only; facility IR/F-N and provider qualification remain closed |
 
 ## 재현 명령
 
@@ -89,6 +90,7 @@ python scripts/build_ijhe_completion_audit.py `
   --observed-hazop-provider-consequence-chain results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json `
   --observed-hazop-storage-isolation-branch-evidence results/20261110/observed_hazop_storage_isolation_branch_evidence.json `
   --observed-hazop-vaporizer-isolation-branch-evidence results/20261110/observed_hazop_vaporizer_isolation_branch_evidence.json `
+  --inspection-center-facility-ijhe-handoff-audit examples/inspection_center_facility_ijhe_handoff_audit.json `
   --hazop-selection-event-binding results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/hazop_selection_event_binding.json `
   --hazop-extension-mode-evidence-request results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/hazop_extension_mode_evidence_request.json `
   --output results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json

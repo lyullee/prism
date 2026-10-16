@@ -160,6 +160,9 @@ packets, or physical validation are complete. The JSON record is
 [`inspection_center_facility_ijhe_handoff_audit.json`](examples/inspection_center_facility_ijhe_handoff_audit.json),
 and the reusable implementation is
 [`inspection_center_facility_ijhe_audit.py`](src/lh2_tno/inspection_center_facility_ijhe_audit.py).
+The full IJHE audit can consume this record with
+`--inspection-center-facility-ijhe-handoff-audit`; it appears as a
+`diagnostic_only` check and does not weaken the strict facility-QRA gates.
 
 ## Equipment and provider boundary
 

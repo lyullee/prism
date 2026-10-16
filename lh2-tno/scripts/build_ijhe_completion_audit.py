@@ -244,6 +244,11 @@ def main() -> int:
         help="optional explicit vaporizer isolation and zero-flow branch evidence",
     )
     parser.add_argument(
+        "--inspection-center-facility-ijhe-handoff-audit",
+        type=Path,
+        help="optional reconstructed facility HAZOP/annual handoff traceability audit",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -697,6 +702,15 @@ def main() -> int:
             observed_hazop_vaporizer_isolation_branch_evidence["_record_path"] = str(
                 args.observed_hazop_vaporizer_isolation_branch_evidence
             )
+        inspection_center_facility_ijhe_handoff_audit = (
+            _object(args.inspection_center_facility_ijhe_handoff_audit)
+            if args.inspection_center_facility_ijhe_handoff_audit
+            else None
+        )
+        if inspection_center_facility_ijhe_handoff_audit is not None:
+            inspection_center_facility_ijhe_handoff_audit["_record_path"] = str(
+                args.inspection_center_facility_ijhe_handoff_audit
+            )
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -807,6 +821,7 @@ def main() -> int:
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
             native_isolation_event_reconciliation=native_isolation_event_reconciliation,
             native_provider_multi_equipment_audit=native_provider_multi_equipment_audit,
+            inspection_center_facility_ijhe_handoff_audit=inspection_center_facility_ijhe_handoff_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

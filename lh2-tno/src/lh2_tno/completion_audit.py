@@ -117,6 +117,7 @@ def build_ijhe_completion_audit(
     conditional_facility_release_trace: Mapping[str, Any] | None = None,
     native_isolation_event_reconciliation: Mapping[str, Any] | None = None,
     native_provider_multi_equipment_audit: Mapping[str, Any] | None = None,
+    inspection_center_facility_ijhe_handoff_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -5441,6 +5442,49 @@ def build_ijhe_completion_audit(
                 "gate status never opens facility-QRA promotion."
             )
             checks.append(gates_check)
+    if inspection_center_facility_ijhe_handoff_audit is not None:
+        handoff_audit = inspection_center_facility_ijhe_handoff_audit
+        handoff_checks = handoff_audit.get("checks")
+        boundary = handoff_audit.get("qualification_boundary")
+        handoff_valid = (
+            handoff_audit.get("schema_version")
+            == "prism.inspection_center_facility_ijhe_audit.v1"
+            and handoff_audit.get("status") == "PASS_WITH_SCOPE_LIMITATIONS"
+            and isinstance(handoff_checks, list)
+            and bool(handoff_checks)
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status") == "PASS"
+                and row.get("blocking_reason") is None
+                for row in handoff_checks
+            )
+            and isinstance(boundary, Mapping)
+            and boundary.get("facility_ir_fn_available") is False
+            and boundary.get("provider_packet_qualification") == "UNQUALIFIED_DIAGNOSTIC"
+            and boundary.get("physical_validation_claim") is False
+        )
+        handoff_check = _check(
+            "diagnostic_inspection_center_facility_ijhe_handoff",
+            handoff_valid,
+            {
+                "record": handoff_audit.get("_record_path"),
+                "schema_version": handoff_audit.get("schema_version"),
+                "status": handoff_audit.get("status"),
+                "check_count": len(handoff_checks) if isinstance(handoff_checks, list) else None,
+                "blocking_reason_count": len(handoff_audit.get("blocking_reasons", []))
+                if isinstance(handoff_audit.get("blocking_reasons"), list)
+                else None,
+                "qualification_boundary": dict(boundary) if isinstance(boundary, Mapping) else boundary,
+            },
+            "inspection-centre facility handoff audit is missing structural traceability or carries an unsafe qualification claim",
+        )
+        handoff_check["diagnostic_only"] = True
+        handoff_check["interpretation"] = (
+            "The reconstructed facility bridge and annual handoff are included in the IJHE evidence graph. "
+            "This diagnostic check records explicit provider mapping and literature sensitivity while "
+            "preserving the separate facility IR/F-N, provider qualification and physical-validation gates."
+        )
+        checks.append(handoff_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

@@ -4,6 +4,8 @@ from argparse import Namespace
 from pathlib import Path
 import sys
 
+from lh2_tno.completion_audit import build_ijhe_completion_audit
+
 
 def test_facility_ijhe_handoff_audit_is_fail_closed_and_traceable():
     root = Path(__file__).resolve().parents[1]
@@ -25,3 +27,28 @@ def test_facility_ijhe_handoff_audit_is_fail_closed_and_traceable():
     assert not result["blocking_reasons"]
     assert result["qualification_boundary"]["facility_ir_fn_available"] is False
     assert result["qualification_boundary"]["physical_validation_claim"] is False
+
+
+def test_full_ijhe_audit_consumes_facility_handoff_audit_as_diagnostic_check():
+    report = build_ijhe_completion_audit(
+        {"validated": False},
+        {"matrix_complete": False, "blocking_reasons": ["diagnostic"]},
+        {"events": [], "cases": [], "timing": {}},
+        inspection_center_facility_ijhe_handoff_audit={
+            "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+            "status": "PASS_WITH_SCOPE_LIMITATIONS",
+            "checks": [{"status": "PASS", "blocking_reason": None}],
+            "blocking_reasons": [],
+            "qualification_boundary": {
+                "facility_ir_fn_available": False,
+                "provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
+                "physical_validation_claim": False,
+            },
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_inspection_center_facility_ijhe_handoff"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
