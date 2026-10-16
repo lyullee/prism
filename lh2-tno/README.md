@@ -31,7 +31,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1233 passed, 1 warning**.
+The v0.6.3 local validation result is **1237 passed, 1 warning**.
 
 ## What PRISM is for
 
@@ -219,6 +219,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Korean README](README_ko.md)
 - [IJHE requirement traceability](docs/PRISM_IJHE_requirement_traceability_20261115.md)
 - [Latest IJHE audit](docs/PRISM_IJHE_latest_audit_20261115.md)
+- [Latest facility-handoff IJHE audit detail](docs/PRISM_IJHE_facility_handoff_audit_20261115.md)
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [Current external release-artifact intake](docs/PRISM_external_release_artifact_intake_20261016.md)
 - [Inspection-centre reviewed-unit re-audit](docs/PRISM_검사센터_검토단위_재감사_20261016.md)
@@ -251,7 +252,7 @@ python -m pytest -q
 
 ## Current qualification boundary
 
-PRISM v0.6.3 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
+PRISM v0.6.3 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: four evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
 
 ## License and citation
 
