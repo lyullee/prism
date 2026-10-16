@@ -481,16 +481,17 @@
     {
       "id": "strict_facility_state_snapshot_coverage",
       "requirement": "시설 전체 사건이 설비 상태 snapshot과 native 방출 결과 digest까지 일대일로 이어져야 한다",
-      "status": "BLOCKED_EVIDENCE",
+      "status": "PASS",
       "evidence_paths": [
+        "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
         "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\extension_state_snapshot_coverage.json",
         "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "union_event_count": 34,
-        "state_snapshot_campaign_status": null,
-        "state_snapshot_campaign_event_count": null,
-        "state_snapshot_campaign_bound_event_count": null,
+        "state_snapshot_campaign_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+        "state_snapshot_campaign_event_count": 24,
+        "state_snapshot_campaign_bound_event_count": 24,
         "provider_result_digest_mismatch_event_ids": [],
         "extension_state_snapshot_coverage_status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_COMPLETE",
         "extension_state_snapshot_event_count": 10,
@@ -498,90 +499,178 @@
         "extension_state_snapshot_unbound_event_count": 0,
         "extension_state_snapshot_missing_event_ids": []
       },
-      "blocking_reason": "base native campaign의 상태 snapshot은 확인되지만 vertical-handoff와 inventory-depletion 확장 사건까지 시설 전체 상태 연결이 닫히지 않았다; 확장 사건별 canonical state snapshot이 필요하다",
+      "blocking_reason": null,
       "interpretation": "시설 전체 gate는 확장 사건별 상태 snapshot와 provider result digest까지 확인될 때만 통과한다. 부분 연결을 전체 연결로 승격하지 않는다."
     },
     {
       "id": "diagnostic_observed_state_source_replay",
       "requirement": "실증 상태자료의 원문 해시와 상태 장부 재생성이 일치해야 한다",
-      "status": "BLOCKED_EVIDENCE",
-      "evidence_paths": [],
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261101\\inspection_center_observed_state_replay_audit.json"
+      ],
       "observed": {
-        "source_count": null,
-        "matched_source_count": null,
-        "evidence_policy_valid": null,
-        "regeneration": null
+        "source_count": 3,
+        "matched_source_count": 3,
+        "evidence_policy_valid": true,
+        "regeneration": {
+          "performed": true,
+          "canonical_digest_match": true,
+          "reviewed_canonical_digest": "1f0d2dc8fe2b4c3c4f21658639a42f3501cb446bd18ce50d0cdb360dd17e21f8",
+          "regenerated_canonical_digest": "1f0d2dc8fe2b4c3c4f21658639a42f3501cb446bd18ce50d0cdb360dd17e21f8"
+        }
       },
-      "blocking_reason": "관측 상태 원문 해시 또는 상태 장부 재생성이 일치하지 않거나 state-only 정책이 확인되지 않았다",
+      "blocking_reason": null,
       "interpretation": "원문 재생성 일치는 입력 무결성 근거다. 사고 방출·빈도·독립 물리검증·시설 IR/F-N으로 승격하지 않는다."
     },
     {
       "id": "diagnostic_observed_state_runtime_frames",
       "requirement": "관측 상태를 실시간 정상상태 모델/provider resolver 입력으로 내보내되 사고 방출·빈도·QRA로 자동 승격하지 않아야 한다",
-      "status": "BLOCKED_EVIDENCE",
-      "evidence_paths": [],
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261110\\inspection_center_observed_state_runtime_frames_with_modes.json",
+        "results\\20261101\\inspection_center_observed_state_replay_audit.json"
+      ],
       "observed": {
-        "source_count": null,
-        "frame_count": null,
-        "evidence_sample_count": null,
-        "policy": {},
-        "runtime_handoff_contract": {}
+        "source_count": 3,
+        "frame_count": 3,
+        "evidence_sample_count": 8955,
+        "policy": {
+          "state_only": true,
+          "release_scenario_generated": false,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_packet_promoted": false,
+          "physical_validation_claim": false,
+          "facility_qra_claim": false,
+          "provider_release_required_for_consequence": true,
+          "operating_mode_input_bound": true,
+          "operating_mode_inferred": false,
+          "diagnostic_only": true
+        },
+        "runtime_handoff_contract": {
+          "schema": "prism.equipment_process_state.v1",
+          "state_adapter": "service_state_from_runtime_frame",
+          "resolver_adapter": "request_from_observed_state_runtime_frame",
+          "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
+          "facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
+          "runtime_clock": "caller_supplied_now_s",
+          "provider_release_required_for_consequence": true,
+          "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+          "termination_and_inventory_owner": "equipment_provider",
+          "operating_mode_transport": "optional source/sample operating_mode; required by HAZOP selector"
+        }
       },
-      "blocking_reason": "실시간 상태 frame artifact가 없거나 source/frame 수·digest·state-only·시설 monitor 계약이 검증되지 않았다",
+      "blocking_reason": null,
       "interpretation": "상태 frame은 정상상태 모델과 provider resolver에 넘길 수 있는 실행 입력이다. provider가 방출 경계와 종료 조건을 반환하기 전에는 피해·빈도·시설 QRA를 계산하지 않는다."
+    },
+    {
+      "id": "diagnostic_observed_state_model_binding",
+      "requirement": "관측 정상상태 신호를 일반 액화수소 설비 모델에 연결하되 시설 identity·사고 방출·빈도와 분리해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\observed_state_model_binding_audit.json"
+      ],
+      "observed": {
+        "schema": "prism.observed_state_model_binding_audit.v1",
+        "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+        "observed_component_count": 3,
+        "state_model_bound_component_count": 3,
+        "diagnostic_release_adapter_component_count": 3,
+        "facility_component_identity_resolved_count": 0,
+        "qualified_provider_packet_count": 0,
+        "row_count": 3,
+        "policy": {
+          "normal_state_model_is_not_accident_release": true,
+          "diagnostic_adapter_is_not_qualified_provider": true,
+          "facility_component_identity_is_not_resolved": true,
+          "facility_identity_required_for_accident_binding": true,
+          "release_event_binding_is_not_created": true,
+          "frequency_is_not_assigned": true,
+          "facility_ir_fn_promotion": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "센터 정상 운전 신호는 storage tank·vent·vaporizer 모델 입력 후보로만 연결한다. 시설 P&ID identity와 provider accident history가 확인되기 전에는 방출·빈도·IR/F-N을 만들지 않는다."
     },
     {
       "id": "diagnostic_external_outdoor_field_evidence",
       "requirement": "외부 옥외 LH2 관측자료를 해시·사건시계·범위 정책과 함께 감사 장부에 기록해야 한다",
-      "status": "BLOCKED_EVIDENCE",
-      "evidence_paths": [],
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261103\\external_field_evidence\\preslhy_trial10_unverified.json"
+      ],
       "observed": {
-        "status": null,
-        "event_id": null,
-        "dataset_id": null,
-        "scope": null,
-        "source_row_count": null,
-        "weather_row_count": null,
-        "receptor_row_count": null,
-        "hash_verification_enforced": null,
-        "hash_drift_channels": [],
-        "model_comparison_ready": null,
-        "physical_validation_claim": null,
-        "facility_qra_claim": null,
-        "frequency_inference_performed": null
+        "status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE_HASH_DRIFT",
+        "event_id": "preslhy-e35-trial-10-2019-09-13",
+        "dataset_id": "preslhy-e35-trial10-xensor-window",
+        "scope": "lh2_free_field",
+        "source_row_count": 208,
+        "weather_row_count": 92,
+        "receptor_row_count": 5053,
+        "hash_verification_enforced": false,
+        "hash_drift_channels": [
+          "source_boundary",
+          "weather",
+          "common_clock"
+        ],
+        "model_comparison_ready": false,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false,
+        "frequency_inference_performed": false
       },
-      "blocking_reason": "외부 관측자료의 schema·범위·해시 정책 또는 승격 금지 조건이 확인되지 않았다",
+      "blocking_reason": null,
       "interpretation": "관측자료 입력 무결성과 제한 정책만 확인한다. 해시 drift는 진단에 표시하지만 물리검증·방출 packet·빈도·시설 QRA를 열지 않는다."
+    },
+    {
+      "id": "diagnostic_external_field_model_comparison",
+      "requirement": "외부 옥외 LH2 관측과 모델 농도를 동일 센서·공통시계·운반지연으로 비교하되 독립 물리검증으로 자동 승격하지 않아야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261103\\external_field_model_comparison\\preslhy_trial10_replay_unverified.json"
+      ],
+      "observed": {
+        "status": "RESTRICTED_FIELD_MODEL_COMPARISON_HASH_DRIFT",
+        "event_id": "preslhy-e35-trial-10-2019-09-13",
+        "matched_row_count": 4960,
+        "matched_fraction": 0.9815950920245399,
+        "rmse_vol_pct": 31.102896957193188,
+        "source_boundary_mode": "measured_source_replay",
+        "independent_physical_validation_review_eligible": false
+      },
+      "blocking_reason": null,
+      "interpretation": "비교 오차와 시간·기하 결합만 기록한다. measured_source_replay 또는 hash drift는 독립 물리검증으로 승격하지 않으며, frequency·시설 QRA도 열지 않는다."
     },
     {
       "id": "diagnostic_external_equipment_model_readiness",
       "requirement": "외부 액화수소 설비 모델의 상태 입력 준비도와 사고 방출 경계를 분리하여 기록해야 한다",
-      "status": "BLOCKED_EVIDENCE",
+      "status": "PASS",
       "evidence_paths": [
-        "results\\20261024\\native_equipment_model_binding_audit_v1.json"
+        "results\\20261104\\external_equipment_model_audit_current.json"
       ],
       "observed": {
-        "status": "STATE_ONLY_BOUND",
-        "asset_count": null,
-        "state_model_ready_asset_count": null,
-        "physical_time_status": null,
-        "valve_event_count": null,
-        "physical_time_assigned_event_count": null,
-        "verified_raw_historian_session_count": null,
-        "pid_exact_asset_id_overlap_count": null,
-        "pid_source_backed_overlap_count": null,
-        "pid_unmatched_external_asset_count": 0,
-        "pid_confirmed_port_mapping_count": null,
-        "pid_candidate_port_mapping_count": null,
-        "component_binding_enabled_edge_count": null,
-        "component_binding_unresolved_edge_count": null,
-        "flow_candidate_pairing_count": null,
-        "flow_unresolved_tag_count": null,
-        "general_facility_identity_resolved": null,
-        "accident_release_packet_allowed": null,
-        "frequency_inference_allowed": null
+        "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+        "asset_count": 12,
+        "state_model_ready_asset_count": 2,
+        "physical_time_status": "unassigned",
+        "valve_event_count": 36,
+        "physical_time_assigned_event_count": 0,
+        "verified_raw_historian_session_count": 0,
+        "pid_exact_asset_id_overlap_count": 9,
+        "pid_source_backed_overlap_count": 9,
+        "pid_unmatched_external_asset_count": 3,
+        "pid_confirmed_port_mapping_count": 14,
+        "pid_candidate_port_mapping_count": 13,
+        "component_binding_enabled_edge_count": 0,
+        "component_binding_unresolved_edge_count": 27,
+        "flow_candidate_pairing_count": 10,
+        "flow_unresolved_tag_count": 11,
+        "general_facility_identity_resolved": false,
+        "accident_release_packet_allowed": false,
+        "frequency_inference_allowed": false
       },
-      "blocking_reason": "외부 설비 모델의 상태 입력 준비도 또는 사고 방출 승격 차단 정책이 확인되지 않았다",
+      "blocking_reason": null,
       "interpretation": "TK-1101/TK-1102 같은 상태 모델 입력 준비 자산은 기록하되, 절차 의도·재구성 자료만으로 사고 방출 시각·차단·재고 소진·빈도·시설 QRA를 열지 않는다."
     },
     {
@@ -589,49 +678,148 @@
       "requirement": "방출 종료·격리·재고 소진·질량잔차의 provider closure를 사건별로 추적하고 미해결 항목을 표시해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261115\\release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json"
+        "results\\20261106\\release_closure_worklist.json"
       ],
       "observed": {
-        "schema_version": "prism.release_boundary_case_audit.v1",
-        "worklist_status": "CASE_BOUNDARY_PARTIAL",
+        "schema_version": "prism.release_closure_worklist.v1",
+        "worklist_status": "OPEN_RELEASE_CLOSURE_WORKLIST",
         "case_count": 44,
-        "open_case_count": null,
-        "closure_input_valid": false,
+        "open_case_count": 44,
+        "closure_input_valid": true,
         "closure_closed": false,
-        "closure_gap_counts": {},
-        "mass_closure_open_case_count": null,
-        "isolation_open_case_count": null,
-        "termination_open_case_count": null,
-        "inventory_closure_open_case_count": null,
-        "provider_packet_required_case_count": null,
-        "promotion_gates": {}
+        "closure_gap_counts": {
+          "INVENTORY_CLOSURE_OPEN": 15,
+          "ISOLATION_OPEN": 44,
+          "PROVIDER_QUALIFICATION_OPEN": 44,
+          "TERMINATION_OPEN": 24
+        },
+        "mass_closure_open_case_count": 0,
+        "isolation_open_case_count": 44,
+        "termination_open_case_count": 24,
+        "inventory_closure_open_case_count": 15,
+        "provider_packet_required_case_count": 44,
+        "promotion_gates": {
+          "release_boundary_promotion_allowed": false,
+          "frequency_inference_allowed": false,
+          "facility_qra_allowed": false,
+          "physical_validation_claim": false,
+          "diagnostic_only": true
+        }
       },
-      "blocking_reason": "release closure worklist 입력이 없거나 종료·격리·재고 closure가 아직 열려 있다(open_case_count=None)",
+      "blocking_reason": "release closure worklist 입력이 없거나 종료·격리·재고 closure가 아직 열려 있다(open_case_count=44)",
       "interpretation": "이 행은 provider 자료 수집과 종료 경계 확인을 위한 진단 원장이다. worklist가 닫혀도 qualified provider evidence·독립 물리검증·시설 QRA를 자동으로 열지 않는다."
     },
     {
       "id": "diagnostic_generic_provider_evidence_requests",
       "requirement": "모든 generic LH2 provider packet에 종료근거 또는 qualification 증거 요청이 정확히 하나씩 있어야 한다",
-      "status": "BLOCKED_EVIDENCE",
+      "status": "PASS",
       "evidence_paths": [
-        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_evidence_request.json"
+        "results\\20261106\\generic_lh2_provider_evidence_requests.json"
       ],
       "observed": {
-        "schema_version": "prism.facility_evidence_request.v1",
-        "event_count": null,
-        "packet_path_count": null,
-        "packet_count": null,
-        "request_count": null,
-        "closure_open_request_count": null,
-        "qualification_open_request_count": null,
-        "qualified_provider_packet_count": null,
-        "catalog_input_valid": false,
-        "catalog_matches_closure": false,
-        "frequency_inference_allowed": null,
-        "facility_qra_allowed": null
+        "schema_version": "prism.generic_provider_evidence_requests.v1",
+        "event_count": 24,
+        "packet_path_count": 24,
+        "packet_count": 26,
+        "request_count": 26,
+        "closure_open_request_count": 15,
+        "qualification_open_request_count": 11,
+        "qualified_provider_packet_count": 0,
+        "catalog_input_valid": true,
+        "catalog_matches_closure": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
       },
-      "blocking_reason": "provider 증거 요청 catalog가 malformed이거나 closure audit의 packet 수와 일치하지 않는다",
+      "blocking_reason": null,
       "interpretation": "catalog는 자료 수집의 누락을 방지하는 진단 장부다. 종료시간, 재고, 빈도, 물리검증 또는 시설 QRA를 추정하거나 자동 승격하지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_provider_release_closure",
+      "requirement": "generic LH2 provider의 사건별 방출 종료·차단·재고 closure 상태와 승격 차단을 직접 검증해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261106\\generic_lh2_provider_release_closure_current.json"
+      ],
+      "observed": {
+        "schema_version": "prism.generic_provider_release_closure_audit.v1",
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "event_count": 24,
+        "closure_ready_event_count": 9,
+        "closure_open_event_count": 15,
+        "packet_path_count": 24,
+        "provider_packet_count": 26,
+        "closure_ready_packet_path_count": 9,
+        "closure_ready_provider_packet_count": 11,
+        "closure_counts_match": true,
+        "catalog_packet_count": 26,
+        "catalog_packet_count_match": true,
+        "qualified_provider_packet_count": 0,
+        "promotion_gates": {
+          "closure_ready": false,
+          "qualified_provider_packet_allowed": false,
+          "frequency_inference_allowed": false,
+          "facility_qra_allowed": false,
+          "diagnostic_only": true
+        },
+        "input_valid": true
+      },
+      "blocking_reason": null,
+      "interpretation": "열린 closure 사건은 provider 자료 수집 대기 상태로 남긴다. 이 행이 PASS여도 종료근거가 모든 사건에서 확보됐다는 뜻이 아니며, qualified provider·빈도 추론·시설 QRA를 열지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_provider_evidence_audit",
+      "requirement": "provider evidence catalog의 각 packet에 qualification sidecar exact-match 감사가 실행되어야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261106\\generic_lh2_provider_evidence_audit_current.json"
+      ],
+      "observed": {
+        "schema_version": "prism.generic_provider_evidence_audit.v1",
+        "request_count": 26,
+        "packet_count": 26,
+        "qualification_sidecar_present_count": 0,
+        "exact_match_count": 0,
+        "qualified_provider_packet_count": 0,
+        "audit_input_valid": true,
+        "audit_matches_catalog": true
+      },
+      "blocking_reason": null,
+      "interpretation": "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계다. 독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
+    },
+    {
+      "id": "diagnostic_external_release_artifact_intake",
+      "requirement": "외부 LH2 방출 파일을 전체 검색하되 정확한 qualification sidecar와 종료근거가 없으면 진단 inventory로만 유지해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261108\\external_release_artifact_intake.json"
+      ],
+      "observed": {
+        "schema_version": "prism.external_release_artifact_intake.v1",
+        "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
+        "artifact_file_count": 14,
+        "qualification_file_count": 0,
+        "release_row_count": 28,
+        "qualified_sidecar_row_count": 0,
+        "closure_ready_row_count": 0,
+        "actual_origin_row_count": 0,
+        "synthetic_or_model_prediction_row_count": 28,
+        "closure_status_counts": {
+          "SCHEMA_UNQUALIFIED": 21,
+          "CLOSURE_EVIDENCE_OPEN": 7
+        },
+        "error_count": 0,
+        "counts_valid": true,
+        "promotion_policy": {
+          "frequency_assigned": false,
+          "provider_release_packet_promoted": false,
+          "physical_validation_promoted": false,
+          "facility_qra_promoted": false,
+          "qualification_requires_exact_digest_bound_sidecar": true,
+          "provider_ports_never_substituted_for_frequency_ports": true
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "검색된 파일은 설비·사고 후보를 찾는 보조 장부다. synthetic/model-prediction 자료와 sidecar 없는 방출은 실제 사고 근거·빈도·물리검증·시설 QRA로 승격하지 않는다."
     },
     {
       "id": "diagnostic_full_completion_audit_alignment",
@@ -685,10 +873,7 @@
     "independent_physical_validation",
     "qualified_provider_evidence",
     "strict_facility_scope",
-    "strict_facility_qra",
-    "strict_facility_state_snapshot_coverage",
-    "diagnostic_observed_state_source_replay",
-    "diagnostic_observed_state_runtime_frames"
+    "strict_facility_qra"
   ],
   "conditional_chain_complete": true,
   "strict_facility_qra_claim": false,

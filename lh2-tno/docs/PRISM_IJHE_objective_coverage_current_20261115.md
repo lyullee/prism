@@ -8,9 +8,9 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 20 |
+| Objective rows | 25 |
 | Core blocking rows | 0 |
-| Strict or diagnostic evidence gates still open | 7 |
+| Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (49 checks: 45 PASS, 4 BLOCKED) |
 | Facility IR/F-N promotion | withheld |
 | Physical-validation claim | withheld |
@@ -40,9 +40,8 @@ The following gates remain intentionally fail-closed:
 - **`qualified_provider_evidence`**: current packets are native diagnostic packets; no exact qualified provider packet has been promoted.
 - **`strict_facility_scope`**: some declared equipment/accident families remain partial or operator-limited for strict qualification.
 - **`strict_facility_qra`**: facility-wide IR/F/N promotion stays false until the previous gates close.
-- **`strict_facility_state_snapshot_coverage`**: the canonical state-snapshot campaign does not yet cover every vertical-handoff and inventory-depletion case with strict evidence.
-- **`diagnostic_observed_state_source_replay`**: observed-state source/replay evidence is not complete for the full declared chain.
-- **`diagnostic_observed_state_runtime_frames`**: complete runtime-frame and source/frame digest evidence is not available for the full monitor campaign.
+
+The current evidence package closes the observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. Two non-strict diagnostic rows remain visibly blocked because the latest 44-case completion audit still contains an open release-closure worklist and does not align with a strict full-completion claim. They do not disappear from the record and they do not promote facility QRA.
 
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
 
