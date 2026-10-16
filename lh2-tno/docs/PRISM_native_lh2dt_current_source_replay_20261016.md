@@ -53,5 +53,5 @@ python scripts/export_lh2dt_native_valve_prism_packet.py `
   --nozzle-height-m 0.05 --compressible-handoff
 ```
 
-This writes `resolved_release_with_handoff.json`, after exact provider-digest binding and conservation checks. Running that packet through `validate_lh2dt_prism_packet_chain.py` reached `END_TO_END_DIAGNOSTIC_EXECUTED`, with a 0.2 s provider duration and a mass residual of approximately `1.4e-20 kg`. The handoff remains synthetic diagnostic evidence: it does not qualify the provider or unlock facility IR/F-N.
+This writes `resolved_release_with_handoff.json`, after exact provider-digest binding and conservation checks. `validate_compressible_plane_handoff.py` reported 10 handoff states, `handoff_consumed=true`, and maximum Mach `1.3318`; the ordinary chain then reached `END_TO_END_DIAGNOSTIC_EXECUTED`, with a 0.2 s provider duration and a mass residual of approximately `1.4e-20 kg`. The handoff remains synthetic diagnostic evidence: it does not qualify the provider or unlock facility IR/F-N.
 
