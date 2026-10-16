@@ -2294,6 +2294,19 @@ class FacilityRealtimeConsequenceMonitor:
             "sensor_frequency_learning_used": False,
             "facility_annual_ir_available": False,
             "facility_fn_available": False,
+            "conditional_current_weather_expected_death_fn": copy.deepcopy(
+                result.get("conditional_current_weather_expected_death_fn")
+            ),
+            "conditional_current_weather_expected_death_fn_available": (
+                isinstance(
+                    result.get("conditional_current_weather_expected_death_fn"),
+                    Mapping,
+                )
+                and result["conditional_current_weather_expected_death_fn"].get(
+                    "status"
+                )
+                == "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
+            ),
         }
         result = dict(result)
         result["realtime_hazop_bridge"] = bridge

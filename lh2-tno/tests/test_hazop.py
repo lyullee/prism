@@ -766,6 +766,12 @@ def test_realtime_facility_monitor_hazop_bridge_preserves_mode_and_fail_closed_q
     assert result["components"]["TK-01"]["selection"]["operating_mode"] == "receiving"
     assert result["realtime_hazop_bridge"]["status"] == "EXECUTED_DIAGNOSTIC"
     assert result["realtime_hazop_bridge"]["selected_scenario_count"] == 1
+    assert result["realtime_hazop_bridge"][
+        "conditional_current_weather_expected_death_fn"
+    ]["status"] == "WITHHELD_MISSING_POPULATION_LEDGER"
+    assert result["realtime_hazop_bridge"][
+        "conditional_current_weather_expected_death_fn_available"
+    ] is False
     assert result["facility_annual_ir_available"] is False
     assert result["facility_fn_available"] is False
 
