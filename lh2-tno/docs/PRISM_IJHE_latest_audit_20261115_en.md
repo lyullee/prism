@@ -74,9 +74,18 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,332 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,335 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
+
+The release-boundary response intake now has a reproducible handoff to the
+case-level audit: `validate_release_boundary_evidence_response.py` can emit a
+`prism.provider_termination_evidence_catalog.v1` and a re-audited case ledger
+in one run.  Only responses that pass the exact identity, digest, mass-balance,
+and family-specific stopping checks enter that catalog.  The handoff does not
+rebind a campaign packet or rerun SLABx-LH2; a changed provider-result digest
+therefore remains blocked until an explicit packet rebind and consequence
+rerun are supplied.
 
 The union evidence binder now passes the uncertainty ledger, provider worklist,
 adapter registry, facility assessment, and domain-recovery record by named

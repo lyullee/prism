@@ -17,6 +17,7 @@ from typing import Any
 
 SCHEMA = "prism.release_boundary_evidence_intake.v1"
 RESPONSE_SCHEMA = "prism.release_boundary_evidence_response.v1"
+TERMINATION_EVIDENCE_SCHEMA = "prism.provider_termination_evidence_catalog.v1"
 _MASS_TOLERANCE_KG = 1.0e-8
 _SHA256 = re.compile(r"^[0-9a-fA-F]{64}$")
 _SUPPORTED_NON_HORIZON_BASES = {
@@ -297,6 +298,152 @@ def validate_release_boundary_evidence_response(
     }
 
 
+def build_provider_termination_evidence_catalog(
+    request_root: Mapping[str, Any],
+    response_root: Mapping[str, Any] | Sequence[Mapping[str, Any]],
+    *,
+    validation_report: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Convert *validated* responses into the case-audit evidence catalog.
+
+    This is a deliberately narrow handoff.  Only rows marked
+    ``RELEASE_BOUNDARY_REAUDIT_READY`` are emitted, and every emitted row
+    retains the request identity and the response-owned digest.  The catalog
+    does not alter a campaign packet, rerun consequences, qualify a provider,
+    infer a frequency, or promote facility IR/F-N.  A subsequent
+    :func:`lh2_tno.release_boundary_case_audit.build_release_boundary_case_audit`
+    call still has to match the response masses and digest to the consuming
+    case packet.
+    """
+
+    if not isinstance(request_root, Mapping):
+        raise TypeError("request_root must be a mapping")
+    report = (
+        validation_report
+        if isinstance(validation_report, Mapping)
+        else validate_release_boundary_evidence_response(request_root, response_root)
+    )
+    requests = {
+        str(item.get("request_id")): item
+        for item in _rows(request_root.get("requests"))
+        if item.get("request_id") is not None
+    }
+    if isinstance(response_root, Mapping):
+        raw_responses = _rows(response_root.get("responses"))
+        if not raw_responses and response_root.get("request_id") is not None:
+            raw_responses = [response_root]
+    else:
+        raw_responses = _rows(response_root)
+    responses = {
+        str(item.get("request_id")): item
+        for item in raw_responses
+        if item.get("request_id") is not None
+    }
+    rows: list[dict[str, Any]] = []
+    skipped: list[dict[str, Any]] = []
+    for intake_row in _rows(report.get("rows")):
+        request_id = str(intake_row.get("request_id"))
+        response = responses.get(request_id)
+        request = requests.get(request_id)
+        if (
+            intake_row.get("release_boundary_reaudit_ready") is not True
+            or response is None
+            or request is None
+        ):
+            skipped.append({
+                "request_id": request_id,
+                "intake_status": intake_row.get("status"),
+                "reason": "response_not_ready_or_request_identity_missing",
+            })
+            continue
+        identity = request.get("identity")
+        identity = identity if isinstance(identity, Mapping) else {}
+        residual = _finite(response.get("mass_residual_kg"))
+        candidate: dict[str, Any] = {
+            "event_id": identity.get("event_id"),
+            "case_key": identity.get("case_key"),
+            "asset_id": identity.get("asset_id"),
+            "component_id": identity.get("component_id"),
+            "port_ids": list(identity.get("port_ids", []))
+            if isinstance(identity.get("port_ids"), Sequence)
+            and not isinstance(identity.get("port_ids"), (str, bytes))
+            else [],
+            "operating_mode": identity.get("operating_mode"),
+            "hazop_scenario_id": identity.get("hazop_scenario_id"),
+            "provider_result_digest": response.get("provider_result_digest"),
+            "provider_source_digest": response.get("provider_source_digest"),
+            "supersedes_provider_result_digest": response.get(
+                "supersedes_provider_result_digest"
+            ),
+            "termination_basis": response.get("termination_basis"),
+            "duration_s": response.get("termination_time_s"),
+            "termination_time_s": response.get("termination_time_s"),
+            "termination_history_sample_count": response.get(
+                "termination_history_sample_count"
+            ),
+            "termination_provenance": response.get("termination_provenance"),
+            "stopping_event": response.get("stopping_event"),
+            "available_mass_kg": response.get("initial_inventory_kg"),
+            "cumulative_mass_out_kg": response.get("cumulative_mass_out_kg"),
+            "final_inventory_kg": response.get("final_inventory_kg"),
+            "provider_residual_mass_kg": response.get("provider_residual_mass_kg"),
+            "max_abs_mass_residual_kg": abs(residual) if residual is not None else None,
+            "source": "release_boundary_evidence_response_intake",
+        }
+        # Keep the family-specific evidence explicit.  Missing values remain
+        # missing so the downstream case audit can fail closed.
+        for field in (
+            "event_kind",
+            "source_operator",
+            "failure_opening_diameter_m",
+            "relief_setpoint_pa",
+            "relief_capacity_kg_s",
+            "discharge_complete",
+            "isolation_success",
+            "isolation_time_s",
+            "post_isolation_observation_s",
+            "post_isolation_zero_flow",
+            "threshold_mass_kg",
+            "remaining_mass_kg",
+            "available_mass_definition",
+            "remaining_releasable_mass_kg",
+            "endpoint_count",
+        ):
+            if field in response:
+                candidate[field] = response.get(field)
+        rows.append(candidate)
+    rows.sort(key=lambda item: str(item.get("case_key") or item.get("event_id") or ""))
+    return {
+        "schema_version": TERMINATION_EVIDENCE_SCHEMA,
+        "status": (
+            "PROVIDER_TERMINATION_EVIDENCE_READY"
+            if rows and not skipped and report.get("status") == "RELEASE_BOUNDARY_REAUDIT_READY"
+            else "PROVIDER_TERMINATION_EVIDENCE_PARTIAL"
+        ),
+        "source_intake_schema_version": report.get("schema_version"),
+        "source_intake_status": report.get("status"),
+        "request_count": len(requests),
+        "response_count": len(responses),
+        "ready_count": len(rows),
+        "skipped_count": len(skipped),
+        "rows": rows,
+        "skipped": skipped,
+        "provider_qualification_claim": False,
+        "physical_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_promotion_allowed": False,
+        "diagnostic_only": True,
+        "policy": {
+            "packet_rebind_performed": False,
+            "consequence_rerun_performed": False,
+            "duration_inference_allowed": False,
+            "termination_basis_substitution_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_promotion_allowed": False,
+        },
+    }
+
+
 def build_release_boundary_evidence_response_template(
     request_root: Mapping[str, Any],
 ) -> dict[str, Any]:
@@ -363,6 +510,8 @@ def build_release_boundary_evidence_response_template(
 __all__ = [
     "SCHEMA",
     "RESPONSE_SCHEMA",
+    "TERMINATION_EVIDENCE_SCHEMA",
     "build_release_boundary_evidence_response_template",
+    "build_provider_termination_evidence_catalog",
     "validate_release_boundary_evidence_response",
 ]
