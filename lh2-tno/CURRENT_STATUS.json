@@ -5443,7 +5443,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "8207a6a5",
+  "latest_local_full_test_run_commit": "33f60390",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -5646,7 +5646,7 @@
   "process_forecast_hazop_scan_cli_diagnostic_status": "FORECAST_RISK_SCAN_COMPLETE; 60 inspection-centre supply forecast frames replayed, 0 triggers, no quantitative callback supplied",
   "process_forecast_hazop_scan_cli_quantitative_callback_supplied": false,
   "process_forecast_hazop_scan_cli_facility_qra_promotion": false,
-  "process_forecast_hazop_scan_cli_latest_test_commit": "8207a6a5",
+  "process_forecast_hazop_scan_cli_latest_test_commit": "33f60390",
   "process_forecast_frame_merge_implemented": true,
   "process_forecast_frame_merge_module": "lh2_tno.process_forecast.merge_forecast_frame_sets",
   "process_forecast_frame_merge_cli": "scripts/merge_process_forecast_frames.py",
