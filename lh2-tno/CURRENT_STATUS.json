@@ -5364,5 +5364,12 @@
   "latest_ijhe_completion_audit_input_release_boundary": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "latest_ijhe_completion_audit_input_conditional_trace": "results/20261115/conditional_facility_risk_view_with_release_trace.json",
   "latest_ijhe_completion_audit_release_boundary_eligible_case_count": 3,
-  "latest_ijhe_completion_audit_release_boundary_blocked_case_count": 41
+  "latest_ijhe_completion_audit_release_boundary_blocked_case_count": 41,
+  "latest_ijhe_audit_metadata_verifier_module": "src/lh2_tno/latest_ijhe_audit_verification.py",
+  "latest_ijhe_audit_metadata_verifier_script": "scripts/verify_latest_ijhe_audit.py",
+  "latest_ijhe_audit_metadata_verifier_record": "results/20261115/latest_ijhe_audit_verification.json",
+  "latest_ijhe_audit_metadata_verifier_status": "PASS",
+  "latest_ijhe_audit_metadata_verifier_check_count": 45,
+  "latest_ijhe_audit_metadata_verifier_blocking_reason_count": 0,
+  "latest_ijhe_audit_metadata_verifier_interpretation": "Latest status pointer, audit counts, diagnostic facility handoff, and fail-closed qualification flags agree; verification does not promote provider qualification, physical validation, or facility IR/F-N."
 }

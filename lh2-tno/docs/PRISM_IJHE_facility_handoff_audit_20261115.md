@@ -62,3 +62,13 @@ Then run the full audit with the handoff record as an optional diagnostic input.
 ## Interpretation for a digital twin
 
 The diagnostic chain is now connected at the data-contract level: a live state and operating mode can select a HAZOP scenario, the scenario can identify a literature event and provider port, and the resulting consequence can be accumulated into a conditional facility ledger. The current audit still prevents that chain from being presented as a validated annual facility risk. Qualification requires real accident-release exports, closed termination and inventory evidence for the declared scope, independent validation of the full consequence chain, and complete facility evidence.
+
+## Metadata consistency check
+
+Use the metadata verifier after regenerating the audit:
+
+```powershell
+python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
+```
+
+A `PASS` result means that `CURRENT_STATUS.json` points to the stored audit, the check and blocker counts agree, and the facility handoff remains diagnostic-only. It does not mean that the four strict IJHE gates are open.

@@ -22,6 +22,7 @@ From a source checkout:
 ```powershell
 cd lh2-tno
 python -m pip install -e ".[test]"
+python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
 python -m pytest -q
 ```
 
@@ -220,6 +221,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [IJHE requirement traceability](docs/PRISM_IJHE_requirement_traceability_20261115.md)
 - [Latest IJHE audit](docs/PRISM_IJHE_latest_audit_20261115.md)
 - [Latest facility-handoff IJHE audit detail](docs/PRISM_IJHE_facility_handoff_audit_20261115.md)
+- [Latest IJHE audit metadata verifier](src/lh2_tno/latest_ijhe_audit_verification.py)
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [Current external release-artifact intake](docs/PRISM_external_release_artifact_intake_20261016.md)
 - [Inspection-centre reviewed-unit re-audit](docs/PRISM_검사센터_검토단위_재감사_20261016.md)
@@ -247,6 +249,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 Save the exact state frame, HAZOP row, provider response and digest, `FrequencyPlan` revision, weather/ignition/population/protection inputs, package version/commit, and result ledger. Compare reruns by event ID, case ID, risk atom ID, and provider digest rather than only by a rounded total.
 
 ```powershell
+python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
 python -m pytest -q
 ```
 

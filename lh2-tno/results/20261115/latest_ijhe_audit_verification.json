@@ -1,0 +1,16 @@
+{
+  "schema_version": "prism.latest_ijhe_audit_verification.v1",
+  "status": "PASS",
+  "audit_record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json",
+  "audit_status": "INCOMPLETE_EVIDENCE",
+  "check_count": 45,
+  "pass_check_count": 41,
+  "blocked_check_count": 4,
+  "blocking_reason_count": 4,
+  "facility_handoff_check_count": 12,
+  "facility_handoff_status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "complete_facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "blocking_reasons": [],
+  "interpretation": "The latest audit pointer, summary counts, and diagnostic facility handoff are internally consistent; this verification does not promote provider qualification, physical validation, or facility IR/F-N."
+}
