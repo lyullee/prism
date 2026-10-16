@@ -1,6 +1,6 @@
 # PRISM v0.6.2 IJHE 요구사항 추적표 (2026-11-15)
 
-이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **45개 검사 중 41 PASS, 4 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 검사센터 시설 handoff 진단 check가 포함되어 있다.
+이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **49개 검사 중 45 PASS, 4 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 검사센터 시설 handoff와 수신기 기하 비교 진단 check가 포함되어 있다.
 
 ## 요구사항별 판정
 

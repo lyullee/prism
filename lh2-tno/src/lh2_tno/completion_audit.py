@@ -118,6 +118,7 @@ def build_ijhe_completion_audit(
     native_isolation_event_reconciliation: Mapping[str, Any] | None = None,
     native_provider_multi_equipment_audit: Mapping[str, Any] | None = None,
     inspection_center_facility_ijhe_handoff_audit: Mapping[str, Any] | None = None,
+    receptor_geometry_interpretation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -5485,6 +5486,48 @@ def build_ijhe_completion_audit(
             "preserving the separate facility IR/F-N, provider qualification and physical-validation gates."
         )
         checks.append(handoff_check)
+    if receptor_geometry_interpretation is not None:
+        geometry = receptor_geometry_interpretation
+        geometry_checks = geometry.get("checks")
+        promotion_boundary = geometry.get("promotion_boundary")
+        geometry_valid = (
+            geometry.get("schema_version") == "prism.receptor_geometry_interpretation.v1"
+            and geometry.get("status") == "PASS_DIAGNOSTIC_ONLY"
+            and isinstance(geometry_checks, list)
+            and bool(geometry_checks)
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status") == "PASS"
+                for row in geometry_checks
+            )
+            and isinstance(promotion_boundary, Mapping)
+            and promotion_boundary.get("facility_total_risk_claim") is False
+            and promotion_boundary.get("facility_qra_claim") is False
+            and promotion_boundary.get("physical_validation_claim") is False
+        )
+        geometry_check = _check(
+            "diagnostic_receptor_geometry_interpretation",
+            geometry_valid,
+            {
+                "record": geometry.get("_record_path"),
+                "schema_version": geometry.get("schema_version"),
+                "status": geometry.get("status"),
+                "check_count": len(geometry_checks) if isinstance(geometry_checks, list) else None,
+                "full_scope": geometry.get("full_scope"),
+                "near_receptor": geometry.get("near_receptor"),
+                "promotion_boundary": dict(promotion_boundary)
+                if isinstance(promotion_boundary, Mapping)
+                else promotion_boundary,
+            },
+            "receptor geometry interpretation is missing a pass-only comparison or carries an unsafe promotion claim",
+        )
+        geometry_check["diagnostic_only"] = True
+        geometry_check["interpretation"] = (
+            "The declared full-scope receptor and the separate near-receptor replay are compared by explicit geometry. "
+            "A zero full-scope receptor result is not treated as zero facility risk, and the near-receptor contribution "
+            "is never substituted into the facility total."
+        )
+        checks.append(geometry_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

@@ -9,9 +9,9 @@
 
 권위 감사 파일:
 
-[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json)
+[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json)
 
-현재 최신 결과는 **45개 검사 중 41개 PASS, 4개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
+현재 최신 결과는 **49개 검사 중 45개 PASS, 4개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
 차단 검사는 전체 방출 종료 경계, 실제 qualified provider packet, 선언 사고범위의 provider/독립 물리검증, 시설 전체 IR/F-N이다. 44개 case의 exact packet coverage는 이 차단 사유를 뒷받침하는 세부 증거다.
 
 ## 최신 연결 결과
@@ -57,4 +57,4 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 
 ## 2026-11-15 facility-handoff supplement
 
-The latest vertical/inventory/isolation union audit was rerun with the reconstructed inspection-center facility handoff as an optional diagnostic input. The resulting record is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json). It contains 45 checks: 41 PASS and 4 BLOCKED. The new `diagnostic_inspection_center_facility_ijhe_handoff` check is PASS and diagnostic-only; it does not weaken the four strict qualification gates. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.
+The latest vertical/inventory/isolation union audit was rerun with the reconstructed inspection-center facility handoff and receptor-geometry comparison as optional diagnostic inputs. The resulting record is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json). It contains 49 checks: 45 PASS and 4 BLOCKED. The `diagnostic_inspection_center_facility_ijhe_handoff` and `diagnostic_receptor_geometry_interpretation` checks are PASS and diagnostic-only; they do not weaken the four strict qualification gates. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.

@@ -24,7 +24,7 @@ provider `reviewed_isolation_success` 경계가 `VALID`로 확인된다. 기존 
 - provider termination catalog: 35 rows, 34 event IDs, errors 0
 - 시설 release-boundary audit: 44 cases, 32 provider-evidence-valid, 10 not supplied,
   2 invalid, strict eligible 3, blocked 41
-- IJHE audit: 45 checks, 41 PASS, 4 BLOCKED, `INCOMPLETE_EVIDENCE` (latest record includes the inspection-center facility handoff diagnostic check)
+- IJHE audit: 49 checks, 45 PASS, 4 BLOCKED, `INCOMPLETE_EVIDENCE` (latest record includes the inspection-center facility handoff and receptor-geometry diagnostic checks)
 - facility IR/F-N promotion: `false`
 
 새 isolation packet을 추가로 보존한 것이 provider qualification이나 독립 물리검증을

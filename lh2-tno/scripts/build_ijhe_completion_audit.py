@@ -249,6 +249,11 @@ def main() -> int:
         help="optional reconstructed facility HAZOP/annual handoff traceability audit",
     )
     parser.add_argument(
+        "--receptor-geometry-interpretation",
+        type=Path,
+        help="optional diagnostic comparison of full-scope and near-receptor conditional risk",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -711,6 +716,13 @@ def main() -> int:
             inspection_center_facility_ijhe_handoff_audit["_record_path"] = str(
                 args.inspection_center_facility_ijhe_handoff_audit
             )
+        receptor_geometry_interpretation = (
+            _object(args.receptor_geometry_interpretation)
+            if args.receptor_geometry_interpretation
+            else None
+        )
+        if receptor_geometry_interpretation is not None:
+            receptor_geometry_interpretation["_record_path"] = str(args.receptor_geometry_interpretation)
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -822,6 +834,7 @@ def main() -> int:
             native_isolation_event_reconciliation=native_isolation_event_reconciliation,
             native_provider_multi_equipment_audit=native_provider_multi_equipment_audit,
             inspection_center_facility_ijhe_handoff_audit=inspection_center_facility_ijhe_handoff_audit,
+            receptor_geometry_interpretation=receptor_geometry_interpretation,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

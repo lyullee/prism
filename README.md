@@ -61,11 +61,11 @@ The interface guide defines the state-frame, HAZOP, provider release, frequency,
 
 ## Current IJHE audit status
 
-The latest generic outdoor LH2 union audit is [`INCOMPLETE_EVIDENCE`](lh2-tno/docs/PRISM_IJHE_latest_audit_20261115.md): 45 checks, 41 pass, and 4 strict gates withheld. The reconstructed inspection-center handoff is included as a diagnostic-only check; it does not promote provider qualification, independent full-chain validation, or total-facility IR/F-N. The latest facility-handoff interpretation, including the near-receptor conditional IR/F-N diagnostic and its receptor-geometry boundary, is in [`PRISM_IJHE_facility_handoff_audit_20261115.md`](lh2-tno/docs/PRISM_IJHE_facility_handoff_audit_20261115.md).
+The latest generic outdoor LH2 union audit is [`INCOMPLETE_EVIDENCE`](lh2-tno/docs/PRISM_IJHE_latest_audit_20261115.md): 49 checks, 45 pass, and 4 strict gates withheld. The reconstructed inspection-center handoff and receptor-geometry comparison are diagnostic-only; they do not promote provider qualification, independent full-chain validation, or total-facility IR/F-N. The latest facility-handoff interpretation, including the near-receptor conditional IR/F-N diagnostic and its receptor-geometry boundary, is in [`PRISM_IJHE_facility_handoff_audit_20261115.md`](lh2-tno/docs/PRISM_IJHE_facility_handoff_audit_20261115.md).
 
 The machine-readable receptor comparison is [`PRISM_receptor_geometry_interpretation_20261115.md`](lh2-tno/docs/PRISM_receptor_geometry_interpretation_20261115.md). It explains why the declared 20 m full-scope receptor can have zero conditional IR/F-N while a separate 0.5 m diagnostic reaches one harm atom. The records remain separate and neither opens facility-QRA promotion.
 
-The local portable suite currently reports **1243 passed, 1 warning**. The metadata check can be rerun with:
+The local portable suite currently reports **1244 passed, 1 warning**. The metadata check can be rerun with:
 
 ```powershell
 cd prism\lh2-tno

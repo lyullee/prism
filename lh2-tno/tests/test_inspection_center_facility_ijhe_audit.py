@@ -59,3 +59,29 @@ def test_full_ijhe_audit_consumes_facility_handoff_audit_as_diagnostic_check():
     )
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
+
+
+def test_full_ijhe_audit_consumes_receptor_geometry_as_diagnostic_check():
+    report = build_ijhe_completion_audit(
+        {"validated": False},
+        {"matrix_complete": False, "blocking_reasons": ["diagnostic"]},
+        {"events": [], "cases": [], "timing": {}},
+        receptor_geometry_interpretation={
+            "schema_version": "prism.receptor_geometry_interpretation.v1",
+            "status": "PASS_DIAGNOSTIC_ONLY",
+            "checks": [{"status": "PASS"}],
+            "full_scope": {"facility_id": "full"},
+            "near_receptor": {"facility_id": "near"},
+            "promotion_boundary": {
+                "facility_total_risk_claim": False,
+                "facility_qra_claim": False,
+                "physical_validation_claim": False,
+            },
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_receptor_geometry_interpretation"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
