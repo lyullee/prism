@@ -178,7 +178,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1233 passed, 1 warning",
+  "latest_local_full_test_run": "1234 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -5103,7 +5103,11 @@
   "latest_native_mapped_pump_facility_frequency_facility_qra_claim": false,
   "latest_generic_lh2_native_mapped_pump_binding_record": "docs/PRISM_generic_lh2_native_mapped_pump_binding_20261016.md",
   "latest_generic_lh2_native_mapped_pump_binding_summary": "examples/generic_lh2_native_mapped_pump_frequency_replay_20261016.json",
-  "latest_generic_lh2_native_mapped_pump_binding_position_enu_m": [6.0, 0.0, 1.0],
+  "latest_generic_lh2_native_mapped_pump_binding_position_enu_m": [
+    6.0,
+    0.0,
+    1.0
+  ],
   "latest_generic_lh2_native_mapped_pump_binding_port_position_match": true,
   "latest_generic_lh2_native_mapped_pump_binding_exact_opening_match": true,
   "latest_generic_lh2_native_mapped_pump_binding_executed_case_count": 1,
@@ -5115,7 +5119,10 @@
   "latest_native_multi_equipment_facility_campaign_summary": "examples/generic_lh2_native_pump_valve_facility_replay_20261016.json",
   "latest_native_multi_equipment_facility_campaign_manifest": "examples/generic_lh2_native_pump_valve_facility_manifest.json",
   "latest_native_multi_equipment_facility_campaign_frequency_plan": "examples/generic_lh2_native_pump_valve_frequency_plan.json",
-  "latest_native_multi_equipment_facility_campaign_component_ids": ["liquid-transfer-pump-01", "transfer-valve-01"],
+  "latest_native_multi_equipment_facility_campaign_component_ids": [
+    "liquid-transfer-pump-01",
+    "transfer-valve-01"
+  ],
   "latest_native_multi_equipment_facility_campaign_packet_count": 2,
   "latest_native_multi_equipment_facility_campaign_matched_event_count": 2,
   "latest_native_multi_equipment_facility_campaign_event_count": 7,
@@ -5163,7 +5170,6 @@
   "inspection_center_timeseries_reviewed_unit_reaudit_provider_packet_created": false,
   "inspection_center_timeseries_reviewed_unit_reaudit_facility_qra_claim": false,
   "inspection_center_timeseries_reviewed_unit_reaudit_interpretation": "A reviewed unit map confirms 166 numeric signal columns, but unresolved units, pressure basis, calibration/quality, and tag-to-asset mapping keep state snapshots and QRA promotion fail-closed.",
-
   "observed_unit_consistency_audit_implemented": true,
   "observed_unit_consistency_audit_script": "scripts/audit_observed_unit_consistency.py",
   "observed_unit_consistency_audit_module": "src/lh2_tno/observed_unit_consistency.py",
@@ -5175,7 +5181,6 @@
   "observed_unit_consistency_audit_unreviewed_count": 5,
   "observed_unit_consistency_state_snapshot_binding_allowed": false,
   "observed_unit_consistency_interpretation": "Runtime manifest and reviewed procedure evidence disagree for PT1206 and PT1105A (MPa versus bar); no unit precedence or numeric-range inference is permitted, so state binding remains fail-closed.",
-
   "inspection_center_workbook_header_unit_audit_implemented": true,
   "inspection_center_workbook_header_unit_audit_script": "scripts/audit_workbook_header_units.py",
   "inspection_center_workbook_header_unit_audit_module": "src/lh2_tno/workbook_header_units.py",
@@ -5192,7 +5197,6 @@
   "inspection_center_workbook_header_manifest_consistency_unreviewed_count": 3,
   "inspection_center_workbook_header_unit_state_snapshot_binding_allowed": false,
   "inspection_center_workbook_header_unit_interpretation": "Explicit MPa and degC labels in source workbook headers resolve the apparent MPa/bar conflict as raw measurement versus procedure setpoint context; DPT units, pressure basis, calibration/quality, and equipment identity remain open.",
-
   "observed_origin_provenance_audit_implemented": true,
   "observed_origin_provenance_audit_script": "scripts/audit_observed_origin_provenance.py",
   "observed_origin_provenance_audit_module": "src/lh2_tno/observed_origin_provenance.py",
@@ -5201,7 +5205,6 @@
   "observed_origin_provenance_audit_source_count": 3,
   "observed_origin_provenance_audit_conflict_count": 3,
   "observed_origin_provenance_interpretation": "All three runtime-manifest sources are named *_예측데이터_10회차.xlsx but declared historian_measured; origin is not changed automatically and requires source-owner evidence before independent-measurement claims.",
-
   "inspection_center_reconstructed_state_manifest": "examples/inspection_center_reconstructed_state_manifest.json",
   "inspection_center_reconstructed_state_evidence": "examples/inspection_center_reconstructed_state_evidence.json",
   "inspection_center_reconstructed_state_record": "docs/PRISM_검사센터_재구성상태_연결_20261016.md",
@@ -5215,7 +5218,6 @@
   "inspection_center_reconstructed_state_provider_packet_promoted": false,
   "inspection_center_reconstructed_state_facility_qra_claim": false,
   "inspection_center_reconstructed_state_interpretation": "Original training/recovery workbooks are connected as reconstructed state evidence; they are not independent historian measurements and cannot create releases, frequencies, provider packets, or facility QRA.",
-
   "inspection_center_reconstructed_runtime_modes": "examples/inspection_center_reconstructed_runtime_operating_modes.json",
   "inspection_center_reconstructed_runtime_frames": "examples/inspection_center_reconstructed_runtime_frames.json",
   "inspection_center_reconstructed_hazop_runtime_audit": "examples/inspection_center_reconstructed_hazop_runtime_audit.json",
@@ -5268,7 +5270,27 @@
   "provider_component_identity_translation_field": "FacilityRealtimeBinding.provider_component_id",
   "provider_component_identity_translation_module": "src/lh2_tno/observed_state_runtime.py",
   "provider_component_identity_translation_policy": "HAZOP stays on observed component ID; only the provider handoff receives a digest-recomputed translated state snapshot and template; no identity or geometry inference",
-  "inspection_center_reconstructed_runtime_interpretation": "Reconstructed state frames with explicit receiving/standby/supply modes select one diagnostic supply vaporizer_hole HAZOP scenario. An explicitly bound model-prediction provider packet is then executed through the diagnostic consequence chain; provider qualification, physical validation, and facility QRA remain false."
-
-
+  "inspection_center_reconstructed_runtime_interpretation": "Reconstructed state frames with explicit receiving/standby/supply modes select one diagnostic supply vaporizer_hole HAZOP scenario. An explicitly bound model-prediction provider packet is then executed through the diagnostic consequence chain; provider qualification, physical validation, and facility QRA remain false.",
+  "inspection_center_facility_hazop_bridge_record": "examples/inspection_center_facility_hazop_bridge.json",
+  "inspection_center_facility_hazop_bridge_script": "scripts/run_inspection_center_facility_hazop_bridge.py",
+  "inspection_center_facility_hazop_bridge_doc": "docs/PRISM_검사센터_시설HAZOP_브리지_20261017.md",
+  "inspection_center_facility_hazop_bridge_status": "FACILITY_RUNTIME_BRIDGE_EXECUTED_DIAGNOSTIC",
+  "inspection_center_facility_hazop_bridge_component_count": 3,
+  "inspection_center_facility_hazop_bridge_selected_component_count": 1,
+  "inspection_center_facility_hazop_bridge_executed_component_count": 1,
+  "inspection_center_facility_hazop_bridge_withheld_normal_component_ids": [
+    "lh2-intake-tank",
+    "lh2-storage-vent"
+  ],
+  "inspection_center_facility_hazop_bridge_risk_atom_count": 1,
+  "inspection_center_facility_hazop_bridge_conditional_current_weather_ir_available": true,
+  "inspection_center_facility_hazop_bridge_facility_annual_ir_available": false,
+  "inspection_center_facility_hazop_bridge_facility_fn_available": false,
+  "inspection_center_facility_hazop_bridge_provider_identity_mapping": "lh2-supply-vaporizer-boundary -> ambient-vaporizer-01:vaporizer-accident-out",
+  "inspection_center_facility_hazop_bridge_provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
+  "inspection_center_facility_hazop_bridge_physical_validation_claim": false,
+  "inspection_center_facility_hazop_bridge_operating_mode_inferred": false,
+  "inspection_center_facility_hazop_bridge_frequency_learning_used": false,
+  "inspection_center_facility_hazop_bridge_wall_elapsed_ms": 1548.1583999935538,
+  "inspection_center_facility_hazop_bridge_interpretation": "One coherent batch of three reconstructed state frames enters the facility HAZOP gate; receiving and standby are withheld as normal, while the explicit supply vaporizer mapping executes one provider/SLABx-LH2/TNO diagnostic branch. Facility annual IR/F-N remains withheld."
 }
