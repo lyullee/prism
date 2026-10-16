@@ -705,6 +705,40 @@ def build_realtime_facility_campaign_result(
                 continue
 
             provider_identity = _provider_identity(path)
+            # The HAZOP facility snapshot stores the evaluated consequence
+            # payload directly in ``result`` (the runtime branch wrapper has
+            # already been unwrapped by the campaign handoff).
+            consequence_payload = component.get("result")
+            telemetry_boundary = (
+                consequence_payload.get("telemetry_boundary")
+                if isinstance(consequence_payload, Mapping)
+                else None
+            )
+            state_snapshot = component.get("state_snapshot")
+            if provider_identity is not None and isinstance(state_snapshot, Mapping):
+                # The HAZOP runtime already validated this canonical state-only
+                # payload. Carry it with the provider packet identity so the
+                # equipment-state/release audit can verify the complete handoff.
+                provider_identity = dict(provider_identity)
+                provider_identity.update({
+                    "state_snapshot": copy.deepcopy(dict(state_snapshot)),
+                    "state_snapshot_digest": (
+                        telemetry_boundary.get("state_snapshot_digest")
+                        if isinstance(telemetry_boundary, Mapping)
+                        else None
+                    ),
+                    "provider_state_snapshot_digest": (
+                        telemetry_boundary.get("provider_state_snapshot_digest")
+                        if isinstance(telemetry_boundary, Mapping)
+                        else None
+                    ),
+                    "provider_state_snapshot_digests": [
+                        telemetry_boundary.get("provider_state_snapshot_digest")
+                    ]
+                    if isinstance(telemetry_boundary, Mapping)
+                    and telemetry_boundary.get("provider_state_snapshot_digest")
+                    else None,
+                })
             if provider_identity is not None:
                 provider_packet_case_count += 1
                 provider_packet_missing_evidence_cases.append(

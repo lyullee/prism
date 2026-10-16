@@ -27,6 +27,13 @@ It checks nine items:
 9. provider qualification, physical validation, and facility-QRA promotion stay
    closed.
 
+The annual handoff now also carries the canonical provider-bound state snapshot
+into its case identity. The reconstructed example therefore closes the
+equipment-state-to-release identity audit for its one selected case. The
+release-to-consequence audit remains partial because the example still uses an
+operator-limited diagnostic chain and does not claim complete stage timing or
+domain evidence.
+
 The expected result is `PASS_WITH_SCOPE_LIMITATIONS`. That status means the
 new handoff is structurally traceable. It is not a claim that the missing
 normal equipment releases, qualified provider packets, independent physical

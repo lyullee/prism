@@ -2370,11 +2370,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 684.9852000013925,
+                  "source": 712.2566000034567,
                   "pool": 0.005199981387704611,
-                  "near_field_and_dispersion": 379.8621000023559,
-                  "cloud_observation": 95.91489998274483,
-                  "fire_explosion_damage_risk": 77.5572000129614
+                  "near_field_and_dispersion": 387.2408000170253,
+                  "cloud_observation": 90.25519998976961,
+                  "fire_explosion_damage_risk": 67.87240001722239
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -2417,16 +2417,16 @@
               "request_digest": "67f3d70d23b88b8616d30e3dfa2e988cf6313233604122da01610548ed28f928",
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-              "adapter_source_digest": "6b0dae858d9e8873d287fb43bae502214a9759209b6fc92d0cdff9368066ba55",
-              "elapsed_ms": 1493.7215999816544,
+              "adapter_source_digest": "9210a06cf36c7eca3c16100fcfabbda5355765e0e4a6496bdf55d3750307fdec",
+              "elapsed_ms": 1493.4383000072557,
               "physical_validation_claim": false,
               "facility_digest": "d8ed0288047810f718ee5a36f6e2e40a86e063b443c532f44dd1e2a0e2f35897",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 1525.5423999915365,
-                "physics_run_elapsed_ms": 1493.7215999816544,
-                "cache_key": "f2423d6263c688cbcd2f0728df1c9655d67a6a1b9d8a1264a53d4f2ec8a985ee",
+                "service_elapsed_ms": 1523.5781999945175,
+                "physics_run_elapsed_ms": 1493.4383000072557,
+                "cache_key": "57314267eea50f53a382f9786af993329168b90a3939bbd11d27239ef7f975c2",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
                 "mode_contract": {
@@ -2443,8 +2443,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.8679000020492822,
-                "state_update_elapsed_ms": 1526.455499988515
+                "state_resolution_elapsed_ms": 0.8086000161711127,
+                "state_update_elapsed_ms": 1524.4284000073094
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -2536,7 +2536,7 @@
                 "data_age_s": 0.0,
                 "frame_digest": "50a6e1c8ac4c1ebc630ad23e812c64ced30dec86bd7feac515d53dea1ac9f365",
                 "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402",
-                "data_age_at_output_s": 1.5265386999817565,
+                "data_age_at_output_s": 1.5245010000071488,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
@@ -2549,7 +2549,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 1.5265386999817565,
+                "service_elapsed_s": 1.5245010000071488,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -2571,10 +2571,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 1.5265386999817565,
-                "normalization_elapsed_s": 6.649998249486089e-05,
-                "state_resolution_elapsed_s": 0.0008679000020492822,
-                "consequence_service_elapsed_s": 1.5255423999915365,
+                "update_elapsed_s": 1.5245010000071488,
+                "normalization_elapsed_s": 5.8600009651854634e-05,
+                "state_resolution_elapsed_s": 0.0008086000161711127,
+                "consequence_service_elapsed_s": 1.5235781999945175,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -2637,6 +2637,34 @@
         "branches_auto_merged": false,
         "consequence_calculated": true,
         "provider_release_validated_by_scenario": true
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "ambient-vaporizer-01",
+        "captured_at_s": 43200.0,
+        "origin": "reconstructed",
+        "pressure_pa_abs": 610000.0,
+        "temperature_k": 270.15,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 610000.0,
+            "sensor_location": "PT1101",
+            "quality": "valid"
+          },
+          "temperature": {
+            "quantity": "temperature",
+            "value_si": 270.15,
+            "sensor_location": "TT1116",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+        "quality": "valid"
       }
     }
   },
@@ -2710,7 +2738,7 @@
     "input_frame_set_exact": true,
     "component_count": 3,
     "selected_scenario_count": 1,
-    "wall_elapsed_ms": 1527.9809999919962,
+    "wall_elapsed_ms": 1525.7967000070494,
     "measurement_policy": "one synchronous HAZOP/runtime invocation; timing is evidence for this call only and is not a 1 Hz fresh-physics guarantee",
     "operating_mode_inferred": false,
     "frequency_inference_performed": false,
@@ -2803,7 +2831,7 @@
     "facility_qra_claim": false,
     "physical_validation_claim": false,
     "diagnostic_only": true,
-    "wall_elapsed_ms": 1562.6762000028975,
+    "wall_elapsed_ms": 1557.4058000056539,
     "measurement_policy": "diagnostic synchronous wall-clock timing for this batch; not a fresh-physics 1 Hz guarantee"
   },
   "interpretation": "Three reconstructed component state frames entered one facility HAZOP bridge. Receiving and standby were withheld as normal; the explicit supply deviation selected one vaporizer-hole scenario and translated only that branch to ambient-vaporizer-01 before the SLABx-LH2/TNO chain. The provider packet is model-prediction diagnostic evidence, so annual facility IR/F-N promotion remains false."

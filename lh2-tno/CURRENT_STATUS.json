@@ -5331,7 +5331,12 @@
   "inspection_center_facility_ijhe_handoff_audit_interpretation": "Structural traceability of the reconstructed bridge, explicit annual condition, provider mapping, and literature-frequency sensitivity passes; facility-wide IR/F-N, provider qualification, physical validation, and full IJHE evidence gates remain closed.",
   "ijhe_completion_audit_inspection_center_facility_handoff_input": "--inspection-center-facility-ijhe-handoff-audit examples/inspection_center_facility_ijhe_handoff_audit.json",
   "ijhe_completion_audit_inspection_center_facility_handoff_check": "diagnostic_inspection_center_facility_ijhe_handoff",
-  "ijhe_completion_audit_inspection_center_facility_handoff_check_status": "PASS_DIAGNOSTIC_ONLY; latest minimal re-run remains INCOMPLETE_EVIDENCE with 5 strict blockers"
+  "ijhe_completion_audit_inspection_center_facility_handoff_check_status": "PASS_DIAGNOSTIC_ONLY; latest minimal re-run remains INCOMPLETE_EVIDENCE with 5 strict blockers",
+  "inspection_center_facility_campaign_handoff_equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+  "inspection_center_facility_campaign_handoff_equipment_state_release_complete_case_count": 1,
+  "inspection_center_facility_campaign_handoff_risk_atom_chain_status": "PARTIAL_RISK_ATOM_CHAIN",
+  "inspection_center_facility_campaign_handoff_state_release_interpretation": "The canonical provider-bound state snapshot and digest now propagate into the selected case identity and close the structural state-to-release audit; consequence-stage/domain and provider qualification gates remain diagnostic or withheld."
 }
+
 
 

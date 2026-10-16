@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import math
 import json
+import copy
 from collections.abc import Mapping
 from typing import Any, Literal
 
@@ -837,6 +838,14 @@ def run_hazop_facility_runtime(
                 "selection": selection,
                 "branches": branch_rows,
                 "policy": branch_result["policy"],
+                # Carry the state-only payload used at the provider boundary.
+                # The provider identity translation above has already produced
+                # the provider component ID when one is explicitly mapped.
+                "state_snapshot": copy.deepcopy(
+                    (provider_frame if isinstance(provider_frame, Mapping) else frame).get(
+                        "state_snapshot"
+                    )
+                ),
             }
         except Exception as error:
             components[component_id] = {

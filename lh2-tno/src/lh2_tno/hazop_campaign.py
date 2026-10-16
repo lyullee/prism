@@ -242,6 +242,7 @@ def _snapshot_from_hazop_runtime(
             "status": "ACCEPTED",
             "component_id": component_id,
             "selection": copy.deepcopy(dict(selection)),
+            "state_snapshot": copy.deepcopy(raw_component.get("state_snapshot")),
             "selected_hazop_scenario_id": branch.get("scenario_id"),
             "selected_hazop_scenario_family": branch.get("scenario_family"),
             "selected_operating_mode": selection.get("operating_mode"),

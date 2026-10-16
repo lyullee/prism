@@ -31,6 +31,11 @@ def test_facility_campaign_handoff_preserves_normal_components_and_population_bo
     )
     assert result["facility_ledger"]["total_facility_annual_ir_low_high"] is None
     assert result["facility_ledger"]["total_facility_expected_death_fn_low_high"] is None
+    assert result["equipment_state_release_audit"]["status"] == (
+        "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
+    )
+    assert result["equipment_state_release_audit"]["complete_case_count"] == 1
+    assert result["risk_atom_chain_audit"]["status"] == "PARTIAL_RISK_ATOM_CHAIN"
     assert result["facility_campaign_handoff_audit"]["facility_qra_claim"] is False
     assert result["frequency_uncertainty"]["status"] == (
         "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE"

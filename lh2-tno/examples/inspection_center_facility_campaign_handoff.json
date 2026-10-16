@@ -2,7 +2,7 @@
   "schema_version": "prism.inspection_center_facility_campaign_handoff.v1",
   "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
   "facility_id": "generic-outdoor-lh2-diagnostic",
-  "runtime_result_digest": "70a00c58235cbd6ee9fe257cb26051b875188e9b6071d68f9cd28d6916ae7143",
+  "runtime_result_digest": "3f1d4ef03ae248a2249bf1b2aadbbe38dde59b892a2cdd2c4f4826684e6eed72",
   "snapshot": {
     "schema": "prism.hazop_facility_realtime_snapshot.v1",
     "facility_id": "generic-outdoor-lh2-diagnostic",
@@ -182,6 +182,34 @@
             "facility_qra_claim": false
           },
           "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+        },
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "ambient-vaporizer-01",
+          "captured_at_s": 43200.0,
+          "origin": "reconstructed",
+          "pressure_pa_abs": 610000.0,
+          "temperature_k": 270.15,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": null,
+          "measurements": {
+            "pressure": {
+              "quantity": "pressure",
+              "value_si": 610000.0,
+              "sensor_location": "PT1101",
+              "quality": "valid"
+            },
+            "temperature": {
+              "quantity": "temperature",
+              "value_si": 270.15,
+              "sensor_location": "TT1116",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+          "quality": "valid"
         },
         "selected_hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "selected_hazop_scenario_family": "vaporizer_hole",
@@ -2450,11 +2478,11 @@
               }
             ],
             "stage_elapsed_ms": {
-              "source": 684.9852000013925,
+              "source": 712.2566000034567,
               "pool": 0.005199981387704611,
-              "near_field_and_dispersion": 379.8621000023559,
-              "cloud_observation": 95.91489998274483,
-              "fire_explosion_damage_risk": 77.5572000129614
+              "near_field_and_dispersion": 387.2408000170253,
+              "cloud_observation": 90.25519998976961,
+              "fire_explosion_damage_risk": 67.87240001722239
             },
             "risk_semantics": {
               "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -2497,16 +2525,16 @@
           "request_digest": "67f3d70d23b88b8616d30e3dfa2e988cf6313233604122da01610548ed28f928",
           "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
           "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-          "adapter_source_digest": "6b0dae858d9e8873d287fb43bae502214a9759209b6fc92d0cdff9368066ba55",
-          "elapsed_ms": 1493.7215999816544,
+          "adapter_source_digest": "9210a06cf36c7eca3c16100fcfabbda5355765e0e4a6496bdf55d3750307fdec",
+          "elapsed_ms": 1493.4383000072557,
           "physical_validation_claim": false,
           "facility_digest": "d8ed0288047810f718ee5a36f6e2e40a86e063b443c532f44dd1e2a0e2f35897",
           "service": {
             "exact_cache_hit": false,
             "fresh_physics_this_update": true,
-            "service_elapsed_ms": 1525.5423999915365,
-            "physics_run_elapsed_ms": 1493.7215999816544,
-            "cache_key": "f2423d6263c688cbcd2f0728df1c9655d67a6a1b9d8a1264a53d4f2ec8a985ee",
+            "service_elapsed_ms": 1523.5781999945175,
+            "physics_run_elapsed_ms": 1493.4383000072557,
+            "cache_key": "57314267eea50f53a382f9786af993329168b90a3939bbd11d27239ef7f975c2",
             "backend_mode": "isolated_process",
             "realtime_fresh_physics_claim": false,
             "mode_contract": {
@@ -2523,8 +2551,8 @@
               "release_inference": false,
               "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
             },
-            "state_resolution_elapsed_ms": 0.8679000020492822,
-            "state_update_elapsed_ms": 1526.455499988515
+            "state_resolution_elapsed_ms": 0.8086000161711127,
+            "state_update_elapsed_ms": 1524.4284000073094
           },
           "equipment_release_path": {
             "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -2616,7 +2644,7 @@
             "data_age_s": 0.0,
             "frame_digest": "50a6e1c8ac4c1ebc630ad23e812c64ced30dec86bd7feac515d53dea1ac9f365",
             "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402",
-            "data_age_at_output_s": 1.5265386999817565,
+            "data_age_at_output_s": 1.5245010000071488,
             "equipment_release_resolved": true,
             "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
             "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
@@ -2629,7 +2657,7 @@
             "deadline_s": 180.0,
             "deadline_status": "MET",
             "deadline_met": true,
-            "service_elapsed_s": 1.5265386999817565,
+            "service_elapsed_s": 1.5245010000071488,
             "source_interval_s": null,
             "fresh_physics_this_update": true,
             "exact_cache_hit": false,
@@ -2651,10 +2679,10 @@
               "release_inference": false,
               "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
             },
-            "update_elapsed_s": 1.5265386999817565,
-            "normalization_elapsed_s": 6.649998249486089e-05,
-            "state_resolution_elapsed_s": 0.0008679000020492822,
-            "consequence_service_elapsed_s": 1.5255423999915365,
+            "update_elapsed_s": 1.5245010000071488,
+            "normalization_elapsed_s": 5.8600009651854634e-05,
+            "state_resolution_elapsed_s": 0.0008086000161711127,
+            "consequence_service_elapsed_s": 1.5235781999945175,
             "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
           }
         }
@@ -2716,13 +2744,13 @@
         "measurement_policy": "timing is copied from the consequence monitor when present; missing timing remains unavailable"
       }
     },
-    "runtime_result_digest": "70a00c58235cbd6ee9fe257cb26051b875188e9b6071d68f9cd28d6916ae7143"
+    "runtime_result_digest": "3f1d4ef03ae248a2249bf1b2aadbbe38dde59b892a2cdd2c4f4826684e6eed72"
   },
   "campaign": {
     "schema_version": "prism.realtime_facility_campaign_result.v1",
     "status": "PARTIAL_DECLARED_SCOPE",
     "facility_id": "generic-outdoor-lh2-diagnostic",
-    "campaign_digest": "29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a",
+    "campaign_digest": "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868",
     "scope_provenance": "explicit realtime scenario bindings; current-weather and reviewed annual-condition consequence evidence are kept separate",
     "events": [
       {
@@ -2747,7 +2775,7 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
         "physical_validation_claim": false,
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
       }
@@ -2794,11 +2822,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1525.5423999915365,
+        "elapsed_ms": 1523.5781999945175,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -2847,6 +2875,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "termination": {
@@ -2879,11 +2940,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1525.5423999915365,
+        "elapsed_ms": 1523.5781999945175,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -2932,6 +2993,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "termination": {
@@ -3007,6 +3101,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -3026,7 +3153,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3089,6 +3216,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -3108,7 +3268,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3171,6 +3331,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -3190,7 +3383,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3253,6 +3446,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -3272,7 +3498,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       }
     ],
     "excluded_model_components": {},
@@ -3329,9 +3555,9 @@
     "total_facility_expected_death_fn_low_high": null,
     "timing": {
       "fresh_physics_cases": 1,
-      "case_min_ms": 1525.5423999915365,
+      "case_min_ms": 1523.5781999945175,
       "case_median_ms": null,
-      "case_max_ms": 1525.5423999915365,
+      "case_max_ms": 1523.5781999945175,
       "case_p95_ms": null,
       "case_p99_ms": null,
       "campaign_elapsed_ms": null,
@@ -3355,13 +3581,13 @@
     "physical_validation_claim": false,
     "complete_facility_qra_claim": false,
     "one_hz_fresh_physics_demonstrated": false,
-    "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+    "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
     "realtime_handoff": {
       "schema": "prism.realtime_facility_risk_handoff.v1",
       "handoff_status": "DIAGNOSTIC_CURRENT_WEATHER_SNAPSHOT",
       "facility_id": "generic-outdoor-lh2-diagnostic",
       "source_snapshot_status": "ACCEPTED",
-      "source_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+      "source_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
       "source_snapshot": {
         "schema": "prism.hazop_facility_realtime_snapshot.v1",
         "facility_id": "generic-outdoor-lh2-diagnostic",
@@ -3541,6 +3767,34 @@
                 "facility_qra_claim": false
               },
               "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+            },
+            "state_snapshot": {
+              "schema_version": "prism.equipment_state_snapshot.v1",
+              "component_id": "ambient-vaporizer-01",
+              "captured_at_s": 43200.0,
+              "origin": "reconstructed",
+              "pressure_pa_abs": 610000.0,
+              "temperature_k": 270.15,
+              "mass_kg": null,
+              "liquid_fraction": null,
+              "phase": null,
+              "position_enu_m": null,
+              "measurements": {
+                "pressure": {
+                  "quantity": "pressure",
+                  "value_si": 610000.0,
+                  "sensor_location": "PT1101",
+                  "quality": "valid"
+                },
+                "temperature": {
+                  "quantity": "temperature",
+                  "value_si": 270.15,
+                  "sensor_location": "TT1116",
+                  "quality": "valid"
+                }
+              },
+              "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+              "quality": "valid"
             },
             "selected_hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
             "selected_hazop_scenario_family": "vaporizer_hole",
@@ -5809,11 +6063,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 684.9852000013925,
+                  "source": 712.2566000034567,
                   "pool": 0.005199981387704611,
-                  "near_field_and_dispersion": 379.8621000023559,
-                  "cloud_observation": 95.91489998274483,
-                  "fire_explosion_damage_risk": 77.5572000129614
+                  "near_field_and_dispersion": 387.2408000170253,
+                  "cloud_observation": 90.25519998976961,
+                  "fire_explosion_damage_risk": 67.87240001722239
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -5856,16 +6110,16 @@
               "request_digest": "67f3d70d23b88b8616d30e3dfa2e988cf6313233604122da01610548ed28f928",
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-              "adapter_source_digest": "6b0dae858d9e8873d287fb43bae502214a9759209b6fc92d0cdff9368066ba55",
-              "elapsed_ms": 1493.7215999816544,
+              "adapter_source_digest": "9210a06cf36c7eca3c16100fcfabbda5355765e0e4a6496bdf55d3750307fdec",
+              "elapsed_ms": 1493.4383000072557,
               "physical_validation_claim": false,
               "facility_digest": "d8ed0288047810f718ee5a36f6e2e40a86e063b443c532f44dd1e2a0e2f35897",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 1525.5423999915365,
-                "physics_run_elapsed_ms": 1493.7215999816544,
-                "cache_key": "f2423d6263c688cbcd2f0728df1c9655d67a6a1b9d8a1264a53d4f2ec8a985ee",
+                "service_elapsed_ms": 1523.5781999945175,
+                "physics_run_elapsed_ms": 1493.4383000072557,
+                "cache_key": "57314267eea50f53a382f9786af993329168b90a3939bbd11d27239ef7f975c2",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
                 "mode_contract": {
@@ -5882,8 +6136,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.8679000020492822,
-                "state_update_elapsed_ms": 1526.455499988515
+                "state_resolution_elapsed_ms": 0.8086000161711127,
+                "state_update_elapsed_ms": 1524.4284000073094
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -5975,7 +6229,7 @@
                 "data_age_s": 0.0,
                 "frame_digest": "50a6e1c8ac4c1ebc630ad23e812c64ced30dec86bd7feac515d53dea1ac9f365",
                 "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402",
-                "data_age_at_output_s": 1.5265386999817565,
+                "data_age_at_output_s": 1.5245010000071488,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
@@ -5988,7 +6242,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 1.5265386999817565,
+                "service_elapsed_s": 1.5245010000071488,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -6010,10 +6264,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 1.5265386999817565,
-                "normalization_elapsed_s": 6.649998249486089e-05,
-                "state_resolution_elapsed_s": 0.0008679000020492822,
-                "consequence_service_elapsed_s": 1.5255423999915365,
+                "update_elapsed_s": 1.5245010000071488,
+                "normalization_elapsed_s": 5.8600009651854634e-05,
+                "state_resolution_elapsed_s": 0.0008086000161711127,
+                "consequence_service_elapsed_s": 1.5235781999945175,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             }
@@ -6075,7 +6329,7 @@
             "measurement_policy": "timing is copied from the consequence monitor when present; missing timing remains unavailable"
           }
         },
-        "runtime_result_digest": "70a00c58235cbd6ee9fe257cb26051b875188e9b6071d68f9cd28d6916ae7143"
+        "runtime_result_digest": "3f1d4ef03ae248a2249bf1b2aadbbe38dde59b892a2cdd2c4f4826684e6eed72"
       },
       "component_count": 3,
       "available_realtime_risk_atom_component_count": 1,
@@ -6223,14 +6477,14 @@
     "status": "PARTIAL_FACILITY_SCOPE",
     "facility_id": "generic-outdoor-lh2-diagnostic",
     "campaign_ids": [
-      "29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a"
+      "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868"
     ],
     "campaign_digests": [
-      "29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a"
+      "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868"
     ],
-    "campaign_digest": "ed292f48e29249926c8af33251f2d681c616c5edeb9bc654bca5930c39581474",
+    "campaign_digest": "394d0ab03991cca70afb70ae7829dcb653db059e1b317bd7f106f0508a0982fa",
     "event_accounting": {
-      "29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a": {
+      "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868": {
         "generated_event_count": 1,
         "case_event_count": 1,
         "uncomputed_event_count": 1,
@@ -6283,7 +6537,7 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
         "physical_validation_claim": false,
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
       }
@@ -6644,11 +6898,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1525.5423999915365,
+        "elapsed_ms": 1523.5781999945175,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -6697,6 +6951,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "termination": {
@@ -6729,11 +7016,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08",
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1525.5423999915365,
+        "elapsed_ms": 1523.5781999945175,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -6782,6 +7069,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "termination": {
@@ -6857,6 +7177,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -6876,7 +7229,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -6939,6 +7292,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -6958,7 +7344,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -7021,6 +7407,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -7040,7 +7459,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -7103,6 +7522,39 @@
               "post_isolation_observation_s": 0.2,
               "isolation_success": true
             }
+          ],
+          "state_snapshot": {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": "ambient-vaporizer-01",
+            "captured_at_s": 43200.0,
+            "origin": "reconstructed",
+            "pressure_pa_abs": 610000.0,
+            "temperature_k": 270.15,
+            "mass_kg": null,
+            "liquid_fraction": null,
+            "phase": null,
+            "position_enu_m": null,
+            "measurements": {
+              "pressure": {
+                "quantity": "pressure",
+                "value_si": 610000.0,
+                "sensor_location": "PT1101",
+                "quality": "valid"
+              },
+              "temperature": {
+                "quantity": "temperature",
+                "value_si": 270.15,
+                "sensor_location": "TT1116",
+                "quality": "valid"
+              }
+            },
+            "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+            "quality": "valid"
+          },
+          "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
+          "provider_state_snapshot_digests": [
+            "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a"
           ]
         },
         "frequency_port_ids": [
@@ -7122,10 +7574,10 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "c7e95cb9375b85b003a5d3b0b8155c711a2cd87c3c361d0787b9954c43943f08"
+        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
       }
     ],
-    "risk_atoms_digest": "4aea6d9fc670516055eb2d6c0e820f3b5caa77066761e3c419ec8ba946054805",
+    "risk_atoms_digest": "66e0f2abdd7a264060ee8876a3ecbd310ae8939f95f0a428ad66754986e0658b",
     "component_contributions": {
       "lh2-supply-vaporizer-boundary": {
         "event_count": 1,
@@ -7610,14 +8062,14 @@
     "complete_facility_qra_claim": false,
     "qualified_facility_qra_blocking_reasons": [],
     "provider_qualification_blocking_reasons": [
-      "campaign 29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a: qualified provider packet promotion is unavailable",
-      "campaign 29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a: provider packet evidence does not match all consumed packets"
+      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: qualified provider packet promotion is unavailable",
+      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: provider packet evidence does not match all consumed packets"
     ],
     "synthetic_release_horizon_present": false,
     "facility_total_risk_available": false,
     "blocking_reasons": [
-      "campaign 29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a: declared scope is incomplete",
-      "campaign 29a117038c93a04019be95b28dcfac8e9056a809261281399afa9fda9178e19a: uncomputed cases remain",
+      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: declared scope is incomplete",
+      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: uncomputed cases remain",
       "missing expected components: lh2-intake-tank, lh2-storage-vent",
       "component lh2-intake-tank: PARTIAL",
       "component lh2-storage-vent: PARTIAL",
@@ -7626,11 +8078,11 @@
     "timing": {
       "campaign_count": 1,
       "fresh_physics_cases": 1,
-      "case_min_ms": 1525.5423999915365,
-      "case_median_ms": 1525.5423999915365,
-      "case_max_ms": 1525.5423999915365,
-      "case_p95_ms": 1525.5423999915365,
-      "case_p99_ms": 1525.5423999915365,
+      "case_min_ms": 1523.5781999945175,
+      "case_median_ms": 1523.5781999945175,
+      "case_max_ms": 1523.5781999945175,
+      "case_p95_ms": 1523.5781999945175,
+      "case_p99_ms": 1523.5781999945175,
       "campaign_elapsed_ms": 0,
       "campaign_elapsed_ms_sum": 0,
       "campaign_elapsed_ms_min": null,
@@ -7677,15 +8129,15 @@
   },
   "equipment_state_release_audit": {
     "schema_version": "prism.equipment_state_release_audit.v1",
-    "status": "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN",
+    "status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
     "facility_id": "generic-outdoor-lh2-diagnostic",
     "case_count": 1,
-    "complete_case_count": 0,
-    "incomplete_case_count": 1,
-    "complete_case_ids": [],
-    "incomplete_case_ids": [
+    "complete_case_count": 1,
+    "incomplete_case_count": 0,
+    "complete_case_ids": [
       "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success"
     ],
+    "incomplete_case_ids": [],
     "component_count": 1,
     "component_ids": [
       "ambient-vaporizer-01"
@@ -7694,22 +8146,15 @@
       "ambient-vaporizer-01": 1
     },
     "component_complete_case_counts": {
-      "ambient-vaporizer-01": 0
+      "ambient-vaporizer-01": 1
     },
     "component_incomplete_case_counts": {
-      "ambient-vaporizer-01": 1
+      "ambient-vaporizer-01": 0
     },
     "operator_limited_case_count": 1,
     "provider_termination_echo_gap_case_count": 0,
     "provider_termination_echo_gap_case_ids": [],
-    "blocking_reasons": [
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: canonical equipment state snapshot is missing",
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: state snapshot schema is missing or unsupported",
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: state snapshot component_id does not match provider component_id",
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: state snapshot digest is missing",
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: state snapshot origin is missing",
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: state snapshot capture time is missing or invalid"
-    ],
+    "blocking_reasons": [],
     "diagnostic_only": true,
     "provider_packet_promoted": false,
     "frequency_inference_performed": false,
