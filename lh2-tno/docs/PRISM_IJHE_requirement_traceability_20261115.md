@@ -16,6 +16,7 @@
 | 빈도 불확실성·상관 가정·순위 안정성 | 5개 문헌 frequency scenario 및 uncertainty audit | **진단 완료** (`PASS`) |
 | 실시간 처리시간과 캐시/신규 계산 구분 | realtime benchmark 및 case timing fields | **처리시간 근거 확보**, 1 Hz fresh-physics 주장은 보류 (`PASS`) |
 | 현재·예측 공정 상태를 동일 HAZOP/provider/SLABx-LH2 경계로 연결 | `run_hazop_integrated_risk`, `prism.hazop_forecast_risk_scan.v1`, explicit `model_prediction` origin/time, forecast facility-aggregator gate | **진단 완료**, 예측 시설 F/N은 명시적 aggregator 전까지 보류 |
+| 예측 정량 트리거를 시설 원장으로 명시적으로 결합 | `build_hazop_forecast_facility_campaign_result`, `forecast_campaign_bindings`, `component_id|scenario_id|forecast_time_s` trace, completion-audit structure check | **진단 완료**, 누락 trigger는 0 위험으로 대체하지 않고 보류 |
 | 미계산·운영자 제한·영역 제한을 숨기지 않음 | facility evidence request, release-boundary audit, scope ledger | **진단 완료**, 미계산/제한 상태 보존 |
 | 실제 시설 QRA 승격 | qualified packet, independent validation, complete release boundary | **차단** (`BLOCKED`) |
 
