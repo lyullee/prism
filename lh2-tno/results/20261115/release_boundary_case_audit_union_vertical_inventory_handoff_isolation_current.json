@@ -63,7 +63,7 @@
         "ALIGNED": 1
       },
       "blocking_reason_counts": {
-        "termination_basis_emergency_relief_discharge_is_not_allowed": 1
+        "provider_termination_evidence_invalid": 1
       }
     },
     "reliquefier": {
@@ -2072,16 +2072,30 @@
         "provider_result_digest_matches": true,
         "available_mass_matches": true,
         "cumulative_release_matches": true,
-        "supported_basis": false,
+        "supported_basis": true,
+        "event_kind_is_emergency_relief": true,
+        "source_operator_is_emergency_relief": false,
+        "failure_opening_not_declared": true,
+        "positive_duration_present": true,
+        "termination_history_present": true,
+        "relief_setpoint_present": false,
+        "relief_capacity_present": false,
+        "discharge_complete_declared": false,
+        "termination_provenance_present": true,
+        "mass_residual_closed": false,
         "boundary_closed": false
       },
       "provider_termination_evidence_blocking_reasons": [
-        "provider_termination_evidence_supported_basis",
+        "provider_termination_evidence_source_operator_is_emergency_relief",
+        "provider_termination_evidence_relief_setpoint_present",
+        "provider_termination_evidence_relief_capacity_present",
+        "provider_termination_evidence_discharge_complete_declared",
+        "provider_termination_evidence_mass_residual_closed",
         "provider_termination_evidence_boundary_closed"
       ],
       "residual_closure_basis": "provider_residual_mass",
       "release_termination_reasons": [
-        "termination_basis_emergency_relief_discharge_is_not_allowed"
+        "provider_termination_evidence_invalid"
       ],
       "operational_execution_reasons": [],
       "consequence_domain_reasons": [],
@@ -2094,10 +2108,10 @@
       "strict_release_boundary_eligible": false,
       "strict_release_boundary_status": "PROMOTION_BLOCKED",
       "release_boundary_blocking_reasons": [
-        "termination_basis_emergency_relief_discharge_is_not_allowed"
+        "provider_termination_evidence_invalid"
       ],
       "required_evidence": [
-        "qualified relief-discharge setpoint, capacity and provider-owned termination history",
+        "provider termination ledger with matching event, packet digest, masses and the family-specific stopping-rule fields",
         "actual provider source and result artifacts with exact event/component/port SHA-256 identity",
         "provider qualification sidecar bound to the exact source/result artifacts",
         "independent physical-validation record or an explicitly reviewed validation gap"

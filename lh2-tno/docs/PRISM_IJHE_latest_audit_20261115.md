@@ -61,3 +61,9 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 The latest vertical/inventory/isolation union audit was rerun with the reconstructed inspection-center facility handoff and receptor-geometry comparison as optional diagnostic inputs. The resulting record is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json). It contains 49 checks: 45 PASS and 4 BLOCKED. The `diagnostic_inspection_center_facility_ijhe_handoff` and `diagnostic_receptor_geometry_interpretation` checks are PASS and diagnostic-only; they do not weaken the four strict qualification gates. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.
 
 The release-boundary case rows now carry the copied literature frequency and source digest. All 44 rows are event/port-bound, while 35 rows also carry event-level P05/P95 metadata. The other 9 rows intentionally retain their published point rates without an invented interval; their uncertainty is represented only by the separate five-scenario sensitivity audit.
+
+The provider-termination catalog and release-boundary ledger were refreshed
+after the emergency-relief contract update. The VentStack G1 row now reaches
+the current emergency-relief validator and is rejected specifically for its
+missing provider setpoint, capacity, completion, and source-operator fields;
+the bounded G2 row remains explicitly open as `inventory_over_600s`.
