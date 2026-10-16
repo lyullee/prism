@@ -45,6 +45,12 @@ The current-state monitor can consume a cached or already-computed provider resu
 3. Independent physical-validation evidence for the complete release-to-dispersion-to-damage chain is not available. The SLABx-LH2 evidence is restricted component evidence.
 4. Facility-wide IR/F-N remains withheld while the scope and provider gates are open.
 
+The two counts above answer different questions: **42/44** means the numerical
+release/consequence trace reached a closed diagnostic result with valid provider
+termination evidence; **13/44** means the stricter promotion gate also accepts
+the case for facility release-boundary evidence. Operator-limited cases are kept
+in the conditional ledger and are never silently promoted to the latter count.
+
 Unsupported or incomplete accident families remain explicitly `PARTIAL`, `BLOCKED_REVIEW`, or `UNCOMPUTED`. PRISM does not replace a missing family with a similar family and does not treat an omitted family as zero risk.
 
 ## Frequency policy
@@ -68,7 +74,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,331 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,332 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 
