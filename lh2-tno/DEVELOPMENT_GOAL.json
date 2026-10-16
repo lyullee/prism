@@ -4086,7 +4086,7 @@
   "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
   "latest_provider_packet_collection_manifest_case_count": 44,
   "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
-  "latest_local_full_test_run_commit": "c910077b",
+  "latest_local_full_test_run_commit": "8207a6a5",
   "current_development": {
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
@@ -4172,7 +4172,7 @@
   "process_forecast_hazop_scan_cli_diagnostic_status": "FORECAST_RISK_SCAN_COMPLETE; 60 inspection-centre supply forecast frames replayed, 0 triggers, no quantitative callback supplied",
   "process_forecast_hazop_scan_cli_quantitative_callback_supplied": false,
   "process_forecast_hazop_scan_cli_facility_qra_promotion": false,
-  "process_forecast_hazop_scan_cli_latest_test_commit": "c910077b",
+  "process_forecast_hazop_scan_cli_latest_test_commit": "8207a6a5",
   "process_forecast_frame_merge_implemented": true,
   "process_forecast_frame_merge_module": "lh2_tno.process_forecast.merge_forecast_frame_sets",
   "process_forecast_frame_merge_cli": "scripts/merge_process_forecast_frames.py",
