@@ -31,6 +31,7 @@ from lh2_tno.frequency import FrequencyPlan, generate_events  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     build_consequence_request_from_provider_release,
+    load_provider_emergency_relief,
     load_provider_release,
 )
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
@@ -70,12 +71,23 @@ def _request_defaults(context: dict[str, Any], packet: Any) -> dict[str, Any]:
     ):
         defaults.pop(key, None)
     is_liquid = isinstance(packet, ResolvedLiquidRelease)
-    defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
+    if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief":
+        defaults["source_operator"] = "equipment_emergency_relief"
+    else:
+        defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
     defaults["source_duration_mode"] = "declared"
     defaults["release_termination"] = {
-        "basis": "reviewed_isolation_success",
+        "basis": (
+            "emergency_relief_discharge"
+            if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief"
+            else "reviewed_isolation_success"
+        ),
         "time_s": "provider_duration",
-        "provenance": "native provider isolation clock retained for multi-packet facility diagnostic",
+        "provenance": (
+            "native provider emergency-relief duration retained for multi-packet facility diagnostic"
+            if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief"
+            else "native provider isolation clock retained for multi-packet facility diagnostic"
+        ),
     }
     if is_liquid:
         integrated_mass = float(packet.integrated_mass_kg)
@@ -134,6 +146,17 @@ def _facility_frequency_scenarios(events: list[dict[str, Any]]) -> tuple[Literat
 
 
 def _packet_event_match(packet: Any, events: list[Any]) -> Any:
+    if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief":
+        matches = [
+            event for event in events
+            if event.model_component_id == packet.component_id
+            and event.release.mode == "maximum_relief_discharge"
+        ]
+        if len(matches) != 1:
+            raise ValueError(
+                f"emergency-relief packet {packet.event_id} must match exactly one facility event; found {len(matches)}"
+            )
+        return matches[0]
     matches = [
         event for event in events
         if event.model_component_id == packet.component_id
@@ -154,11 +177,21 @@ def _packet_event_match(packet: Any, events: list[Any]) -> Any:
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
-    packets = [load_provider_release(path) for path in args.packets]
+    packets = []
+    for path in args.packets:
+        raw = _object(path)
+        if raw.get("event_kind") == "emergency_relief":
+            packets.append(load_provider_emergency_relief(path))
+        else:
+            packets.append(load_provider_release(path))
     if not packets:
         raise ValueError("at least one provider packet is required")
     for packet in packets:
-        if not isinstance(packet, ResolvedLiquidRelease) and packet.compressible_plane_handoff is None:
+        if (
+            not isinstance(packet, ResolvedLiquidRelease)
+            and packet.event_kind != "emergency_relief"
+            and packet.compressible_plane_handoff is None
+        ):
             raise ValueError(f"gas packet {packet.event_id} lacks compressible_plane_handoff")
     context = _object(args.request_context)
     manifest = EquipmentManifest.from_json(args.manifest)
@@ -271,6 +304,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "port_id": packet.port_id,
                 "event_id": packet.event_id,
                 "release_kind": "liquid" if isinstance(packet, ResolvedLiquidRelease) else "gas",
+                "event_kind": packet.event_kind,
                 "position_enu_m": list(packet.position_enu_m),
                 "failure_opening_diameter_m": packet.failure_opening_diameter_m,
                 "duration_s": packet.duration_s,

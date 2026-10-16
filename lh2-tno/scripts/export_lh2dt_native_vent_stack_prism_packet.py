@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import importlib
 import json
@@ -15,7 +16,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     AccidentReleaseExportRequest,
+    EmergencyReliefExportRequest,
     export_equipment_gas_accident_history,
+    export_equipment_emergency_relief_history,
 )
 from lh2_tno.state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot  # noqa: E402
 
@@ -56,6 +59,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if args.time_step_s <= 0.0 or args.horizon_s <= 0.0 or args.time_step_s > args.horizon_s:
         raise ValueError("horizon and time step must be positive and ordered")
     source_digest = _tree_digest(root)
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, args.nozzle_height_m]
+    )
     sys.path.insert(0, str(root / "src"))
     module = importlib.import_module("lh2dt")
     properties = module.HydrogenProperties("Hydrogen")
@@ -82,22 +90,24 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.source_pressure_pa_abs,
         "temperature_k": args.source_temperature_k,
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "measurements": {
             "upstream_pressure": {"quantity": "pressure", "value_si": args.source_pressure_pa_abs, "sensor_location": f"{args.component_id}.upstream"},
             "upstream_temperature": {"quantity": "temperature", "value_si": args.source_temperature_k, "sensor_location": f"{args.component_id}.upstream"},
         },
     })
-    request = AccidentReleaseExportRequest.from_mapping({
-        "schema_version": "prism.equipment_accident_export_request.v1",
-        "event_kind": "accidental_leak",
+    request_payload = {
+        "schema_version": (
+            "prism.equipment_emergency_relief_export_request.v1"
+            if args.event_kind == "emergency_relief"
+            else "prism.equipment_accident_export_request.v1"
+        ),
+        "event_kind": args.event_kind,
         "component_id": args.component_id,
         "port_id": args.port_id,
         "event_id": args.event_id,
-        "failure_mode": "explicit_failed_vent_outlet",
-        "failure_opening_diameter_m": args.inner_diameter_m,
         "horizon_s": args.horizon_s,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": args.ambient_pressure_pa_abs,
         "ambient_temperature_k": args.ambient_temperature_k,
@@ -112,7 +122,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "native external VentStack accident export; synthetic upstream state and geometry",
         "provider_termination_required": True,
-    })
+    }
+    if args.event_kind == "accidental_leak":
+        request_payload["failure_mode"] = "explicit_failed_vent_outlet"
+        request_payload["failure_opening_diameter_m"] = args.inner_diameter_m
+        request = AccidentReleaseExportRequest.from_mapping(request_payload)
+    else:
+        request = EmergencyReliefExportRequest.from_mapping(request_payload)
     native_response = stack.export_accident_history({
         "event_id": args.event_id,
         "component_id": args.component_id,
@@ -130,7 +146,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_source_digest": source_digest,
         "state_snapshot_digest": snapshot.digest(),
     })
-    result = export_equipment_gas_accident_history(NativeVentStackProvider(native_response), request)
+    if args.event_kind == "emergency_relief":
+        native_response = copy.deepcopy(native_response)
+        native_response["data"]["event_kind"] = "emergency_relief"
+        result = export_equipment_emergency_relief_history(
+            NativeVentStackProvider(native_response), request
+        )
+    else:
+        result = export_equipment_gas_accident_history(NativeVentStackProvider(native_response), request)
     data = native_response["data"]
     meta = data.get("provider_meta") if isinstance(data.get("provider_meta"), Mapping) else {}
     hydraulic = meta.get("hydraulic") if isinstance(meta.get("hydraulic"), Mapping) else {}
@@ -138,6 +161,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "schema_version": "prism.native_lh2dt_vent_stack_packet_verification.v1",
         "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
         "provider_model": native_response.get("provider_model"),
+        "event_kind": args.event_kind,
         "provider_export_schema": native_response.get("provider_export_schema"),
         "provider_method": result.provider_method,
         "provider_source_digest": source_digest,
@@ -173,6 +197,12 @@ def main() -> int:
     parser.add_argument("--component-id", default="native-vent-stack-diagnostic")
     parser.add_argument("--port-id", default="native-vent-stack-gas-out")
     parser.add_argument("--event-id", default="native-vent-stack/accidental-leak-001")
+    parser.add_argument(
+        "--event-kind",
+        choices=("accidental_leak", "emergency_relief"),
+        default="accidental_leak",
+        help="select the strict PRISM accident or emergency-relief contract",
+    )
     parser.add_argument("--model-revision", default="external-library-native-export-0.1.2")
     parser.add_argument("--source-pressure-pa-abs", type=float, default=102000.0)
     parser.add_argument("--source-temperature-k", type=float, default=300.0)
@@ -189,6 +219,14 @@ def main() -> int:
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--available-mass-kg", type=float, default=1.0)
     parser.add_argument("--nozzle-height-m", type=float, default=2.0)
+    parser.add_argument(
+        "--position-enu-m",
+        type=float,
+        nargs=3,
+        metavar=("EAST_M", "NORTH_M", "UP_M"),
+        default=None,
+        help="vent outlet position; defaults to [0, 0, nozzle-height]",
+    )
     args = parser.parse_args()
     try:
         result = run(args)

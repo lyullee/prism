@@ -49,6 +49,8 @@ The framework supports generic outdoor LH2 facilities, including tanks, transfer
 
 For a compact multi-equipment demonstration, see the [native pump + valve facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md). It binds a liquid pump packet and a gas valve packet to one facility ledger, retains release duration and mass-balance evidence, and keeps every unmatched frequency opening explicitly `UNCOMPUTED`.
 
+The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
+
 ## What PRISM does not infer
 
 PRISM does not infer leak size from pressure and temperature alone, convert normal flow into an accident history, learn an annual accident frequency from alarm counts, extend the last provider interval, or silently replace a missing provider with a similar case. These restrictions keep the risk result auditable.
@@ -409,6 +411,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [Native external seven-equipment recheck](docs/PRISM_native_external_multi_equipment_recheck_20261017.md)
 - [Native external seven-equipment consequence-chain manifest](results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json)
+- [Native external seven-equipment facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md)
+- [Native external facility frequency campaign verification](results/20261017/native_external_facility_frequency_campaign_20261017/verification.json)
 - [Partial inspection-centre boundary evidence audit](docs/PRISM_partial_LH2_boundary_evidence_en.md)
 - [Partial boundary evidence record](results/20261117/inspection_center_partial_boundary_evidence.json)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)

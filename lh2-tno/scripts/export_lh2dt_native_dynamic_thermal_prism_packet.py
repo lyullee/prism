@@ -101,6 +101,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if args.time_step_s > args.horizon_s:
         raise ValueError("time step must not exceed horizon")
     source_digest = _tree_digest(root)
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, args.nozzle_height_m]
+    )
     model, properties, model_class = _native_model(
         root, mode=args.mode, fluid_volume_m3=args.fluid_volume_m3,
         wall_heat_capacity_j_k=args.wall_heat_capacity_j_k,
@@ -123,7 +128,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "temperature_k": args.source_temperature_k,
         "mass_kg": float(initial_state.mass_kg),
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "measurements": {
             "initial_pressure": {"quantity": "pressure", "value_si": args.source_pressure_pa_abs, "sensor_location": f"{args.component_id}.fluid_volume"},
             "initial_temperature": {"quantity": "temperature", "value_si": args.source_temperature_k, "sensor_location": f"{args.component_id}.fluid_volume"},
@@ -139,7 +144,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "failure_mode": "explicit_failed_atmospheric_outlet",
         "failure_opening_diameter_m": args.failure_opening_diameter_m,
         "horizon_s": args.horizon_s,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": args.ambient_pressure_pa_abs,
         "ambient_temperature_k": args.ambient_temperature_k,
@@ -244,6 +249,14 @@ def main() -> int:
     parser.add_argument("--fluid-wall-ua-w-k", type=float, default=10.0)
     parser.add_argument("--maximum-heat-w", type=float, default=1000.0)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m",
+        type=float,
+        nargs=3,
+        metavar=("EAST_M", "NORTH_M", "UP_M"),
+        default=None,
+        help="equipment outlet position; defaults to [0, 0, nozzle-height]",
+    )
     args = parser.parse_args()
     if args.component_id is None:
         args.component_id = f"native-{args.mode}-diagnostic"
