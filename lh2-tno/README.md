@@ -177,6 +177,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Latest IJHE audit](docs/PRISM_IJHE_latest_audit_20261115.md)
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [Current external release-artifact intake](docs/PRISM_external_release_artifact_intake_20261016.md)
+- [Inspection-centre reviewed-unit re-audit](docs/PRISM_검사센터_검토단위_재감사_20261016.md)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
 - [v0.6.3 distribution record (Korean)](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)

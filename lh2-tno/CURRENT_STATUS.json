@@ -5146,5 +5146,21 @@
   "zenodo_v063_version_doi_status": "reserved_pending_final_publish_confirmation",
   "zenodo_v063_version_doi": "10.5281/zenodo.23387052",
   "latest_english_user_manual": "docs/PRISM_USER_MANUAL_en.md",
-  "latest_english_interface_guide": "docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md"
+  "latest_english_interface_guide": "docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md",
+  "inspection_center_timeseries_reviewed_unit_reaudit_record": "results/20261016/inspection_center_timeseries_reviewed_unit_audit.json",
+  "inspection_center_timeseries_reviewed_unit_reaudit_summary": "examples/inspection_center_timeseries_reviewed_unit_summary.json",
+  "inspection_center_timeseries_reviewed_unit_reaudit_status": "SCREENING_ONLY_REVIEWED_UNIT_MAP_NOT_STATE_BOUND",
+  "inspection_center_timeseries_reviewed_unit_reaudit_numeric_signal_unit_status_count": {
+    "CONFIRMED_BY_REVIEWED_MAP": 166,
+    "MISSING_OR_UNCONFIRMED": 356
+  },
+  "inspection_center_timeseries_reviewed_unit_reaudit_workbook_count": 17,
+  "inspection_center_timeseries_reviewed_unit_reaudit_sheet_count": 78,
+  "inspection_center_timeseries_reviewed_unit_reaudit_error_count": 0,
+  "inspection_center_timeseries_reviewed_unit_reaudit_state_snapshot_binding_allowed": false,
+  "inspection_center_timeseries_reviewed_unit_reaudit_frequency_applied": false,
+  "inspection_center_timeseries_reviewed_unit_reaudit_sensor_frequency_learning_used": false,
+  "inspection_center_timeseries_reviewed_unit_reaudit_provider_packet_created": false,
+  "inspection_center_timeseries_reviewed_unit_reaudit_facility_qra_claim": false,
+  "inspection_center_timeseries_reviewed_unit_reaudit_interpretation": "A reviewed unit map confirms 166 numeric signal columns, but unresolved units, pressure basis, calibration/quality, and tag-to-asset mapping keep state snapshots and QRA promotion fail-closed."
 }

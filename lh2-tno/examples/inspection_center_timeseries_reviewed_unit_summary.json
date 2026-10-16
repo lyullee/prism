@@ -1,0 +1,1362 @@
+{
+  "schema_version": "prism.inspection_center_timeseries_audit.v1",
+  "status": "SCREENING_ONLY_REVIEWED_UNIT_MAP_NOT_STATE_BOUND",
+  "source_root": "<inspection-center-data-root>",
+  "source_file_count": 17,
+  "aggregate": {
+    "workbook_count": 17,
+    "sheet_count": 78,
+    "workbook_or_sheet_error_count": 0,
+    "signal_category_count": {
+      "differential_pressure": 126,
+      "pressure": 246,
+      "sequence_metadata": 105,
+      "temperature": 93,
+      "time": 10,
+      "unknown": 493
+    },
+    "numeric_signal_unit_status_count": {
+      "CONFIRMED_BY_REVIEWED_MAP": 166,
+      "MISSING_OR_UNCONFIRMED": 356
+    },
+    "reviewed_unit_map_supplied": true
+  },
+  "promotion_gates": {
+    "state_snapshot_binding_allowed": false,
+    "frequency_applied": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false,
+    "reason": "XLSX time-series evidence is an audit input only; an exact reviewed unit map, tag semantics, calibration/quality evidence, and an explicit state-snapshot adapter are still required."
+  },
+  "files": [
+    {
+      "relative_path": "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "size_bytes": 835400,
+      "status": "READ",
+      "sheet_count": 11,
+      "error": null,
+      "sheets": [
+        {
+          "name": "전체(10회차 통합)",
+          "header_row_index": 1,
+          "row_count": 6840,
+          "nonempty_row_count": 6840,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차1",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차2",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차3",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차4",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차5",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차6",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차7",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차8",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차9",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        },
+        {
+          "name": "회차10",
+          "header_row_index": 1,
+          "row_count": 684,
+          "nonempty_row_count": 684,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "sequence_metadata": 5,
+            "temperature": 3,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 10,
+          "unit_unconfirmed_numeric_column_count": 4,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "scenario_group": "vent",
+      "sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "size_bytes": 289206,
+      "status": "READ",
+      "sheet_count": 10,
+      "error": null,
+      "sheets": [
+        {
+          "name": "회차1",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차2",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차3",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차4",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차5",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차6",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차7",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차8",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차9",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        },
+        {
+          "name": "회차10",
+          "header_row_index": 1,
+          "row_count": 673,
+          "nonempty_row_count": 673,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "time": 1,
+            "unknown": 3
+          },
+          "numeric_candidate_column_count": 7,
+          "unit_unconfirmed_numeric_column_count": 5,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+      "scenario_group": "supply",
+      "sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "size_bytes": 932028,
+      "status": "READ",
+      "sheet_count": 10,
+      "error": null,
+      "sheets": [
+        {
+          "name": "회차1",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차2",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차3",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차4",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차5",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차6",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차7",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차8",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차9",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "회차10",
+          "header_row_index": 1,
+          "row_count": 1442,
+          "nonempty_row_count": 1442,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "sequence_metadata": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+      "size_bytes": 50603,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1월 21일",
+          "header_row_index": 1,
+          "row_count": 301,
+          "nonempty_row_count": 301,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 13,
+          "nonempty_row_count": 12,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 322,
+          "nonempty_row_count": 301,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 4
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월23일.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "3f5b8e40f039b330bdf31526777d46990947604b121c13a23fee681882382c24",
+      "size_bytes": 92664,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 13,
+          "nonempty_row_count": 12,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 4
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/3월24일.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "84f7f6a50f7cb36122d2ce06fac009630dee9ad33cb82fc878cd10dc842504a7",
+      "size_bytes": 105378,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 11,
+          "nonempty_row_count": 10,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 4
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/4월16일.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "d1a15eb2445a0343d15dbe73e784cac3bb5e58b0dd6160228a5c40b32a2aa751",
+      "size_bytes": 105564,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 11,
+          "nonempty_row_count": 10,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 4
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/5월29일.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "a7b23ce19e4516c192b689676d2c40d745cb3b3ded4cf2f8322692780cd3ee4f",
+      "size_bytes": 107200,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 11,
+          "nonempty_row_count": 10,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 4
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/7월23일.xlsx",
+      "scenario_group": "receipt",
+      "sha256": "65bfe7e6199b7c99c1d4099ea8741c2e60bf27528e06f62556c03f3b54a64090",
+      "size_bytes": 99380,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 11,
+          "nonempty_row_count": 10,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 4,
+            "temperature": 3,
+            "unknown": 4
+          },
+          "numeric_candidate_column_count": 9,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/2. 저장탱크 벤트 시나리오/저장탱크 데이터.xlsx",
+      "scenario_group": "vent",
+      "sha256": "57fa14039ca34ed5fb5673c5cb06ed0d619f164c469029c03c343cc568321e2d",
+      "size_bytes": 5602415,
+      "status": "READ",
+      "sheet_count": 8,
+      "error": null,
+      "sheets": [
+        {
+          "name": "요약 1",
+          "header_row_index": 1,
+          "row_count": 25,
+          "nonempty_row_count": 19,
+          "signal_category_count": {
+            "unknown": 6
+          },
+          "numeric_candidate_column_count": 2,
+          "unit_unconfirmed_numeric_column_count": 2,
+          "error": null
+        },
+        {
+          "name": "20260124",
+          "header_row_index": 1,
+          "row_count": 7239,
+          "nonempty_row_count": 7239,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 4,
+          "unit_unconfirmed_numeric_column_count": 2,
+          "error": null
+        },
+        {
+          "name": "20260222",
+          "header_row_index": 1,
+          "row_count": 7433,
+          "nonempty_row_count": 7433,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 4,
+          "unit_unconfirmed_numeric_column_count": 2,
+          "error": null
+        },
+        {
+          "name": "20260718",
+          "header_row_index": 1,
+          "row_count": 7259,
+          "nonempty_row_count": 7259,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 4,
+          "unit_unconfirmed_numeric_column_count": 2,
+          "error": null
+        },
+        {
+          "name": "20260606",
+          "header_row_index": 1,
+          "row_count": 30430,
+          "nonempty_row_count": 30430,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 5,
+          "unit_unconfirmed_numeric_column_count": 3,
+          "error": null
+        },
+        {
+          "name": "20260523",
+          "header_row_index": 1,
+          "row_count": 18983,
+          "nonempty_row_count": 18983,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 5,
+          "unit_unconfirmed_numeric_column_count": 3,
+          "error": null
+        },
+        {
+          "name": "20260404",
+          "header_row_index": 1,
+          "row_count": 8326,
+          "nonempty_row_count": 8326,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 5,
+          "unit_unconfirmed_numeric_column_count": 3,
+          "error": null
+        },
+        {
+          "name": "20260307",
+          "header_row_index": 1,
+          "row_count": 14692,
+          "nonempty_row_count": 14692,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 2,
+            "unknown": 47
+          },
+          "numeric_candidate_column_count": 5,
+          "unit_unconfirmed_numeric_column_count": 3,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월15일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+      "size_bytes": 112529,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 742,
+          "signal_category_count": {
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 6,
+          "unit_unconfirmed_numeric_column_count": 6,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월21일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "5b83135f71609f7233773d764a2dddd1bfa3de0ec294c9bba7064f57e466da4f",
+      "size_bytes": 86649,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월22일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "884d7885eaabec486316b2541a96ef6a6476c30f016329c908d7ddb06107a278",
+      "size_bytes": 80019,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월17일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "365a37bc2cac22a89eeefb4f3faf0a7c7df881471291b3f559c95633395bc04b",
+      "size_bytes": 82324,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월22일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "2a0a060d639c69512f9601905cab87336597bd6a1c0ed19fb145afa310bfab87",
+      "size_bytes": 78662,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월29일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "643a7ff57611c5b89491fa0b605a2d667fbc944bab5bd5dfee2327c865d388c0",
+      "size_bytes": 81696,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        }
+      ]
+    },
+    {
+      "relative_path": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월4일.xlsx",
+      "scenario_group": "supply",
+      "sha256": "a28c806412ef74499fe35be634e1b11f1dbf1b55a2d3393e217c1d7564b6a348",
+      "size_bytes": 86639,
+      "status": "READ",
+      "sheet_count": 3,
+      "error": null,
+      "sheets": [
+        {
+          "name": "1분 복원 데이터",
+          "header_row_index": 1,
+          "row_count": 721,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        },
+        {
+          "name": "추출 기준",
+          "header_row_index": 1,
+          "row_count": 9,
+          "nonempty_row_count": 8,
+          "signal_category_count": {
+            "unknown": 2
+          },
+          "numeric_candidate_column_count": 0,
+          "unit_unconfirmed_numeric_column_count": 0,
+          "error": null
+        },
+        {
+          "name": "추세 확인",
+          "header_row_index": 1,
+          "row_count": 742,
+          "nonempty_row_count": 721,
+          "signal_category_count": {
+            "differential_pressure": 2,
+            "pressure": 5,
+            "temperature": 1,
+            "unknown": 1
+          },
+          "numeric_candidate_column_count": 8,
+          "unit_unconfirmed_numeric_column_count": 8,
+          "error": null
+        }
+      ]
+    }
+  ]
+}
