@@ -103,6 +103,32 @@ def test_case_audit_rechecks_literature_frequency_event_and_port_binding():
     assert report["frequency_uncertainty_unavailable_case_count"] == 0
 
 
+def test_case_audit_keeps_point_rate_when_literature_interval_is_missing():
+    report = build_release_boundary_case_audit(
+        _assessment(
+            [_case("point-rate-event")],
+            [_ledger_row("point-rate-event")],
+            events=[{
+                "id": "point-rate-event",
+                "port_ids": ["port-1"],
+                "annual_frequency_per_year": 2.5e-4,
+                "statistic": "published_default",
+                "source": "literature:point-rate-only",
+                "source_sha256": "b" * 64,
+            }],
+        )
+    )
+    audited = report["rows"][0]
+    assert audited["frequency_binding_status"] == "BOUND"
+    assert audited["frequency_uncertainty_status"] == "NOT_AVAILABLE"
+    assert audited["initiating_frequency_per_year"] == 2.5e-4
+    assert audited["frequency_marginal_p05_per_year"] is None
+    assert audited["frequency_marginal_p95_per_year"] is None
+    assert audited["frequency_inference_performed"] is False
+    assert report["frequency_uncertainty_status_counts"] == {"NOT_AVAILABLE": 1}
+    assert report["frequency_uncertainty_unavailable_case_count"] == 1
+
+
 def test_case_audit_blocks_horizon_and_operator_limited_rows():
     cases = [
         _case("limited", status="EXECUTED_OPERATOR_LIMITED"),
