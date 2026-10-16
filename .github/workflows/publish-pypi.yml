@@ -17,7 +17,8 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Keep release builds reproducible across GitHub runner migrations.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4.2.2
         with:
@@ -46,7 +47,8 @@ jobs:
 
   publish:
     needs: build
-    runs-on: ubuntu-latest
+    # Keep the publish job on the same pinned runner image.
+    runs-on: ubuntu-24.04
     environment:
       name: pypi
       url: https://pypi.org/project/prism-risk/

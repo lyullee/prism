@@ -22,7 +22,8 @@ concurrency:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    # Pin the runner image so CI does not change underneath the numerical test suite.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
