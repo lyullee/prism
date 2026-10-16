@@ -281,7 +281,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1281 passed, 1 warning",
+  "latest_local_full_test_run": "1284 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -4081,12 +4081,12 @@
   "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
   "latest_provider_packet_collection_manifest_case_count": 44,
   "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
-  "latest_local_full_test_run_commit": "6d8ac219",
+  "latest_local_full_test_run_commit": "f469bb2f",
   "current_development": {
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
     "per_branch_provider_identity_handoff_policy": "Explicit scenario-to-provider identity map; missing entries withheld; no cross-branch identity reuse.",
-    "latest_local_full_test_run": "1281 passed, 1 warning"
+    "latest_local_full_test_run": "1284 passed, 1 warning"
   },
   "hazop_facility_branch_identity_partition_implemented": true,
   "hazop_facility_branch_identity_partition_key": "component_id|hazop_scenario_id",
