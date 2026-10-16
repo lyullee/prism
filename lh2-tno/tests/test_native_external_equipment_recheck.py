@@ -8,6 +8,7 @@ from scripts.run_native_external_equipment_recheck import (
     summarise_packet,
     tree_digest,
 )
+from scripts.run_native_external_equipment_chain_recheck import chain_commands
 
 
 def test_exporter_commands_cover_all_declared_native_equipment() -> None:
@@ -62,3 +63,19 @@ def test_summarise_packet_preserves_diagnostic_gate(tmp_path: Path) -> None:
     assert summary["provider_packet_promoted"] is False
     assert summary["termination_basis"] == "reviewed_isolation_success"
     assert summary["state_snapshot_digest_match"] is True
+
+
+def test_chain_commands_keep_high_speed_valve_on_compressible_path() -> None:
+    commands = chain_commands(
+        Path("packets"),
+        Path("chains"),
+        backend_config=Path("backend.json"),
+        facility=Path("facility.json"),
+        context=Path("context.json"),
+    )
+    assert set(commands) == {
+        "tank", "pipe", "pump", "vaporizer", "reliquefier", "vent", "valve_compressible",
+    }
+    assert "run_compressible_plane_chain.py" in commands["valve_compressible"][1]
+    assert "--handoff" in commands["valve_compressible"]
+    assert "validate_lh2dt_prism_packet_chain.py" in commands["tank"][1]

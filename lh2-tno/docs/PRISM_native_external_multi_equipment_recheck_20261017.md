@@ -45,3 +45,24 @@ and `facility_qra_claim: false`. Independent packet qualification, measured
 facility state, literature-frequency selection, SLABx-LH2 physical validation,
 and facility IR/F-N promotion remain separate evidence gates. No sensor-based
 frequency learning is introduced.
+
+## Consequence-chain replay
+
+The saved packets were then replayed through the PRISM consequence path with
+`scripts/run_native_external_equipment_chain_recheck.py`:
+
+```powershell
+python scripts/run_native_external_equipment_chain_recheck.py `
+  --packet-root results/20261017/native_external_multi_equipment_recheck_20261017 `
+  --output-dir results/20261017/native_external_multi_equipment_chain_recheck_20261017 `
+  --backend-config <reviewed-backend-config.json> `
+  --facility examples/native_external_valve_chain_facility_20261017.json `
+  --context examples/compressible_plane_chain_context.json
+```
+
+All seven packets reached `END_TO_END_DIAGNOSTIC_EXECUTED`. The valve packet
+used the explicit compressible-plane handoff (maximum diagnostic Mach number
+about 2.29); the other six used the ordinary SLABx-LH2 path. The aggregate
+record is [`chain manifest`](../results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json),
+with individual chain verification records beside it. These are consequence
+chain execution proofs, not facility-wide annual IR/F-N values.

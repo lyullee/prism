@@ -1,0 +1,64 @@
+{
+  "environment": "outdoor",
+  "configuration_origin": "synthetic",
+  "components": [
+    {
+      "id": "native-stroke-valve-diagnostic",
+      "kind": "valve",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "diameter_m": 0.025
+      }
+    }
+  ],
+  "ports": [
+    {
+      "id": "native-stroke-valve-gas-out",
+      "component_id": "native-stroke-valve-diagnostic",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {
+      "id": "near-worker",
+      "position_enu_m": [
+        2.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "downwind-worker",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        0.1
+      ]
+    },
+    {
+      "id": "side-worker",
+      "position_enu_m": [
+        25.0,
+        4.0,
+        1.8
+      ]
+    }
+  ],
+  "id": "compressible-plane-chain-diagnostic"
+}

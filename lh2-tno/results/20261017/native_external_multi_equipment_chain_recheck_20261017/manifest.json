@@ -1,0 +1,182 @@
+{
+  "schema_version": "prism.native_external_multi_equipment_chain_recheck.v1",
+  "status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_CHAIN_EXECUTED_DIAGNOSTIC",
+  "chain_count": 7,
+  "chains": [
+    {
+      "equipment": "tank",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\validate_lh2dt_prism_packet_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\tank\\resolved_release.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\tank",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"source_operator\": \"equipment_liquid_release\",\n  \"provider_packet_schema\": \"prism.resolved_release.v1\",\n  \"provider_model_provenance\": \"native external LayeredTank accident export; synthetic geometry and state\",\n  \"boundary_kind\": \"resolved_atmospheric_liquid_exit\",\n  \"provider_duration_s\": 0.30000000000000004,\n  \"provider_mass_residual_kg\": 0.0,\n  \"pool_sensitivity_radius_m\": 0.005,\n  \"consequence_chain_executed\": true,\n  \"facility_ir_fn_claim\": false,\n  \"frequency_inference\": false,\n  \"physical_validation_claim\": false,\n  \"provider_packet_promoted\": false,\n  \"limitations\": [\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied\",\n    \"single external-provider diagnostic packet only; provider model is not site-calibrated\"\n  ]\n}",
+      "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "consequence_chain_executed": true,
+      "provider_duration_s": 0.30000000000000004,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false
+    },
+    {
+      "equipment": "pipe",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\validate_lh2dt_prism_packet_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\pipe\\resolved_release.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\pipe",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"source_operator\": \"equipment_liquid_release\",\n  \"provider_packet_schema\": \"prism.resolved_release.v1\",\n  \"provider_model_provenance\": \"native external DynamicHEMPipe accident export; synthetic geometry and state\",\n  \"boundary_kind\": \"resolved_atmospheric_liquid_exit\",\n  \"provider_duration_s\": 0.060000000000000005,\n  \"provider_mass_residual_kg\": 0.0,\n  \"pool_sensitivity_radius_m\": 0.005,\n  \"consequence_chain_executed\": true,\n  \"facility_ir_fn_claim\": false,\n  \"frequency_inference\": false,\n  \"physical_validation_claim\": false,\n  \"provider_packet_promoted\": false,\n  \"limitations\": [\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied\",\n    \"single external-provider diagnostic packet only; provider model is not site-calibrated\"\n  ]\n}",
+      "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "consequence_chain_executed": true,
+      "provider_duration_s": 0.060000000000000005,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false
+    },
+    {
+      "equipment": "pump",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\validate_lh2dt_prism_packet_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\pump\\resolved_release.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\pump",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"source_operator\": \"equipment_liquid_release\",\n  \"provider_packet_schema\": \"prism.resolved_release.v1\",\n  \"provider_model_provenance\": \"native external MappedPump H-Q-N accident export; synthetic source state and reserve\",\n  \"boundary_kind\": \"resolved_atmospheric_liquid_exit\",\n  \"provider_duration_s\": 0.1,\n  \"provider_mass_residual_kg\": 0.0,\n  \"pool_sensitivity_radius_m\": 0.0001,\n  \"consequence_chain_executed\": true,\n  \"facility_ir_fn_claim\": false,\n  \"frequency_inference\": false,\n  \"physical_validation_claim\": false,\n  \"provider_packet_promoted\": false,\n  \"limitations\": [\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied\",\n    \"single external-provider diagnostic packet only; provider model is not site-calibrated\"\n  ]\n}",
+      "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "consequence_chain_executed": true,
+      "provider_duration_s": 0.1,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false
+    },
+    {
+      "equipment": "vaporizer",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\validate_lh2dt_prism_packet_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\vaporizer\\resolved_release.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\vaporizer",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"source_operator\": \"integrated_transient\",\n  \"provider_packet_schema\": \"prism.resolved_release.v1\",\n  \"provider_model_provenance\": \"native external DynamicVaporizer finite-volume accident export; synthetic geometry and state\",\n  \"boundary_kind\": \"resolved_atmospheric_gas_exit\",\n  \"provider_duration_s\": 0.1,\n  \"provider_mass_residual_kg\": 0.0,\n  \"pool_sensitivity_radius_m\": null,\n  \"consequence_chain_executed\": true,\n  \"facility_ir_fn_claim\": false,\n  \"frequency_inference\": false,\n  \"physical_validation_claim\": false,\n  \"provider_packet_promoted\": false,\n  \"limitations\": [\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied\",\n    \"single external-provider diagnostic packet only; provider model is not site-calibrated\"\n  ]\n}",
+      "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "consequence_chain_executed": true,
+      "provider_duration_s": 0.1,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false
+    },
+    {
+      "equipment": "reliquefier",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\validate_lh2dt_prism_packet_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\reliquefier\\resolved_release.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\reliquefier",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"source_operator\": \"integrated_transient\",\n  \"provider_packet_schema\": \"prism.resolved_release.v1\",\n  \"provider_model_provenance\": \"native external DynamicReliquefier finite-volume accident export; synthetic geometry and state\",\n  \"boundary_kind\": \"resolved_atmospheric_gas_exit\",\n  \"provider_duration_s\": 0.1,\n  \"provider_mass_residual_kg\": 0.0,\n  \"pool_sensitivity_radius_m\": null,\n  \"consequence_chain_executed\": true,\n  \"facility_ir_fn_claim\": false,\n  \"frequency_inference\": false,\n  \"physical_validation_claim\": false,\n  \"provider_packet_promoted\": false,\n  \"limitations\": [\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied\",\n    \"single external-provider diagnostic packet only; provider model is not site-calibrated\"\n  ]\n}",
+      "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "consequence_chain_executed": true,
+      "provider_duration_s": 0.1,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false
+    },
+    {
+      "equipment": "vent",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\validate_lh2dt_prism_packet_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\vent\\resolved_release.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\vent",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"source_operator\": \"integrated_transient\",\n  \"provider_packet_schema\": \"prism.resolved_release.v1\",\n  \"provider_model_provenance\": \"native external VentStack accident export; synthetic upstream state and geometry\",\n  \"boundary_kind\": \"resolved_atmospheric_gas_exit\",\n  \"provider_duration_s\": 0.1,\n  \"provider_mass_residual_kg\": 0.0,\n  \"pool_sensitivity_radius_m\": null,\n  \"consequence_chain_executed\": true,\n  \"facility_ir_fn_claim\": false,\n  \"frequency_inference\": false,\n  \"physical_validation_claim\": false,\n  \"provider_packet_promoted\": false,\n  \"limitations\": [\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied\",\n    \"single external-provider diagnostic packet only; provider model is not site-calibrated\"\n  ]\n}",
+      "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "consequence_chain_executed": true,
+      "provider_duration_s": 0.1,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false
+    },
+    {
+      "equipment": "valve_compressible",
+      "command": [
+        "C:\\Users\\lyul\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\scripts\\run_compressible_plane_chain.py",
+        "--packet",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\valve\\resolved_release.json",
+        "--handoff",
+        "results\\20261017\\native_external_multi_equipment_recheck_20261017\\valve\\compressible_handoff.json",
+        "--facility",
+        "examples\\native_external_valve_chain_facility_20261017.json",
+        "--context",
+        "examples\\compressible_plane_chain_context.json",
+        "--backend-config",
+        "results\\20261009\\backend_config_current.json",
+        "--output-dir",
+        ".tmp_native_external_chain_runner_20261017\\valve_compressible"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"SYNTHETIC_COMPRESSIBLE_PLANE_CHAIN_EXECUTED\",\n  \"chain_status\": \"END_TO_END_DIAGNOSTIC_EXECUTED\",\n  \"full_chain_executed\": true,\n  \"provider_handoff_consumed\": true,\n  \"handoff_count\": 2,\n  \"handoff_state_count\": 2,\n  \"event_id\": \"native-stroke-valve/accidental-leak-001\",\n  \"component_id\": \"native-stroke-valve-diagnostic\",\n  \"port_id\": \"native-stroke-valve-gas-out\",\n  \"provider_result_digest\": \"d35e0ea91c58c8b3350cf1e70999a570ec4f3b9150bc96102491cbc63b39cda8\",\n  \"provider_duration_s\": 0.1,\n  \"provider_mass_residual_kg\": 0.0,\n  \"chain_max_mass_residual_relative\": 1.7904167849836293e-16,\n  \"max_mach_number\": 2.285507865080773,\n  \"source_operator\": \"integrated_transient\",\n  \"backend_pin_refresh\": [],\n  \"operator_limited\": true,\n  \"provider_packet_promoted\": false,\n  \"physical_validation_claim\": false,\n  \"facility_qra_claim\": false,\n  \"frequency_inference\": false,\n  \"limitations\": [\n    \"synthetic or diagnostic provider history; provider qualification is pending\",\n    \"synthetic facility, receptors, weather and ignition context\",\n    \"no initiating frequency was applied or inferred\",\n    \"compressible-plane handoff is an adapter boundary, not an independently validated near-field solver\"\n  ]\n}",
+      "status": "SYNTHETIC_COMPRESSIBLE_PLANE_CHAIN_EXECUTED",
+      "chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "full_chain_executed": true,
+      "provider_handoff_consumed": true,
+      "provider_duration_s": 0.1,
+      "provider_mass_residual_kg": 0.0,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "frequency_inference": false,
+      "facility_qra_claim": false,
+      "operator_limited": true,
+      "max_mach_number": 2.285507865080773
+    }
+  ],
+  "provider_packet_promoted_count": 0,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic facility, weather, receptors and ignition context",
+    "no initiating frequency was applied or inferred",
+    "provider qualification and independent physical validation remain open",
+    "facility IR/F-N is not promoted from single-packet diagnostics"
+  ]
+}

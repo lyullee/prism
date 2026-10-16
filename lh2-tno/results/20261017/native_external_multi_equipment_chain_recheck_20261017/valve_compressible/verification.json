@@ -1,0 +1,29 @@
+{
+  "status": "SYNTHETIC_COMPRESSIBLE_PLANE_CHAIN_EXECUTED",
+  "chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "full_chain_executed": true,
+  "provider_handoff_consumed": true,
+  "handoff_count": 2,
+  "handoff_state_count": 2,
+  "event_id": "native-stroke-valve/accidental-leak-001",
+  "component_id": "native-stroke-valve-diagnostic",
+  "port_id": "native-stroke-valve-gas-out",
+  "provider_result_digest": "d35e0ea91c58c8b3350cf1e70999a570ec4f3b9150bc96102491cbc63b39cda8",
+  "provider_duration_s": 0.1,
+  "provider_mass_residual_kg": 0.0,
+  "chain_max_mass_residual_relative": 1.7904167849836293e-16,
+  "max_mach_number": 2.285507865080773,
+  "source_operator": "integrated_transient",
+  "backend_pin_refresh": [],
+  "operator_limited": true,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "limitations": [
+    "synthetic or diagnostic provider history; provider qualification is pending",
+    "synthetic facility, receptors, weather and ignition context",
+    "no initiating frequency was applied or inferred",
+    "compressible-plane handoff is an adapter boundary, not an independently validated near-field solver"
+  ]
+}

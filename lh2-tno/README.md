@@ -408,6 +408,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [Native external seven-equipment recheck](docs/PRISM_native_external_multi_equipment_recheck_20261017.md)
+- [Native external seven-equipment consequence-chain manifest](results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json)
 - [Partial inspection-centre boundary evidence audit](docs/PRISM_partial_LH2_boundary_evidence_en.md)
 - [Partial boundary evidence record](results/20261117/inspection_center_partial_boundary_evidence.json)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
