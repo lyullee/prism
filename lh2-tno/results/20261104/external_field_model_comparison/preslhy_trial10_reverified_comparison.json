@@ -23,7 +23,7 @@
   },
   "field_evidence_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE",
   "field_evidence_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261104\\external_field_evidence\\preslhy_trial10_reverified.json",
-  "field_evidence_sha256": "f5a2e5c58479b9ab60edce14ba5e0f610e074ceb9afaae054405e535eea7f249",
+  "field_evidence_sha256": "171cc0b8f77219f275165a547d98fdb0e4aec93a5d72aaa8fa383e1ffe83ddd1",
   "model_prediction_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261103\\external_field_model_comparison\\preslhy_trial10_replay_prediction.json",
   "model_prediction_sha256": "c5ae71801d831a6c08d08a5b1dfa7fdecc497dc496360e57378e2c9a5d908f84",
   "source_boundary_binding": {
