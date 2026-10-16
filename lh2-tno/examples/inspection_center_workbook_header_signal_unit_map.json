@@ -1,0 +1,97 @@
+{
+  "schema_version": "prism.workbook_header_signal_unit_map.v1",
+  "status": "CANDIDATE_EXPLICIT_HEADER_UNIT_MAP",
+  "source_evidence": {
+    "audit_record": "examples/inspection_center_workbook_header_unit_evidence.json",
+    "source_root": "<inspection-center-data-root>",
+    "source_file_count": 17,
+    "explicit_claim_count": 168,
+    "basis": "unit-bearing XLSX header cells only; no numeric-range inference"
+  },
+  "signal_units": {
+    "PT1101": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 14
+    },
+    "PT1105A": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 26
+    },
+    "PT1105B": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 26
+    },
+    "PT1106": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 14
+    },
+    "PT1107": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 14
+    },
+    "PT1111": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 12
+    },
+    "PT1206": {
+      "unit": "mpa",
+      "quantity": "pressure",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 12
+    },
+    "TT1106": {
+      "unit": "degc",
+      "quantity": "temperature",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 12
+    },
+    "TT1111": {
+      "unit": "degc",
+      "quantity": "temperature",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 12
+    },
+    "TT1112": {
+      "unit": "degc",
+      "quantity": "temperature",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 12
+    },
+    "TT1116": {
+      "unit": "degc",
+      "quantity": "temperature",
+      "evidence_basis": "explicit_workbook_header",
+      "evidence_count": 14
+    }
+  },
+  "unresolved_signals": {
+    "DPT1101": "workbook headers contain no engineering unit",
+    "DPT1102": "workbook headers contain no engineering unit",
+    "DPT11012": "workbook headers contain no engineering unit"
+  },
+  "policy": {
+    "procedure_setpoint_repurposed_as_raw_unit": false,
+    "pressure_basis_resolved": false,
+    "calibration_quality_evidence_supplied": false,
+    "requires_reviewer_approval_before_state_binding": true,
+    "state_snapshot_binding_allowed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "This map records explicit raw-unit labels in the workbooks. Procedure bar values remain setpoint context and are not silently substituted for raw MPa labels."
+}

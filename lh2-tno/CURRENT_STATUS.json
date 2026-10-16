@@ -5174,6 +5174,23 @@
   "observed_unit_consistency_audit_conflict_count": 2,
   "observed_unit_consistency_audit_unreviewed_count": 5,
   "observed_unit_consistency_state_snapshot_binding_allowed": false,
-  "observed_unit_consistency_interpretation": "Runtime manifest and reviewed procedure evidence disagree for PT1206 and PT1105A (MPa versus bar); no unit precedence or numeric-range inference is permitted, so state binding remains fail-closed."
+  "observed_unit_consistency_interpretation": "Runtime manifest and reviewed procedure evidence disagree for PT1206 and PT1105A (MPa versus bar); no unit precedence or numeric-range inference is permitted, so state binding remains fail-closed.",
+
+  "inspection_center_workbook_header_unit_audit_implemented": true,
+  "inspection_center_workbook_header_unit_audit_script": "scripts/audit_workbook_header_units.py",
+  "inspection_center_workbook_header_unit_audit_module": "src/lh2_tno/workbook_header_units.py",
+  "inspection_center_workbook_header_unit_audit_record": "examples/inspection_center_workbook_header_unit_evidence.json",
+  "inspection_center_workbook_header_unit_audit_status": "EXPLICIT_HEADER_UNITS_FOUND",
+  "inspection_center_workbook_header_unit_audit_source_file_count": 17,
+  "inspection_center_workbook_header_unit_audit_explicit_claim_count": 168,
+  "inspection_center_workbook_header_unit_audit_conflict_tag_count": 0,
+  "inspection_center_workbook_header_signal_unit_map": "examples/inspection_center_workbook_header_signal_unit_map.json",
+  "inspection_center_workbook_header_manifest_consistency_record": "examples/inspection_center_unit_consistency_with_header_evidence.json",
+  "inspection_center_workbook_header_manifest_consistency_status": "REVIEWED_UNIT_COVERAGE_INCOMPLETE",
+  "inspection_center_workbook_header_manifest_consistency_matched_count": 5,
+  "inspection_center_workbook_header_manifest_consistency_conflict_count": 0,
+  "inspection_center_workbook_header_manifest_consistency_unreviewed_count": 3,
+  "inspection_center_workbook_header_unit_state_snapshot_binding_allowed": false,
+  "inspection_center_workbook_header_unit_interpretation": "Explicit MPa and degC labels in source workbook headers resolve the apparent MPa/bar conflict as raw measurement versus procedure setpoint context; DPT units, pressure basis, calibration/quality, and equipment identity remain open."
 
 }

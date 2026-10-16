@@ -1,0 +1,109 @@
+{
+  "schema_version": "prism.observed_unit_consistency_audit.v1",
+  "status": "REVIEWED_UNIT_COVERAGE_INCOMPLETE",
+  "source_manifest_schema": "prism.observed_state_input_manifest.v1",
+  "reviewed_map_schema": "prism.workbook_header_signal_unit_map.v1",
+  "source_count": 3,
+  "binding_count": 8,
+  "matched_count": 5,
+  "conflict_count": 0,
+  "unreviewed_count": 3,
+  "reviewed_only_tag_count": 6,
+  "reviewed_only_tags": [
+    "PT1105B",
+    "PT1106",
+    "PT1107",
+    "PT1111",
+    "TT1111",
+    "TT1112"
+  ],
+  "bindings": [
+    {
+      "source_id": "inspection-center-intake-10-runs",
+      "quantity": "pressure",
+      "column": "PT1206",
+      "normalized_tag": "PT1206",
+      "manifest_unit": "mpa",
+      "reviewed_unit": "mpa",
+      "status": "MATCHED"
+    },
+    {
+      "source_id": "inspection-center-intake-10-runs",
+      "quantity": "temperature",
+      "column": "TT1106",
+      "normalized_tag": "TT1106",
+      "manifest_unit": "degc",
+      "reviewed_unit": "degc",
+      "status": "MATCHED"
+    },
+    {
+      "source_id": "inspection-center-intake-10-runs",
+      "quantity": "differential_pressure",
+      "column": "DPT1101",
+      "normalized_tag": "DPT1101",
+      "manifest_unit": "kpa",
+      "reviewed_unit": null,
+      "status": "MANIFEST_ONLY_UNREVIEWED"
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs",
+      "quantity": "pressure",
+      "column": "PT1105A",
+      "normalized_tag": "PT1105A",
+      "manifest_unit": "mpa",
+      "reviewed_unit": "mpa",
+      "status": "MATCHED"
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs",
+      "quantity": "differential_pressure",
+      "column": "DPT1101",
+      "normalized_tag": "DPT1101",
+      "manifest_unit": "kpa",
+      "reviewed_unit": null,
+      "status": "MANIFEST_ONLY_UNREVIEWED"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs",
+      "quantity": "pressure",
+      "column": "PT1101",
+      "normalized_tag": "PT1101",
+      "manifest_unit": "mpa",
+      "reviewed_unit": "mpa",
+      "status": "MATCHED"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs",
+      "quantity": "temperature",
+      "column": "TT1116",
+      "normalized_tag": "TT1116",
+      "manifest_unit": "degc",
+      "reviewed_unit": "degc",
+      "status": "MATCHED"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs",
+      "quantity": "differential_pressure",
+      "column": "DPT1101",
+      "normalized_tag": "DPT1101",
+      "manifest_unit": "kpa",
+      "reviewed_unit": null,
+      "status": "MANIFEST_ONLY_UNREVIEWED"
+    }
+  ],
+  "policy": {
+    "numeric_range_unit_inference": false,
+    "unit_precedence_selected": false,
+    "state_snapshot_binding_allowed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Unit declarations are compared only as explicit claims. A conflict or missing review keeps state binding closed; no unit is selected by inference.",
+  "inputs": {
+    "manifest": "examples\\inspection_center_observed_state_manifest.json",
+    "reviewed_map": "examples\\inspection_center_workbook_header_signal_unit_map.json"
+  }
+}
