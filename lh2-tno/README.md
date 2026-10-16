@@ -230,6 +230,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Korean README](README_ko.md)
 - [IJHE requirement traceability](docs/PRISM_IJHE_requirement_traceability_20261115.md)
 - [Latest IJHE audit](docs/PRISM_IJHE_latest_audit_20261115.md)
+- [Latest IJHE audit (English)](docs/PRISM_IJHE_latest_audit_20261115_en.md)
 - [Current IJHE objective coverage audit](docs/PRISM_IJHE_objective_coverage_current_20261115.md)
 - [Latest facility-handoff IJHE audit detail](docs/PRISM_IJHE_facility_handoff_audit_20261115.md)
 - [Latest IJHE audit metadata verifier](src/lh2_tno/latest_ijhe_audit_verification.py)
