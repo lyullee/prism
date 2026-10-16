@@ -1,0 +1,18 @@
+{
+  "schema_version": "prism.native_provider_multi_equipment_facility_audit.v1",
+  "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_AUDIT_CLOSED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-native-pump-valve-facility",
+  "component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+  "component_count": 2,
+  "component_risk_atom_count": 8,
+  "component_partial_scope": true,
+  "frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+  "frequency_scenario_count": 3,
+  "frequency_risk_atom_count": 8,
+  "frequency_inference_performed": false,
+  "facility_credible_interval": false,
+  "physical_validation_claim": false,
+  "qualified_provider_packet": false,
+  "facility_qra_claim": false,
+  "interpretation": "Equipment contributions and literature-frequency sensitivity were independently reproduced from the saved partial ledger; withheld bins remain explicit."
+}

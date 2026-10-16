@@ -126,13 +126,22 @@ def _compare_contribution(
     component_id: str,
     stored: Any,
     computed: Mapping[str, Any],
+    *,
+    partial_scope: bool = False,
 ) -> list[str]:
     if not isinstance(stored, Mapping):
         return [f"component {component_id} stored contribution is missing"]
     mismatches: list[str] = []
-    for field in ("event_count", "risk_atom_count"):
-        if stored.get(field) != computed[field]:
-            mismatches.append(f"component {component_id} {field} differs")
+    if stored.get("event_count") != computed["event_count"]:
+        stored_event_count = stored.get("event_count")
+        if not (
+            partial_scope
+            and isinstance(stored_event_count, int)
+            and stored_event_count >= computed["event_count"]
+        ):
+            mismatches.append(f"component {component_id} event_count differs")
+    if stored.get("risk_atom_count") != computed["risk_atom_count"]:
+        mismatches.append(f"component {component_id} risk_atom_count differs")
     stored_ir = stored.get("annual_ir_low_high")
     if not isinstance(stored_ir, Mapping) or set(map(str, stored_ir)) != set(computed["annual_ir_low_high"]):
         mismatches.append(f"component {component_id} annual IR receptor set differs")
@@ -189,6 +198,10 @@ def build_facility_component_contribution_audit(
     grouped = _component_rows(atoms)
     computed = {component_id: _computed_contribution(component_id, rows) for component_id, rows in grouped.items()}
     stored = campaign_result.get("component_contributions")
+    uncomputed_cases = campaign_result.get("uncomputed_cases")
+    partial_scope = (
+        isinstance(uncomputed_cases, list) and bool(uncomputed_cases)
+    ) or str(campaign_result.get("status", "")).startswith("PARTIAL_")
     mismatches: list[str] = []
     if not isinstance(stored, Mapping):
         mismatches.append("stored component contributions are missing")
@@ -196,7 +209,14 @@ def build_facility_component_contribution_audit(
     if set(map(str, stored)) != set(computed):
         mismatches.append("stored and recomputed component sets differ")
     for component_id, contribution in computed.items():
-        mismatches.extend(_compare_contribution(component_id, stored.get(component_id), contribution))
+        mismatches.extend(
+            _compare_contribution(
+                component_id,
+                stored.get(component_id),
+                contribution,
+                partial_scope=partial_scope,
+            )
+        )
     expected_order = _ranking(computed)
     ranking = campaign_result.get("component_risk_ranking")
     stored_order = []
@@ -225,6 +245,7 @@ def build_facility_component_contribution_audit(
         "risk_atom_count": len(atoms),
         "component_count": len(computed),
         "component_ids": sorted(computed),
+        "partial_scope": partial_scope,
         "recomputed_component_contributions": computed,
         "stored_component_contributions": campaign_result.get("component_contributions"),
         "recomputed_ranking_order": expected_order,

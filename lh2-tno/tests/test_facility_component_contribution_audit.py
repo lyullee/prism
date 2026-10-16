@@ -61,3 +61,16 @@ def test_component_contribution_audit_requires_component_identity():
         assert "component_id" in str(error)
     else:
         raise AssertionError("missing equipment identity must fail closed")
+
+
+def test_component_contribution_audit_allows_withheld_event_bins_in_partial_scope():
+    campaign = _campaign()
+    campaign["status"] = "PARTIAL_DECLARED_SCOPE"
+    campaign["uncomputed_cases"] = [{"event_id": "event-2", "status": "UNCOMPUTED"}]
+    campaign["component_contributions"]["tank-01"]["event_count"] = 2
+
+    result = build_facility_component_contribution_audit(campaign)
+
+    assert result["status"] == "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+    assert result["partial_scope"] is True
+    assert result["mismatch_count"] == 0

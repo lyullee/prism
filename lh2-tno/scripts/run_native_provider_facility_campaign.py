@@ -111,7 +111,7 @@ def _facility_frequency_scenarios(events: list[dict[str, Any]]) -> tuple[Literat
         return (LiteratureFrequencyScenario(
             id="native-provider-facility-fixed",
             asset_quantiles={asset: "fixed" for asset in sorted(by_asset)},
-            provenance="catalogue point estimates retained as fixed where no complete published p05/p95 bounds exist",
+            provenance="no frequency inference; catalogue point estimates retained as fixed where no complete published p05/p95 bounds exist",
         ),)
     return tuple(
         LiteratureFrequencyScenario(
@@ -121,7 +121,7 @@ def _facility_frequency_scenarios(events: list[dict[str, Any]]) -> tuple[Literat
                 for asset in sorted(by_asset)
             },
             provenance=(
-                "published within-asset frequency sensitivity; assets without complete "
+                "no frequency inference; published within-asset frequency sensitivity; assets without complete "
                 "p05/p95 bounds retain their catalogue point estimate as fixed"
             ),
         )

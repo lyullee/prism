@@ -44,3 +44,22 @@ cases, the number of risk atoms, facility IR/F-N availability, and elapsed
 time. The example remains diagnostic because the geometry, conditions,
 provider qualification, and independent physical validation are not yet
 production evidence.
+
+## Independent ledger audit
+
+After the campaign, independently recompute equipment contributions and the
+literature-frequency sensitivity from the saved `facility_risk_ledger`:
+
+```powershell
+python scripts/audit_native_provider_facility_campaign.py `
+  --campaign-result results/20261016/native_pump_valve_facility_campaign/campaign_result.json `
+  --facility-assessment results/20261016/native_pump_valve_facility_campaign/facility_assessment.json `
+  --output results/20261016/native_pump_valve_facility_campaign/audit.json
+```
+
+The recorded result is
+`NATIVE_PROVIDER_MULTI_EQUIPMENT_AUDIT_CLOSED_DIAGNOSTIC`. Partial campaigns
+are accepted only when withheld event bins are explicit; the audit never treats
+those bins as zero risk and never promotes a facility QRA claim. A compact
+tracked summary is in
+`examples/generic_lh2_native_pump_valve_facility_audit_20261016.json`.

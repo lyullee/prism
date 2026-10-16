@@ -21,6 +21,7 @@ def test_multi_equipment_frequency_scenarios_keep_missing_bounds_fixed() -> None
     assert scenarios[0].asset_quantiles["valve"] == "published"
     assert scenarios[1].asset_quantiles["valve"] == "p05"
     assert scenarios[2].asset_quantiles["valve"] == "p95"
+    assert all("no frequency inference" in scenario.provenance for scenario in scenarios)
 
 
 def test_multi_equipment_frequency_scenarios_use_fixed_when_no_bounds_exist() -> None:
@@ -31,3 +32,4 @@ def test_multi_equipment_frequency_scenarios_use_fixed_when_no_bounds_exist() ->
     assert len(scenarios) == 1
     assert scenarios[0].id == "native-provider-facility-fixed"
     assert scenarios[0].asset_quantiles == {"pump": "fixed"}
+    assert "no frequency inference" in scenarios[0].provenance
