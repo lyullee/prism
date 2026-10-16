@@ -23,7 +23,6 @@ _SUPPORTED_NON_HORIZON_BASES = {
     "reviewed_isolation_success",
     "inventory_depletion_positive_threshold",
     "inventory_depletion_releasable_mass",
-    "model_pressure_equalization",
 }
 
 
@@ -193,19 +192,6 @@ def _family_checks(
                     and abs(float(response["provider_residual_mass_kg"])) <= _MASS_TOLERANCE_KG
                 ),
             })
-        elif response_basis == "model_pressure_equalization":
-            checks.update({
-                "pressure_equalization_declared": response.get("pressure_equalization_confirmed") is True,
-                "terminal_pressure_present": _finite(response.get("terminal_pressure_pa")) is not None,
-                "downstream_pressure_present": _finite(response.get("downstream_pressure_pa")) is not None,
-                "pressure_tolerance_present": _positive(response.get("pressure_equalization_tolerance_pa")),
-                "pressure_difference_closed": (
-                    _finite(response.get("pressure_difference_pa")) is not None
-                    and _finite(response.get("pressure_equalization_tolerance_pa")) is not None
-                    and abs(float(response["pressure_difference_pa"])) <= float(response["pressure_equalization_tolerance_pa"])
-                ),
-                "post_equalization_observation_present": _positive(response.get("post_equalization_observation_s")),
-            })
     else:
         checks["request_basis_supported"] = False
     reasons.extend(name for name, ok in checks.items() if not ok)
@@ -360,12 +346,6 @@ def build_release_boundary_evidence_response_template(
                 "available_mass_definition": None,
                 "remaining_releasable_mass_kg": None,
                 "provider_residual_mass_kg": None,
-                "pressure_equalization_confirmed": None,
-                "terminal_pressure_pa": None,
-                "downstream_pressure_pa": None,
-                "pressure_equalization_tolerance_pa": None,
-                "pressure_difference_pa": None,
-                "post_equalization_observation_s": None,
             })
         templates.append(response)
     return {

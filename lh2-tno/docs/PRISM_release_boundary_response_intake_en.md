@@ -36,8 +36,13 @@ family-specific termination rule.
   operator, positive setpoint and capacity, an explicit completion event, and
   a closed mass residual.  It cannot be converted to a random hole.
 * The 600-second vaporizer case cannot be closed by repeating the 600-second
-  horizon.  The provider must supply isolation, inventory depletion,
-  releasable-inventory closure, or pressure-equalization evidence.
+  horizon.  The provider must supply isolation, inventory depletion, or
+  releasable-inventory closure evidence.
+
+The existing provider closure gate treats `model_pressure_equalization` as a
+model-natural diagnostic endpoint rather than a strict provider termination
+ledger.  It can still be carried through the consequence chain for diagnostic
+work, but it does not make this response `RELEASE_BOUNDARY_REAUDIT_READY`.
 
 `RELEASE_BOUNDARY_REAUDIT_READY` means that the response can be handed back to
 the case-level audit.  It does not mean that the provider is qualified, that

@@ -83,6 +83,15 @@ def test_horizon_response_can_close_with_reviewed_isolation():
     assert report["status"] == "RELEASE_BOUNDARY_REAUDIT_READY"
 
 
+def test_horizon_response_pressure_equalization_remains_diagnostic_only():
+    request = _request("inventory_over_600s")
+    response = _common(request)
+    response["termination_basis"] = "model_pressure_equalization"
+    report = validate_release_boundary_evidence_response({"requests": [request]}, {"responses": [response]})
+    assert report["status"] == "RESPONSE_EVIDENCE_OPEN"
+    assert "response_replaces_horizon_basis" in report["rows"][0]["blocking_reasons"]
+
+
 def test_missing_response_is_fail_closed():
     request = _request("inventory_over_600s")
     report = validate_release_boundary_evidence_response({"requests": [request]}, {"responses": []})

@@ -45,7 +45,7 @@ def _family_requirements(row: Mapping[str, Any]) -> list[str]:
     if basis == "inventory_over_600s":
         return [
             "provider history continues beyond 600 s until an explicit physical stopping boundary, or",
-            "provider declares a different supported termination basis with its own evidence (isolation, inventory depletion, or pressure equalization)",
+            "provider declares a different supported termination basis with its own evidence (reviewed isolation or inventory depletion)",
             "if a physical stop is claimed while inventory remains, include the stop trigger, source pressure/flow response, and a post-stop observation interval",
             "provider time history, initial/final inventory, and mass residual within tolerance",
         ]

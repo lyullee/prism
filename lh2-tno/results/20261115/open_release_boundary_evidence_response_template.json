@@ -36,13 +36,7 @@
       "remaining_mass_kg": null,
       "available_mass_definition": null,
       "remaining_releasable_mass_kg": null,
-      "provider_residual_mass_kg": null,
-      "pressure_equalization_confirmed": null,
-      "terminal_pressure_pa": null,
-      "downstream_pressure_pa": null,
-      "pressure_equalization_tolerance_pa": null,
-      "pressure_difference_pa": null,
-      "post_equalization_observation_s": null
+      "provider_residual_mass_kg": null
     },
     {
       "schema_version": "prism.release_boundary_evidence_response.v1",
