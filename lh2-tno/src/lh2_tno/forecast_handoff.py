@@ -234,6 +234,29 @@ def attach_forecast_quantitative_evidence(
             raise ForecastHandoffError(
                 f"attachment {request_id} is missing evidence blocks: {missing_evidence}"
             )
+        contract = request.get("required_contract")
+        if not isinstance(contract, Mapping):
+            raise ForecastHandoffError(f"request {request_id} is missing required_contract")
+        for block_name in _REQUIRED_EVIDENCE:
+            block = evidence[block_name]
+            if not isinstance(block, Mapping):
+                raise ForecastHandoffError(
+                    f"attachment {request_id}.{block_name} must be a mapping"
+                )
+            if not isinstance(block.get("status"), str) or not block["status"].strip():
+                raise ForecastHandoffError(
+                    f"attachment {request_id}.{block_name}.status is required"
+                )
+            required_fields = contract.get(block_name)
+            if not isinstance(required_fields, list):
+                raise ForecastHandoffError(
+                    f"request {request_id}.required_contract.{block_name} must be a list"
+                )
+            missing_fields = [field for field in required_fields if field not in block]
+            if missing_fields:
+                raise ForecastHandoffError(
+                    f"attachment {request_id}.{block_name} is missing fields: {missing_fields}"
+                )
         attached.append({
             "request": dict(request),
             "attachment": dict(attachment),

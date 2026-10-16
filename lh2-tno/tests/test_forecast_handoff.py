@@ -96,10 +96,42 @@ def test_quantitative_evidence_attachment_requires_exact_keys_and_all_blocks():
         key: {
             "status": "REVIEWED_INPUTS_ATTACHED",
             "evidence": {
-                "provider_release_packet": {"status": "provided", "digest": "a" * 64},
-                "frequency_binding": {"status": "literature_bound", "digest": "b" * 64},
-                "slabx_lh2_consequence": {"status": "provided", "digest": "c" * 64},
-                "facility_condition_binding": {"status": "provided", "digest": "d" * 64},
+                "provider_release_packet": {
+                    "status": "provided",
+                    "source_digest": "a" * 64,
+                    "release_start_s": 0.0,
+                    "release_end_s": 1.0,
+                    "duration_s": 1.0,
+                    "termination_basis": "reviewed_isolation_success",
+                    "isolation_time_s": 0.2,
+                    "post_isolation_observation_s": 0.5,
+                    "inventory_initial_kg": 10.0,
+                    "inventory_out_kg": 1.0,
+                    "mass_residual_kg": 0.0,
+                },
+                "frequency_binding": {
+                    "status": "literature_bound",
+                    "literature_event_id": "event-01",
+                    "annual_frequency": 1e-4,
+                    "annual_frequency_low": 5e-5,
+                    "annual_frequency_high": 2e-4,
+                    "source_provenance": "reviewed literature",
+                },
+                "slabx_lh2_consequence": {
+                    "status": "provided",
+                    "result_digest": "c" * 64,
+                    "weather_condition_id": "weather-01",
+                    "ignition_branch_id": "immediate",
+                    "receptor_damage_or_harm_outputs": [],
+                    "processing_time_ms": 12.0,
+                },
+                "facility_condition_binding": {
+                    "status": "provided",
+                    "population_condition_id": "population-01",
+                    "weather_condition_id": "weather-01",
+                    "ignition_branch_id": "immediate",
+                    "facility_port_or_endpoint_id": "port-01",
+                },
             },
         }
     }
@@ -113,3 +145,7 @@ def test_quantitative_evidence_attachment_requires_exact_keys_and_all_blocks():
     incomplete = {key: {"evidence": {"provider_release_packet": {}}}}
     with pytest.raises(ForecastHandoffError, match="missing evidence blocks"):
         attach_forecast_quantitative_evidence(handoff, incomplete)
+    missing_field = {key: {"evidence": {name: dict(block) for name, block in attachment[key]["evidence"].items()}}}
+    del missing_field[key]["evidence"]["frequency_binding"]["annual_frequency_high"]
+    with pytest.raises(ForecastHandoffError, match="missing fields"):
+        attach_forecast_quantitative_evidence(handoff, missing_field)
