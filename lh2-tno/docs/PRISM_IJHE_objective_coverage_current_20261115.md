@@ -115,6 +115,9 @@ inference and facility-QRA promotion. The current 44-case catalog is aligned
 because the evidence has not yet been supplied and qualified.
 The detailed contract definition and reproduction command are in
 [`PRISM_release_boundary_request_contract_20261115.md`](PRISM_release_boundary_request_contract_20261115.md).
+The same release audit also reports an equipment-level `asset_summary`, so the
+facility-wide blocked count can be traced back to individual tanks, lines,
+valves, pumps, vents, vaporizers, and reliquefiers.
 
 ## Reproduction
 

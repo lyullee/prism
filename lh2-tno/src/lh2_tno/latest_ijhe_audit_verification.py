@@ -211,6 +211,32 @@ def verify_latest_ijhe_audit(
             )
             if not isinstance(contract_counts, Mapping) or contract_counts.get("BLOCKED", 0) != 0:
                 reasons.append("latest release-boundary audit evidence-request contract status is not aligned")
+        if "asset_summary" in release_value:
+            asset_summary = release_value.get("asset_summary")
+            if not isinstance(asset_summary, Mapping) or not asset_summary:
+                reasons.append("latest release-boundary audit asset summary is missing")
+            else:
+                asset_case_count = sum(
+                    int(value.get("case_count", -1))
+                    for value in asset_summary.values()
+                    if isinstance(value, Mapping)
+                )
+                asset_eligible_count = sum(
+                    int(value.get("strict_release_boundary_eligible_case_count", -1))
+                    for value in asset_summary.values()
+                    if isinstance(value, Mapping)
+                )
+                asset_blocked_count = sum(
+                    int(value.get("strict_release_boundary_blocked_case_count", -1))
+                    for value in asset_summary.values()
+                    if isinstance(value, Mapping)
+                )
+                if asset_case_count != release_value.get("case_count"):
+                    reasons.append("latest release-boundary asset summary case count disagrees")
+                if asset_eligible_count != release_value.get("strict_release_boundary_eligible_case_count"):
+                    reasons.append("latest release-boundary asset summary eligible count disagrees")
+                if asset_blocked_count != release_value.get("strict_release_boundary_blocked_case_count"):
+                    reasons.append("latest release-boundary asset summary blocked count disagrees")
 
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
@@ -287,6 +313,11 @@ def verify_latest_ijhe_audit(
         "release_boundary_request_contract_blocked_case_count": (
             release_value.get("facility_evidence_request_contract_blocked_case_count")
             if release_value else None
+        ),
+        "release_boundary_asset_count": (
+            len(release_value.get("asset_summary", {}))
+            if release_value and isinstance(release_value.get("asset_summary"), Mapping)
+            else None
         ),
         "blocking_reasons": reasons,
         "interpretation": (

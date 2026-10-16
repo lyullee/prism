@@ -220,6 +220,27 @@ def test_case_audit_blocks_contradictory_request_contract():
     ]
 
 
+def test_case_audit_aggregates_release_boundary_by_asset():
+    first = _case("same-event")
+    second = _case("same-event")
+    first.update({"asset_id": "tank", "release_branch_id": "branch-a"})
+    second.update({"asset_id": "pipe", "release_branch_id": "branch-b"})
+    first_row = _ledger_row("same-event")
+    second_row = _ledger_row("same-event")
+    first_row.update({"asset_id": "tank", "release_branch_id": "branch-a"})
+    second_row.update({"asset_id": "pipe", "release_branch_id": "branch-b", "status": "EXECUTED_OPERATOR_LIMITED"})
+    report = build_release_boundary_case_audit(
+        _assessment([first, second], [first_row, second_row])
+    )
+    assert set(report["asset_summary"]) == {"pipe", "tank"}
+    assert report["asset_summary"]["tank"]["case_count"] == 1
+    assert report["asset_summary"]["tank"]["strict_release_boundary_eligible_case_count"] == 1
+    assert report["asset_summary"]["pipe"]["strict_release_boundary_blocked_case_count"] == 1
+    assert report["asset_summary"]["pipe"]["blocking_reason_counts"][
+        "status_executed_operator_limited"
+    ] == 1
+
+
 def test_case_audit_accepts_explicit_positive_threshold_without_zeroing_residual():
     case = _case("inventory-threshold")
     row = _ledger_row(

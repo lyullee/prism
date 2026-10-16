@@ -26,6 +26,7 @@
     "ALIGNED": 44
   },
   "release_boundary_request_contract_blocked_case_count": 0,
+  "release_boundary_asset_count": 9,
   "blocking_reasons": [],
   "interpretation": "The latest audit pointer, summary counts, diagnostic facility handoff, scope matrix, and release-boundary ledger are internally consistent; this verification does not promote provider qualification, physical validation, or facility IR/F-N."
 }

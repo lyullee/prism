@@ -910,6 +910,54 @@ def build_release_boundary_case_audit(
         for row in rows
         for reason in row["facility_evidence_request_contract_blocking_reasons"]
     })
+    asset_summary: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        asset_id = str(row.get("asset_id") or "UNSPECIFIED")
+        summary = asset_summary.setdefault(
+            asset_id,
+            {
+                "case_count": 0,
+                "strict_release_boundary_eligible_case_count": 0,
+                "strict_release_boundary_blocked_case_count": 0,
+                "numerically_closed_case_count": 0,
+                "provider_termination_evidence_status_counts": Counter(),
+                "request_contract_status_counts": Counter(),
+                "blocking_reason_counts": Counter(),
+            },
+        )
+        summary["case_count"] += 1
+        if row["strict_release_boundary_status"] == "ELIGIBLE":
+            summary["strict_release_boundary_eligible_case_count"] += 1
+        else:
+            summary["strict_release_boundary_blocked_case_count"] += 1
+        if row["numerical_release_closed"] is True:
+            summary["numerically_closed_case_count"] += 1
+        summary["provider_termination_evidence_status_counts"][
+            row["provider_termination_evidence_status"]
+        ] += 1
+        summary["request_contract_status_counts"][
+            row["facility_evidence_request_contract_status"]
+        ] += 1
+        summary["blocking_reason_counts"].update(row["release_boundary_blocking_reasons"])
+
+    def _serialise_asset_summary(summary: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "case_count": summary["case_count"],
+            "strict_release_boundary_eligible_case_count": summary[
+                "strict_release_boundary_eligible_case_count"
+            ],
+            "strict_release_boundary_blocked_case_count": summary[
+                "strict_release_boundary_blocked_case_count"
+            ],
+            "numerically_closed_case_count": summary["numerically_closed_case_count"],
+            "provider_termination_evidence_status_counts": dict(sorted(
+                summary["provider_termination_evidence_status_counts"].items()
+            )),
+            "request_contract_status_counts": dict(sorted(
+                summary["request_contract_status_counts"].items()
+            )),
+            "blocking_reason_counts": dict(sorted(summary["blocking_reason_counts"].items())),
+        }
     reasons = [reason for row in rows for reason in row["release_boundary_blocking_reasons"]]
     return {
         "schema_version": SCHEMA,
@@ -943,6 +991,10 @@ def build_release_boundary_case_audit(
             "BLOCKED", 0
         ),
         "facility_evidence_request_contract_blocking_reasons": request_contract_blocking_reasons,
+        "asset_summary": {
+            asset_id: _serialise_asset_summary(asset_summary[asset_id])
+            for asset_id in sorted(asset_summary)
+        },
         "strict_release_boundary_eligible_case_count": status_counts.get("ELIGIBLE", 0),
         "strict_release_boundary_blocked_case_count": status_counts.get("PROMOTION_BLOCKED", 0),
         "numerically_closed_case_count": sum(

@@ -16,6 +16,16 @@ This is a bookkeeping and safety gate. It does not create a release duration, es
 
 The zero blocked request contracts means the request table is internally complete. It does **not** mean the requested provider evidence has been supplied. The remaining 41 release-boundary cases and all provider-qualification and independent-physical-validation gates remain fail-closed.
 
+The same audit now emits an `asset_summary` section. It preserves the equipment
+boundary instead of pooling all cases into one facility number. In the current
+run, the main strict-boundary bottlenecks are `inventory-depletion-pipe` (10/10
+blocked because provider inventory residual evidence is not supplied),
+`storage-shell` (5/5 operator-limited), `transfer-line` (5/5 operator-limited),
+`transfer-valve` (5/5 operator-limited), and `vertical-handoff-vent` (10/10
+operator-limited). The pressure-relief vent and one ambient-vaporizer case keep
+their unsupported termination bases visible as blocked instead of being silently
+converted to an inventory or isolation event.
+
 ## Reproduce
 
 From the `lh2-tno` package directory:

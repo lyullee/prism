@@ -21,6 +21,144 @@
   },
   "facility_evidence_request_contract_blocked_case_count": 0,
   "facility_evidence_request_contract_blocking_reasons": [],
+  "asset_summary": {
+    "ambient-vaporizer": {
+      "case_count": 3,
+      "strict_release_boundary_eligible_case_count": 2,
+      "strict_release_boundary_blocked_case_count": 1,
+      "numerically_closed_case_count": 2,
+      "provider_termination_evidence_status_counts": {
+        "INVALID": 1,
+        "VALID": 2
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 3
+      },
+      "blocking_reason_counts": {
+        "termination_basis_inventory_over_600s_is_not_allowed": 1
+      }
+    },
+    "inventory-depletion-pipe": {
+      "case_count": 10,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 10,
+      "numerically_closed_case_count": 0,
+      "provider_termination_evidence_status_counts": {
+        "NOT_SUPPLIED": 10
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 10
+      },
+      "blocking_reason_counts": {
+        "provider_inventory_residual_not_depleted": 10
+      }
+    },
+    "pressure-relief-vent": {
+      "case_count": 1,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 1,
+      "numerically_closed_case_count": 0,
+      "provider_termination_evidence_status_counts": {
+        "INVALID": 1
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 1
+      },
+      "blocking_reason_counts": {
+        "termination_basis_emergency_relief_discharge_is_not_allowed": 1
+      }
+    },
+    "reliquefier": {
+      "case_count": 3,
+      "strict_release_boundary_eligible_case_count": 1,
+      "strict_release_boundary_blocked_case_count": 2,
+      "numerically_closed_case_count": 3,
+      "provider_termination_evidence_status_counts": {
+        "VALID": 3
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 3
+      },
+      "blocking_reason_counts": {
+        "status_executed_operator_limited": 2
+      }
+    },
+    "storage-shell": {
+      "case_count": 5,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 5,
+      "numerically_closed_case_count": 5,
+      "provider_termination_evidence_status_counts": {
+        "VALID": 5
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 5
+      },
+      "blocking_reason_counts": {
+        "status_executed_operator_limited": 5
+      }
+    },
+    "transfer-line": {
+      "case_count": 5,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 5,
+      "numerically_closed_case_count": 5,
+      "provider_termination_evidence_status_counts": {
+        "VALID": 5
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 5
+      },
+      "blocking_reason_counts": {
+        "status_executed_operator_limited": 5
+      }
+    },
+    "transfer-pump": {
+      "case_count": 2,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 2,
+      "numerically_closed_case_count": 2,
+      "provider_termination_evidence_status_counts": {
+        "VALID": 2
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 2
+      },
+      "blocking_reason_counts": {
+        "status_executed_operator_limited": 2
+      }
+    },
+    "transfer-valve": {
+      "case_count": 5,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 5,
+      "numerically_closed_case_count": 5,
+      "provider_termination_evidence_status_counts": {
+        "VALID": 5
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 5
+      },
+      "blocking_reason_counts": {
+        "status_executed_operator_limited": 5
+      }
+    },
+    "vertical-handoff-vent": {
+      "case_count": 10,
+      "strict_release_boundary_eligible_case_count": 0,
+      "strict_release_boundary_blocked_case_count": 10,
+      "numerically_closed_case_count": 10,
+      "provider_termination_evidence_status_counts": {
+        "VALID": 10
+      },
+      "request_contract_status_counts": {
+        "ALIGNED": 10
+      },
+      "blocking_reason_counts": {
+        "status_executed_operator_limited": 10
+      }
+    }
+  },
   "strict_release_boundary_eligible_case_count": 3,
   "strict_release_boundary_blocked_case_count": 41,
   "numerically_closed_case_count": 32,
