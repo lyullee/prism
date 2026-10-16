@@ -41,3 +41,13 @@ The failure is useful: it identifies a real numerical-resolution issue in the
 actual LH2 source path. The next technical step is to resolve the grid/source
 convergence (or document a reviewed convergence criterion) before using this
 comparison as an IJHE validation claim.
+
+The recorded gate can be rechecked without rerunning the external physics:
+
+```powershell
+python scripts/audit_ffi_test6_actual_source_numerical_gate.py `
+  --record results/20261115/slabx_lh2_test6_actual_source_numerical_gate/provenance.json `
+  --output results/20261115/slabx_lh2_test6_actual_source_numerical_gate/recomputed_gate.json
+```
+
+The command returns a nonzero status while the actual-source gate is open.
