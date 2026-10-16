@@ -4087,5 +4087,10 @@
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
     "per_branch_provider_identity_handoff_policy": "Explicit scenario-to-provider identity map; missing entries withheld; no cross-branch identity reuse.",
     "latest_local_full_test_run": "1272 passed, 1 warning"
-  }
+  },
+  "hazop_facility_branch_identity_partition_implemented": true,
+  "hazop_facility_branch_identity_partition_key": "component_id|hazop_scenario_id",
+  "hazop_facility_branch_identity_partition_policy": "Facility branch probabilities and partition groups resolve by canonical component_id|scenario_id; bare scenario IDs are accepted only when unique, and ambiguous reused IDs fail closed.",
+  "hazop_facility_branch_identity_partition_record": "docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md",
+  "hazop_facility_branch_identity_partition_test": "tests/test_hazop_campaign.py::test_hazop_branch_bridge_keeps_reused_scenario_ids_separate_by_component"
 }

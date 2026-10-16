@@ -291,6 +291,37 @@ event_id + component_id + port_id + scenario_family + release_branch_id
 
 Record source citation, population or length basis, failure profile, units, applicability, uncertainty, and exclusions. Keep sensor anomaly counts and normal flow outside the frequency plan unless a separate validated statistical study explicitly defines them as a frequency source.
 
+### 7.1 Facility aggregation of simultaneous HAZOP branches
+
+When several components are evaluated in one facility snapshot, a HAZOP row ID
+may be reused by more than one component. The facility branch handoff therefore
+uses the canonical key:
+
+```text
+component_id|hazop_scenario_id
+```
+
+Pass this key to both `branch_probabilities` and
+`branch_partition_groups` in `build_hazop_facility_campaign_branches(...)`:
+
+```python
+branch_probabilities={
+    "tank-01|high-pressure:receiving:vessel_hole": 0.5,
+    "transfer-line-01|high-pressure:receiving:vessel_hole": 0.5,
+}
+branch_partition_groups={
+    "tank-01|high-pressure:receiving:vessel_hole": "shared-deviation",
+    "transfer-line-01|high-pressure:receiving:vessel_hole": "shared-deviation",
+}
+```
+
+The probabilities must close to one within each named partition group. A bare
+scenario ID is accepted only when it occurs on one component; if it is reused,
+PRISM requires the canonical key and fails closed. This prevents an event rate
+or branch probability from moving between tanks, pipes, valves, or vaporizers.
+The resulting ledger is still diagnostic until provider qualification,
+physical validation, and the declared facility scope gates are closed.
+
 ## 8. Result contract and user interface
 
 ```json

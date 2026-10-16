@@ -6,10 +6,11 @@ existing annual-condition/facility ledger.  It does not invent weather,
 population, ignition, release, termination, or frequency data: those values
 must be supplied in ``scenario_bindings`` and ``annual_conditions``.
 
-The bridge accepts one selected HAZOP branch per component.  Multiple active
-branches remain a separate dispatch problem because their event identities and
-frequencies require an explicit branch partition before a facility total can
-be calculated.
+The bridge accepts one selected HAZOP branch per component. Multiple active
+branches are accepted by the explicit partition builder only when each branch
+has a literature event, release/ignition ledger, and a partition probability.
+Facility-wide branch keys use ``component_id|scenario_id``; a bare scenario ID
+remains compatible only when it is unique across the selected components.
 """
 from __future__ import annotations
 
@@ -50,6 +51,12 @@ def _probability(value: Any, label: str) -> float:
             f"{label} must be a finite probability in [0, 1]"
         )
     return float(value)
+
+
+def _branch_identity(component_id: str, scenario_id: str) -> str:
+    """Return the canonical facility-wide identity for one HAZOP branch."""
+
+    return f"{component_id}|{scenario_id}"
 
 
 def _selected_single_branch(
@@ -626,22 +633,65 @@ def build_hazop_facility_campaign_branches(
             if key in branch_rows:
                 raise HazopFacilityCampaignError(f"duplicate HAZOP branch: {component_id}/{scenario_id}")
             branch_rows[key] = branch
-    probability_map = {
-        _name(key, "branch_probabilities key"): _probability(value, f"branch_probabilities[{key}]")
-        for key, value in branch_probabilities.items()
+    branch_identities = {
+        key: _branch_identity(*key)
+        for key in branch_rows
     }
-    group_map = {
-        _name(key, "branch_partition_groups key"): _name(value, f"branch_partition_groups[{key}]")
-        for key, value in branch_partition_groups.items()
-    }
-    scenario_ids = {scenario_id for _, scenario_id in branch_rows}
-    if set(probability_map) != scenario_ids or set(group_map) != scenario_ids:
+    scenario_id_to_keys: dict[str, list[tuple[str, str]]] = {}
+    for component_id, scenario_id in branch_rows:
+        scenario_id_to_keys.setdefault(scenario_id, []).append(
+            (component_id, scenario_id)
+        )
+
+    def resolve_partition_key(raw_key: Any, label: str) -> tuple[str, str]:
+        key = _name(raw_key, f"{label} key")
+        exact = next(
+            (pair for pair, identity in branch_identities.items() if identity == key),
+            None,
+        )
+        if exact is not None:
+            return exact
+        matches = scenario_id_to_keys.get(key, [])
+        if len(matches) == 1:
+            return matches[0]
+        if not matches:
+            raise HazopFacilityCampaignError(
+                f"{label} references an unselected HAZOP branch: {key}"
+            )
         raise HazopFacilityCampaignError(
-            "branch probabilities and partition groups must cover exactly every selected HAZOP scenario_id"
+            f"{label} key {key!r} is reused by multiple components; use the canonical "
+            "component_id|scenario_id key"
+        )
+
+    probability_by_branch: dict[tuple[str, str], float] = {}
+    for raw_key, raw_value in branch_probabilities.items():
+        pair = resolve_partition_key(raw_key, "branch_probabilities")
+        if pair in probability_by_branch:
+            raise HazopFacilityCampaignError(
+                f"duplicate branch probability for {_branch_identity(*pair)}"
+            )
+        probability_by_branch[pair] = _probability(
+            raw_value, f"branch_probabilities[{raw_key}]"
+        )
+    group_by_branch: dict[tuple[str, str], str] = {}
+    for raw_key, raw_value in branch_partition_groups.items():
+        pair = resolve_partition_key(raw_key, "branch_partition_groups")
+        if pair in group_by_branch:
+            raise HazopFacilityCampaignError(
+                f"duplicate branch partition group for {_branch_identity(*pair)}"
+            )
+        group_by_branch[pair] = _name(
+            raw_value, f"branch_partition_groups[{raw_key}]"
+        )
+    branch_keys = set(branch_rows)
+    if set(probability_by_branch) != branch_keys or set(group_by_branch) != branch_keys:
+        raise HazopFacilityCampaignError(
+            "branch probabilities and partition groups must cover exactly every selected "
+            "component/scenario HAZOP branch"
         )
     partitions: dict[str, float] = {}
-    for scenario_id, probability in probability_map.items():
-        group = group_map[scenario_id]
+    for pair, probability in probability_by_branch.items():
+        group = group_by_branch[pair]
         partitions[group] = partitions.get(group, 0.0) + probability
     if any(not math.isclose(value, 1.0, rel_tol=0.0, abs_tol=1.0e-10) for value in partitions.values()):
         raise HazopFacilityCampaignError(
@@ -681,7 +731,7 @@ def build_hazop_facility_campaign_branches(
             "annual_ir_low_high_by_receptor": copy.deepcopy(annual_ir),
         }
         adjusted_bindings: list[dict[str, Any]] = []
-        branch_probability = probability_map[scenario_id]
+        branch_probability = probability_by_branch[(component_id, scenario_id)]
         for binding in binding_groups[(component_id, scenario_id)]:
             release_probability = _probability(
                 binding.get("release_branch_probability"),
@@ -724,8 +774,14 @@ def build_hazop_facility_campaign_branches(
         "schema_version": "prism.hazop_facility_campaign_branches.v1",
         "status": "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
         "facility_id": facility_id,
-        "branch_probabilities": probability_map,
-        "branch_partition_groups": group_map,
+        "branch_probabilities": {
+            _branch_identity(*pair): probability
+            for pair, probability in probability_by_branch.items()
+        },
+        "branch_partition_groups": {
+            _branch_identity(*pair): group
+            for pair, group in group_by_branch.items()
+        },
         "branch_campaigns": branch_campaigns,
         "campaign": combined,
         "facility_ledger": facility_ledger,

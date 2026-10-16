@@ -231,6 +231,11 @@ never inferred from a signal name or copied from a different branch. See the
 [interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
 for the complete example.
 
+For facility aggregation, use `component_id|scenario_id` as the branch
+probability and partition-group key whenever a HAZOP scenario ID is reused by
+multiple components. Bare scenario IDs remain supported only when unique; an
+ambiguous key is rejected instead of transferring a frequency between assets.
+
 ## Result status
 
 Results expose evidence status instead of hiding it:

@@ -299,3 +299,50 @@ def test_hazop_branch_bridge_rejects_open_partition():
             },
             expected_component_ids=("TK-01",),
         )
+
+
+def test_hazop_branch_bridge_keeps_reused_scenario_ids_separate_by_component():
+    runtime = _runtime_result()
+    second_component = deepcopy(runtime["components"]["TK-01"])
+    second_component["component_id"] = "TK-02"
+    branch = second_component["branches"][0]
+    branch["result"]["consequence"]["equipment_release_path"]["boundaries"][0].update(
+        {
+            "event_id": "evt-tk02-hole",
+            "component_id": "TK-02",
+        }
+    )
+    branch["risk"]["risk_atom"].update(
+        {
+            "event_id": "evt-tk02-hole",
+            "asset_id": "TK-02",
+        }
+    )
+    runtime["components"]["TK-02"] = second_component
+    runtime["component_count"] = 2
+    second_binding = _binding()
+    second_binding.update(
+        component_id="TK-02",
+        event_id="evt-tk02-hole",
+        asset_id="TK-02",
+    )
+    result = build_hazop_facility_campaign_branches(
+        runtime,
+        annual_conditions=_annual_conditions(),
+        scenario_bindings=[_binding(), second_binding],
+        branch_probabilities={
+            "TK-01|TK01-high-pressure-receiving": 0.5,
+            "TK-02|TK01-high-pressure-receiving": 0.5,
+        },
+        branch_partition_groups={
+            "TK-01|TK01-high-pressure-receiving": "shared-deviation",
+            "TK-02|TK01-high-pressure-receiving": "shared-deviation",
+        },
+        expected_component_ids=("TK-01", "TK-02"),
+    )
+    assert result["status"] == "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED"
+    assert result["branch_probabilities"] == {
+        "TK-01|TK01-high-pressure-receiving": 0.5,
+        "TK-02|TK01-high-pressure-receiving": 0.5,
+    }
+    assert len(result["campaign"]["risk_atoms"]) == 8
