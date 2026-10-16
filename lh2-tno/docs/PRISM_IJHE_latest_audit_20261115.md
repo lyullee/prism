@@ -67,3 +67,10 @@ after the emergency-relief contract update. The VentStack G1 row now reaches
 the current emergency-relief validator and is rejected specifically for its
 missing provider setpoint, capacity, completion, and source-operator fields;
 the bounded G2 row remains explicitly open as `inventory_over_600s`.
+
+통합 감사 바인더는 이제 uncertainty ledger, provider worklist, adapter registry,
+facility assessment, domain-recovery 기록을 모두 이름으로 전달한다. 긴 선택 인자
+호출에서 provider worklist가 빈도 자료로 잘못 들어가는 회귀를 막기 위한 변경이며,
+계약 테스트는 `tests/test_bind_native_full_scope_union_evidence.py`에 있다. union을
+다시 만들 때는 `--domain-recovery-audit
+results/20261024/domain_recovery_audit_flammability_gate_v2.json`을 함께 전달한다.

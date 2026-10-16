@@ -67,9 +67,16 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The full local regression suite currently reports **1,290 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
+The full local regression suite currently reports **1,291 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
+
+The union evidence binder now passes the uncertainty ledger, provider worklist,
+adapter registry, facility assessment, and domain-recovery record by named
+arguments. This prevents a long optional-argument call from silently treating a
+provider worklist as frequency evidence. The regression contract is
+`tests/test_bind_native_full_scope_union_evidence.py`; when rebuilding a union,
+include `--domain-recovery-audit results/20261024/domain_recovery_audit_flammability_gate_v2.json`.
 
 ## Evidence needed for a strict IJHE claim
 

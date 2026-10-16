@@ -117,13 +117,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         args.isolation_union_extension_verification
     )
 
+    # Keep the audit inputs explicit. The completion-audit API has a long
+    # optional signature; positional arguments here previously mixed the
+    # facility assessment, uncertainty ledger, and provider worklist domains.
+    uncertainty_result = None
+    frequency_scenarios_path = output_dir / "frequency_scenarios.json"
+    if frequency_scenarios_path.is_file():
+        uncertainty_result = _with_record(frequency_scenarios_path)
     audit = build_ijhe_completion_audit(
         current_status,
         scope,
         campaign,
-        facility,
-        provider_worklist,
-        registry,
+        uncertainty_result=uncertainty_result,
+        provider_worklist=provider_worklist,
+        diagnostic_adapter_registry=registry,
         facility_assessment=facility_record,
         facility_case_packet_coverage=facility_case_packet_coverage,
         vertical_handoff_result=vertical,
