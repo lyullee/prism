@@ -1,6 +1,6 @@
 # PRISM v0.6.2 IJHE 요구사항 추적표 (2026-11-15)
 
-이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 IJHE 감사는 **53개 검사 중 48 PASS, 5 BLOCKED**인 `INCOMPLETE_EVIDENCE`다.
+이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **45개 검사 중 41 PASS, 4 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 검사센터 시설 handoff 진단 check가 포함되어 있다.
 
 ## 요구사항별 판정
 
@@ -33,7 +33,7 @@
 진단 geometry를 사용하므로 실제 시설 provider 자격, 독립 검증, 시설 전체
 IR/F-N 승격의 증거로 사용하지 않는다.
 
-## 현재 다섯 차단 검사
+## 현재 네 가지 엄격한 차단 검사
 
 | 차단 검사 | 의미 | 필요한 다음 증거 |
 |---|---|---|
@@ -41,7 +41,6 @@ IR/F-N 승격의 증거로 사용하지 않는다.
 | `actual_provider_release_packet` | 합성/model-prediction packet만 있음 | 실제 시설 geometry·운전조건을 계산한 qualified accident export와 qualification sidecar |
 | `declared_major_accident_scope` | 수치 계산은 있으나 사고군 전체의 적격 증거가 없음 | 사고군별 독립 검증자료와 provider packet |
 | `facility_ir_fn_available` | 시설 전체 IR/F-N을 공식값으로 표시할 수 없음 | 위 세 증거와 완전한 시설 목록·위치·인구·방호정책 |
-| `facility_case_provider_packet_coverage` | 44개 case 모두 qualified packet과 exact-match되지 않음 | case ID·component·port·opening·provider digest가 일치하는 packet catalog |
 
 ## 추가된 다설비 결합 진단
 
@@ -65,7 +64,7 @@ gas handoff packet을 사용한다. 두 packet의 component·port·개구가 문
 상세 실행 원장은 [`PRISM_native_multi_equipment_facility_campaign_20261016.md`](PRISM_native_multi_equipment_facility_campaign_20261016.md)와
 [`generic_lh2_native_pump_valve_facility_replay_20261016.json`](../examples/generic_lh2_native_pump_valve_facility_replay_20261016.json)에 있다.
 설비별 기여와 빈도 민감도 재계산 감사는 [`generic_lh2_native_pump_valve_facility_audit_20261016.json`](../examples/generic_lh2_native_pump_valve_facility_audit_20261016.json)에 기록했다.
-이 감사는 최신 IJHE 완료 감사에도 `diagnostic_native_provider_multi_equipment_audit: PASS`로 연결했다. 전체 감사 상태는 `INCOMPLETE_EVIDENCE`이며, 기존 6개 범위·자격 차단 항목은 그대로 남아 있다.
+이 감사는 최신 IJHE 완료 감사에도 `diagnostic_native_provider_multi_equipment_audit: PASS`로 연결했다. 전체 감사 상태는 `INCOMPLETE_EVIDENCE`이며, qualified provider·release boundary·독립 물리검증·시설 IR/F-N 차단은 그대로 남아 있다.
 이 결과는 다설비 연결과 fail-closed 누락 회계를 검증하는 진단 증거이며,
 qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미하지 않는다.
 
@@ -81,7 +80,9 @@ qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미�
 ## 권위 산출물
 
 - 최신 facility union: `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json`
-- 최신 IJHE audit: `results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`
+- 최신 IJHE audit: `results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json`
+- 최신 handoff audit: `examples/inspection_center_facility_ijhe_handoff_audit.json`
+- 최신 audit metadata verifier: `results/20261115/latest_ijhe_audit_verification.json`
 - 최신 release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 최신 provider termination catalog: `results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json`
 - 현재 상태 원장: `CURRENT_STATUS.json`
