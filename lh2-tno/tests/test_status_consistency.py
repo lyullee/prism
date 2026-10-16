@@ -9,22 +9,22 @@ from lh2_tno.status_consistency import build_status_consistency_report, load_jso
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json"
-ASSESSMENT = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_assessment.json"
-EVIDENCE_REQUEST = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json"
-LEDGER = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_ledger.json"
-COVERAGE = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_case_packet_coverage.json"
+AUDIT = ROOT / "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+ASSESSMENT = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json"
+EVIDENCE_REQUEST = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json"
+LEDGER = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json"
+COVERAGE = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_case_packet_coverage.json"
 CURRENT_PROVIDER_INPUT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json"
 CURRENT_STATE_RELEASE_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json"
 CURRENT_COMPONENT_MAPPING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json"
 CURRENT_STATE_MODEL_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json"
 CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json"
 CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json"
-CURRENT_AUDIT = ROOT / "results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json"
-CURRENT_ASSESSMENT = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_assessment.json"
-CURRENT_EVIDENCE_REQUEST = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json"
-CURRENT_LEDGER = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_ledger.json"
-CURRENT_COVERAGE = ROOT / "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_case_packet_coverage.json"
+CURRENT_AUDIT = ROOT / "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+CURRENT_ASSESSMENT = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json"
+CURRENT_EVIDENCE_REQUEST = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json"
+CURRENT_LEDGER = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json"
+CURRENT_COVERAGE = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_case_packet_coverage.json"
 
 
 def _report(**overrides):
@@ -72,8 +72,8 @@ def test_current_union_pointer_evidence_reports_current_audit_counts() -> None:
     assert report["status"] == "CONSISTENT"
     for name in ("current_status_audit_pointer", "development_goal_audit_pointer"):
         evidence = next(row for row in report["checks"] if row["name"] == name)["evidence"]
-        assert evidence["check_count"] == 29
-        assert evidence["blocking_reason_count"] == 6
+        assert evidence["check_count"] == 54
+        assert evidence["blocking_reason_count"] == 5
 
 
 def test_current_provider_packet_input_audit_is_bound_to_status_ledgers() -> None:
@@ -328,13 +328,13 @@ def test_changed_case_coverage_cannot_pass() -> None:
     assert "coverage_gate" in report["blocking_reasons"]
 
 
-def test_changed_combined_chain_cannot_pass() -> None:
+def test_changed_risk_atom_chain_cannot_pass() -> None:
     audit = deepcopy(load_json_object(AUDIT))
     combined = next(
         row for row in audit["checks"]
-        if row["name"] == "diagnostic_combined_chain_closure"
+        if row["name"] == "diagnostic_risk_atom_chain_closure"
     )
-    combined["evidence"]["combined_diagnostic_closed_event_count"] = 28
+    combined["evidence"]["complete_case_count"] = 43
     report = _report(audit=audit)
     assert report["status"] == "INCONSISTENT"
     assert "audit_combined_chain_gate" in report["blocking_reasons"]

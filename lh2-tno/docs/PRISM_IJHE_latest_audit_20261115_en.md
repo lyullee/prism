@@ -4,7 +4,7 @@ This document is the English companion to the latest PRISM readiness record. It 
 
 ## Current result
 
-The latest audit is `INCOMPLETE_EVIDENCE` with **49 checks: 45 pass and 4 blocked**. The conditional calculation chain is connected, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
+The latest audit is `INCOMPLETE_EVIDENCE` with **54 checks: 49 pass and 5 blocked**. The conditional calculation chain is connected, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
 | Item | Current evidence |
 |---|---:|
@@ -67,7 +67,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The full local regression suite currently reports **1,267 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
+The full local regression suite currently reports **1,290 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 

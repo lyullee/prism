@@ -5189,6 +5189,56 @@
       "interpretation": "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in this benchmark. The separately measured cold and warm fresh-physics runs remain diagnostic timing evidence; no fresh-physics 1 Hz service claim is made."
     },
     {
+      "name": "diagnostic_domain_recovery_audit",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\domain_recovery_audit_flammability_gate_v2.json",
+        "schema": "prism.domain_recovery_audit.v1",
+        "status": "DOMAIN_RECOVERY_REVIEWED",
+        "event_count": 24,
+        "baseline_domain_incomplete_event_count": 6,
+        "recovery_domain_incomplete_event_count": 0,
+        "persistent_domain_incomplete_event_ids": [],
+        "recovered_event_ids": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+        ],
+        "recovery_flammability_proven_event_count": 22,
+        "recovery_flammability_proven_event_ids": [
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+          "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+        ],
+        "facility_ir_fn_promotion": false
+      },
+      "interpretation": "An explicit larger-domain sensitivity run was compared event by event. The conservative outside-LFL proof closes the fire/explosion domain gate for the recovered events, while provider qualification and facility IR/F-N remain withheld."
+    },
+    {
       "name": "equipment_model_binding_to_accident_release",
       "status": "PASS",
       "evidence": {
