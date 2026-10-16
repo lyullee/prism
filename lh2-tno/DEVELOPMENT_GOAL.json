@@ -4115,5 +4115,24 @@
   "equipment_hazop_quantitative_campaign_bridge_example": "examples/equipment_hazop_quantitative_campaign.json",
   "equipment_hazop_quantitative_campaign_bridge_policy": "Explicit equipment identity, operating mode, qualitative HAZOP scenario, quantitative provider scenario, reviewed frequency/release bindings, and branch partitions are required; identity drift blocks dispatch and no release/frequency/SLABx-LH2/facility-QRA value is inferred.",
   "equipment_hazop_quantitative_campaign_bridge_test": "tests/test_equipment_hazop_campaign.py",
-  "equipment_hazop_quantitative_campaign_bridge_status": "IMPLEMENTED_DIAGNOSTIC_OPERATOR_LIMITED; strict provider qualification, physical validation, and facility IR/F-N gates remain withheld"
+  "equipment_hazop_quantitative_campaign_bridge_status": "IMPLEMENTED_DIAGNOSTIC_OPERATOR_LIMITED; strict provider qualification, physical validation, and facility IR/F-N gates remain withheld",
+  "emergency_relief_release_boundary_contract_implemented": true,
+  "emergency_relief_release_boundary_contract_module": "src/lh2_tno/release_boundary_case_audit.py",
+  "emergency_relief_release_boundary_catalog_module": "src/lh2_tno/provider_termination_evidence_catalog.py",
+  "emergency_relief_release_boundary_required_fields": [
+    "event_kind=emergency_relief",
+    "source_operator=equipment_emergency_relief",
+    "failure_opening_diameter_m=null",
+    "positive_duration_s",
+    "termination_history_sample_count>=2",
+    "relief_setpoint_pa",
+    "relief_capacity_kg_s",
+    "discharge_complete=true",
+    "termination_provenance",
+    "max_abs_mass_residual_kg"
+  ],
+  "emergency_relief_release_boundary_record": "docs/PRISM_emergency_relief_boundary_contract_en.md",
+  "emergency_relief_release_boundary_test": "tests/test_release_boundary_case_audit.py::test_case_audit_accepts_emergency_relief_only_with_relief_specific_evidence",
+  "emergency_relief_release_boundary_status": "IMPLEMENTED_FAIL_CLOSED; current synthetic VentStack G1 remains INVALID and NUMERICALLY_OPEN",
+  "inventory_over_600s_release_boundary_policy": "remains unsupported for strict closure while provider inventory remains above zero; no horizon substitution"
 }

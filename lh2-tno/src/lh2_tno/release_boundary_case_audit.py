@@ -14,13 +14,23 @@ from typing import Any, Mapping, Sequence
 
 
 SCHEMA = "prism.release_boundary_case_audit.v1"
-_ALLOWED_BASES = {"reviewed_isolation_success", "inventory_depletion", "two_sided_rupture"}
+_ALLOWED_BASES = {
+    "reviewed_isolation_success",
+    "inventory_depletion",
+    "two_sided_rupture",
+    # Emergency relief is a distinct provider-owned discharge boundary.  It
+    # is accepted only after the branch below verifies relief-specific
+    # evidence; it is never treated as a random hole or as inventory
+    # depletion.
+    "emergency_relief_discharge",
+}
 _TOLERANCE_KG = 1e-8
 _TERMINATION_EVIDENCE_BASES = {
     "reviewed_isolation_success",
     "inventory_depletion_positive_threshold",
     "inventory_depletion_releasable_mass",
     "two_sided_rupture",
+    "emergency_relief_discharge",
 }
 
 
@@ -293,6 +303,47 @@ def _audit_termination_evidence(
                 "mass_residual_closed",
             )
         )
+    elif basis == "emergency_relief_discharge":
+        # A relief discharge is not a leak through a guessed hole.  A valid
+        # row must carry the provider's emergency-relief identity, an explicit
+        # setpoint/capacity pair, a finite discharge history, and a declared
+        # end event.  These checks make the new basis usable for a qualified
+        # provider packet while keeping the existing synthetic VentStack
+        # diagnostic packet open (it lacks the required relief metadata).
+        checks["event_kind_is_emergency_relief"] = candidate.get("event_kind") == "emergency_relief"
+        checks["source_operator_is_emergency_relief"] = candidate.get("source_operator") == "equipment_emergency_relief"
+        checks["failure_opening_not_declared"] = candidate.get("failure_opening_diameter_m") is None
+        duration = _finite(candidate.get("duration_s"))
+        checks["positive_duration_present"] = duration is not None and duration > 0.0
+        sample_count = candidate.get("termination_history_sample_count")
+        checks["termination_history_present"] = (
+            isinstance(sample_count, int)
+            and not isinstance(sample_count, bool)
+            and sample_count >= 2
+        )
+        setpoint = _finite(candidate.get("relief_setpoint_pa"))
+        capacity = _finite(candidate.get("relief_capacity_kg_s"))
+        checks["relief_setpoint_present"] = setpoint is not None and setpoint > 0.0
+        checks["relief_capacity_present"] = capacity is not None and capacity > 0.0
+        checks["discharge_complete_declared"] = candidate.get("discharge_complete") is True
+        provenance = candidate.get("termination_provenance")
+        checks["termination_provenance_present"] = isinstance(provenance, str) and bool(provenance.strip())
+        checks["mass_residual_closed"] = max_residual is not None and abs(max_residual) <= residual_tolerance_kg
+        checks["boundary_closed"] = all(
+            checks[name]
+            for name in (
+                "event_kind_is_emergency_relief",
+                "source_operator_is_emergency_relief",
+                "failure_opening_not_declared",
+                "positive_duration_present",
+                "termination_history_present",
+                "relief_setpoint_present",
+                "relief_capacity_present",
+                "discharge_complete_declared",
+                "termination_provenance_present",
+                "mass_residual_closed",
+            )
+        )
     else:
         checks["boundary_closed"] = False
     for name, ok in checks.items():
@@ -469,6 +520,16 @@ def _case_reasons(
             reasons.append("provider_termination_evidence_invalid")
         elif evidence_status != "VALID":
             reasons.append("two_sided_provider_termination_evidence_not_supplied")
+    if basis == "emergency_relief_discharge":
+        evidence_status = (
+            termination_evidence_audit.get("status")
+            if isinstance(termination_evidence_audit, Mapping)
+            else None
+        )
+        if evidence_status == "INVALID":
+            reasons.append("provider_termination_evidence_invalid")
+        elif evidence_status != "VALID":
+            reasons.append("emergency_relief_provider_termination_evidence_not_supplied")
     mass = _as_mapping(row.get("mass_ledger"))
     residual = _finite(mass.get("end_to_end_residual_kg"))
     if residual is None or abs(residual) > residual_tolerance_kg:
@@ -540,6 +601,16 @@ def _termination_reasons(
             reasons.append("provider_termination_evidence_invalid")
         elif evidence_status != "VALID":
             reasons.append("two_sided_provider_termination_evidence_not_supplied")
+    if basis == "emergency_relief_discharge":
+        evidence_status = (
+            termination_evidence_audit.get("status")
+            if isinstance(termination_evidence_audit, Mapping)
+            else None
+        )
+        if evidence_status == "INVALID":
+            reasons.append("provider_termination_evidence_invalid")
+        elif evidence_status != "VALID":
+            reasons.append("emergency_relief_provider_termination_evidence_not_supplied")
     mass = _as_mapping(row.get("mass_ledger"))
     residual = _finite(mass.get("end_to_end_residual_kg"))
     if residual is None or abs(residual) > residual_tolerance_kg:
@@ -708,7 +779,11 @@ def _required_evidence(
         )
     if "provider_termination_evidence_invalid" in reason_set:
         requirements.append(
-            "provider termination ledger with matching event, packet digest, masses and explicit threshold or releasable-inventory basis"
+            "provider termination ledger with matching event, packet digest, masses and the family-specific stopping-rule fields"
+        )
+    if "emergency_relief_provider_termination_evidence_not_supplied" in reason_set:
+        requirements.append(
+            "emergency-relief provider evidence with event_kind, source_operator, setpoint, capacity, sampled termination history, and discharge_complete=true"
         )
     if "two_sided_provider_termination_evidence_not_supplied" in reason_set:
         requirements.append(

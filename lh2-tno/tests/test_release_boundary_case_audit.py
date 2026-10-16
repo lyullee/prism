@@ -398,6 +398,70 @@ def test_case_audit_accepts_provider_owned_reviewed_isolation_evidence():
     assert result["residual_closure_basis"] == "reviewed_isolation_success"
 
 
+def test_case_audit_accepts_emergency_relief_only_with_relief_specific_evidence():
+    case = _case("emergency-relief")
+    row = _ledger_row("emergency-relief", basis="emergency_relief_discharge")
+    evidence = {
+        "rows": [{
+            "event_id": "emergency-relief",
+            "provider_result_digest": "result",
+            "termination_basis": "emergency_relief_discharge",
+            "event_kind": "emergency_relief",
+            "source_operator": "equipment_emergency_relief",
+            "failure_opening_diameter_m": None,
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "duration_s": 0.5,
+            "termination_history_sample_count": 10,
+            "relief_setpoint_pa": 102000.0,
+            "relief_capacity_kg_s": 0.5,
+            "discharge_complete": True,
+            "termination_provenance": "provider relief setpoint reached and discharge ended",
+            "max_abs_mass_residual_kg": 0.0,
+        }],
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "VALID"
+    assert result["provider_termination_evidence_used"] is True
+    assert result["residual_closure_basis"] == "emergency_relief_discharge"
+    assert result["release_boundary_blocking_reasons"] == []
+    assert result["strict_release_boundary_eligible"] is True
+
+
+def test_case_audit_keeps_emergency_relief_open_without_relief_specific_evidence():
+    case = _case("emergency-relief-open")
+    row = _ledger_row("emergency-relief-open", basis="emergency_relief_discharge")
+    evidence = {
+        "rows": [{
+            "event_id": "emergency-relief-open",
+            "provider_result_digest": "result",
+            "termination_basis": "emergency_relief_discharge",
+            "event_kind": "emergency_relief",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "duration_s": 0.5,
+            "max_abs_mass_residual_kg": 0.0,
+        }],
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "INVALID"
+    assert result["strict_release_boundary_eligible"] is False
+    assert "provider_termination_evidence_invalid" in result[
+        "release_boundary_blocking_reasons"
+    ]
+    assert "provider_termination_evidence_source_operator_is_emergency_relief" in result[
+        "provider_termination_evidence_blocking_reasons"
+    ]
+
+
 def test_case_audit_accepts_paired_two_sided_provider_evidence():
     case = _case("two-sided")
     case["provider_packet_identity"]["provider_result_digests"] = ["left", "right"]

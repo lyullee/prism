@@ -129,11 +129,33 @@ def _storage_rows(catalog_dir: Path) -> tuple[list[dict[str, Any]], list[str]]:
                     row: dict[str, Any] = {
                         "event_id": event_id,
                         "component_id": data.get("component_id") or packet.get("component_id"),
+                        "event_kind": data.get("event_kind"),
+                        "source_operator": data.get("source_operator") or provider_meta.get("source_operator"),
                         "provider_result_digest": digest,
                         "termination_basis": termination_basis,
                         "available_mass_kg": data.get("available_mass_kg"),
                         "cumulative_mass_out_kg": data.get("cumulative_mass_out_kg"),
                         "duration_s": data.get("duration_s") or verification.get("duration_s"),
+                        "termination_provenance": data.get("termination_provenance"),
+                        "termination_history_sample_count": (
+                            len(data.get("steps"))
+                            if isinstance(data.get("steps"), list)
+                            else 0
+                        ),
+                        "failure_opening_diameter_m": data.get("failure_opening_diameter_m"),
+                        "relief_setpoint_pa": (
+                            data.get("relief_setpoint_pa")
+                            or provider_meta.get("relief_setpoint_pa")
+                        ),
+                        "relief_capacity_kg_s": (
+                            data.get("relief_capacity_kg_s")
+                            or provider_meta.get("relief_capacity_kg_s")
+                        ),
+                        "discharge_complete": (
+                            data.get("discharge_complete")
+                            if data.get("discharge_complete") is not None
+                            else provider_meta.get("discharge_complete")
+                        ),
                         "operator_limited": False,
                         "physical_validation_claim": verification.get("physical_validation_claim") is True,
                         "source": {
@@ -196,10 +218,18 @@ def _storage_rows(catalog_dir: Path) -> tuple[list[dict[str, Any]], list[str]]:
             row = {
                 "event_id": event_id,
                 "component_id": packet.get("component_id"),
+                "event_kind": meta.get("event_kind"),
+                "source_operator": meta.get("source_operator"),
                 "provider_result_digest": digest,
                 "termination_basis": meta.get("termination_basis"),
                 "available_mass_kg": meta.get("available_mass_kg"),
                 "cumulative_mass_out_kg": meta.get("cumulative_mass_out_kg"),
+                "termination_provenance": meta.get("termination_provenance"),
+                "termination_history_sample_count": meta.get("termination_history_sample_count", 0),
+                "failure_opening_diameter_m": meta.get("failure_opening_diameter_m"),
+                "relief_setpoint_pa": meta.get("relief_setpoint_pa"),
+                "relief_capacity_kg_s": meta.get("relief_capacity_kg_s"),
+                "discharge_complete": meta.get("discharge_complete"),
                 "threshold_mass_kg": meta.get("threshold_mass_kg"),
                 "remaining_mass_kg": meta.get("remaining_mass_kg"),
                 "max_abs_mass_residual_kg": meta.get("max_abs_mass_residual_kg"),

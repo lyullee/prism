@@ -121,6 +121,47 @@ def test_catalog_reads_native_isolation_and_two_sided_set_artifacts(tmp_path):
     assert rows["native/set"]["provider_result_digests"] == ["left", "right"]
 
 
+def test_catalog_preserves_relief_specific_termination_fields(tmp_path):
+    (tmp_path / "resolved_release.json").write_text(json.dumps({
+        "provider_export_schema": "prism.resolved_release.v1",
+        "event_id": "native/relief",
+        "component_id": "relief-1",
+        "provider_result_digest": "relief-result",
+    }), encoding="utf-8")
+    (tmp_path / "verification.json").write_text(json.dumps({
+        "provider_result_digest": "relief-result",
+        "physical_validation_claim": False,
+        "mass_residual_kg": 0.0,
+    }), encoding="utf-8")
+    (tmp_path / "provider_response.json").write_text(json.dumps({
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "data": {
+            "event_id": "native/relief",
+            "component_id": "relief-1",
+            "event_kind": "emergency_relief",
+            "source_operator": "equipment_emergency_relief",
+            "termination_basis": "emergency_relief_discharge",
+            "termination_provenance": "relief setpoint reached",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "duration_s": 0.5,
+            "relief_setpoint_pa": 102000.0,
+            "relief_capacity_kg_s": 0.5,
+            "discharge_complete": True,
+            "steps": [{"time_s": 0.0}, {"time_s": 0.25}],
+            "provider_meta": {},
+        },
+    }), encoding="utf-8")
+    report = build_provider_termination_evidence_catalog(storage_catalog_dir=tmp_path)
+    row = report["rows"][0]
+    assert row["event_kind"] == "emergency_relief"
+    assert row["source_operator"] == "equipment_emergency_relief"
+    assert row["termination_history_sample_count"] == 2
+    assert row["relief_setpoint_pa"] == 102000.0
+    assert row["relief_capacity_kg_s"] == 0.5
+    assert row["discharge_complete"] is True
+
+
 def test_catalog_accepts_multiple_storage_directories(tmp_path):
     first = tmp_path / "first" / "events" / "one"
     second = tmp_path / "second" / "events" / "two"

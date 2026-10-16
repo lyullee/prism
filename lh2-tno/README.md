@@ -229,6 +229,15 @@ The supported termination bases include:
 - `emergency_relief_discharge`
 - `synthetic_diagnostic_horizon` (diagnostic horizon only)
 
+`emergency_relief_discharge` has a dedicated release-boundary contract. A
+provider must identify the event as `emergency_relief`, use the
+`equipment_emergency_relief` source operator, preserve a sampled termination
+history, and provide the relief setpoint, capacity, explicit completion event,
+termination provenance, and mass-residual evidence. A relief device is never
+represented by an inferred random-hole diameter. The current synthetic
+VentStack G1 packet intentionally remains open because those qualification
+fields are absent. See the [emergency-relief boundary contract](docs/PRISM_emergency_relief_boundary_contract_en.md).
+
 ## Frequency binding
 
 Frequency is a separate, explicit `FrequencyPlan` input. The normal matching key is:
@@ -292,6 +301,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
 - [HAZOP-to-facility campaign manifest and CLI](docs/PRISM_HAZOP_facility_campaign_manifest_en.md)
 - [Equipment-twin to HAZOP mode handoff](docs/PRISM_equipment_to_hazop_mode_handoff_en.md)
+- [Emergency-relief release-boundary contract](docs/PRISM_emergency_relief_boundary_contract_en.md)
 - [Korean user manual](docs/PRISM_USER_MANUAL_ko.md)
 - [Korean interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)
 - [Korean README](README_ko.md)
