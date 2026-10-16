@@ -130,11 +130,105 @@ def _branch_binding(bridge: Mapping[str, Any], annual_condition_id: str) -> dict
     }
 
 
+def _frequency_uncertainty(
+    bridge: Mapping[str, Any],
+    frequency_scenarios_record: Mapping[str, Any],
+    known_ir: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Reweight the selected atom only across declared literature scenarios.
+
+    The generic catalogue marks the selected ambient-vaporizer asset as
+    ``fixed`` in its low/high scenarios.  That is a valid sensitivity ledger,
+    but it is not a marginal p05/p95 confidence interval.  Missing bounds stay
+    explicitly unavailable.
+    """
+    selected_atom = None
+    for component in bridge.get("components", {}).values():
+        if not isinstance(component, Mapping):
+            continue
+        for branch in component.get("branches", ()):  # selected component only
+            if isinstance(branch, Mapping):
+                risk = branch.get("risk")
+                if isinstance(risk, Mapping) and isinstance(risk.get("risk_atom"), Mapping):
+                    selected_atom = risk["risk_atom"]
+                    break
+        if selected_atom is not None:
+            break
+    if not isinstance(selected_atom, Mapping):
+        raise ValueError("bridge has no selected risk atom for frequency sensitivity")
+    central = float(selected_atom.get("initiating_frequency_per_year"))
+    asset_id = str(selected_atom.get("asset_id") or "")
+    p05 = selected_atom.get("frequency_p05_per_year")
+    p95 = selected_atom.get("frequency_p95_per_year")
+    scenarios = frequency_scenarios_record.get("scenarios")
+    if not isinstance(scenarios, list) or not scenarios:
+        raise ValueError("frequency scenario record must contain scenarios")
+    rows: list[dict[str, Any]] = []
+    for scenario in scenarios:
+        if not isinstance(scenario, Mapping):
+            continue
+        scenario_id = str(scenario.get("id") or "")
+        asset_quantiles = scenario.get("asset_quantiles")
+        basis = asset_quantiles.get(asset_id) if isinstance(asset_quantiles, Mapping) else None
+        scenario_frequency = None
+        status = "WITHHELD_MISSING_MARGINAL_FREQUENCY_BOUND"
+        if basis in {"published", "fixed"}:
+            scenario_frequency = central
+            status = "FIXED_CATALOGUE_RATE_SCENARIO"
+        elif basis == "p05" and isinstance(p05, (int, float)):
+            scenario_frequency = float(p05)
+            status = "PUBLISHED_MARGINAL_P05_SCENARIO"
+        elif basis == "p95" and isinstance(p95, (int, float)):
+            scenario_frequency = float(p95)
+            status = "PUBLISHED_MARGINAL_P95_SCENARIO"
+        row: dict[str, Any] = {
+            "id": scenario_id,
+            "asset_id": asset_id,
+            "asset_quantile_basis": basis,
+            "status": status,
+            "annual_frequency_per_year": scenario_frequency,
+            "frequency_is_not_inferred": True,
+        }
+        if scenario_frequency is not None:
+            scale = scenario_frequency / central if central > 0.0 else 0.0
+            row["annual_ir_low_high"] = {
+                str(receptor_id): [float(value) * scale for value in endpoints]
+                for receptor_id, endpoints in known_ir.items()
+                if isinstance(endpoints, (list, tuple)) and len(endpoints) == 2
+            }
+        else:
+            row["annual_ir_low_high"] = None
+        rows.append(row)
+    return {
+        "schema_version": "prism.facility_frequency_sensitivity.v1",
+        "event_id": selected_atom.get("event_id"),
+        "asset_id": asset_id,
+        "central_frequency_per_year": central,
+        "marginal_p05_per_year": p05,
+        "marginal_p95_per_year": p95,
+        "status": (
+            "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE"
+            if all(row["annual_frequency_per_year"] is not None for row in rows)
+            else "LITERATURE_SCENARIO_SENSITIVITY_PARTIAL"
+        ),
+        "facility_credible_interval": False,
+        "frequency_inference_performed": False,
+        "sensor_frequency_learning_used": False,
+        "rows": rows,
+        "interpretation": (
+            "Declared catalogue scenario reweighting only. Fixed low/high rates "
+            "do not constitute marginal p05/p95 uncertainty bounds or a statistical "
+            "confidence interval."
+        ),
+    }
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     from lh2_tno.hazop_campaign import build_hazop_facility_campaign_result
 
     bridge = _object(args.bridge)
     conditions = _annual_conditions(_object(args.annual_conditions))
+    frequency_scenarios_record = _object(args.frequency_scenarios)
     condition_id = str(conditions[0]["id"])
     binding = _branch_binding(bridge, condition_id)
     component_ids = sorted(str(component_id) for component_id in bridge["components"])
@@ -150,6 +244,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     result["input_evidence"] = {
         "bridge": str(args.bridge),
         "annual_conditions": str(args.annual_conditions),
+        "frequency_scenarios": str(args.frequency_scenarios),
         "annual_condition_id": condition_id,
         "annual_condition_provenance": conditions[0].get("provenance"),
         "population_provenance": [
@@ -158,6 +253,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             if isinstance(row, Mapping)
         ],
     }
+    ledger = result.get("facility_ledger")
+    known_ir = (
+        ledger.get("known_contribution_annual_ir_low_high")
+        if isinstance(ledger, Mapping)
+        else {}
+    )
+    result["frequency_uncertainty"] = _frequency_uncertainty(
+        bridge,
+        frequency_scenarios_record,
+        known_ir if isinstance(known_ir, Mapping) else {},
+    )
     result["facility_campaign_handoff_audit"] = {
         "status": "FACILITY_CAMPAIGN_HANDOFF_EXECUTED_DIAGNOSTIC",
         "declared_component_count": len(component_ids),
@@ -192,6 +298,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bridge", type=Path, default=ROOT / "examples/inspection_center_facility_hazop_bridge.json")
     parser.add_argument("--annual-conditions", type=Path, default=ROOT / "results/20261009/generic_full_scope_worklist/campaign_result.json")
+    parser.add_argument("--frequency-scenarios", type=Path, default=ROOT / "results/20261110/native_full_scope_frequency_assessment_latest2/frequency_scenarios.json")
     parser.add_argument("--output", type=Path, default=ROOT / "examples/inspection_center_facility_campaign_handoff.json")
     args = parser.parse_args()
     try:

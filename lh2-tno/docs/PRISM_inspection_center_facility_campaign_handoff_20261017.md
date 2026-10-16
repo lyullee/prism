@@ -42,6 +42,14 @@ The latest replay shows:
 | Facility total annual IR/F-N | withheld (`null`) |
 | Provider packet qualification | 0 qualified cases; diagnostic model prediction |
 
+The handoff also records the frequency-scenario ledger for the selected
+`ambient-vaporizer/G3` event. The central, low, and high catalogue scenarios
+all carry the published/fixed rate of `1.0e-3 per year` for this asset, so the
+three reweighted IR rows are identical in this diagnostic replay. The record
+explicitly reports `marginal_p05_per_year=null` and
+`marginal_p95_per_year=null`: fixed catalogue scenarios are sensitivity cases,
+not a statistical confidence interval.
+
 The annual-condition file is treated as evidence input and its provenance is
 copied into the handoff. The script does not create population, weather,
 frequency, release duration, isolation, or inventory values. The facility

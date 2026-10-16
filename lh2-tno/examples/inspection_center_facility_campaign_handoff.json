@@ -7706,11 +7706,69 @@
   "input_evidence": {
     "bridge": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\inspection_center_facility_hazop_bridge.json",
     "annual_conditions": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261009\\generic_full_scope_worklist\\campaign_result.json",
+    "frequency_scenarios": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261110\\native_full_scope_frequency_assessment_latest2\\frequency_scenarios.json",
     "annual_condition_id": "synthetic-west-3ms",
     "annual_condition_provenance": "synthetic single outdoor weather/population condition",
     "population_provenance": [
       "synthetic demonstration receptor; not site occupancy data"
     ]
+  },
+  "frequency_uncertainty": {
+    "schema_version": "prism.facility_frequency_sensitivity.v1",
+    "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+    "asset_id": "ambient-vaporizer",
+    "central_frequency_per_year": 0.001,
+    "marginal_p05_per_year": null,
+    "marginal_p95_per_year": null,
+    "status": "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE",
+    "facility_credible_interval": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "rows": [
+      {
+        "id": "native-full-scope-literature-central",
+        "asset_id": "ambient-vaporizer",
+        "asset_quantile_basis": "published",
+        "status": "FIXED_CATALOGUE_RATE_SCENARIO",
+        "annual_frequency_per_year": 0.001,
+        "frequency_is_not_inferred": true,
+        "annual_ir_low_high": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "id": "native-full-scope-literature-low",
+        "asset_id": "ambient-vaporizer",
+        "asset_quantile_basis": "fixed",
+        "status": "FIXED_CATALOGUE_RATE_SCENARIO",
+        "annual_frequency_per_year": 0.001,
+        "frequency_is_not_inferred": true,
+        "annual_ir_low_high": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "id": "native-full-scope-literature-high",
+        "asset_id": "ambient-vaporizer",
+        "asset_quantile_basis": "fixed",
+        "status": "FIXED_CATALOGUE_RATE_SCENARIO",
+        "annual_frequency_per_year": 0.001,
+        "frequency_is_not_inferred": true,
+        "annual_ir_low_high": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "interpretation": "Declared catalogue scenario reweighting only. Fixed low/high rates do not constitute marginal p05/p95 uncertainty bounds or a statistical confidence interval."
   },
   "facility_campaign_handoff_audit": {
     "status": "FACILITY_CAMPAIGN_HANDOFF_EXECUTED_DIAGNOSTIC",

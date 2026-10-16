@@ -5312,5 +5312,13 @@
   "inspection_center_facility_campaign_handoff_frequency_inference_performed": false,
   "inspection_center_facility_campaign_handoff_sensor_frequency_learning_used": false,
   "inspection_center_facility_campaign_handoff_physical_validation_claim": false,
-  "inspection_center_facility_campaign_handoff_interpretation": "The selected supply HAZOP branch crosses an explicit outdoor weather/population handoff; receiving and standby remain WITHHELD_NORMAL, and the partial facility ledger records a conditional contribution without annual facility IR/F-N promotion."
+  "inspection_center_facility_campaign_handoff_interpretation": "The selected supply HAZOP branch crosses an explicit outdoor weather/population handoff; receiving and standby remain WITHHELD_NORMAL, and the partial facility ledger records a conditional contribution without annual facility IR/F-N promotion.",
+  "inspection_center_facility_campaign_handoff_frequency_uncertainty_schema": "prism.facility_frequency_sensitivity.v1",
+  "inspection_center_facility_campaign_handoff_frequency_uncertainty_status": "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE",
+  "inspection_center_facility_campaign_handoff_frequency_uncertainty_record": "examples/inspection_center_facility_campaign_handoff.json",
+  "inspection_center_facility_campaign_handoff_frequency_scenario_count": 3,
+  "inspection_center_facility_campaign_handoff_frequency_central_per_year": 0.001,
+  "inspection_center_facility_campaign_handoff_frequency_marginal_p05_per_year": null,
+  "inspection_center_facility_campaign_handoff_frequency_marginal_p95_per_year": null,
+  "inspection_center_facility_campaign_handoff_frequency_interpretation": "Central, low, and high catalogue scenarios are explicit fixed-rate sensitivity cases for ambient-vaporizer/G3; no marginal p05/p95 interval or statistical confidence claim is made."
 }
