@@ -1,0 +1,78 @@
+{
+  "schema_version": "prism.slabx_lh2_ffi_test6_actual_source_refinement.v1",
+  "scope": "actual FFI Test 6 HorizontalJet source; no sensor fitting",
+  "source": {
+    "rate_kg_s": 0.8317,
+    "nozzle_diameter_m": 0.0254,
+    "liquid_mass_fraction": 0.559,
+    "height_m": 0.5,
+    "duration_s": 120.0,
+    "temperature_K": 20.37
+  },
+  "levels": [
+    {
+      "n_field_steps": 640,
+      "H2_vol_pct_at_30_m": 3.6276837848848276,
+      "centre_height_m_at_30_m": 1.634143578844569,
+      "cloud_depth_m_at_30_m": 7.937039925910487,
+      "temperature_K_at_30_m": 269.5126463613253,
+      "sensor_count": 30,
+      "MAE_vol_pct": 1.6442353644106773,
+      "RMSE_vol_pct": 4.482981734949563,
+      "LFL_observed": 6,
+      "LFL_predicted": 3,
+      "TP": 3,
+      "FN": 3,
+      "FP": 0,
+      "elapsed_s": 11.050807599996915
+    },
+    {
+      "n_field_steps": 1280,
+      "H2_vol_pct_at_30_m": 3.0538446382823414,
+      "centre_height_m_at_30_m": 1.2376232729531937,
+      "cloud_depth_m_at_30_m": 8.240100719928428,
+      "temperature_K_at_30_m": 270.47661533161187,
+      "sensor_count": 30,
+      "MAE_vol_pct": 1.558589784248054,
+      "RMSE_vol_pct": 4.469146142795594,
+      "LFL_observed": 6,
+      "LFL_predicted": 3,
+      "TP": 3,
+      "FN": 3,
+      "FP": 0,
+      "elapsed_s": 19.656836500013014
+    },
+    {
+      "n_field_steps": 2560,
+      "H2_vol_pct_at_30_m": 2.554647286065095,
+      "centre_height_m_at_30_m": 0.9704874222478265,
+      "cloud_depth_m_at_30_m": 8.583174324661348,
+      "temperature_K_at_30_m": 271.28604517658925,
+      "sensor_count": 30,
+      "MAE_vol_pct": 1.5871863656791156,
+      "RMSE_vol_pct": 4.472376097549032,
+      "LFL_observed": 6,
+      "LFL_predicted": 2,
+      "TP": 2,
+      "FN": 4,
+      "FP": 0,
+      "elapsed_s": 47.09595309998258
+    },
+    {
+      "n_field_steps": 5120,
+      "H2_vol_pct_at_30_m": 2.211975293961168,
+      "centre_height_m_at_30_m": 0.8205368553968556,
+      "cloud_depth_m_at_30_m": 8.857201461216617,
+      "temperature_K_at_30_m": 271.83204860464247,
+      "sensor_count": 30,
+      "MAE_vol_pct": 1.6427185987513304,
+      "RMSE_vol_pct": 4.483088483228325,
+      "LFL_observed": 6,
+      "LFL_predicted": 0,
+      "TP": 0,
+      "FN": 6,
+      "FP": 0,
+      "elapsed_s": 72.90316839999286
+    }
+  ]
+}
