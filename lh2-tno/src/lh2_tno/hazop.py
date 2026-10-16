@@ -799,7 +799,6 @@ def run_hazop_facility_runtime(
                 provider_template=provider_template,
                 provider_component_id=provider_component_id,
             )
-            frequency = getattr(binding, "frequency_binding", None)
             branch_rows: list[dict[str, Any]] = []
             for branch in branch_result["branches"]:
                 branch_copy = dict(branch)
@@ -807,6 +806,11 @@ def run_hazop_facility_runtime(
                 # so the downstream facility handoff cannot lose the HAZOP
                 # context.
                 branch_copy["operating_mode"] = selection.get("operating_mode")
+                from .service import _scenario_frequency_binding
+
+                frequency = _scenario_frequency_binding(
+                    binding, branch_copy.get("scenario_id")
+                )
                 branch_result_row = branch_copy.get("result")
                 consequence = (
                     branch_result_row.get("consequence")
@@ -831,6 +835,24 @@ def run_hazop_facility_runtime(
                             "risk": risk,
                         })
                 branch_copy["risk"] = risk
+                branch_copy["frequency_binding"] = (
+                    {
+                        "status": "BOUND",
+                        "event_id": frequency.event_id,
+                        "source_digest": frequency.source_digest,
+                    }
+                    if frequency is not None
+                    else {
+                        "status": (
+                            "WITHHELD_MISSING_SCENARIO_BINDING"
+                            if getattr(binding, "scenario_frequency_bindings", None)
+                            is not None
+                            else "WITHHELD_MISSING_COMPONENT_BINDING"
+                        ),
+                        "event_id": None,
+                        "source_digest": None,
+                    }
+                )
                 branch_rows.append(branch_copy)
             components[component_id] = {
                 "status": branch_result["status"],

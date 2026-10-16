@@ -105,6 +105,33 @@ Compare the state value and operating mode with the HAZOP row. Preserve the sele
 
 HAZOP selection is a qualitative decision. It does not create or update an annual initiating frequency.
 
+### 4.1 Multiple active HAZOP branches
+
+If the same runtime frame activates more than one reviewed HAZOP row, bind the
+literature rates by the exact scenario ID. Do not put one component-level rate
+on all branches:
+
+```python
+FacilityRealtimeBinding(
+    component_id="storage-tank-01",
+    template=template,
+    monitor=monitor,
+    normalizer=normalizer,
+    pressure_tag="PT-01",
+    temperature_tag="TT-01",
+    scenario_frequency_bindings={
+        "TK01-receiving-vessel-hole:receiving:vessel_hole": vessel_frequency,
+        "TK01-receiving-liquid-two-phase:receiving:liquid_two_phase": liquid_frequency,
+    },
+)
+```
+
+Each provider resolver remains keyed by `(component_id, scenario_id)`. The
+runtime result echoes the selected branch's frequency event ID and source
+digest. If a selected scenario has no exact frequency entry, its risk atom is
+withheld and the branch is reported as
+`WITHHELD_MISSING_SCENARIO_BINDING`; no frequency is inferred from telemetry.
+
 ## 5. Provider release contract
 
 The provider response must identify the event, component, accident port, source digest, release intervals, inventory, and termination evidence.

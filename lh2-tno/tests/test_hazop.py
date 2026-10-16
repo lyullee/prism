@@ -464,6 +464,90 @@ def test_facility_runtime_collects_component_branch_and_withholds_annual_qra():
     assert result["policy"]["facility_annual_qra_promotion"] is False
 
 
+def test_facility_runtime_binds_frequency_per_hazop_branch_without_cross_reuse():
+    table = _gate_table()
+    extra = dict(table["rows"][0])
+    extra["id"] = "TK01-liquid-branch-receiving"
+    extra["scenario_family"] = "liquid_two_phase"
+    table["rows"].append(extra)
+    selection = evaluate_hazop_runtime_frame(
+        table, _runtime_frame_for_gate(), now_s=3.2
+    )
+    scenarios = selection["selected_scenarios"]
+    assert len(scenarios) == 2
+    from lh2_tno.service import RealtimeFrequencyBinding
+
+    def frequency(event_id, rate):
+        return RealtimeFrequencyBinding(
+            event_id=event_id,
+            asset_id="TK-01",
+            initiating_frequency_per_year=rate,
+            annual_condition_probability=1.0,
+            release_branch_probability=1.0,
+            occupancy_probability=1.0,
+            provenance="reviewed branch frequency fixture",
+            source_digest=(event_id.encode().hex() + "0" * 64)[:64],
+        )
+
+    frequencies = {
+        scenarios[0]["scenario_id"]: frequency("event-vessel", 1.0e-4),
+        scenarios[1]["scenario_id"]: frequency("event-liquid", 2.0e-4),
+    }
+    binding = SimpleNamespace(
+        template=object(),
+        monitor=_FakeMonitor(_provider_request()),
+        scenario_frequency_bindings=frequencies,
+    )
+    def resolver_for(scenario):
+        basis = (
+            "inventory_depletion"
+            if scenario["scenario_family"] == "liquid_two_phase"
+            else "model_pressure_equalization"
+        )
+        return lambda template, normalized, basis=basis: _provider_request(
+            source_operator="equipment_liquid_release", basis=basis
+        )
+
+    resolvers = {
+        ("TK-01", scenario["scenario_id"]): resolver_for(scenario)
+        for scenario in scenarios
+    }
+    result = run_hazop_facility_runtime(
+        table,
+        {"TK-01": _runtime_frame_for_gate()},
+        now_s=3.2,
+        component_bindings={"TK-01": binding},
+        release_resolvers=resolvers,
+    )
+    branches = result["components"]["TK-01"]["branches"]
+    assert len(branches) == 2
+    assert {
+        branch["frequency_binding"]["event_id"] for branch in branches
+    } == {"event-vessel", "event-liquid"}
+    assert all(branch["frequency_binding"]["status"] == "BOUND" for branch in branches)
+
+    partial = run_hazop_facility_runtime(
+        table,
+        {"TK-01": _runtime_frame_for_gate()},
+        now_s=3.2,
+        component_bindings={
+            "TK-01": SimpleNamespace(
+                template=object(),
+                monitor=_FakeMonitor(_provider_request()),
+                scenario_frequency_bindings={
+                    scenarios[0]["scenario_id"]: frequencies[scenarios[0]["scenario_id"]]
+                },
+            )
+        },
+        release_resolvers=resolvers,
+    )
+    partial_statuses = {
+        branch["frequency_binding"]["status"]
+        for branch in partial["components"]["TK-01"]["branches"]
+    }
+    assert "WITHHELD_MISSING_SCENARIO_BINDING" in partial_statuses
+
+
 def test_realtime_facility_monitor_hazop_bridge_preserves_mode_and_fail_closed_qra(tmp_path):
     from lh2_tno.provider_release import build_consequence_request_from_provider_release
     from lh2_tno.service import (

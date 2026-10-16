@@ -198,13 +198,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             for scenario in scenario_by_id.values()
             if str(scenario.get("component_id")) == component_id
         ]
-        if len(selected) > 1:
+        selected_ids = [str(scenario.get("scenario_id")) for scenario in selected]
+        provider_rows = [provider_by_scenario.get(scenario_id) for scenario_id in selected_ids]
+        provider_rows = [row for row in provider_rows if row is not None]
+        provider_component_ids = {
+            str(row["provider_component_id"])
+            for row in provider_rows
+            if row.get("provider_component_id") is not None
+        }
+        if len(provider_component_ids) > 1:
             raise ValueError(
-                f"multiple selected HAZOP scenarios for component {component_id}; explicit branch probabilities are required"
+                f"selected HAZOP scenarios for component {component_id} map to different provider components; "
+                "split the facility binding before execution"
             )
-        scenario = selected[0] if selected else None
-        scenario_id = str(scenario.get("scenario_id")) if scenario else ""
-        provider_row = provider_by_scenario.get(scenario_id)
+        provider_component_id = next(iter(provider_component_ids), None)
         template_data = copy.deepcopy(template_payload)
         template_data["component_id"] = component_id
         template = ConsequenceRequest.model_validate_json(
@@ -219,11 +226,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             normalizer=_RuntimeNormalizer(),
             pressure_tag="pressure",
             temperature_tag="temperature",
-            frequency_binding=frequency_by_scenario.get(scenario_id),
-            provider_component_id=(
-                str(provider_row["provider_component_id"])
-                if provider_row is not None else None
+            frequency_binding=(
+                frequency_by_scenario.get(selected_ids[0])
+                if len(selected_ids) == 1 else None
             ),
+            scenario_frequency_bindings=(
+                {
+                    scenario_id: frequency_by_scenario[scenario_id]
+                    for scenario_id in selected_ids
+                    if scenario_id in frequency_by_scenario
+                }
+                if len(selected_ids) > 1 else None
+            ),
+            provider_component_id=provider_component_id,
         )
 
     result = run_hazop_facility_runtime(

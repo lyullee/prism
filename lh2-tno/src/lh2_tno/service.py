@@ -1049,6 +1049,10 @@ class FacilityRealtimeBinding:
     release_resolver: Callable | None = None
     ambient_pressure_pa: float | None = None
     frequency_binding: RealtimeFrequencyBinding | None = None
+    # Optional exact literature bindings for multiple active HAZOP branches.
+    # When supplied, an unmatched scenario is withheld rather than inheriting
+    # the component-level frequency.
+    scenario_frequency_bindings: Mapping[str, RealtimeFrequencyBinding] | None = None
     # Optional explicit identity used only at the provider handoff.  HAZOP
     # remains keyed by component_id; no name or geometry inference is allowed.
     provider_component_id: str | None = None
@@ -1187,6 +1191,29 @@ def _realtime_current_weather_risk(
         },
         "reason": "reviewed literature frequency was multiplied by provider consequence harm for the current weather frame",
     }
+
+
+def _scenario_frequency_binding(
+    binding: object,
+    scenario_id: object,
+) -> RealtimeFrequencyBinding | None:
+    """Resolve the literature rate for one selected HAZOP scenario.
+
+    A component-level ``frequency_binding`` remains supported for the common
+    one-scenario case. Once ``scenario_frequency_bindings`` is supplied, it is
+    authoritative: an unmatched branch is withheld instead of inheriting a
+    different scenario's initiating frequency.
+    """
+
+    scenario_map = getattr(binding, "scenario_frequency_bindings", None)
+    if scenario_map is not None:
+        if not isinstance(scenario_map, Mapping):
+            return None
+        key = str(scenario_id) if scenario_id is not None else ""
+        value = scenario_map.get(key)
+        return value if isinstance(value, RealtimeFrequencyBinding) else None
+    value = getattr(binding, "frequency_binding", None)
+    return value if isinstance(value, RealtimeFrequencyBinding) else None
 
 
 def _realtime_ignition_accounting(
@@ -1818,6 +1845,31 @@ class FacilityRealtimeConsequenceMonitor:
                         f"{event_id} ({previous_owner}, {key})"
                     )
                 frequency_event_owners[event_id] = key
+            scenario_frequency_bindings = getattr(
+                binding, "scenario_frequency_bindings", None
+            )
+            if scenario_frequency_bindings is not None:
+                if not isinstance(scenario_frequency_bindings, Mapping):
+                    raise TypeError(
+                        "scenario_frequency_bindings must be a mapping when supplied"
+                    )
+                for scenario_id, scenario_frequency in scenario_frequency_bindings.items():
+                    if not isinstance(scenario_id, str) or not scenario_id.strip():
+                        raise ValueError(
+                            "scenario_frequency_bindings keys must be nonempty strings"
+                        )
+                    if not isinstance(scenario_frequency, RealtimeFrequencyBinding):
+                        raise TypeError(
+                            "scenario_frequency_bindings values must be RealtimeFrequencyBinding"
+                        )
+                    event_id = scenario_frequency.event_id
+                    previous_owner = frequency_event_owners.get(event_id)
+                    if previous_owner is not None and previous_owner != key:
+                        raise ValueError(
+                            "one literature event cannot be bound to multiple realtime components: "
+                            f"{event_id} ({previous_owner}, {key})"
+                        )
+                    frequency_event_owners[event_id] = key
             if binding.ambient_pressure_pa is not None:
                 if (isinstance(binding.ambient_pressure_pa, bool)
                         or not isinstance(binding.ambient_pressure_pa, (int, float))

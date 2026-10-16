@@ -215,6 +215,13 @@ event_id + component_id + port_id + scenario_family + release_branch_id
 
 The plan records the citation, population or length basis, failure profile, units, applicability, uncertainty, and exclusions. A sensor anomaly count is not a frequency source unless a separate validated statistical study says so.
 
+When one live HAZOP frame selects more than one accident branch, use
+`FacilityRealtimeBinding.scenario_frequency_bindings` as an exact map from
+`scenario_id` to `RealtimeFrequencyBinding`. PRISM then reports each branch's
+event ID and source digest separately; a missing scenario key is withheld
+instead of reusing another branch's frequency. The single
+`frequency_binding` field remains the shorthand for one-branch components.
+
 ## Result status
 
 Results expose evidence status instead of hiding it:
