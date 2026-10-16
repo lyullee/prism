@@ -50,6 +50,7 @@ def test_reconstructed_three_component_facility_bridge_executes_selected_supply_
         provider_defaults_relief=ROOT / "examples/provider_emergency_relief_defaults.json",
         template=ROOT / "examples/equipment_consequence_template.json",
         backend_config=ROOT / "results/20261008/full_chain/backend_config.json",
+        operation_sequence_evidence=ROOT / "results/20261115/inspection_center_operation_sequence_evidence.json",
         now_s=43200.0,
         deadline_s=180.0,
         output=output,
@@ -84,6 +85,13 @@ def test_reconstructed_three_component_facility_bridge_executes_selected_supply_
     assert supply["selected_scenario_count"] == 1
     assert result["policy"]["operating_mode_taken_from_input"] is True
     assert result["facility_bridge_audit"]["operating_mode_inferred"] is False
+    sequence = result["input_evidence"]["operation_sequence_evidence"]
+    assert sequence["schema_version"] == "prism.inspection_center_operation_sequence_evidence.v1"
+    assert sequence["selected_row_count"] == 3
+    assert sequence["observed_relief_setpoint_candidate_pa"] == 650000.0
+    assert sequence["observed_operational_close_threshold_candidate_pa"] == 600000.0
+    assert sequence["release_boundary_closed"] is False
+    assert result["facility_bridge_audit"]["operation_sequence_evidence_bound"] is True
     mapping = result["facility_bridge_audit"]["explicit_provider_component_mapping"]
     assert mapping["observed_component_id"] == "lh2-supply-vaporizer-boundary"
     assert mapping["provider_component_id"] == "ambient-vaporizer-01"

@@ -111,6 +111,18 @@ def _facility_hazop_table(table_set: Mapping[str, Any]) -> dict[str, Any]:
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     started = time.perf_counter()
+    operation_sequence_evidence = None
+    operation_sequence_path = getattr(args, "operation_sequence_evidence", None)
+    if operation_sequence_path is not None:
+        operation_sequence_evidence = _object(Path(operation_sequence_path))
+        if operation_sequence_evidence.get("schema_version") != (
+            "prism.inspection_center_operation_sequence_evidence.v1"
+        ):
+            raise ValueError("operation sequence evidence has an unexpected schema")
+        if operation_sequence_evidence.get("promotion_gates", {}).get(
+            "release_boundary_closed", True
+        ):
+            raise ValueError("operation sequence evidence cannot claim a closed release boundary")
     runtime_frames_record = _object(args.runtime_frames)
     frame_rows = runtime_frames_record.get("frames")
     if not isinstance(frame_rows, list) or not frame_rows:
@@ -302,6 +314,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     "mapping_digest": canonical_digest(binding_audit),
                 },
                 "state_snapshot_handoff": state_snapshot_handoff,
+                "operation_sequence_evidence_bound": operation_sequence_evidence is not None,
                 "operating_mode_inferred": False,
                 "frequency_inference_performed": False,
                 "sensor_frequency_learning_used": False,
@@ -327,6 +340,28 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             ),
         }
     )
+    if operation_sequence_evidence is not None:
+        result["input_evidence"]["operation_sequence_evidence"] = {
+            "path": str(operation_sequence_path),
+            "schema_version": operation_sequence_evidence["schema_version"],
+            "status": operation_sequence_evidence.get("status"),
+            "source_sha256": operation_sequence_evidence.get("source", {}).get("sha256"),
+            "selected_row_count": operation_sequence_evidence.get("source", {}).get(
+                "row_count_selected"
+            ),
+            "observed_relief_setpoint_candidate_pa": operation_sequence_evidence.get(
+                "operating_sequence", {}
+            ).get("observed_relief_setpoint_candidate_pa"),
+            "observed_operational_close_threshold_candidate_pa": operation_sequence_evidence.get(
+                "operating_sequence", {}
+            ).get("observed_operational_close_threshold_candidate_pa"),
+            "release_boundary_closed": operation_sequence_evidence.get(
+                "promotion_gates", {}
+            ).get("release_boundary_closed"),
+            "frequency_applied": operation_sequence_evidence.get("promotion_gates", {}).get(
+                "frequency_applied"
+            ),
+        }
     _save(args.output, result)
     return result
 
@@ -346,6 +381,7 @@ def main() -> int:
     parser.add_argument("--provider-defaults-relief", type=Path, default=ROOT / "examples/provider_emergency_relief_defaults.json")
     parser.add_argument("--template", type=Path, default=ROOT / "examples/equipment_consequence_template.json")
     parser.add_argument("--backend-config", type=Path, default=ROOT / "results/20261008/full_chain/backend_config.json")
+    parser.add_argument("--operation-sequence-evidence", type=Path)
     parser.add_argument("--now-s", type=float, default=43200.0)
     parser.add_argument("--deadline-s", type=float, default=180.0)
     parser.add_argument("--output", type=Path, default=ROOT / "examples/inspection_center_facility_hazop_bridge.json")

@@ -193,6 +193,19 @@ exercises this coordinator end to end:
 python scripts/run_inspection_center_facility_hazop_bridge.py
 ```
 
+To bind the reviewed operation-sequence provenance to that diagnostic bridge,
+pass the screened sidecar explicitly:
+
+```powershell
+python scripts/run_inspection_center_facility_hazop_bridge.py `
+  --operation-sequence-evidence results/20261115/inspection_center_operation_sequence_evidence.json
+```
+
+The output then echoes the source digest and the 6.5/6.0 bar owner-review
+candidates under `input_evidence`. The bridge rejects a sidecar that claims a
+closed release boundary; it never turns the sequence into a provider packet or
+an annual facility QRA result.
+
 It sends receiving, standby, and supply frames as one batch. The first two
 remain `WITHHELD_HAZOP_NO_DEVIATION`; only the explicitly mapped supply
 vaporizer branch reaches the provider packet and SLABx-LH2/TNO consequence
