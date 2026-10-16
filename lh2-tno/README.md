@@ -32,7 +32,13 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,329 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,332 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+
+The latest IJHE readiness record is intentionally fail-closed: it reports the
+diagnostic chain and its conditional IR/F-N view, while withholding a formal
+facility-QRA claim until every release boundary has qualified provider evidence
+and independent validation. See the [English readiness audit](docs/PRISM_IJHE_latest_audit_20261115_en.md)
+for the current 44-case counts and open evidence requests.
 
 ## What PRISM is for
 
