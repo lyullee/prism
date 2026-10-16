@@ -9,12 +9,14 @@
 
 권위 감사 파일:
 
-[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json)
+[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json)
 
-현재 결과는 **53개 검사 중 48개 PASS, 5개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
-차단 검사에는 전체 방출 종료 경계, 실제 qualified provider packet, 선언 사고범위의 독립 물리검증, 시설 전체 IR/F-N, 44개 case의 exact qualified packet coverage가 포함된다.
+현재 최신 결과는 **45개 검사 중 41개 PASS, 4개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
+차단 검사는 전체 방출 종료 경계, 실제 qualified provider packet, 선언 사고범위의 provider/독립 물리검증, 시설 전체 IR/F-N이다. 44개 case의 exact packet coverage는 이 차단 사유를 뒷받침하는 세부 증거다.
 
 ## 최신 연결 결과
+
+The latest audit consumes the inspection-center facility handoff as a diagnostic-only check. Its 12 structural checks pass; it does not alter the four strict gates.
 
 | 확인 항목 | 결과 |
 |---|---:|
