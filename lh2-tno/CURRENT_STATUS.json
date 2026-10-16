@@ -5162,5 +5162,18 @@
   "inspection_center_timeseries_reviewed_unit_reaudit_sensor_frequency_learning_used": false,
   "inspection_center_timeseries_reviewed_unit_reaudit_provider_packet_created": false,
   "inspection_center_timeseries_reviewed_unit_reaudit_facility_qra_claim": false,
-  "inspection_center_timeseries_reviewed_unit_reaudit_interpretation": "A reviewed unit map confirms 166 numeric signal columns, but unresolved units, pressure basis, calibration/quality, and tag-to-asset mapping keep state snapshots and QRA promotion fail-closed."
+  "inspection_center_timeseries_reviewed_unit_reaudit_interpretation": "A reviewed unit map confirms 166 numeric signal columns, but unresolved units, pressure basis, calibration/quality, and tag-to-asset mapping keep state snapshots and QRA promotion fail-closed.",
+
+  "observed_unit_consistency_audit_implemented": true,
+  "observed_unit_consistency_audit_script": "scripts/audit_observed_unit_consistency.py",
+  "observed_unit_consistency_audit_module": "src/lh2_tno/observed_unit_consistency.py",
+  "observed_unit_consistency_audit_record": "examples/inspection_center_unit_consistency_audit.json",
+  "observed_unit_consistency_audit_status": "BLOCKED_UNIT_CONFLICT",
+  "observed_unit_consistency_audit_binding_count": 8,
+  "observed_unit_consistency_audit_matched_count": 1,
+  "observed_unit_consistency_audit_conflict_count": 2,
+  "observed_unit_consistency_audit_unreviewed_count": 5,
+  "observed_unit_consistency_state_snapshot_binding_allowed": false,
+  "observed_unit_consistency_interpretation": "Runtime manifest and reviewed procedure evidence disagree for PT1206 and PT1105A (MPa versus bar); no unit precedence or numeric-range inference is permitted, so state binding remains fail-closed."
+
 }
