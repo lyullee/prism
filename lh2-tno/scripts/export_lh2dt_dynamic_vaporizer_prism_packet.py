@@ -25,7 +25,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
     AccidentReleaseExportRequest,
+    InventoryReleaseExportRequest,
     export_equipment_gas_accident_history,
+    export_equipment_inventory_release_history,
 )
 from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
@@ -49,6 +51,55 @@ def _save(path: Path, value: object) -> None:
         json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
         encoding="utf-8",
     )
+
+
+def _annotate_inventory_depletion_response(
+    response: Mapping[str, Any], *, initial_mass_kg: float
+) -> dict[str, Any]:
+    """Expose the native positive-threshold stop without repairing the packet.
+
+    ``lh2dt`` owns the stop decision.  PRISM records the exact threshold,
+    final inventory and accounting residual so the release-boundary audit can
+    distinguish a real provider stop from a finite diagnostic horizon.
+    """
+
+    if not isinstance(response, Mapping) or not isinstance(response.get("data"), Mapping):
+        raise ValueError("native inventory response must contain an object data field")
+    data = dict(response["data"])
+    if not isinstance(data.get("provider_meta"), Mapping):
+        raise ValueError("native inventory response must contain provider_meta")
+    metadata = dict(data["provider_meta"])
+    try:
+        initial = float(initial_mass_kg)
+        final_mass = float(metadata["final_mass_kg"])
+        cumulative_mass = float(data["cumulative_mass_out_kg"])
+    except (KeyError, TypeError, ValueError) as error:
+        raise ValueError("native inventory response lacks finite mass ledger fields") from error
+    if (
+        not math.isfinite(initial)
+        or not math.isfinite(final_mass)
+        or not math.isfinite(cumulative_mass)
+        or initial <= 0.0
+        or final_mass < 0.0
+        or cumulative_mass < 0.0
+    ):
+        raise ValueError("native inventory response contains invalid mass ledger fields")
+    threshold_mass = max(initial * 1.0e-9, 1.0e-12)
+    metadata.update({
+        "available_mass_definition": (
+            "initial finite-volume inventory with explicit positive depletion threshold"
+        ),
+        "depletion_threshold_kg": threshold_mass,
+        "remaining_inventory_kg": final_mass,
+        "max_total_mass_residual_kg": abs(
+            initial - cumulative_mass - final_mass
+        ),
+        "termination_rule": "state.mass_kg <= max(initial_mass_kg*1e-9, 1e-12)",
+    })
+    data["provider_meta"] = metadata
+    result = dict(response)
+    result["data"] = data
+    return result
 
 
 def _request(*, source_digest: str, component_id: str, opening_diameter_m: float,
@@ -104,6 +155,7 @@ class DynamicVaporizerAccidentProvider:
                  maximum_heat_w: float, inlet_pressure_pa: float,
                  inlet_temperature_k: float, opening_diameter_m: float,
                  discharge_coefficient: float, stroke_time_s: float,
+                 termination_mode: str = "synthetic_horizon",
                  isolation_time_s: float | None = None,
                  post_isolation_observation_s: float | None = None) -> None:
         self.root = root.resolve()
@@ -121,6 +173,7 @@ class DynamicVaporizerAccidentProvider:
         self.opening_diameter_m = float(opening_diameter_m)
         self.discharge_coefficient = float(discharge_coefficient)
         self.stroke_time_s = float(stroke_time_s)
+        self.termination_mode = termination_mode
         self.isolation_time_s = (
             None if isolation_time_s is None else float(isolation_time_s)
         )
@@ -150,6 +203,10 @@ class DynamicVaporizerAccidentProvider:
             raise ValueError("dynamic vaporizer diagnostic inputs must be finite")
         if self.mode not in {"vaporizer", "reliquefier"}:
             raise ValueError("mode must be vaporizer or reliquefier")
+        if self.termination_mode not in {"synthetic_horizon", "inventory_depletion"}:
+            raise ValueError(
+                "termination_mode must be synthetic_horizon or inventory_depletion"
+            )
         if self.duration_s <= 0.0 or self.time_step_s <= 0.0:
             raise ValueError("diagnostic duration and time step must be positive")
         if self.isolation_time_s is None:
@@ -219,6 +276,45 @@ class DynamicVaporizerAccidentProvider:
             raise ValueError("dynamic gas-unit initial state must be gas-like")
         state = model.initialize(inlet)
         initial_mass = float(state.mass_kg)
+
+        if self.termination_mode == "inventory_depletion":
+            if self.isolation_time_s is not None:
+                raise ValueError(
+                    "inventory_depletion cannot be combined with an isolation command"
+                )
+            # Use the native finite-volume accident exporter.  The adapter
+            # below does not reinterpret its stopping rule; it only makes the
+            # provider's positive threshold and residual ledger explicit for
+            # PRISM's release-boundary audit.
+            native_response = model.export_accident_history({
+                "event_id": request["event_id"],
+                "component_id": request["component_id"],
+                "port_id": request["port_id"],
+                "source_pressure_pa_abs": self.inlet_pressure_pa,
+                "source_temperature_k": self.inlet_temperature_k,
+                "ambient_pressure_pa_abs": ambient_pressure,
+                "ambient_temperature_k": ambient_temperature,
+                "failure_opening_diameter_m": self.opening_diameter_m,
+                "horizon_s": self.duration_s,
+                "time_step_s": self.time_step_s,
+                "discharge_coefficient": self.discharge_coefficient,
+                "stroke_time_s": self.stroke_time_s,
+                "wall_temperature_k": self.inlet_temperature_k,
+                "provider_source_digest": request["provider_source_digest"],
+                "state_snapshot_digest": request["state_snapshot_digest"],
+            })
+            # These fields are a direct serialization of the stopping rule in
+            # lh2dt.DynamicVaporizer.export_accident_history.  Without this
+            # explicit declaration, PRISM must keep the packet unclosed.
+            response = _annotate_inventory_depletion_response(
+                native_response, initial_mass_kg=initial_mass
+            )
+            response["provider_state_snapshot_digest"] = request[
+                "state_snapshot_digest"
+            ]
+            response["provider_source_digest"] = request["provider_source_digest"]
+            return response
+
         area = math.pi * self.opening_diameter_m**2 / 4.0
         outlet_boundary = properties.from_pT(ambient_pressure, ambient_temperature)
         valve = StrokeLimitedCommandedValve(
@@ -407,17 +503,47 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
         "source_digest": source_digest,
     })
-    request = _request(
-        source_digest=source_digest, component_id=component_id,
-        opening_diameter_m=args.opening_diameter_m,
-        state_snapshot=state_snapshot,
-        height_m=args.nozzle_height_m, model_class=model_class,
-        model_revision=args.model_revision, mode=args.mode, event_id=args.event_id,
-        port_id=args.port_id,
-        horizon_s=args.duration_s if args.isolation_time_s is not None else 600.0,
-        isolation_time_s=args.isolation_time_s,
-        post_isolation_observation_s=args.post_isolation_observation_s,
-    )
+    if args.termination_mode == "inventory_depletion":
+        request = InventoryReleaseExportRequest.from_mapping({
+            "schema_version": "prism.equipment_inventory_export_request.v1",
+            "event_kind": "accidental_leak",
+            "component_id": component_id,
+            "port_id": args.port_id or f"{component_id}.accident-out",
+            "event_id": args.event_id or f"{component_id}/inventory-depletion",
+            "release_mode": "instantaneous_inventory",
+            "horizon_s": args.duration_s,
+            "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+            "direction_enu": [1.0, 0.0, 0.0],
+            "ambient_pressure_pa_abs": 101325.0,
+            "ambient_temperature_k": 288.15,
+            "provider_source_digest": source_digest,
+            "provider_boundary_reference": (
+                f"lh2dt {model_class} native finite-volume inventory outlet"
+            ),
+            "input_origin": "model_prediction",
+            "model_package": "lh2dt_models",
+            "model_class": model_class,
+            "model_revision": args.model_revision,
+            "state_snapshot_digest": state_snapshot.digest(),
+            "state_snapshot": state_snapshot.to_mapping(),
+            "evidence_status": "synthetic_diagnostic",
+            "scenario_provenance": (
+                f"explicit external {model_class} inventory-depletion diagnostic; not site-calibrated"
+            ),
+            "provider_termination_required": True,
+        })
+    else:
+        request = _request(
+            source_digest=source_digest, component_id=component_id,
+            opening_diameter_m=args.opening_diameter_m,
+            state_snapshot=state_snapshot,
+            height_m=args.nozzle_height_m, model_class=model_class,
+            model_revision=args.model_revision, mode=args.mode, event_id=args.event_id,
+            port_id=args.port_id,
+            horizon_s=args.duration_s if args.isolation_time_s is not None else 600.0,
+            isolation_time_s=args.isolation_time_s,
+            post_isolation_observation_s=args.post_isolation_observation_s,
+        )
     provider = DynamicVaporizerAccidentProvider(
         root, mode=args.mode, duration_s=args.duration_s,
         time_step_s=args.time_step_s, fluid_volume_m3=args.fluid_volume_m3,
@@ -431,15 +557,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         opening_diameter_m=args.opening_diameter_m,
         discharge_coefficient=args.discharge_coefficient,
         stroke_time_s=args.stroke_time_s,
+        termination_mode=args.termination_mode,
         isolation_time_s=args.isolation_time_s,
         post_isolation_observation_s=args.post_isolation_observation_s,
     )
-    result = export_equipment_gas_accident_history(provider, request)
+    if args.termination_mode == "inventory_depletion":
+        result = export_equipment_inventory_release_history(provider, request)
+    else:
+        result = export_equipment_gas_accident_history(provider, request)
     release = result.release.model_dump(mode="json")
     verification = {
         "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
         "provider_model": model_class,
         "mode": args.mode,
+        "termination_mode": args.termination_mode,
         "provider_result_digest": result.provider_result_digest,
         "state_snapshot": result.request.state_snapshot.to_mapping() if result.request.state_snapshot else None,
         "state_snapshot_handoff": {
@@ -484,6 +615,11 @@ def main() -> int:
     parser.add_argument("--lh2dt-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--mode", choices=("vaporizer", "reliquefier"), default="vaporizer")
+    parser.add_argument(
+        "--termination-mode", choices=("synthetic_horizon", "inventory_depletion"),
+        default="synthetic_horizon",
+        help="use the native positive-threshold inventory stop instead of a bounded diagnostic horizon",
+    )
     parser.add_argument("--duration-s", type=float, default=0.5)
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--fluid-volume-m3", type=float, default=0.01)

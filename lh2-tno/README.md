@@ -238,6 +238,12 @@ represented by an inferred random-hole diameter. The current synthetic
 VentStack G1 packet intentionally remains open because those qualification
 fields are absent. See the [emergency-relief boundary contract](docs/PRISM_emergency_relief_boundary_contract_en.md).
 
+For finite-volume vaporizer and reliquefier models, the native
+`inventory_depletion` exporter records the provider's positive stopping
+threshold and mass ledger. A bounded `inventory_over_600s` history is never
+silently relabeled as depletion; see the [native inventory-depletion export
+guide](docs/PRISM_native_inventory_depletion_export_en.md).
+
 ## Frequency binding
 
 Frequency is a separate, explicit `FrequencyPlan` input. The normal matching key is:
@@ -302,6 +308,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [HAZOP-to-facility campaign manifest and CLI](docs/PRISM_HAZOP_facility_campaign_manifest_en.md)
 - [Equipment-twin to HAZOP mode handoff](docs/PRISM_equipment_to_hazop_mode_handoff_en.md)
 - [Emergency-relief release-boundary contract](docs/PRISM_emergency_relief_boundary_contract_en.md)
+- [Native LH2 inventory-depletion export](docs/PRISM_native_inventory_depletion_export_en.md)
 - [Korean user manual](docs/PRISM_USER_MANUAL_ko.md)
 - [Korean interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)
 - [Korean README](README_ko.md)
