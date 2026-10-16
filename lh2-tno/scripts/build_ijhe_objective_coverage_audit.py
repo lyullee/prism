@@ -42,6 +42,7 @@ def main() -> int:
     parser.add_argument("--observed-state-replay-audit", type=Path)
     parser.add_argument("--observed-state-runtime-frames", type=Path)
     parser.add_argument("--observed-state-model-binding-audit", type=Path)
+    parser.add_argument("--inspection-center-source-inventory", type=Path)
     parser.add_argument("--external-field-evidence", type=Path)
     parser.add_argument("--external-field-model-comparison", type=Path)
     parser.add_argument("--validation-intake-audit", type=Path)
@@ -105,6 +106,11 @@ def main() -> int:
             observed_state_model_binding_audit=(
                 _object(args.observed_state_model_binding_audit)
                 if args.observed_state_model_binding_audit
+                else None
+            ),
+            inspection_center_source_inventory=(
+                _object(args.inspection_center_source_inventory)
+                if args.inspection_center_source_inventory
                 else None
             ),
             external_field_evidence=(

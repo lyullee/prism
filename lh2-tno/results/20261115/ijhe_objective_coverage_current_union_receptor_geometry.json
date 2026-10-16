@@ -595,6 +595,36 @@
       "interpretation": "센터 정상 운전 신호는 storage tank·vent·vaporizer 모델 입력 후보로만 연결한다. 시설 P&ID identity와 provider accident history가 확인되기 전에는 방출·빈도·IR/F-N을 만들지 않는다."
     },
     {
+      "id": "diagnostic_inspection_center_source_suitability",
+      "requirement": "검사센터 시계열 자료를 상태·HAZOP 진단 입력으로만 사용하고 방출·빈도·물리검증·시설 QRA로 승격하지 않아야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261115\\inspection_center_source_inventory_suitability.json"
+      ],
+      "observed": {
+        "schema_version": "prism.inspection_center_source_inventory_suitability.v1",
+        "status": "NORMAL_OPERATION_SOURCE_SCREENED_DIAGNOSTIC_ONLY",
+        "workbook_count": 17,
+        "sheet_count": 78,
+        "accident_release_available": false,
+        "failure_frequency_available": false,
+        "promotion_gates": {
+          "raw_state_snapshot_binding_allowed": false,
+          "reviewed_numeric_state_binding_allowed": false,
+          "reconstructed_state_evidence_only": true,
+          "frequency_applied": false,
+          "sensor_frequency_learning_used": false,
+          "provider_packet_created": false,
+          "provider_packet_qualified": false,
+          "facility_qra_claim": false,
+          "physical_validation_claim": false,
+          "reason": "Use the files for state/HAZOP diagnostics only until source-owner unit, tag, calibration, identity, and accident-release evidence are separately reviewed."
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "검사센터 자료의 시간·상태 신호는 명시적 운전모드와 HAZOP 진단을 점검하는 데 사용한다. 자료 자체로 누출량, 지속시간, 사고빈도 또는 시설 IR/F-N을 추정하지 않는다."
+    },
+    {
       "id": "diagnostic_external_outdoor_field_evidence",
       "requirement": "외부 옥외 LH2 관측자료를 해시·사건시계·범위 정책과 함께 감사 장부에 기록해야 한다",
       "status": "PASS",

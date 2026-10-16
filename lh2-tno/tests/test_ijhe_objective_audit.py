@@ -1076,3 +1076,32 @@ def test_objective_audit_records_observed_state_model_binding_without_release_pr
     assert check["status"] == "PASS"
     assert check["observed"]["state_model_bound_component_count"] == 3
     assert report["strict_facility_qra_claim"] is False
+
+
+def test_objective_audit_records_inspection_center_source_suitability_boundary():
+    inputs = _inputs()
+    inputs["inspection_center_source_inventory"] = {
+        "schema_version": "prism.inspection_center_source_inventory_suitability.v1",
+        "status": "NORMAL_OPERATION_SOURCE_SCREENED_DIAGNOSTIC_ONLY",
+        "inventory": {"workbook_count": 17, "sheet_count": 78},
+        "evidence_suitability": {
+            "accident_release_boundary": {"available": False},
+            "failure_frequency": {"available": False},
+        },
+        "promotion_gates": {
+            "frequency_applied": False,
+            "sensor_frequency_learning_used": False,
+            "provider_packet_qualified": False,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+        "_record_path": "inspection-center-source-inventory.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_inspection_center_source_suitability"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["workbook_count"] == 17
+    assert report["strict_facility_qra_claim"] is False

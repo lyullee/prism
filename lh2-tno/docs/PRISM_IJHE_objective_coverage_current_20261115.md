@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 25 |
+| Objective rows | 26 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (49 checks: 45 PASS, 4 BLOCKED) |
@@ -47,7 +47,7 @@ The following gates remain intentionally fail-closed:
 - **`strict_facility_scope`**: some declared equipment/accident families remain partial or operator-limited for strict qualification.
 - **`strict_facility_qra`**: facility-wide IR/F/N promotion stays false until the previous gates close.
 
-The current evidence package closes the observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. Two non-strict diagnostic rows remain visibly blocked because the latest 44-case completion audit still contains an open release-closure worklist and does not align with a strict full-completion claim. They do not disappear from the record and they do not promote facility QRA.
+The current evidence package closes the inspection-centre source suitability diagnostic, observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. Two non-strict diagnostic rows remain visibly blocked because the latest 44-case completion audit still contains an open release-closure worklist and does not align with a strict full-completion claim. They do not disappear from the record and they do not promote facility QRA.
 
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
 
@@ -80,6 +80,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --completion-audit results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --facility-assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
+  --inspection-center-source-inventory results/20261115/inspection_center_source_inventory_suitability.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --output results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json
 ```

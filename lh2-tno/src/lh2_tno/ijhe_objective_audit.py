@@ -61,6 +61,7 @@ def build_ijhe_objective_coverage_audit(
     observed_state_replay_audit: Mapping[str, Any] | None = None,
     observed_state_runtime_frames: Mapping[str, Any] | None = None,
     observed_state_model_binding_audit: Mapping[str, Any] | None = None,
+    inspection_center_source_inventory: Mapping[str, Any] | None = None,
     external_field_evidence: Mapping[str, Any] | None = None,
     external_field_model_comparison: Mapping[str, Any] | None = None,
     validation_intake_audit: Mapping[str, Any] | None = None,
@@ -98,6 +99,9 @@ def build_ijhe_objective_coverage_audit(
     observed_replay_path = _record_path(observed_state_replay_audit, None)
     observed_runtime_path = _record_path(observed_state_runtime_frames, None)
     observed_model_binding_path = _record_path(observed_state_model_binding_audit, None)
+    inspection_center_source_inventory_path = _record_path(
+        inspection_center_source_inventory, None
+    )
     external_field_path = _record_path(external_field_evidence, None)
     external_field_comparison_path = _record_path(external_field_model_comparison, None)
     validation_intake_path = _record_path(validation_intake_audit, None)
@@ -878,6 +882,95 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "센터 정상 운전 신호는 storage tank·vent·vaporizer 모델 입력 후보로만 연결한다. "
                 "시설 P&ID identity와 provider accident history가 확인되기 전에는 방출·빈도·IR/F-N을 만들지 않는다."
+            ),
+        ))
+
+    source_inventory_inventory = (
+        inspection_center_source_inventory.get("inventory", {})
+        if isinstance(inspection_center_source_inventory, Mapping)
+        else {}
+    )
+    source_inventory_suitability = (
+        inspection_center_source_inventory.get("evidence_suitability", {})
+        if isinstance(inspection_center_source_inventory, Mapping)
+        else {}
+    )
+    source_inventory_gates = (
+        inspection_center_source_inventory.get("promotion_gates", {})
+        if isinstance(inspection_center_source_inventory, Mapping)
+        else {}
+    )
+    if not isinstance(source_inventory_inventory, Mapping):
+        source_inventory_inventory = {}
+    if not isinstance(source_inventory_suitability, Mapping):
+        source_inventory_suitability = {}
+    if not isinstance(source_inventory_gates, Mapping):
+        source_inventory_gates = {}
+    source_inventory_release = (
+        source_inventory_suitability.get("accident_release_boundary", {})
+        if isinstance(source_inventory_suitability, Mapping)
+        else {}
+    )
+    source_inventory_frequency = (
+        source_inventory_suitability.get("failure_frequency", {})
+        if isinstance(source_inventory_suitability, Mapping)
+        else {}
+    )
+    if not isinstance(source_inventory_release, Mapping):
+        source_inventory_release = {}
+    if not isinstance(source_inventory_frequency, Mapping):
+        source_inventory_frequency = {}
+    source_inventory_ok = (
+        isinstance(inspection_center_source_inventory, Mapping)
+        and inspection_center_source_inventory.get("schema_version")
+        == "prism.inspection_center_source_inventory_suitability.v1"
+        and inspection_center_source_inventory.get("status")
+        == "NORMAL_OPERATION_SOURCE_SCREENED_DIAGNOSTIC_ONLY"
+        and isinstance(source_inventory_inventory, Mapping)
+        and source_inventory_inventory.get("workbook_count", 0) > 0
+        and source_inventory_inventory.get("sheet_count", 0) > 0
+        and isinstance(source_inventory_suitability, Mapping)
+        and source_inventory_release.get("available") is False
+        and source_inventory_frequency.get("available") is False
+        and isinstance(source_inventory_gates, Mapping)
+        and source_inventory_gates.get("frequency_applied") is False
+        and source_inventory_gates.get("sensor_frequency_learning_used") is False
+        and source_inventory_gates.get("provider_packet_qualified") is False
+        and source_inventory_gates.get("facility_qra_claim") is False
+        and source_inventory_gates.get("physical_validation_claim") is False
+    )
+    if inspection_center_source_inventory is not None:
+        rows.append(_row(
+            "diagnostic_inspection_center_source_suitability",
+            "검사센터 시계열 자료를 상태·HAZOP 진단 입력으로만 사용하고 방출·빈도·물리검증·시설 QRA로 승격하지 않아야 한다",
+            "PASS" if source_inventory_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(inspection_center_source_inventory_path,),
+            observed={
+                "schema_version": (
+                    inspection_center_source_inventory.get("schema_version")
+                    if isinstance(inspection_center_source_inventory, Mapping)
+                    else None
+                ),
+                "status": (
+                    inspection_center_source_inventory.get("status")
+                    if isinstance(inspection_center_source_inventory, Mapping)
+                    else None
+                ),
+                "workbook_count": source_inventory_inventory.get("workbook_count"),
+                "sheet_count": source_inventory_inventory.get("sheet_count"),
+                "accident_release_available": source_inventory_release.get("available"),
+                "failure_frequency_available": source_inventory_frequency.get("available"),
+                "promotion_gates": dict(source_inventory_gates)
+                if isinstance(source_inventory_gates, Mapping)
+                else {},
+            },
+            blocking_reason=None if source_inventory_ok else (
+                "검사센터 source suitability record가 없거나 schema/status가 맞지 않거나 "
+                "정상운전 자료의 사고 방출·빈도·시설 승격 차단이 확인되지 않았다"
+            ),
+            interpretation=(
+                "검사센터 자료의 시간·상태 신호는 명시적 운전모드와 HAZOP 진단을 점검하는 데 사용한다. "
+                "자료 자체로 누출량, 지속시간, 사고빈도 또는 시설 IR/F-N을 추정하지 않는다."
             ),
         ))
 
