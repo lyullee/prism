@@ -64,3 +64,6 @@ The current machine-readable receptor comparison is
 [`receptor_geometry_interpretation.json`](../results/20261115/receptor_geometry_interpretation.json),
 and the requirement-level status remains in
 [`PRISM_IJHE_objective_coverage_current_20261115.md`](PRISM_IJHE_objective_coverage_current_20261115.md).
+
+The unresolved finite-inventory termination margin is recorded in
+[`PRISM_inventory_termination_margin_20261115.md`](PRISM_inventory_termination_margin_20261115.md).

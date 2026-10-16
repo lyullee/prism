@@ -74,6 +74,7 @@ def build_ijhe_objective_coverage_audit(
     generic_provider_evidence_requests: Mapping[str, Any] | None = None,
     generic_provider_evidence_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
+    inventory_termination_margin_probe: Mapping[str, Any] | None = None,
     external_release_artifact_intake: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
@@ -124,6 +125,9 @@ def build_ijhe_objective_coverage_audit(
         generic_provider_evidence_audit, None
     )
     release_closure_worklist_path = _record_path(release_closure_worklist, None)
+    inventory_termination_margin_probe_path = _record_path(
+        inventory_termination_margin_probe, None
+    )
     external_release_artifact_intake_path = _record_path(
         external_release_artifact_intake, None
     )
@@ -1911,6 +1915,69 @@ def build_ijhe_objective_coverage_audit(
                 "이 행은 provider 자료 수집과 종료 경계 확인을 위한 진단 원장이다. "
                 "worklist가 닫혀도 qualified provider evidence·독립 물리검증·시설 QRA를 "
                 "자동으로 열지 않는다."
+            ),
+        ))
+
+    inventory_probe_policy = (
+        inventory_termination_margin_probe.get("request_policy", {})
+        if isinstance(inventory_termination_margin_probe, Mapping)
+        else {}
+    )
+    if not isinstance(inventory_probe_policy, Mapping):
+        inventory_probe_policy = {}
+    inventory_probe_ok = (
+        isinstance(inventory_termination_margin_probe, Mapping)
+        and inventory_termination_margin_probe.get("schema_version")
+        == "prism.inventory_termination_margin_probe.v1"
+        and inventory_termination_margin_probe.get("status")
+        == "TERMINATION_MARGIN_DIAGNOSTIC_COMPLETED"
+        and isinstance(inventory_termination_margin_probe.get("area_count"), int)
+        and inventory_termination_margin_probe.get("area_count", 0) > 0
+        and inventory_termination_margin_probe.get("depleted_case_count") == 0
+        and inventory_termination_margin_probe.get("open_case_count")
+        == inventory_termination_margin_probe.get("area_count")
+        and inventory_probe_policy.get("no_extrapolation") is True
+        and inventory_probe_policy.get("no_termination_basis_substitution") is True
+        and inventory_probe_policy.get("provider_packet_promotion") is False
+        and inventory_probe_policy.get("facility_qra_claim") is False
+        and inventory_probe_policy.get("physical_validation_claim") is False
+    )
+    if inventory_termination_margin_probe is not None:
+        rows.append(_row(
+            "diagnostic_inventory_termination_margin",
+            "재고소진 provider가 실제 종료경계에 도달하지 못하면 외삽·종료기준 대체 없이 미해결로 보존해야 한다",
+            "PASS" if inventory_probe_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(inventory_termination_margin_probe_path,),
+            observed={
+                "status": (
+                    inventory_termination_margin_probe.get("status")
+                    if isinstance(inventory_termination_margin_probe, Mapping)
+                    else None
+                ),
+                "area_count": (
+                    inventory_termination_margin_probe.get("area_count")
+                    if isinstance(inventory_termination_margin_probe, Mapping)
+                    else None
+                ),
+                "depleted_case_count": (
+                    inventory_termination_margin_probe.get("depleted_case_count")
+                    if isinstance(inventory_termination_margin_probe, Mapping)
+                    else None
+                ),
+                "open_case_count": (
+                    inventory_termination_margin_probe.get("open_case_count")
+                    if isinstance(inventory_termination_margin_probe, Mapping)
+                    else None
+                ),
+                "request_policy": dict(inventory_probe_policy),
+            },
+            blocking_reason=None if inventory_probe_ok else (
+                "재고소진 margin probe가 없거나 bounded provider 종료정책과 "
+                "미해결 결과 보존 조건을 확인하지 못했다"
+            ),
+            interpretation=(
+                "재고소진 경계는 provider가 실제 mass history와 종료조건을 제공할 때만 닫힌다. "
+                "현재 probe가 열린 경우에는 consequence 진단을 유지하되 strict facility QRA로 승격하지 않는다."
             ),
         ))
 

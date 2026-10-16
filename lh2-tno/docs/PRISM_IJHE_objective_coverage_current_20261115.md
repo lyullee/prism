@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 26 |
+| Objective rows | 27 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (49 checks: 45 PASS, 4 BLOCKED) |
@@ -42,6 +42,11 @@ The interpretation of the current facility-level conditional IR/F-N fields,
 including the declared receptor geometry and the separate near-receptor
 diagnostic, is documented in
 [`PRISM_conditional_facility_risk_interpretation_20261115.md`](PRISM_conditional_facility_risk_interpretation_20261115.md).
+
+The finite-inventory termination margin probe is documented in
+[`PRISM_inventory_termination_margin_20261115.md`](PRISM_inventory_termination_margin_20261115.md);
+it confirms that the remaining open inventory cases cannot be closed by
+extrapolating the current provider horizon.
 
 ## Open evidence gates
 
@@ -86,6 +91,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --facility-assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
   --inspection-center-source-inventory results/20261115/inspection_center_source_inventory_suitability.json `
+  --inventory-termination-margin-probe results/20261115/inventory_termination_margin_probe.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --output results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json
 ```

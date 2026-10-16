@@ -1,0 +1,87 @@
+{
+  "schema_version": "prism.inventory_termination_margin_probe.v1",
+  "status": "TERMINATION_MARGIN_DIAGNOSTIC_COMPLETED",
+  "provider_backend_config": "results\\20261009\\equipment_inventory_campaign\\backend_config.json",
+  "provider_backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
+  "provider_package_count": 5,
+  "request_policy": {
+    "source_kind": "external_dynamic_inventory_provider",
+    "threshold_mass_kg": 1e-10,
+    "duration_s": 120.0,
+    "time_step_s": 1.2,
+    "no_extrapolation": true,
+    "no_termination_basis_substitution": true,
+    "provider_packet_promotion": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false
+  },
+  "area_count": 5,
+  "depleted_case_count": 0,
+  "open_case_count": 5,
+  "rows": [
+    {
+      "area_m2": 1e-09,
+      "requested_duration_s": 120.0,
+      "time_step_s": 1.2,
+      "threshold_mass_kg": 1e-10,
+      "status": "HORIZON_OR_INTERVAL_OPEN",
+      "duration_s": 120.0,
+      "provider_intervals": 100,
+      "available_mass_kg": 0.00013416755831850078,
+      "remaining_inventory_kg": 0.00013215549759855187,
+      "remaining_fraction": 0.9850033738023876,
+      "inventory_depletion_detected": false,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "elapsed_ms": 4141.911300015636
+    },
+    {
+      "area_m2": 1e-08,
+      "requested_duration_s": 120.0,
+      "time_step_s": 1.2,
+      "threshold_mass_kg": 1e-10,
+      "status": "HORIZON_OR_INTERVAL_OPEN",
+      "duration_s": 120.0,
+      "provider_intervals": 100,
+      "available_mass_kg": 0.00013416755831850078,
+      "remaining_inventory_kg": 0.00013150099464373272,
+      "remaining_fraction": 0.9801251233294571,
+      "inventory_depletion_detected": false,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "elapsed_ms": 1958.1900000048336
+    },
+    {
+      "area_m2": 1e-07,
+      "requested_duration_s": 120.0,
+      "time_step_s": 1.2,
+      "threshold_mass_kg": 1e-10,
+      "status": "HORIZON_OR_INTERVAL_OPEN",
+      "duration_s": 120.0,
+      "provider_intervals": 100,
+      "available_mass_kg": 0.00013416755831850078,
+      "remaining_inventory_kg": 0.00012912323943264567,
+      "remaining_fraction": 0.9624028420202715,
+      "inventory_depletion_detected": false,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "elapsed_ms": 1797.7532999939285
+    },
+    {
+      "area_m2": 1e-06,
+      "requested_duration_s": 120.0,
+      "time_step_s": 1.2,
+      "threshold_mass_kg": 1e-10,
+      "status": "PROVIDER_ERROR",
+      "error": "BackendError: ValueError: inventory provider row budget exceeded before depletion",
+      "elapsed_ms": 1772.5208000047132
+    },
+    {
+      "area_m2": 1e-05,
+      "requested_duration_s": 120.0,
+      "time_step_s": 1.2,
+      "threshold_mass_kg": 1e-10,
+      "status": "PROVIDER_ERROR",
+      "error": "BackendError: ValueError: inventory provider row budget exceeded before depletion",
+      "elapsed_ms": 1765.3376000234857
+    }
+  ],
+  "interpretation": "The probe measures whether the declared positive-mass inventory stop is reached within the bounded provider run. An open or provider-error row remains open in the facility release-boundary ledger; the result is never extended or relabelled."
+}

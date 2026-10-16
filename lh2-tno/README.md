@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1246 passed, 1 warning**.
+The v0.6.3 local validation result is **1247 passed, 1 warning**.
 
 ## What PRISM is for
 
@@ -220,6 +220,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 - [Current IJHE objective coverage](docs/PRISM_IJHE_objective_coverage_current_20261115.md)
 - [Conditional facility IR/F-N interpretation](docs/PRISM_conditional_facility_risk_interpretation_20261115.md)
+- [Inventory termination margin diagnostic](docs/PRISM_inventory_termination_margin_20261115.md)
 - [Inspection-centre source suitability boundary](docs/PRISM_inspection_center_source_suitability_20261115.md)
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)

@@ -740,6 +740,33 @@
       "interpretation": "이 행은 provider 자료 수집과 종료 경계 확인을 위한 진단 원장이다. worklist가 닫혀도 qualified provider evidence·독립 물리검증·시설 QRA를 자동으로 열지 않는다."
     },
     {
+      "id": "diagnostic_inventory_termination_margin",
+      "requirement": "재고소진 provider가 실제 종료경계에 도달하지 못하면 외삽·종료기준 대체 없이 미해결로 보존해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261115\\inventory_termination_margin_probe.json"
+      ],
+      "observed": {
+        "status": "TERMINATION_MARGIN_DIAGNOSTIC_COMPLETED",
+        "area_count": 5,
+        "depleted_case_count": 0,
+        "open_case_count": 5,
+        "request_policy": {
+          "source_kind": "external_dynamic_inventory_provider",
+          "threshold_mass_kg": 1e-10,
+          "duration_s": 120.0,
+          "time_step_s": 1.2,
+          "no_extrapolation": true,
+          "no_termination_basis_substitution": true,
+          "provider_packet_promotion": false,
+          "facility_qra_claim": false,
+          "physical_validation_claim": false
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "재고소진 경계는 provider가 실제 mass history와 종료조건을 제공할 때만 닫힌다. 현재 probe가 열린 경우에는 consequence 진단을 유지하되 strict facility QRA로 승격하지 않는다."
+    },
+    {
       "id": "diagnostic_generic_provider_evidence_requests",
       "requirement": "모든 generic LH2 provider packet에 종료근거 또는 qualification 증거 요청이 정확히 하나씩 있어야 한다",
       "status": "PASS",

@@ -1105,3 +1105,30 @@ def test_objective_audit_records_inspection_center_source_suitability_boundary()
     assert check["status"] == "PASS"
     assert check["observed"]["workbook_count"] == 17
     assert report["strict_facility_qra_claim"] is False
+
+
+def test_objective_audit_records_open_inventory_termination_margin_without_substitution():
+    inputs = _inputs()
+    inputs["inventory_termination_margin_probe"] = {
+        "schema_version": "prism.inventory_termination_margin_probe.v1",
+        "status": "TERMINATION_MARGIN_DIAGNOSTIC_COMPLETED",
+        "area_count": 5,
+        "depleted_case_count": 0,
+        "open_case_count": 5,
+        "request_policy": {
+            "no_extrapolation": True,
+            "no_termination_basis_substitution": True,
+            "provider_packet_promotion": False,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+        "_record_path": "inventory-termination-margin.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_inventory_termination_margin"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["depleted_case_count"] == 0
+    assert report["strict_facility_qra_claim"] is False
