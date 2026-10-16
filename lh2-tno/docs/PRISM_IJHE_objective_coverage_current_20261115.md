@@ -38,6 +38,11 @@ It records 17 workbooks and 78 sheets with timestamped process signals, while
 keeping unit/tag/calibration review, accident-release evidence, frequency
 evidence, and independent physical validation as explicit open gates.
 
+The interpretation of the current facility-level conditional IR/F-N fields,
+including the declared receptor geometry and the separate near-receptor
+diagnostic, is documented in
+[`PRISM_conditional_facility_risk_interpretation_20261115.md`](PRISM_conditional_facility_risk_interpretation_20261115.md).
+
 ## Open evidence gates
 
 The following gates remain intentionally fail-closed:

@@ -5401,6 +5401,7 @@
     "strict_facility_qra"
   ],
   "latest_ijhe_objective_coverage_audit_sha256": "8464B4358D05683A6AE1888D907DBFCEE3F56AC8C47A710BC57A2BE7B9FCC3A8",
+  "conditional_facility_risk_interpretation_doc": "docs/PRISM_conditional_facility_risk_interpretation_20261115.md",
   "inspection_center_source_inventory_suitability_record": "results/20261115/inspection_center_source_inventory_suitability.json",
   "inspection_center_source_inventory_suitability_doc": "docs/PRISM_inspection_center_source_suitability_20261115.md",
   "inspection_center_source_inventory_suitability_status": "NORMAL_OPERATION_SOURCE_SCREENED_DIAGNOSTIC_ONLY",
