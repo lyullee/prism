@@ -270,6 +270,11 @@ facility-condition blocks for every request. It preserves operator review and
 keeps facility IR/F-N promotion disabled until the ordinary qualification and
 scope gates are satisfied.
 
+The generated request contract also names the required release duration,
+isolation and inventory fields, frequency low/central/high values, SLABx-LH2
+weather/ignition outputs and processing time, plus the facility population and
+endpoint identity. Missing fields remain explicit evidence gaps.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute

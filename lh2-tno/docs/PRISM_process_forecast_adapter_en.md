@@ -117,6 +117,14 @@ keys are rejected. The resulting operator-limited record preserves evidence
 but does not run physics, infer frequency, qualify a provider or promote
 facility IR/F-N.
 
+Each request also carries a field-level contract. The release block asks for
+duration, isolation timing, post-isolation observation, initial/out mass and
+residual; the frequency block asks for published low/central/high values and
+provenance; the SLABx-LH2 block asks for weather/ignition identity, harm
+outputs and processing time; the facility block asks for population, weather,
+ignition and endpoint identity. This keeps an unclosed accident visible as a
+missing case instead of allowing a partial packet to enter the facility ledger.
+
 ## Passing frames to forecast HAZOP
 
 Read `record["frames"]` and pass it to

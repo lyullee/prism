@@ -5674,6 +5674,12 @@
   "process_forecast_quantitative_handoff_record": "results/20261115/inspection_center_facility_forecast_quantitative_handoff.json",
   "process_forecast_quantitative_handoff_status": "FORECAST_QUANTITATIVE_HANDOFF_READY; 2 explicit receiving/supply requests ready for reviewed downstream evidence",
   "process_forecast_quantitative_handoff_facility_qra_promotion": false,
+  "process_forecast_quantitative_handoff_contract_fields": {
+    "provider_release_packet": ["duration_s", "termination_basis", "isolation_time_s", "post_isolation_observation_s", "inventory_initial_kg", "inventory_out_kg", "mass_residual_kg"],
+    "frequency_binding": ["annual_frequency", "annual_frequency_low", "annual_frequency_high", "source_provenance"],
+    "slabx_lh2_consequence": ["weather_condition_id", "ignition_branch_id", "receptor_damage_or_harm_outputs", "processing_time_ms"],
+    "facility_condition_binding": ["population_condition_id", "weather_condition_id", "ignition_branch_id", "facility_port_or_endpoint_id"]
+  },
   "process_forecast_quantitative_evidence_attachment_implemented": true,
   "process_forecast_quantitative_evidence_attachment_module": "lh2_tno.forecast_handoff.attach_forecast_quantitative_evidence",
   "process_forecast_quantitative_evidence_attachment_cli": "scripts/attach_forecast_quantitative_evidence.py",

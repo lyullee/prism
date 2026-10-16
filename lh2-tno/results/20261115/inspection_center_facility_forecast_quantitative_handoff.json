@@ -20,6 +20,40 @@
         "SLABx-LH2_consequence_result",
         "facility_annual_condition_population_ignition_binding"
       ],
+      "required_contract": {
+        "provider_release_packet": [
+          "source_digest",
+          "release_start_s",
+          "release_end_s",
+          "duration_s",
+          "termination_basis",
+          "isolation_time_s",
+          "post_isolation_observation_s",
+          "inventory_initial_kg",
+          "inventory_out_kg",
+          "mass_residual_kg"
+        ],
+        "frequency_binding": [
+          "literature_event_id",
+          "annual_frequency",
+          "annual_frequency_low",
+          "annual_frequency_high",
+          "source_provenance"
+        ],
+        "slabx_lh2_consequence": [
+          "result_digest",
+          "weather_condition_id",
+          "ignition_branch_id",
+          "receptor_damage_or_harm_outputs",
+          "processing_time_ms"
+        ],
+        "facility_condition_binding": [
+          "population_condition_id",
+          "weather_condition_id",
+          "ignition_branch_id",
+          "facility_port_or_endpoint_id"
+        ]
+      },
       "status": "READY_FOR_QUANTITATIVE_EVALUATION"
     },
     {
@@ -39,6 +73,40 @@
         "SLABx-LH2_consequence_result",
         "facility_annual_condition_population_ignition_binding"
       ],
+      "required_contract": {
+        "provider_release_packet": [
+          "source_digest",
+          "release_start_s",
+          "release_end_s",
+          "duration_s",
+          "termination_basis",
+          "isolation_time_s",
+          "post_isolation_observation_s",
+          "inventory_initial_kg",
+          "inventory_out_kg",
+          "mass_residual_kg"
+        ],
+        "frequency_binding": [
+          "literature_event_id",
+          "annual_frequency",
+          "annual_frequency_low",
+          "annual_frequency_high",
+          "source_provenance"
+        ],
+        "slabx_lh2_consequence": [
+          "result_digest",
+          "weather_condition_id",
+          "ignition_branch_id",
+          "receptor_damage_or_harm_outputs",
+          "processing_time_ms"
+        ],
+        "facility_condition_binding": [
+          "population_condition_id",
+          "weather_condition_id",
+          "ignition_branch_id",
+          "facility_port_or_endpoint_id"
+        ]
+      },
       "status": "READY_FOR_QUANTITATIVE_EVALUATION"
     }
   ],

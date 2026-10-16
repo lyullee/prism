@@ -55,6 +55,9 @@ def test_forecast_quantitative_handoff_creates_explicit_request_without_risk():
     assert request["request_id"] == "tank-01|tank-pressure|12"
     assert request["operating_mode"] == "receiving"
     assert "qualified_provider_release_packet" in request["required_inputs"]
+    assert "termination_basis" in request["required_contract"]["provider_release_packet"]
+    assert "annual_frequency_low" in request["required_contract"]["frequency_binding"]
+    assert "processing_time_ms" in request["required_contract"]["slabx_lh2_consequence"]
     assert result["policy"]["provider_release_created"] is False
     assert result["policy"]["facility_ir_fn_calculated"] is False
     assert result["policy"]["missing_requests_assigned_zero"] is False
