@@ -5320,5 +5320,14 @@
   "inspection_center_facility_campaign_handoff_frequency_central_per_year": 0.001,
   "inspection_center_facility_campaign_handoff_frequency_marginal_p05_per_year": null,
   "inspection_center_facility_campaign_handoff_frequency_marginal_p95_per_year": null,
-  "inspection_center_facility_campaign_handoff_frequency_interpretation": "Central, low, and high catalogue scenarios are explicit fixed-rate sensitivity cases for ambient-vaporizer/G3; no marginal p05/p95 interval or statistical confidence claim is made."
+  "inspection_center_facility_campaign_handoff_frequency_interpretation": "Central, low, and high catalogue scenarios are explicit fixed-rate sensitivity cases for ambient-vaporizer/G3; no marginal p05/p95 interval or statistical confidence claim is made.",
+  "inspection_center_facility_ijhe_handoff_audit_record": "examples/inspection_center_facility_ijhe_handoff_audit.json",
+  "inspection_center_facility_ijhe_handoff_audit_script": "scripts/audit_inspection_center_facility_ijhe_handoff.py",
+  "inspection_center_facility_ijhe_handoff_audit_module": "src/lh2_tno/inspection_center_facility_ijhe_audit.py",
+  "inspection_center_facility_ijhe_handoff_audit_schema": "prism.inspection_center_facility_ijhe_audit.v1",
+  "inspection_center_facility_ijhe_handoff_audit_status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "inspection_center_facility_ijhe_handoff_audit_check_count": 8,
+  "inspection_center_facility_ijhe_handoff_audit_blocking_reason_count": 0,
+  "inspection_center_facility_ijhe_handoff_audit_interpretation": "Structural traceability of the reconstructed bridge, explicit annual condition, provider mapping, and literature-frequency sensitivity passes; facility-wide IR/F-N, provider qualification, physical validation, and full IJHE evidence gates remain closed."
 }
+

@@ -1,0 +1,35 @@
+# Inspection-centre facility handoff audit
+
+The new audit record is a narrow, fail-closed traceability check for the
+reconstructed generic outdoor LH2 facility example. It is separate from the
+full IJHE completion audit because it covers one new bridge and one annual
+handoff record without pretending that the whole facility has been qualified.
+
+Run it with:
+
+```powershell
+python scripts/audit_inspection_center_facility_ijhe_handoff.py
+```
+
+It checks eight items:
+
+1. the facility bridge schema is the declared PRISM contract;
+2. one HAZOP deviation is evaluated while two normal components remain
+   explicitly withheld;
+3. provider identity is carried by an explicit observed-to-provider mapping;
+4. the annual campaign handoff uses its declared schema;
+5. weather and population come from an explicit annual-condition record;
+6. the partial ledger does not claim facility-wide IR/F-N;
+7. frequency rows are literature catalogue sensitivity cases, with no inferred
+   p05/p95 interval; and
+8. provider qualification, physical validation, and facility-QRA promotion stay
+   closed.
+
+The expected result is `PASS_WITH_SCOPE_LIMITATIONS`. That status means the
+new handoff is structurally traceable. It is not a claim that the missing
+normal equipment releases, qualified provider packets, independent physical
+validation, or complete facility IR/F-N have been supplied. The full IJHE audit
+therefore remains fail-closed until those evidence gates are closed.
+
+The machine-readable record is
+[`inspection_center_facility_ijhe_handoff_audit.json`](../examples/inspection_center_facility_ijhe_handoff_audit.json).

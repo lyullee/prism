@@ -147,6 +147,20 @@ records the known conditional contribution without promoting it to a complete
 facility IR/F-N result. See
 [`PRISM_inspection_center_facility_campaign_handoff_20261017.md`](docs/PRISM_inspection_center_facility_campaign_handoff_20261017.md).
 
+Run the narrow IJHE traceability audit for the same reconstructed handoff:
+
+```powershell
+python scripts/audit_inspection_center_facility_ijhe_handoff.py
+```
+
+`PASS_WITH_SCOPE_LIMITATIONS` means the bridge, explicit annual condition,
+provider mapping, and literature-frequency sensitivity are internally
+traceable. It does not mean that facility-wide IR/F-N, qualified provider
+packets, or physical validation are complete. The JSON record is
+[`inspection_center_facility_ijhe_handoff_audit.json`](examples/inspection_center_facility_ijhe_handoff_audit.json),
+and the reusable implementation is
+[`inspection_center_facility_ijhe_audit.py`](src/lh2_tno/inspection_center_facility_ijhe_audit.py).
+
 ## Equipment and provider boundary
 
 The state frame contains facility ID, component ID, operating mode, timestamp, measured or predicted values, units, signal quality, and provenance. It does not contain `resolved_release`, opening diameter, annual frequency, duration, or termination basis.

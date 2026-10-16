@@ -1,0 +1,111 @@
+{
+  "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+  "status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "checks": [
+    {
+      "id": "facility_bridge_schema",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "schema_version": "prism.inspection_center_facility_hazop_bridge.v1"
+      }
+    },
+    {
+      "id": "facility_bridge_component_partition",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "component_count": 3,
+        "selected_component_ids": [
+          "lh2-supply-vaporizer-boundary"
+        ],
+        "withheld_component_ids": [
+          "lh2-intake-tank",
+          "lh2-storage-vent"
+        ]
+      }
+    },
+    {
+      "id": "explicit_provider_component_mapping",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "mapping": {
+          "observed_component_id": "lh2-supply-vaporizer-boundary",
+          "provider_component_id": "ambient-vaporizer-01",
+          "provider_port_id": "vaporizer-accident-out",
+          "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+          "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402"
+        }
+      }
+    },
+    {
+      "id": "facility_handoff_schema",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "schema_version": "prism.inspection_center_facility_campaign_handoff.v1"
+      }
+    },
+    {
+      "id": "explicit_annual_condition_population",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "status": "EXPLICIT_CONDITION_POPULATION"
+      }
+    },
+    {
+      "id": "diagnostic_qra_boundary",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "handoff_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "ledger_status": "PARTIAL_FACILITY_SCOPE",
+        "facility_ir_available": false,
+        "facility_fn_available": false
+      }
+    },
+    {
+      "id": "literature_frequency_sensitivity_boundary",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "schema_version": "prism.facility_frequency_sensitivity.v1",
+        "status": "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE",
+        "row_count": 3,
+        "marginal_p05_per_year": null,
+        "marginal_p95_per_year": null
+      }
+    },
+    {
+      "id": "no_qualification_or_physical_validation_claim",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      }
+    }
+  ],
+  "blocking_reasons": [],
+  "qualification_boundary": {
+    "facility_ir_fn_available": false,
+    "provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
+    "physical_validation_claim": false,
+    "interpretation": "Structural traceability passes only when all checks pass; this record does not close the full IJHE evidence audit or promote facility QRA."
+  },
+  "input_evidence": {
+    "bridge": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\inspection_center_facility_hazop_bridge.json",
+    "handoff": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\inspection_center_facility_campaign_handoff.json"
+  }
+}
