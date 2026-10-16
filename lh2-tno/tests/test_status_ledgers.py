@@ -60,8 +60,8 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
         assert status["ijhe_completion_audit_latest_facility_assessment_record"].endswith(
             ASSESSMENT_PATH.name
         )
-        assert status["full_portable_test_count"] == 1291
-        assert status["full_portable_test_status"] == "1291 passed, 1 warning"
+        assert status["full_portable_test_count"] == 1293
+        assert status["full_portable_test_status"] == "1293 passed, 1 warning"
         assert status["facility_evidence_request_latest_record"].endswith(
             "facility_evidence_request.json"
         )
