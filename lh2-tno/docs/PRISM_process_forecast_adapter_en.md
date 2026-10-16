@@ -70,6 +70,20 @@ visible before it can enter the HAZOP scanner. The merged record keeps the
 operating mode for each component in `operating_modes_by_component` and sorts
 frames by `forecast_time_s` and `component_id`.
 
+Run the facility qualitative HAZOP scan on the merged record with:
+
+```powershell
+python scripts/run_merged_process_forecast_hazop_scan.py `
+  --frames results/20261115/inspection_center_facility_forecast_frame_set.json `
+  --tables examples/inspection_center_hazop_runtime_tables.json `
+  --output results/20261115/inspection_center_facility_forecast_hazop_scan.json
+```
+
+The scan covers all merged components at each forecast time and retains the
+component operating-mode trace. It requests a quantitative evaluation only
+when a HAZOP condition is reached. With no evaluator supplied by the caller,
+those entries are explicitly withheld rather than being treated as zero risk.
+
 ## Passing frames to forecast HAZOP
 
 Read `record["frames"]` and pass it to

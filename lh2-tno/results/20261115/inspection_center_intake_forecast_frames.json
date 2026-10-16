@@ -1,0 +1,1661 @@
+{
+  "schema_version": "prism.process_forecast_frame_set.v1",
+  "status": "PROCESS_FORECAST_FRAMES_READY",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "component_id": "lh2-intake-tank",
+  "operating_mode": "receiving",
+  "origin": "model_prediction",
+  "source": {
+    "source_id": "inspection-center-intake-forecast",
+    "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+    "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+    "row_count_selected": 60,
+    "time_column": null,
+    "sample_period_s": 1.0
+  },
+  "mapping": {
+    "pressure": {
+      "source_column": "PT1206",
+      "quantity": "pressure",
+      "unit": "MPa",
+      "sensor_location": "intake-tank-boundary"
+    },
+    "temperature": {
+      "source_column": "TT1106",
+      "quantity": "temperature",
+      "unit": "C",
+      "sensor_location": "intake-tank-boundary"
+    }
+  },
+  "frames": [
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 0.0,
+      "forecast_time_s": 0.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 1.0,
+      "forecast_time_s": 1.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 2.0,
+      "forecast_time_s": 2.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 3.0,
+      "forecast_time_s": 3.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 4.0,
+      "forecast_time_s": 4.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 5.0,
+      "forecast_time_s": 5.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 6.0,
+      "forecast_time_s": 6.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 7.0,
+      "forecast_time_s": 7.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 8.0,
+      "forecast_time_s": 8.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 9.0,
+      "forecast_time_s": 9.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 10.0,
+      "forecast_time_s": 10.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 11.0,
+      "forecast_time_s": 11.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 12.0,
+      "forecast_time_s": 12.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 13.0,
+      "forecast_time_s": 13.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 14.0,
+      "forecast_time_s": 14.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 15.0,
+      "forecast_time_s": 15.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 16.0,
+      "forecast_time_s": 16.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 17.0,
+      "forecast_time_s": 17.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 18.0,
+      "forecast_time_s": 18.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 19.0,
+      "forecast_time_s": 19.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 20.0,
+      "forecast_time_s": 20.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 21.0,
+      "forecast_time_s": 21.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 22.0,
+      "forecast_time_s": 22.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 23.0,
+      "forecast_time_s": 23.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 239.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 24.0,
+      "forecast_time_s": 24.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.04999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 25.0,
+      "forecast_time_s": 25.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.04999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 26.0,
+      "forecast_time_s": 26.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.04999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 27.0,
+      "forecast_time_s": 27.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.04999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 28.0,
+      "forecast_time_s": 28.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.14999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 29.0,
+      "forecast_time_s": 29.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.14999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 30.0,
+      "forecast_time_s": 30.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.14999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 31.0,
+      "forecast_time_s": 31.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.14999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 32.0,
+      "forecast_time_s": 32.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.24999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 33.0,
+      "forecast_time_s": 33.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.24999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 34.0,
+      "forecast_time_s": 34.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.24999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 35.0,
+      "forecast_time_s": 35.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 36.0,
+      "forecast_time_s": 36.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 37.0,
+      "forecast_time_s": 37.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 38.0,
+      "forecast_time_s": 38.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.34999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 39.0,
+      "forecast_time_s": 39.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 40.0,
+      "forecast_time_s": 40.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 41.0,
+      "forecast_time_s": 41.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.45,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 42.0,
+      "forecast_time_s": 42.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 43.0,
+      "forecast_time_s": 43.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 44.0,
+      "forecast_time_s": 44.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 45.0,
+      "forecast_time_s": 45.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.54999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 46.0,
+      "forecast_time_s": 46.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 47.0,
+      "forecast_time_s": 47.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 48.0,
+      "forecast_time_s": 48.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.64999999999998,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 49.0,
+      "forecast_time_s": 49.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 50.0,
+      "forecast_time_s": 50.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 51.0,
+      "forecast_time_s": 51.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 52.0,
+      "forecast_time_s": 52.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.74999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 53.0,
+      "forecast_time_s": 53.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 54.0,
+      "forecast_time_s": 54.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 55.0,
+      "forecast_time_s": 55.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.84999999999997,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 56.0,
+      "forecast_time_s": 56.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 57.0,
+      "forecast_time_s": 57.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 58.0,
+      "forecast_time_s": 58.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "captured_at_s": 59.0,
+      "forecast_time_s": 59.0,
+      "origin": "model_prediction",
+      "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 500000.0,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 240.95,
+          "sensor_location": "intake-tank-boundary",
+          "quality": "valid"
+        }
+      }
+    }
+  ],
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Process-model forecast frames are ready for HAZOP forecast scanning. They carry state and mode only; no accident frequency, release boundary, physical validation, or facility IR/F-N claim is created."
+}

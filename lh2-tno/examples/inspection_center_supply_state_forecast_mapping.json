@@ -1,0 +1,14 @@
+{
+  "pressure": {
+    "source_column": "PT1101",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "supply-vaporizer-boundary"
+  },
+  "temperature": {
+    "source_column": "TT1116",
+    "quantity": "temperature",
+    "unit": "C",
+    "sensor_location": "supply-vaporizer-boundary"
+  }
+}

@@ -229,6 +229,20 @@ Different grids, duplicate components, and missing components fail closed.
 There is no interpolation or silent component drop, and the merged diagnostic
 record does not infer frequency or create a release or facility IR/F-N result.
 
+To replay the qualitative HAZOP selection across all merged components:
+
+```powershell
+python scripts/run_merged_process_forecast_hazop_scan.py `
+  --frames results/20261115/inspection_center_facility_forecast_frame_set.json `
+  --tables examples/inspection_center_hazop_runtime_tables.json `
+  --output results/20261115/inspection_center_facility_forecast_hazop_scan.json
+```
+
+The scan preserves the explicit receiving/standby/supply mode trace and
+reports any reached condition. A quantitative callback must still provide the
+qualified equipment release, literature frequency binding, SLABx-LH2 result,
+and facility evidence; absent callbacks are reported as withheld.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute

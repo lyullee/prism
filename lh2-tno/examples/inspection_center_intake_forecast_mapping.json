@@ -1,0 +1,14 @@
+{
+  "pressure": {
+    "source_column": "PT1206",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "intake-tank-boundary"
+  },
+  "temperature": {
+    "source_column": "TT1106",
+    "quantity": "temperature",
+    "unit": "C",
+    "sensor_location": "intake-tank-boundary"
+  }
+}

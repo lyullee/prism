@@ -1,0 +1,8 @@
+{
+  "pressure": {
+    "source_column": "PT1105A",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "storage-vent-boundary"
+  }
+}

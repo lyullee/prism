@@ -1,0 +1,1235 @@
+{
+  "schema_version": "prism.process_forecast_frame_set.v1",
+  "status": "PROCESS_FORECAST_FRAMES_READY",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "component_id": "lh2-storage-vent",
+  "operating_mode": "standby",
+  "origin": "model_prediction",
+  "source": {
+    "source_id": "inspection-center-storage-vent-forecast",
+    "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+    "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+    "row_count_selected": 60,
+    "time_column": null,
+    "sample_period_s": 1.0
+  },
+  "mapping": {
+    "pressure": {
+      "source_column": "PT1105A",
+      "quantity": "pressure",
+      "unit": "MPa",
+      "sensor_location": "storage-vent-boundary"
+    }
+  },
+  "frames": [
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 0.0,
+      "forecast_time_s": 0.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 317000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 1.0,
+      "forecast_time_s": 1.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 319000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 2.0,
+      "forecast_time_s": 2.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 320000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 3.0,
+      "forecast_time_s": 3.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 322000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 4.0,
+      "forecast_time_s": 4.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 323000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 5.0,
+      "forecast_time_s": 5.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 324000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 6.0,
+      "forecast_time_s": 6.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 326000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 7.0,
+      "forecast_time_s": 7.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 327000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 8.0,
+      "forecast_time_s": 8.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 329000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 9.0,
+      "forecast_time_s": 9.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 330000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 10.0,
+      "forecast_time_s": 10.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 332000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 11.0,
+      "forecast_time_s": 11.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 333000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 12.0,
+      "forecast_time_s": 12.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 335000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 13.0,
+      "forecast_time_s": 13.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 336000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 14.0,
+      "forecast_time_s": 14.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 338000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 15.0,
+      "forecast_time_s": 15.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 339000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 16.0,
+      "forecast_time_s": 16.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 340000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 17.0,
+      "forecast_time_s": 17.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 342000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 18.0,
+      "forecast_time_s": 18.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 343000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 19.0,
+      "forecast_time_s": 19.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 345000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 20.0,
+      "forecast_time_s": 20.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 346000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 21.0,
+      "forecast_time_s": 21.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 348000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 22.0,
+      "forecast_time_s": 22.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 349000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 23.0,
+      "forecast_time_s": 23.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 350000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 24.0,
+      "forecast_time_s": 24.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 352000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 25.0,
+      "forecast_time_s": 25.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 353000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 26.0,
+      "forecast_time_s": 26.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 355000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 27.0,
+      "forecast_time_s": 27.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 356000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 28.0,
+      "forecast_time_s": 28.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 358000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 29.0,
+      "forecast_time_s": 29.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 359000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 30.0,
+      "forecast_time_s": 30.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 360000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 31.0,
+      "forecast_time_s": 31.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 362000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 32.0,
+      "forecast_time_s": 32.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 363000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 33.0,
+      "forecast_time_s": 33.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 365000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 34.0,
+      "forecast_time_s": 34.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 366000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 35.0,
+      "forecast_time_s": 35.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 367000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 36.0,
+      "forecast_time_s": 36.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 369000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 37.0,
+      "forecast_time_s": 37.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 370000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 38.0,
+      "forecast_time_s": 38.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 372000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 39.0,
+      "forecast_time_s": 39.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 373000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 40.0,
+      "forecast_time_s": 40.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 374000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 41.0,
+      "forecast_time_s": 41.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 376000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 42.0,
+      "forecast_time_s": 42.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 377000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 43.0,
+      "forecast_time_s": 43.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 379000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 44.0,
+      "forecast_time_s": 44.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 380000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 45.0,
+      "forecast_time_s": 45.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 381000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 46.0,
+      "forecast_time_s": 46.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 383000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 47.0,
+      "forecast_time_s": 47.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 384000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 48.0,
+      "forecast_time_s": 48.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 386000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 49.0,
+      "forecast_time_s": 49.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 387000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 50.0,
+      "forecast_time_s": 50.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 388000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 51.0,
+      "forecast_time_s": 51.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 390000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 52.0,
+      "forecast_time_s": 52.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 391000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 53.0,
+      "forecast_time_s": 53.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 392000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 54.0,
+      "forecast_time_s": 54.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 394000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 55.0,
+      "forecast_time_s": 55.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 395000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 56.0,
+      "forecast_time_s": 56.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 397000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 57.0,
+      "forecast_time_s": 57.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 398000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 58.0,
+      "forecast_time_s": 58.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 400000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    },
+    {
+      "schema_version": "prism.hazop_state_frame.v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "captured_at_s": 59.0,
+      "forecast_time_s": 59.0,
+      "origin": "model_prediction",
+      "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 401000.0,
+          "sensor_location": "storage-vent-boundary",
+          "quality": "valid"
+        }
+      }
+    }
+  ],
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Process-model forecast frames are ready for HAZOP forecast scanning. They carry state and mode only; no accident frequency, release boundary, physical validation, or facility IR/F-N claim is created."
+}
