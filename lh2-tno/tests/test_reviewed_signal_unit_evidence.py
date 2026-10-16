@@ -61,3 +61,33 @@ def test_reviewed_anchor_map_can_be_checked_without_frequency_or_state_promotion
     assert report["reviewed_signal_count"] == 2
     assert report["observed_unmapped_tags"] == ["DPT1"]
     assert report["policy"]["pressure_basis_inference_performed"] is False
+
+
+def test_source_and_comparison_units_are_reported_as_separate_roles(tmp_path: Path, monkeypatch):
+    document = tmp_path / "procedure.pdf"
+    document.write_bytes(b"placeholder")
+    import lh2_tno.reviewed_signal_unit_evidence as module
+
+    monkeypatch.setattr(module, "_decode_pdf_pages", lambda path: ["PT-1 raw MPa; setpoint 6 bar"])
+    digest = module._sha256(document)
+    report = audit_reviewed_signal_unit_evidence(
+        {
+            "source_evidence": {"sha256": digest},
+            "signal_units": {
+                "PT-1": {
+                    "source_unit": "MPa",
+                    "comparison_unit": "bar",
+                    "quantity": "pressure",
+                    "pressure_basis": "unresolved",
+                    "evidence": [{"page": 1, "anchor": "PT-1"}],
+                }
+            },
+        },
+        source_document=document,
+        timeseries_audit={"files": [{"sheets": [{"headers": ["PT-1"]}]}]},
+    )
+    assert report["status"] == "REVIEWED_SIGNAL_UNIT_EVIDENCE_COMPLETE"
+    signal = report["signals"][0]
+    assert signal["source_unit"] == "MPa"
+    assert signal["comparison_unit"] == "bar"
+    assert report["policy"]["comparison_unit_used_for_runtime_conversion"] is False

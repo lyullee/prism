@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,337 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,361 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -52,6 +52,13 @@ PRISM helps an operator or researcher answer:
 - What evidence, uncertainty, latency, and response action should be shown?
 
 The framework supports generic outdoor LH2 facilities, including tanks, transfer lines, valves, pumps, vaporizers, and vents. It is designed to connect to an existing process digital twin. The equipment model remains the owner of thermodynamics, inventory, isolation, and accident release history.
+
+For inspection-centre or historian signals, PRISM records the unit carried by
+the source column separately from a procedure or setpoint comparison unit. See
+the [unit-role guide](docs/PRISM_source_vs_comparison_unit_roles_20261017.md).
+This prevents an MPa source column from being silently relabeled as bar while
+keeping the state-promotion gate closed until pressure basis and data quality
+are reviewed.
 
 For a compact multi-equipment demonstration, see the [native pump + valve facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md). It binds a liquid pump packet and a gas valve packet to one facility ledger, retains release duration and mass-balance evidence, and keeps every unmatched frequency opening explicitly `UNCOMPUTED`.
 

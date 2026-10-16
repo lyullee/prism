@@ -3,6 +3,7 @@ import pytest
 from lh2_tno.inspection_timeseries import (
     classify_signal,
     frame_from_row,
+    normalise_unit_claims,
     normalise_unit_map,
     resolve_unit,
     state_snapshot_from_row,
@@ -21,6 +22,18 @@ def test_unit_map_requires_exact_reviewed_mapping():
     unit_map = normalise_unit_map({"signal_units": {"PT1105A": "bar"}})
     assert resolve_unit("PT1105A", unit_map) == ("bar", "CONFIRMED_BY_REVIEWED_MAP")
     assert resolve_unit("PT1105B", unit_map) == (None, "MISSING_OR_UNCONFIRMED")
+
+
+def test_unit_claims_preserve_comparison_context_without_changing_legacy_map():
+    value = {
+        "signal_units": {
+            "PT1105A": {"source_unit": "MPa", "comparison_unit": "bar"},
+        }
+    }
+    assert normalise_unit_map(value) == {"PT1105A": "MPa"}
+    assert normalise_unit_claims(value) == {
+        "PT1105A": {"source_unit": "MPa", "comparison_unit": "bar"}
+    }
 
 
 def test_numeric_summary_keeps_only_aggregate_values():

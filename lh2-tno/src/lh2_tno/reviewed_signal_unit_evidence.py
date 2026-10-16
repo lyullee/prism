@@ -74,18 +74,32 @@ def _load_unit_map(value: Mapping[str, Any] | str | Path) -> dict[str, Any]:
             raise ValueError("unit map contains an empty tag")
         if isinstance(raw, str):
             unit = raw
+            source_unit = raw
+            comparison_unit = None
             quantity = None
             pressure_basis = None
             evidence = []
         elif isinstance(raw, Mapping):
             unit = raw.get("unit")
+            source_unit = raw.get("source_unit", unit)
+            comparison_unit = raw.get("comparison_unit")
             quantity = raw.get("quantity")
             pressure_basis = raw.get("pressure_basis")
             evidence = raw.get("evidence")
         else:
             raise ValueError(f"unit map entry {raw_tag} must be a string or object")
-        if not isinstance(unit, str) or unit not in _ALLOWED_UNITS:
+        if not isinstance(source_unit, str) or source_unit not in _ALLOWED_UNITS:
+            raise ValueError(f"unit map entry {raw_tag} has unsupported source_unit")
+        if unit is not None and (not isinstance(unit, str) or unit not in _ALLOWED_UNITS):
             raise ValueError(f"unit map entry {raw_tag} has unsupported unit")
+        if unit is not None and unit != source_unit:
+            raise ValueError(
+                f"unit map entry {raw_tag} has conflicting legacy unit and source_unit"
+            )
+        if comparison_unit is not None and (
+            not isinstance(comparison_unit, str) or comparison_unit not in _ALLOWED_UNITS
+        ):
+            raise ValueError(f"unit map entry {raw_tag} has unsupported comparison_unit")
         if quantity is not None and quantity not in _ALLOWED_QUANTITIES:
             raise ValueError(f"unit map entry {raw_tag} has unsupported quantity")
         if pressure_basis is not None and pressure_basis not in {"absolute", "gauge", "unresolved"}:
@@ -94,7 +108,11 @@ def _load_unit_map(value: Mapping[str, Any] | str | Path) -> dict[str, Any]:
             raise ValueError(f"unit map entry {raw_tag} requires page evidence")
         result[tag] = {
             "tag": tag,
-            "unit": unit,
+            # Keep ``unit`` as the source-unit compatibility field.  The
+            # explicit role fields are what new adapters should consume.
+            "unit": source_unit,
+            "source_unit": source_unit,
+            "comparison_unit": comparison_unit,
             "quantity": quantity,
             "pressure_basis": pressure_basis,
             "evidence": list(evidence),
@@ -185,7 +203,17 @@ def audit_reviewed_signal_unit_evidence(
                 "context": evidence.get("context"),
             })
         rows.append({
-            **{key: entry[key] for key in ("tag", "unit", "quantity", "pressure_basis")},
+            **{
+                key: entry[key]
+                for key in (
+                    "tag",
+                    "unit",
+                    "source_unit",
+                    "comparison_unit",
+                    "quantity",
+                    "pressure_basis",
+                )
+            },
             "evidence": evidence_rows,
             "status": "REVIEWED_ANCHOR_FOUND" if evidence_rows and all(item["anchor_found"] for item in evidence_rows) else "REVIEW_REQUIRED",
         })
@@ -242,6 +270,8 @@ def audit_reviewed_signal_unit_evidence(
         },
         "policy": {
             "unit_from_declared_document_anchor_only": True,
+            "source_unit_vs_comparison_unit_distinguished": True,
+            "comparison_unit_used_for_runtime_conversion": False,
             "unit_inference_from_numeric_range_performed": False,
             "pressure_basis_inference_performed": False,
             "raw_dpt_value_reinterpreted_as_level_percent": False,

@@ -46,20 +46,51 @@ def classify_signal(header: Any) -> dict[str, str]:
     return {"category": "unknown", "basis": "unresolved_header"}
 
 
-def normalise_unit_map(value: Mapping[str, Any] | None) -> dict[str, str]:
-    """Return an exact, case-insensitive reviewed tag-to-unit map."""
+def normalise_unit_claims(value: Mapping[str, Any] | None) -> dict[str, dict[str, str | None]]:
+    """Return exact reviewed source and comparison unit roles.
+
+    ``source_unit`` is the unit carried by the incoming time-series column.
+    ``comparison_unit`` is optional procedure or setpoint context and is never
+    silently used as a runtime conversion unit.  Legacy strings and
+    ``{"unit": ...}`` mappings remain source-unit declarations.
+    """
 
     if not value:
         return {}
     nested = value.get("signal_units") if isinstance(value, Mapping) else None
     source = nested if isinstance(nested, Mapping) else value
-    result: dict[str, str] = {}
-    for key, unit in source.items():
-        if isinstance(unit, Mapping):
-            unit = unit.get("unit")
-        if isinstance(unit, str) and str(key).strip() and unit.strip():
-            result[_normalise_header(key)] = unit.strip()
+    result: dict[str, dict[str, str | None]] = {}
+    for key, raw in source.items():
+        if isinstance(raw, Mapping):
+            source_unit = raw.get("source_unit", raw.get("unit"))
+            comparison_unit = raw.get("comparison_unit")
+        else:
+            source_unit = raw
+            comparison_unit = None
+        if isinstance(source_unit, str) and str(key).strip() and source_unit.strip():
+            result[_normalise_header(key)] = {
+                "source_unit": source_unit.strip(),
+                "comparison_unit": (
+                    comparison_unit.strip()
+                    if isinstance(comparison_unit, str) and comparison_unit.strip()
+                    else None
+                ),
+            }
     return result
+
+
+def normalise_unit_map(value: Mapping[str, Any] | None) -> dict[str, str]:
+    """Return the legacy exact tag-to-source-unit map.
+
+    Use :func:`normalise_unit_claims` when procedure or setpoint context is
+    also needed by an audit or user interface.
+    """
+
+    return {
+        tag: str(claim["source_unit"])
+        for tag, claim in normalise_unit_claims(value).items()
+        if claim.get("source_unit") is not None
+    }
 
 
 def resolve_unit(header: Any, unit_map: Mapping[str, str]) -> tuple[str | None, str]:

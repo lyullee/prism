@@ -38,26 +38,56 @@ def _unit(value: Any) -> str | None:
     return aliases.get(token, token)
 
 
-def _reviewed_units(reviewed_map: Mapping[str, Any]) -> dict[str, str]:
+def _reviewed_unit_claims(reviewed_map: Mapping[str, Any]) -> dict[str, dict[str, str | None]]:
+    """Return reviewed unit roles without collapsing source and comparison units.
+
+    ``unit`` is the legacy field and means the unit carried by the observed
+    source column.  New maps may state that role explicitly as ``source_unit``
+    and may additionally record a procedure/setpoint ``comparison_unit``.
+    The latter is contextual evidence only and is never compared with the
+    runtime source unit.
+    """
     if not isinstance(reviewed_map, Mapping):
         raise TypeError("reviewed_map must be an object")
     source = reviewed_map.get("signal_units", reviewed_map)
     if not isinstance(source, Mapping):
         raise ValueError("reviewed_map.signal_units must be an object")
-    result: dict[str, str] = {}
+    result: dict[str, dict[str, str | None]] = {}
     for raw_tag, raw_value in source.items():
         tag = _tag(raw_tag)
         if not tag:
             continue
-        value = raw_value.get("unit") if isinstance(raw_value, Mapping) else raw_value
-        normalized = _unit(value)
-        if normalized is None:
+        if isinstance(raw_value, Mapping):
+            legacy = _unit(raw_value.get("unit"))
+            source_unit = _unit(raw_value.get("source_unit")) or legacy
+            comparison_unit = _unit(raw_value.get("comparison_unit"))
+        else:
+            source_unit = _unit(raw_value)
+            comparison_unit = None
+        if source_unit is None:
             continue
         previous = result.get(tag)
-        if previous is not None and previous != normalized:
+        claim = {
+            "source_unit": source_unit,
+            "comparison_unit": comparison_unit,
+        }
+        if previous is not None and (
+            previous.get("source_unit") != source_unit
+            or previous.get("comparison_unit") != comparison_unit
+        ):
             raise ValueError(f"reviewed map contains conflicting units for {tag}")
-        result[tag] = normalized
+        result[tag] = claim
     return result
+
+
+def _reviewed_units(reviewed_map: Mapping[str, Any]) -> dict[str, str]:
+    """Backward-compatible source-unit-only view for existing callers."""
+
+    return {
+        tag: str(claim["source_unit"])
+        for tag, claim in _reviewed_unit_claims(reviewed_map).items()
+        if claim.get("source_unit") is not None
+    }
 
 
 def audit_observed_unit_consistency(
@@ -70,7 +100,7 @@ def audit_observed_unit_consistency(
     sources = manifest.get("sources")
     if not isinstance(sources, list) or not sources:
         raise ValueError("manifest.sources must be a non-empty array")
-    reviewed = _reviewed_units(reviewed_map)
+    reviewed_claims = _reviewed_unit_claims(reviewed_map)
     rows: list[dict[str, Any]] = []
     manifest_tags: set[str] = set()
     for source_index, source in enumerate(sources):
@@ -92,7 +122,9 @@ def audit_observed_unit_consistency(
                 )
             tag = _tag(column)
             manifest_tags.add(tag)
-            reviewed_unit = reviewed.get(tag)
+            claim = reviewed_claims.get(tag)
+            reviewed_unit = claim.get("source_unit") if claim else None
+            comparison_unit = claim.get("comparison_unit") if claim else None
             if reviewed_unit is None:
                 status = "MANIFEST_ONLY_UNREVIEWED"
             elif reviewed_unit != manifest_unit:
@@ -107,10 +139,17 @@ def audit_observed_unit_consistency(
                     "normalized_tag": tag,
                     "manifest_unit": manifest_unit,
                     "reviewed_unit": reviewed_unit,
+                    "reviewed_source_unit": reviewed_unit,
+                    "reviewed_comparison_unit": comparison_unit,
+                    "unit_roles": {
+                        "manifest": "source",
+                        "reviewed_unit": "source",
+                        "reviewed_comparison_unit": "procedure_or_setpoint_context",
+                    },
                     "status": status,
                 }
             )
-    reviewed_only = sorted(set(reviewed) - manifest_tags)
+    reviewed_only = sorted(set(reviewed_claims) - manifest_tags)
     conflict_count = sum(row["status"] == "CONFLICTING_UNITS" for row in rows)
     unreviewed_count = sum(row["status"] == "MANIFEST_ONLY_UNREVIEWED" for row in rows)
     matched_count = sum(row["status"] == "MATCHED" for row in rows)
@@ -135,6 +174,8 @@ def audit_observed_unit_consistency(
         "bindings": rows,
         "policy": {
             "numeric_range_unit_inference": False,
+            "source_unit_vs_comparison_unit_distinguished": True,
+            "comparison_unit_used_for_runtime_conversion": False,
             "unit_precedence_selected": False,
             "state_snapshot_binding_allowed": False,
             "frequency_inference_performed": False,
@@ -144,8 +185,10 @@ def audit_observed_unit_consistency(
             "diagnostic_only": True,
         },
         "interpretation": (
-            "Unit declarations are compared only as explicit claims. A conflict or missing review "
-            "keeps state binding closed; no unit is selected by inference."
+            "Manifest units are source-column units. A reviewed comparison_unit is procedure or "
+            "setpoint context only; it is not compared with or substituted for the source unit. "
+            "A source-unit conflict or missing review keeps state binding closed; no unit is selected "
+            "by inference."
         ),
     }
 

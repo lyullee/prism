@@ -1,0 +1,47 @@
+{
+  "schema_version": "prism.reviewed_signal_unit_map.v1",
+  "status": "DIAGNOSTIC_ROLE_RECONCILIATION_ONLY",
+  "description": "Diagnostic example separating raw workbook source units from operating-procedure comparison units. It is not a state-promotion approval.",
+  "source_unit_evidence": {
+    "record": "examples/inspection_center_workbook_header_unit_evidence.json",
+    "claim": "Workbook headers explicitly label PT1206 and PT1105A as MPa and TT1106 as degC.",
+    "numeric_range_inference": false
+  },
+  "comparison_unit_evidence": {
+    "record": "examples/inspection_center_reviewed_signal_unit_map.json",
+    "claim": "The operating procedure provides bar pressure setpoint context and does not establish the historian source unit.",
+    "numeric_range_inference": false
+  },
+  "signal_units": {
+    "PT1206": {
+      "source_unit": "MPa",
+      "comparison_unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [{"page": 9, "anchor": "PT-1206", "context": "comparison context only"}]
+    },
+    "PT1105A": {
+      "source_unit": "MPa",
+      "comparison_unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [{"page": 24, "anchor": "PT-1105A", "context": "comparison context only"}]
+    },
+    "TT1106": {
+      "source_unit": "degC",
+      "comparison_unit": "degC",
+      "quantity": "temperature",
+      "evidence": [{"page": 11, "anchor": "TT-1106", "context": "source and comparison unit agree"}]
+    }
+  },
+  "policy": {
+    "source_unit_vs_comparison_unit_distinguished": true,
+    "comparison_unit_used_for_runtime_conversion": false,
+    "pressure_basis_resolved": false,
+    "calibration_quality_resolved": false,
+    "state_snapshot_binding_allowed": false,
+    "frequency_inference_performed": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false
+  }
+}
