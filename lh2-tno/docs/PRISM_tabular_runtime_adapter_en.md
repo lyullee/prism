@@ -49,6 +49,7 @@ frames = build_runtime_frames_from_xlsx(
     component_id="TK-01",
     sheet="Receiving",
     timestamp_column="time_s",
+    timestamp_base="2026-01-21T13:00:00",
     operating_mode_column="operating_mode",
     bindings={
         "PT1105A": {"tag": "pressure", "unit": "bar", "quality": "valid"},
@@ -64,6 +65,10 @@ equivalent pinned `openpyxl` package). It rejects empty
 or duplicate headers and does not guess a worksheet, unit, pressure basis, or
 operating mode. The inspection-centre workbook can therefore be replayed as a
 state input only after its tag and unit review is complete.
+
+For an Excel date/time column, pass an ISO-8601 `timestamp_base` explicitly.
+The adapter converts each cell to elapsed seconds from that base. Without the
+base it rejects datetime cells rather than guessing a clock origin or timezone.
 
 The result contains the latest state frame plus the source SHA-256 and all
 sample provenance. Pass the frame to the HAZOP runtime handoff. The adapter

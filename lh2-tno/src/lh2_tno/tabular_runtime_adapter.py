@@ -15,6 +15,7 @@ import csv
 import hashlib
 import math
 from collections.abc import Mapping
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -54,6 +55,40 @@ def _finite(value: Any, field: str, *, nonnegative: bool = False) -> float:
             f"{field} must be finite" + (" and non-negative" if nonnegative else "")
         )
     return number
+
+
+def _source_time_seconds(
+    value: Any,
+    field: str,
+    *,
+    scale_to_s: float,
+    timestamp_base: str | datetime | None,
+) -> float:
+    """Convert an explicitly supplied numeric or datetime source timestamp."""
+    if isinstance(value, datetime):
+        if timestamp_base is None:
+            raise TabularRuntimeAdapterError(
+                f"{field} is a datetime; provide timestamp_base explicitly"
+            )
+        if isinstance(timestamp_base, str):
+            try:
+                base = datetime.fromisoformat(timestamp_base)
+            except ValueError as error:
+                raise TabularRuntimeAdapterError(
+                    "timestamp_base must be an ISO-8601 datetime"
+                ) from error
+        elif isinstance(timestamp_base, datetime):
+            base = timestamp_base
+        else:
+            raise TabularRuntimeAdapterError(
+                "timestamp_base must be an ISO-8601 datetime or datetime object"
+            )
+        if (value.tzinfo is None) != (base.tzinfo is None):
+            raise TabularRuntimeAdapterError(
+                f"{field} and timestamp_base must use the same timezone awareness"
+            )
+        return (value - base).total_seconds() * scale_to_s
+    return _finite(value, field) * scale_to_s
 
 
 def _numeric_row(
@@ -126,6 +161,7 @@ def _build_runtime_source_from_rows(
     origin: str,
     arrival_delay_s: float,
     timestamp_scale_to_s: float,
+    timestamp_base: str | datetime | None,
     ambient_pressure_pa: float | None,
     format_name: str,
     format_metadata: Mapping[str, Any] | None = None,
@@ -173,7 +209,12 @@ def _build_runtime_source_from_rows(
         if not isinstance(row, Mapping):
             raise TabularRuntimeAdapterError(f"row {index} must be an object")
         raw_time = row.get(timestamp_column)
-        source_time_s = _finite(raw_time, f"row {index}.{timestamp_column}") * timestamp_scale_to_s
+        source_time_s = _source_time_seconds(
+            raw_time,
+            f"row {index}.{timestamp_column}",
+            scale_to_s=timestamp_scale_to_s,
+            timestamp_base=timestamp_base,
+        )
         if source_time_s < 0.0:
             raise TabularRuntimeAdapterError(f"row {index} source time must be non-negative")
         if previous_time is not None and source_time_s <= previous_time:
@@ -218,6 +259,7 @@ def _build_runtime_source_from_rows(
     binding_metadata = {
         "timestamp_column": timestamp_column,
         "timestamp_scale_to_s": timestamp_scale_to_s,
+        "timestamp_base": timestamp_base.isoformat() if isinstance(timestamp_base, datetime) else timestamp_base,
         "operating_mode_column": operating_mode_column,
         "arrival_delay_s": arrival_delay_s,
         "normalizer_mapping_is_explicit": True,
@@ -261,6 +303,7 @@ def load_csv_runtime_source(
     encoding: str = "utf-8-sig",
     arrival_delay_s: float = 0.0,
     timestamp_scale_to_s: float = 1.0,
+    timestamp_base: str | datetime | None = None,
     ambient_pressure_pa: float | None = None,
 ) -> dict[str, Any]:
     """Load one explicit CSV/TSV state stream as a runtime source mapping.
@@ -302,6 +345,7 @@ def load_csv_runtime_source(
         origin=origin,
         arrival_delay_s=arrival_delay_s,
         timestamp_scale_to_s=timestamp_scale_to_s,
+        timestamp_base=timestamp_base,
         ambient_pressure_pa=ambient_pressure_pa,
         format_name="csv" if delimiter == "," else "delimited",
         format_metadata={"delimiter": delimiter},
@@ -323,6 +367,7 @@ def load_xlsx_runtime_source(
     sheet_index: int = 0,
     arrival_delay_s: float = 0.0,
     timestamp_scale_to_s: float = 1.0,
+    timestamp_base: str | datetime | None = None,
     ambient_pressure_pa: float | None = None,
 ) -> dict[str, Any]:
     """Load one explicit XLSX state stream using the same strict row contract.
@@ -380,6 +425,7 @@ def load_xlsx_runtime_source(
         origin=origin,
         arrival_delay_s=arrival_delay_s,
         timestamp_scale_to_s=timestamp_scale_to_s,
+        timestamp_base=timestamp_base,
         ambient_pressure_pa=ambient_pressure_pa,
         format_name="xlsx",
         format_metadata={"sheet": sheet, "sheet_index": sheet_index},

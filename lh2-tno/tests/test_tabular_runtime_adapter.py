@@ -163,6 +163,7 @@ def test_xlsx_adapter_preserves_explicit_sheet_and_mode(tmp_path):
         source_id="xlsx-tk-01",
         component_id="TK-01",
         timestamp_column="time_s",
+        timestamp_base="2026-01-21T13:00:00",
         operating_mode_column="mode",
         sheet="Receiving",
         bindings=_bindings(),
@@ -176,6 +177,7 @@ def test_xlsx_adapter_preserves_explicit_sheet_and_mode(tmp_path):
         source_id="xlsx-tk-01",
         component_id="TK-01",
         timestamp_column="time_s",
+        timestamp_base="2026-01-21T13:00:00",
         operating_mode_column="mode",
         sheet="Receiving",
         bindings=_bindings(),
@@ -183,6 +185,40 @@ def test_xlsx_adapter_preserves_explicit_sheet_and_mode(tmp_path):
     )
     assert frames["frames"][0]["captured_at_s"] == 1.0
     assert frames["frames"][0]["values"]["pressure"]["value_si"] == pytest.approx(650000.0)
+
+
+def test_xlsx_adapter_requires_base_for_datetime_timestamps(tmp_path):
+    openpyxl = pytest.importorskip("openpyxl")
+    from datetime import datetime
+
+    path = tmp_path / "datetime.xlsx"
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.append(["captured_at", "mode", "PT1105A", "TT1106"])
+    worksheet.append([datetime(2026, 1, 21, 13, 0), "receiving", 6.2, -160])
+    workbook.save(path)
+    workbook.close()
+    with pytest.raises(TabularRuntimeAdapterError, match="timestamp_base"):
+        load_xlsx_runtime_source(
+            path,
+            source_id="xlsx-tk-01",
+            component_id="TK-01",
+            timestamp_column="captured_at",
+            operating_mode_column="mode",
+            bindings=_bindings(),
+            normalizer=_normalizer(),
+        )
+    source = load_xlsx_runtime_source(
+        path,
+        source_id="xlsx-tk-01",
+        component_id="TK-01",
+        timestamp_column="captured_at",
+        operating_mode_column="mode",
+        timestamp_base="2026-01-21T13:00:00",
+        bindings=_bindings(),
+        normalizer=_normalizer(),
+    )
+    assert source["samples"][0]["captured_at_s"] == 0.0
 
 
 def test_xlsx_adapter_rejects_duplicate_headers(tmp_path):
