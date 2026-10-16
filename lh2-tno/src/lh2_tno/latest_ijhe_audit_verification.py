@@ -31,6 +31,7 @@ def verify_latest_ijhe_audit(
     root: Path | None = None,
     audit: Mapping[str, Any] | Path | None = None,
     handoff: Mapping[str, Any] | Path | None = None,
+    receptor_geometry: Mapping[str, Any] | Path | None = None,
 ) -> dict[str, Any]:
     """Verify status/audit/handoff identity without changing qualification gates."""
 
@@ -105,6 +106,34 @@ def verify_latest_ijhe_audit(
     if not isinstance(boundary, Mapping) or boundary.get("facility_ir_fn_available") is not False or boundary.get("physical_validation_claim") is not False:
         reasons.append("facility handoff qualification boundary is not fail-closed")
 
+    geometry_value: dict[str, Any] = {}
+    geometry_path: Path | None = None
+    geometry_pointer = status.get("receptor_geometry_interpretation_record")
+    if receptor_geometry is None and isinstance(geometry_pointer, str):
+        geometry_path = _relative_or_absolute(geometry_pointer, root=base)
+        geometry_value = _read_object(geometry_path) if geometry_path.exists() else {}
+    elif isinstance(receptor_geometry, Path):
+        geometry_path = receptor_geometry
+        geometry_value = _read_object(receptor_geometry)
+    elif isinstance(receptor_geometry, Mapping):
+        geometry_value = dict(receptor_geometry)
+    if geometry_pointer is not None or receptor_geometry is not None:
+        if geometry_value.get("schema_version") != "prism.receptor_geometry_interpretation.v1":
+            reasons.append("receptor geometry interpretation schema is not the declared PRISM schema")
+        if geometry_value.get("status") != "PASS_DIAGNOSTIC_ONLY":
+            reasons.append("receptor geometry interpretation is not PASS_DIAGNOSTIC_ONLY")
+        geometry_checks = geometry_value.get("checks")
+        if not isinstance(geometry_checks, list) or not geometry_checks or any(
+            not isinstance(item, Mapping) or item.get("status") != "PASS" for item in geometry_checks
+        ):
+            reasons.append("receptor geometry interpretation checks are not all PASS")
+        promotion = geometry_value.get("promotion_boundary")
+        if not isinstance(promotion, Mapping) or any(
+            promotion.get(key) is not False
+            for key in ("facility_total_risk_claim", "facility_qra_claim", "physical_validation_claim")
+        ):
+            reasons.append("receptor geometry interpretation promotion boundary is not fail-closed")
+
     status_value = "PASS" if not reasons else "BLOCKED_AUDIT_METADATA"
     return {
         "schema_version": SCHEMA,
@@ -119,6 +148,8 @@ def verify_latest_ijhe_audit(
         "facility_handoff_status": handoff_value.get("status"),
         "complete_facility_qra_claim": audit_value.get("complete_facility_qra_claim"),
         "physical_validation_claim": audit_value.get("physical_validation_claim"),
+        "receptor_geometry_interpretation_record": str(geometry_path) if geometry_path else None,
+        "receptor_geometry_interpretation_status": geometry_value.get("status") if geometry_value else None,
         "blocking_reasons": reasons,
         "interpretation": (
             "The latest audit pointer, summary counts, and diagnostic facility handoff are internally consistent; "

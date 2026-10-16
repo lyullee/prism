@@ -1,0 +1,138 @@
+{
+  "schema_version": "prism.receptor_geometry_interpretation.v1",
+  "status": "PASS_DIAGNOSTIC_ONLY",
+  "full_scope": {
+    "facility_id": "generic-lh2-full-scope-example",
+    "receptor_ids": [
+      "worker-01"
+    ],
+    "receptor_positions_enu_m": [
+      [
+        20.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "nearest_component_id": "reliquefier-01",
+    "nearest_component_distance_m": 7.0,
+    "conditional_annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "conditional_expected_death_fn_low_high": [
+      {
+        "expected_deaths": [],
+        "cumulative_frequency_per_year": []
+      },
+      {
+        "expected_deaths": [],
+        "cumulative_frequency_per_year": []
+      }
+    ],
+    "event_count": 34,
+    "case_count": 44,
+    "risk_atom_count": 176
+  },
+  "near_receptor": {
+    "facility_id": "generic-lh2-near-receptor-diagnostic",
+    "receptor_ids": [
+      "worker-01"
+    ],
+    "receptor_positions_enu_m": [
+      [
+        0.5,
+        0.0,
+        1.0
+      ]
+    ],
+    "nearest_component_id": "storage-tank-01",
+    "nearest_component_distance_m": 0.5,
+    "conditional_annual_ir_low_high": {
+      "worker-01": [
+        4.6800000000000006e-05,
+        4.6800000000000006e-05
+      ]
+    },
+    "conditional_expected_death_fn_low_high": [
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          4.6800000000000006e-05
+        ]
+      },
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          4.6800000000000006e-05
+        ]
+      }
+    ],
+    "positive_receptor_harm_atom_count": 1,
+    "event_count": 24,
+    "case_count": 24,
+    "risk_atom_count": 96
+  },
+  "checks": [
+    {
+      "id": "full_scope_manifest_identity",
+      "status": "PASS",
+      "interpretation": "full-scope assessment and manifest facility IDs must match"
+    },
+    {
+      "id": "near_receptor_manifest_identity",
+      "status": "PASS",
+      "interpretation": "near-receptor verification and manifest facility IDs must match"
+    },
+    {
+      "id": "full_scope_declared_receptor_is_zero",
+      "status": "PASS",
+      "interpretation": "the declared full-scope receptor must have zero conditional IR/F-N in this diagnostic"
+    },
+    {
+      "id": "near_receptor_diagnostic_is_nonzero",
+      "status": "PASS",
+      "interpretation": "the separate near-receptor diagnostic must retain a positive conditional contribution"
+    },
+    {
+      "id": "geometry_is_distinct",
+      "status": "PASS",
+      "interpretation": "the two diagnostics must use distinct receptor geometry and the near receptor must be closer"
+    },
+    {
+      "id": "diagnostic_records_are_not_substituted",
+      "status": "PASS",
+      "interpretation": "near-receptor results must not be substituted into the full-scope facility record"
+    },
+    {
+      "id": "promotion_remains_closed",
+      "status": "PASS",
+      "interpretation": "both records must remain diagnostic-only with facility QRA and physical validation closed"
+    }
+  ],
+  "promotion_boundary": {
+    "facility_total_risk_claim": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false,
+    "near_receptor_is_chain_connectivity_diagnostic_only": true,
+    "interpretation": "A zero result at the declared full-scope receptor is a geometry-specific conditional result. The separate near-receptor diagnostic demonstrates that the release-to-harm chain can reach a receptor, but its result is not a full-scope facility total and is not substituted into the union."
+  },
+  "source_paths": {
+    "full_scope_assessment": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+    "near_receptor_verification": "results\\20261111\\native_isolation_catalog_facility_chain_near_receptor_v3\\verification.json",
+    "full_scope_manifest": "examples\\generic_lh2_full_scope_manifest.json",
+    "near_receptor_manifest": "examples\\generic_lh2_near_receptor_manifest.json"
+  },
+  "blocking_reasons": [],
+  "source_sha256": {
+    "full_scope_assessment": "92315c2cd334b7f9d1374692bebc1d5c58f1d40f8cdd6eb717fbe04ae641d415",
+    "near_receptor_verification": "ef034ca8cd8d17feae1a17f7b76d2ee5aee8e503f1a4ca3900e4c56b810b9033",
+    "full_scope_manifest": "bb227b1e8dd3d9681c51d1a7fca0d78bd1b7d02ba0f4933854ac32667b170ca1",
+    "near_receptor_manifest": "2223f26eee5a2b4b9b44fb16d416a106bf539f624ac142dcb54a77ecac90ba60"
+  }
+}

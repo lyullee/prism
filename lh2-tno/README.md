@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1239 passed, 1 warning**.
+The v0.6.3 local validation result is **1243 passed, 1 warning**.
 
 ## What PRISM is for
 
@@ -222,6 +222,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Latest IJHE audit](docs/PRISM_IJHE_latest_audit_20261115.md)
 - [Latest facility-handoff IJHE audit detail](docs/PRISM_IJHE_facility_handoff_audit_20261115.md)
 - [Latest IJHE audit metadata verifier](src/lh2_tno/latest_ijhe_audit_verification.py)
+- [Receptor-geometry interpretation](docs/PRISM_receptor_geometry_interpretation_20261115.md)
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [Current external release-artifact intake](docs/PRISM_external_release_artifact_intake_20261016.md)
 - [Inspection-centre reviewed-unit re-audit](docs/PRISM_검사센터_검토단위_재감사_20261016.md)
@@ -252,6 +253,12 @@ Save the exact state frame, HAZOP row, provider response and digest, `FrequencyP
 python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
 python -m pytest -q
 ```
+
+The latest geometry diagnostic explains why the full union can show zero at
+the declared 20 m worker receptor while a separate 0.5 m replay reaches one
+harm atom. The records remain separate and diagnostic-only; the near-receptor
+value is never substituted into the facility total. See
+[`PRISM_receptor_geometry_interpretation_20261115.md`](docs/PRISM_receptor_geometry_interpretation_20261115.md).
 
 ## Current qualification boundary
 

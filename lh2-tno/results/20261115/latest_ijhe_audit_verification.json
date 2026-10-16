@@ -11,6 +11,8 @@
   "facility_handoff_status": "PASS_WITH_SCOPE_LIMITATIONS",
   "complete_facility_qra_claim": false,
   "physical_validation_claim": false,
+  "receptor_geometry_interpretation_record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\receptor_geometry_interpretation.json",
+  "receptor_geometry_interpretation_status": "PASS_DIAGNOSTIC_ONLY",
   "blocking_reasons": [],
   "interpretation": "The latest audit pointer, summary counts, and diagnostic facility handoff are internally consistent; this verification does not promote provider qualification, physical validation, or facility IR/F-N."
 }

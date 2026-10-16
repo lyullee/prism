@@ -77,3 +77,43 @@ def test_latest_ijhe_audit_verification_blocks_count_drift(tmp_path: Path):
     result = verify_latest_ijhe_audit(status, root=tmp_path)
     assert result["status"] == "BLOCKED_AUDIT_METADATA"
     assert any("check count" in reason for reason in result["blocking_reasons"])
+
+
+def test_latest_ijhe_audit_verification_checks_receptor_geometry_pointer(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {"facility_ir_fn_available": False, "physical_validation_claim": False},
+    }
+    geometry = {
+        "schema_version": "prism.receptor_geometry_interpretation.v1",
+        "status": "PASS_DIAGNOSTIC_ONLY",
+        "checks": [{"status": "PASS"}],
+        "promotion_boundary": {
+            "facility_total_risk_claim": False,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "geometry.json", geometry)
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "receptor_geometry_interpretation_record": "geometry.json",
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["receptor_geometry_interpretation_status"] == "PASS_DIAGNOSTIC_ONLY"
