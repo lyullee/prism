@@ -341,6 +341,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "status": "EXECUTED" if gate_result.get("status") == "CONSEQUENCE_EVALUATED" else "CONSEQUENCE_WITHHELD",
                 "gate_status": gate_result.get("status"),
                 "gate_reason": gate_result.get("reason"),
+                "consequence": consequence,
                 "risk": risk,
                 "elapsed_ms": (time.perf_counter() - started_event) * 1000.0,
                 "provider_input_origin": packet.get("input_origin"),
