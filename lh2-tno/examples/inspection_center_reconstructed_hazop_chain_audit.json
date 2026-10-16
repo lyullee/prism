@@ -1,0 +1,114 @@
+{
+  "schema_version": "prism.reconstructed_hazop_chain_audit.v1",
+  "status": "RECONSTRUCTED_DIAGNOSTIC_CHAIN_VERIFIED",
+  "check_count": 5,
+  "passed_count": 5,
+  "blocked_count": 0,
+  "checks": [
+    {
+      "name": "selected_scenario_identity",
+      "status": "PASS",
+      "reason": null,
+      "evidence": {
+        "runtime_ids": [
+          "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+        ],
+        "binding_ids": [
+          "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+        ],
+        "chain_ids": [
+          "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+        ]
+      }
+    },
+    {
+      "name": "provider_event_binding",
+      "status": "PASS",
+      "reason": null,
+      "evidence": {
+        "binding_status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
+        "bound_count": 1,
+        "binding_count": 1
+      }
+    },
+    {
+      "name": "provider_consequence_execution",
+      "status": "PASS",
+      "reason": null,
+      "evidence": {
+        "chain_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
+        "selected_count": 1,
+        "executed_count": 1,
+        "gate_statuses": [
+          "CONSEQUENCE_EVALUATED"
+        ]
+      }
+    },
+    {
+      "name": "full_consequence_stage_ledger",
+      "status": "PASS",
+      "reason": null,
+      "evidence": {
+        "required_stages": [
+          "equipment_resolved_gas_exit",
+          "rainout_and_dynamic_pool",
+          "vector_cryogenic_near_field",
+          "SLABx_dispersion",
+          "finite_inventory_cloud",
+          "ignition_branches",
+          "fire_radiation",
+          "multi_energy_blast_zones",
+          "TNO_human_damage",
+          "conditional_risk"
+        ],
+        "observed_stages": [
+          [
+            "equipment_resolved_gas_exit",
+            "rainout_and_dynamic_pool",
+            "vector_cryogenic_near_field",
+            "SLABx_dispersion",
+            "finite_inventory_cloud",
+            "ignition_branches",
+            "fire_radiation",
+            "multi_energy_blast_zones",
+            "TNO_human_damage",
+            "conditional_risk"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "diagnostic_promotion_boundary",
+      "status": "PASS",
+      "reason": null,
+      "evidence": {
+        "provider_packets_are_qualified": false,
+        "facility_qra_claim": false,
+        "provider_qualifications": [
+          "UNQUALIFIED_DIAGNOSTIC"
+        ]
+      }
+    }
+  ],
+  "required_stages": [
+    "equipment_resolved_gas_exit",
+    "rainout_and_dynamic_pool",
+    "vector_cryogenic_near_field",
+    "SLABx_dispersion",
+    "finite_inventory_cloud",
+    "ignition_branches",
+    "fire_radiation",
+    "multi_energy_blast_zones",
+    "TNO_human_damage",
+    "conditional_risk"
+  ],
+  "policy": {
+    "diagnostic_only": true,
+    "provider_qualification_claim": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false
+  },
+  "interpretation": "The reconstructed state-to-HAZOP-to-provider-to-consequence chain is structurally verified as a diagnostic execution. This audit does not qualify a provider packet, validate facility geometry, or promote a facility IR/F-N result."
+}
