@@ -4086,7 +4086,7 @@
   "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
   "latest_provider_packet_collection_manifest_case_count": 44,
   "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
-  "latest_local_full_test_run_commit": "7673e679",
+  "latest_local_full_test_run_commit": "15ef2f7c",
   "current_development": {
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
@@ -4161,5 +4161,6 @@
   "process_forecast_frame_adapter_diagnostic_status": "PROCESS_FORECAST_FRAMES_READY; 60 rows from inspection-centre supply forecast workbook, mode supplied explicitly as supply",
   "process_forecast_frame_adapter_diagnostic_source_digest": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
   "process_forecast_frame_adapter_frequency_inference_performed": false,
-  "process_forecast_frame_adapter_facility_qra_promotion": false
+  "process_forecast_frame_adapter_facility_qra_promotion": false,
+  "process_forecast_frame_adapter_latest_test_commit": "15ef2f7c"
 }
