@@ -1,0 +1,21 @@
+{
+  "schema_version": "prism.native_lh2dt_valve_compressible_handoff_replay.v1",
+  "replay_date": "2026-10-16",
+  "upstream_repository": "https://github.com/lyullee/lh2dt_models",
+  "upstream_commit": "b483f7921d7e67a269947f36393fdd3b9ab9e7b3",
+  "upstream_source_tree_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
+  "event_id": "native-stroke-valve/accidental-leak-001",
+  "provider_result_digest": "b77bdcf94ea03c2ecf90512467b79431c3f8161f23fdc72b9c8a7785632849a5",
+  "handoff_result_digest": "b08b3acb6bc0a36f1e5625feee26eeaae07f482868d55d668a8102457d524742",
+  "provider_duration_s": 0.19999999999999998,
+  "provider_mass_residual_kg": 1.3552527156068805E-20,
+  "handoff_state_count": 10,
+  "handoff_max_mach_number": 1.3317710729923289,
+  "handoff_consumed": true,
+  "consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "interpretation": "Current-source integration diagnostic only; no provider qualification, field frequency inference, independent full-chain physical validation, or facility IR/F-N promotion."
+}

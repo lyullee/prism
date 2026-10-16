@@ -5036,6 +5036,7 @@
   "latest_native_lh2dt_valve_compressible_handoff_packet": "results/20261016/native_valve_actual_smoke_integrated_v2/resolved_release_with_handoff.json",
   "latest_native_lh2dt_valve_compressible_handoff_chain_verification": "results/20261016/native_valve_actual_smoke_integrated_v2/chain/verification.json",
   "latest_native_lh2dt_valve_compressible_handoff_validation": "results/20261016/native_valve_actual_smoke_integrated_v2/handoff_validation.json",
+  "latest_native_lh2dt_valve_compressible_handoff_replay_summary": "examples/native_lh2dt_valve_compressible_handoff_replay_20261016.json",
   "latest_native_lh2dt_valve_compressible_handoff_max_mach": 1.3317710729923289,
   "latest_native_lh2dt_valve_compressible_handoff_chain_executed": true,
   "latest_native_lh2dt_valve_compressible_handoff_provider_mass_residual_kg": 1.3552527156068805e-20,
