@@ -340,6 +340,14 @@ physical validation, and the declared facility scope gates are closed.
 
 The monitoring screen should show operating mode, HAZOP deviation, provider status, source digest, termination, inventory, frequency citation, consequence backend, cache/fresh mode, latency, and required response. `facility_qra_claim=false` and `frequency_inference_performed=false` are safety guards, not errors.
 
+For a conditional realtime facility handoff, read `campaign.timing.case_count`,
+`case_min_ms`, `case_median_ms`, `case_p95_ms`, and `case_p99_ms` from the
+same result ledger. These are measured wall-clock samples for the cases in that
+single snapshot. They describe observed processing time and do not establish a
+fresh-physics 1 Hz service guarantee; the result continues to expose
+`one_hz_fresh_physics_demonstrated=false` unless a separate validated benchmark
+opens that claim.
+
 ## 9. Acceptance tests
 
 After connecting a provider, automatically check:

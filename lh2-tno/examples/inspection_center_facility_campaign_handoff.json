@@ -3584,12 +3584,13 @@
     "total_facility_annual_ir_low_high": null,
     "total_facility_expected_death_fn_low_high": null,
     "timing": {
+      "case_count": 1,
       "fresh_physics_cases": 1,
       "case_min_ms": 1499.203099985607,
-      "case_median_ms": null,
+      "case_median_ms": 1499.203099985607,
       "case_max_ms": 1499.203099985607,
-      "case_p95_ms": null,
-      "case_p99_ms": null,
+      "case_p95_ms": 1499.203099985607,
+      "case_p99_ms": 1499.203099985607,
       "campaign_elapsed_ms": null,
       "distribution": "one synchronous realtime facility snapshot; not sustained throughput",
       "realtime_processing_time": {
