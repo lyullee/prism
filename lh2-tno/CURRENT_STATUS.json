@@ -1954,8 +1954,8 @@
   "current_union_facility_evidence_request_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_ledger.json",
   "current_union_full_test_count": 1078,
-  "current_union_ijhe_objective_coverage_audit_record": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 25 objective checks including generic-facility scenario/frequency, release-closure, and observed-state-model-binding diagnostic rows; core blockers 0 and strict evidence gates 4 remain blocked; 44/44 release-closure cases remain open",
+  "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 20 objective checks, core blockers 0, strict/diagnostic evidence gates 7 remain blocked; realtime cache path is conditionally complete while fresh physics remains background-only",
   "current_union_risk_atom_chain_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_chain_closure_audit.json",
   "current_union_risk_atom_chain_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 24 events, 24 cases and 96 risk atoms reach the facility damage ledger; operator-limited and synthetic evidence remain diagnostic-only",
   "current_union_facility_ir_fn_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC; 176 risk atoms independently reproduce conditional facility IR/F-N with 0 IR mismatches and 0 F/N mismatches; diagnostic-only and facility QRA remains withheld",
@@ -5379,5 +5379,32 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "66f89934"
+  "latest_local_full_test_run_commit": "8e05b6c4",
+  "current_union_ijhe_objective_coverage_audit_check_count": 20,
+  "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
+  "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra",
+    "strict_facility_state_snapshot_coverage",
+    "diagnostic_observed_state_source_replay",
+    "diagnostic_observed_state_runtime_frames"
+  ],
+  "current_union_ijhe_objective_coverage_audit_sha256": "E006073D0CD003E9E0924071892E845336A929840FEF381C0AFD684F78E7519B",
+  "current_union_ijhe_objective_coverage_audit_realtime_status": "CONDITIONALLY_COMPLETE; cached_diagnostic_1hz meets benchmark, fresh_physics_background is explicitly not a 1 Hz claim",
+  "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json",
+  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 20 checks, core blockers 0, strict/diagnostic evidence gates 7 remain blocked",
+  "latest_ijhe_objective_coverage_audit_check_count": 20,
+  "latest_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
+  "latest_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra",
+    "strict_facility_state_snapshot_coverage",
+    "diagnostic_observed_state_source_replay",
+    "diagnostic_observed_state_runtime_frames"
+  ],
+  "latest_ijhe_objective_coverage_audit_sha256": "E006073D0CD003E9E0924071892E845336A929840FEF381C0AFD684F78E7519B"
 }
