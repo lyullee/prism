@@ -1,6 +1,6 @@
-# PRISM v0.6.2 IJHE 요구사항 추적표 (2026-11-15)
+# PRISM v0.6.3 IJHE 요구사항 추적표 (2026-11-15)
 
-이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **49개 검사 중 45 PASS, 4 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 검사센터 시설 handoff와 수신기 기하 비교 진단 check가 포함되어 있다.
+이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **54개 검사 중 49 PASS, 5 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 검사센터 시설 handoff와 수신기 기하 비교 진단 check가 포함되어 있다.
 
 ## 요구사항별 판정
 
@@ -15,6 +15,7 @@
 | 기상·인구·IR/F-N 조건부 계산 | facility assessment의 conditional diagnostic view | **조건부 진단만 허용** (`PASS`) |
 | 빈도 불확실성·상관 가정·순위 안정성 | 5개 문헌 frequency scenario 및 uncertainty audit | **진단 완료** (`PASS`) |
 | 실시간 처리시간과 캐시/신규 계산 구분 | realtime benchmark 및 case timing fields | **처리시간 근거 확보**, 1 Hz fresh-physics 주장은 보류 (`PASS`) |
+| 현재·예측 공정 상태를 동일 HAZOP/provider/SLABx-LH2 경계로 연결 | `run_hazop_integrated_risk`, `prism.hazop_forecast_risk_scan.v1`, explicit `model_prediction` origin/time, forecast facility-aggregator gate | **진단 완료**, 예측 시설 F/N은 명시적 aggregator 전까지 보류 |
 | 미계산·운영자 제한·영역 제한을 숨기지 않음 | facility evidence request, release-boundary audit, scope ledger | **진단 완료**, 미계산/제한 상태 보존 |
 | 실제 시설 QRA 승격 | qualified packet, independent validation, complete release boundary | **차단** (`BLOCKED`) |
 
@@ -33,7 +34,7 @@
 진단 geometry를 사용하므로 실제 시설 provider 자격, 독립 검증, 시설 전체
 IR/F-N 승격의 증거로 사용하지 않는다.
 
-## 현재 네 가지 엄격한 차단 검사
+## 현재 다섯 가지 엄격한 차단 검사
 
 | 차단 검사 | 의미 | 필요한 다음 증거 |
 |---|---|---|
@@ -41,6 +42,15 @@ IR/F-N 승격의 증거로 사용하지 않는다.
 | `actual_provider_release_packet` | 합성/model-prediction packet만 있음 | 실제 시설 geometry·운전조건을 계산한 qualified accident export와 qualification sidecar |
 | `declared_major_accident_scope` | 수치 계산은 있으나 사고군 전체의 적격 증거가 없음 | 사고군별 독립 검증자료와 provider packet |
 | `facility_ir_fn_available` | 시설 전체 IR/F-N을 공식값으로 표시할 수 없음 | 위 세 증거와 완전한 시설 목록·위치·인구·방호정책 |
+| `facility_case_provider_packet_coverage` | 44개 case와 정확히 일치하는 qualified provider packet이 없음 | case/event/component/port/source-result digest가 일치하는 provider packet과 qualification sidecar |
+
+수치적으로는 44개 case 모두가 risk-atom chain을 통과했고, 최신 case-level
+release audit은 **42개를 numerically closed**, **2개를 numerically open**으로
+분류한다. 이 수치는 provider 자격화가 끝났다는 뜻이 아니다. 29개는
+`NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`이고, 2개는 emergency-relief
+및 600 s horizon 종료 경계가 아직 열려 있으므로 strict facility-QRA gate는
+계속 닫혀 있다. 예측 상태 스캔도 동일한 사고·피해 필드를 사용하지만,
+시설 F/N 집계는 `WITHHELD_FORECAST_FACILITY_AGGREGATOR_REQUIRED`로 남긴다.
 
 ## 추가된 다설비 결합 진단
 
@@ -85,6 +95,8 @@ qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미�
 - 최신 audit metadata verifier: `results/20261115/latest_ijhe_audit_verification.json`
 - 최신 release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 최신 provider termination catalog: `results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json`
+- 최신 case-level release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
+- 현재·예측 HAZOP 연결 계약: [`PRISM_current_forecast_hazop_contract_en.md`](PRISM_current_forecast_hazop_contract_en.md)
 - 현재 상태 원장: `CURRENT_STATUS.json`
 
 이 표는 완료를 선언하는 문서가 아니라, 계산 연결과 승격 증거를 한눈에 구분하는 IJHE 제출용 추적성 문서다.
