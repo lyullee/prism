@@ -58,7 +58,9 @@ frames = build_runtime_frames_from_xlsx(
 )
 ```
 
-The XLSX reader requires `openpyxl` in the connector runtime. It rejects empty
+The XLSX reader requires `openpyxl` in the connector runtime. Install the
+optional package extra with `pip install "prism-risk[xlsx]"` (or install an
+equivalent pinned `openpyxl` package). It rejects empty
 or duplicate headers and does not guess a worksheet, unit, pressure basis, or
 operating mode. The inspection-centre workbook can therefore be replayed as a
 state input only after its tag and unit review is complete.

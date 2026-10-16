@@ -28,6 +28,7 @@ Archive = "https://doi.org/10.5281/zenodo.23241358"
 
 [project.optional-dependencies]
 test = ["pytest>=8", "numpy>=1.26,<3", "CoolProp>=6.6,<9", "pypdf>=5,<7"]
+xlsx = ["openpyxl>=3.1,<4"]
 
 [project.scripts]
 prism = "tno_host:main"
