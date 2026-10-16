@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1294 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,307 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 ## What PRISM is for
 
@@ -389,6 +389,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
 - [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
+- [Partial inspection-centre boundary evidence audit](docs/PRISM_partial_LH2_boundary_evidence_en.md)
+- [Partial boundary evidence record](results/20261117/inspection_center_partial_boundary_evidence.json)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
 - [v0.6.3 distribution record (Korean)](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)
 
@@ -418,6 +420,14 @@ value is never substituted into the facility total. See
 ## Current qualification boundary
 
 PRISM v0.6.3 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: four evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
+
+The inspection-centre procedure audit is intentionally classified as **partial operational evidence**. It confirms procedure anchors for pressure monitoring, PSV response, isolation/vent commands, and an operating stage, but it does not supply a qualified release duration, termination event, relief setpoint/capacity, mass balance, or annual accident frequency. Those missing fields must be supplied by an equipment-provider packet before the affected cases can enter a promoted facility QRA. The audit script is reproducible with:
+
+```powershell
+python scripts/audit_partial_lh2_boundary_evidence.py `
+  --manifest examples/inspection_center_partial_boundary_evidence_manifest.json `
+  --output results/20261117/inspection_center_partial_boundary_evidence.json
+```
 
 ## License and citation
 
