@@ -267,6 +267,29 @@ def test_objective_audit_aligns_current_completion_audit_without_optional_extern
     ] is None
 
 
+def test_objective_audit_accepts_independent_facility_ir_fn_closure():
+    inputs = _inputs()
+    inputs["facility_aggregate_closure_audit"] = {
+        "schema_version": "prism.facility_aggregate_closure_audit.v1",
+        "status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+        "risk_atom_count": 4,
+        "ir_mismatch_count": 0,
+        "fn_mismatch_count": 0,
+        "diagnostic_only": True,
+        "qualified_provider_packet": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "_record_path": "facility-aggregate.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_facility_ir_fn_aggregate_closure"
+    )
+    assert row["status"] == "PASS"
+    assert row["observed"]["risk_atom_count"] == 4
+
+
 def test_objective_audit_blocks_misaligned_full_completion_audit():
     inputs = _inputs()
     inputs["completion_audit"] = {

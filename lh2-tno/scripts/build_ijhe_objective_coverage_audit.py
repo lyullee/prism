@@ -54,6 +54,7 @@ def main() -> int:
     parser.add_argument("--generic-provider-closure-audit", type=Path)
     parser.add_argument("--generic-provider-evidence-requests", type=Path)
     parser.add_argument("--generic-provider-evidence-audit", type=Path)
+    parser.add_argument("--facility-aggregate-closure-audit", type=Path)
     parser.add_argument("--release-closure-worklist", type=Path)
     parser.add_argument("--inventory-termination-margin-probe", type=Path)
     parser.add_argument("--external-release-artifact-intake", type=Path)
@@ -167,6 +168,11 @@ def main() -> int:
             generic_provider_evidence_audit=(
                 _object(args.generic_provider_evidence_audit)
                 if args.generic_provider_evidence_audit
+                else None
+            ),
+            facility_aggregate_closure_audit=(
+                _object(args.facility_aggregate_closure_audit)
+                if args.facility_aggregate_closure_audit
                 else None
             ),
             release_closure_worklist=(

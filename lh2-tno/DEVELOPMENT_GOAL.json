@@ -1460,7 +1460,7 @@
   "current_union_campaign_ledger_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_ledger.json",
   "current_union_full_test_count": 1078,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 32 objective checks including generic-facility scenario/frequency, release-closure, observed-state-model-binding and completion-alignment diagnostic rows; core blockers 0 and strict evidence gates 4 remain blocked; 44/44 release-closure cases remain open",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 33 objective checks including generic-facility scenario/frequency, release-closure, independent facility IR/F-N closure, observed-state-model-binding and completion-alignment diagnostic rows; core blockers 0 and strict evidence gates 4 remain blocked; 44/44 release-closure cases remain open",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_frequency_uncertainty_audit.json",
   "current_union_facility_frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC; 5 literature scenarios reproduce the 96-atom conditional ledger; no frequency inference, credible interval or facility QRA",
   "current_union_facility_component_contribution_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_component_audit.json",

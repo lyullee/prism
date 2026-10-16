@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 32 |
+| Objective rows | 33 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (49 checks: 45 PASS, 4 BLOCKED) |
@@ -95,7 +95,8 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore means that the unresolved gate is represented consistently; it
 does not mean that the source has converged or that physical validation is complete.
 
-The current objective ledger contains 32 checks after reconciling the latest completion audit.
+The current objective ledger contains 33 checks after reconciling the latest completion audit and
+independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.
 The external-release inventory remains a separate optional diagnostic row when it is not embedded
 in the completion audit.
 
@@ -116,6 +117,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --completion-audit results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --facility-assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
+  --facility-aggregate-closure-audit results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_aggregate_closure_audit.json `
   --inspection-center-source-inventory results/20261115/inspection_center_source_inventory_suitability.json `
   --inventory-termination-margin-probe results/20261115/inventory_termination_margin_probe.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `

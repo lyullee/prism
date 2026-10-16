@@ -73,6 +73,7 @@ def build_ijhe_objective_coverage_audit(
     generic_provider_closure_audit: Mapping[str, Any] | None = None,
     generic_provider_evidence_requests: Mapping[str, Any] | None = None,
     generic_provider_evidence_audit: Mapping[str, Any] | None = None,
+    facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
     inventory_termination_margin_probe: Mapping[str, Any] | None = None,
     external_release_artifact_intake: Mapping[str, Any] | None = None,
@@ -123,6 +124,9 @@ def build_ijhe_objective_coverage_audit(
     )
     generic_provider_evidence_audit_path = _record_path(
         generic_provider_evidence_audit, None
+    )
+    facility_aggregate_closure_path = _record_path(
+        facility_aggregate_closure_audit, None
     )
     release_closure_worklist_path = _record_path(release_closure_worklist, None)
     inventory_termination_margin_probe_path = _record_path(
@@ -2286,6 +2290,53 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계다. "
                 "독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
+            ),
+        ))
+
+    # Independently reproduce the conditional facility IR/F-N sum from the
+    # saved atoms.  This is a numerical accounting check only; it must never
+    # turn a diagnostic ledger into a qualified site QRA.
+    if facility_aggregate_closure_audit is not None:
+        aggregate = facility_aggregate_closure_audit
+        aggregate_atom_count = _int(aggregate.get("risk_atom_count")) if isinstance(aggregate, Mapping) else None
+        facility_atom_count = _int(facility_coverage.get("risk_atom_count"))
+        aggregate_ok = (
+            isinstance(aggregate, Mapping)
+            and aggregate.get("schema_version") == "prism.facility_aggregate_closure_audit.v1"
+            and aggregate.get("status") == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
+            and aggregate_atom_count is not None
+            and facility_atom_count is not None
+            and aggregate_atom_count == facility_atom_count
+            and aggregate.get("ir_mismatch_count") == 0
+            and aggregate.get("fn_mismatch_count") == 0
+            and aggregate.get("diagnostic_only") is True
+            and aggregate.get("qualified_provider_packet") is False
+            and aggregate.get("physical_validation_claim") is False
+            and aggregate.get("facility_qra_claim") is False
+        )
+        rows.append(_row(
+            "diagnostic_facility_ir_fn_aggregate_closure",
+            "저장된 risk atom에서 시설 조건부 IR/F-N을 독립 재계산해 집계값과 일치시켜야 한다",
+            "PASS" if aggregate_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(facility_aggregate_closure_path,),
+            observed={
+                "schema_version": aggregate.get("schema_version") if isinstance(aggregate, Mapping) else None,
+                "status": aggregate.get("status") if isinstance(aggregate, Mapping) else None,
+                "risk_atom_count": aggregate_atom_count,
+                "facility_assessment_risk_atom_count": facility_atom_count,
+                "ir_mismatch_count": aggregate.get("ir_mismatch_count") if isinstance(aggregate, Mapping) else None,
+                "fn_mismatch_count": aggregate.get("fn_mismatch_count") if isinstance(aggregate, Mapping) else None,
+                "diagnostic_only": aggregate.get("diagnostic_only") if isinstance(aggregate, Mapping) else None,
+                "qualified_provider_packet": aggregate.get("qualified_provider_packet") if isinstance(aggregate, Mapping) else None,
+                "physical_validation_claim": aggregate.get("physical_validation_claim") if isinstance(aggregate, Mapping) else None,
+                "facility_qra_claim": aggregate.get("facility_qra_claim") if isinstance(aggregate, Mapping) else None,
+            },
+            blocking_reason=None if aggregate_ok else (
+                "시설 IR/F-N 독립 집계 원장이 malformed이거나 저장된 risk atom 집계와 일치하지 않는다"
+            ),
+            interpretation=(
+                "조건부 시설 IR/F-N의 수치 집계가 저장된 risk atom에서 독립 재현되었음을 확인한다. "
+                "provider 자격화, 독립 물리검증, 사고범위 완결성 및 시설 QRA 승격은 별도 gate다."
             ),
         ))
 
