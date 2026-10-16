@@ -58,3 +58,18 @@ bindings from entering the facility ledger. A complete gate permits the
 existing operator-limited join; it still preserves the no-frequency-inference,
 no-sensor-learning, no-physical-validation and no-facility-QRA-promotion
 policies.
+
+The same two records can be included in the IJHE readiness audit:
+
+```powershell
+python scripts/build_ijhe_completion_audit.py `
+  ...existing audit inputs... `
+  --forecast-quantitative-evidence-coverage results/20261115/inspection_center_facility_forecast_evidence_coverage.json `
+  --forecast-facility-campaign-evidence-gate results/20261115/inspection_center_facility_forecast_campaign_gate.json `
+  --output results/20261115/ijhe_completion_audit_with_forecast_gate.json
+```
+
+The resulting diagnostic check passes when the gate is internally consistent,
+including a valid withheld state. It does not reduce the strict blockers for
+qualified provider packets, independent physical validation or complete
+facility IR/F-N scope.

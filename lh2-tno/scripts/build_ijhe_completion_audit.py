@@ -179,6 +179,16 @@ def main() -> int:
         help="optional predicted-state HAZOP trigger scan",
     )
     parser.add_argument(
+        "--forecast-quantitative-evidence-coverage",
+        type=Path,
+        help="optional exact forecast-request quantitative evidence coverage audit",
+    )
+    parser.add_argument(
+        "--forecast-facility-campaign-evidence-gate",
+        type=Path,
+        help="optional fail-closed forecast facility campaign evidence gate",
+    )
+    parser.add_argument(
         "--hazop-integrated-risk",
         type=Path,
         help="optional current/forecast integrated HAZOP risk ledger",
@@ -604,6 +614,24 @@ def main() -> int:
         )
         if hazop_forecast_scan is not None:
             hazop_forecast_scan["_record_path"] = str(args.hazop_forecast_scan)
+        forecast_quantitative_evidence_coverage = (
+            _object(args.forecast_quantitative_evidence_coverage)
+            if args.forecast_quantitative_evidence_coverage
+            else None
+        )
+        if forecast_quantitative_evidence_coverage is not None:
+            forecast_quantitative_evidence_coverage["_record_path"] = str(
+                args.forecast_quantitative_evidence_coverage
+            )
+        forecast_facility_campaign_evidence_gate = (
+            _object(args.forecast_facility_campaign_evidence_gate)
+            if args.forecast_facility_campaign_evidence_gate
+            else None
+        )
+        if forecast_facility_campaign_evidence_gate is not None:
+            forecast_facility_campaign_evidence_gate["_record_path"] = str(
+                args.forecast_facility_campaign_evidence_gate
+            )
         hazop_integrated_risk = (
             _object(args.hazop_integrated_risk)
             if args.hazop_integrated_risk
@@ -807,6 +835,8 @@ def main() -> int:
             observed_state_model_binding_audit,
             external_equipment_model_contract_audit,
             hazop_forecast_scan=hazop_forecast_scan,
+            forecast_quantitative_evidence_coverage=forecast_quantitative_evidence_coverage,
+            forecast_facility_campaign_evidence_gate=forecast_facility_campaign_evidence_gate,
             hazop_integrated_risk=hazop_integrated_risk,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,

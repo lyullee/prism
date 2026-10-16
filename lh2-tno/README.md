@@ -302,6 +302,12 @@ both requests are still missing evidence. It never assigns zero risk or
 silently substitutes another component. See
 [`PRISM_forecast_facility_campaign_evidence_gate_en.md`](docs/PRISM_forecast_facility_campaign_evidence_gate_en.md)
 for the contract and the `forecast_evidence_coverage=...` integration option.
+The same coverage and gate records can be passed to
+`build_ijhe_completion_audit.py` with
+`--forecast-quantitative-evidence-coverage` and
+`--forecast-facility-campaign-evidence-gate`; a consistent withheld gate is
+recorded as a diagnostic control pass while strict provider and facility-QRA
+blockers remain visible.
 
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is

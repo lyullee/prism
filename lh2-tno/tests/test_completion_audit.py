@@ -217,6 +217,103 @@ def test_completion_audit_blocks_forecast_scan_without_processing_timing():
     assert "processing" in check["blocking_reason"]
 
 
+def test_completion_audit_records_forecast_facility_evidence_gate_as_diagnostic_control():
+    coverage = {
+        "schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+        "facility_id": "facility",
+        "rows": [{
+            "request_id": "tank-01|pressure|12",
+            "status": "MISSING_EVIDENCE",
+            "missing_fields": ["provider_release_packet.source_digest"],
+            "malformed_reason": "attachment_missing",
+        }],
+        "extra_attachment_keys": [],
+        "summary": {
+            "request_count": 1,
+            "evidence_complete_count": 0,
+            "evidence_missing_count": 1,
+            "extra_attachment_key_count": 0,
+        },
+    }
+    gate = {
+        "schema_version": "prism.forecast_facility_campaign_evidence_gate.v1",
+        "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE",
+        "facility_id": "facility",
+        "summary": {
+            "request_count": 1,
+            "evidence_complete_count": 0,
+            "evidence_missing_count": 1,
+            "extra_attachment_key_count": 0,
+        },
+        "missing_request_ids": ["tank-01|pressure|12"],
+        "extra_attachment_keys": [],
+        "downstream_campaign_input_allowed": False,
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "facility_ir_fn_calculated": False,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        forecast_quantitative_evidence_coverage=coverage,
+        forecast_facility_campaign_evidence_gate=gate,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_forecast_facility_campaign_evidence_gate"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["downstream_campaign_input_allowed"] is False
+
+
+def test_completion_audit_blocks_mismatched_forecast_facility_evidence_gate():
+    coverage = {
+        "schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+        "facility_id": "facility",
+        "rows": [{
+            "request_id": "tank-01|pressure|12",
+            "status": "MISSING_EVIDENCE",
+            "missing_fields": ["provider_release_packet.source_digest"],
+            "malformed_reason": "attachment_missing",
+        }],
+        "extra_attachment_keys": [],
+    }
+    gate = {
+        "schema_version": "prism.forecast_facility_campaign_evidence_gate.v1",
+        "status": "FORECAST_FACILITY_CAMPAIGN_READY_FOR_DOWNSTREAM_BINDING",
+        "summary": {
+            "request_count": 1,
+            "evidence_complete_count": 1,
+            "evidence_missing_count": 0,
+            "extra_attachment_key_count": 0,
+        },
+        "missing_request_ids": [],
+        "extra_attachment_keys": [],
+        "downstream_campaign_input_allowed": True,
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "facility_ir_fn_calculated": False,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        forecast_quantitative_evidence_coverage=coverage,
+        forecast_facility_campaign_evidence_gate=gate,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_forecast_facility_campaign_evidence_gate"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _integrated_hazop_ledger():
     return {
         "schema_version": "prism.hazop_integrated_risk.v1",

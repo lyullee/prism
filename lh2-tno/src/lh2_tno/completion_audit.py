@@ -11,6 +11,12 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .release_ledger import evaluate_facility_release_boundary
+from .forecast_handoff import (
+    FACILITY_CAMPAIGN_GATE_SCHEMA,
+    EVIDENCE_COVERAGE_SCHEMA,
+    ForecastHandoffError,
+    build_forecast_facility_campaign_evidence_gate,
+)
 
 
 def _finite(value: Any) -> bool:
@@ -119,6 +125,8 @@ def build_ijhe_completion_audit(
     native_provider_multi_equipment_audit: Mapping[str, Any] | None = None,
     inspection_center_facility_ijhe_handoff_audit: Mapping[str, Any] | None = None,
     receptor_geometry_interpretation: Mapping[str, Any] | None = None,
+    forecast_quantitative_evidence_coverage: Mapping[str, Any] | None = None,
+    forecast_facility_campaign_evidence_gate: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3566,6 +3574,78 @@ def build_ijhe_completion_audit(
             "never infers frequency or promotes facility QRA."
         )
         checks.append(forecast_check)
+    if (
+        forecast_quantitative_evidence_coverage is not None
+        or forecast_facility_campaign_evidence_gate is not None
+    ):
+        coverage = forecast_quantitative_evidence_coverage
+        gate = forecast_facility_campaign_evidence_gate
+        computed_gate: Mapping[str, Any] | None = None
+        gate_error: str | None = None
+        if not isinstance(coverage, Mapping):
+            gate_error = "forecast quantitative evidence coverage is missing"
+        elif coverage.get("schema_version") != EVIDENCE_COVERAGE_SCHEMA:
+            gate_error = "forecast quantitative evidence coverage schema is invalid"
+        else:
+            try:
+                computed_gate = build_forecast_facility_campaign_evidence_gate(coverage)
+            except ForecastHandoffError as error:
+                gate_error = str(error)
+        gate_summary = gate.get("summary") if isinstance(gate, Mapping) else None
+        computed_summary = computed_gate.get("summary") if computed_gate else None
+        gate_matches = (
+            isinstance(gate, Mapping)
+            and computed_gate is not None
+            and gate.get("schema_version") == FACILITY_CAMPAIGN_GATE_SCHEMA
+            and gate.get("status") == computed_gate.get("status")
+            and gate.get("downstream_campaign_input_allowed")
+            == computed_gate.get("downstream_campaign_input_allowed")
+            and gate.get("missing_request_ids") == computed_gate.get("missing_request_ids")
+            and gate.get("extra_attachment_keys") == computed_gate.get("extra_attachment_keys")
+            and gate_summary == computed_summary
+            and isinstance(gate.get("policy"), Mapping)
+            and gate["policy"].get("facility_qra_promotion") is False
+            and gate["policy"].get("frequency_inference_performed") is False
+            and gate["policy"].get("facility_ir_fn_calculated") is False
+        )
+        gate_check = _check(
+            "diagnostic_forecast_facility_campaign_evidence_gate",
+            gate_error is None and gate_matches,
+            {
+                "coverage_record": coverage.get("_record_path")
+                if isinstance(coverage, Mapping)
+                else None,
+                "gate_record": gate.get("_record_path") if isinstance(gate, Mapping) else None,
+                "coverage_schema_version": coverage.get("schema_version")
+                if isinstance(coverage, Mapping)
+                else None,
+                "gate_schema_version": gate.get("schema_version")
+                if isinstance(gate, Mapping)
+                else None,
+                "coverage_summary": dict(coverage.get("summary", {}))
+                if isinstance(coverage, Mapping)
+                and isinstance(coverage.get("summary"), Mapping)
+                else None,
+                "gate_summary": dict(gate_summary) if isinstance(gate_summary, Mapping) else None,
+                "computed_gate_status": computed_gate.get("status")
+                if computed_gate is not None
+                else None,
+                "downstream_campaign_input_allowed": gate.get(
+                    "downstream_campaign_input_allowed"
+                )
+                if isinstance(gate, Mapping)
+                else None,
+                "gate_error": gate_error,
+            },
+            "forecast evidence coverage and its facility campaign gate are missing, inconsistent, or unsafe",
+        )
+        gate_check["diagnostic_only"] = True
+        gate_check["interpretation"] = (
+            "The exact-request evidence gate is audited as a diagnostic control. "
+            "A valid withheld gate is a passing control check; it does not open "
+            "facility IR/F-N or qualify provider evidence."
+        )
+        checks.append(gate_check)
     if hazop_integrated_risk is not None:
         integrated = hazop_integrated_risk
         policy = integrated.get("policy")
