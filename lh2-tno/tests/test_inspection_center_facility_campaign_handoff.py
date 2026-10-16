@@ -35,7 +35,10 @@ def test_facility_campaign_handoff_preserves_normal_components_and_population_bo
         "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
     )
     assert result["equipment_state_release_audit"]["complete_case_count"] == 1
-    assert result["risk_atom_chain_audit"]["status"] == "PARTIAL_RISK_ATOM_CHAIN"
+    assert result["risk_atom_chain_audit"]["status"] == (
+        "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC"
+    )
+    assert result["risk_atom_chain_audit"]["complete_case_count"] == 1
     assert result["facility_campaign_handoff_audit"]["facility_qra_claim"] is False
     assert result["frequency_uncertainty"]["status"] == (
         "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE"

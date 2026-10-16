@@ -2,7 +2,7 @@
   "schema_version": "prism.inspection_center_facility_campaign_handoff.v1",
   "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
   "facility_id": "generic-outdoor-lh2-diagnostic",
-  "runtime_result_digest": "3f1d4ef03ae248a2249bf1b2aadbbe38dde59b892a2cdd2c4f4826684e6eed72",
+  "runtime_result_digest": "5626542fb29a9d9b84665c9675c4e8ee90aa99ce4d193115d4ee5ce46c255180",
   "snapshot": {
     "schema": "prism.hazop_facility_realtime_snapshot.v1",
     "facility_id": "generic-outdoor-lh2-diagnostic",
@@ -2478,11 +2478,11 @@
               }
             ],
             "stage_elapsed_ms": {
-              "source": 712.2566000034567,
-              "pool": 0.005199981387704611,
-              "near_field_and_dispersion": 387.2408000170253,
-              "cloud_observation": 90.25519998976961,
-              "fire_explosion_damage_risk": 67.87240001722239
+              "source": 689.508300012676,
+              "pool": 0.0052000104915350676,
+              "near_field_and_dispersion": 384.7513999789953,
+              "cloud_observation": 90.32799999113195,
+              "fire_explosion_damage_risk": 67.91439998778515
             },
             "risk_semantics": {
               "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -2525,16 +2525,16 @@
           "request_digest": "67f3d70d23b88b8616d30e3dfa2e988cf6313233604122da01610548ed28f928",
           "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
           "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-          "adapter_source_digest": "9210a06cf36c7eca3c16100fcfabbda5355765e0e4a6496bdf55d3750307fdec",
-          "elapsed_ms": 1493.4383000072557,
+          "adapter_source_digest": "82de21bbaa5f48af9d472782604ff722fb6501c22f8ad277279ecdd7e34972c9",
+          "elapsed_ms": 1469.5948000007775,
           "physical_validation_claim": false,
           "facility_digest": "d8ed0288047810f718ee5a36f6e2e40a86e063b443c532f44dd1e2a0e2f35897",
           "service": {
             "exact_cache_hit": false,
             "fresh_physics_this_update": true,
-            "service_elapsed_ms": 1523.5781999945175,
-            "physics_run_elapsed_ms": 1493.4383000072557,
-            "cache_key": "57314267eea50f53a382f9786af993329168b90a3939bbd11d27239ef7f975c2",
+            "service_elapsed_ms": 1499.203099985607,
+            "physics_run_elapsed_ms": 1469.5948000007775,
+            "cache_key": "354c3c180cce65ce8e582ec0f286de21db66a14199afd9989e95b90654538029",
             "backend_mode": "isolated_process",
             "realtime_fresh_physics_claim": false,
             "mode_contract": {
@@ -2551,8 +2551,8 @@
               "release_inference": false,
               "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
             },
-            "state_resolution_elapsed_ms": 0.8086000161711127,
-            "state_update_elapsed_ms": 1524.4284000073094
+            "state_resolution_elapsed_ms": 0.7676999957766384,
+            "state_update_elapsed_ms": 1500.0302999978885
           },
           "equipment_release_path": {
             "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -2644,7 +2644,7 @@
             "data_age_s": 0.0,
             "frame_digest": "50a6e1c8ac4c1ebc630ad23e812c64ced30dec86bd7feac515d53dea1ac9f365",
             "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402",
-            "data_age_at_output_s": 1.5245010000071488,
+            "data_age_at_output_s": 1.5001075000036508,
             "equipment_release_resolved": true,
             "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
             "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
@@ -2657,7 +2657,7 @@
             "deadline_s": 180.0,
             "deadline_status": "MET",
             "deadline_met": true,
-            "service_elapsed_s": 1.5245010000071488,
+            "service_elapsed_s": 1.5001075000036508,
             "source_interval_s": null,
             "fresh_physics_this_update": true,
             "exact_cache_hit": false,
@@ -2679,10 +2679,10 @@
               "release_inference": false,
               "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
             },
-            "update_elapsed_s": 1.5245010000071488,
-            "normalization_elapsed_s": 5.8600009651854634e-05,
-            "state_resolution_elapsed_s": 0.0008086000161711127,
-            "consequence_service_elapsed_s": 1.5235781999945175,
+            "update_elapsed_s": 1.5001075000036508,
+            "normalization_elapsed_s": 5.7199998991563916e-05,
+            "state_resolution_elapsed_s": 0.0007676999957766384,
+            "consequence_service_elapsed_s": 1.499203099985607,
             "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
           }
         }
@@ -2744,13 +2744,13 @@
         "measurement_policy": "timing is copied from the consequence monitor when present; missing timing remains unavailable"
       }
     },
-    "runtime_result_digest": "3f1d4ef03ae248a2249bf1b2aadbbe38dde59b892a2cdd2c4f4826684e6eed72"
+    "runtime_result_digest": "5626542fb29a9d9b84665c9675c4e8ee90aa99ce4d193115d4ee5ce46c255180"
   },
   "campaign": {
     "schema_version": "prism.realtime_facility_campaign_result.v1",
     "status": "PARTIAL_DECLARED_SCOPE",
     "facility_id": "generic-outdoor-lh2-diagnostic",
-    "campaign_digest": "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868",
+    "campaign_digest": "b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36",
     "scope_provenance": "explicit realtime scenario bindings; current-weather and reviewed annual-condition consequence evidence are kept separate",
     "events": [
       {
@@ -2775,7 +2775,7 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
         "physical_validation_claim": false,
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
       }
@@ -2822,11 +2822,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1523.5781999945175,
+        "elapsed_ms": 1499.203099985607,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -2918,6 +2918,21 @@
         "mass_ledger": {
           "released_kg": 7.221896865709533e-06,
           "end_to_end_residual_kg": 0.0008166317257982181
+        },
+        "stage_elapsed_ms": {
+          "source": 689.508300012676,
+          "pool": 0.0052000104915350676,
+          "near_field_and_dispersion": 384.7513999789953,
+          "cloud_observation": 90.32799999113195,
+          "fire_explosion_damage_risk": 67.91439998778515
+        },
+        "domain_assessment": {
+          "domain_truncated": false,
+          "inventory_outside_domain": false,
+          "outside_domain_h2_kg_at_ignition": 0.0,
+          "outside_domain_mole_fraction_upper_bound_at_ignition": 0.0005385228319330763,
+          "outside_domain_flammability_proven_at_ignition": true,
+          "domain_truncation_reasons": []
         }
       }
     ],
@@ -2940,11 +2955,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1523.5781999945175,
+        "elapsed_ms": 1499.203099985607,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -3036,6 +3051,21 @@
         "mass_ledger": {
           "released_kg": 7.221896865709533e-06,
           "end_to_end_residual_kg": 0.0008166317257982181
+        },
+        "stage_elapsed_ms": {
+          "source": 689.508300012676,
+          "pool": 0.0052000104915350676,
+          "near_field_and_dispersion": 384.7513999789953,
+          "cloud_observation": 90.32799999113195,
+          "fire_explosion_damage_risk": 67.91439998778515
+        },
+        "domain_assessment": {
+          "domain_truncated": false,
+          "inventory_outside_domain": false,
+          "outside_domain_h2_kg_at_ignition": 0.0,
+          "outside_domain_mole_fraction_upper_bound_at_ignition": 0.0005385228319330763,
+          "outside_domain_flammability_proven_at_ignition": true,
+          "domain_truncation_reasons": []
         }
       }
     ],
@@ -3153,7 +3183,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3268,7 +3298,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3383,7 +3413,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3498,7 +3528,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       }
     ],
     "excluded_model_components": {},
@@ -3555,9 +3585,9 @@
     "total_facility_expected_death_fn_low_high": null,
     "timing": {
       "fresh_physics_cases": 1,
-      "case_min_ms": 1523.5781999945175,
+      "case_min_ms": 1499.203099985607,
       "case_median_ms": null,
-      "case_max_ms": 1523.5781999945175,
+      "case_max_ms": 1499.203099985607,
       "case_p95_ms": null,
       "case_p99_ms": null,
       "campaign_elapsed_ms": null,
@@ -3581,13 +3611,13 @@
     "physical_validation_claim": false,
     "complete_facility_qra_claim": false,
     "one_hz_fresh_physics_demonstrated": false,
-    "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+    "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
     "realtime_handoff": {
       "schema": "prism.realtime_facility_risk_handoff.v1",
       "handoff_status": "DIAGNOSTIC_CURRENT_WEATHER_SNAPSHOT",
       "facility_id": "generic-outdoor-lh2-diagnostic",
       "source_snapshot_status": "ACCEPTED",
-      "source_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+      "source_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
       "source_snapshot": {
         "schema": "prism.hazop_facility_realtime_snapshot.v1",
         "facility_id": "generic-outdoor-lh2-diagnostic",
@@ -6063,11 +6093,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 712.2566000034567,
-                  "pool": 0.005199981387704611,
-                  "near_field_and_dispersion": 387.2408000170253,
-                  "cloud_observation": 90.25519998976961,
-                  "fire_explosion_damage_risk": 67.87240001722239
+                  "source": 689.508300012676,
+                  "pool": 0.0052000104915350676,
+                  "near_field_and_dispersion": 384.7513999789953,
+                  "cloud_observation": 90.32799999113195,
+                  "fire_explosion_damage_risk": 67.91439998778515
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -6110,16 +6140,16 @@
               "request_digest": "67f3d70d23b88b8616d30e3dfa2e988cf6313233604122da01610548ed28f928",
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-              "adapter_source_digest": "9210a06cf36c7eca3c16100fcfabbda5355765e0e4a6496bdf55d3750307fdec",
-              "elapsed_ms": 1493.4383000072557,
+              "adapter_source_digest": "82de21bbaa5f48af9d472782604ff722fb6501c22f8ad277279ecdd7e34972c9",
+              "elapsed_ms": 1469.5948000007775,
               "physical_validation_claim": false,
               "facility_digest": "d8ed0288047810f718ee5a36f6e2e40a86e063b443c532f44dd1e2a0e2f35897",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 1523.5781999945175,
-                "physics_run_elapsed_ms": 1493.4383000072557,
-                "cache_key": "57314267eea50f53a382f9786af993329168b90a3939bbd11d27239ef7f975c2",
+                "service_elapsed_ms": 1499.203099985607,
+                "physics_run_elapsed_ms": 1469.5948000007775,
+                "cache_key": "354c3c180cce65ce8e582ec0f286de21db66a14199afd9989e95b90654538029",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
                 "mode_contract": {
@@ -6136,8 +6166,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.8086000161711127,
-                "state_update_elapsed_ms": 1524.4284000073094
+                "state_resolution_elapsed_ms": 0.7676999957766384,
+                "state_update_elapsed_ms": 1500.0302999978885
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -6229,7 +6259,7 @@
                 "data_age_s": 0.0,
                 "frame_digest": "50a6e1c8ac4c1ebc630ad23e812c64ced30dec86bd7feac515d53dea1ac9f365",
                 "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402",
-                "data_age_at_output_s": 1.5245010000071488,
+                "data_age_at_output_s": 1.5001075000036508,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "b5b9676821a049b3ba1090dd436f69a805d7740cca44d581e606640729651f7a",
@@ -6242,7 +6272,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 1.5245010000071488,
+                "service_elapsed_s": 1.5001075000036508,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -6264,10 +6294,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 1.5245010000071488,
-                "normalization_elapsed_s": 5.8600009651854634e-05,
-                "state_resolution_elapsed_s": 0.0008086000161711127,
-                "consequence_service_elapsed_s": 1.5235781999945175,
+                "update_elapsed_s": 1.5001075000036508,
+                "normalization_elapsed_s": 5.7199998991563916e-05,
+                "state_resolution_elapsed_s": 0.0007676999957766384,
+                "consequence_service_elapsed_s": 1.499203099985607,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             }
@@ -6329,7 +6359,7 @@
             "measurement_policy": "timing is copied from the consequence monitor when present; missing timing remains unavailable"
           }
         },
-        "runtime_result_digest": "3f1d4ef03ae248a2249bf1b2aadbbe38dde59b892a2cdd2c4f4826684e6eed72"
+        "runtime_result_digest": "5626542fb29a9d9b84665c9675c4e8ee90aa99ce4d193115d4ee5ce46c255180"
       },
       "component_count": 3,
       "available_realtime_risk_atom_component_count": 1,
@@ -6477,14 +6507,14 @@
     "status": "PARTIAL_FACILITY_SCOPE",
     "facility_id": "generic-outdoor-lh2-diagnostic",
     "campaign_ids": [
-      "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868"
+      "b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36"
     ],
     "campaign_digests": [
-      "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868"
+      "b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36"
     ],
-    "campaign_digest": "394d0ab03991cca70afb70ae7829dcb653db059e1b317bd7f106f0508a0982fa",
+    "campaign_digest": "801264d58f265c3817cedc0c5ae8bf5f6b7f1758d4f5b55d73a4076453cd19f5",
     "event_accounting": {
-      "0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868": {
+      "b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36": {
         "generated_event_count": 1,
         "case_event_count": 1,
         "uncomputed_event_count": 1,
@@ -6537,7 +6567,7 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
         "physical_validation_claim": false,
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
       }
@@ -6898,11 +6928,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1523.5781999945175,
+        "elapsed_ms": 1499.203099985607,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -6994,6 +7024,21 @@
         "mass_ledger": {
           "released_kg": 7.221896865709533e-06,
           "end_to_end_residual_kg": 0.0008166317257982181
+        },
+        "stage_elapsed_ms": {
+          "source": 689.508300012676,
+          "pool": 0.0052000104915350676,
+          "near_field_and_dispersion": 384.7513999789953,
+          "cloud_observation": 90.32799999113195,
+          "fire_explosion_damage_risk": 67.91439998778515
+        },
+        "domain_assessment": {
+          "domain_truncated": false,
+          "inventory_outside_domain": false,
+          "outside_domain_h2_kg_at_ignition": 0.0,
+          "outside_domain_mole_fraction_upper_bound_at_ignition": 0.0005385228319330763,
+          "outside_domain_flammability_proven_at_ignition": true,
+          "domain_truncation_reasons": []
         }
       }
     ],
@@ -7016,11 +7061,11 @@
           "vaporizer_hole"
         ],
         "operating_mode": "supply",
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525",
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94",
         "hazop_scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "reason": "realtime_snapshot consequence joined to an explicit scenario; annual facility campaign and provider qualification remain open",
-        "elapsed_ms": 1523.5781999945175,
+        "elapsed_ms": 1499.203099985607,
         "provider_packet_identity": {
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "component_id": "ambient-vaporizer-01",
@@ -7112,6 +7157,21 @@
         "mass_ledger": {
           "released_kg": 7.221896865709533e-06,
           "end_to_end_residual_kg": 0.0008166317257982181
+        },
+        "stage_elapsed_ms": {
+          "source": 689.508300012676,
+          "pool": 0.0052000104915350676,
+          "near_field_and_dispersion": 384.7513999789953,
+          "cloud_observation": 90.32799999113195,
+          "fire_explosion_damage_risk": 67.91439998778515
+        },
+        "domain_assessment": {
+          "domain_truncated": false,
+          "inventory_outside_domain": false,
+          "outside_domain_h2_kg_at_ignition": 0.0,
+          "outside_domain_mole_fraction_upper_bound_at_ignition": 0.0005385228319330763,
+          "outside_domain_flammability_proven_at_ignition": true,
+          "domain_truncation_reasons": []
         }
       }
     ],
@@ -7229,7 +7289,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -7344,7 +7404,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -7459,7 +7519,7 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -7574,10 +7634,10 @@
           0.0,
           0.0
         ],
-        "realtime_snapshot_digest": "895b6d13213f2568f8dc14d8ea6e99d0f90e1f29a3f0c124a671c9778b885525"
+        "realtime_snapshot_digest": "4eae3c3cf2418e68551824b0490b4b8c5d2fef8b366b6f6eae0f63625acbbf94"
       }
     ],
-    "risk_atoms_digest": "66e0f2abdd7a264060ee8876a3ecbd310ae8939f95f0a428ad66754986e0658b",
+    "risk_atoms_digest": "adc7284650037406083dd7c3f866af7c8b64ffad7c0d657b550e87bd2a5da357",
     "component_contributions": {
       "lh2-supply-vaporizer-boundary": {
         "event_count": 1,
@@ -7915,7 +7975,48 @@
         "withheld_operator_limited_case_count": 1,
         "withheld_domain_incomplete_case_count": 0
       },
-      "stage_timing": {},
+      "stage_timing": {
+        "cloud_observation": {
+          "sample_count": 1,
+          "sum_ms": 90.32799999113195,
+          "median_ms": 90.32799999113195,
+          "max_ms": 90.32799999113195,
+          "p95_ms": 90.32799999113195,
+          "p99_ms": 90.32799999113195
+        },
+        "fire_explosion_damage_risk": {
+          "sample_count": 1,
+          "sum_ms": 67.91439998778515,
+          "median_ms": 67.91439998778515,
+          "max_ms": 67.91439998778515,
+          "p95_ms": 67.91439998778515,
+          "p99_ms": 67.91439998778515
+        },
+        "near_field_and_dispersion": {
+          "sample_count": 1,
+          "sum_ms": 384.7513999789953,
+          "median_ms": 384.7513999789953,
+          "max_ms": 384.7513999789953,
+          "p95_ms": 384.7513999789953,
+          "p99_ms": 384.7513999789953
+        },
+        "pool": {
+          "sample_count": 1,
+          "sum_ms": 0.0052000104915350676,
+          "median_ms": 0.0052000104915350676,
+          "max_ms": 0.0052000104915350676,
+          "p95_ms": 0.0052000104915350676,
+          "p99_ms": 0.0052000104915350676
+        },
+        "source": {
+          "sample_count": 1,
+          "sum_ms": 689.508300012676,
+          "median_ms": 689.508300012676,
+          "max_ms": 689.508300012676,
+          "p95_ms": 689.508300012676,
+          "p99_ms": 689.508300012676
+        }
+      },
       "case_status_counts": {
         "EXECUTED_OPERATOR_LIMITED": 1
       },
@@ -8062,14 +8163,14 @@
     "complete_facility_qra_claim": false,
     "qualified_facility_qra_blocking_reasons": [],
     "provider_qualification_blocking_reasons": [
-      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: qualified provider packet promotion is unavailable",
-      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: provider packet evidence does not match all consumed packets"
+      "campaign b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36: qualified provider packet promotion is unavailable",
+      "campaign b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36: provider packet evidence does not match all consumed packets"
     ],
     "synthetic_release_horizon_present": false,
     "facility_total_risk_available": false,
     "blocking_reasons": [
-      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: declared scope is incomplete",
-      "campaign 0583f0ed6c7ef2bb9e9428485f29a1bf61e13661e71efac4dcaef11068248868: uncomputed cases remain",
+      "campaign b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36: declared scope is incomplete",
+      "campaign b997bdb99c6ef8ca3aa2163aca4c6342d0f69b1a1c3053840577dc4edf60bb36: uncomputed cases remain",
       "missing expected components: lh2-intake-tank, lh2-storage-vent",
       "component lh2-intake-tank: PARTIAL",
       "component lh2-storage-vent: PARTIAL",
@@ -8078,11 +8179,11 @@
     "timing": {
       "campaign_count": 1,
       "fresh_physics_cases": 1,
-      "case_min_ms": 1523.5781999945175,
-      "case_median_ms": 1523.5781999945175,
-      "case_max_ms": 1523.5781999945175,
-      "case_p95_ms": 1523.5781999945175,
-      "case_p99_ms": 1523.5781999945175,
+      "case_min_ms": 1499.203099985607,
+      "case_median_ms": 1499.203099985607,
+      "case_max_ms": 1499.203099985607,
+      "case_p95_ms": 1499.203099985607,
+      "case_p99_ms": 1499.203099985607,
       "campaign_elapsed_ms": 0,
       "campaign_elapsed_ms_sum": 0,
       "campaign_elapsed_ms_min": null,
@@ -8090,7 +8191,48 @@
       "campaign_elapsed_ms_max": null,
       "campaign_elapsed_ms_p95": null,
       "campaign_elapsed_ms_p99": null,
-      "stage_elapsed_ms": {},
+      "stage_elapsed_ms": {
+        "cloud_observation": {
+          "sample_count": 1,
+          "sum_ms": 90.32799999113195,
+          "median_ms": 90.32799999113195,
+          "max_ms": 90.32799999113195,
+          "p95_ms": 90.32799999113195,
+          "p99_ms": 90.32799999113195
+        },
+        "fire_explosion_damage_risk": {
+          "sample_count": 1,
+          "sum_ms": 67.91439998778515,
+          "median_ms": 67.91439998778515,
+          "max_ms": 67.91439998778515,
+          "p95_ms": 67.91439998778515,
+          "p99_ms": 67.91439998778515
+        },
+        "near_field_and_dispersion": {
+          "sample_count": 1,
+          "sum_ms": 384.7513999789953,
+          "median_ms": 384.7513999789953,
+          "max_ms": 384.7513999789953,
+          "p95_ms": 384.7513999789953,
+          "p99_ms": 384.7513999789953
+        },
+        "pool": {
+          "sample_count": 1,
+          "sum_ms": 0.0052000104915350676,
+          "median_ms": 0.0052000104915350676,
+          "max_ms": 0.0052000104915350676,
+          "p95_ms": 0.0052000104915350676,
+          "p99_ms": 0.0052000104915350676
+        },
+        "source": {
+          "sample_count": 1,
+          "sum_ms": 689.508300012676,
+          "median_ms": 689.508300012676,
+          "max_ms": 689.508300012676,
+          "p95_ms": 689.508300012676,
+          "p99_ms": 689.508300012676
+        }
+      },
       "distribution": "across separately executed equipment campaigns; not repeated-run latency"
     },
     "semantics": {
@@ -8164,16 +8306,16 @@
   },
   "risk_atom_chain_audit": {
     "schema_version": "prism.risk_atom_chain_audit.v1",
-    "status": "PARTIAL_RISK_ATOM_CHAIN",
+    "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
     "facility_id": "generic-outdoor-lh2-diagnostic",
     "case_count": 1,
     "risk_atom_count": 4,
-    "complete_case_count": 0,
-    "incomplete_case_count": 1,
-    "complete_case_ids": [],
-    "incomplete_case_ids": [
+    "complete_case_count": 1,
+    "incomplete_case_count": 0,
+    "complete_case_ids": [
       "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success"
     ],
+    "incomplete_case_ids": [],
     "missing_atom_case_ids": [],
     "extra_atom_case_ids": [],
     "duplicate_case_count": 0,
@@ -8186,11 +8328,11 @@
       "fire_explosion_damage_risk"
     ],
     "stage_complete_case_counts": {
-      "source": 0,
-      "pool": 0,
-      "near_field_and_dispersion": 0,
-      "cloud_observation": 0,
-      "fire_explosion_damage_risk": 0
+      "source": 1,
+      "pool": 1,
+      "near_field_and_dispersion": 1,
+      "cloud_observation": 1,
+      "fire_explosion_damage_risk": 1
     },
     "operator_limited_case_count": 1,
     "zero_harm_atom_count": 4,
@@ -8198,10 +8340,7 @@
     "empty_harm_atom_count": 0,
     "zero_expected_death_atom_count": 4,
     "positive_expected_death_atom_count": 0,
-    "blocking_reasons": [
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: stage timing is missing",
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-west-3ms/reviewed_isolation_success: domain assessment is missing"
-    ],
+    "blocking_reasons": [],
     "diagnostic_only": true,
     "provider_packet_promoted": false,
     "frequency_inference_performed": false,

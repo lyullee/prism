@@ -30,9 +30,10 @@ It checks nine items:
 The annual handoff now also carries the canonical provider-bound state snapshot
 into its case identity. The reconstructed example therefore closes the
 equipment-state-to-release identity audit for its one selected case. The
-release-to-consequence audit remains partial because the example still uses an
-operator-limited diagnostic chain and does not claim complete stage timing or
-domain evidence.
+release-to-consequence audit is structurally closed for that case, including
+stage timing and domain completeness. It remains diagnostic because the
+example uses an operator-limited provider packet and does not claim provider
+qualification or facility-QRA promotion.
 
 The expected result is `PASS_WITH_SCOPE_LIMITATIONS`. That status means the
 new handoff is structurally traceable. It is not a claim that the missing

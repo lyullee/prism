@@ -5334,8 +5334,9 @@
   "ijhe_completion_audit_inspection_center_facility_handoff_check_status": "PASS_DIAGNOSTIC_ONLY; latest minimal re-run remains INCOMPLETE_EVIDENCE with 5 strict blockers",
   "inspection_center_facility_campaign_handoff_equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
   "inspection_center_facility_campaign_handoff_equipment_state_release_complete_case_count": 1,
-  "inspection_center_facility_campaign_handoff_risk_atom_chain_status": "PARTIAL_RISK_ATOM_CHAIN",
-  "inspection_center_facility_campaign_handoff_state_release_interpretation": "The canonical provider-bound state snapshot and digest now propagate into the selected case identity and close the structural state-to-release audit; consequence-stage/domain and provider qualification gates remain diagnostic or withheld."
+  "inspection_center_facility_campaign_handoff_risk_atom_chain_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+  "inspection_center_facility_campaign_handoff_risk_atom_chain_complete_case_count": 1,
+  "inspection_center_facility_campaign_handoff_state_release_interpretation": "The canonical provider-bound state snapshot and digest now propagate into the selected case identity and close the structural state-to-release audit; provider qualification and facility-QRA promotion remain diagnostic or withheld."
 }
 
 

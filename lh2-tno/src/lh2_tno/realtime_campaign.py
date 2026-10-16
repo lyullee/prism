@@ -739,6 +739,41 @@ def build_realtime_facility_campaign_result(
                     and telemetry_boundary.get("provider_state_snapshot_digest")
                     else None,
                 })
+            consequence_data = (
+                consequence_payload.get("data")
+                if isinstance(consequence_payload, Mapping)
+                else None
+            )
+            stage_elapsed_ms = (
+                copy.deepcopy(consequence_data.get("stage_elapsed_ms"))
+                if isinstance(consequence_data, Mapping)
+                else None
+            )
+            explosion = (
+                consequence_data.get("explosion")
+                if isinstance(consequence_data, Mapping)
+                else None
+            )
+            domain_assessment = (
+                {
+                    "domain_truncated": explosion.get("domain_truncated"),
+                    "inventory_outside_domain": explosion.get("inventory_outside_domain"),
+                    "outside_domain_h2_kg_at_ignition": explosion.get(
+                        "outside_domain_h2_kg_at_ignition"
+                    ),
+                    "outside_domain_mole_fraction_upper_bound_at_ignition": explosion.get(
+                        "outside_domain_mole_fraction_upper_bound_at_ignition"
+                    ),
+                    "outside_domain_flammability_proven_at_ignition": explosion.get(
+                        "outside_domain_flammability_proven_at_ignition"
+                    ),
+                    "domain_truncation_reasons": explosion.get(
+                        "domain_truncation_reasons", []
+                    ),
+                }
+                if isinstance(explosion, Mapping)
+                else None
+            )
             if provider_identity is not None:
                 provider_packet_case_count += 1
                 provider_packet_missing_evidence_cases.append(
@@ -773,6 +808,8 @@ def build_realtime_facility_campaign_result(
                     "released_kg": inventory.get("cumulative_mass_out_kg"),
                     "end_to_end_residual_kg": inventory.get("mass_residual_kg"),
                 },
+                stage_elapsed_ms=stage_elapsed_ms,
+                domain_assessment=domain_assessment,
             )
             cases.append(case)
             uncomputed_cases.append(dict(case))
