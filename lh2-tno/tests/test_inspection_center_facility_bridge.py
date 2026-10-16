@@ -5,8 +5,33 @@ from argparse import Namespace
 from pathlib import Path
 import sys
 
+import pytest
+
 
 def test_reconstructed_three_component_facility_bridge_executes_selected_supply_branch(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    required_inputs = (
+        root / "examples/inspection_center_reconstructed_runtime_frames.json",
+        root / "examples/inspection_center_hazop_runtime_tables.json",
+        root / "examples/inspection_center_reconstructed_hazop_runtime_audit.json",
+        root / "examples/inspection_center_reconstructed_hazop_provider_event_binding.json",
+        root / "results/20261110/native_full_scope_frequency_assessment_latest2/provider_worklist.json",
+        root / "results/20261110/observed_hazop_storage_vaporizer_isolation_overlay/packet_evidence.json",
+        root / "results/20261110/native_generic_scope_packets_latest2",
+        root / "examples/generic_lh2_full_scope_manifest.json",
+        root / "results/20261110/native_full_scope_frequency_assessment_latest2/frequency_plan.json",
+        root / "examples/provider_request_defaults_liquid.json",
+        root / "examples/provider_emergency_relief_defaults.json",
+        root / "examples/equipment_consequence_template.json",
+        root / "results/20261008/full_chain/backend_config.json",
+    )
+    missing = [str(path) for path in required_inputs if not path.exists()]
+    if missing:
+        pytest.skip(
+            "requires locally generated inspection-center evidence artifacts: "
+            + ", ".join(missing)
+        )
+
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
     from run_inspection_center_facility_hazop_bridge import ROOT, run
 

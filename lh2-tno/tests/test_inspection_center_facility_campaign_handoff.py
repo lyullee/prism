@@ -4,9 +4,23 @@ from argparse import Namespace
 from pathlib import Path
 import sys
 
+import pytest
+
 
 def test_facility_campaign_handoff_preserves_normal_components_and_population_boundary():
     root = Path(__file__).resolve().parents[1]
+    required_inputs = (
+        root / "examples/inspection_center_facility_hazop_bridge.json",
+        root / "results/20261009/generic_full_scope_worklist/campaign_result.json",
+        root / "results/20261110/native_full_scope_frequency_assessment_latest2/frequency_scenarios.json",
+    )
+    missing = [str(path) for path in required_inputs if not path.exists()]
+    if missing:
+        pytest.skip(
+            "requires locally generated inspection-center evidence artifacts: "
+            + ", ".join(missing)
+        )
+
     sys.path.insert(0, str(root / "scripts"))
     from build_inspection_center_facility_campaign_handoff import run
 
