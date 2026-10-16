@@ -242,6 +242,13 @@ The inspection-centre source inventory is documented in
 It is a state/HAZOP diagnostic input boundary; it does not create accident
 releases or learn failure frequencies from normal-operation signals.
 
+For CSV/TSV historian or simulator exports, the strict tabular adapter is
+documented in [`PRISM_tabular_runtime_adapter_en.md`](docs/PRISM_tabular_runtime_adapter_en.md).
+It requires explicit signal units, pressure basis, timestamps and operating
+mode, then produces the same runtime-frame contract used by the live HAZOP
+handoff. It never invents a release or learns an accident frequency from
+normal-state samples.
+
 For a reproducible, unit-safe example of the general facility input path, use
 the [header-bound observed-state chain](docs/PRISM_header_bound_observed_state_chain_20261115.md).
 It reads only the five pressure/temperature columns with explicit workbook
