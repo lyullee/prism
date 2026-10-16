@@ -72,8 +72,17 @@ def test_current_union_pointer_evidence_reports_current_audit_counts() -> None:
     assert report["status"] == "CONSISTENT"
     for name in ("current_status_audit_pointer", "development_goal_audit_pointer"):
         evidence = next(row for row in report["checks"] if row["name"] == name)["evidence"]
-        assert evidence["check_count"] == 54
+        assert evidence["check_count"] == 55
         assert evidence["blocking_reason_count"] == 5
+        gate_check = next(
+            row for row in load_json_object(CURRENT_AUDIT)["checks"]
+            if row["name"] == "diagnostic_forecast_facility_campaign_evidence_gate"
+        )
+        assert gate_check["status"] == "PASS"
+        assert gate_check["evidence"]["computed_gate_status"] == (
+            "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE"
+        )
+        assert gate_check["evidence"]["downstream_campaign_input_allowed"] is False
 
 
 def test_current_provider_packet_input_audit_is_bound_to_status_ledgers() -> None:

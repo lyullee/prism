@@ -752,13 +752,13 @@
       "name": "diagnostic_adapter_execution_contract",
       "status": "PASS",
       "evidence": {
-        "source": "current_status",
-        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED; 7/7 PRISM-side adapter classes resolved, 0 provider instances and 0 qualified packets",
+        "source": "diagnostic_adapter_registry",
+        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED",
         "adapter_count": 7,
         "resolved_adapter_count": 7,
         "provider_instance_count": 0,
         "qualified_provider_packet_count": 0,
-        "record": "results/20261014/diagnostic_adapter_registry_audit_live.json"
+        "record": null
       },
       "blocking_reason": null
     },
@@ -5247,7 +5247,11 @@
         "state_supported_component_count": 8,
         "accident_release_supported_component_count": 7,
         "diagnostic_release_adapter_component_count": 7,
-        "record": "results/20261024/native_equipment_model_binding_audit_v1.json"
+        "record": "results/20261024/native_equipment_model_binding_audit_v1.json",
+        "external_model_contract_status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
+        "external_model_contract_native_accident_export_component_count": 7,
+        "external_model_contract_native_accident_export_missing_components": [],
+        "external_model_contract_record": "results\\20261115\\lh2dt_native_contract_audit_current.json"
       },
       "blocking_reason": null
     },
@@ -5455,7 +5459,7 @@
       "evidence": {
         "implemented": true,
         "module": "src/lh2_tno/service.py",
-        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1291 passed, 1 warning; CI Run #1177 completed successfully.",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; latest local full suite 1281 passed, 1 warning; GitHub Actions run 38947028662 completed successfully.",
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null
@@ -5547,6 +5551,34 @@
         }
       },
       "interpretation": "Every merged facility weather/release case must resolve to an exact qualified provider packet before the facility chain can be presented as complete. A packet may be reused across weather cases, but missing case identity remains a blocker; this check never infers frequency or physical validation."
+    },
+    {
+      "name": "diagnostic_forecast_facility_campaign_evidence_gate",
+      "status": "PASS",
+      "evidence": {
+        "coverage_record": "results\\20261115\\inspection_center_facility_forecast_evidence_coverage.json",
+        "gate_record": "results\\20261115\\inspection_center_facility_forecast_campaign_gate.json",
+        "coverage_schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+        "gate_schema_version": "prism.forecast_facility_campaign_evidence_gate.v1",
+        "coverage_summary": {
+          "request_count": 2,
+          "evidence_complete_count": 0,
+          "evidence_missing_count": 2,
+          "extra_attachment_key_count": 0
+        },
+        "gate_summary": {
+          "request_count": 2,
+          "evidence_complete_count": 0,
+          "evidence_missing_count": 2,
+          "extra_attachment_key_count": 0
+        },
+        "computed_gate_status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE",
+        "downstream_campaign_input_allowed": false,
+        "gate_error": null
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The exact-request evidence gate is audited as a diagnostic control. A valid withheld gate is a passing control check; it does not open facility IR/F-N or qualify provider evidence."
     },
     {
       "name": "diagnostic_hazop_integrated_risk",
@@ -5942,9 +5974,25 @@
         "facility_evidence_request_alignment": true,
         "release_audit_evidence_request_alignment": "ALIGNED",
         "release_audit_evidence_request_rows_match": true,
+        "release_audit_evidence_request_contract_valid": true,
+        "release_audit_evidence_request_contract_status_counts": {
+          "ALIGNED": 44
+        },
+        "release_audit_evidence_request_contract_blocked_case_count": 0,
         "facility_evidence_request_case_count": 44,
         "strict_release_boundary_eligible_case_count": 13,
         "strict_release_boundary_blocked_case_count": 31,
+        "frequency_binding_status_counts": {
+          "BOUND": 44
+        },
+        "frequency_unbound_case_count": 0,
+        "frequency_binding_metadata_valid": true,
+        "frequency_uncertainty_status_counts": {
+          "BOUND": 35,
+          "NOT_AVAILABLE": 9
+        },
+        "frequency_uncertainty_unavailable_case_count": 9,
+        "frequency_uncertainty_metadata_valid": true,
         "termination_basis_counts": {
           "emergency_relief_discharge": 1,
           "inventory_depletion": 25,
@@ -6017,9 +6065,9 @@
         "schema_version": "prism.conditional_facility_frequency_trace.v1",
         "scenario_count": 5,
         "scenario_ids": [
-          "native-isolation-catalog-literature-published",
-          "native-isolation-catalog-literature-p05",
-          "native-isolation-catalog-literature-p95",
+          "native-full-scope-literature-central",
+          "native-full-scope-literature-low",
+          "native-full-scope-literature-high",
           "native-full-scope-independent-event-low",
           "native-full-scope-independent-event-high"
         ],
@@ -6058,46 +6106,41 @@
           "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
         },
         "uncomputed_case_count_by_scenario": {
-          "native-isolation-catalog-literature-published": 30,
-          "native-isolation-catalog-literature-p05": 30,
-          "native-isolation-catalog-literature-p95": 30,
-          "native-full-scope-independent-event-low": 30,
-          "native-full-scope-independent-event-high": 30
+          "native-full-scope-literature-central": 29,
+          "native-full-scope-literature-low": 29,
+          "native-full-scope-literature-high": 29,
+          "native-full-scope-independent-event-low": 29,
+          "native-full-scope-independent-event-high": 29
         },
         "uncomputed_case_unique_key_count_by_scenario": {
-          "native-isolation-catalog-literature-published": 29,
-          "native-isolation-catalog-literature-p05": 29,
-          "native-isolation-catalog-literature-p95": 29,
+          "native-full-scope-literature-central": 29,
+          "native-full-scope-literature-low": 29,
+          "native-full-scope-literature-high": 29,
           "native-full-scope-independent-event-low": 29,
           "native-full-scope-independent-event-high": 29
         },
         "uncomputed_case_duplicate_row_count_by_scenario": {
-          "native-isolation-catalog-literature-published": 1,
-          "native-isolation-catalog-literature-p05": 1,
-          "native-isolation-catalog-literature-p95": 1,
-          "native-full-scope-independent-event-low": 1,
-          "native-full-scope-independent-event-high": 1
+          "native-full-scope-literature-central": 0,
+          "native-full-scope-literature-low": 0,
+          "native-full-scope-literature-high": 0,
+          "native-full-scope-independent-event-low": 0,
+          "native-full-scope-independent-event-high": 0
         },
         "uncomputed_case_union_count": 29,
         "uncomputed_case_status_counts_by_scenario": {
-          "native-isolation-catalog-literature-published": {
-            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "native-full-scope-literature-central": {
             "EXECUTED_OPERATOR_LIMITED": 29
           },
-          "native-isolation-catalog-literature-p05": {
-            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "native-full-scope-literature-low": {
             "EXECUTED_OPERATOR_LIMITED": 29
           },
-          "native-isolation-catalog-literature-p95": {
-            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "native-full-scope-literature-high": {
             "EXECUTED_OPERATOR_LIMITED": 29
           },
           "native-full-scope-independent-event-low": {
-            "EXECUTED_DOMAIN_INCOMPLETE": 1,
             "EXECUTED_OPERATOR_LIMITED": 29
           },
           "native-full-scope-independent-event-high": {
-            "EXECUTED_DOMAIN_INCOMPLETE": 1,
             "EXECUTED_OPERATOR_LIMITED": 29
           }
         },

@@ -44,7 +44,7 @@ python -m pytest -q
 포트에 결합되며 case/risk-atom port mismatch는 0건이다. 수직 handoff는 5개
 event·10개 weather case 모두 `inventory_depletion` 종료 기준을 사용하지만,
 `EXECUTED_OPERATOR_LIMITED`·synthetic handoff·독립 물리검증 부재는 그대로
-기록된다. 종료 evidence catalog는 35 provider row와 34 event ID를 보존하고, 현재 union의 44 case 중 32개가 provider 종료 근거와 정확히 일치한다. 동일 사건 ID의 서로 다른 provider replay는 digest로 구분한다. 최신 감사는 54개 검사 중 49개 PASS·5개 BLOCKED인 `INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 상세 재현 명령과 해석은
+기록된다. 종료 evidence catalog는 35 provider row와 34 event ID를 보존하고, 현재 union의 44 case 중 32개가 provider 종료 근거와 정확히 일치한다. 동일 사건 ID의 서로 다른 provider replay는 digest로 구분한다. 최신 감사는 55개 검사 중 50개 PASS·5개 BLOCKED인 `INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 예측 quantitative-evidence gate는 두 요청을 증거 부족으로 보류하고 downstream 시설 집계를 차단한다. 상세 재현 명령과 해석은
 [`수직 handoff 재고소진 연결 기록`](docs/PRISM_vertical_inventory_handoff_20261115.md),
 [`PRISM IJHE 최신 감사`](docs/PRISM_IJHE_latest_audit_20261115.md),
 [`IJHE 요구사항 추적표`](docs/PRISM_IJHE_requirement_traceability_20261115.md)에 있다.

@@ -1965,7 +1965,7 @@
   "mixed_lh2_accident_scope_matrix_catalog_family_count": 12,
   "mixed_lh2_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 54 checks, 49 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 55 checks, 50 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; forecast facility campaign evidence gate is withheld",
   "ijhe_completion_audit_scope_gap_reason_policy": "declared_major_accident_scope now distinguishes numerical case gaps/uncomputed cases from qualification-only gaps; numerical diagnostic closure never promotes provider or facility QRA evidence",
   "current_union_ijhe_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "current_union_external_equipment_model_contract_audit_record": "results/20261026/native_full_scope_union_assessment/external_lh2dt_model_contract_audit.json",
@@ -1994,10 +1994,10 @@
   "diagnostic_union_chain_closure_audit_implemented": true,
   "diagnostic_union_chain_closure_audit_policy": "The completion audit may close the declared diagnostic chain from the exact packet subset plus a separately identified vertical-handoff subset when the combined closure proves exact union identity, event-count equality, no mismatches, and packet-subset identity consumption. This is diagnostic-only and cannot qualify providers, infer frequency, or promote facility IR/F-N.",
   "ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 49,
+    "PASS": 50,
     "BLOCKED": 5
   },
-  "ijhe_completion_audit_latest_check_count": 54,
+  "ijhe_completion_audit_latest_check_count": 55,
   "ijhe_completion_audit_latest_blocking_reason_count": 5,
   "ijhe_completion_audit_latest_blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
@@ -3453,8 +3453,8 @@
   "ijhe_completion_audit_combined_chain_closure_promotion": false,
   "ijhe_completion_audit_combined_chain_closure_test_status": "2 completion-audit tests; full portable suite 595 passed/1 skipped",
   "ijhe_audit_latest_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 54 checks, 49 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only",
-  "ijhe_audit_latest_check_count": 54,
+  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 55 checks, 50 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; forecast facility campaign evidence gate is withheld",
+  "ijhe_audit_latest_check_count": 55,
   "ijhe_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; local full suite 1337 passed, 1 warning; facility QRA remains fail-closed",
   "slabx_lh2_validation_evidence_implemented": true,
   "slabx_lh2_validation_evidence_module": "src/lh2_tno/slabx_validation_audit.py",
@@ -3676,9 +3676,9 @@
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
     "facility cases do not all have exact qualified provider packet evidence"
   ],
-  "v060_ijhe_completion_audit_latest_check_count": 54,
+  "v060_ijhe_completion_audit_latest_check_count": 55,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 49,
+    "PASS": 50,
     "BLOCKED": 5
   },
   "v060_ijhe_completion_audit_latest_blocked_checks": [
@@ -4281,7 +4281,7 @@
   "ijhe_completion_audit_external_document_evidence_check_name": "diagnostic_external_document_evidence",
   "ijhe_completion_audit_external_document_evidence_promotion": false,
   "ijhe_completion_audit_latest_full_evidence_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "ijhe_completion_audit_latest_full_evidence_status": "INCOMPLETE_EVIDENCE; 44 checks; 5 strict blocking reasons; structural worklist, facility evidence-request, diagnostic release-trace, vertical-handoff, numerical-scope, frequency-port and external-release-artifact checks PASS diagnostic-only",
+  "ijhe_completion_audit_latest_full_evidence_status": "INCOMPLETE_EVIDENCE; 55 checks; 5 strict blocking reasons; structural worklist, facility evidence-request, diagnostic release-trace, vertical-handoff, numerical-scope, frequency-port, external-release-artifact and forecast-campaign-gate checks PASS diagnostic-only",
   "ijhe_objective_latest_alignment_record": "results/20261108/ijhe_objective_coverage_audit_full_evidence_with_external_release_intake.json",
   "ijhe_objective_latest_alignment_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 30 objective rows; latest 44-check completion audit alignment PASS; 4 strict blockers remain",
   "status_consistency_recheck_record": "results/20261108/status_consistency_after_objective_alignment.json",
@@ -5055,8 +5055,8 @@
   "latest_provider_termination_event_row_count": 35,
   "latest_provider_termination_case_used_count": 42,
   "latest_provider_termination_invalid_case_count": 2,
-  "latest_ijhe_check_count": 49,
-  "latest_ijhe_pass_count": 48,
+  "latest_ijhe_check_count": 55,
+  "latest_ijhe_pass_count": 50,
   "latest_ijhe_blocked_count": 5,
   "latest_ijhe_status": "INCOMPLETE_EVIDENCE",
   "latest_facility_qra_promotion": false,
@@ -5098,7 +5098,7 @@
   "latest_provider_termination_variant_catalog": "results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json",
   "latest_provider_termination_variant_catalog_status": "EVIDENCE_CATALOG_READY; 35 rows, 34 event IDs, 42 case uses, distinct provider digests preserved",
   "latest_release_boundary_case_audit_status": "CASE_BOUNDARY_PARTIAL; 44 cases, 42 numerically closed, 2 numerically open, 42 provider-evidence-used cases, 2 invalid, 13 strict eligible, 31 blocked",
-  "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 54 checks, 49 PASS, 5 BLOCKED; current release-boundary and facility-case coverage evidence refreshed; domain-recovery sensitivity linked",
+  "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 55 checks, 50 PASS, 5 BLOCKED; current release-boundary and facility-case coverage evidence refreshed; forecast facility campaign evidence gate is withheld",
   "latest_native_lh2dt_current_source_replay_record": "docs/PRISM_native_lh2dt_current_source_replay_20261016.md",
   "latest_native_lh2dt_current_source_replay_commit": "b483f7921d7e67a269947f36393fdd3b9ab9e7b3",
   "latest_native_lh2dt_current_source_replay_tree_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
@@ -5408,7 +5408,7 @@
   "inspection_center_facility_campaign_handoff_qualified_total_ir_fn_available": false,
   "inspection_center_facility_campaign_handoff_state_release_interpretation": "The canonical provider-bound state snapshot and digest now propagate into the selected case identity and close the structural state-to-release audit; provider qualification and facility-QRA promotion remain diagnostic or withheld.",
   "latest_ijhe_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "latest_ijhe_completion_audit_check_count": 54,
+  "latest_ijhe_completion_audit_check_count": 55,
   "latest_ijhe_completion_audit_blocking_reason_count": 5,
   "latest_ijhe_completion_audit_diagnostic_facility_handoff_status": "PASS_DIAGNOSTIC_ONLY",
   "latest_ijhe_completion_audit_diagnostic_facility_handoff_check_count": 12,
@@ -5675,10 +5675,33 @@
   "process_forecast_quantitative_handoff_status": "FORECAST_QUANTITATIVE_HANDOFF_READY; 2 explicit receiving/supply requests ready for reviewed downstream evidence",
   "process_forecast_quantitative_handoff_facility_qra_promotion": false,
   "process_forecast_quantitative_handoff_contract_fields": {
-    "provider_release_packet": ["duration_s", "termination_basis", "isolation_time_s", "post_isolation_observation_s", "inventory_initial_kg", "inventory_out_kg", "mass_residual_kg"],
-    "frequency_binding": ["annual_frequency", "annual_frequency_low", "annual_frequency_high", "source_provenance"],
-    "slabx_lh2_consequence": ["weather_condition_id", "ignition_branch_id", "receptor_damage_or_harm_outputs", "processing_time_ms"],
-    "facility_condition_binding": ["population_condition_id", "weather_condition_id", "ignition_branch_id", "facility_port_or_endpoint_id"]
+    "provider_release_packet": [
+      "duration_s",
+      "termination_basis",
+      "isolation_time_s",
+      "post_isolation_observation_s",
+      "inventory_initial_kg",
+      "inventory_out_kg",
+      "mass_residual_kg"
+    ],
+    "frequency_binding": [
+      "annual_frequency",
+      "annual_frequency_low",
+      "annual_frequency_high",
+      "source_provenance"
+    ],
+    "slabx_lh2_consequence": [
+      "weather_condition_id",
+      "ignition_branch_id",
+      "receptor_damage_or_harm_outputs",
+      "processing_time_ms"
+    ],
+    "facility_condition_binding": [
+      "population_condition_id",
+      "weather_condition_id",
+      "ignition_branch_id",
+      "facility_port_or_endpoint_id"
+    ]
   },
   "process_forecast_quantitative_evidence_attachment_implemented": true,
   "process_forecast_quantitative_evidence_attachment_module": "lh2_tno.forecast_handoff.attach_forecast_quantitative_evidence",
@@ -5705,12 +5728,13 @@
   "process_forecast_facility_campaign_evidence_gate_test_status": "2 gate contract tests and 1 integrated withholding test; full local suite 1356 passed, 1 warning",
   "process_forecast_facility_campaign_evidence_gate_record": "results/20261115/inspection_center_facility_forecast_campaign_gate.json",
   "process_forecast_facility_campaign_evidence_gate_status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE; 2 requests, 0 complete, 2 missing",
-  "process_forecast_facility_campaign_evidence_gate_downstream_campaign_input_allowed": false
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_implemented": true
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_module": "lh2_tno.completion_audit.build_ijhe_completion_audit"
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_cli": "scripts/build_ijhe_completion_audit.py"
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_check": "diagnostic_forecast_facility_campaign_evidence_gate"
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_policy": "coverage and gate records must agree exactly; a consistent withheld gate passes as a diagnostic control while provider qualification, physical validation and facility IR/F-N strict blockers remain"
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_test": "tests/test_completion_audit.py"
-  ,"process_forecast_facility_campaign_evidence_gate_completion_audit_test_status": "2 completion-audit consistency tests; full local suite 1358 passed, 1 warning"
+  "process_forecast_facility_campaign_evidence_gate_downstream_campaign_input_allowed": false,
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_implemented": true,
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_module": "lh2_tno.completion_audit.build_ijhe_completion_audit",
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_cli": "scripts/build_ijhe_completion_audit.py",
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_check": "diagnostic_forecast_facility_campaign_evidence_gate",
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_policy": "coverage and gate records must agree exactly; a consistent withheld gate passes as a diagnostic control while provider qualification, physical validation and facility IR/F-N strict blockers remain",
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_test": "tests/test_completion_audit.py",
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_test_status": "2 completion-audit consistency tests; full local suite 1358 passed, 1 warning",
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
 }
