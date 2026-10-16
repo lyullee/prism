@@ -43,6 +43,22 @@ The ambient-vaporizer G2 case remains a separate open case. Its
 `inventory_over_600s` horizon leaves almost all provider inventory present and
 is not accepted as inventory depletion.
 
+The VentStack exporter accepts the relief metadata only as explicit provider
+inputs. For example:
+
+```powershell
+python scripts/export_lh2dt_vent_stack_prism_packet.py `
+  --lh2dt-root "C:\path\to\lh2dt_models" `
+  --output-dir results/vent_relief_candidate `
+  --relief-setpoint-pa 102000 `
+  --relief-capacity-kg-s 0.5 `
+  --discharge-complete
+```
+
+If either relief value or the completion flag is omitted, the packet remains
+diagnostic and the strict audit keeps it open. The command does not infer
+setpoint, capacity, or completion from the steady VentStack flow.
+
 ## Implementation and replay
 
 The contract is implemented in:

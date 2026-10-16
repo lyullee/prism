@@ -76,17 +76,34 @@ def _request(*, source_digest: str, component_id: str, port_id: str | None, even
 class VentStackAccidentProvider:
     """Run one explicit VentStack two-port state over a bounded clock."""
 
-    def __init__(self, root: Path, *, duration_s: float, time_step_s: float, stack: dict[str, Any], upstream: dict[str, float], ambient_temperature_k: float) -> None:
+    def __init__(self, root: Path, *, duration_s: float, time_step_s: float, stack: dict[str, Any], upstream: dict[str, float], ambient_temperature_k: float, relief_setpoint_pa: float | None = None, relief_capacity_kg_s: float | None = None, discharge_complete: bool = False) -> None:
         self.root = root.resolve()
         self.duration_s = float(duration_s)
         self.time_step_s = float(time_step_s)
         self.stack = dict(stack)
         self.upstream = dict(upstream)
         self.ambient_temperature_k = float(ambient_temperature_k)
+        self.relief_setpoint_pa = (
+            None if relief_setpoint_pa is None else float(relief_setpoint_pa)
+        )
+        self.relief_capacity_kg_s = (
+            None if relief_capacity_kg_s is None else float(relief_capacity_kg_s)
+        )
+        self.discharge_complete = bool(discharge_complete)
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         if self.duration_s <= 0.0 or self.time_step_s <= 0.0:
             raise ValueError("VentStack diagnostic duration and time step must be positive")
+        if (self.relief_setpoint_pa is None) != (self.relief_capacity_kg_s is None):
+            raise ValueError(
+                "relief_setpoint_pa and relief_capacity_kg_s must be supplied together"
+            )
+        for name, value in {
+            "relief_setpoint_pa": self.relief_setpoint_pa,
+            "relief_capacity_kg_s": self.relief_capacity_kg_s,
+        }.items():
+            if value is not None and (not math.isfinite(value) or value <= 0.0):
+                raise ValueError(f"{name} must be finite and positive")
         if not math.isclose(self.duration_s / self.time_step_s, round(self.duration_s / self.time_step_s), rel_tol=0.0, abs_tol=1.0e-10):
             raise ValueError("VentStack duration must be an integer number of time steps")
         sys.path.insert(0, str(self.root / "src"))
@@ -123,6 +140,7 @@ class VentStackAccidentProvider:
         cumulative_enthalpy = cumulative_mass * float(outlet.specific_enthalpy_J_kg)
         data = {
             "event_kind": "emergency_relief",
+            "source_operator": "equipment_emergency_relief",
             "event_id": request["event_id"],
             "component_id": request["component_id"],
             "port_id": request["port_id"],
@@ -132,6 +150,9 @@ class VentStackAccidentProvider:
             "cumulative_static_enthalpy_out_j": cumulative_enthalpy,
             "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
             "termination_basis": "emergency_relief_discharge",
+            "relief_setpoint_pa": self.relief_setpoint_pa,
+            "relief_capacity_kg_s": self.relief_capacity_kg_s,
+            "discharge_complete": self.discharge_complete,
             "fluid": "Hydrogen",
             "steps": steps,
             "provider_meta": {
@@ -143,6 +164,9 @@ class VentStackAccidentProvider:
                 "upstream": dict(self.upstream),
                 "downstream_pressure_pa": ambient_pressure,
                 "model_class": "lh2dt.VentStack",
+                "relief_setpoint_pa": self.relief_setpoint_pa,
+                "relief_capacity_kg_s": self.relief_capacity_kg_s,
+                "discharge_complete": self.discharge_complete,
             },
         }
         return {
@@ -180,7 +204,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "source_digest": source_digest,
     })
     request = _request(source_digest=source_digest, component_id=component_id, port_id=args.port_id, event_id=args.event_id, state_snapshot=state_snapshot, height_m=args.nozzle_height_m, revision=args.model_revision)
-    provider = VentStackAccidentProvider(root, duration_s=args.duration_s, time_step_s=args.time_step_s, stack=stack, upstream=upstream, ambient_temperature_k=args.ambient_temperature_k)
+    provider = VentStackAccidentProvider(
+        root,
+        duration_s=args.duration_s,
+        time_step_s=args.time_step_s,
+        stack=stack,
+        upstream=upstream,
+        ambient_temperature_k=args.ambient_temperature_k,
+        relief_setpoint_pa=args.relief_setpoint_pa,
+        relief_capacity_kg_s=args.relief_capacity_kg_s,
+        discharge_complete=args.discharge_complete,
+    )
     result = export_equipment_emergency_relief_history(provider, request)
     release = result.release.model_dump(mode="json")
     verification = {
@@ -230,6 +264,18 @@ def main() -> int:
     parser.add_argument("--inlet-pressure-pa", type=float, default=102000.0)
     parser.add_argument("--inlet-temperature-k", type=float, default=40.0)
     parser.add_argument("--ambient-temperature-k", type=float, default=288.15)
+    parser.add_argument(
+        "--relief-setpoint-pa", type=float, default=None,
+        help="provider-declared relief setpoint; omit to keep the packet open",
+    )
+    parser.add_argument(
+        "--relief-capacity-kg-s", type=float, default=None,
+        help="provider-declared relief capacity; omit to keep the packet open",
+    )
+    parser.add_argument(
+        "--discharge-complete", action="store_true",
+        help="provider explicitly declares that the relief discharge ended",
+    )
     parser.add_argument("--nozzle-height-m", type=float, default=2.0)
     parser.add_argument("--component-id", default="vent-stack-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")

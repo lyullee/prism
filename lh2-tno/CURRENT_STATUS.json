@@ -1366,6 +1366,8 @@
   "external_lh2dt_vent_stack_prism_packet_export_implemented": true,
   "external_lh2dt_vent_stack_prism_packet_export_script": "scripts/export_lh2dt_vent_stack_prism_packet.py",
   "external_lh2dt_vent_stack_prism_packet_export_status": "EXECUTED_OPERATOR_LIMITED; VentStack steady two-port gas packet and full consequence chain; synthetic diagnostic only",
+  "external_lh2dt_vent_stack_relief_metadata_inputs_implemented": true,
+  "external_lh2dt_vent_stack_relief_metadata_policy": "setpoint, capacity and discharge completion are optional explicit provider inputs; omitted values keep emergency-relief evidence invalid",
   "external_lh2dt_vent_stack_prism_packet_export_record": "results/20261012/vent_stack_prism_packet_default_smoke",
   "external_lh2dt_vent_stack_prism_packet_export_chain_record": "results/20261012/vent_stack_prism_chain_default_smoke",
   "external_lh2dt_vent_stack_prism_packet_export_provider_model": "lh2dt.VentStack",
