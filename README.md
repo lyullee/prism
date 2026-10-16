@@ -59,6 +59,17 @@ The detailed package documentation is in [`lh2-tno/README.md`](lh2-tno/README.md
 
 The interface guide defines the state-frame, HAZOP, provider release, frequency, result, and acceptance-test contracts needed to connect an equipment digital twin.
 
+## Current IJHE audit status
+
+The latest generic outdoor LH2 union audit is [`INCOMPLETE_EVIDENCE`](lh2-tno/docs/PRISM_IJHE_latest_audit_20261115.md): 45 checks, 41 pass, and 4 strict gates withheld. The reconstructed inspection-center handoff is included as a diagnostic-only check; it does not promote provider qualification, independent full-chain validation, or total-facility IR/F-N. The latest facility-handoff interpretation, including the near-receptor conditional IR/F-N diagnostic and its receptor-geometry boundary, is in [`PRISM_IJHE_facility_handoff_audit_20261115.md`](lh2-tno/docs/PRISM_IJHE_facility_handoff_audit_20261115.md).
+
+The local portable suite currently reports **1239 passed, 1 warning**. The metadata check can be rerun with:
+
+```powershell
+cd prism\lh2-tno
+python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
+```
+
 ## Release links
 
 - [GitHub Release v0.6.3](https://github.com/lyullee/prism/releases/tag/v0.6.3)
