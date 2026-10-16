@@ -267,6 +267,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
 - [HAZOP-to-facility campaign manifest and CLI](docs/PRISM_HAZOP_facility_campaign_manifest_en.md)
+- [Equipment-twin to HAZOP mode handoff](docs/PRISM_equipment_to_hazop_mode_handoff_en.md)
 - [Korean user manual](docs/PRISM_USER_MANUAL_ko.md)
 - [Korean interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)
 - [Korean README](README_ko.md)
