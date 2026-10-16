@@ -4086,7 +4086,7 @@
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
     "per_branch_provider_identity_handoff_policy": "Explicit scenario-to-provider identity map; missing entries withheld; no cross-branch identity reuse.",
-    "latest_local_full_test_run": "1272 passed, 1 warning"
+    "latest_local_full_test_run": "1275 passed, 1 warning"
   },
   "hazop_facility_branch_identity_partition_implemented": true,
   "hazop_facility_branch_identity_partition_key": "component_id|hazop_scenario_id",
@@ -4098,6 +4098,5 @@
   "hazop_facility_campaign_manifest_runner": "scripts/run_hazop_facility_campaign_manifest.py",
   "hazop_facility_campaign_manifest_api": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_branches_from_manifest",
   "hazop_facility_campaign_manifest_record": "docs/PRISM_HAZOP_facility_campaign_manifest_en.md",
-  "hazop_facility_campaign_manifest_test": "tests/test_hazop_campaign.py::test_hazop_branch_manifest_replays_the_same_facility_campaign",
-  "latest_local_full_test_run": "1275 passed, 1 warning"
+  "hazop_facility_campaign_manifest_test": "tests/test_hazop_campaign.py::test_hazop_branch_manifest_replays_the_same_facility_campaign"
 }
