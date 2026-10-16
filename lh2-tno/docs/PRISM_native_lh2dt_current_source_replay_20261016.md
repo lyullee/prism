@@ -41,3 +41,17 @@ The result is a current-source integration diagnostic. It does **not** qualify t
 
 Current-source diagnostic exports also completed for `DynamicHEMPipe` (`two_phase`) and `MappedPump`. A `StrokeLimitedCommandedValve` gas export completed, but the ordinary low-Mach consequence chain correctly rejected its high-speed gas exit and requested a compressible/underexpanded plane handoff. That rejection is preserved as an explicit scope boundary; the valve packet was not silently downgraded.
 
+The valve adapter now has an optional one-command handoff path:
+
+```powershell
+python scripts/export_lh2dt_native_valve_prism_packet.py `
+  --lh2dt-root C:\Users\lyul\Desktop\DocuData\_external_lh2dt_models_20261016 `
+  --output-dir results\20261016\native_valve_actual_smoke_integrated_v2 `
+  --source-pressure-pa-abs 300000 --source-temperature-k 50 `
+  --failure-opening-diameter-m 0.001 --stroke-time-s 0.1 `
+  --horizon-s 0.2 --time-step-s 0.02 --available-mass-kg 5 `
+  --nozzle-height-m 0.05 --compressible-handoff
+```
+
+This writes `resolved_release_with_handoff.json`, after exact provider-digest binding and conservation checks. Running that packet through `validate_lh2dt_prism_packet_chain.py` reached `END_TO_END_DIAGNOSTIC_EXECUTED`, with a 0.2 s provider duration and a mass residual of approximately `1.4e-20 kg`. The handoff remains synthetic diagnostic evidence: it does not qualify the provider or unlock facility IR/F-N.
+

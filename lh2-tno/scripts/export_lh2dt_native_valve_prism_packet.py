@@ -25,6 +25,8 @@ from lh2_tno.equipment_accident_export import (  # noqa: E402
     export_equipment_gas_accident_history,
 )
 from lh2_tno.contracts import canonical_digest  # noqa: E402
+from lh2_tno.compressible_handoff import attach_compressible_plane_handoff  # noqa: E402
+from lh2_tno.compressible_source_adapter import build_compressible_plane_handoff  # noqa: E402
 from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
     EquipmentStateSnapshot,
@@ -243,6 +245,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "physical_validation_claim": False,
         "frequency_inference_performed": False,
         "facility_qra_claim": False,
+        "compressible_handoff_requested": args.compressible_handoff,
+        "compressible_handoff_generated": False,
         "limitations": [
             "synthetic gas source state, valve geometry and upstream reserve",
             "StrokeLimitedCommandedValve owns no upstream inventory or isolation reliability",
@@ -253,6 +257,32 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(args.output_dir / "provider_response.json", native_response)
     _save(args.output_dir / "provider_response_strict.json", strict_provider_response)
     _save(args.output_dir / "resolved_release.json", result.release.model_dump(mode="json"))
+    if args.compressible_handoff:
+        handoff_source_digest = canonical_digest({
+            "prism_adapter": "export_lh2dt_native_valve_prism_packet",
+            "adapter_revision": args.model_revision,
+            "lh2dt_source_digest": source_digest,
+        })
+        handoff_result = build_compressible_plane_handoff(
+            result.release,
+            strict_provider_response,
+            properties=properties,
+            algorithm=args.handoff_algorithm,
+            adapter_source_digest=handoff_source_digest,
+            evidence_status="synthetic_diagnostic",
+        )
+        attached_packet, handoff_audit = attach_compressible_plane_handoff(
+            result.release.model_dump(mode="json"),
+            handoff_result.export,
+        )
+        _save(args.output_dir / "compressible_handoff.json", handoff_result.export)
+        _save(args.output_dir / "compressible_handoff_audit.json", handoff_result.audit)
+        _save(args.output_dir / "resolved_release_with_handoff.json", attached_packet)
+        _save(args.output_dir / "handoff_attach_audit.json", handoff_audit)
+        verification["compressible_handoff_generated"] = True
+        verification["compressible_handoff_algorithm"] = args.handoff_algorithm
+        verification["compressible_handoff_state_count"] = handoff_audit["handoff_state_count"]
+        verification["compressible_handoff_provider_qualified"] = False
     _save(args.output_dir / "verification.json", verification)
     return verification
 
@@ -276,6 +306,19 @@ def main() -> int:
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--available-mass-kg", type=float, default=100.0)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--compressible-handoff",
+        action="store_true",
+        help=(
+            "also build and attach a source-state-bound compressible plane handoff; "
+            "the result remains synthetic diagnostic evidence"
+        ),
+    )
+    parser.add_argument(
+        "--handoff-algorithm",
+        choices=("birch_momentum_energy", "birch_momentum_isentropic"),
+        default="birch_momentum_energy",
+    )
     args = parser.parse_args()
     try:
         result = run(args)
