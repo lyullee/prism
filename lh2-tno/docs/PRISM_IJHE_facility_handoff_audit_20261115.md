@@ -12,7 +12,7 @@ The handoff path is:
 
 | Item | Result |
 |---|---:|
-| Audit record | [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound_with_inspection_center_handoff.json`](../results/20261115/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound_with_inspection_center_handoff.json) |
+| Audit record | [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json) |
 | Overall status | `INCOMPLETE_EVIDENCE` |
 | Checks | 45 total: 41 pass, 4 blocked |
 | Facility handoff diagnostic check | `PASS` (`diagnostic_only=true`) |
@@ -20,7 +20,7 @@ The handoff path is:
 | Independent full-chain physical validation | Not claimed |
 | Qualified total-facility IR/F-N | Withheld |
 
-The four blocking gates are deliberately preserved:
+The latest release-boundary ledger has 44 declared cases, 3 strict-eligible rows, and 41 blocked rows. The four blocking gates are deliberately preserved:
 
 1. The release boundary is not closed for every declared case.
 2. Available provider releases are synthetic or screening evidence.
