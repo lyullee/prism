@@ -4033,5 +4033,8 @@
     "temperature_K_at_30_m": 0.00493915837236222,
     "MAE_vol_pct": 0.04617591972538058,
     "RMSE_vol_pct": 0.002373795060655996
-  }
+  },
+  "slabx_lh2_test6_numerical_sensitivity_record": "results/20261115/slabx_lh2_test6_numerical_sensitivity.json",
+  "slabx_lh2_test6_numerical_sensitivity_status": "PARAMETER_SENSITIVITY_DIAGNOSTIC",
+  "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence."
 }

@@ -27,6 +27,7 @@ records are:
 
 - `results/20261115/slabx_lh2_test6_actual_source_numerical_gate/refinement.json`
 - `results/20261115/slabx_lh2_test6_actual_source_numerical_gate/provenance.json`
+- `results/20261115/slabx_lh2_test6_numerical_sensitivity.json`
 
 ## Interpretation
 
@@ -41,6 +42,12 @@ The failure is useful: it identifies a real numerical-resolution issue in the
 actual LH2 source path. The next technical step is to resolve the grid/source
 convergence (or document a reviewed convergence criterion) before using this
 comparison as an IJHE validation claim.
+
+The sensitivity record shows why simply increasing the grid is not a safe fix:
+at 320 field steps, increasing RK substeps from 16 to 64 changes the 30-metre
+hydrogen volume fraction from 3.077 to 2.258 vol% and increases one fresh
+calculation from about 30 s to 112 s. A strict adaptive run at `rtol` 0.005
+also fails to meet its tolerance at the source region after 16 refinements.
 
 The recorded gate can be rechecked without rerunning the external physics:
 

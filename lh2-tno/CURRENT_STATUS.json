@@ -5440,5 +5440,8 @@
   "slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim": false,
   "slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim": false,
   "slabx_lh2_test6_actual_source_numerical_gate_interpretation": "Actual FFI Test 6 LH2 source remains numerically unresolved; no separate pseudo-source convergence record is substituted.",
-  "slabx_lh2_test6_actual_source_numerical_gate_doc": "docs/PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md"
+  "slabx_lh2_test6_actual_source_numerical_gate_doc": "docs/PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md",
+  "slabx_lh2_test6_numerical_sensitivity_record": "results/20261115/slabx_lh2_test6_numerical_sensitivity.json",
+  "slabx_lh2_test6_numerical_sensitivity_status": "PARAMETER_SENSITIVITY_DIAGNOSTIC",
+  "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence."
 }

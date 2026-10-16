@@ -1,0 +1,33 @@
+{
+  "schema_version": "prism.slabx_lh2_ffi_test6_numerical_sensitivity.v1",
+  "status": "PARAMETER_SENSITIVITY_DIAGNOSTIC",
+  "scope": "actual FFI Test 6 HorizontalJet source; no sensor fitting",
+  "source": {
+    "rate_kg_s": 0.8317,
+    "nozzle_diameter_m": 0.0254,
+    "liquid_mass_fraction": 0.559,
+    "height_m": 0.5,
+    "duration_s": 120.0,
+    "temperature_K": 20.37
+  },
+  "substep_sweep": [
+    {"n_field_steps": 320, "n_source_steps": 10, "substeps": 16, "H2_vol_pct_at_30_m": 3.07721394959511, "centre_height_m_at_30_m": 1.240420365905147, "cloud_depth_m_at_30_m": 8.213472277059461, "temperature_K_at_30_m": 270.43791526559266, "elapsed_s": 29.6029167},
+    {"n_field_steps": 320, "n_source_steps": 10, "substeps": 32, "H2_vol_pct_at_30_m": 2.6707635108214127, "centre_height_m_at_30_m": 1.0192542970708318, "cloud_depth_m_at_30_m": 8.48421789095455, "temperature_K_at_30_m": 271.09891692181566, "elapsed_s": 56.0951051},
+    {"n_field_steps": 320, "n_source_steps": 10, "substeps": 64, "H2_vol_pct_at_30_m": 2.258395266243753, "centre_height_m_at_30_m": 0.8341897196036598, "cloud_depth_m_at_30_m": 8.803844963149565, "temperature_K_at_30_m": 271.7583081179319, "elapsed_s": 111.6164817},
+    {"n_field_steps": 640, "n_source_steps": 10, "substeps": 16, "H2_vol_pct_at_30_m": 2.6696580773218868, "centre_height_m_at_30_m": 1.0187173531880416, "cloud_depth_m_at_30_m": 8.485032423371983, "temperature_K_at_30_m": 271.10070254388427, "elapsed_s": 57.2501779}
+  ],
+  "adaptive_sweep": [
+    {"n_field_steps": 40, "n_source_steps": 10, "substeps": 3, "adaptive_rtol": 0.02, "H2_vol_pct_at_30_m": 4.526426288985168, "centre_height_m_at_30_m": 2.3280568332645273, "cloud_depth_m_at_30_m": 7.699527007415462, "temperature_K_at_30_m": 267.9483606460252, "elapsed_s": 2.988343},
+    {"n_field_steps": 80, "n_source_steps": 10, "substeps": 3, "adaptive_rtol": 0.02, "H2_vol_pct_at_30_m": 4.444773109153556, "centre_height_m_at_30_m": 2.2501977656120453, "cloud_depth_m_at_30_m": 7.722538558009863, "temperature_K_at_30_m": 268.09316376978023, "elapsed_s": 4.6362177},
+    {"n_field_steps": 160, "n_source_steps": 10, "substeps": 3, "adaptive_rtol": 0.02, "H2_vol_pct_at_30_m": 4.1800631681212685, "centre_height_m_at_30_m": 2.2161464769518813, "cloud_depth_m_at_30_m": 7.913706093215454, "temperature_K_at_30_m": 268.5611842559669, "elapsed_s": 8.7675972},
+    {"n_field_steps": 320, "n_source_steps": 10, "substeps": 3, "adaptive_rtol": 0.02, "H2_vol_pct_at_30_m": 3.979626054474348, "centre_height_m_at_30_m": 1.9260717880144307, "cloud_depth_m_at_30_m": 7.818128758364819, "temperature_K_at_30_m": 268.90834253302876, "elapsed_s": 17.0778129}
+  ],
+  "adaptive_failure": {
+    "adaptive_rtol": 0.005,
+    "n_field_steps": 80,
+    "error": "adaptive RK4 did not meet rtol=0.005 at x=1 after 16 refinements (error=0.0103)"
+  },
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "Substep and adaptive settings materially affect the actual LH2 source path; no setting is promoted to physical validation or facility QRA without a reviewed convergence basis."
+}
