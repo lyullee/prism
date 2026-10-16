@@ -584,6 +584,75 @@ def _release_metrics(row: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _frequency_metadata(
+    event: Mapping[str, Any] | None,
+    case: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Copy the already-bound literature frequency into one case audit row.
+
+    This function is intentionally a read-only bridge.  It never estimates a
+    frequency from telemetry or a release result; the facility event ledger is
+    the only accepted source.  Rechecking the event and port identity here
+    makes a frequency-to-case mismatch visible at the same grain as the
+    release-boundary decision.
+    """
+
+    if not isinstance(event, Mapping):
+        return {
+            "frequency_binding_status": "NOT_AVAILABLE",
+            "initiating_frequency_per_year": None,
+            "frequency_marginal_p05_per_year": None,
+            "frequency_marginal_p95_per_year": None,
+            "frequency_statistic": None,
+            "frequency_source": None,
+            "frequency_source_sha256": None,
+            "frequency_event_id": None,
+            "frequency_event_port_ids": [],
+            "frequency_case_port_ids": [],
+            "frequency_inference_performed": False,
+        }
+
+    event_ports_raw = event.get("port_ids")
+    case_ports_raw = case.get("frequency_port_ids")
+    event_ports = (
+        sorted({str(value) for value in event_ports_raw if value is not None})
+        if isinstance(event_ports_raw, Sequence)
+        and not isinstance(event_ports_raw, (str, bytes))
+        else []
+    )
+    case_ports = (
+        sorted({str(value) for value in case_ports_raw if value is not None})
+        if isinstance(case_ports_raw, Sequence)
+        and not isinstance(case_ports_raw, (str, bytes))
+        else []
+    )
+    annual = _finite(event.get("annual_frequency_per_year"))
+    p05 = _finite(event.get("marginal_p05_per_year"))
+    p95 = _finite(event.get("marginal_p95_per_year"))
+    event_id = event.get("id")
+    identity_bound = (
+        isinstance(event_id, str)
+        and str(event_id) == str(case.get("event_id"))
+        and bool(event_ports)
+        and event_ports == case_ports
+        and annual is not None
+        and annual >= 0.0
+    )
+    return {
+        "frequency_binding_status": "BOUND" if identity_bound else "UNBOUND",
+        "initiating_frequency_per_year": annual,
+        "frequency_marginal_p05_per_year": p05,
+        "frequency_marginal_p95_per_year": p95,
+        "frequency_statistic": event.get("statistic"),
+        "frequency_source": event.get("source"),
+        "frequency_source_sha256": event.get("source_sha256"),
+        "frequency_event_id": event_id,
+        "frequency_event_port_ids": event_ports,
+        "frequency_case_port_ids": case_ports,
+        "frequency_inference_performed": False,
+    }
+
+
 def _required_evidence(
     boundary_reasons: Sequence[str],
     provider_reasons: Sequence[str],
@@ -699,6 +768,11 @@ def build_release_boundary_case_audit(
     }
     cases_by_key = {
         _case_key(case): case for case in cases if case.get("event_id") is not None
+    }
+    event_by_id = {
+        str(event.get("id")): event
+        for event in _as_rows(risk_ledger.get("events"))
+        if event.get("id") is not None
     }
     case_ids = [_case_key(case) for case in cases if case.get("event_id") is not None]
     ledger_ids = [_case_key(row) for row in ledger_rows if row.get("event_id") is not None]
@@ -819,6 +893,7 @@ def build_release_boundary_case_audit(
         identity = _as_mapping(case.get("provider_packet_identity"))
         boundary_ok = not reasons
         metrics = _release_metrics(ledger_row)
+        frequency = _frequency_metadata(event_by_id.get(event_id), case)
         numerical_release_closed = not termination_reasons
         if numerical_release_closed and operational_reasons:
             numerical_closure_status = "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED"
@@ -843,6 +918,7 @@ def build_release_boundary_case_audit(
             "operating_mode": case.get("operating_mode"),
             "hazop_scenario_id": case.get("hazop_scenario_id"),
             "scenario_families": list(case.get("scenario_families", [])) if isinstance(case.get("scenario_families"), list) else [],
+            **frequency,
             "status": ledger_row.get("status"),
             "ledger_status": ledger_row.get("ledger_status"),
             "termination": {
@@ -898,6 +974,7 @@ def build_release_boundary_case_audit(
     status_counts = Counter(row["strict_release_boundary_status"] for row in rows)
     numerical_closure_counts = Counter(row["numerical_closure_status"] for row in rows)
     domain_status_counts = Counter(row["consequence_domain_status"] for row in rows)
+    frequency_binding_counts = Counter(row["frequency_binding_status"] for row in rows)
     provider_status_counts = Counter(row["provider_qualification_status"] for row in rows)
     termination_evidence_status_counts = Counter(
         row["provider_termination_evidence_status"] for row in rows
@@ -1005,6 +1082,9 @@ def build_release_boundary_case_audit(
         ),
         "numerical_closure_status_counts": dict(sorted(numerical_closure_counts.items())),
         "consequence_domain_status_counts": dict(sorted(domain_status_counts.items())),
+        "frequency_binding_status_counts": dict(sorted(frequency_binding_counts.items())),
+        "frequency_unbound_case_count": frequency_binding_counts.get("UNBOUND", 0)
+        + frequency_binding_counts.get("NOT_AVAILABLE", 0),
         "operator_review_required_case_count": numerical_closure_counts.get(
             "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED", 0
         ),

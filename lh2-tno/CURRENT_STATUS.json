@@ -5467,7 +5467,7 @@
   "latest_ijhe_audit_metadata_verifier_release_boundary_record": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "latest_ijhe_audit_metadata_verifier_release_boundary_status": "CASE_BOUNDARY_PARTIAL",
   "latest_ijhe_audit_metadata_verifier_release_boundary_case_count": 44,
-  "latest_release_boundary_case_audit_sha256": "7D4B81EC80B735C21DF0BD957CC1649E1AA6BD9DD1FFE7D7E44A648821BC07C2",
+  "latest_release_boundary_case_audit_sha256": "33C685BFFBEF0CAD408D8C84D3929509B04C77D336775C50AA406D783A0AF0E1",
   "latest_release_boundary_case_audit_request_status": "OPEN_EVIDENCE_REQUEST",
   "latest_release_boundary_case_audit_request_contract_status_counts": {
     "ALIGNED": 44
@@ -5489,5 +5489,10 @@
     "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 29,
     "NUMERICALLY_OPEN": 2
   },
-  "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY; 35 event rows, 42 case uses, 42 valid and 2 unsupported-basis rows"
+  "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY; 35 event rows, 42 case uses, 42 valid and 2 unsupported-basis rows",
+  "latest_release_boundary_frequency_binding_status_counts": {
+    "BOUND": 44
+  },
+  "latest_release_boundary_frequency_unbound_case_count": 0,
+  "latest_release_boundary_frequency_inference_performed": false
 }

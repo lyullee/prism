@@ -169,6 +169,10 @@
   "consequence_domain_status_counts": {
     "CLOSED": 44
   },
+  "frequency_binding_status_counts": {
+    "BOUND": 44
+  },
+  "frequency_unbound_case_count": 0,
   "operator_review_required_case_count": 29,
   "consequence_domain_truncated_case_count": 0,
   "provider_qualification_status_counts": {
@@ -208,6 +212,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.00065,
+      "frequency_marginal_p05_per_year": 3.7382986363517247e-05,
+      "frequency_marginal_p95_per_year": 0.01130279619616365,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -313,6 +332,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.00014,
+      "frequency_marginal_p05_per_year": 2.1504049427284243e-06,
+      "frequency_marginal_p95_per_year": 0.009113981537286191,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -416,6 +450,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 2.8e-05,
+      "frequency_marginal_p05_per_year": 9.638894775799317e-07,
+      "frequency_marginal_p95_per_year": 0.000813381099417175,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "frequency_event_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -519,6 +568,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 5.7e-06,
+      "frequency_marginal_p05_per_year": 6.514182178725963e-08,
+      "frequency_marginal_p95_per_year": 0.0004988022019019256,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "frequency_event_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -622,6 +686,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.2e-06,
+      "frequency_marginal_p05_per_year": 6.996829710251477e-09,
+      "frequency_marginal_p95_per_year": 0.00020580296839426259,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "frequency_event_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "tank-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -725,6 +804,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.4e-06,
+      "frequency_marginal_p05_per_year": 3.2554838825238133e-07,
+      "frequency_marginal_p95_per_year": 3.5511808894583394e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -830,6 +924,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.6e-06,
+      "frequency_marginal_p05_per_year": 1.3386517161273802e-07,
+      "frequency_marginal_p95_per_year": 1.9123984561800025e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -935,6 +1044,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 8e-07,
+      "frequency_marginal_p05_per_year": 7.464077255362197e-08,
+      "frequency_marginal_p95_per_year": 8.573615206250296e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "frequency_event_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1040,6 +1164,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.9e-07,
+      "frequency_marginal_p05_per_year": 3.5602303956530105e-08,
+      "frequency_marginal_p95_per_year": 4.2723586050594105e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "frequency_event_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1145,6 +1284,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.9e-07,
+      "frequency_marginal_p05_per_year": 6.489473098932577e-09,
+      "frequency_marginal_p95_per_year": 5.563320009666715e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "frequency_event_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "line-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1250,6 +1404,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.00012,
+      "frequency_marginal_p05_per_year": 4.4143229045141205e-05,
+      "frequency_marginal_p95_per_year": 0.0003262231195800764,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1355,6 +1524,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 5.2e-05,
+      "frequency_marginal_p05_per_year": 8.622477495766756e-06,
+      "frequency_marginal_p95_per_year": 0.00031357816528445936,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1460,6 +1644,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 2.2e-05,
+      "frequency_marginal_p05_per_year": 2.057720688527284e-06,
+      "frequency_marginal_p95_per_year": 0.0002351967052387882,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "frequency_event_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1565,6 +1764,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 9.3e-06,
+      "frequency_marginal_p05_per_year": 3.3789251339083347e-07,
+      "frequency_marginal_p95_per_year": 0.00025596700711635174,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "frequency_event_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1670,6 +1884,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.9e-06,
+      "frequency_marginal_p05_per_year": 1.541781617567238e-07,
+      "frequency_marginal_p95_per_year": 9.865881321160032e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "frequency_event_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "valve-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1773,6 +2002,21 @@
       "scenario_families": [
         "vent_hole"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 2e-05,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.12/3.13, printed pp.3.10-3.11; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "frequency_event_port_ids": [
+        "vent-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "vent-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -1874,6 +2118,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.0001,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "frequency_event_port_ids": [
+        "pump-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "pump-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -1979,6 +2238,21 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.0005,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "frequency_event_port_ids": [
+        "pump-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "pump-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -2082,6 +2356,21 @@
       "scenario_families": [
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 5e-05,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "frequency_event_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -2176,6 +2465,21 @@
       "scenario_families": [
         "inventory_over_600s"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 5e-05,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "frequency_event_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -2275,6 +2579,21 @@
       "scenario_families": [
         "vaporizer_hole"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.001,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "frequency_event_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "frequency_case_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -2373,6 +2692,23 @@
       "scenario_families": [
         "two_sided_rupture"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1e-05,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "frequency_event_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "frequency_case_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -2479,6 +2815,23 @@
       "scenario_families": [
         "two_sided_rupture"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.001,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "frequency_event_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "frequency_case_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -2584,6 +2937,21 @@
       "scenario_families": [
         "reliquefier_hole"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.01,
+      "frequency_marginal_p05_per_year": null,
+      "frequency_marginal_p95_per_year": null,
+      "frequency_statistic": "published_default",
+      "frequency_source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "frequency_source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "frequency_event_port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "frequency_case_port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -2683,6 +3051,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.00012,
+      "frequency_marginal_p05_per_year": 4.4143229045141205e-05,
+      "frequency_marginal_p95_per_year": 0.0003262231195800764,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -2786,6 +3169,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 0.00012,
+      "frequency_marginal_p05_per_year": 4.4143229045141205e-05,
+      "frequency_marginal_p95_per_year": 0.0003262231195800764,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -2889,6 +3287,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 5.2e-05,
+      "frequency_marginal_p05_per_year": 8.622477495766756e-06,
+      "frequency_marginal_p95_per_year": 0.00031357816528445936,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -2992,6 +3405,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 5.2e-05,
+      "frequency_marginal_p05_per_year": 8.622477495766756e-06,
+      "frequency_marginal_p95_per_year": 0.00031357816528445936,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3095,6 +3523,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 2.2e-05,
+      "frequency_marginal_p05_per_year": 2.057720688527284e-06,
+      "frequency_marginal_p95_per_year": 0.0002351967052387882,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3198,6 +3641,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 2.2e-05,
+      "frequency_marginal_p05_per_year": 2.057720688527284e-06,
+      "frequency_marginal_p95_per_year": 0.0002351967052387882,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3301,6 +3759,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 9.3e-06,
+      "frequency_marginal_p05_per_year": 3.3789251339083347e-07,
+      "frequency_marginal_p95_per_year": 0.00025596700711635174,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3404,6 +3877,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 9.3e-06,
+      "frequency_marginal_p05_per_year": 3.3789251339083347e-07,
+      "frequency_marginal_p95_per_year": 0.00025596700711635174,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3507,6 +3995,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.9e-06,
+      "frequency_marginal_p05_per_year": 1.541781617567238e-07,
+      "frequency_marginal_p95_per_year": 9.865881321160032e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3610,6 +4113,21 @@
         "vertical_handoff",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.9e-06,
+      "frequency_marginal_p05_per_year": 1.541781617567238e-07,
+      "frequency_marginal_p95_per_year": 9.865881321160032e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED_OPERATOR_LIMITED",
       "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
       "termination": {
@@ -3712,6 +4230,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.4e-06,
+      "frequency_marginal_p05_per_year": 3.2554838825238133e-07,
+      "frequency_marginal_p95_per_year": 3.5511808894583394e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -3808,6 +4341,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.4e-06,
+      "frequency_marginal_p05_per_year": 3.2554838825238133e-07,
+      "frequency_marginal_p95_per_year": 3.5511808894583394e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -3904,6 +4452,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.6e-06,
+      "frequency_marginal_p05_per_year": 1.3386517161273802e-07,
+      "frequency_marginal_p95_per_year": 1.9123984561800025e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4000,6 +4563,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.6e-06,
+      "frequency_marginal_p05_per_year": 1.3386517161273802e-07,
+      "frequency_marginal_p95_per_year": 1.9123984561800025e-05,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4096,6 +4674,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 8e-07,
+      "frequency_marginal_p05_per_year": 7.464077255362197e-08,
+      "frequency_marginal_p95_per_year": 8.573615206250296e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4192,6 +4785,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 8e-07,
+      "frequency_marginal_p05_per_year": 7.464077255362197e-08,
+      "frequency_marginal_p95_per_year": 8.573615206250296e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4288,6 +4896,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.9e-07,
+      "frequency_marginal_p05_per_year": 3.5602303956530105e-08,
+      "frequency_marginal_p95_per_year": 4.2723586050594105e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4384,6 +5007,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 3.9e-07,
+      "frequency_marginal_p05_per_year": 3.5602303956530105e-08,
+      "frequency_marginal_p95_per_year": 4.2723586050594105e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4480,6 +5118,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.9e-07,
+      "frequency_marginal_p05_per_year": 6.489473098932577e-09,
+      "frequency_marginal_p95_per_year": 5.563320009666715e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {
@@ -4576,6 +5229,21 @@
         "pipe_hole",
         "inventory_depletion"
       ],
+      "frequency_binding_status": "BOUND",
+      "initiating_frequency_per_year": 1.9e-07,
+      "frequency_marginal_p05_per_year": 6.489473098932577e-09,
+      "frequency_marginal_p95_per_year": 5.563320009666715e-06,
+      "frequency_statistic": "published_median",
+      "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "frequency_source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "frequency_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "frequency_event_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_case_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "frequency_inference_performed": false,
       "status": "EXECUTED",
       "ledger_status": "COMPLETE",
       "termination": {

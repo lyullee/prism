@@ -5914,7 +5914,11 @@
               "status_executed_operator_limited": 10
             }
           }
-        }
+        },
+        "frequency_binding_status_counts": {
+          "BOUND": 44
+        },
+        "frequency_unbound_case_count": 0
       },
       "blocking_reason": null,
       "diagnostic_only": true,

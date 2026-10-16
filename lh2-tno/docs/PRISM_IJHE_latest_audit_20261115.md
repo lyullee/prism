@@ -23,6 +23,7 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 | union event / case / risk atom | 34 / 44 / 176 |
 | HAZOP event identity | 34/34 bound |
 | frequency port binding | 34/34 scoped, unbound 0, mismatch 0 |
+| release case frequency binding | 44/44 case rows bound to event/port literature metadata, unbound 0 |
 | 수직 handoff | 5 event, 10 case, `inventory_depletion` 종료 |
 | provider 종료 evidence | 35 provider row, 34 event ID, 42 case 사용, 2 invalid case |
 | numerical closure | 42 closed, 29 operator-review, 2 open |

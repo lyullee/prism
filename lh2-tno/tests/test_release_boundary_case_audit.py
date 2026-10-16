@@ -43,10 +43,11 @@ def _ledger_row(event_id, *, status="EXECUTED", basis="reviewed_isolation_succes
     }
 
 
-def _assessment(cases, rows):
+def _assessment(cases, rows, *, events=None):
     return {"facility_risk_ledger": {
         "cases": cases,
         "release_termination_inventory_ledger": {"rows": rows},
+        "events": list(events or []),
     }}
 
 
@@ -68,6 +69,35 @@ def test_case_audit_keeps_release_boundary_and_provider_qualification_separate()
     assert row["residual_fraction"] == []
     assert row["numerical_closure_status"] == "NUMERICALLY_CLOSED"
     assert row["consequence_domain_status"] == "CLOSED"
+
+
+def test_case_audit_rechecks_literature_frequency_event_and_port_binding():
+    case = _case("event-1")
+    row = _ledger_row("event-1")
+    report = build_release_boundary_case_audit(
+        _assessment(
+            [case],
+            [row],
+            events=[{
+                "id": "event-1",
+                "port_ids": ["port-1"],
+                "annual_frequency_per_year": 2.5e-4,
+                "marginal_p05_per_year": 1.0e-4,
+                "marginal_p95_per_year": 5.0e-4,
+                "statistic": "published",
+                "source": "literature:example",
+                "source_sha256": "a" * 64,
+            }],
+        )
+    )
+    audited = report["rows"][0]
+    assert audited["frequency_binding_status"] == "BOUND"
+    assert audited["initiating_frequency_per_year"] == 2.5e-4
+    assert audited["frequency_marginal_p05_per_year"] == 1.0e-4
+    assert audited["frequency_marginal_p95_per_year"] == 5.0e-4
+    assert audited["frequency_inference_performed"] is False
+    assert report["frequency_binding_status_counts"] == {"BOUND": 1}
+    assert report["frequency_unbound_case_count"] == 0
 
 
 def test_case_audit_blocks_horizon_and_operator_limited_rows():
