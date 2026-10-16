@@ -2239,6 +2239,12 @@ class FacilityRealtimeConsequenceMonitor:
                 "unknown_component_ids": unknown,
                 "components": {},
                 "risk_atoms": [],
+                "conditional_current_weather_expected_death_fn": {
+                    "status": "WITHHELD_RUNTIME_HAZOP_FRAME_SET",
+                    "expected_death_fn_low_high": None,
+                    "frequency_sensitivity_expected_death_fn_low_high": None,
+                    "reason": "an exact runtime frame set is required before HAZOP F/N evaluation",
+                },
                 "facility_annual_ir_available": False,
                 "facility_fn_available": False,
                 "policy": {
@@ -2264,6 +2270,7 @@ class FacilityRealtimeConsequenceMonitor:
             component_bindings=self.bindings,
             release_resolvers=release_resolvers,
             mapping_digest=mapping_digest,
+            population_binding=self.population_binding,
         )
         elapsed_ms = (time.perf_counter() - started) * 1000.0
         bridge = {

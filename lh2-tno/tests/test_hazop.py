@@ -845,6 +845,7 @@ def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_ro
         ConsequenceService,
         RealtimeConsequenceMonitor,
         RealtimeFrequencyBinding,
+        RealtimePopulationBinding,
     )
     from test_consequence_service import RiskPipeline, request
     from test_provider_release import _defaults, _liquid_release
@@ -875,6 +876,11 @@ def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_ro
         frequency_p05_per_year=5.0e-4,
         frequency_p95_per_year=2.0e-3,
     )
+    population = RealtimePopulationBinding(
+        persons_by_receptor={"worker-01": 10.0},
+        provenance="reviewed outdoor population fixture",
+        source_digest="b" * 64,
+    )
     selection = evaluate_hazop_runtime_frame(
         _gate_table(), _runtime_frame_for_gate(), now_s=3.2
     )
@@ -891,12 +897,19 @@ def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_ro
             )
         },
         release_resolvers={scenario_id: lambda template, normalized: provider_request},
+        population_binding=population,
     )
     assert runtime["status"] == "FACILITY_HAZOP_RUNTIME_EVALUATED"
     assert runtime["facility_id"] == "generic-outdoor-lh2"
     branch = runtime["components"]["TK-01"]["branches"][0]
     assert branch["risk"]["status"] == "AVAILABLE_CURRENT_WEATHER_IR"
     assert runtime["risk_atoms"][0]["operating_mode"] == "receiving"
+    assert runtime["conditional_current_weather_expected_death_fn"]["status"] == (
+        "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
+    )
+    assert runtime["conditional_current_weather_expected_death_fn"][
+        "expected_death_fn_low_high"
+    ] == pytest.approx([2.0e-3, 4.0e-3])
     consequence = branch["result"]["consequence"]
     probabilities = consequence["data"]["ignition_branch_probabilities"]
     observed = branch["risk"]["risk_atom"]["receptor_harm_low_high"]
