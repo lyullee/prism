@@ -1,0 +1,91 @@
+{
+  "schema_version": "prism.observed_state_input_manifest.v1",
+  "description": "Diagnostic reconstructed-state inputs from the original inspection-centre training/recovery workbooks. These rows are not independent historian measurements and are not accident-frequency inputs.",
+  "sources": [
+    {
+      "source_id": "inspection-center-reconstructed-intake-20260121",
+      "path": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
+      "format": "xlsx",
+      "sheet": "1월 21일",
+      "component_id": "lh2-intake-tank-reconstructed",
+      "origin": "reconstructed",
+      "time": {
+        "column": "일시",
+        "mode": "timestamp",
+        "base_timestamp": "2026-01-21T13:00:00",
+        "cadence_s": 60.0
+      },
+      "signals": {
+        "pressure": {
+          "column": "PT1206 (MPa)",
+          "unit": "MPa",
+          "sensor_location": "PT1206",
+          "zero_is_missing": true,
+          "nonpositive_is_missing": true
+        },
+        "temperature": {
+          "column": "TT1106 (℃)",
+          "unit": "C",
+          "sensor_location": "TT1106"
+        }
+      }
+    },
+    {
+      "source_id": "inspection-center-reconstructed-storage-vent-20260124",
+      "path": "원본 학습데이터/2. 저장탱크 벤트 시나리오/저장탱크 데이터.xlsx",
+      "format": "xlsx",
+      "sheet": "20260124",
+      "component_id": "lh2-storage-vent-reconstructed",
+      "origin": "reconstructed",
+      "time": {
+        "column": "시간",
+        "mode": "timestamp",
+        "base_timestamp": "2026-01-24T00:00:00",
+        "cadence_s": 1.0
+      },
+      "signals": {
+        "pressure": {
+          "column": "센서_PT1105A",
+          "unit": "MPa",
+          "sensor_location": "PT1105A"
+        }
+      }
+    },
+    {
+      "source_id": "inspection-center-reconstructed-supply-20260415",
+      "path": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월15일.xlsx",
+      "format": "xlsx",
+      "sheet": "1분 복원 데이터",
+      "component_id": "lh2-supply-vaporizer-boundary-reconstructed",
+      "origin": "reconstructed",
+      "time": {
+        "column": "일시",
+        "mode": "timestamp",
+        "base_timestamp": "2026-04-15T07:00:00",
+        "cadence_s": 60.0
+      },
+      "signals": {
+        "pressure": {
+          "column": "PT1101 (MPa)",
+          "unit": "MPa",
+          "sensor_location": "PT1101"
+        },
+        "temperature": {
+          "column": "TT1116 (℃)",
+          "unit": "C",
+          "sensor_location": "TT1116"
+        }
+      }
+    }
+  ],
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+  "policy": {
+    "origin_is_independent_historian_measurement": false,
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  }
+}
