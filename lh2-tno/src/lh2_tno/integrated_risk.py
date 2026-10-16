@@ -124,6 +124,7 @@ def run_hazop_integrated_risk(
     forecast_component_ids: Sequence[str] | None = None,
     forecast_quantitative_evaluator: Any = None,
     forecast_evaluate_on: str = "entry",
+    population_binding: Any | None = None,
     facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     forecast_facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     mapping_digest: str | None = None,
@@ -157,6 +158,7 @@ def run_hazop_integrated_risk(
             component_bindings=component_bindings,
             release_resolvers=release_resolvers,
             mapping_digest=mapping_digest,
+            population_binding=population_binding,
         )
     except Exception as error:
         raise IntegratedRiskError(f"current-state HAZOP execution failed: {error}") from error
@@ -170,9 +172,17 @@ def run_hazop_integrated_risk(
             "trigger_count": 0,
             "evaluated_count": 0,
             "withheld_count": 0,
+            "conditional_current_weather_expected_death_fn": {
+                "status": "FORECAST_NOT_REQUESTED",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+            },
+            "facility_annual_ir_available": False,
+            "facility_fn_available": False,
             "policy": {
                 "diagnostic_only": True,
                 "facility_qra_promotion": False,
+                "conditional_expected_death_fn_calculated": False,
             },
         }
     else:

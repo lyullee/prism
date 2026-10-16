@@ -116,6 +116,12 @@ def test_forecast_scan_triggers_quantitative_evaluation_on_first_risk_entry():
     assert cleared["operating_mode"] == "receiving"
     assert result["steps"][1]["components"][0]["scenarios"][0]["operating_mode"] == "receiving"
     assert result["policy"]["frequency_inference_performed"] is False
+    assert result["policy"]["conditional_expected_death_fn_calculated"] is False
+    assert result["conditional_current_weather_expected_death_fn"]["status"] == (
+        "WITHHELD_FORECAST_FACILITY_AGGREGATOR_REQUIRED"
+    )
+    assert result["facility_annual_ir_available"] is False
+    assert result["facility_fn_available"] is False
     assert result["timing"]["wall_elapsed_ms"] >= 0.0
     assert result["timing"]["quantitative_evaluation_elapsed_ms"] >= 0.0
     assert result["timing"]["fresh_physics_claim"] is False

@@ -78,6 +78,29 @@ def test_integrated_risk_joins_current_and_forecast_identity(monkeypatch):
     assert result["policy"]["frequency_inference_performed"] is False
     assert calls["current"][2]["now_s"] == 10.0
     assert calls["forecast"]["expected_component_ids"] == ("TK-01",)
+    assert calls["current"][2]["population_binding"] is None
+
+
+def test_integrated_risk_forwards_explicit_population_binding(monkeypatch):
+    calls = {}
+
+    def current(table, frames, **kwargs):
+        calls["current"] = kwargs
+        return _current_result()
+
+    monkeypatch.setattr(integrated_risk, "run_hazop_facility_runtime", current)
+    population = object()
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        population_binding=population,
+    )
+
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
+    assert calls["current"]["population_binding"] is population
 
 
 def test_integrated_risk_requires_explicit_forecast_tables(monkeypatch):
@@ -112,6 +135,7 @@ def test_integrated_risk_can_be_current_only(monkeypatch):
     )
     assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
     assert result["forecast"]["status"] == "FORECAST_NOT_REQUESTED"
+    assert result["forecast"]["facility_fn_available"] is False
 
 
 def test_integrated_risk_runs_from_observed_custom_tag_to_forecast_path():

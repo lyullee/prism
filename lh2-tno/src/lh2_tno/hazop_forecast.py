@@ -521,6 +521,18 @@ def run_hazop_forecast_risk_scan(
         "trigger_count": trigger_count,
         "evaluated_count": evaluated_count,
         "withheld_count": withheld_count,
+        "conditional_current_weather_expected_death_fn": {
+            "status": "WITHHELD_FORECAST_FACILITY_AGGREGATOR_REQUIRED",
+            "expected_death_fn_low_high": None,
+            "frequency_sensitivity_expected_death_fn_low_high": None,
+            "reason": (
+                "forecast evaluations preserve one predicted component and scenario at a time; "
+                "an explicit facility aggregator with reviewed population and branch bindings "
+                "is required before conditional F/N aggregation"
+            ),
+        },
+        "facility_annual_ir_available": False,
+        "facility_fn_available": False,
         "timing": {
             "wall_elapsed_ms": (time.perf_counter() - scan_started) * 1000.0,
             "quantitative_evaluation_elapsed_ms": quantitative_elapsed_ms,
@@ -537,6 +549,8 @@ def run_hazop_forecast_risk_scan(
             "sensor_frequency_learning_used": False,
             "release_packet_created_by_scan": False,
             "facility_qra_promotion": False,
+            "conditional_expected_death_fn_calculated": False,
+            "facility_aggregation_required": True,
             "diagnostic_only": True,
         },
         "interpretation": (

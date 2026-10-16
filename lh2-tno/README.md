@@ -121,6 +121,41 @@ provider owns release geometry, isolation, duration, and inventory depletion.
 The result is a diagnostic current-weather view until the reviewed annual
 campaign, provider qualification, and independent validation gates are closed.
 
+The current and predicted paths can be called together with
+`run_hazop_integrated_risk(...)`. Measured frames use the same HAZOP table and
+equipment provider bindings as the live monitor. Predicted frames must declare
+`origin="model_prediction"` and `forecast_time_s`; they re-enter the same
+HAZOP selector and provider/SLABx-LH2 consequence gate when a predicted state
+reaches a deviation. The predicted scan reports the same facility-level fields
+as the live path, but keeps them explicitly withheld until a caller supplies a
+reviewed facility aggregator, population ledger, branch weights, and annual
+conditions. It never treats a prediction as an observed failure or learns a
+frequency from it.
+
+```python
+from lh2_tno.integrated_risk import run_hazop_integrated_risk
+
+result = run_hazop_integrated_risk(
+    hazop_table,
+    current_frames=measured_frames,
+    forecast_frames=predicted_frames,
+    forecast_tables_by_component=tables_by_component,
+    component_bindings=component_bindings,
+    release_resolvers=release_resolvers,
+    population_binding=population_binding,
+    now_s=clock_s,
+)
+```
+
+Both results carry explicit `facility_annual_ir_available` and
+`facility_fn_available` flags. The current path may expose a conditional
+current-weather expected-death contribution when the population ledger and
+frequency bindings are complete. The forecast path returns
+`WITHHELD_FORECAST_FACILITY_AGGREGATOR_REQUIRED` until its future-state
+facility aggregation is supplied through `forecast_facility_campaign_evaluator`.
+This makes a control-room response screen possible without presenting a
+partial forecast as a completed facility QRA.
+
 The returned `realtime_hazop_bridge` also exposes the conditional current-
 weather expected-death F/N result when the monitor has an explicit
 `RealtimePopulationBinding`. Without that population ledger it returns the
