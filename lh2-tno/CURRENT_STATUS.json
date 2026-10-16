@@ -5191,6 +5191,15 @@
   "inspection_center_workbook_header_manifest_consistency_conflict_count": 0,
   "inspection_center_workbook_header_manifest_consistency_unreviewed_count": 3,
   "inspection_center_workbook_header_unit_state_snapshot_binding_allowed": false,
-  "inspection_center_workbook_header_unit_interpretation": "Explicit MPa and degC labels in source workbook headers resolve the apparent MPa/bar conflict as raw measurement versus procedure setpoint context; DPT units, pressure basis, calibration/quality, and equipment identity remain open."
+  "inspection_center_workbook_header_unit_interpretation": "Explicit MPa and degC labels in source workbook headers resolve the apparent MPa/bar conflict as raw measurement versus procedure setpoint context; DPT units, pressure basis, calibration/quality, and equipment identity remain open.",
+
+  "observed_origin_provenance_audit_implemented": true,
+  "observed_origin_provenance_audit_script": "scripts/audit_observed_origin_provenance.py",
+  "observed_origin_provenance_audit_module": "src/lh2_tno/observed_origin_provenance.py",
+  "observed_origin_provenance_audit_record": "examples/inspection_center_origin_provenance_audit.json",
+  "observed_origin_provenance_audit_status": "ORIGIN_REVIEW_REQUIRED",
+  "observed_origin_provenance_audit_source_count": 3,
+  "observed_origin_provenance_audit_conflict_count": 3,
+  "observed_origin_provenance_interpretation": "All three runtime-manifest sources are named *_예측데이터_10회차.xlsx but declared historian_measured; origin is not changed automatically and requires source-owner evidence before independent-measurement claims."
 
 }

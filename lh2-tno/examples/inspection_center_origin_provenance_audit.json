@@ -1,0 +1,40 @@
+{
+  "schema_version": "prism.observed_origin_provenance_audit.v1",
+  "status": "ORIGIN_REVIEW_REQUIRED",
+  "source_count": 3,
+  "conflict_count": 3,
+  "sources": [
+    {
+      "source_id": "inspection-center-intake-10-runs",
+      "path": "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "declared_origin": "historian_measured",
+      "filename_origin_signal": "prediction_named",
+      "status": "ORIGIN_REVIEW_REQUIRED"
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs",
+      "path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "declared_origin": "historian_measured",
+      "filename_origin_signal": "prediction_named",
+      "status": "ORIGIN_REVIEW_REQUIRED"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs",
+      "path": "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+      "declared_origin": "historian_measured",
+      "filename_origin_signal": "prediction_named",
+      "status": "ORIGIN_REVIEW_REQUIRED"
+    }
+  ],
+  "policy": {
+    "origin_changed_automatically": false,
+    "state_snapshot_binding_allowed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Filename semantics are review clues only. A declared origin is not changed without source-owner evidence.",
+  "manifest": "examples\\inspection_center_observed_state_manifest.json"
+}
