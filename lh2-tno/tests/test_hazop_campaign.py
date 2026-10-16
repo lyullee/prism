@@ -5,6 +5,7 @@ import pytest
 from lh2_tno.hazop_campaign import (
     HazopFacilityCampaignError,
     build_hazop_facility_campaign_branches,
+    build_hazop_facility_campaign_branches_from_manifest,
     build_hazop_facility_campaign_result,
 )
 
@@ -346,3 +347,41 @@ def test_hazop_branch_bridge_keeps_reused_scenario_ids_separate_by_component():
         "TK-02|TK01-high-pressure-receiving": 0.5,
     }
     assert len(result["campaign"]["risk_atoms"]) == 8
+
+
+def test_hazop_branch_manifest_replays_the_same_facility_campaign():
+    second = _binding()
+    second.update(
+        hazop_scenario_id="TK01-secondary-1",
+        event_id="evt-tk01-hole-1",
+    )
+    manifest = {
+        "schema_version": "prism.hazop_facility_campaign_manifest.v1",
+        "runtime_result": _runtime_result(branch_count=2),
+        "annual_conditions": _annual_conditions(),
+        "scenario_bindings": [_binding(), second],
+        "branch_probabilities": {
+            "TK-01|TK01-high-pressure-receiving": 0.6,
+            "TK-01|TK01-secondary-1": 0.4,
+        },
+        "branch_partition_groups": {
+            "TK-01|TK01-high-pressure-receiving": "pressure-deviation",
+            "TK-01|TK01-secondary-1": "pressure-deviation",
+        },
+        "expected_component_ids": ["TK-01"],
+    }
+    result = build_hazop_facility_campaign_branches_from_manifest(manifest)
+    assert result["manifest"]["branch_identity_key"] == "component_id|hazop_scenario_id"
+    assert result["branch_probabilities"]["TK-01|TK01-secondary-1"] == 0.4
+    assert len(result["campaign"]["risk_atoms"]) == 8
+
+
+def test_hazop_branch_manifest_fails_closed_when_input_is_missing():
+    manifest = {
+        "runtime_result": _runtime_result(),
+        "annual_conditions": _annual_conditions(),
+        "scenario_bindings": [_binding()],
+        "branch_probabilities": {"TK-01|TK01-high-pressure-receiving": 1.0},
+    }
+    with pytest.raises(HazopFacilityCampaignError, match="branch_partition_groups"):
+        build_hazop_facility_campaign_branches_from_manifest(manifest)

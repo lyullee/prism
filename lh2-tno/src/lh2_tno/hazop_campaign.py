@@ -798,8 +798,59 @@ def build_hazop_facility_campaign_branches(
     }
 
 
+def build_hazop_facility_campaign_branches_from_manifest(
+    manifest: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Replay a multi-branch HAZOP campaign from one JSON-compatible manifest.
+
+    The manifest is deliberately a data-only boundary for digital-twin
+    integrations.  It must contain ``runtime_result``, ``annual_conditions``,
+    ``scenario_bindings``, ``branch_probabilities`` and
+    ``branch_partition_groups``.  The function performs no file access and
+    delegates all identity, probability, release and facility-ledger checks to
+    :func:`build_hazop_facility_campaign_branches`.
+    """
+    if not isinstance(manifest, Mapping):
+        raise TypeError("manifest must be a mapping")
+
+    def required_mapping(key: str) -> Mapping[str, Any]:
+        value = manifest.get(key)
+        if not isinstance(value, Mapping):
+            raise HazopFacilityCampaignError(f"manifest.{key} must be an object")
+        return value
+
+    def required_sequence(key: str) -> Sequence[Any]:
+        value = manifest.get(key)
+        if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+            raise HazopFacilityCampaignError(f"manifest.{key} must be an array")
+        return value
+
+    expected = manifest.get("expected_component_ids", ())
+    if not isinstance(expected, Sequence) or isinstance(expected, (str, bytes)):
+        raise HazopFacilityCampaignError(
+            "manifest.expected_component_ids must be an array when supplied"
+        )
+    result = build_hazop_facility_campaign_branches(
+        required_mapping("runtime_result"),
+        annual_conditions=required_sequence("annual_conditions"),
+        scenario_bindings=required_sequence("scenario_bindings"),
+        branch_probabilities=required_mapping("branch_probabilities"),
+        branch_partition_groups=required_mapping("branch_partition_groups"),
+        expected_component_ids=expected,
+    )
+    result["manifest"] = {
+        "schema_version": manifest.get(
+            "schema_version", "prism.hazop_facility_campaign_manifest.v1"
+        ),
+        "expected_component_ids": [str(value) for value in expected],
+        "branch_identity_key": "component_id|hazop_scenario_id",
+    }
+    return result
+
+
 __all__ = [
     "HazopFacilityCampaignError",
     "build_hazop_facility_campaign_result",
     "build_hazop_facility_campaign_branches",
+    "build_hazop_facility_campaign_branches_from_manifest",
 ]
