@@ -84,6 +84,23 @@ component operating-mode trace. It requests a quantitative evaluation only
 when a HAZOP condition is reached. With no evaluator supplied by the caller,
 those entries are explicitly withheld rather than being treated as zero risk.
 
+## Quantitative handoff worklist
+
+The withheld triggers can be turned into an explicit request list for the
+provider and facility-QRA owner:
+
+```powershell
+python scripts/build_forecast_quantitative_handoff.py `
+  --scan results/20261115/inspection_center_facility_forecast_hazop_scan.json `
+  --output results/20261115/inspection_center_facility_forecast_quantitative_handoff.json
+```
+
+Each request is keyed by `component_id|scenario_id|forecast_time_s` and keeps
+the operating mode, scenario family and release mode. It lists the required
+provider release packet, reviewed literature frequency, SLABx-LH2 result and
+facility population/ignition binding. The worklist never creates any of those
+inputs, assigns missing cases zero risk, or opens facility IR/F-N promotion.
+
 ## Passing frames to forecast HAZOP
 
 Read `record["frames"]` and pass it to

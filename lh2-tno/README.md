@@ -243,6 +243,19 @@ reports any reached condition. A quantitative callback must still provide the
 qualified equipment release, literature frequency binding, SLABx-LH2 result,
 and facility evidence; absent callbacks are reported as withheld.
 
+Create the auditable request list for those withheld triggers with:
+
+```powershell
+python scripts/build_forecast_quantitative_handoff.py `
+  --scan results/20261115/inspection_center_facility_forecast_hazop_scan.json `
+  --output results/20261115/inspection_center_facility_forecast_quantitative_handoff.json
+```
+
+The resulting keys are `component_id|scenario_id|forecast_time_s`; each one
+retains its operating mode and required provider/frequency/SLABx-LH2/facility
+inputs. Missing evidence remains a work item instead of being converted to
+zero risk.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute

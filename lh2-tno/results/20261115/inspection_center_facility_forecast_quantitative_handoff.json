@@ -1,0 +1,61 @@
+{
+  "schema_version": "prism.forecast_quantitative_handoff.v1",
+  "status": "FORECAST_QUANTITATIVE_HANDOFF_READY",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "requests": [
+    {
+      "request_id": "lh2-intake-tank|inspection-intake-receiving-high-pressure:receiving:vessel_hole|0",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-intake-tank",
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "forecast_time_s": 0.0,
+      "operating_mode": "receiving",
+      "scenario_family": "vessel_hole",
+      "release_mode": "hole",
+      "source_trigger_type": "RISK_CONDITION_REACHED",
+      "current_evaluation_status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
+      "required_inputs": [
+        "qualified_provider_release_packet",
+        "reviewed_literature_frequency_binding",
+        "SLABx-LH2_consequence_result",
+        "facility_annual_condition_population_ignition_binding"
+      ],
+      "status": "READY_FOR_QUANTITATIVE_EVALUATION"
+    },
+    {
+      "request_id": "lh2-supply-vaporizer-boundary|inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole|0",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "forecast_time_s": 0.0,
+      "operating_mode": "supply",
+      "scenario_family": "vaporizer_hole",
+      "release_mode": "hole",
+      "source_trigger_type": "RISK_CONDITION_REACHED",
+      "current_evaluation_status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
+      "required_inputs": [
+        "qualified_provider_release_packet",
+        "reviewed_literature_frequency_binding",
+        "SLABx-LH2_consequence_result",
+        "facility_annual_condition_population_ignition_binding"
+      ],
+      "status": "READY_FOR_QUANTITATIVE_EVALUATION"
+    }
+  ],
+  "summary": {
+    "request_count": 2,
+    "ready_for_quantitative_evaluation_count": 2,
+    "review_required_count": 0
+  },
+  "policy": {
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "slabx_lh2_calculated": false,
+    "facility_ir_fn_calculated": false,
+    "facility_qra_promotion": false,
+    "missing_requests_assigned_zero": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Each predicted HAZOP condition is an explicit quantitative work item. The handoff requests reviewed provider, frequency, SLABx-LH2 and facility bindings but creates none of them."
+}
