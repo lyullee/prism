@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "facility_id": "generic-lh2-native-pump-valve-facility",
+  "environment": "outdoor",
+  "configuration_origin": "synthetic",
+  "components": [
+    {
+      "id": "liquid-transfer-pump-01",
+      "kind": "pump",
+      "position_enu_m": [6.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {"diameter_m": 0.025},
+      "source_status": "declared",
+      "source_provenance": "generic outdoor LH2 pump; native MappedPump packet"
+    },
+    {
+      "id": "transfer-valve-01",
+      "kind": "valve",
+      "position_enu_m": [7.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {"diameter_m": 0.025},
+      "source_status": "declared",
+      "source_provenance": "generic outdoor LH2 transfer valve; native compressible handoff packet"
+    }
+  ],
+  "ports": [
+    {
+      "id": "pump-accident-out",
+      "component_id": "liquid-transfer-pump-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [6.0, 0.0, 1.0]
+    },
+    {
+      "id": "valve-accident-out",
+      "component_id": "transfer-valve-01",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": [7.0, 0.0, 1.0]
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {"id": "worker-01", "position_enu_m": [20.0, 0.0, 1.0]}
+  ],
+  "scenarios": []
+}

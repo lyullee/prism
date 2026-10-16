@@ -1,0 +1,28 @@
+{
+  "id": "generic-lh2-native-pump-valve-frequency-example",
+  "assets": [
+    {
+      "id": "transfer-pump",
+      "model_component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "port_ids": ["pump-accident-out"],
+      "physical_scope_ids": ["liquid-transfer-pump-01-connection"],
+      "classification_basis": "generic outdoor LH2 pump; largest connecting pipe applies",
+      "nominal_diameter_m": 0.025,
+      "location_weight": 1.0,
+      "location_weight_provenance": "one reviewed pump connection in this diagnostic scope"
+    },
+    {
+      "id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "port_ids": ["valve-accident-out"],
+      "physical_scope_ids": ["transfer-valve-01-body"],
+      "classification_basis": "generic outdoor LH2 transfer valve; construction and exposure review required",
+      "nominal_diameter_m": 0.025,
+      "location_weight": 1.0,
+      "location_weight_provenance": "one reviewed transfer valve in this diagnostic scope"
+    }
+  ],
+  "excluded_model_components": {}
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "prism.native_provider_multi_equipment_facility_campaign.v1",
+  "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-native-pump-valve-facility",
+  "recorded_at": "2026-10-16",
+  "component_ids": [
+    "liquid-transfer-pump-01",
+    "transfer-valve-01"
+  ],
+  "packet_count": 2,
+  "matched_event_ids": [
+    "generic-lh2-native-pump-valve-frequency-example/transfer-pump/G2",
+    "generic-lh2-native-pump-valve-frequency-example/transfer-valve/AREA_0.01%"
+  ],
+  "event_count": 7,
+  "executed_case_count": 2,
+  "uncomputed_case_count": 5,
+  "operator_limited_case_count": 2,
+  "risk_atom_count": 8,
+  "frequency_scenario_count": 3,
+  "conditional_diagnostic_facility_risk_available": true,
+  "facility_total_risk_available": false,
+  "facility_qra_claim": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "campaign_elapsed_ms": 10700.51950000925,
+  "packet_records": [
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "failure_opening_diameter_m": 0.0025,
+      "release_kind": "liquid",
+      "termination_basis": "reviewed_isolation_success"
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "provider_event_id": "native-stroke-valve/transfer-valve-AREA_0.01pct",
+      "failure_opening_diameter_m": 0.00025,
+      "release_kind": "gas",
+      "termination_basis": "synthetic_diagnostic_horizon"
+    }
+  ],
+  "limitations": [
+    "provider packets, facility geometry, weather and population remain synthetic or diagnostic",
+    "unmatched frequency opening bins remain UNCOMPUTED and are not assigned zero risk",
+    "pump catalogue rates without p05/p95 bounds remain fixed rather than receiving invented uncertainty",
+    "provider qualification and independent physical validation are not claimed",
+    "facility IR/F-N promotion remains closed"
+  ]
+}
