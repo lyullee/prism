@@ -112,42 +112,35 @@ def _check_bindings(
             )
 
 
-def load_csv_runtime_source(
-    path: str | Path,
+def _build_runtime_source_from_rows(
+    source_path: Path,
     *,
     source_id: str,
     component_id: str,
     timestamp_column: str,
     bindings: Mapping[str, Mapping[str, Any]],
     normalizer: TelemetryNormalizer,
-    operating_mode_column: str | None = None,
-    operating_mode: str | None = None,
-    origin: str = "historian_measured",
-    delimiter: str = ",",
-    encoding: str = "utf-8-sig",
-    arrival_delay_s: float = 0.0,
-    timestamp_scale_to_s: float = 1.0,
-    ambient_pressure_pa: float | None = None,
+    rows: list[Mapping[str, Any]],
+    operating_mode_column: str | None,
+    operating_mode: str | None,
+    origin: str,
+    arrival_delay_s: float,
+    timestamp_scale_to_s: float,
+    ambient_pressure_pa: float | None,
+    format_name: str,
+    format_metadata: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Load one explicit CSV/TSV state stream as a runtime source mapping.
+    """Build one source from already decoded rows.
 
-    ``timestamp_column`` contains numeric source time. If a site export uses
-    an epoch or milliseconds, the caller must supply the corresponding
-    ``timestamp_scale_to_s`` explicitly. At least one of
-    ``operating_mode_column`` or ``operating_mode`` is required because HAZOP
-    selection must not guess the operating mode from signals.
+    CSV and XLSX decoding deliberately happens outside this function.  Keeping
+    row validation in one path prevents the two formats from acquiring
+    different unit, timestamp, or operating-mode semantics.
     """
-
-    source_path = Path(path)
-    if not source_path.is_file():
-        raise TabularRuntimeAdapterError(f"CSV source does not exist: {source_path}")
     source_id = _name(source_id, "source_id")
     component_id = _name(component_id, "component_id")
     timestamp_column = _name(timestamp_column, "timestamp_column")
     if origin not in _ORIGINS:
         raise TabularRuntimeAdapterError(f"unsupported origin: {origin}")
-    if not isinstance(delimiter, str) or len(delimiter) != 1:
-        raise TabularRuntimeAdapterError("delimiter must be one character")
     arrival_delay_s = _finite(arrival_delay_s, "arrival_delay_s", nonnegative=True)
     timestamp_scale_to_s = _finite(
         timestamp_scale_to_s, "timestamp_scale_to_s", nonnegative=True
@@ -171,33 +164,21 @@ def load_csv_runtime_source(
         raise TabularRuntimeAdapterError(
             "timestamp/mode columns cannot also be signal bindings: " + ", ".join(overlap)
         )
-
-    digest = hashlib.sha256(source_path.read_bytes()).hexdigest()
-    with source_path.open("r", encoding=encoding, newline="") as handle:
-        reader = csv.DictReader(handle, delimiter=delimiter)
-        headers = reader.fieldnames or []
-        if timestamp_column not in headers:
-            raise TabularRuntimeAdapterError(
-                f"CSV header is missing timestamp column {timestamp_column}"
-            )
-        if operating_mode_column and operating_mode_column not in headers:
-            raise TabularRuntimeAdapterError(
-                f"CSV header is missing operating-mode column {operating_mode_column}"
-            )
-        rows = list(reader)
     if not rows:
-        raise TabularRuntimeAdapterError("CSV source contains no data rows")
+        raise TabularRuntimeAdapterError(f"{format_name.upper()} source contains no data rows")
 
     samples: list[dict[str, Any]] = []
     previous_time: float | None = None
     for index, row in enumerate(rows, start=2):
+        if not isinstance(row, Mapping):
+            raise TabularRuntimeAdapterError(f"row {index} must be an object")
         raw_time = row.get(timestamp_column)
         source_time_s = _finite(raw_time, f"row {index}.{timestamp_column}") * timestamp_scale_to_s
         if source_time_s < 0.0:
             raise TabularRuntimeAdapterError(f"row {index} source time must be non-negative")
         if previous_time is not None and source_time_s <= previous_time:
             raise TabularRuntimeAdapterError(
-                f"CSV source times must be strictly increasing at row {index}"
+                f"{format_name.upper()} source times must be strictly increasing at row {index}"
             )
         previous_time = source_time_s
         numeric_row = _numeric_row(row, bindings, index)
@@ -234,24 +215,26 @@ def load_csv_runtime_source(
             sample["operating_mode"] = mode
         samples.append(sample)
 
+    binding_metadata = {
+        "timestamp_column": timestamp_column,
+        "timestamp_scale_to_s": timestamp_scale_to_s,
+        "operating_mode_column": operating_mode_column,
+        "arrival_delay_s": arrival_delay_s,
+        "normalizer_mapping_is_explicit": True,
+    }
+    if format_metadata:
+        binding_metadata.update(format_metadata)
     return {
         "schema_version": SCHEMA,
         "source_id": source_id,
         "source_path": str(source_path),
-        "source_sha256": digest,
-        "format": "csv" if delimiter == "," else "delimited",
+        "source_sha256": hashlib.sha256(source_path.read_bytes()).hexdigest(),
+        "format": format_name,
         "component_id": component_id,
         "origin": origin,
         "samples": samples,
         "operating_mode": operating_mode if operating_mode_column is None else None,
-        "tabular_binding": {
-            "timestamp_column": timestamp_column,
-            "timestamp_scale_to_s": timestamp_scale_to_s,
-            "operating_mode_column": operating_mode_column,
-            "delimiter": delimiter,
-            "arrival_delay_s": arrival_delay_s,
-            "normalizer_mapping_is_explicit": True,
-        },
+        "tabular_binding": binding_metadata,
         "policy": {
             "units_inferred": False,
             "pressure_basis_inferred": False,
@@ -263,9 +246,165 @@ def load_csv_runtime_source(
     }
 
 
+def load_csv_runtime_source(
+    path: str | Path,
+    *,
+    source_id: str,
+    component_id: str,
+    timestamp_column: str,
+    bindings: Mapping[str, Mapping[str, Any]],
+    normalizer: TelemetryNormalizer,
+    operating_mode_column: str | None = None,
+    operating_mode: str | None = None,
+    origin: str = "historian_measured",
+    delimiter: str = ",",
+    encoding: str = "utf-8-sig",
+    arrival_delay_s: float = 0.0,
+    timestamp_scale_to_s: float = 1.0,
+    ambient_pressure_pa: float | None = None,
+) -> dict[str, Any]:
+    """Load one explicit CSV/TSV state stream as a runtime source mapping.
+
+    ``timestamp_column`` contains numeric source time. If a site export uses
+    an epoch or milliseconds, the caller must supply the corresponding
+    ``timestamp_scale_to_s`` explicitly. At least one of
+    ``operating_mode_column`` or ``operating_mode`` is required because HAZOP
+    selection must not guess the operating mode from signals.
+    """
+
+    source_path = Path(path)
+    if not source_path.is_file():
+        raise TabularRuntimeAdapterError(f"CSV source does not exist: {source_path}")
+    if not isinstance(delimiter, str) or len(delimiter) != 1:
+        raise TabularRuntimeAdapterError("delimiter must be one character")
+    with source_path.open("r", encoding=encoding, newline="") as handle:
+        reader = csv.DictReader(handle, delimiter=delimiter)
+        headers = reader.fieldnames or []
+        if timestamp_column not in headers:
+            raise TabularRuntimeAdapterError(
+                f"CSV header is missing timestamp column {timestamp_column}"
+            )
+        if operating_mode_column and operating_mode_column not in headers:
+            raise TabularRuntimeAdapterError(
+                f"CSV header is missing operating-mode column {operating_mode_column}"
+            )
+        rows = list(reader)
+    return _build_runtime_source_from_rows(
+        source_path,
+        source_id=source_id,
+        component_id=component_id,
+        timestamp_column=timestamp_column,
+        bindings=bindings,
+        normalizer=normalizer,
+        rows=rows,
+        operating_mode_column=operating_mode_column,
+        operating_mode=operating_mode,
+        origin=origin,
+        arrival_delay_s=arrival_delay_s,
+        timestamp_scale_to_s=timestamp_scale_to_s,
+        ambient_pressure_pa=ambient_pressure_pa,
+        format_name="csv" if delimiter == "," else "delimited",
+        format_metadata={"delimiter": delimiter},
+    )
+
+
+def load_xlsx_runtime_source(
+    path: str | Path,
+    *,
+    source_id: str,
+    component_id: str,
+    timestamp_column: str,
+    bindings: Mapping[str, Mapping[str, Any]],
+    normalizer: TelemetryNormalizer,
+    operating_mode_column: str | None = None,
+    operating_mode: str | None = None,
+    origin: str = "historian_measured",
+    sheet: str | None = None,
+    sheet_index: int = 0,
+    arrival_delay_s: float = 0.0,
+    timestamp_scale_to_s: float = 1.0,
+    ambient_pressure_pa: float | None = None,
+) -> dict[str, Any]:
+    """Load one explicit XLSX state stream using the same strict row contract.
+
+    ``openpyxl`` is intentionally optional.  A workbook is accepted only when
+    the caller identifies the sheet and binds every signal, unit, timestamp,
+    and operating-mode field explicitly; no header or sheet is guessed.
+    """
+    source_path = Path(path)
+    if not source_path.is_file():
+        raise TabularRuntimeAdapterError(f"XLSX source does not exist: {source_path}")
+    try:
+        import openpyxl
+    except ImportError as error:
+        raise TabularRuntimeAdapterError(
+            "XLSX input requires openpyxl; install it in the runtime used by the connector"
+        ) from error
+    if not isinstance(sheet_index, int) or sheet_index < 0:
+        raise TabularRuntimeAdapterError("sheet_index must be a non-negative integer")
+    workbook = openpyxl.load_workbook(source_path, read_only=True, data_only=True)
+    try:
+        if sheet is None:
+            if sheet_index >= len(workbook.worksheets):
+                raise TabularRuntimeAdapterError(
+                    f"sheet_index {sheet_index} is outside workbook sheet count {len(workbook.worksheets)}"
+                )
+            worksheet = workbook.worksheets[sheet_index]
+        else:
+            sheet = _name(sheet, "sheet")
+            if sheet not in workbook.sheetnames:
+                raise TabularRuntimeAdapterError(f"workbook does not contain sheet {sheet}")
+            worksheet = workbook[sheet]
+        iterator = worksheet.iter_rows(values_only=True)
+        header = next(iterator, None)
+        if not header:
+            raise TabularRuntimeAdapterError("XLSX sheet has no header row")
+        headers = [str(value).strip() if value is not None else "" for value in header]
+        if any(not value for value in headers):
+            raise TabularRuntimeAdapterError("XLSX header contains an empty column name")
+        if len(set(headers)) != len(headers):
+            raise TabularRuntimeAdapterError("XLSX header contains duplicate column names")
+        rows = [dict(zip(headers, row)) for row in iterator]
+    finally:
+        workbook.close()
+    return _build_runtime_source_from_rows(
+        source_path,
+        source_id=source_id,
+        component_id=component_id,
+        timestamp_column=timestamp_column,
+        bindings=bindings,
+        normalizer=normalizer,
+        rows=rows,
+        operating_mode_column=operating_mode_column,
+        operating_mode=operating_mode,
+        origin=origin,
+        arrival_delay_s=arrival_delay_s,
+        timestamp_scale_to_s=timestamp_scale_to_s,
+        ambient_pressure_pa=ambient_pressure_pa,
+        format_name="xlsx",
+        format_metadata={"sheet": sheet, "sheet_index": sheet_index},
+    )
+
+
 def build_runtime_frames_from_csv(path: str | Path, **kwargs: Any) -> dict[str, Any]:
     """Load one CSV source and select its latest state runtime frame."""
 
     source = load_csv_runtime_source(path, **kwargs)
     return build_observed_state_runtime_frames([source])
+
+
+def build_runtime_frames_from_xlsx(path: str | Path, **kwargs: Any) -> dict[str, Any]:
+    """Load one XLSX source and select its latest state runtime frame."""
+
+    source = load_xlsx_runtime_source(path, **kwargs)
+    return build_observed_state_runtime_frames([source])
+
+
+__all__ = [
+    "TabularRuntimeAdapterError",
+    "build_runtime_frames_from_csv",
+    "build_runtime_frames_from_xlsx",
+    "load_csv_runtime_source",
+    "load_xlsx_runtime_source",
+]
 

@@ -5,7 +5,9 @@ import pytest
 from lh2_tno.tabular_runtime_adapter import (
     TabularRuntimeAdapterError,
     build_runtime_frames_from_csv,
+    build_runtime_frames_from_xlsx,
     load_csv_runtime_source,
+    load_xlsx_runtime_source,
 )
 from lh2_tno.telemetry import TagMapping, TelemetryNormalizer
 
@@ -139,6 +141,66 @@ def test_csv_adapter_rejects_normalizer_component_drift(tmp_path):
             component_id="TK-02",
             timestamp_column="time_s",
             operating_mode_column="mode",
+            bindings=_bindings(),
+            normalizer=_normalizer(),
+        )
+
+
+def test_xlsx_adapter_preserves_explicit_sheet_and_mode(tmp_path):
+    openpyxl = pytest.importorskip("openpyxl")
+    path = tmp_path / "history.xlsx"
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.title = "Receiving"
+    worksheet.append(["time_s", "mode", "PT1105A", "TT1106"])
+    worksheet.append([0, "receiving", 6.2, -160])
+    worksheet.append([1, "receiving", 6.5, -159.5])
+    workbook.save(path)
+    workbook.close()
+
+    source = load_xlsx_runtime_source(
+        path,
+        source_id="xlsx-tk-01",
+        component_id="TK-01",
+        timestamp_column="time_s",
+        operating_mode_column="mode",
+        sheet="Receiving",
+        bindings=_bindings(),
+        normalizer=_normalizer(),
+    )
+    assert source["format"] == "xlsx"
+    assert source["tabular_binding"]["sheet"] == "Receiving"
+    assert source["samples"][1]["operating_mode"] == "receiving"
+    frames = build_runtime_frames_from_xlsx(
+        path,
+        source_id="xlsx-tk-01",
+        component_id="TK-01",
+        timestamp_column="time_s",
+        operating_mode_column="mode",
+        sheet="Receiving",
+        bindings=_bindings(),
+        normalizer=_normalizer(),
+    )
+    assert frames["frames"][0]["captured_at_s"] == 1.0
+    assert frames["frames"][0]["values"]["pressure"]["value_si"] == pytest.approx(650000.0)
+
+
+def test_xlsx_adapter_rejects_duplicate_headers(tmp_path):
+    openpyxl = pytest.importorskip("openpyxl")
+    path = tmp_path / "bad.xlsx"
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.append(["time_s", "PT1105A", "PT1105A"])
+    worksheet.append([0, 6.2, 6.2])
+    workbook.save(path)
+    workbook.close()
+    with pytest.raises(TabularRuntimeAdapterError, match="duplicate"):
+        load_xlsx_runtime_source(
+            path,
+            source_id="xlsx-tk-01",
+            component_id="TK-01",
+            timestamp_column="time_s",
+            operating_mode="receiving",
             bindings=_bindings(),
             normalizer=_normalizer(),
         )

@@ -1,7 +1,7 @@
 # Tabular runtime adapter
 
 `lh2_tno.tabular_runtime_adapter` is the small input adapter for a historian
-or process simulator that exports CSV/TSV rows. It turns one reviewed stream
+or process simulator that exports CSV/TSV rows or an XLSX worksheet. It turns one reviewed stream
 into the existing `prism.observed_state_runtime_frames.v1` contract, so the
 same HAZOP and current/forecast risk path can be used for a file replay or a
 live connector.
@@ -35,6 +35,33 @@ frames = build_runtime_frames_from_csv(
 )
 latest_frame = frames["frames"][0]
 ```
+
+An XLSX worksheet uses the same explicit bindings. Select a sheet by name (or
+by zero-based `sheet_index`) and keep the operating mode in a dedicated column
+or pass a reviewed constant:
+
+```python
+from lh2_tno.tabular_runtime_adapter import build_runtime_frames_from_xlsx
+
+frames = build_runtime_frames_from_xlsx(
+    "inspection_center_receiving.xlsx",
+    source_id="inspection-center-receiving-tk-01",
+    component_id="TK-01",
+    sheet="Receiving",
+    timestamp_column="time_s",
+    operating_mode_column="operating_mode",
+    bindings={
+        "PT1105A": {"tag": "pressure", "unit": "bar", "quality": "valid"},
+        "TT1106": {"tag": "temperature", "unit": "degC", "quality": "valid"},
+    },
+    normalizer=reviewed_normalizer,
+)
+```
+
+The XLSX reader requires `openpyxl` in the connector runtime. It rejects empty
+or duplicate headers and does not guess a worksheet, unit, pressure basis, or
+operating mode. The inspection-centre workbook can therefore be replayed as a
+state input only after its tag and unit review is complete.
 
 The result contains the latest state frame plus the source SHA-256 and all
 sample provenance. Pass the frame to the HAZOP runtime handoff. The adapter

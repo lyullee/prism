@@ -251,7 +251,7 @@ The inspection-centre source inventory is documented in
 It is a state/HAZOP diagnostic input boundary; it does not create accident
 releases or learn failure frequencies from normal-operation signals.
 
-For CSV/TSV historian or simulator exports, the strict tabular adapter is
+For CSV/TSV historian or simulator exports and reviewed XLSX worksheets, the strict tabular adapter is
 documented in [`PRISM_tabular_runtime_adapter_en.md`](docs/PRISM_tabular_runtime_adapter_en.md).
 It requires explicit signal units, pressure basis, timestamps and operating
 mode, then produces the same runtime-frame contract used by the live HAZOP
