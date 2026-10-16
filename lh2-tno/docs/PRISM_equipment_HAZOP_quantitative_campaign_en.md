@@ -88,3 +88,22 @@ It preserves the distinction between a current monitoring snapshot and a
 predicted simulation state, so an operator can see which branch was evaluated,
 what provider packet was consumed, and which strict evidence gate remains
 open.
+
+## Multiple equipment in one facility
+
+The same contract is applied independently to every declared component.  For
+example, a receiving storage tank and a supply vaporizer can enter the same
+facility campaign with different operating modes, HAZOP rows, provider event
+IDs, release ports, and quantitative scenario IDs.  The canonical branch key
+is `component_id|scenario_id`, so a reused scenario name cannot accidentally
+borrow another equipment's release or frequency.  The campaign then retains
+one case and its risk atoms per equipment path before the facility ledger sums
+the explicit atoms.
+
+The regression test
+`test_equipment_hazop_quantitative_campaign_keeps_two_equipment_paths_separate`
+exercises this two-equipment contract.  It verifies that `TK-01` remains in
+`receiving`, `VAP-01` remains in `supply`, and the two event/asset identities
+stay separate.  This is an integration-contract test with synthetic provider
+records; it is not evidence that a real terminal's provider packets are
+qualified.
