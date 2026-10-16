@@ -5455,7 +5455,7 @@
       "evidence": {
         "implemented": true,
         "module": "src/lh2_tno/service.py",
-        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1209 passed, 1 warning; CI Run #941 completed successfully.",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1290 passed, 1 warning; CI Run #1175 completed successfully.",
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null

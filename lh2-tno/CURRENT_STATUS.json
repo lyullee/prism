@@ -4012,7 +4012,7 @@
   "generic_provider_evidence_sidecar_manifest_template_entry_count": 26,
   "generic_provider_evidence_sidecar_manifest_template_promotion_allowed": false,
   "ci_local_reproduction_record": "results/20261106/ci_local_reproduction_current.json",
-  "ci_local_reproduction_status": "LOCAL_WORKFLOW_EQUIVALENT_PASS; current root workflow tests.yml reproduced with 1209 passed, 1 warning and wheel contract verified; GitHub Actions Run #941 passed all steps",
+  "ci_local_reproduction_status": "LOCAL_WORKFLOW_EQUIVALENT_PASS; current package workflow reproduced with 1290 passed, 1 warning and wheel contract verified; GitHub Actions Run #1175 passed all steps",
   "ci_local_reproduction_wheel_sha256": "5764e3a081af95c8f7a392107b11fafbdef25c7427e658eba29de9effb114902",
   "ci_local_reproduction_github_actions_claim": false,
   "ci_local_reproduction_github_actions_run_id": null,
