@@ -138,15 +138,18 @@ def _default_scenarios(
     sensitivity.
     """
     asset_events = [
-        row for row in (events or ())
+        row for row in events
         if str(row.get("asset_id", "")) == asset_id
-    ]
-    has_complete_bounds = bool(asset_events) and all(
-        row.get("marginal_p05_per_year") is not None
-        and row.get("marginal_p95_per_year") is not None
-        for row in asset_events
+    ] if events is not None else []
+    has_complete_bounds = events is None or (
+        bool(asset_events)
+        and all(
+            row.get("marginal_p05_per_year") is not None
+            and row.get("marginal_p95_per_year") is not None
+            for row in asset_events
+        )
     )
-    if not has_complete_bounds:
+    if events is not None and not has_complete_bounds:
         return (
             LiteratureFrequencyScenario(
                 id="native-provider-literature-fixed",
