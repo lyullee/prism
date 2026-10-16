@@ -39,7 +39,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--inventory-target-event-prefix",
-        default="generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/",
+        default="generic-lh2-full-scope-example/inventory-depletion/",
     )
     args = parser.parse_args()
     try:

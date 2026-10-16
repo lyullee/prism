@@ -4902,12 +4902,18 @@
       "diagnostic_only": false,
       "blocking_reason": "facility release boundary is not closed across all declared cases",
       "evidence": {
-        "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "schema": "prism.facility_release_boundary_gate.v1",
         "schema_version": "prism.facility_release_boundary_gate.v1",
         "strict_release_boundary_ready": false,
         "case_count": 44,
-        "facility_gate_checks": {
+        "withheld_case_count": 31,
+        "termination_basis_counts": {
+          "emergency_relief_discharge": 1,
+          "inventory_depletion": 25,
+          "inventory_over_600s": 1,
+          "reviewed_isolation_success": 15,
+          "two_sided_rupture": 2
+        },
+        "checks": {
           "all_rows_complete": false,
           "all_termination_bases_allowed": false,
           "all_isolation_or_inventory_statuses_closed": true,
@@ -4916,67 +4922,29 @@
           "no_withheld_cases": false
         },
         "blocking_reasons": [
-          "29 case(s) are withheld from the release ledger",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
-          "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
-          "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
-          "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
-          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
+          "status_executed_operator_limited",
+          "termination_basis_emergency_relief_discharge_is_not_allowed",
+          "termination_basis_inventory_over_600s_is_not_allowed"
         ],
-        "promotion_policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates",
-        "raw_ledger_reconciliation": {
-          "status": "MATCHED",
-          "compared_fields": [
-            "schema_version",
-            "strict_release_boundary_ready",
-            "case_count",
-            "withheld_case_count",
-            "checks",
-            "blocking_reasons",
-            "residual_tolerance_kg"
-          ],
-          "mismatched_fields": [],
-          "recomputed_schema_version": "prism.facility_release_boundary_gate.v1",
-          "recomputed_case_count": 44,
-          "recomputed_withheld_case_count": 29,
-          "recomputed_checks": {
+        "residual_tolerance_kg": 1e-08,
+        "provider_qualification_evaluated": false,
+        "independent_physical_validation_claim": false,
+        "frequency_inference_performed": false,
+        "facility_ir_fn_promotion": false,
+        "policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates",
+        "source_assessment_gate": {
+          "schema_version": "prism.facility_release_boundary_gate.v1",
+          "strict_release_boundary_ready": false,
+          "case_count": 44,
+          "withheld_case_count": 29,
+          "termination_basis_counts": {
+            "emergency_relief_discharge": 1,
+            "inventory_depletion": 25,
+            "inventory_over_600s": 1,
+            "reviewed_isolation_success": 15,
+            "two_sided_rupture": 2
+          },
+          "checks": {
             "all_rows_complete": false,
             "all_termination_bases_allowed": false,
             "all_isolation_or_inventory_statuses_closed": true,
@@ -4984,7 +4952,7 @@
             "all_provider_mass_balances_closed": true,
             "no_withheld_cases": false
           },
-          "recomputed_blocking_reasons": [
+          "blocking_reasons": [
             "29 case(s) are withheld from the release ledger",
             "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
             "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
@@ -5028,8 +4996,29 @@
             "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
             "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
             "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
-          ]
-        }
+          ],
+          "residual_tolerance_kg": 1e-08,
+          "provider_qualification_evaluated": false,
+          "independent_physical_validation_claim": false,
+          "frequency_inference_performed": false,
+          "facility_ir_fn_promotion": false,
+          "policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates"
+        },
+        "case_audit_status": "CASE_BOUNDARY_PARTIAL",
+        "numerically_closed_case_count": 42,
+        "numerically_open_case_count": 2,
+        "operator_review_required_case_count": 29,
+        "numerical_closure_status_counts": {
+          "NUMERICALLY_CLOSED": 13,
+          "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 29,
+          "NUMERICALLY_OPEN": 2
+        },
+        "provider_termination_evidence_status_counts": {
+          "INVALID": 2,
+          "VALID": 42
+        },
+        "provider_termination_evidence_used_case_count": 42,
+        "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json"
       },
       "interpretation": "Every declared case must have an allowed provider-owned termination basis and a closed mass/inventory ledger before the facility chain can be promoted. This gate does not assign frequency or validate physics."
     },
@@ -5756,8 +5745,8 @@
         "release_audit_evidence_request_alignment": "ALIGNED",
         "release_audit_evidence_request_rows_match": true,
         "facility_evidence_request_case_count": 44,
-        "strict_release_boundary_eligible_case_count": 3,
-        "strict_release_boundary_blocked_case_count": 41,
+        "strict_release_boundary_eligible_case_count": 13,
+        "strict_release_boundary_blocked_case_count": 31,
         "termination_basis_counts": {
           "emergency_relief_discharge": 1,
           "inventory_depletion": 25,
@@ -5770,10 +5759,9 @@
         "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY",
         "provider_termination_evidence_status_counts": {
           "INVALID": 2,
-          "NOT_SUPPLIED": 10,
-          "VALID": 32
+          "VALID": 42
         },
-        "provider_termination_evidence_used_case_count": 32,
+        "provider_termination_evidence_used_case_count": 42,
         "provider_qualification_status_counts": {
           "BLOCKED": 44
         },
@@ -5785,7 +5773,148 @@
         "release_audit_evidence_request_contract_status_counts": {
           "ALIGNED": 44
         },
-        "release_audit_evidence_request_contract_blocked_case_count": 0
+        "release_audit_evidence_request_contract_blocked_case_count": 0,
+        "provider_termination_evidence_invalid_case_count": 2,
+        "facility_evidence_request_contract_status_counts": {
+          "ALIGNED": 44
+        },
+        "facility_evidence_request_contract_blocked_case_count": 0,
+        "asset_summary": {
+          "ambient-vaporizer": {
+            "case_count": 3,
+            "strict_release_boundary_eligible_case_count": 2,
+            "strict_release_boundary_blocked_case_count": 1,
+            "numerically_closed_case_count": 2,
+            "provider_termination_evidence_status_counts": {
+              "INVALID": 1,
+              "VALID": 2
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 3
+            },
+            "blocking_reason_counts": {
+              "termination_basis_inventory_over_600s_is_not_allowed": 1
+            }
+          },
+          "inventory-depletion-pipe": {
+            "case_count": 10,
+            "strict_release_boundary_eligible_case_count": 10,
+            "strict_release_boundary_blocked_case_count": 0,
+            "numerically_closed_case_count": 10,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 10
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 10
+            },
+            "blocking_reason_counts": {}
+          },
+          "pressure-relief-vent": {
+            "case_count": 1,
+            "strict_release_boundary_eligible_case_count": 0,
+            "strict_release_boundary_blocked_case_count": 1,
+            "numerically_closed_case_count": 0,
+            "provider_termination_evidence_status_counts": {
+              "INVALID": 1
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 1
+            },
+            "blocking_reason_counts": {
+              "termination_basis_emergency_relief_discharge_is_not_allowed": 1
+            }
+          },
+          "reliquefier": {
+            "case_count": 3,
+            "strict_release_boundary_eligible_case_count": 1,
+            "strict_release_boundary_blocked_case_count": 2,
+            "numerically_closed_case_count": 3,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 3
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 3
+            },
+            "blocking_reason_counts": {
+              "status_executed_operator_limited": 2
+            }
+          },
+          "storage-shell": {
+            "case_count": 5,
+            "strict_release_boundary_eligible_case_count": 0,
+            "strict_release_boundary_blocked_case_count": 5,
+            "numerically_closed_case_count": 5,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 5
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 5
+            },
+            "blocking_reason_counts": {
+              "status_executed_operator_limited": 5
+            }
+          },
+          "transfer-line": {
+            "case_count": 5,
+            "strict_release_boundary_eligible_case_count": 0,
+            "strict_release_boundary_blocked_case_count": 5,
+            "numerically_closed_case_count": 5,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 5
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 5
+            },
+            "blocking_reason_counts": {
+              "status_executed_operator_limited": 5
+            }
+          },
+          "transfer-pump": {
+            "case_count": 2,
+            "strict_release_boundary_eligible_case_count": 0,
+            "strict_release_boundary_blocked_case_count": 2,
+            "numerically_closed_case_count": 2,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 2
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 2
+            },
+            "blocking_reason_counts": {
+              "status_executed_operator_limited": 2
+            }
+          },
+          "transfer-valve": {
+            "case_count": 5,
+            "strict_release_boundary_eligible_case_count": 0,
+            "strict_release_boundary_blocked_case_count": 5,
+            "numerically_closed_case_count": 5,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 5
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 5
+            },
+            "blocking_reason_counts": {
+              "status_executed_operator_limited": 5
+            }
+          },
+          "vertical-handoff-vent": {
+            "case_count": 10,
+            "strict_release_boundary_eligible_case_count": 0,
+            "strict_release_boundary_blocked_case_count": 10,
+            "numerically_closed_case_count": 10,
+            "provider_termination_evidence_status_counts": {
+              "VALID": 10
+            },
+            "request_contract_status_counts": {
+              "ALIGNED": 10
+            },
+            "blocking_reason_counts": {
+              "status_executed_operator_limited": 10
+            }
+          }
+        }
       },
       "blocking_reason": null,
       "diagnostic_only": true,
@@ -5805,25 +5934,25 @@
         "rows": 44,
         "summary": {
           "case_count": 44,
-          "strict_release_boundary_eligible_case_count": 3,
-          "strict_release_boundary_blocked_case_count": 41,
-          "numerically_closed_case_count": 32,
-          "numerically_open_case_count": 12,
+          "strict_release_boundary_eligible_case_count": 13,
+          "strict_release_boundary_blocked_case_count": 31,
+          "numerically_closed_case_count": 42,
+          "numerically_open_case_count": 2,
           "operator_review_required_case_count": 29,
-          "consequence_domain_truncated_case_count": 1,
+          "consequence_domain_truncated_case_count": 0,
           "numerical_closure_status_counts": {
-            "NUMERICALLY_CLOSED": 3,
+            "NUMERICALLY_CLOSED": 13,
             "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 29,
-            "NUMERICALLY_OPEN": 12
+            "NUMERICALLY_OPEN": 2
           },
           "consequence_domain_status_counts": {
-            "CLOSED": 43,
-            "TRUNCATED": 1
+            "CLOSED": 44
           },
           "facility_ir_fn_promotion": false,
           "risk_atom_count": 176
         },
-        "promotion": false
+        "promotion": false,
+        "case_key_definition": "event_id|release_branch_id|annual_condition_id"
       },
       "blocking_reason": null,
       "diagnostic_only": true,

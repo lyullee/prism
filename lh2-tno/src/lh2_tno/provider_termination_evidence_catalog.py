@@ -285,7 +285,11 @@ def build_provider_termination_evidence_catalog(
     inventory_resolved_releases: Mapping[str, Any] | None = None,
     inventory_source_paths: Mapping[str, str] | None = None,
     inventory_source_event_prefix: str = "equipment-inventory-campaign/",
-    inventory_target_event_prefix: str = "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/",
+    # The target scope already owns the ``inventory-depletion`` family
+    # segment. Keeping it in the default once is important: duplicating the
+    # segment produces an event identity that cannot match the facility case
+    # ledger, so otherwise valid provider evidence is reported as missing.
+    inventory_target_event_prefix: str = "generic-lh2-full-scope-example/inventory-depletion/",
 ) -> dict[str, Any]:
     """Build the evidence catalog from persisted provider artifacts."""
 

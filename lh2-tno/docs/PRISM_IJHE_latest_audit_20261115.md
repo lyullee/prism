@@ -24,9 +24,9 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 | HAZOP event identity | 34/34 bound |
 | frequency port binding | 34/34 scoped, unbound 0, mismatch 0 |
 | 수직 handoff | 5 event, 10 case, `inventory_depletion` 종료 |
-| provider 종료 evidence | 35 provider row, 34 event ID, 32 case 사용, 2 invalid case |
-| numerical closure | 32 closed, 29 operator-review, 12 open |
-| strict boundary eligible | 3; 41 blocked |
+| provider 종료 evidence | 35 provider row, 34 event ID, 42 case 사용, 2 invalid case |
+| numerical closure | 42 closed, 29 operator-review, 2 open |
+| strict boundary eligible | 13; 31 blocked |
 | 시설 IR/F-N 승격 | `false` |
 
 `NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`는 방출 시간·초기/누적/잔여

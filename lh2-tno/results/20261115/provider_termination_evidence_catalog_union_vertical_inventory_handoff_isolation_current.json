@@ -685,7 +685,7 @@
       "provider_residual_mass_kg": null
     },
     {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
       "component_id": "terminal_pipe",
       "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
       "termination_basis": "inventory_depletion_positive_threshold",
@@ -705,7 +705,7 @@
       }
     },
     {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
       "component_id": "terminal_pipe",
       "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
       "termination_basis": "inventory_depletion_positive_threshold",
@@ -725,7 +725,7 @@
       }
     },
     {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
       "component_id": "terminal_pipe",
       "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
       "termination_basis": "inventory_depletion_positive_threshold",
@@ -745,7 +745,7 @@
       }
     },
     {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
       "component_id": "terminal_pipe",
       "provider_result_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f",
       "termination_basis": "inventory_depletion_positive_threshold",
@@ -765,7 +765,7 @@
       }
     },
     {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
       "component_id": "terminal_pipe",
       "provider_result_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006",
       "termination_basis": "inventory_depletion_positive_threshold",

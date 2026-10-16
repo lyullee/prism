@@ -4990,7 +4990,7 @@
   "latest_union_frequency_port_unbound_event_count": 0,
   "latest_union_case_risk_atom_port_mismatch_count": 0,
   "latest_provider_termination_event_row_count": 35,
-  "latest_provider_termination_case_used_count": 32,
+  "latest_provider_termination_case_used_count": 42,
   "latest_provider_termination_invalid_case_count": 2,
   "latest_ijhe_check_count": 53,
   "latest_ijhe_pass_count": 48,
@@ -5033,8 +5033,8 @@
   "latest_union_isolation_case_facility_qra_claim": false,
   "latest_provider_termination_variant_replay_record": "docs/PRISM_provider_termination_variant_replay_20261115.md",
   "latest_provider_termination_variant_catalog": "results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json",
-  "latest_provider_termination_variant_catalog_status": "EVIDENCE_CATALOG_READY; 35 rows, 34 event IDs, distinct provider digests preserved",
-  "latest_release_boundary_case_audit_status": "CASE_BOUNDARY_PARTIAL; 44 cases, 32 provider-evidence-valid, 10 not supplied, 2 invalid, 3 strict eligible, 41 blocked",
+  "latest_provider_termination_variant_catalog_status": "EVIDENCE_CATALOG_READY; 35 rows, 34 event IDs, 42 case uses, distinct provider digests preserved",
+  "latest_release_boundary_case_audit_status": "CASE_BOUNDARY_PARTIAL; 44 cases, 42 provider-evidence-valid, 0 not supplied, 2 invalid, 13 strict eligible, 31 blocked",
   "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 49 checks, 45 PASS, 4 BLOCKED; latest vertical/inventory/isolation union inputs consumed; inspection-center handoff and receptor-geometry diagnostic checks PASS; qualified provider, independent full-chain validation, release-boundary closure and facility IR/F-N remain withheld",
   "latest_native_lh2dt_current_source_replay_record": "docs/PRISM_native_lh2dt_current_source_replay_20261016.md",
   "latest_native_lh2dt_current_source_replay_commit": "b483f7921d7e67a269947f36393fdd3b9ab9e7b3",
@@ -5363,8 +5363,8 @@
   "latest_ijhe_completion_audit_input_facility_assessment": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "latest_ijhe_completion_audit_input_release_boundary": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "latest_ijhe_completion_audit_input_conditional_trace": "results/20261115/conditional_facility_risk_view_with_release_trace.json",
-  "latest_ijhe_completion_audit_release_boundary_eligible_case_count": 3,
-  "latest_ijhe_completion_audit_release_boundary_blocked_case_count": 41,
+  "latest_ijhe_completion_audit_release_boundary_eligible_case_count": 13,
+  "latest_ijhe_completion_audit_release_boundary_blocked_case_count": 31,
   "latest_ijhe_audit_metadata_verifier_module": "src/lh2_tno/latest_ijhe_audit_verification.py",
   "latest_ijhe_audit_metadata_verifier_script": "scripts/verify_latest_ijhe_audit.py",
   "latest_ijhe_audit_metadata_verifier_record": "results/20261115/latest_ijhe_audit_verification.json",
@@ -5478,5 +5478,16 @@
   },
   "latest_ijhe_audit_metadata_verifier_release_boundary_request_contract_blocked_case_count": 0,
   "latest_release_boundary_case_audit_asset_count": 9,
-  "latest_ijhe_audit_metadata_verifier_release_boundary_asset_count": 9
+  "latest_ijhe_audit_metadata_verifier_release_boundary_asset_count": 9,
+  "strict_release_boundary_eligible_case_count": 13,
+  "strict_release_boundary_blocked_case_count": 31,
+  "release_boundary_numerically_closed_case_count": 42,
+  "release_boundary_numerically_open_case_count": 2,
+  "release_boundary_operator_review_required_case_count": 29,
+  "release_boundary_numerical_closure_status_counts": {
+    "NUMERICALLY_CLOSED": 13,
+    "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 29,
+    "NUMERICALLY_OPEN": 2
+  },
+  "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY; 35 event rows, 42 case uses, 42 valid and 2 unsupported-basis rows"
 }

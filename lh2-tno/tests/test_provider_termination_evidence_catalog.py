@@ -55,7 +55,7 @@ def test_catalog_binds_storage_sidecar_and_inventory_response(tmp_path):
     rows = {row["event_id"]: row for row in report["rows"]}
     assert rows["storage/event"]["provider_result_digest"] == "storage-digest"
     assert rows[
-        "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%"
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%"
     ]["provider_result_digest"] == "inventory-digest"
     assert report["provider_qualification_claim"] is False
     assert report["facility_qra_claim"] is False
