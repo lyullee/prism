@@ -57,6 +57,7 @@ gas handoff packet을 사용한다. 두 packet의 component·port·개구가 문
 상세 실행 원장은 [`PRISM_native_multi_equipment_facility_campaign_20261016.md`](PRISM_native_multi_equipment_facility_campaign_20261016.md)와
 [`generic_lh2_native_pump_valve_facility_replay_20261016.json`](../examples/generic_lh2_native_pump_valve_facility_replay_20261016.json)에 있다.
 설비별 기여와 빈도 민감도 재계산 감사는 [`generic_lh2_native_pump_valve_facility_audit_20261016.json`](../examples/generic_lh2_native_pump_valve_facility_audit_20261016.json)에 기록했다.
+이 감사는 최신 IJHE 완료 감사에도 `diagnostic_native_provider_multi_equipment_audit: PASS`로 연결했다. 전체 감사 상태는 `INCOMPLETE_EVIDENCE`이며, 기존 6개 범위·자격 차단 항목은 그대로 남아 있다.
 이 결과는 다설비 연결과 fail-closed 누락 회계를 검증하는 진단 증거이며,
 qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미하지 않는다.
 
