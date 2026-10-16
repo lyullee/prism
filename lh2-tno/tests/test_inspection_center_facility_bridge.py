@@ -67,6 +67,23 @@ def test_reconstructed_three_component_facility_bridge_executes_selected_supply_
         "lh2-intake-tank",
         "lh2-storage-vent",
     }
+    # The operating mode is part of each field state frame.  HAZOP must use
+    # that supplied mode to select the branch; it must not infer a mode from
+    # the measured value or create a provider release for normal branches.
+    components = result["components"]
+    assert components["lh2-intake-tank"]["selection"]["operating_mode"] == "receiving"
+    assert components["lh2-intake-tank"]["selection"]["status"] == "NO_DEVIATION"
+    assert components["lh2-intake-tank"]["selection"]["selected_scenario_count"] == 0
+    assert components["lh2-storage-vent"]["selection"]["operating_mode"] == "standby"
+    assert components["lh2-storage-vent"]["selection"]["status"] == "NO_DEVIATION"
+    assert components["lh2-storage-vent"]["selection"]["selected_scenario_count"] == 0
+    supply = components["lh2-supply-vaporizer-boundary"]["selection"]
+    assert supply["operating_mode"] == "supply"
+    assert supply["status"] == "SCENARIOS_SELECTED"
+    assert supply["active_deviation_count"] == 1
+    assert supply["selected_scenario_count"] == 1
+    assert result["policy"]["operating_mode_taken_from_input"] is True
+    assert result["facility_bridge_audit"]["operating_mode_inferred"] is False
     mapping = result["facility_bridge_audit"]["explicit_provider_component_mapping"]
     assert mapping["observed_component_id"] == "lh2-supply-vaporizer-boundary"
     assert mapping["provider_component_id"] == "ambient-vaporizer-01"
