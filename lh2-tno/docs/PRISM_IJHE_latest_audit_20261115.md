@@ -52,3 +52,7 @@
 현재 범위에서 현장 사고빈도 수집·센서 기반 빈도 학습·실내·폭굉·전체 도미노는
 수행하지 않는다. 지원되지 않은 사고는 다른 사고군으로 대체하지 않고
 `PARTIAL`, `BLOCKED_REVIEW`, `UNCOMPUTED` 또는 증거요청으로 보존한다.
+
+## 2026-11-15 facility-handoff supplement
+
+The full audit was rerun with the reconstructed inspection-center facility handoff as an optional diagnostic input. The resulting record is [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound_with_inspection_center_handoff.json`](../results/20261115/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound_with_inspection_center_handoff.json). It contains 45 checks: 41 PASS and 4 BLOCKED. The new `diagnostic_inspection_center_facility_ijhe_handoff` check is PASS and diagnostic-only; it does not weaken the four strict qualification gates. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.
