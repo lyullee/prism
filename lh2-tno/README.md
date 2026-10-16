@@ -31,7 +31,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1222 passed, 1 warning**.
+The v0.6.3 local validation result is **1223 passed, 1 warning**.
 
 ## What PRISM is for
 
@@ -92,6 +92,33 @@ Operating mode is part of the input, such as `receiving`, `supply`, or `standby`
 ```
 
 The scenario ID is preserved in the event, case, risk atom, and result ledger. HAZOP selection is qualitative; it does not create an annual frequency.
+
+For a live facility batch, `FacilityRealtimeConsequenceMonitor.update_from_runtime_frames_with_hazop(...)`
+combines the two boundaries in one explicit call. It requires exactly one state
+frame per declared component, reads `operating_mode` from each frame, evaluates
+the bound HAZOP table, dispatches each selected scenario to its matching
+equipment release resolver, and then sends the validated release through the
+existing realtime monitor and SLABx-LH2 consequence path. A missing or extra
+frame is rejected before a provider is called. The returned
+`realtime_hazop_bridge` records the selected scenario count and wall time, while
+annual facility IR/F-N and frequency learning remain explicitly unavailable.
+
+```python
+result = facility_monitor.update_from_runtime_frames_with_hazop(
+    hazop_table,
+    runtime_frames_by_component,
+    now_s=clock_s,
+    release_resolvers={
+        (component_id, scenario_id): provider_resolver,
+    },
+)
+```
+
+This is the recommended current-state control-room path: monitoring data and
+operating mode enter together, HAZOP chooses the qualitative scenario, and the
+provider owns release geometry, isolation, duration, and inventory depletion.
+The result is a diagnostic current-weather view until the reviewed annual
+campaign, provider qualification, and independent validation gates are closed.
 
 ## Equipment and provider boundary
 

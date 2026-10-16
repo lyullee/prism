@@ -2106,6 +2106,106 @@ class FacilityRealtimeConsequenceMonitor:
         snapshot["aggregate"]["runtime_arrival_latency_available"] = False
         return snapshot
 
+    def update_from_runtime_frames_with_hazop(
+        self,
+        table: Mapping[str, object] | object,
+        frames: Mapping[str, Mapping[str, object]],
+        *,
+        now_s: float,
+        release_resolvers: Mapping[object, object],
+        mapping_digest: str | None = None,
+    ) -> dict[str, object]:
+        """Run the explicit mode/HAZOP gate before runtime consequence branches.
+
+        ``update_from_runtime_frames`` is the state-to-provider/consequence
+        path.  This companion method adds the qualitative decision that users
+        expect at a control-room boundary: each frame must carry an explicit
+        operating mode, the bound HAZOP table selects the active scenario, and
+        only a resolver whose provider release matches that scenario is passed
+        to the existing SLABx-LH2 monitor.  Missing or extra component frames
+        are rejected before any resolver is called.  The returned object is a
+        diagnostic HAZOP runtime ledger; it never learns frequency and never
+        promotes the branch results to annual facility IR/F-N.
+        """
+        if not isinstance(frames, Mapping):
+            raise TypeError("frames must be a component-id mapping")
+        if not isinstance(release_resolvers, Mapping):
+            raise TypeError("release_resolvers must be a mapping")
+        if (
+            isinstance(now_s, bool)
+            or not isinstance(now_s, (int, float))
+            or not math.isfinite(float(now_s))
+            or now_s < 0
+        ):
+            raise ValueError("now_s must be finite and nonnegative")
+
+        declared = set(self.bindings)
+        supplied = set(frames)
+        missing = sorted(str(component_id) for component_id in declared - supplied)
+        unknown = sorted(str(component_id) for component_id in supplied - declared)
+        if missing or unknown:
+            return {
+                "schema_version": "prism.realtime_hazop_facility_bridge.v1",
+                "status": "REJECTED_RUNTIME_HAZOP_FRAME_SET",
+                "facility_id": self.facility_id,
+                "component_count": len(declared),
+                "missing_component_ids": missing,
+                "unknown_component_ids": unknown,
+                "components": {},
+                "risk_atoms": [],
+                "facility_annual_ir_available": False,
+                "facility_fn_available": False,
+                "policy": {
+                    "operating_mode_taken_from_input": True,
+                    "frequency_inference_performed": False,
+                    "sensor_frequency_learning_used": False,
+                    "provider_release_created_by_prism": False,
+                    "facility_annual_qra_promotion": False,
+                },
+                "reason": (
+                    "one coherent HAZOP runtime batch requires exactly one frame "
+                    "for every declared facility component"
+                ),
+            }
+
+        from .hazop import run_hazop_facility_runtime
+
+        started = time.perf_counter()
+        result = run_hazop_facility_runtime(
+            table,
+            frames,
+            now_s=float(now_s),
+            component_bindings=self.bindings,
+            release_resolvers=release_resolvers,
+            mapping_digest=mapping_digest,
+        )
+        elapsed_ms = (time.perf_counter() - started) * 1000.0
+        bridge = {
+            "schema": "prism.realtime_hazop_facility_bridge.v1",
+            "status": "EXECUTED_DIAGNOSTIC",
+            "input_frame_set_exact": True,
+            "component_count": len(declared),
+            "selected_scenario_count": sum(
+                int(row.get("selection", {}).get("selected_scenario_count", 0))
+                for row in result.get("components", {}).values()
+                if isinstance(row, Mapping)
+                and isinstance(row.get("selection"), Mapping)
+            ),
+            "wall_elapsed_ms": elapsed_ms,
+            "measurement_policy": (
+                "one synchronous HAZOP/runtime invocation; timing is evidence for "
+                "this call only and is not a 1 Hz fresh-physics guarantee"
+            ),
+            "operating_mode_inferred": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_annual_ir_available": False,
+            "facility_fn_available": False,
+        }
+        result = dict(result)
+        result["realtime_hazop_bridge"] = bridge
+        return result
+
     def build_annual_campaign_result(
         self,
         snapshot: Mapping[str, object],
