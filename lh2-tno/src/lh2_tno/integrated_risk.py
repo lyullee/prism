@@ -21,6 +21,7 @@ from .facility_ledger import merge_facility_campaign_results
 from .hazop import HazopTable, run_hazop_facility_runtime
 from .hazop_campaign import build_hazop_facility_campaign_result
 from .hazop_forecast import HazopForecastError, run_hazop_forecast_risk_scan
+from .forecast_handoff import build_forecast_facility_campaign_evidence_gate
 
 
 SCHEMA = "prism.hazop_integrated_risk.v1"
@@ -42,6 +43,7 @@ def build_hazop_forecast_facility_campaign_result(
     *,
     campaign_bindings: Mapping[str, Mapping[str, Any]],
     expected_component_ids: Sequence[str] = (),
+    evidence_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Join explicit forecast-trigger campaigns into one facility ledger.
 
@@ -70,6 +72,16 @@ def build_hazop_forecast_facility_campaign_result(
         )
     if not isinstance(campaign_bindings, Mapping):
         raise IntegratedRiskError("campaign_bindings must be a mapping")
+    evidence_gate: dict[str, Any] | None = None
+    if evidence_coverage is not None:
+        try:
+            evidence_gate = build_forecast_facility_campaign_evidence_gate(evidence_coverage)
+        except Exception as error:
+            raise IntegratedRiskError(f"forecast evidence coverage gate is invalid: {error}") from error
+        if evidence_gate["downstream_campaign_input_allowed"] is not True:
+            raise IntegratedRiskError(
+                "forecast facility campaign is withheld by incomplete quantitative evidence coverage"
+            )
 
     entries: list[dict[str, Any]] = []
     for index, raw in enumerate(forecast_scan.get("scenario_entries", ())):
@@ -130,6 +142,7 @@ def build_hazop_forecast_facility_campaign_result(
             "forecast_scan_digest": canonical_digest(dict(forecast_scan)),
             "trigger_bindings": [],
             "facility_ledger": None,
+            "evidence_gate": evidence_gate,
             "policy": {
                 "forecast_origin": "model_prediction",
                 "frequency_inference_performed": False,
@@ -217,6 +230,7 @@ def build_hazop_forecast_facility_campaign_result(
         "trigger_bindings": trace,
         "campaign_results": normalized_campaigns,
         "facility_ledger": ledger,
+        "evidence_gate": evidence_gate,
         "policy": {
             "forecast_origin": "model_prediction",
             "frequency_inference_performed": False,
@@ -330,6 +344,7 @@ def run_hazop_integrated_risk(
     facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     forecast_facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     forecast_campaign_bindings: Mapping[str, Mapping[str, Any]] | None = None,
+    forecast_evidence_coverage: Mapping[str, Any] | None = None,
     mapping_digest: str | None = None,
 ) -> dict[str, Any]:
     """Run current and optional forecast HAZOP risk paths as one ledger.
@@ -411,6 +426,15 @@ def run_hazop_integrated_risk(
         except (HazopForecastError, ValueError, TypeError) as error:
             raise IntegratedRiskError(f"forecast-state HAZOP execution failed: {error}") from error
 
+    forecast_evidence_gate: dict[str, Any] | None = None
+    if forecast_evidence_coverage is not None:
+        try:
+            forecast_evidence_gate = build_forecast_facility_campaign_evidence_gate(
+                forecast_evidence_coverage
+            )
+        except Exception as error:
+            raise IntegratedRiskError(f"forecast evidence coverage gate is invalid: {error}") from error
+
     forecast_facility_campaign: dict[str, Any]
     if forecast_facility_campaign_evaluator is not None and forecast_campaign_bindings is not None:
         raise IntegratedRiskError(
@@ -421,7 +445,20 @@ def run_hazop_integrated_risk(
             raise IntegratedRiskError(
                 "forecast_campaign_bindings requires forecast_frames"
             )
-        if forecast.get("status") != "FORECAST_RISK_SCAN_COMPLETE":
+        if forecast_evidence_gate is not None and not forecast_evidence_gate[
+            "downstream_campaign_input_allowed"
+        ]:
+            forecast_facility_campaign = {
+                "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_EVIDENCE_COVERAGE",
+                "reason": "forecast quantitative evidence coverage is incomplete",
+                "evidence_gate": forecast_evidence_gate,
+                "policy": {
+                    "facility_qra_promotion": False,
+                    "frequency_inference_performed": False,
+                    "physical_validation_claim": False,
+                },
+            }
+        elif forecast.get("status") != "FORECAST_RISK_SCAN_COMPLETE":
             forecast_facility_campaign = {
                 "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_PARTIAL",
                 "reason": "forecast facility campaign requires a completed forecast HAZOP scan",
@@ -450,6 +487,7 @@ def run_hazop_integrated_risk(
                     expected_component_ids=tuple(
                         forecast_component_ids or tuple(forecast_tables_by_component or {})
                     ),
+                    evidence_coverage=forecast_evidence_coverage,
                 )
             except Exception as error:
                 forecast_facility_campaign = {
@@ -475,6 +513,19 @@ def run_hazop_integrated_risk(
         raise IntegratedRiskError(
             "forecast_facility_campaign_evaluator must be callable when supplied"
         )
+    elif forecast_evidence_gate is not None and not forecast_evidence_gate[
+        "downstream_campaign_input_allowed"
+    ]:
+        forecast_facility_campaign = {
+            "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_EVIDENCE_COVERAGE",
+            "reason": "forecast quantitative evidence coverage is incomplete",
+            "evidence_gate": forecast_evidence_gate,
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
     elif forecast.get("status") != "FORECAST_RISK_SCAN_COMPLETE":
         forecast_facility_campaign = {
             "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_PARTIAL",
@@ -681,6 +732,7 @@ def run_hazop_integrated_risk(
         "forecast": forecast,
         "facility_campaign": facility_campaign,
         "forecast_facility_campaign": forecast_facility_campaign,
+        "forecast_evidence_gate": forecast_evidence_gate,
         "linkage": {
             "current_component_ids": sorted(current_frames),
             "forecast_component_ids": sorted(forecast_tables_by_component or {}),

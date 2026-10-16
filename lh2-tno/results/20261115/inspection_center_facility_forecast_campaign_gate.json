@@ -1,0 +1,28 @@
+{
+  "schema_version": "prism.forecast_facility_campaign_evidence_gate.v1",
+  "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "coverage_schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+  "summary": {
+    "request_count": 2,
+    "evidence_complete_count": 0,
+    "evidence_missing_count": 2,
+    "extra_attachment_key_count": 0
+  },
+  "missing_request_ids": [
+    "lh2-intake-tank|inspection-intake-receiving-high-pressure:receiving:vessel_hole|0",
+    "lh2-supply-vaporizer-boundary|inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole|0"
+  ],
+  "extra_attachment_keys": [],
+  "downstream_campaign_input_allowed": false,
+  "policy": {
+    "missing_cases_assigned_zero": false,
+    "frequency_inference_performed": false,
+    "provider_release_created": false,
+    "slabx_lh2_calculated": false,
+    "facility_ir_fn_calculated": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "A forecast facility campaign may consume downstream bindings only when every exact request has complete evidence. Missing evidence remains withheld and is never replaced by zero risk or another case."
+}

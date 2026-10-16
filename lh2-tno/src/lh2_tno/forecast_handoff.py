@@ -13,6 +13,8 @@ from typing import Any
 
 
 SCHEMA = "prism.forecast_quantitative_handoff.v1"
+EVIDENCE_COVERAGE_SCHEMA = "prism.forecast_quantitative_evidence_coverage.v1"
+FACILITY_CAMPAIGN_GATE_SCHEMA = "prism.forecast_facility_campaign_evidence_gate.v1"
 
 
 class ForecastHandoffError(ValueError):
@@ -353,7 +355,7 @@ def audit_forecast_quantitative_evidence_coverage(
     extra = sorted(set(attachments) - expected)
     complete_count = sum(row["status"] == "EVIDENCE_COMPLETE" for row in rows)
     return {
-        "schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+        "schema_version": EVIDENCE_COVERAGE_SCHEMA,
         "status": "FORECAST_QUANTITATIVE_EVIDENCE_COVERAGE_AUDITED",
         "facility_id": handoff.get("facility_id"),
         "rows": rows,
@@ -380,10 +382,87 @@ def audit_forecast_quantitative_evidence_coverage(
     }
 
 
+def build_forecast_facility_campaign_evidence_gate(
+    coverage: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Turn exact-request evidence coverage into a downstream campaign gate.
+
+    The coverage audit is intentionally descriptive.  This gate is the small
+    control boundary used by an integrated risk runner: every quantitative
+    forecast request must have all provider, frequency, SLABx-LH2 and facility
+    condition fields before a forecast campaign binding may enter the facility
+    ledger.  It never calculates a consequence or assigns zero risk.
+    """
+    if not isinstance(coverage, Mapping):
+        raise ForecastHandoffError("coverage must be a mapping")
+    if coverage.get("schema_version") != EVIDENCE_COVERAGE_SCHEMA:
+        raise ForecastHandoffError("coverage has an unsupported schema_version")
+    rows = coverage.get("rows")
+    if not isinstance(rows, list) or not rows:
+        raise ForecastHandoffError("coverage.rows must be a non-empty list")
+    extra = coverage.get("extra_attachment_keys")
+    if not isinstance(extra, list) or any(not isinstance(value, str) for value in extra):
+        raise ForecastHandoffError("coverage.extra_attachment_keys must be a string list")
+    request_ids: set[str] = set()
+    missing_request_ids: list[str] = []
+    complete_count = 0
+    for index, row in enumerate(rows):
+        if not isinstance(row, Mapping):
+            raise ForecastHandoffError(f"coverage.rows[{index}] must be a mapping")
+        request_id = _name(row.get("request_id"), f"coverage.rows[{index}].request_id")
+        if request_id in request_ids:
+            raise ForecastHandoffError(f"duplicate coverage request_id: {request_id}")
+        request_ids.add(request_id)
+        status = row.get("status")
+        if status == "EVIDENCE_COMPLETE" and not row.get("missing_fields") and row.get("malformed_reason") is None:
+            complete_count += 1
+        else:
+            missing_request_ids.append(request_id)
+    request_count = len(rows)
+    missing_count = request_count - complete_count
+    ready = missing_count == 0 and not extra
+    return {
+        "schema_version": FACILITY_CAMPAIGN_GATE_SCHEMA,
+        "status": (
+            "FORECAST_FACILITY_CAMPAIGN_READY_FOR_DOWNSTREAM_BINDING"
+            if ready
+            else "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE"
+        ),
+        "facility_id": coverage.get("facility_id"),
+        "coverage_schema_version": EVIDENCE_COVERAGE_SCHEMA,
+        "summary": {
+            "request_count": request_count,
+            "evidence_complete_count": complete_count,
+            "evidence_missing_count": missing_count,
+            "extra_attachment_key_count": len(extra),
+        },
+        "missing_request_ids": sorted(missing_request_ids),
+        "extra_attachment_keys": sorted(extra),
+        "downstream_campaign_input_allowed": ready,
+        "policy": {
+            "missing_cases_assigned_zero": False,
+            "frequency_inference_performed": False,
+            "provider_release_created": False,
+            "slabx_lh2_calculated": False,
+            "facility_ir_fn_calculated": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+        "interpretation": (
+            "A forecast facility campaign may consume downstream bindings only "
+            "when every exact request has complete evidence. Missing evidence "
+            "remains withheld and is never replaced by zero risk or another case."
+        ),
+    }
+
+
 __all__ = [
     "SCHEMA",
+    "EVIDENCE_COVERAGE_SCHEMA",
+    "FACILITY_CAMPAIGN_GATE_SCHEMA",
     "ForecastHandoffError",
     "build_forecast_quantitative_handoff",
     "attach_forecast_quantitative_evidence",
     "audit_forecast_quantitative_evidence_coverage",
+    "build_forecast_facility_campaign_evidence_gate",
 ]

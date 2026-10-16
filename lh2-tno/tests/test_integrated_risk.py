@@ -175,6 +175,56 @@ def test_integrated_risk_can_use_strict_forecast_campaign_bindings(monkeypatch):
     assert result["forecast_facility_campaign"]["policy"]["facility_qra_promotion"] is False
 
 
+def test_integrated_risk_withholds_forecast_campaign_when_evidence_gate_is_incomplete(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_forecast_risk_scan",
+        lambda **kwargs: _forecast_campaign_scan(),
+    )
+    coverage = {
+        "schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+        "facility_id": "facility-1",
+        "rows": [{
+            "request_id": "TK-01|TK-01-pressure|12",
+            "status": "MISSING_EVIDENCE",
+            "missing_fields": ["provider_release_packet.source_digest"],
+            "malformed_reason": "attachment_missing",
+        }],
+        "extra_attachment_keys": [],
+    }
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        forecast_frames=[{"component_id": "TK-01", "origin": "model_prediction"}],
+        forecast_tables_by_component={"TK-01": {"rows": []}},
+        forecast_campaign_bindings={
+            "TK-01|TK-01-pressure|12": {
+                "component_id": "TK-01",
+                "scenario_id": "TK-01-pressure",
+                "forecast_time_s": 12.0,
+                "operating_mode": "receiving",
+                "campaign": _forecast_campaign(),
+            }
+        },
+        forecast_evidence_coverage=coverage,
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
+    assert result["forecast_facility_campaign"]["status"] == (
+        "WITHHELD_FORECAST_FACILITY_CAMPAIGN_EVIDENCE_COVERAGE"
+    )
+    assert result["forecast_facility_campaign"]["evidence_gate"][
+        "downstream_campaign_input_allowed"
+    ] is False
+
+
 def test_integrated_risk_joins_current_and_forecast_identity(monkeypatch):
     calls = {}
 

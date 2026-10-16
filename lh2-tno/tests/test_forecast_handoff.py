@@ -8,6 +8,7 @@ from lh2_tno.forecast_handoff import (
     ForecastHandoffError,
     audit_forecast_quantitative_evidence_coverage,
     attach_forecast_quantitative_evidence,
+    build_forecast_facility_campaign_evidence_gate,
     build_forecast_quantitative_handoff,
 )
 
@@ -163,3 +164,34 @@ def test_quantitative_evidence_coverage_audit_preserves_missing_cases():
     assert result["rows"][0]["status"] == "MISSING_EVIDENCE"
     assert "provider_release_packet.source_digest" in result["rows"][0]["missing_fields"]
     assert result["policy"]["missing_cases_assigned_zero"] is False
+
+
+def test_forecast_facility_campaign_gate_withholds_incomplete_coverage():
+    handoff = build_forecast_quantitative_handoff(_scan())
+    coverage = audit_forecast_quantitative_evidence_coverage(handoff, {})
+    gate = build_forecast_facility_campaign_evidence_gate(coverage)
+
+    assert gate["schema_version"] == "prism.forecast_facility_campaign_evidence_gate.v1"
+    assert gate["status"] == "WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE"
+    assert gate["downstream_campaign_input_allowed"] is False
+    assert gate["missing_request_ids"] == ["tank-01|tank-pressure|12"]
+    assert gate["policy"]["facility_qra_promotion"] is False
+
+
+def test_forecast_facility_campaign_gate_allows_complete_exact_coverage():
+    handoff = build_forecast_quantitative_handoff(_scan())
+    key = handoff["requests"][0]["request_id"]
+    fields = handoff["requests"][0]["required_contract"]
+    evidence = {
+        block: {"status": "provided", **{field: f"{block}:{field}" for field in required}}
+        for block, required in fields.items()
+    }
+    coverage = audit_forecast_quantitative_evidence_coverage(
+        handoff,
+        {key: {"evidence": evidence}},
+    )
+    gate = build_forecast_facility_campaign_evidence_gate(coverage)
+
+    assert gate["status"] == "FORECAST_FACILITY_CAMPAIGN_READY_FOR_DOWNSTREAM_BINDING"
+    assert gate["downstream_campaign_input_allowed"] is True
+    assert gate["summary"]["evidence_missing_count"] == 0

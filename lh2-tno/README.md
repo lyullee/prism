@@ -287,6 +287,22 @@ python scripts/audit_forecast_quantitative_evidence.py `
 The saved diagnostic currently reports two missing evidence cases. It is a
 coverage ledger, not a completed risk calculation.
 
+Before a forecast campaign can enter the facility ledger, turn this coverage
+record into an explicit fail-closed gate:
+
+```powershell
+python scripts/build_forecast_facility_campaign_gate.py `
+  --coverage results/20261115/inspection_center_facility_forecast_evidence_coverage.json `
+  --output results/20261115/inspection_center_facility_forecast_campaign_gate.json
+```
+
+The current diagnostic gate is
+`WITHHELD_FORECAST_FACILITY_CAMPAIGN_MISSING_QUANTITATIVE_EVIDENCE` because
+both requests are still missing evidence. It never assigns zero risk or
+silently substitutes another component. See
+[`PRISM_forecast_facility_campaign_evidence_gate_en.md`](docs/PRISM_forecast_facility_campaign_evidence_gate_en.md)
+for the contract and the `forecast_evidence_coverage=...` integration option.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute
@@ -526,6 +542,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
 - [Forecast HAZOP-to-facility campaign handoff (English)](docs/PRISM_forecast_facility_campaign_handoff_en.md)
+- [Forecast facility campaign evidence gate (English)](docs/PRISM_forecast_facility_campaign_evidence_gate_en.md)
 - [HAZOP-to-facility campaign manifest and CLI](docs/PRISM_HAZOP_facility_campaign_manifest_en.md)
 - [Equipment-twin to HAZOP mode handoff](docs/PRISM_equipment_to_hazop_mode_handoff_en.md)
 - [Emergency-relief release-boundary contract](docs/PRISM_emergency_relief_boundary_contract_en.md)
