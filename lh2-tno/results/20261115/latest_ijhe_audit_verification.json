@@ -22,6 +22,10 @@
   "release_boundary_audit_record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "release_boundary_audit_status": "CASE_BOUNDARY_PARTIAL",
   "release_boundary_case_count": 44,
+  "release_boundary_request_contract_status_counts": {
+    "ALIGNED": 44
+  },
+  "release_boundary_request_contract_blocked_case_count": 0,
   "blocking_reasons": [],
   "interpretation": "The latest audit pointer, summary counts, diagnostic facility handoff, scope matrix, and release-boundary ledger are internally consistent; this verification does not promote provider qualification, physical validation, or facility IR/F-N."
 }

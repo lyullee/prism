@@ -327,6 +327,61 @@ def _case_key(row: Mapping[str, Any]) -> str:
     return "|".join("" if value is None else str(value) for value in values)
 
 
+def _request_contract_check(
+    request: Mapping[str, Any] | None,
+    *,
+    ledger_row: Mapping[str, Any],
+    case: Mapping[str, Any],
+    request_root: Mapping[str, Any] | None,
+) -> list[str]:
+    """Validate the per-case evidence-request contract without promoting it.
+
+    Case-key alignment proves that a request exists, but it does not prove that
+    the request identifies the same equipment or that it asks for enough
+    evidence to close the release boundary.  This check stays deliberately
+    conservative: missing optional metadata is tolerated, while a supplied
+    contradiction or an empty mandatory field blocks the request.
+    """
+
+    if request is None:
+        return ["facility_evidence_request_missing"]
+    reasons: list[str] = []
+    request_id = request.get("request_id")
+    if not isinstance(request_id, str) or not request_id.strip():
+        reasons.append("facility_evidence_request_id_missing")
+    for field in ("event_id", "release_branch_id", "annual_condition_id"):
+        expected = ledger_row.get(field)
+        supplied = request.get(field)
+        if supplied is not None and expected is not None and str(supplied) != str(expected):
+            reasons.append(f"facility_evidence_request_{field}_mismatch")
+    expected_component = (
+        _as_mapping(case.get("provider_packet_identity")).get("component_id")
+        or case.get("component_id")
+        or ledger_row.get("component_id")
+    )
+    supplied_component = request.get("component_id")
+    if (
+        expected_component is not None
+        and supplied_component is not None
+        and str(expected_component) != str(supplied_component)
+    ):
+        reasons.append("facility_evidence_request_component_id_mismatch")
+    required = request.get("required_provider_evidence")
+    qualification_required = request.get("qualification_required") is True
+    if qualification_required and (
+        not isinstance(required, Sequence)
+        or isinstance(required, (str, bytes))
+        or not any(isinstance(item, str) and item.strip() for item in required)
+    ):
+        reasons.append("facility_evidence_request_required_evidence_missing")
+    if request_root is not None:
+        if request_root.get("frequency_inference_allowed") is True:
+            reasons.append("facility_evidence_request_allows_frequency_inference")
+        if request_root.get("facility_qra_allowed") is True:
+            reasons.append("facility_evidence_request_allows_facility_qra")
+    return list(dict.fromkeys(reasons))
+
+
 def _provider_origins(case: Mapping[str, Any], ledger_row: Mapping[str, Any]) -> list[str]:
     identity = _as_mapping(case.get("provider_packet_identity"))
     origins = identity.get("input_origins")
@@ -631,9 +686,10 @@ def build_release_boundary_case_audit(
     cases = _as_rows(risk_ledger.get("cases"))
     release_ledger = _as_mapping(risk_ledger.get("release_termination_inventory_ledger"))
     ledger_rows = _as_rows(release_ledger.get("rows"))
+    request_root = _as_mapping(facility_evidence_request) if facility_evidence_request is not None else None
     request_rows = (
-        _as_rows(_as_mapping(facility_evidence_request).get("case_requests"))
-        if facility_evidence_request is not None
+        _as_rows(request_root.get("case_requests"))
+        if request_root is not None
         else []
     )
     request_by_key = {
@@ -746,6 +802,12 @@ def build_release_boundary_case_audit(
         provider_blockers = _provider_blockers(case, ledger_row)
         required_evidence = _required_evidence(reasons, provider_blockers)
         request = request_by_key.get(_case_key(ledger_row))
+        request_contract_blocking_reasons = _request_contract_check(
+            request,
+            ledger_row=ledger_row,
+            case=case,
+            request_root=request_root,
+        )
         request_evidence = request.get("required_provider_evidence", []) if request else []
         request_evidence = (
             list(request_evidence)
@@ -815,8 +877,16 @@ def build_release_boundary_case_audit(
             "evidence_request_status": "OPEN" if required_evidence else "NONE",
             "facility_evidence_request_match": request is not None,
             "facility_evidence_request_id": request.get("request_id") if request else None,
-            "facility_evidence_request_status": request.get("status") if request else None,
+            "facility_evidence_request_status": (
+                request.get("status") if request and request.get("status") is not None
+                else request_root.get("status") if request_root is not None
+                else None
+            ),
             "facility_evidence_required_provider_evidence_count": len(request_evidence),
+            "facility_evidence_request_contract_status": (
+                "ALIGNED" if not request_contract_blocking_reasons else "BLOCKED"
+            ) if facility_evidence_request is not None else "NOT_SUPPLIED",
+            "facility_evidence_request_contract_blocking_reasons": request_contract_blocking_reasons,
             "provider_qualification_status": "BLOCKED" if provider_blockers else "REVIEW_REQUIRED",
             "provider_qualification_blocking_reasons": provider_blockers,
             "facility_qra_promotion_eligible": False,
@@ -832,6 +902,14 @@ def build_release_boundary_case_audit(
     termination_evidence_status_counts = Counter(
         row["provider_termination_evidence_status"] for row in rows
     )
+    request_contract_status_counts = Counter(
+        row["facility_evidence_request_contract_status"] for row in rows
+    )
+    request_contract_blocking_reasons = sorted({
+        reason
+        for row in rows
+        for reason in row["facility_evidence_request_contract_blocking_reasons"]
+    })
     reasons = [reason for row in rows for reason in row["release_boundary_blocking_reasons"]]
     return {
         "schema_version": SCHEMA,
@@ -855,6 +933,16 @@ def build_release_boundary_case_audit(
         "facility_evidence_request_missing_case_keys": request_missing_case_keys,
         "facility_evidence_request_orphan_case_keys": request_orphan_case_keys,
         "facility_evidence_request_duplicate_case_keys": request_duplicate_case_keys,
+        "facility_evidence_request_status": (
+            request_root.get("status") if request_root is not None else None
+        ),
+        "facility_evidence_request_contract_status_counts": dict(
+            sorted(request_contract_status_counts.items())
+        ),
+        "facility_evidence_request_contract_blocked_case_count": request_contract_status_counts.get(
+            "BLOCKED", 0
+        ),
+        "facility_evidence_request_contract_blocking_reasons": request_contract_blocking_reasons,
         "strict_release_boundary_eligible_case_count": status_counts.get("ELIGIBLE", 0),
         "strict_release_boundary_blocked_case_count": status_counts.get("PROMOTION_BLOCKED", 0),
         "numerically_closed_case_count": sum(

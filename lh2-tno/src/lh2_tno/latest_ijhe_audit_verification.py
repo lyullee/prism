@@ -199,6 +199,18 @@ def verify_latest_ijhe_audit(
             expected = status.get(status_key)
             if expected is not None and release_value.get(audit_key) != expected:
                 reasons.append(f"latest release-boundary audit {audit_key} disagrees with status ledger")
+        # Newer release audits include a per-case evidence-request contract
+        # check.  Consume it when present while keeping historical records
+        # readable; a blocked contract must never be mistaken for aligned
+        # evidence coverage.
+        if "facility_evidence_request_contract_blocked_case_count" in release_value:
+            if release_value.get("facility_evidence_request_contract_blocked_case_count") != 0:
+                reasons.append("latest release-boundary audit has blocked evidence-request contracts")
+            contract_counts = release_value.get(
+                "facility_evidence_request_contract_status_counts"
+            )
+            if not isinstance(contract_counts, Mapping) or contract_counts.get("BLOCKED", 0) != 0:
+                reasons.append("latest release-boundary audit evidence-request contract status is not aligned")
 
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
@@ -268,6 +280,14 @@ def verify_latest_ijhe_audit(
         "release_boundary_audit_record": str(release_path) if release_path else None,
         "release_boundary_audit_status": release_value.get("status") if release_value else None,
         "release_boundary_case_count": release_value.get("case_count") if release_value else None,
+        "release_boundary_request_contract_status_counts": (
+            release_value.get("facility_evidence_request_contract_status_counts")
+            if release_value else None
+        ),
+        "release_boundary_request_contract_blocked_case_count": (
+            release_value.get("facility_evidence_request_contract_blocked_case_count")
+            if release_value else None
+        ),
         "blocking_reasons": reasons,
         "interpretation": (
             "The latest audit pointer, summary counts, diagnostic facility handoff, scope matrix, and "

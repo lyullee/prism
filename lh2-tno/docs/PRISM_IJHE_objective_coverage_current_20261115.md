@@ -107,6 +107,15 @@ schemas, and keeps facility IR/F-N, provider qualification, and physical-validat
 claims false. This prevents a stale scope or release ledger from being mistaken for
 the current IJHE evidence package.
 
+The release-boundary audit now performs a second, per-case evidence-request contract
+check. It verifies the request ID, equipment identity, event/branch/annual-condition
+key, required provider-evidence list, and the root policy flags that forbid frequency
+inference and facility-QRA promotion. The current 44-case catalog is aligned
+(`ALIGNED: 44`, `BLOCKED: 0`); the request status remains `OPEN_EVIDENCE_REQUEST`
+because the evidence has not yet been supplied and qualified.
+The detailed contract definition and reproduction command are in
+[`PRISM_release_boundary_request_contract_20261115.md`](PRISM_release_boundary_request_contract_20261115.md).
+
 ## Reproduction
 
 Run from the `lh2-tno` package directory. The exact evidence paths are listed in the audit JSON and in `CURRENT_STATUS.json`. The essential command is:

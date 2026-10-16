@@ -170,6 +170,56 @@ def test_case_audit_blocks_missing_facility_evidence_request_case():
     assert report["rows"][0]["facility_evidence_request_match"] is False
 
 
+def test_case_audit_reports_request_contract_status_and_root_status():
+    report = build_release_boundary_case_audit(
+        _assessment([_case("good")], [_ledger_row("good")]),
+        facility_evidence_request={
+            "status": "OPEN_EVIDENCE_REQUEST",
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "case_requests": [{
+                "event_id": "good",
+                "annual_condition_id": None,
+                "release_branch_id": None,
+                "request_id": "request-good",
+                "qualification_required": True,
+                "required_provider_evidence": ["provider history"],
+            }],
+        },
+    )
+    assert report["facility_evidence_request_status"] == "OPEN_EVIDENCE_REQUEST"
+    assert report["facility_evidence_request_contract_status_counts"] == {"ALIGNED": 1}
+    assert report["rows"][0]["facility_evidence_request_status"] == "OPEN_EVIDENCE_REQUEST"
+    assert report["rows"][0]["facility_evidence_request_contract_status"] == "ALIGNED"
+
+
+def test_case_audit_blocks_contradictory_request_contract():
+    report = build_release_boundary_case_audit(
+        _assessment([_case("good")], [_ledger_row("good")]),
+        facility_evidence_request={
+            "status": "OPEN_EVIDENCE_REQUEST",
+            "frequency_inference_allowed": True,
+            "facility_qra_allowed": False,
+            "case_requests": [{
+                "event_id": "good",
+                "annual_condition_id": None,
+                "release_branch_id": None,
+                "request_id": "request-good",
+                "qualification_required": True,
+                "required_provider_evidence": [],
+            }],
+        },
+    )
+    row = report["rows"][0]
+    assert row["facility_evidence_request_contract_status"] == "BLOCKED"
+    assert "facility_evidence_request_required_evidence_missing" in row[
+        "facility_evidence_request_contract_blocking_reasons"
+    ]
+    assert "facility_evidence_request_allows_frequency_inference" in row[
+        "facility_evidence_request_contract_blocking_reasons"
+    ]
+
+
 def test_case_audit_accepts_explicit_positive_threshold_without_zeroing_residual():
     case = _case("inventory-threshold")
     row = _ledger_row(

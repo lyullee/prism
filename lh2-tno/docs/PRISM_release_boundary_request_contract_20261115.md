@@ -1,0 +1,31 @@
+# PRISM release-boundary evidence-request contract (15 November 2026)
+
+The facility release-boundary audit now checks two separate things for every declared case:
+
+1. **Case-key coverage** — the evidence request exists exactly once for the same `event_id`, `release_branch_id`, and `annual_condition_id`.
+2. **Request-contract coverage** — the request has a non-empty request ID, does not contradict the equipment/component identity, asks for provider evidence when qualification is required, and keeps frequency inference and facility-QRA promotion disabled.
+
+This is a bookkeeping and safety gate. It does not create a release duration, estimate a missing inventory, learn a frequency, or qualify a provider. The current generic outdoor LH2 assessment has 44 cases:
+
+- request status: `OPEN_EVIDENCE_REQUEST`
+- case-key contract: `ALIGNED` for 44/44
+- blocked request contracts: 0
+- strict release-boundary eligible: 3/44
+- strict release-boundary blocked: 41/44
+- facility IR/F-N promotion: false
+
+The zero blocked request contracts means the request table is internally complete. It does **not** mean the requested provider evidence has been supplied. The remaining 41 release-boundary cases and all provider-qualification and independent-physical-validation gates remain fail-closed.
+
+## Reproduce
+
+From the `lh2-tno` package directory:
+
+```powershell
+python scripts/audit_release_boundary_cases.py `
+  --facility-assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
+  --facility-evidence-request results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json `
+  --provider-termination-evidence results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json `
+  --output results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json
+```
+
+The machine-readable output is the release-boundary audit itself. Its `facility_evidence_request_contract_status_counts` and `facility_evidence_request_contract_blocking_reasons` fields show the per-case request result. The latest metadata verifier consumes these fields when present.
