@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,362 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,364 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -593,6 +593,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Header-bound chain summary](examples/inspection_center_header_bound_chain_summary.json)
 - [Header-bound multi-equipment facility bridge](docs/PRISM_header_bound_facility_bridge_20261115.md)
 - [Per-branch provider identity handoff](docs/PRISM_multi_provider_identity_handoff_20261115.md)
+- [Case-status trace from facility cases to risk atoms](docs/PRISM_case_status_risk_atom_trace_20261017.md)
 - [Header-bound facility bridge summary](results/20261115/header_bound_facility_bridge_summary.json)
 - [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
 - [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)

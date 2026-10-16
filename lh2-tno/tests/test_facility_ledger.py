@@ -167,6 +167,83 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     }
 
 
+def test_facility_ledger_traces_risk_atoms_to_executed_and_withheld_cases():
+    executed = _result(
+        event_id="event-trace-executed",
+        asset_id="asset-trace-executed",
+        component_id="tank-trace-executed",
+        frequency=1e-3,
+    )
+    withheld = _result(
+        event_id="event-trace-withheld",
+        asset_id="asset-trace-withheld",
+        component_id="tank-trace-withheld",
+        frequency=2e-3,
+        incomplete=True,
+    )
+    for payload, status in ((executed, "EXECUTED"), (withheld, "EXECUTED_OPERATOR_LIMITED")):
+        dimensions = {
+            "annual_condition_id": "weather-1",
+            "release_branch_id": "release-1",
+        }
+        payload["cases"][0].update(dimensions, status=status)
+        if payload["uncomputed_cases"]:
+            payload["uncomputed_cases"][0].update(dimensions, status=status)
+
+    merged = merge_facility_campaign_results(
+        [executed, withheld],
+        expected_component_ids=("tank-trace-executed", "tank-trace-withheld"),
+    )
+
+    trace = merged["risk_atom_case_traceability"]
+    assert trace["status"] == "CLOSED"
+    assert trace["risk_atom_count"] == 2
+    assert trace["eligible_risk_atom_count"] == 1
+    assert trace["withheld_risk_atom_count"] == 1
+    assert trace["case_parent_no_ignition_match_count"] == 2
+    assert trace["unmatched_risk_atom_count"] == 0
+    assert trace["strict_facility_qra_promotion_blocked"] is True
+    by_event = {atom["event_id"]: atom for atom in merged["risk_atoms"]}
+    assert by_event["event-trace-executed"]["case_status"] == "EXECUTED"
+    assert by_event["event-trace-executed"]["case_match_kind"] == "CASE_PARENT_NO_IGNITION"
+    assert by_event["event-trace-executed"]["case_eligibility"] == "ELIGIBLE"
+    assert by_event["event-trace-executed"]["case_withheld_from_strict_facility_qra"] is False
+    assert by_event["event-trace-withheld"]["case_status"] == "EXECUTED_OPERATOR_LIMITED"
+    assert by_event["event-trace-withheld"]["case_eligibility"] == "WITHHELD"
+    assert by_event["event-trace-withheld"]["case_withheld_from_strict_facility_qra"] is True
+    assert merged["facility_total_risk_available"] is False
+    assessment = build_facility_assessment([merged])
+    assert assessment["risk_atom_case_traceability"]["withheld_risk_atom_count"] == 1
+
+
+def test_facility_ledger_blocks_unmatched_risk_atom_case_identity():
+    result = _result(
+        event_id="event-trace-unmatched",
+        asset_id="asset-trace-unmatched",
+        component_id="tank-trace-unmatched",
+        frequency=1e-3,
+    )
+    result["cases"][0].update(
+        annual_condition_id="different-weather",
+        release_branch_id="different-release",
+        ignition_branch="direct_fire",
+    )
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-trace-unmatched",)
+    )
+
+    trace = merged["risk_atom_case_traceability"]
+    assert trace["status"] == "BLOCKED"
+    assert trace["unmatched_risk_atom_count"] == 1
+    assert trace["strict_facility_qra_promotion_blocked"] is True
+    atom = merged["risk_atoms"][0]
+    assert atom["case_status"] is None
+    assert atom["case_match_kind"] == "UNMATCHED_CASE"
+    assert atom["risk_atom_eligibility"] == "UNMATCHED_CASE"
+    assert merged["facility_total_risk_available"] is False
+    assert any("no matching case identity" in reason for reason in merged["blocking_reasons"])
+
+
 def test_facility_ledger_keeps_port_trace_and_withholds_mismatch():
     aligned = merge_facility_campaign_results(
         [{

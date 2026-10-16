@@ -328,6 +328,10 @@ def build_facility_assessment(
         # reaching into the nested ledger, so omitting this field would make a
         # real gate disappear from the final IJHE audit.
         "strict_release_boundary": ledger.get("strict_release_boundary"),
+        # Keep the case-to-risk-atom eligibility audit at the public boundary
+        # so dashboard and manuscript consumers can see which atoms are
+        # withheld from strict promotion without opening the nested ledger.
+        "risk_atom_case_traceability": ledger.get("risk_atom_case_traceability"),
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],

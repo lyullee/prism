@@ -119,6 +119,181 @@ def _case_identity(row: Mapping[str, Any]) -> tuple[str, ...]:
     return (event_id,)
 
 
+def _risk_atom_case_traceability(
+    atoms: Sequence[dict[str, Any]],
+    cases: Sequence[Mapping[str, Any]],
+    uncomputed_cases: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Bind every risk atom to the case that produced or withheld it.
+
+    A facility ledger can contain a numerical ``risk_atom`` together with a
+    case that is operator-limited or otherwise withheld from strict promotion.
+    Previously the atom carried no case status, so a zero-harm diagnostic atom
+    could look like a completed case when it was inspected in isolation.  This
+    audit keeps the atom in the conditional diagnostic sum, but records the
+    case identity, status, match method, and strict-scope eligibility on the
+    atom itself.  Missing or ambiguous matches are blocking findings; no case
+    status, frequency, or eligibility is inferred.
+    """
+
+    # Keep the same preference used by facility case accounting: an evaluated
+    # case row wins over a duplicate explanatory row in ``uncomputed_cases``.
+    candidates: dict[tuple[str, ...], list[tuple[str, str]]] = defaultdict(list)
+    for source, rows in (("cases", cases), ("uncomputed_cases", uncomputed_cases)):
+        for row in rows:
+            identity = _case_identity(row)
+            candidates[identity].append((str(row.get("status", "UNKNOWN")), source))
+
+    chosen: dict[tuple[str, ...], tuple[str, str]] = {}
+    for identity, rows in candidates.items():
+        evaluated = [row for row in rows if row[1] == "cases"]
+        selected = evaluated[0] if evaluated else rows[0]
+        sources = sorted({source for _, source in rows})
+        source = "+".join(sources)
+        chosen[identity] = (selected[0], source)
+
+    # Case rows describe the release boundary and may therefore omit the
+    # ignition branch that is present on each risk atom.  A unique
+    # event/condition/release parent is safe to bind to all of its ignition
+    # outcome atoms.  Legacy rows may carry only an event ID; those are used
+    # only when one atom exists for that event.
+    parent_by_release: dict[tuple[str, ...], tuple[str, str]] = {}
+    for identity, status_source in chosen.items():
+        if len(identity) == 4 and identity[0] and identity[1] and identity[2] and not identity[3]:
+            parent_by_release[identity[:3]] = status_source
+    legacy_by_event: dict[str, list[tuple[tuple[str, ...], str, str]]] = defaultdict(list)
+    for identity, (status, source) in chosen.items():
+        if len(identity) == 1 and identity[0]:
+            legacy_by_event[identity[0]].append((identity, status, source))
+    atom_count_by_event: dict[str, int] = defaultdict(int)
+    for atom in atoms:
+        atom_count_by_event[str(atom.get("event_id", ""))] += 1
+
+    matched_count = 0
+    exact_match_count = 0
+    parent_match_count = 0
+    legacy_match_count = 0
+    withheld_count = 0
+    eligible_count = 0
+    unmatched_count = 0
+    ambiguous_count = 0
+    status_counts: dict[str, int] = defaultdict(int)
+    match_kind_counts: dict[str, int] = defaultdict(int)
+    blocking_reasons: list[str] = []
+
+    for index, atom in enumerate(atoms):
+        identity = _case_identity(atom)
+        status_source = chosen.get(identity)
+        match_kind = "EXACT_CASE"
+        if status_source is None:
+            parent_source = parent_by_release.get(identity[:3]) if len(identity) == 4 else None
+            if parent_source is not None:
+                status_source = parent_source
+                match_kind = "CASE_PARENT_NO_IGNITION"
+            else:
+                event_id = identity[0] if identity else ""
+                legacy_rows = legacy_by_event.get(event_id, [])
+                if atom_count_by_event.get(event_id, 0) == 1 and len(legacy_rows) == 1:
+                    _, status, source = legacy_rows[0]
+                    status_source = (status, source)
+                    match_kind = "LEGACY_EVENT_ONLY"
+                elif legacy_rows:
+                    match_kind = "AMBIGUOUS_EVENT_ONLY"
+                else:
+                    match_kind = "UNMATCHED_CASE"
+
+        atom["case_identity"] = list(identity)
+        atom["case_match_kind"] = match_kind
+        match_kind_counts[match_kind] += 1
+
+        if status_source is None:
+            atom["case_status"] = None
+            atom["case_status_source"] = None
+            atom["case_eligibility"] = (
+                "AMBIGUOUS" if match_kind == "AMBIGUOUS_EVENT_ONLY" else "UNMATCHED"
+            )
+            atom["risk_atom_eligibility"] = (
+                "AMBIGUOUS_CASE"
+                if match_kind == "AMBIGUOUS_EVENT_ONLY"
+                else "UNMATCHED_CASE"
+            )
+            atom["case_withheld_from_strict_facility_qra"] = True
+            if match_kind == "AMBIGUOUS_EVENT_ONLY":
+                ambiguous_count += 1
+                blocking_reasons.append(
+                    f"risk atom {index} has multiple legacy event-only case candidates"
+                )
+            else:
+                unmatched_count += 1
+                blocking_reasons.append(
+                    f"risk atom {index} has no matching case identity"
+                )
+            continue
+
+        status, source = status_source
+        matched_count += 1
+        if match_kind == "EXACT_CASE":
+            exact_match_count += 1
+        elif match_kind == "CASE_PARENT_NO_IGNITION":
+            parent_match_count += 1
+        else:
+            legacy_match_count += 1
+        status_counts[status] += 1
+        atom["case_status"] = status
+        atom["case_status_source"] = source
+        if status == "EXECUTED":
+            eligible_count += 1
+            atom["case_eligibility"] = "ELIGIBLE"
+            atom["risk_atom_eligibility"] = "ELIGIBLE_FOR_NUMERICAL_SCOPE"
+            atom["case_withheld_from_strict_facility_qra"] = False
+        else:
+            withheld_count += 1
+            atom["case_eligibility"] = "WITHHELD"
+            atom["risk_atom_eligibility"] = "WITHHELD_FROM_STRICT_SCOPE"
+            atom["case_withheld_from_strict_facility_qra"] = True
+
+    if withheld_count:
+        blocking_reasons.append(
+            f"{withheld_count} risk atoms are linked to non-EXECUTED case status"
+        )
+    if unmatched_count:
+        blocking_reasons.append(f"{unmatched_count} risk atoms have no case match")
+    if ambiguous_count:
+        blocking_reasons.append(f"{ambiguous_count} risk atoms have ambiguous legacy case matches")
+    if uncomputed_cases and not withheld_count:
+        blocking_reasons.append(
+            f"{len(uncomputed_cases)} uncomputed case rows remain outside the atom status trace"
+        )
+
+    status = "CLOSED" if not (unmatched_count or ambiguous_count) else "BLOCKED"
+    return {
+        "schema_version": "prism.facility_case_risk_atom_trace.v1",
+        "status": status,
+        "risk_atom_count": len(atoms),
+        "matched_risk_atom_count": matched_count,
+        "exact_case_match_count": exact_match_count,
+        "case_parent_no_ignition_match_count": parent_match_count,
+        "legacy_event_only_match_count": legacy_match_count,
+        "eligible_risk_atom_count": eligible_count,
+        "withheld_risk_atom_count": withheld_count,
+        "unmatched_risk_atom_count": unmatched_count,
+        "ambiguous_risk_atom_count": ambiguous_count,
+        "uncomputed_case_row_count": len(uncomputed_cases),
+        "case_status_atom_counts": dict(sorted(status_counts.items())),
+        "case_match_kind_counts": dict(sorted(match_kind_counts.items())),
+        "strict_facility_qra_promotion_blocked": bool(
+            uncomputed_cases or withheld_count or unmatched_count or ambiguous_count
+        ),
+        "blocking_reasons": list(dict.fromkeys(blocking_reasons)),
+        "policy": {
+            "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": True,
+            "withheld_case_atoms_excluded_from_strict_facility_qra": True,
+            "missing_case_status_is_not_inferred": True,
+            "frequency_reallocation_performed": False,
+        },
+    }
+
+
 def _strict_port_ids(value: Any, label: str) -> tuple[str, ...] | None:
     """Normalize an optional reviewed accident-port list without inference."""
     if value is None:
@@ -1404,6 +1579,25 @@ def merge_facility_campaign_results(
             ],
             "frequency_is_not_reallocated": True,
         }
+    risk_atom_case_traceability = _risk_atom_case_traceability(
+        merged_atoms,
+        merged_cases,
+        merged_missing,
+    )
+    if risk_atom_case_traceability["withheld_risk_atom_count"]:
+        source_complete = False
+        blocking_reasons.extend(
+            f"facility case-risk trace: {reason}"
+            for reason in risk_atom_case_traceability["blocking_reasons"]
+            if "non-EXECUTED" in reason
+        )
+    if risk_atom_case_traceability["status"] == "BLOCKED":
+        source_complete = False
+        blocking_reasons.extend(
+            f"facility case-risk trace: {reason}"
+            for reason in risk_atom_case_traceability["blocking_reasons"]
+            if "no matching case" in reason or "no case match" in reason or "ambiguous" in reason
+        )
     total_available = source_complete and not source_synthetic and not merged_exclusions
     provider_packet_promoted = (
         source_provider_packet_promoted
@@ -1472,6 +1666,7 @@ def merge_facility_campaign_results(
         "not_numerically_executed_case_count": not_numerically_executed_case_count,
         "qualified_evidence_withheld_case_count": qualified_evidence_withheld_case_count,
         "numerically_executed_case_count": numerically_executed_case_count,
+        "risk_atom_case_traceability": risk_atom_case_traceability,
         "observed_component_count": len(observed_components),
         "expected_component_count": len(expected_components),
         "component_status_counts": {
@@ -1514,6 +1709,7 @@ def merge_facility_campaign_results(
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,
         "risk_atoms_digest": canonical_digest(merged_atoms),
+        "risk_atom_case_traceability": risk_atom_case_traceability,
         "component_contributions": component_contributions,
         "component_risk_ranking": component_risk_ranking,
         "component_coverage_schema": "prism.component_coverage.v1",
@@ -1605,6 +1801,11 @@ def merge_facility_campaign_results(
                 "case-level provider duration, termination, isolation, inventory and mass "
                 "closure are retained in one facility ledger; withheld copies remain in the "
                 "summary and are never converted to zero risk"
+            ),
+            "case_risk_atom_trace": (
+                "each risk atom carries the matched case identity and status; non-EXECUTED "
+                "or unmatched cases stay in the conditional diagnostic view but cannot open "
+                "strict facility-QRA promotion"
             ),
         },
     }

@@ -15058,7 +15058,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -15184,7 +15196,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -15310,7 +15334,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -15436,7 +15472,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
@@ -15548,7 +15596,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
@@ -15660,7 +15720,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
@@ -15772,7 +15844,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
@@ -15884,7 +15968,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
@@ -15996,7 +16092,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
@@ -16108,7 +16216,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
@@ -16220,7 +16340,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
@@ -16332,7 +16464,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
@@ -16444,7 +16588,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
@@ -16556,7 +16712,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
@@ -16668,7 +16836,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
@@ -16780,7 +16960,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
@@ -16892,7 +17084,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
@@ -17004,7 +17208,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
@@ -17116,7 +17332,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
@@ -17228,7 +17456,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
@@ -17348,7 +17588,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
@@ -17468,7 +17720,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
@@ -17588,7 +17852,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
@@ -17708,7 +17984,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
@@ -17828,7 +18116,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
@@ -17948,7 +18248,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
@@ -18068,7 +18380,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
@@ -18188,7 +18512,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
@@ -18308,7 +18644,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
@@ -18428,7 +18776,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
@@ -18548,7 +18908,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
@@ -18668,7 +19040,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
@@ -18788,7 +19172,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
@@ -18908,7 +19304,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
@@ -19028,7 +19436,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
@@ -19148,7 +19568,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
@@ -19268,7 +19700,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
@@ -19388,7 +19832,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
@@ -19508,7 +19964,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
@@ -19628,7 +20096,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -19735,7 +20215,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -19842,7 +20334,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -19949,7 +20453,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -20056,7 +20572,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
@@ -20163,7 +20691,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
@@ -20270,7 +20810,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
@@ -20377,7 +20929,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
@@ -20484,7 +21048,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
@@ -20591,7 +21167,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
@@ -20698,7 +21286,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
@@ -20805,7 +21405,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
@@ -20912,7 +21524,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
@@ -21019,7 +21643,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
@@ -21126,7 +21762,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
@@ -21233,7 +21881,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
@@ -21340,7 +22000,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
@@ -21447,7 +22119,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
@@ -21554,7 +22238,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
@@ -21661,7 +22357,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
@@ -21768,7 +22476,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -21859,7 +22579,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -21950,7 +22682,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -22041,7 +22785,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -22132,7 +22888,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
@@ -22252,7 +23020,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
@@ -22372,7 +23152,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
@@ -22492,7 +23284,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
@@ -22612,7 +23416,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
@@ -22732,7 +23548,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
@@ -22852,7 +23680,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
@@ -22972,7 +23812,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
@@ -23092,7 +23944,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
@@ -23197,7 +24061,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
@@ -23302,7 +24178,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
@@ -23407,7 +24295,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
@@ -23512,7 +24412,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
@@ -23617,7 +24529,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
@@ -23722,7 +24646,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
@@ -23827,7 +24763,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
@@ -23932,7 +24880,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -24037,7 +24997,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -24142,7 +25114,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -24247,7 +25231,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -24352,7 +25348,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
@@ -24455,7 +25463,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
@@ -24558,7 +25578,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
@@ -24661,7 +25693,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
@@ -24764,7 +25808,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
@@ -24867,7 +25923,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
@@ -24970,7 +26038,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
@@ -25073,7 +26153,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
@@ -25176,7 +26268,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
@@ -25281,7 +26385,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
@@ -25386,7 +26502,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
@@ -25491,7 +26619,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
@@ -25596,7 +26736,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "synthetic-generic-worker-west-3ms",
+        "matched-event-provider-request",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -25701,7 +26853,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -25806,7 +26970,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -25911,7 +27087,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -26016,7 +27204,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -26121,7 +27321,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -26226,7 +27438,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -26331,7 +27555,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
@@ -26436,7 +27672,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -26541,7 +27789,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -26646,7 +27906,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -26751,7 +28023,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -26856,7 +28140,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -26961,7 +28257,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -27066,7 +28374,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -27171,7 +28491,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
@@ -27276,7 +28608,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -27381,7 +28725,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -27486,7 +28842,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -27591,7 +28959,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -27696,7 +29076,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -27801,7 +29193,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -27906,7 +29310,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -28011,7 +29427,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
@@ -28116,7 +29544,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28221,7 +29661,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28326,7 +29778,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28431,7 +29895,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28536,7 +30012,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28641,7 +30129,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28746,7 +30246,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28851,7 +30363,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
@@ -28956,7 +30480,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29061,7 +30597,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29166,7 +30714,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29271,7 +30831,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29376,7 +30948,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29481,7 +31065,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29586,7 +31182,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29691,7 +31299,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
@@ -29796,7 +31416,19 @@
       "expected_deaths_low_high": [
         0.0,
         0.0
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+        "provider-vertical-handoff",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED_OPERATOR_LIMITED",
+      "case_status_source": "cases+uncomputed_cases",
+      "case_eligibility": "WITHHELD",
+      "risk_atom_eligibility": "WITHHELD_FROM_STRICT_SCOPE",
+      "case_withheld_from_strict_facility_qra": true
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -29881,7 +31513,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -29966,7 +31610,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -30051,7 +31707,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -30136,7 +31804,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -30221,7 +31901,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -30306,7 +31998,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -30391,7 +32095,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -30476,7 +32192,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -30561,7 +32289,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -30646,7 +32386,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -30731,7 +32483,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -30816,7 +32580,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -30901,7 +32677,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -30986,7 +32774,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -31071,7 +32871,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
@@ -31156,7 +32968,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31241,7 +33065,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31326,7 +33162,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31411,7 +33259,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31496,7 +33356,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31581,7 +33453,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31666,7 +33550,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31751,7 +33647,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
@@ -31836,7 +33744,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -31921,7 +33841,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32006,7 +33938,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32091,7 +34035,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32176,7 +34132,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32261,7 +34229,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32346,7 +34326,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32431,7 +34423,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
@@ -32516,7 +34520,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -32601,7 +34617,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -32686,7 +34714,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -32771,7 +34811,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -32856,7 +34908,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -32941,7 +35005,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_explosion"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -33026,7 +35102,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "delayed_flash_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -33111,7 +35199,19 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "direct_fire"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
@@ -33196,10 +35296,22 @@
       ],
       "frequency_port_ids": [
         "terminal_pipe.out"
-      ]
+      ],
+      "case_identity": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+        "provider-inventory-depletion",
+        "no_ignition"
+      ],
+      "case_match_kind": "CASE_PARENT_NO_IGNITION",
+      "case_status": "EXECUTED",
+      "case_status_source": "cases",
+      "case_eligibility": "ELIGIBLE",
+      "risk_atom_eligibility": "ELIGIBLE_FOR_NUMERICAL_SCOPE",
+      "case_withheld_from_strict_facility_qra": false
     }
   ],
-  "risk_atoms_digest": "f81cb717d61a364eb7753050c1c4247716840c8db7532251db8272514cffee18",
+  "risk_atoms_digest": "aba841c1850f1449a434c3730e3c8896e5e199d57aa4c2f2e9854930e21d4cab",
   "component_contributions": {
     "ambient-vaporizer-01": {
       "event_count": 3,
@@ -35364,7 +37476,38 @@
       }
     },
     "required_accident_family_count": 12,
-    "scope_blocker_count": 20
+    "scope_blocker_count": 20,
+    "risk_atom_case_traceability": {
+      "schema_version": "prism.facility_case_risk_atom_trace.v1",
+      "status": "CLOSED",
+      "risk_atom_count": 176,
+      "matched_risk_atom_count": 176,
+      "exact_case_match_count": 0,
+      "case_parent_no_ignition_match_count": 176,
+      "legacy_event_only_match_count": 0,
+      "eligible_risk_atom_count": 60,
+      "withheld_risk_atom_count": 116,
+      "unmatched_risk_atom_count": 0,
+      "ambiguous_risk_atom_count": 0,
+      "uncomputed_case_row_count": 29,
+      "case_status_atom_counts": {
+        "EXECUTED": 60,
+        "EXECUTED_OPERATOR_LIMITED": 116
+      },
+      "case_match_kind_counts": {
+        "CASE_PARENT_NO_IGNITION": 176
+      },
+      "strict_facility_qra_promotion_blocked": true,
+      "blocking_reasons": [
+        "116 risk atoms are linked to non-EXECUTED case status"
+      ],
+      "policy": {
+        "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
+        "withheld_case_atoms_excluded_from_strict_facility_qra": true,
+        "missing_case_status_is_not_inferred": true,
+        "frequency_reallocation_performed": false
+      }
+    }
   },
   "declared_scope_annual_ir_low_high": null,
   "declared_scope_expected_death_fn_low_high": null,
@@ -35407,7 +37550,8 @@
     "accident family liquid_two_phase: PARTIAL",
     "accident family inventory_depletion: PARTIAL",
     "accident family two_sided_rupture: PARTIAL",
-    "accident family vertical_handoff: PARTIAL"
+    "accident family vertical_handoff: PARTIAL",
+    "facility case-risk trace: 116 risk atoms are linked to non-EXECUTED case status"
   ],
   "timing": {
     "campaign_count": 3,
@@ -35506,5 +37650,36 @@
     "component_risk_ranking": "equipment rows are ranked by peak receptor IR from the same conditional risk atoms; this is a diagnostic triage view and never reallocates frequency or promotes facility IR/F-N",
     "scenario_branch_accounting": "annual-condition weather, release/termination, and ignition branches are preserved as diagnostics over the same risk atoms; no branch frequency is inferred, reallocated, or double-counted",
     "release_termination_inventory": "case-level provider duration, termination, isolation, inventory and mass closure are retained in one facility ledger; withheld copies remain in the summary and are never converted to zero risk"
+  },
+  "risk_atom_case_traceability": {
+    "schema_version": "prism.facility_case_risk_atom_trace.v1",
+    "status": "CLOSED",
+    "risk_atom_count": 176,
+    "matched_risk_atom_count": 176,
+    "exact_case_match_count": 0,
+    "case_parent_no_ignition_match_count": 176,
+    "legacy_event_only_match_count": 0,
+    "eligible_risk_atom_count": 60,
+    "withheld_risk_atom_count": 116,
+    "unmatched_risk_atom_count": 0,
+    "ambiguous_risk_atom_count": 0,
+    "uncomputed_case_row_count": 29,
+    "case_status_atom_counts": {
+      "EXECUTED": 60,
+      "EXECUTED_OPERATOR_LIMITED": 116
+    },
+    "case_match_kind_counts": {
+      "CASE_PARENT_NO_IGNITION": 176
+    },
+    "strict_facility_qra_promotion_blocked": true,
+    "blocking_reasons": [
+      "116 risk atoms are linked to non-EXECUTED case status"
+    ],
+    "policy": {
+      "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
+      "withheld_case_atoms_excluded_from_strict_facility_qra": true,
+      "missing_case_status_is_not_inferred": true,
+      "frequency_reallocation_performed": false
+    }
   }
 }
