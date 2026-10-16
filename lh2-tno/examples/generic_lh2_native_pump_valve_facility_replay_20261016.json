@@ -12,6 +12,11 @@
     "generic-lh2-native-pump-valve-frequency-example/transfer-pump/G2",
     "generic-lh2-native-pump-valve-frequency-example/transfer-valve/AREA_0.01%"
   ],
+  "matched_event_chain_closed": true,
+  "matched_event_case_chain_closed": true,
+  "matched_event_risk_atom_chain_closed": true,
+  "matched_event_executed_case_count": 2,
+  "matched_event_risk_atom_event_count": 2,
   "event_count": 7,
   "executed_case_count": 2,
   "uncomputed_case_count": 5,
@@ -23,7 +28,7 @@
   "facility_qra_claim": false,
   "provider_packet_promoted": false,
   "physical_validation_claim": false,
-  "campaign_elapsed_ms": 10725.855900003808,
+  "campaign_elapsed_ms": 10583.045400009723,
   "packet_records": [
     {
       "component_id": "liquid-transfer-pump-01",

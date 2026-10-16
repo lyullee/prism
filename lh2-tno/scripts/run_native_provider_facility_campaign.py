@@ -222,6 +222,23 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     result_cases = result.get("cases", [])
     withheld = result.get("uncomputed_cases", [])
+    matched_event_ids = {event.id for event, _packet in matched.values()}
+    executed_event_ids = {
+        str(case.get("event_id"))
+        for case in result_cases
+        if str(case.get("status", "")).startswith("EXECUTED")
+    }
+    risk_atom_event_ids = {
+        str(atom.get("event_id"))
+        for atom in result.get("risk_atoms", [])
+    }
+    missing_case_events = sorted(matched_event_ids - executed_event_ids)
+    missing_atom_events = sorted(matched_event_ids - risk_atom_event_ids)
+    if missing_case_events or missing_atom_events:
+        raise ValueError(
+            "matched provider event did not close the case-to-risk-atom chain: "
+            f"missing_cases={missing_case_events}, missing_atoms={missing_atom_events}"
+        )
     verification = {
         "schema_version": "prism.native_provider_multi_equipment_facility_campaign.v1",
         "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
@@ -229,6 +246,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "component_ids": sorted(packet_components),
         "packet_count": len(packets),
         "matched_event_ids": [event.id for event, _packet in matched.values()],
+        "matched_event_case_chain_closed": not missing_case_events,
+        "matched_event_risk_atom_chain_closed": not missing_atom_events,
+        "matched_event_chain_closed": not (missing_case_events or missing_atom_events),
+        "matched_event_executed_case_count": len(matched_event_ids & executed_event_ids),
+        "matched_event_risk_atom_event_count": len(matched_event_ids & risk_atom_event_ids),
         "event_count": len(result.get("events", [])),
         "case_count": len(result_cases),
         "executed_case_count": sum(1 for case in result_cases if str(case.get("status", "")).startswith("EXECUTED")),
