@@ -1,8 +1,8 @@
 {
   "schema_version": "prism.process_forecast_frame_set.v1",
   "status": "PROCESS_FORECAST_FRAMES_READY",
-  "facility_id": "inspection-centre-diagnostic",
-  "component_id": "supply-train-01",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "component_id": "lh2-supply-vaporizer-boundary",
   "operating_mode": "supply",
   "origin": "model_prediction",
   "source": {
@@ -54,8 +54,8 @@
   "frames": [
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 0.0,
       "forecast_time_s": 0.0,
@@ -64,42 +64,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 364000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 572000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 275000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 284.95,
           "sensor_location": "supply-line",
@@ -109,8 +109,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 1.0,
       "forecast_time_s": 1.0,
@@ -119,42 +119,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 364000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 572000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 275000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 284.95,
           "sensor_location": "supply-line",
@@ -164,8 +164,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 2.0,
       "forecast_time_s": 2.0,
@@ -174,42 +174,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 364000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 572000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 274000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 284.95,
           "sensor_location": "supply-line",
@@ -219,8 +219,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 3.0,
       "forecast_time_s": 3.0,
@@ -229,42 +229,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 363000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 572000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 274000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 284.95,
           "sensor_location": "supply-line",
@@ -274,8 +274,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 4.0,
       "forecast_time_s": 4.0,
@@ -284,42 +284,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 363000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 571000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 274000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 284.95,
           "sensor_location": "supply-line",
@@ -329,8 +329,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 5.0,
       "forecast_time_s": 5.0,
@@ -339,42 +339,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 363000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 571000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 273000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 284.95,
           "sensor_location": "supply-line",
@@ -384,8 +384,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 6.0,
       "forecast_time_s": 6.0,
@@ -394,42 +394,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 363000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 571000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 273000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -439,8 +439,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 7.0,
       "forecast_time_s": 7.0,
@@ -449,42 +449,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 363000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 571000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 273000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -494,8 +494,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 8.0,
       "forecast_time_s": 8.0,
@@ -504,42 +504,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 363000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 571000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 272000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -549,8 +549,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 9.0,
       "forecast_time_s": 9.0,
@@ -559,42 +559,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 362000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 571000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 272000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -604,8 +604,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 10.0,
       "forecast_time_s": 10.0,
@@ -614,42 +614,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 362000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 389000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 570000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 272000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -659,8 +659,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 11.0,
       "forecast_time_s": 11.0,
@@ -669,42 +669,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 362000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 570000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 271000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -714,8 +714,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 12.0,
       "forecast_time_s": 12.0,
@@ -724,42 +724,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 362000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 570000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 271000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -769,8 +769,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 13.0,
       "forecast_time_s": 13.0,
@@ -779,42 +779,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 362000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 570000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 271000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -824,8 +824,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 14.0,
       "forecast_time_s": 14.0,
@@ -834,42 +834,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 361000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 570000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 270000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -879,8 +879,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 15.0,
       "forecast_time_s": 15.0,
@@ -889,42 +889,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 361000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 570000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 270000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.04999999999995,
           "sensor_location": "supply-line",
@@ -934,8 +934,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 16.0,
       "forecast_time_s": 16.0,
@@ -944,42 +944,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 361000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 569000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 270000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -989,8 +989,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 17.0,
       "forecast_time_s": 17.0,
@@ -999,42 +999,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 361000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 569000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 269000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1044,8 +1044,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 18.0,
       "forecast_time_s": 18.0,
@@ -1054,42 +1054,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 361000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 569000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 269000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1099,8 +1099,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 19.0,
       "forecast_time_s": 19.0,
@@ -1109,42 +1109,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 361000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 569000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 269000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1154,8 +1154,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 20.0,
       "forecast_time_s": 20.0,
@@ -1164,42 +1164,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 360000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 569000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 268000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1209,8 +1209,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 21.0,
       "forecast_time_s": 21.0,
@@ -1219,42 +1219,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 360000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 569000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 268000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1264,8 +1264,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 22.0,
       "forecast_time_s": 22.0,
@@ -1274,42 +1274,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 360000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 268000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1319,8 +1319,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 23.0,
       "forecast_time_s": 23.0,
@@ -1329,42 +1329,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 360000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 267000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1374,8 +1374,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 24.0,
       "forecast_time_s": 24.0,
@@ -1384,42 +1384,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 360000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 267000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1429,8 +1429,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 25.0,
       "forecast_time_s": 25.0,
@@ -1439,42 +1439,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 266000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.15,
           "sensor_location": "supply-line",
@@ -1484,8 +1484,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 26.0,
       "forecast_time_s": 26.0,
@@ -1494,42 +1494,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 266000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1539,8 +1539,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 27.0,
       "forecast_time_s": 27.0,
@@ -1549,42 +1549,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 266000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1594,8 +1594,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 28.0,
       "forecast_time_s": 28.0,
@@ -1604,42 +1604,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 568000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 265000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1649,8 +1649,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 29.0,
       "forecast_time_s": 29.0,
@@ -1659,42 +1659,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 567000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 265000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1704,8 +1704,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 30.0,
       "forecast_time_s": 30.0,
@@ -1714,42 +1714,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 388000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 567000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 265000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1759,8 +1759,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 31.0,
       "forecast_time_s": 31.0,
@@ -1769,42 +1769,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 567000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 264000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1814,8 +1814,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 32.0,
       "forecast_time_s": 32.0,
@@ -1824,42 +1824,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 567000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 264000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1869,8 +1869,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 33.0,
       "forecast_time_s": 33.0,
@@ -1879,42 +1879,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 567000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 264000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1924,8 +1924,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 34.0,
       "forecast_time_s": 34.0,
@@ -1934,42 +1934,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 567000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 263000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -1979,8 +1979,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 35.0,
       "forecast_time_s": 35.0,
@@ -1989,42 +1989,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 566000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 263000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.25,
           "sensor_location": "supply-line",
@@ -2034,8 +2034,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 36.0,
       "forecast_time_s": 36.0,
@@ -2044,42 +2044,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 358000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 566000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 263000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2089,8 +2089,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 37.0,
       "forecast_time_s": 37.0,
@@ -2099,42 +2099,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 566000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 262000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2144,8 +2144,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 38.0,
       "forecast_time_s": 38.0,
@@ -2154,42 +2154,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 566000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 262000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2199,8 +2199,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 39.0,
       "forecast_time_s": 39.0,
@@ -2209,42 +2209,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 566000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 262000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2254,8 +2254,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 40.0,
       "forecast_time_s": 40.0,
@@ -2264,42 +2264,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 566000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 261000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2309,8 +2309,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 41.0,
       "forecast_time_s": 41.0,
@@ -2319,42 +2319,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 357000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 565000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 261000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2364,8 +2364,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 42.0,
       "forecast_time_s": 42.0,
@@ -2374,42 +2374,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 356000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 565000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 261000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2419,8 +2419,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 43.0,
       "forecast_time_s": 43.0,
@@ -2429,42 +2429,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 356000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 565000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 260000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2474,8 +2474,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 44.0,
       "forecast_time_s": 44.0,
@@ -2484,42 +2484,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 356000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 565000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 260000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2529,8 +2529,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 45.0,
       "forecast_time_s": 45.0,
@@ -2539,42 +2539,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 356000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 565000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 260000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2584,8 +2584,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 46.0,
       "forecast_time_s": 46.0,
@@ -2594,42 +2594,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 356000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 565000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 259000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.34999999999997,
           "sensor_location": "supply-line",
@@ -2639,8 +2639,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 47.0,
       "forecast_time_s": 47.0,
@@ -2649,42 +2649,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 356000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 259000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -2694,8 +2694,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 48.0,
       "forecast_time_s": 48.0,
@@ -2704,42 +2704,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 355000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 259000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -2749,8 +2749,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 49.0,
       "forecast_time_s": 49.0,
@@ -2759,42 +2759,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 355000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 258000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -2804,8 +2804,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 50.0,
       "forecast_time_s": 50.0,
@@ -2814,42 +2814,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 355000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 258000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -2859,8 +2859,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 51.0,
       "forecast_time_s": 51.0,
@@ -2869,42 +2869,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 355000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 387000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 258000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -2914,8 +2914,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 52.0,
       "forecast_time_s": 52.0,
@@ -2924,42 +2924,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 355000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 257000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -2969,8 +2969,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 53.0,
       "forecast_time_s": 53.0,
@@ -2979,42 +2979,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 354000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 564000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 257000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -3024,8 +3024,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 54.0,
       "forecast_time_s": 54.0,
@@ -3034,42 +3034,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 354000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 563000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 257000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -3079,8 +3079,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 55.0,
       "forecast_time_s": 55.0,
@@ -3089,42 +3089,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 354000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 563000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 256000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -3134,8 +3134,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 56.0,
       "forecast_time_s": 56.0,
@@ -3144,42 +3144,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 354000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 563000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 256000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.45,
           "sensor_location": "supply-line",
@@ -3189,8 +3189,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 57.0,
       "forecast_time_s": 57.0,
@@ -3199,42 +3199,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 354000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 563000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 256000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.54999999999995,
           "sensor_location": "supply-line",
@@ -3244,8 +3244,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 58.0,
       "forecast_time_s": 58.0,
@@ -3254,42 +3254,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 354000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 563000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 255000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.54999999999995,
           "sensor_location": "supply-line",
@@ -3299,8 +3299,8 @@
     },
     {
       "schema_version": "prism.hazop_state_frame.v1",
-      "facility_id": "inspection-centre-diagnostic",
-      "component_id": "supply-train-01",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "captured_at_s": 59.0,
       "forecast_time_s": 59.0,
@@ -3309,42 +3309,42 @@
       "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
       "values": {
         "PT1101": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 353000.0,
           "sensor_location": "supply-tank-vapour",
           "quality": "valid"
         },
         "PT1106": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 386000.0,
           "sensor_location": "supply-line-upstream",
           "quality": "valid"
         },
         "PT1107": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 359000.0,
           "sensor_location": "supply-line-downstream",
           "quality": "valid"
         },
         "PT1105A": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 563000.0,
           "sensor_location": "vaporizer-inlet-a",
           "quality": "valid"
         },
         "PT1105B": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "pressure",
           "value_si": 255000.0,
           "sensor_location": "vaporizer-inlet-b",
           "quality": "valid"
         },
         "TT1116": {
-          "component_id": "supply-train-01",
+          "component_id": "lh2-supply-vaporizer-boundary",
           "quantity": "temperature",
           "value_si": 285.54999999999995,
           "sensor_location": "supply-line",

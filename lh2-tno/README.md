@@ -199,6 +199,25 @@ infer a failure frequency, or promote facility IR/F-N. A quantitative callback
 still has to satisfy the existing provider-release, SLABx-LH2 and facility
 evidence gates.
 
+To replay the qualitative HAZOP step from a saved frame set, use the
+fail-closed scan CLI:
+
+```powershell
+python scripts/run_process_forecast_hazop_scan.py `
+  --frames results/20261115/inspection_center_supply_forecast_frames.json `
+  --tables examples/inspection_center_hazop_runtime_tables.json `
+  --output build/process_forecast_hazop_scan.json
+```
+
+The table file may be either a component-keyed mapping or the inspection-centre
+wrapper with its component tables under `tables`; the component ID must match
+the frame set exactly.
+
+The HAZOP scan records each predicted risk-condition entry and reports a
+withheld quantitative evaluation when no provider/SLABx-LH2 callback is
+supplied. It is an auditable digital-twin replay entry point, not a substitute
+for the qualified release and facility evidence required by the IJHE gates.
+
 The returned `realtime_hazop_bridge` also exposes the conditional current-
 weather expected-death F/N result when the monitor has an explicit
 `RealtimePopulationBinding`. Without that population ledger it returns the

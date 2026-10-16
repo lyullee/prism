@@ -1,0 +1,3419 @@
+{
+  "schema_version": "prism.hazop_forecast_risk_scan.v1",
+  "status": "FORECAST_RISK_SCAN_COMPLETE",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "forecast_origin": "model_prediction",
+  "evaluate_on": "entry",
+  "steps": [
+    {
+      "step_index": 0,
+      "forecast_time_s": 0.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 0.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "0f98dbf860a57de7052f0833ee7de75a03f88bca205a4379a8f0998a5fd7332c",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 0.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 1,
+      "forecast_time_s": 1.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 1.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "b31df0bd08dbd81a76973477d6aec58014b0e1339d6927c9eeb9bc35711e8f0c",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 1.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 2,
+      "forecast_time_s": 2.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 2.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "8b1a763cf8ac072df474b8e6faf16f779c111dc83ac381784f7b92fa055d1fff",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 2.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 3,
+      "forecast_time_s": 3.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 3.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "bfccab108bf4df48ea7a1d11767d3f77e8dc6a049709734d0fd83ea84cd5a486",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 3.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 4,
+      "forecast_time_s": 4.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 4.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "72f17a9550b2d464c91477b306945fc85edcdc961ade09b6e43957ead5ebc876",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 4.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 5,
+      "forecast_time_s": 5.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 5.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "ce6c75c416b955c9726f6cfb643d8d423bfec629f2c493f15d01093fea563d77",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 5.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 6,
+      "forecast_time_s": 6.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 6.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "a0d2e40889da78db4755e6a18a8988bf29f89eca1a6cf79be767a134243d9c3d",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 6.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 7,
+      "forecast_time_s": 7.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 7.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "e917ea9c590f764375feb7a2160be730390685ed3debf842fa4184d326a69a17",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 7.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 8,
+      "forecast_time_s": 8.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 8.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "b91c5f85166fd625b4a9e1f2d07a61b65124af98d331299f10b092120efebc48",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 8.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 9,
+      "forecast_time_s": 9.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 9.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "3b4e16c2c01529a08a63baace4a21f5d2bfed1b5d01dc7f6e22e34dac51ffa3a",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 9.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 10,
+      "forecast_time_s": 10.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 10.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "8a4e959a34de73c945ca105f58687dcea475d8efc7c0f07e119c0067fea61dda",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 10.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 11,
+      "forecast_time_s": 11.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 11.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "7eca0d68aa2d14e16e224ec65006036e0bb20494d99fc4d70d34be256c2c5a6b",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 11.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 12,
+      "forecast_time_s": 12.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 12.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "a9376bbe43e34c06a4b9dcd3e436ba33b815cf460e00fd547d4aadc0bf081bb7",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 12.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 13,
+      "forecast_time_s": 13.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 13.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "16a5613bfb922036612b30ca9699d6d8522b34f078700acd40b52fd6c3bc6963",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 13.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 14,
+      "forecast_time_s": 14.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 14.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "b78dd10f6798f98682735181cef96696cdf41152b2716d35a5c2c74ed977df48",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 14.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 15,
+      "forecast_time_s": 15.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 15.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "a481cb75ac9a2befa913985926afd8bf99f3ea4c9adc45d5970a864578c62661",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 15.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 16,
+      "forecast_time_s": 16.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 16.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "57cb418ecec9ebaa3d268eb76c0136ff682d07f513568273d2f5cba04e627f61",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 16.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 17,
+      "forecast_time_s": 17.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 17.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "9dfe21932f0c12d76f3bd1684133fc020aa05dc7c20782256a5efd146d4d8612",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 17.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 18,
+      "forecast_time_s": 18.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 18.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "4f7e342e17699d1b882a5b89ea848b73ec510cfece1ba30467967b980be48254",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 18.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 19,
+      "forecast_time_s": 19.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 19.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "123d763aa4a9dbe560f00658f5026cf4a0fc2f2884646a8271ce759c4df813ca",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 19.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 20,
+      "forecast_time_s": 20.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 20.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "6e7bc8370cfe7f2baffe5427dc9e6ce2205ceaa3dbbbb651f31c735a51496555",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 20.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 21,
+      "forecast_time_s": 21.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 21.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "c0cf5e2fb8ff3bc3a7c46762f47a8596c1e91dda304b8e7a21cd6f5c6e6853b3",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 21.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 22,
+      "forecast_time_s": 22.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 22.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "7324cb335d3625f1ef489a6c8d9bb838dfe7e8d776eca82457572b46b4608b6d",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 22.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 23,
+      "forecast_time_s": 23.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 23.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "6c55308a56266f1326916fde8aa02178d27f56df8fa05a9e7227bb7afb642b4e",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 23.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 24,
+      "forecast_time_s": 24.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 24.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "ffa1700bc5c0dbfabafccc7f605e4eb3612ad0bc3b9779b2a9fe50082a3fe4e2",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 24.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 25,
+      "forecast_time_s": 25.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 25.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "d66333cad51a79bbac5fd38e32d75d7220b077039e0514df6597d3b8787e51a3",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 25.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 26,
+      "forecast_time_s": 26.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 26.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "28320cd8e4648d1edc1275681ce646f3b50c61246e6b95fc9594f1efd159afcc",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 26.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 27,
+      "forecast_time_s": 27.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 27.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "a24a53dec02836e881f831b3e6ad18325cb04102561302fa33008260eb602e59",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 27.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 28,
+      "forecast_time_s": 28.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 28.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "c0240087912ad868e064bc0b43ce086a7d6c4778e340b6c97bb5e935cbd2378a",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 28.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 29,
+      "forecast_time_s": 29.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 29.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "04dfe27ea4680deb8094b9cf65da74ef7809649f4b44087c63e065942793f939",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 29.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 30,
+      "forecast_time_s": 30.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 30.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "68feeca6e6aec087a48a07a723056d13a0090f0a16805fba6f83a2dd3993f164",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 30.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 31,
+      "forecast_time_s": 31.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 31.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "579f28a53553eeae43bf38dd6a3ccf8794806ede532414e7ac1aef44d0dadee4",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 31.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 32,
+      "forecast_time_s": 32.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 32.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "842d2ee6713ddef6b9075d0191cf4d441afc6198744afe0ed340fde8f33850b6",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 32.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 33,
+      "forecast_time_s": 33.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 33.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "510cdd1015bb1158940562ad52ba84cb173a166d078f067d0949d966125f031e",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 33.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 34,
+      "forecast_time_s": 34.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 34.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "7c93747e8010ac9a5519fdaa83268e2705b2b67ed1b95185cef97047a440e580",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 34.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 35,
+      "forecast_time_s": 35.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 35.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "c873b1348c09a87c749ae76f89de6fa2a2f6dbb5727bce68361c2cd9637fb1d7",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 35.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 36,
+      "forecast_time_s": 36.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 36.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "f22bf4756ce54002b37244707183fe7cda0af238897587c0ad19601fb1172398",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 36.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 37,
+      "forecast_time_s": 37.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 37.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "27be40bf825660087bc9fa1ff16df96c2ed7682bde05e8a92aaa4d7b223ee6f9",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 37.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 38,
+      "forecast_time_s": 38.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 38.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "86fbe0d4c5260ca5ff6c3be075643286aeac0bf129a884b3628567c30844cadf",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 38.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 39,
+      "forecast_time_s": 39.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 39.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "038b9ebfa4bdd1639a9a34137f49a72de58821710c9872cd965d03de53aa8cc5",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 39.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 40,
+      "forecast_time_s": 40.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 40.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "5f4875cd84d320e27ab2669efe47b77cf7adb605ed81ea139d26bb90b40fb659",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 40.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 41,
+      "forecast_time_s": 41.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 41.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "6e036591112e733a8a799399a7229bb651febc6947aec2440f9a382efd22e26d",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 41.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 42,
+      "forecast_time_s": 42.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 42.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "841793c257d9ed61a0d3daef2989d7055804774943a14386643b07049adadb62",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 42.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 43,
+      "forecast_time_s": 43.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 43.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "b4734bc63158f076accf22fff6460efc4035aac264afeb04c385afb62b7475ae",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 43.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 44,
+      "forecast_time_s": 44.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 44.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "51e5b14ef435b014b7bc9e0daaede3b87545c8c76413570be7755708595f973e",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 44.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 45,
+      "forecast_time_s": 45.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 45.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "fdf945d72b8855911141d2923a0c4d7d1f73ff8cffd3451463745b5c6fc5e833",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 45.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 46,
+      "forecast_time_s": 46.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 46.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "d8f1116ed22ea3c518749dffd08487b55e329af442d1061138c8bd19096edb7a",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 46.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 47,
+      "forecast_time_s": 47.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 47.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "72e8d66f1fe9708524d6bef4a21ff895a728cbdf9de00fc4fa05958a1861c779",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 47.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 48,
+      "forecast_time_s": 48.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 48.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "6110d5566db4dbbef0fd7006ebc0f70d93d135007ad9271cf187699bb465dbed",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 48.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 49,
+      "forecast_time_s": 49.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 49.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "2baa139845e634d14ee5904dab841073f81aaf1b85c69457ebf0b6e39c65d156",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 49.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 50,
+      "forecast_time_s": 50.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 50.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "87d63c66b3b6ec3d3197d8c45dcc417f5d8c31b970b55a3fe9bebb0e3231d6bd",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 50.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 51,
+      "forecast_time_s": 51.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 51.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "b4a392b364337a694d67dfabf851d9b46cdd1e780c438ca8c686fb35d35a2e6d",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 51.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 52,
+      "forecast_time_s": 52.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 52.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "5393437f0cc743ea42abf6b4bf38798fa40dd5bc12acbdc9394ff707d463a001",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 52.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 53,
+      "forecast_time_s": 53.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 53.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "ec0f4b1fff42c43819c2eab1046d6a32909f00c93a508c72ed6c6693cd1c45c0",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 53.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 54,
+      "forecast_time_s": 54.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 54.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "edc2bfb25dd532dbb92f381f2237b4bc9ee7c23a3dd745c6e0458b878c79c7ac",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 54.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 55,
+      "forecast_time_s": 55.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 55.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "f568760e9d2858d1433b2fb3350edbf8218669a5ab0c157dc38c6c09e9e13200",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 55.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 56,
+      "forecast_time_s": 56.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 56.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "a211688991573a087ec595c3d3377d3fc4329cfd1248ad0e2df3b1f4b1ee37d1",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 56.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 57,
+      "forecast_time_s": 57.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 57.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "8e4ed521318c6e9e25163cace4b3cbf6ca53a1f20372bca6f85af280d31ef880",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 57.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 58,
+      "forecast_time_s": 58.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 58.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "159f20b6de8c8261f3b0a88e498cc4433478272c2300ca801c6322a34ed57ef4",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 58.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    },
+    {
+      "step_index": 59,
+      "forecast_time_s": 59.0,
+      "components": [
+        {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "status": "NO_RISK_TRIGGER",
+          "forecast_time_s": 59.0,
+          "selection_status": "BLOCKED_OPEN_INPUTS",
+          "selection": {
+            "schema_version": "prism.hazop_operating_mode_selection.v1",
+            "status": "BLOCKED_OPEN_INPUTS",
+            "facility_id": "generic-outdoor-lh2-diagnostic",
+            "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+            "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+            "state_digest": "13d23ad202362e393c91070cb92e0826c6f2978e04a3b4bec2e009d7445e0391",
+            "component_id": "lh2-supply-vaporizer-boundary",
+            "operating_mode": "supply",
+            "captured_at_s": 59.0,
+            "applicable_row_count": 1,
+            "active_deviation_count": 0,
+            "selected_scenario_count": 0,
+            "checks": [
+              {
+                "row_id": "inspection-supply-vaporizer-high-pressure",
+                "component_id": "lh2-supply-vaporizer-boundary",
+                "operating_mode": "supply",
+                "variable_tag": "pressure",
+                "deviation": "supply pressure deviation",
+                "trigger": "at_or_above",
+                "scenario_family": "vaporizer_hole",
+                "release_mode": "hole",
+                "status": "MISSING_SIGNAL",
+                "reason": "required HAZOP signal is absent"
+              }
+            ],
+            "selected_scenarios": [],
+            "blocking_reasons": [
+              "inspection-supply-vaporizer-high-pressure: missing signal pressure"
+            ],
+            "policy": {
+              "operating_mode_taken_from_input": true,
+              "frequency_inference_performed": false,
+              "sensor_frequency_learning_used": false,
+              "release_packet_created": false,
+              "consequence_calculated": false,
+              "facility_qra_claim": false
+            },
+            "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+          },
+          "quantitative_evaluation": null
+        }
+      ],
+      "active_scenario_count": 0,
+      "risk_condition_reached": false
+    }
+  ],
+  "scenario_entries": [],
+  "trigger_count": 0,
+  "evaluated_count": 0,
+  "withheld_count": 0,
+  "conditional_current_weather_expected_death_fn": {
+    "status": "WITHHELD_FORECAST_FACILITY_AGGREGATOR_REQUIRED",
+    "expected_death_fn_low_high": null,
+    "frequency_sensitivity_expected_death_fn_low_high": null,
+    "reason": "forecast evaluations preserve one predicted component and scenario at a time; an explicit facility aggregator with reviewed population and branch bindings is required before conditional F/N aggregation"
+  },
+  "facility_annual_ir_available": false,
+  "facility_fn_available": false,
+  "timing": {
+    "wall_elapsed_ms": 5.68490001023747,
+    "quantitative_evaluation_elapsed_ms": 0.0,
+    "trigger_count": 0,
+    "evaluated_count": 0,
+    "withheld_count": 0,
+    "fresh_physics_claim": false,
+    "interpretation": "Measured for this scan invocation; not an operating 1 Hz guarantee."
+  },
+  "policy": {
+    "operating_mode_taken_from_forecast_input": true,
+    "operating_mode_trace_recorded": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "release_packet_created_by_scan": false,
+    "facility_qra_promotion": false,
+    "conditional_expected_death_fn_calculated": false,
+    "facility_aggregation_required": true,
+    "diagnostic_only": true,
+    "quantitative_callback_supplied": false,
+    "provider_release_created_by_cli": false
+  },
+  "interpretation": "Predicted process states were evaluated at explicit forecast times. Quantitative analysis is requested only when a HAZOP condition is reached; provider, SLABx-LH2, literature frequency and facility-ledger evidence remain owned by the supplied evaluator.",
+  "input_frame_set": {
+    "schema_version": "prism.process_forecast_frame_set.v1",
+    "component_id": "lh2-supply-vaporizer-boundary",
+    "origin": "model_prediction",
+    "operating_mode": "supply",
+    "source": {
+      "source_id": "inspection-centre-supply-forecast-10-run",
+      "source_provenance": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+      "source_digest": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "row_count_selected": 60,
+      "time_column": null,
+      "sample_period_s": 1.0
+    },
+    "frame_count": 60
+  }
+}
