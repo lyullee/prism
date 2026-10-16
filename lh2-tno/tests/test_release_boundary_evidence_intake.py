@@ -1,6 +1,7 @@
 from lh2_tno.release_boundary_evidence_intake import (
     RESPONSE_SCHEMA,
     build_release_boundary_evidence_response_template,
+    build_release_boundary_evidence_handoff,
     build_provider_termination_evidence_catalog,
     validate_release_boundary_evidence_response,
 )
@@ -215,3 +216,75 @@ def test_catalog_can_be_consumed_by_case_audit_at_the_same_packet_grain():
     )
     assert audit["rows"][0]["provider_termination_evidence_status"] == "VALID"
     assert audit["rows"][0]["strict_release_boundary_eligible"] is True
+
+
+def test_single_handoff_api_preserves_intake_catalog_and_case_audit():
+    request = _request("emergency_relief_discharge")
+    response = _common(request)
+    response.update({
+        "termination_basis": "emergency_relief_discharge",
+        "event_kind": "emergency_relief",
+        "source_operator": "equipment_emergency_relief",
+        "failure_opening_diameter_m": None,
+        "relief_setpoint_pa": 120000.0,
+        "relief_capacity_kg_s": 0.5,
+        "discharge_complete": True,
+    })
+    case = {
+        "event_id": "facility/event/G1",
+        "release_branch_id": "branch",
+        "annual_condition_id": "weather",
+        "asset_id": "asset-01",
+        "frequency_port_ids": ["accident-out"],
+        "provider_packet_identity": {
+            "component_id": "component-01",
+            "provider_result_digests": ["c" * 64],
+            "input_origins": ["provider_actual"],
+        },
+        "status": "EXECUTED",
+        "domain_assessment": {"domain_truncated": False},
+    }
+    ledger_row = {
+        "event_id": "facility/event/G1",
+        "release_branch_id": "branch",
+        "annual_condition_id": "weather",
+        "asset_id": "asset-01",
+        "status": "EXECUTED",
+        "ledger_status": "COMPLETE",
+        "termination": {
+            "basis": "emergency_relief_discharge",
+            "time_s": 10.0,
+            "provenance": "provider",
+        },
+        "provider": {
+            "provider_mass_balance_statuses": ["CLOSED"],
+            "duration_s": [10.0],
+            "available_mass_kg": [1.0],
+            "cumulative_mass_out_kg": [0.75],
+            "residual_mass_kg": [0.25],
+        },
+        "mass_ledger": {"end_to_end_residual_kg": 0.0},
+    }
+    handoff = build_release_boundary_evidence_handoff(
+        {"requests": [request]},
+        {"responses": [response]},
+        facility_assessment={
+            "facility_risk_ledger": {
+                "cases": [case],
+                "release_termination_inventory_ledger": {"rows": [ledger_row]},
+                "events": [],
+            }
+        },
+        facility_evidence_request={
+            "case_requests": [{
+                "event_id": "facility/event/G1",
+                "release_branch_id": "branch",
+                "annual_condition_id": "weather",
+            }]
+        },
+    )
+    assert handoff["intake"]["status"] == "RELEASE_BOUNDARY_REAUDIT_READY"
+    assert handoff["provider_termination_evidence"]["ready_count"] == 1
+    assert handoff["case_audit"]["rows"][0]["provider_termination_evidence_status"] == "VALID"
+    assert handoff["case_audit"]["rows"][0]["strict_release_boundary_eligible"] is True
+    assert handoff["facility_qra_promotion_allowed"] is False

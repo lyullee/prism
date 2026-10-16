@@ -507,11 +507,63 @@ def build_release_boundary_evidence_response_template(
     }
 
 
+def build_release_boundary_evidence_handoff(
+    request_root: Mapping[str, Any],
+    response_root: Mapping[str, Any] | Sequence[Mapping[str, Any]],
+    *,
+    facility_assessment: Mapping[str, Any] | None = None,
+    facility_evidence_request: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Connect provider response intake to the case-level boundary audit.
+
+    The returned object preserves all three stages: response validation,
+    provider termination catalog construction, and (when both facility inputs
+    are supplied) case-level matching.  It never reruns consequences, assigns
+    a frequency, qualifies a provider, or promotes facility IR/F-N.  Keeping
+    this handoff as one explicit API prevents callers from accidentally using
+    a raw response as if it were already matched to a facility packet.
+    """
+
+    if (facility_assessment is None) != (facility_evidence_request is None):
+        raise ValueError(
+            "facility_assessment and facility_evidence_request must be supplied together"
+        )
+    intake = validate_release_boundary_evidence_response(request_root, response_root)
+    catalog = build_provider_termination_evidence_catalog(
+        request_root,
+        response_root,
+        validation_report=intake,
+    )
+    handoff: dict[str, Any] = {
+        "schema_version": "prism.release_boundary_evidence_handoff.v1",
+        "intake": intake,
+        "provider_termination_evidence": catalog,
+        "case_audit": None,
+        "provider_qualification_claim": False,
+        "physical_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_promotion_allowed": False,
+        "diagnostic_only": True,
+    }
+    if facility_assessment is not None and facility_evidence_request is not None:
+        # Import lazily so the intake validator remains usable without loading
+        # the larger facility-audit module for response-only workflows.
+        from .release_boundary_case_audit import build_release_boundary_case_audit
+
+        handoff["case_audit"] = build_release_boundary_case_audit(
+            facility_assessment,
+            facility_evidence_request=facility_evidence_request,
+            provider_termination_evidence=catalog,
+        )
+    return handoff
+
+
 __all__ = [
     "SCHEMA",
     "RESPONSE_SCHEMA",
     "TERMINATION_EVIDENCE_SCHEMA",
     "build_release_boundary_evidence_response_template",
+    "build_release_boundary_evidence_handoff",
     "build_provider_termination_evidence_catalog",
     "validate_release_boundary_evidence_response",
 ]
