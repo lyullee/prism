@@ -142,6 +142,7 @@ def _snapshot_from_hazop_runtime(
     runtime_result: Mapping[str, Any],
     *,
     expected_component_ids: Sequence[str],
+    allow_withheld_normal_components: bool = False,
 ) -> dict[str, Any]:
     if runtime_result.get("status") != "FACILITY_HAZOP_RUNTIME_EVALUATED":
         raise HazopFacilityCampaignError(
@@ -168,6 +169,37 @@ def _snapshot_from_hazop_runtime(
         )
     components: dict[str, Any] = {}
     for component_id in component_ids:
+        raw_component = components_raw[component_id]
+        if (
+            allow_withheld_normal_components
+            and isinstance(raw_component, Mapping)
+            and raw_component.get("status")
+            in {
+                "WITHHELD_HAZOP_NO_DEVIATION",
+                "WITHHELD_HAZOP_NO_APPLICABLE_MODE_ROW",
+            }
+        ):
+            # A normal HAZOP component is part of the facility snapshot, but
+            # it has no release, frequency, or consequence branch to hand off.
+            # Preserve its selection ledger while keeping it out of annual
+            # risk atoms; silently treating it as zero risk would be unsafe.
+            components[component_id] = {
+                "status": "WITHHELD_NORMAL",
+                "component_id": component_id,
+                "selection": copy.deepcopy(dict(raw_component.get("selection", {}))),
+                "selected_hazop_scenario_id": None,
+                "selected_hazop_scenario_family": None,
+                "selected_operating_mode": (
+                    raw_component.get("selection", {}).get("operating_mode")
+                    if isinstance(raw_component.get("selection"), Mapping)
+                    else None
+                ),
+                "equipment_release_path": None,
+                "ignition": {"status": "WITHHELD_NO_DEVIATION"},
+                "risk": None,
+                "result": None,
+            }
+            continue
         branch, consequence, risk, selection = _selected_single_branch(runtime_result, component_id)
         release_path = consequence.get("equipment_release_path")
         if not isinstance(release_path, Mapping) or release_path.get("status") != "AVAILABLE_PROVIDER_RELEASE_PATH":
@@ -180,10 +212,29 @@ def _snapshot_from_hazop_runtime(
                 f"component {component_id} provider release path has no explicit boundaries"
             )
         for boundary in boundaries:
-            if isinstance(boundary, Mapping) and boundary.get("component_id") not in {
-                None,
-                component_id,
-            }:
+            if not isinstance(boundary, Mapping):
+                continue
+            boundary_component_id = boundary.get("component_id")
+            allowed_boundary_components = {None, component_id}
+            # A facility runtime bridge may have an explicit observed-to-
+            # provider identity translation.  Accept that provider component
+            # only when the bridge records the exact mapping; never infer it
+            # from a name, port, or geometry.
+            bridge_audit = runtime_result.get("facility_bridge_audit")
+            identity_mapping = (
+                bridge_audit.get("explicit_provider_component_mapping")
+                if isinstance(bridge_audit, Mapping)
+                else None
+            )
+            if (
+                isinstance(identity_mapping, Mapping)
+                and identity_mapping.get("observed_component_id") == component_id
+                and isinstance(identity_mapping.get("provider_component_id"), str)
+            ):
+                allowed_boundary_components.add(
+                    identity_mapping["provider_component_id"]
+                )
+            if boundary_component_id not in allowed_boundary_components:
                 raise HazopFacilityCampaignError(
                     f"component {component_id} provider boundary belongs to another component"
                 )
@@ -238,6 +289,7 @@ def build_hazop_facility_campaign_result(
     annual_conditions: Sequence[Mapping[str, Any]],
     scenario_bindings: Sequence[Mapping[str, Any]],
     expected_component_ids: Sequence[str] = (),
+    allow_withheld_normal_components: bool = False,
 ) -> dict[str, Any]:
     """Join one HAZOP-selected runtime branch per component to the facility ledger.
 
@@ -251,6 +303,7 @@ def build_hazop_facility_campaign_result(
     snapshot = _snapshot_from_hazop_runtime(
         runtime_result,
         expected_component_ids=expected_component_ids,
+        allow_withheld_normal_components=allow_withheld_normal_components,
     )
     components = snapshot["components"]
     if not isinstance(scenario_bindings, Sequence) or isinstance(scenario_bindings, (str, bytes)):
@@ -314,7 +367,13 @@ def build_hazop_facility_campaign_result(
             )
         binding_components.add(component_id)
         normalized_bindings.append(dict(raw))
-    required_components = set(components)
+    withheld_normal_components = {
+        component_id
+        for component_id, component in components.items()
+        if isinstance(component, Mapping)
+        and component.get("status") == "WITHHELD_NORMAL"
+    }
+    required_components = set(components) - withheld_normal_components
     if binding_components != required_components:
         missing = sorted(required_components - binding_components)
         raise HazopFacilityCampaignError(
@@ -333,7 +392,7 @@ def build_hazop_facility_campaign_result(
     # this call never turns a conditional diagnostic sum into qualified QRA.
     facility_ledger = merge_facility_campaign_results(
         [campaign],
-        expected_component_ids=tuple(sorted(required_components)),
+        expected_component_ids=tuple(sorted(components)),
     )
     scenario_trace_audit = audit_hazop_scenario_trace(
         {
@@ -368,6 +427,8 @@ def build_hazop_facility_campaign_result(
             "provider_release_created_by_prism": False,
             "facility_qra_promotion": False,
             "physical_validation_claim": False,
+            "withheld_normal_components_allowed": allow_withheld_normal_components,
+            "withheld_normal_component_ids": sorted(withheld_normal_components),
         },
     }
 

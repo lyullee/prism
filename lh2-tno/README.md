@@ -135,6 +135,18 @@ chain. The generated record is
 evidence boundary, and interpretation documented in
 [`PRISM_검사센터_시설HAZOP_브리지_20261017.md`](docs/PRISM_검사센터_시설HAZOP_브리지_20261017.md).
 
+The selected bridge branch can then be handed to the annual weather/population
+and facility-ledger boundary:
+
+```powershell
+python scripts/build_inspection_center_facility_campaign_handoff.py
+```
+
+This keeps normal components as explicit `WITHHELD_NORMAL` coverage and
+records the known conditional contribution without promoting it to a complete
+facility IR/F-N result. See
+[`PRISM_inspection_center_facility_campaign_handoff_20261017.md`](docs/PRISM_inspection_center_facility_campaign_handoff_20261017.md).
+
 ## Equipment and provider boundary
 
 The state frame contains facility ID, component ID, operating mode, timestamp, measured or predicted values, units, signal quality, and provenance. It does not contain `resolved_release`, opening diameter, annual frequency, duration, or termination basis.
@@ -198,6 +210,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Inspection-centre reconstructed chain audit](examples/inspection_center_reconstructed_hazop_chain_audit.json)
 - [Inspection-centre facility HAZOP bridge replay](examples/inspection_center_facility_hazop_bridge.json)
 - [Inspection-centre facility HAZOP bridge record](docs/PRISM_검사센터_시설HAZOP_브리지_20261017.md)
+- [Inspection-centre facility campaign handoff](examples/inspection_center_facility_campaign_handoff.json)
+- [Inspection-centre facility campaign handoff record](docs/PRISM_inspection_center_facility_campaign_handoff_20261017.md)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
 - [v0.6.3 distribution record (Korean)](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)

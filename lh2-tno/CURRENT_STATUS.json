@@ -178,7 +178,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1234 passed, 1 warning",
+  "latest_local_full_test_run": "1235 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -5292,5 +5292,25 @@
   "inspection_center_facility_hazop_bridge_operating_mode_inferred": false,
   "inspection_center_facility_hazop_bridge_frequency_learning_used": false,
   "inspection_center_facility_hazop_bridge_wall_elapsed_ms": 1548.1583999935538,
-  "inspection_center_facility_hazop_bridge_interpretation": "One coherent batch of three reconstructed state frames enters the facility HAZOP gate; receiving and standby are withheld as normal, while the explicit supply vaporizer mapping executes one provider/SLABx-LH2/TNO diagnostic branch. Facility annual IR/F-N remains withheld."
+  "inspection_center_facility_hazop_bridge_interpretation": "One coherent batch of three reconstructed state frames enters the facility HAZOP gate; receiving and standby are withheld as normal, while the explicit supply vaporizer mapping executes one provider/SLABx-LH2/TNO diagnostic branch. Facility annual IR/F-N remains withheld.",
+  "inspection_center_facility_campaign_handoff_record": "examples/inspection_center_facility_campaign_handoff.json",
+  "inspection_center_facility_campaign_handoff_script": "scripts/build_inspection_center_facility_campaign_handoff.py",
+  "inspection_center_facility_campaign_handoff_doc": "docs/PRISM_inspection_center_facility_campaign_handoff_20261017.md",
+  "inspection_center_facility_campaign_handoff_status": "FACILITY_CAMPAIGN_HANDOFF_EXECUTED_DIAGNOSTIC",
+  "inspection_center_facility_campaign_handoff_campaign_status": "PARTIAL_DECLARED_SCOPE",
+  "inspection_center_facility_campaign_handoff_ledger_status": "PARTIAL_FACILITY_SCOPE",
+  "inspection_center_facility_campaign_handoff_annual_condition_population_status": "EXPLICIT_CONDITION_POPULATION",
+  "inspection_center_facility_campaign_handoff_risk_atom_count": 4,
+  "inspection_center_facility_campaign_handoff_withheld_normal_component_ids": [
+    "lh2-intake-tank",
+    "lh2-storage-vent"
+  ],
+  "inspection_center_facility_campaign_handoff_known_contribution_available": true,
+  "inspection_center_facility_campaign_handoff_facility_total_ir_available": false,
+  "inspection_center_facility_campaign_handoff_facility_fn_available": false,
+  "inspection_center_facility_campaign_handoff_provider_qualified_case_count": 0,
+  "inspection_center_facility_campaign_handoff_frequency_inference_performed": false,
+  "inspection_center_facility_campaign_handoff_sensor_frequency_learning_used": false,
+  "inspection_center_facility_campaign_handoff_physical_validation_claim": false,
+  "inspection_center_facility_campaign_handoff_interpretation": "The selected supply HAZOP branch crosses an explicit outdoor weather/population handoff; receiving and standby remain WITHHELD_NORMAL, and the partial facility ledger records a conditional contribution without annual facility IR/F-N promotion."
 }
