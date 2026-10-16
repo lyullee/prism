@@ -164,6 +164,11 @@ def main() -> int:
         help="optional independent literature-frequency sensitivity audit",
     )
     parser.add_argument(
+        "--native-provider-multi-equipment-audit",
+        type=Path,
+        help="optional independent native multi-equipment partial-ledger audit",
+    )
+    parser.add_argument(
         "--isolation-union-extension-verification",
         type=Path,
         help="optional namespaced isolation success/failure facility-extension verification",
@@ -564,6 +569,15 @@ def main() -> int:
             facility_frequency_uncertainty_audit["_record_path"] = str(
                 args.facility_frequency_uncertainty_audit
             )
+        native_provider_multi_equipment_audit = (
+            _object(args.native_provider_multi_equipment_audit)
+            if args.native_provider_multi_equipment_audit
+            else None
+        )
+        if native_provider_multi_equipment_audit is not None:
+            native_provider_multi_equipment_audit["_record_path"] = str(
+                args.native_provider_multi_equipment_audit
+            )
         isolation_union_extension_verification = (
             _object(args.isolation_union_extension_verification)
             if args.isolation_union_extension_verification
@@ -792,6 +806,7 @@ def main() -> int:
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
             native_isolation_event_reconciliation=native_isolation_event_reconciliation,
+            native_provider_multi_equipment_audit=native_provider_multi_equipment_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

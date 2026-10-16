@@ -63,3 +63,11 @@ are accepted only when withheld event bins are explicit; the audit never treats
 those bins as zero risk and never promotes a facility QRA claim. A compact
 tracked summary is in
 `examples/generic_lh2_native_pump_valve_facility_audit_20261016.json`.
+
+The same audit can be supplied to the IJHE completion-audit builder with
+`--native-provider-multi-equipment-audit`. It produces a separate diagnostic
+check named `diagnostic_native_provider_multi_equipment_audit: PASS`; the
+overall audit remains `INCOMPLETE_EVIDENCE` because the larger facility scope
+still has qualified-provider and independent-validation gates.
+The tracked IJHE replay summary is
+`examples/generic_lh2_native_pump_valve_ijhe_audit_replay_20261016.json`.

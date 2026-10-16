@@ -116,6 +116,7 @@ def build_ijhe_completion_audit(
     release_boundary_case_audit: Mapping[str, Any] | None = None,
     conditional_facility_release_trace: Mapping[str, Any] | None = None,
     native_isolation_event_reconciliation: Mapping[str, Any] | None = None,
+    native_provider_multi_equipment_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2564,6 +2565,59 @@ def build_ijhe_completion_audit(
                 "interpretation": (
                     "Equipment-level IR/F-N contributions and the diagnostic ranking are independently "
                     "reproduced from risk atoms; missing equipment cases and provider evidence remain gates."
+                ),
+            }
+        )
+    if native_provider_multi_equipment_audit is not None:
+        multi_audit = native_provider_multi_equipment_audit
+        component_nested = multi_audit.get("component_contribution_audit")
+        frequency_nested = multi_audit.get("frequency_uncertainty_audit")
+        multi_audit_valid = (
+            multi_audit.get("schema_version")
+            == "prism.native_provider_multi_equipment_facility_audit.v1"
+            and multi_audit.get("status")
+            == "NATIVE_PROVIDER_MULTI_EQUIPMENT_AUDIT_CLOSED_DIAGNOSTIC"
+            and isinstance(component_nested, Mapping)
+            and component_nested.get("status")
+            == "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+            and isinstance(frequency_nested, Mapping)
+            and frequency_nested.get("status")
+            == "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC"
+            and multi_audit.get("blocking_reasons") == []
+            and multi_audit.get("diagnostic_only") is True
+            and multi_audit.get("frequency_inference_performed") is False
+            and multi_audit.get("facility_credible_interval") is False
+            and multi_audit.get("physical_validation_claim") is False
+            and multi_audit.get("qualified_provider_packet") is False
+            and multi_audit.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_provider_multi_equipment_audit",
+                "status": "PASS" if multi_audit_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if multi_audit_valid
+                    else "multi-equipment provider ledger audit is missing, blocked, or permits unsafe promotion"
+                ),
+                "evidence": {
+                    "record": multi_audit.get("_record_path"),
+                    "schema_version": multi_audit.get("schema_version"),
+                    "status": multi_audit.get("status"),
+                    "facility_id": multi_audit.get("facility_id"),
+                    "component_audit_status": component_nested.get("status")
+                    if isinstance(component_nested, Mapping)
+                    else None,
+                    "frequency_audit_status": frequency_nested.get("status")
+                    if isinstance(frequency_nested, Mapping)
+                    else None,
+                    "facility_qra_claim": multi_audit.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The partial multi-equipment ledger independently reproduces component contributions "
+                    "and literature-frequency sensitivity; withheld bins remain explicit and no facility "
+                    "QRA claim is promoted."
                 ),
             }
         )

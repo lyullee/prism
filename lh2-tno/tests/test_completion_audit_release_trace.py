@@ -214,3 +214,37 @@ def test_completion_audit_checks_literature_frequency_trace() -> None:
         if row["name"] == "diagnostic_conditional_facility_frequency_trace"
     )
     assert blocked_check["status"] == "BLOCKED"
+
+
+def test_completion_audit_checks_native_multi_equipment_ledger_audit() -> None:
+    multi_audit = {
+        "schema_version": "prism.native_provider_multi_equipment_facility_audit.v1",
+        "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_AUDIT_CLOSED_DIAGNOSTIC",
+        "facility_id": "facility-1",
+        "component_contribution_audit": {
+            "status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+        },
+        "frequency_uncertainty_audit": {
+            "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC"
+        },
+        "blocking_reasons": [],
+        "diagnostic_only": True,
+        "frequency_inference_performed": False,
+        "facility_credible_interval": False,
+        "physical_validation_claim": False,
+        "qualified_provider_packet": False,
+        "facility_qra_claim": False,
+    }
+    report = build_ijhe_completion_audit(
+        _status(),
+        {"matrix_complete": False, "blocking_reasons": ["scope open"]},
+        {"events": [], "cases": [], "timing": {}},
+        native_provider_multi_equipment_audit=multi_audit,
+    )
+    check = next(
+        row
+        for row in report["checks"]
+        if row["name"] == "diagnostic_native_provider_multi_equipment_audit"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True

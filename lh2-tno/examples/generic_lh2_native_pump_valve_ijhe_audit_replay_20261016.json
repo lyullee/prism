@@ -1,0 +1,21 @@
+{
+  "schema_version": "prism.ijhe_completion_audit.v1",
+  "status": "INCOMPLETE_EVIDENCE",
+  "recorded_at": "2026-10-16",
+  "source_audit": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_native_multi.json",
+  "check_count": 28,
+  "diagnostic_native_provider_multi_equipment_audit": "PASS",
+  "diagnostic_native_provider_multi_equipment_audit_record": "examples/generic_lh2_native_pump_valve_facility_audit_20261016.json",
+  "blocking_checks": [
+    "facility_release_boundary",
+    "actual_provider_release_packet",
+    "provider_worklist_coverage",
+    "declared_major_accident_scope",
+    "facility_ir_fn_available",
+    "facility_case_provider_packet_coverage"
+  ],
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "interpretation": "The multi-equipment diagnostic audit passes independently, while the larger facility readiness audit remains fail-closed."
+}
