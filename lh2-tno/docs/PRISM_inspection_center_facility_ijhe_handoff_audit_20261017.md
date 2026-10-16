@@ -11,7 +11,7 @@ Run it with:
 python scripts/audit_inspection_center_facility_ijhe_handoff.py
 ```
 
-It checks eleven items:
+It checks twelve items:
 
 1. the facility bridge schema is the declared PRISM contract;
 2. one HAZOP deviation is evaluated while two normal components remain
@@ -30,6 +30,8 @@ It checks eleven items:
     explicitly selected diagnostic branch or as `NOT_EVALUATED_EXPLICIT`.
 11. facility wall time, case time, and consequence-stage processing times are
     present as finite diagnostic measurements.
+12. conditional facility IR/F-N aggregation is available from explicit inputs,
+    while the qualified facility total remains withheld.
 
 The annual handoff now also carries the canonical provider-bound state snapshot
 into its case identity. The reconstructed example therefore closes the

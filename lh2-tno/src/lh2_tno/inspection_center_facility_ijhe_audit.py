@@ -199,6 +199,33 @@ def build_inspection_center_facility_ijhe_audit(
         processing_time=processing_time,
     ))
 
+    ledger = handoff.get("facility_ledger")
+    ledger = ledger if isinstance(ledger, Mapping) else {}
+    conditional_ir = ledger.get("conditional_diagnostic_facility_annual_ir_low_high")
+    conditional_fn = ledger.get("conditional_diagnostic_facility_expected_death_fn_low_high")
+    conditional_risk_valid = (
+        ledger.get("conditional_diagnostic_facility_risk_available") is True
+        and isinstance(conditional_ir, Mapping)
+        and isinstance(conditional_fn, list)
+        and len(conditional_fn) == 2
+        and isinstance(ledger.get("conditional_diagnostic_facility_basis"), str)
+        and "not a qualified facility total" in ledger.get(
+            "conditional_diagnostic_facility_basis", ""
+        )
+        and ledger.get("total_facility_annual_ir_low_high") is None
+        and ledger.get("total_facility_expected_death_fn_low_high") is None
+    )
+    checks.append(_check(
+        "conditional_facility_ir_fn_aggregation",
+        conditional_risk_valid,
+        "conditional facility IR/F-N must be available from explicit weather/population/ignition inputs while qualified total remains withheld",
+        conditional_risk_available=ledger.get("conditional_diagnostic_facility_risk_available"),
+        conditional_ir=conditional_ir,
+        conditional_fn=conditional_fn,
+        qualified_total_ir_available=ledger.get("total_facility_annual_ir_low_high") is not None,
+        qualified_total_fn_available=ledger.get("total_facility_expected_death_fn_low_high") is not None,
+    ))
+
     handoff_schema = handoff.get("schema_version")
     checks.append(_check(
         "facility_handoff_schema",
@@ -206,8 +233,6 @@ def build_inspection_center_facility_ijhe_audit(
         "facility campaign handoff schema is not the declared PRISM contract",
         schema_version=handoff_schema,
     ))
-    ledger = handoff.get("facility_ledger")
-    ledger = ledger if isinstance(ledger, Mapping) else {}
     population = ledger.get("population_accounting")
     population = population if isinstance(population, Mapping) else {}
     checks.append(_check(
@@ -285,4 +310,11 @@ def build_inspection_center_facility_ijhe_audit(
         },
         "major_accident_scope": coverage,
         "processing_time": processing_time,
+        "conditional_facility_risk": {
+            "available": ledger.get("conditional_diagnostic_facility_risk_available") is True,
+            "annual_ir_low_high": conditional_ir,
+            "expected_death_fn_low_high": conditional_fn,
+            "qualified_total_withheld": True,
+            "basis": ledger.get("conditional_diagnostic_facility_basis"),
+        },
     }

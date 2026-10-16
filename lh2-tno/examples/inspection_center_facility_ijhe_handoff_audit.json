@@ -89,6 +89,33 @@
       }
     },
     {
+      "id": "conditional_facility_ir_fn_aggregation",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "conditional_risk_available": true,
+        "conditional_ir": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        },
+        "conditional_fn": [
+          {
+            "expected_deaths": [],
+            "cumulative_frequency_per_year": []
+          },
+          {
+            "expected_deaths": [],
+            "cumulative_frequency_per_year": []
+          }
+        ],
+        "qualified_total_ir_available": false,
+        "qualified_total_fn_available": false
+      }
+    },
+    {
       "id": "facility_handoff_schema",
       "status": "PASS",
       "passed": true,
@@ -250,6 +277,27 @@
       "fire_explosion_damage_risk": 67.91439998778515
     },
     "fresh_physics_claim": false
+  },
+  "conditional_facility_risk": {
+    "available": true,
+    "annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "expected_death_fn_low_high": [
+      {
+        "expected_deaths": [],
+        "cumulative_frequency_per_year": []
+      },
+      {
+        "expected_deaths": [],
+        "cumulative_frequency_per_year": []
+      }
+    ],
+    "qualified_total_withheld": true,
+    "basis": "linear sum of validated risk atoms from the evaluated equipment campaigns; scope blockers are retained and this view is not a qualified facility total"
   },
   "input_evidence": {
     "bridge": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\inspection_center_facility_hazop_bridge.json",

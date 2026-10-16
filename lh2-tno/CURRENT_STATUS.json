@@ -5326,7 +5326,7 @@
   "inspection_center_facility_ijhe_handoff_audit_module": "src/lh2_tno/inspection_center_facility_ijhe_audit.py",
   "inspection_center_facility_ijhe_handoff_audit_schema": "prism.inspection_center_facility_ijhe_audit.v1",
   "inspection_center_facility_ijhe_handoff_audit_status": "PASS_WITH_SCOPE_LIMITATIONS",
-  "inspection_center_facility_ijhe_handoff_audit_check_count": 11,
+  "inspection_center_facility_ijhe_handoff_audit_check_count": 12,
   "inspection_center_facility_ijhe_handoff_audit_blocking_reason_count": 0,
   "inspection_center_facility_ijhe_handoff_audit_interpretation": "Structural traceability of the reconstructed bridge, explicit annual condition, provider mapping, and literature-frequency sensitivity passes; facility-wide IR/F-N, provider qualification, physical validation, and full IJHE evidence gates remain closed.",
   "ijhe_completion_audit_inspection_center_facility_handoff_input": "--inspection-center-facility-ijhe-handoff-audit examples/inspection_center_facility_ijhe_handoff_audit.json",
@@ -5341,6 +5341,8 @@
   "inspection_center_facility_campaign_handoff_major_accident_scope_implicit_substitution": false,
   "inspection_center_facility_campaign_handoff_processing_time_evidence_status": "PASS_DIAGNOSTIC_ONLY",
   "inspection_center_facility_campaign_handoff_processing_time_fresh_physics_claim": false,
+  "inspection_center_facility_campaign_handoff_conditional_ir_fn_aggregation_status": "PASS_DIAGNOSTIC_ONLY",
+  "inspection_center_facility_campaign_handoff_qualified_total_ir_fn_available": false,
   "inspection_center_facility_campaign_handoff_state_release_interpretation": "The canonical provider-bound state snapshot and digest now propagate into the selected case identity and close the structural state-to-release audit; provider qualification and facility-QRA promotion remain diagnostic or withheld."
 }
 
