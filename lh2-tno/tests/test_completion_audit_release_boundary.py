@@ -152,3 +152,23 @@ def test_completion_audit_blocks_request_contract_gate_when_case_is_blocked():
         row for row in report["checks"] if row["name"] == "diagnostic_release_boundary_case_audit"
     )
     assert check["status"] == "BLOCKED"
+
+
+def test_completion_audit_blocks_invalid_case_frequency_metadata():
+    audit = _audit(
+        frequency_binding_status_counts={"BOUND": 1, "UNBOUND": 1},
+        frequency_unbound_case_count=1,
+        frequency_uncertainty_status_counts={"BOUND": 1, "INVALID": 1},
+    )
+    report = build_ijhe_completion_audit(
+        _status(),
+        {"matrix_complete": False, "blocking_reasons": ["scope open"]},
+        {"events": [], "cases": [], "timing": {}},
+        release_boundary_case_audit=audit,
+    )
+    check = next(
+        row for row in report["checks"] if row["name"] == "diagnostic_release_boundary_case_audit"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["frequency_binding_metadata_valid"] is False
+    assert check["evidence"]["frequency_uncertainty_metadata_valid"] is False

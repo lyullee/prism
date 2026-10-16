@@ -5071,6 +5071,31 @@ def build_ijhe_completion_audit(
                     for row in rows
                 )
             )
+        frequency_binding_status_counts = boundary.get(
+            "frequency_binding_status_counts"
+        )
+        frequency_unbound_case_count = boundary.get(
+            "frequency_unbound_case_count"
+        )
+        frequency_binding_valid = None
+        if (
+            frequency_binding_status_counts is not None
+            or frequency_unbound_case_count is not None
+        ):
+            frequency_binding_valid = (
+                isinstance(frequency_binding_status_counts, Mapping)
+                and frequency_binding_status_counts.get("BOUND", 0) == case_count
+                and frequency_unbound_case_count == 0
+            )
+        frequency_uncertainty_status_counts = boundary.get(
+            "frequency_uncertainty_status_counts"
+        )
+        frequency_uncertainty_valid = None
+        if frequency_uncertainty_status_counts is not None:
+            frequency_uncertainty_valid = (
+                isinstance(frequency_uncertainty_status_counts, Mapping)
+                and frequency_uncertainty_status_counts.get("INVALID", 0) == 0
+            )
         boundary_valid = (
             boundary.get("schema_version") == "prism.release_boundary_case_audit.v1"
             and boundary.get("status") in {"CASE_BOUNDARY_PARTIAL", "CASE_BOUNDARY_CLOSED"}
@@ -5093,6 +5118,8 @@ def build_ijhe_completion_audit(
                 )
             )
             and (request_contract_valid is not False)
+            and (frequency_binding_valid is not False)
+            and (frequency_uncertainty_valid is not False)
             and boundary.get("provider_qualification_claim") is False
             and boundary.get("independent_physical_validation_claim") is False
             and boundary.get("frequency_inference_performed") is False
@@ -5130,12 +5157,14 @@ def build_ijhe_completion_audit(
                 "frequency_unbound_case_count": boundary.get(
                     "frequency_unbound_case_count"
                 ),
+                "frequency_binding_metadata_valid": frequency_binding_valid,
                 "frequency_uncertainty_status_counts": boundary.get(
                     "frequency_uncertainty_status_counts"
                 ),
                 "frequency_uncertainty_unavailable_case_count": boundary.get(
                     "frequency_uncertainty_unavailable_case_count"
                 ),
+                "frequency_uncertainty_metadata_valid": frequency_uncertainty_valid,
                 "termination_basis_counts": boundary.get("termination_basis_counts"),
                 "provider_termination_evidence_supplied": boundary.get(
                     "provider_termination_evidence_supplied"

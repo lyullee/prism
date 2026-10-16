@@ -5923,7 +5923,9 @@
           "BOUND": 35,
           "NOT_AVAILABLE": 9
         },
-        "frequency_uncertainty_unavailable_case_count": 9
+        "frequency_uncertainty_unavailable_case_count": 9,
+        "frequency_binding_metadata_valid": true,
+        "frequency_uncertainty_metadata_valid": true
       },
       "blocking_reason": null,
       "diagnostic_only": true,
