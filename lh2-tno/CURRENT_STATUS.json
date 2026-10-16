@@ -5326,7 +5326,7 @@
   "inspection_center_facility_ijhe_handoff_audit_module": "src/lh2_tno/inspection_center_facility_ijhe_audit.py",
   "inspection_center_facility_ijhe_handoff_audit_schema": "prism.inspection_center_facility_ijhe_audit.v1",
   "inspection_center_facility_ijhe_handoff_audit_status": "PASS_WITH_SCOPE_LIMITATIONS",
-  "inspection_center_facility_ijhe_handoff_audit_check_count": 8,
+  "inspection_center_facility_ijhe_handoff_audit_check_count": 9,
   "inspection_center_facility_ijhe_handoff_audit_blocking_reason_count": 0,
   "inspection_center_facility_ijhe_handoff_audit_interpretation": "Structural traceability of the reconstructed bridge, explicit annual condition, provider mapping, and literature-frequency sensitivity passes; facility-wide IR/F-N, provider qualification, physical validation, and full IJHE evidence gates remain closed.",
   "ijhe_completion_audit_inspection_center_facility_handoff_input": "--inspection-center-facility-ijhe-handoff-audit examples/inspection_center_facility_ijhe_handoff_audit.json",

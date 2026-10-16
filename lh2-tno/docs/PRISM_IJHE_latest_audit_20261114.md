@@ -42,7 +42,7 @@
 | `observed_hazop_storage_isolation_branch_evidence.json` / `observed_hazop_vaporizer_isolation_branch_evidence.json` | 저장탱크·기화기 차단 성공 branch와 zero-flow evidence | explicit controls·branch probability·diagnostic gate 확인 |
 | `facility_evidence_request.json` | case/family별 누락 증거 요청 | 44 case와 12 family를 추적 |
 | `native_generic_scope_packet_evidence_qualification_readiness_v14.json` | provider qualification readiness | 24/24 `BLOCKED_REVIEW` |
-| `inspection_center_facility_ijhe_handoff_audit.json` | reconstructed facility HAZOP bridge + explicit annual handoff traceability | 8/8 structural checks pass; diagnostic only; facility IR/F-N and provider qualification remain closed |
+| `inspection_center_facility_ijhe_handoff_audit.json` | reconstructed facility HAZOP bridge + state-snapshot/provider-boundary + explicit annual handoff traceability | 9/9 structural checks pass; provider echo remains withheld; facility IR/F-N and qualification remain closed |
 
 ## 재현 명령
 

@@ -11,18 +11,20 @@ Run it with:
 python scripts/audit_inspection_center_facility_ijhe_handoff.py
 ```
 
-It checks eight items:
+It checks nine items:
 
 1. the facility bridge schema is the declared PRISM contract;
 2. one HAZOP deviation is evaluated while two normal components remain
    explicitly withheld;
 3. provider identity is carried by an explicit observed-to-provider mapping;
-4. the annual campaign handoff uses its declared schema;
-5. weather and population come from an explicit annual-condition record;
-6. the partial ledger does not claim facility-wide IR/F-N;
-7. frequency rows are literature catalogue sensitivity cases, with no inferred
+4. each runtime state snapshot is carried to the mapped provider boundary with
+   its digest, while provider echo remains explicitly withheld;
+5. the annual campaign handoff uses its declared schema;
+6. weather and population come from an explicit annual-condition record;
+7. the partial ledger does not claim facility-wide IR/F-N;
+8. frequency rows are literature catalogue sensitivity cases, with no inferred
    p05/p95 interval; and
-8. provider qualification, physical validation, and facility-QRA promotion stay
+9. provider qualification, physical validation, and facility-QRA promotion stay
    closed.
 
 The expected result is `PASS_WITH_SCOPE_LIMITATIONS`. That status means the

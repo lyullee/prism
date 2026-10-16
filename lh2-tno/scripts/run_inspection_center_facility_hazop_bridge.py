@@ -37,6 +37,7 @@ from lh2_tno.observed_hazop_consequence_chain import (  # noqa: E402
 )
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import provider_release_resolver_from_packet  # noqa: E402
+from lh2_tno.state_snapshot import EquipmentStateSnapshot  # noqa: E402
 from lh2_tno.service import (  # noqa: E402
     ConsequenceService,
     FacilityRealtimeBinding,
@@ -235,6 +236,33 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         for component in selected
         if str(component.get("status", "")).startswith("CONSEQUENCE_BRANCHES_EVALUATED")
     ]
+    state_snapshot_handoff: list[dict[str, Any]] = []
+    for component_id, frame in sorted(frames.items()):
+        snapshot = frame.get("state_snapshot")
+        if not isinstance(snapshot, Mapping):
+            raise ValueError(f"runtime frame has no state_snapshot: {component_id}")
+        snapshot_model = EquipmentStateSnapshot.from_mapping(snapshot)
+        declared_digest = frame.get("state_snapshot_digest")
+        if declared_digest != snapshot_model.digest():
+            raise ValueError(f"runtime frame state_snapshot_digest mismatch: {component_id}")
+        state_snapshot_handoff.append(
+            {
+                "observed_component_id": component_id,
+                "state_snapshot_schema": snapshot_model.schema_version,
+                "state_snapshot_digest": snapshot_model.digest(),
+                "captured_at_s": snapshot_model.captured_at_s,
+                "origin": snapshot_model.origin,
+                "quality": snapshot_model.quality,
+                "provider_component_id": (
+                    provider_component_id if component_id == str(scenario["component_id"]) else None
+                ),
+                "provider_port_id": (
+                    provider_port_id if component_id == str(scenario["component_id"]) else None
+                ),
+                "provider_state_snapshot_echo": False,
+                "qualification_status": "WITHHELD_PROVIDER_ECHO_NOT_CONFIRMED",
+            }
+        )
     result = dict(result)
     result.update(
         {
@@ -273,6 +301,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     "scenario_id": scenario_id,
                     "mapping_digest": canonical_digest(binding_audit),
                 },
+                "state_snapshot_handoff": state_snapshot_handoff,
                 "operating_mode_inferred": False,
                 "frequency_inference_performed": False,
                 "sensor_frequency_learning_used": False,

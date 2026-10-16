@@ -23,7 +23,7 @@ def test_facility_ijhe_handoff_audit_is_fail_closed_and_traceable():
         output.unlink(missing_ok=True)
 
     assert result["status"] == "PASS_WITH_SCOPE_LIMITATIONS"
-    assert len(result["checks"]) == 8
+    assert len(result["checks"]) == 9
     assert not result["blocking_reasons"]
     assert result["qualification_boundary"]["facility_ir_fn_available"] is False
     assert result["qualification_boundary"]["physical_validation_claim"] is False

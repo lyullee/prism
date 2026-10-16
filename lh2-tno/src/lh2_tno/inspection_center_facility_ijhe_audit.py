@@ -66,6 +66,32 @@ def build_inspection_center_facility_ijhe_audit(
         "provider boundary identity must be established by an explicit mapping record",
         mapping=dict(mapping) if isinstance(mapping, Mapping) else mapping,
     ))
+    state_handoff = bridge.get("facility_bridge_audit", {}).get("state_snapshot_handoff")
+    state_handoff_valid = (
+        isinstance(state_handoff, list)
+        and len(state_handoff) == len(components)
+        and all(
+            isinstance(row, Mapping)
+            and isinstance(row.get("observed_component_id"), str)
+            and row.get("state_snapshot_schema") == "prism.equipment_state_snapshot.v1"
+            and isinstance(row.get("state_snapshot_digest"), str)
+            and len(row.get("state_snapshot_digest")) == 64
+            and isinstance(row.get("captured_at_s"), (int, float))
+            and row.get("provider_state_snapshot_echo") is False
+            and row.get("qualification_status") == "WITHHELD_PROVIDER_ECHO_NOT_CONFIRMED"
+            for row in state_handoff
+        )
+    )
+    checks.append(_check(
+        "state_snapshot_handoff_boundary",
+        bool(state_handoff_valid),
+        "state snapshots must be carried to the explicit provider boundary while provider echo remains unqualified",
+        row_count=len(state_handoff) if isinstance(state_handoff, list) else None,
+        provider_state_snapshot_echoes=(
+            sum(bool(row.get("provider_state_snapshot_echo")) for row in state_handoff)
+            if isinstance(state_handoff, list) else None
+        ),
+    ))
 
     handoff_schema = handoff.get("schema_version")
     checks.append(_check(

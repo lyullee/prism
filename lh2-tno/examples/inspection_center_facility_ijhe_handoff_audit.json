@@ -43,6 +43,16 @@
       }
     },
     {
+      "id": "state_snapshot_handoff_boundary",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "row_count": 3,
+        "provider_state_snapshot_echoes": 0
+      }
+    },
+    {
       "id": "facility_handoff_schema",
       "status": "PASS",
       "passed": true,

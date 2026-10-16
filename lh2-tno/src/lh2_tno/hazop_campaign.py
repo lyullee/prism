@@ -255,12 +255,19 @@ def _snapshot_from_hazop_runtime(
         }
     conditional = runtime_result.get("conditional_current_weather_risk")
     conditional = conditional if isinstance(conditional, Mapping) else {}
+    bridge_audit = runtime_result.get("facility_bridge_audit")
+    state_snapshot_handoff = (
+        copy.deepcopy(bridge_audit.get("state_snapshot_handoff"))
+        if isinstance(bridge_audit, Mapping)
+        else None
+    )
     return {
         "schema": "prism.hazop_facility_realtime_snapshot.v1",
         "facility_id": facility_id,
         "status": "ACCEPTED",
         "component_count": len(components),
         "components": components,
+        "state_snapshot_handoff": state_snapshot_handoff,
         "aggregate": {
             "current_weather_ir_available": bool(conditional.get("annual_ir_low_high_by_receptor")),
             "current_weather_annual_ir_low_high": copy.deepcopy(
