@@ -213,6 +213,22 @@ The table file may be either a component-keyed mapping or the inspection-centre
 wrapper with its component tables under `tables`; the component ID must match
 the frame set exactly.
 
+For a facility forecast, merge the component frame sets before scanning. The
+merger requires one exact common time grid and preserves the operating mode of
+each component:
+
+```powershell
+python scripts/merge_process_forecast_frames.py `
+  --frames results/20261115/inspection_center_intake_forecast_frames.json `
+  --frames results/20261115/inspection_center_storage_forecast_frames.json `
+  --frames results/20261115/inspection_center_supply_forecast_frames.json `
+  --output results/20261115/inspection_center_forecast_frame_set.json
+```
+
+Different grids, duplicate components, and missing components fail closed.
+There is no interpolation or silent component drop, and the merged diagnostic
+record does not infer frequency or create a release or facility IR/F-N result.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute

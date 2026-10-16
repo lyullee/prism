@@ -219,4 +219,105 @@ def build_forecast_frames(
     }
 
 
-__all__ = ["SCHEMA", "ORIGIN", "ProcessForecastError", "build_forecast_frames"]
+def merge_forecast_frame_sets(records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Merge one or more component forecast records on an exact time grid.
+
+    Each record must be a ``PROCESS_FORECAST_FRAMES_READY`` output from this
+    module. Facility-level forecast HAZOP requires every declared component at
+    every forecast time, so this function rejects duplicate components,
+    mismatched facilities, and different time grids. It never interpolates,
+    drops a component, or creates a risk result.
+    """
+    if not isinstance(records, Sequence) or isinstance(records, (str, bytes)) or not records:
+        raise ProcessForecastError("records must be a non-empty sequence")
+    normalized: list[Mapping[str, Any]] = []
+    facility_id: str | None = None
+    component_ids: list[str] = []
+    times: tuple[float, ...] | None = None
+    for index, record in enumerate(records):
+        if not isinstance(record, Mapping):
+            raise ProcessForecastError(f"records[{index}] must be a mapping")
+        if record.get("schema_version") != SCHEMA or record.get("status") != "PROCESS_FORECAST_FRAMES_READY":
+            raise ProcessForecastError(
+                f"records[{index}] must be a PROCESS_FORECAST_FRAMES_READY record"
+            )
+        record_facility = _name(record.get("facility_id"), f"records[{index}].facility_id")
+        component_id = _name(record.get("component_id"), f"records[{index}].component_id")
+        if facility_id is None:
+            facility_id = record_facility
+        elif record_facility != facility_id:
+            raise ProcessForecastError("all forecast records must use the same facility_id")
+        if component_id in component_ids:
+            raise ProcessForecastError(f"duplicate forecast component_id: {component_id}")
+        frames = record.get("frames")
+        if not isinstance(frames, list) or not frames:
+            raise ProcessForecastError(f"records[{index}].frames must be non-empty")
+        record_times: list[float] = []
+        for frame_index, frame in enumerate(frames):
+            if not isinstance(frame, Mapping):
+                raise ProcessForecastError(f"records[{index}].frames[{frame_index}] must be a mapping")
+            if frame.get("component_id") != component_id:
+                raise ProcessForecastError(
+                    f"records[{index}].frames[{frame_index}] component_id disagrees with record"
+                )
+            if frame.get("origin") != ORIGIN:
+                raise ProcessForecastError("merged forecast frames must use origin='model_prediction'")
+            record_times.append(_finite(frame.get("forecast_time_s"), f"records[{index}].frames[].forecast_time_s"))
+        candidate_times = tuple(record_times)
+        if tuple(sorted(set(candidate_times))) != candidate_times:
+            raise ProcessForecastError("each forecast record must have strictly increasing times")
+        if times is None:
+            times = candidate_times
+        elif candidate_times != times:
+            raise ProcessForecastError("forecast records must share an exact time grid")
+        normalized.append(record)
+        component_ids.append(component_id)
+    assert facility_id is not None and times is not None  # validated above
+    frames = [
+        dict(frame)
+        for record in normalized
+        for frame in record["frames"]
+    ]
+    frames.sort(key=lambda frame: (float(frame["forecast_time_s"]), str(frame["component_id"])))
+    return {
+        "schema_version": SCHEMA,
+        "status": "PROCESS_FORECAST_FRAME_SET_MERGED",
+        "facility_id": facility_id,
+        "component_ids": component_ids,
+        "origin": ORIGIN,
+        "frames": frames,
+        "time_grid_s": list(times),
+        "source": {
+            "source_count": len(normalized),
+            "sources": [dict(record.get("source", {})) for record in normalized],
+            "row_count_selected": len(frames),
+        },
+        "operating_modes_by_component": {
+            str(record["component_id"]): record.get("operating_mode")
+            for record in normalized
+        },
+        "policy": {
+            "exact_time_grid_required": True,
+            "interpolation_performed": False,
+            "component_drop_performed": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+        "interpretation": (
+            "Multiple component process-model forecasts were merged on an exact "
+            "common time grid. The result is ready for facility HAZOP scanning; "
+            "it does not create accident releases, frequencies or facility IR/F-N."
+        ),
+    }
+
+
+__all__ = [
+    "SCHEMA",
+    "ORIGIN",
+    "ProcessForecastError",
+    "build_forecast_frames",
+    "merge_forecast_frame_sets",
+]

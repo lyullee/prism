@@ -8,7 +8,11 @@ from lh2_tno.hazop import HAZOP_SCHEMA, HAZOP_STATE_SCHEMA
 from lh2_tno.hazop_forecast import run_hazop_forecast_risk_scan
 from lh2_tno.integrated_risk import run_hazop_integrated_risk
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames
-from lh2_tno.process_forecast import ProcessForecastError, build_forecast_frames
+from lh2_tno.process_forecast import (
+    ProcessForecastError,
+    build_forecast_frames,
+    merge_forecast_frame_sets,
+)
 
 
 def _mapping():
@@ -207,3 +211,72 @@ def test_process_forecast_frames_can_feed_the_unified_current_forecast_boundary(
     assert selection["operating_mode"] == "receiving"
     assert result["forecast"]["policy"]["operating_mode_trace_recorded"] is True
     assert result["policy"]["facility_qra_promotion"] is False
+
+
+def test_process_forecast_frame_sets_merge_on_exact_common_grid():
+    receiving = build_forecast_frames(
+        [{"pressure": 0.50}, {"pressure": 0.51}],
+        facility_id="facility",
+        component_id="intake-tank",
+        operating_mode="receiving",
+        mapping={"PT-INTAKE": {"source_column": "pressure", "quantity": "pressure", "unit": "MPa"}},
+        source_id="forecast://intake",
+        source_provenance="test intake rows",
+        sample_period_s=1.0,
+    )
+    supply = build_forecast_frames(
+        [{"pressure": 0.60}, {"pressure": 0.61}],
+        facility_id="facility",
+        component_id="supply-boundary",
+        operating_mode="supply",
+        mapping={"PT-SUPPLY": {"source_column": "pressure", "quantity": "pressure", "unit": "MPa"}},
+        source_id="forecast://supply",
+        source_provenance="test supply rows",
+        sample_period_s=1.0,
+    )
+
+    merged = merge_forecast_frame_sets([supply, receiving])
+
+    assert merged["status"] == "PROCESS_FORECAST_FRAME_SET_MERGED"
+    assert merged["facility_id"] == "facility"
+    assert merged["component_ids"] == ["supply-boundary", "intake-tank"]
+    assert merged["time_grid_s"] == [0.0, 1.0]
+    assert [(frame["forecast_time_s"], frame["component_id"]) for frame in merged["frames"]] == [
+        (0.0, "intake-tank"),
+        (0.0, "supply-boundary"),
+        (1.0, "intake-tank"),
+        (1.0, "supply-boundary"),
+    ]
+    assert merged["operating_modes_by_component"] == {
+        "supply-boundary": "supply",
+        "intake-tank": "receiving",
+    }
+    assert merged["policy"]["exact_time_grid_required"] is True
+    assert merged["policy"]["interpolation_performed"] is False
+    assert merged["policy"]["facility_qra_promotion"] is False
+
+
+def test_process_forecast_frame_sets_reject_mismatched_grid_and_duplicate_component():
+    base = build_forecast_frames(
+        [{"pressure": 0.50}, {"pressure": 0.51}],
+        facility_id="facility",
+        component_id="component-a",
+        operating_mode="receiving",
+        mapping={"PT": {"source_column": "pressure", "quantity": "pressure", "unit": "MPa"}},
+        source_id="forecast://a",
+        source_provenance="test rows",
+    )
+    mismatch = build_forecast_frames(
+        [{"pressure": 0.60}, {"pressure": 0.61}],
+        facility_id="facility",
+        component_id="component-b",
+        operating_mode="supply",
+        mapping={"PT": {"source_column": "pressure", "quantity": "pressure", "unit": "MPa"}},
+        source_id="forecast://b",
+        source_provenance="test rows",
+        sample_period_s=2.0,
+    )
+    with pytest.raises(ProcessForecastError, match="exact time grid"):
+        merge_forecast_frame_sets([base, mismatch])
+    with pytest.raises(ProcessForecastError, match="duplicate forecast component_id"):
+        merge_forecast_frame_sets([base, base])

@@ -48,6 +48,28 @@ contains an explicit timestamp column, pass `--time-column` and omit the
 sample-period assumption. The command records the workbook SHA-256 and the
 selected row count in the output.
 
+## Merging component forecasts
+
+Facility-level HAZOP scanning needs a state frame for every expected component
+at the same forecast time. Build one frame-set per component, then merge them
+with the exact-grid guard:
+
+```powershell
+python scripts/merge_process_forecast_frames.py `
+  --frames results/20261115/inspection_center_intake_forecast_frames.json `
+  --frames results/20261115/inspection_center_storage_forecast_frames.json `
+  --frames results/20261115/inspection_center_supply_forecast_frames.json `
+  --output results/20261115/inspection_center_forecast_frame_set.json
+```
+
+`merge_forecast_frame_sets()` rejects a duplicate component, a different
+facility, or even one missing/different time value. It does not interpolate,
+silently drop a component, infer an operating mode, learn a frequency, or
+create a release/facility risk result. This makes an incomplete process model
+visible before it can enter the HAZOP scanner. The merged record keeps the
+operating mode for each component in `operating_modes_by_component` and sorts
+frames by `forecast_time_s` and `component_id`.
+
 ## Passing frames to forecast HAZOP
 
 Read `record["frames"]` and pass it to
