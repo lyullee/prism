@@ -61,7 +61,11 @@ class NativeLayeredTankProvider:
         return self.response
 
 
-def _native_tank(lh2dt_root: Path) -> Any:
+def _native_tank(
+    lh2dt_root: Path,
+    *,
+    distributed_boiling_model: str = "phase_change_complementarity",
+) -> Any:
     sys.path.insert(0, str(lh2dt_root / "src"))
     module = importlib.import_module("lh2dt")
     geometry = module.HorizontalVesselGeometry(
@@ -75,6 +79,12 @@ def _native_tank(lh2dt_root: Path) -> Any:
         vapor_cell_count=3,
         wall_node_count=6,
         wall_heat_capacity_J_K=3.0e6,
+        # A depressurising liquid outlet can move a labelled vapor cell into
+        # the saturation band.  The current lh2dt API requires that phase
+        # transfer be closed by its explicit complementarity model; leaving
+        # the model at the historical ``off`` default makes the native
+        # accident export fail before a provider packet is produced.
+        distributed_boiling_model=distributed_boiling_model,
     )
     return module.LayeredTank(geometry, parameters)
 
@@ -84,7 +94,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     source_digest = _tree_digest(root)
     if args.isolation_time_s is not None and args.isolation_time_s > args.horizon_s:
         raise ValueError("isolation time must not exceed horizon")
-    tank = _native_tank(root)
+    tank = _native_tank(
+        root,
+        distributed_boiling_model=args.distributed_boiling_model,
+    )
     component_id = args.component_id
     port_id = args.port_id
     event_id = args.event_id
@@ -193,6 +206,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "available_mass_kg": data.get("available_mass_kg"),
         "cumulative_mass_out_kg": data.get("cumulative_mass_out_kg"),
         "mass_residual_kg": provider_meta.get("residual_mass_kg"),
+        "distributed_boiling_model": args.distributed_boiling_model,
         "isolation_time_s": provider_meta.get("isolation_time_s"),
         "post_isolation_observation_s": provider_meta.get("post_isolation_observation_s"),
         "isolation_success": provider_meta.get("isolation_success"),
@@ -220,6 +234,16 @@ def main() -> int:
     parser.add_argument("--port-id", default="native-layered-tank-liquid-out")
     parser.add_argument("--event-id", default="native-layered-tank/accidental-leak-001")
     parser.add_argument("--model-revision", default="external-library-native-export-0.1.1")
+    parser.add_argument(
+        "--distributed-boiling-model",
+        choices=("phase_change_complementarity", "saturated_liquid_complementarity", "off"),
+        default="phase_change_complementarity",
+        help=(
+            "lh2dt phase-transfer closure used while depressurising the tank; "
+            "the explicit complementarity default prevents a vapor cell from "
+            "crossing into the saturation band without a phase-transfer ledger"
+        ),
+    )
     parser.add_argument("--initial-pressure-pa-abs", type=float, default=500000.0)
     parser.add_argument("--liquid-volume-fraction", type=float, default=0.43)
     parser.add_argument("--ambient-pressure-pa-abs", type=float, default=101325.0)
