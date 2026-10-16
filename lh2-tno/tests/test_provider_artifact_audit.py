@@ -1,6 +1,11 @@
 import json
 
-from lh2_tno.provider_artifact_audit import audit_provider_artifact_root
+import pytest
+
+from lh2_tno.provider_artifact_audit import (
+    audit_provider_artifact_root,
+    audit_provider_artifact_roots,
+)
 
 
 def test_provider_artifact_audit_keeps_diagnostic_packets_unqualified(tmp_path):
@@ -74,3 +79,33 @@ def test_provider_artifact_audit_reads_korean_windows_encoded_json(tmp_path):
     assert report["artifact_count"] == 1
     assert report["errors"] == []
     assert report["provider_response_count"] == 1
+
+
+def test_provider_artifact_audit_roots_keeps_sources_separate_and_fail_closed(
+    tmp_path,
+):
+    current = tmp_path / "current"
+    legacy = tmp_path / "legacy"
+    current.mkdir()
+    legacy.mkdir()
+    (current / "provider_response.json").write_text("{}", encoding="utf-8")
+    (legacy / "verification.json").write_text("{}", encoding="utf-8")
+
+    report = audit_provider_artifact_roots(
+        {"current": current, "legacy": legacy}
+    )
+
+    assert report["schema_version"] == "prism.provider_artifact_roots_audit.v1"
+    assert report["status"] == "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY"
+    assert report["root_count"] == 2
+    assert set(report["roots"]) == {"current", "legacy"}
+    assert report["summary"]["artifact_count"] == 2
+    assert report["summary"]["provider_response_count"] == 1
+    assert report["summary"]["qualification_artifact_count"] == 0
+    assert report["summary"]["facility_ir_fn_allowed"] is False
+    assert report["promotion_policy"]["roots_remain_separate"] is True
+
+
+def test_provider_artifact_audit_roots_rejects_empty_mapping(tmp_path):
+    with pytest.raises(ValueError, match="non-empty"):
+        audit_provider_artifact_roots({})

@@ -1,0 +1,55 @@
+{
+  "schema_version": "prism.provider_artifact_roots_recheck.v1",
+  "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+  "scope": "external provider and digital-twin JSON workspace recheck",
+  "root_count": 2,
+  "roots": {
+    "prism-dev": {
+      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+      "artifact_count": 84,
+      "provider_response_count": 2,
+      "verification_artifact_count": 12,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 84
+    },
+    "lh2-digital-twin": {
+      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+      "artifact_count": 662,
+      "provider_response_count": 7,
+      "verification_artifact_count": 9,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 662
+    }
+  },
+  "summary": {
+    "artifact_count": 746,
+    "provider_response_count": 9,
+    "verification_artifact_count": 21,
+    "qualification_artifact_count": 0,
+    "physical_validation_artifact_count": 0,
+    "complete_facility_qra_artifact_count": 0,
+    "diagnostic_artifact_count": 746,
+    "qualification_evidence_present": false,
+    "independent_physical_validation_present": false,
+    "complete_facility_qra_claim_present": false,
+    "facility_ir_fn_allowed": false
+  },
+  "blocking_reasons": [
+    "no artifact claims a complete facility QRA",
+    "no artifact claims independent physical validation",
+    "no prism.provider_qualification_evidence.v1 record was found"
+  ],
+  "promotion_policy": {
+    "roots_remain_separate": true,
+    "frequency_assigned": false,
+    "provider_release_packet_promoted": false,
+    "physical_validation_promoted": false,
+    "facility_qra_promoted": false,
+    "qualification_requires_separate_exact_digest_bound_evidence": true
+  },
+  "reproduction_command": "python scripts/audit_provider_artifact_workspace_roots.py --root prism-dev=<PRISM_IJHE_step1> --root lh2-digital-twin=<LH2_digital_twin_root> --output provider_roots_audit.json"
+}

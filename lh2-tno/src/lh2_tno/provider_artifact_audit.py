@@ -163,3 +163,79 @@ def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
         },
         "blocking_reasons": list(dict.fromkeys(blockers)),
     }
+
+
+def audit_provider_artifact_roots(
+    roots: Mapping[str, str | Path],
+) -> dict[str, Any]:
+    """Audit several external workspaces as one non-promoting inventory.
+
+    A project often keeps the process-model outputs and the PRISM development
+    replay in different folders.  Auditing only one folder can therefore make
+    the evidence search look complete while silently omitting another source.
+    This helper keeps each root's result separate, adds a deterministic
+    aggregate, and never merges artifacts or opens a qualification gate.
+    Labels are caller-owned identifiers; the report intentionally preserves
+    the per-root ``source_root_provided`` value only inside each child result.
+    """
+    if not isinstance(roots, Mapping) or not roots:
+        raise ValueError("roots must be a non-empty label-to-path mapping")
+    labels = [str(label) for label in roots]
+    if any(not label.strip() for label in labels) or len(set(labels)) != len(labels):
+        raise ValueError("root labels must be unique non-empty strings")
+
+    inventories: dict[str, dict[str, Any]] = {}
+    for label, root in roots.items():
+        if not isinstance(label, str) or not label.strip():
+            raise ValueError("root labels must be non-empty strings")
+        inventories[label] = audit_provider_artifact_root(root)
+
+    numeric_keys = (
+        "artifact_count",
+        "provider_response_count",
+        "verification_artifact_count",
+        "qualification_artifact_count",
+        "physical_validation_artifact_count",
+        "complete_facility_qra_artifact_count",
+        "diagnostic_artifact_count",
+    )
+    totals = {
+        key: sum(int(item.get(key, 0)) for item in inventories.values())
+        for key in numeric_keys
+    }
+    blockers = sorted({
+        str(reason)
+        for item in inventories.values()
+        for reason in item.get("blocking_reasons", ())
+    })
+    qualified = totals["qualification_artifact_count"]
+    physical = totals["physical_validation_artifact_count"]
+    qra = totals["complete_facility_qra_artifact_count"]
+    if not totals["artifact_count"]:
+        status = "NO_EXTERNAL_JSON_ARTIFACTS"
+    elif not qualified or not physical or not qra:
+        status = "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY"
+    else:
+        status = "ARTIFACTS_REQUIRE_PRISM_RECONCILIATION"
+    return {
+        "schema_version": "prism.provider_artifact_roots_audit.v1",
+        "status": status,
+        "root_count": len(inventories),
+        "roots": inventories,
+        "summary": {
+            **totals,
+            "qualification_evidence_present": qualified > 0,
+            "independent_physical_validation_present": physical > 0,
+            "complete_facility_qra_claim_present": qra > 0,
+            "facility_ir_fn_allowed": False,
+        },
+        "blocking_reasons": blockers,
+        "promotion_policy": {
+            "roots_remain_separate": True,
+            "frequency_assigned": False,
+            "provider_release_packet_promoted": False,
+            "physical_validation_promoted": False,
+            "facility_qra_promoted": False,
+            "qualification_requires_separate_exact_digest_bound_evidence": True,
+        },
+    }
