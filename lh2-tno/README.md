@@ -275,6 +275,18 @@ isolation and inventory fields, frequency low/central/high values, SLABx-LH2
 weather/ignition outputs and processing time, plus the facility population and
 endpoint identity. Missing fields remain explicit evidence gaps.
 
+Use the coverage auditor to record those gaps without assigning zero risk:
+
+```powershell
+python scripts/audit_forecast_quantitative_evidence.py `
+  --handoff results/20261115/inspection_center_facility_forecast_quantitative_handoff.json `
+  --attachments examples/inspection_center_forecast_evidence_pending.json `
+  --output results/20261115/inspection_center_facility_forecast_evidence_coverage.json
+```
+
+The saved diagnostic currently reports two missing evidence cases. It is a
+coverage ledger, not a completed risk calculation.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute

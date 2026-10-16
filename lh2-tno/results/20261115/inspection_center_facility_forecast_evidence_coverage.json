@@ -1,0 +1,93 @@
+{
+  "schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+  "status": "FORECAST_QUANTITATIVE_EVIDENCE_COVERAGE_AUDITED",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "rows": [
+    {
+      "request_id": "lh2-intake-tank|inspection-intake-receiving-high-pressure:receiving:vessel_hole|0",
+      "component_id": "lh2-intake-tank",
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "forecast_time_s": 0.0,
+      "operating_mode": "receiving",
+      "status": "MISSING_EVIDENCE",
+      "missing_fields": [
+        "facility_condition_binding.facility_port_or_endpoint_id",
+        "facility_condition_binding.ignition_branch_id",
+        "facility_condition_binding.population_condition_id",
+        "facility_condition_binding.weather_condition_id",
+        "frequency_binding.annual_frequency",
+        "frequency_binding.annual_frequency_high",
+        "frequency_binding.annual_frequency_low",
+        "frequency_binding.literature_event_id",
+        "frequency_binding.source_provenance",
+        "provider_release_packet.duration_s",
+        "provider_release_packet.inventory_initial_kg",
+        "provider_release_packet.inventory_out_kg",
+        "provider_release_packet.isolation_time_s",
+        "provider_release_packet.mass_residual_kg",
+        "provider_release_packet.post_isolation_observation_s",
+        "provider_release_packet.release_end_s",
+        "provider_release_packet.release_start_s",
+        "provider_release_packet.source_digest",
+        "provider_release_packet.termination_basis",
+        "slabx_lh2_consequence.ignition_branch_id",
+        "slabx_lh2_consequence.processing_time_ms",
+        "slabx_lh2_consequence.receptor_damage_or_harm_outputs",
+        "slabx_lh2_consequence.result_digest",
+        "slabx_lh2_consequence.weather_condition_id"
+      ],
+      "malformed_reason": "attachment_missing"
+    },
+    {
+      "request_id": "lh2-supply-vaporizer-boundary|inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole|0",
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "forecast_time_s": 0.0,
+      "operating_mode": "supply",
+      "status": "MISSING_EVIDENCE",
+      "missing_fields": [
+        "facility_condition_binding.facility_port_or_endpoint_id",
+        "facility_condition_binding.ignition_branch_id",
+        "facility_condition_binding.population_condition_id",
+        "facility_condition_binding.weather_condition_id",
+        "frequency_binding.annual_frequency",
+        "frequency_binding.annual_frequency_high",
+        "frequency_binding.annual_frequency_low",
+        "frequency_binding.literature_event_id",
+        "frequency_binding.source_provenance",
+        "provider_release_packet.duration_s",
+        "provider_release_packet.inventory_initial_kg",
+        "provider_release_packet.inventory_out_kg",
+        "provider_release_packet.isolation_time_s",
+        "provider_release_packet.mass_residual_kg",
+        "provider_release_packet.post_isolation_observation_s",
+        "provider_release_packet.release_end_s",
+        "provider_release_packet.release_start_s",
+        "provider_release_packet.source_digest",
+        "provider_release_packet.termination_basis",
+        "slabx_lh2_consequence.ignition_branch_id",
+        "slabx_lh2_consequence.processing_time_ms",
+        "slabx_lh2_consequence.receptor_damage_or_harm_outputs",
+        "slabx_lh2_consequence.result_digest",
+        "slabx_lh2_consequence.weather_condition_id"
+      ],
+      "malformed_reason": "attachment_missing"
+    }
+  ],
+  "extra_attachment_keys": [],
+  "summary": {
+    "request_count": 2,
+    "evidence_complete_count": 0,
+    "evidence_missing_count": 2,
+    "extra_attachment_key_count": 0
+  },
+  "policy": {
+    "missing_cases_assigned_zero": false,
+    "frequency_inference_performed": false,
+    "provider_release_created": false,
+    "facility_ir_fn_calculated": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Coverage is reported at the exact forecast request key. Missing or malformed evidence remains an explicit uncomputed case and is not reallocated or assigned zero risk."
+}

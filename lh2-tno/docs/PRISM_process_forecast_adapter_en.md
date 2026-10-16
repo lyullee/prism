@@ -125,6 +125,19 @@ outputs and processing time; the facility block asks for population, weather,
 ignition and endpoint identity. This keeps an unclosed accident visible as a
 missing case instead of allowing a partial packet to enter the facility ledger.
 
+Before attaching evidence, audit coverage to preserve every missing case:
+
+```powershell
+python scripts/audit_forecast_quantitative_evidence.py `
+  --handoff results/20261115/inspection_center_facility_forecast_quantitative_handoff.json `
+  --attachments examples/inspection_center_forecast_evidence_pending.json `
+  --output results/20261115/inspection_center_facility_forecast_evidence_coverage.json
+```
+
+The current diagnostic input intentionally contains no attachments, so the
+saved audit reports two missing evidence cases. It is a coverage record, not a
+zero-risk result.
+
 ## Passing frames to forecast HAZOP
 
 Read `record["frames"]` and pass it to

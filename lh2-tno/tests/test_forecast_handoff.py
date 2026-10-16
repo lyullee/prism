@@ -6,6 +6,7 @@ import pytest
 
 from lh2_tno.forecast_handoff import (
     ForecastHandoffError,
+    audit_forecast_quantitative_evidence_coverage,
     attach_forecast_quantitative_evidence,
     build_forecast_quantitative_handoff,
 )
@@ -149,3 +150,16 @@ def test_quantitative_evidence_attachment_requires_exact_keys_and_all_blocks():
     del missing_field[key]["evidence"]["frequency_binding"]["annual_frequency_high"]
     with pytest.raises(ForecastHandoffError, match="missing fields"):
         attach_forecast_quantitative_evidence(handoff, missing_field)
+
+
+def test_quantitative_evidence_coverage_audit_preserves_missing_cases():
+    handoff = build_forecast_quantitative_handoff(_scan())
+    result = audit_forecast_quantitative_evidence_coverage(handoff, {})
+
+    assert result["status"] == "FORECAST_QUANTITATIVE_EVIDENCE_COVERAGE_AUDITED"
+    assert result["summary"]["request_count"] == 1
+    assert result["summary"]["evidence_complete_count"] == 0
+    assert result["summary"]["evidence_missing_count"] == 1
+    assert result["rows"][0]["status"] == "MISSING_EVIDENCE"
+    assert "provider_release_packet.source_digest" in result["rows"][0]["missing_fields"]
+    assert result["policy"]["missing_cases_assigned_zero"] is False

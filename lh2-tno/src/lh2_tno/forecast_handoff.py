@@ -293,9 +293,97 @@ def attach_forecast_quantitative_evidence(
     }
 
 
+def audit_forecast_quantitative_evidence_coverage(
+    handoff: Mapping[str, Any],
+    attachments: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Report request-by-request evidence gaps without assigning zero risk."""
+    if not isinstance(handoff, Mapping) or handoff.get("schema_version") != SCHEMA:
+        raise ForecastHandoffError("handoff has an unsupported schema_version")
+    requests = handoff.get("requests")
+    if not isinstance(requests, list) or not requests:
+        raise ForecastHandoffError("handoff.requests must be a non-empty list")
+    if not isinstance(attachments, Mapping):
+        raise ForecastHandoffError("attachments must be a mapping keyed by request_id")
+    rows: list[dict[str, Any]] = []
+    expected: set[str] = set()
+    for request in requests:
+        if not isinstance(request, Mapping):
+            raise ForecastHandoffError("handoff requests must be mappings")
+        request_id = _name(request.get("request_id"), "request_id")
+        if request_id in expected:
+            raise ForecastHandoffError(f"duplicate request_id: {request_id}")
+        expected.add(request_id)
+        contract = request.get("required_contract")
+        if not isinstance(contract, Mapping):
+            raise ForecastHandoffError(f"request {request_id} is missing required_contract")
+        attachment = attachments.get(request_id)
+        missing: list[str] = []
+        malformed: str | None = None
+        if attachment is None:
+            missing = [f"{block}.{field}" for block in _REQUIRED_EVIDENCE for field in contract.get(block, ())]
+            malformed = "attachment_missing"
+        elif not isinstance(attachment, Mapping):
+            malformed = "attachment_not_mapping"
+        else:
+            evidence = attachment.get("evidence")
+            if not isinstance(evidence, Mapping):
+                malformed = "evidence_not_mapping"
+            else:
+                for block in _REQUIRED_EVIDENCE:
+                    value = evidence.get(block)
+                    if not isinstance(value, Mapping):
+                        missing.extend(f"{block}.{field}" for field in contract.get(block, ()))
+                        continue
+                    if not isinstance(value.get("status"), str) or not value["status"].strip():
+                        missing.append(f"{block}.status")
+                    missing.extend(
+                        f"{block}.{field}" for field in contract.get(block, ()) if field not in value
+                    )
+        rows.append({
+            "request_id": request_id,
+            "component_id": request.get("component_id"),
+            "scenario_id": request.get("scenario_id"),
+            "forecast_time_s": request.get("forecast_time_s"),
+            "operating_mode": request.get("operating_mode"),
+            "status": "EVIDENCE_COMPLETE" if not missing and malformed is None else "MISSING_EVIDENCE",
+            "missing_fields": sorted(set(missing)),
+            "malformed_reason": malformed,
+        })
+    extra = sorted(set(attachments) - expected)
+    complete_count = sum(row["status"] == "EVIDENCE_COMPLETE" for row in rows)
+    return {
+        "schema_version": "prism.forecast_quantitative_evidence_coverage.v1",
+        "status": "FORECAST_QUANTITATIVE_EVIDENCE_COVERAGE_AUDITED",
+        "facility_id": handoff.get("facility_id"),
+        "rows": rows,
+        "extra_attachment_keys": extra,
+        "summary": {
+            "request_count": len(rows),
+            "evidence_complete_count": complete_count,
+            "evidence_missing_count": len(rows) - complete_count,
+            "extra_attachment_key_count": len(extra),
+        },
+        "policy": {
+            "missing_cases_assigned_zero": False,
+            "frequency_inference_performed": False,
+            "provider_release_created": False,
+            "facility_ir_fn_calculated": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+        "interpretation": (
+            "Coverage is reported at the exact forecast request key. Missing or "
+            "malformed evidence remains an explicit uncomputed case and is not "
+            "reallocated or assigned zero risk."
+        ),
+    }
+
+
 __all__ = [
     "SCHEMA",
     "ForecastHandoffError",
     "build_forecast_quantitative_handoff",
     "attach_forecast_quantitative_evidence",
+    "audit_forecast_quantitative_evidence_coverage",
 ]
