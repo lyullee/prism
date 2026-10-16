@@ -121,6 +121,11 @@ provider owns release geometry, isolation, duration, and inventory depletion.
 The result is a diagnostic current-weather view until the reviewed annual
 campaign, provider qualification, and independent validation gates are closed.
 
+The returned `realtime_hazop_bridge` also exposes the conditional current-
+weather expected-death F/N result when the monitor has an explicit
+`RealtimePopulationBinding`. Without that population ledger it returns the
+explicit `WITHHELD_MISSING_POPULATION_LEDGER` status.
+
 For applications that already use the lower-level HAZOP runtime coordinator,
 `run_hazop_facility_runtime(...)` can also produce a conditional current-weather
 expected-death F/N contribution when an explicit `RealtimePopulationBinding`
