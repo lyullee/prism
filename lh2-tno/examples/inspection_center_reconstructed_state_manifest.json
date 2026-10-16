@@ -7,7 +7,7 @@
       "path": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
       "format": "xlsx",
       "sheet": "1월 21일",
-      "component_id": "lh2-intake-tank-reconstructed",
+      "component_id": "lh2-intake-tank",
       "origin": "reconstructed",
       "time": {
         "column": "일시",
@@ -35,7 +35,7 @@
       "path": "원본 학습데이터/2. 저장탱크 벤트 시나리오/저장탱크 데이터.xlsx",
       "format": "xlsx",
       "sheet": "20260124",
-      "component_id": "lh2-storage-vent-reconstructed",
+      "component_id": "lh2-storage-vent",
       "origin": "reconstructed",
       "time": {
         "column": "시간",
@@ -56,7 +56,7 @@
       "path": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월15일.xlsx",
       "format": "xlsx",
       "sheet": "1분 복원 데이터",
-      "component_id": "lh2-supply-vaporizer-boundary-reconstructed",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "origin": "reconstructed",
       "time": {
         "column": "일시",

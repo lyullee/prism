@@ -1,0 +1,148 @@
+{
+  "schema_version": "prism.observed_hazop_runtime_audit.v1",
+  "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+  "runtime_frame_count": 3,
+  "evaluated_frame_count": 3,
+  "selected_scenario_count": 1,
+  "operating_mode_counts": {
+    "receiving": 1,
+    "standby": 1,
+    "supply": 1
+  },
+  "status_counts": {
+    "NO_DEVIATION": 2,
+    "SCENARIOS_SELECTED": 1
+  },
+  "rows": [
+    {
+      "component_id": "lh2-intake-tank",
+      "source_id": "inspection-center-reconstructed-intake-20260121",
+      "captured_at_s": 39600.0,
+      "operating_mode": "receiving",
+      "state_snapshot_digest": "4144767d05219fd856ff614921b4b2c5d4adc0c97f79797ef44faca2e19ec6b6",
+      "table_id": "inspection-center-intake-hazop-diagnostic-v1",
+      "table_digest": "04fc1a817b912fa2e4fd57d88466ddbec9f84d7b5eed45c82239997743c5e879",
+      "state_digest": "e6cd822bdf7452b77b91b8624edc03c0b97151fe649de1c7618959de74f32101",
+      "status": "NO_DEVIATION",
+      "active_deviation_count": 0,
+      "selected_scenario_count": 0,
+      "selected_scenarios": [],
+      "checks": [
+        {
+          "row_id": "inspection-intake-receiving-high-pressure",
+          "component_id": "lh2-intake-tank",
+          "operating_mode": "receiving",
+          "variable_tag": "pressure",
+          "deviation": "receiving pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vessel_hole",
+          "release_mode": "hole",
+          "status": "NORMAL",
+          "value_si": 151000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 500000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "lh2-storage-vent",
+      "source_id": "inspection-center-reconstructed-storage-vent-20260124",
+      "captured_at_s": 7241.0,
+      "operating_mode": "standby",
+      "state_snapshot_digest": "9267d8dc6a707b3ec6bf679037c7350dc39d041e75e2c6b890b6548ebb29bf60",
+      "table_id": "inspection-center-storage-vent-hazop-diagnostic-v1",
+      "table_digest": "73905e822d7ad028316472be9118710cef78c2c909170a07e2a5b04a154dc9d5",
+      "state_digest": "734d4249d1f5d07afd13e1163e9562c042dd28df052c5e643ba240ee265962e5",
+      "status": "NO_DEVIATION",
+      "active_deviation_count": 0,
+      "selected_scenario_count": 0,
+      "selected_scenarios": [],
+      "checks": [
+        {
+          "row_id": "inspection-storage-standby-vent-pressure",
+          "component_id": "lh2-storage-vent",
+          "operating_mode": "standby",
+          "variable_tag": "pressure",
+          "deviation": "standby vent pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "status": "NORMAL",
+          "value_si": 343800.00829696655,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "source_id": "inspection-center-reconstructed-supply-20260415",
+      "captured_at_s": 43200.0,
+      "operating_mode": "supply",
+      "state_snapshot_digest": "0efa89fe28443b7cf6304264b98ab2b67fe92e97369583f99787f00c06ea56a9",
+      "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+      "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+      "state_digest": "e838ebb9f87f0184aaa557efb6a0201ecd94092d0e8de79d72fc1be7c303a984",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+          "hazop_row_id": "inspection-supply-vaporizer-high-pressure",
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "component_kind": "vaporizer",
+          "operating_mode": "supply",
+          "scenario_family": "vaporizer_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 610000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 300000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "diagnostic row; threshold is not a qualified facility design limit"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "inspection-supply-vaporizer-high-pressure",
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "operating_mode": "supply",
+          "variable_tag": "pressure",
+          "deviation": "supply pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vaporizer_hole",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 610000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 300000.0
+        }
+      ],
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "operating_mode_inferred": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Observed state and explicit operating mode selected HAZOP scenarios. Each selected scenario still requires a qualified provider release, literature frequency binding, and the downstream SLABx-LH2/TNO chain.",
+  "runtime_frames_record": "examples\\inspection_center_reconstructed_runtime_frames.json",
+  "hazop_table_set_record": "examples\\inspection_center_hazop_runtime_tables.json",
+  "now_s": 43200.0
+}

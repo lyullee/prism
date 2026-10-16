@@ -5214,6 +5214,26 @@
   "inspection_center_reconstructed_state_frequency_inference_performed": false,
   "inspection_center_reconstructed_state_provider_packet_promoted": false,
   "inspection_center_reconstructed_state_facility_qra_claim": false,
-  "inspection_center_reconstructed_state_interpretation": "Original training/recovery workbooks are connected as reconstructed state evidence; they are not independent historian measurements and cannot create releases, frequencies, provider packets, or facility QRA."
+  "inspection_center_reconstructed_state_interpretation": "Original training/recovery workbooks are connected as reconstructed state evidence; they are not independent historian measurements and cannot create releases, frequencies, provider packets, or facility QRA.",
+
+  "inspection_center_reconstructed_runtime_modes": "examples/inspection_center_reconstructed_runtime_operating_modes.json",
+  "inspection_center_reconstructed_runtime_frames": "examples/inspection_center_reconstructed_runtime_frames.json",
+  "inspection_center_reconstructed_hazop_runtime_audit": "examples/inspection_center_reconstructed_hazop_runtime_audit.json",
+  "inspection_center_reconstructed_runtime_frame_status": "STATE_RUNTIME_FRAMES_READY",
+  "inspection_center_reconstructed_runtime_frame_count": 3,
+  "inspection_center_reconstructed_runtime_mode_binding_status": "EXPLICIT_MODE_INPUT_BOUND",
+  "inspection_center_reconstructed_runtime_operating_mode_counts": {
+    "receiving": 1,
+    "standby": 1,
+    "supply": 1
+  },
+  "inspection_center_reconstructed_hazop_status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+  "inspection_center_reconstructed_hazop_selected_scenario_count": 1,
+  "inspection_center_reconstructed_hazop_selected_scenario_family": "vaporizer_hole",
+  "inspection_center_reconstructed_hazop_provider_release_required": true,
+  "inspection_center_reconstructed_hazop_frequency_assignment": "not_performed",
+  "inspection_center_reconstructed_hazop_consequence_calculated": false,
+  "inspection_center_reconstructed_hazop_facility_qra_claim": false,
+  "inspection_center_reconstructed_runtime_interpretation": "Reconstructed state frames with explicit receiving/standby/supply modes select one diagnostic supply vaporizer_hole HAZOP scenario; no release, frequency, consequence, or facility QRA is created."
 
 }

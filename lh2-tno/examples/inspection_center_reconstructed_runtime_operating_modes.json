@@ -1,0 +1,18 @@
+{
+  "schema_version": "prism.explicit_operating_mode_input.v1",
+  "description": "Explicit operating modes for the reconstructed-state diagnostic frames. Modes are supplied by the operating sequence layer and are never inferred from reconstructed values.",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "source_to_mode": {
+    "inspection-center-reconstructed-intake-20260121": "receiving",
+    "inspection-center-reconstructed-storage-vent-20260124": "standby",
+    "inspection-center-reconstructed-supply-20260415": "supply"
+  },
+  "policy": {
+    "mode_is_explicit_input": true,
+    "mode_inference_from_state_values": false,
+    "frequency_inference_performed": false,
+    "release_packet_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  }
+}

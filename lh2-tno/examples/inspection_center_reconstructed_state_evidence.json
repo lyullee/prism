@@ -11,7 +11,7 @@
       "resolved_source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\1월21일.xlsx",
       "source_sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
       "format": "xlsx",
-      "component_id": "lh2-intake-tank-reconstructed",
+      "component_id": "lh2-intake-tank",
       "origin": "reconstructed",
       "sample_count": 241,
       "time_start_s": 0.0,
@@ -31,7 +31,7 @@
           "sensor_location": "TT1106"
         }
       },
-      "snapshot_digest_set_sha256": "49519db24658c19a054ee28ed146425a5c97997662fb6e5e530224c07fc1a106"
+      "snapshot_digest_set_sha256": "0364129f9c79b10854a5c544a90b9466d1c45edd8def8c364b83111db0be9642"
     },
     {
       "source_id": "inspection-center-reconstructed-storage-vent-20260124",
@@ -39,7 +39,7 @@
       "resolved_source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\2. 저장탱크 벤트 시나리오\\저장탱크 데이터.xlsx",
       "source_sha256": "57fa14039ca34ed5fb5673c5cb06ed0d619f164c469029c03c343cc568321e2d",
       "format": "xlsx",
-      "component_id": "lh2-storage-vent-reconstructed",
+      "component_id": "lh2-storage-vent",
       "origin": "reconstructed",
       "sample_count": 7239,
       "time_start_s": 0.0,
@@ -52,7 +52,7 @@
           "sensor_location": "PT1105A"
         }
       },
-      "snapshot_digest_set_sha256": "7d620118760cedc4a1d6284a8958961915563f0bdeb1dad470364d57da192520"
+      "snapshot_digest_set_sha256": "bdf00c2bf56eca17c798bc296ef64662c6462454f5bfdfbcf44925ab84f7a6de"
     },
     {
       "source_id": "inspection-center-reconstructed-supply-20260415",
@@ -60,7 +60,7 @@
       "resolved_source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\4월15일.xlsx",
       "source_sha256": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
       "format": "xlsx",
-      "component_id": "lh2-supply-vaporizer-boundary-reconstructed",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "origin": "reconstructed",
       "sample_count": 721,
       "time_start_s": 0.0,
@@ -78,12 +78,12 @@
           "sensor_location": "TT1116"
         }
       },
-      "snapshot_digest_set_sha256": "c012a811d48c0bb52661e454ac6dd22a14820ca996f5290c92509ce11d8a3a8e"
+      "snapshot_digest_set_sha256": "d7bca2d45e3cfcdd30057ff40c1284c7acd306d585b5bc25c8868d609458b6be"
     }
   ],
   "component_rows": [
     {
-      "component_id": "lh2-intake-tank-reconstructed",
+      "component_id": "lh2-intake-tank",
       "source_ids": [
         "inspection-center-reconstructed-intake-20260121"
       ],
@@ -107,7 +107,7 @@
       }
     },
     {
-      "component_id": "lh2-storage-vent-reconstructed",
+      "component_id": "lh2-storage-vent",
       "source_ids": [
         "inspection-center-reconstructed-storage-vent-20260124"
       ],
@@ -124,7 +124,7 @@
       }
     },
     {
-      "component_id": "lh2-supply-vaporizer-boundary-reconstructed",
+      "component_id": "lh2-supply-vaporizer-boundary",
       "source_ids": [
         "inspection-center-reconstructed-supply-20260415"
       ],

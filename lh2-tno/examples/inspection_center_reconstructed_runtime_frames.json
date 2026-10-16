@@ -1,0 +1,209 @@
+{
+  "schema_version": "prism.observed_state_runtime_frames.v1",
+  "status": "STATE_RUNTIME_FRAMES_READY",
+  "source_count": 3,
+  "frame_count": 3,
+  "frames": [
+    {
+      "source_id": "inspection-center-reconstructed-intake-20260121",
+      "component_id": "lh2-intake-tank",
+      "captured_at_s": 39600.0,
+      "origin": "reconstructed",
+      "quality": "valid",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 151000.0,
+          "sensor_location": "PT1206",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 88.14999999999998,
+          "sensor_location": "TT1106",
+          "quality": "valid"
+        }
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "lh2-intake-tank",
+        "captured_at_s": 39600.0,
+        "origin": "reconstructed",
+        "pressure_pa_abs": 151000.0,
+        "temperature_k": 88.14999999999998,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 151000.0,
+            "sensor_location": "PT1206",
+            "quality": "valid"
+          },
+          "temperature": {
+            "quantity": "temperature",
+            "value_si": 88.14999999999998,
+            "sensor_location": "TT1106",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+        "quality": "valid"
+      },
+      "state_snapshot_digest": "4144767d05219fd856ff614921b4b2c5d4adc0c97f79797ef44faca2e19ec6b6",
+      "source_sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+      "operating_mode": "receiving",
+      "frame_digest": "9c8442a68ad450bd2a2e5d030719f99cb73bf0dd2790ea41548318aaa000fb4a"
+    },
+    {
+      "source_id": "inspection-center-reconstructed-storage-vent-20260124",
+      "component_id": "lh2-storage-vent",
+      "captured_at_s": 7241.0,
+      "origin": "reconstructed",
+      "quality": "valid",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 343800.00829696655,
+          "sensor_location": "PT1105A",
+          "quality": "valid"
+        }
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "lh2-storage-vent",
+        "captured_at_s": 7241.0,
+        "origin": "reconstructed",
+        "pressure_pa_abs": 343800.00829696655,
+        "temperature_k": null,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 343800.00829696655,
+            "sensor_location": "PT1105A",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "57fa14039ca34ed5fb5673c5cb06ed0d619f164c469029c03c343cc568321e2d",
+        "quality": "valid"
+      },
+      "state_snapshot_digest": "9267d8dc6a707b3ec6bf679037c7350dc39d041e75e2c6b890b6548ebb29bf60",
+      "source_sha256": "57fa14039ca34ed5fb5673c5cb06ed0d619f164c469029c03c343cc568321e2d",
+      "operating_mode": "standby",
+      "frame_digest": "87c880781e3210c19cac5a83b77e2c471999ade9d120984ebbff7a22759fdc91"
+    },
+    {
+      "source_id": "inspection-center-reconstructed-supply-20260415",
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "captured_at_s": 43200.0,
+      "origin": "reconstructed",
+      "quality": "valid",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "quantity": "pressure",
+          "value_si": 610000.0,
+          "sensor_location": "PT1101",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "quantity": "temperature",
+          "value_si": 270.15,
+          "sensor_location": "TT1116",
+          "quality": "valid"
+        }
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "lh2-supply-vaporizer-boundary",
+        "captured_at_s": 43200.0,
+        "origin": "reconstructed",
+        "pressure_pa_abs": 610000.0,
+        "temperature_k": 270.15,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 610000.0,
+            "sensor_location": "PT1101",
+            "quality": "valid"
+          },
+          "temperature": {
+            "quantity": "temperature",
+            "value_si": 270.15,
+            "sensor_location": "TT1116",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+        "quality": "valid"
+      },
+      "state_snapshot_digest": "0efa89fe28443b7cf6304264b98ab2b67fe92e97369583f99787f00c06ea56a9",
+      "source_sha256": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+      "operating_mode": "supply",
+      "frame_digest": "cfaf05aac6399b01972fd29d7bfa6d56518fe6db15914997797bbbb520e9e184"
+    }
+  ],
+  "evidence_sample_count": 8201,
+  "selection": {
+    "method": "latest_sample_by_captured_at_s_then_source_order",
+    "one_frame_per_source": true
+  },
+  "runtime_handoff_contract": {
+    "schema": "prism.equipment_process_state.v1",
+    "state_adapter": "service_state_from_runtime_frame",
+    "resolver_adapter": "request_from_observed_state_runtime_frame",
+    "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
+    "facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
+    "runtime_clock": "caller_supplied_now_s",
+    "provider_release_required_for_consequence": true,
+    "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+    "termination_and_inventory_owner": "equipment_provider",
+    "operating_mode_transport": "optional source/sample operating_mode; required by HAZOP selector"
+  },
+  "operating_mode_binding": {
+    "schema_version": "prism.explicit_operating_mode_input.v1",
+    "status": "EXPLICIT_MODE_INPUT_BOUND",
+    "source_count": 3,
+    "source_to_mode": {
+      "inspection-center-reconstructed-intake-20260121": "receiving",
+      "inspection-center-reconstructed-storage-vent-20260124": "standby",
+      "inspection-center-reconstructed-supply-20260415": "supply"
+    },
+    "inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "diagnostic_only": true
+  },
+  "policy": {
+    "state_only": true,
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "provider_release_required_for_consequence": true,
+    "operating_mode_input_bound": true,
+    "operating_mode_inferred": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Latest observed state frames are ready for an explicit normal-model or provider-resolver input. They do not create a release, frequency, or QRA result.",
+  "manifest": {
+    "path": "examples\\inspection_center_reconstructed_state_manifest.json",
+    "schema_version": "prism.observed_state_input_manifest.v1",
+    "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터"
+  }
+}
