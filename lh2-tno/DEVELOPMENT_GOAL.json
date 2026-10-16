@@ -281,7 +281,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1278 passed, 1 warning",
+  "latest_local_full_test_run": "1281 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -4086,7 +4086,7 @@
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
     "per_branch_provider_identity_handoff_policy": "Explicit scenario-to-provider identity map; missing entries withheld; no cross-branch identity reuse.",
-    "latest_local_full_test_run": "1278 passed, 1 warning"
+    "latest_local_full_test_run": "1281 passed, 1 warning"
   },
   "hazop_facility_branch_identity_partition_implemented": true,
   "hazop_facility_branch_identity_partition_key": "component_id|hazop_scenario_id",
@@ -4106,5 +4106,14 @@
   "equipment_hazop_mode_handoff_record": "docs/PRISM_equipment_to_hazop_mode_handoff_en.md",
   "equipment_hazop_mode_handoff_policy": "Explicit manifest component identity and runtime operating mode are required; unknown or missing components fail closed; no release, frequency, SLABx-LH2, or facility-QRA value is inferred.",
   "equipment_hazop_mode_handoff_test": "tests/test_equipment_hazop_handoff.py",
-  "equipment_hazop_mode_handoff_status": "QUALITATIVE_HANDOFF_READY_DIAGNOSTIC; quantitative provider and facility gates remain downstream"
+  "equipment_hazop_mode_handoff_status": "QUALITATIVE_HANDOFF_READY_DIAGNOSTIC; quantitative provider and facility gates remain downstream",
+  "equipment_hazop_quantitative_campaign_bridge_implemented": true,
+  "equipment_hazop_quantitative_campaign_bridge_schema": "prism.equipment_hazop_quantitative_campaign.v1",
+  "equipment_hazop_quantitative_campaign_bridge_module": "src/lh2_tno/equipment_hazop_campaign.py",
+  "equipment_hazop_quantitative_campaign_bridge_runner": "scripts/run_equipment_hazop_quantitative_campaign.py",
+  "equipment_hazop_quantitative_campaign_bridge_record": "docs/PRISM_equipment_HAZOP_quantitative_campaign_en.md",
+  "equipment_hazop_quantitative_campaign_bridge_example": "examples/equipment_hazop_quantitative_campaign.json",
+  "equipment_hazop_quantitative_campaign_bridge_policy": "Explicit equipment identity, operating mode, qualitative HAZOP scenario, quantitative provider scenario, reviewed frequency/release bindings, and branch partitions are required; identity drift blocks dispatch and no release/frequency/SLABx-LH2/facility-QRA value is inferred.",
+  "equipment_hazop_quantitative_campaign_bridge_test": "tests/test_equipment_hazop_campaign.py",
+  "equipment_hazop_quantitative_campaign_bridge_status": "IMPLEMENTED_DIAGNOSTIC_OPERATOR_LIMITED; strict provider qualification, physical validation, and facility IR/F-N gates remain withheld"
 }

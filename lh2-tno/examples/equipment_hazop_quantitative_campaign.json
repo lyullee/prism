@@ -1,0 +1,361 @@
+{
+  "schema_version": "prism.equipment_hazop_quantitative_campaign_manifest.v1",
+  "equipment_manifest": {
+    "schema_version": "1.0",
+    "facility_id": "generic-outdoor-lh2",
+    "environment": "outdoor",
+    "configuration_origin": "synthetic",
+    "components": [
+      {
+        "id": "TK-01",
+        "kind": "storage_tank",
+        "position_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "property_basis": {
+          "fluid": "Hydrogen",
+          "backend": "CoolProp-HEOS",
+          "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+        },
+        "parameters_si": {
+          "volume_m3": 10.0
+        }
+      }
+    ],
+    "ports": [
+      {
+        "id": "tank-01-out",
+        "component_id": "TK-01",
+        "phase": "liquid",
+        "direction": "out"
+      }
+    ]
+  },
+  "runtime_frames": {
+    "schema_version": "prism.observed_state_runtime_frames.v1",
+    "status": "STATE_RUNTIME_FRAMES_READY",
+    "source_count": 1,
+    "frame_count": 1,
+    "frames": [
+      {
+        "source_id": "historian-TK-01",
+        "component_id": "TK-01",
+        "captured_at_s": 3.0,
+        "origin": "historian_measured",
+        "quality": "valid",
+        "values": {
+          "pressure": {
+            "component_id": "TK-01",
+            "quantity": "pressure",
+            "value_si": 650000.0,
+            "sensor_location": "TK-01.vapour",
+            "quality": "valid"
+          }
+        },
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "TK-01",
+          "captured_at_s": 3.0,
+          "origin": "historian_measured",
+          "pressure_pa_abs": 650000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": null,
+          "measurements": {
+            "pressure": {
+              "quantity": "pressure",
+              "value_si": 650000.0,
+              "sensor_location": "TK-01.vapour",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "7a209e2501625eeda684973e5b9b976b2c1a3e820321211e3bf73edd6bb64c27",
+        "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operating_mode": "receiving",
+        "frame_digest": "c0e072a44b5c82ccf2778ab44fdf5378ab42542803ba1b8f89a30bf5232575d8"
+      }
+    ],
+    "evidence_sample_count": 1,
+    "selection": {
+      "method": "latest_sample_by_captured_at_s_then_source_order",
+      "one_frame_per_source": true
+    },
+    "runtime_handoff_contract": {
+      "schema": "prism.equipment_process_state.v1",
+      "state_adapter": "service_state_from_runtime_frame",
+      "resolver_adapter": "request_from_observed_state_runtime_frame",
+      "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
+      "facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
+      "runtime_clock": "caller_supplied_now_s",
+      "provider_release_required_for_consequence": true,
+      "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+      "termination_and_inventory_owner": "equipment_provider",
+      "operating_mode_transport": "optional source/sample operating_mode; required by HAZOP selector"
+    },
+    "operating_mode_binding": {
+      "schema_version": "prism.explicit_operating_mode_input.v1",
+      "status": "EXPLICIT_MODE_INPUT_BOUND",
+      "source_count": 1,
+      "source_to_mode": {
+        "historian-TK-01": "receiving"
+      },
+      "inference_performed": false,
+      "sensor_frequency_learning_used": false,
+      "diagnostic_only": true
+    },
+    "policy": {
+      "state_only": true,
+      "release_scenario_generated": false,
+      "frequency_inference_performed": false,
+      "sensor_frequency_learning_used": false,
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "provider_release_required_for_consequence": true,
+      "operating_mode_input_bound": true,
+      "operating_mode_inferred": false,
+      "diagnostic_only": true
+    },
+    "interpretation": "Latest observed state frames are ready for an explicit normal-model or provider-resolver input. They do not create a release, frequency, or QRA result.",
+    "facility_id": "generic-outdoor-lh2"
+  },
+  "hazop_table_set": {
+    "schema_version": "prism.hazop_runtime_table_set.v1",
+    "tables": {
+      "TK-01": {
+        "schema_version": "prism.hazop_operating_mode_selection.v1",
+        "id": "runtime-test-hazop",
+        "facility_id": "generic-outdoor-lh2",
+        "operating_modes": [
+          "receiving",
+          "supply",
+          "standby"
+        ],
+        "configuration_origin": "synthetic",
+        "source_provenance": "PRISM example fixture",
+        "rows": [
+          {
+            "id": "high-pressure",
+            "component_id": "TK-01",
+            "component_kind": "storage_tank",
+            "operating_modes": [
+              "receiving"
+            ],
+            "variable_tag": "pressure",
+            "quantity": "pressure",
+            "trigger": "at_or_above",
+            "threshold_high_si": 600000.0,
+            "scenario_family": "vessel_hole",
+            "release_mode": "hole",
+            "priority": "high",
+            "deviation_label": "high pressure",
+            "cause_summary": "example threshold crossing",
+            "consequence_summary": "provider release required",
+            "provenance": "PRISM example fixture"
+          }
+        ]
+      }
+    }
+  },
+  "runtime_result": {
+    "schema_version": "prism.hazop_facility_runtime.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+    "component_count": 1,
+    "components": {
+      "TK-01": {
+        "status": "CONSEQUENCE_BRANCHES_EVALUATED",
+        "component_id": "TK-01",
+        "selection": {
+          "status": "SCENARIOS_SELECTED",
+          "state_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "operating_mode": "receiving"
+        },
+        "branches": [
+          {
+            "scenario_id": "TK01-high-pressure-receiving",
+            "scenario_family": "vessel_hole",
+            "release_mode": "hole",
+            "result": {
+              "status": "CONSEQUENCE_EVALUATED",
+              "consequence": {
+                "data": {
+                  "ignition_branch_probabilities": {
+                    "direct_fire": 0.25,
+                    "delayed_flash_fire": 0.35,
+                    "delayed_explosion": 0.1,
+                    "no_ignition": 0.3
+                  },
+                  "receptors": [
+                    {
+                      "id": "worker-01",
+                      "harm_given_observed_release_low_high": [
+                        0.2,
+                        0.4
+                      ]
+                    }
+                  ]
+                },
+                "equipment_release_path": {
+                  "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
+                  "boundaries": [
+                    {
+                      "event_id": "evt-tk01-hole",
+                      "component_id": "TK-01",
+                      "port_id": "liquid-outlet",
+                      "provider_source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                      "provider_result_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                      "provider_boundary_reference": "provider://tk01/outlet",
+                      "termination_basis": "model_pressure_equalization",
+                      "termination_provenance": "reviewed provider packet",
+                      "event_kind": "accidental_leak",
+                      "input_origin": "native_provider",
+                      "duration_s": 2.0,
+                      "available_mass_kg": 100.0,
+                      "cumulative_mass_out_kg": 80.0,
+                      "provider_mass_balance": {
+                        "status": "closed"
+                      }
+                    }
+                  ],
+                  "termination": {
+                    "basis": "model_pressure_equalization",
+                    "time_s": 2.0,
+                    "provenance": "reviewed provider packet"
+                  },
+                  "inventory": {
+                    "cumulative_mass_out_kg": 80.0,
+                    "mass_residual_kg": 20.0
+                  }
+                }
+              }
+            },
+            "risk": {
+              "status": "AVAILABLE_CURRENT_WEATHER_IR",
+              "annual_ir_low_high": {
+                "worker-01": [
+                  0.0002,
+                  0.0004
+                ]
+              },
+              "risk_atom": {
+                "event_id": "evt-tk01-hole",
+                "asset_id": "TK-01",
+                "initiating_frequency_per_year": 0.001,
+                "conditional_weight": 1.0,
+                "annual_condition_probability": 1.0,
+                "release_branch_probability": 1.0,
+                "occupancy_probability": 1.0,
+                "receptor_harm_low_high": {
+                  "worker-01": [
+                    0.2,
+                    0.4
+                  ]
+                },
+                "frequency_provenance": "reviewed LH2 literature fixture",
+                "frequency_source_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "frequency_is_not_inferred": true,
+                "frequency_p05_per_year": 0.0005,
+                "frequency_p95_per_year": 0.002,
+                "expected_deaths_low_high": null
+              }
+            }
+          }
+        ]
+      }
+    },
+    "conditional_current_weather_risk": {
+      "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+      "annual_ir_low_high_by_receptor": {
+        "worker-01": [
+          0.0002,
+          0.0004
+        ]
+      }
+    }
+  },
+  "annual_conditions": [
+    {
+      "id": "weather-d-03",
+      "annual_probability": 1.0,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "stability_class": "D"
+      },
+      "population": [
+        {
+          "receptor_id": "worker-01",
+          "persons": 12.0,
+          "presence_probability": 1.0,
+          "provenance": "reviewed outdoor population fixture"
+        }
+      ],
+      "provenance": "reviewed annual weather fixture"
+    }
+  ],
+  "scenario_bindings": [
+    {
+      "component_id": "TK-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "TK01-high-pressure-receiving",
+      "event_id": "evt-tk01-hole",
+      "asset_id": "TK-01",
+      "annual_condition_id": "weather-d-03",
+      "release_branch_id": "reviewed-isolation",
+      "release_branch_probability": 1.0,
+      "ignition_branch_probabilities": {
+        "direct_fire": 0.25,
+        "delayed_flash_fire": 0.35,
+        "delayed_explosion": 0.1,
+        "no_ignition": 0.3
+      },
+      "branch_harm_low_high": {
+        "worker-01": {
+          "direct_fire": [
+            0.2857142857142857,
+            0.5714285714285714
+          ],
+          "delayed_flash_fire": [
+            0.2857142857142857,
+            0.5714285714285714
+          ],
+          "delayed_explosion": [
+            0.2857142857142857,
+            0.5714285714285714
+          ],
+          "no_ignition": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "scenario_families": [
+        "vessel_hole"
+      ]
+    }
+  ],
+  "branch_probabilities": {
+    "TK-01|TK01-high-pressure-receiving": 1.0
+  },
+  "branch_partition_groups": {
+    "TK-01|TK01-high-pressure-receiving": "pressure-deviation"
+  },
+  "scenario_identity_crosswalk": [
+    {
+      "component_id": "TK-01",
+      "qualitative_scenario_id": "high-pressure:receiving:vessel_hole",
+      "quantitative_scenario_id": "TK01-high-pressure-receiving"
+    }
+  ],
+  "expected_component_ids": [
+    "TK-01"
+  ],
+  "provenance": "synthetic example only; not a facility qualification record"
+}

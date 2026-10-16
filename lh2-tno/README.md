@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1267 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1281 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 ## What PRISM is for
 
@@ -164,6 +164,30 @@ and the reusable implementation is
 The full IJHE audit can consume this record with
 `--inspection-center-facility-ijhe-handoff-audit`; it appears as a
 `diagnostic_only` check and does not weaken the strict facility-QRA gates.
+
+For a generic digital-twin integration that must connect the qualitative and
+quantitative layers in one auditable call, use
+[`equipment_hazop_campaign.py`](src/lh2_tno/equipment_hazop_campaign.py). It
+requires an explicit scenario-identity crosswalk whenever the HAZOP table and
+the equipment provider use different scenario IDs. The crosswalk is checked
+for every selected component and mode before the annual campaign is dispatched:
+
+```powershell
+python scripts/run_equipment_hazop_quantitative_campaign.py `
+  --manifest examples/equipment_hazop_quantitative_campaign.json `
+  --now-s 1710000000 `
+  --output build/equipment_hazop_quantitative_campaign.json
+```
+
+The output contains the equipment-to-HAZOP handoff, the qualitative-to-
+quantitative identity audit, the existing campaign result, and the facility
+ledger. An unknown component, stale frame, mode mismatch, or scenario-ID drift
+stops dispatch and returns a blocked result. The adapter never creates a leak,
+assigns a frequency, runs SLABx-LH2, or promotes facility IR/F-N by itself;
+those values remain explicit provider, literature, weather, ignition,
+population, and protection inputs. See
+[`PRISM_equipment_HAZOP_quantitative_campaign_en.md`](docs/PRISM_equipment_HAZOP_quantitative_campaign_en.md)
+for the input schema and connector checklist.
 
 The inspection-centre source inventory is documented in
 [`PRISM_inspection_center_source_suitability_20261115.md`](docs/PRISM_inspection_center_source_suitability_20261115.md).
