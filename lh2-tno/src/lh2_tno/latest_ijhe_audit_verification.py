@@ -238,6 +238,86 @@ def verify_latest_ijhe_audit(
                 if asset_blocked_count != release_value.get("strict_release_boundary_blocked_case_count"):
                     reasons.append("latest release-boundary asset summary blocked count disagrees")
 
+        # The completion audit also embeds a case-level release-boundary
+        # snapshot.  Check that snapshot against the pointed artifact instead
+        # of trusting a stale copied summary.  This is metadata consistency
+        # only; it never changes the qualification gate.
+        embedded_boundary = next(
+            (
+                item
+                for item in checks
+                if isinstance(item, Mapping)
+                and item.get("name") == "diagnostic_release_boundary_case_audit"
+            ),
+            None,
+        )
+        if isinstance(embedded_boundary, Mapping):
+            embedded = embedded_boundary.get("evidence")
+            if isinstance(embedded, Mapping):
+                for key in (
+                    "case_count",
+                    "strict_release_boundary_eligible_case_count",
+                    "strict_release_boundary_blocked_case_count",
+                    "provider_termination_evidence_status_counts",
+                    "provider_termination_evidence_used_case_count",
+                ):
+                    if key in embedded and embedded.get(key) != release_value.get(key):
+                        reasons.append(
+                            f"latest audit embedded release-boundary {key} disagrees with source ledger"
+                        )
+
+        embedded_trace = next(
+            (
+                item
+                for item in checks
+                if isinstance(item, Mapping)
+                and item.get("name") == "diagnostic_conditional_facility_release_trace"
+            ),
+            None,
+        )
+        if isinstance(embedded_trace, Mapping):
+            embedded = embedded_trace.get("evidence")
+            trace_record = (
+                embedded.get("record")
+                if isinstance(embedded, Mapping)
+                else None
+            )
+            trace_path = (
+                _relative_or_absolute(trace_record, root=base)
+                if isinstance(trace_record, str) and trace_record.strip()
+                else None
+            )
+            trace_value = _read_object(trace_path) if trace_path and trace_path.exists() else None
+            source_summary = (
+                trace_value.get("release_trace", {}).get("summary")
+                if isinstance(trace_value, Mapping)
+                and isinstance(trace_value.get("release_trace"), Mapping)
+                else None
+            )
+            embedded_summary = (
+                embedded.get("summary")
+                if isinstance(embedded, Mapping)
+                else None
+            )
+            if isinstance(source_summary, Mapping) and isinstance(embedded_summary, Mapping):
+                for key in (
+                    "case_count",
+                    "strict_release_boundary_eligible_case_count",
+                    "strict_release_boundary_blocked_case_count",
+                    "numerically_closed_case_count",
+                    "numerically_open_case_count",
+                    "operator_review_required_case_count",
+                    "consequence_domain_truncated_case_count",
+                    "numerical_closure_status_counts",
+                    "consequence_domain_status_counts",
+                    "facility_ir_fn_promotion",
+                    "risk_atom_count",
+                ):
+                    if key in embedded_summary and embedded_summary.get(key) != source_summary.get(key):
+                        reasons.append(
+                            f"latest audit embedded release-trace {key} disagrees with source ledger"
+                        )
+
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
     # identity and fail-closed claims here as well.  This keeps a stale or

@@ -387,3 +387,66 @@ def test_latest_ijhe_audit_verification_rejects_asset_summary_count_drift(tmp_pa
     result = verify_latest_ijhe_audit(status, root=tmp_path)
     assert result["status"] == "BLOCKED_AUDIT_METADATA"
     assert any("asset summary case count" in reason for reason in result["blocking_reasons"])
+
+
+def test_latest_ijhe_audit_verification_rejects_embedded_release_snapshot_drift(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [
+            {
+                "name": "diagnostic_release_boundary_case_audit",
+                "status": "PASS",
+                "evidence": {
+                    "case_count": 2,
+                    "strict_release_boundary_eligible_case_count": 2,
+                    "strict_release_boundary_blocked_case_count": 0,
+                    "provider_termination_evidence_status_counts": {"VALID": 2},
+                    "provider_termination_evidence_used_case_count": 2,
+                },
+            }
+        ],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    release = {
+        "schema_version": "prism.release_boundary_case_audit.v1",
+        "status": "CASE_BOUNDARY_PARTIAL",
+        "case_count": 2,
+        "strict_release_boundary_eligible_case_count": 1,
+        "strict_release_boundary_blocked_case_count": 1,
+        "provider_termination_evidence_status_counts": {"VALID": 1, "INVALID": 1},
+        "provider_termination_evidence_used_case_count": 1,
+        "facility_ir_fn_promotion": False,
+        "provider_qualification_claim": False,
+        "independent_physical_validation_claim": False,
+    }
+    for name, value in {
+        "audit.json": audit,
+        "handoff.json": handoff,
+        "release.json": release,
+    }.items():
+        _write(tmp_path / name, value)
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "latest_release_boundary_case_audit": "release.json",
+        "latest_union_case_count": 2,
+        "latest_ijhe_completion_audit_release_boundary_eligible_case_count": 1,
+        "latest_ijhe_completion_audit_release_boundary_blocked_case_count": 1,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("embedded release-boundary" in reason for reason in result["blocking_reasons"])

@@ -5943,8 +5943,8 @@
         "release_audit_evidence_request_alignment": "ALIGNED",
         "release_audit_evidence_request_rows_match": true,
         "facility_evidence_request_case_count": 44,
-        "strict_release_boundary_eligible_case_count": 3,
-        "strict_release_boundary_blocked_case_count": 41,
+        "strict_release_boundary_eligible_case_count": 13,
+        "strict_release_boundary_blocked_case_count": 31,
         "termination_basis_counts": {
           "emergency_relief_discharge": 1,
           "inventory_depletion": 25,
@@ -5957,10 +5957,9 @@
         "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY",
         "provider_termination_evidence_status_counts": {
           "INVALID": 2,
-          "NOT_SUPPLIED": 10,
-          "VALID": 32
+          "VALID": 42
         },
-        "provider_termination_evidence_used_case_count": 32,
+        "provider_termination_evidence_used_case_count": 42,
         "provider_qualification_status_counts": {
           "BLOCKED": 44
         },
@@ -5987,20 +5986,19 @@
         "rows": 44,
         "summary": {
           "case_count": 44,
-          "strict_release_boundary_eligible_case_count": 3,
-          "strict_release_boundary_blocked_case_count": 41,
-          "numerically_closed_case_count": 32,
-          "numerically_open_case_count": 12,
+          "strict_release_boundary_eligible_case_count": 13,
+          "strict_release_boundary_blocked_case_count": 31,
+          "numerically_closed_case_count": 42,
+          "numerically_open_case_count": 2,
           "operator_review_required_case_count": 29,
-          "consequence_domain_truncated_case_count": 1,
+          "consequence_domain_truncated_case_count": 0,
           "numerical_closure_status_counts": {
-            "NUMERICALLY_CLOSED": 3,
+            "NUMERICALLY_CLOSED": 13,
             "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 29,
-            "NUMERICALLY_OPEN": 12
+            "NUMERICALLY_OPEN": 2
           },
           "consequence_domain_status_counts": {
-            "CLOSED": 43,
-            "TRUNCATED": 1
+            "CLOSED": 44
           },
           "facility_ir_fn_promotion": false,
           "risk_atom_count": 176

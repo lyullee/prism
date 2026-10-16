@@ -1,10 +1,10 @@
-# PRISM IJHE Readiness Audit — 15 November 2026
+# PRISM IJHE Readiness Audit — current union evidence
 
 This document is the English companion to the latest PRISM readiness record. It describes the current **generic outdoor liquid-hydrogen (LH2) facility** scope. Inspection-center data are used only as state, operating-mode, and HAZOP diagnostics; they are not converted into accident frequencies or qualified release packets.
 
 ## Current result
 
-The latest audit is `INCOMPLETE_EVIDENCE` with **54 checks: 49 pass and 5 blocked**. The conditional calculation chain is connected, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
+The latest audit is `INCOMPLETE_EVIDENCE` with **54 checks: 49 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
 | Item | Current evidence |
 |---|---:|
@@ -13,10 +13,11 @@ The latest audit is `INCOMPLETE_EVIDENCE` with **54 checks: 49 pass and 5 blocke
 | Risk atoms reaching the facility ledger | 176 |
 | Exact native packet matches | 24/24 |
 | Frequency-port binding | 44/44 |
-| Cases with event-level P05/P95 | 35/44 |
-| Cases with point rate only | 9/44 |
 | Numerically closed cases | 42/44 |
+| Numerically open cases | 2/44 |
+| Cases requiring operator review | 29/44 |
 | Strict release-boundary eligible cases | 13/44 |
+| Provider termination evidence | 42 valid, 2 invalid |
 | Facility IR/F-N promotion | `false` |
 | Frequency inference or sensor learning | `false` |
 
@@ -39,8 +40,8 @@ The current-state monitor can consume a cached or already-computed provider resu
 
 ## Strict blockers
 
-1. The release boundary is not closed for every declared case. A row marked `ELIGIBLE` only has a closed numerical termination ledger; it is not a qualified provider result.
-2. No facility case currently has an externally qualified provider release packet and qualification sidecar.
+1. The release boundary is not closed for every declared case. Only 13 of 44 cases are currently strict-boundary eligible; 29 require operator review and 2 remain numerically open.
+2. No facility case currently has an externally qualified provider release packet and qualification sidecar. The 42 valid termination-evidence rows are diagnostic closure evidence, not provider qualification.
 3. Independent physical-validation evidence for the complete release-to-dispersion-to-damage chain is not available. The SLABx-LH2 evidence is restricted component evidence.
 4. Facility-wide IR/F-N remains withheld while the scope and provider gates are open.
 
@@ -67,7 +68,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The full local regression suite currently reports **1,291 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
+The current status ledger records **1,331 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 
