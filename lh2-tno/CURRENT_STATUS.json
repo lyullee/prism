@@ -5417,24 +5417,28 @@
   "inspection_center_source_inventory_accident_release_promotion": false,
   "inspection_center_source_inventory_frequency_learning": false,
   "inspection_center_source_inventory_physical_validation_claim": false,
-  "slabx_lh2_test6_high_resolution_gate_status": "NUMERICAL_GATE_ACCEPTED_INDEPENDENT_COMPARISON_REVIEW_READY",
-  "slabx_lh2_test6_high_resolution_gate_record": "results/20261115/slabx_lh2_test6_high_resolution_gate/independent_comparison_audit.json",
-  "slabx_lh2_test6_high_resolution_gate_provenance": "results/20261115/slabx_lh2_test6_high_resolution_gate/provenance.json",
-  "slabx_lh2_test6_high_resolution_gate_levels": [
+  "slabx_lh2_test6_actual_source_numerical_gate_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN",
+  "slabx_lh2_test6_actual_source_numerical_gate_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate/provenance.json",
+  "slabx_lh2_test6_actual_source_numerical_gate_refinement": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate/refinement.json",
+  "slabx_lh2_test6_actual_source_numerical_gate_levels": [
+    40,
+    80,
+    160,
+    320,
     640,
-    1280,
-    2560,
-    5120
+    1280
   ],
-  "slabx_lh2_test6_high_resolution_gate_last_pair_relative_changes": {
-    "H2_vol_pct_at_30_m": 5.097767821168394e-06,
-    "centre_height_m_at_30_m": 7.072957715432721e-07,
-    "cloud_depth_m_at_30_m": 1.0933796487483373e-05,
-    "temperature_K_at_30_m": 1.277817290368297e-07
+  "slabx_lh2_test6_actual_source_numerical_gate_last_pair_relative_changes": {
+    "H2_vol_pct_at_30_m": 0.19719025825722364,
+    "centre_height_m_at_30_m": 0.3118763594546088,
+    "cloud_depth_m_at_30_m": 0.0415213595877465,
+    "temperature_K_at_30_m": 0.00493915837236222,
+    "MAE_vol_pct": 0.04617591972538058,
+    "RMSE_vol_pct": 0.002373795060655996
   },
-  "slabx_lh2_test6_high_resolution_gate_physical_validation_claim": false,
-  "slabx_lh2_test6_high_resolution_gate_facility_qra_claim": false,
-  "slabx_lh2_test6_high_resolution_gate_interpretation": "Numerical refinement accepted for the independent FFI Test 6 SLABx component comparison; external source/operator review, full-chain physical validation and facility QRA remain withheld.",
-  "slabx_lh2_test6_high_resolution_gate_doc": "docs/PRISM_FFI_Test6_numerical_gate_high_resolution_20261115.md",
-  "slabx_lh2_test6_high_resolution_gate_record_sha256": "9783069D0A0F3EB8741C3BB6DD930CC1A7BA8B7EB604B1B5D7CC6990C98BBE8F"
+  "slabx_lh2_test6_actual_source_numerical_gate_accepted": false,
+  "slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim": false,
+  "slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim": false,
+  "slabx_lh2_test6_actual_source_numerical_gate_interpretation": "Actual FFI Test 6 LH2 source remains numerically unresolved; no separate pseudo-source convergence record is substituted.",
+  "slabx_lh2_test6_actual_source_numerical_gate_doc": "docs/PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md"
 }

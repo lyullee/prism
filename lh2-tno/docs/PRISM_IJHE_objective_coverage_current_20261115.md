@@ -48,13 +48,13 @@ The finite-inventory termination margin probe is documented in
 it confirms that the remaining open inventory cases cannot be closed by
 extrapolating the current provider horizon.
 
-The independent FFI Test 6 SLABx comparison now also has a high-resolution
-numerical gate record in
-[`PRISM_FFI_Test6_numerical_gate_high_resolution_20261115.md`](PRISM_FFI_Test6_numerical_gate_high_resolution_20261115.md).
-The 2560-to-5120 refinement changes all monitored values by less than 2% and
-is therefore accepted as a numerical-stability result. It does not open the
-independent physical-validation gate because source/operator review and
-full-chain validation are still required.
+The independent FFI Test 6 SLABx comparison now has an actual-source
+numerical-gate record in
+[`PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md`](PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md).
+The 640-to-1280 refinement remains above the 2% criterion for the monitored
+source and plume values, so the comparison gate remains open. This unresolved
+numerical result is retained explicitly and does not support an independent
+physical-validation or facility-QRA claim.
 
 ## Open evidence gates
 

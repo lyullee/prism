@@ -3184,9 +3184,9 @@
   "v060_readiness_current_slabx_direct_component_comparison_rmse_vol_pct": 1.2106452167244133,
   "v060_readiness_current_slabx_direct_component_comparison_independent_holdout_claim": false,
   "ci_local_reproduction_record_sha256": "e24e56993cf4dfa0d24b0f572746889dd002c273b9f33c9c13331fe034149d7e",
-  "v060_readiness_current_slabx_independent_comparison_record": "results/20261115/slabx_lh2_test6_high_resolution_gate/independent_comparison_audit.json",
-  "v060_readiness_current_slabx_independent_comparison_sha256": "9783069D0A0F3EB8741C3BB6DD930CC1A7BA8B7EB604B1B5D7CC6990C98BBE8F",
-  "v060_readiness_current_slabx_independent_comparison_status": "INDEPENDENT_COMPARISON_REVIEW_READY_NUMERICAL_GATE_ACCEPTED",
+  "v060_readiness_current_slabx_independent_comparison_record": "results/20261106/slabx_lh2_independent_comparison_audit.json",
+  "v060_readiness_current_slabx_independent_comparison_sha256": "DA83E398618179B101D405A9426B5ED059FF341A2E08983FF5DCFC91523B7C39",
+  "v060_readiness_current_slabx_independent_comparison_status": "RESTRICTED_INDEPENDENT_COMPARISON_SOURCE_GATE_OPEN",
   "v060_readiness_current_slabx_independent_comparison_sensor_count": 30,
   "v060_readiness_current_slabx_independent_comparison_row_count": 30,
   "v060_readiness_current_slabx_independent_comparison_mae_vol_pct": 1.8671267816835724,
@@ -3196,12 +3196,12 @@
     3,
     0
   ],
-  "v060_readiness_current_slabx_independent_comparison_source_gate_accepted": true,
+  "v060_readiness_current_slabx_independent_comparison_source_gate_accepted": false,
   "v060_readiness_current_slabx_independent_comparison_physical_validation_claim": false,
   "v060_readiness_current_slabx_independent_comparison_facility_qra_claim": false,
-  "slabx_lh2_independent_comparison_record": "results/20261115/slabx_lh2_test6_high_resolution_gate/independent_comparison_audit.json",
-  "slabx_lh2_independent_comparison_sha256": "9783069D0A0F3EB8741C3BB6DD930CC1A7BA8B7EB604B1B5D7CC6990C98BBE8F",
-  "slabx_lh2_independent_comparison_status": "INDEPENDENT_COMPARISON_REVIEW_READY_NUMERICAL_GATE_ACCEPTED",
+  "slabx_lh2_independent_comparison_record": "results/20261106/slabx_lh2_independent_comparison_audit.json",
+  "slabx_lh2_independent_comparison_sha256": "DA83E398618179B101D405A9426B5ED059FF341A2E08983FF5DCFC91523B7C39",
+  "slabx_lh2_independent_comparison_status": "RESTRICTED_INDEPENDENT_COMPARISON_SOURCE_GATE_OPEN",
   "slabx_lh2_independent_comparison_sensor_count": 30,
   "slabx_lh2_independent_comparison_row_count": 30,
   "slabx_lh2_independent_comparison_mae_vol_pct": 1.8671267816835724,
@@ -3211,7 +3211,7 @@
     3,
     0
   ],
-  "slabx_lh2_independent_comparison_source_gate_accepted": true,
+  "slabx_lh2_independent_comparison_source_gate_accepted": false,
   "slabx_lh2_independent_comparison_independent_physical_validation_claim": false,
   "slabx_lh2_independent_comparison_facility_qra_claim": false,
   "legacy_tno_frequency_bridge_implemented": true,
@@ -4018,21 +4018,20 @@
     "ijhe_blocked": 5
   },
   "v060_readiness_current_slabx_independent_comparison_independent_physical_validation_claim": false,
-  "v060_readiness_current_slabx_independent_comparison_numerical_gate_levels": [
-    640,
-    1280,
-    2560,
-    5120
-  ],
-  "v060_readiness_current_slabx_independent_comparison_numerical_gate_last_pair_max_relative_change": 1.0933796487483373e-05,
   "slabx_lh2_independent_comparison_physical_validation_claim": false,
-  "slabx_lh2_independent_comparison_numerical_gate_levels": [
-    640,
-    1280,
-    2560,
-    5120
-  ],
-  "slabx_lh2_independent_comparison_numerical_gate_last_pair_max_relative_change": 1.0933796487483373e-05,
-  "slabx_lh2_test6_high_resolution_gate_doc": "docs/PRISM_FFI_Test6_numerical_gate_high_resolution_20261115.md",
-  "slabx_lh2_test6_high_resolution_gate_interpretation": "Numerical stability accepted; external source/operator review, independent full-chain physical validation and facility QRA remain withheld."
+  "slabx_lh2_test6_actual_source_numerical_gate_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN",
+  "slabx_lh2_test6_actual_source_numerical_gate_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate/provenance.json",
+  "slabx_lh2_test6_actual_source_numerical_gate_refinement": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate/refinement.json",
+  "slabx_lh2_test6_actual_source_numerical_gate_accepted": false,
+  "slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim": false,
+  "slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim": false,
+  "slabx_lh2_test6_actual_source_numerical_gate_doc": "docs/PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md",
+  "slabx_lh2_test6_actual_source_numerical_gate_last_pair_relative_changes": {
+    "H2_vol_pct_at_30_m": 0.19719025825722364,
+    "centre_height_m_at_30_m": 0.3118763594546088,
+    "cloud_depth_m_at_30_m": 0.0415213595877465,
+    "temperature_K_at_30_m": 0.00493915837236222,
+    "MAE_vol_pct": 0.04617591972538058,
+    "RMSE_vol_pct": 0.002373795060655996
+  }
 }
