@@ -1,0 +1,108 @@
+{
+  "schema_version": "prism.inspection_center_source_inventory_suitability.v1",
+  "status": "NORMAL_OPERATION_SOURCE_SCREENED_DIAGNOSTIC_ONLY",
+  "purpose": "Bound the inspection-centre data before it is used by the generic outdoor LH2 PRISM chain.",
+  "source_identity": {
+    "display_name": "LH2 Inspection Support Center data",
+    "source_root_label": "액화수소검사지원센터 데이터",
+    "source_kind": "normal_operation_and_training_or_recovery_time_series",
+    "independent_historian_measurement_claim": false,
+    "source_owner_review_required": true
+  },
+  "inventory": {
+    "source_file_count": 17,
+    "workbook_count": 17,
+    "sheet_count": 78,
+    "signal_category_count": {
+      "differential_pressure": 126,
+      "pressure": 246,
+      "sequence_metadata": 105,
+      "temperature": 93,
+      "time": 10,
+      "unknown": 493
+    },
+    "numeric_signal_unit_status_count": {
+      "MISSING_OR_UNCONFIRMED": 522
+    },
+    "timestamps_or_sequence_columns_observed": true,
+    "pressure_temperature_and_differential_signals_observed": true
+  },
+  "evidence_suitability": {
+    "timestamped_process_state_screening": {
+      "available": true,
+      "promotion": "diagnostic_only",
+      "reason": "The audit found timestamped process and sequence columns, but not a complete reviewed tag/unit/calibration map."
+    },
+    "explicit_operating_mode_and_hazop_diagnostic": {
+      "available": true,
+      "promotion": "diagnostic_only",
+      "reason": "Explicit modes and a reconstructed state adapter may select a HAZOP branch; this does not turn normal rows into an accident."
+    },
+    "accident_release_boundary": {
+      "available": false,
+      "promotion": "withheld",
+      "missing_fields": [
+        "initiating_failure_or_aperture_definition",
+        "mass_flow_or_release_rate_time_history",
+        "release_duration_and_termination_evidence",
+        "isolation_and_inventory_depletion_evidence",
+        "phase_and_source_term_validation_context"
+      ]
+    },
+    "failure_frequency": {
+      "available": false,
+      "promotion": "withheld",
+      "reason": "Normal-operation time series do not provide a counted failure population, exposure denominator, or qualified event-frequency record.",
+      "sensor_frequency_learning_used": false
+    },
+    "independent_physical_validation": {
+      "available": false,
+      "promotion": "withheld",
+      "reason": "The source package is not an independent accident-release validation campaign."
+    }
+  },
+  "promotion_gates": {
+    "raw_state_snapshot_binding_allowed": false,
+    "reviewed_numeric_state_binding_allowed": false,
+    "reconstructed_state_evidence_only": true,
+    "frequency_applied": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "provider_packet_qualified": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false,
+    "reason": "Use the files for state/HAZOP diagnostics only until source-owner unit, tag, calibration, identity, and accident-release evidence are separately reviewed."
+  },
+  "allowed_uses": [
+    "screen timestamped process-state patterns",
+    "reconstruct an explicitly labelled state frame",
+    "pass an explicit operating mode to a HAZOP diagnostic gate",
+    "exercise the fail-closed provider/consequence interface with a separately identified diagnostic packet"
+  ],
+  "forbidden_implicit_promotions": [
+    "infer a leak size or release duration from pressure or temperature alone",
+    "learn annual failure frequency from alarms or normal-operation samples",
+    "treat reconstructed/training data as independent accident measurements",
+    "promote a provider packet or facility IR/F-N result from this source inventory"
+  ],
+  "references": {
+    "timeseries_audit": {
+      "path": "results/20261106/external_support_center_timeseries_audit.json",
+      "sha256": "c4fc9a01270a9c151397229f893ffe63ce17bfc87e80955ff719a81c8ab89549",
+      "schema": "prism.inspection_center_timeseries_audit.v1",
+      "status": "SCREENING_ONLY_UNIT_BASIS_UNCONFIRMED"
+    },
+    "reviewed_signal_unit_evidence": {
+      "path": "results/20261014/support_center_reviewed_signal_unit_evidence.json",
+      "sha256": "2998690f4373410ef52b25b74338536ae9cc032d784cd057c8517766df9c101f",
+      "schema": "prism.reviewed_signal_unit_evidence.v1",
+      "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL"
+    },
+    "reconstructed_state_evidence": {
+      "path": "examples/inspection_center_reconstructed_state_evidence.json",
+      "sha256": "fd22416141d680730e5f57e96183d04d5258e375548ee28979a10338e4f36d61",
+      "schema": "prism.observed_equipment_state_evidence.v1",
+      "status": "OBSERVATION_STATE_EVIDENCE_ONLY"
+    }
+  }
+}

@@ -32,6 +32,12 @@ The current chain is explicit and auditable:
 
 The latest 49-check audit also includes the reconstructed inspection-center handoff and the receptor-geometry comparison. Those two checks are diagnostic only. A near-receptor result must not be substituted for the declared facility receptor geometry.
 
+The inspection-centre source boundary is documented separately in
+[`PRISM_inspection_center_source_suitability_20261115.md`](PRISM_inspection_center_source_suitability_20261115.md).
+It records 17 workbooks and 78 sheets with timestamped process signals, while
+keeping unit/tag/calibration review, accident-release evidence, frequency
+evidence, and independent physical validation as explicit open gates.
+
 ## Open evidence gates
 
 The following gates remain intentionally fail-closed:

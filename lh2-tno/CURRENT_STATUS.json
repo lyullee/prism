@@ -63,7 +63,7 @@
   "realtime_monitor_implemented": true,
   "realtime_monitor_module": "src/lh2_tno/service.py",
   "realtime_monitor_policy": "Normalize each frame, run the declared consequence service, and record deadline status, input age, exact-cache/fresh-physics mode; never infer leak size or initiating frequency and never substitute stale output after a deadline miss.",
-  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1244 passed, 1 warning; CI Run #941 completed successfully.",
+  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1245 passed, 1 warning; CI Run #941 completed successfully.",
   "realtime_monitor_one_hz_claim": false,
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
@@ -178,7 +178,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1244 passed, 1 warning",
+  "latest_local_full_test_run": "1245 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -5400,5 +5400,14 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "latest_ijhe_objective_coverage_audit_sha256": "883FF7F7F56EC461A28D35F400D916AA055E4DC3C1BE2FFBA90B4E053C701134"
+  "latest_ijhe_objective_coverage_audit_sha256": "883FF7F7F56EC461A28D35F400D916AA055E4DC3C1BE2FFBA90B4E053C701134",
+  "inspection_center_source_inventory_suitability_record": "results/20261115/inspection_center_source_inventory_suitability.json",
+  "inspection_center_source_inventory_suitability_doc": "docs/PRISM_inspection_center_source_suitability_20261115.md",
+  "inspection_center_source_inventory_suitability_status": "NORMAL_OPERATION_SOURCE_SCREENED_DIAGNOSTIC_ONLY",
+  "inspection_center_source_inventory_workbook_count": 17,
+  "inspection_center_source_inventory_sheet_count": 78,
+  "inspection_center_source_inventory_numeric_unit_status": "MISSING_OR_UNCONFIRMED",
+  "inspection_center_source_inventory_accident_release_promotion": false,
+  "inspection_center_source_inventory_frequency_learning": false,
+  "inspection_center_source_inventory_physical_validation_claim": false
 }

@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1244 passed, 1 warning**.
+The v0.6.3 local validation result is **1245 passed, 1 warning**.
 
 ## What PRISM is for
 
@@ -165,6 +165,11 @@ The full IJHE audit can consume this record with
 `--inspection-center-facility-ijhe-handoff-audit`; it appears as a
 `diagnostic_only` check and does not weaken the strict facility-QRA gates.
 
+The inspection-centre source inventory is documented in
+[`PRISM_inspection_center_source_suitability_20261115.md`](docs/PRISM_inspection_center_source_suitability_20261115.md).
+It is a state/HAZOP diagnostic input boundary; it does not create accident
+releases or learn failure frequencies from normal-operation signals.
+
 ## Equipment and provider boundary
 
 The state frame contains facility ID, component ID, operating mode, timestamp, measured or predicted values, units, signal quality, and provenance. It does not contain `resolved_release`, opening diameter, annual frequency, duration, or termination basis.
@@ -213,6 +218,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 ## Documentation
 
+- [Current IJHE objective coverage](docs/PRISM_IJHE_objective_coverage_current_20261115.md)
+- [Inspection-centre source suitability boundary](docs/PRISM_inspection_center_source_suitability_20261115.md)
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
 - [Korean user manual](docs/PRISM_USER_MANUAL_ko.md)
