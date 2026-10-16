@@ -29,6 +29,8 @@ The latest release-boundary ledger has 44 declared cases, 3 strict-eligible rows
 
 A blocked gate is not treated as zero risk, and no unsupported accident family is substituted for a missing case.
 
+The default full-union receptor is a synthetic worker location at 20 m, so its conditional harm envelope is zero for the saved diagnostic atoms. The audit also consumes a separate near-receptor replay at 0.5 m: one positive harm atom reaches `worker-01`, with conditional IR `4.68e-5/year` and an `N >= 1` F/N point at the same conditional frequency. These two outputs are deliberately kept separate. The zero at the distant receptor is not interpreted as zero facility risk, and the near-receptor value is not promoted to a qualified facility total.
+
 ## Inspection-center facility handoff
 
 The dedicated handoff audit is [`inspection_center_facility_ijhe_handoff_audit.json`](../examples/inspection_center_facility_ijhe_handoff_audit.json). It has 12 structural checks and status `PASS_WITH_SCOPE_LIMITATIONS`. It verifies:
