@@ -2731,7 +2731,7 @@
   "current_union_full_test_status": "1078 passed, 1 warning; latest isolation-rebound campaign 24 events/24 cases/96 risk atoms; strict IJHE gates remain open",
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
-  "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
+  "current_union_provider_packet_collection_manifest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/provider_packet_collection_manifest.json",
   "current_union_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION; 44 case-level requests are ready; 0 qualified provider packets received; release and qualification paths remain empty",
   "supplemental_isolation_response_audit_record": "results/20261009/equipment_isolation_campaign/isolation_response_audit.json",
   "supplemental_isolation_response_audit_status": "ISOLATION_RESPONSE_CHAIN_DIAGNOSTIC; 10 provider branches (5 success, 5 failure) consumed by 20 campaign cases and 80 risk atoms; synthetic diagnostic only",
@@ -4036,5 +4036,7 @@
   },
   "slabx_lh2_test6_numerical_sensitivity_record": "results/20261115/slabx_lh2_test6_numerical_sensitivity.json",
   "slabx_lh2_test6_numerical_sensitivity_status": "PARAMETER_SENSITIVITY_DIAGNOSTIC",
-  "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence."
+  "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
+  "latest_provider_packet_collection_manifest_case_count": 44,
+  "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION"
 }

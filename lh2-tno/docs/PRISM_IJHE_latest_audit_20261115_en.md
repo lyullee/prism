@@ -69,6 +69,8 @@ The current verification result is `PASS` with zero metadata-consistency blocker
 
 The full local regression suite currently reports **1,265 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
 
+The latest provider collection manifest is `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/provider_packet_collection_manifest.json`. It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
+
 ## Evidence needed for a strict IJHE claim
 
 For each facility case, provide an exact asset/port identity, initial state, time-resolved release history, isolation command and response, termination basis, mass/energy residuals, and a qualification sidecar. Separately provide an independent holdout comparison for the relevant source and consequence domains, plus reviewed receptor geometry, weather, ignition, and population data. Once those records are supplied, the existing fail-closed gates can be rerun without changing the frequency or consequence algorithms.

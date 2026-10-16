@@ -3518,7 +3518,7 @@
   "current_union_observed_state_release_binding_audit_status": "NO_STATE_TO_RELEASE_BINDING; 3 observed components have state evidence but no reviewed facility/provider-event binding",
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
-  "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
+  "current_union_provider_packet_collection_manifest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/provider_packet_collection_manifest.json",
   "current_union_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION; 44 case-level requests are ready; 0 qualified provider packets received; release and qualification paths remain empty",
   "supplemental_isolation_response_audit_record": "results/20261009/equipment_isolation_campaign/isolation_response_audit.json",
   "supplemental_isolation_response_audit_status": "ISOLATION_RESPONSE_CHAIN_DIAGNOSTIC; 10 provider branches (5 success, 5 failure) consumed by 20 campaign cases and 80 risk atoms; synthetic diagnostic only",
@@ -5499,5 +5499,7 @@
     "BOUND": 35,
     "NOT_AVAILABLE": 9
   },
-  "latest_release_boundary_frequency_uncertainty_unavailable_case_count": 9
+  "latest_release_boundary_frequency_uncertainty_unavailable_case_count": 9,
+  "latest_provider_packet_collection_manifest_case_count": 44,
+  "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION"
 }
