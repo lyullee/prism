@@ -113,6 +113,15 @@ def build_forecast_quantitative_handoff(scan: Mapping[str, Any]) -> dict[str, An
         "status": "FORECAST_QUANTITATIVE_HANDOFF_READY",
         "facility_id": facility_id,
         "requests": requests,
+        "timing": {
+            "source_scan_timing": dict(scan.get("timing", {}))
+            if isinstance(scan.get("timing"), Mapping)
+            else None,
+            "measurement_policy": (
+                "Copied from the forecast scan invocation; it is a diagnostic wall-clock "
+                "measurement and does not claim a 1 Hz operating guarantee."
+            ),
+        },
         "summary": {
             "request_count": len(requests),
             "ready_for_quantitative_evaluation_count": sum(

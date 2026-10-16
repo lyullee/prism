@@ -42,6 +42,18 @@
       "status": "READY_FOR_QUANTITATIVE_EVALUATION"
     }
   ],
+  "timing": {
+    "source_scan_timing": {
+      "wall_elapsed_ms": 17.04579999204725,
+      "quantitative_evaluation_elapsed_ms": 0.0,
+      "trigger_count": 2,
+      "evaluated_count": 0,
+      "withheld_count": 2,
+      "fresh_physics_claim": false,
+      "interpretation": "Measured for this scan invocation; not an operating 1 Hz guarantee."
+    },
+    "measurement_policy": "Copied from the forecast scan invocation; it is a diagnostic wall-clock measurement and does not claim a 1 Hz operating guarantee."
+  },
   "summary": {
     "request_count": 2,
     "ready_for_quantitative_evaluation_count": 2,

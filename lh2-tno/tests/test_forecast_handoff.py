@@ -11,6 +11,10 @@ def _scan():
     return {
         "status": "FORECAST_RISK_SCAN_COMPLETE",
         "facility_id": "facility",
+        "timing": {
+            "wall_elapsed_ms": 2.5,
+            "quantitative_evaluation_elapsed_ms": 0.0,
+        },
         "steps": [{
             "forecast_time_s": 12.0,
             "components": [{
@@ -50,6 +54,8 @@ def test_forecast_quantitative_handoff_creates_explicit_request_without_risk():
     assert result["policy"]["provider_release_created"] is False
     assert result["policy"]["facility_ir_fn_calculated"] is False
     assert result["policy"]["missing_requests_assigned_zero"] is False
+    assert result["timing"]["source_scan_timing"]["wall_elapsed_ms"] == 2.5
+    assert "does not claim a 1 Hz" in result["timing"]["measurement_policy"]
 
 
 def test_forecast_quantitative_handoff_rejects_incomplete_scan_and_duplicate_trigger():
