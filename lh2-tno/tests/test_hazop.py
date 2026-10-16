@@ -522,6 +522,16 @@ def test_realtime_facility_monitor_hazop_bridge_preserves_mode_and_fail_closed_q
     assert result["facility_annual_ir_available"] is False
     assert result["facility_fn_available"] is False
 
+    partial = facility.update_from_runtime_frames_with_hazop(
+        _gate_table(),
+        {},
+        now_s=3.2,
+        release_resolvers={},
+    )
+    assert partial["status"] == "REJECTED_RUNTIME_HAZOP_FRAME_SET"
+    assert partial["missing_component_ids"] == ["TK-01"]
+    assert partial["facility_annual_ir_available"] is False
+
 
 def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_rows(tmp_path):
     from lh2_tno.hazop_campaign import build_hazop_facility_campaign_result
