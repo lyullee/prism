@@ -92,12 +92,15 @@ def test_case_audit_rechecks_literature_frequency_event_and_port_binding():
     )
     audited = report["rows"][0]
     assert audited["frequency_binding_status"] == "BOUND"
+    assert audited["frequency_uncertainty_status"] == "BOUND"
     assert audited["initiating_frequency_per_year"] == 2.5e-4
     assert audited["frequency_marginal_p05_per_year"] == 1.0e-4
     assert audited["frequency_marginal_p95_per_year"] == 5.0e-4
     assert audited["frequency_inference_performed"] is False
     assert report["frequency_binding_status_counts"] == {"BOUND": 1}
     assert report["frequency_unbound_case_count"] == 0
+    assert report["frequency_uncertainty_status_counts"] == {"BOUND": 1}
+    assert report["frequency_uncertainty_unavailable_case_count"] == 0
 
 
 def test_case_audit_blocks_horizon_and_operator_limited_rows():

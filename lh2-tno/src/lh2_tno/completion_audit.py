@@ -5130,6 +5130,12 @@ def build_ijhe_completion_audit(
                 "frequency_unbound_case_count": boundary.get(
                     "frequency_unbound_case_count"
                 ),
+                "frequency_uncertainty_status_counts": boundary.get(
+                    "frequency_uncertainty_status_counts"
+                ),
+                "frequency_uncertainty_unavailable_case_count": boundary.get(
+                    "frequency_uncertainty_unavailable_case_count"
+                ),
                 "termination_basis_counts": boundary.get("termination_basis_counts"),
                 "provider_termination_evidence_supplied": boundary.get(
                     "provider_termination_evidence_supplied"

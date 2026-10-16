@@ -600,6 +600,7 @@ def _frequency_metadata(
     if not isinstance(event, Mapping):
         return {
             "frequency_binding_status": "NOT_AVAILABLE",
+            "frequency_uncertainty_status": "NOT_AVAILABLE",
             "initiating_frequency_per_year": None,
             "frequency_marginal_p05_per_year": None,
             "frequency_marginal_p95_per_year": None,
@@ -638,8 +639,15 @@ def _frequency_metadata(
         and annual is not None
         and annual >= 0.0
     )
+    if p05 is None or p95 is None:
+        uncertainty_status = "NOT_AVAILABLE"
+    elif p05 < 0.0 or p95 < p05 or annual is None or not p05 <= annual <= p95:
+        uncertainty_status = "INVALID"
+    else:
+        uncertainty_status = "BOUND"
     return {
         "frequency_binding_status": "BOUND" if identity_bound else "UNBOUND",
+        "frequency_uncertainty_status": uncertainty_status,
         "initiating_frequency_per_year": annual,
         "frequency_marginal_p05_per_year": p05,
         "frequency_marginal_p95_per_year": p95,
@@ -975,6 +983,9 @@ def build_release_boundary_case_audit(
     numerical_closure_counts = Counter(row["numerical_closure_status"] for row in rows)
     domain_status_counts = Counter(row["consequence_domain_status"] for row in rows)
     frequency_binding_counts = Counter(row["frequency_binding_status"] for row in rows)
+    frequency_uncertainty_counts = Counter(
+        row["frequency_uncertainty_status"] for row in rows
+    )
     provider_status_counts = Counter(row["provider_qualification_status"] for row in rows)
     termination_evidence_status_counts = Counter(
         row["provider_termination_evidence_status"] for row in rows
@@ -1085,6 +1096,12 @@ def build_release_boundary_case_audit(
         "frequency_binding_status_counts": dict(sorted(frequency_binding_counts.items())),
         "frequency_unbound_case_count": frequency_binding_counts.get("UNBOUND", 0)
         + frequency_binding_counts.get("NOT_AVAILABLE", 0),
+        "frequency_uncertainty_status_counts": dict(
+            sorted(frequency_uncertainty_counts.items())
+        ),
+        "frequency_uncertainty_unavailable_case_count": frequency_uncertainty_counts.get(
+            "NOT_AVAILABLE", 0
+        ),
         "operator_review_required_case_count": numerical_closure_counts.get(
             "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED", 0
         ),

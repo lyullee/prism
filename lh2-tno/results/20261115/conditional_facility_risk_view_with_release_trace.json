@@ -31136,5 +31136,5 @@
   "source_assessment_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "source_assessment_sha256": "92315c2cd334b7f9d1374692bebc1d5c58f1d40f8cdd6eb717fbe04ae641d415",
   "release_boundary_case_audit_path": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "release_boundary_case_audit_sha256": "33c685bffbef0cad408d8c84d3929509b04c77d336775c50aa406d783a0af0e1"
+  "release_boundary_case_audit_sha256": "e8916a7eb42b8da0aa03ffa8ffe2d14b517872c3416d77fcd41d06234f8e1d73"
 }

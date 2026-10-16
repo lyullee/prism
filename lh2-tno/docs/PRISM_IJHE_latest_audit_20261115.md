@@ -23,7 +23,7 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 | union event / case / risk atom | 34 / 44 / 176 |
 | HAZOP event identity | 34/34 bound |
 | frequency port binding | 34/34 scoped, unbound 0, mismatch 0 |
-| release case frequency binding | 44/44 case rows bound to event/port literature metadata, unbound 0 |
+| release case frequency binding | 44/44 case rows bound to event/port literature metadata, unbound 0; 35/44 have event-level P05/P95 intervals |
 | 수직 handoff | 5 event, 10 case, `inventory_depletion` 종료 |
 | provider 종료 evidence | 35 provider row, 34 event ID, 42 case 사용, 2 invalid case |
 | numerical closure | 42 closed, 29 operator-review, 2 open |
@@ -59,3 +59,5 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 ## 2026-11-15 facility-handoff supplement
 
 The latest vertical/inventory/isolation union audit was rerun with the reconstructed inspection-center facility handoff and receptor-geometry comparison as optional diagnostic inputs. The resulting record is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json). It contains 49 checks: 45 PASS and 4 BLOCKED. The `diagnostic_inspection_center_facility_ijhe_handoff` and `diagnostic_receptor_geometry_interpretation` checks are PASS and diagnostic-only; they do not weaken the four strict qualification gates. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.
+
+The release-boundary case rows now carry the copied literature frequency and source digest. All 44 rows are event/port-bound, while 35 rows also carry event-level P05/P95 metadata. The other 9 rows intentionally retain their published point rates without an invented interval; their uncertainty is represented only by the separate five-scenario sensitivity audit.

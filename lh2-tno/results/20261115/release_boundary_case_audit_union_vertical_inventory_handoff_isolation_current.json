@@ -173,6 +173,11 @@
     "BOUND": 44
   },
   "frequency_unbound_case_count": 0,
+  "frequency_uncertainty_status_counts": {
+    "BOUND": 35,
+    "NOT_AVAILABLE": 9
+  },
+  "frequency_uncertainty_unavailable_case_count": 9,
   "operator_review_required_case_count": 29,
   "consequence_domain_truncated_case_count": 0,
   "provider_qualification_status_counts": {
@@ -213,6 +218,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 0.00065,
       "frequency_marginal_p05_per_year": 3.7382986363517247e-05,
       "frequency_marginal_p95_per_year": 0.01130279619616365,
@@ -333,6 +339,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 0.00014,
       "frequency_marginal_p05_per_year": 2.1504049427284243e-06,
       "frequency_marginal_p95_per_year": 0.009113981537286191,
@@ -451,6 +458,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 2.8e-05,
       "frequency_marginal_p05_per_year": 9.638894775799317e-07,
       "frequency_marginal_p95_per_year": 0.000813381099417175,
@@ -569,6 +577,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 5.7e-06,
       "frequency_marginal_p05_per_year": 6.514182178725963e-08,
       "frequency_marginal_p95_per_year": 0.0004988022019019256,
@@ -687,6 +696,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.2e-06,
       "frequency_marginal_p05_per_year": 6.996829710251477e-09,
       "frequency_marginal_p95_per_year": 0.00020580296839426259,
@@ -805,6 +815,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.4e-06,
       "frequency_marginal_p05_per_year": 3.2554838825238133e-07,
       "frequency_marginal_p95_per_year": 3.5511808894583394e-05,
@@ -925,6 +936,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.6e-06,
       "frequency_marginal_p05_per_year": 1.3386517161273802e-07,
       "frequency_marginal_p95_per_year": 1.9123984561800025e-05,
@@ -1045,6 +1057,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 8e-07,
       "frequency_marginal_p05_per_year": 7.464077255362197e-08,
       "frequency_marginal_p95_per_year": 8.573615206250296e-06,
@@ -1165,6 +1178,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.9e-07,
       "frequency_marginal_p05_per_year": 3.5602303956530105e-08,
       "frequency_marginal_p95_per_year": 4.2723586050594105e-06,
@@ -1285,6 +1299,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.9e-07,
       "frequency_marginal_p05_per_year": 6.489473098932577e-09,
       "frequency_marginal_p95_per_year": 5.563320009666715e-06,
@@ -1405,6 +1420,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 0.00012,
       "frequency_marginal_p05_per_year": 4.4143229045141205e-05,
       "frequency_marginal_p95_per_year": 0.0003262231195800764,
@@ -1525,6 +1541,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 5.2e-05,
       "frequency_marginal_p05_per_year": 8.622477495766756e-06,
       "frequency_marginal_p95_per_year": 0.00031357816528445936,
@@ -1645,6 +1662,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 2.2e-05,
       "frequency_marginal_p05_per_year": 2.057720688527284e-06,
       "frequency_marginal_p95_per_year": 0.0002351967052387882,
@@ -1765,6 +1783,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 9.3e-06,
       "frequency_marginal_p05_per_year": 3.3789251339083347e-07,
       "frequency_marginal_p95_per_year": 0.00025596700711635174,
@@ -1885,6 +1904,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.9e-06,
       "frequency_marginal_p05_per_year": 1.541781617567238e-07,
       "frequency_marginal_p95_per_year": 9.865881321160032e-05,
@@ -2003,6 +2023,7 @@
         "vent_hole"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 2e-05,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2119,6 +2140,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 0.0001,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2239,6 +2261,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 0.0005,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2357,6 +2380,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 5e-05,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2466,6 +2490,7 @@
         "inventory_over_600s"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 5e-05,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2580,6 +2605,7 @@
         "vaporizer_hole"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 0.001,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2693,6 +2719,7 @@
         "two_sided_rupture"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 1e-05,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2816,6 +2843,7 @@
         "two_sided_rupture"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 0.001,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -2938,6 +2966,7 @@
         "reliquefier_hole"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "NOT_AVAILABLE",
       "initiating_frequency_per_year": 0.01,
       "frequency_marginal_p05_per_year": null,
       "frequency_marginal_p95_per_year": null,
@@ -3052,6 +3081,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 0.00012,
       "frequency_marginal_p05_per_year": 4.4143229045141205e-05,
       "frequency_marginal_p95_per_year": 0.0003262231195800764,
@@ -3170,6 +3200,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 0.00012,
       "frequency_marginal_p05_per_year": 4.4143229045141205e-05,
       "frequency_marginal_p95_per_year": 0.0003262231195800764,
@@ -3288,6 +3319,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 5.2e-05,
       "frequency_marginal_p05_per_year": 8.622477495766756e-06,
       "frequency_marginal_p95_per_year": 0.00031357816528445936,
@@ -3406,6 +3438,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 5.2e-05,
       "frequency_marginal_p05_per_year": 8.622477495766756e-06,
       "frequency_marginal_p95_per_year": 0.00031357816528445936,
@@ -3524,6 +3557,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 2.2e-05,
       "frequency_marginal_p05_per_year": 2.057720688527284e-06,
       "frequency_marginal_p95_per_year": 0.0002351967052387882,
@@ -3642,6 +3676,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 2.2e-05,
       "frequency_marginal_p05_per_year": 2.057720688527284e-06,
       "frequency_marginal_p95_per_year": 0.0002351967052387882,
@@ -3760,6 +3795,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 9.3e-06,
       "frequency_marginal_p05_per_year": 3.3789251339083347e-07,
       "frequency_marginal_p95_per_year": 0.00025596700711635174,
@@ -3878,6 +3914,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 9.3e-06,
       "frequency_marginal_p05_per_year": 3.3789251339083347e-07,
       "frequency_marginal_p95_per_year": 0.00025596700711635174,
@@ -3996,6 +4033,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.9e-06,
       "frequency_marginal_p05_per_year": 1.541781617567238e-07,
       "frequency_marginal_p95_per_year": 9.865881321160032e-05,
@@ -4114,6 +4152,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.9e-06,
       "frequency_marginal_p05_per_year": 1.541781617567238e-07,
       "frequency_marginal_p95_per_year": 9.865881321160032e-05,
@@ -4231,6 +4270,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.4e-06,
       "frequency_marginal_p05_per_year": 3.2554838825238133e-07,
       "frequency_marginal_p95_per_year": 3.5511808894583394e-05,
@@ -4342,6 +4382,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.4e-06,
       "frequency_marginal_p05_per_year": 3.2554838825238133e-07,
       "frequency_marginal_p95_per_year": 3.5511808894583394e-05,
@@ -4453,6 +4494,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.6e-06,
       "frequency_marginal_p05_per_year": 1.3386517161273802e-07,
       "frequency_marginal_p95_per_year": 1.9123984561800025e-05,
@@ -4564,6 +4606,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.6e-06,
       "frequency_marginal_p05_per_year": 1.3386517161273802e-07,
       "frequency_marginal_p95_per_year": 1.9123984561800025e-05,
@@ -4675,6 +4718,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 8e-07,
       "frequency_marginal_p05_per_year": 7.464077255362197e-08,
       "frequency_marginal_p95_per_year": 8.573615206250296e-06,
@@ -4786,6 +4830,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 8e-07,
       "frequency_marginal_p05_per_year": 7.464077255362197e-08,
       "frequency_marginal_p95_per_year": 8.573615206250296e-06,
@@ -4897,6 +4942,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.9e-07,
       "frequency_marginal_p05_per_year": 3.5602303956530105e-08,
       "frequency_marginal_p95_per_year": 4.2723586050594105e-06,
@@ -5008,6 +5054,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 3.9e-07,
       "frequency_marginal_p05_per_year": 3.5602303956530105e-08,
       "frequency_marginal_p95_per_year": 4.2723586050594105e-06,
@@ -5119,6 +5166,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.9e-07,
       "frequency_marginal_p05_per_year": 6.489473098932577e-09,
       "frequency_marginal_p95_per_year": 5.563320009666715e-06,
@@ -5230,6 +5278,7 @@
         "inventory_depletion"
       ],
       "frequency_binding_status": "BOUND",
+      "frequency_uncertainty_status": "BOUND",
       "initiating_frequency_per_year": 1.9e-07,
       "frequency_marginal_p05_per_year": 6.489473098932577e-09,
       "frequency_marginal_p95_per_year": 5.563320009666715e-06,

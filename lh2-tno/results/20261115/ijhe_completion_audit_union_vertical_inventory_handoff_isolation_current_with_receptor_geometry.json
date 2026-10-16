@@ -5918,7 +5918,12 @@
         "frequency_binding_status_counts": {
           "BOUND": 44
         },
-        "frequency_unbound_case_count": 0
+        "frequency_unbound_case_count": 0,
+        "frequency_uncertainty_status_counts": {
+          "BOUND": 35,
+          "NOT_AVAILABLE": 9
+        },
+        "frequency_uncertainty_unavailable_case_count": 9
       },
       "blocking_reason": null,
       "diagnostic_only": true,
