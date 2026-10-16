@@ -1,0 +1,98 @@
+{
+  "schema_version": "prism.header_bound_facility_hazop_bridge_summary.v1",
+  "status": "MULTI_EQUIPMENT_HEADER_BOUND_FACILITY_RUNTIME_EXECUTED_DIAGNOSTIC",
+  "source_bridge_schema": "prism.inspection_center_header_bound_facility_hazop_bridge.v1",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "component_count": 3,
+  "selected_component_count": 3,
+  "executed_component_count": 3,
+  "ready_provider_scenario_count": 3,
+  "withheld_provider_scenario_count": 0,
+  "risk_atom_count": 3,
+  "conditional_current_weather_risk": {
+    "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+    "annual_ir_low_high_by_receptor": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "risk_atom_count": 3,
+    "frequency_learning": false,
+    "interpretation": "sum of explicitly bound HAZOP-selected component contributions for the current weather only; this is not a full facility annual IR/F-N result"
+  },
+  "processing_time": {
+    "wall_elapsed_ms": 10391.874299995834,
+    "measurement_policy": "diagnostic synchronous wall-clock timing for this batch; not a fresh-physics 1 Hz guarantee"
+  },
+  "components": [
+    {
+      "component_id": "lh2-intake-tank",
+      "source_id": "inspection-center-intake-10-runs-header-bound",
+      "operating_mode": "receiving",
+      "selected_scenario_count": 1,
+      "scenario_ids": [
+        "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+      ],
+      "branch_statuses": [
+        "CONSEQUENCE_EVALUATED"
+      ],
+      "status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "risk_statuses": [
+        "AVAILABLE_CURRENT_WEATHER_IR"
+      ]
+    },
+    {
+      "component_id": "lh2-storage-vent",
+      "source_id": "inspection-center-storage-vent-10-runs-header-bound",
+      "operating_mode": "standby",
+      "selected_scenario_count": 1,
+      "scenario_ids": [
+        "inspection-storage-standby-vent-pressure:standby:vent_hole"
+      ],
+      "branch_statuses": [
+        "CONSEQUENCE_EVALUATED"
+      ],
+      "status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "risk_statuses": [
+        "AVAILABLE_CURRENT_WEATHER_IR"
+      ]
+    },
+    {
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "source_id": "inspection-center-supply-10-runs-header-bound",
+      "operating_mode": "supply",
+      "selected_scenario_count": 1,
+      "scenario_ids": [
+        "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+      ],
+      "branch_statuses": [
+        "CONSEQUENCE_EVALUATED"
+      ],
+      "status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "risk_statuses": [
+        "AVAILABLE_CURRENT_WEATHER_IR"
+      ]
+    }
+  ],
+  "policy": {
+    "explicit_operating_mode_input": true,
+    "frequency_assignment_performed": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created_by_prism": false,
+    "provider_packets_qualified": false,
+    "physical_validation_claim": false,
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Explicit header-bound state frames for all declared components entered one facility HAZOP runtime batch. Each selected mode/scenario retained its own provider component, port, release history, SLABx-LH2 consequence and literature frequency binding. The output is a current-weather diagnostic view; model-prediction packets, missing qualification and physical validation keep annual facility IR/F-N promotion withheld.",
+  "input_evidence": {
+    "runtime_frames": "examples/inspection_center_header_bound_runtime_frames_20261115.json",
+    "observed_hazop_runtime_audit": "examples/inspection_center_header_bound_hazop_runtime_audit_20261115.json",
+    "observed_hazop_provider_binding": "examples/inspection_center_header_bound_provider_binding_20261115.json",
+    "summary_source": "results/20261115/header_bound_facility_bridge_runtime.json"
+  }
+}

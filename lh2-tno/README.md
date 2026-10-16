@@ -182,6 +182,14 @@ The chain remains diagnostic until a source owner confirms origin, pressure
 basis, quality, asset/port identity, and the equipment provider supplies the
 accidental-release packet.
 
+The multi-equipment bridge now consumes these three header-bound frames in one
+batch and executes three independently bound provider/SLABx-LH2 branches. See
+the [bridge record](docs/PRISM_header_bound_facility_bridge_20261115.md) and
+[stable summary](results/20261115/header_bound_facility_bridge_summary.json).
+This is still a diagnostic replay: provider qualification, physical validation,
+and facility annual IR/F-N remain withheld. Fresh physics took about 10.4 s for
+three branches; the cached control-loop benchmark is reported separately.
+
 ## Equipment and provider boundary
 
 The state frame contains facility ID, component ID, operating mode, timestamp, measured or predicted values, units, signal quality, and provenance. It does not contain `resolved_release`, opening diameter, annual frequency, duration, or termination basis.
@@ -261,6 +269,10 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Header-bound state manifest](examples/inspection_center_header_bound_state_manifest.json)
 - [Header-bound operating-mode input](examples/inspection_center_header_bound_operating_modes.json)
 - [Header-bound chain summary](examples/inspection_center_header_bound_chain_summary.json)
+- [Header-bound multi-equipment facility bridge](docs/PRISM_header_bound_facility_bridge_20261115.md)
+- [Header-bound facility bridge summary](results/20261115/header_bound_facility_bridge_summary.json)
+- [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
+- [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
 - [v0.6.3 distribution record (Korean)](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)
