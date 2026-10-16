@@ -158,6 +158,47 @@ def build_inspection_center_facility_ijhe_audit(
         implicit_substitution_performed=coverage["implicit_substitution_performed"],
     ))
 
+    bridge_audit = bridge.get("facility_bridge_audit")
+    bridge_audit = bridge_audit if isinstance(bridge_audit, Mapping) else {}
+    campaign = handoff.get("campaign")
+    campaign = campaign if isinstance(campaign, Mapping) else {}
+    timing = campaign.get("timing")
+    timing = timing if isinstance(timing, Mapping) else {}
+    processing_time = {
+        "facility_bridge_wall_elapsed_ms": bridge_audit.get("wall_elapsed_ms"),
+        "campaign_case_min_ms": timing.get("case_min_ms"),
+        "campaign_case_max_ms": timing.get("case_max_ms"),
+        "campaign_elapsed_ms": timing.get("campaign_elapsed_ms"),
+        "case_stage_elapsed_ms": (
+            campaign.get("cases", [{}])[0].get("stage_elapsed_ms")
+            if isinstance(campaign.get("cases"), list) and campaign.get("cases")
+            and isinstance(campaign.get("cases")[0], Mapping)
+            else None
+        ),
+        "fresh_physics_claim": False,
+    }
+    finite_times = [
+        processing_time["facility_bridge_wall_elapsed_ms"],
+        processing_time["campaign_case_min_ms"],
+        processing_time["campaign_case_max_ms"],
+    ]
+    stage_times = processing_time["case_stage_elapsed_ms"]
+    processing_valid = (
+        all(isinstance(value, (int, float)) and value >= 0.0 for value in finite_times)
+        and isinstance(stage_times, Mapping)
+        and all(
+            isinstance(stage_times.get(name), (int, float)) and stage_times.get(name) >= 0.0
+            for name in ("source", "pool", "near_field_and_dispersion", "cloud_observation", "fire_explosion_damage_risk")
+        )
+        and processing_time["fresh_physics_claim"] is False
+    )
+    checks.append(_check(
+        "processing_time_evidence",
+        processing_valid,
+        "facility bridge, case, and consequence-stage processing times must be explicit finite values",
+        processing_time=processing_time,
+    ))
+
     handoff_schema = handoff.get("schema_version")
     checks.append(_check(
         "facility_handoff_schema",
@@ -243,4 +284,5 @@ def build_inspection_center_facility_ijhe_audit(
             ),
         },
         "major_accident_scope": coverage,
+        "processing_time": processing_time,
     }

@@ -23,13 +23,15 @@ def test_facility_ijhe_handoff_audit_is_fail_closed_and_traceable():
         output.unlink(missing_ok=True)
 
     assert result["status"] == "PASS_WITH_SCOPE_LIMITATIONS"
-    assert len(result["checks"]) == 10
+    assert len(result["checks"]) == 11
     assert not result["blocking_reasons"]
     assert result["qualification_boundary"]["facility_ir_fn_available"] is False
     assert result["qualification_boundary"]["physical_validation_claim"] is False
     assert result["major_accident_scope"]["selected_families"] == ["vaporizer_hole"]
     assert len(result["major_accident_scope"]["not_evaluated_families"]) == 11
     assert result["major_accident_scope"]["implicit_substitution_performed"] is False
+    assert result["processing_time"]["fresh_physics_claim"] is False
+    assert result["processing_time"]["case_stage_elapsed_ms"]["source"] >= 0.0
 
 
 def test_full_ijhe_audit_consumes_facility_handoff_audit_as_diagnostic_check():
