@@ -69,7 +69,7 @@ The current verification result is `PASS` with zero metadata-consistency blocker
 
 The full local regression suite currently reports **1,265 passed and 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract.
 
-The latest provider collection manifest is `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/provider_packet_collection_manifest.json`. It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
+The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 
 ## Evidence needed for a strict IJHE claim
 
