@@ -117,3 +117,93 @@ def test_latest_ijhe_audit_verification_checks_receptor_geometry_pointer(tmp_pat
     result = verify_latest_ijhe_audit(status, root=tmp_path)
     assert result["status"] == "PASS"
     assert result["receptor_geometry_interpretation_status"] == "PASS_DIAGNOSTIC_ONLY"
+
+
+def test_latest_ijhe_audit_verification_checks_actual_ffi_gate_identity(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    gate = {
+        "schema_version": "prism.slabx_lh2_ffi_test6_actual_source_numerical_gate.v1",
+        "status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN",
+        "accepted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "gate.json", gate)
+    _write(tmp_path / "refinement.json", {"levels": []})
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "slabx_lh2_test6_actual_source_numerical_gate_record": "gate.json",
+        "slabx_lh2_test6_actual_source_numerical_gate_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN",
+        "slabx_lh2_test6_actual_source_numerical_gate_accepted": False,
+        "slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim": False,
+        "slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim": False,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["actual_ffi_numerical_gate_accepted"] is False
+
+
+def test_latest_ijhe_audit_verification_rejects_gate_acceptance_drift(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    gate = {
+        "schema_version": "prism.slabx_lh2_ffi_test6_actual_source_numerical_gate.v1",
+        "status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN",
+        "accepted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "gate.json", gate)
+    _write(tmp_path / "refinement.json", {"levels": []})
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "slabx_lh2_test6_actual_source_numerical_gate_record": "gate.json",
+        "slabx_lh2_test6_actual_source_numerical_gate_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_ACCEPTED",
+        "slabx_lh2_test6_actual_source_numerical_gate_accepted": True,
+        "slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim": False,
+        "slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim": False,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("gate status" in reason or "acceptance" in reason for reason in result["blocking_reasons"])

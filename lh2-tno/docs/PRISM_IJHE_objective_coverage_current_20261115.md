@@ -88,6 +88,13 @@ The benchmark must be read as two modes:
 
 The monitor path does not learn annual accident frequency from alarm counts, infer an accident release from pressure/temperature alone, extend a provider interval, or silently substitute a similar event.
 
+The latest audit metadata verifier also checks the actual FFI Test 6 numerical-gate
+pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
+`OPEN`/`accepted=false` state, the sibling refinement record, and explicit
+`physical_validation_claim=false` and `facility_qra_claim=false` flags. A verifier
+`PASS` therefore means that the unresolved gate is represented consistently; it
+does not mean that the source has converged or that physical validation is complete.
+
 ## Reproduction
 
 Run from the `lh2-tno` package directory. The exact evidence paths are listed in the audit JSON and in `CURRENT_STATUS.json`. The essential command is:
@@ -105,6 +112,13 @@ python scripts/build_ijhe_objective_coverage_audit.py `
 ```
 
 The full campaign command adds the native catalog, state-snapshot, provider-request, release-closure, validation, extension-coverage and external-equipment evidence paths. A nonzero exit status is expected while strict evidence gates remain open; the JSON status is the authoritative result.
+
+To verify the latest pointer and its fail-closed FFI gate metadata:
+
+```powershell
+python scripts/verify_latest_ijhe_audit.py `
+  --output results/20261115/latest_ijhe_audit_verification.json
+```
 
 ## Scope exclusions
 

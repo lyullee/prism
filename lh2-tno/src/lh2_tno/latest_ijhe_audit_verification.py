@@ -134,6 +134,41 @@ def verify_latest_ijhe_audit(
         ):
             reasons.append("receptor geometry interpretation promotion boundary is not fail-closed")
 
+    # The actual FFI Test 6 convergence record is optional for historical
+    # callers, but when the current status ledger points to it we verify the
+    # identity and fail-closed claims here as well.  This keeps a stale or
+    # hand-edited status file from silently presenting an unresolved numerical
+    # source as accepted physical validation.
+    gate_record_value = status.get("slabx_lh2_test6_actual_source_numerical_gate_record")
+    gate_status_value = status.get("slabx_lh2_test6_actual_source_numerical_gate_status")
+    gate_accepted_value = status.get("slabx_lh2_test6_actual_source_numerical_gate_accepted")
+    gate_record: dict[str, Any] = {}
+    gate_path: Path | None = None
+    if gate_record_value is not None:
+        if not isinstance(gate_record_value, str) or not gate_record_value.strip():
+            reasons.append("actual FFI numerical gate record pointer is not a non-empty string")
+        else:
+            gate_path = _relative_or_absolute(gate_record_value, root=base)
+            if not gate_path.exists():
+                reasons.append("actual FFI numerical gate record does not exist")
+            else:
+                gate_record = _read_object(gate_path)
+                if gate_record.get("schema_version") != (
+                    "prism.slabx_lh2_ffi_test6_actual_source_numerical_gate.v1"
+                ):
+                    reasons.append("actual FFI numerical gate schema is not the declared schema")
+                if gate_status_value != gate_record.get("status"):
+                    reasons.append("status ledger and actual FFI numerical gate status disagree")
+                if gate_accepted_value != gate_record.get("accepted"):
+                    reasons.append("status ledger and actual FFI numerical gate acceptance disagree")
+                if status.get("slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim") is not False:
+                    reasons.append("status ledger actual FFI gate must keep physical_validation_claim=false")
+                if status.get("slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim") is not False:
+                    reasons.append("status ledger actual FFI gate must keep facility_qra_claim=false")
+                refinement_path = gate_path.with_name("refinement.json")
+                if not refinement_path.exists():
+                    reasons.append("actual FFI numerical gate refinement record does not exist")
+
     status_value = "PASS" if not reasons else "BLOCKED_AUDIT_METADATA"
     return {
         "schema_version": SCHEMA,
@@ -150,6 +185,9 @@ def verify_latest_ijhe_audit(
         "physical_validation_claim": audit_value.get("physical_validation_claim"),
         "receptor_geometry_interpretation_record": str(geometry_path) if geometry_path else None,
         "receptor_geometry_interpretation_status": geometry_value.get("status") if geometry_value else None,
+        "actual_ffi_numerical_gate_record": str(gate_path) if gate_path else None,
+        "actual_ffi_numerical_gate_status": gate_record.get("status") if gate_record else gate_status_value,
+        "actual_ffi_numerical_gate_accepted": gate_record.get("accepted") if gate_record else gate_accepted_value,
         "blocking_reasons": reasons,
         "interpretation": (
             "The latest audit pointer, summary counts, and diagnostic facility handoff are internally consistent; "
