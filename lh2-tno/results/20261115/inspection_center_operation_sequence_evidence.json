@@ -1,0 +1,104 @@
+{
+  "schema_version": "prism.inspection_center_operation_sequence_evidence.v1",
+  "status": "OPERATION_SEQUENCE_SCREENED_DIAGNOSTIC_ONLY",
+  "source": {
+    "path": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터/2. 액화수소 저장(벤트) 시나리오 데이터/액화수소저장벤트_운전시퀀스.csv",
+    "sha256": "58bd97776b98dd8c2c29222452eb8661b4a6ce6dccc1f6dc1f73c0409b7981b4",
+    "encoding": "utf-8-sig",
+    "scenario_filter": "액화수소 저장(벤트)",
+    "row_count_total": 3,
+    "row_count_selected": 3
+  },
+  "operating_sequence": {
+    "rows": [
+      {
+        "procedure_number": "1",
+        "action": "LH2 TANK 저장 중 급격한 압력상승에 의한 압력증가",
+        "tank_or_scope": "TANK1·TANK2 공통",
+        "hazard_classification": "pressure_rise_monitor",
+        "expected_leak_failure": "압력계(PT) 드리프트·고장; 진공단열 파괴에 의한 열유입 급증",
+        "leak_basis_reference": "KGS AC111; ASME BPVC Section VIII",
+        "explicit_pressure_bar": [
+          6.5
+        ],
+        "explicit_pressure_pa": [
+          650000.0
+        ],
+        "source_row_digest": "ec0087fdc882f330176dc2a83a683574ae2230e4c5bb97cc4f5398284fb79248"
+      },
+      {
+        "procedure_number": "2",
+        "action": "XV10(TANK1) / XV11(TANK2) OPEN — 벤트",
+        "tank_or_scope": "TANK1·TANK2 공통",
+        "hazard_classification": "relief_vent",
+        "expected_leak_failure": "벤트밸브 개방 지연·고착; 벤트 후 폐밸브 불완전 폐쇄",
+        "leak_basis_reference": "KGS AC111 방출관 기준; CGA G-5.5",
+        "explicit_pressure_bar": [
+          6.5
+        ],
+        "explicit_pressure_pa": [
+          650000.0
+        ],
+        "source_row_digest": "e104c54185a92c86f3f974062a010e30093f09e585eb9ba3bc9d9d60f5a54571"
+      },
+      {
+        "procedure_number": "3",
+        "action": "XV10(TANK1) / XV11(TANK2) CLOSE",
+        "tank_or_scope": "TANK1·TANK2 공통",
+        "hazard_classification": "valve_close",
+        "expected_leak_failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+        "leak_basis_reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33",
+        "explicit_pressure_bar": [
+          6.0,
+          6.0
+        ],
+        "explicit_pressure_pa": [
+          600000.0,
+          600000.0
+        ],
+        "source_row_digest": "ec784882cd3b3820141700b9e0544cea23734a412d2e7725eba5cb184875650f"
+      }
+    ],
+    "explicit_pressure_pa": [
+      600000.0,
+      650000.0
+    ],
+    "relief_operation_row_count": 1,
+    "close_operation_row_count": 1,
+    "observed_relief_setpoint_candidate_pa": 650000.0,
+    "observed_operational_close_threshold_candidate_pa": 600000.0
+  },
+  "evidence_suitability": {
+    "operating_sequence_for_hazop": {
+      "available": true,
+      "promotion": "diagnostic_only"
+    },
+    "relief_setpoint": {
+      "available_as_observed_candidate": true,
+      "promotion": "requires_owner_review",
+      "reason": "CSV pressure labels are operational evidence, not a certified relief-device setpoint."
+    },
+    "release_boundary": {
+      "available": false,
+      "missing_fields": [
+        "provider relief capacity or mass-flow history",
+        "physical discharge-complete event",
+        "initial/final inventory and mass residual"
+      ]
+    },
+    "failure_frequency": {
+      "available": false,
+      "sensor_frequency_learning_used": false
+    }
+  },
+  "promotion_gates": {
+    "hazop_sequence_reference_allowed": true,
+    "provider_packet_created": false,
+    "provider_packet_qualified": false,
+    "release_boundary_closed": false,
+    "frequency_applied": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false
+  },
+  "interpretation": "The source records an operator sequence and explicit pressure labels. It may support HAZOP provenance, but it does not close a provider release boundary or supply a failure frequency."
+}

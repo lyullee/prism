@@ -19,6 +19,13 @@ exercise the state-to-mode-to-HAZOP diagnostic gate. It is recorded as
 reconstructed evidence and remains separate from a claim of independent
 historian measurements.
 
+The vent procedure CSV is also screened into
+[`inspection_center_operation_sequence_evidence.json`](../results/20261115/inspection_center_operation_sequence_evidence.json).
+It preserves the source-row digest and explicit 6.5 bar vent-operation and
+6.0 bar close-operation labels. These are operational HAZOP provenance
+anchors and owner-review candidates; they are not a qualified relief-device
+setpoint or a release termination record.
+
 ## What the data may be used for
 
 - Screen timestamped process-state patterns.
@@ -42,6 +49,11 @@ packet, apply a sensor-learned frequency, or authorize facility IR/F-N. The
 existing PRISM flow still uses an explicitly selected literature frequency for
 diagnostic scenarios; the inspection-centre signals do not change that
 frequency.
+
+The sequence sidecar follows the same boundary. It explicitly reports that
+relief capacity or mass-flow history, a physical discharge-complete event, and
+initial/final inventory with residual mass are missing. Those fields remain
+open in the pressure-relief G1 request.
 
 ## Required evidence to close the boundary
 
@@ -73,3 +85,12 @@ python scripts/build_inspection_center_source_inventory.py `
 
 The output is a suitability boundary record, not a QRA result. It is consumed
 alongside the current IJHE objective audit and the 49-check completion audit.
+
+The sequence-only screen is reproducible with:
+
+```powershell
+python scripts/build_inspection_center_sequence_evidence.py `
+  --source "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터\2. 액화수소 저장(벤트) 시나리오 데이터\액화수소저장벤트_운전시퀀스.csv" `
+  --scenario "액화수소 저장(벤트)" `
+  --output results/20261115/inspection_center_operation_sequence_evidence.json
+```

@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,335 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,337 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -258,6 +258,20 @@ The inspection-centre source inventory is documented in
 [`PRISM_inspection_center_source_suitability_20261115.md`](docs/PRISM_inspection_center_source_suitability_20261115.md).
 It is a state/HAZOP diagnostic input boundary; it does not create accident
 releases or learn failure frequencies from normal-operation signals.
+
+The vent procedure CSV has a separate provenance adapter:
+[`inspection_center_operation_sequence_evidence.json`](results/20261115/inspection_center_operation_sequence_evidence.json).
+It preserves explicit 6.5 bar vent-operation and 6.0 bar close-operation
+labels as owner-review candidates. It does not provide relief capacity,
+discharge completion, mass balance, or a failure frequency, so the pressure-
+relief release-boundary gate remains closed. Rebuild it with:
+
+```powershell
+python scripts/build_inspection_center_sequence_evidence.py `
+  --source "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터\2. 액화수소 저장(벤트) 시나리오 데이터\액화수소저장벤트_운전시퀀스.csv" `
+  --scenario "액화수소 저장(벤트)" `
+  --output results/20261115/inspection_center_operation_sequence_evidence.json
+```
 
 For CSV/TSV historian or simulator exports and reviewed XLSX worksheets, the strict tabular adapter is
 documented in [`PRISM_tabular_runtime_adapter_en.md`](docs/PRISM_tabular_runtime_adapter_en.md).

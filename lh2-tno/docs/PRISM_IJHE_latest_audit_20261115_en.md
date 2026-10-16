@@ -2,6 +2,15 @@
 
 This document is the English companion to the latest PRISM readiness record. It describes the current **generic outdoor liquid-hydrogen (LH2) facility** scope. Inspection-center data are used only as state, operating-mode, and HAZOP diagnostics; they are not converted into accident frequencies or qualified release packets.
 
+The inspection-centre vent-sequence CSV is now screened into
+`results/20261115/inspection_center_operation_sequence_evidence.json` by
+`build_inspection_center_sequence_evidence.py`. The sidecar records the
+explicit 6.5 bar vent-operation label and the 6.0 bar operational close label
+as **owner-review candidates**. It does not assert a certified PSV setpoint,
+relief capacity, discharge completion, inventory depletion, or mass closure.
+This keeps the sequence useful as HAZOP provenance while leaving the G1
+release-boundary request open.
+
 ## Current result
 
 The latest audit is `INCOMPLETE_EVIDENCE` with **54 checks: 49 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
@@ -74,9 +83,22 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,335 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,337 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
+
+To reproduce the operation-sequence screening (the source file is external to
+the repository), run:
+
+```powershell
+python scripts/build_inspection_center_sequence_evidence.py `
+  --source "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터\2. 액화수소 저장(벤트) 시나리오 데이터\액화수소저장벤트_운전시퀀스.csv" `
+  --scenario "액화수소 저장(벤트)" `
+  --output results/20261115/inspection_center_operation_sequence_evidence.json
+```
+
+The generated record is an input/provenance artifact. It cannot by itself
+rebind the provider packet, close the G1 mass ledger, or open facility IR/F-N.
 
 The release-boundary response intake now has a reproducible handoff to the
 case-level audit: `validate_release_boundary_evidence_response.py` can emit a
