@@ -111,6 +111,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if args.time_step_s > args.horizon_s:
         raise ValueError("time step must not exceed horizon")
     source_digest = _tree_digest(root)
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     valve, properties = _native_valve(
         root,
         opening_diameter_m=args.failure_opening_diameter_m,
@@ -130,7 +135,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "temperature_k": args.source_temperature_k,
         "mass_kg": args.available_mass_kg,
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+            "position_enu_m": position_enu_m,
         "measurements": {
             "upstream_pressure": {
                 "quantity": "pressure",
@@ -153,7 +158,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "failure_mode": "explicit_failed_opening",
         "failure_opening_diameter_m": args.failure_opening_diameter_m,
         "horizon_s": args.horizon_s,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": args.ambient_pressure_pa_abs,
         "ambient_temperature_k": args.ambient_temperature_k,
@@ -306,6 +311,14 @@ def main() -> int:
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--available-mass-kg", type=float, default=100.0)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m",
+        type=float,
+        nargs=3,
+        metavar=("EAST_M", "NORTH_M", "UP_M"),
+        default=None,
+        help="equipment outlet position; defaults to [0, 0, nozzle-height]",
+    )
     parser.add_argument(
         "--compressible-handoff",
         action="store_true",

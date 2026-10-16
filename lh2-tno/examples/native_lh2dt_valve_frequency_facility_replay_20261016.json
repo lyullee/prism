@@ -1,0 +1,38 @@
+{
+  "schema_version": "prism.native_lh2dt_valve_frequency_facility_replay.v1",
+  "replay_date": "2026-10-16",
+  "facility_id": "native-lh2dt-valve-frequency-diagnostic",
+  "component_id": "transfer-valve-01",
+  "provider_packet_event_id": "native-stroke-valve/transfer-valve-AREA_0.01pct",
+  "campaign_frequency_event_id": "native-lh2dt-valve-frequency-diagnostic/transfer-valve/AREA_0.01%",
+  "provider_event_id_rebound": true,
+  "provider_result_digest": "798a67a35abd1f0554a85dd2182ac46631b855f9645992941079c203e7a214ee",
+  "compressible_plane_handoff_consumed": true,
+  "exact_opening_match": true,
+  "literature_frequency_applied": true,
+  "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+  "frequency_annual_central_per_year": 0.00012,
+  "frequency_p05_per_year": 4.4143229045141205E-05,
+  "frequency_p95_per_year": 0.0003262231195800764,
+  "event_count": 5,
+  "case_count": 5,
+  "executed_case_count": 1,
+  "uncomputed_case_count": 4,
+  "operator_limited_case_count": 1,
+  "withheld_case_count": 5,
+  "risk_atom_count": 4,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "facility_total_risk_available": false,
+  "campaign_elapsed_ms": 4491.376900026808,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "interpretation": "Conditional diagnostic only; unmatched bins remain UNCOMPUTED and the facility QRA gate remains closed."
+}

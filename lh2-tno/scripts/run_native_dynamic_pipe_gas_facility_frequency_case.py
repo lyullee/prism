@@ -1,4 +1,4 @@
-"""Run one native DynamicHEMPipe gas packet through the facility risk ledger.
+"""Run one native external gas packet through the facility risk ledger.
 
 The packet must already contain the provider-resolved compressible plane.  This
 runner binds its exact opening to one literature frequency event, evaluates the
@@ -81,7 +81,7 @@ def _request_defaults(context: dict[str, Any]) -> dict[str, Any]:
         "basis": "reviewed_isolation_success",
         "time_s": "provider_duration",
         "provenance": (
-            "native DynamicHEMPipe gas packet; provider isolation clock retained "
+            "native external gas provider packet; provider isolation clock retained "
             "for facility campaign diagnostic"
         ),
     }
@@ -99,17 +99,17 @@ def _default_scenarios(asset_id: str) -> tuple[LiteratureFrequencyScenario, ...]
             (
                 "native-gas-published-central",
                 "published",
-                "published LH2 pipe catalogue central rate; diagnostic only",
+                "published LH2 equipment catalogue central rate; diagnostic only",
             ),
             (
                 "native-gas-literature-low",
                 "p05",
-                "published marginal p05 LH2 pipe rate; diagnostic sensitivity only",
+                "published marginal p05 LH2 equipment rate; diagnostic sensitivity only",
             ),
             (
                 "native-gas-literature-high",
                 "p95",
-                "published marginal p95 LH2 pipe rate; diagnostic sensitivity only",
+                "published marginal p95 LH2 equipment rate; diagnostic sensitivity only",
             ),
         )
     )
@@ -154,7 +154,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "id": "native-provider-gas-packet",
         "probability_given_event": 1.0,
         "provenance": (
-            "native DynamicHEMPipe gas history with provider-resolved compressible "
+            "native external gas history with provider-resolved compressible "
             "plane; exact opening match; diagnostic only"
         ),
         "request": request.model_dump(mode="json"),
@@ -176,7 +176,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                                 "other catalogue bins remain uncomputed"
                             ),
                             "uncomputed_reason": (
-                                "no native DynamicHEMPipe packet for this opening bin"
+                                "no native external gas packet for this opening bin"
                             ),
                         }
                     ],
@@ -184,12 +184,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             )
     conditions = _array(args.annual_conditions)
     campaign_raw = {
-        "id": "native-dynamic-pipe-gas-facility-frequency-campaign",
+        "id": "native-gas-facility-frequency-campaign",
         "frequency_plan": plan.model_dump(mode="json"),
         "annual_conditions": conditions,
         "event_routes": routes,
         "scope_provenance": (
-            "one native DynamicHEMPipe gas packet bound to one LH2 pipe literature "
+            "one native external gas packet bound to one literature frequency "
             "opening; declared outdoor weather/population conditions; other bins withheld"
         ),
         "maximum_physics_cases": args.maximum_physics_cases,
@@ -214,11 +214,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     result_events = result.get("events", [])
     result_cases = result.get("cases", [])
+    withheld_cases = result.get("uncomputed_cases", [])
+    actual_uncomputed_case_count = sum(
+        1 for case in withheld_cases if str(case.get("status", "")) == "UNCOMPUTED"
+    )
+    operator_limited_case_count = sum(
+        1
+        for case in withheld_cases
+        if str(case.get("status", "")).startswith("EXECUTED_OPERATOR_LIMITED")
+    )
     executed_cases = [
         case for case in result_cases if str(case.get("status", "")).startswith("EXECUTED")
     ]
     verification = {
-        "schema_version": "prism.native_dynamic_pipe_gas_facility_frequency_case.v1",
+        "schema_version": "prism.native_gas_facility_frequency_case.v1",
         "status": "NATIVE_GAS_PACKET_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
         "campaign_status": result.get("status"),
         "facility_assessment_status": assessment.get("status"),
@@ -248,7 +257,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "event_count": len(result_events),
         "case_count": len(result_cases),
         "executed_case_count": len(executed_cases),
-        "uncomputed_case_count": len(result.get("uncomputed_cases", [])),
+        "uncomputed_case_count": actual_uncomputed_case_count,
+        "operator_limited_case_count": operator_limited_case_count,
+        "withheld_case_count": len(withheld_cases),
         "risk_atom_count": len(result.get("risk_atoms", [])),
         "conditional_diagnostic_facility_risk_available": assessment.get(
             "conditional_diagnostic_facility_risk_available"
