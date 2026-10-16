@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "facility_id": "generic-lh2-native-pump-example",
+  "environment": "outdoor",
+  "configuration_origin": "synthetic",
+  "components": [
+    {
+      "id": "liquid-transfer-pump-01",
+      "kind": "pump",
+      "position_enu_m": [6.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {"diameter_m": 0.025},
+      "source_status": "declared",
+      "source_provenance": "generic outdoor LH2 facility pump scope; native MappedPump packet bound at the accident port"
+    }
+  ],
+  "ports": [
+    {
+      "id": "pump-accident-out",
+      "component_id": "liquid-transfer-pump-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [6.0, 0.0, 1.0]
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {"id": "worker-01", "position_enu_m": [20.0, 0.0, 1.0]}
+  ],
+  "scenarios": []
+}

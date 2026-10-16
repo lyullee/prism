@@ -59,6 +59,7 @@ def _apply_isolation_contract(
     isolation_time_s: float | None,
     post_isolation_observation_s: float | None,
     time_step_s: float,
+    position_enu_m: tuple[float, float, float],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Add an explicit downstream isolation observation to a native pump history.
 
@@ -105,7 +106,7 @@ def _apply_isolation_contract(
         "ground_liquid_mass_flow_kg_s": 0.0,
         "airborne_liquid_mass_flow_kg_s": 0.0,
         "flight_time_s": 0.0,
-        "impact_position_m": [0.0, 0.0, 0.001],
+        "impact_position_m": [position_enu_m[0], position_enu_m[1], 0.001],
         "droplet_diameter_m": 0.001,
     }
     observation_intervals = int(round(post_isolation_observation_s / time_step_s))
@@ -191,6 +192,7 @@ def _native_pump(
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
+    position_enu_m = tuple(float(value) for value in args.position_enu_m)
     if args.time_step_s <= 0.0 or args.horizon_s <= 0.0:
         raise ValueError("horizon and time step must be positive")
     if args.time_step_s > args.horizon_s:
@@ -225,7 +227,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "temperature_k": args.source_temperature_k,
         "mass_kg": args.available_mass_kg,
         "phase": "liquid",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": list(position_enu_m),
         "measurements": {
             "upstream_pressure": {
                 "quantity": "pressure",
@@ -248,7 +250,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "failure_mode": "explicit_failed_pump_atmospheric_outlet",
         "failure_opening_diameter_m": args.failure_opening_diameter_m,
         "horizon_s": args.horizon_s,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": list(position_enu_m),
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": args.ambient_pressure_pa_abs,
         "ambient_temperature_k": args.ambient_temperature_k,
@@ -290,7 +292,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "state_snapshot_digest": snapshot.digest(),
         "droplet_diameter_m": args.droplet_diameter_m,
         "droplet_flight_time_s": args.droplet_flight_time_s,
-        "impact_position_m": [0.0, 0.0, 0.001],
+        "impact_position_m": [position_enu_m[0], position_enu_m[1], 0.001],
     }
     native_response = pump.export_accident_history(native_request)
     native_response, isolation_summary = _apply_isolation_contract(
@@ -305,6 +307,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         isolation_time_s=args.isolation_time_s,
         post_isolation_observation_s=args.post_isolation_observation_s,
         time_step_s=args.time_step_s,
+        position_enu_m=position_enu_m,
     )
     result = export_equipment_liquid_accident_history(NativeMappedPumpProvider(native_response), request)
     data = native_response["data"]
@@ -394,11 +397,23 @@ def main() -> int:
     parser.add_argument("--droplet-diameter-m", type=float, default=0.001)
     parser.add_argument("--droplet-flight-time-s", type=float, default=0.0)
     parser.add_argument("--nozzle-height-m", type=float, default=0.5)
+    parser.add_argument(
+        "--position-enu-m",
+        type=float,
+        nargs=3,
+        default=None,
+        metavar=("EAST", "NORTH", "UP"),
+        help="global ENU position of the pump accident port; defaults to [0, 0, nozzle_height_m]",
+    )
     parser.add_argument("--reference-speed-rpm", type=float, default=3000.0)
     parser.add_argument("--speed-rpm", type=float, default=3000.0)
     parser.add_argument("--isentropic-efficiency", type=float, default=0.7)
     parser.add_argument("--head-curve-points", type=json.loads, default=[[0.0, 300000.0], [0.01, 150000.0], [0.02, 0.0]])
     args = parser.parse_args()
+    if args.position_enu_m is None:
+        args.position_enu_m = (0.0, 0.0, args.nozzle_height_m)
+    else:
+        args.position_enu_m = tuple(args.position_enu_m)
     try:
         result = run(args)
     except (ImportError, KeyError, OSError, TypeError, ValueError) as error:

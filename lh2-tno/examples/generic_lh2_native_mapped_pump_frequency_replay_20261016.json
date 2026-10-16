@@ -1,0 +1,33 @@
+{
+  "schema_version": "prism.generic_lh2_native_mapped_pump_frequency_replay.v1",
+  "status": "NATIVE_PROVIDER_PACKET_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "packet": "results/20261016/native_mapped_pump_generic_component_frequency_packet_positioned/resolved_release.json",
+  "manifest": "examples/generic_lh2_native_mapped_pump_manifest.json",
+  "frequency_plan": "examples/generic_lh2_native_mapped_pump_frequency_plan.json",
+  "component_id": "liquid-transfer-pump-01",
+  "port_id": "pump-accident-out",
+  "event_id": "generic-lh2-native-pump-frequency-example/transfer-pump/G2",
+  "exact_opening_diameter_m": 0.0025,
+  "position_enu_m": [6.0, 0.0, 1.0],
+  "frequency_profile": "TNO_PUMP_STANDARD",
+  "frequency_loc": "G2",
+  "frequency_annual_central_per_year": 0.0005,
+  "frequency_bounds": "not published; fixed catalogue rate retained",
+  "executed_case_count": 1,
+  "uncomputed_case_count": 1,
+  "risk_atom_count": 4,
+  "campaign_elapsed_ms": 6537.3523000162095,
+  "conditional_diagnostic_facility_risk_available": true,
+  "facility_total_risk_available": false,
+  "facility_qra_claim": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "interpretation": "The native MappedPump packet is coupled to a general outdoor LH2 facility pump identity and exact TNO frequency port. The facility wrapper is generic and synthetic; it is not inspection-center-specific.",
+  "limitations": [
+    "synthetic source state, H-Q-N map, reserve, atmospheric opening and isolation boundary",
+    "generic TNO pump frequency is not an empirically validated LH2 failure rate",
+    "G1 full-bore, other pump connections and unmodeled pump failure modes remain uncomputed",
+    "airborne liquid remains zero under the native provider contract",
+    "conditional IR/F-N does not promote facility-total QRA"
+  ]
+}

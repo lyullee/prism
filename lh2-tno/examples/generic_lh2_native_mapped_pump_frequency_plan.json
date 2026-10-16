@@ -1,0 +1,17 @@
+{
+  "id": "generic-lh2-native-pump-frequency-example",
+  "assets": [
+    {
+      "id": "transfer-pump",
+      "model_component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "port_ids": ["pump-accident-out"],
+      "physical_scope_ids": ["liquid-transfer-pump-01-connection"],
+      "classification_basis": "generic outdoor LH2 pump; TNO pump frequency uses the largest connecting pipe and requires engineering applicability review",
+      "nominal_diameter_m": 0.025,
+      "location_weight": 1.0,
+      "location_weight_provenance": "one reviewed pump connection in this diagnostic scope; remaining connections require separate physical scope rows"
+    }
+  ],
+  "excluded_model_components": {}
+}
