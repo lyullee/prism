@@ -4,7 +4,11 @@ import json
 
 import pytest
 
-from lh2_tno.forecast_handoff import ForecastHandoffError, build_forecast_quantitative_handoff
+from lh2_tno.forecast_handoff import (
+    ForecastHandoffError,
+    attach_forecast_quantitative_evidence,
+    build_forecast_quantitative_handoff,
+)
 
 
 def _scan():
@@ -80,3 +84,29 @@ def test_saved_facility_scan_builds_two_provider_requests():
     assert result["summary"]["request_count"] == 2
     assert result["summary"]["ready_for_quantitative_evaluation_count"] == 2
     assert {request["operating_mode"] for request in result["requests"]} == {"receiving", "supply"}
+
+
+def test_quantitative_evidence_attachment_requires_exact_keys_and_all_blocks():
+    handoff = build_forecast_quantitative_handoff(_scan())
+    key = handoff["requests"][0]["request_id"]
+    attachment = {
+        key: {
+            "status": "REVIEWED_INPUTS_ATTACHED",
+            "evidence": {
+                "provider_release_packet": {"status": "provided", "digest": "a" * 64},
+                "frequency_binding": {"status": "literature_bound", "digest": "b" * 64},
+                "slabx_lh2_consequence": {"status": "provided", "digest": "c" * 64},
+                "facility_condition_binding": {"status": "provided", "digest": "d" * 64},
+            },
+        }
+    }
+    result = attach_forecast_quantitative_evidence(handoff, attachment)
+    assert result["status"] == "FORECAST_QUANTITATIVE_EVIDENCE_ATTACHED_OPERATOR_LIMITED"
+    assert result["summary"]["evidence_attached_count"] == 1
+    assert result["policy"]["facility_qra_promotion"] is False
+
+    with pytest.raises(ForecastHandoffError, match="exactly match"):
+        attach_forecast_quantitative_evidence(handoff, {"other": attachment[key]})
+    incomplete = {key: {"evidence": {"provider_release_packet": {}}}}
+    with pytest.raises(ForecastHandoffError, match="missing evidence blocks"):
+        attach_forecast_quantitative_evidence(handoff, incomplete)

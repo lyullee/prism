@@ -256,6 +256,20 @@ retains its operating mode and required provider/frequency/SLABx-LH2/facility
 inputs. Missing evidence remains a work item instead of being converted to
 zero risk.
 
+After reviewed evidence is prepared, attach it using the exact request keys:
+
+```powershell
+python scripts/attach_forecast_quantitative_evidence.py `
+  --handoff results/20261115/inspection_center_facility_forecast_quantitative_handoff.json `
+  --attachments reviewed_forecast_evidence.json `
+  --output build/inspection_center_forecast_evidence_attachment.json
+```
+
+The attachment contract requires provider-release, frequency, SLABx-LH2 and
+facility-condition blocks for every request. It preserves operator review and
+keeps facility IR/F-N promotion disabled until the ordinary qualification and
+scope gates are satisfied.
+
 The HAZOP scan records each predicted risk-condition entry and reports a
 withheld quantitative evaluation when no provider/SLABx-LH2 callback is
 supplied. It is an auditable digital-twin replay entry point, not a substitute

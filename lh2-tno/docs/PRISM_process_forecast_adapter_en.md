@@ -101,6 +101,22 @@ provider release packet, reviewed literature frequency, SLABx-LH2 result and
 facility population/ignition binding. The worklist never creates any of those
 inputs, assigns missing cases zero risk, or opens facility IR/F-N promotion.
 
+When reviewed evidence is available, attach it with a JSON object keyed by the
+same request IDs:
+
+```powershell
+python scripts/attach_forecast_quantitative_evidence.py `
+  --handoff results/20261115/inspection_center_facility_forecast_quantitative_handoff.json `
+  --attachments reviewed_forecast_evidence.json `
+  --output build/inspection_center_forecast_evidence_attachment.json
+```
+
+Every attachment must contain `provider_release_packet`, `frequency_binding`,
+`slabx_lh2_consequence` and `facility_condition_binding`. Missing or extra
+keys are rejected. The resulting operator-limited record preserves evidence
+but does not run physics, infer frequency, qualify a provider or promote
+facility IR/F-N.
+
 ## Passing frames to forecast HAZOP
 
 Read `record["frames"]` and pass it to

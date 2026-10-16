@@ -19,6 +19,14 @@ class ForecastHandoffError(ValueError):
     """Raised when a forecast scan cannot satisfy the handoff contract."""
 
 
+_REQUIRED_EVIDENCE = (
+    "provider_release_packet",
+    "frequency_binding",
+    "slabx_lh2_consequence",
+    "facility_condition_binding",
+)
+
+
 def _name(value: Any, field: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise ForecastHandoffError(f"{field} must be a non-empty string")
@@ -149,4 +157,88 @@ def build_forecast_quantitative_handoff(scan: Mapping[str, Any]) -> dict[str, An
     }
 
 
-__all__ = ["SCHEMA", "ForecastHandoffError", "build_forecast_quantitative_handoff"]
+def attach_forecast_quantitative_evidence(
+    handoff: Mapping[str, Any],
+    attachments: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Attach exact-keyed downstream evidence without promoting facility QRA.
+
+    ``attachments`` is keyed by the request IDs emitted by
+    :func:`build_forecast_quantitative_handoff`. Each value must contain an
+    ``evidence`` mapping with all four required evidence blocks. The blocks are
+    preserved verbatim for the qualified provider/facility owner; this helper
+    does not run physics, infer frequency, or decide qualification.
+    """
+    if not isinstance(handoff, Mapping) or handoff.get("schema_version") != SCHEMA:
+        raise ForecastHandoffError("handoff has an unsupported schema_version")
+    requests = handoff.get("requests")
+    if not isinstance(requests, list) or not requests:
+        raise ForecastHandoffError("handoff.requests must be a non-empty list")
+    if not isinstance(attachments, Mapping):
+        raise ForecastHandoffError("attachments must be a mapping keyed by request_id")
+    expected = {request.get("request_id") for request in requests if isinstance(request, Mapping)}
+    if len(expected) != len(requests) or None in expected:
+        raise ForecastHandoffError("handoff requests must contain unique request_id values")
+    actual = set(attachments)
+    missing = sorted(expected - actual)
+    extra = sorted(actual - expected)
+    if missing or extra:
+        raise ForecastHandoffError(
+            f"attachment keys must exactly match handoff requests; missing={missing}, extra={extra}"
+        )
+    attached: list[dict[str, Any]] = []
+    for request in requests:
+        request_id = str(request["request_id"])
+        attachment = attachments[request_id]
+        if not isinstance(attachment, Mapping):
+            raise ForecastHandoffError(f"attachment {request_id} must be a mapping")
+        evidence = attachment.get("evidence")
+        if not isinstance(evidence, Mapping):
+            raise ForecastHandoffError(f"attachment {request_id}.evidence must be a mapping")
+        missing_evidence = [name for name in _REQUIRED_EVIDENCE if name not in evidence]
+        if missing_evidence:
+            raise ForecastHandoffError(
+                f"attachment {request_id} is missing evidence blocks: {missing_evidence}"
+            )
+        attached.append({
+            "request": dict(request),
+            "attachment": dict(attachment),
+            "evidence_block_names": list(_REQUIRED_EVIDENCE),
+            "status": "EVIDENCE_ATTACHED_OPERATOR_LIMITED",
+        })
+    return {
+        "schema_version": "prism.forecast_quantitative_evidence_attachment.v1",
+        "status": "FORECAST_QUANTITATIVE_EVIDENCE_ATTACHED_OPERATOR_LIMITED",
+        "facility_id": handoff.get("facility_id"),
+        "requests": attached,
+        "summary": {
+            "request_count": len(attached),
+            "evidence_attached_count": len(attached),
+            "evidence_withheld_count": 0,
+        },
+        "policy": {
+            "exact_request_key_match_required": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created": False,
+            "slabx_lh2_calculated": False,
+            "facility_ir_fn_calculated": False,
+            "provider_qualification_claim": False,
+            "independent_physical_validation_claim": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+        "interpretation": (
+            "Exact-keyed downstream evidence blocks were attached for every forecast "
+            "request. The attachment preserves operator review and does not itself "
+            "qualify a provider, run SLABx-LH2, infer frequency or promote facility QRA."
+        ),
+    }
+
+
+__all__ = [
+    "SCHEMA",
+    "ForecastHandoffError",
+    "build_forecast_quantitative_handoff",
+    "attach_forecast_quantitative_evidence",
+]
