@@ -31,7 +31,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1214 passed, 1 warning**.
+The v0.6.3 local validation result is **1220 passed, 1 warning**.
 
 ## What PRISM is for
 
@@ -45,6 +45,8 @@ PRISM helps an operator or researcher answer:
 - What evidence, uncertainty, latency, and response action should be shown?
 
 The framework supports generic outdoor LH2 facilities, including tanks, transfer lines, valves, pumps, vaporizers, and vents. It is designed to connect to an existing process digital twin. The equipment model remains the owner of thermodynamics, inventory, isolation, and accident release history.
+
+For a compact multi-equipment demonstration, see the [native pump + valve facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md). It binds a liquid pump packet and a gas valve packet to one facility ledger, retains release duration and mass-balance evidence, and keeps every unmatched frequency opening explicitly `UNCOMPUTED`.
 
 ## What PRISM does not infer
 
@@ -147,6 +149,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [IJHE requirement traceability](docs/PRISM_IJHE_requirement_traceability_20261115.md)
 - [Latest IJHE audit](docs/PRISM_IJHE_latest_audit_20261115.md)
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
+- [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
 - [v0.6.3 distribution record (Korean)](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)
 
