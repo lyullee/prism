@@ -192,7 +192,13 @@ def _native_pump(
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
-    position_enu_m = tuple(float(value) for value in args.position_enu_m)
+    raw_position = getattr(args, "position_enu_m", None)
+    if raw_position is None:
+        position_enu_m = (0.0, 0.0, float(args.nozzle_height_m))
+    else:
+        if len(raw_position) != 3:
+            raise ValueError("position_enu_m must contain exactly three ENU values")
+        position_enu_m = tuple(float(value) for value in raw_position)
     if args.time_step_s <= 0.0 or args.horizon_s <= 0.0:
         raise ValueError("horizon and time step must be positive")
     if args.time_step_s > args.horizon_s:
