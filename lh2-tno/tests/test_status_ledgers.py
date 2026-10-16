@@ -69,6 +69,20 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
         assert status["full_portable_test_status"].startswith(
             f"{test_count} passed"
         )
+        # The v0.6.0 alias is a current pointer, not a historical snapshot.
+        # Keep it synchronized with the authoritative audit so dashboards and
+        # release notes cannot silently report the retired 42-check snapshot.
+        v060_counts = {
+            state: sum(check["status"] == state for check in audit["checks"])
+            for state in {check["status"] for check in audit["checks"]}
+        }
+        assert status["v060_ijhe_completion_audit_latest_check_count"] == len(
+            audit["checks"]
+        )
+        assert status["v060_ijhe_completion_audit_latest_check_status_counts"] == v060_counts
+        assert status["v060_ijhe_completion_audit_latest_blocked_checks"] == [
+            check["name"] for check in audit["checks"] if check["status"] != "PASS"
+        ]
         assert status["facility_evidence_request_latest_record"].endswith(
             "facility_evidence_request.json"
         )

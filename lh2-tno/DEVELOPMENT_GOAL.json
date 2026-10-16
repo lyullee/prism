@@ -1475,7 +1475,7 @@
   "equipment_state_release_audit_record": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
   "equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases, 9 components; synthetic-horizon termination basis/provider echo present in 10 cases; all remain operator-limited",
   "ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 37,
+    "PASS": 49,
     "BLOCKED": 5
   },
   "ijhe_completion_audit_latest_check_count": 54,
@@ -1483,7 +1483,7 @@
   "ijhe_completion_audit_latest_blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
-    "one or more declared accident families are missing, partial, or uncomputed",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
     "facility cases do not all have exact qualified provider packet evidence"
   ],
@@ -1592,7 +1592,7 @@
   "refined_pool_ijhe_audit_blockers": [
     "one or more equipment models lacks an accident-release interface and provider termination ledger",
     "only synthetic or screening provider releases are available for this campaign",
-    "one or more declared accident families are missing, partial, or uncomputed",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
   ],
   "frequency_provenance_report_implemented": true,
@@ -2355,7 +2355,7 @@
   "ijhe_audit_latest_blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
-    "one or more declared accident families are missing, partial, or uncomputed",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
     "facility cases do not all have exact qualified provider packet evidence"
   ],
@@ -2715,9 +2715,9 @@
   "facility_release_boundary_gate_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
   "facility_release_boundary_gate_completion_audit_record": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json",
   "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 4 completion-audit tests, public assessment propagation assertion, union case-coverage/raw-ledger reconciliation assertions, and state-snapshot result-binding tests; full portable suite 707 passed, 1 skipped",
-  "v060_ijhe_completion_audit_latest_check_count": 42,
+  "v060_ijhe_completion_audit_latest_check_count": 54,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 37,
+    "PASS": 49,
     "BLOCKED": 5
   },
   "v060_ijhe_completion_audit_latest_blocked_checks": [
@@ -3748,7 +3748,7 @@
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
     "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
-    "one or more declared accident families are missing, partial, or uncomputed",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
   ],
   "latest_isolation_packet_rebound": {
@@ -3834,7 +3834,7 @@
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
     "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
-    "one or more declared accident families are missing, partial, or uncomputed",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
     "facility cases do not all have exact qualified provider packet evidence"
   ],
