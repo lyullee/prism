@@ -533,6 +533,64 @@ def test_realtime_facility_monitor_hazop_bridge_preserves_mode_and_fail_closed_q
     assert partial["facility_annual_ir_available"] is False
 
 
+def test_realtime_facility_monitor_supports_explicit_provider_component_identity(tmp_path):
+    from lh2_tno.provider_release import build_consequence_request_from_provider_release
+    from lh2_tno.service import (
+        ConsequenceService,
+        FacilityRealtimeBinding,
+        FacilityRealtimeConsequenceMonitor,
+        RealtimeConsequenceMonitor,
+    )
+    from test_consequence_service import Pipeline, request
+    from test_provider_release import _defaults, _liquid_release
+
+    provider_id = "provider-TK-01"
+    release = _liquid_release().model_copy(update={"component_id": provider_id})
+    defaults = _defaults()
+    defaults.update({
+        "component_id": provider_id,
+        "source_operator": "equipment_liquid_release",
+        "release_termination": {
+            "basis": "model_pressure_equalization",
+            "time_s": 0.2,
+            "provenance": "explicit provider identity translation test",
+        },
+        "source_duration_mode": "model_natural",
+    })
+    provider_request = build_consequence_request_from_provider_release(release, defaults)
+
+    class _RuntimeNormalizer:
+        def normalize(self, *_args, **_kwargs):
+            raise AssertionError("runtime HAZOP bridge must bypass historian normalization")
+
+    binding = FacilityRealtimeBinding(
+        component_id="TK-01",
+        template=request().model_copy(update={"component_id": "TK-01"}),
+        monitor=RealtimeConsequenceMonitor(ConsequenceService(Pipeline(tmp_path))),
+        normalizer=_RuntimeNormalizer(),
+        pressure_tag="pressure",
+        temperature_tag="temperature",
+        provider_component_id=provider_id,
+    )
+    facility = FacilityRealtimeConsequenceMonitor(
+        {"TK-01": binding}, facility_id="generic-outdoor-lh2"
+    )
+    frame = _runtime_frame_for_gate()
+    selection = evaluate_hazop_runtime_frame(_gate_table(), frame, now_s=3.2)
+    scenario_id = selection["selected_scenarios"][0]["scenario_id"]
+    result = facility.update_from_runtime_frames_with_hazop(
+        _gate_table(),
+        {"TK-01": frame},
+        now_s=3.2,
+        release_resolvers={scenario_id: lambda _template, _normalized: provider_request},
+    )
+    assert result["status"] == "FACILITY_HAZOP_RUNTIME_EVALUATED"
+    assert result["components"]["TK-01"]["status"] == "CONSEQUENCE_BRANCHES_EVALUATED"
+    branch = result["components"]["TK-01"]["branches"][0]
+    assert branch["result"]["status"] == "CONSEQUENCE_EVALUATED"
+    assert branch["operating_mode"] == "receiving"
+
+
 def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_rows(tmp_path):
     from lh2_tno.hazop_campaign import build_hazop_facility_campaign_result
     from lh2_tno.provider_release import build_consequence_request_from_provider_release

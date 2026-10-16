@@ -60,6 +60,30 @@ The state frame contains state only. It may include a measured or predicted valu
 
 Do not place `resolved_release`, opening diameter, annual frequency, release duration, or termination basis in the state frame. Those fields belong to the scenario/provider and frequency contracts.
 
+### 3.1 Explicit observed-to-provider component mapping
+
+An observed tag may use a site asset ID while the equipment model uses a
+different provider ID. In that case, declare the mapping on the facility
+binding instead of matching by name or guessing from geometry:
+
+```python
+FacilityRealtimeBinding(
+    component_id="lh2-supply-vaporizer-boundary",
+    template=template_for_observed_component,
+    monitor=monitor,
+    normalizer=normalizer,
+    pressure_tag="PT1111",
+    temperature_tag="TT1116",
+    provider_component_id="ambient-vaporizer-01",
+)
+```
+
+The HAZOP selector continues to evaluate the observed component. Only the
+provider handoff receives an explicit translated state snapshot and template,
+and their digests are recomputed. This mapping does not create release
+geometry, duration, inventory, frequency, or facility risk; the provider must
+still return a contract-valid accident history.
+
 ## 4. HAZOP binding
 
 Compare the state value and operating mode with the HAZOP row. Preserve the selected row ID, operating mode, deviation, and safeguard context downstream.

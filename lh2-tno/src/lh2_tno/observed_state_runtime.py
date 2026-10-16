@@ -12,6 +12,7 @@ evaluate consequences.
 """
 from __future__ import annotations
 
+import copy
 from collections.abc import Iterable, Mapping
 import math
 from typing import Any
@@ -351,6 +352,42 @@ def service_state_from_runtime_frame(
     return validate_equipment_process_state(normalized)
 
 
+def translate_runtime_frame_component_id(
+    frame: Mapping[str, Any],
+    provider_component_id: str,
+) -> dict[str, Any]:
+    """Apply an explicit observed-to-provider component identity mapping.
+
+    HAZOP selection remains on the observed component frame.  The translated
+    copy is only for the provider/consequence boundary, where the equipment
+    model may use a different, explicitly reviewed component identifier.  No
+    geometry, release, duration, frequency, or accident field is created.
+    """
+    if not isinstance(frame, Mapping):
+        raise TypeError("frame must be a mapping")
+    target = str(provider_component_id or "").strip()
+    if not target:
+        raise ValueError("provider_component_id must be nonempty")
+    translated = copy.deepcopy(dict(frame))
+    translated["component_id"] = target
+    values = translated.get("values")
+    if not isinstance(values, Mapping):
+        raise ValueError("runtime frame values must be a mapping")
+    for value in values.values():
+        if not isinstance(value, dict):
+            raise ValueError("runtime frame values must contain mutable objects")
+        value["component_id"] = target
+    snapshot = translated.get("state_snapshot")
+    if not isinstance(snapshot, dict):
+        raise ValueError("runtime frame state_snapshot must be a mapping")
+    snapshot["component_id"] = target
+    translated["state_snapshot_digest"] = canonical_digest(snapshot)
+    translated["frame_digest"] = canonical_digest(
+        {key: value for key, value in translated.items() if key != "frame_digest"}
+    )
+    return translated
+
+
 def request_from_observed_state_runtime_frame(
     template: Any,
     frame: Mapping[str, Any],
@@ -450,4 +487,5 @@ __all__ = [
     "build_observed_state_runtime_frames",
     "service_state_from_runtime_frame",
     "request_from_observed_state_runtime_frame",
+    "translate_runtime_frame_component_id",
 ]

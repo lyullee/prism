@@ -7,6 +7,7 @@
 | 요구사항 | 현재 증거 | 판정 |
 |---|---|---|
 | 설비 상태와 운전 모드를 HAZOP 입력으로 사용 | HAZOP selection/event binding, operating-mode evidence, observed runtime audit | **진단 완료** (`PASS`) |
+| 현장 설비 ID와 provider 모델 ID의 결합 경계를 명시 | `FacilityRealtimeBinding.provider_component_id`, digest-recomputed runtime translation, explicit identity test | **진단 완료**, provider 자격화와는 별도 |
 | 실시간 설비 프레임에서 HAZOP 선택과 provider/SLABx-LH2 호출을 한 경계로 연결 | `FacilityRealtimeConsequenceMonitor.update_from_runtime_frames_with_hazop`, `prism.realtime_hazop_facility_bridge.v1`, reconstructed inspection-centre chain (1/1 diagnostic case) | **진단 완료**, 연간 시설 IR/F-N은 보류 |
 | 문헌 빈도를 사고 event에 명시적으로 연결 | frequency port binding 34/34, 5개 문헌 시나리오 | **진단 완료** (`PASS`) |
 | 설비 방출 포트·지속시간·차단·재고를 피해계산에 전달 | `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json` 및 risk-atom chain audit | **진단 완료**, 일부 provider 경계 제한 |

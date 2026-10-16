@@ -41,6 +41,9 @@ from lh2_tno.service import (  # noqa: E402
     RealtimeFrequencyBinding,
     _realtime_current_weather_risk,
 )
+from lh2_tno.observed_state_runtime import (  # noqa: E402
+    translate_runtime_frame_component_id,
+)
 
 
 def _load(path: Path) -> Any:
@@ -125,23 +128,7 @@ def _rebase_manifest_to_packets(
 
 def _translate_frame(frame: Mapping[str, Any], provider_component_id: str) -> dict[str, Any]:
     """Create an explicit component-identity translation for the diagnostic seam."""
-    translated = copy.deepcopy(dict(frame))
-    translated["component_id"] = provider_component_id
-    values = translated.get("values")
-    if not isinstance(values, dict):
-        raise ValueError("runtime frame values must be an object")
-    for value in values.values():
-        if isinstance(value, dict):
-            value["component_id"] = provider_component_id
-    snapshot = translated.get("state_snapshot")
-    if not isinstance(snapshot, dict):
-        raise ValueError("runtime frame state_snapshot must be an object")
-    snapshot["component_id"] = provider_component_id
-    translated["state_snapshot_digest"] = canonical_digest(snapshot)
-    translated["frame_digest"] = canonical_digest({
-        key: value for key, value in translated.items() if key != "frame_digest"
-    })
-    return translated
+    return translate_runtime_frame_component_id(frame, provider_component_id)
 
 
 def _request_defaults(

@@ -412,6 +412,9 @@ def run_hazop_runtime_consequence(
     monitor: Any,
     release_resolver: Any,
     mapping_digest: str | None = None,
+    provider_frame: Mapping[str, Any] | None = None,
+    provider_template: Any | None = None,
+    provider_component_id: str | None = None,
 ) -> dict[str, Any]:
     """Gate one runtime consequence update with the mode-specific HAZOP result.
 
@@ -474,12 +477,32 @@ def run_hazop_runtime_consequence(
         )
 
     scenario = selected[0]
+    expected_provider_component_id = str(
+        provider_component_id or scenario["component_id"]
+    )
+    if not expected_provider_component_id.strip():
+        raise HazopSelectionError("provider component identity must be nonempty")
+    update_frame = provider_frame if provider_frame is not None else frame
+    update_template = provider_template if provider_template is not None else template
+    if provider_frame is not None:
+        if not isinstance(provider_frame, Mapping):
+            raise HazopSelectionError("provider_frame must be a mapping when supplied")
+        if provider_frame.get("component_id") != expected_provider_component_id:
+            raise HazopSelectionError(
+                "provider frame component identity does not match explicit provider_component_id"
+            )
+    if provider_template is not None and getattr(
+        provider_template, "component_id", None
+    ) != expected_provider_component_id:
+        raise HazopSelectionError(
+            "provider template component identity does not match explicit provider_component_id"
+        )
 
     def guarded_resolver(template_arg: Any, normalized: Mapping[str, Any]) -> Any:
         request = release_resolver(template_arg, normalized)
-        if getattr(request, "component_id", None) != scenario["component_id"]:
+        if getattr(request, "component_id", None) != expected_provider_component_id:
             raise HazopSelectionError(
-                "provider release component does not match the selected HAZOP component"
+                "provider release component does not match the explicit provider component mapping"
             )
         families = scenario_families_for_request(
             scenario["component_kind"],
@@ -526,8 +549,8 @@ def run_hazop_runtime_consequence(
 
     try:
         consequence = update(
-            template,
-            frame,
+            update_template,
+            update_frame,
             now_s=float(now_s),
             release_resolver=guarded_resolver,
             mapping_digest=mapping_digest,
@@ -561,6 +584,9 @@ def run_hazop_runtime_consequence_branches(
     monitor: Any,
     release_resolvers: Mapping[Any, Any],
     mapping_digest: str | None = None,
+    provider_frame: Mapping[str, Any] | None = None,
+    provider_template: Any | None = None,
+    provider_component_id: str | None = None,
 ) -> dict[str, Any]:
     """Dispatch several active HAZOP rows as separate consequence branches.
 
@@ -570,6 +596,9 @@ def run_hazop_runtime_consequence_branches(
     HAZOP table, so no provider history, termination basis, or frequency is
     silently shared between simultaneous accident hypotheses.  Missing branch
     resolvers remain explicitly withheld while other valid branches may run.
+    ``provider_frame``, ``provider_template``, and ``provider_component_id``
+    provide an explicit observed-to-provider identity translation; they never
+    infer a provider identity from a component name or geometry.
     """
     if not isinstance(release_resolvers, Mapping):
         raise HazopSelectionError(
@@ -631,6 +660,9 @@ def run_hazop_runtime_consequence_branches(
             monitor=monitor,
             release_resolver=resolver,
             mapping_digest=mapping_digest,
+            provider_frame=provider_frame,
+            provider_template=provider_template,
+            provider_component_id=provider_component_id,
         )
         result["branches"].append({
             "scenario_id": scenario["scenario_id"],
@@ -731,6 +763,29 @@ def run_hazop_facility_runtime(
                 raise HazopSelectionError(
                     "component binding must expose template and monitor"
                 )
+            provider_component_id = getattr(binding, "provider_component_id", None)
+            provider_frame = None
+            provider_template = None
+            if provider_component_id is not None:
+                provider_component_id = str(provider_component_id).strip()
+                if not provider_component_id:
+                    raise HazopSelectionError(
+                        "provider_component_id must be nonempty when supplied"
+                    )
+                if provider_component_id != component_id:
+                    from .observed_state_runtime import translate_runtime_frame_component_id
+
+                    provider_frame = translate_runtime_frame_component_id(
+                        frame, provider_component_id
+                    )
+                    model_copy = getattr(template, "model_copy", None)
+                    if not callable(model_copy):
+                        raise HazopSelectionError(
+                            "provider identity mapping requires a model-copyable template"
+                        )
+                    provider_template = model_copy(
+                        update={"component_id": provider_component_id}
+                    )
             branch_result = run_hazop_runtime_consequence_branches(
                 table,
                 frame,
@@ -739,6 +794,9 @@ def run_hazop_facility_runtime(
                 monitor=monitor,
                 release_resolvers=release_resolvers,
                 mapping_digest=mapping_digest,
+                provider_frame=provider_frame,
+                provider_template=provider_template,
+                provider_component_id=provider_component_id,
             )
             frequency = getattr(binding, "frequency_binding", None)
             branch_rows: list[dict[str, Any]] = []

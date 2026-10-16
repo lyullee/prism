@@ -1049,6 +1049,9 @@ class FacilityRealtimeBinding:
     release_resolver: Callable | None = None
     ambient_pressure_pa: float | None = None
     frequency_binding: RealtimeFrequencyBinding | None = None
+    # Optional explicit identity used only at the provider handoff.  HAZOP
+    # remains keyed by component_id; no name or geometry inference is allowed.
+    provider_component_id: str | None = None
 
 
 _REALTIME_ROW_BINDING_KEYS = frozenset({

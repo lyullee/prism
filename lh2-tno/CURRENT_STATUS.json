@@ -178,7 +178,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1232 passed, 1 warning",
+  "latest_local_full_test_run": "1233 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -5246,7 +5246,7 @@
   "inspection_center_reconstructed_hazop_consequence_chain_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
   "inspection_center_reconstructed_hazop_consequence_chain_executed_scenario_count": 1,
   "inspection_center_reconstructed_hazop_consequence_chain_risk_atom_count": 1,
-  "inspection_center_reconstructed_hazop_consequence_chain_processing_time_ms": 1545.4523999942467,
+  "inspection_center_reconstructed_hazop_consequence_chain_processing_time_ms": 1558.6532999877818,
   "inspection_center_reconstructed_hazop_consequence_chain_full_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
   "inspection_center_reconstructed_hazop_consequence_chain_stages": [
     "equipment_resolved_gas_exit",
@@ -5264,6 +5264,11 @@
   "inspection_center_reconstructed_hazop_provider_qualification": "UNQUALIFIED_DIAGNOSTIC",
   "inspection_center_reconstructed_hazop_physical_validation_claim": false,
   "inspection_center_reconstructed_hazop_facility_qra_claim": false,
+  "provider_component_identity_translation_status": "IMPLEMENTED_EXPLICIT_ONLY",
+  "provider_component_identity_translation_field": "FacilityRealtimeBinding.provider_component_id",
+  "provider_component_identity_translation_module": "src/lh2_tno/observed_state_runtime.py",
+  "provider_component_identity_translation_policy": "HAZOP stays on observed component ID; only the provider handoff receives a digest-recomputed translated state snapshot and template; no identity or geometry inference",
   "inspection_center_reconstructed_runtime_interpretation": "Reconstructed state frames with explicit receiving/standby/supply modes select one diagnostic supply vaporizer_hole HAZOP scenario. An explicitly bound model-prediction provider packet is then executed through the diagnostic consequence chain; provider qualification, physical validation, and facility QRA remain false."
+
 
 }
