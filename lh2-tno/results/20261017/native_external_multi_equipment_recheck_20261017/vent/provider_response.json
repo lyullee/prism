@@ -1,0 +1,73 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.vent_stack.VentStack",
+  "provider_source_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
+  "provider_state_snapshot_digest": "665dad1459dc9d02ec506ab0ec08b282206a6c57abf18d48bcfa610b3d41c50b",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "native-vent-stack/accidental-leak-001",
+    "component_id": "native-vent-stack-diagnostic",
+    "port_id": "native-vent-stack-gas-out",
+    "duration_s": 0.1,
+    "available_mass_kg": 1.0,
+    "cumulative_mass_out_kg": 3.827489552640163e-05,
+    "cumulative_static_enthalpy_out_j": 151.50288848483862,
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "termination_provenance": "operator-declared bounded VentStack horizon; upstream reserve remains explicit",
+    "fluid": "Hydrogen",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 0.0003827489552640163,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3958283.5276541375,
+        "temperature_k": 300.0002044224795,
+        "density_kg_m3": 0.08184043204976539,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 59.546497170479235,
+        "area_provenance": "native VentStack circular terminal area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 102000.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.08238536226639276,
+          "source_specific_enthalpy_j_kg": 3958283.5276541375,
+          "source_specific_entropy_j_kgk": 53437.11332678583,
+          "opening": 1.0,
+          "choked": false
+        }
+      },
+      {
+        "time_s": 0.05,
+        "mass_flow_kg_s": 0.0003827489552640163,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3958283.5276541375,
+        "temperature_k": 300.0002044224795,
+        "density_kg_m3": 0.08184043204976539,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 59.546497170479235,
+        "area_provenance": "native VentStack circular terminal area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 102000.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.08238536226639276,
+          "source_specific_enthalpy_j_kg": 3958283.5276541375,
+          "source_specific_entropy_j_kgk": 53437.11332678583,
+          "opening": 1.0,
+          "choked": false
+        }
+      }
+    ],
+    "provider_meta": {
+      "native_inventory_owner": "upstream_provider_declared",
+      "initial_source_phase": "supercritical_gas",
+      "time_step_s": 0.05,
+      "valve": {
+        "area_m2": 7.853981633974483e-05,
+        "final_opening": 1.0,
+        "choked_intervals": 0
+      }
+    }
+  }
+}

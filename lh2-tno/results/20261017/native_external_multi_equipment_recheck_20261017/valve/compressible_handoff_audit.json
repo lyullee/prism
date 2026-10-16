@@ -1,0 +1,21 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_GENERATED_SOURCE_STATE_BOUND",
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "algorithm": "birch_momentum_energy",
+  "component_id": "native-stroke-valve-diagnostic",
+  "port_id": "native-stroke-valve-gas-out",
+  "event_id": "native-stroke-valve/accidental-leak-001",
+  "upstream_provider_source_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
+  "upstream_provider_result_digest": "d35e0ea91c58c8b3350cf1e70999a570ec4f3b9150bc96102491cbc63b39cda8",
+  "handoff_provider_source_digest": "6c47c03461846d855b9a6e1d6e6d8314b5cf18607b8d47ba6ed4dd57d8ad5792",
+  "handoff_provider_result_digest": "0f31ef80f50365d50517e2a9791015b6174f218fd3b72e8e37283f3446a32d03",
+  "interval_count": 2,
+  "inactive_interval_count": 0,
+  "max_energy_residual_j_per_kg": 0.0,
+  "max_entropy_residual_j_per_kgk": 43.40795009575231,
+  "evidence_status": "synthetic_diagnostic",
+  "provider_source_state_required": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false
+}
