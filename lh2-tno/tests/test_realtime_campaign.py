@@ -128,6 +128,12 @@ def test_realtime_snapshot_becomes_conditional_facility_ledger_input(tmp_path):
     assert result["qualified_provider_packet_case_count"] == 0
     assert result["physical_validation_claim"] is False
     assert result["complete_facility_qra_claim"] is False
+    timing = result["timing"]
+    assert timing["case_count"] == 1
+    assert timing["case_min_ms"] <= timing["case_median_ms"]
+    assert timing["case_median_ms"] <= timing["case_p95_ms"]
+    assert timing["case_p95_ms"] <= timing["case_p99_ms"]
+    assert timing["case_p99_ms"] <= timing["case_max_ms"]
     assert all(
         atom["expected_deaths_basis"] == "population_weighted"
         for atom in result["risk_atoms"]

@@ -14,6 +14,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 import copy
 import math
+from statistics import median
 from typing import Any
 
 from .contracts import canonical_digest
@@ -325,6 +326,23 @@ def _case_timing(component: Mapping[str, Any]) -> float:
     if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value)) and value >= 0:
         return float(value)
     return 0.0
+
+
+def _linear_percentile(values: Sequence[float], probability: float) -> float | None:
+    """Return an interpolated percentile for observed case timings only."""
+
+    if not values:
+        return None
+    ordered = sorted(float(value) for value in values)
+    if len(ordered) == 1:
+        return ordered[0]
+    position = (len(ordered) - 1) * probability
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    weight = position - lower
+    return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
 
 
 def build_realtime_facility_campaign_result(
@@ -888,13 +906,22 @@ def build_realtime_facility_campaign_result(
     processing_time = snapshot.get("aggregate", {}).get("processing_time", {})
     if not isinstance(processing_time, Mapping):
         processing_time = {}
+    case_elapsed_values = [
+        float(case["elapsed_ms"])
+        for case in cases
+        if isinstance(case.get("elapsed_ms"), (int, float))
+        and not isinstance(case.get("elapsed_ms"), bool)
+        and math.isfinite(float(case["elapsed_ms"]))
+        and float(case["elapsed_ms"]) >= 0.0
+    ]
     timing = {
+        "case_count": len(case_elapsed_values),
         "fresh_physics_cases": fresh_count,
-        "case_min_ms": min((case.get("elapsed_ms", 0.0) for case in cases), default=0.0),
-        "case_median_ms": None,
-        "case_max_ms": max((case.get("elapsed_ms", 0.0) for case in cases), default=0.0),
-        "case_p95_ms": None,
-        "case_p99_ms": None,
+        "case_min_ms": min(case_elapsed_values) if case_elapsed_values else None,
+        "case_median_ms": median(case_elapsed_values) if case_elapsed_values else None,
+        "case_max_ms": max(case_elapsed_values) if case_elapsed_values else None,
+        "case_p95_ms": _linear_percentile(case_elapsed_values, 0.95),
+        "case_p99_ms": _linear_percentile(case_elapsed_values, 0.99),
         "campaign_elapsed_ms": processing_time.get("total_service_elapsed_ms"),
         "distribution": "one synchronous realtime facility snapshot; not sustained throughput",
         "realtime_processing_time": copy.deepcopy(dict(processing_time)),
