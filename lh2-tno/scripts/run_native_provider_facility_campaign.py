@@ -248,10 +248,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "packet_digests": [
             {
                 "component_id": packet.component_id,
+                "port_id": packet.port_id,
                 "event_id": packet.event_id,
+                "release_kind": "liquid" if isinstance(packet, ResolvedLiquidRelease) else "gas",
+                "position_enu_m": list(packet.position_enu_m),
+                "failure_opening_diameter_m": packet.failure_opening_diameter_m,
+                "duration_s": packet.duration_s,
+                "available_mass_kg": packet.available_mass_kg,
+                "cumulative_mass_out_kg": packet.cumulative_mass_out_kg,
+                "integrated_mass_kg": packet.integrated_mass_kg,
+                "mass_residual_kg": packet.cumulative_mass_out_kg - packet.integrated_mass_kg,
                 "provider_packet_digest": canonical_digest(packet.model_dump(mode="json")),
                 "provider_result_digest": packet.provider_result_digest,
                 "termination_basis": packet.termination_basis,
+                "termination_provenance": packet.termination_provenance,
             }
             for packet in packets
         ],

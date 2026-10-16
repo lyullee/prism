@@ -23,21 +23,35 @@
   "facility_qra_claim": false,
   "provider_packet_promoted": false,
   "physical_validation_claim": false,
-  "campaign_elapsed_ms": 10700.51950000925,
+  "campaign_elapsed_ms": 10725.855900003808,
   "packet_records": [
     {
       "component_id": "liquid-transfer-pump-01",
+      "port_id": "pump-accident-out",
       "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
       "failure_opening_diameter_m": 0.0025,
+      "position_enu_m": [6.0, 0.0, 1.0],
       "release_kind": "liquid",
-      "termination_basis": "reviewed_isolation_success"
+      "duration_s": 0.15,
+      "available_mass_kg": 1.0,
+      "integrated_mass_kg": 0.000560663237977497,
+      "mass_residual_kg": 0.0,
+      "termination_basis": "reviewed_isolation_success",
+      "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval"
     },
     {
       "component_id": "transfer-valve-01",
+      "port_id": "valve-accident-out",
       "provider_event_id": "native-stroke-valve/transfer-valve-AREA_0.01pct",
       "failure_opening_diameter_m": 0.00025,
+      "position_enu_m": [7.0, 0.0, 1.0],
       "release_kind": "gas",
-      "termination_basis": "synthetic_diagnostic_horizon"
+      "duration_s": 0.2,
+      "available_mass_kg": 5.0,
+      "integrated_mass_kg": 0.0000030599728463390032,
+      "mass_residual_kg": 8.470329472543003e-22,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "operator-declared bounded valve horizon; upstream reserve remains explicit"
     }
   ],
   "limitations": [
