@@ -1,0 +1,45 @@
+{
+  "schema_version": "prism.observed_state_input_manifest.v1",
+  "description": "Diagnostic state-only input for the three inspection-centre scenario streams. Units are taken only from explicit XLSX header labels; source filenames are prediction-named, so origin remains model_prediction until the source owner confirms provenance.",
+  "sources": [
+    {
+      "source_id": "inspection-center-intake-10-runs-header-bound",
+      "path": "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "format": "xlsx",
+      "sheet_index": 0,
+      "component_id": "lh2-intake-tank",
+      "origin": "model_prediction",
+      "time": {"column": "at_step", "mode": "step", "cadence_s": 1.0},
+      "signals": {
+        "pressure": {"column": "PT1206", "unit": "MPa", "zero_is_missing": true, "nonpositive_is_missing": true, "sensor_location": "PT1206"},
+        "temperature": {"column": "TT1106", "unit": "degC", "sensor_location": "TT1106"}
+      }
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs-header-bound",
+      "path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "format": "xlsx",
+      "sheet_index": 0,
+      "component_id": "lh2-storage-vent",
+      "origin": "model_prediction",
+      "time": {"column": "timestamp", "mode": "step", "cadence_s": 15.0},
+      "signals": {
+        "pressure": {"column": "PT1105A", "unit": "MPa", "zero_is_missing": true, "nonpositive_is_missing": true, "sensor_location": "PT1105A"}
+      }
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs-header-bound",
+      "path": "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+      "format": "xlsx",
+      "sheet_index": 0,
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "origin": "model_prediction",
+      "time": {"column": "at_step", "mode": "step", "cadence_s": 1.0},
+      "signals": {
+        "pressure": {"column": "PT1101", "unit": "MPa", "zero_is_missing": true, "nonpositive_is_missing": true, "sensor_location": "PT1101"},
+        "temperature": {"column": "TT1116", "unit": "degC", "sensor_location": "TT1116"}
+      }
+    }
+  ],
+  "source_root": "<inspection-center-data-root>"
+}

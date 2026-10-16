@@ -29,7 +29,7 @@ python -m pip install -e ".[test]"
 python -m pytest -q
 ```
 
-The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1265 passed, 1 warning**. The warning is reported separately from a failing contract.
+The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1267 passed, 1 warning**. The warning is reported separately from a failing contract.
 
 ## 3. First five minutes
 

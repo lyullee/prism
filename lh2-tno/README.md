@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1265 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1267 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 ## What PRISM is for
 
@@ -170,6 +170,18 @@ The inspection-centre source inventory is documented in
 It is a state/HAZOP diagnostic input boundary; it does not create accident
 releases or learn failure frequencies from normal-operation signals.
 
+For a reproducible, unit-safe example of the general facility input path, use
+the [header-bound observed-state chain](docs/PRISM_header_bound_observed_state_chain_20261115.md).
+It reads only the five pressure/temperature columns with explicit workbook
+header units, carries an explicit `receiving`/`standby`/`supply` mode input,
+and selects the mode-specific HAZOP rows.  The verified replay contains 8,955
+state samples, three runtime frames, and three selected HAZOP scenarios.  The
+stable summary is
+[`inspection_center_header_bound_chain_summary.json`](examples/inspection_center_header_bound_chain_summary.json).
+The chain remains diagnostic until a source owner confirms origin, pressure
+basis, quality, asset/port identity, and the equipment provider supplies the
+accidental-release packet.
+
 ## Equipment and provider boundary
 
 The state frame contains facility ID, component ID, operating mode, timestamp, measured or predicted values, units, signal quality, and provenance. It does not contain `resolved_release`, opening diameter, annual frequency, duration, or termination basis.
@@ -245,6 +257,10 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Inspection-centre facility HAZOP bridge record](docs/PRISM_검사센터_시설HAZOP_브리지_20261017.md)
 - [Inspection-centre facility campaign handoff](examples/inspection_center_facility_campaign_handoff.json)
 - [Inspection-centre facility campaign handoff record](docs/PRISM_inspection_center_facility_campaign_handoff_20261017.md)
+- [Header-bound observed-state to HAZOP chain](docs/PRISM_header_bound_observed_state_chain_20261115.md)
+- [Header-bound state manifest](examples/inspection_center_header_bound_state_manifest.json)
+- [Header-bound operating-mode input](examples/inspection_center_header_bound_operating_modes.json)
+- [Header-bound chain summary](examples/inspection_center_header_bound_chain_summary.json)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
 - [v0.6.3 distribution record (Korean)](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)

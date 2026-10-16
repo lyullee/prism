@@ -1,0 +1,12 @@
+{
+  "schema_version": "prism.explicit_operating_mode_input.v1",
+  "description": "Explicit supervisory mode labels for the diagnostic header-bound state streams. Modes are supplied by the operator/sequence layer and are never inferred from sensor values.",
+  "source_to_mode": {
+    "inspection-center-intake-10-runs-header-bound": "receiving",
+    "inspection-center-storage-vent-10-runs-header-bound": "standby",
+    "inspection-center-supply-10-runs-header-bound": "supply"
+  },
+  "inference_performed": false,
+  "sensor_frequency_learning_used": false,
+  "diagnostic_only": true
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "prism.inspection_center_header_bound_chain_summary.v1",
+  "status": "DIAGNOSTIC_STATE_TO_HAZOP_SELECTION_COMPLETE",
+  "inputs": {
+    "manifest": "examples/inspection_center_header_bound_state_manifest.json",
+    "operating_mode_map": "examples/inspection_center_header_bound_operating_modes.json",
+    "reviewed_unit_evidence": "examples/inspection_center_workbook_header_signal_unit_map.json",
+    "external_source_root": "<inspection-center-data-root>"
+  },
+  "evidence": {
+    "source_count": 3,
+    "state_sample_count": 8955,
+    "runtime_frame_count": 3,
+    "explicit_unit_binding_count": 5,
+    "matched_unit_binding_count": 5,
+    "unit_conflict_count": 0,
+    "origin_conflict_count": 0,
+    "operating_mode_counts": {
+      "receiving": 1,
+      "standby": 1,
+      "supply": 1
+    },
+    "selected_hazop_scenario_count": 3
+  },
+  "chain": [
+    "header-labeled process columns",
+    "SI state-only normalization",
+    "latest runtime frame per component",
+    "explicit operating-mode input",
+    "mode-specific HAZOP scenario selection"
+  ],
+  "policy": {
+    "release_created_from_normal_operation": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "slabx_lh2_consequence_executed": false,
+    "facility_qra_claim": false,
+    "origin_status": "model_prediction_until_source_owner_confirmation",
+    "differential_pressure_channels_excluded_until_unit_review": true,
+    "diagnostic_only": true
+  },
+  "interpretation": "The external inspection-centre data now demonstrate a reusable general-facility input path from explicit raw header units through state frames and operator-supplied mode selection into HAZOP. An accidental release remains provider-owned; this record does not assign frequency or promote facility IR/F-N."
+}
