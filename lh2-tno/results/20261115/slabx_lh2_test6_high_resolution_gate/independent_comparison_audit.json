@@ -1,0 +1,149 @@
+{
+  "schema_version": "prism.slabx_lh2_independent_comparison_audit.v1",
+  "status": "INDEPENDENT_COMPARISON_REVIEW_READY",
+  "scope": "FFI Test 6 pre-ignition SLABx crosswind comparison; independent trial and sensor set",
+  "sources": [
+    {
+      "role": "independent sensor prediction ledger",
+      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_test6_high_resolution_gate\\sensor_predictions.csv",
+      "sha256": "32e91e80a25d1cecb1265d8964ad23baebd40eb35908da70a6ceb1c8f079b2b7"
+    },
+    {
+      "role": "comparison summary and source declaration",
+      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_test6_high_resolution_gate\\summary.json",
+      "sha256": "e4a332c81154c2c66f577e34d3ebe07e23f78db9a72460d7c37b21b60dbf02f1"
+    },
+    {
+      "role": "source/numerical acceptance gate",
+      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_test6_high_resolution_gate\\provenance.json",
+      "sha256": "090c2e0fc17c13b5489b42db56f595a2bfd92d8a90bed5fd80503bf06c9f65fd"
+    },
+    {
+      "role": "published source ledger",
+      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_test6_high_resolution_gate\\source_ledger.json",
+      "sha256": "fdd5cfa932de7f3f2c0b811ee836cf13b7b9b91d81dbb2104b7dc856e7542ed3"
+    }
+  ],
+  "checks": [
+    {
+      "name": "independent_sensor_set_is_complete",
+      "status": "PASS",
+      "evidence": {
+        "expected_sensor_count": 30,
+        "row_count": 30,
+        "sensor_count": 30
+      }
+    },
+    {
+      "name": "summary_reproduces_prediction_metrics",
+      "status": "PASS",
+      "evidence": {
+        "recomputed": {
+          "row_count": 30,
+          "sensor_count": 30,
+          "mean_bias_vol_pct": -1.1924596629594961,
+          "MAE_vol_pct": 1.8671267816835724,
+          "RMSE_vol_pct": 4.535886153151856,
+          "observed_LFL_pairs": 6,
+          "predicted_LFL_pairs": 3,
+          "TP": 3,
+          "FN": 3,
+          "FP": 0
+        },
+        "summary_mean_wind_statistics": {
+          "n_sensor_height_pairs": 30,
+          "MAE_vol_pct": 1.8671267816835722,
+          "RMSE_vol_pct": 4.535886153151856,
+          "mean_bias_vol_pct": -1.1924596629594961,
+          "observed_LFL_pairs": 6,
+          "SLABx_LFL_pairs": 3,
+          "TP": 3,
+          "FN": 3,
+          "FP": 0
+        }
+      }
+    },
+    {
+      "name": "lfl_flags_match_concentrations",
+      "status": "PASS",
+      "evidence": {
+        "lfl_vol_pct": 4.0,
+        "TP": 3,
+        "FN": 3,
+        "FP": 0
+      }
+    },
+    {
+      "name": "published_source_and_no_sensor_fit_declared",
+      "status": "PASS",
+      "evidence": {
+        "source": "{'rate_kg_s': 0.8317, 'nozzle_diameter_m': 0.0254, 'liquid_mass_fraction': 0.559, 'height_m': 0.5, 'duration_s': 120.0} hansen and hansen (2023) published cold h2-air pseudo-source ffi test 6 source-ledger numerical acceptance gate",
+        "fitting": "none"
+      }
+    },
+    {
+      "name": "source_numerical_gate_accepted",
+      "status": "PASS",
+      "evidence": {
+        "numerical_gate": {
+          "criterion": "last two refinements <2% for all monitored values",
+          "accepted": true,
+          "relative_changes": {
+            "H2_vol_pct_at_30_m": 5.097767821168394e-06,
+            "centre_height_m_at_30_m": 7.07295715432721e-07,
+            "cloud_depth_m_at_30_m": 1.0933796487483373e-05,
+            "temperature_K_at_30_m": 1.277817290368297e-07
+          },
+          "levels": [
+            640,
+            1280,
+            2560,
+            5120
+          ],
+          "evaluation_basis": "current audited SLABx source; high-resolution repeat with no sensor fitting"
+        },
+        "gate_record_present": true
+      }
+    }
+  ],
+  "metrics": {
+    "row_count": 30,
+    "sensor_count": 30,
+    "mean_bias_vol_pct": -1.1924596629594961,
+    "MAE_vol_pct": 1.8671267816835724,
+    "RMSE_vol_pct": 4.535886153151856,
+    "observed_LFL_pairs": 6,
+    "predicted_LFL_pairs": 3,
+    "TP": 3,
+    "FN": 3,
+    "FP": 0,
+    "lfl_vol_pct": 4.0
+  },
+  "source_gate": {
+    "accepted": true,
+    "status": true,
+    "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_test6_high_resolution_gate\\provenance.json"
+  },
+  "blocking_reasons": [],
+  "structural_blocking_reasons": [],
+  "claims": {
+    "independent_comparison_evidence": true,
+    "independent_physical_validation_claim": false,
+    "full_chain_validation_claim": false,
+    "accident_release_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false
+  },
+  "promotion_policy": {
+    "independent_comparison_requires_accepted_source_gate": true,
+    "open_source_gate_does_not_become_physical_validation": true,
+    "comparison_does_not_validate_equipment_release": true,
+    "comparison_does_not_validate_facility_qra": true,
+    "frequency_is_not_inferred_from_observations": true
+  },
+  "required_next_evidence": [
+    "accepted source/numerical refinement gate for the independent trial",
+    "external reviewer confirmation of source and observation operator",
+    "equipment release packet, frequency binding and facility-chain validation"
+  ]
+}
