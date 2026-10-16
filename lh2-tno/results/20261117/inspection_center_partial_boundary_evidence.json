@@ -1,0 +1,84 @@
+{
+  "schema_version": "prism.partial_lh2_boundary_evidence.v1",
+  "status": "PARTIAL_OPERATIONAL_BOUNDARY_EVIDENCE",
+  "documents": [
+    {
+      "document_id": "pump-vaporizer-test-procedure-r2",
+      "role": "operating-limit-and-procedure-evidence",
+      "source_file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소센터 관련 자료\\(별첨1-1) 펌프기화기 평가시스템 시험절차서.pdf",
+      "source_sha256": "b8b9e0f7f9d9465cad503ebca8dbb2f5624b9232e06821021faeaf25be15c87f",
+      "page_count": 22,
+      "anchor_findings": [
+        {
+          "page": 21,
+          "anchor": "안전밸브(PSV) 작동",
+          "kind": "pressure_trigger",
+          "context": "procedure records PSV action as an expected response to a high operating range",
+          "anchor_found": true,
+          "status": "ANCHOR_FOUND"
+        },
+        {
+          "page": 17,
+          "anchor": "PT102",
+          "kind": "pressure_trigger",
+          "context": "procedure identifies pressure monitoring during pump/vaporizer operation",
+          "anchor_found": true,
+          "status": "ANCHOR_FOUND"
+        },
+        {
+          "page": 18,
+          "anchor": "XV203",
+          "kind": "isolation_command",
+          "context": "procedure identifies a vent/isolation command during normal shutdown",
+          "anchor_found": true,
+          "status": "ANCHOR_FOUND"
+        },
+        {
+          "page": 16,
+          "anchor": "정상운전",
+          "kind": "operating_mode",
+          "context": "procedure distinguishes operating stages",
+          "anchor_found": true,
+          "status": "ANCHOR_FOUND"
+        }
+      ],
+      "all_declared_anchors_found": true
+    }
+  ],
+  "document_count": 1,
+  "anchor_count": 4,
+  "found_anchor_count": 4,
+  "found_evidence_kinds": [
+    "isolation_command",
+    "operating_mode",
+    "pressure_trigger"
+  ],
+  "errors": [],
+  "supports": {
+    "operating_mode_procedure": true,
+    "pressure_trigger_observation": true,
+    "isolation_or_vent_command_observation": true,
+    "provider_release_duration": false,
+    "provider_termination_boundary": false,
+    "relief_setpoint_certified": false,
+    "relief_capacity_certified": false,
+    "discharge_complete": false,
+    "mass_balance": false,
+    "annual_frequency": false
+  },
+  "promotion_gates": {
+    "provider_packet_promoted": false,
+    "frequency_applied": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "blocking_reasons": [
+    "operational procedure evidence is not a provider-owned accident history",
+    "no provider-owned release duration or termination event is present",
+    "no reviewed relief setpoint and capacity are present",
+    "no provider mass ledger or residual tolerance is present",
+    "no accident count and exposure denominator are present for frequency"
+  ],
+  "interpretation": "The source is useful for procedure, alarm, and command provenance. It cannot close a PRISM release-boundary case or assign a frequency.",
+  "source_manifest": "examples\\inspection_center_partial_boundary_evidence_manifest.json"
+}

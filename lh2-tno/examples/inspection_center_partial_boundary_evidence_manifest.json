@@ -1,0 +1,37 @@
+{
+  "schema_version": "prism.partial_lh2_boundary_evidence_manifest.v1",
+  "facility_context": "inspection-center-source-screening-only",
+  "documents": [
+    {
+      "document_id": "pump-vaporizer-test-procedure-r2",
+      "role": "operating-limit-and-procedure-evidence",
+      "path": "C:/Users/lyul/Desktop/DocuData/액화수소센터 관련 자료/(별첨1-1) 펌프기화기 평가시스템 시험절차서.pdf",
+      "anchors": [
+        {
+          "page": 21,
+          "anchor": "안전밸브(PSV) 작동",
+          "kind": "pressure_trigger",
+          "context": "procedure records PSV action as an expected response to a high operating range"
+        },
+        {
+          "page": 17,
+          "anchor": "PT102",
+          "kind": "pressure_trigger",
+          "context": "procedure identifies pressure monitoring during pump/vaporizer operation"
+        },
+        {
+          "page": 18,
+          "anchor": "XV203",
+          "kind": "isolation_command",
+          "context": "procedure identifies a vent/isolation command during normal shutdown"
+        },
+        {
+          "page": 16,
+          "anchor": "정상운전",
+          "kind": "operating_mode",
+          "context": "procedure distinguishes operating stages"
+        }
+      ]
+    }
+  ]
+}
