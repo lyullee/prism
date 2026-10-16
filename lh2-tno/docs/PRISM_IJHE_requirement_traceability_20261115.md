@@ -58,6 +58,13 @@ release audit은 **42개를 numerically closed**, **2개를 numerically open**�
 600 s 요청에는 추가 이력 또는 provider 소유의 명시적 물리 종료근거를 요구한다.
 두 요청 모두 종료시간·빈도·시설 QRA를 추정하지 않는다.
 
+공급자 결과를 받은 뒤에는 [`PRISM release-boundary response intake`](PRISM_release_boundary_response_intake_en.md)의
+`prism.release_boundary_evidence_response.v1` 계약으로 먼저 응답을 검사한다.
+응답 검사는 event/case/component/port/운전모드/HAZOP ID와 원본 digest를
+대조하고, PSV와 600 s horizon에 서로 다른 종료 규칙을 적용한다.
+`RELEASE_BOUNDARY_REAUDIT_READY`는 case-level 재감사가 가능하다는 뜻일 뿐,
+provider 자격화·독립 물리검증·시설 IR/F-N 승인을 뜻하지 않는다.
+
 ## 추가된 다설비 결합 진단
 
 별도의 일반 옥외 시설 예제로 펌프와 밸브를 하나의 facility campaign에
@@ -102,6 +109,8 @@ qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미�
 - 최신 release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 최신 provider termination catalog: `results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json`
 - 현재 열린 종료경계 증거요청: `results/20261115/open_release_boundary_evidence_requests_current.json`
+- 현재 열린 종료경계 응답 템플릿: `results/20261115/open_release_boundary_evidence_response_template.json`
+- 종료경계 응답 intake 계약: [`PRISM_release_boundary_response_intake_en.md`](PRISM_release_boundary_response_intake_en.md)
 - 최신 case-level release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 현재·예측 HAZOP 연결 계약: [`PRISM_current_forecast_hazop_contract_en.md`](PRISM_current_forecast_hazop_contract_en.md)
 - 현재 상태 원장: `CURRENT_STATUS.json`

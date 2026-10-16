@@ -1,0 +1,86 @@
+{
+  "schema_version": "prism.release_boundary_evidence_response.v1",
+  "status": "TEMPLATE_ONLY",
+  "responses": [
+    {
+      "schema_version": "prism.release_boundary_evidence_response.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+      "supersedes_provider_result_digest": "4f7a02ef16c308f36af674af23520467d0b13955442f7e6b5460fa6d963e9875",
+      "identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "case_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+        "asset_id": "ambient-vaporizer",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2"
+      },
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "termination_basis": "reviewed_isolation_success",
+      "termination_time_s": null,
+      "termination_history_sample_count": null,
+      "termination_provenance": null,
+      "stopping_event": null,
+      "initial_inventory_kg": null,
+      "cumulative_mass_out_kg": null,
+      "final_inventory_kg": null,
+      "mass_residual_kg": null,
+      "isolation_success": null,
+      "isolation_time_s": null,
+      "post_isolation_observation_s": null,
+      "post_isolation_zero_flow": null,
+      "threshold_mass_kg": null,
+      "remaining_mass_kg": null,
+      "available_mass_definition": null,
+      "remaining_releasable_mass_kg": null,
+      "provider_residual_mass_kg": null,
+      "pressure_equalization_confirmed": null,
+      "terminal_pressure_pa": null,
+      "downstream_pressure_pa": null,
+      "pressure_equalization_tolerance_pa": null,
+      "pressure_difference_pa": null,
+      "post_equalization_observation_s": null
+    },
+    {
+      "schema_version": "prism.release_boundary_evidence_response.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+      "supersedes_provider_result_digest": "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75",
+      "identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "case_key": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+        "asset_id": "pressure-relief-vent",
+        "component_id": "pressure-relief-vent-01",
+        "port_ids": [
+          "vent-accident-out"
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
+      },
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "termination_basis": null,
+      "termination_time_s": null,
+      "termination_history_sample_count": null,
+      "termination_provenance": null,
+      "stopping_event": null,
+      "initial_inventory_kg": null,
+      "cumulative_mass_out_kg": null,
+      "final_inventory_kg": null,
+      "mass_residual_kg": null,
+      "event_kind": "emergency_relief",
+      "source_operator": "equipment_emergency_relief",
+      "failure_opening_diameter_m": null,
+      "relief_setpoint_pa": null,
+      "relief_capacity_kg_s": null,
+      "discharge_complete": null
+    }
+  ],
+  "policy": {
+    "placeholder_values_are_not_evidence": true,
+    "facility_qra_promotion_allowed": false,
+    "diagnostic_only": true
+  }
+}
