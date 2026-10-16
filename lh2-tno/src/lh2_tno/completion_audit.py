@@ -3725,9 +3725,66 @@ def build_ijhe_completion_audit(
                         for row in forecast_campaign_rows
                     )
                 )
+            elif forecast_facility_campaign_status == (
+                "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+            ):
+                # The strict forecast adapter stores one explicit campaign per
+                # component/scenario/time trigger and one merged facility
+                # ledger.  It has a different shape from the legacy callback,
+                # so validate its trace directly rather than accepting the
+                # status string alone.
+                forecast_campaign_rows = forecast_facility_campaign.get(
+                    "trigger_bindings"
+                )
+                forecast_campaign_results = forecast_facility_campaign.get(
+                    "campaign_results"
+                )
+                forecast_facility_campaign_count = (
+                    len(forecast_campaign_results)
+                    if isinstance(forecast_campaign_results, list)
+                    else None
+                )
+                forecast_facility_campaign_row_count = (
+                    len(forecast_campaign_rows)
+                    if isinstance(forecast_campaign_rows, list)
+                    else None
+                )
+                forecast_facility_campaign_evaluated_count = (
+                    forecast_facility_campaign_row_count
+                )
+                merged_ledger = forecast_facility_campaign.get("facility_ledger")
+                forecast_facility_campaign_structure_valid = (
+                    isinstance(forecast_campaign_rows, list)
+                    and isinstance(forecast_campaign_results, list)
+                    and len(forecast_campaign_rows) >= 1
+                    and len(forecast_campaign_rows) == len(forecast_campaign_results)
+                    and isinstance(merged_ledger, Mapping)
+                    and merged_ledger.get("complete_facility_qra_claim") is not True
+                    and merged_ledger.get("qualified_facility_qra_available") is not True
+                    and all(
+                        isinstance(row, Mapping)
+                        and _finite(row.get("forecast_time_s"))
+                        and float(row.get("forecast_time_s")) >= 0.0
+                        and isinstance(row.get("component_id"), str)
+                        and bool(row.get("component_id"))
+                        and isinstance(row.get("scenario_id"), str)
+                        and bool(row.get("scenario_id"))
+                        and row.get("origin") == "model_prediction"
+                        and isinstance(row.get("campaign_id"), str)
+                        and bool(row.get("campaign_id"))
+                        for row in forecast_campaign_rows
+                    )
+                )
+            elif forecast_facility_campaign_status == "FORECAST_NO_QUANTITATIVE_TRIGGERS":
+                forecast_facility_campaign_structure_valid = (
+                    forecast_facility_campaign.get("facility_ledger") is None
+                    and forecast_facility_campaign.get("trigger_bindings") == []
+                )
             forecast_facility_campaign_valid = (
                 forecast_facility_campaign_status in {
                     "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
+                    "FORECAST_NO_QUANTITATIVE_TRIGGERS",
+                    "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED",
                     "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
                     "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
                     "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",

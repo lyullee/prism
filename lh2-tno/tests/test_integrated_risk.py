@@ -5,6 +5,7 @@ import pytest
 import lh2_tno.integrated_risk as integrated_risk
 from lh2_tno.integrated_risk import (
     IntegratedRiskError,
+    build_hazop_forecast_facility_campaign_result,
     build_hazop_facility_campaign_evaluator,
     run_hazop_integrated_risk,
 )
@@ -42,6 +43,136 @@ def _forecast_result():
         "withheld_count": 1,
         "policy": {"diagnostic_only": True, "facility_qra_promotion": False},
     }
+
+
+def _forecast_campaign_scan():
+    return {
+        "schema_version": "prism.hazop_forecast_risk_scan.v1",
+        "status": "FORECAST_RISK_SCAN_COMPLETE",
+        "facility_id": "facility-1",
+        "withheld_count": 0,
+        "evaluated_count": 1,
+        "scenario_entries": [{
+            "component_id": "TK-01",
+            "scenario_id": "TK-01-pressure",
+            "operating_mode": "receiving",
+            "forecast_time_s": 12.0,
+            "trigger_type": "RISK_CONDITION_REACHED",
+            "evaluation": {"status": "EVALUATED_OPERATOR_LIMITED"},
+        }],
+    }
+
+
+def _forecast_campaign():
+    return {
+        "facility_id": "facility-1",
+        "campaign_digest": "forecast-campaign-digest",
+        "events": [{
+            "id": "forecast-event-tank",
+            "asset_id": "tank-asset",
+            "model_component_id": "TK-01",
+        }],
+        "annual_conditions": [{"id": "weather-1", "annual_probability": 1.0}],
+        "cases": [{"event_id": "forecast-event-tank", "status": "EXECUTED"}],
+        "uncomputed_cases": [],
+        "risk_atoms": [{
+            "event_id": "forecast-event-tank",
+            "asset_id": "tank-asset",
+            "annual_condition_id": "weather-1",
+            "release_branch_id": "release-1",
+            "ignition_branch": "direct_fire",
+            "initiating_frequency_per_year": 1.0e-4,
+            "conditional_weight": 1.0,
+            "receptor_harm_low_high": {"worker-01": [0.1, 0.2]},
+            "expected_deaths_low_high": [0.1, 0.2],
+        }],
+        "declared_scope_numerically_complete": False,
+        "synthetic_release_horizon_present": False,
+        "excluded_model_components": {},
+        "physical_validation_claim": False,
+        "coverage": {"by_component": [{"component_id": "TK-01"}]},
+        "timing": {"campaign_elapsed_ms": 4.0},
+        "policy": {
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+        },
+    }
+
+
+def test_forecast_facility_campaign_binds_each_trigger_without_inference(monkeypatch):
+    captured = {}
+
+    def merge(campaigns, **kwargs):
+        captured["campaigns"] = campaigns
+        captured["kwargs"] = kwargs
+        return {"status": "FACILITY_SCOPE_PARTIAL"}
+
+    monkeypatch.setattr(integrated_risk, "merge_facility_campaign_results", merge)
+    scan = _forecast_campaign_scan()
+    key = "TK-01|TK-01-pressure|12"
+    result = build_hazop_forecast_facility_campaign_result(
+        scan,
+        campaign_bindings={key: {
+            "component_id": "TK-01",
+            "scenario_id": "TK-01-pressure",
+            "forecast_time_s": 12.0,
+            "operating_mode": "receiving",
+            "campaign": _forecast_campaign(),
+        }},
+        expected_component_ids=("TK-01",),
+    )
+    assert result["status"] == "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+    assert result["policy"]["frequency_inference_performed"] is False
+    assert result["trigger_bindings"][0]["forecast_time_s"] == 12.0
+    assert captured["kwargs"]["expected_component_ids"] == ("TK-01",)
+    assert captured["campaigns"][0]["campaign_id"] == "forecast:TK-01|TK-01-pressure|12"
+
+
+def test_forecast_facility_campaign_rejects_missing_trigger_binding():
+    with pytest.raises(IntegratedRiskError, match="cover exactly every quantitative trigger"):
+        build_hazop_forecast_facility_campaign_result(
+            _forecast_campaign_scan(),
+            campaign_bindings={},
+            expected_component_ids=("TK-01",),
+        )
+
+
+def test_integrated_risk_can_use_strict_forecast_campaign_bindings(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_forecast_risk_scan",
+        lambda **kwargs: _forecast_campaign_scan(),
+    )
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        forecast_frames=[{"component_id": "TK-01", "origin": "model_prediction"}],
+        forecast_tables_by_component={"TK-01": {"rows": []}},
+        forecast_campaign_bindings={
+            "TK-01|TK-01-pressure|12": {
+                "component_id": "TK-01",
+                "scenario_id": "TK-01-pressure",
+                "forecast_time_s": 12.0,
+                "operating_mode": "receiving",
+                "campaign": _forecast_campaign(),
+            }
+        },
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
+    assert result["forecast_facility_campaign"]["status"] == (
+        "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+    )
+    assert result["forecast_facility_campaign"]["policy"]["facility_qra_promotion"] is False
 
 
 def test_integrated_risk_joins_current_and_forecast_identity(monkeypatch):

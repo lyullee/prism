@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,308 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,316 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 ## What PRISM is for
 
@@ -155,6 +155,15 @@ frequency bindings are complete. The forecast path returns
 facility aggregation is supplied through `forecast_facility_campaign_evaluator`.
 This makes a control-room response screen possible without presenting a
 partial forecast as a completed facility QRA.
+
+When a future-state evaluator has already produced explicit facility campaign
+records, use the strict trigger-to-ledger adapter described in
+[`PRISM_forecast_facility_campaign_handoff_en.md`](docs/PRISM_forecast_facility_campaign_handoff_en.md).
+It binds each `component_id|scenario_id|forecast_time_s` trigger to one reviewed
+campaign, checks the operating mode and facility identity, and merges the
+records without inferring frequencies or replacing missing cases with zero.
+The same adapter can be requested in `run_hazop_integrated_risk(...)` with
+`forecast_campaign_bindings=...`.
 
 The returned `realtime_hazop_bridge` also exposes the conditional current-
 weather expected-death F/N result when the monitor has an explicit
@@ -360,6 +369,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Inspection-centre source suitability boundary](docs/PRISM_inspection_center_source_suitability_20261115.md)
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
+- [Forecast HAZOP-to-facility campaign handoff (English)](docs/PRISM_forecast_facility_campaign_handoff_en.md)
 - [HAZOP-to-facility campaign manifest and CLI](docs/PRISM_HAZOP_facility_campaign_manifest_en.md)
 - [Equipment-twin to HAZOP mode handoff](docs/PRISM_equipment_to_hazop_mode_handoff_en.md)
 - [Emergency-relief release-boundary contract](docs/PRISM_emergency_relief_boundary_contract_en.md)

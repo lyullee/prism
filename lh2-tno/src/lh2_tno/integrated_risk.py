@@ -12,19 +12,221 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
 import copy
+import math
 import time
 from typing import Any
 
+from .contracts import canonical_digest
+from .facility_ledger import merge_facility_campaign_results
 from .hazop import HazopTable, run_hazop_facility_runtime
 from .hazop_campaign import build_hazop_facility_campaign_result
 from .hazop_forecast import HazopForecastError, run_hazop_forecast_risk_scan
 
 
 SCHEMA = "prism.hazop_integrated_risk.v1"
+FORECAST_FACILITY_SCHEMA = "prism.hazop_forecast_facility_campaign.v1"
 
 
 class IntegratedRiskError(ValueError):
     """Raised when the current/forecast integration contract is incomplete."""
+
+
+def _forecast_trigger_key(component_id: str, scenario_id: str, forecast_time_s: float) -> str:
+    """Return the JSON-safe identity for one forecast quantitative trigger."""
+
+    return f"{component_id}|{scenario_id}|{format(float(forecast_time_s), '.17g')}"
+
+
+def build_hazop_forecast_facility_campaign_result(
+    forecast_scan: Mapping[str, Any],
+    *,
+    campaign_bindings: Mapping[str, Mapping[str, Any]],
+    expected_component_ids: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Join explicit forecast-trigger campaigns into one facility ledger.
+
+    ``run_hazop_forecast_risk_scan`` deliberately returns one quantitative
+    evaluation at a time.  A digital-twin host that has an approved provider /
+    SLABx-LH2 / facility calculation can place that *already evaluated* result
+    in ``campaign_bindings`` under the canonical key
+    ``component_id|scenario_id|forecast_time_s``.  The binding value must have
+    ``component_id``, ``scenario_id``, ``forecast_time_s``, ``operating_mode``
+    (the exact mode selected by HAZOP), and a complete ``campaign`` mapping.
+
+    This function only joins reviewed campaign outputs.  It never creates a
+    release, infers a frequency, substitutes a missing consequence, or marks
+    a forecast facility QRA as qualified.  Missing or extra trigger bindings
+    fail closed.
+    """
+    if not isinstance(forecast_scan, Mapping):
+        raise IntegratedRiskError("forecast_scan must be a mapping")
+    if forecast_scan.get("schema_version") != "prism.hazop_forecast_risk_scan.v1":
+        raise IntegratedRiskError("forecast_scan has an unsupported schema_version")
+    if forecast_scan.get("status") != "FORECAST_RISK_SCAN_COMPLETE":
+        raise IntegratedRiskError("a completed forecast HAZOP scan is required")
+    if int(forecast_scan.get("withheld_count", 0) or 0) != 0:
+        raise IntegratedRiskError(
+            "forecast campaign join is withheld while quantitative evaluations remain withheld"
+        )
+    if not isinstance(campaign_bindings, Mapping):
+        raise IntegratedRiskError("campaign_bindings must be a mapping")
+
+    entries: list[dict[str, Any]] = []
+    for index, raw in enumerate(forecast_scan.get("scenario_entries", ())):
+        if not isinstance(raw, Mapping):
+            raise IntegratedRiskError(f"forecast_scan.scenario_entries[{index}] must be a mapping")
+        trigger_type = raw.get("trigger_type")
+        if trigger_type not in {"RISK_CONDITION_REACHED", "ACTIVE_CONDITION_RECHECK"}:
+            continue
+        component_id = _name(raw.get("component_id"), f"scenario_entries[{index}].component_id")
+        scenario_id = _name(raw.get("scenario_id"), f"scenario_entries[{index}].scenario_id")
+        try:
+            forecast_time_s = float(raw.get("forecast_time_s"))
+        except (TypeError, ValueError) as error:
+            raise IntegratedRiskError(
+                f"scenario_entries[{index}].forecast_time_s must be finite and non-negative"
+            ) from error
+        if not math.isfinite(forecast_time_s) or forecast_time_s < 0.0:
+            raise IntegratedRiskError(
+                f"scenario_entries[{index}].forecast_time_s must be finite and non-negative"
+            )
+        key = _forecast_trigger_key(component_id, scenario_id, forecast_time_s)
+        if key in {row["key"] for row in entries}:
+            raise IntegratedRiskError(f"duplicate forecast quantitative trigger: {key}")
+        evaluation = raw.get("evaluation")
+        if not isinstance(evaluation, Mapping) or evaluation.get("status") != "EVALUATED_OPERATOR_LIMITED":
+            raise IntegratedRiskError(
+                f"forecast trigger {key} lacks an evaluated operator-limited result"
+            )
+        operating_mode = _name(
+            raw.get("operating_mode"),
+            f"scenario_entries[{index}].operating_mode",
+        )
+        entries.append(
+            {
+                "key": key,
+                "component_id": component_id,
+                "scenario_id": scenario_id,
+                "forecast_time_s": forecast_time_s,
+                "operating_mode": operating_mode,
+                "trigger_type": trigger_type,
+            }
+        )
+
+    expected_keys = {row["key"] for row in entries}
+    supplied_keys = {str(key) for key in campaign_bindings}
+    if supplied_keys != expected_keys:
+        missing = sorted(expected_keys - supplied_keys)
+        extra = sorted(supplied_keys - expected_keys)
+        raise IntegratedRiskError(
+            "forecast campaign bindings must cover exactly every quantitative trigger; "
+            f"missing={missing}, extra={extra}"
+        )
+    if not entries:
+        return {
+            "schema_version": FORECAST_FACILITY_SCHEMA,
+            "status": "FORECAST_NO_QUANTITATIVE_TRIGGERS",
+            "facility_id": _name(forecast_scan.get("facility_id"), "forecast_scan.facility_id"),
+            "forecast_scan_digest": canonical_digest(dict(forecast_scan)),
+            "trigger_bindings": [],
+            "facility_ledger": None,
+            "policy": {
+                "forecast_origin": "model_prediction",
+                "frequency_inference_performed": False,
+                "sensor_frequency_learning_used": False,
+                "facility_qra_promotion": False,
+                "physical_validation_claim": False,
+                "missing_trigger_substituted_as_zero": False,
+            },
+        }
+
+    facility_id = _name(forecast_scan.get("facility_id"), "forecast_scan.facility_id")
+    normalized_campaigns: list[dict[str, Any]] = []
+    trace: list[dict[str, Any]] = []
+    seen_event_ids: set[str] = set()
+    for entry in entries:
+        raw_binding = campaign_bindings[entry["key"]]
+        if not isinstance(raw_binding, Mapping):
+            raise IntegratedRiskError(f"campaign binding must be a mapping: {entry['key']}")
+        if _name(raw_binding.get("component_id"), f"campaign_bindings[{entry['key']}].component_id") != entry["component_id"]:
+            raise IntegratedRiskError(f"campaign binding component identity mismatch: {entry['key']}")
+        if _name(raw_binding.get("scenario_id"), f"campaign_bindings[{entry['key']}].scenario_id") != entry["scenario_id"]:
+            raise IntegratedRiskError(f"campaign binding scenario identity mismatch: {entry['key']}")
+        try:
+            binding_time = float(raw_binding.get("forecast_time_s"))
+        except (TypeError, ValueError) as error:
+            raise IntegratedRiskError(f"campaign binding forecast_time_s is invalid: {entry['key']}") from error
+        if not math.isclose(binding_time, entry["forecast_time_s"], rel_tol=0.0, abs_tol=1.0e-12):
+            raise IntegratedRiskError(f"campaign binding forecast time mismatch: {entry['key']}")
+        binding_mode = raw_binding.get("operating_mode")
+        if binding_mode != entry["operating_mode"]:
+            raise IntegratedRiskError(f"campaign binding operating mode mismatch: {entry['key']}")
+        campaign = raw_binding.get("campaign")
+        if not isinstance(campaign, Mapping):
+            raise IntegratedRiskError(f"campaign binding has no complete campaign: {entry['key']}")
+        if campaign.get("facility_id") != facility_id:
+            raise IntegratedRiskError(f"campaign facility identity mismatch: {entry['key']}")
+        policy = campaign.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        if (
+            policy.get("frequency_inference_performed") is True
+            or policy.get("sensor_frequency_learning_used") is True
+            or policy.get("facility_qra_promotion") is True
+            or policy.get("physical_validation_claim") is True
+            or campaign.get("complete_facility_qra_claim") is True
+        ):
+            raise IntegratedRiskError(f"unsafe promotion or inference claim in forecast campaign: {entry['key']}")
+        event_ids = {
+            str(event.get("id"))
+            for event in campaign.get("events", ())
+            if isinstance(event, Mapping) and event.get("id")
+        }
+        if seen_event_ids & event_ids:
+            raise IntegratedRiskError(
+                "forecast campaigns reuse an event ID across prediction times; "
+                f"namespace the event IDs explicitly: {sorted(seen_event_ids & event_ids)}"
+            )
+        seen_event_ids.update(event_ids)
+        normalized_campaigns.append(
+            {
+                "campaign_id": f"forecast:{entry['key']}",
+                "result": copy.deepcopy(dict(campaign)),
+            }
+        )
+        trace.append(
+            {
+                **entry,
+                "campaign_id": f"forecast:{entry['key']}",
+                "campaign_digest": canonical_digest(dict(campaign)),
+                "origin": "model_prediction",
+            }
+        )
+
+    components = tuple(expected_component_ids) or tuple(sorted({row["component_id"] for row in entries}))
+    if len(set(components)) != len(components):
+        raise IntegratedRiskError("expected_component_ids must be unique")
+    ledger = merge_facility_campaign_results(
+        normalized_campaigns,
+        expected_component_ids=components,
+    )
+    return {
+        "schema_version": FORECAST_FACILITY_SCHEMA,
+        "status": "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "facility_id": facility_id,
+        "forecast_scan_digest": canonical_digest(dict(forecast_scan)),
+        "trigger_bindings": trace,
+        "campaign_results": normalized_campaigns,
+        "facility_ledger": ledger,
+        "policy": {
+            "forecast_origin": "model_prediction",
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+            "missing_trigger_substituted_as_zero": False,
+            "facility_aggregation_performed": True,
+        },
+    }
 
 
 def build_hazop_facility_campaign_evaluator(
@@ -127,6 +329,7 @@ def run_hazop_integrated_risk(
     population_binding: Any | None = None,
     facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     forecast_facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+    forecast_campaign_bindings: Mapping[str, Mapping[str, Any]] | None = None,
     mapping_digest: str | None = None,
 ) -> dict[str, Any]:
     """Run current and optional forecast HAZOP risk paths as one ledger.
@@ -209,7 +412,57 @@ def run_hazop_integrated_risk(
             raise IntegratedRiskError(f"forecast-state HAZOP execution failed: {error}") from error
 
     forecast_facility_campaign: dict[str, Any]
-    if forecast_facility_campaign_evaluator is None:
+    if forecast_facility_campaign_evaluator is not None and forecast_campaign_bindings is not None:
+        raise IntegratedRiskError(
+            "supply either forecast_facility_campaign_evaluator or forecast_campaign_bindings, not both"
+        )
+    if forecast_campaign_bindings is not None:
+        if forecast_frames is None:
+            raise IntegratedRiskError(
+                "forecast_campaign_bindings requires forecast_frames"
+            )
+        if forecast.get("status") != "FORECAST_RISK_SCAN_COMPLETE":
+            forecast_facility_campaign = {
+                "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_PARTIAL",
+                "reason": "forecast facility campaign requires a completed forecast HAZOP scan",
+                "policy": {
+                    "facility_qra_promotion": False,
+                    "frequency_inference_performed": False,
+                    "physical_validation_claim": False,
+                },
+            }
+        elif int(forecast.get("withheld_count", 0) or 0) > 0:
+            forecast_facility_campaign = {
+                "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_WITHHELD",
+                "reason": "forecast HAZOP scan contains withheld quantitative evaluations",
+                "withheld_count": int(forecast.get("withheld_count", 0) or 0),
+                "policy": {
+                    "facility_qra_promotion": False,
+                    "frequency_inference_performed": False,
+                    "physical_validation_claim": False,
+                },
+            }
+        else:
+            try:
+                forecast_facility_campaign = build_hazop_forecast_facility_campaign_result(
+                    forecast,
+                    campaign_bindings=forecast_campaign_bindings,
+                    expected_component_ids=tuple(
+                        forecast_component_ids or tuple(forecast_tables_by_component or {})
+                    ),
+                )
+            except Exception as error:
+                forecast_facility_campaign = {
+                    "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_BINDING_ERROR",
+                    "error_type": type(error).__name__,
+                    "reason": str(error),
+                    "policy": {
+                        "facility_qra_promotion": False,
+                        "frequency_inference_performed": False,
+                        "physical_validation_claim": False,
+                    },
+                }
+    elif forecast_facility_campaign_evaluator is None:
         forecast_facility_campaign = {
             "status": "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
             "policy": {
@@ -402,6 +655,8 @@ def run_hazop_integrated_risk(
     forecast_facility_campaign_status = str(forecast_facility_campaign.get("status", ""))
     forecast_facility_campaign_ok = forecast_facility_campaign_status in {
         "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
+        "FORECAST_NO_QUANTITATIVE_TRIGGERS",
+        "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED",
         "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
         "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
         "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
@@ -455,7 +710,9 @@ def run_hazop_integrated_risk(
 
 __all__ = [
     "SCHEMA",
+    "FORECAST_FACILITY_SCHEMA",
     "IntegratedRiskError",
+    "build_hazop_forecast_facility_campaign_result",
     "build_hazop_facility_campaign_evaluator",
     "run_hazop_integrated_risk",
 ]

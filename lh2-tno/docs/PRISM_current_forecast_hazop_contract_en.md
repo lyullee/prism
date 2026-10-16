@@ -58,6 +58,15 @@ The optional `forecast_facility_campaign_evaluator` in
 aggregation. Its output is still guarded against frequency inference,
 physical-validation claims, and premature facility-QRA promotion.
 
+For a structured handoff, use `forecast_campaign_bindings=...` with
+`run_hazop_integrated_risk` or call
+`build_hazop_forecast_facility_campaign_result()` directly. The strict adapter
+requires one reviewed campaign for every quantitative trigger and binds it by
+`component_id|scenario_id|forecast_time_s`, including the operating mode. It
+records the merged facility ledger while preserving the operator-limited status;
+missing triggers fail closed instead of becoming zero risk. See the detailed
+[forecast facility campaign handoff guide](PRISM_forecast_facility_campaign_handoff_en.md).
+
 ## Timing and interpretation
 
 Both paths record invocation timing. The timing is a measured diagnostic for

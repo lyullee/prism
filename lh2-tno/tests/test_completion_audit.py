@@ -438,6 +438,42 @@ def test_completion_audit_accepts_structured_evaluated_forecast_facility_handoff
     assert check["evidence"]["forecast_facility_campaign_structure_valid"] is True
 
 
+def test_completion_audit_accepts_strict_forecast_trigger_campaign_handoff():
+    ledger = _integrated_hazop_ledger()
+    ledger["forecast_facility_campaign"] = {
+        "status": "FORECAST_FACILITY_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "trigger_bindings": [{
+            "forecast_time_s": 10.0,
+            "component_id": "TK-01",
+            "scenario_id": "scenario-01",
+            "origin": "model_prediction",
+            "campaign_id": "forecast:TK-01|scenario-01|10",
+        }],
+        "campaign_results": [{"campaign_id": "forecast:TK-01|scenario-01|10"}],
+        "facility_ledger": {
+            "complete_facility_qra_claim": False,
+            "qualified_facility_qra_available": False,
+        },
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=ledger,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["forecast_facility_campaign_structure_valid"] is True
+
+
 def test_completion_audit_blocks_forecast_mode_trace_mismatch():
     forecast = {
         "schema_version": "prism.hazop_forecast_risk_scan.v1",
