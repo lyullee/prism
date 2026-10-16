@@ -6,7 +6,9 @@ liquid-hydrogen equipment models in one outdoor manifest:
 * a native `MappedPump` liquid packet at `liquid-transfer-pump-01`, and
 * a native compressible-plane valve packet at `transfer-valve-01`.
 
-The packets are consumed as provider-owned release histories. The PRISM
+The packets are consumed as provider-owned release histories. Multiple packets
+for the same component are allowed when they map to different exact opening
+events. The PRISM
 frequency catalogue supplies the initiating annual frequency after an exact
 component and opening match. Every other opening bin remains `UNCOMPUTED`; it
 is never assigned zero risk or silently replaced by a generic release.

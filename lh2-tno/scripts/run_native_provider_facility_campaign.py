@@ -157,8 +157,6 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     packets = [load_provider_release(path) for path in args.packets]
     if not packets:
         raise ValueError("at least one provider packet is required")
-    if len({packet.component_id for packet in packets}) != len(packets):
-        raise ValueError("one packet per facility component is required")
     for packet in packets:
         if not isinstance(packet, ResolvedLiquidRelease) and packet.compressible_plane_handoff is None:
             raise ValueError(f"gas packet {packet.event_id} lacks compressible_plane_handoff")
@@ -175,7 +173,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         event = _packet_event_match(packet, list(events))
         if event.id in {value[0].id for value in matched.values()}:
             raise ValueError("multiple provider packets resolve to one frequency event")
-        matched[packet.component_id] = (event, packet)
+        matched[packet.event_id] = (event, packet)
     routes = []
     for event in events:
         entry = next((pair for pair in matched.values() if pair[0].id == event.id), None)
