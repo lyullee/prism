@@ -1,12 +1,14 @@
-"""Run one native external gas packet through the facility risk ledger.
+"""Run one native external gas or liquid packet through the facility risk ledger.
 
-The packet must already contain the provider-resolved compressible plane.  This
-runner binds its exact opening to one literature frequency event, evaluates the
-declared outdoor weather/population conditions with the normal PRISM campaign
-engine, and writes a conditional facility IR/F-N assessment.  Unmatched
-opening bins remain explicit ``UNCOMPUTED`` cases.  Provider qualification,
-independent physical validation, and the complete-facility QRA gate remain
-closed for synthetic or operator-limited evidence.
+Gas packets must already contain the provider-resolved compressible plane;
+liquid/two-phase packets carry the provider-resolved liquid boundary and use a
+declared pool-footprint sensitivity.  The runner binds the exact opening to
+one literature frequency event, evaluates the declared outdoor
+weather/population conditions with the normal PRISM campaign engine, and
+writes a conditional facility IR/F-N assessment.  Unmatched opening bins
+remain explicit ``UNCOMPUTED`` cases.  Provider qualification, independent
+physical validation, and the complete-facility QRA gate remain closed for
+synthetic or operator-limited evidence.
 """
 from __future__ import annotations
 
@@ -29,6 +31,7 @@ from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.frequency import FrequencyPlan, generate_events  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
+from lh2_tno.equipment_boundary import ResolvedLiquidRelease  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     build_consequence_request_from_provider_release,
     load_provider_release,
@@ -58,7 +61,10 @@ def _save(path: Path, value: Any) -> None:
     )
 
 
-def _request_defaults(context: dict[str, Any]) -> dict[str, Any]:
+def _request_defaults(
+    context: dict[str, Any],
+    packet: Any,
+) -> dict[str, Any]:
     defaults = copy.deepcopy(context)
     for key in (
         "component_id",
@@ -75,16 +81,47 @@ def _request_defaults(context: dict[str, Any]) -> dict[str, Any]:
         "initiation_intensity_per_s",
     ):
         defaults.pop(key, None)
-    defaults["source_operator"] = "integrated_transient"
+    is_liquid = isinstance(packet, ResolvedLiquidRelease)
+    defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
     defaults["source_duration_mode"] = "declared"
     defaults["release_termination"] = {
         "basis": "reviewed_isolation_success",
         "time_s": "provider_duration",
         "provenance": (
-            "native external gas provider packet; provider isolation clock retained "
+            "native external provider packet; provider isolation clock retained "
             "for facility campaign diagnostic"
         ),
     }
+    if is_liquid:
+        integrated_mass = float(packet.integrated_mass_kg)
+        pool_radius = (
+            0.0001 if integrated_mass < 1.0e-4
+            else 0.005 if integrated_mass < 0.1
+            else 0.05
+        )
+        pool_fluid = packet.property_basis.fluid
+        translation = "none"
+        provenance = None
+        if pool_fluid == "ParaHydrogen":
+            pool_fluid = "Hydrogen"
+            translation = "para_hydrogen_to_hydrogen"
+            provenance = (
+                "explicit provider ParaHydrogen to native DynamicLH2PoolX Hydrogen "
+                "compatibility boundary; synthetic diagnostic"
+            )
+        defaults["pool"] = {
+            "footprint_origin": "declared_sensitivity",
+            "fluid": pool_fluid,
+            "fluid_translation": translation,
+            "translation_provenance": provenance,
+            "radius_m": pool_radius,
+            "conductivity_w_mk": 0.6,
+            "diffusivity_m2_s": 1.5e-7,
+            "initial_temperature_k": packet.ambient_temperature_k,
+            "domain_radius_m": max(0.005, 5.0 * pool_radius) if pool_radius < 0.001 else max(0.25, 5.0 * pool_radius),
+            "radial_step_m": pool_radius / 20.0,
+            "maximum_time_step_s": 0.01,
+        }
     return defaults
 
 
@@ -97,17 +134,17 @@ def _default_scenarios(asset_id: str) -> tuple[LiteratureFrequencyScenario, ...]
         )
         for identifier, quantile, provenance in (
             (
-                "native-gas-published-central",
+                "native-provider-published-central",
                 "published",
                 "published LH2 equipment catalogue central rate; diagnostic only",
             ),
             (
-                "native-gas-literature-low",
+                "native-provider-literature-low",
                 "p05",
                 "published marginal p05 LH2 equipment rate; diagnostic sensitivity only",
             ),
             (
-                "native-gas-literature-high",
+                "native-provider-literature-high",
                 "p95",
                 "published marginal p95 LH2 equipment rate; diagnostic sensitivity only",
             ),
@@ -117,8 +154,11 @@ def _default_scenarios(asset_id: str) -> tuple[LiteratureFrequencyScenario, ...]
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     packet = load_provider_release(args.packet)
-    if packet.compressible_plane_handoff is None:
-        raise ValueError("the selected gas packet must contain compressible_plane_handoff")
+    is_liquid = isinstance(packet, ResolvedLiquidRelease)
+    if not is_liquid and packet.compressible_plane_handoff is None:
+        raise ValueError(
+            "the selected gas packet must contain compressible_plane_handoff"
+        )
     context = _object(args.request_context)
     manifest = EquipmentManifest.from_json(args.manifest)
     facility = manifest.to_facility()
@@ -148,14 +188,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         )
     bound_event = matching[0]
     request = build_consequence_request_from_provider_release(
-        packet, _request_defaults(context)
+        packet, _request_defaults(context, packet)
     )
     branch = {
-        "id": "native-provider-gas-packet",
+        "id": "native-provider-liquid-packet" if is_liquid else "native-provider-gas-packet",
         "probability_given_event": 1.0,
         "provenance": (
-            "native external gas history with provider-resolved compressible "
-            "plane; exact opening match; diagnostic only"
+            (
+                "native external liquid/two-phase history with declared pool sensitivity; "
+                "exact opening match; diagnostic only"
+                if is_liquid
+                else "native external gas history with provider-resolved compressible "
+                "plane; exact opening match; diagnostic only"
+            )
         ),
         "request": request.model_dump(mode="json"),
     }
@@ -172,11 +217,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                             "id": "uncomputed-opening-bin",
                             "probability_given_event": 1.0,
                             "provenance": (
-                                "native gas packet covers only the exact provider opening; "
+                                "native external packet covers only the exact provider opening; "
                                 "other catalogue bins remain uncomputed"
                             ),
                             "uncomputed_reason": (
-                                "no native external gas packet for this opening bin"
+                                "no native external packet for this opening bin"
                             ),
                         }
                     ],
@@ -184,12 +229,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             )
     conditions = _array(args.annual_conditions)
     campaign_raw = {
-        "id": "native-gas-facility-frequency-campaign",
+        "id": "native-provider-facility-frequency-campaign",
         "frequency_plan": plan.model_dump(mode="json"),
         "annual_conditions": conditions,
         "event_routes": routes,
         "scope_provenance": (
-            "one native external gas packet bound to one literature frequency "
+            "one native external packet bound to one literature frequency "
             "opening; declared outdoor weather/population conditions; other bins withheld"
         ),
         "maximum_physics_cases": args.maximum_physics_cases,
@@ -227,8 +272,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         case for case in result_cases if str(case.get("status", "")).startswith("EXECUTED")
     ]
     verification = {
-        "schema_version": "prism.native_gas_facility_frequency_case.v1",
-        "status": "NATIVE_GAS_PACKET_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+        "schema_version": "prism.native_provider_facility_frequency_case.v1",
+        "status": "NATIVE_PROVIDER_PACKET_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
         "campaign_status": result.get("status"),
         "facility_assessment_status": assessment.get("status"),
         "facility_id": facility.id,
@@ -241,7 +286,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_termination_basis": packet.termination_basis,
         "provider_duration_s": packet.duration_s,
         "provider_mass_residual_kg": packet.cumulative_mass_out_kg - packet.integrated_mass_kg,
-        "compressible_plane_handoff_consumed": True,
+        "release_kind": "liquid" if is_liquid else "gas",
+        "compressible_plane_handoff_consumed": not is_liquid,
         "exact_opening_match": math.isclose(
             packet.failure_opening_diameter_m,
             bound_event.release.hole_diameter_m,
@@ -281,7 +327,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "provider packet, geometry, weather and population remain synthetic or diagnostic",
             "provider event identity is explicitly mapped to the matching frequency event; it is not silently rewritten",
             "unmatched opening bins remain UNCOMPUTED",
-            "operator-limited compressible-plane handoff is not independent physical validation",
+            (
+                "declared liquid pool footprint and liquid/near-field provider boundary are not "
+                "independent physical validation"
+                if is_liquid
+                else "operator-limited compressible-plane handoff is not independent physical validation"
+            ),
             "literature frequency uncertainty is a conditional reweighting of saved atoms, not a facility credible interval",
             "facility IR/F-N promotion remains closed until qualified provider, complete scope and validation gates pass",
         ],
@@ -296,7 +347,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(
         args.output_dir / "binding_provenance.json",
         {
-            "schema_version": "prism.native_gas_frequency_event_binding.v1",
+            "schema_version": "prism.native_provider_frequency_event_binding.v1",
             "provider_packet_digest": canonical_digest(packet.model_dump(mode="json")),
             "provider_event_id": packet.event_id,
             "frequency_event_id": bound_event.id,
@@ -305,6 +356,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "frequency_from_provider_packet": False,
             "facility_qra_claim": False,
             "physical_validation_claim": False,
+            "release_kind": "liquid" if is_liquid else "gas",
             "interpretation": (
                 "The native packet is consumed as the release history. The catalogue event "
                 "supplies the initiating frequency after an explicit opening match; event-ID "
@@ -329,7 +381,7 @@ def main() -> int:
     try:
         result = run(args)
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ImportError, TypeError, ValueError) as error:
-        raise SystemExit(f"native gas facility campaign failed: {error}") from error
+        raise SystemExit(f"native provider facility campaign failed: {error}") from error
     print(
         json.dumps(
             {
