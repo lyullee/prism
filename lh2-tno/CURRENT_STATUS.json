@@ -5232,8 +5232,19 @@
   "inspection_center_reconstructed_hazop_selected_scenario_family": "vaporizer_hole",
   "inspection_center_reconstructed_hazop_provider_release_required": true,
   "inspection_center_reconstructed_hazop_frequency_assignment": "not_performed",
-  "inspection_center_reconstructed_hazop_consequence_calculated": false,
+  "inspection_center_reconstructed_hazop_consequence_calculated": true,
+  "inspection_center_reconstructed_hazop_provider_binding": "examples/inspection_center_reconstructed_hazop_provider_event_binding.json",
+  "inspection_center_reconstructed_hazop_provider_binding_status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
+  "inspection_center_reconstructed_hazop_provider_bound_scenario_count": 1,
+  "inspection_center_reconstructed_hazop_consequence_chain": "examples/inspection_center_reconstructed_hazop_provider_consequence_chain.json",
+  "inspection_center_reconstructed_hazop_consequence_chain_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
+  "inspection_center_reconstructed_hazop_consequence_chain_executed_scenario_count": 1,
+  "inspection_center_reconstructed_hazop_consequence_chain_risk_atom_count": 1,
+  "inspection_center_reconstructed_hazop_consequence_chain_processing_time_ms": 1521.3578999973834,
+  "inspection_center_reconstructed_hazop_downstream_frequency_status": "DIAGNOSTIC_LITERATURE_EVENT_APPLIED; not learned from sensor",
+  "inspection_center_reconstructed_hazop_provider_qualification": "UNQUALIFIED_DIAGNOSTIC",
+  "inspection_center_reconstructed_hazop_physical_validation_claim": false,
   "inspection_center_reconstructed_hazop_facility_qra_claim": false,
-  "inspection_center_reconstructed_runtime_interpretation": "Reconstructed state frames with explicit receiving/standby/supply modes select one diagnostic supply vaporizer_hole HAZOP scenario; no release, frequency, consequence, or facility QRA is created."
+  "inspection_center_reconstructed_runtime_interpretation": "Reconstructed state frames with explicit receiving/standby/supply modes select one diagnostic supply vaporizer_hole HAZOP scenario. An explicitly bound model-prediction provider packet is then executed through the diagnostic consequence chain; provider qualification, physical validation, and facility QRA remain false."
 
 }

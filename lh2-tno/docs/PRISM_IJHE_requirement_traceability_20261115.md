@@ -7,7 +7,7 @@
 | 요구사항 | 현재 증거 | 판정 |
 |---|---|---|
 | 설비 상태와 운전 모드를 HAZOP 입력으로 사용 | HAZOP selection/event binding, operating-mode evidence, observed runtime audit | **진단 완료** (`PASS`) |
-| 실시간 설비 프레임에서 HAZOP 선택과 provider/SLABx-LH2 호출을 한 경계로 연결 | `FacilityRealtimeConsequenceMonitor.update_from_runtime_frames_with_hazop`, `prism.realtime_hazop_facility_bridge.v1` | **진단 완료**, 연간 시설 IR/F-N은 보류 |
+| 실시간 설비 프레임에서 HAZOP 선택과 provider/SLABx-LH2 호출을 한 경계로 연결 | `FacilityRealtimeConsequenceMonitor.update_from_runtime_frames_with_hazop`, `prism.realtime_hazop_facility_bridge.v1`, reconstructed inspection-centre chain (1/1 diagnostic case) | **진단 완료**, 연간 시설 IR/F-N은 보류 |
 | 문헌 빈도를 사고 event에 명시적으로 연결 | frequency port binding 34/34, 5개 문헌 시나리오 | **진단 완료** (`PASS`) |
 | 설비 방출 포트·지속시간·차단·재고를 피해계산에 전달 | `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json` 및 risk-atom chain audit | **진단 완료**, 일부 provider 경계 제한 |
 | 방출부터 SLABx-LH2·점화·최종 피해까지 연결 | facility aggregate closure와 risk atom chain audit | **진단 완료** (`PASS`) |
@@ -25,6 +25,12 @@
 4. 방출 packet은 SLABx-LH2/풀·확산·점화·피해 계산으로 전달된다.
 5. 결과는 사건·설비·수용점·문헌 빈도 시나리오별로 facility ledger에 집계된다.
 6. 조건부 IR/F-N은 계산되지만, 시설 전체 공식 위험값은 자격화 조건이 충족될 때까지 보류된다.
+
+재구성 검사센터 데이터에 대해서는 공급 모드 고압 이탈 1건을 명시적
+문헌 event와 연결하여 provider packet, SLABx-LH2/TNO consequence service,
+현재 기상 risk atom까지 진단 실행했다. 이 실행은 `model_prediction` packet과
+진단 geometry를 사용하므로 실제 시설 provider 자격, 독립 검증, 시설 전체
+IR/F-N 승격의 증거로 사용하지 않는다.
 
 ## 현재 다섯 차단 검사
 

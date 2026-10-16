@@ -1,0 +1,50 @@
+{
+  "schema_version": "prism.observed_hazop_provider_event_binding.v1",
+  "status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
+  "selected_scenario_count": 1,
+  "bound_scenario_count": 1,
+  "provider_worklist_event_count": 24,
+  "binding_map_count": 1,
+  "rows": [
+    {
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "hazop_row_id": "inspection-supply-vaporizer-high-pressure",
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "operating_mode": "supply",
+      "scenario_family": "vaporizer_hole",
+      "release_mode": "hole",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_component_id": "ambient-vaporizer-01",
+      "provider_port_id": "vaporizer-accident-out",
+      "provider_event_kind": "accidental_leak",
+      "provider_release_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "annual_frequency_per_year": 0.001,
+      "checks": {
+        "explicit_mapping_present": true,
+        "provider_event_present": true,
+        "provider_component_matches_mapping": true,
+        "provider_port_present": true,
+        "scenario_family_compatible": true,
+        "release_mode_compatible": true,
+        "literature_frequency_present": true
+      },
+      "status": "EXPLICIT_PROVIDER_EVENT_BOUND",
+      "frequency_assignment": "not_performed; literature event identity only",
+      "provider_release_created": false
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "operating_mode_inferred": false,
+    "literature_event_identity_bound": true,
+    "frequency_assignment_performed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Each selected observed HAZOP scenario is checked against an explicit literature provider event, component, and accident port. The event's frequency is recorded for traceability only; it is not assigned to the sensor frame and no release packet or consequence is created."
+}

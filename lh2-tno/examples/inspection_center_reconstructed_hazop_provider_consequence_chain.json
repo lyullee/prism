@@ -1,0 +1,233 @@
+{
+  "schema_version": "prism.observed_hazop_provider_consequence_chain.v1",
+  "status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
+  "selected_scenario_count": 1,
+  "executed_scenario_count": 1,
+  "withheld_scenario_count": 0,
+  "risk_atom_count": 1,
+  "preflight": {
+    "schema_version": "prism.observed_hazop_provider_consequence_chain.v1",
+    "status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY",
+    "selected_scenario_count": 1,
+    "ready_for_provider_chain_count": 1,
+    "withheld_provider_chain_count": 0,
+    "rows": [
+      {
+        "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+        "hazop_row_id": "inspection-supply-vaporizer-high-pressure",
+        "observed_component_id": "lh2-supply-vaporizer-boundary",
+        "source_id": "inspection-center-reconstructed-supply-20260415",
+        "captured_at_s": 43200.0,
+        "state_snapshot_digest": "0efa89fe28443b7cf6304264b98ab2b67fe92e97369583f99787f00c06ea56a9",
+        "operating_mode": "supply",
+        "scenario_family": "vaporizer_hole",
+        "release_mode": "hole",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "provider_component_id": "ambient-vaporizer-01",
+        "provider_component_kind": "vaporizer",
+        "provider_port_id": "vaporizer-accident-out",
+        "provider_packet_path": "results\\20261110\\native_generic_scope_packets_latest2\\..\\observed_hazop_vaporizer_isolation_overlay\\resolved_release.json",
+        "provider_packet_status": "model_prediction",
+        "provider_termination_basis": "reviewed_isolation_success",
+        "provider_duration_s": 0.5,
+        "checks": {
+          "binding_present": true,
+          "worklist_event_present": true,
+          "packet_evidence_path_present": true,
+          "packet_file_present": true,
+          "packet_event_identity": true,
+          "packet_component_identity": true,
+          "packet_port_identity": true,
+          "event_kind_compatible": true,
+          "termination_basis_compatible": true,
+          "duration_present": true,
+          "mass_ledger_nonnegative": true
+        },
+        "status": "READY_FOR_PROVIDER_CHAIN",
+        "blocking_reason": null
+      }
+    ],
+    "blocking_reasons": [],
+    "policy": {
+      "packet_created_by_prism": false,
+      "termination_inferred": false,
+      "frequency_assignment_performed": false,
+      "frequency_inference_performed": false,
+      "sensor_frequency_learning_used": false,
+      "facility_qra_claim": false,
+      "physical_validation_claim": false,
+      "diagnostic_only": true
+    },
+    "interpretation": "Only packets whose actual event identity, port, event kind, termination basis, duration, and mass ledger satisfy the selected HAZOP family's contract may enter the consequence runner. Other scenarios remain withheld."
+  },
+  "rows": [
+    {
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "hazop_row_id": "inspection-supply-vaporizer-high-pressure",
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "source_id": "inspection-center-reconstructed-supply-20260415",
+      "captured_at_s": 43200.0,
+      "state_snapshot_digest": "0efa89fe28443b7cf6304264b98ab2b67fe92e97369583f99787f00c06ea56a9",
+      "operating_mode": "supply",
+      "scenario_family": "vaporizer_hole",
+      "release_mode": "hole",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_component_id": "ambient-vaporizer-01",
+      "provider_component_kind": "vaporizer",
+      "provider_port_id": "vaporizer-accident-out",
+      "provider_packet_path": "results\\20261110\\native_generic_scope_packets_latest2\\..\\observed_hazop_vaporizer_isolation_overlay\\resolved_release.json",
+      "provider_packet_status": "model_prediction",
+      "provider_termination_basis": "reviewed_isolation_success",
+      "provider_duration_s": 0.5,
+      "checks": {
+        "binding_present": true,
+        "worklist_event_present": true,
+        "packet_evidence_path_present": true,
+        "packet_file_present": true,
+        "packet_event_identity": true,
+        "packet_component_identity": true,
+        "packet_port_identity": true,
+        "event_kind_compatible": true,
+        "termination_basis_compatible": true,
+        "duration_present": true,
+        "mass_ledger_nonnegative": true
+      },
+      "status": "EXECUTED",
+      "blocking_reason": null,
+      "scenario": {
+        "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+        "hazop_row_id": "inspection-supply-vaporizer-high-pressure",
+        "component_id": "lh2-supply-vaporizer-boundary",
+        "component_kind": "vaporizer",
+        "operating_mode": "supply",
+        "scenario_family": "vaporizer_hole",
+        "release_mode": "hole",
+        "priority": "high",
+        "measured_value_si": 610000.0,
+        "trigger": "at_or_above",
+        "threshold_low_si": null,
+        "threshold_high_si": 300000.0,
+        "provider_release_status": "REQUIRED_NOT_CREATED",
+        "provider_release_required": true,
+        "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+        "source": "diagnostic row; threshold is not a qualified facility design limit"
+      },
+      "gate_status": "CONSEQUENCE_EVALUATED",
+      "gate_reason": null,
+      "risk": {
+        "status": "AVAILABLE_CURRENT_WEATHER_IR",
+        "annual_ir_low_high": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        },
+        "frequency_sensitivity_current_weather_ir_low_high": null,
+        "risk_atom": {
+          "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+          "asset_id": "ambient-vaporizer",
+          "port_ids": [
+            "vaporizer-accident-out"
+          ],
+          "initiating_frequency_per_year": 0.001,
+          "conditional_weight": 1.0,
+          "annual_condition_probability": 1.0,
+          "release_branch_probability": 1.0,
+          "occupancy_probability": 1.0,
+          "receptor_harm_low_high": {
+            "worker-01": [
+              0.0,
+              0.0
+            ]
+          },
+          "frequency_provenance": "catalogue_event=generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3; source=Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08; catalogue_digest=cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+          "frequency_source_digest": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+          "frequency_is_not_inferred": true,
+          "frequency_p05_per_year": null,
+          "frequency_p95_per_year": null,
+          "expected_deaths_low_high": null
+        },
+        "reason": "reviewed literature frequency was multiplied by provider consequence harm for the current weather frame"
+      },
+      "elapsed_ms": 1487.2385999769904,
+      "provider_input_origin": "model_prediction",
+      "provider_result_digest": "f707ec1f17f1b93c08d5bc374ee1a5fe3b9fe1fecc77a419b81de3618b1a9cd7",
+      "provider_qualification": "UNQUALIFIED_DIAGNOSTIC"
+    }
+  ],
+  "risk_atoms": [
+    {
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "operating_mode": "supply",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "risk": {
+        "status": "AVAILABLE_CURRENT_WEATHER_IR",
+        "annual_ir_low_high": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        },
+        "frequency_sensitivity_current_weather_ir_low_high": null,
+        "risk_atom": {
+          "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+          "asset_id": "ambient-vaporizer",
+          "port_ids": [
+            "vaporizer-accident-out"
+          ],
+          "initiating_frequency_per_year": 0.001,
+          "conditional_weight": 1.0,
+          "annual_condition_probability": 1.0,
+          "release_branch_probability": 1.0,
+          "occupancy_probability": 1.0,
+          "receptor_harm_low_high": {
+            "worker-01": [
+              0.0,
+              0.0
+            ]
+          },
+          "frequency_provenance": "catalogue_event=generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3; source=Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08; catalogue_digest=cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+          "frequency_source_digest": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+          "frequency_is_not_inferred": true,
+          "frequency_p05_per_year": null,
+          "frequency_p95_per_year": null,
+          "expected_deaths_low_high": null
+        },
+        "reason": "reviewed literature frequency was multiplied by provider consequence harm for the current weather frame"
+      }
+    }
+  ],
+  "geometry_rebase": {
+    "schema_version": "prism.observed_hazop_provider_geometry_rebase.v1",
+    "status": "DIAGNOSTIC_PROVIDER_EXIT_GEOMETRY_REBASED",
+    "changed_component_ids": [
+      "ambient-vaporizer-01"
+    ],
+    "changed_port_ids": [
+      "vaporizer-accident-out"
+    ],
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "processing_time": {
+    "total_elapsed_ms": 1521.3578999973834,
+    "executed_case_elapsed_ms": [
+      1487.2385999769904
+    ],
+    "measurement_policy": "diagnostic wall-clock timing; no 1 Hz or site real-time guarantee"
+  },
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "frequency_assignment_performed": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created_by_prism": false,
+    "provider_packets_are_qualified": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "facility_scope_complete": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "This run demonstrates the explicit observed-mode HAZOP to provider packet and SLABx-LH2 boundary for contract-compatible rows. Literature frequency is applied only to executed diagnostic risk atoms; it is not learned from the sensor frame. Withheld rows and unqualified packets prevent a facility annual IR/F-N claim."
+}

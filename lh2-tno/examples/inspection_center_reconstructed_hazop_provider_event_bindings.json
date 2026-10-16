@@ -1,0 +1,23 @@
+{
+  "schema_version": "prism.observed_hazop_provider_event_binding_map.v1",
+  "status": "DIAGNOSTIC_EXPLICIT_MAPPING",
+  "description": "Diagnostic-only mapping from the reconstructed inspection-center HAZOP runtime scenario to a generic LH2 literature provider event. The provider event is not a qualified facility release packet.",
+  "bindings": [
+    {
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_component_id": "ambient-vaporizer-01",
+      "provider_port_id": "vaporizer-accident-out",
+      "mapping_basis": "scenario-family and release-mode compatible diagnostic vaporizer-hole event"
+    }
+  ],
+  "policy": {
+    "explicit_mapping_required": true,
+    "frequency_assignment_performed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  }
+}
