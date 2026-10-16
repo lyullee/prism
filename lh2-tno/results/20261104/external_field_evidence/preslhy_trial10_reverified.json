@@ -60,7 +60,22 @@
     ],
     "event_ids": [
       "preslhy-e35-trial-10-2019-09-13"
-    ]
+    ],
+    "observed_source_term": {
+      "available": true,
+      "sample_count": 208,
+      "observed_window_start_s": 0.0,
+      "observed_window_end_s": 207.0,
+      "observed_window_duration_s": 207.0,
+      "positive_flow_start_s": 2.0,
+      "positive_flow_end_s": 207.0,
+      "positive_flow_sample_count": 205,
+      "integrated_mass_left_hold_kg": 27.506655159,
+      "observation_operator": "left_held_between_observed_timestamps_no_final_extension",
+      "termination_evidence_present": false,
+      "inventory_balance_evidence_present": false,
+      "isolation_evidence_present": false
+    }
   },
   "weather": {
     "row_count": 92,

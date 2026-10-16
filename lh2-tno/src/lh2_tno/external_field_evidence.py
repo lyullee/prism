@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -127,6 +128,68 @@ def _csv_summary(path: Path, *, required_columns: tuple[str, ...], label: str) -
     }
 
 
+def _source_boundary_observation(path: Path) -> dict[str, Any]:
+    """Summarize an observed source clock without turning it into a packet.
+
+    The left-held integral is an observation operator between recorded samples;
+    it is not a provider termination or an inventory balance.  A final sample
+    is therefore not extended beyond the observed clock window.
+    """
+    try:
+        with path.open("r", encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            fields = tuple(reader.fieldnames or ())
+            if "time_s" not in fields or "mass_flow_kg_s" not in fields:
+                return {
+                    "available": False,
+                    "reason": "source_boundary has no explicit time_s and mass_flow_kg_s columns",
+                    "termination_evidence_present": False,
+                }
+            samples: list[tuple[float, float]] = []
+            for row_number, row in enumerate(reader, start=2):
+                try:
+                    time_s = float(row.get("time_s"))
+                    mass_flow = float(row.get("mass_flow_kg_s"))
+                except (TypeError, ValueError) as error:
+                    raise ExternalFieldEvidenceError(
+                        f"source_boundary row {row_number} has non-numeric time_s or mass_flow_kg_s"
+                    ) from error
+                if not math.isfinite(time_s) or not math.isfinite(mass_flow):
+                    raise ExternalFieldEvidenceError(
+                        f"source_boundary row {row_number} has non-finite time or mass flow"
+                    )
+                if time_s < 0.0 or mass_flow < 0.0:
+                    raise ExternalFieldEvidenceError(
+                        f"source_boundary row {row_number} requires non-negative time and mass flow"
+                    )
+                samples.append((time_s, mass_flow))
+    except (OSError, UnicodeDecodeError, csv.Error) as error:
+        raise ExternalFieldEvidenceError(f"cannot parse source_boundary observations: {path}") from error
+    if not samples:
+        raise ExternalFieldEvidenceError(f"source_boundary has no time-series rows: {path}")
+    if any(right[0] <= left[0] for left, right in zip(samples, samples[1:])):
+        raise ExternalFieldEvidenceError("source_boundary time_s must be strictly increasing")
+    start_s = samples[0][0]
+    end_s = samples[-1][0]
+    positive = [time_s for time_s, flow in samples if flow > 0.0]
+    left_held_mass = sum(flow * (right_time - time_s) for (time_s, flow), (right_time, _) in zip(samples, samples[1:]))
+    return {
+        "available": True,
+        "sample_count": len(samples),
+        "observed_window_start_s": start_s,
+        "observed_window_end_s": end_s,
+        "observed_window_duration_s": end_s - start_s,
+        "positive_flow_start_s": min(positive) if positive else None,
+        "positive_flow_end_s": max(positive) if positive else None,
+        "positive_flow_sample_count": len(positive),
+        "integrated_mass_left_hold_kg": left_held_mass,
+        "observation_operator": "left_held_between_observed_timestamps_no_final_extension",
+        "termination_evidence_present": False,
+        "inventory_balance_evidence_present": False,
+        "isolation_evidence_present": False,
+    }
+
+
 def build_external_field_evidence_record(
     manifest_path: str | Path,
     *,
@@ -186,6 +249,9 @@ def build_external_field_evidence_record(
         required_columns=("event_id", "mass_flow_kg_s", "phase", "release_height_m"),
         label="source_boundary",
     )
+    source_observation = _source_boundary_observation(
+        Path(channels["source_boundary"]["path"]).resolve()
+    )
     weather = _csv_summary(
         Path(channels["weather"]["path"]).resolve(),
         required_columns=("event_id", "wind_speed_m_s", "wind_direction"),
@@ -234,7 +300,7 @@ def build_external_field_evidence_record(
         "dataset_id": manifest.get("dataset_id"),
         "scope": "lh2_free_field",
         "channels": verified_channels,
-        "source_boundary": source,
+        "source_boundary": {**source, "observed_source_term": source_observation},
         "weather": weather,
         "receptor_observations": receptors,
         "obstacle_geometry": {

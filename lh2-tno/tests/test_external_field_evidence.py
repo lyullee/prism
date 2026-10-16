@@ -20,8 +20,10 @@ def _hash(path: Path) -> str:
 def _bundle(tmp_path: Path) -> Path:
     source = tmp_path / "source.csv"
     source.write_text(
-        "event_id,mass_flow_kg_s,phase,release_height_m\n"
-        f"{EVENT_ID},0.02,LH2,0.5\n",
+        "event_id,time_s,mass_flow_kg_s,phase,release_height_m\n"
+        f"{EVENT_ID},0,0.02,LH2,0.5\n"
+        f"{EVENT_ID},1,0.02,LH2,0.5\n"
+        f"{EVENT_ID},2,0,LH2,0.5\n",
         encoding="utf-8",
     )
     weather = tmp_path / "weather.csv"
@@ -94,7 +96,10 @@ def test_external_field_bundle_verifies_identity_and_keeps_promotion_closed(tmp_
 
     assert report["status"] == "RESTRICTED_EXTERNAL_FIELD_EVIDENCE"
     assert report["event_id"] == EVENT_ID
-    assert report["source_boundary"]["row_count"] == 1
+    assert report["source_boundary"]["row_count"] == 3
+    assert report["source_boundary"]["observed_source_term"]["observed_window_duration_s"] == 2.0
+    assert report["source_boundary"]["observed_source_term"]["integrated_mass_left_hold_kg"] == pytest.approx(0.04)
+    assert report["source_boundary"]["observed_source_term"]["termination_evidence_present"] is False
     assert report["weather"]["row_count"] == 1
     assert report["receptor_observations"]["row_count"] == 1
     assert report["model_comparison_ready"] is False
