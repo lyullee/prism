@@ -53,6 +53,20 @@
       }
     },
     {
+      "id": "major_accident_scope_explicit",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "declared_family_count": 12,
+        "selected_families": [
+          "vaporizer_hole"
+        ],
+        "not_evaluated_family_count": 11,
+        "implicit_substitution_performed": false
+      }
+    },
+    {
       "id": "facility_handoff_schema",
       "status": "PASS",
       "passed": true,
@@ -113,6 +127,93 @@
     "provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
     "physical_validation_claim": false,
     "interpretation": "Structural traceability passes only when all checks pass; this record does not close the full IJHE evidence audit or promote facility QRA."
+  },
+  "major_accident_scope": {
+    "schema_version": "prism.facility_major_accident_scope_status.v1",
+    "catalog_schema": "prism.accident_scenario_catalog.v1",
+    "declared_family_count": 12,
+    "selected_family_count": 1,
+    "selected_families": [
+      "vaporizer_hole"
+    ],
+    "not_evaluated_families": [
+      "vessel_hole",
+      "pipe_hole",
+      "valve_hole",
+      "vent_hole",
+      "pump_hole",
+      "reliquefier_hole",
+      "liquid_two_phase",
+      "inventory_depletion",
+      "inventory_over_600s",
+      "two_sided_rupture",
+      "vertical_handoff"
+    ],
+    "rows": [
+      {
+        "family": "vessel_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved vessel accident history is required"
+      },
+      {
+        "family": "pipe_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved pipe accident history is required"
+      },
+      {
+        "family": "valve_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved valve accident history is required"
+      },
+      {
+        "family": "vent_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "qualified relief set-point and discharge history are required"
+      },
+      {
+        "family": "pump_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved pump accident history is required"
+      },
+      {
+        "family": "vaporizer_hole",
+        "status": "DIAGNOSTIC_SELECTED_RUNTIME_BRANCH",
+        "reason": "one explicit HAZOP-selected branch reached the consequence chain"
+      },
+      {
+        "family": "reliquefier_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved reliquefier accident history is required"
+      },
+      {
+        "family": "liquid_two_phase",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "liquid outlet packet with phase and enthalpy ledger is required"
+      },
+      {
+        "family": "inventory_depletion",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider packet must close the mass inventory at depletion"
+      },
+      {
+        "family": "inventory_over_600s",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider must supply exactly 600 s and a closed mass ledger"
+      },
+      {
+        "family": "two_sided_rupture",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "two endpoint packets and shared inventory closure are required"
+      },
+      {
+        "family": "vertical_handoff",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "validated vertical free-jet and handoff state are required"
+      }
+    ],
+    "implicit_substitution_performed": false,
+    "facility_qra_promotion": false,
+    "interpretation": "Only the explicitly selected runtime branch is calculated. Every other catalogue family is retained as an explicit not-evaluated scope row; no unsupported accident is replaced by another family."
   },
   "input_evidence": {
     "bridge": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\inspection_center_facility_hazop_bridge.json",

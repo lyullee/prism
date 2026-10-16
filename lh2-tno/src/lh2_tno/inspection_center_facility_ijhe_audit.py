@@ -10,6 +10,8 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
+from .accident_scenario_catalog import accident_scenario_catalog
+
 
 def _check(check_id: str, passed: bool, reason: str, **evidence: Any) -> dict[str, Any]:
     return {
@@ -91,6 +93,69 @@ def build_inspection_center_facility_ijhe_audit(
             sum(bool(row.get("provider_state_snapshot_echo")) for row in state_handoff)
             if isinstance(state_handoff, list) else None
         ),
+    ))
+
+    selected_families = sorted(
+        {
+            str(branch.get("scenario_family"))
+            for component in components.values()
+            if isinstance(component, Mapping)
+            for branch in component.get("branches", ())
+            if isinstance(branch, Mapping) and branch.get("scenario_family")
+        }
+    )
+    coverage_rows: list[dict[str, Any]] = []
+    for definition in accident_scenario_catalog():
+        family = str(definition["family"])
+        if family in selected_families:
+            coverage_rows.append({
+                "family": family,
+                "status": "DIAGNOSTIC_SELECTED_RUNTIME_BRANCH",
+                "reason": "one explicit HAZOP-selected branch reached the consequence chain",
+            })
+        else:
+            coverage_rows.append({
+                "family": family,
+                "status": "NOT_EVALUATED_EXPLICIT",
+                "reason": definition["uncomputed_default_reason"],
+            })
+    coverage = {
+        "schema_version": "prism.facility_major_accident_scope_status.v1",
+        "catalog_schema": "prism.accident_scenario_catalog.v1",
+        "declared_family_count": len(coverage_rows),
+        "selected_family_count": len(selected_families),
+        "selected_families": selected_families,
+        "not_evaluated_families": [
+            row["family"] for row in coverage_rows if row["status"] == "NOT_EVALUATED_EXPLICIT"
+        ],
+        "rows": coverage_rows,
+        "implicit_substitution_performed": False,
+        "facility_qra_promotion": False,
+        "interpretation": (
+            "Only the explicitly selected runtime branch is calculated. Every other "
+            "catalogue family is retained as an explicit not-evaluated scope row; "
+            "no unsupported accident is replaced by another family."
+        ),
+    }
+    coverage_valid = (
+        coverage["declared_family_count"] == len(accident_scenario_catalog())
+        and coverage["selected_family_count"] == len(selected_families)
+        and len(coverage["rows"]) == coverage["declared_family_count"]
+        and all(
+            row["status"] in {"DIAGNOSTIC_SELECTED_RUNTIME_BRANCH", "NOT_EVALUATED_EXPLICIT"}
+            for row in coverage["rows"]
+        )
+        and coverage["implicit_substitution_performed"] is False
+        and coverage["facility_qra_promotion"] is False
+    )
+    checks.append(_check(
+        "major_accident_scope_explicit",
+        coverage_valid,
+        "major-accident catalogue coverage must distinguish selected and not-evaluated families without substitution",
+        declared_family_count=coverage["declared_family_count"],
+        selected_families=selected_families,
+        not_evaluated_family_count=len(coverage["not_evaluated_families"]),
+        implicit_substitution_performed=coverage["implicit_substitution_performed"],
     ))
 
     handoff_schema = handoff.get("schema_version")
@@ -177,4 +242,5 @@ def build_inspection_center_facility_ijhe_audit(
                 "does not close the full IJHE evidence audit or promote facility QRA."
             ),
         },
+        "major_accident_scope": coverage,
     }

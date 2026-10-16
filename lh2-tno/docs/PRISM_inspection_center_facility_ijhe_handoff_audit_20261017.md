@@ -11,7 +11,7 @@ Run it with:
 python scripts/audit_inspection_center_facility_ijhe_handoff.py
 ```
 
-It checks nine items:
+It checks ten items:
 
 1. the facility bridge schema is the declared PRISM contract;
 2. one HAZOP deviation is evaluated while two normal components remain
@@ -25,7 +25,9 @@ It checks nine items:
 8. frequency rows are literature catalogue sensitivity cases, with no inferred
    p05/p95 interval; and
 9. provider qualification, physical validation, and facility-QRA promotion stay
-   closed.
+   closed; and
+10. every declared outdoor major-accident family is marked either as the
+    explicitly selected diagnostic branch or as `NOT_EVALUATED_EXPLICIT`.
 
 The annual handoff now also carries the canonical provider-bound state snapshot
 into its case identity. The reconstructed example therefore closes the
