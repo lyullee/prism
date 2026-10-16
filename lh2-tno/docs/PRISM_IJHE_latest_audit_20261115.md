@@ -1,4 +1,4 @@
-# PRISM v0.6.2 IJHE 최신 감사 기준 (2026-11-15)
+# PRISM v0.6.3 IJHE 최신 감사 기준 (2026-11-15)
 
 현재 권위 union은 일반 옥외 액화수소 시설의 **34개 event, 44개 case,
 176개 risk atom**이다. 설비 상태→HAZOP/운전 모드→문헌 빈도→provider 방출
@@ -9,10 +9,10 @@
 
 권위 감사 파일:
 
-[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json)
+[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json)
 
-현재 최신 결과는 **49개 검사 중 45개 PASS, 4개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
-차단 검사는 전체 방출 종료 경계, 실제 qualified provider packet, 선언 사고범위의 provider/독립 물리검증, 시설 전체 IR/F-N이다. 44개 case의 exact packet coverage는 이 차단 사유를 뒷받침하는 세부 증거다.
+현재 공식 최신 결과는 **53개 검사 중 48개 PASS, 5개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
+이번 기록에는 최신 release-boundary 재감사와 44개 facility case의 qualified-provider packet coverage 검사가 포함되어 있다. 차단 검사는 전체 방출 종료 경계, 실제 qualified provider packet, 선언 사고범위의 provider/독립 물리검증, 시설 전체 IR/F-N, 전체 case의 qualified packet coverage다.
 
 ## 최신 연결 결과
 
@@ -58,7 +58,7 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 
 ## 2026-11-15 facility-handoff supplement
 
-The latest vertical/inventory/isolation union audit was rerun with the reconstructed inspection-center facility handoff and receptor-geometry comparison as optional diagnostic inputs. The resulting record is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json). It contains 49 checks: 45 PASS and 4 BLOCKED. The `diagnostic_inspection_center_facility_ijhe_handoff` and `diagnostic_receptor_geometry_interpretation` checks are PASS and diagnostic-only; they do not weaken the four strict qualification gates. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.
+The current authoritative union record is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json). It contains 53 checks: 48 PASS and 5 BLOCKED. The separate receptor-geometry and inspection-center handoff records remain diagnostic-only inputs verified by the latest-audit pointer checker; they do not weaken the five strict gates. The earlier 49-check `..._with_receptor_geometry.json` record is retained as a historical supplement. See [`PRISM_IJHE_facility_handoff_audit_20261115.md`](PRISM_IJHE_facility_handoff_audit_20261115.md) for the detailed interpretation and reproduction path.
 
 The release-boundary case rows now carry the copied literature frequency and source digest. All 44 rows are event/port-bound, while 35 rows also carry event-level P05/P95 metadata. The other 9 rows intentionally retain their published point rates without an invented interval; their uncertainty is represented only by the separate five-scenario sensitivity audit.
 
