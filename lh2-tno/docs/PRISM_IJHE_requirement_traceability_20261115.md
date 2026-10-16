@@ -35,6 +35,30 @@
 | `facility_ir_fn_available` | 시설 전체 IR/F-N을 공식값으로 표시할 수 없음 | 위 세 증거와 완전한 시설 목록·위치·인구·방호정책 |
 | `facility_case_provider_packet_coverage` | 44개 case 모두 qualified packet과 exact-match되지 않음 | case ID·component·port·opening·provider digest가 일치하는 packet catalog |
 
+## 추가된 다설비 결합 진단
+
+별도의 일반 옥외 시설 예제로 펌프와 밸브를 하나의 facility campaign에
+연결했다. 펌프는 native liquid/two-phase packet, 밸브는 native compressible
+gas handoff packet을 사용한다. 두 packet의 component·port·개구가 문헌 빈도
+사건과 exact-match되고, 각 실행 사건은 case와 risk atom까지 연결되었는지
+실행기 자체가 확인한다.
+
+| 항목 | 결과 |
+|---|---:|
+| packet / component | 2 / 2 |
+| 생성 빈도 event | 7 |
+| 실행 case | 2 |
+| `UNCOMPUTED` opening bin | 5 |
+| risk atom | 8 |
+| 문헌 빈도 시나리오 | 3 (valve p05/published/p95, pump fixed) |
+| 방출→case→risk atom chain | `true` |
+| campaign 측정시간 | 약 10.6 s |
+
+상세 실행 원장은 [`PRISM_native_multi_equipment_facility_campaign_20261016.md`](PRISM_native_multi_equipment_facility_campaign_20261016.md)와
+[`generic_lh2_native_pump_valve_facility_replay_20261016.json`](../examples/generic_lh2_native_pump_valve_facility_replay_20261016.json)에 있다.
+이 결과는 다설비 연결과 fail-closed 누락 회계를 검증하는 진단 증거이며,
+qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미하지 않는다.
+
 ## 해석 규칙
 
 - `EXECUTED`는 계산 경로가 실행되었다는 뜻이고, 실제 시설에 검증된 모델이라는 뜻이 아니다.
