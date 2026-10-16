@@ -58,3 +58,22 @@ python scripts/audit_ffi_test6_actual_source_numerical_gate.py `
 ```
 
 The command returns a nonzero status while the actual-source gate is open.
+
+## Reproducible external-physics runner
+
+The calculation can be repeated from the PRISM checkout when the separately
+versioned SLABx and SLABx-LH2 source trees are available. The runner fixes the
+published source and mean-wind observation operator; it never fits a sensor
+value or infers a release parameter:
+
+```powershell
+python scripts/run_ffi_test6_actual_source_numerical_gate.py `
+  --slabx-src <SLABx checkout>/slabx/src `
+  --slabx-lh2-src <SLABx-LH2 checkout>/source/slabx-lh2 `
+  --observations <SLABx-LH2 checkout>/PSEP_STATISTICS_REVISION_20260831/data/ffi_sensor_statistics.csv `
+  --output-dir results/20261115/slabx_lh2_test6_actual_source_numerical_gate_rerun
+```
+
+The runner writes the same schemas consumed by the audit script. A run that
+does not meet the two-percent criterion exits nonzero and remains diagnostic;
+it cannot be replaced by the earlier pseudo-source refinement record.
