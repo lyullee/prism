@@ -222,6 +222,15 @@ event ID and source digest separately; a missing scenario key is withheld
 instead of reusing another branch's frequency. The single
 `frequency_binding` field remains the shorthand for one-branch components.
 
+If one observed boundary can dispatch to different equipment models, bind
+`FacilityRealtimeBinding.provider_component_ids_by_scenario` with one reviewed
+provider ID per `scenario_id`. PRISM translates the state frame and request
+template separately for each branch. Missing identity entries produce
+`WITHHELD_PROVIDER_IDENTITY_MAPPING`; a tank, pipe, valve, or vaporizer ID is
+never inferred from a signal name or copied from a different branch. See the
+[interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
+for the complete example.
+
 ## Result status
 
 Results expose evidence status instead of hiding it:
@@ -277,6 +286,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Header-bound operating-mode input](examples/inspection_center_header_bound_operating_modes.json)
 - [Header-bound chain summary](examples/inspection_center_header_bound_chain_summary.json)
 - [Header-bound multi-equipment facility bridge](docs/PRISM_header_bound_facility_bridge_20261115.md)
+- [Per-branch provider identity handoff](docs/PRISM_multi_provider_identity_handoff_20261115.md)
 - [Header-bound facility bridge summary](results/20261115/header_bound_facility_bridge_summary.json)
 - [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
 - [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)

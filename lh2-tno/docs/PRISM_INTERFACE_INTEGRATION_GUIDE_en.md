@@ -132,6 +132,31 @@ digest. If a selected scenario has no exact frequency entry, its risk atom is
 withheld and the branch is reported as
 `WITHHELD_MISSING_SCENARIO_BINDING`; no frequency is inferred from telemetry.
 
+When one observed component can select branches owned by different equipment
+models, provide an equally explicit provider identity map:
+
+```python
+FacilityRealtimeBinding(
+    component_id="shared-observed-boundary",
+    template=template,
+    monitor=monitor,
+    normalizer=normalizer,
+    pressure_tag="PT-01",
+    temperature_tag="TT-01",
+    provider_component_ids_by_scenario={
+        "high-pressure:vessel_hole": "tank-provider-01",
+        "high-pressure:liquid_two_phase": "transfer-line-provider-01",
+    },
+)
+```
+
+For each selected scenario, PRISM translates the state snapshot and request
+template to the declared provider ID before calling the resolver. A missing
+entry is returned as `WITHHELD_PROVIDER_IDENTITY_MAPPING`; another branch's
+provider ID is never reused. This allows a shared sensor boundary to fan out to
+different tank, pipe, valve, or vaporizer models while keeping the HAZOP
+component identity and provider identity separately auditable.
+
 ## 5. Provider release contract
 
 The provider response must identify the event, component, accident port, source digest, release intervals, inventory, and termination evidence.

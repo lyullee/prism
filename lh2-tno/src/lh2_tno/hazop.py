@@ -588,6 +588,7 @@ def run_hazop_runtime_consequence_branches(
     provider_frame: Mapping[str, Any] | None = None,
     provider_template: Any | None = None,
     provider_component_id: str | None = None,
+    provider_contexts: Mapping[Any, Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     """Dispatch several active HAZOP rows as separate consequence branches.
 
@@ -599,7 +600,10 @@ def run_hazop_runtime_consequence_branches(
     resolvers remain explicitly withheld while other valid branches may run.
     ``provider_frame``, ``provider_template``, and ``provider_component_id``
     provide an explicit observed-to-provider identity translation; they never
-    infer a provider identity from a component name or geometry.
+    infer a provider identity from a component name or geometry.  For a
+    multi-branch frame, ``provider_contexts`` can provide a separate explicit
+    translation for each scenario.  If the map is supplied, a missing scenario
+    entry is withheld rather than inheriting another branch's provider.
     """
     if not isinstance(release_resolvers, Mapping):
         raise HazopSelectionError(
@@ -653,6 +657,47 @@ def run_hazop_runtime_consequence_branches(
         if resolver is None:
             resolver = release_resolvers.get(scenario["scenario_id"])
             resolver_key = "scenario"
+        branch_provider_frame = provider_frame
+        branch_provider_template = provider_template
+        branch_provider_component_id = provider_component_id
+        if provider_contexts is not None:
+            context = provider_contexts.get((component_id, scenario["scenario_id"]))
+            if context is None:
+                context = provider_contexts.get(scenario["scenario_id"])
+            if context is None:
+                result["branches"].append({
+                    "scenario_id": scenario["scenario_id"],
+                    "resolver_binding": {
+                        "key_type": resolver_key,
+                        "component_id": component_id,
+                    },
+                    "scenario_family": scenario["scenario_family"],
+                    "release_mode": scenario["release_mode"],
+                    "result": {
+                        "status": "WITHHELD_PROVIDER_IDENTITY_MAPPING",
+                        "selection": selection,
+                        "consequence": None,
+                        "policy": {
+                            "operating_mode_taken_from_input": True,
+                            "provider_release_created_by_prism": False,
+                            "frequency_inference_performed": False,
+                            "sensor_frequency_learning_used": False,
+                            "facility_qra_claim": False,
+                        },
+                        "reason": (
+                            "selected HAZOP scenario has no explicit provider identity "
+                            "mapping; no other branch identity was reused"
+                        ),
+                    },
+                })
+                continue
+            if not isinstance(context, Mapping):
+                raise HazopSelectionError(
+                    "provider_contexts entries must be mappings or None"
+                )
+            branch_provider_frame = context.get("provider_frame")
+            branch_provider_template = context.get("provider_template")
+            branch_provider_component_id = context.get("provider_component_id")
         branch = run_hazop_runtime_consequence(
             branch_table,
             frame,
@@ -661,9 +706,9 @@ def run_hazop_runtime_consequence_branches(
             monitor=monitor,
             release_resolver=resolver,
             mapping_digest=mapping_digest,
-            provider_frame=provider_frame,
-            provider_template=provider_template,
-            provider_component_id=provider_component_id,
+            provider_frame=branch_provider_frame,
+            provider_template=branch_provider_template,
+            provider_component_id=branch_provider_component_id,
         )
         result["branches"].append({
             "scenario_id": scenario["scenario_id"],
@@ -787,6 +832,53 @@ def run_hazop_facility_runtime(
                     provider_template = model_copy(
                         update={"component_id": provider_component_id}
                     )
+            provider_contexts = None
+            provider_component_ids_by_scenario = getattr(
+                binding, "provider_component_ids_by_scenario", None
+            )
+            if provider_component_ids_by_scenario is not None:
+                if not isinstance(provider_component_ids_by_scenario, Mapping):
+                    raise HazopSelectionError(
+                        "provider_component_ids_by_scenario must be a mapping"
+                    )
+                provider_contexts = {}
+                model_copy = getattr(template, "model_copy", None)
+                if not callable(model_copy):
+                    raise HazopSelectionError(
+                        "per-scenario provider identity mapping requires a model-copyable template"
+                    )
+                for scenario in selection["selected_scenarios"]:
+                    scenario_id = str(scenario["scenario_id"])
+                    if scenario_id not in provider_component_ids_by_scenario:
+                        # The branch dispatcher will return an explicit
+                        # WITHHELD_PROVIDER_IDENTITY_MAPPING result for this
+                        # scenario.  It must not inherit another branch's ID.
+                        continue
+                    scenario_provider_id = str(
+                        provider_component_ids_by_scenario[scenario_id]
+                    ).strip()
+                    if not scenario_provider_id:
+                        raise HazopSelectionError(
+                            "provider component identity must be nonempty"
+                        )
+                    scenario_provider_frame = frame
+                    scenario_provider_template = template
+                    if scenario_provider_id != component_id:
+                        from .observed_state_runtime import (
+                            translate_runtime_frame_component_id,
+                        )
+
+                        scenario_provider_frame = translate_runtime_frame_component_id(
+                            frame, scenario_provider_id
+                        )
+                        scenario_provider_template = model_copy(
+                            update={"component_id": scenario_provider_id}
+                        )
+                    provider_contexts[(component_id, scenario_id)] = {
+                        "provider_frame": scenario_provider_frame,
+                        "provider_template": scenario_provider_template,
+                        "provider_component_id": scenario_provider_id,
+                    }
             branch_result = run_hazop_runtime_consequence_branches(
                 table,
                 frame,
@@ -798,6 +890,7 @@ def run_hazop_facility_runtime(
                 provider_frame=provider_frame,
                 provider_template=provider_template,
                 provider_component_id=provider_component_id,
+                provider_contexts=provider_contexts,
             )
             branch_rows: list[dict[str, Any]] = []
             for branch in branch_result["branches"]:

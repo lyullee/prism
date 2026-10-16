@@ -228,8 +228,19 @@ class _FakeMonitor:
 
 
 def _provider_request(*, source_operator="equipment_liquid_release", basis="model_pressure_equalization"):
+    return _provider_request_for(
+        "TK-01", source_operator=source_operator, basis=basis
+    )
+
+
+def _provider_request_for(
+    component_id,
+    *,
+    source_operator="equipment_liquid_release",
+    basis="model_pressure_equalization",
+):
     return SimpleNamespace(
-        component_id="TK-01",
+        component_id=component_id,
         resolved_release=None,
         resolved_release_set=None,
         resolved_liquid_release=SimpleNamespace(event_kind="accidental_leak"),
@@ -440,6 +451,98 @@ def test_runtime_gate_dispatches_multiple_active_rows_as_separate_branches():
     )
     assert result["policy"]["branches_auto_merged"] is False
     assert monitor.called is True
+
+
+def test_runtime_gate_uses_distinct_provider_identity_per_active_branch():
+    table = _gate_table()
+    extra = dict(table["rows"][0])
+    extra["id"] = "TK01-liquid-branch-receiving"
+    extra["scenario_family"] = "liquid_two_phase"
+    table["rows"].append(extra)
+    selection = evaluate_hazop_runtime_frame(
+        table, _runtime_frame_for_gate(), now_s=3.2
+    )
+    scenarios = selection["selected_scenarios"]
+    provider_ids = {
+        scenarios[0]["scenario_id"]: "provider-tank",
+        scenarios[1]["scenario_id"]: "provider-line",
+    }
+    resolvers = {
+        ("TK-01", scenario["scenario_id"]): (
+            lambda template, normalized,
+            provider_id=provider_ids[scenario["scenario_id"]],
+            basis=(
+                "inventory_depletion"
+                if scenario["scenario_family"] == "liquid_two_phase"
+                else "model_pressure_equalization"
+            ): _provider_request_for(provider_id, basis=basis)
+        )
+        for scenario in scenarios
+    }
+    contexts = {
+        ("TK-01", scenario_id): {
+            "provider_frame": {
+                **_runtime_frame_for_gate(),
+                "component_id": provider_id,
+            },
+            "provider_template": SimpleNamespace(component_id=provider_id),
+            "provider_component_id": provider_id,
+        }
+        for scenario_id, provider_id in provider_ids.items()
+    }
+    result = run_hazop_runtime_consequence_branches(
+        table,
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=_FakeMonitor(_provider_request()),
+        release_resolvers=resolvers,
+        provider_contexts=contexts,
+    )
+    assert result["status"] == "CONSEQUENCE_BRANCHES_EVALUATED"
+    assert all(
+        branch["result"]["status"] == "CONSEQUENCE_EVALUATED"
+        for branch in result["branches"]
+    )
+
+
+def test_facility_runtime_withholds_missing_per_branch_provider_identity():
+    table = _gate_table()
+    extra = dict(table["rows"][0])
+    extra["id"] = "TK01-liquid-branch-receiving"
+    extra["scenario_family"] = "liquid_two_phase"
+    table["rows"].append(extra)
+    selection = evaluate_hazop_runtime_frame(
+        table, _runtime_frame_for_gate(), now_s=3.2
+    )
+    scenarios = selection["selected_scenarios"]
+    provider_ids = {scenarios[0]["scenario_id"]: "provider-tank"}
+    resolvers = {
+        ("TK-01", scenario["scenario_id"]): (
+            lambda template, normalized, provider_id=provider_ids.get(
+                scenario["scenario_id"], "provider-line"
+            ): _provider_request_for(provider_id)
+        )
+        for scenario in scenarios
+    }
+    binding = SimpleNamespace(
+        template=_ModeAwareProviderRequest(component_id="TK-01"),
+        monitor=_FakeMonitor(_provider_request()),
+        provider_component_ids_by_scenario=provider_ids,
+    )
+    result = run_hazop_facility_runtime(
+        table,
+        {"TK-01": _runtime_frame_for_gate()},
+        now_s=3.2,
+        component_bindings={"TK-01": binding},
+        release_resolvers=resolvers,
+    )
+    statuses = {
+        branch["result"]["status"]
+        for branch in result["components"]["TK-01"]["branches"]
+    }
+    assert "CONSEQUENCE_EVALUATED" in statuses
+    assert "WITHHELD_PROVIDER_IDENTITY_MAPPING" in statuses
 
 
 def test_facility_runtime_collects_component_branch_and_withholds_annual_qra():

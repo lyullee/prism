@@ -178,7 +178,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1267 passed, 1 warning",
+  "latest_local_full_test_run": "1272 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -5421,7 +5421,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "346c769b",
+  "latest_local_full_test_run_commit": "working-tree provider identity handoff (pre-commit)",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -5543,5 +5543,10 @@
   },
   "latest_release_boundary_frequency_uncertainty_unavailable_case_count": 9,
   "latest_provider_packet_collection_manifest_case_count": 44,
-  "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION"
+  "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
+  "per_branch_provider_identity_handoff_implemented": true,
+  "per_branch_provider_identity_handoff_field": "FacilityRealtimeBinding.provider_component_ids_by_scenario",
+  "per_branch_provider_identity_handoff_policy": "When supplied, each selected HAZOP scenario requires an explicit provider component ID; translated state/template are dispatched per branch; missing entries are WITHHELD_PROVIDER_IDENTITY_MAPPING and no cross-branch identity reuse or inference is allowed.",
+  "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
+  "per_branch_provider_identity_handoff_test": "tests/test_hazop.py::test_runtime_gate_uses_distinct_provider_identity_per_active_branch and ::test_facility_runtime_withholds_missing_per_branch_provider_identity"
 }

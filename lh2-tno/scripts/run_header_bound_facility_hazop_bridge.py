@@ -199,19 +199,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             if str(scenario.get("component_id")) == component_id
         ]
         selected_ids = [str(scenario.get("scenario_id")) for scenario in selected]
-        provider_rows = [provider_by_scenario.get(scenario_id) for scenario_id in selected_ids]
-        provider_rows = [row for row in provider_rows if row is not None]
-        provider_component_ids = {
-            str(row["provider_component_id"])
-            for row in provider_rows
-            if row.get("provider_component_id") is not None
+        provider_component_ids_by_scenario = {
+            scenario_id: str(provider_by_scenario[scenario_id]["provider_component_id"])
+            for scenario_id in selected_ids
+            if scenario_id in provider_by_scenario
+            and provider_by_scenario[scenario_id].get("provider_component_id") is not None
         }
-        if len(provider_component_ids) > 1:
-            raise ValueError(
-                f"selected HAZOP scenarios for component {component_id} map to different provider components; "
-                "split the facility binding before execution"
-            )
-        provider_component_id = next(iter(provider_component_ids), None)
+        provider_component_ids = set(provider_component_ids_by_scenario.values())
+        provider_component_id = (
+            next(iter(provider_component_ids))
+            if len(selected_ids) == 1 and provider_component_ids
+            else None
+        )
         template_data = copy.deepcopy(template_payload)
         template_data["component_id"] = component_id
         template = ConsequenceRequest.model_validate_json(
@@ -239,6 +238,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 if len(selected_ids) > 1 else None
             ),
             provider_component_id=provider_component_id,
+            provider_component_ids_by_scenario=(
+                provider_component_ids_by_scenario
+                if len(selected_ids) > 1
+                else None
+            ),
         )
 
     result = run_hazop_facility_runtime(
@@ -264,30 +268,30 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     state_handoff = []
     for component_id, frame in sorted(frames.items()):
         snapshot = frame.get("state_snapshot")
+        selected_scenario_ids = [
+            str(s.get("scenario_id"))
+            for s in scenario_by_id.values()
+            if str(s.get("component_id")) == component_id
+        ]
+        provider_identities = {
+            scenario_id: {
+                "component_id": str(provider_by_scenario[scenario_id]["provider_component_id"]),
+                "port_id": str(provider_by_scenario[scenario_id]["provider_port_id"]),
+            }
+            for scenario_id in selected_scenario_ids
+            if scenario_id in provider_by_scenario
+        }
         state_handoff.append({
             "observed_component_id": component_id,
             "source_id": frame.get("source_id"),
             "captured_at_s": frame.get("captured_at_s"),
             "origin": frame.get("origin"),
             "state_snapshot_digest": frame.get("state_snapshot_digest"),
-            "selected_scenario_ids": [
-                str(s.get("scenario_id"))
-                for s in scenario_by_id.values()
-                if str(s.get("component_id")) == component_id
-            ],
+            "selected_scenario_ids": selected_scenario_ids,
+            "provider_identities_by_scenario": provider_identities,
             "provider_identity": (
-                {
-                    "component_id": str(provider_by_scenario[scenario_id]["provider_component_id"]),
-                    "port_id": str(provider_by_scenario[scenario_id]["provider_port_id"]),
-                }
-                if (scenario_id := next(
-                    (
-                        str(s.get("scenario_id"))
-                        for s in scenario_by_id.values()
-                        if str(s.get("component_id")) == component_id
-                    ),
-                    "",
-                )) in provider_by_scenario
+                next(iter(provider_identities.values()))
+                if len(provider_identities) == 1
                 else None
             ),
         })

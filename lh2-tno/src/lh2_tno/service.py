@@ -1056,6 +1056,10 @@ class FacilityRealtimeBinding:
     # Optional explicit identity used only at the provider handoff.  HAZOP
     # remains keyed by component_id; no name or geometry inference is allowed.
     provider_component_id: str | None = None
+    # Optional explicit per-scenario provider identities.  When supplied, a
+    # selected HAZOP branch must have an entry here; the branch is not allowed
+    # to inherit another scenario's provider component.
+    provider_component_ids_by_scenario: Mapping[str, str] | None = None
 
 
 _REALTIME_ROW_BINDING_KEYS = frozenset({
@@ -1870,6 +1874,23 @@ class FacilityRealtimeConsequenceMonitor:
                             f"{event_id} ({previous_owner}, {key})"
                         )
                     frequency_event_owners[event_id] = key
+            provider_component_ids_by_scenario = getattr(
+                binding, "provider_component_ids_by_scenario", None
+            )
+            if provider_component_ids_by_scenario is not None:
+                if not isinstance(provider_component_ids_by_scenario, Mapping):
+                    raise TypeError(
+                        "provider_component_ids_by_scenario must be a mapping when supplied"
+                    )
+                for scenario_id, provider_id in provider_component_ids_by_scenario.items():
+                    if not isinstance(scenario_id, str) or not scenario_id.strip():
+                        raise ValueError(
+                            "provider_component_ids_by_scenario keys must be nonempty strings"
+                        )
+                    if not isinstance(provider_id, str) or not provider_id.strip():
+                        raise ValueError(
+                            "provider_component_ids_by_scenario values must be nonempty strings"
+                        )
             if binding.ambient_pressure_pa is not None:
                 if (isinstance(binding.ambient_pressure_pa, bool)
                         or not isinstance(binding.ambient_pressure_pa, (int, float))
