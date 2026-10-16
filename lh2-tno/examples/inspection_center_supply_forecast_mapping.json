@@ -1,0 +1,38 @@
+{
+  "PT1101": {
+    "source_column": "PT1101",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "supply-tank-vapour"
+  },
+  "PT1106": {
+    "source_column": "PT1106",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "supply-line-upstream"
+  },
+  "PT1107": {
+    "source_column": "PT1107",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "supply-line-downstream"
+  },
+  "PT1105A": {
+    "source_column": "PT1105A",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "vaporizer-inlet-a"
+  },
+  "PT1105B": {
+    "source_column": "PT1105B",
+    "quantity": "pressure",
+    "unit": "MPa",
+    "sensor_location": "vaporizer-inlet-b"
+  },
+  "TT1116": {
+    "source_column": "TT1116",
+    "quantity": "temperature",
+    "unit": "C",
+    "sensor_location": "supply-line"
+  }
+}

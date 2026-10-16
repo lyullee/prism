@@ -173,6 +173,32 @@ records without inferring frequencies or replacing missing cases with zero.
 The same adapter can be requested in `run_hazop_integrated_risk(...)` with
 `forecast_campaign_bindings=...`.
 
+### Importing process-model forecast workbooks
+
+Process-model exports can be converted into the same forecast frames with
+[`PRISM_process_forecast_adapter_en.md`](docs/PRISM_process_forecast_adapter_en.md).
+The adapter requires an explicit column-to-unit mapping and an explicit
+operating mode; it records the workbook digest and marks the rows as
+`model_prediction`. For example:
+
+```powershell
+python scripts/build_process_forecast_frames.py `
+  --source "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터\3. 액화수소 공급 시나리오 데이터\액화수소_공급_예측데이터_10회차.xlsx" `
+  --sheet-index 0 `
+  --mapping examples/inspection_center_supply_forecast_mapping.json `
+  --facility-id inspection-centre-diagnostic `
+  --component-id supply-train-01 `
+  --operating-mode supply `
+  --sample-period-s 1 `
+  --max-rows 60 `
+  --output results/20261115/inspection_center_supply_forecast_frames.json
+```
+
+This is a state/mode handoff only. It does not create a release history,
+infer a failure frequency, or promote facility IR/F-N. A quantitative callback
+still has to satisfy the existing provider-release, SLABx-LH2 and facility
+evidence gates.
+
 The returned `realtime_hazop_bridge` also exposes the conditional current-
 weather expected-death F/N result when the monitor has an explicit
 `RealtimePopulationBinding`. Without that population ledger it returns the
