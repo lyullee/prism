@@ -23,6 +23,6 @@
 
 - `tests/test_equipment_release_adapter.py`에 가스 구간별 port/source state 보존 및 malformed state 거부 검사를 추가했다.
 - 관련 adapter·boundary·consequence 테스트: **119 passed**
-- 전체 PRISM 테스트: **1214 passed, 1 warning**
+- 전체 PRISM 테스트: **1319 passed, 1 warning**
 
 이 기능은 설비 모델과 PRISM 사이의 상태 손실을 줄이는 연결 보완이다. 실제 시설 QRA 승격에는 여전히 실제 설비의 qualified release packet, 종료·재고 evidence, 사고군 독립 물리검증과 완전한 시설 범위가 필요하다.

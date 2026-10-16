@@ -29,7 +29,7 @@ python -m pip install -e ".[test]"
 python -m pytest -q
 ```
 
-The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1267 passed, 1 warning**. The warning is reported separately from a failing contract.
+The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1319 passed, 1 warning**. The warning is reported separately from a failing contract.
 
 ## 3. First five minutes
 
@@ -203,7 +203,7 @@ The output should be compared by event ID, case ID, risk atom ID, and provider d
 
 ## 13. Current scope
 
-The generic LH2 boundary is intended to connect tanks, pipes, valves, pumps, vaporizers, vents, and external LH2 digital-twin providers. The package is not tied to one inspection center. It is also not a completed regulatory facility QRA: the latest IJHE audit remains fail-closed with four strict evidence gates blocked, and facility IR/F-N promotion is false.
+The generic LH2 boundary is intended to connect tanks, pipes, valves, pumps, vaporizers, vents, and external LH2 digital-twin providers. The package is not tied to one inspection center. It is also not a completed regulatory facility QRA: the latest IJHE audit remains fail-closed with five strict evidence gates blocked, and facility IR/F-N promotion is false.
 
 ## 14. Further reading
 

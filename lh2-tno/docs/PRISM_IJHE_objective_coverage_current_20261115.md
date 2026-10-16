@@ -1,6 +1,6 @@
 # PRISM IJHE objective coverage audit (15 November 2026)
 
-This record is the current requirement-level audit for the generic outdoor liquid-hydrogen facility scope. It is deliberately separate from the 49-check completion audit: the completion audit checks the executable facility handoff, while this objective audit checks whether the IJHE claims are supported by the current evidence package.
+This record is the current requirement-level audit for the generic outdoor liquid-hydrogen facility scope. It is deliberately separate from the 54-check completion audit: the completion audit checks the executable facility handoff, while this objective audit checks whether the IJHE claims are supported by the current evidence package.
 
 ## Current decision
 
@@ -11,7 +11,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 | Objective rows | 33 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
-| Completion-audit result | `INCOMPLETE_EVIDENCE` (49 checks: 45 PASS, 4 BLOCKED) |
+| Completion-audit result | `INCOMPLETE_EVIDENCE` (54 checks: 49 PASS, 5 BLOCKED) |
 | Facility IR/F-N promotion | withheld |
 | Physical-validation claim | withheld |
 | Fresh-physics 1 Hz claim | withheld |
@@ -30,7 +30,7 @@ The current chain is explicit and auditable:
 6. Literature-based frequency ports and uncertainty cases are retained in the same event/case identity.
 7. The monitor path distinguishes `cached_diagnostic_1hz` from `fresh_physics_background`; the benchmark records both timings and makes no fresh-physics 1 Hz claim.
 
-The latest 49-check audit also includes the reconstructed inspection-center handoff and the receptor-geometry comparison. Those two checks are diagnostic only. A near-receptor result must not be substituted for the declared facility receptor geometry.
+The latest 54-check audit also includes the reconstructed inspection-center handoff and the receptor-geometry comparison. Those two checks are diagnostic only. A near-receptor result must not be substituted for the declared facility receptor geometry.
 
 The inspection-centre source boundary is documented separately in
 [`PRISM_inspection_center_source_suitability_20261115.md`](PRISM_inspection_center_source_suitability_20261115.md).
@@ -101,7 +101,7 @@ The external-release inventory remains a separate optional diagnostic row when i
 in the completion audit.
 
 The verifier now also binds the latest union facility scope matrix and release-boundary
-case audit. It cross-checks the 44-case count and the 3 eligible/41 blocked release
+case audit. It cross-checks the 44-case count and the 13 eligible/31 blocked release
 split against `CURRENT_STATUS.json`, requires the declared scope matrix and audit
 schemas, and keeps facility IR/F-N, provider qualification, and physical-validation
 claims false. This prevents a stale scope or release ledger from being mistaken for

@@ -12,20 +12,21 @@ The handoff path is:
 
 | Item | Result |
 |---|---:|
-| Audit record | [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json) |
+| Audit record | [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json) |
 | Overall status | `INCOMPLETE_EVIDENCE` |
-| Checks | 49 total: 45 pass, 4 blocked |
+| Checks | 54 total: 49 pass, 5 blocked |
 | Facility handoff diagnostic check | `PASS` (`diagnostic_only=true`) |
 | Qualified provider packets | 0 |
 | Independent full-chain physical validation | Not claimed |
 | Qualified total-facility IR/F-N | Withheld |
 
-The latest release-boundary ledger has 44 declared cases, 3 strict-eligible rows, and 41 blocked rows. The four blocking gates are deliberately preserved:
+The latest release-boundary ledger has 44 declared cases, 13 strict-eligible rows, and 31 blocked rows. The five blocking gates are deliberately preserved:
 
 1. The release boundary is not closed for every declared case.
 2. Available provider releases are synthetic or screening evidence.
 3. Provider qualification or independent full-chain physical validation is open.
-4. Qualified total-facility IR/F-N is withheld while scope/evidence is incomplete or synthetic.
+4. Facility cases do not all have an exact qualified provider packet.
+5. Qualified total-facility IR/F-N is withheld while scope/evidence is incomplete or synthetic.
 
 A blocked gate is not treated as zero risk, and no unsupported accident family is substituted for a missing case.
 
@@ -75,4 +76,4 @@ Use the metadata verifier after regenerating the audit:
 python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
 ```
 
-A `PASS` result means that `CURRENT_STATUS.json` points to the stored audit, the check and blocker counts agree, and the facility handoff remains diagnostic-only. It does not mean that the four strict IJHE gates are open.
+A `PASS` result means that `CURRENT_STATUS.json` points to the stored audit, the check and blocker counts agree, and the facility handoff remains diagnostic-only. It does not mean that the five strict IJHE gates are open.
