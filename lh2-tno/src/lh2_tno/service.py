@@ -2131,6 +2131,16 @@ class FacilityRealtimeConsequenceMonitor:
             raise TypeError("frames must be a component-id mapping")
         if not isinstance(release_resolvers, Mapping):
             raise TypeError("release_resolvers must be a mapping")
+        table_facility_id = (
+            table.get("facility_id")
+            if isinstance(table, Mapping)
+            else getattr(table, "facility_id", None)
+        )
+        if table_facility_id != self.facility_id:
+            raise ValueError(
+                "HAZOP table facility_id does not match the realtime monitor: "
+                f"{table_facility_id!r} != {self.facility_id!r}"
+            )
         if (
             isinstance(now_s, bool)
             or not isinstance(now_s, (int, float))
