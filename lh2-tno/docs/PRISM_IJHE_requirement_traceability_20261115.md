@@ -52,6 +52,12 @@ release audit은 **42개를 numerically closed**, **2개를 numerically open**�
 계속 닫혀 있다. 예측 상태 스캔도 동일한 사고·피해 필드를 사용하지만,
 시설 F/N 집계는 `WITHHELD_FORECAST_FACILITY_AGGREGATOR_REQUIRED`로 남긴다.
 
+두 열린 case의 다음 입력은 [`PRISM open release-boundary evidence requests`](PRISM_open_release_boundary_requests_en.md)와
+`results/20261115/open_release_boundary_evidence_requests_current.json`에
+기계판독 가능한 형태로 고정했다. PSV 요청에는 setpoint·capacity·완료 사건을,
+600 s 요청에는 추가 이력 또는 provider 소유의 명시적 물리 종료근거를 요구한다.
+두 요청 모두 종료시간·빈도·시설 QRA를 추정하지 않는다.
+
 ## 추가된 다설비 결합 진단
 
 별도의 일반 옥외 시설 예제로 펌프와 밸브를 하나의 facility campaign에
@@ -95,6 +101,7 @@ qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미�
 - 최신 audit metadata verifier: `results/20261115/latest_ijhe_audit_verification.json`
 - 최신 release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 최신 provider termination catalog: `results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json`
+- 현재 열린 종료경계 증거요청: `results/20261115/open_release_boundary_evidence_requests_current.json`
 - 최신 case-level release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 현재·예측 HAZOP 연결 계약: [`PRISM_current_forecast_hazop_contract_en.md`](PRISM_current_forecast_hazop_contract_en.md)
 - 현재 상태 원장: `CURRENT_STATUS.json`

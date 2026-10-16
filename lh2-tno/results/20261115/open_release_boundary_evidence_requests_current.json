@@ -1,0 +1,118 @@
+{
+  "schema_version": "prism.release_boundary_evidence_requests.v1",
+  "status": "OPEN_RELEASE_BOUNDARY_EVIDENCE_REQUESTS",
+  "source_schema_version": "prism.release_boundary_case_audit.v1",
+  "source_status": "CASE_BOUNDARY_PARTIAL",
+  "source_case_count": 44,
+  "open_request_count": 2,
+  "requests": [
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+      "status": "OPEN",
+      "termination_basis_observed": "inventory_over_600s",
+      "identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "case_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+        "asset_id": "ambient-vaporizer",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2"
+      },
+      "current_boundary": {
+        "duration_s": [
+          600.0
+        ],
+        "available_mass_kg": [
+          0.0008238536226639276
+        ],
+        "cumulative_mass_out_kg": [
+          4.956379784841932e-06
+        ],
+        "residual_mass_kg": [
+          0.0008188972428790857
+        ],
+        "provider_result_digest": "4f7a02ef16c308f36af674af23520467d0b13955442f7e6b5460fa6d963e9875",
+        "evidence_status": "INVALID"
+      },
+      "blocking_reasons": [
+        "provider_termination_evidence_supported_basis",
+        "provider_termination_evidence_boundary_closed"
+      ],
+      "required_provider_evidence": [
+        "provider history continues beyond 600 s until an explicit physical stopping boundary, or",
+        "provider declares a different supported termination basis with its own evidence (isolation, inventory depletion, or pressure equalization)",
+        "if a physical stop is claimed while inventory remains, include the stop trigger, source pressure/flow response, and a post-stop observation interval",
+        "provider time history, initial/final inventory, and mass residual within tolerance"
+      ],
+      "qualification_requirements": [
+        "exact source/result artifact digests and provider evidence identifier",
+        "independent physical validation record or an explicitly reviewed validation gap"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+      "status": "OPEN",
+      "termination_basis_observed": "emergency_relief_discharge",
+      "identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "case_key": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+        "asset_id": "pressure-relief-vent",
+        "component_id": "pressure-relief-vent-01",
+        "port_ids": [
+          "vent-accident-out"
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
+      },
+      "current_boundary": {
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.0008087150217064195
+        ],
+        "cumulative_mass_out_kg": [
+          0.0006739291847553497
+        ],
+        "residual_mass_kg": [
+          0.00013478583695106987
+        ],
+        "provider_result_digest": "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75",
+        "evidence_status": "INVALID"
+      },
+      "blocking_reasons": [
+        "provider_termination_evidence_source_operator_is_emergency_relief",
+        "provider_termination_evidence_relief_setpoint_present",
+        "provider_termination_evidence_relief_capacity_present",
+        "provider_termination_evidence_discharge_complete_declared",
+        "provider_termination_evidence_mass_residual_closed",
+        "provider_termination_evidence_boundary_closed"
+      ],
+      "required_provider_evidence": [
+        "event_kind=emergency_relief",
+        "source_operator=equipment_emergency_relief",
+        "failure_opening_diameter_m is null (relief is not a random hole)",
+        "positive provider relief_setpoint_pa",
+        "positive provider relief_capacity_kg_s",
+        "discharge_complete=true with the physical stopping event identified",
+        "provider time history, initial/final inventory, and mass residual within tolerance"
+      ],
+      "qualification_requirements": [
+        "exact source/result artifact digests and provider evidence identifier",
+        "independent physical validation record or an explicitly reviewed validation gap"
+      ]
+    }
+  ],
+  "policy": {
+    "duration_inference_allowed": false,
+    "termination_basis_substitution_allowed": false,
+    "frequency_inference_allowed": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_promotion_allowed": false,
+    "physical_validation_claim": false,
+    "diagnostic_only": true
+  }
+}
