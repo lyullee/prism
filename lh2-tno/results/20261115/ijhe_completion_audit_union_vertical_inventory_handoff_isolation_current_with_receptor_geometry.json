@@ -5780,7 +5780,12 @@
         "provider_qualification_claim": false,
         "independent_physical_validation_claim": false,
         "frequency_inference_performed": false,
-        "facility_ir_fn_promotion": false
+        "facility_ir_fn_promotion": false,
+        "release_audit_evidence_request_contract_valid": true,
+        "release_audit_evidence_request_contract_status_counts": {
+          "ALIGNED": 44
+        },
+        "release_audit_evidence_request_contract_blocked_case_count": 0
       },
       "blocking_reason": null,
       "diagnostic_only": true,

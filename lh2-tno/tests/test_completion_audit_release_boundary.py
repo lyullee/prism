@@ -113,3 +113,42 @@ def test_completion_audit_cross_checks_boundary_rows_against_case_requests():
     )
     assert check["status"] == "PASS"
     assert check["evidence"]["facility_evidence_request_alignment"] is True
+
+
+def test_completion_audit_consumes_request_contract_gate():
+    audit = _audit(
+        facility_evidence_request_contract_status_counts={"ALIGNED": 2},
+        facility_evidence_request_contract_blocked_case_count=0,
+    )
+    for row in audit["rows"]:
+        row["facility_evidence_request_contract_status"] = "ALIGNED"
+    report = build_ijhe_completion_audit(
+        _status(),
+        {"matrix_complete": False, "blocking_reasons": ["scope open"]},
+        {"events": [], "cases": [], "timing": {}},
+        release_boundary_case_audit=audit,
+    )
+    check = next(
+        row for row in report["checks"] if row["name"] == "diagnostic_release_boundary_case_audit"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["release_audit_evidence_request_contract_valid"] is True
+
+
+def test_completion_audit_blocks_request_contract_gate_when_case_is_blocked():
+    audit = _audit(
+        facility_evidence_request_contract_status_counts={"ALIGNED": 1, "BLOCKED": 1},
+        facility_evidence_request_contract_blocked_case_count=1,
+    )
+    audit["rows"][0]["facility_evidence_request_contract_status"] = "ALIGNED"
+    audit["rows"][1]["facility_evidence_request_contract_status"] = "BLOCKED"
+    report = build_ijhe_completion_audit(
+        _status(),
+        {"matrix_complete": False, "blocking_reasons": ["scope open"]},
+        {"events": [], "cases": [], "timing": {}},
+        release_boundary_case_audit=audit,
+    )
+    check = next(
+        row for row in report["checks"] if row["name"] == "diagnostic_release_boundary_case_audit"
+    )
+    assert check["status"] == "BLOCKED"

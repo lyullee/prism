@@ -5056,6 +5056,21 @@ def build_ijhe_completion_audit(
             row.get("facility_evidence_request_match") is True
             for row in rows
         ) if request_rows is not None else None
+        request_contract_valid = None
+        request_contract_status_counts = boundary.get(
+            "facility_evidence_request_contract_status_counts"
+        )
+        if "facility_evidence_request_contract_blocked_case_count" in boundary:
+            request_contract_valid = (
+                isinstance(request_contract_status_counts, Mapping)
+                and request_contract_status_counts.get("BLOCKED", 0) == 0
+                and boundary.get("facility_evidence_request_contract_blocked_case_count") == 0
+                and all(
+                    isinstance(row, Mapping)
+                    and row.get("facility_evidence_request_contract_status") == "ALIGNED"
+                    for row in rows
+                )
+            )
         boundary_valid = (
             boundary.get("schema_version") == "prism.release_boundary_case_audit.v1"
             and boundary.get("status") in {"CASE_BOUNDARY_PARTIAL", "CASE_BOUNDARY_CLOSED"}
@@ -5077,6 +5092,7 @@ def build_ijhe_completion_audit(
                     and audit_request_rows_match is True
                 )
             )
+            and (request_contract_valid is not False)
             and boundary.get("provider_qualification_claim") is False
             and boundary.get("independent_physical_validation_claim") is False
             and boundary.get("frequency_inference_performed") is False
@@ -5098,6 +5114,11 @@ def build_ijhe_completion_audit(
                 "facility_evidence_request_alignment": request_alignment,
                 "release_audit_evidence_request_alignment": audit_request_alignment,
                 "release_audit_evidence_request_rows_match": audit_request_rows_match,
+                "release_audit_evidence_request_contract_valid": request_contract_valid,
+                "release_audit_evidence_request_contract_status_counts": request_contract_status_counts,
+                "release_audit_evidence_request_contract_blocked_case_count": boundary.get(
+                    "facility_evidence_request_contract_blocked_case_count"
+                ),
                 "facility_evidence_request_case_count": (
                     len(request_rows) if request_rows is not None else None
                 ),
