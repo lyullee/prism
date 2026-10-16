@@ -1955,7 +1955,7 @@
   "current_union_campaign_ledger_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_ledger.json",
   "current_union_full_test_count": 1078,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json",
-  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 25 objective checks, core blockers 0, strict evidence gates 4 remain blocked; observed-state replay/runtime, external-equipment readiness, provider-request and release-closure diagnostics are explicitly recorded",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 32 objective checks, core blockers 0, strict evidence gates 4 remain blocked; observed-state replay/runtime, external-equipment readiness, provider-request, release-closure and completion-alignment diagnostics are explicitly recorded",
   "current_union_risk_atom_chain_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_chain_closure_audit.json",
   "current_union_risk_atom_chain_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 24 events, 24 cases and 96 risk atoms reach the facility damage ledger; operator-limited and synthetic evidence remain diagnostic-only",
   "current_union_facility_ir_fn_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC; 176 risk atoms independently reproduce conditional facility IR/F-N with 0 IR mismatches and 0 F/N mismatches; diagnostic-only and facility QRA remains withheld",
@@ -5380,7 +5380,7 @@
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
   "latest_local_full_test_run_commit": "8e05b6c4",
-  "current_union_ijhe_objective_coverage_audit_check_count": 27,
+  "current_union_ijhe_objective_coverage_audit_check_count": 32,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
@@ -5388,11 +5388,11 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "current_union_ijhe_objective_coverage_audit_sha256": "B7D317F4F3765A909D397794ADE870E3C087079E3D711F24CBF60F644C430B4E",
+  "current_union_ijhe_objective_coverage_audit_sha256": "8828E7966511554BE1541E3F0FF8E6FA049C4E2B16537D53C3E08A5D49A908C3",
   "current_union_ijhe_objective_coverage_audit_realtime_status": "CONDITIONALLY_COMPLETE; cached_diagnostic_1hz meets benchmark, fresh_physics_background is explicitly not a 1 Hz claim",
   "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json",
-  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 27 checks, core blockers 0, strict evidence gates 4 remain blocked",
-  "latest_ijhe_objective_coverage_audit_check_count": 27,
+  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 32 checks, core blockers 0, strict evidence gates 4 remain blocked",
+  "latest_ijhe_objective_coverage_audit_check_count": 32,
   "latest_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "latest_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
@@ -5400,7 +5400,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "latest_ijhe_objective_coverage_audit_sha256": "B7D317F4F3765A909D397794ADE870E3C087079E3D711F24CBF60F644C430B4E",
+  "latest_ijhe_objective_coverage_audit_sha256": "8828E7966511554BE1541E3F0FF8E6FA049C4E2B16537D53C3E08A5D49A908C3",
   "conditional_facility_risk_interpretation_doc": "docs/PRISM_conditional_facility_risk_interpretation_20261115.md",
   "inventory_termination_margin_probe_record": "results/20261115/inventory_termination_margin_probe.json",
   "inventory_termination_margin_probe_doc": "docs/PRISM_inventory_termination_margin_20261115.md",

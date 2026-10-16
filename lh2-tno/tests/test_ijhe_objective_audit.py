@@ -235,6 +235,38 @@ def test_objective_audit_aligns_latest_full_completion_audit():
     assert row["observed"]["check_count"] == 44
 
 
+def test_objective_audit_aligns_current_completion_audit_without_optional_external_row():
+    inputs = _inputs()
+    names = [
+        "diagnostic_worklist_packet_coverage_evidence",
+        "diagnostic_release_trace_coverage",
+        "diagnostic_numerical_scope_coverage",
+        "diagnostic_facility_frequency_port_binding",
+        "diagnostic_facility_evidence_request_coverage",
+    ]
+    inputs["completion_audit"] = {
+        "schema_version": "prism.ijhe_completion_audit.v1",
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [
+            {"name": name, "status": "PASS"}
+            for name in names
+        ] + [{"name": f"other-{i}", "status": "PASS"} for i in range(39)],
+        "blocking_reasons": ["a", "b", "c", "d"],
+        "physical_validation_claim": False,
+        "complete_facility_qra_claim": False,
+        "_record_path": "current-completion.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_full_completion_audit_alignment"
+    )
+    assert row["status"] == "PASS"
+    assert row["observed"]["required_diagnostic_statuses"][
+        "diagnostic_external_release_artifact_intake"
+    ] is None
+
+
 def test_objective_audit_blocks_misaligned_full_completion_audit():
     inputs = _inputs()
     inputs["completion_audit"] = {

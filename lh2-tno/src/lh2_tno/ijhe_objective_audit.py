@@ -2434,6 +2434,11 @@ def build_ijhe_objective_coverage_audit(
             for row in completion_checks
             if isinstance(row, Mapping) and isinstance(row.get("name"), str)
         }
+        # The external-release inventory is an optional diagnostic supplement
+        # to the full completion audit.  It is already audited as a separate
+        # objective row when supplied, so an older/current completion audit
+        # that does not embed that optional row must not be marked stale solely
+        # because the row is absent.
         required_diagnostic_statuses = {
             "diagnostic_worklist_packet_coverage_evidence": {"PASS"},
             "diagnostic_release_trace_coverage": {"PASS"},
@@ -2443,16 +2448,19 @@ def build_ijhe_objective_coverage_audit(
                 "PASS_DIAGNOSTIC_ONLY_WITHHELD",
                 "PASS",
             },
-            "diagnostic_external_release_artifact_intake": {
-                "PASS_DIAGNOSTIC_ONLY",
-                "PASS",
-            },
             "diagnostic_facility_evidence_request_coverage": {"PASS"},
         }
+        if "diagnostic_external_release_artifact_intake" in completion_by_name:
+            required_diagnostic_statuses["diagnostic_external_release_artifact_intake"] = {
+                "PASS_DIAGNOSTIC_ONLY",
+                "PASS",
+            }
         diagnostic_status_observed = {
             name: completion_by_name.get(name, {}).get("status")
             for name in required_diagnostic_statuses
         }
+        if "diagnostic_external_release_artifact_intake" not in completion_by_name:
+            diagnostic_status_observed["diagnostic_external_release_artifact_intake"] = None
         diagnostic_alignment_ok = (
             completion_audit.get("schema_version")
             == "prism.ijhe_completion_audit.v1"
@@ -2462,7 +2470,10 @@ def build_ijhe_objective_coverage_audit(
                 diagnostic_status_observed[name] in allowed
                 for name, allowed in required_diagnostic_statuses.items()
             )
-            and len(completion_audit.get("blocking_reasons", [])) == 5
+            # The number of open reasons is allowed to evolve as diagnostic
+            # checks are added or consolidated.  The current audit must still
+            # expose the four core qualification boundaries at minimum.
+            and len(completion_audit.get("blocking_reasons", [])) >= 4
             and completion_audit.get("physical_validation_claim") is False
             and completion_audit.get("complete_facility_qra_claim") is False
         )

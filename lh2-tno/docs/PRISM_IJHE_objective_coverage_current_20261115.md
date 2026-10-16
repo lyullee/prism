@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 27 |
+| Objective rows | 32 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (49 checks: 45 PASS, 4 BLOCKED) |
@@ -94,6 +94,10 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `physical_validation_claim=false` and `facility_qra_claim=false` flags. A verifier
 `PASS` therefore means that the unresolved gate is represented consistently; it
 does not mean that the source has converged or that physical validation is complete.
+
+The current objective ledger contains 32 checks after reconciling the latest completion audit.
+The external-release inventory remains a separate optional diagnostic row when it is not embedded
+in the completion audit.
 
 The verifier now also binds the latest union facility scope matrix and release-boundary
 case audit. It cross-checks the 44-case count and the 3 eligible/41 blocked release

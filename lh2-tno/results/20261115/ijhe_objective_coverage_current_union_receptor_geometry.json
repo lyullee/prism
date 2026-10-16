@@ -673,6 +673,27 @@
       "interpretation": "비교 오차와 시간·기하 결합만 기록한다. measured_source_replay 또는 hash drift는 독립 물리검증으로 승격하지 않으며, frequency·시설 QRA도 열지 않는다."
     },
     {
+      "id": "diagnostic_validation_intake_readiness",
+      "requirement": "검사센터 시계열과 외부 검증 장부를 입력 준비도만으로 기록하고 사고 방출·빈도·시설 QRA로 승격하지 않아야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261104\\validation_intake_audit_current.json"
+      ],
+      "observed": {
+        "intake_status": "SCREENED_NO_PROMOTION",
+        "source_file_count": 17,
+        "workbook_count": 17,
+        "sheet_count": 78,
+        "numeric_signal_unit_status_count": {
+          "MISSING_OR_UNCONFIRMED": 522
+        },
+        "promotion_allowed": false,
+        "frequency_inference_performed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "검사센터 시계열은 공정 상태 후보 증거로만 보존한다. 단위·자산 crosswalk·provider 방출 packet·독립 holdout 근거가 없으면 물리검증, 빈도, 시설 QRA를 열지 않는다."
+    },
+    {
       "id": "diagnostic_external_equipment_model_readiness",
       "requirement": "외부 액화수소 설비 모델의 상태 입력 준비도와 사고 방출 경계를 분리하여 기록해야 한다",
       "status": "PASS",
@@ -702,6 +723,85 @@
       },
       "blocking_reason": null,
       "interpretation": "TK-1101/TK-1102 같은 상태 모델 입력 준비 자산은 기록하되, 절차 의도·재구성 자료만으로 사고 방출 시각·차단·재고 소진·빈도·시설 QRA를 열지 않는다."
+    },
+    {
+      "id": "diagnostic_equipment_scenario_coverage",
+      "requirement": "설비 ID·P&ID component kind·사고 family를 명시적으로 연결하되 시나리오 목록이 방출·빈도·시설 QRA를 만들지 않아야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261104\\equipment_scenario_coverage_audit_current.json"
+      ],
+      "observed": {
+        "status": "CROSSWALK_REQUIRED",
+        "asset_count": 12,
+        "mapped_asset_count": 0,
+        "resolved_asset_count": 0,
+        "scenario_family_count": 12,
+        "accident_release_packet_allowed": false,
+        "frequency_inference_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "일반 액화수소 시설에서 설비별 주요 사고 목록과 필요한 provider 연산자를 보여준다. P&ID crosswalk와 provider 방출 packet이 없으면 해당 family는 계산하지 않는다."
+    },
+    {
+      "id": "diagnostic_equipment_frequency_binding",
+      "requirement": "문헌 빈도를 확정 설비·사고 family에만 연결하고 미계산 family와 provider 방출 요구를 보존해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261104\\equipment_frequency_binding_audit_current.json"
+      ],
+      "observed": {
+        "status": "FREQUENCY_BINDING_WITHHELD",
+        "resolved_asset_count": 0,
+        "frequency_event_count": 0,
+        "valid_frequency_event_count": 0,
+        "uncomputed_family_count": 12,
+        "provider_release_required": true,
+        "facility_qra_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "문헌 빈도는 설비 사고 시작의 연간 빈도로만 사용한다. 실제 피해 계산은 provider가 지속시간·차단·재고·질량수지를 가진 방출 packet을 제출한 뒤에만 수행한다."
+    },
+    {
+      "id": "diagnostic_generic_equipment_scenario_coverage",
+      "requirement": "일반 옥외 액화수소시설의 설비·사고군 crosswalk를 objective 원장에 연결하되 방출·빈도·QRA 승격은 차단해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261105\\generic_lh2_full_scope_equipment_scenario_coverage.json"
+      ],
+      "observed": {
+        "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+        "asset_count": 7,
+        "mapped_asset_count": 7,
+        "resolved_asset_count": 7,
+        "state_model_ready_mapped_asset_count": 7,
+        "scenario_family_count": 12,
+        "accident_release_packet_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "일반 시설 manifest는 7개 설비와 12개 사고군의 적용 후보를 명시한다. 이 목록은 provider의 방출 지속시간·차단·재고·질량수지를 대신하지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_equipment_frequency_binding",
+      "requirement": "일반 시설 설비 사고군에 문헌 빈도를 연결하되 현장 학습·provider 방출·피해 결합과 미계산 사고를 보존해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261105\\generic_lh2_full_scope_equipment_frequency_binding.json"
+      ],
+      "observed": {
+        "status": "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+        "asset_count": 7,
+        "resolved_asset_count": 7,
+        "frequency_event_count": 24,
+        "valid_frequency_event_count": 24,
+        "uncomputed_family_count": 1,
+        "provider_release_required": true,
+        "consequence_binding_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "문헌 빈도는 일반 시설의 사고 시작 빈도 후보로만 연결한다. 센서 정상상태에서 빈도를 학습하지 않으며, provider 방출 packet 없이는 피해와 IR/F-N을 계산하지 않는다."
     },
     {
       "id": "diagnostic_release_closure_worklist",
@@ -881,7 +981,7 @@
     {
       "id": "diagnostic_full_completion_audit_alignment",
       "requirement": "최신 시설 전체 완료감사의 case·구조적 작업목록·진단 검사·차단 이유를 IJHE 목표 원장과 일치시켜야 한다",
-      "status": "BLOCKED_EVIDENCE",
+      "status": "PASS",
       "evidence_paths": [
         "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json"
       ],
@@ -894,15 +994,15 @@
           "diagnostic_release_trace_coverage": "PASS",
           "diagnostic_numerical_scope_coverage": "PASS",
           "diagnostic_facility_frequency_port_binding": "PASS",
-          "diagnostic_external_release_artifact_intake": null,
-          "diagnostic_facility_evidence_request_coverage": "PASS"
+          "diagnostic_facility_evidence_request_coverage": "PASS",
+          "diagnostic_external_release_artifact_intake": null
         },
         "blocking_reason_count": 4,
         "physical_validation_claim": false,
         "complete_facility_qra_claim": false,
-        "alignment_valid": false
+        "alignment_valid": true
       },
-      "blocking_reason": "최신 44개 case 완료감사의 schema·진단 검사·차단 이유 또는 승격 차단 플래그가 목표 원장과 일치하지 않는다",
+      "blocking_reason": null,
       "interpretation": "이 행은 최신 전체 감사가 구조적 연결을 확인했는지 검증한다. PASS는 시설 QRA 완료를 뜻하지 않으며, 실제 provider·물리검증·범위 gate는 별도로 열린다."
     }
   ],
