@@ -125,7 +125,38 @@ def _request_defaults(
     return defaults
 
 
-def _default_scenarios(asset_id: str) -> tuple[LiteratureFrequencyScenario, ...]:
+def _default_scenarios(
+    asset_id: str,
+    events: list[dict[str, Any]] | None = None,
+) -> tuple[LiteratureFrequencyScenario, ...]:
+    """Build a conservative frequency sensitivity set for one generated asset.
+
+    The Purple Book pump defaults are published point estimates without
+    marginal p05/p95 bounds.  In that case the uncertainty ledger must retain
+    the catalogue rate as ``fixed`` rather than inventing bounds.  Assets for
+    which every event has published bounds retain the usual three-point
+    sensitivity.
+    """
+    asset_events = [
+        row for row in (events or ())
+        if str(row.get("asset_id", "")) == asset_id
+    ]
+    has_complete_bounds = bool(asset_events) and all(
+        row.get("marginal_p05_per_year") is not None
+        and row.get("marginal_p95_per_year") is not None
+        for row in asset_events
+    )
+    if not has_complete_bounds:
+        return (
+            LiteratureFrequencyScenario(
+                id="native-provider-literature-fixed",
+                asset_quantiles={asset_id: "fixed"},
+                provenance=(
+                    "catalogue point estimate retained as fixed because the "
+                    "selected provider asset has no complete published p05/p95 bounds"
+                ),
+            ),
+        )
     return tuple(
         LiteratureFrequencyScenario(
             id=identifier,
@@ -252,13 +283,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     started = time.perf_counter()
     result = ResearchPipeline(facility, IsolatedBackend(config)).facility_risk(campaign)
     campaign_elapsed_ms = (time.perf_counter() - started) * 1000.0
+    result_events = result.get("events", [])
+    result_cases = result.get("cases", [])
     assessment = build_facility_assessment(
         [result],
         expected_component_ids=(packet.component_id,),
-        frequency_scenarios=_default_scenarios(bound_event.asset_id),
+        frequency_scenarios=_default_scenarios(bound_event.asset_id, result_events),
     )
-    result_events = result.get("events", [])
-    result_cases = result.get("cases", [])
     withheld_cases = result.get("uncomputed_cases", [])
     actual_uncomputed_case_count = sum(
         1 for case in withheld_cases if str(case.get("status", "")) == "UNCOMPUTED"

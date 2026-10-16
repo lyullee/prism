@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "facility_id": "native-mapped-pump-frequency-example",
+  "environment": "outdoor",
+  "configuration_origin": "synthetic",
+  "components": [
+    {
+      "id": "native-mapped-pump-diagnostic",
+      "kind": "pump",
+      "position_enu_m": [0.0, 0.0, 0.05],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {"diameter_m": 0.01},
+      "source_status": "declared",
+      "source_provenance": "native MappedPump diagnostic packet; synthetic facility wrapper"
+    }
+  ],
+  "ports": [
+    {
+      "id": "native-mapped-pump-liquid-out",
+      "component_id": "native-mapped-pump-diagnostic",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [0.0, 0.0, 0.05]
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {"id": "worker-01", "position_enu_m": [20.0, 0.0, 1.0]}
+  ],
+  "scenarios": []
+}

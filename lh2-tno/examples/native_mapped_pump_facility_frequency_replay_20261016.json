@@ -1,0 +1,29 @@
+{
+  "schema_version": "prism.native_mapped_pump_facility_frequency_replay.v1",
+  "status": "NATIVE_PROVIDER_PACKET_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "packet": "results/20261016/native_mapped_pump_actual_smoke/resolved_release.json",
+  "manifest": "examples/native_mapped_pump_facility_manifest.json",
+  "frequency_plan": "examples/native_mapped_pump_facility_frequency_plan.json",
+  "exact_opening_diameter_m": 0.001,
+  "frequency_profile": "TNO_PUMP_STANDARD",
+  "frequency_loc": "G2",
+  "frequency_annual_central_per_year": 0.0005,
+  "frequency_source": "Purple Book Chapter 3 Tables 3.8/3.9; generic pump default; applicability review required",
+  "executed_case_count": 1,
+  "uncomputed_case_count": 1,
+  "risk_atom_count": 4,
+  "campaign_elapsed_ms": 28447.514100000262,
+  "conditional_diagnostic_facility_risk_available": true,
+  "facility_total_risk_available": false,
+  "facility_qra_claim": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "scope": "one native liquid MappedPump outlet bound to one TNO pump G2 opening; G1 full-bore and non-modeled pump exposures remain uncomputed",
+  "limitations": [
+    "native source state, H-Q-N map, reserve and isolation boundary are synthetic diagnostic inputs",
+    "TNO pump frequency is a generic industrial default and is not an empirically validated LH2 rate",
+    "the pump does not own upstream inventory or field valve reliability",
+    "airborne liquid remains zero under the native provider contract",
+    "conditional IR/F-N is diagnostic and does not promote facility-total QRA"
+  ]
+}

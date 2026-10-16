@@ -1,0 +1,17 @@
+{
+  "id": "native-mapped-pump-frequency-example",
+  "assets": [
+    {
+      "id": "native-mapped-pump",
+      "model_component_id": "native-mapped-pump-diagnostic",
+      "profile": "TNO_PUMP_STANDARD",
+      "port_ids": ["native-mapped-pump-liquid-out"],
+      "physical_scope_ids": ["native-mapped-pump-diagnostic-connection"],
+      "classification_basis": "synthetic diagnostic wrapper; replace with reviewed pump connection and seal scope",
+      "nominal_diameter_m": 0.01,
+      "location_weight": 1.0,
+      "location_weight_provenance": "single native diagnostic outlet; remaining pump exposure requires separate reviewed scope"
+    }
+  ],
+  "excluded_model_components": {}
+}
