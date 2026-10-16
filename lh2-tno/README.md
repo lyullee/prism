@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1293 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1294 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 ## What PRISM is for
 
@@ -120,6 +120,14 @@ operating mode enter together, HAZOP chooses the qualitative scenario, and the
 provider owns release geometry, isolation, duration, and inventory depletion.
 The result is a diagnostic current-weather view until the reviewed annual
 campaign, provider qualification, and independent validation gates are closed.
+
+For applications that already use the lower-level HAZOP runtime coordinator,
+`run_hazop_facility_runtime(...)` can also produce a conditional current-weather
+expected-death F/N contribution when an explicit `RealtimePopulationBinding`
+is supplied. This closes the live release-to-harm path for a response screen
+without claiming a complete annual facility F/N curve. See the
+[`live HAZOP conditional F/N guide`](docs/PRISM_hazop_runtime_conditional_fn_en.md)
+for the input contract and withheld-result behavior.
 
 The repository includes a three-component reconstructed facility replay that
 exercises this coordinator end to end:

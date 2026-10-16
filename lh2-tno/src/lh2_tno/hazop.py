@@ -743,6 +743,7 @@ def run_hazop_facility_runtime(
     component_bindings: Mapping[str, Any],
     release_resolvers: Mapping[Any, Any],
     mapping_digest: str | None = None,
+    population_binding: Any | None = None,
 ) -> dict[str, Any]:
     """Coordinate HAZOP-gated consequence branches for several components.
 
@@ -754,6 +755,8 @@ def run_hazop_facility_runtime(
     reviewed frequency binding.  It deliberately withholds annual facility
     IR/F-N: HAZOP deviations are an operator-triggered view, not a replacement
     for the full literature event catalogue and all-weather facility campaign.
+    ``population_binding`` is an optional ``RealtimePopulationBinding`` from
+    :mod:`lh2_tno.service`; it is never inferred from frames or geometry.
     """
     if not isinstance(frames, Mapping) or not isinstance(component_bindings, Mapping):
         raise HazopSelectionError("frames and component_bindings must be mappings")
@@ -1015,6 +1018,30 @@ def run_hazop_facility_runtime(
             "risk_atom_count": 0,
             "reason": "no selected branch produced a current-weather IR contribution",
         }
+    if population_binding is not None:
+        from .service import RealtimePopulationBinding
+
+        if not isinstance(population_binding, RealtimePopulationBinding):
+            raise HazopSelectionError(
+                "population_binding must be a RealtimePopulationBinding when supplied"
+            )
+    if multiple_branch:
+        conditional_expected_death_fn = {
+            "status": "WITHHELD_BRANCH_WEIGHT_REQUIRED",
+            "expected_death_fn_low_high": None,
+            "frequency_sensitivity_expected_death_fn_low_high": None,
+            "reason": (
+                "multiple active HAZOP branches require explicit branch probabilities "
+                "before expected-death aggregation"
+            ),
+        }
+    else:
+        from .service import _realtime_conditional_expected_death_fn
+
+        conditional_expected_death_fn = _realtime_conditional_expected_death_fn(
+            [row["risk"] for row in risk_atoms],
+            population_binding,
+        )
     rejected = [
         component_id
         for component_id, row in components.items()
@@ -1030,6 +1057,7 @@ def run_hazop_facility_runtime(
         "components": components,
         "risk_atoms": risk_atoms,
         "conditional_current_weather_risk": conditional_risk,
+        "conditional_current_weather_expected_death_fn": conditional_expected_death_fn,
         "facility_annual_ir_available": False,
         "facility_fn_available": False,
         "policy": {
@@ -1038,6 +1066,10 @@ def run_hazop_facility_runtime(
             "sensor_frequency_learning_used": False,
             "facility_annual_qra_promotion": False,
             "branch_results_auto_merged": False,
+            "conditional_expected_death_fn_calculated": (
+                conditional_expected_death_fn["status"]
+                == "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
+            ),
         },
     }
 

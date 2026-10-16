@@ -567,6 +567,66 @@ def test_facility_runtime_collects_component_branch_and_withholds_annual_qra():
     assert result["policy"]["facility_annual_qra_promotion"] is False
 
 
+def test_facility_runtime_exposes_conditional_current_weather_expected_death_fn():
+    from lh2_tno.service import RealtimeFrequencyBinding, RealtimePopulationBinding
+
+    class _RiskMonitor(_FakeMonitor):
+        def update_from_runtime_frame(
+            self, template, frame, *, now_s, release_resolver, mapping_digest=None
+        ):
+            request = release_resolver(template, {"operating_mode": "receiving"})
+            return {
+                "data": {
+                    "receptors": [
+                        {
+                            "id": "R-01",
+                            "harm_given_observed_release_low_high": [0.10, 0.20],
+                        }
+                    ]
+                },
+                "request": request,
+            }
+
+    frequency = RealtimeFrequencyBinding(
+        event_id="event-tank-hole",
+        asset_id="TK-01",
+        initiating_frequency_per_year=1.0e-4,
+        annual_condition_probability=1.0,
+        release_branch_probability=1.0,
+        occupancy_probability=1.0,
+        provenance="reviewed literature fixture",
+        source_digest="a" * 64,
+    )
+    population = RealtimePopulationBinding(
+        persons_by_receptor={"R-01": 10.0},
+        provenance="reviewed outdoor receptor ledger fixture",
+        source_digest="b" * 64,
+    )
+    selection = evaluate_hazop_runtime_frame(
+        _gate_table(), _runtime_frame_for_gate(), now_s=3.2
+    )
+    scenario_id = selection["selected_scenarios"][0]["scenario_id"]
+    result = run_hazop_facility_runtime(
+        _gate_table(),
+        {"TK-01": _runtime_frame_for_gate()},
+        now_s=3.2,
+        component_bindings={
+            "TK-01": SimpleNamespace(
+                template=object(),
+                monitor=_RiskMonitor(_provider_request()),
+                frequency_binding=frequency,
+            )
+        },
+        release_resolvers={scenario_id: lambda template, normalized: _provider_request()},
+        population_binding=population,
+    )
+    fn = result["conditional_current_weather_expected_death_fn"]
+    assert fn["status"] == "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
+    assert fn["expected_death_fn_low_high"] == pytest.approx([1.0e-4, 2.0e-4])
+    assert result["policy"]["conditional_expected_death_fn_calculated"] is True
+    assert result["facility_fn_available"] is False
+
+
 def test_facility_runtime_binds_frequency_per_hazop_branch_without_cross_reuse():
     table = _gate_table()
     extra = dict(table["rows"][0])
