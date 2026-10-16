@@ -31,7 +31,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The v0.6.3 local validation result is **1231 passed, 1 warning**.
+The v0.6.3 local validation result is **1232 passed, 1 warning**.
 
 ## What PRISM is for
 

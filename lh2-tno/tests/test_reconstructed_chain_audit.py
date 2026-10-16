@@ -34,3 +34,16 @@ def test_reconstructed_chain_audit_rejects_qualified_claim():
     assert report["status"] == "RECONSTRUCTED_DIAGNOSTIC_CHAIN_BLOCKED"
     assert report["blocked_count"] == 1
     assert report["checks"][-1]["name"] == "diagnostic_promotion_boundary"
+
+
+def test_reconstructed_chain_audit_fails_closed_on_malformed_consequence_payload():
+    chain = _load("inspection_center_reconstructed_hazop_provider_consequence_chain.json")
+    chain["rows"][0]["consequence"]["data"] = []
+    report = audit_reconstructed_hazop_chain(
+        _load("inspection_center_reconstructed_hazop_runtime_audit.json"),
+        _load("inspection_center_reconstructed_hazop_provider_event_binding.json"),
+        chain,
+    )
+    assert report["status"] == "RECONSTRUCTED_DIAGNOSTIC_CHAIN_BLOCKED"
+    assert report["checks"][3]["name"] == "full_consequence_stage_ledger"
+    assert report["checks"][3]["status"] == "BLOCKED"

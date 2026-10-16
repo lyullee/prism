@@ -125,14 +125,21 @@ def audit_reconstructed_hazop_chain(
         stages = data.get("stages") if isinstance(data, Mapping) else None
         stage_sets.append([str(stage) for stage in stages] if isinstance(stages, list) else [])
     stages_ok = bool(stage_sets) and all(set(REQUIRED_STAGES).issubset(set(stages)) for stages in stage_sets)
+
+    def full_chain_payload_ok(row: Mapping[str, Any]) -> bool:
+        consequence = row.get("consequence")
+        if not isinstance(consequence, Mapping):
+            return False
+        data = consequence.get("data")
+        return (
+            isinstance(data, Mapping)
+            and data.get("full_chain_executed") is True
+            and data.get("status") == "END_TO_END_DIAGNOSTIC_EXECUTED"
+        )
+
     check(
         "full_consequence_stage_ledger",
-        stages_ok and all(
-            isinstance(row.get("consequence"), Mapping)
-            and row["consequence"].get("data", {}).get("full_chain_executed") is True
-            and row["consequence"].get("data", {}).get("status") == "END_TO_END_DIAGNOSTIC_EXECUTED"
-            for row in executed
-        ),
+        stages_ok and all(full_chain_payload_ok(row) for row in executed),
         "consequence payload does not expose the required end-to-end diagnostic stages",
         {
             "required_stages": list(REQUIRED_STAGES),
