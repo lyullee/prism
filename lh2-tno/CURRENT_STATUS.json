@@ -63,7 +63,7 @@
   "realtime_monitor_implemented": true,
   "realtime_monitor_module": "src/lh2_tno/service.py",
   "realtime_monitor_policy": "Normalize each frame, run the declared consequence service, and record deadline status, input age, exact-cache/fresh-physics mode; never infer leak size or initiating frequency and never substitute stale output after a deadline miss.",
-  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1247 passed, 1 warning; CI Run #941 completed successfully.",
+  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 1264 passed, 1 warning; GitHub Actions run 38938549422 completed successfully.",
   "realtime_monitor_one_hz_claim": false,
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
