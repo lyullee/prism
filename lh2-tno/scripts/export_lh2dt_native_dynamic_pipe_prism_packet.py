@@ -84,6 +84,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if args.isolation_time_s is not None and args.isolation_time_s > args.horizon_s:
         raise ValueError("isolation time must not exceed horizon")
     source_digest = _tree_digest(root)
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     pipe, properties = _native_pipe(
         root,
         length_m=args.length_m,
@@ -115,7 +120,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             if source_state.phase in {"gas", "supercritical_gas", "supercritical"}
             else "two_phase"
         ),
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "measurements": {
             "initial_pressure": {
                 "quantity": "pressure",
@@ -144,7 +149,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "failure_mode": "explicit_failed_opening",
         "failure_opening_diameter_m": args.failure_opening_diameter_m,
         "horizon_s": args.horizon_s,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": args.ambient_pressure_pa_abs,
         "ambient_temperature_k": args.ambient_temperature_k,
@@ -278,6 +283,14 @@ def main() -> int:
         help="omit the diagnostic isolation clock so every provider interval remains an active gas outlet",
     )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m",
+        type=float,
+        nargs=3,
+        metavar=("EAST_M", "NORTH_M", "UP_M"),
+        default=None,
+        help="equipment outlet position; defaults to [0, 0, nozzle-height]",
+    )
     args = parser.parse_args()
     if args.no_isolation:
         args.isolation_time_s = None

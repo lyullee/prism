@@ -1,0 +1,55 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_frequency_facility_replay.v1",
+  "replay_date": "2026-10-16",
+  "upstream_repository": "https://github.com/lyullee/lh2dt_models",
+  "upstream_source_tree_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
+  "facility_id": "native-dynamic-pipe-gas-facility-diagnostic",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "provider_packet_event_id": "native-dynamic-pipe/AREA_0.01pct",
+  "campaign_frequency_event_id": "native-dynamic-pipe-gas-facility-frequency/native-pipe/AREA_0.01%",
+  "provider_event_id_rebound": true,
+  "provider_result_digest": "68206f8a64447fbb10c95c55e380db7cc957d5020d113f41579f74a78aeec9c8",
+  "provider_termination_basis": "reviewed_isolation_success",
+  "provider_duration_s": 0.15000000000000002,
+  "provider_mass_residual_kg": -3.3881317890172014E-21,
+  "compressible_plane_handoff_consumed": true,
+  "exact_opening_match": true,
+  "literature_frequency_applied": true,
+  "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+  "frequency_annual_central_per_year": 3.4E-06,
+  "frequency_p05_per_year": 3.2554838825238133E-07,
+  "frequency_p95_per_year": 3.5511808894583394E-05,
+  "event_count": 5,
+  "case_count": 10,
+  "executed_case_count": 2,
+  "uncomputed_case_count": 8,
+  "operator_limited_case_count": 2,
+  "withheld_case_count": 10,
+  "risk_atom_count": 8,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "distant_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "facility_total_risk_available": false,
+  "campaign_elapsed_ms": 7150.302399997599,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "interpretation": "Conditional diagnostic only; eight unmatched cases remain UNCOMPUTED and the facility QRA gate remains closed."
+}
