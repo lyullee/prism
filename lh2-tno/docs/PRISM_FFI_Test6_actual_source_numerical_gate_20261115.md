@@ -77,3 +77,27 @@ python scripts/run_ffi_test6_actual_source_numerical_gate.py `
 The runner writes the same schemas consumed by the audit script. A run that
 does not meet the two-percent criterion exits nonzero and remains diagnostic;
 it cannot be replaced by the earlier pseudo-source refinement record.
+
+## Reproducibility recheck (640 -> 1280)
+
+On 2026-10-17, the external runner was executed again with the actual FFI
+source, `puff_steps=120`, `substeps=3`, and the native SLABx path (the
+SLABx-LH2 plume-width and ice extensions were disabled for this run). Both
+field levels completed successfully:
+
+| field steps | runtime | H2 at 30 m | centre height | cloud depth | sensor MAE | sensor RMSE |
+|---:|---:|---:|---:|---:|---:|---:|
+| 640 | 10.60 s | 3.6277 vol% | 1.6341 m | 7.9370 m | 1.6442 vol% | 4.4830 vol% |
+| 1280 | 19.21 s | 3.0538 vol% | 1.2376 m | 8.2401 m | 1.5586 vol% | 4.4691 vol% |
+
+The final relative changes were 15.818% (H2 volume fraction), 24.265%
+(centre height), 3.678% (cloud depth), 0.356% (temperature), 5.209% (MAE),
+and 0.309% (RMSE). The two-percent criterion therefore remains open. This
+recheck is a reproducibility and processing-time record; because its numerical
+substep configuration differs from the six-level authoritative record above,
+it does not replace that record or promote physical validation.
+
+Machine-readable recheck records:
+
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_640_1280/refinement.json`
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_640_1280/provenance.json`
