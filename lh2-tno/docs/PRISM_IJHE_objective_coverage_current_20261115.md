@@ -95,6 +95,13 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore means that the unresolved gate is represented consistently; it
 does not mean that the source has converged or that physical validation is complete.
 
+The verifier now also binds the latest union facility scope matrix and release-boundary
+case audit. It cross-checks the 44-case count and the 3 eligible/41 blocked release
+split against `CURRENT_STATUS.json`, requires the declared scope matrix and audit
+schemas, and keeps facility IR/F-N, provider qualification, and physical-validation
+claims false. This prevents a stale scope or release ledger from being mistaken for
+the current IJHE evidence package.
+
 ## Reproduction
 
 Run from the `lh2-tno` package directory. The exact evidence paths are listed in the audit JSON and in `CURRENT_STATUS.json`. The essential command is:
@@ -117,6 +124,8 @@ To verify the latest pointer and its fail-closed FFI gate metadata:
 
 ```powershell
 python scripts/verify_latest_ijhe_audit.py `
+  --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
+  --release-boundary results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json `
   --output results/20261115/latest_ijhe_audit_verification.json
 ```
 

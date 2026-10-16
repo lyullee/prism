@@ -32,6 +32,8 @@ def verify_latest_ijhe_audit(
     audit: Mapping[str, Any] | Path | None = None,
     handoff: Mapping[str, Any] | Path | None = None,
     receptor_geometry: Mapping[str, Any] | Path | None = None,
+    scope_matrix: Mapping[str, Any] | Path | None = None,
+    release_boundary: Mapping[str, Any] | Path | None = None,
 ) -> dict[str, Any]:
     """Verify status/audit/handoff identity without changing qualification gates."""
 
@@ -134,6 +136,70 @@ def verify_latest_ijhe_audit(
         ):
             reasons.append("receptor geometry interpretation promotion boundary is not fail-closed")
 
+    # Bind the latest facility-level scope and release-boundary ledgers when
+    # the current status ledger exposes their pointers.  These are diagnostic
+    # consistency checks only: a numerically executed row is never promoted to
+    # qualified provider evidence or facility QRA here.
+    def _load_optional(
+        supplied: Mapping[str, Any] | Path | None,
+        pointer_keys: tuple[str, ...],
+    ) -> tuple[dict[str, Any], Path | None, bool]:
+        if supplied is not None:
+            if isinstance(supplied, Path):
+                return _read_object(supplied), supplied, True
+            return dict(supplied), None, True
+        for key in pointer_keys:
+            pointer = status.get(key)
+            if isinstance(pointer, str) and pointer.strip():
+                path = _relative_or_absolute(pointer, root=base)
+                if not path.exists():
+                    reasons.append(f"{key} does not exist")
+                    return {}, path, True
+                return _read_object(path), path, True
+        return {}, None, False
+
+    scope_value, scope_path, scope_present = _load_optional(
+        scope_matrix,
+        ("latest_union_scope_matrix_record", "scope_matrix_latest_record"),
+    )
+    release_value, release_path, release_present = _load_optional(
+        release_boundary,
+        ("latest_release_boundary_case_audit",),
+    )
+    if scope_present:
+        if scope_value.get("schema_version") != "prism.major_accident_scope.v1":
+            reasons.append("latest facility scope matrix schema is not the declared PRISM schema")
+        if not isinstance(scope_value.get("rows"), list) or not scope_value.get("rows"):
+            reasons.append("latest facility scope matrix has no family rows")
+        if not isinstance(scope_value.get("conditional_chain_complete"), bool):
+            reasons.append("latest facility scope matrix conditional-chain flag is missing")
+        if scope_value.get("facility_total_risk_available") is not False:
+            reasons.append("latest facility scope matrix must keep facility_total_risk_available=false")
+        if scope_value.get("physical_validation_claim") is not False:
+            reasons.append("latest facility scope matrix must keep physical_validation_claim=false")
+        expected_cases = status.get("latest_union_case_count")
+        if expected_cases is not None and scope_value.get("case_count") != expected_cases:
+            reasons.append("latest facility scope matrix case count disagrees with status ledger")
+    if release_present:
+        if release_value.get("schema_version") != "prism.release_boundary_case_audit.v1":
+            reasons.append("latest release-boundary audit schema is not the declared PRISM schema")
+        if release_value.get("facility_ir_fn_promotion") is not False:
+            reasons.append("latest release-boundary audit must keep facility_ir_fn_promotion=false")
+        if release_value.get("provider_qualification_claim") is not False:
+            reasons.append("latest release-boundary audit must keep provider_qualification_claim=false")
+        if release_value.get("independent_physical_validation_claim") is not False:
+            reasons.append("latest release-boundary audit must keep independent_physical_validation_claim=false")
+        expected_cases = status.get("latest_union_case_count")
+        if expected_cases is not None and release_value.get("case_count") != expected_cases:
+            reasons.append("latest release-boundary audit case count disagrees with status ledger")
+        for status_key, audit_key in (
+            ("latest_ijhe_completion_audit_release_boundary_eligible_case_count", "strict_release_boundary_eligible_case_count"),
+            ("latest_ijhe_completion_audit_release_boundary_blocked_case_count", "strict_release_boundary_blocked_case_count"),
+        ):
+            expected = status.get(status_key)
+            if expected is not None and release_value.get(audit_key) != expected:
+                reasons.append(f"latest release-boundary audit {audit_key} disagrees with status ledger")
+
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
     # identity and fail-closed claims here as well.  This keeps a stale or
@@ -170,6 +236,14 @@ def verify_latest_ijhe_audit(
                     reasons.append("actual FFI numerical gate refinement record does not exist")
 
     status_value = "PASS" if not reasons else "BLOCKED_AUDIT_METADATA"
+    scope_status = scope_value.get("status") if scope_value else None
+    if scope_value and scope_status is None:
+        scope_status = (
+            "COMPLETE_DECLARED_SCOPE"
+            if scope_value.get("matrix_complete") is True
+            else "INCOMPLETE_DECLARED_SCOPE"
+        )
+
     return {
         "schema_version": SCHEMA,
         "status": status_value,
@@ -188,10 +262,17 @@ def verify_latest_ijhe_audit(
         "actual_ffi_numerical_gate_record": str(gate_path) if gate_path else None,
         "actual_ffi_numerical_gate_status": gate_record.get("status") if gate_record else gate_status_value,
         "actual_ffi_numerical_gate_accepted": gate_record.get("accepted") if gate_record else gate_accepted_value,
+        "facility_scope_matrix_record": str(scope_path) if scope_path else None,
+        "facility_scope_matrix_status": scope_status,
+        "facility_scope_matrix_case_count": scope_value.get("case_count") if scope_value else None,
+        "release_boundary_audit_record": str(release_path) if release_path else None,
+        "release_boundary_audit_status": release_value.get("status") if release_value else None,
+        "release_boundary_case_count": release_value.get("case_count") if release_value else None,
         "blocking_reasons": reasons,
         "interpretation": (
-            "The latest audit pointer, summary counts, and diagnostic facility handoff are internally consistent; "
-            "this verification does not promote provider qualification, physical validation, or facility IR/F-N."
+            "The latest audit pointer, summary counts, diagnostic facility handoff, scope matrix, and "
+            "release-boundary ledger are internally consistent; this verification does not promote provider "
+            "qualification, physical validation, or facility IR/F-N."
             if not reasons
             else "The latest audit metadata is inconsistent or incomplete; no qualification claim is allowed."
         ),
