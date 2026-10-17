@@ -23,6 +23,93 @@ from .release_ledger import build_release_termination_inventory_ledger
 from .uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty
 
 
+_STATE_ORIGIN_NAMES = (
+    "reviewed_measurement",
+    "reviewed_model",
+    "model_prediction",
+    "synthetic",
+    "missing",
+)
+
+
+def _state_origin_accounting(ledger: Mapping[str, Any]) -> dict[str, Any]:
+    """Summarize the provenance of state frames used by facility cases.
+
+    The digital-twin boundary has two valid execution paths: a live monitored
+    frame and a simulator-predicted frame.  A facility assessment must expose
+    which path actually supplied each case instead of making a dashboard infer
+    it from a nested provider packet.  This accounting is descriptive only;
+    it never treats a model prediction as a measurement and never trains or
+    changes an initiating frequency.
+    """
+
+    cases = ledger.get("cases", ())
+    if not isinstance(cases, Sequence) or isinstance(cases, (str, bytes)):
+        cases = ()
+    counts = {name: 0 for name in _STATE_ORIGIN_NAMES}
+    case_rows: list[dict[str, Any]] = []
+    for row in cases:
+        if not isinstance(row, Mapping):
+            counts["missing"] += 1
+            continue
+        identity = row.get("provider_packet_identity")
+        origins = identity.get("input_origins") if isinstance(identity, Mapping) else None
+        origin_values = (
+            [value.strip() for value in origins if isinstance(value, str) and value.strip()]
+            if isinstance(origins, Sequence) and not isinstance(origins, (str, bytes))
+            else []
+        )
+        snapshot = identity.get("state_snapshot") if isinstance(identity, Mapping) else None
+        if not origin_values and isinstance(snapshot, Mapping):
+            value = snapshot.get("origin")
+            if isinstance(value, str) and value.strip():
+                origin_values = [value.strip()]
+        unique_origins = sorted(set(origin_values))
+        if len(unique_origins) == 1 and unique_origins[0] in counts:
+            origin = unique_origins[0]
+        else:
+            origin = "missing"
+            if len(unique_origins) > 1:
+                # Mixed-endpoint packets cannot be silently classified as a
+                # single monitored or predicted case.
+                unique_origins = ["mixed"] + unique_origins
+        counts[origin] += 1
+        case_rows.append(
+            {
+                "event_id": row.get("event_id"),
+                "component_id": identity.get("component_id") if isinstance(identity, Mapping) else None,
+                "input_origins": unique_origins,
+                "classified_origin": origin,
+                "operating_mode": row.get("operating_mode"),
+            }
+        )
+    total = len(case_rows)
+    return {
+        "schema_version": "prism.facility_state_origin_accounting.v1",
+        "status": "EXPLICIT_STATE_ORIGIN_ACCOUNTING" if counts["missing"] == 0 else "STATE_ORIGIN_MISSING",
+        "case_count": total,
+        "case_counts_by_origin": counts,
+        "monitored_case_count": counts["reviewed_measurement"],
+        "reviewed_model_case_count": counts["reviewed_model"],
+        "predicted_case_count": counts["model_prediction"],
+        "synthetic_case_count": counts["synthetic"],
+        "missing_origin_case_count": counts["missing"],
+        "mixed_origin_case_count": sum(
+            1 for row in case_rows if "mixed" in row.get("input_origins", [])
+        ),
+        "frequency_inference_performed": False,
+        "sensor_frequency_learning_used": False,
+        "case_rows": case_rows,
+        "semantics": {
+            "reviewed_measurement": "live reviewed monitoring input; eligible for an external qualification review but not automatically promoted",
+            "reviewed_model": "reviewed equipment-model input; distinct from a live measurement",
+            "model_prediction": "forecast or synthetic model state; diagnostic only",
+            "mixed_or_missing": "withheld from provenance classification; no origin is inferred",
+            "frequency": "this accounting never assigns, learns, or reweights initiating frequency",
+        },
+    }
+
+
 def build_facility_assessment(
     campaign_results: Sequence[Mapping[str, Any]],
     *,
@@ -328,6 +415,13 @@ def build_facility_assessment(
         ],
         "conditional_diagnostic_facility_expected_death_fn_diagnostics": fn_diagnostics,
         "annual_condition_count": population_accounting.get("annual_condition_count", 0),
+        "event_count": ledger.get("event_count", 0),
+        "case_count": ledger.get("case_count", 0),
+        "risk_atom_count": len(ledger.get("risk_atoms", ()))
+        if isinstance(ledger.get("risk_atoms"), Sequence)
+        and not isinstance(ledger.get("risk_atoms"), (str, bytes))
+        else 0,
+        "state_origin_accounting": _state_origin_accounting(ledger),
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
         "release_termination_inventory_ledger": release_termination_inventory_ledger,
@@ -397,6 +491,10 @@ def build_facility_assessment(
                 "annual-condition weather, release/termination, and ignition branches are "
                 "preserved over the same validated atoms; no frequency inference or branch "
                 "reallocation is performed"
+            ),
+            "state_origin_accounting": (
+                "case state origin is copied from the provider packet or canonical state snapshot; "
+                "model-predicted and measured inputs are never conflated and no frequency learning is performed"
             ),
             "release_termination_inventory": (
                 "case-level provider duration, termination, isolation, inventory and mass "

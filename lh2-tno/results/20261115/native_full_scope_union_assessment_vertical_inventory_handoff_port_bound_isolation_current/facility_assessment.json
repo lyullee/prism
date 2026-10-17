@@ -66421,7 +66421,8 @@
     "facility_case_packet_coverage": "exact facility case identity must be qualified before the facility QRA gate can open; missing cases remain explicit and do not infer frequency or physical validation",
     "scenario_branch_accounting": "annual-condition weather, release/termination, and ignition branches are preserved over the same validated atoms; no frequency inference or branch reallocation is performed",
     "release_termination_inventory": "case-level provider duration, termination, isolation, inventory and mass closure are carried through the merged facility ledger without filling missing branch values",
-    "timing": "facility timing preserves observed whole-case and stage elapsed values; it does not claim repeated-run throughput or fresh-physics 1 Hz service"
+    "timing": "facility timing preserves observed whole-case and stage elapsed values; it does not claim repeated-run throughput or fresh-physics 1 Hz service",
+    "state_origin_accounting": "case state origin is copied from the provider packet or canonical state snapshot; model-predicted and measured inputs are never conflated and no frequency learning is performed"
   },
   "risk_atom_case_traceability": {
     "schema_version": "prism.facility_case_risk_atom_trace.v1",
@@ -66454,5 +66455,433 @@
       "frequency_reallocation_performed": false
     }
   },
-  "assessment_digest": "f1ed5927f7c6207d9727811bbb6beb343b4b3ee9b495b484309e5d85a7818cb2"
+  "assessment_digest": "43864e91c3db03fd233056a91d994f95ddd7ec69db6ef51abcf6aed7ade3780b",
+  "event_count": 34,
+  "case_count": 44,
+  "risk_atom_count": 176,
+  "state_origin_accounting": {
+    "schema_version": "prism.facility_state_origin_accounting.v1",
+    "status": "EXPLICIT_STATE_ORIGIN_ACCOUNTING",
+    "case_count": 44,
+    "case_counts_by_origin": {
+      "reviewed_measurement": 0,
+      "reviewed_model": 0,
+      "model_prediction": 24,
+      "synthetic": 20,
+      "missing": 0
+    },
+    "monitored_case_count": 0,
+    "reviewed_model_case_count": 0,
+    "predicted_case_count": 24,
+    "synthetic_case_count": 20,
+    "missing_origin_case_count": 0,
+    "mixed_origin_case_count": 0,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "case_rows": [
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "receiving"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "component_id": "storage-tank-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "receiving"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "component_id": "storage-tank-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "receiving"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "component_id": "storage-tank-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "receiving"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "component_id": "storage-tank-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "receiving"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "standby"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "component_id": "ambient-vaporizer-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "supply"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "standby"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "standby"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "input_origins": [
+          "model_prediction"
+        ],
+        "classified_origin": "model_prediction",
+        "operating_mode": "standby"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "input_origins": [
+          "synthetic"
+        ],
+        "classified_origin": "synthetic",
+        "operating_mode": null
+      }
+    ],
+    "semantics": {
+      "reviewed_measurement": "live reviewed monitoring input; eligible for an external qualification review but not automatically promoted",
+      "reviewed_model": "reviewed equipment-model input; distinct from a live measurement",
+      "model_prediction": "forecast or synthetic model state; diagnostic only",
+      "mixed_or_missing": "withheld from provenance classification; no origin is inferred",
+      "frequency": "this accounting never assigns, learns, or reweights initiating frequency"
+    }
+  }
 }

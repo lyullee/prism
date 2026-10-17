@@ -174,6 +174,35 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     }
 
 
+def test_facility_assessment_exposes_state_origin_without_frequency_learning():
+    result = _result(
+        event_id="event-state-origin",
+        asset_id="asset-state-origin",
+        component_id="tank-state-origin",
+        frequency=1e-3,
+    )
+    result["cases"][0]["provider_packet_identity"] = {
+        "component_id": "tank-state-origin",
+        "input_origins": ["model_prediction"],
+        "state_snapshot": {"origin": "model_prediction"},
+    }
+    ledger = merge_facility_campaign_results(
+        [{"campaign_id": "state-origin-campaign", "result": result}],
+        expected_component_ids=("tank-state-origin",),
+    )
+    assessment = build_facility_assessment([ledger])
+    accounting = assessment["state_origin_accounting"]
+    assert accounting["status"] == "EXPLICIT_STATE_ORIGIN_ACCOUNTING"
+    assert accounting["case_count"] == 1
+    assert accounting["predicted_case_count"] == 1
+    assert accounting["monitored_case_count"] == 0
+    assert accounting["frequency_inference_performed"] is False
+    assert accounting["sensor_frequency_learning_used"] is False
+    assert assessment["event_count"] == 1
+    assert assessment["case_count"] == 1
+    assert assessment["risk_atom_count"] == 1
+
+
 def test_facility_ledger_traces_risk_atoms_to_executed_and_withheld_cases():
     executed = _result(
         event_id="event-trace-executed",
