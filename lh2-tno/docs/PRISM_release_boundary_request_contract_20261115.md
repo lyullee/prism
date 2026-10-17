@@ -16,6 +16,12 @@ This is a bookkeeping and safety gate. It does not create a release duration, es
 
 The zero blocked request contracts means the request table is internally complete. It does **not** mean the requested provider evidence has been supplied. The remaining 31 release-boundary cases and all provider-qualification and independent-physical-validation gates remain fail-closed.
 
+Every case request now states `required_input_origin=reviewed_measurement`. Synthetic
+and model-prediction packets remain valid diagnostic inputs, but they cannot be
+used to create a qualified provider packet. The request also records this policy
+at the top level so an external equipment adapter can reject an unsuitable
+packet before it reaches the promotion boundary.
+
 The same audit now emits an `asset_summary` section. It preserves the equipment
 boundary instead of pooling all cases into one facility number. In the current
 run, `inventory-depletion-pipe` is now 10/10 strict-eligible after the provider

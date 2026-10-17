@@ -15,9 +15,11 @@ from typing import Any
 
 SCHEMA = "prism.facility_evidence_request.v1"
 PROVIDER_SCHEMA = "prism.external_accident_history.v1"
+REQUIRED_PROVIDER_INPUT_ORIGIN = "reviewed_measurement"
 
 _COMMON_REQUIREMENTS = (
     "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+    "input_origin=reviewed_measurement with source-owner review and provenance",
     "exact component_id, accident port, event_id, opening geometry, position and direction",
     "provider-owned time history with start/end clock and explicit termination basis",
     "provider mass and energy closure with residuals and initial/final inventory",
@@ -382,6 +384,7 @@ def _build_case_requests(
             "current_boundary_gaps": _release_boundary_gaps(row, status=status),
             "request_kind": "QUALIFIED_PROVIDER_PACKET",
             "qualification_required": qualification_gap,
+            "required_input_origin": REQUIRED_PROVIDER_INPUT_ORIGIN,
             "frequency_port_ids": reviewed_frequency_port_ids,
             "provider_packet_port_ids": provider_packet_port_ids,
             "port_binding": {
@@ -664,6 +667,15 @@ def build_facility_evidence_request(
         "facility_id": assessment.get("facility_id", ledger.get("facility_id", scope_matrix.get("facility_id"))),
         "scope": "outdoor_major_accidents",
         "provider_export_schema_required": PROVIDER_SCHEMA,
+        "provider_input_origin_policy": {
+            "required_for_qualification": REQUIRED_PROVIDER_INPUT_ORIGIN,
+            "accepted_for_diagnostic_only": ["synthetic", "model_prediction"],
+            "frequency_inference_allowed": False,
+            "policy": (
+                "Synthetic and model-prediction packets may be executed diagnostically, "
+                "but only reviewed_measurement packets can enter qualified provider promotion."
+            ),
+        },
         "status": "OPEN_EVIDENCE_REQUEST",
         "current_assessment": {
             "status": ledger.get("status"),
@@ -743,4 +755,9 @@ def build_facility_evidence_request(
     }
 
 
-__all__ = ["SCHEMA", "PROVIDER_SCHEMA", "build_facility_evidence_request"]
+__all__ = [
+    "SCHEMA",
+    "PROVIDER_SCHEMA",
+    "REQUIRED_PROVIDER_INPUT_ORIGIN",
+    "build_facility_evidence_request",
+]

@@ -242,6 +242,7 @@ def test_case_requests_preserve_exact_vertical_handoff_identity_and_qualificatio
     assert request["request_kind"] == "QUALIFIED_PROVIDER_PACKET"
     assert request["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
     assert request["qualification_required"] is True
+    assert request["required_input_origin"] == "reviewed_measurement"
     assert request["exact_match_required"]["component_id"] == "vertical-handoff-terminal-pipe-01"
     assert request["exact_match_required"]["port_ids"] == ["terminal_pipe.out"]
     assert "provider-owned vertical-to-horizontal handoff state and boundary" in request[
