@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from .provider_release_closure import audit_provider_release_closure
+from .external_release_normalization import audit_external_release_response
 
 
 SCHEMA = "prism.external_release_artifact_intake.v1"
@@ -36,6 +37,18 @@ def _sha256(path: Path) -> str:
     except OSError as error:
         raise ExternalReleaseArtifactIntakeError(f"cannot read artifact: {path}") from error
     return digest.hexdigest()
+
+
+def _nearby_provider_response(path: Path) -> Path | None:
+    """Find the native response paired with a resolved-release artifact.
+
+    Only the exact sibling filename is considered.  This prevents a response
+    from another equipment or run from being guessed by a broad directory
+    search; callers can still supply a separate qualification sidecar.
+    """
+
+    candidate = path.parent / "provider_response.json"
+    return candidate if candidate.is_file() else None
 
 
 def _read_json(path: Path) -> Any:
@@ -262,6 +275,9 @@ def audit_external_release_artifacts(
 
     artifacts: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
+    provider_response_pair_count = 0
+    provider_response_normalized_count = 0
+    provider_response_mismatch_count = 0
     for path in files:
         try:
             payload = _read_json(path)
@@ -318,6 +334,34 @@ def audit_external_release_artifacts(
             closure = _closure_summary(release)
             if closure.get("closure_ready") is not True:
                 reasons.extend(str(item) for item in closure.get("blocking_reasons", []))
+            provider_response_path = _nearby_provider_response(path)
+            provider_response_audit: dict[str, Any] | None = None
+            provider_response_sha256: str | None = None
+            if provider_response_path is not None:
+                provider_response_pair_count += 1
+                try:
+                    provider_response_sha256 = _sha256(provider_response_path)
+                    provider_response_audit = audit_external_release_response(
+                        release, provider_response_path
+                    )
+                except (OSError, UnicodeDecodeError, ValueError, TypeError) as error:
+                    provider_response_audit = {
+                        "status": "PROVIDER_RESPONSE_AUDIT_ERROR",
+                        "diagnostic_only": True,
+                        "blocking_reasons": [str(error)],
+                        "closure_ready": False,
+                        "qualified_provider_packet_allowed": False,
+                        "frequency_inference_allowed": False,
+                        "facility_qra_allowed": False,
+                    }
+                if provider_response_audit.get("status") == "NORMALIZED_PROVIDER_RESPONSE":
+                    provider_response_normalized_count += 1
+                else:
+                    provider_response_mismatch_count += 1
+                reasons.extend(
+                    f"provider response: {item}"
+                    for item in provider_response_audit.get("blocking_reasons", [])
+                )
             artifacts.append({
                 "path": str(path),
                 "sha256": digest,
@@ -338,6 +382,11 @@ def audit_external_release_artifacts(
                 "qualification_bound": qualification_bound,
                 "qualification_mismatch_reasons": qualification_mismatch_reasons,
                 "closure_audit": closure,
+                "provider_response_path": str(provider_response_path)
+                if provider_response_path is not None
+                else None,
+                "provider_response_sha256": provider_response_sha256,
+                "provider_response_audit": provider_response_audit,
                 "diagnostic_only": True,
                 "blocking_reasons": reasons,
             })
@@ -377,6 +426,9 @@ def audit_external_release_artifacts(
         "synthetic_or_model_prediction_row_count": sum(
             1 for row in release_rows if row.get("input_origin") in {"synthetic", "model_prediction"}
         ),
+        "provider_response_pair_count": provider_response_pair_count,
+        "provider_response_normalized_count": provider_response_normalized_count,
+        "provider_response_mismatch_count": provider_response_mismatch_count,
         "error_count": len(errors),
         "artifacts": artifacts,
         "errors": errors,

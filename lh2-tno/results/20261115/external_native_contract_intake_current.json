@@ -13,6 +13,9 @@
   },
   "actual_origin_row_count": 0,
   "synthetic_or_model_prediction_row_count": 7,
+  "provider_response_pair_count": 7,
+  "provider_response_normalized_count": 7,
+  "provider_response_mismatch_count": 0,
   "error_count": 0,
   "artifacts": [
     {
@@ -46,12 +49,78 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\layered\\provider_response.json",
+      "provider_response_sha256": "84b251fe554ff1df85edc4a7f71c46b56dafe9b8f24804a9920503bc3ef40185",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-layered-tank/accidental-leak-001",
+        "component_id": "native-layered-tank-diagnostic",
+        "port_id": "native-layered-tank-liquid-out",
+        "provider_model": "lh2dt.LayeredTank",
+        "provider_state_snapshot_digest": "c61cf19075eed0e9235e5660f0c2ad2e7d074a7afb61d52b113989311291142c",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": true,
+          "mass_ledger_closed": true,
+          "isolation_evidence_present": false,
+          "isolation_clock_valid": false
+        },
+        "provider_mass_balance_candidate": {
+          "schema_version": "prism.provider_mass_balance.v1",
+          "initial_mass_kg": 434.50988152270014,
+          "cumulative_mass_out_kg": 0.00015346569325836357,
+          "final_mass_kg": 434.50972805700695,
+          "reported_residual_mass_kg": 5.684341886080802e-14,
+          "derived_accounting_residual_kg": 5.684341886080802e-14,
+          "mass_balance_closed": true
+        },
+        "isolation_evidence_candidate": {
+          "present": false,
+          "isolation_time_s": null,
+          "isolation_success": null,
+          "within_release_clock": false
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider response check failed: isolation_evidence_present",
+          "native isolation evidence is absent or outside the release clock",
+          "native inventory still has residual mass; depletion is not proven",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
         "packet[0]: provider mass balance is required for inventory depletion",
-        "packet[0]: provider inventory termination evidence is missing"
+        "packet[0]: provider inventory termination evidence is missing",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider response check failed: isolation_evidence_present",
+        "provider response: native isolation evidence is absent or outside the release clock",
+        "provider response: native inventory still has residual mass; depletion is not proven",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     },
     {
@@ -86,13 +155,75 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pipe\\provider_response.json",
+      "provider_response_sha256": "ec4867234d23f7a6975c1ccf9e545b8f6533c92bb723cfb9e55bb771d8663fa7",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-dynamic-pipe/accidental-leak-001",
+        "component_id": "native-dynamic-pipe-diagnostic",
+        "port_id": "native-dynamic-pipe-out",
+        "provider_model": "lh2dt.DynamicHEMPipe",
+        "provider_state_snapshot_digest": "c021582ed86a58069c5d60bb69e2a08a936aafb40102ac40df08d4e562b85b0e",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": true,
+          "mass_ledger_closed": false,
+          "isolation_evidence_present": true,
+          "isolation_clock_valid": true
+        },
+        "provider_mass_balance_candidate": {
+          "schema_version": "prism.provider_mass_balance.v1",
+          "initial_mass_kg": 2.5156266507964498,
+          "cumulative_mass_out_kg": 2.5156266507964498,
+          "final_mass_kg": 1.093854225801009,
+          "reported_residual_mass_kg": 1.0938542258010093,
+          "derived_accounting_residual_kg": 1.0938542258010093,
+          "mass_balance_closed": false
+        },
+        "isolation_evidence_candidate": {
+          "present": true,
+          "isolation_time_s": 0.05,
+          "isolation_success": true,
+          "within_release_clock": true
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider mass ledger does not close within tolerance",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
         "packet[0]: isolation_record_present is missing or inconsistent",
         "packet[0]: isolation_success_declared is missing or inconsistent",
-        "packet[0]: isolation_clock_present is missing or inconsistent"
+        "packet[0]: isolation_clock_present is missing or inconsistent",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider mass ledger does not close within tolerance",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     },
     {
@@ -125,11 +256,73 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pump\\provider_response.json",
+      "provider_response_sha256": "216f3e32799855d00452016907e758ef1be89ab71bb161b4cb82f9e3caf05c62",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-mapped-pump/accidental-leak-001",
+        "component_id": "native-mapped-pump-diagnostic",
+        "port_id": "native-mapped-pump-liquid-out",
+        "provider_model": "lh2dt.MappedPump",
+        "provider_state_snapshot_digest": "529a0143f76d0b6d2c043e010bf51e8ba5c4fba6e64605d5a1994ccb84a8f9c1",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": false,
+          "mass_ledger_closed": false,
+          "isolation_evidence_present": false,
+          "isolation_clock_valid": false
+        },
+        "provider_mass_balance_candidate": null,
+        "isolation_evidence_candidate": {
+          "present": false,
+          "isolation_time_s": null,
+          "isolation_success": null,
+          "within_release_clock": false
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider response check failed: mass_ledger_present",
+          "native provider mass ledger does not close within tolerance",
+          "native provider response check failed: isolation_evidence_present",
+          "native isolation evidence is absent or outside the release clock",
+          "synthetic diagnostic horizon is not a release termination boundary",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
-        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider response check failed: mass_ledger_present",
+        "provider response: native provider mass ledger does not close within tolerance",
+        "provider response: native provider response check failed: isolation_evidence_present",
+        "provider response: native isolation evidence is absent or outside the release clock",
+        "provider response: synthetic diagnostic horizon is not a release termination boundary",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     },
     {
@@ -162,11 +355,77 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\reliquefier\\provider_response.json",
+      "provider_response_sha256": "2fde978357072b8fcd96ea3f00b96c5c1c68117efbd5bc9dacb4724afa571525",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-reliquefier/accidental-leak-001",
+        "component_id": "native-reliquefier-diagnostic",
+        "port_id": "native-reliquefier-gas-out",
+        "provider_model": "lh2dt.DynamicReliquefier",
+        "provider_state_snapshot_digest": "d370a4a37e719a25cfef96a965d06f683ec788418e4111b15783ceba38cda4c5",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": true,
+          "mass_ledger_closed": true,
+          "isolation_evidence_present": false,
+          "isolation_clock_valid": false
+        },
+        "provider_mass_balance_candidate": {
+          "schema_version": "prism.provider_mass_balance.v1",
+          "initial_mass_kg": 0.0008198175196090351,
+          "cumulative_mass_out_kg": 1.0508063795789736e-06,
+          "final_mass_kg": 0.0008187667132294561,
+          "reported_residual_mass_kg": 0.0,
+          "derived_accounting_residual_kg": 0.0,
+          "mass_balance_closed": true
+        },
+        "isolation_evidence_candidate": {
+          "present": false,
+          "isolation_time_s": null,
+          "isolation_success": null,
+          "within_release_clock": false
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider response check failed: isolation_evidence_present",
+          "native isolation evidence is absent or outside the release clock",
+          "synthetic diagnostic horizon is not a release termination boundary",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
-        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider response check failed: isolation_evidence_present",
+        "provider response: native isolation evidence is absent or outside the release clock",
+        "provider response: synthetic diagnostic horizon is not a release termination boundary",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     },
     {
@@ -199,11 +458,73 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\valve\\provider_response.json",
+      "provider_response_sha256": "40484dbd89ed5eaf3455b0c9a4b051c004cece52457fb588f931f82d5e7a539f",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-stroke-valve/accidental-leak-001",
+        "component_id": "native-stroke-valve-diagnostic",
+        "port_id": "native-stroke-valve-gas-out",
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "provider_state_snapshot_digest": "723d4532836cce921bc44588ae9af16919201ef75bcb535df6990c070e0add36",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": false,
+          "mass_ledger_closed": false,
+          "isolation_evidence_present": false,
+          "isolation_clock_valid": false
+        },
+        "provider_mass_balance_candidate": null,
+        "isolation_evidence_candidate": {
+          "present": false,
+          "isolation_time_s": null,
+          "isolation_success": null,
+          "within_release_clock": false
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider response check failed: mass_ledger_present",
+          "native provider mass ledger does not close within tolerance",
+          "native provider response check failed: isolation_evidence_present",
+          "native isolation evidence is absent or outside the release clock",
+          "synthetic diagnostic horizon is not a release termination boundary",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
-        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider response check failed: mass_ledger_present",
+        "provider response: native provider mass ledger does not close within tolerance",
+        "provider response: native provider response check failed: isolation_evidence_present",
+        "provider response: native isolation evidence is absent or outside the release clock",
+        "provider response: synthetic diagnostic horizon is not a release termination boundary",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     },
     {
@@ -236,11 +557,77 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vaporizer\\provider_response.json",
+      "provider_response_sha256": "54c9d2b160a3e151d4a6deb93b2839198c7cffe40fffc60d0eda2d01a2d6e8a7",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-vaporizer/accidental-leak-001",
+        "component_id": "native-vaporizer-diagnostic",
+        "port_id": "native-vaporizer-gas-out",
+        "provider_model": "lh2dt.DynamicVaporizer",
+        "provider_state_snapshot_digest": "8f32b28f444c8905299c27b96487392619991ff875c1528fcb808fcce500976b",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": true,
+          "mass_ledger_closed": true,
+          "isolation_evidence_present": false,
+          "isolation_clock_valid": false
+        },
+        "provider_mass_balance_candidate": {
+          "schema_version": "prism.provider_mass_balance.v1",
+          "initial_mass_kg": 0.0008198175196090351,
+          "cumulative_mass_out_kg": 1.0508063795789736e-06,
+          "final_mass_kg": 0.0008187667132294561,
+          "reported_residual_mass_kg": 0.0,
+          "derived_accounting_residual_kg": 0.0,
+          "mass_balance_closed": true
+        },
+        "isolation_evidence_candidate": {
+          "present": false,
+          "isolation_time_s": null,
+          "isolation_success": null,
+          "within_release_clock": false
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider response check failed: isolation_evidence_present",
+          "native isolation evidence is absent or outside the release clock",
+          "synthetic diagnostic horizon is not a release termination boundary",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
-        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider response check failed: isolation_evidence_present",
+        "provider response: native isolation evidence is absent or outside the release clock",
+        "provider response: synthetic diagnostic horizon is not a release termination boundary",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     },
     {
@@ -273,11 +660,73 @@
         ],
         "facility_qra_allowed": false
       },
+      "provider_response_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vent\\provider_response.json",
+      "provider_response_sha256": "94e649101fd72d5f5aba5dde8c71129a31ae334bd3262bcd0bab926dea39d947",
+      "provider_response_audit": {
+        "schema_version": "prism.external_release_response_normalization.v1",
+        "status": "NORMALIZED_PROVIDER_RESPONSE",
+        "diagnostic_only": true,
+        "event_id": "native-vent-stack/accidental-leak-001",
+        "component_id": "native-vent-stack-diagnostic",
+        "port_id": "native-vent-stack-gas-out",
+        "provider_model": "lh2dt.VentStack",
+        "provider_state_snapshot_digest": "665dad1459dc9d02ec506ab0ec08b282206a6c57abf18d48bcfa610b3d41c50b",
+        "checks": {
+          "identity_matches": true,
+          "clock_matches": true,
+          "available_mass_matches": true,
+          "released_mass_matches": true,
+          "termination_basis_matches": true,
+          "termination_provenance_matches": true,
+          "source_digest_matches": true,
+          "state_snapshot_digest_present": true,
+          "result_digest_rebound": false,
+          "mass_ledger_present": false,
+          "mass_ledger_closed": false,
+          "isolation_evidence_present": false,
+          "isolation_clock_valid": false
+        },
+        "provider_mass_balance_candidate": null,
+        "isolation_evidence_candidate": {
+          "present": false,
+          "isolation_time_s": null,
+          "isolation_success": null,
+          "within_release_clock": false
+        },
+        "blocking_reasons": [
+          "provider response does not carry a digest-bound provider_result_digest",
+          "native provider response check failed: mass_ledger_present",
+          "native provider mass ledger does not close within tolerance",
+          "native provider response check failed: isolation_evidence_present",
+          "native isolation evidence is absent or outside the release clock",
+          "synthetic diagnostic horizon is not a release termination boundary",
+          "input origin remains diagnostic and is not qualified actual evidence"
+        ],
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "physical_validation_claim": false,
+        "facility_qra_allowed": false,
+        "promotion_policy": {
+          "provider_result_digest_synthesized": false,
+          "termination_evidence_synthesized": false,
+          "residual_inventory_replaced_with_zero": false,
+          "frequency_assigned": false,
+          "facility_qra_promoted": false
+        }
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
         "no nearby prism.provider_qualification_evidence.v1 sidecar",
-        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon",
+        "provider response: provider response does not carry a digest-bound provider_result_digest",
+        "provider response: native provider response check failed: mass_ledger_present",
+        "provider response: native provider mass ledger does not close within tolerance",
+        "provider response: native provider response check failed: isolation_evidence_present",
+        "provider response: native isolation evidence is absent or outside the release clock",
+        "provider response: synthetic diagnostic horizon is not a release termination boundary",
+        "provider response: input origin remains diagnostic and is not qualified actual evidence"
       ]
     }
   ],

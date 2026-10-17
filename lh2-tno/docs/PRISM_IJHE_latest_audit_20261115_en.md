@@ -39,6 +39,18 @@ does not open provider, frequency, physical-validation, or facility-QRA gates.
 The machine-readable record is
 [`external_native_contract_intake_current.json`](../results/20261115/external_native_contract_intake_current.json).
 
+Each of the seven rows now also has a sibling-response normalization audit.
+The native `provider_response.json` agrees with its resolved release on the
+event/component/port identity, release clock, available and released mass,
+termination declaration, and provider source digest (`7/7` normalized). The
+audit retains native mass residuals and isolation metadata when present, but
+does not invent a result digest, turn a diagnostic horizon into a physical
+termination, or replace residual inventory with zero. Thus normalization
+improves the model-to-PRISM handoff trace while the strict qualification and
+facility-QRA gates remain unchanged. See
+[`external release-response normalization`](PRISM_external_release_response_normalization_en.md)
+for the exact comparison rules.
+
 The nine point-rate-only events retain their published point rate and are represented in the five-scenario sensitivity ledger. PRISM does not invent confidence intervals for them.
 
 ## Connected calculation path
@@ -92,7 +104,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,365 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,367 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 

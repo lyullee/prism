@@ -4,6 +4,8 @@
 
 외부 `lh2dt` 모델 정본에서 탱크·배관·펌프·밸브·기화기·재액화기·벤트의 release-shaped export 7개를 확인했다. 이 7개는 포트·방출시간·질량·종료근거를 보존하지만 모두 `model_prediction` 원점이고 exact qualification sidecar가 없으므로, 모델 연결 진단 근거로만 기록하고 provider·빈도·물리검증·시설 QRA 승격에는 사용하지 않는다.
 
+각 export의 같은 폴더에 있는 `provider_response.json`도 함께 대조한다. 7/7 행에서 event·component·port ID, 방출시간, 가용·누적 방출질량, 종료근거와 provider source digest가 `resolved_release.json`과 일치한다. 이 정규화는 모델 출력과 PRISM 경계가 서로 다른 사고나 포트를 가리키지 않는지 확인하는 진단 단계다. provider result digest가 응답에 없거나, 질량 잔차가 남거나, `synthetic_diagnostic_horizon`인 경우는 그대로 열린 근거로 남기며, 잔여 재고를 0으로 고치거나 빈도·물리검증·시설 QRA를 승격하지 않는다. 상세 규칙은 [`external release-response normalization`](PRISM_external_release_response_normalization_en.md)에 기록했다.
+
 ## 요구사항별 판정
 
 | 요구사항 | 현재 증거 | 판정 |

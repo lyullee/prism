@@ -5042,6 +5042,13 @@ def build_ijhe_completion_audit(
                 "qualified_sidecar_row_count": qualified_sidecar_row_count,
                 "closure_ready_row_count": closure_ready_row_count,
                 "closure_status_counts": intake.get("closure_status_counts"),
+                "provider_response_pair_count": intake.get("provider_response_pair_count"),
+                "provider_response_normalized_count": intake.get(
+                    "provider_response_normalized_count"
+                ),
+                "provider_response_mismatch_count": intake.get(
+                    "provider_response_mismatch_count"
+                ),
                 "actual_origin_row_count": actual_origin_row_count,
                 "synthetic_or_model_prediction_row_count": synthetic_or_model_prediction_row_count,
                 "error_count": intake.get("error_count"),
@@ -5052,8 +5059,11 @@ def build_ijhe_completion_audit(
         intake_check["diagnostic_only"] = True
         intake_check["interpretation"] = (
             "External release-shaped JSON is inventoried with exact file digests and equipment/port "
-            "identity. Synthetic or model-prediction rows remain diagnostic until a separate exact "
-            "provider qualification sidecar is present; no frequency or facility QRA is inferred."
+            "identity. When a sibling provider_response.json exists, its identity, clock, inventory, "
+            "termination declaration, source digest, and explicit mass/isolation evidence are also "
+            "compared. A normalized response remains diagnostic: synthetic or model-prediction rows "
+            "still require a separate exact provider qualification sidecar, and no frequency or "
+            "facility QRA is inferred."
         )
         checks.append(intake_check)
     if facility_evidence_request is not None:

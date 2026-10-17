@@ -137,3 +137,95 @@ def test_external_release_intake_expands_release_set_container(tmp_path: Path) -
 
     assert report["release_row_count"] == 1
     assert report["artifacts"][0]["item_pointer"] == "$.releases[0]"
+
+
+def test_external_release_intake_normalizes_nearby_provider_response_without_promotion(
+    tmp_path: Path,
+) -> None:
+    release = _release("model_prediction")
+    release.update(
+        {
+            "termination_provenance": "native model ledger",
+            "provider_source_digest": "a" * 64,
+            "cumulative_mass_out_kg": 2.0,
+        }
+    )
+    release_path = tmp_path / "resolved_release.json"
+    release_path.write_text(json.dumps(release), encoding="utf-8")
+    response_path = tmp_path / "provider_response.json"
+    response_path.write_text(
+        json.dumps(
+            {
+                "provider_export_schema": "prism.native_provider_response.v1",
+                "provider_model": "native-test-model",
+                "provider_source_digest": "a" * 64,
+                "provider_state_snapshot_digest": "c" * 64,
+                "data": {
+                    "event_id": release["event_id"],
+                    "component_id": release["component_id"],
+                    "port_id": release["port_id"],
+                    "duration_s": release["duration_s"],
+                    "available_mass_kg": release["available_mass_kg"],
+                    "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+                    "termination_basis": release["termination_basis"],
+                    "termination_provenance": release["termination_provenance"],
+                    "provider_meta": {
+                        "initial_mass_kg": 10.0,
+                        "final_mass_kg": 8.0,
+                        "residual_mass_kg": 0.0,
+                    },
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    report = audit_external_release_artifacts(paths=[release_path])
+
+    assert report["provider_response_pair_count"] == 1
+    assert report["provider_response_normalized_count"] == 1
+    assert report["provider_response_mismatch_count"] == 0
+    audit = report["artifacts"][0]["provider_response_audit"]
+    assert audit["status"] == "NORMALIZED_PROVIDER_RESPONSE"
+    assert audit["diagnostic_only"] is True
+    assert audit["closure_ready"] is False
+    assert audit["promotion_policy"]["provider_result_digest_synthesized"] is False
+    assert audit["checks"]["mass_ledger_closed"] is True
+
+
+def test_external_release_response_mismatch_is_explicit(tmp_path: Path) -> None:
+    release = _release("model_prediction")
+    release.update(
+        {
+            "termination_provenance": "native model ledger",
+            "cumulative_mass_out_kg": 2.0,
+        }
+    )
+    release_path = tmp_path / "resolved_release.json"
+    release_path.write_text(json.dumps(release), encoding="utf-8")
+    (tmp_path / "provider_response.json").write_text(
+        json.dumps(
+            {
+                "provider_source_digest": "z" * 64,
+                "data": {
+                    "event_id": "different-event",
+                    "component_id": release["component_id"],
+                    "port_id": release["port_id"],
+                    "duration_s": release["duration_s"],
+                    "available_mass_kg": release["available_mass_kg"],
+                    "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+                    "termination_basis": release["termination_basis"],
+                    "termination_provenance": release["termination_provenance"],
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    report = audit_external_release_artifacts(paths=[release_path])
+
+    audit = report["artifacts"][0]["provider_response_audit"]
+    assert audit["status"] == "PROVIDER_RESPONSE_MISMATCH"
+    assert audit["checks"]["identity_matches"] is False
+    assert audit["checks"]["source_digest_matches"] is False
+    assert audit["closure_ready"] is False

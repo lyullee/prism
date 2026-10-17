@@ -577,6 +577,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Receptor-geometry interpretation](docs/PRISM_receptor_geometry_interpretation_20261115.md)
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [Current external release-artifact intake](docs/PRISM_external_release_artifact_intake_20261016.md)
+- [External release-response normalization](docs/PRISM_external_release_response_normalization_en.md)
 - [Multi-root external provider audit (English)](docs/PRISM_external_provider_roots_audit_20261017_en.md)
 - [Multi-root external provider audit record](examples/provider_artifact_roots_recheck_20261017.json)
 - [Inspection-centre reviewed-unit re-audit](docs/PRISM_검사센터_검토단위_재감사_20261016.md)
