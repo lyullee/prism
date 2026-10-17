@@ -86,6 +86,11 @@ and a dynamic vaporizer are saved under
 `results/20261115/native_*_closure_check_current`; all three pass the PRISM
 source-dynamics gate with reviewed isolation termination while retaining their
 synthetic and unvalidated status.
+The seven-equipment recheck in
+`results/20261115/native_external_multi_equipment_recheck_current/manifest.json`
+shows the same handoff across the dynamic pipe, layered tank, vaporizer, and
+reliquefier. Fixed-source valve, pump, and vent-stack rows remain explicitly
+diagnostic or operator-limited.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the

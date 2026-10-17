@@ -4316,5 +4316,11 @@
   "external_lh2dt_layered_tank_closure_status": "READY_SOURCE_DYNAMICS_DIAGNOSTIC; reviewed isolation success and explicit provider closure",
   "external_lh2dt_dynamic_thermal_closure_record": "results/20261115/native_dynamic_thermal_closure_check_current/verification.json",
   "external_lh2dt_dynamic_thermal_closure_status": "READY_SOURCE_DYNAMICS_DIAGNOSTIC; reviewed isolation success and explicit provider closure",
-  "external_lh2dt_native_closure_facility_qra_promotion": false
+  "external_lh2dt_native_closure_facility_qra_promotion": false,
+  "external_lh2dt_native_multi_equipment_recheck_record": "results/20261115/native_external_multi_equipment_recheck_current/manifest.json",
+  "external_lh2dt_native_multi_equipment_recheck_status": "EXECUTED_DIAGNOSTIC_ONLY; 7 native equipment rows, 4 dynamic closure READY and 3 fixed-source/operator-limited; provider qualification, frequency, physical validation and facility QRA remain withheld",
+  "external_lh2dt_native_multi_equipment_recheck_equipment_count": 7,
+  "external_lh2dt_native_multi_equipment_recheck_dynamic_closure_ready_count": 4,
+  "external_lh2dt_native_multi_equipment_recheck_provider_packet_promoted_count": 0,
+  "external_lh2dt_native_multi_equipment_recheck_facility_qra_promotion": false
 }

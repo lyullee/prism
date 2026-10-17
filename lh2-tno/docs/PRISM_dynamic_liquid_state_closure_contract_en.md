@@ -81,6 +81,15 @@ source-dynamics gate. They remain synthetic diagnostic cases: none claims
 independent physical validation, a literature initiating frequency, or
 facility IR/F-N promotion.
 
+The seven-equipment recheck is recorded in
+`results/20261115/native_external_multi_equipment_recheck_current/manifest.json`.
+It covers the layered tank, dynamic pipe, stroke-limited valve, mapped pump,
+dynamic vaporizer, dynamic reliquefier, and vent stack. Four dynamic-provider
+rows expose `READY` closure evidence; the fixed-source valve, pump, and vent
+stack rows remain explicitly diagnostic or operator-limited. The manifest is
+not a facility-QRA result and does not infer frequency, physical validation, or
+provider qualification.
+
 ## Release of the operator limitation
 
 The gas and liquid workers release the source-dynamics limitation only when

@@ -74,6 +74,7 @@ def exporter_commands(root: Path, output_dir: Path) -> dict[str, list[str]]:
             *common,
             "--output-dir", str(output_dir / "vaporizer"),
             "--mode", "vaporizer", "--horizon-s", "0.1", "--time-step-s", "0.05",
+            "--isolation-time-s", "0.05", "--post-isolation-observation-s", "0.05",
         ],
         "dynamic_reliquefier": [
             sys.executable,
@@ -81,6 +82,7 @@ def exporter_commands(root: Path, output_dir: Path) -> dict[str, list[str]]:
             *common,
             "--output-dir", str(output_dir / "reliquefier"),
             "--mode", "reliquefier", "--horizon-s", "0.1", "--time-step-s", "0.05",
+            "--isolation-time-s", "0.05", "--post-isolation-observation-s", "0.05",
         ],
         "vent_stack": [
             sys.executable,
@@ -118,6 +120,7 @@ def summarise_packet(name: str, packet_dir: Path, command: list[str], *, exit_co
             "duration_s", "provider_packet_promoted", "physical_validation_claim",
             "frequency_inference_performed", "facility_qra_claim", "state_snapshot_digest_match",
             "isolation_success", "phase_basis", "source_phase",
+            "dynamic_state_closure",
         ):
             if key in verification:
                 summary[key] = verification[key]
