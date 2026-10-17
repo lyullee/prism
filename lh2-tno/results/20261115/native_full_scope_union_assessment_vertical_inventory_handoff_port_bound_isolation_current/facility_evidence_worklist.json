@@ -1,0 +1,3311 @@
+{
+  "schema_version": "prism.facility_evidence_worklist.v1",
+  "status": "OPEN_PROVIDER_EVIDENCE_WORKLIST",
+  "facility_id": "generic-lh2-full-scope-example",
+  "scope": "outdoor_major_accidents",
+  "source_request_schema": "prism.facility_evidence_request.v1",
+  "promotion_policy": {
+    "frequency_is_not_assigned": true,
+    "sensor_frequency_learning": false,
+    "missing_evidence_is_not_zero_risk": true,
+    "facility_qra_promotion": false
+  },
+  "current_assessment": {
+    "event_count": 34,
+    "case_count": 44,
+    "strict_uncomputed_case_count": 29,
+    "qualified_provider_packet_case_count": 0,
+    "facility_total_risk_available": false,
+    "qualified_facility_qra_available": false,
+    "facility_promotion_allowed_now": false
+  },
+  "case_count": 44,
+  "case_rows": [
+    {
+      "sequence": 1,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 2,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 3,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 4,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 5,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 6,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 7,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 8,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 9,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.0625,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 10,
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.0625,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 11,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 12,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 13,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 14,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 15,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 16,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 17,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 18,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 19,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.0625,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 20,
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.0625,
+        "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 21,
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "asset_id": "ambient-vaporizer",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "ade32dda3c6911c1ed75aca690b3756ee86942a455086b155afffa38990c49d5"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.6000000000000003,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 22,
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "asset_id": "ambient-vaporizer",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_over_600s"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "4f7a02ef16c308f36af674af23520467d0b13955442f7e6b5460fa6d963e9875"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_over_600s",
+        "termination_time_s": 600.0,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": false,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "complete 600 s provider history and end-of-horizon inventory"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 23,
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "asset_id": "ambient-vaporizer",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "vaporizer_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "6a617c9bba76e2566636f4d6d7dd930923ca49b1cbe2233df21c539af32cbe67"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.5,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "vaporizer process-side state, failure mode and boundary history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 24,
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "asset_id": "pressure-relief-vent",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "port_ids": [
+          "vent-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "emergency_relief_discharge",
+        "termination_time_s": 0.5,
+        "termination_provenance": "selected exact strict emergency-relief worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "relief/vent set point, capacity and discharge termination history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 25,
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "asset_id": "reliquefier",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "ea4d5877c94a26b850b5db636b5bf809968aa6b8d0bc298a3ee9648086feb16a",
+          "427527d0aa74c74c82e063675464a73fbe9aa404ef77cca7d092f9a305ce9854"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "two_sided_rupture",
+        "termination_time_s": 1e-05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": null
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "both provider outlets, endpoint geometry and same-event coupling",
+        "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 26,
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "asset_id": "reliquefier",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "3efe25b8ead45ff22dcc5d2ebdde6e2d5fc49c275b9c31124e6142dd34754f0b",
+          "fa33c6d5fc2b200b7fbb4ba1f4de32e70719d5501854efaf236a0a08ec7f4669"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "two_sided_rupture",
+        "termination_time_s": 1e-05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": null
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "both provider outlets, endpoint geometry and same-event coupling",
+        "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 27,
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "asset_id": "reliquefier",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "reliquefier_hole"
+      ],
+      "current_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "e1552148519310fd384d14b3e1302ae3156d630baac62d27c6d83fcb8b029477"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.5,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "reliquefier failure mode, connected inventory and outlet history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 28,
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "asset_id": "storage-shell",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "3d737384a6d02cad8877da680ccaaf78dbe751d57b3ccc2b14683d51ecaef6fd"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.0001,
+        "termination_provenance": "native LayeredTank packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 29,
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "asset_id": "storage-shell",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "ddcdd2065f524292b7eb2aa93631a15662a126f63d71ebeb8796161bdb853148"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 5.999999999999993e-05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 30,
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "asset_id": "storage-shell",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "c51997811fae138e6348b88c605bfe0fcfcb1fd481403099cb63245315eb2983"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 5.999999999999999e-06,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": true
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 31,
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "asset_id": "storage-shell",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "89b8306b4968aa355e7fbdfadeae53cb261d5859a10c920a7eb0992332fd86b3"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1e-06,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": true
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 32,
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "asset_id": "storage-shell",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "77f0fce14bead315f16567ba441127d9204fc1575e0fe09c353566f58d6a51be"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1e-06,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": true
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 33,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "asset_id": "transfer-line",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "a638f9d2f9b2c270975e20bb6b35812e1f4e1753e1548d4918a40dc483068407"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 34,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "asset_id": "transfer-line",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "9e3d8d63604568b956662dea7ea36cdad2057e294a7fad25d1de2638f254a0ca"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 35,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "asset_id": "transfer-line",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "1f44835da5eff88e625ae2b6f591a2f3084875929c0f74d2eed8433daa440ee7"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 36,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "asset_id": "transfer-line",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "1f18394a3d5d7dfa3332aa426bae2b25e4c3f3ec430d9dd740fdb246ee26a821"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 37,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "asset_id": "transfer-line",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "786c90a02e6fae8b442aaaf0ee8723b308129c937c1a03265a63d12849274a1c"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.30000000000000004,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 38,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "asset_id": "transfer-pump",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "port_ids": [
+          "pump-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "8de252cd6c117e4804f1a42ed8bca42b961c1c0fbf53d3ecace33ce46d758c13"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.30000000000000004,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pump trip/seal failure state and connected inventory history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 39,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "asset_id": "transfer-pump",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "port_ids": [
+          "pump-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "8930c89e45b3808486014f79c1da59742e986916b9690ebde5f037a319be4435"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.30000000000000004,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "pump trip/seal failure state and connected inventory history"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 40,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "asset_id": "transfer-valve",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "9b837de142516329e65db7c24b7816ecfce3c004982e00376481510260a27297"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 41,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "asset_id": "transfer-valve",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "bd33e46eb899d151696065a2a1489c7be03e5a1db0a921b5cdbdd0ecd9439c37"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 42,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "asset_id": "transfer-valve",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "6e6860e162c489f5b81efa43c6881a5cbfe3570fae44b203b4a57af76d4f19ed"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 43,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "asset_id": "transfer-valve",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "fffed864878f499c2534d609f61c22f4838ff3aa8f13225582c6505605ad214d"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "sequence": 44,
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "asset_id": "transfer-valve",
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "current_status": "EXECUTED_OPERATOR_LIMITED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
+      "exact_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "2c5b0a273281fb9eff50ab0fac1bfa80199817ee82f7752a150087d703c5b653"
+        ]
+      },
+      "release_boundary": {
+        "termination_basis": "reviewed_isolation_success",
+        "termination_time_s": 0.3,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "strict_termination_basis_allowed": true,
+        "domain_truncated": false,
+        "inventory_outside_domain": false
+      },
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "source operator has declared constant-state or open physical closure limitations",
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    }
+  ],
+  "component_summary": [
+    {
+      "key": "ambient-vaporizer-01",
+      "case_count": 3,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "complete 600 s provider history and end-of-horizon inventory",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "vaporizer process-side state, failure mode and boundary history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "inventory-depletion-pipe-01",
+      "case_count": 10,
+      "request_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "liquid-transfer-line-01",
+      "case_count": 5,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "liquid-transfer-pump-01",
+      "case_count": 2,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "pump trip/seal failure state and connected inventory history",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "pressure-relief-vent-01",
+      "case_count": 1,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "relief/vent set point, capacity and discharge termination history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "reliquefier-01",
+      "case_count": 3,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "both provider outlets, endpoint geometry and same-event coupling",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "reliquefier failure mode, connected inventory and outlet history"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "storage-tank-01",
+      "case_count": 5,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "transfer-valve-01",
+      "case_count": 5,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "vertical-handoff-terminal-pipe-01",
+      "case_count": 10,
+      "request_ids": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider-owned vertical-to-horizontal handoff state and boundary",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    }
+  ],
+  "family_summary": [
+    {
+      "key": "inventory_depletion",
+      "case_count": 38,
+      "request_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider-owned vertical-to-horizontal handoff state and boundary",
+        "pump trip/seal failure state and connected inventory history",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "tank pressure, phase inventory and vessel opening history",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "inventory_over_600s",
+      "case_count": 1,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "complete 600 s provider history and end-of-horizon inventory",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "liquid_two_phase",
+      "case_count": 17,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "pump trip/seal failure state and connected inventory history",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "tank pressure, phase inventory and vessel opening history",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "pipe_hole",
+      "case_count": 25,
+      "request_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider-owned vertical-to-horizontal handoff state and boundary",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "pump_hole",
+      "case_count": 2,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "pump trip/seal failure state and connected inventory history",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "reliquefier_hole",
+      "case_count": 1,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "reliquefier failure mode, connected inventory and outlet history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "two_sided_rupture",
+      "case_count": 2,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "both provider outlets, endpoint geometry and same-event coupling",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "valve_hole",
+      "case_count": 5,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "vaporizer_hole",
+      "case_count": 1,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "vaporizer process-side state, failure mode and boundary history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "vent_hole",
+      "case_count": 1,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "relief/vent set point, capacity and discharge termination history"
+      ],
+      "blocking_reasons": [
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "key": "vertical_handoff",
+      "case_count": 10,
+      "request_ids": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "pipe upstream/downstream state and isolation response history",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider-owned vertical-to-horizontal handoff state and boundary",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    },
+    {
+      "key": "vessel_hole",
+      "case_count": 5,
+      "request_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request"
+      ],
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "required_input_origins": [
+        "reviewed_measurement"
+      ],
+      "required_evidence": [
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "flash quality, gas/liquid/ground partition and droplet treatment",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "blocking_reasons": [
+        "current case status is EXECUTED_OPERATOR_LIMITED",
+        "qualified provider packet coverage is 0/44 cases",
+        "source operator has declared constant-state or open physical closure limitations"
+      ]
+    }
+  ],
+  "blocking_reason_counts": {
+    "current case status is EXECUTED_OPERATOR_LIMITED": 29,
+    "qualified provider packet coverage is 0/44 cases": 44,
+    "source operator has declared constant-state or open physical closure limitations": 29
+  }
+}

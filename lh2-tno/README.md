@@ -148,6 +148,23 @@ remain `TEMPLATE_ONLY`; replacing a placeholder with a reviewed
 provider result can be qualified. This workflow never infers frequency from
 signals and never enables facility QRA by itself.
 
+For the larger generic-facility assessment, turn the evidence request into a
+provider-facing work queue with exact case, component, port, termination, and
+digest requirements:
+
+```powershell
+python scripts/export_facility_evidence_worklist.py `
+  --request results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json `
+  --output results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_worklist.json `
+  --csv-output results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_worklist.csv
+```
+
+The current worklist contains 44 cases across 9 components and 12 accident
+families. It is an evidence-intake document only: it does not assign
+frequency, infer a value from sensors, or promote facility QRA. A case remains
+open until a provider packet and its required qualification evidence match the
+exact identity in the request.
+
 The clean-source replay of the same 24-event scope is documented in the
 [clean-source full-scope replay record](docs/PRISM_native_clean_full_scope_replay_20261017.md).
 It uses `lh2dt_models@16f7a4b`, matches and executes all 24 packet identities,

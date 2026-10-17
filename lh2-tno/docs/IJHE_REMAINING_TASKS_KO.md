@@ -10,6 +10,7 @@
 - 각 요청은 `provider_release_packet`, `frequency_binding`, `slabx_lh2_consequence`, `facility_condition_binding` 네 블록을 정확히 연결한다.
 - 최신 표준 산출물은 현재·예측 경로 모두 `QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE`를 기록한다.
 - 이 결과는 증거 연결 완성도를 뜻하며, 정량 평가기 실행·시설 IR/F-N 산출·시설 QRA 승격을 뜻하지 않는다.
+- 시설 증거 요청은 `scripts/export_facility_evidence_worklist.py`로 설비·사고군·케이스별 작업목록(JSON/CSV)으로 펼칠 수 있다. 현재 목록은 44개 케이스, 9개 설비, 12개 사고군이며, 빈도나 위험도를 자동으로 채우지 않는다.
 
 ## 남은 게이트
 
