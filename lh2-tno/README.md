@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,419 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,442 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -618,6 +618,26 @@ The inspection-centre source inventory is documented in
 [`PRISM_inspection_center_source_suitability_20261115.md`](docs/PRISM_inspection_center_source_suitability_20261115.md).
 It is a state/HAZOP diagnostic input boundary; it does not create accident
 releases or learn failure frequencies from normal-operation signals.
+
+To reproduce the current source re-audit from the inspection-centre folder,
+run the combined read-only command below:
+
+```powershell
+python scripts/build_inspection_center_evidence_reaudit.py `
+  --source-root "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터" `
+  --output results/20261115/inspection_center_evidence_reaudit_current.json `
+  --scenario-audit-output results/20261115/inspection_center_scenario_evidence_current.json `
+  --scenario-import-output results/20261115/inspection_center_scenario_import_current.json `
+  --timeseries-audit-output results/20261115/inspection_center_timeseries_current.json
+```
+
+The current run records 3 CSV files/52 scenario rows, with 41 outdoor
+screening candidates and 11 rows outside the declared outdoor scope. It also
+records 17 workbooks/78 sheets and 522 numeric signal columns whose engineering
+units are still unconfirmed. The command keeps provider-packet creation,
+frequency assignment, sensor-frequency learning, and facility-QRA promotion
+disabled. The contract is tested by
+[`test_inspection_center_evidence_reaudit.py`](tests/test_inspection_center_evidence_reaudit.py).
 
 The vent procedure CSV has a separate provenance adapter:
 [`inspection_center_operation_sequence_evidence.json`](results/20261115/inspection_center_operation_sequence_evidence.json).
