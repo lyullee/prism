@@ -102,6 +102,8 @@ def _request_defaults(
         defaults["source_operator"] = (
             "equipment_liquid_over_600s" if is_liquid else "equipment_inventory_over_600s"
         )
+    elif getattr(packet, "termination_basis", None) == "model_pressure_equalization":
+        defaults["source_operator"] = "equipment_pressure_equalization"
     else:
         defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
     defaults["source_duration_mode"] = (
@@ -232,6 +234,12 @@ def _packet_event_match(packet: Any, events: list[Any]) -> Any:
         basis_to_mode = {
             "inventory_depletion": "instantaneous_inventory",
             "inventory_over_600s": "inventory_over_600s",
+            # A provider may replace a bounded observation horizon with an
+            # explicit pressure-equalization boundary after re-export.  The
+            # facility frequency event remains the reviewed
+            # ``inventory_over_600s`` event; the packet's termination basis is
+            # carried separately into the release ledger and evidence audit.
+            "model_pressure_equalization": "inventory_over_600s",
         }
         release_mode = basis_to_mode.get(getattr(packet, "termination_basis", None))
         matches = [

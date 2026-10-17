@@ -103,6 +103,32 @@ def test_inventory_packet_matches_exact_termination_event_without_opening() -> N
     assert _packet_event_match(packet, [inventory_event]).id == "facility/vaporizer/G1"
 
 
+def test_pressure_equalization_packet_matches_reviewed_bounded_inventory_event() -> None:
+    packet = SimpleNamespace(
+        event_id="facility/vaporizer/G2",
+        component_id="vaporizer",
+        failure_opening_diameter_m=None,
+        termination_basis="model_pressure_equalization",
+    )
+    inventory_event = SimpleNamespace(
+        id="facility/vaporizer/G2",
+        model_component_id="vaporizer",
+        release=SimpleNamespace(mode="inventory_over_600s"),
+    )
+
+    assert _packet_event_match(packet, [inventory_event]).id == "facility/vaporizer/G2"
+
+
+def test_pressure_equalization_request_selects_explicit_gas_operator() -> None:
+    packet = SimpleNamespace(
+        event_kind="accidental_leak",
+        termination_basis="model_pressure_equalization",
+    )
+    defaults = _request_defaults({}, packet)
+    assert defaults["source_operator"] == "equipment_pressure_equalization"
+    assert defaults["source_duration_mode"] == "model_natural"
+
+
 def test_low_speed_gas_packet_requires_provider_source_state_for_slabx_path() -> None:
     state = object()
     packet = SimpleNamespace(

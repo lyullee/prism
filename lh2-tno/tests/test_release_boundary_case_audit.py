@@ -126,6 +126,16 @@ def test_case_audit_accepts_pressure_equalization_overlay_for_bounded_history():
     assert result["strict_release_boundary_eligible"] is True
 
 
+def test_case_audit_serializes_uncomputed_rows_with_missing_termination_basis():
+    case = _case("uncomputed")
+    row = _ledger_row("uncomputed")
+    row["termination"] = {}
+    report = build_release_boundary_case_audit(_assessment([case], [row]))
+
+    assert report["termination_basis_counts"][None] == 1
+    assert report["status"] == "CASE_BOUNDARY_BLOCKED"
+
+
 def test_case_audit_rechecks_literature_frequency_event_and_port_binding():
     case = _case("event-1")
     row = _ledger_row("event-1")

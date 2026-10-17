@@ -52,5 +52,23 @@ required before it can affect any release-boundary count.  The initial state,
 geometry, and valve area are synthetic, so the packet remains diagnostic and
 does not claim physical validation, frequency inference, or facility QRA.
 
+### Facility-chain candidate replay
+
+The same packet was then passed through the native multi-equipment facility
+campaign runner. The campaign matcher maps the explicit
+`model_pressure_equalization` provider termination to the reviewed
+`inventory_over_600s` frequency event while preserving the provider's actual
+termination basis in the release ledger. The consequence request uses the
+explicit `equipment_pressure_equalization` operator and `model_natural`
+duration mode; it does not reinterpret the packet as a 600 s horizon.
+
+The one-packet candidate reached the consequence chain and produced four risk
+atoms. Its separate release-boundary audit reports the G2 row as
+`provider_termination_evidence_status=VALID`,
+`numerical_release_closed=true`, and `strict_release_boundary_status=ELIGIBLE`.
+The candidate still has 23 uncomputed cases and keeps facility IR/F-N and QRA
+promotion false. The compact tracked record is
+[`g2_pressure_equalization_facility_candidate_summary.json`](../results/20261018/g2_pressure_equalization_facility_candidate_summary.json).
+
 The implementation is [`src/lh2_tno/pressure_equalization.py`](../src/lh2_tno/pressure_equalization.py), with the command-line wrapper
 [`scripts/audit_provider_pressure_equalization.py`](../scripts/audit_provider_pressure_equalization.py).

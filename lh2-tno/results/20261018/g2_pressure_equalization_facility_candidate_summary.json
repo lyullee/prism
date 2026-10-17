@@ -1,0 +1,45 @@
+{
+  "schema_version": "prism.g2_pressure_equalization_facility_candidate_summary.v1",
+  "status": "DIAGNOSTIC_FACILITY_CHAIN_EXECUTED_RELEASE_BOUNDARY_CLOSED_FOR_G2",
+  "source_packet": "results/20261018/g2_pressure_equalization_reexport_diagnostic.json",
+  "campaign_record": "results/20261018/g2_pressure_equalization_facility_candidate/verification.json",
+  "release_boundary_audit": "results/20261018/g2_pressure_equalization_facility_candidate/release_boundary_audit.json",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+  "component_id": "ambient-vaporizer-01",
+  "provider_result_digest": "b59fefcf3f795250e7fcef7858d5f7e678157e814b9c7db2ace6b38c498d29e8",
+  "termination_basis": "model_pressure_equalization",
+  "termination_provenance": "external lh2dt.DynamicVaporizer source pressure reached the non-outward atmospheric boundary and remained at zero flow through the provider observation tail",
+  "campaign_chain": {
+    "matched_event": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+    "executed_case_count": 1,
+    "risk_atom_count": 4,
+    "chain_closed": true,
+    "facility_total_risk_available": false,
+    "facility_qra_claim": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "uncomputed_case_count": 23
+  },
+  "release_boundary": {
+    "provider_termination_evidence_status": "VALID",
+    "provider_termination_evidence_basis": "model_pressure_equalization",
+    "numerical_release_closed": true,
+    "release_termination_reasons": [],
+    "strict_release_boundary_status": "ELIGIBLE",
+    "candidate_audit_case_count": 24,
+    "candidate_audit_numerically_closed_case_count": 1,
+    "candidate_audit_numerically_open_case_count": 23
+  },
+  "authority_binding": {
+    "current_authority_campaign": "results/20261115/native_external_facility_full_scope_campaign_current",
+    "authority_replaced": false,
+    "reason": "Candidate provider result digest is different from the authority packet; exact identity binding keeps this run diagnostic until an explicit campaign rebind is reviewed."
+  },
+  "limitations": [
+    "synthetic facility geometry, weather and population remain diagnostic inputs",
+    "23 other declared cases are uncomputed in this one-packet candidate campaign",
+    "provider qualification and independent physical validation are absent",
+    "facility IR/F-N and facility QRA promotion remain false",
+    "SLABx-LH2 is consumed as the frozen external consequence component and is not modified or revalidated here"
+  ]
+}

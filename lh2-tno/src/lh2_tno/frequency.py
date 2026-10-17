@@ -391,11 +391,11 @@ def bind_event(request, event: FrequencyEvent):
             and request.source_operator in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'}
         ) or (
             event.release.mode == 'inventory_over_600s'
-            and request.source_operator in {'inventory_over_600s', 'equipment_inventory_over_600s', 'equipment_liquid_over_600s'}
+            and request.source_operator in {'inventory_over_600s', 'equipment_inventory_over_600s', 'equipment_liquid_over_600s', 'equipment_pressure_equalization'}
         )
         if not accepted_inventory_operator:
             raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
-        if request.source_operator in {'equipment_inventory_depletion', 'equipment_inventory_over_600s'}:
+        if request.source_operator in {'equipment_inventory_depletion', 'equipment_inventory_over_600s', 'equipment_pressure_equalization'}:
             if request.resolved_release is None or request.resolved_release.event_kind != 'accidental_leak':
                 raise ValueError('provider inventory binding requires an accidental-leak resolved release history')
         if request.source_operator in {'equipment_liquid_release', 'equipment_liquid_over_600s'}:
@@ -405,7 +405,7 @@ def bind_event(request, event: FrequencyEvent):
             raise ValueError('non-hole inventory binding requires explicit termination provenance')
         if event.release.mode == 'instantaneous_inventory' and request.release_termination.basis != 'inventory_depletion':
             raise ValueError('instantaneous inventory binding requires an inventory-depletion termination basis')
-        if event.release.mode == 'inventory_over_600s' and request.release_termination.basis != 'inventory_over_600s':
+        if event.release.mode == 'inventory_over_600s' and request.release_termination.basis not in {'inventory_over_600s', 'model_pressure_equalization'}:
             raise ValueError('600 s inventory binding requires an inventory-over-600s termination basis')
         payload = request.model_dump(mode='json')
         if request.annual_frequency_per_year is not None:

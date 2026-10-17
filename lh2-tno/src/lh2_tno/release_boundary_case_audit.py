@@ -54,6 +54,20 @@ def _as_rows(value: Any) -> list[Mapping[str, Any]]:
     return [row for row in value if isinstance(row, Mapping)]
 
 
+def _sorted_counter(counter: Counter[Any]) -> dict[Any, int]:
+    """Serialize counters whose diagnostic rows may legitimately use ``None``.
+
+    Partial facility campaigns contain uncomputed rows without a termination
+    basis or provider-evidence status.  Their counters must remain visible in
+    the audit instead of failing while sorting mixed ``None``/string keys.
+    """
+
+    return {
+        key: counter[key]
+        for key in sorted(counter, key=lambda value: (value is not None, str(value)))
+    }
+
+
 def _same_mass(left: Any, right: Any, tolerance: float) -> bool:
     """Compare provider-owned masses without accepting missing values."""
 
@@ -1228,13 +1242,9 @@ def build_release_boundary_case_audit(
                 "strict_release_boundary_blocked_case_count"
             ],
             "numerically_closed_case_count": summary["numerically_closed_case_count"],
-            "provider_termination_evidence_status_counts": dict(sorted(
-                summary["provider_termination_evidence_status_counts"].items()
-            )),
-            "request_contract_status_counts": dict(sorted(
-                summary["request_contract_status_counts"].items()
-            )),
-            "blocking_reason_counts": dict(sorted(summary["blocking_reason_counts"].items())),
+            "provider_termination_evidence_status_counts": _sorted_counter(summary["provider_termination_evidence_status_counts"]),
+            "request_contract_status_counts": _sorted_counter(summary["request_contract_status_counts"]),
+            "blocking_reason_counts": _sorted_counter(summary["blocking_reason_counts"]),
         }
     reasons = [reason for row in rows for reason in row["release_boundary_blocking_reasons"]]
     return {
@@ -1262,9 +1272,7 @@ def build_release_boundary_case_audit(
         "facility_evidence_request_status": (
             request_root.get("status") if request_root is not None else None
         ),
-        "facility_evidence_request_contract_status_counts": dict(
-            sorted(request_contract_status_counts.items())
-        ),
+        "facility_evidence_request_contract_status_counts": _sorted_counter(request_contract_status_counts),
         "facility_evidence_request_contract_blocked_case_count": request_contract_status_counts.get(
             "BLOCKED", 0
         ),
@@ -1281,14 +1289,12 @@ def build_release_boundary_case_audit(
         "numerically_open_case_count": sum(
             row["numerical_release_closed"] is not True for row in rows
         ),
-        "numerical_closure_status_counts": dict(sorted(numerical_closure_counts.items())),
-        "consequence_domain_status_counts": dict(sorted(domain_status_counts.items())),
-        "frequency_binding_status_counts": dict(sorted(frequency_binding_counts.items())),
+        "numerical_closure_status_counts": _sorted_counter(numerical_closure_counts),
+        "consequence_domain_status_counts": _sorted_counter(domain_status_counts),
+        "frequency_binding_status_counts": _sorted_counter(frequency_binding_counts),
         "frequency_unbound_case_count": frequency_binding_counts.get("UNBOUND", 0)
         + frequency_binding_counts.get("NOT_AVAILABLE", 0),
-        "frequency_uncertainty_status_counts": dict(
-            sorted(frequency_uncertainty_counts.items())
-        ),
+        "frequency_uncertainty_status_counts": _sorted_counter(frequency_uncertainty_counts),
         "frequency_uncertainty_unavailable_case_count": frequency_uncertainty_counts.get(
             "NOT_AVAILABLE", 0
         ),
@@ -1296,10 +1302,8 @@ def build_release_boundary_case_audit(
             "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED", 0
         ),
         "consequence_domain_truncated_case_count": domain_status_counts.get("TRUNCATED", 0),
-        "provider_qualification_status_counts": dict(sorted(provider_status_counts.items())),
-        "provider_termination_evidence_status_counts": dict(
-            sorted(termination_evidence_status_counts.items())
-        ),
+        "provider_qualification_status_counts": _sorted_counter(provider_status_counts),
+        "provider_termination_evidence_status_counts": _sorted_counter(termination_evidence_status_counts),
         "provider_termination_evidence_supplied": provider_termination_evidence is not None,
         "provider_termination_evidence_catalog_path": (
             provider_termination_evidence.get("_record_path")
@@ -1317,9 +1321,9 @@ def build_release_boundary_case_audit(
         "provider_termination_evidence_invalid_case_count": termination_evidence_status_counts.get(
             "INVALID", 0
         ),
-        "termination_basis_counts": dict(sorted(Counter(
+        "termination_basis_counts": _sorted_counter(Counter(
             row["termination"]["basis"] for row in rows
-        ).items())),
+        )),
         "rows": rows,
         "residual_tolerance_kg": tolerance,
         "provider_qualification_claim": False,
