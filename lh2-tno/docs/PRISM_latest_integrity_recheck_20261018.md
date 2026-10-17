@@ -24,6 +24,6 @@ PRISM's full portable suite passed `1525` tests with one warning after the numer
 
 ## Continuous integration
 
-GitHub Actions run #1401 for commit `c8ec1cf2` completed successfully. The API record is the authoritative status; the web page may briefly show a stale in-progress view during the recheck.
+GitHub Actions run #1402 for commit `42a788cf` completed successfully. The API record is the authoritative status; the web page may briefly show a stale in-progress view during the recheck.
 
 
