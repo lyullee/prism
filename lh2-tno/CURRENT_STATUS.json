@@ -5499,7 +5499,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "pending-current-worklist-commit",
+  "latest_local_full_test_run_commit": "31b71ca3",
   "current_union_ijhe_objective_coverage_audit_check_count": 37,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
