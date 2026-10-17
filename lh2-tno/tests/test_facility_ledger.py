@@ -504,6 +504,36 @@ def test_facility_ledger_accepts_explicit_reviewed_population_source():
     assert merged["population_accounting"]["population_source_unqualified_row_count"] == 0
 
 
+def test_facility_ledger_rejects_non_hex_population_source_digest():
+    result = _result(
+        event_id="event-population-invalid-digest",
+        asset_id="asset-population-invalid-digest",
+        component_id="tank-population-invalid-digest",
+        frequency=1e-3,
+    )
+    result["annual_conditions"] = [{
+        "id": "weather-1",
+        "annual_probability": 1.0,
+        "population": [{
+            "receptor_id": "receptor-a",
+            "persons": 1.0,
+            "presence_probability": 1.0,
+            "source_status": "field_confirmed",
+            "source_digest": "g" * 64,
+        }],
+        "provenance": "field-confirmed population snapshot",
+    }]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-population-invalid-digest",)
+    )
+    accounting = merged["population_accounting"]
+    assert accounting["population_source_qualification_status"] == (
+        "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED"
+    )
+    assert accounting["population_source_digest_count"] == 0
+    assert accounting["population_source_unqualified_row_count"] == 0
+
+
 def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():
     result = _result(
         event_id="event-legacy-fn-diagnostics",

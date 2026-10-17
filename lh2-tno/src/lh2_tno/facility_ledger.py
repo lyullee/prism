@@ -607,7 +607,12 @@ def _population_accounting(
             normalized = "unqualified"
         population_source_status_counts[normalized] = population_source_status_counts.get(normalized, 0) + 1
         digest = row.get("source_digest") or condition.get("population_source_digest")
-        if isinstance(digest, str) and len(digest) == 64:
+        digest_is_sha256 = (
+            isinstance(digest, str)
+            and len(digest) == 64
+            and all(character in "0123456789abcdefABCDEF" for character in digest)
+        )
+        if digest_is_sha256:
             population_source_digest_count += 1
         if normalized not in {"field_confirmed", "reviewed_design", "reviewed"}:
             population_source_unqualified_row_count += 1
