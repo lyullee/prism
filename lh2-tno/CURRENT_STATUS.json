@@ -5922,7 +5922,7 @@
   "facility_qra_gate_summary_module": "src/lh2_tno/facility_qra_gate.py",
   "facility_qra_gate_summary_script": "scripts/build_facility_qra_gate_summary.py",
   "facility_qra_gate_summary_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json",
-  "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD; six-gate reconciliation over the external full-scope diagnostic (24 cases); diagnostic facility risk available; 26 explicit blocking reasons",
+  "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD; six-gate reconciliation over the authoritative 34-event/44-case union assessment; diagnostic facility risk available; 50 explicit blocking reasons",
   "facility_qra_gate_summary_promotion_allowed": false,
   "facility_qra_gate_summary_frequency_port_gate_aligned": true,
   "facility_qra_gate_summary_provider_qualification_complete": false,

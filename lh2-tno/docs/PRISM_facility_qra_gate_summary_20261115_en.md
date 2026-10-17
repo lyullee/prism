@@ -26,7 +26,7 @@ python scripts/build_facility_qra_gate_summary.py `
   --assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
   --provider-audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
   --validation-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json `
-  --scope-matrix results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json `
+  --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --output results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json
 ```
 
@@ -39,7 +39,7 @@ union contains 34 events and 44 cases; 29 cases remain withheld by the strict
 release boundary.
 The frequency-port gate is aligned, qualified provider packets are `0/26`, and
 the physical-validation matrix remains restricted. The summary currently has
-26 explicit blocking reasons. The provider qualification audit remains a
+50 explicit blocking reasons. The provider qualification audit remains a
 separate input, so missing provider evidence cannot be hidden by the full-scope
 assessment.
 The summary is therefore a review control and does not claim a regulatory or
