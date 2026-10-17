@@ -57,3 +57,25 @@ def test_backend_chain_blocks_missing_stage_and_case_field() -> None:
     assert any("pool" in reason for reason in report["blocking_reasons"])
     assert report["closed_case_count"] == 0
 
+
+def test_backend_chain_does_not_substitute_default_path_for_unknown_family() -> None:
+    campaign = {"status": "PARTIAL_FACILITY_SCOPE", "cases": [deepcopy(_case())]}
+    campaign["cases"][0]["scenario_families"] = ["unsupported_accident_family"]
+    contract = deepcopy(CONTRACT)
+    contract["paths"] = [{
+        "path_id": "default",
+        "stage_ids": [row["stage_id"] for row in contract["stages"]],
+        "scenario_families": [],
+        "required_case_fields": [],
+        "required_atom_fields": [],
+    }]
+
+    report = audit_consequence_backend_chain(campaign, contract)
+
+    assert report["status"] == "INCOMPLETE_CONSEQUENCE_BACKEND_CHAIN"
+    assert report["closed_case_count"] == 0
+    assert any(
+        "no backend path matches" in reason
+        for reason in report["case_rows"][0]["blocking_reasons"]
+    )
+

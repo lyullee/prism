@@ -42,6 +42,11 @@ explicit and reproducible; it is not evidence that the IJHE strict QRA gates
 are complete.  The authoritative completion audit remains
 `results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`.
 
+The consequence-backend contract also requires an explicit scenario-family
+match.  A case with a named accident family cannot fall back to a generic
+release path.  If no contract path lists that family, the case is reported as
+uncomputed and its IR/F-N contribution is withheld.
+
 ## Reproduction
 
 Run from the `lh2-tno` package directory:

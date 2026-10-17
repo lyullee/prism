@@ -48,7 +48,19 @@
     {
       "path_id": "standard_release_to_harm",
       "stage_ids": ["source", "pool", "near_field_and_dispersion", "cloud_observation", "fire_explosion_damage_risk"],
-      "scenario_families": [],
+      "scenario_families": [
+        "vessel_hole",
+        "pipe_hole",
+        "valve_hole",
+        "vent_hole",
+        "pump_hole",
+        "vaporizer_hole",
+        "reliquefier_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "vertical_handoff"
+      ],
       "required_case_fields": ["provider_packet_identity", "termination", "mass_ledger.released_kg", "domain_assessment"],
       "required_atom_fields": ["receptor_harm_low_high", "expected_deaths_low_high"]
     },

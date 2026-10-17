@@ -4,8 +4,10 @@ The facility campaign already stores per-case stage timings and result
 digests.  This audit makes the model handoff explicit: equipment release,
 DynamicLH2PoolX pool handling, SLABx-LH2 dispersion, cloud observation and
 PRISM harm aggregation must all be declared in a contract and present in
-every saved case.  It is an accounting diagnostic; it does not qualify the
-models, infer frequency, or promote facility IR/F-N.
+every saved case.  A named accident family may only use a path that explicitly
+lists that family; otherwise the case remains uncomputed.  It is an accounting
+diagnostic; it does not qualify the models, infer frequency, or promote
+facility IR/F-N.
 """
 from __future__ import annotations
 
@@ -159,9 +161,15 @@ def audit_consequence_backend_chain(
         } if isinstance(case.get("scenario_families", []), Sequence) and not isinstance(case.get("scenario_families", []), (str, bytes)) else set()
         matching_paths = [
             path for path in paths
-            if path["scenario_families"] and scenario_families.intersection(path["scenario_families"])
+            if path["scenario_families"]
+            and scenario_families.intersection(path["scenario_families"])
         ]
-        if not matching_paths:
+        # An empty-family path is a default only for a case that declares no
+        # scenario family.  Once the campaign has named an accident family,
+        # silently routing it through a generic path would turn an unsupported
+        # accident into a supported one.  Keep that case explicitly
+        # uncomputed until a matching path is declared.
+        if not matching_paths and not scenario_families:
             matching_paths = [path for path in paths if not path["scenario_families"]]
         if not matching_paths:
             case_reasons.append("no backend path matches the case scenario family")
