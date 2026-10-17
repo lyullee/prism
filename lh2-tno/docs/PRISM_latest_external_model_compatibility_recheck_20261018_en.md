@@ -2,38 +2,33 @@
 
 ## Result
 
-The latest external `lh2dt_models` packet root was checked against the 24-event generic outdoor LH2 frequency campaign before any facility result was promoted. The packet root is usable for 23 events. One event is blocked because the provider changed its release termination contract without a corresponding change to the existing frequency catalogue.
+The latest external `lh2dt_models` packet root was checked against the current 24-event generic outdoor LH2 frequency campaign before any facility result was promoted. All 24 exact packet identities and provider result digests match the current campaign. The current campaign already classifies ambient-vaporizer G1 as `inventory_over_600s`, so the provider's bounded 600-second termination is applied with the matching frequency mode.
 
 | Check | Result |
 |---|---:|
 | Generated frequency events checked | 24 |
-| Packet-compatible events | 23 |
-| Packet/frequency compatibility blocks | 1 |
+| Packet-compatible events | 24 |
+| Packet/frequency compatibility blocks | 0 |
 | Diagnostic base cases | 24 |
-| Numerically executed base cases | 23 |
-| Base risk atoms | 92 |
-| Diagnostic union events / cases / risk atoms | 34 / 44 / 172 |
+| Numerically executed base cases | 24 |
+| Base risk atoms | 96 |
+| Diagnostic union events / cases / risk atoms | 34 / 44 / 176 |
 | Qualified facility QRA | No |
 | Facility IR/F-N promotion | No |
 
 The machine-readable record is [`results/20261018/latest_external_model_compatibility_recheck_20261018.json`](../results/20261018/latest_external_model_compatibility_recheck_20261018.json).
 
-## Blocking mismatch
+## Frequency reconciliation
 
-`generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1` is still classified in the frequency catalogue as `instantaneous_inventory`. The latest provider packet declares `inventory_over_600s` and uses `equipment_inventory_over_600s`. PRISM correctly rejects this combination because it would apply an instantaneous-inventory frequency to a 600-second provider boundary.
-
-The recheck therefore keeps the existing compatible packet for this one event in a separate diagnostic candidate. It does not rewrite the frequency mode, invent a new rate, or claim that the latest packet root is a complete facility input. The remaining 23 routes use the latest packet root.
+An earlier diagnostic comparison used an older isolation campaign whose G1 frequency row was still `instantaneous_inventory`. That comparison was correctly blocked and has been retained as historical evidence. It was not the current external facility campaign. The current campaign in `results/20261115/native_external_facility_full_scope_campaign_current` uses the latest packet root and declares G1 as `inventory_over_600s`; no frequency rate was invented or changed during this recheck.
 
 ## Candidate facility execution
 
-The compatible diagnostic candidate was run through the existing PRISM chain: literature frequency binding, provider-resolved release, outdoor consequence calculation, weather and population conditions, and facility ledger aggregation. The resulting base candidate reports 11 `EXECUTED`, 12 `EXECUTED_OPERATOR_LIMITED`, and 1 failed case; the failed case is the blocked G1 route. The candidate union with the existing vertical-handoff and inventory-depletion ledgers contains 34 events, 44 cases, and 172 risk atoms.
+The current campaign has already been run through the existing PRISM chain: literature frequency binding, provider-resolved release, outdoor consequence calculation, weather and population conditions, and facility ledger aggregation. It reports 24 cases, 24 executed cases, 11 operator-limited cases, and 96 risk atoms. The facility union with the existing vertical-handoff and inventory-depletion ledgers contains 34 events, 44 cases, and 176 risk atoms.
 
-Dynamic state closure is visible in the candidate ledger. The base candidate contains 11 `READY`, 10 `BLOCKED`, and 3 `NOT_DECLARED` closure states. The union contains 11 `READY`, 10 `BLOCKED`, and 23 `NOT_DECLARED` states because the extension campaigns retain their independent evidence limits.
+Dynamic state closure is visible in the current ledger. The base campaign contains 13 `READY`, 9 `BLOCKED`, and 2 `NOT_DECLARED` closure states. The union contains 13 `READY`, 9 `BLOCKED`, and 22 `NOT_DECLARED` states because the extension campaigns retain their independent evidence limits.
 
-These are diagnostic comparison outputs. `facility_total_risk_available=false`, `qualified_facility_qra_available=false`, `provider_packet_promoted=false`, and `physical_validation_claim=false` remain enforced. The latest root can become the facility input only after one of the following is supplied:
-
-1. a frequency catalogue row explicitly defined for the 600-second inventory-over-600s event; or
-2. a provider packet for G1 whose termination basis is compatible with the existing instantaneous-inventory frequency row.
+These are diagnostic comparison outputs. `facility_total_risk_available=false`, `qualified_facility_qra_available=false`, `provider_packet_promoted=false`, and `physical_validation_claim=false` remain enforced. The remaining work is evidence qualification and facility-scope closure, not packet/frequency identity reconciliation.
 
 ## Code change made during the check
 
@@ -44,6 +39,8 @@ Regression coverage was added for pressure-equalisation rebinding. The full test
 ## Reproduction
 
 ```powershell
+# Historical comparison only: this uses the older isolation campaign and
+# intentionally exposes the G1 frequency-mode mismatch described above.
 python scripts/rebind_campaign_to_worklist_packets.py `
   --campaign results/20261115/native_full_scope_frequency_assessment_isolation_current/campaign.json `
   --packet-evidence results/20261018/latest_full_scope_packet_evidence_20261018.json `
@@ -53,14 +50,14 @@ python scripts/rebind_campaign_to_worklist_packets.py `
 
 python scripts/run_native_full_scope_frequency_assessment.py `
   --manifest examples/generic_lh2_full_scope_manifest.json `
-  --campaign results/20261018/latest_compatible_campaign_rebound_20261018.json `
+  --campaign results/20261115/native_external_facility_full_scope_campaign_current/campaign.json `
   --backend-config results/20261008/full_chain/backend_config.json `
-  --output-dir results/20261018/native_full_scope_frequency_assessment_latest_compatible_candidate
+  --output-dir results/20261115/native_external_facility_full_scope_campaign_current
 
 python scripts/run_native_full_scope_union_assessment.py `
-  --base-dir results/20261018/native_full_scope_frequency_assessment_latest_compatible_candidate `
-  --base-campaign results/20261018/native_full_scope_frequency_assessment_latest_compatible_candidate/campaign.json `
-  --base-campaign-result results/20261018/native_full_scope_frequency_assessment_latest_compatible_candidate/campaign_result.json `
+  --base-dir results/20261115/native_external_facility_full_scope_campaign_current `
+  --base-campaign results/20261115/native_external_facility_full_scope_campaign_current/campaign.json `
+  --base-campaign-result results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json `
   --vertical-result results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/vertical_handoff_rebound_result.json `
   --vertical-scope-matrix results/20261020/vertical_handoff_scope_matrix_all_bins.json `
   --inventory-result results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/inventory_depletion_rebound_result.json `
@@ -68,5 +65,5 @@ python scripts/run_native_full_scope_union_assessment.py `
   --inventory-source-asset-id terminal_pipe_asset `
   --inventory-source-component-id terminal_pipe `
   --extension-state-snapshot-audit results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/extension_state_snapshot_coverage.json `
-  --output-dir results/20261018/native_full_scope_union_assessment_latest_compatible_candidate
+  --output-dir results/20261115/native_full_scope_union_assessment_external_base_recheck_current
 ```
