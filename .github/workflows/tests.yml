@@ -15,6 +15,7 @@ on:
       - 'lh2-tno/docs/**'
       - 'lh2-tno/CURRENT_STATUS.json'
       - 'lh2-tno/DEVELOPMENT_GOAL.json'
+      - 'lh2-tno/README.md'
   pull_request:
     branches:
       - main
@@ -23,6 +24,7 @@ on:
       - 'lh2-tno/docs/**'
       - 'lh2-tno/CURRENT_STATUS.json'
       - 'lh2-tno/DEVELOPMENT_GOAL.json'
+      - 'lh2-tno/README.md'
 
 permissions:
   contents: read
