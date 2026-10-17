@@ -76,3 +76,45 @@ def test_template_flattens_native_full_scope_request_rows(tmp_path):
     assert result["entry_count"] == 1
     assert result["entries"][0]["expected_identity"]["component_id"] == "native-component"
     assert result["promotion_allowed"] is False
+
+
+def test_template_accepts_facility_evidence_request_and_preserves_case_metadata(tmp_path):
+    catalogue = tmp_path / "facility_request.json"
+    catalogue.write_text(json.dumps({
+        "schema_version": "prism.facility_evidence_request.v1",
+        "case_requests": [{
+            "request_id": "facility/event-1",
+            "event_id": "event-1",
+            "asset_id": "tank-1",
+            "component_id": "tank-1",
+            "hazop_scenario_id": "HZ-1",
+            "operating_mode": "receiving",
+            "scenario_families": ["vessel_hole"],
+            "required_input_origin": "reviewed_measurement",
+            "frequency_port_ids": ["tank.out"],
+            "provider_packet_port_ids": ["tank.out"],
+            "request_kind": "QUALIFIED_PROVIDER_PACKET",
+            "current_status": "EXECUTED",
+            "exact_match_required": {
+                "event_id": "event-1",
+                "component_id": "tank-1",
+                "port_ids": ["tank.out"],
+                "provider_source_digests": ["e" * 64],
+                "provider_result_digests": ["f" * 64],
+            },
+        }],
+    }), encoding="utf-8")
+    result = build_manifest_template(catalogue)
+    entry = result["entries"][0]
+    assert result["catalogue_schema_version"] == "prism.facility_evidence_request.v1"
+    assert result["entry_count"] == 1
+    assert entry["facility_case_request_id"] == "facility/event-1"
+    assert entry["operating_mode"] == "receiving"
+    assert entry["requested_exact_identity"]["port_ids"] == ["tank.out"]
+    assert entry["qualification_sidecar_path"].startswith(
+        "REPLACE_WITH_REVIEWED_SIDECARS/"
+    )
+    assert entry["packet_path"].startswith(
+        "REPLACE_WITH_REVIEWED_PROVIDER_PACKETS/"
+    )
+    assert result["promotion_allowed"] is False

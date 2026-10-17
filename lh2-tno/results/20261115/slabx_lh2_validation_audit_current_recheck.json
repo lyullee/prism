@@ -1,0 +1,135 @@
+{
+  "schema_version": "prism.slabx_lh2_validation_audit.v1",
+  "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+  "model": {
+    "name": "SLABx-LH2",
+    "slabx_lh2_version": "0.1.2",
+    "slabx_version": "1.0.6"
+  },
+  "scope": {
+    "supports": [
+      "cryogenic-hydrogen pool radius and evaporation comparison",
+      "outdoor hydrogen dispersion/LFL comparison under declared applicability",
+      "inventory mass-closure and repeat-runtime evidence from the external model"
+    ],
+    "excludes": [
+      "equipment accident release or provider qualification",
+      "initiating-event frequency or sensor frequency learning",
+      "ignition, fire, explosion, blast, IR/F-N, or facility-QRA validation",
+      "indoor, detonation/DDT, obstacle/terrain cases outside the declared SLABx applicability"
+    ]
+  },
+  "source_files": [
+    {
+      "role": "model_results",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\results.json",
+      "sha256": "a014b3e09133320204579a36d4b6591cc7640249bf862ef6f4485e4d859775cb"
+    },
+    {
+      "role": "reproducibility_audit",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\논문화\\KCI_pool_source_2026-10-09\\results\\audit.json",
+      "sha256": "5c64f881219ce08d7a5427ddb1cc8ce1b427761762ea8b441c4ec08944ddcf6e"
+    },
+    {
+      "role": "source_manifest",
+      "relative_path": "slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\results.json",
+      "sha256": "a014b3e09133320204579a36d4b6591cc7640249bf862ef6f4485e4d859775cb"
+    },
+    {
+      "role": "source_manifest",
+      "relative_path": "slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\pytest_full.txt",
+      "sha256": "44184cb74466d9a8ab3ef8a1d59a66b17910cb105f5dc497fb02fea4856865ee"
+    },
+    {
+      "role": "source_manifest",
+      "relative_path": "slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\run_manifest.txt",
+      "sha256": "1835299cc964cac29022c91bf0e365bc9fc04db96c7338220f872655a55f058f"
+    },
+    {
+      "role": "source_manifest",
+      "relative_path": "논문화\\KCI_pool_source_2026-10-09\\results\\audit.json",
+      "sha256": "5c64f881219ce08d7a5427ddb1cc8ce1b427761762ea8b441c4ec08944ddcf6e"
+    },
+    {
+      "role": "source_manifest",
+      "relative_path": "핸드오프\\VALIDATION.md",
+      "sha256": "5d308b54f1499327cf69d0aa5c5e646c7c27246c499bdb01f7a4ed96a389b0fd"
+    }
+  ],
+  "source_results": {
+    "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\results.json",
+    "sha256": "a014b3e09133320204579a36d4b6591cc7640249bf862ef6f4485e4d859775cb",
+    "generated_utc": "2026-08-25T23:53:16Z"
+  },
+  "source_audit": {
+    "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\논문화\\KCI_pool_source_2026-10-09\\results\\audit.json",
+    "sha256": "5c64f881219ce08d7a5427ddb1cc8ce1b427761762ea8b441c4ec08944ddcf6e"
+  },
+  "checks": [
+    {
+      "name": "model_identity",
+      "status": "PASS",
+      "evidence": {
+        "slabx_lh2_version": "0.1.2",
+        "slabx_version": "1.0.6"
+      }
+    },
+    {
+      "name": "reproducibility_audit",
+      "status": "PASS",
+      "evidence": {
+        "passed": true,
+        "check_count": 12,
+        "dynamic_tests_passed": 51,
+        "quasi_steady_tests_passed": 7
+      }
+    },
+    {
+      "name": "dispersion_comparison_coverage",
+      "status": "PASS",
+      "evidence": {
+        "ffi_case_count": 6,
+        "flacs_comparison_row_count": 6,
+        "measurements_installed": true,
+        "lfl_in_bracket": 5
+      }
+    },
+    {
+      "name": "pool_and_negative_control",
+      "status": "PASS",
+      "evidence": {
+        "pool_radius_case_count": 6,
+        "pool_radius_median_ratio": 1.0305005693059233,
+        "negative_control_max_change_pct": 0.0
+      }
+    },
+    {
+      "name": "mass_and_runtime_ledger",
+      "status": "PASS",
+      "evidence": {
+        "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+        "runtime_repeat_inventory_difference_kg": 0.0,
+        "runtime_three_repeats": true
+      }
+    }
+  ],
+  "metrics": {
+    "ffi_case_count": 6,
+    "flacs_comparison_row_count": 6,
+    "pool_radius_median_ratio": 1.0305005693059233,
+    "lfl_in_bracket": 5,
+    "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+    "runtime_repeat_inventory_difference_kg": 0.0
+  },
+  "blocking_reasons": [],
+  "physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference_performed": false,
+  "promotion_policy": {
+    "component_evidence_only": true,
+    "external_model_is_not_provider_packet": true,
+    "frequency_is_not_inferred": true,
+    "facility_qra_requires_independent_full_chain_validation": true
+  }
+}

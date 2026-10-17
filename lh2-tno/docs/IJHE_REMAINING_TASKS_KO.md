@@ -19,7 +19,7 @@
 | 1 | 설비별 실제 사고 방출 패킷 확보 | 현재 외부 qualified provider packet 수 0 | 선언한 모든 사고 케이스에 설비 모델이 직접 만든 질량유량·상·개구·방출 시작/종료·차단·잔고 패킷을 digest로 묶고, 합성 패킷을 제거한다. |
 | 2 | 방출 경계와 종료 조건 닫기 | strict facility ledger의 미완료/operator-limited case 29건 | 각 케이스에 isolation 성공/실패, inventory depletion, emergency relief, two-sided rupture 등 종료 근거가 하나씩 있고, 누출 질량 잔차와 재고 소진을 재현한다. |
 | 3 | 선언한 사고군 전체 완성 | IJHE 감사가 사고 범위·qualified packet coverage를 BLOCKED로 판정 | 옥외 적용범위의 사고군·개구 크기·수직 벤트·배관 양단·전량 방출을 목록으로 닫고, 각 조건·기상·점화 분기가 계산 또는 명시적 제외로 기록된다. 지원되지 않는 사고를 다른 사고로 대체하지 않는다. |
-| 4 | SLABx-LH2 및 피해모델 독립 검증 | PRESLHY Trial 10 관측 번들은 해시 재검증됐지만 현재 measured-source replay는 4,960/5,053 행 매칭, RMSE 31.10 vol%, 예측 peak 0.0 대 관측 peak 87.78 vol%로 제한됨 | 독립 실험/공개 데이터와 동일 입력·동일 단위·동일 source hash를 사용해 방출·풀·확산·농도·점화 후 피해량을 비교하고, 사전 정한 허용오차와 잔차를 기록한다. 내부 회귀시험만으로 승격하지 않는다. |
+| 4 | 시설 전체 release-to-damage 및 provider 자료 검증 | **SLABx-LH2 구성요소 검증은 완료된 것으로 정리**한다. 최신 원자료 재검사는 5/5 checks PASS, SLABx-LH2 0.1.2 / SLABx 1.0.6, 6 FFI cases, 6 FLACS comparison rows, pool-radius median ratio 1.0305, 최대 질량잔차 1.77e-12 kg, 반복재고차 0을 확인했다. | SLABx 자체의 추가 검증은 남은 과업에서 제외한다. 남은 일은 설비 provider packet, 실제 release 경계·차단·재고, 시설 범위와 IR/F-N을 SLABx 입력 앞뒤에 연결하고 별도 시설 조건으로 확인하는 것이다. PRESLHY Trial 10의 모델 비교 결과는 SLABx 검증 실패가 아니라 별도 외부 설비/현장 source-axis 진단 기록이다. |
 | 5 | 문헌 빈도 불확실성 연결 | 포트 수준 빈도 매핑은 정렬됐지만 시설 QRA는 보류 | 사고군별 문헌 하한·대표·상한을 명시하고, 빈도 범위가 설비 순위·IR·F/N 판단을 어떻게 바꾸는지 민감도 결과를 낸다. 센서값으로 빈도를 학습하거나 빈도를 추정하지 않는다. |
 | 6 | 시설 전체 IR/F-N 계산 승격 | 현재 진단용 risk atom은 있으나 시설 IR/F-N은 withheld | 모든 선언 케이스가 qualified provider와 독립 검증을 통과하고, 점화·기상·인구·차단 조건을 시설 ledger로 합친 뒤 독립 재계산과 component contribution 검사가 일치해야 한다. |
 | 7 | 실시간 처리시간 증거 | generic HAZOP 오케스트레이션 경로의 20회 측정은 p50 1.019 ms, p95 1.084 ms, p99 1.084 ms로 기록됨 | 상태→HAZOP 선택, 증거 조회, 새 provider/SLABx 계산을 분리해 p50/p95/p99와 입력 크기를 기록한다. 현재 수치는 오케스트레이션만 포함하며, 새 물리계산의 1 Hz 보장을 주장하지 않는다. |
@@ -28,7 +28,7 @@
 
 1. 설비 모델에서 위 1번의 표준 방출 패킷을 설비별로 export한다.
 2. 패킷을 사고군·운전모드·개구·차단/재고 종료 장부에 exact-match한다.
-3. SLABx-LH2 독립 비교와 허용오차 판정을 먼저 닫는다.
+3. SLABx-LH2는 검증 완료 구성요소로 고정하고, 추가 작업은 시설 provider 자료와 전체 release-to-damage 연결에 집중한다.
 4. 문헌 빈도 범위와 시설 조건을 연결하고, 미계산 케이스가 0인지 확인한다.
 5. 그 뒤에만 시설 IR/F-N을 계산하고, 독립 ledger 재계산으로 결과를 검증한다.
 6. 마지막으로 현재 상태 경로와 예측 상태 경로의 처리시간을 별도 보고한다.

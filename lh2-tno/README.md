@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,459 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,460 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -164,6 +164,21 @@ families. It is an evidence-intake document only: it does not assign
 frequency, infer a value from sensors, or promote facility QRA. A case remains
 open until a provider packet and its required qualification evidence match the
 exact identity in the request.
+
+### SLABx-LH2 validation boundary
+
+SLABx-LH2 is treated as a validated consequence-model component in the current
+development plan. A fresh source recheck is recorded in
+[`slabx_lh2_validation_audit_current_recheck.json`](results/20261115/slabx_lh2_validation_audit_current_recheck.json):
+all 5/5 checks pass, with 6 FFI cases, 6 FLACS comparison rows, a pool-radius
+median ratio of 1.0305, a maximum mass residual of `1.77e-12 kg`, and zero
+repeat-run inventory difference. No additional SLABx validation task is open.
+
+This closes the SLABx component task only. Facility provider qualification,
+release termination and isolation evidence, full declared accident scope, and
+facility IR/F-N/QRA remain separate gates. The 44-case provider intake can be
+started from the generated
+[`facility_provider_qualification_sidecar_manifest_template.json`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_qualification_sidecar_manifest_template.json).
 
 The clean-source replay of the same 24-event scope is documented in the
 [clean-source full-scope replay record](docs/PRISM_native_clean_full_scope_replay_20261017.md).

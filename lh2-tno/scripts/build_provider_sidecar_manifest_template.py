@@ -69,6 +69,47 @@ def _flatten_requests(catalogue: dict[str, Any]) -> list[dict[str, Any]]:
                     )
                 flattened.append(raw)
         return flattened
+    if schema == "prism.facility_evidence_request.v1":
+        # The generic facility request is the operator-facing intake contract,
+        # rather than a provider packet catalogue.  Adapt each case into the
+        # same flat identity shape used by the sidecar template while keeping
+        # the original request metadata for the reviewer.
+        rows = catalogue.get("case_requests")
+        if not isinstance(rows, list):
+            raise ValueError("facility evidence request case_requests must be an array")
+        flattened = []
+        for row_index, raw in enumerate(rows):
+            if not isinstance(raw, dict):
+                raise ValueError(f"facility case request {row_index} must be an object")
+            identity = raw.get("exact_match_required")
+            if not isinstance(identity, dict):
+                raise ValueError(
+                    f"facility case request {row_index} lacks exact_match_required"
+                )
+            ports = identity.get("port_ids") or raw.get("provider_packet_port_ids")
+            if not isinstance(ports, list) or not ports:
+                raise ValueError(f"facility case request {row_index} lacks port_ids")
+            # The existing audit accepts one flat packet row.  A facility case
+            # can declare multiple ports, so retain the port list in the
+            # sidecar template and use the first port for legacy identity.
+            current = {
+                "event_id": identity.get("event_id", raw.get("event_id")),
+                "component_id": identity.get("component_id", raw.get("component_id")),
+                "port_id": ports[0],
+                "port_ids": ports,
+                "provider_source_digest": (identity.get("provider_source_digests") or [None])[0],
+                "provider_result_digest": (identity.get("provider_result_digests") or [None])[0],
+            }
+            flattened.append({
+                "request_id": raw.get("request_id"),
+                "packet_path": "",
+                "packet_index": 0,
+                "request_kind": raw.get("request_kind"),
+                "closure_status": raw.get("current_status"),
+                "current_packet": current,
+                "facility_case_request": raw,
+            })
+        return flattened
     raise ValueError("unsupported provider evidence catalogue schema")
 
 
@@ -83,10 +124,21 @@ def build_manifest_template(catalogue_path: str | Path) -> dict[str, Any]:
         if not isinstance(current, dict):
             raise ValueError(f"catalogue request {index} lacks current_packet")
         packet_path = str(raw.get("packet_path", ""))
+        facility_case = raw.get("facility_case_request")
+        if isinstance(facility_case, dict):
+            # A facility request has no provider packet yet.  Give the
+            # reviewer a deterministic placeholder that is safe to replace.
+            packet_path = (
+                "REPLACE_WITH_REVIEWED_PROVIDER_PACKETS/"
+                f"{_safe_name(str(raw.get('request_id', index)))}.json"
+            )
         group_key = packet_path or str(raw.get("request_id", index))
+        sidecar_name = _safe_name(group_key)
+        if sidecar_name.endswith(".json"):
+            sidecar_name = sidecar_name[:-5]
         sidecar_path = group_paths.setdefault(
             group_key,
-            f"REPLACE_WITH_REVIEWED_SIDECARS/{_safe_name(group_key)}.json",
+            f"REPLACE_WITH_REVIEWED_SIDECARS/{sidecar_name}.json",
         )
         entry = {
             "request_id": raw.get("request_id"),
@@ -107,6 +159,24 @@ def build_manifest_template(catalogue_path: str | Path) -> dict[str, Any]:
                 "For an ordered release set, use the same sidecar path for every request sharing packet_path."
             ),
         }
+        if isinstance(facility_case, dict):
+            exact = facility_case.get("exact_match_required")
+            entry.update({
+                "facility_case_request_id": facility_case.get("request_id"),
+                "asset_id": facility_case.get("asset_id"),
+                "hazop_scenario_id": facility_case.get("hazop_scenario_id"),
+                "operating_mode": facility_case.get("operating_mode"),
+                "scenario_families": facility_case.get("scenario_families", []),
+                "required_input_origin": facility_case.get("required_input_origin"),
+                "frequency_port_ids": facility_case.get("frequency_port_ids", []),
+                "provider_packet_port_ids": facility_case.get("provider_packet_port_ids", []),
+                "requested_exact_identity": exact,
+                "digest_note": (
+                    "The diagnostic digests copied into expected_identity are a baseline. "
+                    "A reviewed provider packet must be issued with its own digests and "
+                    "the facility request must be re-baselined before qualification."
+                ),
+            })
         entries.append(entry)
     return {
         "schema_version": SCHEMA,
