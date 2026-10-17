@@ -1,0 +1,298 @@
+{
+  "schema_version": "prism.external_release_artifact_intake.v1",
+  "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
+  "diagnostic_only": true,
+  "artifact_file_count": 7,
+  "qualification_file_count": 0,
+  "qualification_search_paths": [],
+  "release_row_count": 7,
+  "qualified_sidecar_row_count": 0,
+  "closure_ready_row_count": 0,
+  "closure_status_counts": {
+    "CLOSURE_EVIDENCE_OPEN": 7
+  },
+  "actual_origin_row_count": 0,
+  "synthetic_or_model_prediction_row_count": 7,
+  "error_count": 0,
+  "artifacts": [
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\layered\\resolved_release.json",
+      "sha256": "4cc42a2fc9fe9d15deda116215e39de1785a7b1c200c2ef62ed81f7f0686638c",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-layered-tank/accidental-leak-001",
+      "component_id": "native-layered-tank-diagnostic",
+      "port_id": "native-layered-tank-liquid-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "inventory_depletion",
+      "duration_s": 0.1,
+      "available_mass_kg": 434.50988152270014,
+      "provider_source_digest": "9e519a13debf758e5b4b8ba5c1326bc17af882d5f58fbbc50d4260a4fb8b174d",
+      "provider_result_digest": "b370d88d96ac9814a1c66e1035135980c8bce7f23d679a103bfa3d73e5f48da3",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: provider mass balance is required for inventory depletion",
+          "packet[0]: provider inventory termination evidence is missing"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: provider mass balance is required for inventory depletion",
+        "packet[0]: provider inventory termination evidence is missing"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pipe\\resolved_release.json",
+      "sha256": "4224f8a27b35aa7778c63eab04d3da6ce6709fd8fe5286d30bb6cb4b9165933e",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-dynamic-pipe/accidental-leak-001",
+      "component_id": "native-dynamic-pipe-diagnostic",
+      "port_id": "native-dynamic-pipe-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.07500000000000001,
+      "available_mass_kg": 2.5156266507964498,
+      "provider_source_digest": "a34b691dc221fc1b0ba176a9f0c489c0a62eb9b8e4fa66e15d904c725238cdcb",
+      "provider_result_digest": "993c70ea51758a57e313d6f36b9c41721a6288e2ac775e6e4560561ce7197cd7",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: isolation_record_present is missing or inconsistent",
+          "packet[0]: isolation_success_declared is missing or inconsistent",
+          "packet[0]: isolation_clock_present is missing or inconsistent"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: isolation_record_present is missing or inconsistent",
+        "packet[0]: isolation_success_declared is missing or inconsistent",
+        "packet[0]: isolation_clock_present is missing or inconsistent"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pump\\resolved_release.json",
+      "sha256": "9ec47ffc5d7c60a93aef47625ccd7ad398bdaae87b30023676ae19f594750f7f",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-mapped-pump/accidental-leak-001",
+      "component_id": "native-mapped-pump-diagnostic",
+      "port_id": "native-mapped-pump-liquid-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "available_mass_kg": 1.0,
+      "provider_source_digest": "6451b1521ceb0a3e8c1b8f0946bcdf789c5f14102763d7783c0577e27be3cb0f",
+      "provider_result_digest": "ec86ecf9205976dc1184b026e94c418c4442305ceea98cf835e42ced4e6822ca",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\reliquefier\\resolved_release.json",
+      "sha256": "62918f2642e9cac63cbdacd1f3b361710b4312bb61398eac2c33e16cde037906",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-reliquefier/accidental-leak-001",
+      "component_id": "native-reliquefier-diagnostic",
+      "port_id": "native-reliquefier-gas-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "available_mass_kg": 0.0008198175196090351,
+      "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+      "provider_result_digest": "247158fd9b8cc9b95cf0c835085670981fadcaff30cb9390499e7ed5f67d5fe7",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\valve\\resolved_release.json",
+      "sha256": "b5268d51b502e8b7e86c4d79083e043eee88e4ecf18c26ffecc65bbe5ff940d3",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-stroke-valve/accidental-leak-001",
+      "component_id": "native-stroke-valve-diagnostic",
+      "port_id": "native-stroke-valve-gas-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "available_mass_kg": 100.0,
+      "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+      "provider_result_digest": "46ec14d5d00941ab941d00da2b1f9705e7f04662259744cfde93ee30fd4b038f",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vaporizer\\resolved_release.json",
+      "sha256": "ab6867205c893105a423f388cbdba771a8f1576178246c50bb159c47e74c5e12",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-vaporizer/accidental-leak-001",
+      "component_id": "native-vaporizer-diagnostic",
+      "port_id": "native-vaporizer-gas-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "available_mass_kg": 0.0008198175196090351,
+      "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+      "provider_result_digest": "e727b58d83f5f074c37ca4c6c437ca76a0aa6b65e2df7cfa74ec630ba8daabf6",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vent\\resolved_release.json",
+      "sha256": "787b4af38644ab0fcf6cbdb37625e5f9da4309557e0e347e1ab5e81ec0a13c52",
+      "item_pointer": "$",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "event_id": "native-vent-stack/accidental-leak-001",
+      "component_id": "native-vent-stack-diagnostic",
+      "port_id": "native-vent-stack-gas-out",
+      "input_origin": "model_prediction",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "available_mass_kg": 1.0,
+      "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+      "provider_result_digest": "61054aa89cc3dade006c007b7224e736685a4598356974e1dc5bff919709987b",
+      "release_shape_valid": true,
+      "qualification_sidecar_present": false,
+      "qualification_sidecar_paths": [],
+      "qualification_bound": false,
+      "qualification_mismatch_reasons": [],
+      "closure_audit": {
+        "status": "CLOSURE_EVIDENCE_OPEN",
+        "closure_ready": false,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 1
+        },
+        "blocking_reasons": [
+          "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+        ],
+        "facility_qra_allowed": false
+      },
+      "diagnostic_only": true,
+      "blocking_reasons": [
+        "input_origin is not a qualified observed/provider export",
+        "no nearby prism.provider_qualification_evidence.v1 sidecar",
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ]
+    }
+  ],
+  "errors": [],
+  "promotion_policy": {
+    "frequency_assigned": false,
+    "provider_release_packet_promoted": false,
+    "physical_validation_promoted": false,
+    "facility_qra_promoted": false,
+    "qualification_requires_exact_digest_bound_sidecar": true,
+    "provider_ports_never_substituted_for_frequency_ports": true
+  },
+  "blocking_reasons": [
+    "external release artifacts are inventory evidence only until exact provider qualification is bound",
+    "synthetic or model-prediction releases cannot establish field/actual accident coverage",
+    "facility IR/F-N remains withheld while qualified provider packet coverage is incomplete"
+  ]
+}

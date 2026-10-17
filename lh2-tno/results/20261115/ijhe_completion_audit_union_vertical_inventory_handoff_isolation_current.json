@@ -6218,6 +6218,37 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The digital-twin view exposes release-boundary, provider-qualification, independent-validation and facility IR/F-N gates separately. A diagnostic gate status never opens facility-QRA promotion."
+    },
+    {
+      "name": "diagnostic_external_release_artifact_intake",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261115\\external_native_contract_intake_current.json",
+        "schema_version": "prism.external_release_artifact_intake.v1",
+        "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
+        "artifact_file_count": 7,
+        "release_row_count": 7,
+        "qualification_file_count": 0,
+        "qualified_sidecar_row_count": 0,
+        "closure_ready_row_count": 0,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 7
+        },
+        "actual_origin_row_count": 0,
+        "synthetic_or_model_prediction_row_count": 7,
+        "error_count": 0,
+        "policy": {
+          "frequency_assigned": false,
+          "provider_release_packet_promoted": false,
+          "physical_validation_promoted": false,
+          "facility_qra_promoted": false,
+          "qualification_requires_exact_digest_bound_sidecar": true,
+          "provider_ports_never_substituted_for_frequency_ports": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Synthetic or model-prediction rows remain diagnostic until a separate exact provider qualification sidecar is present; no frequency or facility QRA is inferred."
     }
   ],
   "blocking_reasons": [

@@ -13,7 +13,7 @@ release-boundary request open.
 
 ## Current result
 
-The latest audit is `INCOMPLETE_EVIDENCE` with **55 checks: 50 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
+The latest audit is `INCOMPLETE_EVIDENCE` with **56 checks: 51 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
 | Item | Current evidence |
 |---|---:|
@@ -29,6 +29,15 @@ The latest audit is `INCOMPLETE_EVIDENCE` with **55 checks: 50 pass and 5 blocke
 | Provider termination evidence | 42 valid, 2 invalid |
 | Facility IR/F-N promotion | `false` |
 | Frequency inference or sensor learning | `false` |
+
+The external-model intake now inventories seven release-shaped exports from the
+`lh2dt` equipment model root (layered tank, dynamic pipe, mapped pump, valve,
+vaporizer, reliquefier, and vent). They carry equipment/port identity and
+time-resolved release fields, but all seven are `model_prediction` rows with no
+exact qualification sidecar. The intake is therefore a traceability record and
+does not open provider, frequency, physical-validation, or facility-QRA gates.
+The machine-readable record is
+[`external_native_contract_intake_current.json`](../results/20261115/external_native_contract_intake_current.json).
 
 The nine point-rate-only events retain their published point rate and are represented in the five-scenario sensitivity ledger. PRISM does not invent confidence intervals for them.
 
@@ -83,7 +92,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,337 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,365 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 
