@@ -4803,5 +4803,17 @@
   "preslhy_trial10_field_model_comparison_matched_fraction": 0.9815950920245399,
   "preslhy_trial10_field_model_comparison_physical_validation_claim": false,
   "validation_evidence_matrix_with_preslhy_reverified_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix_with_preslhy_reverified.json",
-  "validation_evidence_matrix_with_preslhy_reverified_status": "RESTRICTED_EVIDENCE_MATRIX; 11 domains; FACILITY_QRA_WITHHELD; physical validation false"
+  "validation_evidence_matrix_with_preslhy_reverified_status": "RESTRICTED_EVIDENCE_MATRIX; 11 domains; FACILITY_QRA_WITHHELD; physical validation false",
+  "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified.json",
+  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; core blockers 0; strict blockers 4; reverified PRESLHY evidence included",
+  "latest_ijhe_objective_coverage_audit_check_count": 34,
+  "latest_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
+  "latest_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "latest_ijhe_objective_coverage_audit_physical_validation_claim": false,
+  "latest_ijhe_objective_coverage_audit_strict_facility_state_snapshot_status": "PASS; union_event_count=34; base_state_snapshot_bound=24; extension_state_snapshot_bound=10; provider_result_digest_mismatch=0"
 }
