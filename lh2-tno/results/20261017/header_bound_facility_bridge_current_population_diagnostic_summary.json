@@ -1,0 +1,120 @@
+{
+  "schema_version": "prism.header_bound_facility_bridge_population_summary.v1",
+  "source_record": "results/20261017/header_bound_facility_bridge_current_population_diagnostic.json",
+  "population_binding": "examples\\inspection_center_header_bound_population_binding_diagnostic.json",
+  "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "component_count": 3,
+  "selected_component_count": 3,
+  "executed_component_count": 3,
+  "ready_provider_scenario_count": 3,
+  "withheld_provider_scenario_count": 0,
+  "risk_atom_count": 3,
+  "preflight_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY",
+  "facility_annual_ir_available": false,
+  "facility_fn_available": false,
+  "conditional_current_weather_expected_death_fn": {
+    "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN",
+    "expected_death_fn_low_high": [
+      0.0,
+      0.0
+    ],
+    "frequency_sensitivity_expected_death_fn_low_high": null,
+    "population_provenance": "synthetic generic outdoor worker receptor; diagnostic F/N chain only; not site occupancy data",
+    "population_source_digest": "4913e4d883f2fb9c986406e6392fbcde2030a1e4c30465197930b9be0dfbf3a0",
+    "population_receptor_count": 1,
+    "frequency_learning": false,
+    "reason": "explicit receptor population was multiplied by the reviewed literature frequency and current-weather consequence harm; full-facility F/N remains withheld"
+  },
+  "population_binding_supplied": true,
+  "provider_packets_qualified": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "sensor_frequency_learning_used": false,
+  "diagnostic_only": true,
+  "wall_elapsed_ms": 12212.423599994509,
+  "rows": [
+    {
+      "observed_component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "provider_component_id": "storage-tank-01",
+      "provider_port_id": "tank-accident-out",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "provider_input_origin": "model_prediction",
+      "release_duration_s": 0.15000000000000002,
+      "available_mass_kg": 0.01677670997923311,
+      "cumulative_mass_out_kg": 0.01677670997923311,
+      "remaining_mass_kg": 0.0,
+      "termination_basis": "reviewed_isolation_success",
+      "isolation_status": "ISOLATION_SUCCESS_DECLARED",
+      "mass_status": "MASS_BALANCE_CLOSED",
+      "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "slabx_service_elapsed_ms": 5847.3004999978,
+      "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
+      "conditional_current_weather_ir": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "frequency_is_not_inferred": true
+    },
+    {
+      "observed_component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "provider_component_id": "pressure-relief-vent-01",
+      "provider_port_id": "vent-accident-out",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "provider_input_origin": "model_prediction",
+      "release_duration_s": 0.5,
+      "available_mass_kg": 0.0008087150217064195,
+      "cumulative_mass_out_kg": 0.0006739291847553497,
+      "remaining_mass_kg": 0.00013478583695106987,
+      "termination_basis": "emergency_relief_discharge",
+      "isolation_status": "EMERGENCY_RELIEF_TERMINATION",
+      "mass_status": "MASS_BALANCE_CLOSED",
+      "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "slabx_service_elapsed_ms": 4482.455699995626,
+      "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
+      "conditional_current_weather_ir": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "frequency_is_not_inferred": true
+    },
+    {
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "operating_mode": "supply",
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "provider_component_id": "ambient-vaporizer-01",
+      "provider_port_id": "vaporizer-accident-out",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_input_origin": "model_prediction",
+      "release_duration_s": 0.5,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.221896865709533e-06,
+      "remaining_mass_kg": 0.0008166317257982181,
+      "termination_basis": "reviewed_isolation_success",
+      "isolation_status": "ISOLATION_SUCCESS_DECLARED",
+      "mass_status": "MASS_BALANCE_CLOSED",
+      "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "slabx_service_elapsed_ms": 1837.133900000481,
+      "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
+      "conditional_current_weather_ir": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "frequency_is_not_inferred": true
+    }
+  ],
+  "interpretation": "An explicit synthetic receptor population was carried into the current-weather expected-death F/N diagnostic. The zero-valued conditional curve reflects the supplied worker receptor and current-weather harm endpoints; it is not a site-qualified facility F/N result. Annual facility IR/F-N promotion remains closed because provider qualification, independent physical validation, and complete facility scope are not established."
+}

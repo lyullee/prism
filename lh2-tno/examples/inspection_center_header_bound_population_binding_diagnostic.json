@@ -1,0 +1,11 @@
+{
+  "schema_version": "prism.header_bound_population_binding.v1",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "persons_by_receptor": {
+    "worker-01": 1.0
+  },
+  "provenance": "synthetic generic outdoor worker receptor; diagnostic F/N chain only; not site occupancy data",
+  "source_record": "examples/native_generic_scope_vertical_population_binding_summary.json",
+  "qualification_status": "DIAGNOSTIC_SYNTHETIC_POPULATION",
+  "source_digest": "4913e4d883f2fb9c986406e6392fbcde2030a1e4c30465197930b9be0dfbf3a0"
+}

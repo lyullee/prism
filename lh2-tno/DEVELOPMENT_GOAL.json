@@ -4588,5 +4588,15 @@
   "inspection_center_header_bound_provider_binding_current_status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
   "inspection_center_header_bound_provider_binding_current_selected_scenario_count": 3,
   "inspection_center_header_bound_provider_binding_current_bound_scenario_count": 3,
-  "inspection_center_header_bound_provider_binding_current_promotion_allowed": false
+  "inspection_center_header_bound_provider_binding_current_promotion_allowed": false,
+  "inspection_center_header_bound_facility_bridge_population_binding_record": "examples/inspection_center_header_bound_population_binding_diagnostic.json",
+  "inspection_center_header_bound_facility_bridge_population_bound_runtime_record": "results/20261017/header_bound_facility_bridge_current_population_diagnostic.json",
+  "inspection_center_header_bound_facility_bridge_population_bound_summary": "results/20261017/header_bound_facility_bridge_current_population_diagnostic_summary.json",
+  "inspection_center_header_bound_facility_bridge_population_bound_status": "CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN_DIAGNOSTIC",
+  "inspection_center_header_bound_facility_bridge_population_binding_supplied": true,
+  "inspection_center_header_bound_facility_bridge_conditional_expected_death_fn_available": true,
+  "inspection_center_header_bound_facility_bridge_population_qualification_status": "DIAGNOSTIC_SYNTHETIC_POPULATION",
+  "inspection_center_header_bound_facility_bridge_population_promotion_allowed": false,
+  "inspection_center_header_bound_facility_bridge_population_promotion_reason": "synthetic worker receptor only; site occupancy and complete facility QRA evidence remain open",
+  "inspection_center_header_bound_facility_bridge_population_bound_wall_elapsed_ms": 12212.423599994509
 }

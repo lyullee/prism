@@ -658,6 +658,9 @@ Its [compact result](results/20261017/header_bound_facility_bridge_current_summa
 records release duration, termination basis, mass ledger, SLABx-LH2 execution
 time (about 11.4 s for three fresh branches in the current replay), and the
 still-closed facility-QRA gates for each equipment branch.
+An optional explicit receptor-population binding also exercises the conditional
+current-weather expected-death F/N path; see the [population-bound diagnostic
+record](docs/PRISM_header_bound_current_bridge_20261017.md#conditional-fn-diagnostic).
 
 ## Equipment and provider boundary
 
@@ -796,6 +799,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
 - [Current header-bound bridge replay record](docs/PRISM_header_bound_current_bridge_20261017.md)
 - [Current header-bound bridge replay summary](results/20261017/header_bound_facility_bridge_current_summary.json)
+- [Current header-bound bridge population-bound diagnostic](results/20261017/header_bound_facility_bridge_current_population_diagnostic_summary.json)
 - [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [Native external seven-equipment recheck](docs/PRISM_native_external_multi_equipment_recheck_20261017.md)

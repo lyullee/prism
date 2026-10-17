@@ -50,6 +50,20 @@ replay the single synthetic worker receptor receives an IR interval of zero.
 That is a result for the supplied geometry, weather and receptor set, not a
 claim that the facility has zero risk.
 
+### Conditional F/N diagnostic
+
+The bridge also accepts an optional, explicit receptor-population binding. The
+current replay used one synthetic `worker-01` receptor with one person. That
+input produces an `AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN`
+record with a zero-valued curve because the supplied current-weather harm
+endpoints are zero. This proves the population-to-F/N arithmetic path; it is
+not site occupancy evidence and does not open the facility F/N gate.
+
+The full population-bound replay is
+`results/20261017/header_bound_facility_bridge_current_population_diagnostic.json`;
+the compact record is
+`results/20261017/header_bound_facility_bridge_current_population_diagnostic_summary.json`.
+
 The following gates remain deliberately closed:
 
 - provider qualification and independent physical validation;
@@ -87,6 +101,7 @@ python scripts/run_header_bound_facility_hazop_bridge.py `
   --frequency-plan results/20261110/native_full_scope_frequency_assessment_latest2/frequency_plan.json `
   --provider-defaults-liquid examples/provider_request_defaults_liquid.json `
   --provider-defaults-relief examples/provider_emergency_relief_defaults.json `
+  --population-binding examples/inspection_center_header_bound_population_binding_diagnostic.json `
   --template examples/equipment_consequence_template.json `
   --backend-config results/20261008/full_chain/backend_config.json `
   --now-s 20000 `

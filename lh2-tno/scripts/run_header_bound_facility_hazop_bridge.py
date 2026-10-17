@@ -45,6 +45,7 @@ from lh2_tno.provider_release import (  # noqa: E402
 from lh2_tno.service import (  # noqa: E402
     ConsequenceService,
     FacilityRealtimeBinding,
+    RealtimePopulationBinding,
     RealtimeConsequenceMonitor,
     RealtimeFrequencyBinding,
 )
@@ -141,6 +142,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     events = {event.id: event for event in generate_events(facility, frequency_plan)}
     liquid_defaults = _object(args.provider_defaults_liquid)
     relief_defaults = _object(args.provider_defaults_relief)
+    population_binding = None
+    if args.population_binding is not None:
+        population_payload = _object(args.population_binding)
+        population_binding = RealtimePopulationBinding(
+            persons_by_receptor=population_payload["persons_by_receptor"],
+            provenance=str(population_payload["provenance"]),
+            source_digest=str(population_payload["source_digest"]),
+        )
 
     # Build one resolver and one frequency binding per selected scenario.  The
     # key includes the observed component so two components can never share a
@@ -252,6 +261,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         component_bindings=bindings,
         release_resolvers=resolvers,
         mapping_digest=canonical_digest(binding_audit),
+        population_binding=population_binding,
     )
     elapsed_ms = (time.perf_counter() - started) * 1000.0
     component_rows = result.get("components", {})
@@ -304,6 +314,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "observed_hazop_provider_binding": str(args.observed_hazop_provider_binding),
             "provider_worklist": str(args.provider_worklist),
             "packet_evidence": str(args.packet_evidence),
+            "population_binding": (
+                str(args.population_binding)
+                if args.population_binding is not None
+                else None
+            ),
             "geometry_rebase": geometry_rebase,
         },
         "preflight": preflight,
@@ -324,6 +339,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "facility_fn_available": False,
             "facility_qra_claim": False,
             "physical_validation_claim": False,
+            "population_binding_supplied": population_binding is not None,
+            "conditional_current_weather_expected_death_fn": copy.deepcopy(
+                result.get("conditional_current_weather_expected_death_fn")
+            ),
+            "conditional_current_weather_expected_death_fn_available": (
+                isinstance(
+                    result.get("conditional_current_weather_expected_death_fn"),
+                    Mapping,
+                )
+                and result["conditional_current_weather_expected_death_fn"].get(
+                    "status"
+                ) == "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
+            ),
             "diagnostic_only": True,
             "wall_elapsed_ms": elapsed_ms,
             "measurement_policy": (
@@ -357,6 +385,15 @@ def main() -> int:
     parser.add_argument("--frequency-plan", type=Path, required=True)
     parser.add_argument("--provider-defaults-liquid", type=Path, required=True)
     parser.add_argument("--provider-defaults-relief", type=Path, required=True)
+    parser.add_argument(
+        "--population-binding",
+        type=Path,
+        default=None,
+        help=(
+            "optional explicit receptor population binding for a conditional "
+            "current-weather expected-death F/N diagnostic"
+        ),
+    )
     parser.add_argument("--template", type=Path, required=True)
     parser.add_argument("--backend-config", type=Path, required=True)
     parser.add_argument("--now-s", type=float, default=20000.0)
