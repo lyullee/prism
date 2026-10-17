@@ -156,6 +156,11 @@ The latest-audit verifier now follows the current worklist pointer and checks it
 case count, closure summary, fail-closed promotion flags and SHA-256 digest, so a
 stale closure artifact cannot silently appear as the current facility evidence.
 
+The provider gate now reports the two relevant populations separately: the
+native diagnostic campaign contains 24 executed packet cases, while the facility
+intake and evidence worklist covers all 44 declared cases. The 44-case template
+alignment is intake completeness only; it is not qualified provider evidence.
+
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
 
 The latest case-coverage record is

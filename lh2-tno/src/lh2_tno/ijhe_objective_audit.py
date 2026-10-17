@@ -564,14 +564,66 @@ def build_ijhe_objective_coverage_audit(
         "qualified_provider_evidence",
         "각 facility case에 exact qualified provider packet이 있어야 한다",
         "PASS" if qualified_ok else "BLOCKED_EVIDENCE",
-        evidence_paths=(campaign_path, packet_path, completion_path),
+        evidence_paths=(
+            campaign_path,
+            packet_path,
+            completion_path,
+            facility_provider_intake_audit_path,
+            facility_evidence_worklist_path,
+            release_closure_worklist_path,
+        ),
         observed={
             "provider_packet_case_count": native_packet_campaign_ledger.get("provider_packet_case_count"),
             "qualified_provider_packet_case_count": native_packet_campaign_ledger.get("qualified_provider_packet_case_count"),
             "provider_packet_promoted": native_packet_campaign_ledger.get("provider_packet_promoted"),
+            "facility_request_case_count": (
+                facility_provider_intake_audit.get("request_case_count")
+                if isinstance(facility_provider_intake_audit, Mapping)
+                else None
+            ),
+            "facility_template_entry_count": (
+                facility_provider_intake_audit.get("template_entry_count")
+                if isinstance(facility_provider_intake_audit, Mapping)
+                else None
+            ),
+            "facility_aligned_entry_count": (
+                facility_provider_intake_audit.get("aligned_entry_count")
+                if isinstance(facility_provider_intake_audit, Mapping)
+                else None
+            ),
+            "facility_evidence_worklist_case_count": (
+                facility_evidence_worklist.get("case_count")
+                if isinstance(facility_evidence_worklist, Mapping)
+                else None
+            ),
+            "facility_evidence_worklist_status": (
+                facility_evidence_worklist.get("status")
+                if isinstance(facility_evidence_worklist, Mapping)
+                else None
+            ),
+            "release_closure_worklist_case_count": (
+                release_closure_worklist.get("case_count")
+                if isinstance(release_closure_worklist, Mapping)
+                else None
+            ),
+            "release_closure_worklist_open_case_count": (
+                release_closure_worklist.get("open_case_count")
+                if isinstance(release_closure_worklist, Mapping)
+                else None
+            ),
+            "release_closure_worklist_termination_open_case_count": (
+                release_closure_worklist.get("summary", {}).get("termination_open_case_count")
+                if isinstance(release_closure_worklist, Mapping)
+                and isinstance(release_closure_worklist.get("summary"), Mapping)
+                else None
+            ),
         },
         blocking_reason=None if qualified_ok else "현재 packet은 native diagnostic packet이며 qualified provider packet은 0건이다",
-        interpretation="이 gate가 닫히기 전까지 결과는 조건부 진단 결과로만 표시한다.",
+        interpretation=(
+            "native campaign의 실행 packet 수, 시설 intake template 수, closure worklist 수를 분리해 표시한다. "
+            "template 정렬이나 종료 closure만으로 qualified provider evidence가 되지 않으며, 이 gate가 닫히기 전까지 "
+            "결과는 조건부 진단 결과로만 표시한다."
+        ),
     ))
 
     strict_scope_ok = scope_matrix.get("matrix_complete") is True

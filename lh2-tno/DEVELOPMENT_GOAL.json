@@ -4833,7 +4833,7 @@
   "facility_provider_intake_audit_template_entry_count": 44,
   "facility_provider_intake_audit_aligned_entry_count": 44,
   "facility_provider_intake_audit_blocking_reason_count": 0,
-  "latest_ijhe_objective_coverage_audit_sha256": "B5EEF2939FFF47570436F1213D022BE1B2D0AD515AFCBE3FB3019AF2DFCFA33E",
+  "latest_ijhe_objective_coverage_audit_sha256": "025E99537E31EE1D951C0322374CF8D8E0772AA3C99EDD7CEB85F8660E43E7E9",
   "ijhe_completion_audit_latest_verification_after_provider_intake_record": "results/20261115/latest_ijhe_audit_verification_after_provider_intake.json",
   "ijhe_completion_audit_latest_verification_after_provider_intake_status": "PASS",
   "ijhe_completion_audit_latest_verification_after_provider_intake_blocking_reason_count": 0,

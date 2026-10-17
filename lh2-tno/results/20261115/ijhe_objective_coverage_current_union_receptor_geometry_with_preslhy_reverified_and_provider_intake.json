@@ -440,15 +440,26 @@
       "evidence_paths": [
         "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
         "results\\20261110\\native_generic_scope_packets_latest2\\native_generic_scope_worklist_packet_evidence_latest.json",
-        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_provider_intake_audit.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_evidence_worklist.json",
+        "results\\20261115\\release_closure_worklist_current.json"
       ],
       "observed": {
         "provider_packet_case_count": 24,
         "qualified_provider_packet_case_count": 0,
-        "provider_packet_promoted": false
+        "provider_packet_promoted": false,
+        "facility_request_case_count": 44,
+        "facility_template_entry_count": 44,
+        "facility_aligned_entry_count": 44,
+        "facility_evidence_worklist_case_count": 44,
+        "facility_evidence_worklist_status": "OPEN_PROVIDER_EVIDENCE_WORKLIST",
+        "release_closure_worklist_case_count": 44,
+        "release_closure_worklist_open_case_count": 44,
+        "release_closure_worklist_termination_open_case_count": 0
       },
       "blocking_reason": "현재 packet은 native diagnostic packet이며 qualified provider packet은 0건이다",
-      "interpretation": "이 gate가 닫히기 전까지 결과는 조건부 진단 결과로만 표시한다."
+      "interpretation": "native campaign의 실행 packet 수, 시설 intake template 수, closure worklist 수를 분리해 표시한다. template 정렬이나 종료 closure만으로 qualified provider evidence가 되지 않으며, 이 gate가 닫히기 전까지 결과는 조건부 진단 결과로만 표시한다."
     },
     {
       "id": "strict_facility_scope",

@@ -235,6 +235,20 @@ def test_objective_audit_records_facility_provider_intake_alignment_without_prom
         "promotion_policy": {"facility_qra_allowed": False},
         "_record_path": "facility-provider-intake.json",
     }
+    inputs["facility_evidence_worklist"] = {
+        "schema_version": "prism.facility_evidence_worklist.v1",
+        "status": "OPEN_PROVIDER_EVIDENCE_WORKLIST",
+        "case_count": 44,
+        "_record_path": "facility-evidence-worklist.json",
+    }
+    inputs["release_closure_worklist"] = {
+        "schema_version": "prism.release_closure_worklist.v1",
+        "status": "OPEN_RELEASE_CLOSURE_WORKLIST",
+        "case_count": 44,
+        "open_case_count": 44,
+        "summary": {"termination_open_case_count": 0},
+        "_record_path": "release-closure-worklist.json",
+    }
     report = build_ijhe_objective_coverage_audit(**inputs)
     check = next(
         row for row in report["checks"]
@@ -242,6 +256,15 @@ def test_objective_audit_records_facility_provider_intake_alignment_without_prom
     )
     assert check["status"] == "PASS"
     assert check["observed"]["aligned_entry_count"] == 44
+    qualified = next(
+        row for row in report["checks"] if row["id"] == "qualified_provider_evidence"
+    )
+    assert qualified["observed"]["facility_request_case_count"] == 44
+    assert qualified["observed"]["facility_template_entry_count"] == 44
+    assert qualified["observed"]["facility_aligned_entry_count"] == 44
+    assert qualified["observed"]["facility_evidence_worklist_case_count"] == 44
+    assert qualified["observed"]["release_closure_worklist_open_case_count"] == 44
+    assert qualified["observed"]["release_closure_worklist_termination_open_case_count"] == 0
     assert "diagnostic_facility_provider_intake_alignment" not in report["strict_blocking_check_ids"]
     assert {
         "independent_physical_validation",
