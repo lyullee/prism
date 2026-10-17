@@ -32,6 +32,7 @@ python -m pytest -q
 - [최신 IJHE 감사](docs/PRISM_IJHE_latest_audit_20261115.md)
 - [설비 provider 상태 handoff 기록](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [v0.6.3 PyPI·DOI 배포 기록](docs/PRISM_v063_PyPI_DOI_배포기록_20261015.md)
+- [현재 상태 재점검 (2026-10-18)](docs/PRISM_현재상태_재점검_20261018.md)
 
 ## 최신 v0.6.2 IJHE 기준점 (2026-11-15)
 
