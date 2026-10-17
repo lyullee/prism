@@ -5875,7 +5875,7 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_exact_match_event_count": 13,
   "external_lh2dt_native_facility_full_scope_provider_qualification_qualified_count": 0,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 identity-preserving requests: 7 packets have a structurally closed termination ledger and need qualification-only evidence; 19 require release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 identity-preserving requests: explicit closure status 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN; 7 packets need qualification-only evidence and 19 require release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_count": 24,
   "external_lh2dt_native_facility_full_scope_provider_qualification_only_request_count": 7,
   "external_lh2dt_native_facility_full_scope_provider_closure_and_qualification_request_count": 19,
@@ -5886,7 +5886,7 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_entry_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_promotion_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; sidecar files present 0; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; explicit closure status 7 ready and 19 open; sidecar files present 0; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_event_row_count": 24,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_release_identity_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_exact_match_count": 0,
@@ -6102,5 +6102,13 @@
   "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_record": "results/20261017/latest_ijhe_audit_verification_after_sidecar_count_fix.json",
   "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_status": "PASS; 57-check INCOMPLETE_EVIDENCE audit remains internally consistent after provider sidecar presence correction; facility QRA remains withheld",
   "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_blocking_reason_count": 0,
-  "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_sha256": "A570896F70DD15849C552B2EA2DD722EC12669F93375557188AE811AE5D05FB2"
+  "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_sha256": "A570896F70DD15849C552B2EA2DD722EC12669F93375557188AE811AE5D05FB2",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_closure_status_counts": {
+    "CLOSURE_EVIDENCE_OPEN": 19,
+    "CLOSURE_READY_FOR_QUALIFICATION": 7
+  },
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_closure_status_counts": {
+    "CLOSURE_EVIDENCE_OPEN": 19,
+    "CLOSURE_READY_FOR_QUALIFICATION": 7
+  }
 }

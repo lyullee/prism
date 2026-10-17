@@ -87,3 +87,18 @@ def test_native_exact_sidecar_remains_unqualified_until_closure_is_explicit(tmp_
     assert report["exact_match_count"] == 1
     assert report["qualified_provider_packet_count"] == 0
     assert report["rows"][0]["status"] == "QUALIFIED_SIDECAR_EXACT_MATCH"
+
+
+def test_native_exact_sidecar_is_qualified_when_ready_closure_is_explicit(tmp_path):
+    catalogue, manifest = _native_catalogue(tmp_path, with_sidecar=True)
+    value = json.loads(catalogue.read_text(encoding="utf-8"))
+    value["requests"][0]["requests"][0]["closure_status"] = (
+        "CLOSURE_READY_FOR_QUALIFICATION"
+    )
+    catalogue.write_text(json.dumps(value), encoding="utf-8")
+    report = audit_native_full_scope_provider_qualification(
+        catalogue, sidecar_manifest=manifest
+    )
+    assert report["exact_match_count"] == 1
+    assert report["qualified_provider_packet_count"] == 1
+    assert report["rows"][0]["qualified_provider_packet"] is True

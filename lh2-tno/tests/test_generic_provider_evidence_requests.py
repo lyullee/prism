@@ -122,8 +122,18 @@ def test_qualification_request_does_not_claim_bounded_horizon_is_closed():
         termination_basis="inventory_over_600s",
     )
     request = build_provider_qualification_request(packet)
+    assert request["closure_status"] == "CLOSURE_EVIDENCE_OPEN"
     assert request["acceptance"]["termination_evidence_already_closed"] is False
     assert request["acceptance"]["termination_evidence_review_required"] is True
+
+
+def test_closed_qualification_request_exposes_ready_closure_status():
+    request = build_provider_qualification_request(
+        _packet(event_id="closed-event", termination_basis="reviewed_isolation_success")
+    )
+    assert request["closure_status"] == "CLOSURE_READY_FOR_QUALIFICATION"
+    assert request["acceptance"]["termination_evidence_already_closed"] is True
+    assert request["acceptance"]["termination_evidence_review_required"] is False
 
 
 def _write_verification(directory, packet, basis):

@@ -214,6 +214,7 @@ def _closure_request(
         "request_schema": "prism.provider_release_closure_request.v1",
         "request_id": str(packet.get("event_id", event_id)),
         "status": "OPEN",
+        "closure_status": "CLOSURE_EVIDENCE_OPEN",
         "current_packet": current,
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blocking_reasons)),
         "required_evidence": fields,
@@ -281,6 +282,16 @@ def build_provider_qualification_request(
         "request_schema": "prism.provider_qualification_request.v1",
         "request_id": str(resolved_event_id),
         "status": "OPEN",
+        # The qualification request is still OPEN because review is pending,
+        # while this separate field records whether the release boundary is
+        # already structurally closed.  Downstream native request audits use
+        # this field to permit a future exact sidecar to qualify the packet
+        # without silently treating an open boundary as closed.
+        "closure_status": (
+            "CLOSURE_READY_FOR_QUALIFICATION"
+            if termination_evidence_closed
+            else "CLOSURE_EVIDENCE_OPEN"
+        ),
         "current_packet": current,
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blocking_reasons)),
         "required_evidence": [

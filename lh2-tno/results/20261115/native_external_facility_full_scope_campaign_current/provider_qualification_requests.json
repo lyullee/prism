@@ -27,6 +27,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
             "component_id": "storage-tank-01",
@@ -131,6 +132,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
             "component_id": "storage-tank-01",
@@ -235,6 +237,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
             "component_id": "storage-tank-01",
@@ -339,6 +342,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
             "component_id": "storage-tank-01",
@@ -444,6 +448,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
             "component_id": "storage-tank-01",
@@ -549,6 +554,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
             "component_id": "liquid-transfer-line-01",
@@ -658,6 +664,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
             "component_id": "liquid-transfer-line-01",
@@ -767,6 +774,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
             "component_id": "liquid-transfer-line-01",
@@ -876,6 +884,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
             "component_id": "liquid-transfer-line-01",
@@ -985,6 +994,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
             "component_id": "liquid-transfer-line-01",
@@ -1095,6 +1105,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
             "component_id": "transfer-valve-01",
@@ -1186,6 +1197,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
             "component_id": "transfer-valve-01",
@@ -1277,6 +1289,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
             "component_id": "transfer-valve-01",
@@ -1368,6 +1381,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
             "component_id": "transfer-valve-01",
@@ -1459,6 +1473,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
             "component_id": "transfer-valve-01",
@@ -1550,6 +1565,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
             "component_id": "pressure-relief-vent-01",
@@ -1655,6 +1671,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
             "component_id": "liquid-transfer-pump-01",
@@ -1764,6 +1781,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
             "component_id": "liquid-transfer-pump-01",
@@ -1873,6 +1891,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
             "component_id": "ambient-vaporizer-01",
@@ -1983,6 +2002,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
             "component_id": "ambient-vaporizer-01",
@@ -2093,6 +2113,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
             "component_id": "ambient-vaporizer-01",
@@ -2183,6 +2204,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
             "component_id": "reliquefier-01",
@@ -2279,6 +2301,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
             "component_id": "reliquefier-01",
@@ -2390,6 +2413,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
             "component_id": "reliquefier-01",
@@ -2486,6 +2510,7 @@
           "request_schema": "prism.provider_release_closure_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
           "status": "OPEN",
+          "closure_status": "CLOSURE_EVIDENCE_OPEN",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
             "component_id": "reliquefier-01",
@@ -2596,6 +2621,7 @@
           "request_schema": "prism.provider_qualification_request.v1",
           "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
           "status": "OPEN",
+          "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
           "current_packet": {
             "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
             "component_id": "reliquefier-01",
