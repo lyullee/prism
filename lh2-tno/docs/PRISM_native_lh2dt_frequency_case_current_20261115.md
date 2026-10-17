@@ -58,13 +58,25 @@ python scripts/run_lh2dt_native_frequency_case.py `
 | 문헌 빈도 사용 | `true` |
 | provider에서 빈도 추정 | `false` |
 | provider 질량 잔차 | `0 kg` |
-| native source digest | `13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22` |
-| native 방출 계산시간 | 약 `276.5 ms` |
-| 전체 campaign chain 시간 | 약 `146.9 s` |
+| native source digest | `d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce` |
+| native 방출 계산시간 | 약 `263.7 ms` |
+| 전체 campaign chain 시간 | 약 `176.1 s` |
 | 방출→피해 chain 실행 | `true` |
 | 시설 전체 IR/F-N 사용 가능 | `false` |
 | provider 승격 | `false` |
 | 물리검증 주장 | `false` |
+
+### State-to-release inventory rebaseline
+
+The compiled route contained an older state snapshot with an inventory of
+`0.0284920619 kg`, while the current native LayeredTank initialization used by
+the provider contains `71.76440057 kg`. The runner now constructs the snapshot
+from the exact native initialization that produced the release, binds its new
+digest into the accident request and consequence request, and records the old
+digest and mass in `verification.json`. The regenerated packet reports
+`state_snapshot_release_mass_match=true`; no value is silently copied into the
+old artifact. The one-case mass audit is retained in
+`examples/native_lh2dt_frequency_case_state_mass_audit_20261115.json`.
 
 campaign 결과는 선택된 저장탱크 사건을 `EXECUTED_OPERATOR_LIMITED`로 기록하고,
 문헌 빈도 `6.5×10^-4 year^-1`을 조건부 risk atom에 보존한다. 저장탱크의

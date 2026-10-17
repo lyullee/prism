@@ -223,9 +223,9 @@
               "component_id": "storage-tank-01",
               "captured_at_s": 0.0,
               "origin": "model_prediction",
-              "pressure_pa_abs": 204952.5178434031,
-              "temperature_k": 22.96893651066565,
-              "mass_kg": 0.028492061899609754,
+              "pressure_pa_abs": 110000.0,
+              "temperature_k": 20.551696828257803,
+              "mass_kg": 71.7644005715206,
               "liquid_fraction": null,
               "phase": "liquid",
               "position_enu_m": [
@@ -236,30 +236,30 @@
               "measurements": {
                 "initial_pressure": {
                   "quantity": "pressure",
-                  "value_si": 204952.5178434031,
-                  "sensor_location": "storage-tank-01.liquid_cell_0",
+                  "value_si": 110000.0,
+                  "sensor_location": "storage-tank-01.native_inventory",
                   "quality": "valid"
                 },
                 "initial_temperature": {
                   "quantity": "temperature",
-                  "value_si": 22.96893651066565,
-                  "sensor_location": "storage-tank-01.liquid_cell_0",
+                  "value_si": 20.551696828257803,
+                  "sensor_location": "storage-tank-01.native_inventory",
                   "quality": "valid"
                 },
                 "initial_mass": {
                   "quantity": "mass",
-                  "value_si": 0.028492061899609754,
-                  "sensor_location": "storage-tank-01.inventory",
+                  "value_si": 71.7644005715206,
+                  "sensor_location": "storage-tank-01.native_inventory",
                   "quality": "valid"
                 }
               },
               "source_digest": null,
               "quality": "valid"
             },
-            "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-            "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+            "state_snapshot_digest": "63fa5ff7f3ace5e4805adfdbd759c3c43977a0adf935d26614a4f4cf2c96955e",
+            "provider_state_snapshot_digest": "63fa5ff7f3ace5e4805adfdbd759c3c43977a0adf935d26614a4f4cf2c96955e",
             "provider_state_snapshot_digests": [
-              "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+              "63fa5ff7f3ace5e4805adfdbd759c3c43977a0adf935d26614a4f4cf2c96955e"
             ],
             "source_input": null,
             "resolved_release": null,
@@ -282,8 +282,8 @@
                 "backend": "CoolProp-HEOS",
                 "energy_reference": "CoolProp-HEOS:Hydrogen:native"
               },
-              "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-              "provider_result_digest": "d40a94be2340bf9de8ac9c4ae0d9bdb3a3eb192caebde3bec131ff1dc985a76f",
+              "provider_source_digest": "d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce",
+              "provider_result_digest": "3187964df0fdf389ba14bb455343ae72ce8f607e7018c7f5572cddb8d0d7ded7",
               "provider_boundary_reference": "native lh2dt LayeredTank atmospheric liquid outlet; explicit placement from compiled facility port",
               "input_origin": "model_prediction",
               "position_enu_m": [
@@ -349,7 +349,24 @@
                 "derived_accounting_residual_kg": -1.4210854715202004e-14,
                 "isolation_time_s": null,
                 "post_isolation_observation_s": null,
-                "isolation_success": false
+                "isolation_success": false,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "f44cd936e0924342130caa71e66f99fd0348c36b7fd36dd40af0c75da655bda9",
+                  "max_abs_inventory_residual_kg": 1.4210854715202004e-14,
+                  "inventory_tolerance_kg": 7.176440057152061e-08,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 1.1e-05,
+                  "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+                }
               },
               "failure_opening_diameter_m": 0.0127
             },
@@ -3515,7 +3532,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.00025
             },
@@ -3904,7 +3928,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.0007905694150420948
             },
@@ -4293,7 +4324,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.0025000000000000005
             },
@@ -4682,7 +4720,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.00790569415042095
             },
@@ -5099,7 +5144,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.025
             },
@@ -5471,7 +5523,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.00025
             },
@@ -5846,7 +5905,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.0007905694150420948
             },
@@ -6221,7 +6287,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.0025000000000000005
             },
@@ -6596,7 +6669,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.00790569415042095
             },
@@ -6971,7 +7051,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.025
             },
@@ -7687,7 +7774,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.025
             },
@@ -8076,7 +8170,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "failure_opening_diameter_m": 0.0025000000000000005
             },
@@ -8500,7 +8601,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": null,
                 "post_isolation_observation_s": null,
-                "isolation_success": null
+                "isolation_success": null,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "vertical_handoff": null,
               "compressible_plane_handoff": null,
@@ -10051,7 +10159,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": null,
                 "post_isolation_observation_s": null,
-                "isolation_success": null
+                "isolation_success": null,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "vertical_handoff": null,
               "compressible_plane_handoff": null,
@@ -10536,7 +10651,14 @@
                 "derived_accounting_residual_kg": 0.0,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "vertical_handoff": null,
               "compressible_plane_handoff": null,
@@ -11954,7 +12076,14 @@
                 "derived_accounting_residual_kg": -1.0842021724855044e-19,
                 "isolation_time_s": 0.1,
                 "post_isolation_observation_s": 0.2,
-                "isolation_success": true
+                "isolation_success": true,
+                "pressure_equalization_time_s": null,
+                "post_pressure_equalization_observation_s": null,
+                "pressure_equalization_success": null,
+                "terminal_source_pressure_pa_abs": null,
+                "ambient_pressure_pa_abs": null,
+                "max_post_pressure_equalization_flow_kg_s": null,
+                "dynamic_state_closure": null
               },
               "vertical_handoff": null,
               "compressible_plane_handoff": null,

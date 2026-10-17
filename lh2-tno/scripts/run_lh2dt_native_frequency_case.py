@@ -13,6 +13,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -23,7 +24,6 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest  # noqa: E402
 from lh2_tno.campaign import RiskCampaign  # noqa: E402
-from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     AccidentReleaseExportRequest,
     export_equipment_liquid_accident_history,
@@ -32,6 +32,10 @@ from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     build_consequence_request_from_provider_release,
+)
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
 )
 
 
@@ -68,6 +72,7 @@ def _native_request(
     source_digest: str,
     state_digest: str,
     *,
+    state_snapshot: EquipmentStateSnapshot | None = None,
     isolation_time_s: float | None = None,
     post_isolation_observation_s: float = 0.0,
 ) -> AccidentReleaseExportRequest:
@@ -105,6 +110,8 @@ def _native_request(
         "scenario_provenance": "explicit native external LayeredTank diagnostic; not site-calibrated",
         "provider_termination_required": True,
     }
+    if state_snapshot is not None:
+        payload["state_snapshot"] = state_snapshot.to_mapping()
     if isolation_time_s is not None:
         payload["isolation_time_s"] = isolation_time_s
         payload["post_isolation_observation_s"] = post_isolation_observation_s
@@ -164,11 +171,48 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         ),
     )
     source_digest = _tree_digest(external_root)
-    state_digest = canonical_digest({
-        "source": "native-layered-tank-frequency-case",
-        "pressure_pa_abs": 110000.0,
-        "liquid_volume_fraction": 0.05,
-    })
+    source_pressure_pa_abs = 110000.0
+    liquid_volume_fraction = 0.05
+    initial_state = model.initialize_saturated(
+        source_pressure_pa_abs,
+        liquid_volume_fraction,
+        wall_temperature_K=model.properties.saturated_liquid(
+            source_pressure_pa_abs
+        ).temperature_K,
+    )
+    provider_initial_mass_kg = float(model.total_mass_kg(initial_state))
+    provider_initial_temperature_k = float(
+        model.properties.saturated_liquid(source_pressure_pa_abs).temperature_K
+    )
+    provider_state_snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="storage-tank-01",
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=source_pressure_pa_abs,
+        temperature_k=provider_initial_temperature_k,
+        mass_kg=provider_initial_mass_kg,
+        phase="liquid",
+        position_enu_m=(0.0, 0.0, 1.0),
+        measurements={
+            "initial_pressure": {
+                "quantity": "pressure",
+                "value_si": source_pressure_pa_abs,
+                "sensor_location": "storage-tank-01.native_inventory",
+            },
+            "initial_temperature": {
+                "quantity": "temperature",
+                "value_si": provider_initial_temperature_k,
+                "sensor_location": "storage-tank-01.native_inventory",
+            },
+            "initial_mass": {
+                "quantity": "mass",
+                "value_si": provider_initial_mass_kg,
+                "sensor_location": "storage-tank-01.native_inventory",
+            },
+        },
+    )
+    state_digest = provider_state_snapshot.digest()
     provider = NativeLayeredTankProvider(
         model,
         {
@@ -191,6 +235,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         _native_request(
             source_digest,
             state_digest,
+            state_snapshot=provider_state_snapshot,
             isolation_time_s=args.isolation_time_s,
             post_isolation_observation_s=args.post_isolation_observation_s,
         ),
@@ -204,6 +249,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     payload["provider_boundary_reference"] += "; explicit placement from compiled facility port"
     release = type(release).model_validate_json(json.dumps(payload, allow_nan=False))
     defaults = _campaign_request_defaults(current_request)
+    previous_state_snapshot = current_request.get("state_snapshot")
+    previous_state_snapshot_digest = current_request.get("state_snapshot_digest")
+    previous_state_snapshot_mass_kg = (
+        previous_state_snapshot.get("mass_kg")
+        if isinstance(previous_state_snapshot, dict)
+        else None
+    )
+    # The compiled route may contain a snapshot from a different native
+    # initialization.  Reuse its operating/frequency context, but bind the
+    # consequence request to the exact provider initialization that produced
+    # this release.  The old identity and mass are retained in verification;
+    # they are never silently overwritten in the audit record.
+    defaults["state_snapshot"] = provider_state_snapshot.to_mapping()
+    defaults["state_snapshot_digest"] = state_digest
+    defaults["provider_state_snapshot_digest"] = state_digest
+    defaults["provider_state_snapshot_digests"] = [state_digest]
     if release.phase_basis == "two_phase" and any(
         float(step.ground_liquid_mass_flow_kg_s) > 0.0
         for step in release.steps
@@ -279,6 +340,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_isolation_time_s": mass_balance.isolation_time_s if mass_balance else None,
         "provider_post_isolation_observation_s": mass_balance.post_isolation_observation_s if mass_balance else None,
         "provider_available_mass_kg": release.available_mass_kg,
+        "state_snapshot_rebased_to_provider": True,
+        "state_snapshot_previous_digest": previous_state_snapshot_digest,
+        "state_snapshot_previous_mass_kg": previous_state_snapshot_mass_kg,
+        "state_snapshot_provider_digest": state_digest,
+        "state_snapshot_provider_mass_kg": provider_initial_mass_kg,
+        "state_snapshot_release_mass_match": math.isclose(
+            float(provider_state_snapshot.mass_kg),
+            float(release.available_mass_kg),
+            rel_tol=1.0e-9,
+            abs_tol=1.0e-12,
+        ),
         "provider_final_mass_kg": mass_balance.final_mass_kg if mass_balance else None,
         "provider_residual_inventory_kg": mass_balance.final_mass_kg if mass_balance else None,
         "provider_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,
