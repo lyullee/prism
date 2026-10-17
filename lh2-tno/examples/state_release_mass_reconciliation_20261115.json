@@ -1,0 +1,31 @@
+{
+  "schema_version": "prism.state_release_mass_reconciliation.v1",
+  "status": "MASS_STATE_CONSISTENCY_RECONCILED_DIAGNOSTIC_ONLY",
+  "authoritative_audit_status": "MASS_STATE_CONSISTENCY_REVIEW_REQUIRED",
+  "authoritative_audit_case_count": 44,
+  "authoritative_mismatch_count": 1,
+  "rebaseline_record_count": 1,
+  "resolved_mismatch_count": 1,
+  "unresolved_mismatch_count": 0,
+  "unresolved_event_ids": [],
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "authoritative_state_mass_kg": 0.028492061899609754,
+      "authoritative_provider_initial_mass_kg": 71.7644005715206,
+      "legacy_relative_difference": 0.9996029777762692,
+      "rebaseline_found": true,
+      "rebaseline_previous_mass_kg": 0.028492061899609754,
+      "rebaseline_provider_mass_kg": 71.7644005715206,
+      "rebaseline_provider_result_digest": "3187964df0fdf389ba14bb455343ae72ce8f607e7018c7f5572cddb8d0d7ded7",
+      "status": "RESOLVED_BY_EXPLICIT_REBASELINE"
+    }
+  ],
+  "authoritative_campaign_replaced": false,
+  "provider_packet_promoted": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "promotion_allowed": false,
+  "interpretation": "A resolved row has an explicit provider-state rebaseline whose previous mass matches the authoritative mismatch and whose new snapshot matches its provider. The authoritative campaign remains unchanged until a full catalog rebaseline is reviewed and rebound."
+}
