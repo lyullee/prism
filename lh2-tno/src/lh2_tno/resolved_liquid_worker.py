@@ -14,6 +14,10 @@ _DYNAMIC_TERMINATION_BASES = {
     'reviewed_isolation_success',
     'inventory_depletion',
     'emergency_relief_discharge',
+    # DynamicHEMPipe may terminate when its provider-owned finite-volume
+    # pressure reaches the declared boundary.  This is a physical closure
+    # basis when the accompanying state-history and mass ledger checks pass.
+    'model_pressure_equalization',
 }
 _MASS_TOLERANCE_KG = 1.0e-8
 
