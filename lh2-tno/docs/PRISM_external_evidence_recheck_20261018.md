@@ -1,6 +1,6 @@
 # PRISM external evidence recheck (2026-10-18)
 
-This is a read-only recheck of the three external workspaces used by the
+This is a read-only recheck of the four external workspaces used by the
 liquid-hydrogen facility objective. It checks whether new provider-release,
 qualification, or independent validation material appeared after the
 2026-11-15 intake ledger. It does not promote any artifact.
@@ -8,12 +8,13 @@ qualification, or independent validation material appeared after the
 ## Result
 
 The workspace scan returned `prism.provider_artifact_roots_audit.v1` with
-`EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY`, three roots, 42 JSON artifacts, 41
+`EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY`, four roots, 43 JSON artifacts, 43
 supporting files, and zero qualification artifacts. Facility IR/F-N promotion
 remains false.
 
 | Root | JSON artifacts | Supporting files | Provider responses | Qualification records | Physical-validation claims |
 | --- | ---: | ---: | ---: | ---: | ---: |
+| `_prism_clean_lh2dt_models_16f7a4b` | 1 | 2 | 0 | 0 | 0 |
 | `_external_lh2dt_models_20261016` | 2 | 2 | 0 | 0 | 0 |
 | `SLABx_LH2/.release-work/DynamicLH2PoolX-review` | 40 | 15 | 0 | 0 | 0 |
 | `액화수소검사지원센터 데이터` | 0 | 24 | 0 | 0 | 0 |
@@ -45,6 +46,7 @@ Run from the `lh2-tno` package directory:
 
 ```powershell
 python scripts/audit_provider_artifact_workspace_roots.py `
+  --root prism_clean_lh2dt="C:\Users\lyul\Desktop\DocuData\_prism_clean_lh2dt_models_16f7a4b" `
   --root external_lh2dt="C:\Users\lyul\Desktop\DocuData\_external_lh2dt_models_20261016" `
   --root slabx_validation="C:\Users\lyul\Desktop\DocuData\SLABx_LH2\.release-work\DynamicLH2PoolX-review" `
   --root inspection_center="C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터" `
