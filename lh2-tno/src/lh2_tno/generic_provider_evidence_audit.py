@@ -299,7 +299,16 @@ def audit_generic_provider_evidence(
             and Path(str(item["sidecar_path"])).is_file()
         ):
             counts["sidecar_present"] += 1
-        matched, reason = _match_sidecar(group_packets[str(packet_path)], sidecar)
+        sidecar_file_exists = (
+            sidecar_path is not None and Path(str(sidecar_path)).is_file()
+        )
+        # A present but unreadable/non-object sidecar is evidence-quality
+        # failure, not missing evidence. Keeping the categories separate
+        # makes the external-provider worklist actionable.
+        if sidecar is None and sidecar_file_exists:
+            matched, reason = False, "qualification_sidecar_invalid"
+        else:
+            matched, reason = _match_sidecar(group_packets[str(packet_path)], sidecar)
         row["exact_match"] = matched
         row["qualified_provider_packet"] = bool(
             matched and raw.get("closure_status") == "CLOSURE_READY_FOR_QUALIFICATION"

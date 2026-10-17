@@ -82,6 +82,8 @@ def test_invalid_sidecar_file_is_present_but_not_qualified(tmp_path):
     report = audit_generic_provider_evidence(catalogue)
     assert report["qualification_sidecar_present_count"] == 1
     assert report["exact_match_count"] == 0
+    assert report["missing_sidecar_count"] == 0
+    assert report["invalid_count"] == 1
 
 
 def test_identity_and_digest_mismatch_are_separate(tmp_path):
