@@ -4865,5 +4865,8 @@
   "latest_native_external_base_recheck_reason": "Candidate provider result digests differ from the authoritative union and base state-snapshot binding was not requalified; retain as diagnostic evidence only.",
   "latest_native_external_base_recheck_verification_sha256": "8c1f484e25d0852cd3e4618bf67c5920e3371bdbfac00dee65239fd66b71ca53",
   "latest_native_external_base_recheck_summary": "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/native_external_base_recheck_summary.json",
-  "latest_native_external_base_recheck_summary_status": "DIAGNOSTIC_CANDIDATE; 34 events, 44 cases, 176 risk atoms; 23 EXECUTED, 21 EXECUTED_OPERATOR_LIMITED; authoritative union unchanged"
+  "latest_native_external_base_recheck_summary_status": "DIAGNOSTIC_CANDIDATE; 34 events, 44 cases, 176 risk atoms; 23 EXECUTED, 21 EXECUTED_OPERATOR_LIMITED; authoritative union unchanged",
+  "latest_external_evidence_recheck_record": "docs/PRISM_external_evidence_recheck_20261018.md",
+  "latest_external_evidence_recheck_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY; 3 roots, 42 JSON artifacts, 41 supporting files, 0 qualification records, 0 provider responses, 0 independent physical-validation claims; facility IR/F-N promotion false",
+  "latest_external_evidence_recheck_inspection_center_status": "NO_EXTERNAL_JSON_ARTIFACTS; 24 supporting files recognized; state/scenario evidence only"
 }
