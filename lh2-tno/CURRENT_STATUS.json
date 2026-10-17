@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1457 passed, 1 warning",
+  "latest_local_full_test_run": "1459 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -5499,7 +5499,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "713960a7",
+  "latest_local_full_test_run_commit": "d488628c",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -6239,5 +6239,12 @@
   "generic_outdoor_facility_hazop_handoff_timing_p99_ms": 1.0837000154424459,
   "generic_outdoor_facility_hazop_handoff_timing_provider_physics_included": false,
   "generic_outdoor_facility_hazop_handoff_timing_slabx_lh2_included": false,
-  "generic_outdoor_facility_hazop_handoff_timing_one_hz_claim": false
+  "generic_outdoor_facility_hazop_handoff_timing_one_hz_claim": false,
+  "facility_evidence_worklist_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_worklist.json",
+  "facility_evidence_worklist_latest_csv": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_worklist.csv",
+  "facility_evidence_worklist_latest_status": "OPEN_PROVIDER_EVIDENCE_WORKLIST; 44 cases, 9 components, 12 accident families; exact identity and termination requirements preserved; no frequency inference or facility-QRA promotion",
+  "facility_evidence_worklist_case_count": 44,
+  "facility_evidence_worklist_component_count": 9,
+  "facility_evidence_worklist_family_count": 12,
+  "facility_evidence_worklist_facility_qra_promotion": false
 }
