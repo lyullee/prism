@@ -1,0 +1,111 @@
+{
+  "schema_version": "prism.generic_provider_chain_evidence_summary.v1",
+  "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+  "source_sha256": "04195ff116f1b2be42f8e1aabc0f494f4739ca4f4b9c4530eb9230c33f961329",
+  "scope": "generic outdoor LH2 facility campaign case; exact provider-bound diagnostic",
+  "exact_identity": {
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "pressure-relief-vent-01",
+    "hazop_scenario_family": "vent_hole",
+    "operating_mode": "standby",
+    "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+    "provider_port_id": "vent-accident-out",
+    "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+    "campaign_case_status": "EXECUTED_OPERATOR_LIMITED",
+    "campaign_case_result_digest": "60ddea6f6cc7ba4822b0de835a5fc5644108846ce745cc7222361b058808bae7"
+  },
+  "current_path": {
+    "status": "CAMPAIGN_CASE_EXACT_MATCH",
+    "risk_atom_count": 1,
+    "conditional_current_weather_risk_status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "forecast_path": {
+    "status": "CAMPAIGN_CASE_REUSED_FOR_FORECAST_BINDING",
+    "trigger_count": 1,
+    "evaluated_count": 1,
+    "withheld_count": 0,
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "provider_release_boundary": {
+    "boundary_kind": "resolved_atmospheric_gas_exit",
+    "phase_basis": "gas",
+    "duration_s": 0.5,
+    "available_mass_kg": 0.0008087150217064195,
+    "cumulative_mass_out_kg": 0.0006739291847553497,
+    "termination_basis": "emergency_relief_discharge",
+    "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
+    "isolation_status": "EMERGENCY_RELIEF_DISCHARGE",
+    "inventory_status": "INVENTORY_NOT_CLOSED",
+    "mass_residual_kg": null,
+    "provider_mass_balance": {}
+  },
+  "consequence_chain": {
+    "handoffs": [
+      "equipment_state_to_provider_release",
+      "provider_release_to_SLABx_LH2",
+      "SLABx_LH2_to_TNO_damage_and_conditional_risk"
+    ],
+    "full_chain_executed": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "stages": [
+      "equipment_resolved_release",
+      "direct_gas_release",
+      "SLABx_dispersion",
+      "finite_inventory_cloud",
+      "ignition_branches",
+      "fire_radiation",
+      "multi_energy_blast_zones",
+      "TNO_human_damage",
+      "conditional_risk"
+    ],
+    "stage_elapsed_ms": {
+      "source": 725.8956999867223,
+      "pool": 0.005499983672052622,
+      "near_field_and_dispersion": 2788.000100001227,
+      "cloud_observation": 281.6026999789756,
+      "fire_explosion_damage_risk": 94.26340000936761
+    },
+    "operator_limited": true
+  },
+  "frequency_binding": {
+    "initiating_frequency_per_year": 2e-05,
+    "annual_condition_id": "synthetic-generic-worker-west-3ms",
+    "frequency_source": "external campaign catalogue; carried by exact event identity",
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false
+  },
+  "facility_campaign": {
+    "status": "HAZOP_CAMPAIGN_CASE_OPERATOR_LIMITED",
+    "conditional_diagnostic_ir_available": true,
+    "qualified_facility_qra_available": false
+  },
+  "timing": {
+    "wall_elapsed_ms": 4234.651100006886,
+    "stage_elapsed_ms": {
+      "source": 725.8956999867223,
+      "pool": 0.005499983672052622,
+      "near_field_and_dispersion": 2788.000100001227,
+      "cloud_observation": 281.6026999789756,
+      "fire_explosion_damage_risk": 94.26340000936761
+    },
+    "fresh_physics_claim": true
+  },
+  "policy": {
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_promotion": false,
+    "provider_qualification_claim": false,
+    "physical_validation_claim": false
+  },
+  "limitations": [
+    "campaign case input origin is model_prediction or synthetic external catalogue evidence",
+    "provider qualification and independent physical validation remain open",
+    "conditional current/forecast binding does not create a qualified facility IR/F-N total"
+  ],
+  "packet_record": "results/20261115/native_external_facility_full_scope_packets_current/events/015_pressure-relief-vent-01_G1/resolved_release.json"
+}

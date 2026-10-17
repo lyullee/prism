@@ -1,0 +1,322 @@
+{
+  "schema_version": "prism.generic_provider_chain_attachment.v1",
+  "status": "PROVIDER_CHAINS_ATTACHED_OPERATOR_LIMITED",
+  "facility_id": "generic-outdoor-lh2",
+  "matched_requests": [
+    {
+      "path": "current",
+      "request_id": "current|storage-tank-01|TK01-receiving-liquid-hole:receiving:liquid_two_phase|10",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "scenario_family": "liquid_two_phase"
+    },
+    {
+      "path": "forecast",
+      "request_id": "storage-tank-01|TK01-receiving-liquid-hole:receiving:liquid_two_phase|10",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "scenario_family": "liquid_two_phase"
+    },
+    {
+      "path": "current",
+      "request_id": "current|liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "scenario_family": "pipe_hole"
+    },
+    {
+      "path": "forecast",
+      "request_id": "liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "scenario_family": "pipe_hole"
+    },
+    {
+      "path": "current",
+      "request_id": "current|pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10",
+      "component_id": "pressure-relief-vent-01",
+      "operating_mode": "standby",
+      "scenario_family": "vent_hole"
+    },
+    {
+      "path": "forecast",
+      "request_id": "pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10",
+      "component_id": "pressure-relief-vent-01",
+      "operating_mode": "standby",
+      "scenario_family": "vent_hole"
+    }
+  ],
+  "uncomputed_request_ids": [],
+  "provider_evidence": [
+    {
+      "source_record": "lh2-tno/results/20261115/generic_storage_provider_bound_hazop_diagnostic.json",
+      "source_sha256": "4a6badffceacf76c7a7a345487bd7027579855814c5aaecf45e6e43b45ac0661",
+      "exact_identity": {
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "storage-tank-01",
+        "hazop_scenario_family": "liquid_two_phase",
+        "operating_mode": "receiving",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "provider_port_id": "tank-accident-out",
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7"
+      },
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "provider_port_id": "tank-accident-out",
+      "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+      "provider_result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7",
+      "release_boundary": {
+        "boundary_kind": "resolved_atmospheric_liquid_exit",
+        "phase_basis": "liquid",
+        "duration_s": 0.05,
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.008231481218448094,
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+        "isolation_status": "INVENTORY_TERMINATION",
+        "inventory_status": "INVENTORY_NOT_CLOSED",
+        "mass_residual_kg": 0.020260580681161662
+      },
+      "consequence_chain": {
+        "handoffs": [],
+        "full_chain_executed": true,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false,
+        "stages": [
+          "equipment_resolved_liquid_two_phase_exit",
+          "rainout_and_dynamic_pool",
+          "vector_cryogenic_near_field",
+          "SLABx_dispersion",
+          "finite_inventory_cloud",
+          "ignition_branches",
+          "fire_radiation",
+          "multi_energy_blast_zones",
+          "TNO_human_damage",
+          "conditional_risk"
+        ],
+        "operator_limited": true
+      },
+      "frequency_binding": null,
+      "facility_campaign": {
+        "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "conditional_diagnostic_ir_available": true,
+        "qualified_facility_qra_available": false
+      },
+      "timing": {
+        "wall_elapsed_ms": 23172.54870000761,
+        "fresh_physics_claim": null
+      }
+    },
+    {
+      "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+      "source_sha256": "04195ff116f1b2be42f8e1aabc0f494f4739ca4f4b9c4530eb9230c33f961329",
+      "exact_identity": {
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "liquid-transfer-line-01",
+        "hazop_scenario_family": "pipe_hole",
+        "operating_mode": "supply",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "provider_port_id": "line-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+        "campaign_case_status": "EXECUTED",
+        "campaign_case_result_digest": "a325b45c6cae205b98c9f14d545b18065386d046ccaa103d4694b811830e1879"
+      },
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "provider_port_id": "line-accident-out",
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+      "release_boundary": {
+        "boundary_kind": "resolved_atmospheric_liquid_exit",
+        "phase_basis": "two_phase",
+        "duration_s": 0.49999999999999994,
+        "available_mass_kg": 0.10622803086219497,
+        "cumulative_mass_out_kg": 1.5142271983109373e-05,
+        "termination_basis": "reviewed_isolation_success",
+        "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+        "isolation_status": "REVIEWED_ISOLATION_SUCCESS",
+        "inventory_status": "INVENTORY_CLOSED",
+        "mass_residual_kg": 0.0,
+        "provider_mass_balance": {
+          "schema_version": "prism.provider_mass_balance.v1",
+          "initial_mass_kg": 0.10622803086219497,
+          "cumulative_mass_in_kg": null,
+          "cumulative_mass_out_kg": 1.5142271983109373e-05,
+          "final_mass_kg": 0.10621288859021186,
+          "reported_residual_mass_kg": 0.0,
+          "derived_accounting_residual_kg": 0.0,
+          "isolation_time_s": 0.3,
+          "post_isolation_observation_s": 0.2,
+          "isolation_success": true,
+          "dynamic_state_closure": {
+            "schema_version": "prism.provider_dynamic_state_closure.v1",
+            "inventory_feedback_closed": true,
+            "pressure_feedback_closed": true,
+            "state_history_digest": "a838edd9f7f0cf4a90d662116bf1a50bbd0c3b82d5eedde0ed604394d45573ef",
+            "max_abs_inventory_residual_kg": 0.0,
+            "inventory_tolerance_kg": 1.0622803086219498e-10,
+            "max_abs_pressure_residual_pa": 0.0,
+            "pressure_tolerance_pa": 2.499718403563069e-05,
+            "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+          }
+        }
+      },
+      "consequence_chain": {
+        "handoffs": [
+          "equipment_state_to_provider_release",
+          "provider_release_to_SLABx_LH2",
+          "SLABx_LH2_to_TNO_damage_and_conditional_risk"
+        ],
+        "full_chain_executed": true,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false,
+        "stages": [
+          "equipment_resolved_release",
+          "rainout_and_dynamic_pool",
+          "SLABx_dispersion",
+          "finite_inventory_cloud",
+          "ignition_branches",
+          "fire_radiation",
+          "multi_energy_blast_zones",
+          "TNO_human_damage",
+          "conditional_risk"
+        ],
+        "stage_elapsed_ms": {
+          "source": 706.4260999904945,
+          "pool": 68995.39580001147,
+          "near_field_and_dispersion": 11092.004999984056,
+          "cloud_observation": 363.42060001334175,
+          "fire_explosion_damage_risk": 103.21560001466423
+        },
+        "operator_limited": false
+      },
+      "frequency_binding": {
+        "initiating_frequency_per_year": 3.4e-05,
+        "annual_condition_id": "synthetic-generic-worker-west-3ms",
+        "frequency_source": "external campaign catalogue; carried by exact event identity",
+        "frequency_inference_performed": false,
+        "sensor_frequency_learning_used": false
+      },
+      "facility_campaign": {
+        "status": "HAZOP_CAMPAIGN_CASE_OPERATOR_LIMITED",
+        "conditional_diagnostic_ir_available": true,
+        "qualified_facility_qra_available": false
+      },
+      "timing": {
+        "wall_elapsed_ms": 81567.22739999532,
+        "stage_elapsed_ms": {
+          "source": 706.4260999904945,
+          "pool": 68995.39580001147,
+          "near_field_and_dispersion": 11092.004999984056,
+          "cloud_observation": 363.42060001334175,
+          "fire_explosion_damage_risk": 103.21560001466423
+        },
+        "fresh_physics_claim": true
+      }
+    },
+    {
+      "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+      "source_sha256": "04195ff116f1b2be42f8e1aabc0f494f4739ca4f4b9c4530eb9230c33f961329",
+      "exact_identity": {
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "pressure-relief-vent-01",
+        "hazop_scenario_family": "vent_hole",
+        "operating_mode": "standby",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "provider_port_id": "vent-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+        "campaign_case_status": "EXECUTED_OPERATOR_LIMITED",
+        "campaign_case_result_digest": "60ddea6f6cc7ba4822b0de835a5fc5644108846ce745cc7222361b058808bae7"
+      },
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "provider_port_id": "vent-accident-out",
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+      "release_boundary": {
+        "boundary_kind": "resolved_atmospheric_gas_exit",
+        "phase_basis": "gas",
+        "duration_s": 0.5,
+        "available_mass_kg": 0.0008087150217064195,
+        "cumulative_mass_out_kg": 0.0006739291847553497,
+        "termination_basis": "emergency_relief_discharge",
+        "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
+        "isolation_status": "EMERGENCY_RELIEF_DISCHARGE",
+        "inventory_status": "INVENTORY_NOT_CLOSED",
+        "mass_residual_kg": null,
+        "provider_mass_balance": {}
+      },
+      "consequence_chain": {
+        "handoffs": [
+          "equipment_state_to_provider_release",
+          "provider_release_to_SLABx_LH2",
+          "SLABx_LH2_to_TNO_damage_and_conditional_risk"
+        ],
+        "full_chain_executed": true,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false,
+        "stages": [
+          "equipment_resolved_release",
+          "direct_gas_release",
+          "SLABx_dispersion",
+          "finite_inventory_cloud",
+          "ignition_branches",
+          "fire_radiation",
+          "multi_energy_blast_zones",
+          "TNO_human_damage",
+          "conditional_risk"
+        ],
+        "stage_elapsed_ms": {
+          "source": 725.8956999867223,
+          "pool": 0.005499983672052622,
+          "near_field_and_dispersion": 2788.000100001227,
+          "cloud_observation": 281.6026999789756,
+          "fire_explosion_damage_risk": 94.26340000936761
+        },
+        "operator_limited": true
+      },
+      "frequency_binding": {
+        "initiating_frequency_per_year": 2e-05,
+        "annual_condition_id": "synthetic-generic-worker-west-3ms",
+        "frequency_source": "external campaign catalogue; carried by exact event identity",
+        "frequency_inference_performed": false,
+        "sensor_frequency_learning_used": false
+      },
+      "facility_campaign": {
+        "status": "HAZOP_CAMPAIGN_CASE_OPERATOR_LIMITED",
+        "conditional_diagnostic_ir_available": true,
+        "qualified_facility_qra_available": false
+      },
+      "timing": {
+        "wall_elapsed_ms": 4234.651100006886,
+        "stage_elapsed_ms": {
+          "source": 725.8956999867223,
+          "pool": 0.005499983672052622,
+          "near_field_and_dispersion": 2788.000100001227,
+          "cloud_observation": 281.6026999789756,
+          "fire_explosion_damage_risk": 94.26340000936761
+        },
+        "fresh_physics_claim": true
+      }
+    }
+  ],
+  "summary": {
+    "current_request_count": 3,
+    "forecast_request_count": 3,
+    "matched_request_count": 6,
+    "uncomputed_request_count": 0,
+    "provider_chain_count": 3,
+    "provider_chain_stage_count": 28
+  },
+  "policy": {
+    "exact_component_mode_family_match_required": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_qualification_claim": false,
+    "physical_validation_claim": false,
+    "facility_ir_fn_claim": false,
+    "facility_qra_promotion": false,
+    "uncomputed_cases_assigned_zero": false,
+    "diagnostic_only": true
+  }
+}

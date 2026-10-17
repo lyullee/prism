@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1452 passed, 1 warning",
+  "latest_local_full_test_run": "1454 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -5499,7 +5499,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "08d9a30a",
+  "latest_local_full_test_run_commit": "pending-provider-chain-multi-attach",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -6203,13 +6203,20 @@
   "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_missing_cases_assigned_zero": false,
   "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_facility_qra_claim": false,
   "generic_provider_chain_evidence_summary_record": "results/20261115/generic_storage_provider_bound_hazop_evidence_summary.json",
-  "generic_provider_chain_evidence_summary_status": "OPERATOR_LIMITED_PROVIDER_CHAIN_EXECUTED; storage-tank-01 current/forecast exact match; provider qualification and facility QRA withheld",
-  "generic_provider_chain_attachment_record": "results/20261115/generic_provider_chain_attachment.json",
-  "generic_provider_chain_attachment_status": "PROVIDER_CHAIN_ATTACHED_OPERATOR_LIMITED",
-  "generic_provider_chain_attachment_matched_request_count": 2,
-  "generic_provider_chain_attachment_uncomputed_request_count": 4,
+  "generic_provider_chain_evidence_summary_status": "OPERATOR_LIMITED_PROVIDER_CHAIN_EXECUTED; storage tank, transfer line and relief vent exact component/mode/family matches; provider qualification and facility QRA withheld",
+  "generic_provider_chain_attachment_record": "results/20261115/generic_provider_chain_attachment_all_components.json",
+  "generic_provider_chain_attachment_status": "PROVIDER_CHAINS_ATTACHED_OPERATOR_LIMITED",
+  "generic_provider_chain_attachment_matched_request_count": 6,
+  "generic_provider_chain_attachment_uncomputed_request_count": 0,
   "generic_provider_chain_attachment_slabx_stage": "SLABx_dispersion",
   "generic_provider_chain_attachment_facility_ir_fn_claim": false,
   "generic_provider_chain_attachment_facility_qra_claim": false,
-  "generic_provider_chain_attachment_physical_validation_claim": false
+  "generic_provider_chain_attachment_physical_validation_claim": false,
+  "generic_provider_chain_evidence_summary_records": [
+    "results/20261115/generic_storage_provider_bound_hazop_evidence_summary.json",
+    "results/20261115/generic_line_provider_bound_hazop_evidence_summary.json",
+    "results/20261115/generic_vent_provider_bound_hazop_evidence_summary.json"
+  ],
+  "generic_provider_chain_attachment_component_count": 3,
+  "generic_provider_chain_attachment_provider_qualification_claim": false
 }

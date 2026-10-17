@@ -4,7 +4,8 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-from attach_generic_provider_chain import attach
+from attach_generic_provider_chain import attach, attach_many
+from build_generic_campaign_provider_evidence import build
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,3 +43,42 @@ def test_provider_chain_requires_exact_family_match():
         assert "exactly one" in str(error)
     else:
         raise AssertionError("mismatched provider family must be rejected")
+
+
+def test_all_generic_components_attach_without_assigning_missing_cases_zero():
+    handoff = json.loads(
+        (ROOT / "results/20261115/generic_provider_bound_hazop_quantitative_handoff.json")
+        .read_text(encoding="utf-8")
+    )
+    evidences = [
+        json.loads((ROOT / "results/20261115/generic_storage_provider_bound_hazop_evidence_summary.json").read_text(encoding="utf-8")),
+        json.loads((ROOT / "results/20261115/generic_line_provider_bound_hazop_evidence_summary.json").read_text(encoding="utf-8")),
+        json.loads((ROOT / "results/20261115/generic_vent_provider_bound_hazop_evidence_summary.json").read_text(encoding="utf-8")),
+    ]
+    result = attach_many(handoff, evidences)
+    assert result["summary"]["provider_chain_count"] == 3
+    assert result["summary"]["matched_request_count"] == 6
+    assert result["summary"]["uncomputed_request_count"] == 0
+    assert result["policy"]["uncomputed_cases_assigned_zero"] is False
+    assert result["policy"]["facility_qra_promotion"] is False
+
+
+def test_campaign_case_evidence_preserves_inventory_and_slabx_stage():
+    campaign = json.loads(
+        (ROOT / "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json")
+        .read_text(encoding="utf-8")
+    )
+    packet_path = ROOT / "results/20261115/native_external_facility_full_scope_packets_current/events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json"
+    packet = json.loads(packet_path.read_text(encoding="utf-8"))
+    evidence = build(
+        campaign,
+        packet,
+        campaign_path=ROOT / "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+        packet_path=packet_path,
+        component_id="liquid-transfer-line-01",
+        event_id="generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        scenario_family="pipe_hole",
+    )
+    assert evidence["provider_release_boundary"]["inventory_status"] == "INVENTORY_CLOSED"
+    assert "SLABx_dispersion" in evidence["consequence_chain"]["stages"]
+    assert evidence["policy"]["provider_qualification_claim"] is False

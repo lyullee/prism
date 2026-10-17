@@ -399,13 +399,34 @@ The result also contains separate exact-key evidence coverage for the current
 and forecast worklists. Missing or extra attachments keep the corresponding
 coverage gate withheld and are never converted to zero risk.
 
-An operator-limited provider-chain example is also shipped for the
-`storage-tank-01` `liquid_two_phase` request. Run
+Operator-limited provider-chain evidence is also shipped for all three generic
+HAZOP requests: `storage-tank-01` (`liquid_two_phase`),
+`liquid-transfer-line-01` (`pipe_hole`), and `pressure-relief-vent-01`
+(`vent_hole`). The line and vent summaries are exact joins to one executed case
+from the native multi-equipment campaign; they retain the provider-owned
+duration, isolation, inventory and SLABx-LH2 stage without silently filling any
+missing frequency or validation evidence. Run
 [`scripts/attach_generic_provider_chain.py`](scripts/attach_generic_provider_chain.py)
-with the provider evidence summary to attach one exact current request and one
-exact forecast request. The adapter records the provider release boundary,
-inventory termination, SLABx-LH2/TNO chain stages, conditional IR, and timing;
-the remaining four requests stay uncomputed.
+with all three summaries to attach one exact current request and one exact
+forecast request per component:
+
+```powershell
+python scripts/attach_generic_provider_chain.py `
+  --handoff results/20261115/generic_provider_bound_hazop_quantitative_handoff.json `
+  --evidence results/20261115/generic_storage_provider_bound_hazop_evidence_summary.json `
+  --evidence results/20261115/generic_line_provider_bound_hazop_evidence_summary.json `
+  --evidence results/20261115/generic_vent_provider_bound_hazop_evidence_summary.json `
+  --output results/20261115/generic_provider_chain_attachment_all_components.json
+```
+
+The resulting attachment matches all six current/forecast requests and leaves
+no request silently uncomputed. It still remains diagnostic: provider
+qualification, independent physical validation, facility IR/F-N closure and
+facility QRA promotion are explicitly false. To regenerate a line or vent
+summary from an exact campaign case, use
+[`scripts/build_generic_campaign_provider_evidence.py`](scripts/build_generic_campaign_provider_evidence.py)
+with the campaign result, the matching `resolved_release.json`, and the exact
+component/event/scenario-family identity.
 
 ### Importing process-model forecast workbooks
 

@@ -59,23 +59,38 @@ failures rather than being reassigned or treated as zero risk.
 
 ## Provider-bound diagnostic attachment
 
-The generic facility package also includes a compact evidence summary for one
-explicit `storage-tank-01` liquid/two-phase provider packet. It records the
-provider-owned duration and inventory boundary, the `SLABx_dispersion` and TNO
-damage stages, one current-weather conditional IR contribution, and the fresh
-diagnostic elapsed time. Use the exact-match adapter:
+The generic facility package includes compact evidence summaries for all three
+declared HAZOP requests. The tank summary is the explicit liquid/two-phase
+diagnostic; the transfer-line and relief-vent summaries are exact joins to one
+executed case from the native multi-equipment campaign. Each summary records
+the provider-owned duration, isolation/termination and inventory boundary, the
+`SLABx_dispersion` and TNO damage stages, conditional risk and timing. The
+campaign join is evidence accounting only: it does not qualify the provider or
+promote a facility total.
+
+Run the exact-match adapter with all three summaries:
 
 ```powershell
 python scripts/attach_generic_provider_chain.py `
   --handoff results/20261115/generic_provider_bound_hazop_quantitative_handoff.json `
   --evidence results/20261115/generic_storage_provider_bound_hazop_evidence_summary.json `
-  --output results/20261115/generic_provider_chain_attachment.json
+  --evidence results/20261115/generic_line_provider_bound_hazop_evidence_summary.json `
+  --evidence results/20261115/generic_vent_provider_bound_hazop_evidence_summary.json `
+  --output results/20261115/generic_provider_chain_attachment_all_components.json
 ```
 
-The attachment matches one current and one forecast request. The other four
-requests remain uncomputed. The provider packet is synthetic/model-prediction
-diagnostic evidence, so the attachment does not claim provider qualification,
-independent physical validation, facility IR/F-N closure, or facility QRA.
+The attachment matches one current and one forecast request per component (six
+requests total). Exact component, operating-mode and scenario-family matching
+is required; a mismatch fails closed. The provider packets are
+synthetic/model-prediction or operator-limited diagnostic evidence, so the
+attachment does not claim provider qualification, independent physical
+validation, facility IR/F-N closure, or facility QRA. Missing cases are never
+assigned zero frequency.
+
+To regenerate a line or vent summary from the campaign evidence, use
+`scripts/build_generic_campaign_provider_evidence.py` and provide the campaign
+result, the matching `resolved_release.json`, and the exact component/event and
+scenario-family identity. The script rejects duplicate or mismatched cases.
 
 ## What this proves and what it does not
 

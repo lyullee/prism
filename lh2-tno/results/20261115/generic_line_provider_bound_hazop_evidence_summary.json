@@ -1,0 +1,133 @@
+{
+  "schema_version": "prism.generic_provider_chain_evidence_summary.v1",
+  "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+  "source_sha256": "04195ff116f1b2be42f8e1aabc0f494f4739ca4f4b9c4530eb9230c33f961329",
+  "scope": "generic outdoor LH2 facility campaign case; exact provider-bound diagnostic",
+  "exact_identity": {
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "liquid-transfer-line-01",
+    "hazop_scenario_family": "pipe_hole",
+    "operating_mode": "supply",
+    "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+    "provider_port_id": "line-accident-out",
+    "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+    "campaign_case_status": "EXECUTED",
+    "campaign_case_result_digest": "a325b45c6cae205b98c9f14d545b18065386d046ccaa103d4694b811830e1879"
+  },
+  "current_path": {
+    "status": "CAMPAIGN_CASE_EXACT_MATCH",
+    "risk_atom_count": 1,
+    "conditional_current_weather_risk_status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "forecast_path": {
+    "status": "CAMPAIGN_CASE_REUSED_FOR_FORECAST_BINDING",
+    "trigger_count": 1,
+    "evaluated_count": 1,
+    "withheld_count": 0,
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "provider_release_boundary": {
+    "boundary_kind": "resolved_atmospheric_liquid_exit",
+    "phase_basis": "two_phase",
+    "duration_s": 0.49999999999999994,
+    "available_mass_kg": 0.10622803086219497,
+    "cumulative_mass_out_kg": 1.5142271983109373e-05,
+    "termination_basis": "reviewed_isolation_success",
+    "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+    "isolation_status": "REVIEWED_ISOLATION_SUCCESS",
+    "inventory_status": "INVENTORY_CLOSED",
+    "mass_residual_kg": 0.0,
+    "provider_mass_balance": {
+      "schema_version": "prism.provider_mass_balance.v1",
+      "initial_mass_kg": 0.10622803086219497,
+      "cumulative_mass_in_kg": null,
+      "cumulative_mass_out_kg": 1.5142271983109373e-05,
+      "final_mass_kg": 0.10621288859021186,
+      "reported_residual_mass_kg": 0.0,
+      "derived_accounting_residual_kg": 0.0,
+      "isolation_time_s": 0.3,
+      "post_isolation_observation_s": 0.2,
+      "isolation_success": true,
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "a838edd9f7f0cf4a90d662116bf1a50bbd0c3b82d5eedde0ed604394d45573ef",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1.0622803086219498e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 2.499718403563069e-05,
+        "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
+    }
+  },
+  "consequence_chain": {
+    "handoffs": [
+      "equipment_state_to_provider_release",
+      "provider_release_to_SLABx_LH2",
+      "SLABx_LH2_to_TNO_damage_and_conditional_risk"
+    ],
+    "full_chain_executed": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "stages": [
+      "equipment_resolved_release",
+      "rainout_and_dynamic_pool",
+      "SLABx_dispersion",
+      "finite_inventory_cloud",
+      "ignition_branches",
+      "fire_radiation",
+      "multi_energy_blast_zones",
+      "TNO_human_damage",
+      "conditional_risk"
+    ],
+    "stage_elapsed_ms": {
+      "source": 706.4260999904945,
+      "pool": 68995.39580001147,
+      "near_field_and_dispersion": 11092.004999984056,
+      "cloud_observation": 363.42060001334175,
+      "fire_explosion_damage_risk": 103.21560001466423
+    },
+    "operator_limited": false
+  },
+  "frequency_binding": {
+    "initiating_frequency_per_year": 3.4e-05,
+    "annual_condition_id": "synthetic-generic-worker-west-3ms",
+    "frequency_source": "external campaign catalogue; carried by exact event identity",
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false
+  },
+  "facility_campaign": {
+    "status": "HAZOP_CAMPAIGN_CASE_OPERATOR_LIMITED",
+    "conditional_diagnostic_ir_available": true,
+    "qualified_facility_qra_available": false
+  },
+  "timing": {
+    "wall_elapsed_ms": 81567.22739999532,
+    "stage_elapsed_ms": {
+      "source": 706.4260999904945,
+      "pool": 68995.39580001147,
+      "near_field_and_dispersion": 11092.004999984056,
+      "cloud_observation": 363.42060001334175,
+      "fire_explosion_damage_risk": 103.21560001466423
+    },
+    "fresh_physics_claim": true
+  },
+  "policy": {
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_promotion": false,
+    "provider_qualification_claim": false,
+    "physical_validation_claim": false
+  },
+  "limitations": [
+    "campaign case input origin is model_prediction or synthetic external catalogue evidence",
+    "provider qualification and independent physical validation remain open",
+    "conditional current/forecast binding does not create a qualified facility IR/F-N total"
+  ],
+  "packet_record": "results/20261115/native_external_facility_full_scope_packets_current/events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json"
+}
