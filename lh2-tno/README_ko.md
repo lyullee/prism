@@ -44,7 +44,7 @@ python -m pytest -q
 포트에 결합되며 case/risk-atom port mismatch는 0건이다. 수직 handoff는 5개
 event·10개 weather case 모두 `inventory_depletion` 종료 기준을 사용하지만,
 `EXECUTED_OPERATOR_LIMITED`·synthetic handoff·독립 물리검증 부재는 그대로
-기록된다. 종료 evidence catalog는 35 provider row와 34 event ID를 보존하고, 현재 union의 44 case 중 32개가 provider 종료 근거와 정확히 일치한다. 동일 사건 ID의 서로 다른 provider replay는 digest로 구분한다. 최신 감사는 55개 검사 중 50개 PASS·5개 BLOCKED인 `INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 예측 quantitative-evidence gate는 두 요청을 증거 부족으로 보류하고 downstream 시설 집계를 차단한다. 상세 재현 명령과 해석은
+기록된다. 종료 evidence catalog는 35 provider row와 34 event ID를 보존하고, 현재 union의 44 case 중 42개가 수치상 종료 증거를 갖는다. 동일 사건 ID의 서로 다른 provider replay는 digest로 구분한다. 최신 감사는 57개 검사 중 52개 PASS·5개 BLOCKED인 `INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 예측 quantitative-evidence gate는 두 요청을 증거 부족으로 보류하고 downstream 시설 집계를 차단한다. 상세 재현 명령과 해석은
 [`수직 handoff 재고소진 연결 기록`](docs/PRISM_vertical_inventory_handoff_20261115.md),
 [`PRISM IJHE 최신 감사`](docs/PRISM_IJHE_latest_audit_20261115.md),
 [`IJHE 요구사항 추적표`](docs/PRISM_IJHE_requirement_traceability_20261115.md)에 있다.
@@ -132,10 +132,10 @@ provider 질량 잔차는 `0 kg`, 초기 약 `71.7644006 kg` 중 격리 후 약 
 
 **케이스별 방출 경계 승격 표 (2026-11-14):** 최신 전체 union 44개 시설 case를 설비·포트·운전
 모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 13개와 보류된 31개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 13개 행도 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
-이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 32개는
-종료 시간·재고·질량 잔차가 수치상 닫혔고, 그중 19개는 `EXECUTED_OPERATOR_LIMITED`라서
-운영자 독립 종료 근거를 기다린다. 나머지 12개는 종료 기준 또는 잔여 재고가 아직
-열려 있다. 수치상 닫혔다는 사실은 provider qualification이나 시설 IR/F-N 승격을
+이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 42개는
+종료 시간·재고·질량 잔차가 수치상 닫혔고, 그중 29개는 `EXECUTED_OPERATOR_LIMITED`라서
+운영자 독립 종료 근거를 기다린다. 나머지 2개는 provider 종료 증거가 유효하지 않아
+수치상 열려 있다. 수치상 닫혔다는 사실은 provider qualification이나 시설 IR/F-N 승격을
 의미하지 않는다.
 
 native provider response와 inventory-depletion 응답의 명시적 종료 근거는 [`provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json)에 별도 보존한다. 29개 event row가 32개 case에 연결되며, 초기질량·누적 방출량·격리/endpoint 종료·질량 잔차·provider result digest가 모두 맞을 때만 수치 종료로 반영한다. 양단 파열은 endpoint 두 개를 한 사건으로 확인하고, emergency-relief·600초 horizon처럼 지원되지 않은 basis는 승격하지 않는다. 잔여량을 0으로 만들거나 빈도를 추정하지 않는다. 자세한 규칙과 재현 명령은 [`provider 종료 증거 카탈로그`](docs/PRISM_provider_termination_evidence_catalog_20261114.md)에 있다.
