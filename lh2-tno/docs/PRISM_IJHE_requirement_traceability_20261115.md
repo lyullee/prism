@@ -225,6 +225,12 @@ The full campaign rebaseline contract was then applied with explicit previous an
 
 The provider qualification request catalog was also rebound at request granularity. The batch contract updated 24 event requests plus the two reliquefier endpoint requests (26 identity matches) to the current provider digests. It preserves the prior catalog as the source of the rebaseline, creates no qualification sidecar, and leaves frequency and facility-QRA promotion false. The compact audit record is [`examples/native_external_full_scope_provider_request_rebaseline_20261018.json`](../examples/native_external_full_scope_provider_request_rebaseline_20261018.json); the full generated catalog is retained in the local intake workspace for evidence review.
 
+## 2026-10-18 current external-worktree drift recheck
+
+A second check found uncommitted changes in the external `lh2dt_models` worktree at commit `16f7a4b`: `Vaporizer.from_design_point` and the opt-in `log_mean` heat-transfer integration. The changed source tree digest is `d7bec406…`, so it is distinct from the earlier clean-source records. The modified external source passed **392 tests** with one deprecation warning. PRISM then re-exported all seven native diagnostic equipment packets; all seven carried provider result digests and four dynamic equipment rows reported source-dynamics closure ready.
+
+This is a source-drift recheck only. The worktree is dirty, the packets remain diagnostic, and none is promoted to a qualified provider, frequency source, independent physical-validation result, or facility IR/F-N value. The packets were not rebound into the authoritative 34-event/44-case/176-risk-atom union. The machine-readable records are [`examples/external_lh2dt_worktree_drift_recheck_20261018.json`](../examples/external_lh2dt_worktree_drift_recheck_20261018.json) and [`examples/external_lh2dt_worktree_recheck_manifest_20261018.json`](../examples/external_lh2dt_worktree_recheck_manifest_20261018.json). A committed external source and full campaign replay are required before authoritative rebinding.
+
 ## 2026-10-18 inspection-centre source recheck
 
 The current inspection-centre files were hashed and re-audited against the prior

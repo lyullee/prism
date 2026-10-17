@@ -1,0 +1,34 @@
+{
+  "schema_version": "prism.external_lh2dt_worktree_drift_recheck.v1",
+  "checked_on": "2026-10-18",
+  "external_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models",
+  "git_commit": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+  "worktree_dirty": true,
+  "changed_paths": [
+    "CHANGELOG.md",
+    "src/lh2dt/vaporizer.py"
+  ],
+  "diff_stat": "CHANGELOG.md           |   8 +++\n src/lh2dt/vaporizer.py | 152 +++++++++++++++++++++++++++++++++++++++++++++++--\n 2 files changed, 156 insertions(+), 4 deletions(-)",
+  "source_tree_digest": "d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce",
+  "test_command": "python -m pytest -q -ra",
+  "test_status": "PASS",
+  "test_passed": 392,
+  "test_failed": 0,
+  "test_warnings": 1,
+  "native_recheck_manifest": "examples/external_lh2dt_worktree_recheck_manifest_20261018.json",
+  "native_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC",
+  "equipment_count": 7,
+  "equipment_provider_result_digest_count": 7,
+  "dynamic_state_closure_ready_count": 4,
+  "provider_packet_promoted_count": 0,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "authoritative_union_rebound": false,
+  "facility_qra_promotion": false,
+  "previous_recorded_source_digests": {
+    "external_lh2dt_source_test_recheck_20261018": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "native_multi_equipment_recheck_compact": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
+  },
+  "interpretation": "The current external lh2dt worktree contains uncommitted Vaporizer design-point and log-mean integration changes. The modified source passes its own 392-test suite and all seven native diagnostic exporters preserve packet identity and explicit closure fields. The output is a source-drift recheck only: it is not rebound into the authoritative 34-event/44-case/176-risk-atom union, and it does not qualify providers, infer frequency, claim independent physical validation, or promote facility IR/F-N. A committed external source and full campaign replay are required before authoritative rebinding."
+}
