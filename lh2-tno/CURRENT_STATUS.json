@@ -6382,5 +6382,16 @@
   "latest_realtime_cache_recheck_cache_meets_one_hz": true,
   "latest_realtime_cache_recheck_fresh_physics_meets_one_hz": false,
   "latest_realtime_cache_recheck_facility_qra_claim": false,
-  "latest_realtime_cache_recheck_full_scope_attempt_promoted": false
+  "latest_realtime_cache_recheck_full_scope_attempt_promoted": false,
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_record": "examples/native_dynamic_pipe_exact_area100_current_recheck_20261018.json",
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_status": "CURRENT_CODE_REPLAY_MATCHED_DIAGNOSTIC; provider result/state digests matched; 1/1 case and 4/4 risk atoms executed; authoritative union unchanged",
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_provider_commit": "7072374",
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_chain_elapsed_ms": 32866.89910001587,
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_risk_atom_count": 4,
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_provider_packet_promoted": false,
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_facility_qra_claim": false,
+  "latest_native_dynamic_pipe_exact_area100_current_recheck_authoritative_union_rebound": false
 }

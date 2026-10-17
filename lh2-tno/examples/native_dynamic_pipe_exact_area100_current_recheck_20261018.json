@@ -1,0 +1,55 @@
+{
+  "schema_version": "prism.native_dynamic_pipe_exact_area100_current_recheck.v1",
+  "status": "NATIVE_DYNAMIC_PIPE_EXACT_AREA100_CURRENT_RECHECK_DIAGNOSTIC",
+  "recheck_date_kst": "2026-10-18",
+  "current_prism_code_commit": "325ba010ea34c9c04de8b506b2c046866ebb5428",
+  "external_model_repository": "lh2dt_models",
+  "external_model_commit": "7072374",
+  "external_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+  "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+  "comparison": {
+    "provider_result_digest_previous": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+    "provider_result_digest_current": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+    "provider_result_digest_match": true,
+    "termination_basis_previous": "model_pressure_equalization",
+    "termination_basis_current": "model_pressure_equalization",
+    "duration_s_previous": 0.24005155145460036,
+    "duration_s_current": 0.24005155145460036,
+    "mass_residual_kg_current": 1.3877787807814457e-17,
+    "chain_status_previous": "DECLARED_SCOPE_EXECUTED",
+    "chain_status_current": "DECLARED_SCOPE_EXECUTED",
+    "risk_atom_count_previous": 4,
+    "risk_atom_count_current": 4,
+    "chain_elapsed_ms_previous": 29068.51709994953,
+    "chain_elapsed_ms_current": 32866.89910001587,
+    "chain_elapsed_delta_ms": 3798.38200006634,
+    "state_snapshot_digest_match": true
+  },
+  "facility_binding": {
+    "literature_event_exact_match": true,
+    "single_event_count": 1,
+    "single_case_count": 1,
+    "executed_case_count": 1,
+    "risk_atom_count": 4,
+    "facility_total_risk_available": false,
+    "authoritative_campaign_rebound": false,
+    "authoritative_union_event_count": 34,
+    "authoritative_union_case_count": 44,
+    "authoritative_union_risk_atom_count": 176
+  },
+  "promotion": {
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "slabx_lh2_modified": false
+  },
+  "limitations": [
+    "reduced declared sensitivity grid for processing-time diagnostic",
+    "exact state replay uses synthetic provider input and current campaign synthetic receptor/weather",
+    "qualification sidecar and independent physical validation remain absent",
+    "candidate is not rebound into authoritative campaign",
+    "The exact native packet has no qualification sidecar; it remains diagnostic evidence only.",
+    "The reduced spatial grid and synthetic weather/receptor geometry are not facility design evidence."
+  ]
+}

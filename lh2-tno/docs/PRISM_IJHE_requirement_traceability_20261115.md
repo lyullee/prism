@@ -197,3 +197,10 @@ The near-receptor diagnostic monitor path was measured again with the current co
 - A separate attempt against the 24-case full-scope campaign exceeded the configured backend deadline on its first fresh-physics request. Its partial process was terminated and no result was promoted; this does not change the authoritative campaign or risk ledger.
 
 The machine-readable recheck is [`examples/native_lh2_realtime_cache_recheck_20261018.json`](../examples/native_lh2_realtime_cache_recheck_20261018.json).
+
+## 2026-10-18 exact AREA_100% native pipe current-code recheck
+
+The latest `lh2dt_models` source (`7072374`, source digest `3b186dff…`) was replayed for the exact `LH2_PIPE AREA_100%` event used by the generic full-scope campaign. The provider state snapshot digest and provider result digest matched the previous candidate replay. The provider again terminated at `model_pressure_equalization` after `0.24005155145460036 s`, with a mass residual of approximately `1.39×10⁻¹⁷ kg` and an explicit `0.2 s` post-equalization observation with zero flow.
+
+The packet passed the PRISM strict adapter and reached a one-event consequence campaign with one executed case and four risk atoms. The chain took `32.87 s` on this run. This confirms reproducibility of the state→native release→release ledger→SLABx-LH2/consequence path for this exact event. It remains a diagnostic candidate: no qualification sidecar or independent full-chain validation is present, the spatial grid and receptors are synthetic, and the packet was not rebound into the authoritative 34-event/44-case/176-atom union. The machine-readable record is [`examples/native_dynamic_pipe_exact_area100_current_recheck_20261018.json`](../examples/native_dynamic_pipe_exact_area100_current_recheck_20261018.json).
+
