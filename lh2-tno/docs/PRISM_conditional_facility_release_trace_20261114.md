@@ -1,5 +1,7 @@
 # 조건부 시설 위험도와 방출 추적 view (2026-11-14)
 
+> **Snapshot notice:** This document preserves the 14 November 2026 release-boundary snapshot. The current authoritative recheck is [`release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json): 42 of 44 cases are numerically closed, 2 of 44 remain numerically open, and 29 require operator review. The 32/12 counts below are historical snapshot values and are not the current union status.
+
 `build_conditional_facility_risk_view.py`에 case별 방출 추적 출력을 연결했다. 이
 출력은 디지털트윈 화면이나 API가 한 번의 결과에서 다음 항목을 함께 읽을 수 있게
 한다.

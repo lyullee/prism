@@ -132,6 +132,8 @@ provider 질량 잔차는 `0 kg`, 초기 약 `71.7644006 kg` 중 격리 후 약 
 
 **케이스별 방출 경계 승격 표 (2026-11-14):** 최신 전체 union 44개 시설 case를 설비·포트·운전
 모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 13개와 보류된 31개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 13개 행도 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
+
+> **현재 기준 안내:** 위 파일과 아래의 2026-11-14 설명은 당시 스냅샷을 보존한 역사 기록이다. 현재 권위 재검증은 [`release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`](results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json)이며, 44개 case 중 42개는 수치상 종료, 2개는 수치상 열림, 29개는 운영자 검토가 필요하다. 과거 문서의 32/12 수치는 당시 스냅샷 값이다.
 이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 42개는
 종료 시간·재고·질량 잔차가 수치상 닫혔고, 그중 29개는 `EXECUTED_OPERATOR_LIMITED`라서
 운영자 독립 종료 근거를 기다린다. 나머지 2개는 provider 종료 증거가 유효하지 않아
