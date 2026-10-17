@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1426 passed, 1 warning",
+  "latest_local_full_test_run": "1427 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -2751,8 +2751,8 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 1426,
-  "full_portable_test_status": "1426 passed, 1 warning",
+  "full_portable_test_count": 1427,
+  "full_portable_test_status": "1427 passed, 1 warning",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -3852,9 +3852,9 @@
   "facility_ledger_frequency_port_promotion_gate_policy": "ALIGNED means declared rows agree; qualified facility QRA also requires every event to have an explicit reviewed accident port. Provider outlets never create a reviewed frequency port.",
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
-  "latest_local_targeted_test_run": "18 targeted evidence-gate tests passed; full suite 1426 passed separately (1 pytest-asyncio deprecation warning)",
-  "latest_remote_verified_commit": "a107d3fa",
-  "latest_remote_ci_run": "run 1323 completed successfully",
+  "latest_local_targeted_test_run": "54 targeted facility/status tests passed; full suite 1427 passed separately (1 pytest-asyncio deprecation warning)",
+  "latest_remote_verified_commit": "fbb22cfc",
+  "latest_remote_ci_run": "run 1324 completed successfully",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
   "v060_readiness_frequency_port_binding_evidence_request_fallback_implemented": true,
@@ -5480,7 +5480,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "a107d3fa",
+  "latest_local_full_test_run_commit": "fbb22cfc",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -5999,10 +5999,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1323,
+    "run_number": 1324,
     "status": "success",
-    "commit": "a107d3fa",
-    "url": "https://github.com/lyullee/prism/actions/runs/39027383414"
+    "commit": "fbb22cfc",
+    "url": "https://github.com/lyullee/prism/actions/runs/39027858765"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
@@ -6124,5 +6124,16 @@
   "native_provider_audit_closure_counts_exposed": {
     "CLOSURE_READY_FOR_QUALIFICATION": 7,
     "CLOSURE_EVIDENCE_OPEN": 19
-  }
+  },
+  "facility_state_origin_accounting_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
+  "facility_state_origin_accounting_latest_status": "EXPLICIT_STATE_ORIGIN_ACCOUNTING",
+  "facility_state_origin_accounting_latest_counts": {
+    "reviewed_measurement": 0,
+    "reviewed_model": 0,
+    "model_prediction": 24,
+    "synthetic": 20,
+    "missing": 0
+  },
+  "facility_state_origin_accounting_frequency_inference_performed": false,
+  "facility_state_origin_accounting_sensor_frequency_learning_used": false
 }
