@@ -5998,13 +5998,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1314,
     "workflow": "Python contracts and numerical checks",
-    "commit": "dee9aeb5",
-    "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/lyullee/prism/actions/runs/39023487591",
-    "verified_kst": "2026-10-17"
+    "run_number": 1315,
+    "status": "success",
+    "commit": "aecc27aef52e71229cbc0b3939b8e44b249d9fc3",
+    "url": "https://github.com/lyullee/prism/actions/runs/39023885705"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
