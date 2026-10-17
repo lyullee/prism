@@ -35,6 +35,7 @@ def verify_latest_ijhe_audit(
     scope_matrix: Mapping[str, Any] | Path | None = None,
     release_boundary: Mapping[str, Any] | Path | None = None,
     native_external_multi_equipment_recheck: Mapping[str, Any] | Path | None = None,
+    native_external_clean_full_scope_replay: Mapping[str, Any] | Path | None = None,
 ) -> dict[str, Any]:
     """Verify status/audit/handoff identity without changing qualification gates."""
 
@@ -429,6 +430,95 @@ def verify_latest_ijhe_audit(
                     f"status ledger {status_key} disagrees with native external recheck"
                 )
 
+    # The clean-source full-scope replay binds all 24 generic outdoor LH2
+    # event identities to the facility consequence runner.  It is still a
+    # diagnostic record: the verifier checks the complete handoff and all
+    # fail-closed flags, but never treats it as qualified facility QRA.
+    clean_scope_value: dict[str, Any] = {}
+    clean_scope_path: Path | None = None
+    clean_scope_pointer = status.get(
+        "external_lh2dt_native_clean_full_scope_replay_record"
+    )
+    if native_external_clean_full_scope_replay is None and isinstance(
+        clean_scope_pointer, str
+    ):
+        clean_scope_path = _relative_or_absolute(clean_scope_pointer, root=base)
+        if not clean_scope_path.exists():
+            reasons.append("native clean full-scope replay record does not exist")
+        else:
+            clean_scope_value = _read_object(clean_scope_path)
+    elif isinstance(native_external_clean_full_scope_replay, Path):
+        clean_scope_path = native_external_clean_full_scope_replay
+        clean_scope_value = _read_object(clean_scope_path)
+    elif isinstance(native_external_clean_full_scope_replay, Mapping):
+        clean_scope_value = dict(native_external_clean_full_scope_replay)
+    if clean_scope_pointer is not None or native_external_clean_full_scope_replay is not None:
+        source = clean_scope_value.get("source")
+        packet_catalog = clean_scope_value.get("packet_catalog")
+        campaign = clean_scope_value.get("facility_campaign")
+        clean_scope_valid = (
+            clean_scope_value.get("schema_version")
+            == "prism.native_external_facility_full_scope_clean_source_replay.v1"
+            and clean_scope_value.get("status")
+            == "EXECUTED_DIAGNOSTIC_CLEAN_EXTERNAL_SOURCE"
+            and isinstance(source, Mapping)
+            and isinstance(source.get("repository"), str)
+            and bool(source.get("repository"))
+            and isinstance(source.get("commit"), str)
+            and bool(source.get("commit"))
+            and isinstance(source.get("source_tree_sha256"), str)
+            and len(source.get("source_tree_sha256")) == 64
+            and isinstance(packet_catalog, Mapping)
+            and packet_catalog.get("event_count") == 24
+            and packet_catalog.get("exact_native_packet_count") == 24
+            and packet_catalog.get("uncomputed_event_count") == 0
+            and packet_catalog.get("isolation_requested") is False
+            and isinstance(campaign, Mapping)
+            and campaign.get("packet_count") == 24
+            and campaign.get("event_count") == 24
+            and campaign.get("matched_event_case_record_count") == 24
+            and campaign.get("matched_event_executed_case_count") == 24
+            and campaign.get("matched_event_uncomputed_case_count") == 0
+            and campaign.get("matched_event_failed_case_count") == 0
+            and campaign.get("risk_atom_count") == 96
+            and campaign.get("hazop_event_mode_binding", {}).get("bound_event_count") == 24
+            and campaign.get("hazop_event_mode_binding", {}).get("unbound_event_count") == 0
+            and campaign.get("provider_packet_promoted") is False
+            and campaign.get("physical_validation_claim") is False
+            and campaign.get("facility_qra_claim") is False
+        )
+        if not clean_scope_valid:
+            reasons.append(
+                "native clean full-scope replay is malformed or permits unsafe promotion"
+            )
+        for status_key, actual in (
+            (
+                "external_lh2dt_native_clean_full_scope_replay_source_digest",
+                source.get("source_tree_sha256") if isinstance(source, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_replay_packet_count",
+                campaign.get("packet_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_replay_executed_case_count",
+                campaign.get("matched_event_executed_case_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_replay_risk_atom_count",
+                campaign.get("risk_atom_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_replay_facility_qra_claim",
+                campaign.get("facility_qra_claim") if isinstance(campaign, Mapping) else None,
+            ),
+        ):
+            expected = status.get(status_key)
+            if expected is not None and actual != expected:
+                reasons.append(
+                    f"status ledger {status_key} disagrees with clean full-scope replay"
+                )
+
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
     # identity and fail-closed claims here as well.  This keeps a stale or
@@ -531,6 +621,32 @@ def verify_latest_ijhe_audit(
         ),
         "native_external_multi_equipment_recheck_valid": (
             native_recheck_valid if native_recheck_pointer is not None or native_external_multi_equipment_recheck is not None else None
+        ),
+        "native_external_clean_full_scope_replay_record": (
+            str(clean_scope_path) if clean_scope_path else None
+        ),
+        "native_external_clean_full_scope_replay_status": (
+            clean_scope_value.get("status") if clean_scope_value else None
+        ),
+        "native_external_clean_full_scope_replay_valid": (
+            clean_scope_valid
+            if clean_scope_pointer is not None or native_external_clean_full_scope_replay is not None
+            else None
+        ),
+        "native_external_clean_full_scope_replay_packet_count": (
+            clean_scope_value.get("facility_campaign", {}).get("packet_count")
+            if isinstance(clean_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_replay_executed_case_count": (
+            clean_scope_value.get("facility_campaign", {}).get("matched_event_executed_case_count")
+            if isinstance(clean_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_replay_risk_atom_count": (
+            clean_scope_value.get("facility_campaign", {}).get("risk_atom_count")
+            if isinstance(clean_scope_value.get("facility_campaign"), Mapping)
+            else None
         ),
         "blocking_reasons": reasons,
         "interpretation": (

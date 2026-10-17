@@ -20,6 +20,7 @@ def main() -> int:
     parser.add_argument("--scope-matrix", type=Path)
     parser.add_argument("--release-boundary", type=Path)
     parser.add_argument("--native-external-multi-equipment-recheck", type=Path)
+    parser.add_argument("--native-external-clean-full-scope-replay", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     root = args.root.resolve()
@@ -34,6 +35,11 @@ def main() -> int:
         if args.native_external_multi_equipment_recheck
         else None
     )
+    clean_scope_path = (
+        args.native_external_clean_full_scope_replay.resolve()
+        if args.native_external_clean_full_scope_replay
+        else None
+    )
     report = verify_latest_ijhe_audit(
         status_path,
         root=root,
@@ -43,6 +49,7 @@ def main() -> int:
         scope_matrix=scope_path,
         release_boundary=release_path,
         native_external_multi_equipment_recheck=native_recheck_path,
+        native_external_clean_full_scope_replay=clean_scope_path,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
