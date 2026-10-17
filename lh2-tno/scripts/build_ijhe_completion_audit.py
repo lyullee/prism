@@ -59,6 +59,11 @@ def main() -> int:
         help="optional fail-closed component/observation/facility evidence matrix",
     )
     parser.add_argument(
+        "--facility-qra-gate-summary",
+        type=Path,
+        help="optional unified strict facility-QRA gate summary",
+    )
+    parser.add_argument(
         "--scope-ledger-consistency",
         type=Path,
         help="optional comparison of the declared scope matrix and merged facility ledger",
@@ -425,6 +430,13 @@ def main() -> int:
         )
         if validation_evidence_matrix is not None:
             validation_evidence_matrix["_record_path"] = str(args.validation_evidence_matrix)
+        facility_qra_gate_summary = (
+            _object(args.facility_qra_gate_summary)
+            if args.facility_qra_gate_summary
+            else None
+        )
+        if facility_qra_gate_summary is not None:
+            facility_qra_gate_summary["_record_path"] = str(args.facility_qra_gate_summary)
         scope_ledger_consistency = (
             _object(args.scope_ledger_consistency)
             if args.scope_ledger_consistency
@@ -851,6 +863,7 @@ def main() -> int:
             hazop_forecast_scan=hazop_forecast_scan,
             forecast_quantitative_evidence_coverage=forecast_quantitative_evidence_coverage,
             forecast_facility_campaign_evidence_gate=forecast_facility_campaign_evidence_gate,
+            facility_qra_gate_summary=facility_qra_gate_summary,
             hazop_integrated_risk=hazop_integrated_risk,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,

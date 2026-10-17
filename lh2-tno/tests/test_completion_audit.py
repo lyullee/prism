@@ -49,6 +49,58 @@ def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidenc
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_reconciles_unified_facility_qra_gate_summary():
+    summary = {
+        "schema_version": "prism.facility_qra_gate_summary.v1",
+        "status": "FACILITY_QRA_WITHHELD",
+        "promotion_allowed": False,
+        "facility_qra_claim": False,
+        "blocking_reasons": ["provider_qualification: missing"],
+        "gates": {
+            name: {"complete": name == "frequency_port_binding"}
+            for name in (
+                "facility_scope",
+                "release_boundary",
+                "provider_qualification",
+                "physical_validation",
+                "frequency_port_binding",
+                "case_traceability",
+            )
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_qra_gate_summary=summary,
+    )
+    check = next(
+        item for item in report["checks"] if item["name"] == "facility_qra_gate_summary"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is False
+
+
+def test_completion_audit_blocks_inconsistent_unified_facility_qra_gate_summary():
+    summary = {
+        "schema_version": "prism.facility_qra_gate_summary.v1",
+        "status": "FACILITY_QRA_ALLOWED",
+        "promotion_allowed": True,
+        "facility_qra_claim": True,
+        "gates": {},
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_qra_gate_summary=summary,
+    )
+    check = next(
+        item for item in report["checks"] if item["name"] == "facility_qra_gate_summary"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def test_completion_audit_distinguishes_numerical_scope_from_qualification_gap():
     matrix = {
         **_matrix(complete=False),

@@ -34,3 +34,8 @@ aligned, but the declared scope retains 11 withheld cases, qualified provider
 packets are `0/26`, and the physical-validation matrix remains restricted.
 The summary is therefore a review control and does not claim a regulatory or
 publication-ready facility QRA.
+
+The IJHE completion-audit CLI accepts the same record with
+`--facility-qra-gate-summary`. It adds a structural audit check and blocks the
+audit if the six-gate status, promotion flag, or gate identities are
+inconsistent. It does not turn a withheld summary into a passing QRA claim.

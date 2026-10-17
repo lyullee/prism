@@ -128,6 +128,7 @@ def build_ijhe_completion_audit(
     forecast_quantitative_evidence_coverage: Mapping[str, Any] | None = None,
     forecast_facility_campaign_evidence_gate: Mapping[str, Any] | None = None,
     dynamic_state_closure_ledger_audit: Mapping[str, Any] | None = None,
+    facility_qra_gate_summary: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3488,6 +3489,63 @@ def build_ijhe_completion_audit(
             "it documents the facility-QRA gate and does not open it."
         )
         checks.append(matrix_check)
+    if facility_qra_gate_summary is not None:
+        gate_names = {
+            "facility_scope",
+            "release_boundary",
+            "provider_qualification",
+            "physical_validation",
+            "frequency_port_binding",
+            "case_traceability",
+        }
+        gates = facility_qra_gate_summary.get("gates")
+        gate_rows = gates if isinstance(gates, Mapping) else {}
+        gate_shape_valid = gate_names.issubset(gate_rows)
+        promotion_allowed = facility_qra_gate_summary.get("promotion_allowed")
+        claim = facility_qra_gate_summary.get("facility_qra_claim")
+        status = facility_qra_gate_summary.get("status")
+        status_consistent = (
+            isinstance(promotion_allowed, bool)
+            and claim is promotion_allowed
+            and status
+            == ("FACILITY_QRA_ALLOWED" if promotion_allowed else "FACILITY_QRA_WITHHELD")
+        )
+        incomplete_gate_count = sum(
+            gate_rows.get(name, {}).get("complete") is not True
+            for name in gate_names
+            if isinstance(gate_rows.get(name), Mapping)
+        )
+        summary_check = _check(
+            "facility_qra_gate_summary",
+            facility_qra_gate_summary.get("schema_version")
+            == "prism.facility_qra_gate_summary.v1"
+            and gate_shape_valid
+            and status_consistent
+            and (
+                (promotion_allowed is True and incomplete_gate_count == 0)
+                or (promotion_allowed is False and incomplete_gate_count > 0)
+            ),
+            {
+                "status": status,
+                "promotion_allowed": promotion_allowed,
+                "facility_qra_claim": claim,
+                "gate_names": sorted(gate_rows),
+                "incomplete_gate_count": incomplete_gate_count,
+                "blocking_reason_count": len(
+                    facility_qra_gate_summary.get("blocking_reasons", [])
+                )
+                if isinstance(facility_qra_gate_summary.get("blocking_reasons"), list)
+                else None,
+                "record": facility_qra_gate_summary.get("_record_path"),
+            },
+            "facility QRA gate summary is missing, inconsistent, or unsafe",
+        )
+        summary_check["diagnostic_only"] = False
+        summary_check["interpretation"] = (
+            "The unified gate summary is a structural promotion control. It does not "
+            "create provider evidence, physical validation, frequency, or risk atoms."
+        )
+        checks.append(summary_check)
     if scope_ledger_consistency is not None:
         consistency_status = scope_ledger_consistency.get("status")
         consistency_check = _check(
