@@ -108,3 +108,18 @@ def test_provider_chain_converts_to_complete_current_and_forecast_contract_cover
             assert row["evidence"]["provider_release_packet"]["status"]
             assert row["evidence"]["slabx_lh2_consequence"]["status"]
     assert result["policy"]["facility_qra_promotion"] is False
+
+
+def test_published_generic_handoff_consumes_quantitative_evidence_coverage():
+    published = json.loads(
+        (ROOT / "results/20261115/generic_outdoor_facility_hazop_quantitative_handoff.json")
+        .read_text(encoding="utf-8")
+    )
+
+    assert published["current_evidence_coverage"]["status"] == "QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE"
+    assert published["forecast_evidence_coverage"]["status"] == "QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE"
+    assert published["current_evidence_coverage"]["summary"]["evidence_complete_count"] == 3
+    assert published["forecast_evidence_coverage"]["summary"]["evidence_complete_count"] == 3
+    # Evidence coverage does not promote the absent evaluator, facility IR/F-N, or QRA.
+    assert published["policy"]["facility_ir_fn_calculated"] is False
+    assert published["policy"]["facility_qra_promotion"] is False
