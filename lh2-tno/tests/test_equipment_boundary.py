@@ -288,6 +288,57 @@ def test_low_mach_guard_requires_plane_handoff_and_consumes_it():
         resolve_gas_rows(packet(), 101325., FakeCP(sound=10.))
 
 
+def test_accidental_gas_release_requires_dynamic_state_closure():
+    d = packet()
+    d.update(
+        event_kind='accidental_leak',
+        failure_opening_diameter_m=.0254,
+        termination_basis='reviewed_isolation_success',
+    )
+    rows, history = resolve_gas_rows(d, 101325., FakeCP(sound=200.))
+    assert len(rows) == 2
+    assert history['operator_limited'] is True
+    assert history['dynamic_state_closure']['ready'] is False
+    assert 'provider dynamic pressure/inventory closure evidence is missing' in history['limitations']
+
+
+def test_accidental_gas_release_with_dynamic_state_closure_is_not_operator_limited():
+    d = packet()
+    d.update(
+        event_kind='accidental_leak',
+        failure_opening_diameter_m=.0254,
+        termination_basis='reviewed_isolation_success',
+        provider_mass_balance={
+            'schema_version': 'prism.provider_mass_balance.v1',
+            'initial_mass_kg': 5.0,
+            'cumulative_mass_out_kg': d['cumulative_mass_out_kg'],
+            'final_mass_kg': 5.0 - d['cumulative_mass_out_kg'],
+            'derived_accounting_residual_kg': 0.0,
+            'isolation_time_s': .2,
+            'post_isolation_observation_s': .17,
+            'isolation_success': True,
+            'dynamic_state_closure': {
+                'schema_version': 'prism.provider_dynamic_state_closure.v1',
+                'inventory_feedback_closed': True,
+                'pressure_feedback_closed': True,
+                'state_history_digest': 'e' * 64,
+                'max_abs_inventory_residual_kg': 1.0e-10,
+                'inventory_tolerance_kg': 1.0e-8,
+                'max_abs_pressure_residual_pa': 2.0,
+                'pressure_tolerance_pa': 10.0,
+                'provenance': 'synthetic dynamic gas state closure test',
+            },
+        },
+    )
+    _, history = resolve_gas_rows(d, 101325., FakeCP(sound=200.))
+    assert history['dynamic_state_closure']['ready'] is True
+    assert history['operator_limited'] is False
+    assert history['limitations'] == [
+        'provider owns the gas source and thermodynamic history',
+        'full source-to-cloud energy remains outside this worker',
+    ]
+
+
 def test_external_compressible_handoff_binds_exact_provider_digests():
     d = packet()
     h2_fraction = .5

@@ -1,18 +1,20 @@
 # Dynamic LH2 release-state closure contract
 
 PRISM now distinguishes two different things that can both look like a
-time-resolved liquid release:
+time-resolved LH2 release:
 
 1. a provider that calculated a release history while holding the upstream
    tank pressure and inventory effectively constant; and
 2. a provider that fed the changing equipment state back into the release
    calculation and can prove that feedback.
 
-The first case still runs through the liquid/two-phase, pool, SLABx-LH2,
-ignition, radiation, blast, and conditional-risk chain, but it is reported as
-`EXECUTED_OPERATOR_LIMITED`. The second case may remove that source-dynamics
-limitation, provided the separate termination, provider qualification, and
-physical-validation gates also pass.
+The first case still runs through the gas or liquid/two-phase, pool,
+SLABx-LH2, ignition, radiation, blast, and conditional-risk chain, but it is
+reported as `EXECUTED_OPERATOR_LIMITED` for accidental leaks and emergency
+relief releases. The second case may remove that source-dynamics limitation,
+provided the separate termination, provider qualification, and
+physical-validation gates also pass. Normal operating vents are outside this
+accident-state gate.
 
 ## Provider payload
 
@@ -51,8 +53,8 @@ statement.
 
 ## Release of the operator limitation
 
-The liquid worker releases the source-dynamics limitation only when all of the
-following are true:
+The gas and liquid workers release the source-dynamics limitation only when
+all of the following are true:
 
 - the dynamic closure object is present;
 - both inventory and pressure feedback flags are explicitly `true`;
@@ -73,7 +75,8 @@ flow.
 
 ## What this does not qualify
 
-This contract closes one source-model connection. It does not create an annual
+This contract closes one source-model connection for the selected accident
+packet. It does not create an annual
 frequency, prove that the provider represents a real facility, qualify the
 external model against experiments, or make a two-sided rupture interaction
 closed. The facility campaign still requires exact provider-packet evidence,
@@ -86,7 +89,8 @@ IR/F-N or facility-QRA claim is promoted.
 The portable tests cover both paths:
 
 - a normal liquid packet without this object remains operator-limited;
-- a fully validated dynamic closure packet clears only the source-dynamics
-  limitation; and
+- an accidental gas packet without this object remains operator-limited;
+- fully validated dynamic gas and liquid closure packets clear only the
+  source-dynamics limitation; and
 - residuals outside the provider-declared tolerance are rejected at the
   adapter boundary.

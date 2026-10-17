@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,374 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,376 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -67,7 +67,7 @@ When a qualified equipment model returns a reviewed termination packet, the
 connects response intake, provider termination evidence, and case-level packet
 matching without silently promoting the result to facility QRA.
 
-For liquid/two-phase releases, the optional [dynamic state closure contract](docs/PRISM_dynamic_liquid_state_closure_contract_en.md)
+For accidental gas, liquid, and two-phase releases, the optional [dynamic state closure contract](docs/PRISM_dynamic_liquid_state_closure_contract_en.md)
 shows how an equipment twin can prove that changing pressure and inventory
 were fed back into the release history. Without that explicit evidence, PRISM
 keeps the source `EXECUTED_OPERATOR_LIMITED` even when the downstream

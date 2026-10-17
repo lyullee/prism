@@ -87,12 +87,13 @@ equipment state + operating mode
 
 The current-state monitor can consume a cached or already-computed provider result for low latency. The predicted-state path runs the same gate when the simulation reaches a declared risk condition. A fresh physics call is never described as a 1 Hz calculation merely because the cache path meets a 1 Hz service target.
 
-For liquid/two-phase source histories, the code now has an explicit
+For accidental gas, liquid, and two-phase source histories, the code now has an explicit
 `prism.provider_dynamic_state_closure.v1` opt-in. It requires provider-owned
 pressure and inventory feedback flags, a state-history digest, bounded
 residuals, and a closed initial/final/outgoing mass ledger before the source
 can leave `EXECUTED_OPERATOR_LIMITED`. Existing packets do not contain this
 evidence, so the current audit counts are intentionally unchanged. The
+normal operating-vent path remains outside this accident-state gate. The
 contract and integration example are documented in
 [`PRISM_dynamic_liquid_state_closure_contract_en.md`](PRISM_dynamic_liquid_state_closure_contract_en.md).
 
@@ -133,7 +134,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,374 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,376 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 

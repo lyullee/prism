@@ -231,8 +231,9 @@ Include initial mass, cumulative outflow, final mass, residual, isolation time, 
 
 ### 5.3 Dynamic LH2 source-state closure
 
-For a liquid or two-phase release, a closed atmospheric mass integral does not
-by itself prove that the equipment model changed tank pressure and inventory
+For a gas, liquid, or two-phase accident release, a closed atmospheric mass
+integral does not by itself prove that the equipment model changed tank
+pressure and inventory
 while calculating the leak. To remove the source-dynamics `operator_limited`
 flag, add the optional `provider_meta.dynamic_state_closure` object described
 in the [dynamic closure contract](PRISM_dynamic_liquid_state_closure_contract_en.md).
@@ -245,7 +246,9 @@ It must include:
 
 The packet must also carry a compatible reviewed termination basis. Missing or
 invalid fields leave the source `EXECUTED_OPERATOR_LIMITED`; PRISM never
-reconstructs tank dynamics from outlet flow. Clearing this source flag still
+reconstructs tank dynamics from outlet flow. The same check is applied to
+accidental gas and emergency-relief packets; normal operating vents do not
+require it. Clearing this source flag still
 does not qualify the provider, frequency, or facility IR/F-N result.
 
 ## 6. Python resolver example

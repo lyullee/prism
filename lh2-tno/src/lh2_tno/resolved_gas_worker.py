@@ -1,5 +1,16 @@
-"""PH checks for a provider gas exit; standalone worker has no Pydantic need."""
+"""PH checks for a provider gas exit; standalone worker has no Pydantic need.
+
+Accidental and emergency-relief gas releases also carry the provider-owned
+dynamic pressure/inventory closure gate used by the liquid/two-phase worker.
+Normal vents are steady operating releases and therefore do not require that
+accident-state contract.
+"""
 import math
+
+try:  # package import when used through ``lh2_tno``
+    from .resolved_liquid_worker import dynamic_state_closure_status
+except ImportError:  # direct module import used by the legacy chain runner
+    from resolved_liquid_worker import dynamic_state_closure_status
 
 
 def resolve_gas_rows(packet,ambient_pressure,cp):
@@ -59,9 +70,25 @@ def resolve_gas_rows(packet,ambient_pressure,cp):
         mass+=rate*(end-step['time_s']);energy+=rate*enthalpy*(end-step['time_s'])
     if not math.isclose(mass,packet['cumulative_mass_out_kg'],rel_tol=1e-8,abs_tol=1e-10) or not math.isclose(energy,packet['cumulative_static_enthalpy_out_j'],rel_tol=1e-8,abs_tol=1e-6):
         raise ValueError('provider time-integrated boundary ledger disagrees')
+    dynamic_closure = None
+    limitations = [
+        'provider owns the gas source and thermodynamic history',
+        'full source-to-cloud energy remains outside this worker',
+    ]
+    # A normal vent is a steady operating boundary.  Accident and relief
+    # packets, however, must prove that pressure and inventory were fed back
+    # into the transient calculation before the downstream facility ledger can
+    # treat the case as dynamically closed.
+    if packet.get('event_kind') in {'accidental_leak', 'emergency_relief'}:
+        dynamic_closure = dynamic_state_closure_status(packet)
+        if not dynamic_closure['ready']:
+            limitations.extend(dynamic_closure['blocking_reasons'])
     return rows,{'provider_boundary':packet,'thermodynamic_checks':checks,
         'model_name':'equipment-resolved-compressible-plane-gas-exit' if plane_handoff else 'equipment-resolved-atmospheric-gas-exit','steps':rows,
         'discharge_recalculated':False,'equipment_dynamics_recalculated':False,
         'mass_out_kg':mass,'static_enthalpy_out_j':energy,
         'compressible_plane_handoff_consumed':plane_handoff is not None,
-        'energy_scope':'provider static-enthalpy transport checked; kinetic energy reported separately; full source-to-cloud energy not qualified'}
+        'energy_scope':'provider static-enthalpy transport checked; kinetic energy reported separately; full source-to-cloud energy not qualified',
+        'dynamic_state_closure':dynamic_closure,
+        'operator_limited': bool(dynamic_closure is not None and not dynamic_closure['ready']),
+        'limitations': limitations}
