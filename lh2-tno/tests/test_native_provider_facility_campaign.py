@@ -13,6 +13,7 @@ from scripts.run_native_provider_facility_campaign import (
     _has_explicit_provider_source_states,
     _packet_event_match,
     _bind_hazop_event_modes,
+    _request_defaults,
 )
 
 
@@ -123,6 +124,16 @@ def test_dynamic_state_closure_dump_preserves_provider_evidence() -> None:
     packet = SimpleNamespace(provider_mass_balance=SimpleNamespace(dynamic_state_closure=closure))
     assert _dynamic_state_closure_dump(packet)["state_history_digest"] == "b" * 64
     assert _dynamic_state_closure_dump(SimpleNamespace(provider_mass_balance=None)) is None
+
+
+def test_pressure_equalization_packet_uses_natural_duration_mode() -> None:
+    packet = SimpleNamespace(
+        event_kind="accidental_leak",
+        termination_basis="model_pressure_equalization",
+    )
+    defaults = _request_defaults({}, packet)
+    assert defaults["source_duration_mode"] == "model_natural"
+    assert defaults["release_termination"]["basis"] == "model_pressure_equalization"
 
 
 def test_hazop_event_mode_binding_requires_exact_event_identity(tmp_path) -> None:

@@ -89,6 +89,7 @@ def _request_defaults(
         defaults.pop(key, None)
     is_liquid = isinstance(packet, ResolvedLiquidRelease)
     is_two_sided = isinstance(packet, ResolvedGasReleaseSet)
+    packet_termination_basis = getattr(packet, "termination_basis", None)
     if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief":
         defaults["source_operator"] = "equipment_emergency_relief"
     elif is_two_sided:
@@ -103,7 +104,11 @@ def _request_defaults(
         )
     else:
         defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
-    defaults["source_duration_mode"] = "declared"
+    defaults["source_duration_mode"] = (
+        "model_natural"
+        if packet_termination_basis == "model_pressure_equalization"
+        else "declared"
+    )
     # HAZOP identity is copied only from an exact reviewed event binding.  The
     # campaign never derives a mode from equipment type, pressure, or release
     # physics.
@@ -111,7 +116,6 @@ def _request_defaults(
         if event.operating_mode is not None:
             defaults["operating_mode"] = event.operating_mode
             defaults["hazop_scenario_id"] = event.hazop_scenario_id
-    packet_termination_basis = getattr(packet, "termination_basis", None)
     defaults["release_termination"] = {
         "basis": (
             "emergency_relief_discharge"
@@ -119,7 +123,11 @@ def _request_defaults(
             else "two_sided_rupture"
             if is_two_sided
             else packet_termination_basis
-            if packet_termination_basis in {"inventory_depletion", "inventory_over_600s"}
+            if packet_termination_basis in {
+                "inventory_depletion",
+                "inventory_over_600s",
+                "model_pressure_equalization",
+            }
             else "reviewed_isolation_success"
         ),
         "time_s": "provider_duration",
@@ -130,6 +138,8 @@ def _request_defaults(
             if is_two_sided
             else "native provider inventory termination retained for multi-packet facility diagnostic"
             if packet_termination_basis in {"inventory_depletion", "inventory_over_600s"}
+            else "native provider pressure-equalization termination retained for multi-packet facility diagnostic"
+            if packet_termination_basis == "model_pressure_equalization"
             else "native provider isolation clock retained for multi-packet facility diagnostic"
         ),
     }

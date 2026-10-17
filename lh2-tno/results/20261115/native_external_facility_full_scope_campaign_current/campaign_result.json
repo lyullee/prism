@@ -2,7 +2,7 @@
   "status": "PARTIAL_DECLARED_SCOPE",
   "facility_id": "generic-lh2-full-scope-example",
   "facility_digest": "83f86daba9d58f4fd243b05290d65d58b4b0c3b9637b75df845eade6e73e1c15",
-  "campaign_digest": "c7880de46c4643f30c1c19ca3c12f8a69f91aaa7749880efb96e6e7b99fb8af8",
+  "campaign_digest": "59ebabd630041fce1a89f50a61f388ead07389fb3d54dc7d2213621a769a0a37",
   "scope_provenance": "multiple native provider packets bound to exact facility events; unmatched bins remain withheld",
   "events": [
     {
@@ -1160,17 +1160,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 108165.75749998447,
+      "elapsed_ms": 111982.99720001523,
       "request_digest": "31d13f523dd1337bbf49d8f47873114b2f633af52ad85e13e00e9e780f1f6f54",
-      "result_digest": "85e32d83dfe0b7770b071cb8510e8bf7d8b1a18878aa4a6255c00f8ba1fe094c",
+      "result_digest": "4a20bde7d754dbafd16f698e3e6864c54e14e388b83c7ac46639bde03cdf5203",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 690.2199000178371,
-        "pool": 32852.053699985845,
-        "near_field_and_dispersion": 71470.63210001215,
-        "cloud_observation": 2676.2046000221744,
-        "fire_explosion_damage_risk": 129.71020000986755
+        "source": 696.5115999919362,
+        "pool": 33179.13470001076,
+        "near_field_and_dispersion": 75023.94730001106,
+        "cloud_observation": 2602.928599982988,
+        "fire_explosion_damage_risk": 113.12749999342486
       },
       "mass_ledger": {
         "released_kg": 0.07406123870834073,
@@ -1284,17 +1284,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 70463.40020000935,
+      "elapsed_ms": 75656.45400001085,
       "request_digest": "307e1e934c5299f1f537a595d010d6797e98bfb5d7f2ab52c0eaad9168b9e31a",
-      "result_digest": "22cf7d24859d297ba9cdb7548ae4cdaba30f3af5a13547586de442f2ce95a42d",
+      "result_digest": "8e60cd82e688ed5c9ce401b70fd8240448cccd47119a8b73e3c01230b5cf780e",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 689.973899978213,
-        "pool": 383.5813000041526,
-        "near_field_and_dispersion": 66167.39349998534,
-        "cloud_observation": 2699.0331999841146,
-        "fire_explosion_damage_risk": 149.6847000089474
+        "source": 703.8569000142161,
+        "pool": 386.06439999421127,
+        "near_field_and_dispersion": 70963.38830000605,
+        "cloud_observation": 3022.483700013254,
+        "fire_explosion_damage_risk": 156.99079999467358
       },
       "mass_ledger": {
         "released_kg": 0.7404876048198742,
@@ -1408,17 +1408,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 62301.993500004755,
+      "elapsed_ms": 60986.90910000005,
       "request_digest": "087e7b337ccdab856a397d4e611a0bb2278573764bbc82a6c7ffb456fa36cd64",
-      "result_digest": "7551d267dec012a1817b46173fcc2249cf45c98646b18a651038f5bdcff5e2b6",
+      "result_digest": "bd9d86aef1000af806af556a335c52f8e49415b64d7caabcbe805d978a61def2",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 702.8108999948017,
-        "pool": 432.4884999950882,
-        "near_field_and_dispersion": 57785.837899980834,
-        "cloud_observation": 2815.000400005374,
-        "fire_explosion_damage_risk": 153.67180001339875
+        "source": 707.8596000210382,
+        "pool": 429.5508999784943,
+        "near_field_and_dispersion": 56614.91560001741,
+        "cloud_observation": 2638.5605999967083,
+        "fire_explosion_damage_risk": 154.7372999775689
       },
       "mass_ledger": {
         "released_kg": 7.392533571775646,
@@ -1532,17 +1532,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 65104.92919999524,
+      "elapsed_ms": 61760.98110000021,
       "request_digest": "41186afb92f94c506aa25bf2c80d4ce100d84569117d8324ddc49d32163d2ce8",
-      "result_digest": "148a0527134e6c5da7c9057296f5ed57b1ee434fc4398dfca27274ba4c22e885",
+      "result_digest": "1a63b18f9f81ba9ef65e3ad1e4fd331840b1157023d99b74c5de892443860cb0",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 685.9868000028655,
-        "pool": 830.956799996784,
-        "near_field_and_dispersion": 60594.30440000142,
-        "cloud_observation": 2408.019599999534,
-        "fire_explosion_damage_risk": 148.86319998186082
+        "source": 844.8230999929365,
+        "pool": 613.9751999871805,
+        "near_field_and_dispersion": 56932.19079999835,
+        "cloud_observation": 2751.748899987433,
+        "fire_explosion_damage_risk": 156.19800001149997
       },
       "mass_ledger": {
         "released_kg": 72.70350391264752,
@@ -1631,17 +1631,17 @@
         "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6460.696399997687,
+      "elapsed_ms": 5485.077099991031,
       "request_digest": "e61732606fa30981db9d617cc7c157b9030df628e299fcb80960c073d3ad4cba",
-      "result_digest": "58175d7aa2852dae4aac100b0db99ade4f11e4522b7a451a929db2d8b20986f4",
+      "result_digest": "3801e9009c25eb6dd527f6eb5f378b9a54002e00664297f4161e09674e09f89d",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 690.9597000048961,
-        "pool": 1919.3415000045206,
-        "near_field_and_dispersion": 3319.4482999970205,
-        "cloud_observation": 123.80770000163466,
-        "fire_explosion_damage_risk": 109.16839999845251
+        "source": 701.296099985484,
+        "pool": 2058.0023000075016,
+        "near_field_and_dispersion": 2199.5903000060935,
+        "cloud_observation": 105.79339999821968,
+        "fire_explosion_damage_risk": 82.15070000733249
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -1760,17 +1760,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 77925.17329999828,
+      "elapsed_ms": 81656.78359998856,
       "request_digest": "98a555222f3e8894f14cd00b72882f22ca444eb742f30bb7690f02b6fd0a7c1c",
-      "result_digest": "c8bbdb69db7f90ca65a98fced4a615499559a95774139622fa0b2a4d4db2ecd1",
+      "result_digest": "ff7a45602b53687ae2029cb55fbc6c7ce2a741643731fad8fa56876c0540b2a9",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 694.2127000074834,
-        "pool": 64383.79380002152,
-        "near_field_and_dispersion": 12054.417300008936,
-        "cloud_observation": 339.89140001358464,
-        "fire_explosion_damage_risk": 123.42950000311248
+        "source": 709.1719000018202,
+        "pool": 67445.37490000948,
+        "near_field_and_dispersion": 12680.21689998568,
+        "cloud_observation": 356.35389998788014,
+        "fire_explosion_damage_risk": 117.24500000127591
       },
       "mass_ledger": {
         "released_kg": 1.5142271983109373e-05,
@@ -1884,17 +1884,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 15230.441899999278,
+      "elapsed_ms": 17388.25079999515,
       "request_digest": "367593dfc79e7bb2db4533c5163d31db94a1cb1e63d94d29578f81a1bafa987c",
-      "result_digest": "09d46ef9ae22cf66a4326e9d021d931aa697d58295212a087c70cb60dff45885",
+      "result_digest": "c2c61b09ed8e43abe0648ca49325f5c67a9956ab630d9b5022e0ca0efcc527d3",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 697.7706000034232,
-        "pool": 689.7706000017934,
-        "near_field_and_dispersion": 13024.24119997886,
-        "cloud_observation": 349.18399999151006,
-        "fire_explosion_damage_risk": 111.07439998886548
+        "source": 707.4858999985736,
+        "pool": 652.5503000011668,
+        "near_field_and_dispersion": 15190.997900004731,
+        "cloud_observation": 374.8417999886442,
+        "fire_explosion_damage_risk": 109.01889999513514
       },
       "mass_ledger": {
         "released_kg": 0.0001513433127012609,
@@ -2008,17 +2008,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 24382.83489999594,
+      "elapsed_ms": 23920.65580000053,
       "request_digest": "f71488ec339b67d0004654bf8cc027cf82b282762609f41d0166e8ce95ffd552",
-      "result_digest": "b7f8559854099bcc3c98a507f631f7e2246bbf6b64f1294e8e74d733f038ab1f",
+      "result_digest": "924a46fcdba0b386d2a11df90b089a30fcb9d978752b53b1903b9968ba477042",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 696.5812999987975,
-        "pool": 2521.4830999902915,
-        "near_field_and_dispersion": 20330.119199992623,
-        "cloud_observation": 365.85039997589774,
-        "fire_explosion_damage_risk": 109.79560000123456
+        "source": 725.6853000144474,
+        "pool": 2953.4000999992713,
+        "near_field_and_dispersion": 19316.67379999999,
+        "cloud_observation": 431.96759998681955,
+        "fire_explosion_damage_risk": 121.47619997267611
       },
       "mass_ledger": {
         "released_kg": 0.0015054887924872244,
@@ -2132,17 +2132,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 38809.263599978294,
+      "elapsed_ms": 39161.34029999375,
       "request_digest": "419ed5131c17963005836a54735bbf28ea9573201c9a6a289124d299a3226572",
-      "result_digest": "d2095129eb5ce0b36b72d4d700c74a817938b811e4d57c430cd82b81c4f14820",
+      "result_digest": "24f669f4c1431e2f1c44ffdfba02b2d3e420c2e11d9c66c6eeac2b21a08bb496",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 702.9588999866974,
-        "pool": 12869.816399994306,
-        "near_field_and_dispersion": 24335.422000003746,
-        "cloud_observation": 418.7171999947168,
-        "fire_explosion_damage_risk": 112.45109999435954
+        "source": 719.2446000117343,
+        "pool": 12959.211500012316,
+        "near_field_and_dispersion": 24491.791100008413,
+        "cloud_observation": 477.20910000498407,
+        "fire_explosion_damage_risk": 123.73099999967963
       },
       "mass_ledger": {
         "released_kg": 0.014281290905359737,
@@ -2255,18 +2255,18 @@
           }
         ]
       },
-      "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 55636.025100015104,
-      "request_digest": "948930504f7a5c55d8a497bdb2dc3d838a80addd0bd40b038e443f92ce078a9b",
-      "result_digest": "487c10ad0e79af30b6e8f0a1553ee02343ca51d0b11e68c574a51e54eb507071",
+      "status": "EXECUTED",
+      "elapsed_ms": 53489.082899992354,
+      "request_digest": "2f4a2210dd6f2e3d1a373069b8cc072758baf828e3faf4dc26453b0afd9dd567",
+      "result_digest": "0df2f02b0276e067f215342902a4f71f84740a938e55d385e6597d23bf170d1d",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 702.2991999983788,
-        "pool": 28462.24340001936,
-        "near_field_and_dispersion": 25642.25100001204,
-        "cloud_observation": 354.6820000046864,
-        "fire_explosion_damage_risk": 111.67799998656847
+        "source": 717.9509999987204,
+        "pool": 25661.210699996445,
+        "near_field_and_dispersion": 26195.151299994905,
+        "cloud_observation": 389.86530000693165,
+        "fire_explosion_damage_risk": 122.64329998288304
       },
       "mass_ledger": {
         "released_kg": 0.06826147353425362,
@@ -2280,15 +2280,13 @@
         "end_to_end_residual_kg": -7.311607889074352e-16
       },
       "termination": {
-        "basis": "reviewed_isolation_success",
+        "basis": "model_pressure_equalization",
         "time_s": 0.24005155145460036,
-        "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+        "provenance": "native provider pressure-equalization termination retained for multi-packet facility diagnostic"
       },
-      "dynamic_state_closure_status": "BLOCKED",
-      "dynamic_state_closure_ready": false,
-      "dynamic_state_closure_blocking_reasons": [
-        "dynamic source requires a reviewed isolation, inventory depletion, or relief termination basis"
-      ],
+      "dynamic_state_closure_status": "READY",
+      "dynamic_state_closure_ready": true,
+      "dynamic_state_closure_blocking_reasons": [],
       "domain_assessment": {
         "domain_truncated": false,
         "inventory_outside_domain": false,
@@ -2296,8 +2294,7 @@
         "outside_domain_mole_fraction_upper_bound_at_ignition": 0.38550653364208687,
         "outside_domain_flammability_proven_at_ignition": true,
         "domain_truncation_reasons": []
-      },
-      "reason": "source operator has declared constant-state or open physical closure limitations"
+      }
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -2373,17 +2370,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 136766.6060999909,
+      "elapsed_ms": 133844.00270000333,
       "request_digest": "f9b4dc1b05965485367013ac4dcf93a91ebb01b085f3d8bce15757be063a9a00",
-      "result_digest": "5c0d4ceed6f94de876f11d914a529707a81a56e4253986139195ca6cf81a5108",
+      "result_digest": "8c7ba5e789a4fc4774c5ade50f323171fb01812a0f8f532bba05e91791a804ad",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 692.3107999900822,
-        "pool": 127479.86089999904,
-        "near_field_and_dispersion": 7930.216400010977,
-        "cloud_observation": 231.4765999908559,
-        "fire_explosion_damage_risk": 116.56939997919835
+        "source": 716.5974999952596,
+        "pool": 125049.11459999857,
+        "near_field_and_dispersion": 7417.488499981118,
+        "cloud_observation": 226.38390000793152,
+        "fire_explosion_damage_risk": 97.26370000862516
       },
       "mass_ledger": {
         "released_kg": 4.746475781972484e-05,
@@ -2490,17 +2487,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 12300.688999996055,
+      "elapsed_ms": 12766.553300025407,
       "request_digest": "ed97072969b28f274ab65e39e24cbb6bef752dce4371715c0fd47575e04e0950",
-      "result_digest": "4a83bc626b87b5842be223571ed7aae74dbdcf67cf87c2d4beb6cad601ce6038",
+      "result_digest": "1faa0c1e92024a81f8461142596cd5ee4c1f653abb79558eb808b8811bc28709",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 689.9719999928493,
-        "pool": 1687.9732999950647,
-        "near_field_and_dispersion": 9226.242700009607,
-        "cloud_observation": 237.75719999684952,
-        "fire_explosion_damage_risk": 113.58039997867309
+        "source": 715.6851000036113,
+        "pool": 1548.0846000136808,
+        "near_field_and_dispersion": 9673.024200019427,
+        "cloud_observation": 261.0434000089299,
+        "fire_explosion_damage_risk": 115.94580000382848
       },
       "mass_ledger": {
         "released_kg": 0.00047464757819724846,
@@ -2607,17 +2604,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 19681.091100006597,
+      "elapsed_ms": 20393.165799992858,
       "request_digest": "7a636fdc540894721cf5251049f13cc77940a909da06204f90d642a8d522ffb9",
-      "result_digest": "0c1e47676191d3454df4d2b7c8fca529145a168203ecebe07602e18923600038",
+      "result_digest": "8f787ce59abcf117a4f6a961bc3b5915ee7e0d4e09aad0740720f7470f615a16",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 720.8530000061728,
-        "pool": 8074.011300021084,
-        "near_field_and_dispersion": 10181.021600001259,
-        "cloud_observation": 264.04109998838976,
-        "fire_explosion_damage_risk": 96.92700000596233
+        "source": 738.53189998772,
+        "pool": 7793.2634000026155,
+        "near_field_and_dispersion": 11084.517099981895,
+        "cloud_observation": 293.357400019886,
+        "fire_explosion_damage_risk": 117.01040001935326
       },
       "mass_ledger": {
         "released_kg": 0.004746475781972487,
@@ -2724,17 +2721,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 42522.180100000696,
+      "elapsed_ms": 37593.09909999138,
       "request_digest": "a7dcef5c41cac3c98ca334ac1ad3fdd40eba991853368f51ad7b5dd0356de1a2",
-      "result_digest": "4c27bfe4eb2ed3c87a43850c2242abf85472095f146b2966bda3b02cd88b8d59",
+      "result_digest": "e7cb72d9b50bcd9f5e2dc840ab72fe67dc1c071b0078313f1f3fb7a80a91b2a4",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 689.6690000139643,
-        "pool": 29972.316799976397,
-        "near_field_and_dispersion": 11115.480800013756,
-        "cloud_observation": 280.82690000883304,
-        "fire_explosion_damage_risk": 106.91360000055283
+        "source": 709.7960999817587,
+        "pool": 26538.82600000361,
+        "near_field_and_dispersion": 9538.363400002709,
+        "cloud_observation": 356.71199997887015,
+        "fire_explosion_damage_risk": 121.79370000376366
       },
       "mass_ledger": {
         "released_kg": 0.04746475781972485,
@@ -2841,17 +2838,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 9501.803999999538,
+      "elapsed_ms": 9834.134400007315,
       "request_digest": "ab1560f6d46ab6ecd8357ba32f8f35a89164a0792cb0cc7c600662820acd49b9",
-      "result_digest": "0d8780f9339e6aaee7bd171c0188a0780fbc7bbd8de018fdfddf71299d4c5233",
+      "result_digest": "704cb53957659ee30071179a3d9aceac60023719859dae50a5965fc5d2d43332",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 700.9145999909379,
-        "pool": 381.0846999986097,
-        "near_field_and_dispersion": 7713.514500006568,
-        "cloud_observation": 254.95370000135154,
-        "fire_explosion_damage_risk": 110.11989999678917
+        "source": 705.7888999988791,
+        "pool": 385.47209999524057,
+        "near_field_and_dispersion": 8053.251599980285,
+        "cloud_observation": 264.51719997567125,
+        "fire_explosion_damage_risk": 98.85890001896769
       },
       "mass_ledger": {
         "released_kg": 0.47464757819724845,
@@ -2941,17 +2938,17 @@
         "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3990.8926999778487,
+      "elapsed_ms": 4096.703100018203,
       "request_digest": "65cfef29a2968e5769439e5c77d55d145494c56caf07f2e9a8eaef14dd9a18dd",
-      "result_digest": "68ece2cef86879a4fc436a4aa22b78f85edb748707b2a2141eb0016a239f27fb",
+      "result_digest": "f968cf79467cd5bcf259ef343b5906530175d074c341bbec8cd534f6eb07a98f",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 701.1557999940123,
-        "pool": 0.005499983672052622,
-        "near_field_and_dispersion": 2584.7388000111096,
-        "cloud_observation": 260.3318000037689,
-        "fire_explosion_damage_risk": 113.8609999907203
+        "source": 713.5997000150383,
+        "pool": 0.005599984433501959,
+        "near_field_and_dispersion": 2609.754700009944,
+        "cloud_observation": 333.7570000148844,
+        "fire_explosion_damage_risk": 109.9926000169944
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -3058,17 +3055,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10046.249700011685,
+      "elapsed_ms": 9412.577100010822,
       "request_digest": "72ef6d267f8501756c8e77fd973bf043cca6cf7e35d2a659bef9d3e9021cec10",
-      "result_digest": "39c9e5cc343130b06c1acd45b9a73996cdee6a3205bbcaa8ccf5ad506535e5b8",
+      "result_digest": "11c29ab62fcc85c19c9aeebf0d70823ae0ecf935f2743b418ef584f69cadbe50",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 692.5537000061013,
-        "pool": 469.76080001331866,
-        "near_field_and_dispersion": 8184.742599987658,
-        "cloud_observation": 244.586300017545,
-        "fire_explosion_damage_risk": 109.06550000072457
+        "source": 705.1910999871325,
+        "pool": 477.9225999955088,
+        "near_field_and_dispersion": 7582.874400017317,
+        "cloud_observation": 219.09329999471083,
+        "fire_explosion_damage_risk": 97.59789999225177
       },
       "mass_ledger": {
         "released_kg": 0.16819897139324907,
@@ -3175,17 +3172,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 15047.541100007948,
+      "elapsed_ms": 14128.935400018236,
       "request_digest": "95cce6d7a0fc00f959c58da094bf3f8d1a85e297a7db4113cae37db86e6df76e",
-      "result_digest": "4b85aea5cc37ce6a2f1a6605bb3a5b0855fdd7c51d5a1b009ae7138e8279ddc9",
+      "result_digest": "8aa89e65935ef7f8afc03374572094f10c94a9707de097a9aa73a74995b78a7c",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 692.4384000012651,
-        "pool": 3496.4268000039738,
-        "near_field_and_dispersion": 10175.560200004838,
-        "cloud_observation": 241.0946000018157,
-        "fire_explosion_damage_risk": 111.49490001844242
+        "source": 706.6858999896795,
+        "pool": 3431.0689000121783,
+        "near_field_and_dispersion": 9233.577100007096,
+        "cloud_observation": 283.562799973879,
+        "fire_explosion_damage_risk": 111.17320001358166
       },
       "mass_ledger": {
         "released_kg": 0.0016819897139324915,
@@ -3290,17 +3287,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5332.092500000726,
+      "elapsed_ms": 4761.9507999916095,
       "request_digest": "8998fcdf34aecbd833f9c42ebe4af746b08ca96a18d45d25d0fa6be22cc6bc4d",
-      "result_digest": "18e3047e9239dda283597f2b805d716ce40de9d2931e6c3fe00b6fd001843e11",
+      "result_digest": "c5359a62a34e3fb024eda95a8269dca570c51872799971bed1e036e96b7cb709",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 723.4593000030145,
+        "source": 704.3342999822926,
         "pool": 0.006499991286545992,
-        "near_field_and_dispersion": 3752.4471000069752,
-        "cloud_observation": 452.18260001274757,
-        "fire_explosion_damage_risk": 84.8110000079032
+        "near_field_and_dispersion": 3171.692300005816,
+        "cloud_observation": 431.0096999979578,
+        "fire_explosion_damage_risk": 110.98709999350831
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -3405,17 +3402,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1983.3213000092655,
+      "elapsed_ms": 2068.3176999737043,
       "request_digest": "de9f17c61487181f96bc643bc4d2acdec41a3b4dec6b2e81915d805b9d922a61",
-      "result_digest": "df4f355731a71178ca52b63b013bcc9a179d8c452ce5cdaca48d57d136e6029d",
+      "result_digest": "45886f7ef0eb6ae707b59766e21a95714ea7391095303a076a0be1a909ec62bb",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 749.1258000081871,
-        "pool": 0.0219999928958714,
-        "near_field_and_dispersion": 252.90880000102334,
-        "cloud_observation": 567.886599979829,
-        "fire_explosion_damage_risk": 75.5846000101883
+        "source": 737.3117000097409,
+        "pool": 0.022299995180219412,
+        "near_field_and_dispersion": 252.5012000114657,
+        "cloud_observation": 649.5916999992914,
+        "fire_explosion_damage_risk": 76.94769999943674
       },
       "mass_ledger": {
         "released_kg": 4.956379784841932e-06,
@@ -3530,17 +3527,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1661.9666000187863,
+      "elapsed_ms": 1617.4329999776091,
       "request_digest": "ad0f17351b3802b95df9ea90f5d3b1265b1ff507a387918636b80ce4da250288",
-      "result_digest": "b0b99069cc7d6656f9f13712dfbeeebdf5c5c382d6b5d5ba625abd4ce3276435",
+      "result_digest": "9b09e638cca1003d8c8594b03239701bfe490bdc94cbc633a28f72a6faecf1a0",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 708.3626999810804,
-        "pool": 0.006100017344579101,
-        "near_field_and_dispersion": 407.16850000899285,
-        "cloud_observation": 152.03050000127405,
-        "fire_explosion_damage_risk": 70.98869999754243
+        "source": 756.5796000126284,
+        "pool": 0.006500020390376449,
+        "near_field_and_dispersion": 392.3419000057038,
+        "cloud_observation": 120.83810000331141,
+        "fire_explosion_damage_risk": 68.31909998436458
       },
       "mass_ledger": {
         "released_kg": 7.221896865709533e-06,
@@ -3639,15 +3636,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6870.010799990268,
+      "elapsed_ms": 6573.488900001394,
       "request_digest": "23b4e7de552dfd0c6bff5729e7f13ed2df25aecd893eb98e816ab776a7c40130",
-      "result_digest": "0974e77152dda8ec2920b511615adf63fab60d921198b60ce60789ea36170876",
+      "result_digest": "f98a43fea23bbc928eb9f95ea0e2ef9b5fea0293ac7c16cea8d31da7c424b3c4",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "endpoint_a": 3497.5097999849822,
-        "endpoint_b": 3370.277299982263,
-        "endpoint_aggregation": 6869.309300003806
+        "endpoint_a": 3195.4837999946903,
+        "endpoint_b": 3376.2119000020903,
+        "endpoint_aggregation": 6572.9138999886345
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -3747,15 +3744,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6907.069200009573,
+      "elapsed_ms": 6540.267699980177,
       "request_digest": "de49767b99e40cf1efe84a6a1fdfbe05a08a16f5399bf4d87ca4194c8cfcdd96",
-      "result_digest": "1953fbfd08c8bb14b726e6ce401c44d79cc06b38dc4ea552c42e49407b5912d2",
+      "result_digest": "ab6c941b4770a8556fb881c6b49d934f61a85ec7beebe2a7f314b30b879c29c2",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "endpoint_a": 3623.0715999845415,
-        "endpoint_b": 3281.8834999925457,
-        "endpoint_aggregation": 6906.380300002638
+        "endpoint_a": 3265.380800003186,
+        "endpoint_b": 3273.261599999387,
+        "endpoint_aggregation": 6539.831000001868
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -3868,17 +3865,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 3453.4780999820214,
+      "elapsed_ms": 3604.307300003711,
       "request_digest": "72a223435fe4148aa98469cbc2251a843ef3a9cbb452dbd6ecc634dfb656cfbc",
-      "result_digest": "10475babd99f82054d7130ebe42472d4d1c47ad610c3f29a7a536b1ed40db03e",
+      "result_digest": "4f55d5290290c7cdc5a63e966d9fa76d99e96b207a7a4f96a63636981f73fcd0",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 694.7117999952752,
-        "pool": 0.005999987479299307,
-        "near_field_and_dispersion": 2085.949800006347,
-        "cloud_observation": 258.93909999285825,
-        "fire_explosion_damage_risk": 94.57760001532733
+        "source": 726.9842999812681,
+        "pool": 0.005799985956400633,
+        "near_field_and_dispersion": 2100.910600012867,
+        "cloud_observation": 361.60770000424236,
+        "fire_explosion_damage_risk": 96.74549999181181
       },
       "mass_ledger": {
         "released_kg": 5.131372693670884e-06,
@@ -3969,17 +3966,17 @@
         "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6460.696399997687,
+      "elapsed_ms": 5485.077099991031,
       "request_digest": "e61732606fa30981db9d617cc7c157b9030df628e299fcb80960c073d3ad4cba",
-      "result_digest": "58175d7aa2852dae4aac100b0db99ade4f11e4522b7a451a929db2d8b20986f4",
+      "result_digest": "3801e9009c25eb6dd527f6eb5f378b9a54002e00664297f4161e09674e09f89d",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 690.9597000048961,
-        "pool": 1919.3415000045206,
-        "near_field_and_dispersion": 3319.4482999970205,
-        "cloud_observation": 123.80770000163466,
-        "fire_explosion_damage_risk": 109.16839999845251
+        "source": 701.296099985484,
+        "pool": 2058.0023000075016,
+        "near_field_and_dispersion": 2199.5903000060935,
+        "cloud_observation": 105.79339999821968,
+        "fire_explosion_damage_risk": 82.15070000733249
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -4011,133 +4008,6 @@
         "domain_truncation_reasons": [
           "provider_or_observation_support_exceeds_domain"
         ]
-      },
-      "reason": "source operator has declared constant-state or open physical closure limitations"
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
-      "asset_id": "transfer-line",
-      "release_branch_id": "native-provider-liquid-packet",
-      "frequency_port_ids": [
-        "line-accident-out"
-      ],
-      "annual_condition_id": "synthetic-generic-worker-west-3ms",
-      "initiating_frequency_per_year": 1.9e-06,
-      "release_branch_probability": 1.0,
-      "annual_condition_probability": 1.0,
-      "scenario_families": [
-        "pipe_hole",
-        "liquid_two_phase",
-        "inventory_depletion"
-      ],
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
-      "provider_packet_identity": {
-        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
-        "component_id": "liquid-transfer-line-01",
-        "provider_export_schema": "prism.resolved_release.v1",
-        "port_ids": [
-          "line-accident-out"
-        ],
-        "provider_source_digests": [
-          "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
-        ],
-        "provider_result_digests": [
-          "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218"
-        ],
-        "provider_boundary_references": [
-          "lh2dt.DynamicHEMPipe.export_accident_history native outlet"
-        ],
-        "termination_bases": [
-          "model_pressure_equalization"
-        ],
-        "termination_provenances": [
-          "DynamicHEMPipe native pressure reached the atmospheric boundary and the outlet mass flow fell below the resolved termination threshold"
-        ],
-        "event_kinds": [
-          "accidental_leak"
-        ],
-        "input_origins": [
-          "model_prediction"
-        ],
-        "duration_s": [
-          0.24005155145460036
-        ],
-        "available_mass_kg": [
-          0.10622803086219497
-        ],
-        "cumulative_mass_out_kg": [
-          0.06826147353425363
-        ],
-        "operating_mode": "supply",
-        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
-        "provider_mass_balances": [
-          {
-            "schema_version": "prism.provider_mass_balance.v1",
-            "initial_mass_kg": 0.10622803086219497,
-            "cumulative_mass_in_kg": null,
-            "cumulative_mass_out_kg": 0.06826147353425363,
-            "final_mass_kg": 0.03796655732794134,
-            "reported_residual_mass_kg": 0.0,
-            "derived_accounting_residual_kg": 0.0,
-            "isolation_time_s": 0.3,
-            "post_isolation_observation_s": 0.2,
-            "isolation_success": false,
-            "dynamic_state_closure": {
-              "schema_version": "prism.provider_dynamic_state_closure.v1",
-              "inventory_feedback_closed": true,
-              "pressure_feedback_closed": true,
-              "state_history_digest": "644fac96797de91723b17888f1637b2c9a7ebf9a28e687617757de9bc0c032c6",
-              "max_abs_inventory_residual_kg": 0.0,
-              "inventory_tolerance_kg": 1.0622803086219498e-10,
-              "max_abs_pressure_residual_pa": 0.0,
-              "pressure_tolerance_pa": 1.0132499999999832e-05,
-              "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
-            }
-          }
-        ]
-      },
-      "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 55636.025100015104,
-      "request_digest": "948930504f7a5c55d8a497bdb2dc3d838a80addd0bd40b038e443f92ce078a9b",
-      "result_digest": "487c10ad0e79af30b6e8f0a1553ee02343ca51d0b11e68c574a51e54eb507071",
-      "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
-      "stage_elapsed_ms": {
-        "source": 702.2991999983788,
-        "pool": 28462.24340001936,
-        "near_field_and_dispersion": 25642.25100001204,
-        "cloud_observation": 354.6820000046864,
-        "fire_explosion_damage_risk": 111.67799998656847
-      },
-      "mass_ledger": {
-        "released_kg": 0.06826147353425362,
-        "direct_gas_kg": 0.011909347047605911,
-        "ground_inflow_kg": 0.05635212648664771,
-        "pool_evaporated_kg": 0.05635212030015824,
-        "pool_remaining_kg": 5.802399133193571e-09,
-        "pool_domain_escape_kg": 0.0,
-        "ground_liquid_in_flight_kg": 3.840910645092066e-10,
-        "pool_numerical_adjustment_kg": 0.0,
-        "end_to_end_residual_kg": -7.311607889074352e-16
-      },
-      "termination": {
-        "basis": "reviewed_isolation_success",
-        "time_s": 0.24005155145460036,
-        "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
-      },
-      "dynamic_state_closure_status": "BLOCKED",
-      "dynamic_state_closure_ready": false,
-      "dynamic_state_closure_blocking_reasons": [
-        "dynamic source requires a reviewed isolation, inventory depletion, or relief termination basis"
-      ],
-      "domain_assessment": {
-        "domain_truncated": false,
-        "inventory_outside_domain": false,
-        "outside_domain_h2_kg_at_ignition": 0.0,
-        "outside_domain_mole_fraction_upper_bound_at_ignition": 0.38550653364208687,
-        "outside_domain_flammability_proven_at_ignition": true,
-        "domain_truncation_reasons": []
       },
       "reason": "source operator has declared constant-state or open physical closure limitations"
     },
@@ -4215,17 +4085,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 136766.6060999909,
+      "elapsed_ms": 133844.00270000333,
       "request_digest": "f9b4dc1b05965485367013ac4dcf93a91ebb01b085f3d8bce15757be063a9a00",
-      "result_digest": "5c0d4ceed6f94de876f11d914a529707a81a56e4253986139195ca6cf81a5108",
+      "result_digest": "8c7ba5e789a4fc4774c5ade50f323171fb01812a0f8f532bba05e91791a804ad",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 692.3107999900822,
-        "pool": 127479.86089999904,
-        "near_field_and_dispersion": 7930.216400010977,
-        "cloud_observation": 231.4765999908559,
-        "fire_explosion_damage_risk": 116.56939997919835
+        "source": 716.5974999952596,
+        "pool": 125049.11459999857,
+        "near_field_and_dispersion": 7417.488499981118,
+        "cloud_observation": 226.38390000793152,
+        "fire_explosion_damage_risk": 97.26370000862516
       },
       "mass_ledger": {
         "released_kg": 4.746475781972484e-05,
@@ -4332,17 +4202,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 12300.688999996055,
+      "elapsed_ms": 12766.553300025407,
       "request_digest": "ed97072969b28f274ab65e39e24cbb6bef752dce4371715c0fd47575e04e0950",
-      "result_digest": "4a83bc626b87b5842be223571ed7aae74dbdcf67cf87c2d4beb6cad601ce6038",
+      "result_digest": "1faa0c1e92024a81f8461142596cd5ee4c1f653abb79558eb808b8811bc28709",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 689.9719999928493,
-        "pool": 1687.9732999950647,
-        "near_field_and_dispersion": 9226.242700009607,
-        "cloud_observation": 237.75719999684952,
-        "fire_explosion_damage_risk": 113.58039997867309
+        "source": 715.6851000036113,
+        "pool": 1548.0846000136808,
+        "near_field_and_dispersion": 9673.024200019427,
+        "cloud_observation": 261.0434000089299,
+        "fire_explosion_damage_risk": 115.94580000382848
       },
       "mass_ledger": {
         "released_kg": 0.00047464757819724846,
@@ -4449,17 +4319,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 19681.091100006597,
+      "elapsed_ms": 20393.165799992858,
       "request_digest": "7a636fdc540894721cf5251049f13cc77940a909da06204f90d642a8d522ffb9",
-      "result_digest": "0c1e47676191d3454df4d2b7c8fca529145a168203ecebe07602e18923600038",
+      "result_digest": "8f787ce59abcf117a4f6a961bc3b5915ee7e0d4e09aad0740720f7470f615a16",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 720.8530000061728,
-        "pool": 8074.011300021084,
-        "near_field_and_dispersion": 10181.021600001259,
-        "cloud_observation": 264.04109998838976,
-        "fire_explosion_damage_risk": 96.92700000596233
+        "source": 738.53189998772,
+        "pool": 7793.2634000026155,
+        "near_field_and_dispersion": 11084.517099981895,
+        "cloud_observation": 293.357400019886,
+        "fire_explosion_damage_risk": 117.01040001935326
       },
       "mass_ledger": {
         "released_kg": 0.004746475781972487,
@@ -4566,17 +4436,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 42522.180100000696,
+      "elapsed_ms": 37593.09909999138,
       "request_digest": "a7dcef5c41cac3c98ca334ac1ad3fdd40eba991853368f51ad7b5dd0356de1a2",
-      "result_digest": "4c27bfe4eb2ed3c87a43850c2242abf85472095f146b2966bda3b02cd88b8d59",
+      "result_digest": "e7cb72d9b50bcd9f5e2dc840ab72fe67dc1c071b0078313f1f3fb7a80a91b2a4",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 689.6690000139643,
-        "pool": 29972.316799976397,
-        "near_field_and_dispersion": 11115.480800013756,
-        "cloud_observation": 280.82690000883304,
-        "fire_explosion_damage_risk": 106.91360000055283
+        "source": 709.7960999817587,
+        "pool": 26538.82600000361,
+        "near_field_and_dispersion": 9538.363400002709,
+        "cloud_observation": 356.71199997887015,
+        "fire_explosion_damage_risk": 121.79370000376366
       },
       "mass_ledger": {
         "released_kg": 0.04746475781972485,
@@ -4683,17 +4553,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 9501.803999999538,
+      "elapsed_ms": 9834.134400007315,
       "request_digest": "ab1560f6d46ab6ecd8357ba32f8f35a89164a0792cb0cc7c600662820acd49b9",
-      "result_digest": "0d8780f9339e6aaee7bd171c0188a0780fbc7bbd8de018fdfddf71299d4c5233",
+      "result_digest": "704cb53957659ee30071179a3d9aceac60023719859dae50a5965fc5d2d43332",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 700.9145999909379,
-        "pool": 381.0846999986097,
-        "near_field_and_dispersion": 7713.514500006568,
-        "cloud_observation": 254.95370000135154,
-        "fire_explosion_damage_risk": 110.11989999678917
+        "source": 705.7888999988791,
+        "pool": 385.47209999524057,
+        "near_field_and_dispersion": 8053.251599980285,
+        "cloud_observation": 264.51719997567125,
+        "fire_explosion_damage_risk": 98.85890001896769
       },
       "mass_ledger": {
         "released_kg": 0.47464757819724845,
@@ -4783,17 +4653,17 @@
         "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3990.8926999778487,
+      "elapsed_ms": 4096.703100018203,
       "request_digest": "65cfef29a2968e5769439e5c77d55d145494c56caf07f2e9a8eaef14dd9a18dd",
-      "result_digest": "68ece2cef86879a4fc436a4aa22b78f85edb748707b2a2141eb0016a239f27fb",
+      "result_digest": "f968cf79467cd5bcf259ef343b5906530175d074c341bbec8cd534f6eb07a98f",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 701.1557999940123,
-        "pool": 0.005499983672052622,
-        "near_field_and_dispersion": 2584.7388000111096,
-        "cloud_observation": 260.3318000037689,
-        "fire_explosion_damage_risk": 113.8609999907203
+        "source": 713.5997000150383,
+        "pool": 0.005599984433501959,
+        "near_field_and_dispersion": 2609.754700009944,
+        "cloud_observation": 333.7570000148844,
+        "fire_explosion_damage_risk": 109.9926000169944
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -4900,17 +4770,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10046.249700011685,
+      "elapsed_ms": 9412.577100010822,
       "request_digest": "72ef6d267f8501756c8e77fd973bf043cca6cf7e35d2a659bef9d3e9021cec10",
-      "result_digest": "39c9e5cc343130b06c1acd45b9a73996cdee6a3205bbcaa8ccf5ad506535e5b8",
+      "result_digest": "11c29ab62fcc85c19c9aeebf0d70823ae0ecf935f2743b418ef584f69cadbe50",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 692.5537000061013,
-        "pool": 469.76080001331866,
-        "near_field_and_dispersion": 8184.742599987658,
-        "cloud_observation": 244.586300017545,
-        "fire_explosion_damage_risk": 109.06550000072457
+        "source": 705.1910999871325,
+        "pool": 477.9225999955088,
+        "near_field_and_dispersion": 7582.874400017317,
+        "cloud_observation": 219.09329999471083,
+        "fire_explosion_damage_risk": 97.59789999225177
       },
       "mass_ledger": {
         "released_kg": 0.16819897139324907,
@@ -5017,17 +4887,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 15047.541100007948,
+      "elapsed_ms": 14128.935400018236,
       "request_digest": "95cce6d7a0fc00f959c58da094bf3f8d1a85e297a7db4113cae37db86e6df76e",
-      "result_digest": "4b85aea5cc37ce6a2f1a6605bb3a5b0855fdd7c51d5a1b009ae7138e8279ddc9",
+      "result_digest": "8aa89e65935ef7f8afc03374572094f10c94a9707de097a9aa73a74995b78a7c",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 692.4384000012651,
-        "pool": 3496.4268000039738,
-        "near_field_and_dispersion": 10175.560200004838,
-        "cloud_observation": 241.0946000018157,
-        "fire_explosion_damage_risk": 111.49490001844242
+        "source": 706.6858999896795,
+        "pool": 3431.0689000121783,
+        "near_field_and_dispersion": 9233.577100007096,
+        "cloud_observation": 283.562799973879,
+        "fire_explosion_damage_risk": 111.17320001358166
       },
       "mass_ledger": {
         "released_kg": 0.0016819897139324915,
@@ -5132,17 +5002,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5332.092500000726,
+      "elapsed_ms": 4761.9507999916095,
       "request_digest": "8998fcdf34aecbd833f9c42ebe4af746b08ca96a18d45d25d0fa6be22cc6bc4d",
-      "result_digest": "18e3047e9239dda283597f2b805d716ce40de9d2931e6c3fe00b6fd001843e11",
+      "result_digest": "c5359a62a34e3fb024eda95a8269dca570c51872799971bed1e036e96b7cb709",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 723.4593000030145,
+        "source": 704.3342999822926,
         "pool": 0.006499991286545992,
-        "near_field_and_dispersion": 3752.4471000069752,
-        "cloud_observation": 452.18260001274757,
-        "fire_explosion_damage_risk": 84.8110000079032
+        "near_field_and_dispersion": 3171.692300005816,
+        "cloud_observation": 431.0096999979578,
+        "fire_explosion_damage_risk": 110.98709999350831
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -5247,17 +5117,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1983.3213000092655,
+      "elapsed_ms": 2068.3176999737043,
       "request_digest": "de9f17c61487181f96bc643bc4d2acdec41a3b4dec6b2e81915d805b9d922a61",
-      "result_digest": "df4f355731a71178ca52b63b013bcc9a179d8c452ce5cdaca48d57d136e6029d",
+      "result_digest": "45886f7ef0eb6ae707b59766e21a95714ea7391095303a076a0be1a909ec62bb",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "source": 749.1258000081871,
-        "pool": 0.0219999928958714,
-        "near_field_and_dispersion": 252.90880000102334,
-        "cloud_observation": 567.886599979829,
-        "fire_explosion_damage_risk": 75.5846000101883
+        "source": 737.3117000097409,
+        "pool": 0.022299995180219412,
+        "near_field_and_dispersion": 252.5012000114657,
+        "cloud_observation": 649.5916999992914,
+        "fire_explosion_damage_risk": 76.94769999943674
       },
       "mass_ledger": {
         "released_kg": 4.956379784841932e-06,
@@ -5359,15 +5229,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6870.010799990268,
+      "elapsed_ms": 6573.488900001394,
       "request_digest": "23b4e7de552dfd0c6bff5729e7f13ed2df25aecd893eb98e816ab776a7c40130",
-      "result_digest": "0974e77152dda8ec2920b511615adf63fab60d921198b60ce60789ea36170876",
+      "result_digest": "f98a43fea23bbc928eb9f95ea0e2ef9b5fea0293ac7c16cea8d31da7c424b3c4",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "endpoint_a": 3497.5097999849822,
-        "endpoint_b": 3370.277299982263,
-        "endpoint_aggregation": 6869.309300003806
+        "endpoint_a": 3195.4837999946903,
+        "endpoint_b": 3376.2119000020903,
+        "endpoint_aggregation": 6572.9138999886345
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -5467,15 +5337,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6907.069200009573,
+      "elapsed_ms": 6540.267699980177,
       "request_digest": "de49767b99e40cf1efe84a6a1fdfbe05a08a16f5399bf4d87ca4194c8cfcdd96",
-      "result_digest": "1953fbfd08c8bb14b726e6ce401c44d79cc06b38dc4ea552c42e49407b5912d2",
+      "result_digest": "ab6c941b4770a8556fb881c6b49d934f61a85ec7beebe2a7f314b30b879c29c2",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
+      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
       "stage_elapsed_ms": {
-        "endpoint_a": 3623.0715999845415,
-        "endpoint_b": 3281.8834999925457,
-        "endpoint_aggregation": 6906.380300002638
+        "endpoint_a": 3265.380800003186,
+        "endpoint_b": 3273.261599999387,
+        "endpoint_aggregation": 6539.831000001868
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -6194,17 +6064,17 @@
         "asset_id": "transfer-line",
         "release_branch_id": "native-provider-liquid-packet",
         "annual_condition_id": "synthetic-generic-worker-west-3ms",
-        "status": "EXECUTED_OPERATOR_LIMITED",
-        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
-        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "status": "EXECUTED",
+        "ledger_status": "COMPLETE",
+        "reason": null,
         "release_branch_probability": 1.0,
         "initiating_frequency_per_year": 1.9e-06,
         "termination": {
-          "basis": "reviewed_isolation_success",
+          "basis": "model_pressure_equalization",
           "time_s": 0.24005155145460036,
-          "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+          "provenance": "native provider pressure-equalization termination retained for multi-packet facility diagnostic"
         },
-        "isolation_status": "provider_declared_isolation_success",
+        "isolation_status": "not_declared",
         "inventory_status": "not_inventory_termination",
         "provider": {
           "packet_consumed": true,
@@ -6265,7 +6135,7 @@
           "released_kg": 0.06826147353425362,
           "end_to_end_residual_kg": -7.311607889074352e-16
         },
-        "provider_termination_matches_request": false
+        "provider_termination_matches_request": true
       },
       {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -7209,27 +7079,28 @@
     "summary": {
       "case_count": 24,
       "ledger_status_counts": {
-        "COMPLETE": 10,
-        "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 14
+        "COMPLETE": 11,
+        "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 13
       },
       "termination_basis_counts": {
         "emergency_relief_discharge": 1,
         "inventory_depletion": 2,
         "inventory_over_600s": 1,
-        "reviewed_isolation_success": 18,
+        "model_pressure_equalization": 1,
+        "reviewed_isolation_success": 17,
         "two_sided_rupture": 2
       },
-      "complete_row_count": 10,
-      "operator_limited_or_domain_incomplete_row_count": 14,
+      "complete_row_count": 11,
+      "operator_limited_or_domain_incomplete_row_count": 13,
       "domain_incomplete_row_count": 0,
       "uncomputed_row_count": 0,
       "incomplete_row_count": 0,
       "provider_packet_consumed_row_count": 24,
-      "withheld_case_count": 14,
+      "withheld_case_count": 13,
       "withheld_case_status_counts": {
-        "EXECUTED_OPERATOR_LIMITED": 14
+        "EXECUTED_OPERATOR_LIMITED": 13
       },
-      "withheld_operator_limited_case_count": 14,
+      "withheld_operator_limited_case_count": 13,
       "withheld_domain_incomplete_case_count": 0
     },
     "semantics": {
@@ -7243,18 +7114,18 @@
   },
   "coverage": {
     "generated_initiation_frequency_per_year": 0.0138259,
-    "fully_executed_case_weighted_frequency_per_year": 0.0118856,
-    "fraction_of_generated_initiation_frequency": 0.8596619388249589,
+    "fully_executed_case_weighted_frequency_per_year": 0.0118875,
+    "fraction_of_generated_initiation_frequency": 0.8597993620668456,
     "not_numerically_executed_case_count": 0,
-    "qualified_evidence_withheld_case_count": 14,
+    "qualified_evidence_withheld_case_count": 13,
     "numerically_executed_case_count": 24,
     "dynamic_state_closure_status_counts": {
-      "BLOCKED": 12,
+      "BLOCKED": 11,
       "NOT_DECLARED": 2,
-      "READY": 10
+      "READY": 11
     },
-    "dynamic_state_closure_ready_case_count": 10,
-    "dynamic_state_closure_blocked_case_count": 12,
+    "dynamic_state_closure_ready_case_count": 11,
+    "dynamic_state_closure_blocked_case_count": 11,
     "external_catalogue_scope_gap_component_count": 0,
     "meaning": "frequency coverage only; not fraction of risk captured, not physical validation",
     "by_component": [
@@ -7292,7 +7163,7 @@
       {
         "component_id": "liquid-transfer-line-01",
         "kind": "pipe",
-        "scope_status": "PARTIAL",
+        "scope_status": "EXECUTED",
         "excluded_reason": null,
         "generated_event_count": 5,
         "generated_port_scoped_event_count": 5,
@@ -7303,22 +7174,19 @@
         "generated_initiation_frequency_per_year": 6.379999999999999e-05,
         "campaign_case_count": 5,
         "executed_case_count": 5,
-        "fully_validated_case_count": 4,
-        "operator_limited_case_count": 1,
+        "fully_validated_case_count": 5,
+        "operator_limited_case_count": 0,
         "domain_incomplete_case_count": 0,
-        "uncomputed_case_count": 1,
+        "uncomputed_case_count": 0,
         "not_numerically_executed_case_count": 0,
-        "qualified_evidence_withheld_case_count": 1,
+        "qualified_evidence_withheld_case_count": 0,
         "numerically_executed_case_count": 5,
         "dynamic_state_closure_status_counts": {
-          "BLOCKED": 1,
-          "READY": 4
+          "READY": 5
         },
-        "dynamic_state_closure_ready_case_count": 4,
-        "dynamic_state_closure_blocked_case_count": 1,
-        "uncomputed_reasons": [
-          "source operator has declared constant-state or open physical closure limitations"
-        ]
+        "dynamic_state_closure_ready_case_count": 5,
+        "dynamic_state_closure_blocked_case_count": 0,
+        "uncomputed_reasons": []
       },
       {
         "component_id": "transfer-valve-01",
@@ -15870,18 +15738,18 @@
     "request_digest": "933b727100fabd096a1d097251d8b85dc09aaba0d9a0ff142212dcf0e8ab2422",
     "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
     "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-    "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
-    "elapsed_ms": 275.88119998108596,
+    "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+    "elapsed_ms": 300.64479997963645,
     "physical_validation_claim": false
   },
   "timing": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 1661.9666000187863,
-    "case_median_ms": 15138.991500003613,
-    "case_max_ms": 136766.6060999909,
-    "case_p95_ms": 103629.66986998648,
-    "case_p99_ms": 130188.4109219894,
-    "campaign_elapsed_ms": 800943.3247999987,
+    "case_min_ms": 1617.4329999776091,
+    "case_median_ms": 15758.593100006692,
+    "case_max_ms": 133844.00270000333,
+    "case_p95_ms": 107434.06516001117,
+    "case_p99_ms": 128815.97143500605,
+    "campaign_elapsed_ms": 799134.6805999929,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "semantics": {

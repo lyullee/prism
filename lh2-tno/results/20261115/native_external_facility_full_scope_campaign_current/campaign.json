@@ -9153,12 +9153,12 @@
             "annual_frequency_provenance": null,
             "frequency_event": null,
             "release_termination": {
-              "basis": "reviewed_isolation_success",
+              "basis": "model_pressure_equalization",
               "time_s": 0.24005155145460036,
-              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+              "provenance": "native provider pressure-equalization termination retained for multi-packet facility diagnostic"
             },
             "source_operator": "equipment_liquid_release",
-            "source_duration_mode": "declared",
+            "source_duration_mode": "model_natural",
             "occupancy_probability": 1.0,
             "initiation_intensity_per_s": null,
             "frequency_scope": "single_initiating_event_current_weather",
