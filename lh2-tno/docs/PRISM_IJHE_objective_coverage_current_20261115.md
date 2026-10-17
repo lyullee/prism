@@ -83,6 +83,15 @@ It records 17 workbooks and 78 sheets with timestamped process signals, while
 keeping unit/tag/calibration review, accident-release evidence, frequency
 evidence, and independent physical validation as explicit open gates.
 
+The source folder was re-audited for this current package. The compact record
+[`inspection_center_evidence_reaudit_current.json`](../results/20261115/inspection_center_evidence_reaudit_current.json)
+binds the 3 CSV files/52 scenario rows (41 outdoor candidates and 11 rows
+outside the declared outdoor scope) to the 17-workbook/78-sheet signal audit.
+All 522 numeric signal columns remain `MISSING_OR_UNCONFIRMED` for engineering
+units. The re-audit therefore refreshes provenance only; it does not turn
+normal-operation observations into accident releases, frequencies, provider
+qualification, or facility QRA evidence.
+
 The interpretation of the current facility-level conditional IR/F-N fields,
 including the declared receptor geometry and the separate near-receptor
 diagnostic, is documented in

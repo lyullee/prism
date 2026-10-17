@@ -1,0 +1,35 @@
+{
+  "schema_version": "prism.inspection_center_evidence_reaudit.v1",
+  "status": "SCREENING_EVIDENCE_ONLY",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+  "scenario_evidence": {
+    "source_file_count": 3,
+    "record_count": 52,
+    "outdoor_candidate_count": 41,
+    "out_of_scope_count": 11,
+    "qualified_packet_count": 0,
+    "frequency_applied": false
+  },
+  "timeseries_audit": {
+    "workbook_count": 17,
+    "sheet_count": 78,
+    "read_error_count": 0,
+    "numeric_signal_unit_status_count": {
+      "MISSING_OR_UNCONFIRMED": 522
+    },
+    "state_snapshot_binding_allowed": false,
+    "frequency_applied": false,
+    "sensor_frequency_learning_used": false
+  },
+  "source_artifacts": [
+    {
+      "path": "results/20261115/inspection_center_scenario_import_current.json",
+      "sha256": "267cea50ac1c2755614f9c2b74418e7989df39515431d11d78fb672c56a47058"
+    },
+    {
+      "path": "results/20261115/inspection_center_timeseries_current.json",
+      "sha256": "c4fc9a01270a9c151397229f893ffe63ce17bfc87e80955ff719a81c8ab89549"
+    }
+  ],
+  "promotion_policy": "Actual centre files are retained as facility-neutral scenario and signal evidence. They do not create provider release packets, assign frequency, train sensor frequency, or open facility QRA until units, tag mapping, calibration, and accident release identity are reviewed."
+}
