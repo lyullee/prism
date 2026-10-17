@@ -74,6 +74,14 @@ keeps the source `EXECUTED_OPERATOR_LIMITED` even when the downstream
 consequence chain runs successfully. Campaign and facility ledgers retain the
 closure status per case and per equipment component.
 
+The companion [`lh2dt_models`](https://github.com/lyullee/lh2dt_models)
+package now emits the closure object from its finite-volume
+`DynamicHEMPipe`, `LayeredTank`, and `DynamicVaporizer` accident exporters
+(commit [`959aeff`](https://github.com/lyullee/lh2dt_models/commit/959aeff)).
+Those exporters hash the provider state history and report inventory and
+pressure residuals. Fixed-source valves, pumps, and vent stacks deliberately
+remain operator-limited until an upstream dynamic inventory owner is attached.
+
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the
 facility merge plus the merged facility ledger:

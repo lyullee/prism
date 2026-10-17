@@ -258,6 +258,18 @@ request missing provider evidence. Do not treat `READY` as provider
 qualification; exact packet evidence and independent physical validation are
 separate gates.
 
+The public `lh2dt_models` exporters implement this contract for the dynamic
+equipment classes. Use commit
+[`959aeff`](https://github.com/lyullee/lh2dt_models/commit/959aeff) or a later
+release of that repository. `DynamicHEMPipe`, `LayeredTank`, and
+`DynamicVaporizer` hash their provider-owned state histories and report both
+residual pairs. Their packets can therefore pass the source-dynamics check
+when the declared termination and provider-qualification gates also pass.
+`MappedPump`, `Valve`, and `VentStack` remain fixed-source boundaries: their
+upstream inventory must be supplied by a separate dynamic equipment provider,
+so their omission of `dynamic_state_closure` is intentional and remains
+operator-limited.
+
 ## 6. Python resolver example
 
 ```python

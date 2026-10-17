@@ -51,6 +51,27 @@ provider's pressure/inventory history used to produce the release packet. It
 is not a digest of the PRISM result and it cannot be replaced by a prose
 statement.
 
+## Native LH2DT model exporter
+
+The companion `lh2dt_models` repository now emits this object directly from
+the finite-volume accident exporters in commit
+[`959aeff`](https://github.com/lyullee/lh2dt_models/commit/959aeff):
+
+- `DynamicHEMPipe.export_accident_history` records its mass, internal-energy,
+  wall-temperature, and pressure state history;
+- `LayeredTank.export_accident_history` records all liquid/vapour cell states,
+  wall temperatures, common pressure, total mass, and total energy; and
+- `DynamicVaporizer.export_accident_history` records its finite-volume gas and
+  wall state history.
+
+Each exporter recomputes pressure from its saved state rows, reports the
+maximum inventory and pressure residuals, and hashes the canonical state
+history. The release packet still carries the provider's explicit termination
+basis and isolation fields. Fixed-source valves, vent stacks, and mapped
+pumps intentionally do not emit this record because they do not own an
+upstream dynamic inventory; PRISM therefore keeps those accident routes
+operator-limited until an upstream dynamic provider supplies the contract.
+
 ## Release of the operator limitation
 
 The gas and liquid workers release the source-dynamics limitation only when

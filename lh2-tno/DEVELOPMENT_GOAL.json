@@ -12,7 +12,10 @@
   "facility_case_risk_atom_traceability_module": "src/lh2_tno/facility_ledger.py::_risk_atom_case_traceability",
   "facility_case_risk_atom_traceability_schema": "prism.facility_case_risk_atom_trace.v1",
   "facility_case_risk_atom_traceability_policy": "Every risk atom keeps its case identity and status; non-EXECUTED or unmatched cases remain diagnostic and block strict facility-QRA promotion without frequency inference.",
-  "facility_case_risk_atom_traceability_tests": ["test_facility_ledger_traces_risk_atoms_to_executed_and_withheld_cases", "test_facility_ledger_blocks_unmatched_risk_atom_case_identity"],
+  "facility_case_risk_atom_traceability_tests": [
+    "test_facility_ledger_traces_risk_atoms_to_executed_and_withheld_cases",
+    "test_facility_ledger_blocks_unmatched_risk_atom_case_identity"
+  ],
   "facility_case_risk_atom_traceability_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "facility_case_risk_atom_traceability_latest_status": "CLOSED trace; 176/176 risk atoms matched to release-level cases, 60 linked to EXECUTED cases and 116 linked to EXECUTED_OPERATOR_LIMITED cases; strict facility-QRA promotion remains blocked.",
   "objective": "선언한 옥외 LH2 적용범위의 주요 사고를 설비 상태부터 시설 IR/F-N까지 계산하고, 미계산 사고·문헌 빈도 불확실성·물리 검증 근거·신규 처리시간을 명확히 보고하여 IJHE 연구를 준비한다.",
@@ -4290,5 +4293,16 @@
   "process_forecast_facility_campaign_evidence_gate_completion_audit_policy": "coverage and gate records must agree exactly; a consistent withheld gate passes as a diagnostic control while provider qualification, physical validation and facility IR/F-N strict blockers remain",
   "process_forecast_facility_campaign_evidence_gate_completion_audit_test": "tests/test_completion_audit.py",
   "process_forecast_facility_campaign_evidence_gate_completion_audit_test_status": "2 completion-audit consistency tests; full local suite 1358 passed, 1 warning",
-  "process_forecast_facility_campaign_evidence_gate_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+  "process_forecast_facility_campaign_evidence_gate_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
+  "external_lh2dt_dynamic_state_closure_implemented": true,
+  "external_lh2dt_dynamic_state_closure_schema": "prism.provider_dynamic_state_closure.v1",
+  "external_lh2dt_dynamic_state_closure_commit": "959aeff",
+  "external_lh2dt_dynamic_state_closure_models": [
+    "DynamicHEMPipe",
+    "LayeredTank",
+    "DynamicVaporizer"
+  ],
+  "external_lh2dt_dynamic_state_closure_status": "NATIVE_EXPORT_READY; state history digest and explicit residuals are emitted by the finite-volume accident exporters; fixed-source boundaries remain operator-limited",
+  "external_lh2dt_dynamic_state_closure_test_status": "375 external tests passed, 1 warning",
+  "external_lh2dt_dynamic_state_closure_facility_qra_promotion": false
 }
