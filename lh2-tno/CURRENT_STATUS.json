@@ -6013,5 +6013,15 @@
     "temperature_K_at_30_m": 0.0013179356370956964,
     "MAE_vol_pct": 0.018431112337022496,
     "RMSE_vol_pct": 0.001977484150461847
-  }
+  },
+  "inspection_center_header_bound_state_current_evidence_record": "results/20261017/inspection_center_header_bound_state_evidence_current.json",
+  "inspection_center_header_bound_state_current_replay_record": "results/20261017/inspection_center_header_bound_state_replay_current.json",
+  "inspection_center_header_bound_runtime_frames_current_record": "results/20261017/inspection_center_header_bound_runtime_frames_current.json",
+  "inspection_center_header_bound_hazop_runtime_current_record": "results/20261017/inspection_center_header_bound_hazop_runtime_current.json",
+  "inspection_center_header_bound_current_replay_status": "SOURCE_REPLAY_MATCHED; 3/3 source hashes and regenerated evidence ledger matched; 8,955 state samples",
+  "inspection_center_header_bound_current_runtime_status": "STATE_RUNTIME_FRAMES_READY; 3 explicit mode-bound frames for receiving/standby/supply",
+  "inspection_center_header_bound_current_hazop_status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED; 3/3 mode-specific qualitative selections; state-only diagnostic",
+  "inspection_center_header_bound_current_provider_promotion": false,
+  "inspection_center_header_bound_current_frequency_inference": false,
+  "inspection_center_header_bound_current_facility_qra_claim": false
 }

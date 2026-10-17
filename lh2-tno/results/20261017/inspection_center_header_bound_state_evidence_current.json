@@ -1,0 +1,175 @@
+{
+  "schema_version": "prism.observed_equipment_state_evidence.v1",
+  "status": "OBSERVATION_STATE_EVIDENCE_ONLY",
+  "source_count": 3,
+  "sample_count": 8955,
+  "component_count": 3,
+  "source_rows": [
+    {
+      "source_id": "inspection-center-intake-10-runs-header-bound",
+      "source_path": "1. 액화수소 인수 시나리오 데이터\\액화수소_인수_예측데이터_10회차.xlsx",
+      "resolved_source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\1. 액화수소 인수 시나리오 데이터\\액화수소_인수_예측데이터_10회차.xlsx",
+      "source_sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "format": "xlsx",
+      "component_id": "lh2-intake-tank",
+      "origin": "model_prediction",
+      "sample_count": 6840,
+      "time_start_s": 1.0,
+      "time_end_s": 6838.0,
+      "cadence_s": 1.0,
+      "signal_map": {
+        "pressure": {
+          "column": "PT1206",
+          "unit": "MPa",
+          "zero_is_missing": true,
+          "nonpositive_is_missing": true,
+          "sensor_location": "PT1206"
+        },
+        "temperature": {
+          "column": "TT1106",
+          "unit": "degC",
+          "sensor_location": "TT1106"
+        }
+      },
+      "snapshot_digest_set_sha256": "73d9a0254234392845ae4a598b11cdd67abb3fb9f0cad062614eea9409c7e5f3"
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs-header-bound",
+      "source_path": "2. 액화수소 저장(벤트) 시나리오 데이터\\액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "resolved_source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\2. 액화수소 저장(벤트) 시나리오 데이터\\액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "source_sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "format": "xlsx",
+      "component_id": "lh2-storage-vent",
+      "origin": "model_prediction",
+      "sample_count": 673,
+      "time_start_s": 0.0,
+      "time_end_s": 10080.0,
+      "cadence_s": 15.0,
+      "signal_map": {
+        "pressure": {
+          "column": "PT1105A",
+          "unit": "MPa",
+          "zero_is_missing": true,
+          "nonpositive_is_missing": true,
+          "sensor_location": "PT1105A"
+        }
+      },
+      "snapshot_digest_set_sha256": "301be395dc93cbfec05211467ac5feefab8239bfa1f5b0eb7feaf8168ec21910"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs-header-bound",
+      "source_path": "3. 액화수소 공급 시나리오 데이터\\액화수소_공급_예측데이터_10회차.xlsx",
+      "resolved_source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\3. 액화수소 공급 시나리오 데이터\\액화수소_공급_예측데이터_10회차.xlsx",
+      "source_sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "format": "xlsx",
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "origin": "model_prediction",
+      "sample_count": 1442,
+      "time_start_s": 1.0,
+      "time_end_s": 1440.0,
+      "cadence_s": 1.0,
+      "signal_map": {
+        "pressure": {
+          "column": "PT1101",
+          "unit": "MPa",
+          "zero_is_missing": true,
+          "nonpositive_is_missing": true,
+          "sensor_location": "PT1101"
+        },
+        "temperature": {
+          "column": "TT1116",
+          "unit": "degC",
+          "sensor_location": "TT1116"
+        }
+      },
+      "snapshot_digest_set_sha256": "358462a213e220163d2b7cb0eb32463689aba283b55d269071f8b53a6d9f7cfc"
+    }
+  ],
+  "component_rows": [
+    {
+      "component_id": "lh2-intake-tank",
+      "source_ids": [
+        "inspection-center-intake-10-runs-header-bound"
+      ],
+      "sample_count": 6840,
+      "measurement_count": 13638,
+      "quantity_statistics": {
+        "pressure": {
+          "count": 6798,
+          "min": 1000.0,
+          "max": 662000.0,
+          "mean": 361271.1091497499,
+          "median": 371000.0
+        },
+        "temperature": {
+          "count": 6840,
+          "min": 17.349999999999966,
+          "max": 282.54999999999995,
+          "mean": 147.85480994152044,
+          "median": 137.09999999999997
+        }
+      }
+    },
+    {
+      "component_id": "lh2-storage-vent",
+      "source_ids": [
+        "inspection-center-storage-vent-10-runs-header-bound"
+      ],
+      "sample_count": 673,
+      "measurement_count": 673,
+      "quantity_statistics": {
+        "pressure": {
+          "count": 673,
+          "min": 317000.0,
+          "max": 650000.0,
+          "mean": 576047.5482912333,
+          "median": 614000.0
+        }
+      }
+    },
+    {
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "source_ids": [
+        "inspection-center-supply-10-runs-header-bound"
+      ],
+      "sample_count": 1442,
+      "measurement_count": 2884,
+      "quantity_statistics": {
+        "pressure": {
+          "count": 1442,
+          "min": 216000.0,
+          "max": 364000.0,
+          "mean": 314952.84327323164,
+          "median": 331000.0
+        },
+        "temperature": {
+          "count": 1442,
+          "min": 284.95,
+          "max": 291.25,
+          "mean": 288.9581830790568,
+          "median": 289.75
+        }
+      }
+    }
+  ],
+  "origin_counts": {
+    "model_prediction": 8955
+  },
+  "policy": {
+    "canonical_snapshot_schema": "prism.equipment_state_snapshot.v1",
+    "state_only": true,
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Observed process data are normalized into equipment-state evidence for calibration and snapshot review. No accident, release duration, frequency, provider qualification, or facility QRA claim is derived from these observations.",
+  "manifest": {
+    "path": "examples\\inspection_center_header_bound_state_manifest.json",
+    "schema_version": "prism.observed_state_input_manifest.v1",
+    "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터"
+  }
+}

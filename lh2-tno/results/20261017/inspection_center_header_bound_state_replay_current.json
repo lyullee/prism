@@ -1,0 +1,66 @@
+{
+  "schema_version": "prism.observed_state_source_replay_audit.v1",
+  "status": "SOURCE_REPLAY_MATCHED",
+  "source_count": 3,
+  "matched_source_count": 3,
+  "blocking_reasons": [],
+  "source_rows": [
+    {
+      "source_id": "inspection-center-intake-10-runs-header-bound",
+      "relative_path": "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "resolved_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\1. 액화수소 인수 시나리오 데이터\\액화수소_인수_예측데이터_10회차.xlsx",
+      "component_id": "lh2-intake-tank",
+      "exists": true,
+      "expected_sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "actual_sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "sha256_match": true,
+      "manifest_evidence_metadata_match": true,
+      "evidence_sample_count": 6840,
+      "evidence_snapshot_digest_set_sha256": "73d9a0254234392845ae4a598b11cdd67abb3fb9f0cad062614eea9409c7e5f3"
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs-header-bound",
+      "relative_path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "resolved_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\2. 액화수소 저장(벤트) 시나리오 데이터\\액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "component_id": "lh2-storage-vent",
+      "exists": true,
+      "expected_sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "actual_sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "sha256_match": true,
+      "manifest_evidence_metadata_match": true,
+      "evidence_sample_count": 673,
+      "evidence_snapshot_digest_set_sha256": "301be395dc93cbfec05211467ac5feefab8239bfa1f5b0eb7feaf8168ec21910"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs-header-bound",
+      "relative_path": "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+      "resolved_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\3. 액화수소 공급 시나리오 데이터\\액화수소_공급_예측데이터_10회차.xlsx",
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "exists": true,
+      "expected_sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "actual_sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "sha256_match": true,
+      "manifest_evidence_metadata_match": true,
+      "evidence_sample_count": 1442,
+      "evidence_snapshot_digest_set_sha256": "358462a213e220163d2b7cb0eb32463689aba283b55d269071f8b53a6d9f7cfc"
+    }
+  ],
+  "evidence_policy_valid": true,
+  "regeneration": {
+    "performed": true,
+    "canonical_digest_match": true,
+    "reviewed_canonical_digest": "b83819d1fa764aaa2b8f5db1e5e18dfd804f165b2aa15ec6f00ee99af6cc2954",
+    "regenerated_canonical_digest": "b83819d1fa764aaa2b8f5db1e5e18dfd804f165b2aa15ec6f00ee99af6cc2954"
+  },
+  "promotion_policy": {
+    "state_only": true,
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "The source files and normalized state ledger are reproducible and hash-consistent. This is input-integrity evidence only; it does not qualify an accident release, assign a frequency, or promote facility IR/F-N."
+}
