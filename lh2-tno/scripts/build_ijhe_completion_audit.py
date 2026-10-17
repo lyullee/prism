@@ -284,6 +284,11 @@ def main() -> int:
         help="optional provenance-only audit of external equipment documents",
     )
     parser.add_argument(
+        "--external-pump-test-point-audit",
+        type=Path,
+        help="optional provenance-only audit of external pump test points",
+    )
+    parser.add_argument(
         "--external-release-artifact-intake",
         type=Path,
         help="optional provenance-only inventory of external release-shaped JSON artifacts",
@@ -791,6 +796,15 @@ def main() -> int:
         )
         if external_document_evidence is not None:
             external_document_evidence["_record_path"] = str(args.external_document_evidence)
+        external_pump_test_point_audit = (
+            _object(args.external_pump_test_point_audit)
+            if args.external_pump_test_point_audit
+            else None
+        )
+        if external_pump_test_point_audit is not None:
+            external_pump_test_point_audit["_record_path"] = str(
+                args.external_pump_test_point_audit
+            )
         external_release_artifact_intake = (
             _object(args.external_release_artifact_intake)
             if args.external_release_artifact_intake
@@ -867,6 +881,7 @@ def main() -> int:
             hazop_integrated_risk=hazop_integrated_risk,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,
+            external_pump_test_point_audit=external_pump_test_point_audit,
             external_release_artifact_intake=external_release_artifact_intake,
             external_model_root_review=external_model_root_review,
             hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,

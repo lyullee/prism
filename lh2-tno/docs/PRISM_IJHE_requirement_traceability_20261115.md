@@ -265,3 +265,8 @@ either NASA test article. It therefore cannot use either document as a fitted
 pump map or as an independent validation result. The crosswalk and required
 evidence are recorded in
 [`examples/external_pump_configuration_crosswalk_20261018.json`](../examples/external_pump_configuration_crosswalk_20261018.json).
+
+The same pump audit is now an optional, explicit check in the IJHE completion
+audit (`diagnostic_external_pump_test_point_audit`). This keeps the candidate
+points visible in the readiness report while requiring configuration review and
+an independent holdout before any validation or facility-QRA promotion.

@@ -158,6 +158,7 @@ def build_ijhe_completion_audit(
     forecast_facility_campaign_evidence_gate: Mapping[str, Any] | None = None,
     dynamic_state_closure_ledger_audit: Mapping[str, Any] | None = None,
     facility_qra_gate_summary: Mapping[str, Any] | None = None,
+    external_pump_test_point_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -5077,6 +5078,58 @@ def build_ijhe_completion_audit(
             "claim, or facility QRA result."
         )
         checks.append(document_check)
+    if external_pump_test_point_audit is not None:
+        pump_audit = external_pump_test_point_audit
+        model_binding = pump_audit.get("model_binding")
+        model_binding = model_binding if isinstance(model_binding, Mapping) else {}
+        blockers = pump_audit.get("blocking_reasons")
+        pump_check_valid = (
+            pump_audit.get("schema_version") == "prism.external_pump_test_point_audit.v1"
+            and pump_audit.get("status") in {
+                "TEST_POINTS_EXTRACTED_CONFIGURATION_REVIEW_REQUIRED",
+                "INDEPENDENT_PUMP_HOLDOUT_CANDIDATE_READY",
+            }
+            and isinstance(pump_audit.get("document_count"), int)
+            and pump_audit.get("document_count", 0) > 0
+            and isinstance(pump_audit.get("test_point_count"), int)
+            and pump_audit.get("test_point_count", 0) > 0
+            and isinstance(pump_audit.get("documents"), list)
+            and len(pump_audit.get("documents", [])) == pump_audit.get("document_count")
+            and isinstance(pump_audit.get("test_points"), list)
+            and len(pump_audit.get("test_points", [])) == pump_audit.get("test_point_count")
+            and isinstance(model_binding.get("prism_component_id"), str)
+            and bool(model_binding.get("prism_component_id"))
+            and isinstance(blockers, list)
+            and pump_audit.get("physical_validation_claim") is False
+            and pump_audit.get("provider_release_packet_claim") is False
+            and pump_audit.get("frequency_inference_performed") is False
+            and pump_audit.get("facility_qra_claim") is False
+            and pump_audit.get("promotion_allowed") is False
+        )
+        pump_check = _check(
+            "diagnostic_external_pump_test_point_audit",
+            pump_check_valid,
+            {
+                "record": pump_audit.get("_record_path"),
+                "schema_version": pump_audit.get("schema_version"),
+                "status": pump_audit.get("status"),
+                "document_count": pump_audit.get("document_count"),
+                "test_point_count": pump_audit.get("test_point_count"),
+                "prism_component_id": model_binding.get("prism_component_id"),
+                "configuration_match_status": model_binding.get("configuration_match_status"),
+                "holdout_status": model_binding.get("holdout_status"),
+                "blocking_reasons": blockers,
+                "promotion_allowed": pump_audit.get("promotion_allowed"),
+            },
+            "external pump test-point audit is missing, inconsistent, or carries an unsafe promotion claim",
+        )
+        pump_check["diagnostic_only"] = True
+        pump_check["interpretation"] = (
+            "External pump test points are tracked as provenance-bound candidate comparison inputs. "
+            "Configuration matching and independent holdout review remain explicit gates; this check "
+            "never creates a release packet, frequency, physical-validation claim, or facility QRA result."
+        )
+        checks.append(pump_check)
     if external_model_root_review is not None:
         model_review = external_model_root_review
         provider_artifacts = model_review.get("provider_like_artifacts")

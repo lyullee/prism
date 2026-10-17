@@ -5016,5 +5016,6 @@
   "external_pump_test_point_count": 8,
   "external_pump_test_point_promotion_allowed": false,
   "external_pump_configuration_crosswalk_record": "examples/external_pump_configuration_crosswalk_20261018.json",
-  "external_pump_configuration_crosswalk_exact_match": false
+  "external_pump_configuration_crosswalk_exact_match": false,
+  "external_pump_test_point_completion_audit_check": "diagnostic_external_pump_test_point_audit"
 }

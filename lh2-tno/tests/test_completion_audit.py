@@ -818,6 +818,61 @@ def test_completion_audit_blocks_external_document_promotion_claim():
     assert check["status"] == "BLOCKED"
 
 
+def _external_pump_test_point_audit():
+    return {
+        "schema_version": "prism.external_pump_test_point_audit.v1",
+        "status": "TEST_POINTS_EXTRACTED_CONFIGURATION_REVIEW_REQUIRED",
+        "document_count": 2,
+        "test_point_count": 8,
+        "documents": [{"document_id": "a"}, {"document_id": "b"}],
+        "test_points": [{"point_id": str(i)} for i in range(8)],
+        "model_binding": {
+            "prism_component_id": "liquid-transfer-pump-01",
+            "configuration_match_status": "UNREVIEWED",
+            "holdout_status": "NOT_STARTED",
+            "independent_holdout_result_present": False,
+        },
+        "physical_validation_claim": False,
+        "provider_release_packet_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "promotion_allowed": False,
+        "blocking_reasons": ["configuration review required"],
+    }
+
+
+def test_completion_audit_records_external_pump_test_points_without_promotion():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_pump_test_point_audit=_external_pump_test_point_audit(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_pump_test_point_audit"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_external_pump_test_point_promotion_claim():
+    evidence = _external_pump_test_point_audit()
+    evidence["promotion_allowed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_pump_test_point_audit=evidence,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_pump_test_point_audit"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _external_release_artifact_intake():
     return {
         "schema_version": "prism.external_release_artifact_intake.v1",
