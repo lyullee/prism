@@ -7,6 +7,8 @@
     "record_count": 52,
     "outdoor_candidate_count": 41,
     "out_of_scope_count": 11,
+    "audit_status": "SCENARIO_EVIDENCE_ONLY",
+    "import_status": "SCREENING_EVIDENCE_IMPORTED",
     "qualified_packet_count": 0,
     "frequency_applied": false
   },
@@ -21,6 +23,7 @@
     "frequency_applied": false,
     "sensor_frequency_learning_used": false
   },
+  "promotion_policy": "Actual centre files are retained as facility-neutral scenario and signal evidence. They do not create provider release packets, assign frequency, train sensor frequency, or open facility QRA until units, tag mapping, calibration, and accident release identity are reviewed.",
   "source_artifacts": [
     {
       "path": "results/20261115/inspection_center_scenario_import_current.json",
@@ -30,6 +33,5 @@
       "path": "results/20261115/inspection_center_timeseries_current.json",
       "sha256": "c4fc9a01270a9c151397229f893ffe63ce17bfc87e80955ff719a81c8ab89549"
     }
-  ],
-  "promotion_policy": "Actual centre files are retained as facility-neutral scenario and signal evidence. They do not create provider release packets, assign frequency, train sensor frequency, or open facility QRA until units, tag mapping, calibration, and accident release identity are reviewed."
+  ]
 }

@@ -92,6 +92,14 @@ units. The re-audit therefore refreshes provenance only; it does not turn
 normal-operation observations into accident releases, frequencies, provider
 qualification, or facility QRA evidence.
 
+The re-audit is reproducible with
+[`build_inspection_center_evidence_reaudit.py`](../scripts/build_inspection_center_evidence_reaudit.py).
+It runs the scenario importer, scenario-structure audit, and time-series audit
+together; the compact output keeps the 41/11 scope split and the 522
+unconfirmed-unit signal count. Its contract is covered by
+[`test_inspection_center_evidence_reaudit.py`](../tests/test_inspection_center_evidence_reaudit.py),
+and the command never assigns a frequency or creates a provider packet.
+
 The interpretation of the current facility-level conditional IR/F-N fields,
 including the declared receptor geometry and the separate near-receptor
 diagnostic, is documented in
