@@ -1,0 +1,22 @@
+{
+  "schema_version": "prism.header_bound_frequency_uncertainty_audit.v1",
+  "status": "PASS_DIAGNOSTIC_ONLY",
+  "diagnostic_only": true,
+  "risk_atom_count": 3,
+  "frequency_bound_scenario_count": 1,
+  "frequency_unbound_scenario_count": 2,
+  "frequency_bound_scenario_ids": [
+    "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+  ],
+  "frequency_unbound_scenario_ids": [
+    "inspection-storage-standby-vent-pressure:standby:vent_hole",
+    "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+  ],
+  "expected_summary_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+  "summary_counts_match": true,
+  "summary_policy_match": true,
+  "frequency_inference_performed": false,
+  "missing_bounds_imputed": false,
+  "blocking_reasons": [],
+  "interpretation": "The saved bridge rows and their uncertainty summary reconcile. Only explicit provider frequency bounds are counted; missing bounds remain unbounded and no frequency inference or interval imputation is performed."
+}

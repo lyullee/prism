@@ -77,6 +77,14 @@ default interval, a zero-width interval, or an inferred value. A complete
 facility uncertainty interval requires reviewed p05/p95 evidence for the two
 remaining event bindings.
 
+The coverage is independently reconciled from the saved component rows by
+`scripts/audit_header_bound_frequency_uncertainty.py`. The current audit record
+is `results/20261017/header_bound_frequency_uncertainty_audit_current.json`; the
+population-bound replay has a parallel record at
+`results/20261017/header_bound_frequency_uncertainty_audit_population_diagnostic.json`.
+Both reports are `PASS_DIAGNOSTIC_ONLY`: they verify the partial ledger and its
+fail-closed policy, not a complete facility confidence interval.
+
 The following gates remain deliberately closed:
 
 - provider qualification and independent physical validation;
@@ -119,6 +127,14 @@ python scripts/run_header_bound_facility_hazop_bridge.py `
   --backend-config results/20261008/full_chain/backend_config.json `
   --now-s 20000 `
   --output results/20261017/header_bound_facility_bridge_current.json
+```
+
+To recheck the uncertainty ledger without rerunning SLABx-LH2:
+
+```powershell
+python scripts/audit_header_bound_frequency_uncertainty.py `
+  --result results/20261017/header_bound_facility_bridge_current.json `
+  --output results/20261017/header_bound_frequency_uncertainty_audit_current.json
 ```
 
 This command took about 11.4 s for the three branches in the current replay

@@ -4612,5 +4612,12 @@
   "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_complete": false,
   "inspection_center_header_bound_facility_bridge_population_frequency_bound_scenario_count": 1,
   "inspection_center_header_bound_facility_bridge_population_frequency_unbound_scenario_count": 2,
-  "inspection_center_header_bound_facility_bridge_population_frequency_bounds_imputed": false
+  "inspection_center_header_bound_facility_bridge_population_frequency_bounds_imputed": false,
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_implemented": true,
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_script": "scripts/audit_header_bound_frequency_uncertainty.py",
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_module": "src/lh2_tno/header_bound_frequency_uncertainty_audit.py",
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_record": "results/20261017/header_bound_frequency_uncertainty_audit_current.json",
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_status": "PASS_DIAGNOSTIC_ONLY; 1 explicit bound and 2 unbound branches reconciled from component rows; no imputation or inference",
+  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_audit_record": "results/20261017/header_bound_frequency_uncertainty_audit_population_diagnostic.json",
+  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_audit_status": "PASS_DIAGNOSTIC_ONLY; population-bound replay reconciled with the same 1/2 frequency-bound coverage"
 }
