@@ -100,6 +100,20 @@ The CLI also accepts a facility-assessment file when it contains an explicit
 `facility_risk_ledger` object, so saved assessment artifacts can be audited
 without manual extraction.
 
+For an older saved result that lacks the new status fields, first make the
+absence explicit in a derived copy:
+
+```powershell
+python scripts/annotate_dynamic_state_closure_ledger.py `
+  --input results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
+  --output .tmp_facility_assessment_dynamic_state.json
+```
+
+The annotator writes `NOT_DECLARED` or `NOT_EVALUATED` only. It never creates
+`READY` from a mass balance or process value. The resulting accounting audit
+can therefore pass while provider qualification and facility QRA remain
+withheld.
+
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 
 ## What PRISM does not infer

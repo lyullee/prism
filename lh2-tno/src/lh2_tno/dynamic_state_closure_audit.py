@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
+from copy import deepcopy
 from typing import Any
 
 
@@ -49,7 +50,10 @@ def _case_identity(row: Mapping[str, Any]) -> tuple[str, ...]:
 
 
 def _status(row: Mapping[str, Any], *, missing: bool) -> str:
-    return str(row.get("dynamic_state_closure_status", "NOT_EVALUATED" if missing else "NOT_DECLARED"))
+    value = row.get("dynamic_state_closure_status")
+    if isinstance(value, str) and value.strip():
+        return value
+    return "NOT_EVALUATED" if missing else "NOT_DECLARED"
 
 
 def _counts(values: Sequence[str]) -> dict[str, int]:
@@ -134,6 +138,163 @@ def _component_id(row: Mapping[str, Any], result: Mapping[str, Any]) -> str:
                 if event.get("model_component_id"):
                     return str(event["model_component_id"])
     return "UNMAPPED_COMPONENT"
+
+
+def _component_status_counts(
+    result: Mapping[str, Any],
+    cases: Sequence[Mapping[str, Any]],
+) -> dict[str, dict[str, int]]:
+    grouped: dict[str, list[str]] = defaultdict(list)
+    for case in cases:
+        grouped[_component_id(case, result)].append(_status(case, missing=False))
+    return {
+        component: _counts(statuses)
+        for component, statuses in sorted(grouped.items())
+    }
+
+
+def annotate_missing_dynamic_state_closure_fields(
+    ledger: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Annotate an old saved ledger without inferring provider closure.
+
+    Older result snapshots predate the dynamic-state fields.  This migration
+    writes ``NOT_DECLARED`` for evaluated rows and ``NOT_EVALUATED`` for
+    withheld rows, then rebuilds only the corresponding count views.  It does
+    not inspect scalar mass balances, pressure values, or provider history to
+    create a READY status.
+    """
+    if not isinstance(ledger, Mapping):
+        raise DynamicStateClosureLedgerAuditError("ledger must be an object")
+    output: dict[str, Any] = deepcopy(dict(ledger))
+    target = output.get("facility_risk_ledger")
+    if not isinstance(target, Mapping):
+        target = output
+    else:
+        target = deepcopy(dict(target))
+        output["facility_risk_ledger"] = target
+
+    cases = [dict(row) for row in _rows(target.get("cases", []), "ledger.cases")]
+    uncomputed = [
+        dict(row)
+        for row in _rows(target.get("uncomputed_cases", []), "ledger.uncomputed_cases")
+    ]
+    annotated_case_count = 0
+    annotated_uncomputed_count = 0
+    for row in cases:
+        if not isinstance(row.get("dynamic_state_closure_status"), str) or not row.get(
+            "dynamic_state_closure_status"
+        ):
+            row["dynamic_state_closure_status"] = "NOT_DECLARED"
+            annotated_case_count += 1
+        row.setdefault("dynamic_state_closure_ready", None)
+        row.setdefault("dynamic_state_closure_blocking_reasons", [])
+    for row in uncomputed:
+        if not isinstance(row.get("dynamic_state_closure_status"), str) or not row.get(
+            "dynamic_state_closure_status"
+        ):
+            row["dynamic_state_closure_status"] = "NOT_EVALUATED"
+            annotated_uncomputed_count += 1
+        row.setdefault("dynamic_state_closure_ready", None)
+        row.setdefault("dynamic_state_closure_blocking_reasons", [])
+    target["cases"] = cases
+    target["uncomputed_cases"] = uncomputed
+
+    campaign_coverage = target.get("coverage")
+    if isinstance(campaign_coverage, Mapping):
+        coverage = deepcopy(dict(campaign_coverage))
+        coverage["dynamic_state_closure_status_counts"] = _counts(
+            [_status(row, missing=False) for row in cases]
+        )
+        coverage["dynamic_state_closure_ready_case_count"] = sum(
+            _status(row, missing=False) == "READY" for row in cases
+        )
+        coverage["dynamic_state_closure_blocked_case_count"] = sum(
+            _status(row, missing=False) == "BLOCKED" for row in cases
+        )
+        component_counts = _component_status_counts(target, cases)
+        existing = coverage.get("by_component")
+        rows_by_component = {
+            str(row.get("component_id")): deepcopy(dict(row))
+            for row in existing
+            if isinstance(row, Mapping) and row.get("component_id") is not None
+        } if isinstance(existing, list) else {}
+        for component, counts in component_counts.items():
+            row = rows_by_component.setdefault("" if component is None else component, {})
+            row["component_id"] = component
+            row["dynamic_state_closure_status_counts"] = counts
+            row["dynamic_state_closure_ready_case_count"] = counts.get("READY", 0)
+            row["dynamic_state_closure_blocked_case_count"] = counts.get("BLOCKED", 0)
+        coverage["by_component"] = [
+            rows_by_component[key] for key in sorted(rows_by_component)
+        ]
+        target["coverage"] = coverage
+
+    facility_coverage = target.get("conditional_diagnostic_facility_coverage")
+    if isinstance(facility_coverage, Mapping) or isinstance(
+        target.get("component_coverage"), Mapping
+    ):
+        facility_global, facility_components = _facility_case_statuses(target)
+        grouped: dict[str, list[str]] = defaultdict(list)
+        for identity, status in facility_global.items():
+            grouped[facility_components[identity]].append(status)
+        component_counts = {
+            component: _counts(statuses)
+            for component, statuses in sorted(grouped.items())
+        }
+        coverage = deepcopy(dict(facility_coverage)) if isinstance(
+            facility_coverage, Mapping
+        ) else {}
+        coverage["dynamic_state_closure_status_counts"] = _counts(
+            list(facility_global.values())
+        )
+        coverage["dynamic_state_closure_ready_case_count"] = sum(
+            status == "READY" for status in facility_global.values()
+        )
+        coverage["dynamic_state_closure_blocked_case_count"] = sum(
+            status == "BLOCKED" for status in facility_global.values()
+        )
+        stored_nested = coverage.get("component_case_accounting")
+        stored_nested_items = (
+            stored_nested.items() if isinstance(stored_nested, Mapping) else []
+        )
+        nested = {
+            str(component): deepcopy(dict(row))
+            for component, row in stored_nested_items
+            if isinstance(row, Mapping)
+        }
+        top_level = target.get("component_coverage")
+        top_level_items = top_level.items() if isinstance(top_level, Mapping) else []
+        top = {
+            str(component): deepcopy(dict(row))
+            for component, row in top_level_items
+            if isinstance(row, Mapping)
+        }
+        for component, counts in component_counts.items():
+            for rows in (nested, top):
+                row = rows.setdefault(component, {})
+                row["dynamic_state_closure_status_counts"] = counts
+                row["dynamic_state_closure_ready_case_count"] = counts.get("READY", 0)
+                row["dynamic_state_closure_blocked_case_count"] = counts.get("BLOCKED", 0)
+        coverage["component_case_accounting"] = nested
+        target["conditional_diagnostic_facility_coverage"] = coverage
+        target["component_coverage"] = top
+
+    output["dynamic_state_closure_normalization"] = {
+        "schema_version": "prism.dynamic_state_closure_normalization.v1",
+        "status": "EXPLICIT_MISSING_EVIDENCE_ANNOTATED",
+        "annotated_case_count": annotated_case_count,
+        "annotated_uncomputed_case_count": annotated_uncomputed_count,
+        "closure_inferred": False,
+        "provider_qualification": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "policy": (
+            "Missing dynamic-state fields are labeled NOT_DECLARED or NOT_EVALUATED; "
+            "no READY/BLOCKED status is inferred from scalar balances or process values."
+        ),
+    }
+    return output
 
 
 def _audit_campaign(result: Mapping[str, Any], checks: list[dict[str, Any]]) -> dict[str, Any]:
@@ -315,5 +476,6 @@ def build_dynamic_state_closure_ledger_audit(
 __all__ = [
     "DYNAMIC_STATE_CLOSURE_LEDGER_AUDIT_SCHEMA",
     "DynamicStateClosureLedgerAuditError",
+    "annotate_missing_dynamic_state_closure_fields",
     "build_dynamic_state_closure_ledger_audit",
 ]

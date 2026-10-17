@@ -1980,6 +1980,8 @@
   "dynamic_state_closure_ledger_audit_latest_record": "results/20261115/dynamic_state_closure_ledger_audit_current.json",
   "dynamic_state_closure_ledger_audit_latest_status": "BLOCKED; 40 checks, 29 blocked; the saved 44-case campaign/facility snapshot predates explicit dynamic-state closure coverage fields; no closure status is inferred",
   "dynamic_state_closure_ledger_audit_policy": "The audit recomputes explicit READY/BLOCKED/NOT_DECLARED/NOT_EVALUATED case identities and compares campaign, facility and component ledgers; BLOCKED is evidence of a missing or inconsistent ledger, not zero risk or provider qualification",
+  "dynamic_state_closure_ledger_audit_annotated_record": "results/20261115/dynamic_state_closure_ledger_audit_annotated_current.json",
+  "dynamic_state_closure_ledger_audit_annotated_status": "PASS; 19 accounting checks, 0 blockers after explicit NOT_DECLARED/NOT_EVALUATED annotation; provider dynamic closure remains unqualified",
   "ijhe_completion_audit_scope_gap_reason_policy": "declared_major_accident_scope now distinguishes numerical case gaps/uncomputed cases from qualification-only gaps; numerical diagnostic closure never promotes provider or facility QRA evidence",
   "current_union_ijhe_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "current_union_external_equipment_model_contract_audit_record": "results/20261026/native_full_scope_union_assessment/external_lh2dt_model_contract_audit.json",

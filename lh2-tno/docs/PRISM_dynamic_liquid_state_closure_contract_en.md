@@ -119,6 +119,13 @@ dynamic-state coverage fields. The record is retained as an evidence gap; it
 does not convert the numerical release/consequence results into a qualified
 facility result.
 
+Applying `scripts/annotate_dynamic_state_closure_ledger.py` to that same
+assessment creates an explicit missing-evidence copy. Its follow-up audit is
+`results/20261115/dynamic_state_closure_ledger_audit_annotated_current.json`
+(`PASS`, 19 accounting checks). This PASS only confirms that the explicit
+`NOT_DECLARED`/`NOT_EVALUATED` labels and their count views agree; it does not
+claim dynamic provider closure.
+
 Attach the same report to the IJHE completion audit with
 `--dynamic-state-closure-ledger-audit`. The completion audit records a
 separate diagnostic check; a ledger-consistency pass never becomes a provider

@@ -1,4 +1,7 @@
+from copy import deepcopy
+
 from lh2_tno.dynamic_state_closure_audit import (
+    annotate_missing_dynamic_state_closure_fields,
     build_dynamic_state_closure_ledger_audit,
 )
 
@@ -108,4 +111,40 @@ def test_dynamic_state_closure_audit_counts_uncomputed_identity_once():
         "READY": 1,
     }
     report = build_dynamic_state_closure_ledger_audit(campaign_results=campaign)
+    assert report["status"] == "PASS"
+
+
+def test_dynamic_state_closure_normalizer_marks_missing_campaign_fields_without_inference():
+    campaign = deepcopy(_campaign())
+    for row in campaign["cases"]:
+        row.pop("dynamic_state_closure_status", None)
+    campaign["coverage"].pop("dynamic_state_closure_status_counts", None)
+    campaign["coverage"].pop("by_component", None)
+    normalized = annotate_missing_dynamic_state_closure_fields(campaign)
+    assert normalized["dynamic_state_closure_normalization"]["closure_inferred"] is False
+    assert normalized["dynamic_state_closure_normalization"]["annotated_case_count"] == 2
+    assert {
+        row["dynamic_state_closure_status"] for row in normalized["cases"]
+    } == {"NOT_DECLARED"}
+    report = build_dynamic_state_closure_ledger_audit(campaign_results=normalized)
+    assert report["status"] == "PASS"
+
+
+def test_dynamic_state_closure_normalizer_handles_facility_assessment_wrapper():
+    facility = deepcopy(_facility())
+    for row in facility["cases"]:
+        row.pop("dynamic_state_closure_status", None)
+    facility["conditional_diagnostic_facility_coverage"].pop(
+        "dynamic_state_closure_status_counts", None
+    )
+    for row in facility["component_coverage"].values():
+        row.pop("dynamic_state_closure_status_counts", None)
+    wrapped = {"facility_risk_ledger": facility}
+    normalized = annotate_missing_dynamic_state_closure_fields(wrapped)
+    assert normalized["facility_risk_ledger"]["cases"][0][
+        "dynamic_state_closure_status"
+    ] == "NOT_DECLARED"
+    report = build_dynamic_state_closure_ledger_audit(
+        facility_result=normalized["facility_risk_ledger"]
+    )
     assert report["status"] == "PASS"
