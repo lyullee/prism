@@ -13992,11 +13992,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 735.4540000087582,
-                  "pool": 35151.80519997375,
-                  "near_field_and_dispersion": 81017.15520001017,
-                  "cloud_observation": 3255.0317000132054,
-                  "fire_explosion_damage_risk": 113.17180003970861
+                  "source": 731.2942999997176,
+                  "pool": 36717.88109996123,
+                  "near_field_and_dispersion": 88636.66540000122,
+                  "cloud_observation": 3495.217399962712,
+                  "fire_explosion_damage_risk": 112.14450001716614
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -14040,14 +14040,14 @@
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
               "adapter_source_digest": "ec0c5c1d22e3515c62823233fb3474c38fea0d40278ba680973b83345b9b8184",
-              "elapsed_ms": 120647.3912000074,
+              "elapsed_ms": 130092.1529000043,
               "physical_validation_claim": false,
               "facility_digest": "83f86daba9d58f4fd243b05290d65d58b4b0c3b9637b75df845eade6e73e1c15",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 120693.3635000023,
-                "physics_run_elapsed_ms": 120647.3912000074,
+                "service_elapsed_ms": 130140.41150000412,
+                "physics_run_elapsed_ms": 130092.1529000043,
                 "cache_key": "a7e3d9fcfbe56677f47955057ee10a8600b085abd289b06c429bc29ef524f6b6",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
@@ -14065,8 +14065,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 2.51730001764372,
-                "state_update_elapsed_ms": 120695.95039996784
+                "state_resolution_elapsed_ms": 2.529799996409565,
+                "state_update_elapsed_ms": 130143.05219997186
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -14217,7 +14217,7 @@
                 "data_age_s": 13162.0,
                 "frame_digest": "bf96d47b0fb1bd7006f94ab9e9d71454092ce239737287bb69d1106b5230e99d",
                 "mapping_digest": "0fd49baebaa7fb5958f5e6b6154dd65f3a8a55b3196217814ed7446ef289080e",
-                "data_age_at_output_s": 13282.696056400018,
+                "data_age_at_output_s": 13292.143173000019,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "34096ccc0061e1965da47927829e7ce6410dc7da401fcc6acfa9f578dfd427cd",
@@ -14230,7 +14230,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 120.69605640001828,
+                "service_elapsed_s": 130.14317300001858,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -14252,10 +14252,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 120.69605640001828,
-                "normalization_elapsed_s": 6.729998858645558e-05,
-                "state_resolution_elapsed_s": 0.00251730001764372,
-                "consequence_service_elapsed_s": 120.6933635000023,
+                "update_elapsed_s": 130.14317300001858,
+                "normalization_elapsed_s": 6.659998325631022e-05,
+                "state_resolution_elapsed_s": 0.002529799996409565,
+                "consequence_service_elapsed_s": 130.14041150000412,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -14333,6 +14333,21 @@
             "status": "BOUND",
             "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
             "source_digest": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b"
+          },
+          "provider_dynamic_state_closure": {
+            "ready": true,
+            "checks": {
+              "record_present": true,
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest_present": true,
+              "inventory_residual_within_tolerance": true,
+              "pressure_residual_within_tolerance": true,
+              "mass_ledger_present": true,
+              "mass_ledger_closed": true,
+              "termination_basis_compatible": true
+            },
+            "blocking_reasons": []
           }
         }
       ],
@@ -16814,11 +16829,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 747.2778999945149,
-                  "pool": 0.005099980626255274,
-                  "near_field_and_dispersion": 2889.2799000022933,
-                  "cloud_observation": 293.7380999792367,
-                  "fire_explosion_damage_risk": 99.26619997713715
+                  "source": 758.3318999968469,
+                  "pool": 0.005599984433501959,
+                  "near_field_and_dispersion": 2975.904499995522,
+                  "cloud_observation": 328.19029997335747,
+                  "fire_explosion_damage_risk": 115.6860999763012
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -16862,14 +16877,14 @@
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
               "adapter_source_digest": "ec0c5c1d22e3515c62823233fb3474c38fea0d40278ba680973b83345b9b8184",
-              "elapsed_ms": 4380.386099976022,
+              "elapsed_ms": 4544.452700007241,
               "physical_validation_claim": false,
               "facility_digest": "83f86daba9d58f4fd243b05290d65d58b4b0c3b9637b75df845eade6e73e1c15",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 4448.654000007082,
-                "physics_run_elapsed_ms": 4380.386099976022,
+                "service_elapsed_ms": 4610.795099986717,
+                "physics_run_elapsed_ms": 4544.452700007241,
                 "cache_key": "5ba65d7b661564cf0886d39d0dff1fc9718c94cea2b9462a378dab6a7886b712",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
@@ -16887,8 +16902,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.9754000348038971,
-                "state_update_elapsed_ms": 4449.682200036477
+                "state_resolution_elapsed_ms": 0.7289000204764307,
+                "state_update_elapsed_ms": 4611.583499994595
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -16969,7 +16984,7 @@
                 "data_age_s": 9920.0,
                 "frame_digest": "06fec304183b32bb2d35814ba9875e1185f40a83356d99ba45464fdf9b813c37",
                 "mapping_digest": "0fd49baebaa7fb5958f5e6b6154dd65f3a8a55b3196217814ed7446ef289080e",
-                "data_age_at_output_s": 9924.44975119998,
+                "data_age_at_output_s": 9924.611659999995,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "9ad98cbafb6acb67149d3728c54a02481052001ec1ddec791aa739b80459ceeb",
@@ -16982,7 +16997,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 4.449751199979801,
+                "service_elapsed_s": 4.611659999995027,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -17004,10 +17019,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 4.449751199979801,
-                "normalization_elapsed_s": 5.0499977078288794e-05,
-                "state_resolution_elapsed_s": 0.0009754000348038971,
-                "consequence_service_elapsed_s": 4.448654000007082,
+                "update_elapsed_s": 4.611659999995027,
+                "normalization_elapsed_s": 5.389994475990534e-05,
+                "state_resolution_elapsed_s": 0.0007289000204764307,
+                "consequence_service_elapsed_s": 4.610795099986717,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -17063,6 +17078,23 @@
             "status": "BOUND",
             "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
             "source_digest": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796"
+          },
+          "provider_dynamic_state_closure": {
+            "ready": false,
+            "checks": {
+              "record_present": false,
+              "inventory_feedback_closed": false,
+              "pressure_feedback_closed": false,
+              "state_history_digest_present": false,
+              "inventory_residual_within_tolerance": false,
+              "pressure_residual_within_tolerance": false,
+              "mass_ledger_present": false,
+              "mass_ledger_closed": false,
+              "termination_basis_compatible": false
+            },
+            "blocking_reasons": [
+              "provider dynamic pressure/inventory closure evidence is missing"
+            ]
           }
         }
       ],
@@ -20192,11 +20224,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 734.6956999972463,
-                  "pool": 0.005699985194951296,
-                  "near_field_and_dispersion": 395.09930001804605,
-                  "cloud_observation": 137.42800004547462,
-                  "fire_explosion_damage_risk": 79.59079998545349
+                  "source": 737.3717000009492,
+                  "pool": 0.006200047209858894,
+                  "near_field_and_dispersion": 408.4509000531398,
+                  "cloud_observation": 140.302799991332,
+                  "fire_explosion_damage_risk": 79.8619000124745
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -20240,14 +20272,14 @@
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
               "adapter_source_digest": "ec0c5c1d22e3515c62823233fb3474c38fea0d40278ba680973b83345b9b8184",
-              "elapsed_ms": 1665.5403000186197,
+              "elapsed_ms": 1707.4989000102505,
               "physical_validation_claim": false,
               "facility_digest": "83f86daba9d58f4fd243b05290d65d58b4b0c3b9637b75df845eade6e73e1c15",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 1729.0651999646798,
-                "physics_run_elapsed_ms": 1665.5403000186197,
+                "service_elapsed_ms": 1786.7909999913536,
+                "physics_run_elapsed_ms": 1707.4989000102505,
                 "cache_key": "1aa450354925f858e29e848bb7bd5dd6abdb7762ed296221b23557b80383d44f",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
@@ -20265,8 +20297,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.9945000056177378,
-                "state_update_elapsed_ms": 1730.1073999842629
+                "state_resolution_elapsed_ms": 1.6362000023946166,
+                "state_update_elapsed_ms": 1788.4974000044167
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -20379,7 +20411,7 @@
                 "data_age_s": 18560.0,
                 "frame_digest": "cb866029272bd9105c01f3a6b78770d0ad4555db92f75f855253761e488e4519",
                 "mapping_digest": "0fd49baebaa7fb5958f5e6b6154dd65f3a8a55b3196217814ed7446ef289080e",
-                "data_age_at_output_s": 18561.730187500012,
+                "data_age_at_output_s": 18561.788632499985,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "73a6c0adab300125b56eac2b880dff2c577742af5b52f493232183879a36855c",
@@ -20392,7 +20424,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 1.7301875000121072,
+                "service_elapsed_s": 1.7886324999853969,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -20414,10 +20446,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 1.7301875000121072,
-                "normalization_elapsed_s": 6.220000796020031e-05,
-                "state_resolution_elapsed_s": 0.0009945000056177378,
-                "consequence_service_elapsed_s": 1.7290651999646798,
+                "update_elapsed_s": 1.7886324999853969,
+                "normalization_elapsed_s": 0.00010760000441223383,
+                "state_resolution_elapsed_s": 0.0016362000023946166,
+                "consequence_service_elapsed_s": 1.7867909999913536,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -20473,6 +20505,21 @@
             "status": "BOUND",
             "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
             "source_digest": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796"
+          },
+          "provider_dynamic_state_closure": {
+            "ready": true,
+            "checks": {
+              "record_present": true,
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest_present": true,
+              "inventory_residual_within_tolerance": true,
+              "pressure_residual_within_tolerance": true,
+              "mass_ledger_present": true,
+              "mass_ledger_closed": true,
+              "termination_basis_compatible": true
+            },
+            "blocking_reasons": []
           }
         }
       ],
@@ -20964,6 +21011,57 @@
     "sensor_frequency_learning_used": false,
     "provider_release_created_by_prism": false,
     "provider_packets_qualified": false,
+    "provider_dynamic_state_closure_ready_scenario_count": 2,
+    "provider_dynamic_state_closure_blocked_scenario_count": 1,
+    "provider_dynamic_state_closure_status_by_scenario": {
+      "inspection-intake-receiving-high-pressure:receiving:vessel_hole": {
+        "ready": true,
+        "checks": {
+          "record_present": true,
+          "inventory_feedback_closed": true,
+          "pressure_feedback_closed": true,
+          "state_history_digest_present": true,
+          "inventory_residual_within_tolerance": true,
+          "pressure_residual_within_tolerance": true,
+          "mass_ledger_present": true,
+          "mass_ledger_closed": true,
+          "termination_basis_compatible": true
+        },
+        "blocking_reasons": []
+      },
+      "inspection-storage-standby-vent-pressure:standby:vent_hole": {
+        "ready": false,
+        "checks": {
+          "record_present": false,
+          "inventory_feedback_closed": false,
+          "pressure_feedback_closed": false,
+          "state_history_digest_present": false,
+          "inventory_residual_within_tolerance": false,
+          "pressure_residual_within_tolerance": false,
+          "mass_ledger_present": false,
+          "mass_ledger_closed": false,
+          "termination_basis_compatible": false
+        },
+        "blocking_reasons": [
+          "provider dynamic pressure/inventory closure evidence is missing"
+        ]
+      },
+      "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole": {
+        "ready": true,
+        "checks": {
+          "record_present": true,
+          "inventory_feedback_closed": true,
+          "pressure_feedback_closed": true,
+          "state_history_digest_present": true,
+          "inventory_residual_within_tolerance": true,
+          "pressure_residual_within_tolerance": true,
+          "mass_ledger_present": true,
+          "mass_ledger_closed": true,
+          "termination_basis_compatible": true
+        },
+        "blocking_reasons": []
+      }
+    },
     "facility_annual_ir_available": false,
     "facility_fn_available": false,
     "facility_qra_claim": false,
@@ -20988,7 +21086,7 @@
     "frequency_bound_scenario_count": 1,
     "frequency_unbound_scenario_count": 2,
     "diagnostic_only": true,
-    "wall_elapsed_ms": 126928.11280000024,
+    "wall_elapsed_ms": 136592.70949999336,
     "measurement_policy": "diagnostic synchronous wall-clock timing for this batch; not a fresh-physics 1 Hz guarantee"
   },
   "interpretation": "Explicit header-bound state frames for all declared components entered one facility HAZOP runtime batch. Each selected mode/scenario retained its own provider component, port, release history, SLABx-LH2 consequence and literature frequency binding. The output is a current-weather diagnostic view; model-prediction packets, missing qualification and physical validation keep annual facility IR/F-N promotion withheld."

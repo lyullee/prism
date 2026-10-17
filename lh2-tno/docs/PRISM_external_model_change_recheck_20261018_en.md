@@ -24,6 +24,11 @@ For the current three-branch header-bound replay:
 
 The new packet root was replayed through the existing header-bound HAZOP bridge. All three selected scenarios passed packet preflight and executed the consequence path. The candidate replay took about 126.9 s wall time for the three-branch batch. Frequency uncertainty remains partial: one branch has explicit low/published/high bounds and two do not. The facility annual IR/F-N result remains withheld.
 
+The bridge now carries the provider dynamic-state audit into each branch record
+and reports two closure-ready scenarios and one blocked scenario in its facility
+audit. This is a visibility and traceability improvement; it does not change
+the qualification gate.
+
 The earlier 2026-10-18 replay used the older packet root and classified all three components as operator-limited because the dynamic closure field was absent. That older result remains the authoritative replay record. The new run is a candidate comparison, so it does not silently replace the authoritative union assessment.
 
 ## Interpretation

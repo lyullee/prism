@@ -48,3 +48,29 @@ def test_header_bound_facility_bridge_runtime_record_is_present():
     assert runtime["facility_bridge_audit"]["physical_validation_claim"] is False
     assert runtime["facility_annual_ir_available"] is False
     assert runtime["facility_fn_available"] is False
+
+
+def test_latest_header_bound_replay_exposes_provider_dynamic_closure_state():
+    candidate = json.loads(
+        (
+            ROOT
+            / "results/20261018/header_bound_facility_bridge_latest_packets_recheck.json"
+        ).read_text(encoding="utf-8")
+    )
+    audit = candidate["facility_bridge_audit"]
+    assert audit["provider_dynamic_state_closure_ready_scenario_count"] == 2
+    assert audit["provider_dynamic_state_closure_blocked_scenario_count"] == 1
+    branch_closure = {
+        branch["scenario_id"]: branch["provider_dynamic_state_closure"]
+        for component in candidate["components"].values()
+        for branch in component["branches"]
+    }
+    assert branch_closure[
+        "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+    ]["ready"] is True
+    assert branch_closure[
+        "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+    ]["ready"] is True
+    assert branch_closure[
+        "inspection-storage-standby-vent-pressure:standby:vent_hole"
+    ]["ready"] is False

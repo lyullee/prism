@@ -42,6 +42,7 @@ from lh2_tno.provider_release import (  # noqa: E402
     load_provider_emergency_relief,
     provider_release_resolver_from_packet,
 )
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status  # noqa: E402
 from lh2_tno.service import (  # noqa: E402
     ConsequenceService,
     FacilityRealtimeBinding,
@@ -250,6 +251,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     resolvers: dict[tuple[str, str], Any] = {}
     frequency_by_scenario: dict[str, RealtimeFrequencyBinding] = {}
     provider_by_scenario: dict[str, Mapping[str, Any]] = {}
+    dynamic_closure_by_scenario: dict[str, dict[str, Any]] = {}
     for row in ready_rows:
         scenario_id = str(row["scenario_id"])
         scenario = scenario_by_id.get(scenario_id)
@@ -258,6 +260,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         component_id = str(scenario.get("component_id") or "")
         packet_path = Path(str(row["provider_packet_path"]))
         packet = _object(packet_path)
+        # Preserve the provider-owned dynamic source audit next to the
+        # scenario binding.  The consequence worker already validates this
+        # contract; the header-bound bridge must expose the same result so an
+        # operator can distinguish a dynamically closed packet from a merely
+        # executable diagnostic packet.
+        dynamic_closure_by_scenario[scenario_id] = dynamic_state_closure_status(packet)
         defaults = _request_defaults(
             row,
             liquid_defaults=liquid_defaults,
@@ -360,6 +368,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         result.get("components", {})
     )
     result["conditional_current_weather_frequency_uncertainty"] = frequency_uncertainty
+    for component in result.get("components", {}).values():
+        if not isinstance(component, Mapping):
+            continue
+        for branch in component.get("branches", ()):
+            if not isinstance(branch, dict):
+                continue
+            scenario_id = str(branch.get("scenario_id") or "")
+            closure = dynamic_closure_by_scenario.get(scenario_id)
+            if closure is not None:
+                branch["provider_dynamic_state_closure"] = copy.deepcopy(closure)
     elapsed_ms = (time.perf_counter() - started) * 1000.0
     component_rows = result.get("components", {})
     selected_count = sum(
@@ -432,6 +450,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "sensor_frequency_learning_used": False,
             "provider_release_created_by_prism": False,
             "provider_packets_qualified": False,
+            "provider_dynamic_state_closure_ready_scenario_count": sum(
+                status.get("ready") is True
+                for status in dynamic_closure_by_scenario.values()
+            ),
+            "provider_dynamic_state_closure_blocked_scenario_count": sum(
+                status.get("ready") is not True
+                for status in dynamic_closure_by_scenario.values()
+            ),
+            "provider_dynamic_state_closure_status_by_scenario": copy.deepcopy(
+                dynamic_closure_by_scenario
+            ),
             "facility_annual_ir_available": False,
             "facility_fn_available": False,
             "facility_qra_claim": False,

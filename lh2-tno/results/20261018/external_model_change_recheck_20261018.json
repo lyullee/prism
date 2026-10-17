@@ -80,7 +80,7 @@
   ],
   "header_bound_candidate_replay": {
     "record": "results/20261018/header_bound_facility_bridge_latest_packets_recheck.json",
-    "sha256": "b922fcfdb5a117cbfc2532a6658186743fe1093b0c4402ab7f5155a730b21fbe",
+    "sha256": "efe683bbdb0c943b5b1aff66740440de9dc256178f5edeaa59379ba02687a01a",
     "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
     "selected_component_count": 3,
     "executed_component_count": 3,
@@ -90,7 +90,9 @@
     "frequency_bound_scenario_count": 1,
     "frequency_unbound_scenario_count": 2,
     "facility_annual_ir_available": false,
-    "facility_fn_available": false
+    "facility_fn_available": false,
+    "provider_dynamic_state_closure_ready_scenario_count": 2,
+    "provider_dynamic_state_closure_blocked_scenario_count": 1
   },
   "comparison_with_prior_header_bound_replay": {
     "prior_record": "results/20261018/header_bound_facility_bridge_current_recheck_summary_20261018.json",
