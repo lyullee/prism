@@ -136,6 +136,28 @@ def test_closed_qualification_request_exposes_ready_closure_status():
     assert request["acceptance"]["termination_evidence_review_required"] is False
 
 
+def test_dynamic_provider_closure_is_shared_with_native_request_builder():
+    packet = _packet(
+        event_id="dynamic-closed-event",
+        termination_basis="model_pressure_equalization",
+    )
+    packet["provider_mass_balance"]["dynamic_state_closure"] = {
+        "inventory_feedback_closed": True,
+        "pressure_feedback_closed": True,
+        "state_history_digest": "c" * 64,
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1.0e-6,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.0,
+    }
+
+    request = build_provider_qualification_request(packet)
+
+    assert request["closure_status"] == "CLOSURE_READY_FOR_QUALIFICATION"
+    assert request["acceptance"]["termination_evidence_already_closed"] is True
+    assert request["acceptance"]["facility_qra_allowed"] is False
+
+
 def _write_verification(directory, packet, basis):
     payload = {
         "provider_result_digest": packet["provider_result_digest"],

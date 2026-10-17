@@ -71,33 +71,25 @@ def build_requests(readiness: Mapping[str, Any], *, readiness_path: Path) -> dic
         packet = _load(packet_path)
         if not isinstance(packet, Mapping):
             raise ValueError(f"resolved packet must be an object: {packet_path}")
-        exact = row.get("status") == "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC"
         generated: list[dict[str, Any]] = []
         for index, release in enumerate(_releases(packet)):
-            if exact:
-                qualification_request = build_provider_qualification_request(
-                    release,
-                    event_id=row.get("event_id"),
-                    event_kind=release.get("event_kind"),
-                    blocking_reasons=(evidence.get("qualification_readiness", {}) or {}).get(
-                        "blockers", ()
-                    ),
-                )
-                if qualification_request["acceptance"].get(
-                    "termination_evidence_already_closed"
-                ) is True:
-                    request = qualification_request
-                    kind = "qualification_only"
-                else:
-                    request = build_provider_release_closure_request(
-                        release,
-                        event_id=row.get("event_id"),
-                        event_kind=release.get("event_kind"),
-                        blocking_reasons=(evidence.get("qualification_readiness", {}) or {}).get(
-                            "blockers", ()
-                        ),
-                    )
-                    kind = "release_closure_and_qualification"
+            qualification_request = build_provider_qualification_request(
+                release,
+                event_id=row.get("event_id"),
+                event_kind=release.get("event_kind"),
+                blocking_reasons=(evidence.get("qualification_readiness", {}) or {}).get(
+                    "blockers", ()
+                ),
+            )
+            # Closure readiness belongs to the resolved provider packet, not
+            # to the campaign row label.  A packet with an explicit dynamic
+            # pressure/inventory ledger may therefore be qualification-only
+            # even when the campaign status remains operator-limited.
+            if qualification_request["acceptance"].get(
+                "termination_evidence_already_closed"
+            ) is True:
+                request = qualification_request
+                kind = "qualification_only"
             else:
                 request = build_provider_release_closure_request(
                     release,

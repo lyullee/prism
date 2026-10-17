@@ -295,7 +295,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1429 passed, 1 warning",
+  "latest_local_full_test_run": "1436 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -1147,7 +1147,7 @@
   "ijhe_completion_audit_live_with_runner_consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
   "ijhe_completion_audit_live_with_runner_qualified_provider_packet_count": 0,
   "ijhe_completion_audit_live_with_runner_frequency_bound": false,
-  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; latest local full suite 1419 passed, 1 warning; GitHub Actions run 39022092049 (#1313) completed successfully.",
+  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; latest local full suite 1436 passed, 1 warning; GitHub Actions run 39030307225 (ff5df15f) completed successfully.",
   "provider_worklist_packet_evidence_audit_implemented": true,
   "provider_worklist_packet_evidence_audit_module": "src/lh2_tno/provider_worklist_evidence.py",
   "provider_worklist_packet_evidence_audit_script": "scripts/audit_provider_worklist_packet_evidence.py",
@@ -4108,7 +4108,7 @@
   "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
   "latest_provider_packet_collection_manifest_case_count": 44,
   "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
-  "latest_local_full_test_run_commit": "f6e1d71b",
+  "latest_local_full_test_run_commit": "f68c6e5d",
   "current_development": {
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
@@ -4390,18 +4390,18 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_exact_match_event_count": 13,
   "external_lh2dt_native_facility_full_scope_provider_qualification_qualified_count": 0,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 identity-preserving requests: explicit closure status 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN; 7 packets need qualification-only evidence and 19 require release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 identity-preserving requests: explicit closure status 20 CLOSURE_READY_FOR_QUALIFICATION and 6 CLOSURE_EVIDENCE_OPEN; 20 packets need qualification-only evidence and 6 require release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_count": 24,
   "external_lh2dt_native_facility_full_scope_provider_qualification_only_request_count": 7,
   "external_lh2dt_native_facility_full_scope_provider_closure_and_qualification_request_count": 19,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_frequency_inference_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_facility_qra_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_status": "TEMPLATE_ONLY; 26 release identities grouped from 24 event rows; explicit closure status 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN; placeholder paths require reviewed prism.provider_qualification_evidence.v1 sidecars; promotion false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_status": "TEMPLATE_ONLY; 26 release identities grouped from 24 event rows; explicit closure status 20 CLOSURE_READY_FOR_QUALIFICATION and 6 CLOSURE_EVIDENCE_OPEN; placeholder paths require reviewed prism.provider_qualification_evidence.v1 sidecars; promotion false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_entry_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_promotion_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; explicit closure status 7 ready and 19 open; sidecar files present 0; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; explicit closure status 20 ready and 6 open; sidecar files present 0; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_event_row_count": 24,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_release_identity_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_exact_match_count": 0,
@@ -4514,10 +4514,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1326,
+    "run_number": 1330,
     "status": "success",
-    "commit": "f6e1d71b",
-    "url": "https://github.com/lyullee/prism/actions/runs/39028492024"
+    "commit": "ff5df15f",
+    "url": "https://github.com/lyullee/prism/actions/runs/39030307225"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
@@ -4634,16 +4634,16 @@
   "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_blocking_reason_count": 0,
   "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_sha256": "A570896F70DD15849C552B2EA2DD722EC12669F93375557188AE811AE5D05FB2",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_closure_status_counts": {
-    "CLOSURE_EVIDENCE_OPEN": 19,
-    "CLOSURE_READY_FOR_QUALIFICATION": 7
+    "CLOSURE_EVIDENCE_OPEN": 6,
+    "CLOSURE_READY_FOR_QUALIFICATION": 20
   },
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_closure_status_counts": {
-    "CLOSURE_EVIDENCE_OPEN": 19,
-    "CLOSURE_READY_FOR_QUALIFICATION": 7
+    "CLOSURE_EVIDENCE_OPEN": 6,
+    "CLOSURE_READY_FOR_QUALIFICATION": 20
   },
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_closure_status_counts": {
-    "CLOSURE_EVIDENCE_OPEN": 19,
-    "CLOSURE_READY_FOR_QUALIFICATION": 7
+    "CLOSURE_EVIDENCE_OPEN": 6,
+    "CLOSURE_READY_FOR_QUALIFICATION": 20
   },
   "latest_observed_state_data_recheck_record": "results/20261115/inspection_center_observed_state_evidence_recheck_20261017.json",
   "latest_observed_state_data_recheck_status": "OBSERVATION_STATE_EVIDENCE_ONLY; 3 external XLSX sources, 8,955 samples, 3 components; no frequency or accident release inferred",

@@ -18,6 +18,7 @@ from .provider_release_closure import (
     ProviderReleaseClosureError,
     audit_provider_release_closure,
 )
+from .resolved_liquid_worker import dynamic_state_closure_status
 
 
 SCHEMA = "prism.generic_provider_release_closure_audit.v1"
@@ -32,6 +33,14 @@ def _termination_evidence_is_structurally_closed(packet: Mapping[str, Any]) -> b
     must expose the family-specific stop evidence that the facility boundary
     audit can independently reconcile.
     """
+    # Native finite-volume exporters can provide a stronger, digest-bound
+    # pressure/inventory closure record than the legacy verification sidecar.
+    # Reuse the same fail-closed contract used by the native qualification
+    # audit so request generation and audit reporting cannot diverge.
+    dynamic_status = dynamic_state_closure_status(dict(packet))
+    if dynamic_status.get("ready") is True:
+        return True
+
     basis = packet.get("termination_basis")
     provenance = packet.get("termination_provenance")
     duration = packet.get("duration_s")
