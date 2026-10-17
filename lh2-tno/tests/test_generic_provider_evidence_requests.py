@@ -150,6 +150,14 @@ def test_dynamic_provider_closure_is_shared_with_native_request_builder():
         "max_abs_pressure_residual_pa": 0.0,
         "pressure_tolerance_pa": 1.0,
     }
+    packet["provider_mass_balance"].update({
+        "pressure_equalization_time_s": 0.1,
+        "post_pressure_equalization_observation_s": 0.1,
+        "pressure_equalization_success": True,
+        "terminal_source_pressure_pa_abs": 101324.0,
+        "ambient_pressure_pa_abs": 101325.0,
+        "max_post_pressure_equalization_flow_kg_s": 0.0,
+    })
 
     request = build_provider_qualification_request(packet)
 

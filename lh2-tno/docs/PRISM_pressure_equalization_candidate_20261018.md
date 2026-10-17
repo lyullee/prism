@@ -34,5 +34,15 @@ pressure-equalization boundary.  The audit sets
 `packet_mutation_allowed=false`, `qualified_provider_packet_allowed=false`,
 `frequency_inference_allowed=false`, and `facility_qra_allowed=false`.
 
+The dynamic-vaporizer adapter now also accepts an explicit
+`--termination-mode pressure_equalization` export.  Its provider metadata
+records the equalization time, the post-equalization observation interval, the
+terminal source pressure, the ambient pressure, and the maximum observed
+post-stop flow.  A synthetic diagnostic run with the current external model
+source produced an 84-interval, 12.6 s packet whose provider closure audit was
+`CLOSURE_READY_FOR_QUALIFICATION`; it remains diagnostic because its initial
+state and geometry are synthetic and no qualification sidecar or independent
+facility validation is present.
+
 The implementation is [`src/lh2_tno/pressure_equalization.py`](../src/lh2_tno/pressure_equalization.py), with the command-line wrapper
 [`scripts/audit_provider_pressure_equalization.py`](../scripts/audit_provider_pressure_equalization.py).

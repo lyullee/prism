@@ -71,6 +71,24 @@ def test_case_audit_keeps_release_boundary_and_provider_qualification_separate()
     assert row["consequence_domain_status"] == "CLOSED"
 
 
+def test_case_audit_accepts_explicit_pressure_equalization_boundary():
+    case = _case("pressure-eq")
+    case["provider_packet_identity"]["provider_mass_balances"] = [{
+        "pressure_equalization_time_s": 0.2,
+        "post_pressure_equalization_observation_s": 0.2,
+        "pressure_equalization_success": True,
+        "terminal_source_pressure_pa_abs": 101324.0,
+        "ambient_pressure_pa_abs": 101325.0,
+        "max_post_pressure_equalization_flow_kg_s": 0.0,
+    }]
+    row = _ledger_row("pressure-eq", basis="model_pressure_equalization")
+
+    report = build_release_boundary_case_audit(_assessment([case], [row]))
+
+    assert report["strict_release_boundary_eligible_case_count"] == 1
+    assert report["rows"][0]["strict_release_boundary_status"] == "ELIGIBLE"
+
+
 def test_case_audit_rechecks_literature_frequency_event_and_port_binding():
     case = _case("event-1")
     row = _ledger_row("event-1")

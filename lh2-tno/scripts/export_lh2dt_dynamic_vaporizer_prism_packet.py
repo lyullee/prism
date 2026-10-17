@@ -205,9 +205,12 @@ class DynamicVaporizerAccidentProvider:
             raise ValueError("dynamic vaporizer diagnostic inputs must be finite")
         if self.mode not in {"vaporizer", "reliquefier"}:
             raise ValueError("mode must be vaporizer or reliquefier")
-        if self.termination_mode not in {"synthetic_horizon", "inventory_depletion"}:
+        if self.termination_mode not in {
+            "synthetic_horizon", "inventory_depletion", "pressure_equalization"
+        }:
             raise ValueError(
-                "termination_mode must be synthetic_horizon or inventory_depletion"
+                "termination_mode must be synthetic_horizon, inventory_depletion, "
+                "or pressure_equalization"
             )
         if self.duration_s <= 0.0 or self.time_step_s <= 0.0:
             raise ValueError("diagnostic duration and time step must be positive")
@@ -472,9 +475,63 @@ class DynamicVaporizerAccidentProvider:
                 "outlet evaluation; the digest covers the complete provider history."
             ),
         )
+        pressure_equalization_time_s = None
+        post_pressure_equalization_observation_s = None
+        terminal_source_pressure_pa_abs = None
+        max_post_pressure_equalization_flow_kg_s = None
+        pressure_equalization_success = None
+        if self.termination_mode == "pressure_equalization":
+            flow_tolerance = 1.0e-12
+            pressure_tolerance = 1.0e-3
+            candidate_index = None
+            for index, row in enumerate(steps):
+                if index == 0:
+                    continue
+                source = row.get("provider_source_state")
+                source_pressure = (
+                    float(source["source_pressure_pa_abs"])
+                    if isinstance(source, Mapping)
+                    and isinstance(source.get("source_pressure_pa_abs"), (int, float))
+                    else None
+                )
+                previous_flow = float(steps[index - 1]["mass_flow_kg_s"])
+                if (
+                    source_pressure is not None
+                    and float(row["mass_flow_kg_s"]) <= flow_tolerance
+                    and previous_flow > flow_tolerance
+                    and source_pressure <= ambient_pressure + pressure_tolerance
+                ):
+                    candidate_index = index
+                    break
+            if candidate_index is None or len(steps) - candidate_index < 2:
+                raise ValueError(
+                    "pressure_equalization requires a positive-flow interval followed by "
+                    "at least two provider zero-flow observation intervals"
+                )
+            pressure_equalization_time_s = float(steps[candidate_index]["time_s"])
+            observation_index = candidate_index + 1
+            post_pressure_equalization_observation_s = float(
+                steps[observation_index]["time_s"] - pressure_equalization_time_s
+            )
+            terminal_source_pressure_pa_abs = float(
+                steps[observation_index]["provider_source_state"]["source_pressure_pa_abs"]
+            )
+            max_post_pressure_equalization_flow_kg_s = max(
+                float(row["mass_flow_kg_s"])
+                for row in steps[candidate_index : candidate_index + 2]
+            )
+            pressure_equalization_success = (
+                max_post_pressure_equalization_flow_kg_s <= flow_tolerance
+                and terminal_source_pressure_pa_abs <= ambient_pressure + pressure_tolerance
+            )
+            if not pressure_equalization_success:
+                raise ValueError("pressure equalization observation did not confirm non-outward flow")
+
         termination_basis = (
             "reviewed_isolation_success"
             if isolation_success
+            else "model_pressure_equalization"
+            if pressure_equalization_success
             else "synthetic_diagnostic_horizon"
         )
         termination_provenance = (
@@ -482,8 +539,13 @@ class DynamicVaporizerAccidentProvider:
             "isolation command and remained at zero flow through the observation interval"
             if isolation_success
             else (
-                f"external {model_class} finite-volume state with explicit valve; "
-                "residual inventory retained at synthetic horizon"
+                f"external {model_class} source pressure reached the non-outward atmospheric "
+                "boundary and remained at zero provider flow through the observation interval"
+                if pressure_equalization_success
+                else (
+                    f"external {model_class} finite-volume state with explicit valve; "
+                    "residual inventory retained at synthetic horizon"
+                )
             )
         )
         return {
@@ -521,6 +583,12 @@ class DynamicVaporizerAccidentProvider:
                     "isolation_time_s": self.isolation_time_s,
                     "post_isolation_observation_s": self.post_isolation_observation_s,
                     "isolation_success": isolation_success,
+                    "pressure_equalization_time_s": pressure_equalization_time_s,
+                    "post_pressure_equalization_observation_s": post_pressure_equalization_observation_s,
+                    "pressure_equalization_success": pressure_equalization_success,
+                    "terminal_source_pressure_pa_abs": terminal_source_pressure_pa_abs,
+                    "ambient_pressure_pa_abs": ambient_pressure,
+                    "max_post_pressure_equalization_flow_kg_s": max_post_pressure_equalization_flow_kg_s,
                     "post_isolation_zero_flow": zero_flow_after_isolation,
                     "dynamic_state_closure": dynamic_closure,
                 },
@@ -677,7 +745,7 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--mode", choices=("vaporizer", "reliquefier"), default="vaporizer")
     parser.add_argument(
-        "--termination-mode", choices=("synthetic_horizon", "inventory_depletion"),
+        "--termination-mode", choices=("synthetic_horizon", "inventory_depletion", "pressure_equalization"),
         default="synthetic_horizon",
         help="use the native positive-threshold inventory stop instead of a bounded diagnostic horizon",
     )

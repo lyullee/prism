@@ -29,7 +29,6 @@ MASS_TOLERANCE_KG = 1.0e-8
 _OPEN_BASES = {
     None,
     "synthetic_diagnostic_horizon",
-    "model_pressure_equalization",
     "inventory_over_600s",
 }
 
@@ -253,6 +252,43 @@ def _audit_one(
             ("isolation_clock_present", checks["isolation_clock_present"]),
         ):
             if not ok:
+                gaps.append(f"{name} is missing or inconsistent")
+    elif basis == "model_pressure_equalization":
+        checks["pressure_equalization_record_present"] = mass is not None
+        checks["pressure_equalization_success_declared"] = bool(
+            mass is not None and mass.pressure_equalization_success is True
+        )
+        checks["pressure_equalization_clock_present"] = bool(
+            mass is not None
+            and _finite(mass.pressure_equalization_time_s)
+            and float(mass.pressure_equalization_time_s) <= float(packet.duration_s)
+        )
+        checks["pressure_equalization_observation_present"] = bool(
+            mass is not None
+            and _finite(mass.post_pressure_equalization_observation_s)
+            and float(mass.post_pressure_equalization_observation_s) > 0.0
+        )
+        checks["pressure_equalization_flow_closed"] = bool(
+            mass is not None
+            and _finite(mass.max_post_pressure_equalization_flow_kg_s)
+            and float(mass.max_post_pressure_equalization_flow_kg_s) <= 1.0e-12
+        )
+        checks["pressure_equalization_pressure_boundary_present"] = bool(
+            mass is not None
+            and _finite(mass.terminal_source_pressure_pa_abs)
+            and _finite(mass.ambient_pressure_pa_abs)
+            and float(mass.terminal_source_pressure_pa_abs)
+            <= float(mass.ambient_pressure_pa_abs) + 1.0e-3
+        )
+        for name in (
+            "pressure_equalization_record_present",
+            "pressure_equalization_success_declared",
+            "pressure_equalization_clock_present",
+            "pressure_equalization_observation_present",
+            "pressure_equalization_flow_closed",
+            "pressure_equalization_pressure_boundary_present",
+        ):
+            if not checks[name]:
                 gaps.append(f"{name} is missing or inconsistent")
     elif basis == "inventory_depletion":
         evidence_checks, evidence_gaps, evidence_mode = _inventory_termination_evidence(

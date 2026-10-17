@@ -58,6 +58,32 @@ def test_reviewed_isolation_packet_closes_physical_boundary_but_not_qualificatio
     assert report["promotion_gates"]["qualified_provider_packet_allowed"] is False
 
 
+def test_explicit_pressure_equalization_packet_closes_physical_boundary():
+    value = _closed_release()
+    value["termination_basis"] = "model_pressure_equalization"
+    value["provider_mass_balance"] = {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": 1.0,
+        "cumulative_mass_out_kg": 0.2,
+        "final_mass_kg": 0.8,
+        "reported_residual_mass_kg": 0.0,
+        "derived_accounting_residual_kg": 0.0,
+        "pressure_equalization_time_s": 0.1,
+        "post_pressure_equalization_observation_s": 0.2,
+        "pressure_equalization_success": True,
+        "terminal_source_pressure_pa_abs": 101324.0,
+        "ambient_pressure_pa_abs": 101325.0,
+        "max_post_pressure_equalization_flow_kg_s": 0.0,
+    }
+
+    report = audit_provider_release_closure(value)
+
+    assert report["status"] == "CLOSURE_READY_FOR_QUALIFICATION"
+    row = report["packet_rows"][0]
+    assert row["checks"]["pressure_equalization_success_declared"] is True
+    assert report["promotion_gates"]["qualified_provider_packet_allowed"] is False
+
+
 def test_inventory_depletion_requires_zero_provider_final_mass():
     value = _closed_release()
     value["termination_basis"] = "inventory_depletion"

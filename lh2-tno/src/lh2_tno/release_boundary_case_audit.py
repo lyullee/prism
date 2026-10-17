@@ -17,6 +17,7 @@ SCHEMA = "prism.release_boundary_case_audit.v1"
 _ALLOWED_BASES = {
     "reviewed_isolation_success",
     "inventory_depletion",
+    "model_pressure_equalization",
     "two_sided_rupture",
     # Emergency relief is a distinct provider-owned discharge boundary.  It
     # is accepted only after the branch below verifies relief-specific
@@ -73,6 +74,42 @@ def _same_mass_vector(left: Any, right: Any, tolerance: float) -> bool:
         _same_mass(left_value, right_value, tolerance)
         for left_value, right_value in zip(left_values, right_values)
     )
+
+
+def _pressure_equalization_evidence_valid(
+    case: Mapping[str, Any], row: Mapping[str, Any]
+) -> bool:
+    """Check explicit provider natural-stop fields without inferring them."""
+
+    identity = _as_mapping(case.get("provider_packet_identity"))
+    balances = identity.get("provider_mass_balances")
+    if not isinstance(balances, Sequence) or isinstance(balances, (str, bytes)):
+        balances = _as_mapping(row.get("provider")).get("provider_mass_balances")
+    if not isinstance(balances, Sequence) or isinstance(balances, (str, bytes)) or not balances:
+        return False
+    for balance in balances:
+        if not isinstance(balance, Mapping):
+            return False
+        if balance.get("pressure_equalization_success") is not True:
+            return False
+        values = (
+            balance.get("pressure_equalization_time_s"),
+            balance.get("post_pressure_equalization_observation_s"),
+            balance.get("max_post_pressure_equalization_flow_kg_s"),
+            balance.get("terminal_source_pressure_pa_abs"),
+            balance.get("ambient_pressure_pa_abs"),
+        )
+        if not all(_finite(value) is not None for value in values):
+            return False
+        if float(balance["pressure_equalization_time_s"]) < 0.0:
+            return False
+        if float(balance["post_pressure_equalization_observation_s"]) <= 0.0:
+            return False
+        if float(balance["max_post_pressure_equalization_flow_kg_s"]) > 1.0e-12:
+            return False
+        if float(balance["terminal_source_pressure_pa_abs"]) > float(balance["ambient_pressure_pa_abs"]) + 1.0e-3:
+            return False
+    return True
 
 
 def _termination_evidence_candidates(
@@ -489,6 +526,8 @@ def _case_reasons(
         reasons.append(f"termination_basis_{basis or 'not_declared'}_is_not_allowed")
     if basis == "reviewed_isolation_success" and row.get("isolation_status") != "provider_declared_isolation_success":
         reasons.append("isolation_success_not_declared")
+    if basis == "model_pressure_equalization" and not _pressure_equalization_evidence_valid(case, row):
+        reasons.append("provider_pressure_equalization_evidence_not_supplied")
     if basis == "inventory_depletion":
         if row.get("inventory_status") != "provider_declared_inventory_depletion":
             reasons.append("inventory_depletion_not_declared")
@@ -549,6 +588,7 @@ def _case_reasons(
 
 
 def _termination_reasons(
+    case: Mapping[str, Any],
     row: Mapping[str, Any],
     *,
     residual_tolerance_kg: float,
@@ -570,6 +610,8 @@ def _termination_reasons(
         reasons.append(f"termination_basis_{basis or 'not_declared'}_is_not_allowed")
     if basis == "reviewed_isolation_success" and row.get("isolation_status") != "provider_declared_isolation_success":
         reasons.append("isolation_success_not_declared")
+    if basis == "model_pressure_equalization" and not _pressure_equalization_evidence_valid(case, row):
+        reasons.append("provider_pressure_equalization_evidence_not_supplied")
     if basis == "inventory_depletion":
         if row.get("inventory_status") != "provider_declared_inventory_depletion":
             reasons.append("inventory_depletion_not_declared")
@@ -759,6 +801,10 @@ def _required_evidence(
                 requirements.append(
                     "provider run continued to a reviewed isolation success or positive-inventory depletion boundary"
                 )
+            elif basis == "model_pressure_equalization":
+                requirements.append(
+                    "provider pressure-equalization time, zero-flow observation, terminal source pressure and mass ledger bound to the exact result digest"
+                )
             elif basis == "inventory_over_600s":
                 requirements.append(
                     "complete provider history beyond the 600 s horizon or an explicit physical termination boundary"
@@ -944,6 +990,7 @@ def build_release_boundary_case_audit(
             termination_evidence_audit=evidence_audit,
         )
         termination_reasons = _termination_reasons(
+            case,
             ledger_row,
             residual_tolerance_kg=tolerance,
             termination_evidence_audit=evidence_audit,

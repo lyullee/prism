@@ -33,6 +33,30 @@ def _termination_evidence_is_structurally_closed(packet: Mapping[str, Any]) -> b
     must expose the family-specific stop evidence that the facility boundary
     audit can independently reconcile.
     """
+    # A natural pressure stop needs its own provider metadata.  Dynamic state
+    # closure alone is insufficient because a bounded history can be perfectly
+    # conservative while still ending before the non-outward boundary.
+    if packet.get("termination_basis") == "model_pressure_equalization":
+        balance = packet.get("provider_mass_balance")
+        if not isinstance(balance, Mapping):
+            return False
+        if balance.get("pressure_equalization_success") is not True:
+            return False
+        time_s = balance.get("pressure_equalization_time_s")
+        observation_s = balance.get("post_pressure_equalization_observation_s")
+        max_flow = balance.get("max_post_pressure_equalization_flow_kg_s")
+        terminal = balance.get("terminal_source_pressure_pa_abs")
+        ambient = balance.get("ambient_pressure_pa_abs")
+        if not all(
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            for value in (time_s, observation_s, max_flow, terminal, ambient)
+        ):
+            return False
+        if time_s < 0.0 or observation_s <= 0.0 or max_flow > 1.0e-12:
+            return False
+        if terminal > ambient + 1.0e-3:
+            return False
     # Native finite-volume exporters can provide a stronger, digest-bound
     # pressure/inventory closure record than the legacy verification sidecar.
     # Reuse the same fail-closed contract used by the native qualification
@@ -84,7 +108,7 @@ _COMMON_CLOSURE_REQUEST_FIELDS = (
     },
     {
         "field": "termination_basis",
-        "accepted": "reviewed_isolation_success or inventory_depletion",
+        "accepted": "reviewed_isolation_success, model_pressure_equalization, or inventory_depletion",
         "reason": "a fixed horizon or pressure-equalization stop is not a physical release end",
     },
     {

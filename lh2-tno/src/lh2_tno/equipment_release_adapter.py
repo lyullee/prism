@@ -189,6 +189,12 @@ def _provider_mass_balance(
         "isolation_time_s",
         "post_isolation_observation_s",
         "isolation_success",
+        "pressure_equalization_time_s",
+        "post_pressure_equalization_observation_s",
+        "pressure_equalization_success",
+        "terminal_source_pressure_pa_abs",
+        "ambient_pressure_pa_abs",
+        "max_post_pressure_equalization_flow_kg_s",
         "dynamic_state_closure",
     )
     if not any(key in metadata for key in recognized):
@@ -204,6 +210,11 @@ def _provider_mass_balance(
         "final_mass_kg",
         "isolation_time_s",
         "post_isolation_observation_s",
+        "pressure_equalization_time_s",
+        "post_pressure_equalization_observation_s",
+        "terminal_source_pressure_pa_abs",
+        "ambient_pressure_pa_abs",
+        "max_post_pressure_equalization_flow_kg_s",
     ):
         if key in metadata:
             # Some native providers keep the optional isolation fields in
@@ -211,6 +222,16 @@ def _provider_mass_balance(
             # clock was requested.  Null means "not declared" here; a
             # declared value is still validated strictly below.
             if metadata[key] is None:
+                continue
+            if (
+                key == "post_pressure_equalization_observation_s"
+                and metadata.get("pressure_equalization_time_s") is None
+            ):
+                if value != 0.0:
+                    raise EquipmentReleaseExportError(
+                        "provider data.provider_meta.post_pressure_equalization_observation_s "
+                        "requires pressure_equalization_time_s"
+                    )
                 continue
             value = _finite(metadata[key], f"provider data.provider_meta.{key}")
             if (
@@ -246,6 +267,14 @@ def _provider_mass_balance(
                     "provider data.provider_meta.isolation_success must be boolean"
                 )
             payload["isolation_success"] = value
+    if "pressure_equalization_success" in metadata:
+        value = metadata["pressure_equalization_success"]
+        if value is not None:
+            if not isinstance(value, bool):
+                raise EquipmentReleaseExportError(
+                    "provider data.provider_meta.pressure_equalization_success must be boolean"
+                )
+            payload["pressure_equalization_success"] = value
     if "dynamic_state_closure" in metadata:
         value = metadata["dynamic_state_closure"]
         if value is not None:

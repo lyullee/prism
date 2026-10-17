@@ -24,6 +24,12 @@ def _dynamic_packet() -> dict:
             "cumulative_mass_out_kg": 1.0,
             "final_mass_kg": 9.0,
             "derived_accounting_residual_kg": 0.0,
+            "pressure_equalization_time_s": 0.1,
+            "post_pressure_equalization_observation_s": 0.1,
+            "pressure_equalization_success": True,
+            "terminal_source_pressure_pa_abs": 101324.0,
+            "ambient_pressure_pa_abs": 101325.0,
+            "max_post_pressure_equalization_flow_kg_s": 0.0,
             "dynamic_state_closure": {
                 "inventory_feedback_closed": True,
                 "pressure_feedback_closed": True,

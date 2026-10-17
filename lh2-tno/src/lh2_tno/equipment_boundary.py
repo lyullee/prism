@@ -91,6 +91,15 @@ class ProviderMassBalance(Contract):
     isolation_time_s: Nonnegative | None = None
     post_isolation_observation_s: Nonnegative | None = None
     isolation_success: bool | None = None
+    # Optional provider-owned natural-stop evidence.  These fields are kept
+    # separate from isolation controls because a pressure equalization stop
+    # does not claim that a field isolation command succeeded.
+    pressure_equalization_time_s: Nonnegative | None = None
+    post_pressure_equalization_observation_s: Nonnegative | None = None
+    pressure_equalization_success: bool | None = None
+    terminal_source_pressure_pa_abs: Positive | None = None
+    ambient_pressure_pa_abs: Positive | None = None
+    max_post_pressure_equalization_flow_kg_s: Nonnegative | None = None
     dynamic_state_closure: ProviderDynamicStateClosure | None = None
 
     @model_validator(mode='after')
@@ -98,6 +107,14 @@ class ProviderMassBalance(Contract):
         if self.post_isolation_observation_s is not None and self.isolation_time_s is None:
             raise ValueError(
                 'post_isolation_observation_s requires isolation_time_s'
+            )
+        if (
+            self.post_pressure_equalization_observation_s is not None
+            and self.pressure_equalization_time_s is None
+        ):
+            raise ValueError(
+                'post_pressure_equalization_observation_s requires '
+                'pressure_equalization_time_s'
             )
         if not any(
             value is not None
