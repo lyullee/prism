@@ -20,7 +20,10 @@ changed; it does not mean that a skipped commit was tested.
 
 ## Historical failure
 
-The recent burst of failure emails came from earlier runs that rejected a
-duplicate JSON key in `CURRENT_STATUS.json`. The duplicate key was removed and
-the current `main` revision has successful CI runs. The workflow path filter is
-an additional noise-control measure for future evidence-only commits.
+The recent burst of failure emails came from three short-lived bookkeeping
+expectation mismatches while the facility ledgers were being updated. The
+following commits corrected the ledger count, validation-gate expectation, and
+high-resolution record expectation respectively. The current `main` revision
+has successful CI runs; the failed runs remain in GitHub as history and do not
+represent the current checkout. The workflow path filter is an additional
+noise-control measure for future evidence-only commits.

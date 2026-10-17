@@ -237,6 +237,35 @@ def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
     assert claims["qualified_facility_qra"]["allowed"] is False
 
 
+def test_matrix_records_explicit_accident_family_scope_without_promoting_validation(tmp_path):
+    paths = _records(tmp_path)
+    facility = json.loads(paths["facility"].read_text(encoding="utf-8"))
+    facility["facility_risk_ledger"] = {
+        "required_accident_families": ["vessel_hole", "pipe_hole", "vessel_hole"],
+        "accident_family_statuses": {"vessel_hole": "PARTIAL"},
+    }
+    paths["facility"].write_text(json.dumps(facility), encoding="utf-8")
+
+    matrix = build_validation_evidence_matrix(
+        paths["pool"],
+        paths["equipment"],
+        paths["facility"],
+        slabx_validation_path=paths["slabx"],
+    )
+
+    scope = matrix["accident_family_validation_scope"]
+    assert scope["status"] == "EXPLICIT_FAMILY_SCOPE_RECORDED"
+    assert scope["family_inference_performed"] is False
+    assert scope["required_family_count"] == 2
+    assert scope["unclassified_family_count"] == 1
+    assert scope["component_consequence_evidence"] == "DOWNSTREAM_COMPONENT_EVIDENCE_ONLY"
+    assert [row["scenario_family"] for row in scope["rows"]] == ["vessel_hole", "pipe_hole"]
+    assert all(row["family_level_physical_validation_claim"] is False for row in scope["rows"])
+    assert all(row["facility_qra_validation_status"] == "WITHHELD" for row in scope["rows"])
+    assert matrix["physical_validation_claim"] is False
+    assert matrix["facility_qra_claim"] is False
+
+
 def test_matrix_records_slabx_component_evidence_without_opening_qra(tmp_path):
     paths = _records(tmp_path)
     matrix = build_validation_evidence_matrix(

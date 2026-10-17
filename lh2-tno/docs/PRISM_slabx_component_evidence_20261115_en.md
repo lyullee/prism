@@ -12,6 +12,15 @@ results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_p
 
 It has nine evidence domains and remains `RESTRICTED_EVIDENCE_MATRIX` with decision `FACILITY_QRA_WITHHELD`. The matrix keeps every promotion claim false: equipment-release validation, frequency inference, independent full-chain physical validation, and facility QRA.
 
+The matrix also exposes `accident_family_validation_scope`. It lists the
+facility ledger's explicitly declared accident families and their diagnostic
+execution status (12 families in the current union). For every row,
+equipment-release validation, independent full-chain validation, and facility
+QRA validation remain `WITHHELD`. The field never infers a family from an
+event ID or component name. A linked SLABx-LH2 record is therefore marked
+`DOWNSTREAM_COMPONENT_EVIDENCE_ONLY`; it does not validate any accident family
+or the complete facility chain.
+
 Two additional SLABx comparison domains are now bound to the current matrix:
 
 | Domain | Evidence | Recorded result | Allowed interpretation |

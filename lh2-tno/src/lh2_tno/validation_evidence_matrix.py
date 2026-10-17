@@ -796,6 +796,80 @@ def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -
     }
 
 
+def _accident_family_validation_scope(
+    facility: Mapping[str, Any], *, slabx_attached: bool
+) -> dict[str, Any]:
+    """Expose explicit accident-family coverage without promoting validation.
+
+    The facility ledger owns the declared accident-family list and its
+    diagnostic execution status.  This view deliberately does not infer a
+    family from an event id, component name, or consequence-model row.  A
+    downstream SLABx-LH2 record is therefore reported as component evidence
+    only; it cannot become family-level or full-chain validation.
+    """
+    ledger = facility.get("facility_risk_ledger")
+    if not isinstance(ledger, Mapping):
+        return {
+            "status": "UNAVAILABLE_FACILITY_RISK_LEDGER",
+            "source": "facility_risk_ledger.required_accident_families",
+            "family_labels_are_explicit": True,
+            "family_inference_performed": False,
+            "required_family_count": 0,
+            "rows": [],
+            "unclassified_family_count": 0,
+            "component_consequence_evidence": (
+                "DOWNSTREAM_COMPONENT_EVIDENCE_ONLY" if slabx_attached else "NOT_ATTACHED"
+            ),
+            "equipment_release_validation_status": "WITHHELD",
+            "independent_full_chain_validation_status": "WITHHELD",
+            "facility_qra_validation_status": "WITHHELD",
+        }
+
+    declared = ledger.get("required_accident_families")
+    statuses = ledger.get("accident_family_statuses")
+    families: list[str] = []
+    if isinstance(declared, list):
+        for item in declared:
+            label = str(item).strip()
+            if label and label not in families:
+                families.append(label)
+    status_map = statuses if isinstance(statuses, Mapping) else {}
+    rows: list[dict[str, Any]] = []
+    unclassified = 0
+    for family in families:
+        diagnostic_status = str(status_map.get(family, "UNDECLARED_STATUS")).strip()
+        if not diagnostic_status:
+            diagnostic_status = "UNDECLARED_STATUS"
+        if diagnostic_status == "UNDECLARED_STATUS":
+            unclassified += 1
+        rows.append(
+            {
+                "scenario_family": family,
+                "diagnostic_execution_status": diagnostic_status,
+                "equipment_release_validation_status": "WITHHELD",
+                "independent_full_chain_validation_status": "WITHHELD",
+                "facility_qra_validation_status": "WITHHELD",
+                "family_level_physical_validation_claim": False,
+                "family_level_qra_claim": False,
+            }
+        )
+    return {
+        "status": "EXPLICIT_FAMILY_SCOPE_RECORDED",
+        "source": "facility_risk_ledger.required_accident_families + accident_family_statuses",
+        "family_labels_are_explicit": True,
+        "family_inference_performed": False,
+        "required_family_count": len(families),
+        "rows": rows,
+        "unclassified_family_count": unclassified,
+        "component_consequence_evidence": (
+            "DOWNSTREAM_COMPONENT_EVIDENCE_ONLY" if slabx_attached else "NOT_ATTACHED"
+        ),
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+    }
+
+
 def build_validation_evidence_matrix(
     pool_record_path: str | Path,
     equipment_audit_path: str | Path,
@@ -884,6 +958,9 @@ def build_validation_evidence_matrix(
         domains.append(_nasa_d4171_domain(nasa_path, nasa, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
+    accident_family_scope = _accident_family_validation_scope(
+        facility, slabx_attached=slabx_validation_path is not None
+    )
     claims = [
         {
             "claim": "restricted_pool_spreading_component_evidence",
@@ -975,6 +1052,7 @@ def build_validation_evidence_matrix(
         "status": "RESTRICTED_EVIDENCE_MATRIX" if not unique_blockers else "EVIDENCE_MATRIX_REVIEW_REQUIRED",
         "decision": "FACILITY_QRA_WITHHELD",
         "evidence_domains": domains,
+        "accident_family_validation_scope": accident_family_scope,
         "claims": claims,
         "blocking_reasons": unique_blockers,
         "physical_validation_claim": False,

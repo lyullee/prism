@@ -98,7 +98,7 @@
       "source": {
         "label": "facility assessment",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "sha256": "5525860026d604464a32d8e5c8de8233d1168e9e0b0c4521fc991c0c4a2bcbb2",
+        "sha256": "5164f0289a3cf81fbefb7a7b2ddd373463bbb9977027accc8f3cd2fecd3c3a7d",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,
@@ -166,11 +166,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 56,
+      "check_count": 57,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-        "sha256": "bb0dcefccd03b9cf1db9a1f5b846a4e572ec3063f3f4e5b04698514a2d0e3228",
+        "sha256": "9b0c4dba05b5ee2602c0f28c21e6fed6febcc32777cd03cc1c6809bae252ea44",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,
@@ -281,6 +281,128 @@
       "facility_qra_claim": false
     }
   ],
+  "accident_family_validation_scope": {
+    "status": "EXPLICIT_FAMILY_SCOPE_RECORDED",
+    "source": "facility_risk_ledger.required_accident_families + accident_family_statuses",
+    "family_labels_are_explicit": true,
+    "family_inference_performed": false,
+    "required_family_count": 12,
+    "rows": [
+      {
+        "scenario_family": "vessel_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "pipe_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "valve_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "vent_hole",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "pump_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "vaporizer_hole",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "reliquefier_hole",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "liquid_two_phase",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "inventory_depletion",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "inventory_over_600s",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "two_sided_rupture",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "vertical_handoff",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      }
+    ],
+    "unclassified_family_count": 0,
+    "component_consequence_evidence": "DOWNSTREAM_COMPONENT_EVIDENCE_ONLY",
+    "equipment_release_validation_status": "WITHHELD",
+    "independent_full_chain_validation_status": "WITHHELD",
+    "facility_qra_validation_status": "WITHHELD"
+  },
   "claims": [
     {
       "claim": "restricted_pool_spreading_component_evidence",
@@ -379,5 +501,5 @@
     "diagnostic_chain_does_not_become_qualified_facility_qra": true,
     "frequency_is_not_inferred_from_sensor_or_observation_data": true
   },
-  "_record_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json"
+  "_record_path": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix.json"
 }
