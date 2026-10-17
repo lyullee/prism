@@ -2,7 +2,8 @@
 
 This command reuses the saved facility risk ledger and frequency scenarios. It
 does not rerun equipment physics or alter risk atoms; it makes the provider
-qualification audit an explicit assessment gate and keeps QRA fail-closed.
+qualification audit and physical-validation matrix explicit assessment gates
+and keeps QRA fail-closed.
 """
 from __future__ import annotations
 
