@@ -6,18 +6,21 @@ on:
     # Evidence ledgers and documentation are committed frequently while the
     # executable contract is unchanged.  Do not create an email-producing CI
     # run for those bookkeeping-only updates.
+    # The repository root is the package root.  Keep evidence/status commits
+    # out of the test workflow; the previous `lh2-tno/...` prefixes never
+    # matched and caused a new run (and notification) for every ledger update.
     paths-ignore:
-      - 'lh2-tno/results/**'
-      - 'lh2-tno/docs/**'
-      - 'lh2-tno/CURRENT_STATUS.json'
-      - 'lh2-tno/DEVELOPMENT_GOAL.json'
+      - 'results/**'
+      - 'docs/**'
+      - 'CURRENT_STATUS.json'
+      - 'DEVELOPMENT_GOAL.json'
   pull_request:
     branches: [main]
     paths-ignore:
-      - 'lh2-tno/results/**'
-      - 'lh2-tno/docs/**'
-      - 'lh2-tno/CURRENT_STATUS.json'
-      - 'lh2-tno/DEVELOPMENT_GOAL.json'
+      - 'results/**'
+      - 'docs/**'
+      - 'CURRENT_STATUS.json'
+      - 'DEVELOPMENT_GOAL.json'
 
 permissions:
   contents: read
