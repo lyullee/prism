@@ -131,7 +131,7 @@ case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했�
 ## 권위 산출물
 
 - 최신 facility union: `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json`
-- 최신 IJHE audit: `results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_inspection_center_handoff.json`
+- 최신 IJHE audit: `results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 최신 handoff audit: `examples/inspection_center_facility_ijhe_handoff_audit.json`
 - 최신 audit metadata verifier: `results/20261115/latest_ijhe_audit_verification.json`
 - 최신 release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`

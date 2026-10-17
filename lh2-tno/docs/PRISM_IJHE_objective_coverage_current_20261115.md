@@ -158,7 +158,7 @@ Run from the `lh2-tno` package directory. The exact evidence paths are listed in
 ```powershell
 python scripts/build_ijhe_objective_coverage_audit.py `
   --union-verification results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/verification.json `
-  --completion-audit results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json `
+  --completion-audit results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --facility-assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
   --facility-aggregate-closure-audit results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_aggregate_closure_audit.json `
