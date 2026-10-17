@@ -6460,5 +6460,7 @@
   "external_nasa_tn_d4171_hem_audit_status": "NEGATIVE_BASELINE_VALIDATION_EVIDENCE; 21 unfitted tests; mean predicted/observed 0.480; upper-heating mean 0.232; no promotion",
   "external_nasa_tn_d4171_hem_completion_audit_check": "diagnostic_nasa_tn_d4171_hem_benchmark",
   "external_nasa_tn_d4171_hem_physical_validation_claim": false,
-  "external_nasa_tn_d4171_hem_facility_qra_claim": false
+  "external_nasa_tn_d4171_hem_facility_qra_claim": false,
+  "external_lh2dt_workspace_untracked_benchmark_document": "docs/benchmarks/nasa_tn_d4171_hem_validation.md",
+  "external_lh2dt_workspace_untracked_benchmark_status": "COPIED_TO_PRISM_EVIDENCE; external Python source tree and commit unchanged; external workspace remains dirty only because this document is untracked"
 }
