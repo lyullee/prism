@@ -6098,5 +6098,9 @@
   "ijhe_completion_audit_latest_verification_after_termination_request_fix_status": "PASS; release-closure request tightening leaves the latest 57-check audit internally consistent; facility QRA remains withheld",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 26 release identities audited, 0 exact qualified sidecars; request kinds now reflect termination-ledger closure",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_sidecar_present_count": 0
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_sidecar_present_count": 0,
+  "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_record": "results/20261017/latest_ijhe_audit_verification_after_sidecar_count_fix.json",
+  "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_status": "PASS; 57-check INCOMPLETE_EVIDENCE audit remains internally consistent after provider sidecar presence correction; facility QRA remains withheld",
+  "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_blocking_reason_count": 0,
+  "ijhe_completion_audit_latest_verification_after_sidecar_count_fix_sha256": "A570896F70DD15849C552B2EA2DD722EC12669F93375557188AE811AE5D05FB2"
 }
