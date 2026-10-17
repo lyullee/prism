@@ -3047,7 +3047,7 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "IJHE objective/provider-intake/worklist/verifier and native-recheck-comparison tests passed; full suite 1504 passed separately (1 pytest-asyncio deprecation warning)",
-  "latest_remote_verified_commit": "2b82843f",
+  "latest_remote_verified_commit": "534d1b4f",
   "latest_remote_ci_run": "run 1383 completed successfully for commit 2b82843f; Python contracts and numerical checks job succeeded",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
