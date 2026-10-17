@@ -532,3 +532,41 @@ def test_case_request_exposes_release_boundary_gaps_without_recalculation():
         "current_boundary_gaps"
     ]
     assert any("provider qualification withheld" in item for item in request["current_boundary_gaps"])
+
+
+def test_case_request_exposes_unaccepted_termination_basis():
+    assessment = _assessment()
+    assessment["facility_risk_ledger"].update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "vent/G1",
+            "annual_condition_id": "weather",
+            "release_branch_id": "branch",
+            "status": "EXECUTED",
+            "scenario_families": ["vent_hole"],
+            "provider_packet_identity": {
+                "component_id": "vent-1",
+                "port_ids": ["out"],
+            },
+            "termination": {
+                "basis": "inventory_over_600s",
+                "time_s": 600.0,
+                "provenance": "bounded diagnostic horizon",
+            },
+            "mass_ledger": {"end_to_end_residual_kg": 0.0},
+            "domain_assessment": {},
+        }],
+        "uncomputed_cases": [],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "vent_hole",
+            "status": "EXECUTED",
+            "strict_uncomputed_case_count": 0,
+        }]},
+    )
+    request = report["case_requests"][0]
+    assert request["current_release_boundary"]["strict_termination_basis_allowed"] is False
+    assert any("not an accepted strict release boundary" in item for item in request["current_boundary_gaps"])

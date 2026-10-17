@@ -53,6 +53,18 @@ _GATE_REQUIREMENTS: dict[str, str] = {
     "FAMILY_SCOPE_PARTIAL": "complete the family-specific accident branch and termination coverage",
 }
 
+# These are the termination bases accepted by the strict release-boundary
+# audit.  ``inventory_over_600s`` is a declared diagnostic scenario, but its
+# bounded horizon is intentionally not a strict closure basis.
+_STRICT_TERMINATION_BASES = frozenset(
+    {
+        "reviewed_isolation_success",
+        "inventory_depletion",
+        "two_sided_rupture",
+        "emergency_relief_discharge",
+    }
+)
+
 _CASE_STATUS_RANK = {
     "EXECUTED": 0,
     "EXECUTED_OPERATOR_LIMITED": 1,
@@ -172,6 +184,8 @@ def _release_boundary_summary(row: Mapping[str, Any]) -> dict[str, Any]:
         "termination_basis": termination.get("basis"),
         "termination_time_s": termination.get("time_s"),
         "termination_provenance": termination.get("provenance"),
+        "strict_termination_basis_allowed": termination.get("basis")
+        in _STRICT_TERMINATION_BASES,
         "domain_truncated": domain.get("domain_truncated"),
         "inventory_outside_domain": domain.get("inventory_outside_domain"),
         "outside_domain_h2_kg_at_ignition": domain.get(
@@ -191,7 +205,17 @@ def _release_boundary_gaps(
     gaps: list[str] = []
     if summary["termination_basis"] is None:
         gaps.append("current case has no explicit release termination record")
-    elif summary["termination_basis"] == "synthetic_diagnostic_horizon":
+    elif summary["strict_termination_basis_allowed"] is not True:
+        gaps.append(
+            "termination basis "
+            f"{summary['termination_basis']} is not an accepted strict release boundary"
+        )
+    if summary["termination_basis"] == "emergency_relief_discharge":
+        gaps.append(
+            "provider relief setpoint, capacity, and discharge end-event evidence "
+            "must be supplied for strict closure"
+        )
+    if summary["termination_basis"] == "synthetic_diagnostic_horizon":
         gaps.append("current release ends at a synthetic diagnostic horizon")
     if summary["domain_truncated"] is True:
         gaps.append("current consequence domain is truncated")
