@@ -32,6 +32,8 @@ def test_generic_facility_hazop_handoff_covers_all_components_and_modes():
     assert result["quantitative_handoff"]["summary"]["request_count"] == 3
     assert result["current_state_handoff"]["summary"]["request_count"] == 3
     assert result["current_state_handoff"]["status"] == "CURRENT_HAZOP_SELECTION_COMPLETE"
+    assert result["current_evidence_coverage"]["status"] == "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING"
+    assert result["forecast_evidence_coverage"]["summary"]["evidence_missing_count"] == 3
     assert result["policy"]["operating_mode_taken_from_forecast_input"] is True
     assert result["policy"]["operating_mode_inferred"] is False
 
@@ -78,3 +80,12 @@ def test_current_and_forecast_worklists_preserve_the_same_scenario_families():
         for row in result["quantitative_handoff"]["requests"]
     }
     assert current == forecast
+
+
+def test_evidence_coverage_rejects_extra_attachment_keys():
+    frames, tables, current_frames = _inputs()
+    attachments = {"unexpected": {"evidence": {}}}
+    result = build_handoff(frames, tables, current_frames, attachments, {})
+    coverage = result["current_evidence_coverage"]
+    assert coverage["status"] == "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING"
+    assert coverage["summary"]["extra_attachment_key_count"] == 1

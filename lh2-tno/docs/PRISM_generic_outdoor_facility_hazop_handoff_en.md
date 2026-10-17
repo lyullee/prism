@@ -49,6 +49,14 @@ The current and predicted worklists share the same component, scenario-family,
 operating-mode, and evidence contracts, so a control-room monitor and a
 process-model forecast can feed the same downstream quantitative adapter.
 
+The output adds `current_evidence_coverage` and `forecast_evidence_coverage`.
+Each audit uses the exact request key and checks all four evidence blocks. With
+the shipped synthetic inputs and no attachment file, both gates correctly
+report `WITHHELD_QUANTITATIVE_EVIDENCE_MISSING` for three requests. Optional
+attachment maps can be supplied with `--current-attachments` and
+`--forecast-attachments`; extra keys and missing fields remain visible as gate
+failures rather than being reassigned or treated as zero risk.
+
 ## What this proves and what it does not
 
 The replay proves that a multi-equipment forecast can preserve component

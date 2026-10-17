@@ -46,6 +46,8 @@ _REQUIRED_CONTRACT = {
     ],
 }
 
+_REQUIRED_EVIDENCE_BLOCKS = tuple(_REQUIRED_CONTRACT)
+
 
 def _load(path: Path) -> Any:
     value = json.loads(path.read_text(encoding="utf-8"))
@@ -153,10 +155,106 @@ def _current_quantitative_handoff(
     }
 
 
+def _evidence_coverage(
+    requests: list[Mapping[str, Any]],
+    attachments: Any | None = None,
+) -> dict[str, Any]:
+    """Audit exact-keyed quantitative evidence for either state path."""
+    if attachments is None:
+        attachments = {}
+    if not isinstance(attachments, Mapping):
+        raise ValueError("quantitative evidence attachments must be a mapping")
+    expected: set[str] = set()
+    rows: list[dict[str, Any]] = []
+    for request in requests:
+        request_id = str(request.get("request_id") or "")
+        if not request_id or request_id in expected:
+            raise ValueError("quantitative requests require unique non-empty request_id values")
+        expected.add(request_id)
+        contract = request.get("required_contract")
+        if not isinstance(contract, Mapping):
+            raise ValueError(f"request {request_id} is missing required_contract")
+        attachment = attachments.get(request_id)
+        missing: list[str] = []
+        malformed: str | None = None
+        if attachment is None:
+            missing = [
+                f"{block}.{field}"
+                for block in _REQUIRED_EVIDENCE_BLOCKS
+                for field in contract.get(block, ())
+            ]
+            malformed = "attachment_missing"
+        elif not isinstance(attachment, Mapping):
+            malformed = "attachment_not_mapping"
+        else:
+            evidence = attachment.get("evidence")
+            if not isinstance(evidence, Mapping):
+                malformed = "evidence_not_mapping"
+            else:
+                for block in _REQUIRED_EVIDENCE_BLOCKS:
+                    value = evidence.get(block)
+                    if not isinstance(value, Mapping):
+                        missing.extend(
+                            f"{block}.{field}" for field in contract.get(block, ())
+                        )
+                        continue
+                    if not isinstance(value.get("status"), str) or not value["status"].strip():
+                        missing.append(f"{block}.status")
+                    missing.extend(
+                        f"{block}.{field}"
+                        for field in contract.get(block, ())
+                        if field not in value
+                    )
+        rows.append({
+            "request_id": request_id,
+            "component_id": request.get("component_id"),
+            "scenario_id": request.get("scenario_id"),
+            "operating_mode": request.get("operating_mode"),
+            "forecast_time_s": request.get("forecast_time_s"),
+            "captured_at_s": request.get("captured_at_s"),
+            "status": (
+                "EVIDENCE_COMPLETE"
+                if not missing and malformed is None
+                else "MISSING_EVIDENCE"
+            ),
+            "missing_fields": sorted(set(missing)),
+            "malformed_reason": malformed,
+        })
+    extra = sorted(set(attachments) - expected)
+    complete_count = sum(row["status"] == "EVIDENCE_COMPLETE" for row in rows)
+    return {
+        "schema_version": "prism.generic_quantitative_evidence_coverage.v1",
+        "status": (
+            "QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE"
+            if rows and complete_count == len(rows) and not extra
+            else "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING"
+        ),
+        "rows": rows,
+        "extra_attachment_keys": extra,
+        "summary": {
+            "request_count": len(rows),
+            "evidence_complete_count": complete_count,
+            "evidence_missing_count": len(rows) - complete_count,
+            "extra_attachment_key_count": len(extra),
+        },
+        "policy": {
+            "missing_cases_assigned_zero": False,
+            "frequency_inference_performed": False,
+            "provider_release_created": False,
+            "slabx_lh2_calculated": False,
+            "facility_ir_fn_calculated": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+    }
+
+
 def build_handoff(
     frames: Any,
     tables: Mapping[str, Any],
     current_frames: Any | None = None,
+    current_attachments: Any | None = None,
+    forecast_attachments: Any | None = None,
 ) -> dict[str, Any]:
     """Build a generic multi-component HAZOP scan and quantitative worklist."""
     rows = _frames(frames)
@@ -213,6 +311,12 @@ def build_handoff(
             },
         }
     )
+    current_coverage = _evidence_coverage(
+        current_handoff["requests"], current_attachments
+    )
+    forecast_coverage = _evidence_coverage(
+        handoff["requests"], forecast_attachments
+    )
     return {
         "schema_version": SCHEMA,
         "facility_id": facility_id,
@@ -222,6 +326,8 @@ def build_handoff(
         "scan": scan,
         "quantitative_handoff": handoff,
         "current_state_handoff": current_handoff,
+        "current_evidence_coverage": current_coverage,
+        "forecast_evidence_coverage": forecast_coverage,
         "policy": {
             "operating_mode_taken_from_forecast_input": True,
             "operating_mode_inferred": False,
@@ -251,12 +357,16 @@ def main() -> int:
         type=Path,
         help="optional historian/runtime state frames; one explicit frame per component",
     )
+    parser.add_argument("--current-attachments", type=Path)
+    parser.add_argument("--forecast-attachments", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = build_handoff(
         _load(args.frames),
         _load(args.tables),
         _load(args.current_frames) if args.current_frames is not None else None,
+        _load(args.current_attachments) if args.current_attachments is not None else None,
+        _load(args.forecast_attachments) if args.forecast_attachments is not None else None,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -270,6 +380,8 @@ def main() -> int:
         "withheld_count": scan["withheld_count"],
         "quantitative_request_count": handoff["summary"]["request_count"],
         "current_quantitative_request_count": result["current_state_handoff"]["summary"]["request_count"],
+        "current_evidence_status": result["current_evidence_coverage"]["status"],
+        "forecast_evidence_status": result["forecast_evidence_coverage"]["status"],
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))
     return 0

@@ -395,6 +395,9 @@ literature frequency, SLABx-LH2, and facility-condition evidence contracts are
 supplied; the example does not claim a facility QRA. The complete contract and
 expected diagnostic result are documented in
 [`PRISM_generic_outdoor_facility_hazop_handoff_en.md`](docs/PRISM_generic_outdoor_facility_hazop_handoff_en.md).
+The result also contains separate exact-key evidence coverage for the current
+and forecast worklists. Missing or extra attachments keep the corresponding
+coverage gate withheld and are never converted to zero risk.
 
 ### Importing process-model forecast workbooks
 

@@ -4736,5 +4736,17 @@
   "generic_outdoor_facility_hazop_handoff_current_state_request_count": 3,
   "generic_outdoor_facility_hazop_handoff_current_state_operating_mode_taken_from_input": true,
   "generic_outdoor_facility_hazop_handoff_current_state_frequency_inference_performed": false,
-  "generic_outdoor_facility_hazop_handoff_current_state_facility_qra_claim": false
+  "generic_outdoor_facility_hazop_handoff_current_state_facility_qra_claim": false,
+  "generic_outdoor_facility_hazop_handoff_current_evidence_coverage_status": "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING",
+  "generic_outdoor_facility_hazop_handoff_current_evidence_coverage_request_count": 3,
+  "generic_outdoor_facility_hazop_handoff_current_evidence_coverage_evidence_complete_count": 0,
+  "generic_outdoor_facility_hazop_handoff_current_evidence_coverage_evidence_missing_count": 3,
+  "generic_outdoor_facility_hazop_handoff_current_evidence_coverage_missing_cases_assigned_zero": false,
+  "generic_outdoor_facility_hazop_handoff_current_evidence_coverage_facility_qra_claim": false,
+  "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_status": "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING",
+  "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_request_count": 3,
+  "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_evidence_complete_count": 0,
+  "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_evidence_missing_count": 3,
+  "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_missing_cases_assigned_zero": false,
+  "generic_outdoor_facility_hazop_handoff_forecast_evidence_coverage_facility_qra_claim": false
 }
