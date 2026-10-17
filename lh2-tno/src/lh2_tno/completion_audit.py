@@ -4998,6 +4998,18 @@ def build_ijhe_completion_audit(
         synthetic_or_model_prediction_row_count = intake.get(
             "synthetic_or_model_prediction_row_count"
         )
+        provider_source_state_complete_count = intake.get(
+            "provider_source_state_complete_count"
+        )
+        provider_source_state_incomplete_count = intake.get(
+            "provider_source_state_incomplete_count"
+        )
+        compressible_handoff_candidate_count = intake.get(
+            "compressible_handoff_candidate_count"
+        )
+        compressible_handoff_blocked_count = intake.get(
+            "compressible_handoff_blocked_count"
+        )
         intake_check_valid = (
             intake.get("schema_version") == "prism.external_release_artifact_intake.v1"
             and intake.get("status") == "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION"
@@ -5014,6 +5026,14 @@ def build_ijhe_completion_audit(
             and 0 <= actual_origin_row_count <= release_row_count
             and isinstance(synthetic_or_model_prediction_row_count, int)
             and 0 <= synthetic_or_model_prediction_row_count <= release_row_count
+            and isinstance(provider_source_state_complete_count, int)
+            and provider_source_state_complete_count >= 0
+            and isinstance(provider_source_state_incomplete_count, int)
+            and provider_source_state_incomplete_count >= 0
+            and isinstance(compressible_handoff_candidate_count, int)
+            and compressible_handoff_candidate_count >= 0
+            and isinstance(compressible_handoff_blocked_count, int)
+            and 0 <= compressible_handoff_blocked_count <= compressible_handoff_candidate_count
             and intake.get("error_count") == 0
             and isinstance(intake.get("artifacts"), list)
             and all(
@@ -5052,6 +5072,10 @@ def build_ijhe_completion_audit(
                 "provider_response_result_digest_bound_count": intake.get(
                     "provider_response_result_digest_bound_count"
                 ),
+                "provider_source_state_complete_count": provider_source_state_complete_count,
+                "provider_source_state_incomplete_count": provider_source_state_incomplete_count,
+                "compressible_handoff_candidate_count": compressible_handoff_candidate_count,
+                "compressible_handoff_blocked_count": compressible_handoff_blocked_count,
                 "actual_origin_row_count": actual_origin_row_count,
                 "synthetic_or_model_prediction_row_count": synthetic_or_model_prediction_row_count,
                 "error_count": intake.get("error_count"),
@@ -5064,9 +5088,11 @@ def build_ijhe_completion_audit(
             "External release-shaped JSON is inventoried with exact file digests and equipment/port "
             "identity. When a sibling provider_response.json exists, its identity, clock, inventory, "
             "termination declaration, source digest, and explicit mass/isolation evidence are also "
-            "compared. A normalized response remains diagnostic: synthetic or model-prediction rows "
-            "still require a separate exact provider qualification sidecar, and no frequency or "
-            "facility QRA is inferred."
+            "compared. Gas-shaped responses are also checked for the exact source/throat fields "
+            "required by the optional compressible handoff; missing fields block that adapter and "
+            "never fall back to atmospheric packet velocity. A normalized response remains "
+            "diagnostic: synthetic or model-prediction rows still require a separate exact provider "
+            "qualification sidecar, and no frequency or facility QRA is inferred."
         )
         checks.append(intake_check)
     if facility_evidence_request is not None:

@@ -265,3 +265,98 @@ def test_external_release_response_binds_canonical_result_digest() -> None:
     assert audit["checks"]["result_digest_rebound"] is True
     assert audit["provider_result_digest_binding"] == "canonical_response_digest"
     assert audit["computed_provider_result_digest"] == release["provider_result_digest"]
+
+
+def test_external_release_response_marks_optional_gas_handoff_blocked_without_source_state() -> None:
+    release = _release("model_prediction")
+    release.update(
+        {
+            "termination_provenance": "native model ledger",
+            "cumulative_mass_out_kg": 2.0,
+            "steps": [
+                {
+                    "time_s": 0.0,
+                    "mass_flow_kg_s": 1.0,
+                    "effective_area_m2": 1.0e-4,
+                }
+            ],
+        }
+    )
+    response = {
+        "provider_export_schema": "prism.native_provider_response.v1",
+        "provider_model": "native-gas-test-model",
+        "provider_source_digest": "a" * 64,
+        "provider_state_snapshot_digest": "c" * 64,
+        "data": {
+            "event_id": release["event_id"],
+            "component_id": release["component_id"],
+            "port_id": release["port_id"],
+            "duration_s": release["duration_s"],
+            "available_mass_kg": release["available_mass_kg"],
+            "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+            "termination_basis": release["termination_basis"],
+            "termination_provenance": release["termination_provenance"],
+            "provider_meta": {
+                "initial_mass_kg": 10.0,
+                "final_mass_kg": 8.0,
+                "cumulative_mass_out_kg": 2.0,
+            },
+            "steps": release["steps"],
+        },
+    }
+    release["provider_result_digest"] = canonical_digest(response)
+
+    audit = audit_external_release_response(release, response)
+
+    source = audit["compressible_source_state_audit"]
+    assert source["handoff_candidate"] is True
+    assert source["status"] == "BLOCKED_MISSING_PROVIDER_SOURCE_STATE"
+    assert source["provider_source_state_interval_count"] == 0
+    assert audit["closure_ready"] is False
+    assert any("atmospheric packet velocity cannot be substituted" in reason for reason in audit["blocking_reasons"])
+
+
+def test_external_release_intake_counts_optional_gas_handoff_gap(tmp_path: Path) -> None:
+    release = _release("model_prediction")
+    release.update(
+        {
+            "termination_provenance": "native model ledger",
+            "cumulative_mass_out_kg": 2.0,
+            "steps": [{"time_s": 0.0, "mass_flow_kg_s": 1.0}],
+        }
+    )
+    release_path = tmp_path / "resolved_release.json"
+    release_path.write_text(json.dumps(release), encoding="utf-8")
+    response = {
+        "provider_export_schema": "prism.native_provider_response.v1",
+        "provider_model": "native-gas-test-model",
+        "provider_source_digest": "a" * 64,
+        "provider_state_snapshot_digest": "c" * 64,
+        "data": {
+            "event_id": release["event_id"],
+            "component_id": release["component_id"],
+            "port_id": release["port_id"],
+            "duration_s": release["duration_s"],
+            "available_mass_kg": release["available_mass_kg"],
+            "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+            "termination_basis": release["termination_basis"],
+            "termination_provenance": release["termination_provenance"],
+            "provider_meta": {
+                "initial_mass_kg": 10.0,
+                "final_mass_kg": 8.0,
+                "cumulative_mass_out_kg": 2.0,
+            },
+            "steps": release["steps"],
+        },
+    }
+    response_path = tmp_path / "provider_response.json"
+    response_path.write_text(json.dumps(response), encoding="utf-8")
+    release["provider_result_digest"] = canonical_digest(response)
+    release_path.write_text(json.dumps(release), encoding="utf-8")
+
+    report = audit_external_release_artifacts(paths=[release_path])
+
+    assert report["compressible_handoff_candidate_count"] == 1
+    assert report["provider_source_state_complete_count"] == 0
+    assert report["provider_source_state_incomplete_count"] == 1
+    assert report["compressible_handoff_blocked_count"] == 1

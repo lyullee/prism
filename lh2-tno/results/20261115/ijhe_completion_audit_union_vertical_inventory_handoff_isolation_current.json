@@ -6248,11 +6248,15 @@
         "provider_response_pair_count": 7,
         "provider_response_normalized_count": 7,
         "provider_response_mismatch_count": 0,
-        "provider_response_result_digest_bound_count": 7
+        "provider_response_result_digest_bound_count": 7,
+        "provider_source_state_complete_count": 2,
+        "provider_source_state_incomplete_count": 2,
+        "compressible_handoff_candidate_count": 4,
+        "compressible_handoff_blocked_count": 2
       },
       "blocking_reason": null,
       "diagnostic_only": true,
-      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Sibling provider responses are compared for identity, clock, mass, termination, source-digest, and canonical result-digest consistency. The seven current pairs normalize and bind their canonical result digests, but all remain diagnostic model-prediction rows without qualification sidecars; no frequency, physical-validation, or facility QRA is inferred."
+      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Sibling provider responses are compared for identity, clock, mass, termination, source-digest, and canonical result-digest consistency. Gas-shaped responses are also checked for the exact provider source/throat fields required by the optional compressible handoff; the current valve and vent rows are explicitly blocked because those states are missing, and atmospheric packet velocity is never substituted. All seven pairs remain diagnostic model-prediction rows without qualification sidecars; no frequency, physical-validation, or facility QRA is inferred."
     }
   ],
   "blocking_reasons": [

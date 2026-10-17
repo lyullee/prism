@@ -745,6 +745,10 @@ def _external_release_artifact_intake():
         "provider_response_normalized_count": 2,
         "provider_response_mismatch_count": 0,
         "provider_response_result_digest_bound_count": 2,
+        "provider_source_state_complete_count": 1,
+        "provider_source_state_incomplete_count": 1,
+        "compressible_handoff_candidate_count": 2,
+        "compressible_handoff_blocked_count": 1,
         "error_count": 0,
         "artifacts": [
             {"diagnostic_only": True, "qualification_bound": False},

@@ -46,6 +46,14 @@ canonical result-digest fields. The normalized count is therefore 7/7. All seven
 IJHE blockers are unchanged. The machine-readable report is
 `results/20261115/external_native_contract_intake_current.json`.
 
+The normalization also audits the optional compressible-plane adapter. Four
+rows have a gas-shaped `mass_flow_kg_s` series. Reliquefier and vaporizer have
+complete `provider_source_state` records for all intervals; valve and vent
+have none and are therefore `BLOCKED_MISSING_PROVIDER_SOURCE_STATE`. The
+adapter must not use atmospheric packet velocity as a fallback. Layered tank,
+pipe, and pump are classified as liquid/two-phase shapes for this optional gas
+adapter and require their own validated near-field handoff.
+
 To reproduce the intake:
 
 ```powershell

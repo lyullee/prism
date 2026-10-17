@@ -25,6 +25,12 @@ from .contracts import canonical_digest
 
 SCHEMA = "prism.external_release_response_normalization.v1"
 MASS_TOLERANCE_KG = 1.0e-8
+COMPRESSIBLE_SOURCE_STATE_FIELDS = (
+    "source_specific_entropy_j_kgk",
+    "throat_pressure_pa_abs",
+    "throat_density_kg_m3",
+    "throat_specific_enthalpy_j_kg",
+)
 
 
 class ExternalReleaseNormalizationError(ValueError):
@@ -78,6 +84,64 @@ def _mass_ledger(meta: Mapping[str, Any], payload: Mapping[str, Any]) -> dict[st
         "reported_residual_mass_kg": meta.get("residual_mass_kg"),
         "derived_accounting_residual_kg": residual,
         "mass_balance_closed": abs(residual) <= MASS_TOLERANCE_KG,
+    }
+
+
+def _compressible_source_state_audit(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Audit the optional gas-plane handoff inputs without filling fields.
+
+    ``build_compressible_plane_handoff`` consumes the four fields listed in
+    ``COMPRESSIBLE_SOURCE_STATE_FIELDS`` for every provider interval.  The
+    external response is classified only by its exported step shape: a
+    ``mass_flow_kg_s`` series is a gas-plane candidate, while the liquid or
+    two-phase series is reported as not applicable.  No atmospheric velocity
+    or thermodynamic state is inferred here.
+    """
+
+    raw_steps = payload.get("steps")
+    steps = raw_steps if isinstance(raw_steps, list) else []
+    gas_shape = bool(steps) and all(
+        isinstance(step, Mapping) and "mass_flow_kg_s" in step for step in steps
+    )
+    state_count = 0
+    missing_by_interval: list[dict[str, Any]] = []
+    for index, step in enumerate(steps):
+        state = step.get("provider_source_state") if isinstance(step, Mapping) else None
+        if isinstance(state, Mapping):
+            state_count += 1
+        missing = [
+            field
+            for field in COMPRESSIBLE_SOURCE_STATE_FIELDS
+            if not isinstance(state, Mapping) or state.get(field) is None
+        ]
+        if missing:
+            missing_by_interval.append({"interval": index, "missing_fields": missing})
+    complete = bool(steps) and not missing_by_interval
+    if not gas_shape:
+        status = "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE"
+        blocking_reason = None
+        phase_family = "liquid_or_two_phase"
+    elif complete:
+        status = "COMPLETE_FOR_OPTIONAL_COMPRESSIBLE_HANDOFF"
+        blocking_reason = None
+        phase_family = "gas"
+    else:
+        status = "BLOCKED_MISSING_PROVIDER_SOURCE_STATE"
+        blocking_reason = (
+            "optional compressible handoff is blocked: provider_source_state is incomplete; "
+            "atmospheric packet velocity cannot be substituted"
+        )
+        phase_family = "gas"
+    return {
+        "status": status,
+        "phase_family": phase_family,
+        "interval_count": len(steps),
+        "provider_source_state_interval_count": state_count,
+        "provider_source_state_complete": complete,
+        "required_fields": list(COMPRESSIBLE_SOURCE_STATE_FIELDS),
+        "missing_by_interval": missing_by_interval,
+        "blocking_reason": blocking_reason,
+        "handoff_candidate": gas_shape,
     }
 
 
@@ -156,6 +220,7 @@ def audit_external_release_response(
     checks["isolation_clock_valid"] = (
         isolation["within_release_clock"] if isolation["present"] else False
     )
+    compressible_source_state = _compressible_source_state_audit(payload)
 
     reasons: list[str] = []
     for name, ok in checks.items():
@@ -180,6 +245,8 @@ def audit_external_release_response(
             reasons.append("native inventory still has residual mass; depletion is not proven")
     if release.get("input_origin") in {"synthetic", "model_prediction", None}:
         reasons.append("input origin remains diagnostic and is not qualified actual evidence")
+    if compressible_source_state["blocking_reason"]:
+        reasons.append(compressible_source_state["blocking_reason"])
 
     normalized = all(
         checks[name]
@@ -208,6 +275,7 @@ def audit_external_release_response(
             if checks["result_digest_rebound"]
             else "UNBOUND"
         ),
+        "compressible_source_state_audit": compressible_source_state,
         "checks": checks,
         "provider_mass_balance_candidate": ledger,
         "isolation_evidence_candidate": isolation,
@@ -227,4 +295,10 @@ def audit_external_release_response(
     }
 
 
-__all__ = ["SCHEMA", "MASS_TOLERANCE_KG", "ExternalReleaseNormalizationError", "audit_external_release_response"]
+__all__ = [
+    "SCHEMA",
+    "MASS_TOLERANCE_KG",
+    "COMPRESSIBLE_SOURCE_STATE_FIELDS",
+    "ExternalReleaseNormalizationError",
+    "audit_external_release_response",
+]

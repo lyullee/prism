@@ -17,6 +17,10 @@
   "provider_response_normalized_count": 7,
   "provider_response_mismatch_count": 0,
   "provider_response_result_digest_bound_count": 7,
+  "provider_source_state_complete_count": 2,
+  "provider_source_state_incomplete_count": 2,
+  "compressible_handoff_candidate_count": 4,
+  "compressible_handoff_blocked_count": 2,
   "error_count": 0,
   "artifacts": [
     {
@@ -63,6 +67,41 @@
         "provider_state_snapshot_digest": "c61cf19075eed0e9235e5660f0c2ad2e7d074a7afb61d52b113989311291142c",
         "computed_provider_result_digest": "b370d88d96ac9814a1c66e1035135980c8bce7f23d679a103bfa3d73e5f48da3",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE",
+          "phase_family": "liquid_or_two_phase",
+          "interval_count": 2,
+          "provider_source_state_interval_count": 0,
+          "provider_source_state_complete": false,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [
+            {
+              "interval": 0,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            },
+            {
+              "interval": 1,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            }
+          ],
+          "blocking_reason": null,
+          "handoff_candidate": false
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -111,6 +150,41 @@
           "frequency_assigned": false,
           "facility_qra_promoted": false
         }
+      },
+      "compressible_source_state_audit": {
+        "status": "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE",
+        "phase_family": "liquid_or_two_phase",
+        "interval_count": 2,
+        "provider_source_state_interval_count": 0,
+        "provider_source_state_complete": false,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [
+          {
+            "interval": 0,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          },
+          {
+            "interval": 1,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          }
+        ],
+        "blocking_reason": null,
+        "handoff_candidate": false
       },
       "diagnostic_only": true,
       "blocking_reasons": [
@@ -169,6 +243,50 @@
         "provider_state_snapshot_digest": "c021582ed86a58069c5d60bb69e2a08a936aafb40102ac40df08d4e562b85b0e",
         "computed_provider_result_digest": "993c70ea51758a57e313d6f36b9c41721a6288e2ac775e6e4560561ce7197cd7",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE",
+          "phase_family": "liquid_or_two_phase",
+          "interval_count": 3,
+          "provider_source_state_interval_count": 0,
+          "provider_source_state_complete": false,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [
+            {
+              "interval": 0,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            },
+            {
+              "interval": 1,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            },
+            {
+              "interval": 2,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            }
+          ],
+          "blocking_reason": null,
+          "handoff_candidate": false
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -215,6 +333,50 @@
           "frequency_assigned": false,
           "facility_qra_promoted": false
         }
+      },
+      "compressible_source_state_audit": {
+        "status": "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE",
+        "phase_family": "liquid_or_two_phase",
+        "interval_count": 3,
+        "provider_source_state_interval_count": 0,
+        "provider_source_state_complete": false,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [
+          {
+            "interval": 0,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          },
+          {
+            "interval": 1,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          },
+          {
+            "interval": 2,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          }
+        ],
+        "blocking_reason": null,
+        "handoff_candidate": false
       },
       "diagnostic_only": true,
       "blocking_reasons": [
@@ -270,6 +432,41 @@
         "provider_state_snapshot_digest": "529a0143f76d0b6d2c043e010bf51e8ba5c4fba6e64605d5a1994ccb84a8f9c1",
         "computed_provider_result_digest": "ec86ecf9205976dc1184b026e94c418c4442305ceea98cf835e42ced4e6822ca",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE",
+          "phase_family": "liquid_or_two_phase",
+          "interval_count": 2,
+          "provider_source_state_interval_count": 0,
+          "provider_source_state_complete": false,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [
+            {
+              "interval": 0,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            },
+            {
+              "interval": 1,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            }
+          ],
+          "blocking_reason": null,
+          "handoff_candidate": false
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -312,6 +509,41 @@
           "frequency_assigned": false,
           "facility_qra_promoted": false
         }
+      },
+      "compressible_source_state_audit": {
+        "status": "NOT_APPLICABLE_LIQUID_OR_TWO_PHASE_SHAPE",
+        "phase_family": "liquid_or_two_phase",
+        "interval_count": 2,
+        "provider_source_state_interval_count": 0,
+        "provider_source_state_complete": false,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [
+          {
+            "interval": 0,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          },
+          {
+            "interval": 1,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          }
+        ],
+        "blocking_reason": null,
+        "handoff_candidate": false
       },
       "diagnostic_only": true,
       "blocking_reasons": [
@@ -369,6 +601,22 @@
         "provider_state_snapshot_digest": "d370a4a37e719a25cfef96a965d06f683ec788418e4111b15783ceba38cda4c5",
         "computed_provider_result_digest": "247158fd9b8cc9b95cf0c835085670981fadcaff30cb9390499e7ed5f67d5fe7",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "COMPLETE_FOR_OPTIONAL_COMPRESSIBLE_HANDOFF",
+          "phase_family": "gas",
+          "interval_count": 2,
+          "provider_source_state_interval_count": 2,
+          "provider_source_state_complete": true,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [],
+          "blocking_reason": null,
+          "handoff_candidate": true
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -417,6 +665,22 @@
           "frequency_assigned": false,
           "facility_qra_promoted": false
         }
+      },
+      "compressible_source_state_audit": {
+        "status": "COMPLETE_FOR_OPTIONAL_COMPRESSIBLE_HANDOFF",
+        "phase_family": "gas",
+        "interval_count": 2,
+        "provider_source_state_interval_count": 2,
+        "provider_source_state_complete": true,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [],
+        "blocking_reason": null,
+        "handoff_candidate": true
       },
       "diagnostic_only": true,
       "blocking_reasons": [
@@ -472,6 +736,41 @@
         "provider_state_snapshot_digest": "723d4532836cce921bc44588ae9af16919201ef75bcb535df6990c070e0add36",
         "computed_provider_result_digest": "46ec14d5d00941ab941d00da2b1f9705e7f04662259744cfde93ee30fd4b038f",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "BLOCKED_MISSING_PROVIDER_SOURCE_STATE",
+          "phase_family": "gas",
+          "interval_count": 2,
+          "provider_source_state_interval_count": 0,
+          "provider_source_state_complete": false,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [
+            {
+              "interval": 0,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            },
+            {
+              "interval": 1,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            }
+          ],
+          "blocking_reason": "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted",
+          "handoff_candidate": true
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -500,7 +799,8 @@
           "native provider response check failed: isolation_evidence_present",
           "native isolation evidence is absent or outside the release clock",
           "synthetic diagnostic horizon is not a release termination boundary",
-          "input origin remains diagnostic and is not qualified actual evidence"
+          "input origin remains diagnostic and is not qualified actual evidence",
+          "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
         ],
         "closure_ready": false,
         "qualified_provider_packet_allowed": false,
@@ -515,6 +815,41 @@
           "facility_qra_promoted": false
         }
       },
+      "compressible_source_state_audit": {
+        "status": "BLOCKED_MISSING_PROVIDER_SOURCE_STATE",
+        "phase_family": "gas",
+        "interval_count": 2,
+        "provider_source_state_interval_count": 0,
+        "provider_source_state_complete": false,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [
+          {
+            "interval": 0,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          },
+          {
+            "interval": 1,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          }
+        ],
+        "blocking_reason": "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted",
+        "handoff_candidate": true
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
@@ -525,7 +860,8 @@
         "provider response: native provider response check failed: isolation_evidence_present",
         "provider response: native isolation evidence is absent or outside the release clock",
         "provider response: synthetic diagnostic horizon is not a release termination boundary",
-        "provider response: input origin remains diagnostic and is not qualified actual evidence"
+        "provider response: input origin remains diagnostic and is not qualified actual evidence",
+        "provider response: optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
       ]
     },
     {
@@ -571,6 +907,22 @@
         "provider_state_snapshot_digest": "8f32b28f444c8905299c27b96487392619991ff875c1528fcb808fcce500976b",
         "computed_provider_result_digest": "e727b58d83f5f074c37ca4c6c437ca76a0aa6b65e2df7cfa74ec630ba8daabf6",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "COMPLETE_FOR_OPTIONAL_COMPRESSIBLE_HANDOFF",
+          "phase_family": "gas",
+          "interval_count": 2,
+          "provider_source_state_interval_count": 2,
+          "provider_source_state_complete": true,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [],
+          "blocking_reason": null,
+          "handoff_candidate": true
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -619,6 +971,22 @@
           "frequency_assigned": false,
           "facility_qra_promoted": false
         }
+      },
+      "compressible_source_state_audit": {
+        "status": "COMPLETE_FOR_OPTIONAL_COMPRESSIBLE_HANDOFF",
+        "phase_family": "gas",
+        "interval_count": 2,
+        "provider_source_state_interval_count": 2,
+        "provider_source_state_complete": true,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [],
+        "blocking_reason": null,
+        "handoff_candidate": true
       },
       "diagnostic_only": true,
       "blocking_reasons": [
@@ -674,6 +1042,41 @@
         "provider_state_snapshot_digest": "665dad1459dc9d02ec506ab0ec08b282206a6c57abf18d48bcfa610b3d41c50b",
         "computed_provider_result_digest": "61054aa89cc3dade006c007b7224e736685a4598356974e1dc5bff919709987b",
         "provider_result_digest_binding": "canonical_response_digest",
+        "compressible_source_state_audit": {
+          "status": "BLOCKED_MISSING_PROVIDER_SOURCE_STATE",
+          "phase_family": "gas",
+          "interval_count": 2,
+          "provider_source_state_interval_count": 0,
+          "provider_source_state_complete": false,
+          "required_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ],
+          "missing_by_interval": [
+            {
+              "interval": 0,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            },
+            {
+              "interval": 1,
+              "missing_fields": [
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg"
+              ]
+            }
+          ],
+          "blocking_reason": "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted",
+          "handoff_candidate": true
+        },
         "checks": {
           "identity_matches": true,
           "clock_matches": true,
@@ -702,7 +1105,8 @@
           "native provider response check failed: isolation_evidence_present",
           "native isolation evidence is absent or outside the release clock",
           "synthetic diagnostic horizon is not a release termination boundary",
-          "input origin remains diagnostic and is not qualified actual evidence"
+          "input origin remains diagnostic and is not qualified actual evidence",
+          "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
         ],
         "closure_ready": false,
         "qualified_provider_packet_allowed": false,
@@ -717,6 +1121,41 @@
           "facility_qra_promoted": false
         }
       },
+      "compressible_source_state_audit": {
+        "status": "BLOCKED_MISSING_PROVIDER_SOURCE_STATE",
+        "phase_family": "gas",
+        "interval_count": 2,
+        "provider_source_state_interval_count": 0,
+        "provider_source_state_complete": false,
+        "required_fields": [
+          "source_specific_entropy_j_kgk",
+          "throat_pressure_pa_abs",
+          "throat_density_kg_m3",
+          "throat_specific_enthalpy_j_kg"
+        ],
+        "missing_by_interval": [
+          {
+            "interval": 0,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          },
+          {
+            "interval": 1,
+            "missing_fields": [
+              "source_specific_entropy_j_kgk",
+              "throat_pressure_pa_abs",
+              "throat_density_kg_m3",
+              "throat_specific_enthalpy_j_kg"
+            ]
+          }
+        ],
+        "blocking_reason": "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted",
+        "handoff_candidate": true
+      },
       "diagnostic_only": true,
       "blocking_reasons": [
         "input_origin is not a qualified observed/provider export",
@@ -727,7 +1166,8 @@
         "provider response: native provider response check failed: isolation_evidence_present",
         "provider response: native isolation evidence is absent or outside the release clock",
         "provider response: synthetic diagnostic horizon is not a release termination boundary",
-        "provider response: input origin remains diagnostic and is not qualified actual evidence"
+        "provider response: input origin remains diagnostic and is not qualified actual evidence",
+        "provider response: optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
       ]
     }
   ],

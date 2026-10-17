@@ -51,6 +51,15 @@ facility-QRA gates remain unchanged. See
 [`external release-response normalization`](PRISM_external_release_response_normalization_en.md)
 for the exact comparison rules.
 
+The same intake now audits the optional compressible-plane handoff inputs.
+Four exports have a gas-shaped `mass_flow_kg_s` series: reliquefier and
+vaporizer contain the required provider source/throat state in all intervals,
+whereas valve and vent are explicitly blocked because their source-state
+records are missing (`2 complete`, `2 incomplete`). The adapter therefore
+cannot use atmospheric packet velocity as a substitute. Liquid/two-phase
+layered-tank, pipe, and pump exports are recorded as outside this optional gas
+handoff and are not silently recast as gas.
+
 The nine point-rate-only events retain their published point rate and are represented in the five-scenario sensitivity ledger. PRISM does not invent confidence intervals for them.
 
 ## Connected calculation path

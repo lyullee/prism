@@ -279,6 +279,10 @@ def audit_external_release_artifacts(
     provider_response_normalized_count = 0
     provider_response_mismatch_count = 0
     provider_response_result_digest_bound_count = 0
+    provider_source_state_complete_count = 0
+    provider_source_state_incomplete_count = 0
+    compressible_handoff_candidate_count = 0
+    compressible_handoff_blocked_count = 0
     for path in files:
         try:
             payload = _read_json(path)
@@ -364,6 +368,17 @@ def audit_external_release_artifacts(
                     "result_digest_rebound"
                 ) is True:
                     provider_response_result_digest_bound_count += 1
+                source_state_audit = provider_response_audit.get(
+                    "compressible_source_state_audit"
+                )
+                if isinstance(source_state_audit, Mapping):
+                    if source_state_audit.get("handoff_candidate") is True:
+                        compressible_handoff_candidate_count += 1
+                        if source_state_audit.get("provider_source_state_complete") is True:
+                            provider_source_state_complete_count += 1
+                        else:
+                            provider_source_state_incomplete_count += 1
+                            compressible_handoff_blocked_count += 1
                 reasons.extend(
                     f"provider response: {item}"
                     for item in provider_response_audit.get("blocking_reasons", [])
@@ -393,6 +408,11 @@ def audit_external_release_artifacts(
                 else None,
                 "provider_response_sha256": provider_response_sha256,
                 "provider_response_audit": provider_response_audit,
+                "compressible_source_state_audit": (
+                    provider_response_audit.get("compressible_source_state_audit")
+                    if isinstance(provider_response_audit, Mapping)
+                    else None
+                ),
                 "diagnostic_only": True,
                 "blocking_reasons": reasons,
             })
@@ -436,6 +456,10 @@ def audit_external_release_artifacts(
         "provider_response_normalized_count": provider_response_normalized_count,
         "provider_response_mismatch_count": provider_response_mismatch_count,
         "provider_response_result_digest_bound_count": provider_response_result_digest_bound_count,
+        "provider_source_state_complete_count": provider_source_state_complete_count,
+        "provider_source_state_incomplete_count": provider_source_state_incomplete_count,
+        "compressible_handoff_candidate_count": compressible_handoff_candidate_count,
+        "compressible_handoff_blocked_count": compressible_handoff_blocked_count,
         "error_count": len(errors),
         "artifacts": artifacts,
         "errors": errors,
