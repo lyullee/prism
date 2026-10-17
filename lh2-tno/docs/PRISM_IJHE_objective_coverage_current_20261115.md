@@ -80,13 +80,13 @@ The finite-inventory termination margin probe is documented in
 it confirms that the remaining open inventory cases cannot be closed by
 extrapolating the current provider horizon.
 
-The independent FFI Test 6 SLABx comparison now has an actual-source
-numerical-gate record in
+The independent FFI Test 6 SLABx comparison now has an accepted actual-source
+numerical-gate recheck in
 [`PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md`](PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md).
-The 640-to-1280 refinement remains above the 2% criterion for the monitored
-source and plume values, so the comparison gate remains open. This unresolved
-numerical result is retained explicitly and does not support an independent
-physical-validation or facility-QRA claim.
+The 40,960-to-81,920 refinement is below the 2% criterion for every monitored
+quantity, so the numerical-resolution gate is accepted. The record remains a
+component numerical result and does not support an independent physical-
+validation or facility-QRA claim.
 
 ## Open evidence gates
 
@@ -122,10 +122,10 @@ The monitor path does not learn annual accident frequency from alarm counts, inf
 
 The latest audit metadata verifier also checks the actual FFI Test 6 numerical-gate
 pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
-`OPEN`/`accepted=false` state, the sibling refinement record, and explicit
+`ACCEPTED`/`accepted=true` state, the sibling refinement record, and explicit
 `physical_validation_claim=false` and `facility_qra_claim=false` flags. A verifier
-`PASS` therefore means that the unresolved gate is represented consistently; it
-does not mean that the source has converged or that physical validation is complete.
+`PASS` therefore confirms numerical-gate consistency; it does not mean that
+independent physical validation or facility QRA is complete.
 
 The current objective ledger contains 33 checks after reconciling the latest completion audit and
 independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.

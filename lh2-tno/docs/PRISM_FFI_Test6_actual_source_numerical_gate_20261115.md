@@ -9,6 +9,31 @@ fraction `0.559`, release height `0.5 m`, source temperature `20.37 K`, and a
 
 ## Result
 
+The latest high-resolution recheck at 40,960 and 81,920 field steps is
+accepted by the numerical criterion. The final pair changes are:
+
+| quantity | relative change |
+|---|---:|
+| H2 volume fraction at 30 m | 0.022% |
+| centre height at 30 m | 0.304% |
+| cloud depth at 30 m | 0.027% |
+| temperature at 30 m | 0.003% |
+| sensor MAE | 0.004% |
+| sensor RMSE | 0.001% |
+
+The machine-readable accepted recheck is:
+
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_40960_81920/refinement.json`
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_40960_81920/provenance.json`
+
+This closes the **numerical-resolution** gate for the reviewed actual source.
+It does not establish independent physical validation, qualify a provider
+release packet, or open facility IR/F-N/QRA. Those claims remain explicitly
+false in the accepted record.
+
+The lower-resolution record below is retained as historical evidence of why
+the additional refinement was required.
+
 The field grid was evaluated at `n_field_steps = 40, 80, 160, 320, 640,
 1280`. The final 640 → 1280 changes were:
 
@@ -32,16 +57,18 @@ records are:
 ## Interpretation
 
 The existing 30-sensor comparison remains a diagnostic result with MAE
-`1.8671 vol%`, RMSE `4.5359 vol%`, and LFL TP/FN/FP `3/3/0`, but its actual
-source/grid numerical gate is still open. A separate pseudo-source refinement
-must not be substituted for this result. Consequently this record does not
-open independent physical validation, qualified provider evidence, or facility
-IR/F-N/QRA promotion.
+`1.8671 vol%`, RMSE `4.5359 vol%`, and LFL TP/FN/FP `3/3/0`. The historical
+coarse-grid gate was open, which motivated the accepted 40,960 → 81,920
+recheck above. A separate pseudo-source refinement must not be substituted for
+the actual source. The accepted numerical gate still does not open independent
+physical validation, qualified provider evidence, or facility IR/F-N/QRA
+promotion.
 
-The failure is useful: it identifies a real numerical-resolution issue in the
-actual LH2 source path. The next technical step is to resolve the grid/source
-convergence (or document a reviewed convergence criterion) before using this
-comparison as an IJHE validation claim.
+The historical failure was useful because it identified a real
+numerical-resolution issue in the actual LH2 source path. The latest accepted
+pair resolves that numerical criterion; the remaining step before an IJHE
+validation claim is independent holdout or physical evidence, which is kept
+outside this numerical gate.
 
 The sensitivity record shows why simply increasing the grid is not a safe fix:
 at 320 field steps, increasing RK substeps from 16 to 64 changes the 30-metre

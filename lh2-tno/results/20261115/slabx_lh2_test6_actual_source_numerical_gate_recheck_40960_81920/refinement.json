@@ -1,0 +1,46 @@
+{
+  "schema_version": "prism.slabx_lh2_ffi_test6_actual_source_refinement.v1",
+  "scope": "actual FFI Test 6 HorizontalJet source; no sensor fitting",
+  "source": {
+    "rate_kg_s": 0.8317,
+    "nozzle_diameter_m": 0.0254,
+    "liquid_mass_fraction": 0.559,
+    "height_m": 0.5,
+    "duration_s": 120.0,
+    "temperature_K": 20.37
+  },
+  "levels": [
+    {
+      "n_field_steps": 40960,
+      "H2_vol_pct_at_30_m": 1.7291030877585343,
+      "centre_height_m_at_30_m": 0.55670862100612,
+      "cloud_depth_m_at_30_m": 9.211074775890065,
+      "temperature_K_at_30_m": 272.2461190851248,
+      "sensor_count": 30,
+      "MAE_vol_pct": 1.7235255296969134,
+      "RMSE_vol_pct": 4.510865690420769,
+      "LFL_observed": 6,
+      "LFL_predicted": 0,
+      "TP": 0,
+      "FN": 6,
+      "FP": 0,
+      "elapsed_s": 76.29573109999183
+    },
+    {
+      "n_field_steps": 81920,
+      "H2_vol_pct_at_30_m": 1.7294839349736562,
+      "centre_height_m_at_30_m": 0.5584071915947741,
+      "cloud_depth_m_at_30_m": 9.208603096589922,
+      "temperature_K_at_30_m": 272.253225763548,
+      "sensor_count": 30,
+      "MAE_vol_pct": 1.7234491892195112,
+      "RMSE_vol_pct": 4.510832018219621,
+      "LFL_observed": 6,
+      "LFL_predicted": 0,
+      "TP": 0,
+      "FN": 6,
+      "FP": 0,
+      "elapsed_s": 131.08838020000258
+    }
+  ]
+}

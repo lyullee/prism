@@ -20,9 +20,10 @@ with the raw refinement rows in
 [`refinement.csv`](../results/20261115/slabx_lh2_pseudosource_numerical_sensitivity_high_resolution/refinement.csv).
 
 This is numerical sensitivity evidence for the separately declared
-pseudo-source. It does not close the actual FFI Test 6 source gate, whose
-`0.8317 kg/s` source remains unresolved at the tested resolution. It also does
-not establish independent physical validation, equipment-release validation,
-frequency inference, or facility QRA. The status ledger and IJHE verifier keep
-those claims false and require the actual source record to be resolved before
-any promotion.
+pseudo-source. It was never used to close the actual FFI Test 6 source gate;
+that gate is now closed numerically by the independent 40,960-to-81,920 actual-
+source recheck documented in
+[`PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md`](PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md).
+This pseudo-source record still does not establish independent physical
+validation, equipment-release validation, frequency inference, or facility
+QRA. The status ledger and IJHE verifier keep those claims false.
