@@ -30,5 +30,15 @@
     "external_lh2dt_source_test_recheck_20261018": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
     "native_multi_equipment_recheck_compact": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
   },
-  "interpretation": "The current external lh2dt worktree contains uncommitted Vaporizer design-point and log-mean integration changes. The modified source passes its own 392-test suite and all seven native diagnostic exporters preserve packet identity and explicit closure fields. The output is a source-drift recheck only: it is not rebound into the authoritative 34-event/44-case/176-risk-atom union, and it does not qualify providers, infer frequency, claim independent physical validation, or promote facility IR/F-N. A committed external source and full campaign replay are required before authoritative rebinding."
+  "interpretation": "The current external lh2dt worktree contains uncommitted Vaporizer design-point and log-mean integration changes. The modified source passes its own 392-test suite with one warning. PRISM re-exported seven native equipment packets and replayed all seven through the SLABx-LH2 or compressible-plane consequence chain in 65.33 s; all provider mass residuals were zero. The output is a source-drift recheck only: it is not rebound into the authoritative 34-event/44-case/176-risk-atom union, and it does not qualify providers, infer frequency, claim independent physical validation, or promote facility IR/F-N. A committed external source and full campaign replay are required before authoritative rebinding.",
+  "native_chain_recheck_manifest": "examples/external_lh2dt_worktree_chain_recheck_manifest_20261018.json",
+  "native_chain_recheck_status": "PASS_DIAGNOSTIC",
+  "native_chain_recheck_count": 7,
+  "native_chain_recheck_executed_count": 7,
+  "native_chain_recheck_runner_elapsed_ms": 65330.34939999925,
+  "native_chain_recheck_max_provider_mass_residual_kg": 0.0,
+  "native_chain_recheck_provider_packet_promoted_count": 0,
+  "native_chain_recheck_physical_validation_claim": false,
+  "native_chain_recheck_frequency_inference": false,
+  "native_chain_recheck_facility_qra_claim": false
 }
