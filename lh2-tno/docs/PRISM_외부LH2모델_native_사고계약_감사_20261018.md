@@ -156,3 +156,15 @@ python scripts/audit_lh2dt_native_contract.py `
 이번 실행에서 동적 상태 폐쇄가 명시적으로 `READY`인 설비는 탱크·배관·기화기·재액화기 4개였고, 명시적 격리 성공도 4개 packet에서 확인됐다. 펌프는 격리 종료 basis는 반환했지만 이 exporter 경로에서 별도 isolation-success echo가 없어 READY로 세지 않았다. 밸브와 벤트는 `synthetic_diagnostic_horizon`을 사용했으며, 밸브 compressible-plane chain은 provider handoff를 소비했지만 operator-limited로 남겼다. 전체 chain runner 시간은 약 `88.52 s`였다.
 
 이 재검증은 최신 설비 모델이 PRISM의 방출 지속시간·종료 basis·질량 잔차·동적 상태 폐쇄 정보를 피해영향 chain까지 전달하는 것을 확인한다. 이 실행에는 문헌 빈도를 적용하지 않았고, 설비 형상·수용점·기상·점화 조건은 진단용이다. 따라서 provider 적격성, 독립 물리검증, 시설 전체 IR/F-N/QRA를 열지 않으며, SLABx-LH2 소스는 수정하지 않았다.
+
+## 2026-10-18 current-code full-scope recheck
+
+A current-code replay was run with the same generic LH2 full-scope manifest and backend configuration to check whether the earlier result had changed. This is a diagnostic consistency check; it does not replace the authoritative 34-event union. The machine-readable record is [`examples/native_full_scope_current_code_recheck_20261018.json`](../examples/native_full_scope_current_code_recheck_20261018.json).
+
+- 24 events, 24 cases, and 96 risk atoms were produced again.
+- Case classification was unchanged: 13 `EXECUTED` and 11 `EXECUTED_OPERATOR_LIMITED`.
+- Risk atoms, event/case content, literature-frequency values, conditional IR/F-N values, and the uncomputed-case list were unchanged after removing execution digests and timing fields from the comparison.
+- The current fail-closed release ledger now classifies 20 packets with present but invalid pressure-equalization fields as `provider_declared_pressure_equalization_invalid`; the earlier ledger represented these as `not_declared`. This is a more specific audit status and does not change case status, release values, frequency values, or risk atoms.
+- Campaign elapsed time was approximately 814.29 s previously and 825.92 s in the replay (+11.62 s, +1.43%). This is a single campaign measurement, not a 1 Hz fresh-physics service-level claim.
+
+The authoritative 34-event, 44-case, 176-risk-atom union was left unchanged. The 11 operator-limited cases, zero qualified provider packets, false independent physical-validation claim, and withheld facility IR/F-N/QRA promotion remain in force. SLABx-LH2 remains the validated frozen consequence component and was not modified.

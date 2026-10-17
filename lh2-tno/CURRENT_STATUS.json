@@ -6364,6 +6364,16 @@
   "latest_native_external_multi_equipment_recheck_frequency_inference": false,
   "latest_native_external_multi_equipment_recheck_physical_validation_claim": false,
   "latest_native_external_multi_equipment_recheck_facility_qra_claim": false,
-  "latest_native_external_multi_equipment_recheck_slabx_lh2_modified": false
-
+  "latest_native_external_multi_equipment_recheck_slabx_lh2_modified": false,
+  "latest_full_scope_current_code_recheck_record": "examples/native_full_scope_current_code_recheck_20261018.json",
+  "latest_full_scope_current_code_recheck_status": "COMPLETED_DIAGNOSTIC; 24/24 cases replayed; status counts unchanged at 13 EXECUTED and 11 EXECUTED_OPERATOR_LIMITED; 96 risk atoms unchanged",
+  "latest_full_scope_current_code_recheck_campaign_elapsed_ms": 825915.2645999566,
+  "latest_full_scope_current_code_recheck_previous_campaign_elapsed_ms": 814290.3899999801,
+  "latest_full_scope_current_code_recheck_operator_limited_case_count": 11,
+  "latest_full_scope_current_code_recheck_authoritative_union_replaced": false,
+  "latest_full_scope_current_code_recheck_facility_qra_claim": false,
+  "latest_full_scope_current_code_recheck_physical_validation_claim": false,
+  "latest_full_scope_current_code_recheck_provider_packet_promoted": false,
+  "latest_full_scope_current_code_recheck_slabx_lh2_modified": false,
+  "latest_full_scope_current_code_recheck_pressure_ledger_change": "20 rows are now explicitly classified as provider_declared_pressure_equalization_invalid; risk/frequency/case results unchanged"
 }
