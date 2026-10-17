@@ -6444,5 +6444,12 @@
   "latest_inspection_center_current_source_recheck_facility_qra_claim": false,
   "external_lh2dt_source_test_recheck_record": "examples/external_lh2dt_source_test_recheck_20261018.json",
   "external_lh2dt_source_test_recheck_status": "PASS; 377 tests passed, 0 failed, 1 deprecation warning; source digest 3b186dff…",
-  "external_lh2dt_source_test_recheck_facility_qra_claim": false
+  "external_lh2dt_source_test_recheck_facility_qra_claim": false,
+  "external_pump_test_point_audit_record": "examples/external_pump_test_point_audit_20261018.json",
+  "external_pump_test_point_manifest": "examples/external_pump_test_point_manifest_20261018.json",
+  "external_pump_test_point_audit_status": "TEST_POINTS_EXTRACTED_CONFIGURATION_REVIEW_REQUIRED; 2 NASA PDFs, 8 unit-bound candidate points; document hashes match; configuration mapping and no-fit holdout remain open",
+  "external_pump_test_point_count": 8,
+  "external_pump_test_point_document_count": 2,
+  "external_pump_test_point_physical_validation_claim": false,
+  "external_pump_test_point_facility_qra_claim": false
 }

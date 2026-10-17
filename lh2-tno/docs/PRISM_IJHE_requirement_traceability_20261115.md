@@ -243,3 +243,18 @@ suite: 377 tests passed with one deprecation warning. This is a source-level
 regression check only; it does not turn the external model into qualified
 facility accident evidence. The test receipt is
 [`examples/external_lh2dt_source_test_recheck_20261018.json`](../examples/external_lh2dt_source_test_recheck_20261018.json).
+
+## 2026-10-18 NASA pump test-point intake
+
+The two NASA pump PDFs were reviewed at the source-text level and eight
+unit-bound candidate points were recorded: four for the 1959 five-cylinder
+piston pump and four for the 1991 LH2 centrifugal-pump configuration. The
+manifest preserves the PDF page, source locator, value, unit, test condition,
+and configuration identifier for every point. Both document SHA-256 hashes
+match the current files. The points are still candidate comparison inputs:
+the generic PRISM mapped-pump component has not been shown to match either
+NASA configuration, and no independent no-fit holdout comparison has been
+performed. Consequently physical validation, accident-release qualification,
+frequency, and facility QRA remain closed. The audit and source manifest are
+[`examples/external_pump_test_point_audit_20261018.json`](../examples/external_pump_test_point_audit_20261018.json)
+and [`examples/external_pump_test_point_manifest_20261018.json`](../examples/external_pump_test_point_manifest_20261018.json).

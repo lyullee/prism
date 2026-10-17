@@ -1,0 +1,131 @@
+{
+  "schema_version": "prism.external_pump_test_point_manifest.v1",
+  "review_status": "MANUALLY_REVIEWED_SOURCE_TEXT_POINTS_CONFIGURATION_UNREVIEWED",
+  "documents": [
+    {
+      "document_id": "nasa-piston-1959",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\NASA 극저온 수소 피스톤펌프 시험자료.pdf",
+      "sha256": "8e834bded9e255db743783ec581bde223ce7398ea175c096d66e627be2358e12",
+      "equipment_family": "cryogenic_piston_pump"
+    },
+    {
+      "document_id": "nasa-centrifugal-1991",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\NASA 액화수소 원심펌프 시험자료.pdf",
+      "sha256": "4f8b36a307ae386446c405843b95dde94eb4c25c194389e97a6119aa6ea57f29",
+      "equipment_family": "lh2_centrifugal_pump"
+    }
+  ],
+  "test_points": [
+    {
+      "point_id": "nasa-piston-1959-design-flow",
+      "document_id": "nasa-piston-1959",
+      "pdf_page": 6,
+      "source_locator": "design specifications table",
+      "variable": "design_flow",
+      "value": 55.1,
+      "unit": "US_gpm",
+      "test_condition": "saturated liquid LH2 design condition",
+      "configuration_id": "NASA-piston-five-cylinder",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-piston-1959-design-speed",
+      "document_id": "nasa-piston-1959",
+      "pdf_page": 6,
+      "source_locator": "design specifications table",
+      "variable": "design_speed",
+      "value": 240.0,
+      "unit": "rpm",
+      "test_condition": "saturated liquid LH2 design condition",
+      "configuration_id": "NASA-piston-five-cylinder",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-piston-1959-discharge-pressure",
+      "document_id": "nasa-piston-1959",
+      "pdf_page": 6,
+      "source_locator": "design specifications table",
+      "variable": "discharge_pressure",
+      "value": 135.0,
+      "unit": "psig",
+      "test_condition": "saturated liquid LH2 design condition",
+      "configuration_id": "NASA-piston-five-cylinder",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-piston-1959-hydrogen-endurance",
+      "document_id": "nasa-piston-1959",
+      "pdf_page": 13,
+      "source_locator": "pump wear discussion",
+      "variable": "LH2_operation_duration",
+      "value": 13.0,
+      "unit": "h",
+      "test_condition": "reported approximate liquid-hydrogen endurance exposure",
+      "configuration_id": "NASA-piston-five-cylinder",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-centrifugal-1991-design-flow",
+      "document_id": "nasa-centrifugal-1991",
+      "pdf_page": 7,
+      "source_locator": "summary scaled design point",
+      "variable": "design_flow",
+      "value": 15.7,
+      "unit": "US_gpm",
+      "test_condition": "LH2 configuration 2 at scaled design speed",
+      "configuration_id": "NASA-CR-187117-config-2",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-centrifugal-1991-design-speed",
+      "document_id": "nasa-centrifugal-1991",
+      "pdf_page": 7,
+      "source_locator": "summary scaled design point",
+      "variable": "design_speed",
+      "value": 77000.0,
+      "unit": "rpm",
+      "test_condition": "LH2 configuration 2 scaled design point",
+      "configuration_id": "NASA-CR-187117-config-2",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-centrifugal-1991-head",
+      "document_id": "nasa-centrifugal-1991",
+      "pdf_page": 7,
+      "source_locator": "summary scaled performance",
+      "variable": "isentropic_head",
+      "value": 7000.0,
+      "unit": "ft",
+      "test_condition": "LH2 configuration 2 at design flow",
+      "configuration_id": "NASA-CR-187117-config-2",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    },
+    {
+      "point_id": "nasa-centrifugal-1991-efficiency",
+      "document_id": "nasa-centrifugal-1991",
+      "pdf_page": 7,
+      "source_locator": "summary as-tested efficiency",
+      "variable": "isentropic_efficiency",
+      "value": 30.3,
+      "unit": "percent",
+      "test_condition": "LH2 configuration 2 as-tested wear-ring clearance",
+      "configuration_id": "NASA-CR-187117-config-2",
+      "model_binding_status": "candidate_only",
+      "holdout_role": "reported_point_not_holdout"
+    }
+  ],
+  "model_binding": {
+    "prism_component_id": "liquid-transfer-pump-01",
+    "configuration_match_status": "UNREVIEWED",
+    "holdout_status": "NOT_STARTED",
+    "independent_holdout_result": null,
+    "review_note": "The two NASA documents describe piston and small centrifugal test articles; the current generic PRISM mapped-pump component is not yet shown to match either configuration or port."
+  }
+}
