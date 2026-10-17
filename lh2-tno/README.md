@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,442 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,459 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -228,6 +228,16 @@ The six-gate result is documented in
 [`PRISM_facility_qra_gate_summary_20261115_en.md`](docs/PRISM_facility_qra_gate_summary_20261115_en.md).
 It currently reports `FACILITY_QRA_WITHHELD`; the diagnostic IR/F-N view remains
 visible, and missing evidence is never assigned zero risk.
+
+The latest validation matrix also includes a hash-reverified PRESLHY Trial 10
+field bundle and its measured-source SLABx comparison:
+`validation_evidence_matrix_with_preslhy_reverified.json`. The bundle contains
+208 source-boundary rows, 92 weather rows, and 5,053 receptor observations.
+The comparison matched 4,960 observations, but its current diagnostic replay
+has RMSE 31.10 vol% and a 0.0 vol% predicted peak against an 87.78 vol%
+observed peak. The result remains restricted evidence and keeps the
+physical-validation and facility-QRA gates closed. No bearing or transport
+delay is fitted from these data.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the

@@ -1,0 +1,168 @@
+{
+  "schema_version": "prism.external_field_evidence.v1",
+  "status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE",
+  "event_id": "preslhy-e35-trial-10-2019-09-13",
+  "dataset_id": "preslhy-e35-trial10-xensor-window",
+  "scope": "lh2_free_field",
+  "channels": [
+    {
+      "channel": "source_boundary",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\source_boundary.csv",
+      "declared_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+      "observed_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+      "hash_verified": true
+    },
+    {
+      "channel": "weather",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\weather.csv",
+      "declared_sha256": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed",
+      "observed_sha256": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed",
+      "hash_verified": true
+    },
+    {
+      "channel": "obstacle_geometry",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\obstacle_geometry.json",
+      "declared_sha256": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db",
+      "observed_sha256": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db",
+      "hash_verified": true
+    },
+    {
+      "channel": "receptor_observations",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\receptor_observations.csv",
+      "declared_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+      "observed_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+      "hash_verified": true
+    },
+    {
+      "channel": "common_clock",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\common_clock.json",
+      "declared_sha256": "58ceab659640fa9d27287a22fd5e0c093ab4f61376245aa36fd9f15aff0e4cfb",
+      "observed_sha256": "58ceab659640fa9d27287a22fd5e0c093ab4f61376245aa36fd9f15aff0e4cfb",
+      "hash_verified": true
+    }
+  ],
+  "source_boundary": {
+    "row_count": 208,
+    "column_count": 12,
+    "columns": [
+      "event_id",
+      "source_boundary_id",
+      "common_clock_id",
+      "timestamp",
+      "time_s",
+      "mass_flow_g_s_raw",
+      "mass_flow_kg_s",
+      "phase",
+      "release_mode",
+      "release_height_m",
+      "nozzle_diameter_mm",
+      "source_coordinate_reference"
+    ],
+    "event_ids": [
+      "preslhy-e35-trial-10-2019-09-13"
+    ],
+    "observed_source_term": {
+      "available": true,
+      "sample_count": 208,
+      "observed_window_start_s": 0.0,
+      "observed_window_end_s": 207.0,
+      "observed_window_duration_s": 207.0,
+      "positive_flow_start_s": 2.0,
+      "positive_flow_end_s": 207.0,
+      "positive_flow_sample_count": 205,
+      "integrated_mass_left_hold_kg": 27.506655159,
+      "observation_operator": "left_held_between_observed_timestamps_no_final_extension",
+      "termination_evidence_present": false,
+      "inventory_balance_evidence_present": false,
+      "isolation_evidence_present": false
+    }
+  },
+  "weather": {
+    "row_count": 92,
+    "column_count": 15,
+    "columns": [
+      "event_id",
+      "weather_id",
+      "common_clock_id",
+      "timestamp",
+      "time_s",
+      "wind_speed_m_s",
+      "wind_direction",
+      "wind_direction_deg",
+      "measurement_interval_s",
+      "measurement_height_m",
+      "outdoor_temperature_c",
+      "outdoor_humidity_pct",
+      "relative_pressure_hpa",
+      "dew_point_c",
+      "stability_status"
+    ],
+    "event_ids": [
+      "preslhy-e35-trial-10-2019-09-13"
+    ]
+  },
+  "receptor_observations": {
+    "row_count": 5053,
+    "column_count": 13,
+    "columns": [
+      "event_id",
+      "receptor_geometry_id",
+      "sensor_id",
+      "sensor_set_id",
+      "common_clock_id",
+      "timestamp",
+      "time_s",
+      "x_m",
+      "y_m",
+      "height_m",
+      "observed_vol_pct_raw",
+      "observed_vol_pct",
+      "sensor_processing"
+    ],
+    "event_ids": [
+      "preslhy-e35-trial-10-2019-09-13"
+    ]
+  },
+  "obstacle_geometry": {
+    "obstacles_present": false,
+    "coordinate_reference": "source-relative metres; z above concrete pad",
+    "promotion_status": "conditional_open_pad_only"
+  },
+  "common_clock": {
+    "common_clock_id": "preslhy-e35-trial-10-2019-09-13-shared-wall-clock",
+    "event_clock_origin": "13:25:00",
+    "source_window": {
+      "start_s": 28.0,
+      "end_s": 76.0,
+      "samples": 49
+    },
+    "xensor_window": {
+      "start_index": 153,
+      "end_index": 316,
+      "transport_delay_s": 18.0
+    },
+    "synchronization_method": "shared wall-clock timestamps in Flowmeter, Xensor and LocalWeather workbook sheets"
+  },
+  "model_comparison_ready": false,
+  "hash_verification_enforced": true,
+  "hash_drift_channels": [],
+  "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+  "weather_sha256": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed",
+  "receptor_observation_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+  "physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "promotion_policy": {
+    "observed_source_is_not_provider_release": true,
+    "observed_data_is_not_frequency": true,
+    "matched_model_prediction_required_for_validation": true,
+    "component_evidence_does_not_validate_facility_qra": true
+  },
+  "source_manifest": {
+    "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\preslhy_trial10_manifest_rebaselined_current.json",
+    "sha256": "463938cc1233752a90992b7d0e6ab27776b63df922798c6404fce29a53b42f46",
+    "source_schema": "degali.field-evidence-manifest-execution.v1"
+  }
+}

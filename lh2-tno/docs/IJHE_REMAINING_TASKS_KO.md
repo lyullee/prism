@@ -19,7 +19,7 @@
 | 1 | 설비별 실제 사고 방출 패킷 확보 | 현재 외부 qualified provider packet 수 0 | 선언한 모든 사고 케이스에 설비 모델이 직접 만든 질량유량·상·개구·방출 시작/종료·차단·잔고 패킷을 digest로 묶고, 합성 패킷을 제거한다. |
 | 2 | 방출 경계와 종료 조건 닫기 | strict facility ledger의 미완료/operator-limited case 29건 | 각 케이스에 isolation 성공/실패, inventory depletion, emergency relief, two-sided rupture 등 종료 근거가 하나씩 있고, 누출 질량 잔차와 재고 소진을 재현한다. |
 | 3 | 선언한 사고군 전체 완성 | IJHE 감사가 사고 범위·qualified packet coverage를 BLOCKED로 판정 | 옥외 적용범위의 사고군·개구 크기·수직 벤트·배관 양단·전량 방출을 목록으로 닫고, 각 조건·기상·점화 분기가 계산 또는 명시적 제외로 기록된다. 지원되지 않는 사고를 다른 사고로 대체하지 않는다. |
-| 4 | SLABx-LH2 및 피해모델 독립 검증 | 현재 검증 매트릭스는 restricted evidence이며 물리검증 승격 false | 독립 실험/공개 데이터와 동일 입력·동일 단위·동일 source hash를 사용해 방출·풀·확산·농도·점화 후 피해량을 비교하고, 사전 정한 허용오차와 잔차를 기록한다. 내부 회귀시험만으로 승격하지 않는다. |
+| 4 | SLABx-LH2 및 피해모델 독립 검증 | PRESLHY Trial 10 관측 번들은 해시 재검증됐지만 현재 measured-source replay는 4,960/5,053 행 매칭, RMSE 31.10 vol%, 예측 peak 0.0 대 관측 peak 87.78 vol%로 제한됨 | 독립 실험/공개 데이터와 동일 입력·동일 단위·동일 source hash를 사용해 방출·풀·확산·농도·점화 후 피해량을 비교하고, 사전 정한 허용오차와 잔차를 기록한다. 내부 회귀시험만으로 승격하지 않는다. |
 | 5 | 문헌 빈도 불확실성 연결 | 포트 수준 빈도 매핑은 정렬됐지만 시설 QRA는 보류 | 사고군별 문헌 하한·대표·상한을 명시하고, 빈도 범위가 설비 순위·IR·F/N 판단을 어떻게 바꾸는지 민감도 결과를 낸다. 센서값으로 빈도를 학습하거나 빈도를 추정하지 않는다. |
 | 6 | 시설 전체 IR/F-N 계산 승격 | 현재 진단용 risk atom은 있으나 시설 IR/F-N은 withheld | 모든 선언 케이스가 qualified provider와 독립 검증을 통과하고, 점화·기상·인구·차단 조건을 시설 ledger로 합친 뒤 독립 재계산과 component contribution 검사가 일치해야 한다. |
 | 7 | 실시간 처리시간 증거 | generic HAZOP 오케스트레이션 경로의 20회 측정은 p50 1.019 ms, p95 1.084 ms, p99 1.084 ms로 기록됨 | 상태→HAZOP 선택, 증거 조회, 새 provider/SLABx 계산을 분리해 p50/p95/p99와 입력 크기를 기록한다. 현재 수치는 오케스트레이션만 포함하며, 새 물리계산의 1 Hz 보장을 주장하지 않는다. |

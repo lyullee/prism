@@ -1,0 +1,564 @@
+{
+  "schema_version": "prism.validation_evidence_matrix.v1",
+  "status": "RESTRICTED_EVIDENCE_MATRIX",
+  "decision": "FACILITY_QRA_WITHHELD",
+  "evidence_domains": [
+    {
+      "id": "dynamiclh2poolx_pool_spreading",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "supports": [
+        "ground-reaching inflow to horizontal unconfined pool/spreading terms",
+        "limited hold-out radius and mass-ledger checks"
+      ],
+      "does_not_support": [
+        "equipment accident release",
+        "atmospheric dispersion",
+        "ignition, fire, explosion, IR/F-N",
+        "facility-QRA physical validation"
+      ],
+      "provenance_status": "DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
+      "hash_mismatch_count": 1,
+      "source": {
+        "label": "DynamicLH2PoolX restricted component record",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261009\\validation_evidence\\dynamiclh2poolx_stage_c_prism_record_git_blob.json",
+        "sha256": "ae114e266bddf45d6a8907e770652fad20dd93e80ea707d59f880eef28321200",
+        "status": "DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false
+    },
+    {
+      "id": "equipment_observation",
+      "status": "RESTRICTED_OBSERVATION_EVIDENCE",
+      "supports": [
+        "closed-operation observation and fit/holdout bookkeeping",
+        "independent-validation release-gate bookkeeping"
+      ],
+      "does_not_support": [
+        "accident release packet",
+        "release duration, isolation, or inventory depletion validation",
+        "frequency inference",
+        "SLABx-LH2 or facility IR/F-N validation"
+      ],
+      "case_count": 4,
+      "fit_case_count": 2,
+      "holdout_case_count": 2,
+      "released_scenario_count": 0,
+      "simulator_invocation_count": 0,
+      "source": {
+        "label": "equipment observation validation audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261009\\validation_evidence\\equipment_validation_audit_live.json",
+        "sha256": "e1170593e102bfc644c0e4d3a41b73d6d5175b9aee9204eaffcf0989de3f7a6c",
+        "status": "RESTRICTED_EQUIPMENT_OBSERVATION_EVIDENCE"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false
+    },
+    {
+      "id": "native_external_model_contract",
+      "status": "DIAGNOSTIC_INTERFACE_ONLY",
+      "supports": [
+        "static presence of native export_accident_history methods",
+        "diagnostic adapter contract inspection"
+      ],
+      "does_not_support": [
+        "qualified provider packet",
+        "physical validation",
+        "frequency inference",
+        "facility QRA"
+      ],
+      "binding_count": 8,
+      "native_accident_export_component_count": 7,
+      "diagnostic_adapter_contract_verified_count": 7,
+      "source": {
+        "label": "native external-model contract audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261022\\lh2dt_native_contract_audit_native_catalog.json",
+        "sha256": "2125e4f1eae665f605407f2d9fedf043fec5483998665e9b0ad21d2f38d088ef",
+        "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false
+    },
+    {
+      "id": "facility_conditional_diagnostic_chain",
+      "status": "CONDITIONAL_DIAGNOSTIC_ONLY",
+      "supports": [
+        "conditional source-to-consequence-to-facility diagnostic execution",
+        "conditional IR/F-N bookkeeping under declared screening assumptions"
+      ],
+      "does_not_support": [
+        "qualified facility QRA",
+        "independent full-chain physical validation",
+        "complete accident-family coverage"
+      ],
+      "conditional_case_count": 44,
+      "conditional_executed_case_count": 44,
+      "conditional_uncomputed_case_count": 0,
+      "strict_uncomputed_case_count": 29,
+      "source": {
+        "label": "facility assessment",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "sha256": "5164f0289a3cf81fbefb7a7b2ddd373463bbb9977027accc8f3cd2fecd3c3a7d",
+        "status": "PARTIAL_FACILITY_SCOPE"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_consequence_component",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "supports": [
+        "declared outdoor hydrogen dispersion and LFL comparison cases",
+        "cryogenic pool-radius and evaporation comparison cases",
+        "mass-closure and repeat-runtime checks for the external consequence model"
+      ],
+      "does_not_support": [
+        "equipment accident release, isolation, or inventory-depletion validation",
+        "initiating-event frequency or sensor-frequency learning",
+        "ignition, fire, explosion, IR/F-N, or facility-QRA validation",
+        "indoor, detonation/DDT, obstacle, or terrain cases outside declared applicability"
+      ],
+      "model": {
+        "name": "SLABx-LH2",
+        "slabx_lh2_version": "0.1.2",
+        "slabx_version": "1.0.6"
+      },
+      "declared_scope": {
+        "supports": [
+          "cryogenic-hydrogen pool radius and evaporation comparison",
+          "outdoor hydrogen dispersion/LFL comparison under declared applicability",
+          "inventory mass-closure and repeat-runtime evidence from the external model"
+        ],
+        "excludes": [
+          "equipment accident release or provider qualification",
+          "initiating-event frequency or sensor frequency learning",
+          "ignition, fire, explosion, blast, IR/F-N, or facility-QRA validation",
+          "indoor, detonation/DDT, obstacle/terrain cases outside the declared SLABx applicability"
+        ]
+      },
+      "ffi_case_count": 6,
+      "flacs_comparison_row_count": 6,
+      "pool_radius_median_ratio": 1.0305005693059233,
+      "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+      "runtime_repeat_inventory_difference_kg": 0.0,
+      "source_results": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\results.json",
+        "sha256": "a014b3e09133320204579a36d4b6591cc7640249bf862ef6f4485e4d859775cb",
+        "generated_utc": "2026-08-25T23:53:16Z"
+      },
+      "source": {
+        "label": "SLABx-LH2 restricted consequence component record",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261024\\slabx_lh2_validation_audit_v1.json",
+        "sha256": "01d9a0e7d823f51340c9784616947fc3190905e269da06138f5c2192f028d58a",
+        "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "ijhe_scope_audit",
+      "status": "INCOMPLETE_EVIDENCE",
+      "supports": [
+        "explicit accounting of evidence blockers and diagnostic scope"
+      ],
+      "does_not_support": [
+        "automatic promotion of facility QRA"
+      ],
+      "check_count": 57,
+      "source": {
+        "label": "IJHE completion audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
+        "sha256": "9b0c4dba05b5ee2602c0f28c21e6fed6febcc32777cd03cc1c6809bae252ea44",
+        "status": "INCOMPLETE_EVIDENCE"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_lh2_sweep_screening",
+      "status": "SCREENING_CLOSURE_AND_TIMING_ONLY",
+      "supports": [
+        "internal mass/energy closure bookkeeping",
+        "external-model processing-time range",
+        "failed-case preservation and engineering-judgement proxy labeling"
+      ],
+      "does_not_support": [
+        "independent physical validation",
+        "qualified accident release packet",
+        "frequency inference",
+        "facility IR/F-N"
+      ],
+      "tank_sweep_record_count": 68,
+      "tno_policy_record_count": 6,
+      "maximum_tank_mass_residual_kg": 1.0419221041502169e-11,
+      "maximum_tank_energy_residual_J": 5.811452865600586e-07,
+      "tno_policy_runtime_s": {
+        "count": 6,
+        "min": 0.36883510000006936,
+        "median": 0.38109350000013364,
+        "p95": 0.39991480000071533,
+        "max": 0.40395400000124937
+      },
+      "source": {
+        "label": "external LH2 sweep screening audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\center_lh2_external_sweep_audit.json",
+        "sha256": "cc862d72ae26775292c7439a9da372d5adb2a954a6244b3a71c8b5e8fa75a9f2",
+        "status": "SCREENING_ONLY_EXTERNAL_SWEEP"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_outdoor_field_observation",
+      "status": "RESTRICTED_OBSERVATION_EVIDENCE",
+      "supports": [
+        "machine-readable outdoor LH2 source-boundary observations",
+        "measured weather and receptor concentration time series",
+        "common-clock and file-hash provenance for later model comparison"
+      ],
+      "does_not_support": [
+        "provider accident-release qualification",
+        "initiating frequency or sensor frequency learning",
+        "ignition, fire, explosion, IR/F-N, or facility-QRA validation"
+      ],
+      "event_id": "preslhy-e35-trial-10-2019-09-13",
+      "dataset_id": "preslhy-e35-trial10-xensor-window",
+      "source_row_count": 208,
+      "weather_row_count": 92,
+      "receptor_row_count": 5053,
+      "coordinate_reference": "source-relative metres; z above concrete pad",
+      "model_comparison_ready": false,
+      "source": {
+        "label": "external outdoor field observation evidence",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\preslhy_trial10_external_field_evidence_reverified_current.json",
+        "sha256": "a2372f2483bb99370c08e3536cb883cd064c5e5ac85dfa436359417cbedaa2ad",
+        "status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_field_model_comparison",
+      "status": "RESTRICTED_COMPARISON_EVIDENCE",
+      "supports": [
+        "declared-clock, geometry-matched field/model concentration error metrics",
+        "explicit measured-source replay versus independent-model provenance"
+      ],
+      "does_not_support": [
+        "automatic independent physical-validation promotion",
+        "accident-release or initiating-frequency validation",
+        "ignition, IR/F-N, or facility-QRA validation"
+      ],
+      "event_id": "preslhy-e35-trial-10-2019-09-13",
+      "sample_count": 4960,
+      "matched_row_count": 4960,
+      "matched_fraction": 0.9815950920245399,
+      "rmse_vol_pct": 31.102896957193188,
+      "mae_vol_pct": 18.190083868803708,
+      "source_boundary_mode": "measured_source_replay",
+      "independent_physical_validation_review_eligible": false,
+      "source": {
+        "label": "external field/model comparison",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\preslhy_trial10_field_model_comparison_reverified_current.json",
+        "sha256": "51292522be6c37bc28a3abb537d8cf3796ee3c6d1d3f132d04ebae4ddc0a2977",
+        "status": "RESTRICTED_FIELD_MODEL_COMPARISON"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_direct_component_comparison",
+      "status": "REVIEW_READY_COMPONENT_EVIDENCE",
+      "supports": [
+        "same-operator FFI Test 4 native-SLABx concentration comparison",
+        "30 matched sensors over the declared 275 s observation window",
+        "320/32 to 640/64 numerical refinement and LFL classification closure"
+      ],
+      "does_not_support": [
+        "independent holdout physical validation",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "row_count": 30,
+      "sensor_count": 30,
+      "mean_bias_vol_pct": -0.45313011850063983,
+      "mae_vol_pct": 0.6480842583399518,
+      "rmse_vol_pct": 1.2106452167244133,
+      "observed_lfl_pairs": 3,
+      "predicted_lfl_pairs": 3,
+      "true_positive": 3,
+      "false_negative": 0,
+      "false_positive": 0,
+      "independent_holdout_validation_claim": false,
+      "source": {
+        "label": "SLABx-LH2 direct component comparison audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\slabx_lh2_direct_comparison_audit.json",
+        "sha256": "abb0f2493e2ac1d521bda0606c3e36a8fda7b786ed5eadfce4fe3b529930d590",
+        "status": "DIRECT_COMPONENT_COMPARISON_REVIEW_READY"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_independent_comparison",
+      "status": "INDEPENDENT_COMPARISON_REVIEW_READY",
+      "supports": [
+        "independent FFI Test 6 SLABx sensor comparison",
+        "published-source/no-fitting provenance and LFL classification accounting"
+      ],
+      "does_not_support": [
+        "independent physical validation while the source/numerical gate is open",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "row_count": 30,
+      "sensor_count": 30,
+      "mean_bias_vol_pct": -1.1924596629594961,
+      "mae_vol_pct": 1.8671267816835724,
+      "rmse_vol_pct": 4.535886153151856,
+      "observed_lfl_pairs": 6,
+      "predicted_lfl_pairs": 3,
+      "true_positive": 3,
+      "false_negative": 3,
+      "false_positive": 0,
+      "source_gate_accepted": true,
+      "independent_physical_validation_claim": false,
+      "source": {
+        "label": "SLABx-LH2 independent comparison audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_independent_comparison_high_resolution.json",
+        "sha256": "100986637ef65fe61a7108e215736945c5ee2e84fbd98118d614a2cf30d4a573",
+        "status": "INDEPENDENT_COMPARISON_REVIEW_READY"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    }
+  ],
+  "accident_family_validation_scope": {
+    "status": "EXPLICIT_FAMILY_SCOPE_RECORDED",
+    "source": "facility_risk_ledger.required_accident_families + accident_family_statuses",
+    "family_labels_are_explicit": true,
+    "family_inference_performed": false,
+    "required_family_count": 12,
+    "rows": [
+      {
+        "scenario_family": "vessel_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "pipe_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "valve_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "vent_hole",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "pump_hole",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "vaporizer_hole",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "reliquefier_hole",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "liquid_two_phase",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "inventory_depletion",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "inventory_over_600s",
+        "diagnostic_execution_status": "EXECUTED",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "two_sided_rupture",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      },
+      {
+        "scenario_family": "vertical_handoff",
+        "diagnostic_execution_status": "PARTIAL",
+        "equipment_release_validation_status": "WITHHELD",
+        "independent_full_chain_validation_status": "WITHHELD",
+        "facility_qra_validation_status": "WITHHELD",
+        "family_level_physical_validation_claim": false,
+        "family_level_qra_claim": false
+      }
+    ],
+    "unclassified_family_count": 0,
+    "component_consequence_evidence": "DOWNSTREAM_COMPONENT_EVIDENCE_ONLY",
+    "equipment_release_validation_status": "WITHHELD",
+    "independent_full_chain_validation_status": "WITHHELD",
+    "facility_qra_validation_status": "WITHHELD"
+  },
+  "claims": [
+    {
+      "claim": "restricted_pool_spreading_component_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "dynamiclh2poolx_pool_spreading"
+    },
+    {
+      "claim": "closed_operation_equipment_observation_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "equipment_observation"
+    },
+    {
+      "claim": "conditional_source_to_facility_diagnostic_chain",
+      "status": "CONDITIONAL_ONLY",
+      "allowed": true,
+      "basis": "facility_conditional_diagnostic_chain"
+    },
+    {
+      "claim": "restricted_slabx_lh2_consequence_component_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_consequence_component"
+    },
+    {
+      "claim": "restricted_dynamiclh2poolx_source_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "dynamiclh2poolx_source_evidence_audit"
+    },
+    {
+      "claim": "restricted_external_outdoor_field_observation_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "external_outdoor_field_observation"
+    },
+    {
+      "claim": "restricted_external_field_model_comparison_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "external_field_model_comparison"
+    },
+    {
+      "claim": "restricted_external_provider_component_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "external_provider_validation_component_evidence"
+    },
+    {
+      "claim": "restricted_preslhy_slabx_window_comparison_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "preslhy_slabx_window_comparison"
+    },
+    {
+      "claim": "restricted_slabx_lh2_source_validation_gate_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_source_validation_gate"
+    },
+    {
+      "claim": "review_ready_slabx_lh2_direct_component_comparison",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_direct_component_comparison"
+    },
+    {
+      "claim": "restricted_slabx_lh2_independent_comparison_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_independent_comparison"
+    },
+    {
+      "claim": "independent_full_chain_physical_validation",
+      "status": "WITHHELD",
+      "allowed": false,
+      "basis": "restricted_component_and_observation_evidence_only"
+    },
+    {
+      "claim": "qualified_facility_qra",
+      "status": "WITHHELD",
+      "allowed": false,
+      "basis": "facility promotion gate remains closed"
+    }
+  ],
+  "blocking_reasons": [],
+  "physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "promotion_policy": {
+    "component_evidence_does_not_validate_full_chain": true,
+    "normal_observation_does_not_become_accident_release": true,
+    "diagnostic_chain_does_not_become_qualified_facility_qra": true,
+    "frequency_is_not_inferred_from_sensor_or_observation_data": true
+  }
+}

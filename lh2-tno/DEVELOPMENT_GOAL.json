@@ -4793,5 +4793,15 @@
   "facility_evidence_worklist_case_count": 44,
   "facility_evidence_worklist_component_count": 9,
   "facility_evidence_worklist_family_count": 12,
-  "facility_evidence_worklist_facility_qra_promotion": false
+  "facility_evidence_worklist_facility_qra_promotion": false,
+  "preslhy_trial10_manifest_rebaseline_latest_record": "results/20261115/preslhy_trial10_manifest_rebaselined_current.json",
+  "preslhy_trial10_manifest_rebaseline_latest_status": "HASHES_REBASED_TO_CURRENT_FILES; independent_reverification=false; promotion_allowed=false",
+  "preslhy_trial10_external_field_evidence_latest_record": "results/20261115/preslhy_trial10_external_field_evidence_reverified_current.json",
+  "preslhy_trial10_external_field_evidence_latest_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE; 208 source rows, 92 weather rows, 5053 receptor rows; physical validation false",
+  "preslhy_trial10_field_model_comparison_latest_record": "results/20261115/preslhy_trial10_field_model_comparison_reverified_current.json",
+  "preslhy_trial10_field_model_comparison_latest_status": "RESTRICTED_FIELD_MODEL_COMPARISON; measured-source replay; 4960/5053 matched; RMSE=31.103 vol%; predicted peak=0.0 vs observed peak=87.7818; physical validation false",
+  "preslhy_trial10_field_model_comparison_matched_fraction": 0.9815950920245399,
+  "preslhy_trial10_field_model_comparison_physical_validation_claim": false,
+  "validation_evidence_matrix_with_preslhy_reverified_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix_with_preslhy_reverified.json",
+  "validation_evidence_matrix_with_preslhy_reverified_status": "RESTRICTED_EVIDENCE_MATRIX; 11 domains; FACILITY_QRA_WITHHELD; physical validation false"
 }
