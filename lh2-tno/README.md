@@ -151,6 +151,15 @@ withheld.
 
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 
+The same replay accepts the reviewed HAZOP event-mode binding as an optional
+input (`--hazop-event-mode-binding`). On an exact event/component/release-mode
+match it carries the field operating mode (`receiving`, `supply`, or `standby`)
+and `hazop_scenario_id` into the event route, consequence request, case, and
+risk atom. Missing rows stay unbound; PRISM never guesses a mode from pressure,
+equipment type, or leak size. The current seven-packet record matched all 24
+catalogue event labels, executed seven provider paths, and kept the remaining
+17 opening bins `UNCOMPUTED`.
+
 ## What PRISM does not infer
 
 PRISM does not infer leak size from pressure and temperature alone, convert normal flow into an accident history, learn an annual accident frequency from alarm counts, extend the last provider interval, or silently replace a missing provider with a similar case. These restrictions keep the risk result auditable.

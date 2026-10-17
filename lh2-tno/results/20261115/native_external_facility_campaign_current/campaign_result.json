@@ -2,7 +2,7 @@
   "status": "PARTIAL_DECLARED_SCOPE",
   "facility_id": "generic-lh2-full-scope-example",
   "facility_digest": "83f86daba9d58f4fd243b05290d65d58b4b0c3b9637b75df845eade6e73e1c15",
-  "campaign_digest": "69baccba8eb73f6d49781a69c00c541e4c6501ca245bbbd32393bdbe85bb10b9",
+  "campaign_digest": "bdcf996f2d8064e69e8cc117318c031fc220cc788dc038cb7bdda92fb8ca59e7",
   "scope_provenance": "multiple native provider packets bound to exact facility events; unmatched bins remain withheld",
   "events": [
     {
@@ -45,8 +45,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "physical_validation_claim": false
     },
     {
@@ -89,8 +89,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
       "physical_validation_claim": false
     },
     {
@@ -133,8 +133,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
       "physical_validation_claim": false
     },
     {
@@ -177,8 +177,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
       "physical_validation_claim": false
     },
     {
@@ -221,8 +221,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
       "physical_validation_claim": false
     },
     {
@@ -266,8 +266,8 @@
         "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
       "physical_validation_claim": false
     },
     {
@@ -311,8 +311,8 @@
         "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
       "physical_validation_claim": false
     },
     {
@@ -356,8 +356,8 @@
         "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
       "physical_validation_claim": false
     },
     {
@@ -401,8 +401,8 @@
         "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
       "physical_validation_claim": false
     },
     {
@@ -446,8 +446,8 @@
         "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
       "physical_validation_claim": false
     },
     {
@@ -490,8 +490,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "physical_validation_claim": false
     },
     {
@@ -534,8 +534,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
       "physical_validation_claim": false
     },
     {
@@ -578,8 +578,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
       "physical_validation_claim": false
     },
     {
@@ -622,8 +622,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
       "physical_validation_claim": false
     },
     {
@@ -666,8 +666,8 @@
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
       "physical_validation_claim": false
     },
     {
@@ -708,8 +708,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "physical_validation_claim": false
     },
     {
@@ -749,8 +749,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
       "physical_validation_claim": false
     },
     {
@@ -790,8 +790,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "physical_validation_claim": false
     },
     {
@@ -831,8 +831,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
       "physical_validation_claim": false
     },
     {
@@ -872,8 +872,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
       "physical_validation_claim": false
     },
     {
@@ -913,8 +913,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
       "physical_validation_claim": false
     },
     {
@@ -955,8 +955,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
       "physical_validation_claim": false
     },
     {
@@ -997,8 +997,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
       "physical_validation_claim": false
     },
     {
@@ -1038,8 +1038,8 @@
         "Generic industrial default, not an empirically validated LH2 failure rate.",
         "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
       "physical_validation_claim": false
     }
   ],
@@ -1092,8 +1092,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -1131,6 +1131,8 @@
         "cumulative_mass_out_kg": [
           0.045512888609354325
         ],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -1158,17 +1160,17 @@
         ]
       },
       "status": "EXECUTED_DOMAIN_INCOMPLETE",
-      "elapsed_ms": 35904.00289997342,
-      "request_digest": "48a304464d19471b841012ab069ad1154befb5d974d6879c655049c4a830f781",
-      "result_digest": "670c0e9e5f1003f224632f864d50a5a3cf862e1ea2f4f72f8320d3be7f1ce2b7",
+      "elapsed_ms": 37952.8861999861,
+      "request_digest": "125b7f98c0615eb9a982f3412ad55dec9c4d9a5385a9fd4220de9e08b17259ad",
+      "result_digest": "8de5790d4ded3b748153fcccdc59e028ab976859279cefbfd9c79c3baab72aff",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 724.0965999953914,
-        "pool": 22595.29470000416,
-        "near_field_and_dispersion": 11968.375600001309,
-        "cloud_observation": 199.41380000091158,
-        "fire_explosion_damage_risk": 109.91690002265386
+        "source": 762.5202999915928,
+        "pool": 24857.94079999323,
+        "near_field_and_dispersion": 11727.46009999537,
+        "cloud_observation": 195.53140000789426,
+        "fire_explosion_damage_risk": 100.70760000962764
       },
       "mass_ledger": {
         "released_kg": 0.045512888609354325,
@@ -1217,8 +1219,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1238,8 +1240,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1259,8 +1261,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1280,8 +1282,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1301,8 +1303,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1322,8 +1324,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1344,8 +1346,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
@@ -1383,6 +1385,8 @@
         "cumulative_mass_out_kg": [
           0.00037254245348956725
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -1410,17 +1414,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 8711.309999984223,
-      "request_digest": "2435db18bea089c64b0549693e2a5d9684f723f2b2c7c4edc9ffd397097a130c",
-      "result_digest": "849c4e3abc3aded03ae9f64ad56ec451ead3a61b50d38a468cd324fdf7c5baf8",
+      "elapsed_ms": 8454.251799994381,
+      "request_digest": "252370f266bd3d6363b791ea334f7f29c09053dc6ae52f44a36cdb7f787bd3c9",
+      "result_digest": "55a0475f061044e91532354822275cfeb370ba58294d4dcdb2add8bec0cb98f3",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 724.8969000065699,
-        "pool": 820.1468999905046,
-        "near_field_and_dispersion": 6570.175400003791,
-        "cloud_observation": 161.66670000529848,
-        "fire_explosion_damage_risk": 118.19090001517907
+        "source": 723.7448999949265,
+        "pool": 833.8979999825824,
+        "near_field_and_dispersion": 6296.407999994699,
+        "cloud_observation": 152.50150000792928,
+        "fire_explosion_damage_risk": 114.56410001846962
       },
       "mass_ledger": {
         "released_kg": 0.00037254245348956725,
@@ -1467,8 +1471,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1488,8 +1492,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1508,8 +1512,8 @@
       "scenario_families": [
         "valve_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -1546,20 +1550,22 @@
         ],
         "cumulative_mass_out_kg": [
           1.2111170779661988e-06
-        ]
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1878.6104999890085,
-      "request_digest": "1098d08c746e7cac1dae214450551ee6a714ae04f855ef261fb4641520eb2a19",
-      "result_digest": "10676f61b498cd3b88db1e468db837ae9001a3f5cea4a5a1f81227f2f32e5880",
+      "elapsed_ms": 1848.165900009917,
+      "request_digest": "ea161c66571932bf947353034bffa13e48d91ede21c56c010f81707c9b1effe4",
+      "result_digest": "0d3678b68fc7a44122934b14b8ed795d225c028fcd62e7b7b305f291fb1c5b9a",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 738.344400015194,
-        "pool": 0.0037999998312443495,
-        "near_field_and_dispersion": 670.2842999948189,
-        "cloud_observation": 80.42119999299757,
-        "fire_explosion_damage_risk": 71.93160001770593
+        "source": 729.8828000202775,
+        "pool": 0.0041000021155923605,
+        "near_field_and_dispersion": 663.9737000223249,
+        "cloud_observation": 79.1126000112854,
+        "fire_explosion_damage_risk": 71.67740000295453
       },
       "mass_ledger": {
         "released_kg": 1.2111170779661988e-06,
@@ -1607,8 +1613,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1628,8 +1634,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1649,8 +1655,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1670,8 +1676,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1690,8 +1696,8 @@
       "scenario_families": [
         "vent_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -1728,20 +1734,22 @@
         ],
         "cumulative_mass_out_kg": [
           3.827489552640163e-05
-        ]
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1660.5228999978863,
-      "request_digest": "e2d04c88dc0f2b451ef28d9092becf12b8071601c19d6df29027374da2a31a14",
-      "result_digest": "6103e26cbeabce58946bc2512f698163f9ac9e37693b220b0f39336fb8f07966",
+      "elapsed_ms": 1639.6262000198476,
+      "request_digest": "41571ba4995228c38ac2e7c7271f8872f95e125a9a817a311a3cb1a27020d318",
+      "result_digest": "a7fe6a6670f7ea2745b12fa85bfb6b6d38d5ecbda26f35c6f1c7898304416dfb",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 722.1019999997225,
+        "source": 729.2980000202078,
         "pool": 0.0037999998312443495,
-        "near_field_and_dispersion": 448.44890001695603,
-        "cloud_observation": 86.94769997964613,
-        "fire_explosion_damage_risk": 76.55860000522807
+        "near_field_and_dispersion": 454.74700001068413,
+        "cloud_observation": 80.02110000234097,
+        "fire_explosion_damage_risk": 70.98210000549443
       },
       "mass_ledger": {
         "released_kg": 3.827489552640163e-05,
@@ -1789,8 +1797,8 @@
         "pump_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1811,8 +1819,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -1850,6 +1858,8 @@
         "cumulative_mass_out_kg": [
           0.0002803316189887485
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -1867,17 +1877,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5680.913299991516,
-      "request_digest": "6460bd9c029c2ba81b8d9922e5f6e7dc74cbb3f74849b697611ee4714a7f2861",
-      "result_digest": "2309e4d4a9b68c830c0930c2fae5457adc3a152826c0310125ce9e8446b88c68",
+      "elapsed_ms": 5456.726100004744,
+      "request_digest": "e3759482582a634da330b478adcd7c0940ce0043034344c0b507f3861382989b",
+      "result_digest": "ab8e59950da33b3ab28b81d481ec7a0f63dc30d87d7696d3b3788645cc1f5734",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 720.650300005218,
-        "pool": 926.4344999974128,
-        "near_field_and_dispersion": 3447.0475999987684,
-        "cloud_observation": 133.59129999298602,
-        "fire_explosion_damage_risk": 112.13280001538806
+        "source": 729.4901999994181,
+        "pool": 889.001500006998,
+        "near_field_and_dispersion": 3298.6937000241596,
+        "cloud_observation": 111.05610002414323,
+        "fire_explosion_damage_risk": 88.98170001339167
       },
       "mass_ledger": {
         "released_kg": 0.0002803316189887485,
@@ -1927,8 +1937,8 @@
         "inventory_depletion",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1948,8 +1958,8 @@
         "inventory_over_600s",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -1968,8 +1978,8 @@
       "scenario_families": [
         "vaporizer_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
@@ -2007,6 +2017,8 @@
         "cumulative_mass_out_kg": [
           1.6812902073263578e-05
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -2034,17 +2046,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1655.5763999931514,
-      "request_digest": "d35eb54c903578b6fb0cdce61b08fe738138a067e234b613214795d78d9038f4",
-      "result_digest": "e944826de920fddc76a438c4b44ec25f5c7c47958dae7fc46019a8b6b5ae6214",
+      "elapsed_ms": 1625.5494999932125,
+      "request_digest": "8863e697b0ea492a966090ba6447ff32ab934dcd2892a28fb765e4d326fd5054",
+      "result_digest": "eb6a63508b70821b59c92eb0edeef5114d07d50eda76364ef310af251797d99f",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 724.0689999889582,
-        "pool": 0.0037999998312443495,
-        "near_field_and_dispersion": 441.59239999135025,
-        "cloud_observation": 84.60980001837015,
-        "fire_explosion_damage_risk": 72.70659998175688
+        "source": 728.1738000165205,
+        "pool": 0.0034999975468963385,
+        "near_field_and_dispersion": 442.512399982661,
+        "cloud_observation": 68.88049998087808,
+        "fire_explosion_damage_risk": 71.35579999885522
       },
       "mass_ledger": {
         "released_kg": 1.6812902073263578e-05,
@@ -2089,8 +2101,8 @@
       "scenario_families": [
         "two_sided_rupture"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2110,8 +2122,8 @@
       "scenario_families": [
         "two_sided_rupture"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2130,8 +2142,8 @@
       "scenario_families": [
         "reliquefier_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",
@@ -2169,6 +2181,8 @@
         "cumulative_mass_out_kg": [
           1.0508063795789736e-06
         ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -2196,17 +2210,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1566.699700022582,
-      "request_digest": "0fd7c56a0ca11a76ec874c541c906397b0c0e4e44d5b61cfbbeb033f0870e1d7",
-      "result_digest": "136626d61ec45c55667faf22eca409c958f1177e92ab57e6b65d76eafb42c65b",
+      "elapsed_ms": 1560.3974999976344,
+      "request_digest": "7ace1acaa38363ae79c8809b27294b17f2bb41534dc2efee21a8c07e039d98a2",
+      "result_digest": "da8e43b31e7d1bb2be0c0906cbfcb688577c7b641d0226fd151362f2a5a377d5",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 729.5771999924909,
-        "pool": 0.0037999998312443495,
-        "near_field_and_dispersion": 352.4117000051774,
-        "cloud_observation": 85.01099998829886,
-        "fire_explosion_damage_risk": 72.87219999125227
+        "source": 730.48430000199,
+        "pool": 0.0036999990697950125,
+        "near_field_and_dispersion": 382.390500017209,
+        "cloud_observation": 68.1994000042323,
+        "fire_explosion_damage_risk": 71.82609997107647
       },
       "mass_ledger": {
         "released_kg": 1.0508063795789736e-06,
@@ -2254,8 +2268,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -2293,6 +2307,8 @@
         "cumulative_mass_out_kg": [
           0.045512888609354325
         ],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -2320,17 +2336,17 @@
         ]
       },
       "status": "EXECUTED_DOMAIN_INCOMPLETE",
-      "elapsed_ms": 35904.00289997342,
-      "request_digest": "48a304464d19471b841012ab069ad1154befb5d974d6879c655049c4a830f781",
-      "result_digest": "670c0e9e5f1003f224632f864d50a5a3cf862e1ea2f4f72f8320d3be7f1ce2b7",
+      "elapsed_ms": 37952.8861999861,
+      "request_digest": "125b7f98c0615eb9a982f3412ad55dec9c4d9a5385a9fd4220de9e08b17259ad",
+      "result_digest": "8de5790d4ded3b748153fcccdc59e028ab976859279cefbfd9c79c3baab72aff",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 724.0965999953914,
-        "pool": 22595.29470000416,
-        "near_field_and_dispersion": 11968.375600001309,
-        "cloud_observation": 199.41380000091158,
-        "fire_explosion_damage_risk": 109.91690002265386
+        "source": 762.5202999915928,
+        "pool": 24857.94079999323,
+        "near_field_and_dispersion": 11727.46009999537,
+        "cloud_observation": 195.53140000789426,
+        "fire_explosion_damage_risk": 100.70760000962764
       },
       "mass_ledger": {
         "released_kg": 0.045512888609354325,
@@ -2379,8 +2395,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2400,8 +2416,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2421,8 +2437,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2442,8 +2458,8 @@
         "vessel_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2463,8 +2479,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2484,8 +2500,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2505,8 +2521,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2526,8 +2542,8 @@
         "pipe_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2546,8 +2562,8 @@
       "scenario_families": [
         "valve_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -2584,20 +2600,22 @@
         ],
         "cumulative_mass_out_kg": [
           1.2111170779661988e-06
-        ]
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1878.6104999890085,
-      "request_digest": "1098d08c746e7cac1dae214450551ee6a714ae04f855ef261fb4641520eb2a19",
-      "result_digest": "10676f61b498cd3b88db1e468db837ae9001a3f5cea4a5a1f81227f2f32e5880",
+      "elapsed_ms": 1848.165900009917,
+      "request_digest": "ea161c66571932bf947353034bffa13e48d91ede21c56c010f81707c9b1effe4",
+      "result_digest": "0d3678b68fc7a44122934b14b8ed795d225c028fcd62e7b7b305f291fb1c5b9a",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 738.344400015194,
-        "pool": 0.0037999998312443495,
-        "near_field_and_dispersion": 670.2842999948189,
-        "cloud_observation": 80.42119999299757,
-        "fire_explosion_damage_risk": 71.93160001770593
+        "source": 729.8828000202775,
+        "pool": 0.0041000021155923605,
+        "near_field_and_dispersion": 663.9737000223249,
+        "cloud_observation": 79.1126000112854,
+        "fire_explosion_damage_risk": 71.67740000295453
       },
       "mass_ledger": {
         "released_kg": 1.2111170779661988e-06,
@@ -2645,8 +2663,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2666,8 +2684,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2687,8 +2705,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2708,8 +2726,8 @@
         "valve_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2728,8 +2746,8 @@
       "scenario_families": [
         "vent_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -2766,20 +2784,22 @@
         ],
         "cumulative_mass_out_kg": [
           3.827489552640163e-05
-        ]
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1660.5228999978863,
-      "request_digest": "e2d04c88dc0f2b451ef28d9092becf12b8071601c19d6df29027374da2a31a14",
-      "result_digest": "6103e26cbeabce58946bc2512f698163f9ac9e37693b220b0f39336fb8f07966",
+      "elapsed_ms": 1639.6262000198476,
+      "request_digest": "41571ba4995228c38ac2e7c7271f8872f95e125a9a817a311a3cb1a27020d318",
+      "result_digest": "a7fe6a6670f7ea2745b12fa85bfb6b6d38d5ecbda26f35c6f1c7898304416dfb",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 722.1019999997225,
+        "source": 729.2980000202078,
         "pool": 0.0037999998312443495,
-        "near_field_and_dispersion": 448.44890001695603,
-        "cloud_observation": 86.94769997964613,
-        "fire_explosion_damage_risk": 76.55860000522807
+        "near_field_and_dispersion": 454.74700001068413,
+        "cloud_observation": 80.02110000234097,
+        "fire_explosion_damage_risk": 70.98210000549443
       },
       "mass_ledger": {
         "released_kg": 3.827489552640163e-05,
@@ -2827,8 +2847,8 @@
         "pump_hole",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2849,8 +2869,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -2888,6 +2908,8 @@
         "cumulative_mass_out_kg": [
           0.0002803316189887485
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -2905,17 +2927,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5680.913299991516,
-      "request_digest": "6460bd9c029c2ba81b8d9922e5f6e7dc74cbb3f74849b697611ee4714a7f2861",
-      "result_digest": "2309e4d4a9b68c830c0930c2fae5457adc3a152826c0310125ce9e8446b88c68",
+      "elapsed_ms": 5456.726100004744,
+      "request_digest": "e3759482582a634da330b478adcd7c0940ce0043034344c0b507f3861382989b",
+      "result_digest": "ab8e59950da33b3ab28b81d481ec7a0f63dc30d87d7696d3b3788645cc1f5734",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
       "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
       "stage_elapsed_ms": {
-        "source": 720.650300005218,
-        "pool": 926.4344999974128,
-        "near_field_and_dispersion": 3447.0475999987684,
-        "cloud_observation": 133.59129999298602,
-        "fire_explosion_damage_risk": 112.13280001538806
+        "source": 729.4901999994181,
+        "pool": 889.001500006998,
+        "near_field_and_dispersion": 3298.6937000241596,
+        "cloud_observation": 111.05610002414323,
+        "fire_explosion_damage_risk": 88.98170001339167
       },
       "mass_ledger": {
         "released_kg": 0.0002803316189887485,
@@ -2965,8 +2987,8 @@
         "inventory_depletion",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -2986,8 +3008,8 @@
         "inventory_over_600s",
         "liquid_two_phase"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -3007,8 +3029,8 @@
       "scenario_families": [
         "two_sided_rupture"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -3028,8 +3050,8 @@
       "scenario_families": [
         "two_sided_rupture"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
       "status": "UNCOMPUTED",
       "reason": "provider release evidence is not supplied for this event",
       "elapsed_ms": 0.0
@@ -4531,8 +4553,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -4570,6 +4592,8 @@
         "cumulative_mass_out_kg": [
           0.045512888609354325
         ],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -4623,8 +4647,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -4662,6 +4686,8 @@
         "cumulative_mass_out_kg": [
           0.045512888609354325
         ],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -4715,8 +4741,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -4754,6 +4780,8 @@
         "cumulative_mass_out_kg": [
           0.045512888609354325
         ],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -4807,8 +4835,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -4846,6 +4874,8 @@
         "cumulative_mass_out_kg": [
           0.045512888609354325
         ],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -4899,8 +4929,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
@@ -4938,6 +4968,8 @@
         "cumulative_mass_out_kg": [
           0.00037254245348956725
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -4991,8 +5023,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
@@ -5030,6 +5062,8 @@
         "cumulative_mass_out_kg": [
           0.00037254245348956725
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -5083,8 +5117,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
@@ -5122,6 +5156,8 @@
         "cumulative_mass_out_kg": [
           0.00037254245348956725
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -5175,8 +5211,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
@@ -5214,6 +5250,8 @@
         "cumulative_mass_out_kg": [
           0.00037254245348956725
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -5265,8 +5303,8 @@
       "scenario_families": [
         "valve_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -5303,7 +5341,9 @@
         ],
         "cumulative_mass_out_kg": [
           1.2111170779661988e-06
-        ]
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5330,8 +5370,8 @@
       "scenario_families": [
         "valve_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -5368,7 +5408,9 @@
         ],
         "cumulative_mass_out_kg": [
           1.2111170779661988e-06
-        ]
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5395,8 +5437,8 @@
       "scenario_families": [
         "valve_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -5433,7 +5475,9 @@
         ],
         "cumulative_mass_out_kg": [
           1.2111170779661988e-06
-        ]
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5460,8 +5504,8 @@
       "scenario_families": [
         "valve_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -5498,7 +5542,9 @@
         ],
         "cumulative_mass_out_kg": [
           1.2111170779661988e-06
-        ]
+        ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5525,8 +5571,8 @@
       "scenario_families": [
         "vent_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -5563,7 +5609,9 @@
         ],
         "cumulative_mass_out_kg": [
           3.827489552640163e-05
-        ]
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5590,8 +5638,8 @@
       "scenario_families": [
         "vent_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -5628,7 +5676,9 @@
         ],
         "cumulative_mass_out_kg": [
           3.827489552640163e-05
-        ]
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5655,8 +5705,8 @@
       "scenario_families": [
         "vent_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -5693,7 +5743,9 @@
         ],
         "cumulative_mass_out_kg": [
           3.827489552640163e-05
-        ]
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5720,8 +5772,8 @@
       "scenario_families": [
         "vent_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -5758,7 +5810,9 @@
         ],
         "cumulative_mass_out_kg": [
           3.827489552640163e-05
-        ]
+        ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5787,8 +5841,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -5826,6 +5880,8 @@
         "cumulative_mass_out_kg": [
           0.0002803316189887485
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -5869,8 +5925,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -5908,6 +5964,8 @@
         "cumulative_mass_out_kg": [
           0.0002803316189887485
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -5951,8 +6009,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -5990,6 +6048,8 @@
         "cumulative_mass_out_kg": [
           0.0002803316189887485
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6033,8 +6093,8 @@
         "liquid_two_phase",
         "inventory_depletion"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -6072,6 +6132,8 @@
         "cumulative_mass_out_kg": [
           0.0002803316189887485
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6113,8 +6175,8 @@
       "scenario_families": [
         "vaporizer_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
@@ -6152,6 +6214,8 @@
         "cumulative_mass_out_kg": [
           1.6812902073263578e-05
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6203,8 +6267,8 @@
       "scenario_families": [
         "vaporizer_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
@@ -6242,6 +6306,8 @@
         "cumulative_mass_out_kg": [
           1.6812902073263578e-05
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6293,8 +6359,8 @@
       "scenario_families": [
         "vaporizer_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
@@ -6332,6 +6398,8 @@
         "cumulative_mass_out_kg": [
           1.6812902073263578e-05
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6383,8 +6451,8 @@
       "scenario_families": [
         "vaporizer_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
@@ -6422,6 +6490,8 @@
         "cumulative_mass_out_kg": [
           1.6812902073263578e-05
         ],
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6473,8 +6543,8 @@
       "scenario_families": [
         "reliquefier_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",
@@ -6512,6 +6582,8 @@
         "cumulative_mass_out_kg": [
           1.0508063795789736e-06
         ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6563,8 +6635,8 @@
       "scenario_families": [
         "reliquefier_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",
@@ -6602,6 +6674,8 @@
         "cumulative_mass_out_kg": [
           1.0508063795789736e-06
         ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6653,8 +6727,8 @@
       "scenario_families": [
         "reliquefier_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",
@@ -6692,6 +6766,8 @@
         "cumulative_mass_out_kg": [
           1.0508063795789736e-06
         ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6743,8 +6819,8 @@
       "scenario_families": [
         "reliquefier_hole"
       ],
-      "operating_mode": null,
-      "hazop_scenario_id": null,
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
       "provider_packet_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",
@@ -6782,6 +6858,8 @@
         "cumulative_mass_out_kg": [
           1.0508063795789736e-06
         ],
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
         "provider_mass_balances": [
           {
             "schema_version": "prism.provider_mass_balance.v1",
@@ -6831,21 +6909,21 @@
         "scipy": "1.18.1"
       }
     },
-    "request_digest": "7b8ddc1c4d3b481f963f4ea44a17679b62639411d2cef9a194f70721cc7c795e",
+    "request_digest": "50ae1347d7ee19449db6fe221785d70cf21ade60b72574a7ae4e361d97018c85",
     "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
     "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
     "adapter_source_digest": "920a3ba552e79055efe4016b758880da0064c51b9b62eeafbee8358513e5ce52",
-    "elapsed_ms": 289.11889999289997,
+    "elapsed_ms": 286.2382000021171,
     "physical_validation_claim": false
   },
   "timing": {
     "fresh_physics_cases": 7,
-    "case_min_ms": 1566.699700022582,
-    "case_median_ms": 1878.6104999890085,
-    "case_max_ms": 35904.00289997342,
-    "case_p95_ms": 27746.195029976643,
-    "case_p99_ms": 34272.441325974054,
-    "campaign_elapsed_ms": 57362.779899995076,
+    "case_min_ms": 1560.3974999976344,
+    "case_median_ms": 1848.165900009917,
+    "case_max_ms": 37952.8861999861,
+    "case_p95_ms": 29103.29587998856,
+    "case_p99_ms": 36182.96813598658,
+    "campaign_elapsed_ms": 58839.9743999762,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "semantics": {

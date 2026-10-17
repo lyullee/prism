@@ -59,7 +59,9 @@ def _save(path: Path, value: Any) -> None:
     )
 
 
-def _request_defaults(context: dict[str, Any], packet: Any) -> dict[str, Any]:
+def _request_defaults(
+    context: dict[str, Any], packet: Any, *, event: Any | None = None
+) -> dict[str, Any]:
     """Copy shared consequence inputs without overriding provider release data."""
     defaults = copy.deepcopy(context)
     for key in (
@@ -76,6 +78,13 @@ def _request_defaults(context: dict[str, Any], packet: Any) -> dict[str, Any]:
     else:
         defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
     defaults["source_duration_mode"] = "declared"
+    # HAZOP identity is copied only from an exact reviewed event binding.  The
+    # campaign never derives a mode from equipment type, pressure, or release
+    # physics.
+    if event is not None:
+        if event.operating_mode is not None:
+            defaults["operating_mode"] = event.operating_mode
+            defaults["hazop_scenario_id"] = event.hazop_scenario_id
     defaults["release_termination"] = {
         "basis": (
             "emergency_relief_discharge"
@@ -199,6 +208,78 @@ def _dynamic_state_closure_dump(packet: Any) -> dict[str, Any] | None:
     return closure.model_dump(mode="json") if closure is not None else None
 
 
+def _bind_hazop_event_modes(
+    events: tuple[Any, ...], path: Path | None,
+) -> tuple[tuple[Any, ...], dict[str, Any]]:
+    """Attach exact reviewed HAZOP mode/scenario labels to catalogue events.
+
+    A missing binding stays missing.  This deliberately rejects component-only
+    or release-only matches because those would silently turn a qualitative
+    HAZOP decision into an inferred operating mode.
+    """
+    if path is None:
+        return events, {
+            "status": "NOT_SUPPLIED",
+            "path": None,
+            "bound_event_count": 0,
+            "unbound_event_count": len(events),
+            "orphan_binding_count": 0,
+            "binding_digest": None,
+        }
+    raw = _object(path)
+    rows = raw.get("event_rows")
+    if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+        raise ValueError("HAZOP binding file must contain an event_rows array")
+    event_by_id = {event.id: event for event in events}
+    binding_by_id: dict[str, dict[str, Any]] = {}
+    orphan_count = 0
+    for row in rows:
+        event_id = row.get("event_id")
+        if not isinstance(event_id, str) or not event_id.strip():
+            raise ValueError("HAZOP binding rows require a nonempty event_id")
+        if event_id in binding_by_id:
+            raise ValueError(f"duplicate HAZOP binding for event {event_id}")
+        event = event_by_id.get(event_id)
+        if event is None:
+            orphan_count += 1
+            continue
+        if row.get("component_id") != event.model_component_id:
+            raise ValueError(f"HAZOP binding component mismatch for event {event_id}")
+        if row.get("release_mode") != event.release.mode:
+            raise ValueError(f"HAZOP binding release-mode mismatch for event {event_id}")
+        mode = row.get("operating_mode")
+        scenario = row.get("hazop_scenario_id")
+        if not isinstance(mode, str) or not mode.strip():
+            raise ValueError(f"HAZOP binding operating_mode missing for event {event_id}")
+        if not isinstance(scenario, str) or not scenario.strip():
+            raise ValueError(f"HAZOP binding hazop_scenario_id missing for event {event_id}")
+        binding_by_id[event_id] = {
+            "operating_mode": mode,
+            "hazop_scenario_id": scenario,
+        }
+    bound_rows = []
+    for event in events:
+        update = binding_by_id.get(event.id)
+        if update is None:
+            bound_rows.append(event)
+        elif hasattr(event, "model_copy"):
+            bound_rows.append(event.model_copy(update=update))
+        else:  # small test doubles can use attribute copies too
+            clone = copy.copy(event)
+            for key, value in update.items():
+                setattr(clone, key, value)
+            bound_rows.append(clone)
+    bound_events = tuple(bound_rows)
+    return bound_events, {
+        "status": "EXACT_REVIEWED_BINDING",
+        "path": str(path).replace("\\", "/"),
+        "bound_event_count": len(binding_by_id),
+        "unbound_event_count": len(events) - len(binding_by_id),
+        "orphan_binding_count": orphan_count,
+        "binding_digest": canonical_digest(raw),
+    }
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     packets = []
     for path in args.packets:
@@ -224,6 +305,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         raise ValueError("every provider packet component must be present in the facility manifest")
     plan = FrequencyPlan.model_validate_json(args.frequency_plan.read_text(encoding="utf-8"))
     events = generate_events(facility, plan)
+    events, hazop_binding = _bind_hazop_event_modes(events, args.hazop_event_mode_binding)
     matched: dict[str, tuple[Any, Any]] = {}
     for packet in packets:
         event = _packet_event_match(packet, list(events))
@@ -243,7 +325,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         else:
             packet = entry[1]
             request = build_consequence_request_from_provider_release(
-                packet, _request_defaults(context, packet)
+                packet, _request_defaults(context, packet, event=event)
             )
             release_kind = "liquid" if isinstance(packet, ResolvedLiquidRelease) else "gas"
             branch = {
@@ -252,7 +334,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "provenance": f"native external {release_kind} provider packet; exact component/opening match; diagnostic only",
                 "request": request.model_dump(mode="json"),
             }
-        routes.append({"event_id": event.id, "branches": [branch]})
+        route = {"event_id": event.id, "branches": [branch]}
+        if event.operating_mode is not None:
+            route["operating_mode"] = event.operating_mode
+            route["hazop_scenario_id"] = event.hazop_scenario_id
+        routes.append(route)
     campaign_raw = {
         "id": "native-provider-multi-equipment-facility-campaign",
         "frequency_plan": plan.model_dump(mode="json"),
@@ -320,6 +406,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_packet_promoted": False,
         "physical_validation_claim": False,
         "facility_qra_claim": False,
+        "hazop_event_mode_binding": hazop_binding,
         "campaign_elapsed_ms": elapsed_ms,
         "packet_digests": [
             {
@@ -372,6 +459,10 @@ def main() -> int:
     parser.add_argument("--backend-config", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--maximum-physics-cases", type=int, default=30)
+    parser.add_argument(
+        "--hazop-event-mode-binding", type=Path, default=None,
+        help="Reviewed event_rows JSON; modes are copied only on exact event/component/release matches",
+    )
     args = parser.parse_args()
     try:
         result = run(args)

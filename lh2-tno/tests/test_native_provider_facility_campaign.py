@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from types import SimpleNamespace
+import json
 
 from scripts.run_native_provider_facility_campaign import (
     _dynamic_state_closure_dump,
     _facility_frequency_scenarios,
     _has_explicit_provider_source_states,
     _packet_event_match,
+    _bind_hazop_event_modes,
 )
 
 
@@ -79,3 +81,49 @@ def test_dynamic_state_closure_dump_preserves_provider_evidence() -> None:
     packet = SimpleNamespace(provider_mass_balance=SimpleNamespace(dynamic_state_closure=closure))
     assert _dynamic_state_closure_dump(packet)["state_history_digest"] == "b" * 64
     assert _dynamic_state_closure_dump(SimpleNamespace(provider_mass_balance=None)) is None
+
+
+def test_hazop_event_mode_binding_requires_exact_event_identity(tmp_path) -> None:
+    event = SimpleNamespace(
+        id="plan/tank/G1",
+        model_component_id="tank",
+        release=SimpleNamespace(mode="hole"),
+        operating_mode=None,
+        hazop_scenario_id=None,
+    )
+    path = tmp_path / "binding.json"
+    path.write_text(json.dumps({"event_rows": [{
+        "event_id": "plan/tank/G1",
+        "component_id": "tank",
+        "release_mode": "hole",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "tank-receiving-g1",
+    }]}), encoding="utf-8")
+    bound, audit = _bind_hazop_event_modes((event,), path)
+    assert bound[0].operating_mode == "receiving"
+    assert bound[0].hazop_scenario_id == "tank-receiving-g1"
+    assert audit["bound_event_count"] == 1
+    assert audit["unbound_event_count"] == 0
+
+
+def test_hazop_event_mode_binding_does_not_infer_unmatched_events(tmp_path) -> None:
+    event = SimpleNamespace(
+        id="plan/tank/G1",
+        model_component_id="tank",
+        release=SimpleNamespace(mode="hole"),
+        operating_mode=None,
+        hazop_scenario_id=None,
+    )
+    path = tmp_path / "binding.json"
+    path.write_text(json.dumps({"event_rows": [{
+        "event_id": "plan/tank/G2",
+        "component_id": "tank",
+        "release_mode": "hole",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "tank-receiving-g2",
+    }]}), encoding="utf-8")
+    bound, audit = _bind_hazop_event_modes((event,), path)
+    assert bound[0].operating_mode is None
+    assert bound[0].hazop_scenario_id is None
+    assert audit["bound_event_count"] == 0
+    assert audit["orphan_binding_count"] == 1

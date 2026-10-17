@@ -39,7 +39,15 @@
   "provider_packet_promoted": false,
   "physical_validation_claim": false,
   "facility_qra_claim": false,
-  "campaign_elapsed_ms": 57362.91820000042,
+  "hazop_event_mode_binding": {
+    "status": "EXACT_REVIEWED_BINDING",
+    "path": "results/20261112/native_isolation_catalog_facility_chain_hazop_mode/hazop_event_mode_binding.json",
+    "bound_event_count": 24,
+    "unbound_event_count": 0,
+    "orphan_binding_count": 0,
+    "binding_digest": "c0a22d6b0268dd8c41f7551f97a4263f65c305664b8759dce2f9256db07f1158"
+  },
+  "campaign_elapsed_ms": 58840.099099994404,
   "packet_digests": [
     {
       "component_id": "storage-tank-01",

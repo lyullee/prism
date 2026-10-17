@@ -23,6 +23,7 @@ python scripts/run_native_provider_facility_campaign.py `
   --frequency-plan examples/generic_lh2_full_scope_frequency_plan.json `
   --annual-conditions examples/generic_lh2_full_scope_annual_conditions.json `
   --backend-config results/20261009/equipment_campaign/backend_config.json `
+  --hazop-event-mode-binding results/20261112/native_isolation_catalog_facility_chain_hazop_mode/hazop_event_mode_binding.json `
   --output-dir results/20261017/native_external_facility_frequency_campaign_20261017 `
   --maximum-physics-cases 30
 ```
@@ -73,3 +74,14 @@ The conditional diagnostic facility IR/F-N view is available in
 `facility_total_risk_available=false` and `facility_qra_claim=false`. No
 missing event is assigned zero risk, and no provider qualification,
 independent physical validation, or facility-wide promotion is inferred.
+
+The replay also consumes the reviewed HAZOP event-mode record at
+`results/20261112/native_isolation_catalog_facility_chain_hazop_mode/hazop_event_mode_binding.json`.
+All 24 catalogue events were matched by exact event ID, component ID, and
+release mode (`bound_event_count=24`, `unbound_event_count=0`). The selected
+`receiving`, `supply`, or `standby` mode and its `hazop_scenario_id` are carried
+on the event route and on the seven executed case/risk-atom chains. This is a
+label binding only: it does not change the literature frequency or release
+physics, and the campaign still withholds facility-wide QRA promotion. If the
+binding file is omitted, modes remain absent; no mode is inferred from a
+component name, pressure, or leak size.
