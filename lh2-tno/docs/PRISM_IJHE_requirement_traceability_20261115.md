@@ -185,3 +185,16 @@ The native audit is now consumed by
 the facility assessment gate from the saved risk ledger and frequency scenarios.
 The derived current assessment preserves conditional IR/F-N while explicitly
 reporting provider gate completeness and keeps qualified facility QRA false.
+
+## 2026-10-18 current-code realtime cache recheck
+
+The near-receptor diagnostic monitor path was measured again with the current code. The exact-state cache and changed-weather fresh-physics paths were kept separate.
+
+- Five unchanged-state cache lookups all met the 1 s diagnostic deadline. The cache median was `33.71 ms` and p95 was `36.41 ms`.
+- The first fresh-physics call took `3050.95 ms`; three changed-weather calls through one persistent worker had a steady p95 of `3027.41 ms`.
+- Therefore the cached diagnostic path is suitable for a 1 Hz polling target in this run, while fresh physics remains a background calculation. No fresh-physics 1 Hz claim is made.
+- The benchmark used the synthetic near-receptor diagnostic facility and does not qualify a full-facility service level, provider evidence, frequency, physical validation, or facility QRA.
+- A separate attempt against the 24-case full-scope campaign exceeded the configured backend deadline on its first fresh-physics request. Its partial process was terminated and no result was promoted; this does not change the authoritative campaign or risk ledger.
+
+The machine-readable recheck is [`examples/native_lh2_realtime_cache_recheck_20261018.json`](../examples/native_lh2_realtime_cache_recheck_20261018.json).
+

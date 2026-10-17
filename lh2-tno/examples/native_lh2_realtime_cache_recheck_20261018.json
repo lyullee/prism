@@ -1,0 +1,109 @@
+{
+  "schema_version": "prism.realtime_cache_benchmark_recheck.v1",
+  "status": "CURRENT_CODE_REALTIME_CACHE_RECHECK_DIAGNOSTIC",
+  "recheck_date_kst": "2026-10-18",
+  "current_code_commit": "563172f48820d8b7c5de66dbc30f443b445d4945",
+  "manifest": "examples/generic_lh2_near_receptor_manifest.json",
+  "campaign": "results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/campaign.json",
+  "backend_config": "results/20261009/backend_config_current.json",
+  "scope_note": "Near-receptor diagnostic facility; this benchmark is not a full-facility 1 Hz qualification.",
+  "current_run": {
+    "schema_version": "prism.realtime_cache_benchmark.v1",
+    "facility_id": "generic-lh2-near-receptor-diagnostic",
+    "request_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "fresh_physics_elapsed_ms": 3050.9499000036158,
+    "fresh_backend_elapsed_ms": 3012.2407999588177,
+    "cache_elapsed_ms_values": [
+      33.714500023052096,
+      33.8560999953188,
+      33.15140004269779,
+      32.73750003427267,
+      36.40689997700974
+    ],
+    "cache_median_ms": 33.714500023052096,
+    "cache_p95_ms": 36.40689997700974,
+    "cache_hits": 5,
+    "one_hz_deadline_s": 1.0,
+    "fresh_physics_meets_one_hz": false,
+    "cache_meets_one_hz_all_samples": true,
+    "realtime_fresh_physics_claim": false,
+    "mode_contract": {
+      "schema": "prism.realtime_mode_contract.v1",
+      "observed_evaluation_modes": [
+        "fresh_physics_background",
+        "cached_diagnostic_1hz"
+      ],
+      "fresh_physics_1hz_claim": false,
+      "stale_fallback_used": false,
+      "frequency_learning": false,
+      "release_inference": false
+    },
+    "interpretation": "Exact cache samples meet a 1 Hz lookup deadline in this run; the fresh physics sample is measured separately and is not a 1 Hz service-level claim.",
+    "persistent_fresh_physics": {
+      "persistent_worker": true,
+      "request_count": 3,
+      "startup_included_in_first_sample": true,
+      "service_elapsed_ms_values": [
+        2999.420700012706,
+        3027.41059998516,
+        2979.781500005629
+      ],
+      "backend_elapsed_ms_values": [
+        2944.3074999726377,
+        2970.084099972155,
+        2923.241800046526
+      ],
+      "startup_elapsed_ms": 2999.420700012706,
+      "steady_elapsed_ms_values": [
+        3027.41059998516,
+        2979.781500005629
+      ],
+      "steady_p50_ms": 3003.5960499953944,
+      "steady_median_ms": 3003.5960499953944,
+      "steady_p95_ms": 3027.41059998516,
+      "steady_p99_ms": 3027.41059998516,
+      "fresh_physics_meets_one_hz": false,
+      "steady_fresh_physics_meets_one_hz": false,
+      "realtime_fresh_physics_claim": false,
+      "mode_contract": {
+        "schema": "prism.realtime_mode_contract.v1",
+        "observed_evaluation_mode": "fresh_physics_background",
+        "fresh_physics_1hz_claim": false,
+        "stale_fallback_used": false,
+        "frequency_learning": false,
+        "release_inference": false
+      },
+      "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
+    }
+  },
+  "previous_reference": {
+    "record": "results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/realtime_cache_benchmark_latest.json",
+    "fresh_physics_elapsed_ms": 2928.823900001589,
+    "cache_p95_ms": 38.860599997860845,
+    "persistent_fresh_steady_p95_ms": 1966.2404999980936
+  },
+  "comparison": {
+    "fresh_physics_delta_percent": 4.169796620478294,
+    "cache_p95_delta_percent": -6.3141074018058685,
+    "persistent_fresh_steady_p95_delta_percent": 53.969496609804104,
+    "cache_1hz_passed": true,
+    "fresh_physics_1hz_passed": false,
+    "persistent_fresh_1hz_passed": false,
+    "cache_hits": 5,
+    "cache_samples": 5,
+    "persistent_fresh_samples": 3
+  },
+  "policy": {
+    "fresh_physics_1hz_claim": false,
+    "stale_fallback_used": false,
+    "frequency_learning": false,
+    "release_inference": false,
+    "facility_qra_claim": false,
+    "interpretation": "Only exact unchanged-state cache lookups met the 1 Hz diagnostic deadline in this run. Fresh physics is measured separately and remains a background path."
+  },
+  "limitations": [
+    "Synthetic near-receptor diagnostic geometry and provider packet are used.",
+    "This does not qualify a full-facility fresh-physics service level.",
+    "The attempted full-scope benchmark was not used because its first fresh-physics request exceeded the configured backend deadline; no result was promoted from that attempt."
+  ]
+}

@@ -6328,14 +6328,12 @@
   "external_lh2dt_dynamic_pipe_pressure_equalization_provider_result_digest": "2d2e974560db55d7eedae5ecc27644ab8c82b8f691097a0ab8e5733275451436",
   "external_lh2dt_dynamic_pipe_pressure_equalization_strict_single_case_status": "PASS; provider_declared_pressure_equalization; release boundary true for this case only",
   "external_lh2dt_dynamic_pipe_pressure_equalization_campaign_rebind_status": "PENDING; current authoritative campaign retains previous digest and remains fail-closed",
-
   "native_dynamic_pipe_facility_frequency_recheck_status": "PASS_DIAGNOSTIC_ONLY; current external provider pressure-equalization packet reached a single-component facility RiskCampaign with exact LH2_PIPE AREA_100% literature frequency",
   "native_dynamic_pipe_facility_frequency_recheck_record": "examples/native_dynamic_pipe_full_bore_facility_frequency_case_recheck_20261018.json",
   "native_dynamic_pipe_facility_frequency_recheck_provider_commit": "7072374",
   "native_dynamic_pipe_facility_frequency_recheck_provider_result_digest": "4b9ec1dba42c46bd040089cb4f0ffe9ee7987dd91b3c82ddd5bfd659ab19b4e9",
   "native_dynamic_pipe_facility_frequency_recheck_campaign_status": "PARTIAL_DECLARED_SCOPE; 5 opening bins, 1 executed, 4 UNCOMPUTED, 4 conditional risk atoms",
   "native_dynamic_pipe_facility_frequency_recheck_facility_qra_claim": false,
-
   "native_dynamic_pipe_exact_area100_candidate_status": "PASS_DIAGNOSTIC_ONLY; exact current AREA_100% state re-exported with explicit provider pressure-equalization evidence and consumed by a one-event RiskCampaign",
   "native_dynamic_pipe_exact_area100_candidate_script": "scripts/run_lh2dt_native_dynamic_pipe_exact_area100_candidate.py",
   "native_dynamic_pipe_exact_area100_candidate_record": "examples/native_dynamic_pipe_exact_area100_reduced_grid_candidate_20261018.json",
@@ -6348,7 +6346,6 @@
   "native_dynamic_pipe_exact_area100_candidate_physical_validation_claim": false,
   "native_dynamic_pipe_exact_area100_candidate_authoritative_campaign_rebound": false,
   "native_dynamic_pipe_exact_area100_candidate_recheck_note": "Latest external provider replay matches the authoritative state snapshot and provider result digest; reduced grid executed 1 case/4 risk atoms. Full-grid attempt remained bounded by the 180 s backend deadline. SLABx-LH2 was not modified.",
-
   "latest_native_external_multi_equipment_recheck_status": "PASS_DIAGNOSTIC_ONLY; latest lh2dt_models source exported 7 equipment packets and all 7 reached the PRISM consequence chain",
   "latest_native_external_multi_equipment_recheck_record": "examples/native_external_multi_equipment_latest_recheck_20261018.json",
   "latest_native_external_multi_equipment_recheck_script": "scripts/run_native_external_equipment_recheck.py and scripts/run_native_external_equipment_chain_recheck.py",
@@ -6375,5 +6372,15 @@
   "latest_full_scope_current_code_recheck_physical_validation_claim": false,
   "latest_full_scope_current_code_recheck_provider_packet_promoted": false,
   "latest_full_scope_current_code_recheck_slabx_lh2_modified": false,
-  "latest_full_scope_current_code_recheck_pressure_ledger_change": "20 rows are now explicitly classified as provider_declared_pressure_equalization_invalid; risk/frequency/case results unchanged"
+  "latest_full_scope_current_code_recheck_pressure_ledger_change": "20 rows are now explicitly classified as provider_declared_pressure_equalization_invalid; risk/frequency/case results unchanged",
+  "latest_realtime_cache_recheck_record": "examples/native_lh2_realtime_cache_recheck_20261018.json",
+  "latest_realtime_cache_recheck_status": "CURRENT_CODE_DIAGNOSTIC; 5/5 unchanged-state cache samples met 1 Hz lookup deadline; fresh physics 3050.95 ms; persistent fresh steady p95 3027.41 ms; no fresh-physics 1 Hz claim",
+  "latest_realtime_cache_recheck_cache_p95_ms": 36.40689997700974,
+  "latest_realtime_cache_recheck_cache_median_ms": 33.714500023052096,
+  "latest_realtime_cache_recheck_fresh_physics_elapsed_ms": 3050.9499000036158,
+  "latest_realtime_cache_recheck_persistent_fresh_steady_p95_ms": 3027.41059998516,
+  "latest_realtime_cache_recheck_cache_meets_one_hz": true,
+  "latest_realtime_cache_recheck_fresh_physics_meets_one_hz": false,
+  "latest_realtime_cache_recheck_facility_qra_claim": false,
+  "latest_realtime_cache_recheck_full_scope_attempt_promoted": false
 }
