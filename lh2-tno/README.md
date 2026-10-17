@@ -37,7 +37,7 @@ The current checkout validation result is **1,496 passed, 1 warning**. The warni
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
 facility-QRA claim until every release boundary has qualified provider evidence
-and independent validation. See the [English readiness audit](docs/PRISM_IJHE_latest_audit_20261115_en.md)
+and independent validation. See the [English readiness audit](docs/PRISM_IJHE_latest_audit_20261115_en.md) and the [IJHE requirements/evidence matrix](docs/PRISM_IJHE_requirements_matrix_en.md)
 for the current 44-case counts and open evidence requests.
 
 The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 27 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
@@ -1064,6 +1064,3 @@ PRISM is released under the MIT License. Cite the concept DOI until the version-
 Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.3.
 Concept DOI: https://doi.org/10.5281/zenodo.23241358
 ```
-
-
-
