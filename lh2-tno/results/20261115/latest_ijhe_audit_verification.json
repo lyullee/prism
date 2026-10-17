@@ -25,7 +25,7 @@
   "facility_qra_gate_summary_record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_qra_gate_summary.json",
   "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD",
   "facility_qra_gate_summary_incomplete_gate_count": 5,
-  "facility_qra_gate_summary_blocking_reason_count": 49,
+  "facility_qra_gate_summary_blocking_reason_count": 50,
   "release_boundary_audit_record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "release_boundary_audit_status": "CASE_BOUNDARY_PARTIAL",
   "release_boundary_case_count": 44,

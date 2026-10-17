@@ -271,7 +271,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1480
+        "full_portable_test_count": 1482
       }
     },
     {
@@ -302,7 +302,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1480
+        "full_portable_test_count": 1482
       }
     },
     {

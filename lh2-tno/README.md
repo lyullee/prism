@@ -268,6 +268,9 @@ The six-gate result is documented in
 [`PRISM_facility_qra_gate_summary_20261115_en.md`](docs/PRISM_facility_qra_gate_summary_20261115_en.md).
 It currently reports `FACILITY_QRA_WITHHELD`; the diagnostic IR/F-N view remains
 visible, and missing evidence is never assigned zero risk.
+The facility-scope gate also requires reviewed-design or field-confirmed
+receptor-population rows with source digests; the current synthetic population
+is intentionally withheld. See [`facility population evidence gate`](docs/PRISM_facility_population_evidence_gate_20261018.md).
 
 The latest validation matrix also includes a hash-reverified PRESLHY Trial 10
 field bundle and its measured-source SLABx comparison:

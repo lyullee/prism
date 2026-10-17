@@ -33,13 +33,17 @@ python scripts/build_facility_qra_gate_summary.py `
 The strict scope gate now requires this explicit matrix to have
 `matrix_complete=true`, `conditional_chain_complete=true`, one `COMPLETE` row
 for every required outdoor accident family, no operator-limited or strictly
-uncomputed row, and a case count matching the assessment. Omitting the matrix
-keeps the gate closed. The current record is `FACILITY_QRA_WITHHELD`. The full
+uncomputed row, and a case count matching the assessment. It also requires the
+facility population ledger to declare a reviewed-design or field-confirmed
+source status with a digest for every receptor row. Structural population rows
+without source qualification remain diagnostic only. Omitting the matrix or
+population evidence keeps the gate closed. The current record is `FACILITY_QRA_WITHHELD`. The full
 union contains 34 events and 44 cases; 29 cases remain withheld by the strict
 release boundary.
 The frequency-port gate is aligned, qualified provider packets are `0/26`, and
 the physical-validation matrix remains restricted. The summary currently has
-50 explicit blocking reasons. The provider qualification audit remains a
+50 explicit blocking reasons, including the unqualified synthetic population
+source. The provider qualification audit remains a
 separate input, so missing provider evidence cannot be hidden by the full-scope
 assessment.
 The summary is therefore a review control and does not claim a regulatory or

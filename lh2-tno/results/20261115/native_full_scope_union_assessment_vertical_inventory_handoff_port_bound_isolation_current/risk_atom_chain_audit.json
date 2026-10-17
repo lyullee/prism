@@ -85,5 +85,5 @@
   "facility_ir_fn_promotion": false,
   "facility_qra_claim": false,
   "interpretation": "Every numerical case must retain its release termination, mass closure, consequence-stage timing, domain record and four ignition-specific risk atoms. Harm and expected-death endpoints are counted separately so a computed zero is distinguishable from an empty or invalid consequence. Operator-limited cases can close this structural chain, but remain non-qualified evidence.",
-  "_record_path": ".tmp_union_emergency_relief_current\\risk_atom_chain_audit.json"
+  "_record_path": ".tmp_union_population_qualification_current\\risk_atom_chain_audit.json"
 }

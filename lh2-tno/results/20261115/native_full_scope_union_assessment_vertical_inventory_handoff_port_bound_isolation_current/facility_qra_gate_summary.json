@@ -16,12 +16,16 @@
       "scope_matrix_complete": false,
       "scope_matrix_required_family_count": 12,
       "scope_matrix_row_count": 12,
+      "population_source_qualification_status": "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED",
+      "population_source_digest_count": 0,
+      "population_source_unqualified_row_count": 5,
       "scope_matrix_record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
       "blocking_reasons": [
         "facility scope status is not FACILITY_SCOPE_EXECUTED",
         "facility ledger declares an incomplete numerical scope",
         "facility ledger retains uncomputed cases",
-        "complete outdoor major-accident scope matrix is missing or incomplete"
+        "complete outdoor major-accident scope matrix is missing or incomplete",
+        "reviewed or field-confirmed receptor population evidence is missing"
       ]
     },
     "release_boundary": {
@@ -124,6 +128,7 @@
     "facility_scope: facility ledger declares an incomplete numerical scope",
     "facility_scope: facility ledger retains uncomputed cases",
     "facility_scope: complete outdoor major-accident scope matrix is missing or incomplete",
+    "facility_scope: reviewed or field-confirmed receptor population evidence is missing",
     "release_boundary: 29 case(s) are withheld from the release ledger",
     "release_boundary: generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
     "release_boundary: generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",

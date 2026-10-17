@@ -436,6 +436,10 @@ def test_facility_ledger_preserves_annual_condition_population_provenance():
     assert merged["population_accounting"]["population_provenance"] == {
         "weather-1": "test synthetic condition"
     }
+    assert merged["population_accounting"]["population_source_qualification_status"] == (
+        "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED"
+    )
+    assert merged["population_accounting"]["population_source_unqualified_row_count"] == 2
     assert merged["annual_conditions"][0]["population"][0]["persons"] == 12.0
 
 
@@ -459,6 +463,45 @@ def test_facility_ledger_marks_condition_population_receptor_mismatch():
         "expected": ["receptor-a", "receptor-b"],
         "observed": ["other-receptor"],
     }
+
+
+def test_facility_ledger_accepts_explicit_reviewed_population_source():
+    result = _result(
+        event_id="event-population-reviewed",
+        asset_id="asset-population-reviewed",
+        component_id="tank-population-reviewed",
+        frequency=1e-3,
+    )
+    digest = "a" * 64
+    result["annual_conditions"] = [{
+        "id": "weather-1",
+        "annual_probability": 1.0,
+        "population": [
+            {
+                "receptor_id": "receptor-a",
+                "persons": 12.0,
+                "presence_probability": 0.5,
+                "source_status": "field_confirmed",
+                "source_digest": digest,
+            },
+            {
+                "receptor_id": "receptor-b",
+                "persons": 4.0,
+                "presence_probability": 1.0,
+                "source_status": "field_confirmed",
+                "source_digest": digest,
+            },
+        ],
+        "provenance": "field-confirmed population snapshot",
+    }]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-population-reviewed",)
+    )
+    assert merged["population_accounting"]["population_source_qualification_status"] == (
+        "QUALIFIED_REVIEWED_OR_FIELD_CONFIRMED"
+    )
+    assert merged["population_accounting"]["population_source_digest_count"] == 2
+    assert merged["population_accounting"]["population_source_unqualified_row_count"] == 0
 
 
 def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():

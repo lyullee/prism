@@ -1716,6 +1716,12 @@
       "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
       "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
     },
+    "population_source_status_counts": {
+      "unqualified": 5
+    },
+    "population_source_digest_count": 0,
+    "population_source_unqualified_row_count": 5,
+    "population_source_qualification_status": "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED",
     "receptor_ids": [
       "worker-01"
     ]

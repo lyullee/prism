@@ -561,6 +561,12 @@
       "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
       "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
     },
+    "population_source_status_counts": {
+      "unqualified": 5
+    },
+    "population_source_digest_count": 0,
+    "population_source_unqualified_row_count": 5,
+    "population_source_qualification_status": "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED",
     "receptor_ids": [
       "worker-01"
     ]
@@ -6606,6 +6612,12 @@
         "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
         "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
       },
+      "population_source_status_counts": {
+        "unqualified": 5
+      },
+      "population_source_digest_count": 0,
+      "population_source_unqualified_row_count": 5,
+      "population_source_qualification_status": "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED",
       "receptor_ids": [
         "worker-01"
       ]
@@ -67155,5 +67167,5 @@
     "timing": "facility timing preserves observed whole-case and stage elapsed values; it does not claim repeated-run throughput or fresh-physics 1 Hz service",
     "source_campaign_physics": "source_campaign_physics reports fresh physics already performed by the supplied campaign records; fresh_physics_executed remains false for this merge-only assessment call"
   },
-  "assessment_digest": "b94f9f8d7f0286c710e92d78c5e6589eb007cda9f42fda4b5606ea401d3f3185"
+  "assessment_digest": "2991bda0bc1f03dbed52e7bbac2df423da66f7ec68b79bb84078f6c6468ca52d"
 }

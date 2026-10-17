@@ -113,6 +113,9 @@ def build_facility_qra_gate_summary(
         and _bool(ledger.get("declared_scope_numerically_complete"))
         and ledger.get("uncomputed_case_count") == 0
         and scope_matrix_complete
+        and ledger.get("population_accounting", {}).get(
+            "population_source_qualification_status"
+        ) == "QUALIFIED_REVIEWED_OR_FIELD_CONFIRMED"
     )
     scope_reasons: list[str] = []
     if ledger.get("status") != "FACILITY_SCOPE_EXECUTED":
@@ -125,6 +128,17 @@ def build_facility_qra_gate_summary(
         scope_reasons.append(
             "complete outdoor major-accident scope matrix is missing or incomplete"
         )
+    population_accounting = ledger.get("population_accounting")
+    population_accounting = (
+        population_accounting if isinstance(population_accounting, Mapping) else {}
+    )
+    population_source_status = population_accounting.get(
+        "population_source_qualification_status"
+    )
+    if population_source_status != "QUALIFIED_REVIEWED_OR_FIELD_CONFIRMED":
+        scope_reasons.append(
+            "reviewed or field-confirmed receptor population evidence is missing"
+        )
     gates["facility_scope"] = {
         "complete": scope_complete,
         "status": ledger.get("status"),
@@ -135,6 +149,13 @@ def build_facility_qra_gate_summary(
         "scope_matrix_complete": scope_matrix_complete,
         "scope_matrix_required_family_count": len(required_family_set),
         "scope_matrix_row_count": len(scope_rows) if isinstance(scope_rows, list) else None,
+        "population_source_qualification_status": population_source_status,
+        "population_source_digest_count": population_accounting.get(
+            "population_source_digest_count"
+        ),
+        "population_source_unqualified_row_count": population_accounting.get(
+            "population_source_unqualified_row_count"
+        ),
         "scope_matrix_record": scope_matrix_record,
         "blocking_reasons": scope_reasons,
     }

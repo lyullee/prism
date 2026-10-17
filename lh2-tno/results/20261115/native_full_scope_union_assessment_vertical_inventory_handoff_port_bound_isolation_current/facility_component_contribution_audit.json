@@ -890,5 +890,5 @@
   "physical_validation_claim": false,
   "facility_qra_claim": false,
   "interpretation": "Equipment-level IR/F-N contributions and the diagnostic risk ranking are independently reproduced from risk atoms. Missing equipment cases and provider evidence remain gates.",
-  "_record_path": ".tmp_union_emergency_relief_current\\facility_component_contribution_audit.json"
+  "_record_path": ".tmp_union_population_qualification_current\\facility_component_contribution_audit.json"
 }

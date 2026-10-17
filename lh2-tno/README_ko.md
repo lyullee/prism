@@ -1830,6 +1830,7 @@ F/N 배열이 비어 있어도 계산 누락으로 해석하지 않습니다. `c
 near-receptor F/N 연결 검증은 `scripts/build_near_receptor_facility_assessment_summary.py`로 재현할 수 있습니다. 저장된 한 사건을 원장에 다시 합치는 작업이며 물리 계산을 재실행하지 않습니다. 출력 예시는 [`native_lh2_near_receptor_facility_assessment_summary.json`](examples/native_lh2_near_receptor_facility_assessment_summary.json)에서 확인합니다.
 
 시설 원장은 이제 risk atom과 함께 annual condition의 기상·인구 행도 보존하고 `population_accounting`으로 수용점 집합, 인구 행 수, provenance를 검사합니다. 설비 campaign을 시설 namespace로 합칠 때 수용점을 여러 개에서 하나로 접는 경우에는 population도 자동으로 적격화하지 않고 `RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC`으로 남깁니다. 최신 generic+vertical 진단은 [`native_generic_scope_vertical_population_binding_summary.json`](examples/native_generic_scope_vertical_population_binding_summary.json)에서 확인할 수 있습니다.
+추가로 시설 QRA 게이트는 각 인구 행의 검토설계·현장확인 상태와 원자료 digest를 요구합니다. 현재 합성 인구는 구조적으로 연결되어도 `UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED`로 남아 시설 QRA를 열지 않습니다. [시설 인구·수용점 근거 게이트](docs/PRISM_facility_population_evidence_gate_20261018.md)에 입력 계약과 재현 상태를 정리했습니다.
 
 추가로 시설 원장은 이제 `scenario_branch_accounting`을 보존합니다. `annual_conditions`의 기상·연간 확률, `release_branches`의 방출·차단·종료 근거, `ignition_branches`의 점화 결과와 실제 risk atom 수를 같은 원자 집합에서 확인할 수 있습니다. 각 분기에는 저장된 `개시빈도 × 조건부 가중치` 합도 있어 기상·차단·점화 확률이 실제 계산에 적용됐는지 확인할 수 있습니다. `cross_product_count`는 실제로 계산된 조건×방출×점화 조합 수이며, 이 장부는 빈도를 추정하거나 branch를 재배분하지 않습니다. 이전 저장 ledger에도 진단 장부를 재구성할 수 있으며, 자세한 규칙은 [시설 분기·기상·종료·점화 장부 개발 기록](docs/PRISM_시설분기_기상_종료_점화_장부_개발기록_20261024.md)에 있습니다.
 

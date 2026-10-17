@@ -32,6 +32,11 @@ def _inputs():
             "mismatch_count": 0,
         },
         "risk_atom_case_traceability": trace,
+        "population_accounting": {
+            "population_source_qualification_status": "QUALIFIED_REVIEWED_OR_FIELD_CONFIRMED",
+            "population_source_digest_count": 1,
+            "population_source_unqualified_row_count": 0,
+        },
     }
     assessment = {
         "facility_id": "facility-a",
@@ -166,3 +171,25 @@ def test_facility_qra_gate_withholds_without_complete_scope_matrix():
     assert result["gates"]["facility_scope"]["complete"] is False
     assert result["gates"]["facility_scope"]["scope_matrix_complete"] is False
     assert any("scope matrix" in reason for reason in result["blocking_reasons"])
+
+
+def test_facility_qra_gate_withholds_unqualified_population_source():
+    assessment, provider, validation, scope = _inputs()
+    assessment["facility_risk_ledger"]["population_accounting"] = {
+        "population_source_qualification_status": "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED",
+        "population_source_digest_count": 0,
+        "population_source_unqualified_row_count": 1,
+    }
+    result = build_facility_qra_gate_summary(
+        assessment,
+        provider,
+        validation,
+        assessment_record="assessment.json",
+        provider_audit_record="provider.json",
+        validation_record="validation.json",
+        scope_matrix=scope,
+        scope_matrix_record="scope.json",
+    )
+    assert result["status"] == "FACILITY_QRA_WITHHELD"
+    assert result["gates"]["facility_scope"]["complete"] is False
+    assert any("population evidence" in reason for reason in result["blocking_reasons"])

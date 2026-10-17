@@ -3,7 +3,7 @@
   "status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK",
   "facility_id": "generic-lh2-full-scope-example",
   "source_assessment_schema": "prism.facility_assessment.v1",
-  "source_assessment_digest": "b94f9f8d7f0286c710e92d78c5e6589eb007cda9f42fda4b5606ea401d3f3185",
+  "source_assessment_digest": "2991bda0bc1f03dbed52e7bbac2df423da66f7ec68b79bb84078f6c6468ca52d",
   "event_count": 34,
   "case_count": 44,
   "risk_atom_count": 176,
@@ -31286,7 +31286,7 @@
     "promotion": "this envelope is diagnostic-only until qualified provider coverage, strict scope, and independent physical validation gates close"
   },
   "source_assessment_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-  "source_assessment_sha256": "99f2d305f1f12b425de228286f8c9acdc7f267c78b99a8d604b5df56924aeebc",
+  "source_assessment_sha256": "140632cdcfc543387d96149bc3e1d398ff2cd61b8589aeff97b41c8ece0eec36",
   "release_boundary_case_audit_path": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "release_boundary_case_audit_sha256": "841a4cf93b5eb512537ad5e30b654446718c137acd0a8f6f0686efa21a807494"
 }

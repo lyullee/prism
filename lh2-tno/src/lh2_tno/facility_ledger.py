@@ -584,6 +584,33 @@ def _population_accounting(
     population_row_count = 0
     population_receptor_ids: set[str] = set()
     provenance: dict[str, str] = {}
+    population_source_status_counts: dict[str, int] = {}
+    population_source_digest_count = 0
+    population_source_unqualified_row_count = 0
+
+    def record_population_source(row: Mapping[str, Any], condition: Mapping[str, Any]) -> None:
+        """Record source quality without inferring it from a numeric value.
+
+        A population count can be structurally valid while still being only a
+        synthetic diagnostic fixture.  Facility-QRA promotion therefore needs
+        an explicit source-status declaration.  Legacy rows without that
+        declaration remain unqualified by design.
+        """
+        nonlocal population_source_digest_count, population_source_unqualified_row_count
+        declared = row.get("source_status")
+        if declared is None:
+            declared = condition.get("population_source_status")
+        if not isinstance(declared, str) or not declared.strip():
+            declared = "unqualified"
+        normalized = declared.strip().lower()
+        if normalized not in {"field_confirmed", "reviewed_design", "reviewed", "synthetic", "unqualified"}:
+            normalized = "unqualified"
+        population_source_status_counts[normalized] = population_source_status_counts.get(normalized, 0) + 1
+        digest = row.get("source_digest") or condition.get("population_source_digest")
+        if isinstance(digest, str) and len(digest) == 64:
+            population_source_digest_count += 1
+        if normalized not in {"field_confirmed", "reviewed_design", "reviewed"}:
+            population_source_unqualified_row_count += 1
 
     for condition_id in referenced:
         condition = conditions.get(condition_id)
@@ -610,6 +637,7 @@ def _population_accounting(
             row_ids.add(receptor_id)
             population_receptor_ids.add(receptor_id)
             population_row_count += 1
+            record_population_source(row, condition)
             persons = row.get("persons")
             presence = row.get("presence_probability", 1.0)
             if (
@@ -641,6 +669,17 @@ def _population_accounting(
         status = "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC"
     else:
         status = "EXPLICIT_CONDITION_POPULATION"
+    source_status_qualified = (
+        population_row_count > 0
+        and population_source_unqualified_row_count == 0
+        and sum(population_source_status_counts.values()) == population_row_count
+        and population_source_digest_count == population_row_count
+    )
+    population_source_qualification_status = (
+        "QUALIFIED_REVIEWED_OR_FIELD_CONFIRMED"
+        if source_status_qualified
+        else "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED"
+    )
     return {
         "status": status,
         "annual_condition_count": len(conditions),
@@ -654,6 +693,10 @@ def _population_accounting(
         "population_row_count": population_row_count,
         "population_receptor_ids": sorted(population_receptor_ids),
         "population_provenance": provenance,
+        "population_source_status_counts": dict(sorted(population_source_status_counts.items())),
+        "population_source_digest_count": population_source_digest_count,
+        "population_source_unqualified_row_count": population_source_unqualified_row_count,
+        "population_source_qualification_status": population_source_qualification_status,
         "receptor_ids": sorted(receptor_ids),
     }
 

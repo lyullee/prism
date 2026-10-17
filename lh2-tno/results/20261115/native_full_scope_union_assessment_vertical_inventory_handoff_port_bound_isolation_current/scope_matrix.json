@@ -550,7 +550,7 @@
     "two_sided_rupture: PARTIAL",
     "vertical_handoff: PARTIAL"
   ],
-  "source_facility_ledger_digest": "62832d3575a353a4330ee4204c550ad0814456ae4748c2c40049f0f858c62ac6",
+  "source_facility_ledger_digest": "127e48be6adc52ed9a48e367b56ab15df934803f1387af6c388f4edf44dc967f",
   "source": "facility_ledger_event_and_case_metadata",
   "physical_validation_claim": false,
   "interpretation": "The final scope matrix is regenerated from the merged facility ledger. Source campaign matrices remain provenance views; overlapping family rows are not additive and the ledger's exact event/case identities are authoritative.",

@@ -225,5 +225,5 @@
     "family_labels_are_explicit": true
   },
   "interpretation": "Published and fixed literature-frequency scenarios reproduce the saved conditional IR/F-N sensitivity without rerunning physics or inferring missing frequency. Scope, provider, validation and facility-QRA gates remain independent.",
-  "_record_path": ".tmp_union_emergency_relief_current\\facility_frequency_uncertainty_audit.json"
+  "_record_path": ".tmp_union_population_qualification_current\\facility_frequency_uncertainty_audit.json"
 }
