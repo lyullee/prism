@@ -4901,6 +4901,19 @@
   "native_dynamic_pipe_facility_frequency_recheck_provider_commit": "7072374",
   "native_dynamic_pipe_facility_frequency_recheck_provider_result_digest": "4b9ec1dba42c46bd040089cb4f0ffe9ee7987dd91b3c82ddd5bfd659ab19b4e9",
   "native_dynamic_pipe_facility_frequency_recheck_campaign_status": "PARTIAL_DECLARED_SCOPE; 5 opening bins, 1 executed, 4 UNCOMPUTED, 4 conditional risk atoms",
-  "native_dynamic_pipe_facility_frequency_recheck_facility_qra_claim": false
+  "native_dynamic_pipe_facility_frequency_recheck_facility_qra_claim": false,
+
+  "native_dynamic_pipe_exact_area100_candidate_status": "PASS_DIAGNOSTIC_ONLY; exact current AREA_100% state re-exported with explicit provider pressure-equalization evidence and consumed by a one-event RiskCampaign",
+  "native_dynamic_pipe_exact_area100_candidate_script": "scripts/run_lh2dt_native_dynamic_pipe_exact_area100_candidate.py",
+  "native_dynamic_pipe_exact_area100_candidate_record": "examples/native_dynamic_pipe_exact_area100_reduced_grid_candidate_20261018.json",
+  "native_dynamic_pipe_exact_area100_candidate_external_commit": "7072374",
+  "native_dynamic_pipe_exact_area100_candidate_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "native_dynamic_pipe_exact_area100_candidate_provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+  "native_dynamic_pipe_exact_area100_candidate_chain_elapsed_ms": 29068.51709994953,
+  "native_dynamic_pipe_exact_area100_candidate_risk_atom_count": 4,
+  "native_dynamic_pipe_exact_area100_candidate_facility_qra_claim": false,
+  "native_dynamic_pipe_exact_area100_candidate_physical_validation_claim": false,
+  "native_dynamic_pipe_exact_area100_candidate_authoritative_campaign_rebound": false,
+  "native_dynamic_pipe_exact_area100_candidate_recheck_note": "Latest external provider replay matches the authoritative state snapshot and provider result digest; reduced grid executed 1 case/4 risk atoms. Full-grid attempt remained bounded by the 180 s backend deadline. SLABx-LH2 was not modified."
 
 }

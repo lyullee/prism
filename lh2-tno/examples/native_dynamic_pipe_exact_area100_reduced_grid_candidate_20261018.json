@@ -1,0 +1,79 @@
+{
+  "schema_version": "prism.native_dynamic_pipe_exact_area100_reduced_grid_candidate.v1",
+  "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+  "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+  "provider_duration_s": 0.24005155145460036,
+  "provider_mass_residual_kg": 1.3877787807814457e-17,
+  "termination_basis": "model_pressure_equalization",
+  "pressure_equalization": {
+    "native_inventory_owner": "DynamicHEMPipe",
+    "initial_mass_kg": 0.10622803086219497,
+    "final_mass_kg": 0.03796655732794134,
+    "residual_mass_kg": 0.0,
+    "final_pressure_pa_abs": 101324.99999999831,
+    "pressure_equalized": true,
+    "pressure_equalization_time_s": 0.24005155145460036,
+    "post_pressure_equalization_observation_s": 0.2,
+    "pressure_equalization_success": true,
+    "terminal_source_pressure_pa_abs": 101324.99999999831,
+    "ambient_pressure_pa_abs": 101325.0,
+    "max_post_pressure_equalization_flow_kg_s": 0.0,
+    "isolation_time_s": null,
+    "post_isolation_observation_s": 0.0,
+    "isolation_success": false,
+    "dynamic_state_closure": {
+      "schema_version": "prism.provider_dynamic_state_closure.v1",
+      "inventory_feedback_closed": true,
+      "pressure_feedback_closed": true,
+      "state_history_digest": "d409d2ec1837a12d9cdd5e53a0764ab2f6ad70a6ba8991ec50d24a1c84c3450e",
+      "max_abs_inventory_residual_kg": 0.0,
+      "inventory_tolerance_kg": 1.0622803086219498e-10,
+      "max_abs_pressure_residual_pa": 0.0,
+      "pressure_tolerance_pa": 1.0132499999999832e-05,
+      "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+    },
+    "time_step_s": 0.05,
+    "valve": {
+      "area_m2": 0.0004908738521234052,
+      "discharge_coefficient": 0.8,
+      "choked_intervals": 2
+    }
+  },
+  "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+  "candidate_request_digest": "a0094d7890ad4f526d589cd7b03fed68f1a4a00b1c008b51fdfb61d42b621e70",
+  "chain_elapsed_ms": 29068.51709994953,
+  "campaign_status": "DECLARED_SCOPE_EXECUTED",
+  "campaign_event_count": 1,
+  "campaign_case_count": 1,
+  "campaign_executed_case_count": 1,
+  "campaign_risk_atom_count": 4,
+  "facility_total_risk_available": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "sensitivity_grid": {
+    "pool_domain_radius_m": 0.0005,
+    "pool_radial_step_m": 5e-05,
+    "downwind_bounds_m": [
+      -1.0,
+      30.0
+    ],
+    "crosswind_bounds_m": [
+      -5.0,
+      5.0
+    ],
+    "height_bounds_m": [
+      0.0,
+      5.0
+    ],
+    "cell_size_m": 1.0,
+    "n_puff_steps": 40
+  },
+  "limitations": [
+    "reduced declared sensitivity grid for processing-time diagnostic",
+    "exact state replay uses synthetic provider input and current campaign synthetic receptor/weather",
+    "qualification sidecar and independent physical validation remain absent",
+    "candidate is not rebound into authoritative campaign"
+  ]
+}

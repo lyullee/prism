@@ -140,3 +140,11 @@ python scripts/audit_lh2dt_native_contract.py `
 | facility total IR/F-N | withheld |
 
 이 재검증은 “문헌 빈도 → provider 자연 종료 방출 → PRISM release ledger → SLABx-LH2/TNO 피해 chain → 설비 campaign risk atom”의 실행을 확인한다. 합성 배관·수용점·초기상태와 provider qualification sidecar가 사용되지 않았으므로 시설 전체 QRA나 현장 사고빈도 승인으로 승격하지 않는다.
+
+## 2026-10-18 권위 AREA_100% 상태의 최신 provider 재실행
+
+이전 실행과 외부 모델 소스가 바뀌었는지 확인하기 위해, 현재 권위 캠페인의 `liquid-transfer-line-01` `AREA_100%` 검증 입력을 다시 읽고 외부 `lh2dt_models` `7072374`의 `DynamicHEMPipe`로 동일 상태를 재생성했다. 상태 snapshot digest는 `37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194`로 기존 행과 일치했다. provider 결과 digest는 `4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f`이며, 자연 종료 근거는 `model_pressure_equalization`, 방출 시간은 `0.24005155145460036 s`, 질량 잔차는 약 `1.39×10⁻¹⁷ kg`이다. provider는 압력 평형 시각 `0.24005155145460036 s`, 후속 관찰 `0.2 s`, 최종 압력 `101324.99999999831 Pa`, 후속 최대 유량 `0 kg/s`를 명시했다.
+
+재생성 packet은 PRISM strict release adapter를 통과한 뒤, 단일 사건 `RiskCampaign`에 연결했다. 축소 선언 감도 격자에서 1개 event·1개 case·4개 risk atom이 `DECLARED_SCOPE_EXECUTED`로 완료되었고, 이번 실행의 연결 처리시간은 약 `29.07 s`였다. 기록은 [machine-readable candidate](../examples/native_dynamic_pipe_exact_area100_reduced_grid_candidate_20261018.json), 실행기는 [`run_lh2dt_native_dynamic_pipe_exact_area100_candidate.py`](../scripts/run_lh2dt_native_dynamic_pipe_exact_area100_candidate.py)이다.
+
+이 결과는 최신 외부 provider가 동일 권위 상태를 재현하고 방출→PRISM release ledger→SLABx-LH2/풀→피해 risk atom 경로를 소비한다는 진단 증거다. 축소 격자, 합성 수용점·기상, qualification sidecar 부재 때문에 시설 전체 IR/F-N·QRA나 물리검증으로 승격하지 않는다. 대형 격자 재실행은 backend `180 s` 실행 한계에 도달했으므로 full-grid 처리시간으로 사용하지 않는다. 현재 권위 24-event campaign은 변경하거나 새 digest로 묵시적 재결합하지 않았고, SLABx-LH2 소스도 수정하지 않았다.
