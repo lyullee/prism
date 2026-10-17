@@ -1143,7 +1143,7 @@
   "provider_qualification_assessment_physical_validation_gate_decision": "FACILITY_QRA_WITHHELD",
   "provider_qualification_assessment_physical_validation_gate_complete": false,
   "provider_qualification_assessment_physical_validation_facility_qra_allowed": false,
-  "facility_qra_gate_summary_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json",
+  "facility_qra_gate_summary_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_qra_gate_summary.json",
   "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD",
   "facility_qra_gate_summary_promotion_allowed": false,
   "facility_qra_gate_summary_blocking_reason_count": 50,

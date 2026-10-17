@@ -261,7 +261,7 @@ python scripts/build_facility_qra_gate_summary.py `
   --provider-audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
   --validation-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
-  --output results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json
+  --output results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_qra_gate_summary.json
 ```
 
 The six-gate result is documented in

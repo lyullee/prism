@@ -2,7 +2,7 @@
 
 PRISM keeps the conditional diagnostic IR/F-N calculation separate from the
 strict facility-QRA decision. The machine-readable summary
-`results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json`
+`results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_qra_gate_summary.json`
 reconciles the independent records without rerunning equipment or consequence
 physics.
 
@@ -27,7 +27,7 @@ python scripts/build_facility_qra_gate_summary.py `
   --provider-audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
   --validation-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
-  --output results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json
+  --output results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_qra_gate_summary.json
 ```
 
 The strict scope gate now requires this explicit matrix to have
