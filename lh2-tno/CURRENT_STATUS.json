@@ -6018,10 +6018,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1346,
+    "run_number": 1347,
     "status": "success",
-    "commit": "713960a7",
-    "url": "https://github.com/lyullee/prism/actions/runs/39038640499"
+    "commit": "d488628c",
+    "url": "https://github.com/lyullee/prism/actions/runs/39038974786"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
