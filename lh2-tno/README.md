@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,460 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,463 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -179,6 +179,20 @@ release termination and isolation evidence, full declared accident scope, and
 facility IR/F-N/QRA remain separate gates. The 44-case provider intake can be
 started from the generated
 [`facility_provider_qualification_sidecar_manifest_template.json`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_qualification_sidecar_manifest_template.json).
+
+The template is checked against the source request before it is handed to a
+provider:
+
+```powershell
+python scripts/audit_facility_provider_intake_template.py `
+  --facility-request results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json `
+  --template results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_qualification_sidecar_manifest_template.json `
+  --output results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json
+```
+
+The current audit is `ALIGNED_TEMPLATE_ONLY` with 44/44 entries aligned. This
+proves intake coverage only; it does not mean provider packets have arrived or
+that facility QRA is available.
 
 The clean-source replay of the same 24-event scope is documented in the
 [clean-source full-scope replay record](docs/PRISM_native_clean_full_scope_replay_20261017.md).
