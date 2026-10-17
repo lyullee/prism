@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,412 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,418 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -746,6 +746,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Inspection-centre source suitability boundary](docs/PRISM_inspection_center_source_suitability_20261115.md)
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
+- [Outdoor LH2 consequence-backend contract](docs/PRISM_consequence_backend_chain_contract_en.md)
 - [Forecast HAZOP-to-facility campaign handoff (English)](docs/PRISM_forecast_facility_campaign_handoff_en.md)
 - [Forecast facility campaign evidence gate (English)](docs/PRISM_forecast_facility_campaign_evidence_gate_en.md)
 - [HAZOP-to-facility campaign manifest and CLI](docs/PRISM_HAZOP_facility_campaign_manifest_en.md)
