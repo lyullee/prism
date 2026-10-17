@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 
 from lh2_tno.latest_ijhe_audit_verification import verify_latest_ijhe_audit
@@ -9,6 +10,73 @@ from lh2_tno.latest_ijhe_audit_verification import verify_latest_ijhe_audit
 def _write(path: Path, value: dict) -> Path:
     path.write_text(json.dumps(value), encoding="utf-8")
     return path
+
+
+def test_latest_ijhe_audit_verification_binds_release_closure_worklist_and_digest(tmp_path: Path):
+    _write(
+        tmp_path / "audit.json",
+        {
+            "status": "INCOMPLETE_EVIDENCE",
+            "checks": [{"status": "PASS"}],
+            "blocking_reasons": [],
+            "complete_facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+    )
+    _write(
+        tmp_path / "handoff.json",
+        {
+            "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+            "status": "PASS_WITH_SCOPE_LIMITATIONS",
+            "checks": [{"status": "PASS"}],
+            "qualification_boundary": {
+                "facility_ir_fn_available": False,
+                "physical_validation_claim": False,
+            },
+        },
+    )
+    worklist = {
+        "schema_version": "prism.release_closure_worklist.v1",
+        "status": "OPEN_RELEASE_CLOSURE_WORKLIST",
+        "case_count": 1,
+        "open_case_count": 1,
+        "cases": [{}],
+        "summary": {
+            "mass_closure_open_case_count": 0,
+            "isolation_open_case_count": 1,
+            "termination_open_case_count": 0,
+            "inventory_closure_open_case_count": 0,
+        },
+        "promotion_gates": {
+            "release_boundary_promotion_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "physical_validation_claim": False,
+        },
+    }
+    worklist_path = _write(tmp_path / "worklist.json", worklist)
+    digest = hashlib.sha256(worklist_path.read_bytes()).hexdigest().upper()
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "v060_release_closure_worklist": "worklist.json",
+        "v060_release_closure_worklist_sha256": digest,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["release_closure_worklist_case_count"] == 1
+    assert result["release_closure_worklist_open_case_count"] == 1
+    assert result["release_closure_worklist_termination_open_case_count"] == 0
+    assert result["release_closure_worklist_sha256"] == digest
+
+    worklist["open_case_count"] = 0
+    _write(worklist_path, worklist)
+    drifted = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert drifted["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("SHA-256" in reason for reason in drifted["blocking_reasons"])
 
 
 def test_latest_ijhe_audit_verification_passes_without_opening_qualification(tmp_path: Path):

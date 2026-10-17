@@ -6,6 +6,7 @@ facility handoff remains diagnostic-only. It never promotes a facility QRA.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Mapping
@@ -34,6 +35,7 @@ def verify_latest_ijhe_audit(
     receptor_geometry: Mapping[str, Any] | Path | None = None,
     scope_matrix: Mapping[str, Any] | Path | None = None,
     release_boundary: Mapping[str, Any] | Path | None = None,
+    release_closure_worklist: Mapping[str, Any] | Path | None = None,
     native_external_multi_equipment_recheck: Mapping[str, Any] | Path | None = None,
     native_external_clean_full_scope_replay: Mapping[str, Any] | Path | None = None,
     native_external_clean_full_scope_isolation_replay: Mapping[str, Any] | Path | None = None,
@@ -320,6 +322,55 @@ def verify_latest_ijhe_audit(
                         reasons.append(
                             f"latest audit embedded release-trace {key} disagrees with source ledger"
                         )
+
+    # Keep the release-closure worklist pointer synchronized with the current
+    # facility assessment. This is a diagnostic consistency check only: an
+    # open worklist remains open and never promotes a provider or facility QRA.
+    closure_value, closure_path, closure_present = _load_optional(
+        release_closure_worklist,
+        ("v060_release_closure_worklist",),
+    )
+    closure_sha256 = None
+    if closure_present:
+        if closure_value.get("schema_version") != "prism.release_closure_worklist.v1":
+            reasons.append("release-closure worklist schema is not the declared PRISM schema")
+        cases = closure_value.get("cases")
+        case_count = closure_value.get("case_count")
+        open_case_count = closure_value.get("open_case_count")
+        if not isinstance(cases, list) or not isinstance(case_count, int) or len(cases) != case_count:
+            reasons.append("release-closure worklist case list/count is inconsistent")
+        if not isinstance(open_case_count, int) or not isinstance(case_count, int) or not (
+            0 <= open_case_count <= case_count
+        ):
+            reasons.append("release-closure worklist open_case_count is invalid")
+        summary = closure_value.get("summary")
+        if not isinstance(summary, Mapping):
+            reasons.append("release-closure worklist summary is missing")
+        else:
+            for field in (
+                "mass_closure_open_case_count",
+                "isolation_open_case_count",
+                "termination_open_case_count",
+                "inventory_closure_open_case_count",
+            ):
+                if field in closure_value and summary.get(field) != closure_value.get(field):
+                    reasons.append(f"release-closure worklist {field} disagrees with summary")
+        promotion = closure_value.get("promotion_gates")
+        if not isinstance(promotion, Mapping) or any(
+            promotion.get(key) is not False
+            for key in (
+                "release_boundary_promotion_allowed",
+                "frequency_inference_allowed",
+                "facility_qra_allowed",
+                "physical_validation_claim",
+            )
+        ):
+            reasons.append("release-closure worklist promotion gates are not fail-closed")
+        if closure_path is not None and closure_path.exists():
+            closure_sha256 = hashlib.sha256(closure_path.read_bytes()).hexdigest().upper()
+            expected_sha = status.get("v060_release_closure_worklist_sha256")
+            if isinstance(expected_sha, str) and expected_sha.strip() and expected_sha.upper() != closure_sha256:
+                reasons.append("status release-closure worklist SHA-256 disagrees with the pointed file")
 
     # The clean-source native multi-equipment replay is a supplemental
     # diagnostic record.  Bind it to the current status ledger when present,
@@ -784,6 +835,26 @@ def verify_latest_ijhe_audit(
             if release_value and isinstance(release_value.get("asset_summary"), Mapping)
             else None
         ),
+        "release_closure_worklist_record": str(closure_path) if closure_path else None,
+        "release_closure_worklist_status": closure_value.get("status") if closure_value else None,
+        "release_closure_worklist_case_count": closure_value.get("case_count") if closure_value else None,
+        "release_closure_worklist_open_case_count": closure_value.get("open_case_count") if closure_value else None,
+        "release_closure_worklist_termination_open_case_count": (
+            closure_value.get("summary", {}).get("termination_open_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_isolation_open_case_count": (
+            closure_value.get("summary", {}).get("isolation_open_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_inventory_open_case_count": (
+            closure_value.get("summary", {}).get("inventory_closure_open_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_sha256": closure_sha256,
         "native_external_multi_equipment_recheck_record": (
             str(native_recheck_path) if native_recheck_path else None
         ),

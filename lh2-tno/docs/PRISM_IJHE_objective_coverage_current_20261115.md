@@ -152,6 +152,10 @@ checklist, not qualification evidence.
 
 The current evidence package closes the inspection-centre source suitability diagnostic, observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. One non-strict diagnostic row, `diagnostic_release_closure_worklist`, remains visibly blocked because the current 44-case worklist still has 44 provider-qualification gaps, 29 isolation gaps and 24 inventory-closure gaps. Its termination-closure open count and end-to-end mass-residual open count are both zero. The row does not disappear from the record and it does not promote facility QRA.
 
+The latest-audit verifier now follows the current worklist pointer and checks its
+case count, closure summary, fail-closed promotion flags and SHA-256 digest, so a
+stale closure artifact cannot silently appear as the current facility evidence.
+
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
 
 The latest case-coverage record is
