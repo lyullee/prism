@@ -235,9 +235,10 @@ This is a source-drift recheck only. The worktree is dirty, the packets remain d
 
 The current inspection-centre files were hashed and re-audited against the prior
 read-only evidence records. The three operating-sequence CSV files and three
-ten-run workbooks have the same hashes as the previous check. The external
-`lh2dt` source tree also remains unchanged at commit `7072374` and digest
-`3b186dff…`. The recomputed summary remains 52 scenario rows (41 outdoor
+ten-run workbooks have the same hashes as the previous check. At the time of this inspection-centre source recheck, the external
+`lh2dt` source tree was unchanged at commit `7072374` and digest
+`3b186dff…`; a later uncommitted worktree drift is recorded in the
+separate section above. The recomputed summary remains 52 scenario rows (41 outdoor
 screening candidates and 11 outside the declared outdoor scope), 17 workbooks,
 78 sheets, 8,955 state samples, and 522 numeric signals with unconfirmed
 engineering units. The core summary matches the stored evidence ledger and no
@@ -245,8 +246,9 @@ new release, frequency, provider-qualification, physical-validation, or
 facility-QRA evidence was found. The machine-readable record is
 [`examples/inspection_center_current_source_recheck_20261018.json`](../examples/inspection_center_current_source_recheck_20261018.json).
 
-The same source tree was also tested directly with its current Python test
-suite: 377 tests passed with one deprecation warning. This is a source-level
+That recorded clean source tree was also tested directly with its Python test
+suite: 377 tests passed with one deprecation warning. The later dirty-worktree
+recheck passed 392 tests and is kept separate from this historical receipt. This is a source-level
 regression check only; it does not turn the external model into qualified
 facility accident evidence. The test receipt is
 [`examples/external_lh2dt_source_test_recheck_20261018.json`](../examples/external_lh2dt_source_test_recheck_20261018.json).
