@@ -28,6 +28,9 @@ _BENCHMARK_FILES = (
     "center_raw_historian_gate.json",
     "center_raw_workbook_structure_audit.json",
     "center_prediction_workbook_audit.json",
+    # Anonymous aggregate validation is useful model evidence, but it is not
+    # an accident-release provider packet and must never be promoted as one.
+    "sci_minimal_release_packet.json",
 )
 
 
@@ -149,6 +152,61 @@ def _benchmark_review(path: Path, value: Mapping[str, Any]) -> dict[str, Any]:
         item["counts"] = value.get("summary")
     elif name == "center_prediction_workbook_audit.json":
         item["counts"] = {"workbook_count": value.get("workbook_count")}
+    elif name == "sci_minimal_release_packet.json":
+        protocol = value.get("validation_protocol")
+        protocol = protocol if isinstance(protocol, Mapping) else {}
+        aggregate = value.get("aggregate_validation")
+        aggregate = aggregate if isinstance(aggregate, Mapping) else {}
+        data_availability = value.get("data_availability")
+        data_availability = (
+            data_availability if isinstance(data_availability, Mapping) else {}
+        )
+        item["evidence_class"] = "RESTRICTED_ANONYMIZED_MODEL_VALIDATION"
+        item["model_scope"] = value.get("model_scope", [])
+        item["validation_protocol"] = {
+            "blind_prediction": protocol.get("blind_prediction"),
+            "held_out_dates": protocol.get("held_out_dates"),
+            "primary_metric": protocol.get("primary_metric"),
+            "unscored_units_excluded_from_aggregate": protocol.get(
+                "unscored_units_excluded_from_aggregate"
+            ),
+        }
+        item["aggregate_validation"] = {
+            "declared_unit_count": aggregate.get("declared_unit_count"),
+            "independently_scored_unit_count": aggregate.get(
+                "independently_scored_unit_count"
+            ),
+            "observed_unit_macro_accuracy_percent": aggregate.get(
+                "observed_unit_macro_accuracy_percent"
+            ),
+            "full_unit_macro_accuracy_percent": aggregate.get(
+                "full_unit_macro_accuracy_percent"
+            ),
+            "full_unit_target_met": aggregate.get("full_unit_target_met"),
+            "unscored_units_imputed": aggregate.get("unscored_units_imputed"),
+        }
+        item["data_availability"] = {
+            key: data_availability.get(key)
+            for key in (
+                "raw_historian_records",
+                "facility_identifying_drawings",
+                "instrument_tags_and_addresses",
+                "operating_logs",
+                "reproducibility_material",
+            )
+        }
+        item["promotion_boundary"] = {
+            "provider_packet": False,
+            "frequency": False,
+            "facility_qra": False,
+            "physical_validation": False,
+            "reason": (
+                "Anonymized aggregate model validation is retained as restricted "
+                "evidence; it does not qualify an accident-release provider, a "
+                "facility QRA, or independent end-to-end physical validation."
+            ),
+        }
+        item["publication_claim_boundary"] = value.get("publication_claim_boundary")
     return item
 
 
@@ -232,6 +290,11 @@ def review_external_lh2_model_root(
     )
     if parameter and parameter.get("counts", {}).get("center_promotion_allowed_count", 0) == 0:
         blocking.append("parameter release packet has zero center-promotion rows")
+    anonymous_validation = [
+        item
+        for item in benchmark_reviews
+        if item.get("evidence_class") == "RESTRICTED_ANONYMIZED_MODEL_VALIDATION"
+    ]
     if exact_count == 0:
         blocking.append("no exact match to the current generic PRISM packet identities was found")
     if qualification_count == 0:
@@ -245,6 +308,32 @@ def review_external_lh2_model_root(
         "schema_version": SCHEMA,
         "source_root": str(root),
         "benchmark_reviews": benchmark_reviews,
+        "restricted_model_validation": {
+            "artifact_count": len(anonymous_validation),
+            "artifact_ids": [item.get("artifact_id") for item in anonymous_validation],
+            "independently_scored_unit_count": sum(
+                int(item.get("aggregate_validation", {}).get("independently_scored_unit_count") or 0)
+                for item in anonymous_validation
+            ),
+            "observed_unit_macro_accuracy_percent": [
+                item.get("aggregate_validation", {}).get(
+                    "observed_unit_macro_accuracy_percent"
+                )
+                for item in anonymous_validation
+            ],
+            "full_unit_target_met": all(
+                item.get("aggregate_validation", {}).get("full_unit_target_met") is True
+                for item in anonymous_validation
+            )
+            if anonymous_validation
+            else False,
+            "promotion": {
+                "provider_packet": False,
+                "frequency": False,
+                "facility_qra": False,
+                "physical_validation": False,
+            },
+        },
         "provider_like_artifacts": {
             "provider_response_count": len(provider_responses),
             "resolved_release_count": len(resolved_releases),

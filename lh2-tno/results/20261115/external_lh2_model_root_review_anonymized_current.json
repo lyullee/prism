@@ -1,0 +1,520 @@
+{
+  "schema_version": "prism.external_lh2_model_root_review.v1",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
+  "benchmark_reviews": [
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_observation_release_packet.json",
+      "sha256": "8d87b27fdc860b4036d1490a479b5d293750f6807970309d38b68ff5e1932b39",
+      "schema_version": "0.1",
+      "artifact_id": "center_observation_release_packet_v1",
+      "status": "observation_release_packet_fail_closed",
+      "promotion_flags": {
+        "release_ready_count": 0,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": false,
+        "parameter_update_allowed": false,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "binding_count": 15,
+        "metadata_confirmed_count": 0,
+        "candidate_data_available_count": 13,
+        "candidate_diagnostic_available_count": 4,
+        "release_ready_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_observation_release_plan.json",
+      "sha256": "b284b1adcf34c9b684239361541805fd86c8ed9846296e8b1c08ddb669fb30ca",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": "evidence_release_plan_only",
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_official_independent_validation_20261007.json",
+      "sha256": "f64783e8694b7daa8526691e59d338cb2d9a9e6fbb4cb5730298d5d2b4e1ff76",
+      "schema_version": "0.1",
+      "artifact_id": "center_official_independent_validation_20261007",
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": false,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "scenario_count": 8,
+        "released_scenario_count": 0,
+        "blocked_scenario_count": 8,
+        "simulator_invocation_count": 0,
+        "official_score": null
+      },
+      "raw_historian_gate": {
+        "raw_historian_export_present": false,
+        "explicit_raw_historian_session_count": 0,
+        "approved_field_record_session_count": 0,
+        "promotion_allowed_session_count": 0,
+        "ready_unit_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_parameter_release_packet.json",
+      "sha256": "500a8369cce4dee12d24073c5aca03db36f1da790c40d253066e2871e878b1c1",
+      "schema_version": "0.1",
+      "artifact_id": "center_parameter_release_packet_v1",
+      "status": "center_parameter_release_packet_fail_closed",
+      "promotion_flags": {
+        "release_ready_count": 0,
+        "center_promotion_allowed_count": 0,
+        "forward_comparison_allowed": false,
+        "parameter_update_allowed": false,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "asset_count": 12,
+        "required_field_count": 44,
+        "missing_field_count": 39,
+        "screening_candidate_available_count": 39,
+        "center_promotion_allowed_count": 0,
+        "release_ready_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_readiness_audit.json",
+      "sha256": "65268bf41977e99e5fcaa27427762f66f8f8a5ba4944e7ac8480de923ceb34dd",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": false,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "asset_count": 12,
+        "constructable_count": 0,
+        "ready_count": 0,
+        "scenario_count": 8,
+        "structurally_ready_scenario_count": 8,
+        "confirmed_intent_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_linkage_contract_audit.json",
+      "sha256": "4707e319ed3ad0345d2430c583f03d939dceae68c2f321d1d357de2e77cd75e4",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "edge_count": 27,
+        "edge_ready_count": 0,
+        "scenario_count": 8,
+        "structurally_ready_scenario_count": 8,
+        "model_coverage_ready_scenario_count": 8,
+        "scenario_edge_ready_count": 1
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_measurement_uncertainty_envelope_20261010.json",
+      "sha256": "8bc21dbcef38ae9ca11fcbeed0885ef7c1126d5a3ada90f613a2158116a91ad7",
+      "schema_version": "0.1",
+      "artifact_id": "center_measurement_uncertainty_envelope_20261010",
+      "status": "diagnostic_no_fit_measurement_uncertainty_residual_separation",
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_raw_historian_gate.json",
+      "sha256": "2f1457bb72df7c1dd8504630620ed11319a0319bec83e4c9ee08de925241f5ac",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "candidate_file_count": 14,
+        "session_table_count": 33,
+        "source_error_count": 0,
+        "explicit_raw_historian_session_count": 0,
+        "approved_field_record_session_count": 0,
+        "promotion_allowed_session_count": 0,
+        "raw_historian_export_present": false,
+        "ready_unit_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_raw_workbook_structure_audit.json",
+      "sha256": "0ff4a17cb6d9e18ae84f00d3638fda1b5a278a173bea992492d629729cd7869b",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "unique_source_session_count": 20,
+        "source_file_resolved_count": 20,
+        "source_sheet_resolved_count": 20,
+        "header_row_observed_count": 20,
+        "alias_header_observed_session_count": 20,
+        "timestamp_header_observed_session_count": 20,
+        "provenance_column_observed_session_count": 13,
+        "provenance_value_count": 8953,
+        "strict_timestamp_sequence_session_count": 14,
+        "non_strict_timestamp_session_count": 6,
+        "timestamp_reversal_count": 6,
+        "duplicate_timestamp_count": 0,
+        "blank_timestamp_count": 0,
+        "unparseable_timestamp_count": 0,
+        "matched_channel_column_count": 137,
+        "channel_with_numeric_values_count": 137,
+        "channel_with_blank_values_count": 3,
+        "channel_with_nonnumeric_values_count": 0,
+        "channel_nonfinite_numeric_value_count": 0,
+        "promotion_allowed_count": 0,
+        "source_quality_classification_counts": {
+          "explicit_reconstructed": 20
+        }
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_prediction_workbook_audit.json",
+      "sha256": "5296379db18b3aca15a7048c24a5b0c9cdaf0af8b5a056d7a56d38f7f49b72c6",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "workbook_count": 3
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\sci_minimal_release_packet.json",
+      "sha256": "e12f3101f87cffa157d9ce807bea7009c404d665d5a6506c89474c0616ba4058",
+      "schema_version": "0.1",
+      "artifact_id": "anonymous_lh2_minimal_sci_release_v1",
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "evidence_class": "RESTRICTED_ANONYMIZED_MODEL_VALIDATION",
+      "model_scope": [
+        "mass conservation",
+        "energy conservation",
+        "two-phase thermodynamic state closure",
+        "gas-space pressure evolution",
+        "wall and connected-pipe thermal capacity",
+        "valve and vent boundary conditions"
+      ],
+      "validation_protocol": {
+        "blind_prediction": true,
+        "held_out_dates": true,
+        "primary_metric": "nMAPE; accuracy = 100 - nMAPE",
+        "unscored_units_excluded_from_aggregate": true
+      },
+      "aggregate_validation": {
+        "declared_unit_count": 12,
+        "independently_scored_unit_count": 3,
+        "observed_unit_macro_accuracy_percent": 95.4155462264504,
+        "full_unit_macro_accuracy_percent": null,
+        "full_unit_target_met": false,
+        "unscored_units_imputed": false
+      },
+      "data_availability": {
+        "raw_historian_records": "not publicly released",
+        "facility_identifying_drawings": "not publicly released",
+        "instrument_tags_and_addresses": "not publicly released",
+        "operating_logs": "not publicly released",
+        "reproducibility_material": "governing equations, parameter classes, anonymized aggregate statistics, and synthetic benchmark"
+      },
+      "promotion_boundary": {
+        "provider_packet": false,
+        "frequency": false,
+        "facility_qra": false,
+        "physical_validation": false,
+        "reason": "Anonymized aggregate model validation is retained as restricted evidence; it does not qualify an accident-release provider, a facility QRA, or independent end-to-end physical validation."
+      },
+      "publication_claim_boundary": "Only independently scored observed units may be reported as quantitative validation; a full-system target is not claimed until every declared unit has an independent held-out score."
+    }
+  ],
+  "restricted_model_validation": {
+    "artifact_count": 1,
+    "artifact_ids": [
+      "anonymous_lh2_minimal_sci_release_v1"
+    ],
+    "independently_scored_unit_count": 3,
+    "observed_unit_macro_accuracy_percent": [
+      95.4155462264504
+    ],
+    "full_unit_target_met": false,
+    "promotion": {
+      "provider_packet": false,
+      "frequency": false,
+      "facility_qra": false,
+      "physical_validation": false
+    }
+  },
+  "provider_like_artifacts": {
+    "provider_response_count": 7,
+    "resolved_release_count": 7,
+    "verification_count": 7,
+    "provider_export_schemas": [
+      "prism.external_accident_history.v1"
+    ],
+    "exact_generic_identity_match_count": 0,
+    "qualification_sidecar_count": 0,
+    "physical_validation_artifact_count": 0,
+    "complete_facility_qra_artifact_count": 0
+  },
+  "external_match_review": {
+    "schema": "prism.external_provider_artifact_match_review.v1",
+    "status": "NO_EXACT_QUALIFIED_MATCH",
+    "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
+    "closure_audit": "results\\20261106\\generic_lh2_provider_closure_requests.json",
+    "candidate_count": 7,
+    "exact_match_count": 0,
+    "qualification_artifact_count": 0,
+    "physical_validation_artifact_count": 0,
+    "complete_facility_qra_artifact_count": 0,
+    "candidates": [
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/layered",
+        "provider_model": "lh2dt.LayeredTank",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-layered-tank/accidental-leak-001",
+        "component_id": "native-layered-tank-diagnostic",
+        "port_id": "native-layered-tank-liquid-out",
+        "provider_source_digest": "9e519a13debf758e5b4b8ba5c1326bc17af882d5f58fbbc50d4260a4fb8b174d",
+        "provider_result_digest": "b370d88d96ac9814a1c66e1035135980c8bce7f23d679a103bfa3d73e5f48da3",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external LayeredTank accident export; synthetic geometry and state",
+        "termination_basis": "inventory_depletion",
+        "duration_s": 0.1,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      },
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/pipe",
+        "provider_model": "lh2dt.DynamicHEMPipe",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-dynamic-pipe/accidental-leak-001",
+        "component_id": "native-dynamic-pipe-diagnostic",
+        "port_id": "native-dynamic-pipe-out",
+        "provider_source_digest": "a34b691dc221fc1b0ba176a9f0c489c0a62eb9b8e4fa66e15d904c725238cdcb",
+        "provider_result_digest": "993c70ea51758a57e313d6f36b9c41721a6288e2ac775e6e4560561ce7197cd7",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external DynamicHEMPipe accident export; synthetic geometry and state",
+        "termination_basis": "reviewed_isolation_success",
+        "duration_s": 0.07500000000000001,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      },
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/pump",
+        "provider_model": "lh2dt.MappedPump",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-mapped-pump/accidental-leak-001",
+        "component_id": "native-mapped-pump-diagnostic",
+        "port_id": "native-mapped-pump-liquid-out",
+        "provider_source_digest": "6451b1521ceb0a3e8c1b8f0946bcdf789c5f14102763d7783c0577e27be3cb0f",
+        "provider_result_digest": "ec86ecf9205976dc1184b026e94c418c4442305ceea98cf835e42ced4e6822ca",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external MappedPump H-Q-N accident export; synthetic source state and reserve",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "duration_s": 0.1,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      },
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/reliquefier",
+        "provider_model": "lh2dt.DynamicReliquefier",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-reliquefier/accidental-leak-001",
+        "component_id": "native-reliquefier-diagnostic",
+        "port_id": "native-reliquefier-gas-out",
+        "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+        "provider_result_digest": "247158fd9b8cc9b95cf0c835085670981fadcaff30cb9390499e7ed5f67d5fe7",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external DynamicReliquefier finite-volume accident export; synthetic geometry and state",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "duration_s": 0.1,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      },
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/valve",
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-stroke-valve/accidental-leak-001",
+        "component_id": "native-stroke-valve-diagnostic",
+        "port_id": "native-stroke-valve-gas-out",
+        "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+        "provider_result_digest": "46ec14d5d00941ab941d00da2b1f9705e7f04662259744cfde93ee30fd4b038f",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external StrokeLimitedCommandedValve gas export; synthetic upstream state and reserve",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "duration_s": 0.1,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      },
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/vaporizer",
+        "provider_model": "lh2dt.DynamicVaporizer",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-vaporizer/accidental-leak-001",
+        "component_id": "native-vaporizer-diagnostic",
+        "port_id": "native-vaporizer-gas-out",
+        "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+        "provider_result_digest": "e727b58d83f5f074c37ca4c6c437ca76a0aa6b65e2df7cfa74ec630ba8daabf6",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external DynamicVaporizer finite-volume accident export; synthetic geometry and state",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "duration_s": 0.1,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      },
+      {
+        "directory": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/tmp_native_contract/vent",
+        "provider_model": "lh2dt.VentStack",
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "event_id": "native-vent-stack/accidental-leak-001",
+        "component_id": "native-vent-stack-diagnostic",
+        "port_id": "native-vent-stack-gas-out",
+        "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+        "provider_result_digest": "61054aa89cc3dade006c007b7224e736685a4598356974e1dc5bff919709987b",
+        "input_origin": "model_prediction",
+        "upstream_service_provenance": "native external VentStack accident export; synthetic upstream state and geometry",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "duration_s": 0.1,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "qualification_evidence_present": false,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "exact_match_to_generic_packet": false
+      }
+    ],
+    "errors": [],
+    "blocking_reasons": [
+      "external artifacts are diagnostic unless a separate exact-digest qualification sidecar is present",
+      "no external provider artifact exactly matches a current generic event/component/port/source/result identity",
+      "no prism.provider_qualification_evidence.v1 record was found",
+      "no artifact claims independent physical validation",
+      "no artifact claims a complete facility QRA"
+    ],
+    "promotion": {
+      "provider_packet": false,
+      "frequency": false,
+      "facility_qra": false
+    }
+  },
+  "promotion": {
+    "provider_packet": false,
+    "frequency": false,
+    "facility_qra": false,
+    "physical_validation": false
+  },
+  "blocking_reasons": [
+    "External model outputs are diagnostic unless exact event/component/port and source/result digest identity is present.",
+    "observation release packet has zero release-ready bindings",
+    "no explicit raw historian/DCS/PLC session is available",
+    "parameter release packet has zero center-promotion rows",
+    "no exact match to the current generic PRISM packet identities was found",
+    "no prism.provider_qualification_evidence.v1 sidecar was found",
+    "no independent physical-validation claim was found",
+    "no complete facility-QRA claim was found"
+  ],
+  "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+  "interpretation": "The external model root is retained for topology, component contracts, and screening diagnostics. Reviewed metadata, exact digest-bound release evidence, and independent validation remain required before provider, frequency, or facility-QRA promotion."
+}

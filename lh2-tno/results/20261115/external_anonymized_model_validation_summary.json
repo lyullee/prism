@@ -1,0 +1,44 @@
+{
+  "schema_version": "prism.external_anonymized_model_validation_summary.v1",
+  "artifact_id": "anonymous_lh2_minimal_sci_release_v1",
+  "source_artifact": "external-lh2-model-root/docs/benchmarks/sci_minimal_release_packet.json",
+  "source_artifact_sha256": "e12f3101f87cffa157d9ce807bea7009c404d665d5a6506c89474c0616ba4058",
+  "evidence_class": "RESTRICTED_ANONYMIZED_MODEL_VALIDATION",
+  "system_category": "anonymized LH2 storage, venting, and vaporization system",
+  "model_scope": [
+    "mass conservation",
+    "energy conservation",
+    "two-phase thermodynamic state closure",
+    "gas-space pressure evolution",
+    "wall and connected-pipe thermal capacity",
+    "valve and vent boundary conditions"
+  ],
+  "validation_protocol": {
+    "blind_prediction": true,
+    "held_out_dates": true,
+    "primary_metric": "nMAPE; accuracy = 100 - nMAPE",
+    "unscored_units_excluded_from_aggregate": true
+  },
+  "aggregate_validation": {
+    "declared_unit_count": 12,
+    "independently_scored_unit_count": 3,
+    "observed_unit_macro_accuracy_percent": 95.4155462264504,
+    "full_unit_macro_accuracy_percent": null,
+    "full_unit_target_met": false,
+    "unscored_units_imputed": false
+  },
+  "data_availability": {
+    "raw_historian_records": "not publicly released",
+    "facility_identifying_drawings": "not publicly released",
+    "instrument_tags_and_addresses": "not publicly released",
+    "operating_logs": "not publicly released",
+    "reproducibility_material": "governing equations, parameter classes, anonymized aggregate statistics, and synthetic benchmark"
+  },
+  "promotion_boundary": {
+    "provider_packet": false,
+    "frequency": false,
+    "facility_qra": false,
+    "physical_validation": false,
+    "reason": "Anonymized aggregate model validation is restricted evidence; it does not qualify an accident-release provider, facility QRA, or independent end-to-end physical validation."
+  }
+}
