@@ -3033,7 +3033,7 @@
   "current_union_facility_evidence_request_provider_packet_only_case_count": 0,
   "current_union_v060_readiness_port_binding_source": "facility_evidence_request",
   "current_union_v060_readiness_port_binding_facility_qra_allowed": false,
-  "current_union_v060_readiness_report_record": "results/20261031/native_full_scope_union_pipefix_state_bound/v060_readiness_report.json",
+  "current_union_v060_readiness_report_record": "results/20261115/v060_readiness_report_current_union_20261115.json",
   "v060_readiness_port_binding_qra_promotion_separation_implemented": true,
   "v060_readiness_port_binding_qra_promotion_separation_field": "chain.frequency_port_binding.port_binding_facility_qra_allowed",
   "v060_readiness_port_binding_qra_promotion_separation_policy": "Readiness keeps facility_qra_allowed=false even when the lower-level port map is complete; port completeness is reported separately from provider, validation and facility-QRA promotion.",
@@ -4683,5 +4683,11 @@
     81920
   ],
   "slabx_lh2_test6_actual_source_numerical_gate_interpretation": "Numerical gate accepted for the reviewed actual FFI source; independent physical validation and facility QRA remain withheld.",
-  "actual_ffi_high_resolution_recheck_latest_accepted": true
+  "actual_ffi_high_resolution_recheck_latest_accepted": true,
+  "v060_current_readiness_report": "results/20261115/v060_readiness_report_current_union_20261115.json",
+  "v060_current_readiness_report_schema": "prism.v060_ijhe_readiness_report.v1",
+  "v060_current_readiness_report_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
+  "v060_current_readiness_report_completion_audit_status": "INCOMPLETE_EVIDENCE",
+  "v060_current_readiness_report_authoritative_for": "2026-11-15 native full-scope union assessment with vertical, inventory and isolation extensions",
+  "v060_current_readiness_report_sha256": "9d3d86b810098c79efaa806a05f2e07d5c9393d9d67e8a742caa9c007da1151c"
 }
