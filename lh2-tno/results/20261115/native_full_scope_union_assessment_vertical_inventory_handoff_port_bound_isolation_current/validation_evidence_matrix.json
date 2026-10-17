@@ -166,11 +166,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 55,
+      "check_count": 56,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-        "sha256": "7dde9bd0c75f351a6b960e1387aa4357cb5f5f689aed0c153878cb9959247ea0",
+        "sha256": "bb0dcefccd03b9cf1db9a1f5b846a4e572ec3063f3f4e5b04698514a2d0e3228",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,
@@ -207,6 +207,74 @@
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\center_lh2_external_sweep_audit.json",
         "sha256": "cc862d72ae26775292c7439a9da372d5adb2a954a6244b3a71c8b5e8fa75a9f2",
         "status": "SCREENING_ONLY_EXTERNAL_SWEEP"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_direct_component_comparison",
+      "status": "REVIEW_READY_COMPONENT_EVIDENCE",
+      "supports": [
+        "same-operator FFI Test 4 native-SLABx concentration comparison",
+        "30 matched sensors over the declared 275 s observation window",
+        "320/32 to 640/64 numerical refinement and LFL classification closure"
+      ],
+      "does_not_support": [
+        "independent holdout physical validation",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "row_count": 30,
+      "sensor_count": 30,
+      "mean_bias_vol_pct": -0.45313011850063983,
+      "mae_vol_pct": 0.6480842583399518,
+      "rmse_vol_pct": 1.2106452167244133,
+      "observed_lfl_pairs": 3,
+      "predicted_lfl_pairs": 3,
+      "true_positive": 3,
+      "false_negative": 0,
+      "false_positive": 0,
+      "independent_holdout_validation_claim": false,
+      "source": {
+        "label": "SLABx-LH2 direct component comparison audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\slabx_lh2_direct_comparison_audit.json",
+        "sha256": "abb0f2493e2ac1d521bda0606c3e36a8fda7b786ed5eadfce4fe3b529930d590",
+        "status": "DIRECT_COMPONENT_COMPARISON_REVIEW_READY"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_independent_comparison",
+      "status": "INDEPENDENT_COMPARISON_REVIEW_READY",
+      "supports": [
+        "independent FFI Test 6 SLABx sensor comparison",
+        "published-source/no-fitting provenance and LFL classification accounting"
+      ],
+      "does_not_support": [
+        "independent physical validation while the source/numerical gate is open",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "row_count": 30,
+      "sensor_count": 30,
+      "mean_bias_vol_pct": -1.1924596629594961,
+      "mae_vol_pct": 1.8671267816835724,
+      "rmse_vol_pct": 4.535886153151856,
+      "observed_lfl_pairs": 6,
+      "predicted_lfl_pairs": 3,
+      "true_positive": 3,
+      "false_negative": 3,
+      "false_positive": 0,
+      "source_gate_accepted": true,
+      "independent_physical_validation_claim": false,
+      "source": {
+        "label": "SLABx-LH2 independent comparison audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\slabx_lh2_independent_comparison_high_resolution.json",
+        "sha256": "100986637ef65fe61a7108e215736945c5ee2e84fbd98118d614a2cf30d4a573",
+        "status": "INDEPENDENT_COMPARISON_REVIEW_READY"
       },
       "physical_validation_claim": false,
       "full_chain_validation_claim": false,
@@ -311,5 +379,5 @@
     "diagnostic_chain_does_not_become_qualified_facility_qra": true,
     "frequency_is_not_inferred_from_sensor_or_observation_data": true
   },
-  "_record_path": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix.json"
+  "_record_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json"
 }

@@ -59,7 +59,7 @@
       "complete": false,
       "status": "RESTRICTED_EVIDENCE_MATRIX",
       "decision": "FACILITY_QRA_WITHHELD",
-      "evidence_domain_count": 7,
+      "evidence_domain_count": 9,
       "physical_validation_claim": false,
       "full_chain_validation_claim": false,
       "accident_release_validation_claim": false,

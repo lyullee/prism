@@ -5909,5 +5909,12 @@
   "ijhe_completion_audit_facility_qra_gate_summary_input_implemented": true,
   "ijhe_completion_audit_facility_qra_gate_summary_input": "scripts/build_ijhe_completion_audit.py --facility-qra-gate-summary",
   "ijhe_completion_audit_facility_qra_gate_summary_check": "facility_qra_gate_summary",
-  "ijhe_completion_audit_facility_qra_gate_summary_policy": "Structural six-gate reconciliation; inconsistent or unsafe promotion flags block the audit; no evidence or frequency is inferred."
+  "ijhe_completion_audit_facility_qra_gate_summary_policy": "Structural six-gate reconciliation; inconsistent or unsafe promotion flags block the audit; no evidence or frequency is inferred.",
+  "validation_evidence_matrix_current_20261115_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json",
+  "validation_evidence_matrix_current_20261115_sha256": "9319e8cd2159baecc19034ac6ecb1d2ef2faae24e735c00223ff431199b435ef",
+  "validation_evidence_matrix_current_20261115_status": "RESTRICTED_EVIDENCE_MATRIX; FACILITY_QRA_WITHHELD; all physical-validation, release, frequency and facility-QRA claims false",
+  "validation_evidence_matrix_current_20261115_domain_count": 9,
+  "validation_evidence_matrix_current_20261115_slabx_direct_domain": "REVIEW_READY_COMPONENT_EVIDENCE",
+  "validation_evidence_matrix_current_20261115_slabx_independent_domain": "INDEPENDENT_COMPARISON_REVIEW_READY; physical-validation claim false",
+  "validation_evidence_matrix_current_20261115_rebuild_options": "--slabx-direct-comparison-evidence; --slabx-independent-comparison-evidence"
 }

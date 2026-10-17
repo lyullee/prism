@@ -46,6 +46,7 @@ def test_union_binder_keeps_audit_domains_in_their_named_arguments(tmp_path, mon
     observed: dict[str, object] = {}
 
     def fake_matrix(*args, **kwargs):
+        observed["matrix_kwargs"] = kwargs
         return {
             "status": "RESTRICTED",
             "decision": "FACILITY_QRA_WITHHELD",
@@ -79,6 +80,8 @@ def test_union_binder_keeps_audit_domains_in_their_named_arguments(tmp_path, mon
         "observed_state_model_binding_audit",
         "external_equipment_model_contract_audit",
         "slabx_validation_evidence",
+        "slabx_direct_comparison_evidence",
+        "slabx_independent_comparison_evidence",
         "scope_ledger_consistency",
         "risk_atom_chain_audit",
         "equipment_state_release_audit",
@@ -103,6 +106,8 @@ def test_union_binder_keeps_audit_domains_in_their_named_arguments(tmp_path, mon
     )
     for name in optional_names:
         setattr(args, name, None)
+    args.slabx_direct_comparison_evidence = domain
+    args.slabx_independent_comparison_evidence = domain
 
     binder.run(args)
 
@@ -113,3 +118,5 @@ def test_union_binder_keeps_audit_domains_in_their_named_arguments(tmp_path, mon
     assert observed["diagnostic_adapter_registry"]["kind"] == "registry"
     assert observed["facility_assessment"]["_record_path"].endswith("facility_assessment.json")
     assert observed["domain_recovery_audit"]["kind"] == "domain"
+    assert observed["matrix_kwargs"]["slabx_direct_comparison_path"] == domain
+    assert observed["matrix_kwargs"]["slabx_independent_comparison_path"] == domain
