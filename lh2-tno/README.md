@@ -77,10 +77,15 @@ closure status per case and per equipment component.
 The companion [`lh2dt_models`](https://github.com/lyullee/lh2dt_models)
 package now emits the closure object from its finite-volume
 `DynamicHEMPipe`, `LayeredTank`, and `DynamicVaporizer` accident exporters
-(commit [`65a5e70`](https://github.com/lyullee/lh2dt_models/commit/65a5e70)).
+(commit [`16f7a4b`](https://github.com/lyullee/lh2dt_models/commit/16f7a4b)).
 Those exporters hash the provider state history and report inventory and
 pressure residuals. Fixed-source valves, pumps, and vent stacks deliberately
 remain operator-limited until an upstream dynamic inventory owner is attached.
+Current native diagnostic handoffs for a dynamic pipe, a layered storage tank,
+and a dynamic vaporizer are saved under
+`results/20261115/native_*_closure_check_current`; all three pass the PRISM
+source-dynamics gate with reviewed isolation termination while retaining their
+synthetic and unvalidated status.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the

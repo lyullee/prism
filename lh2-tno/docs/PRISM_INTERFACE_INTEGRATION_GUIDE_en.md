@@ -260,7 +260,7 @@ separate gates.
 
 The public `lh2dt_models` exporters implement this contract for the dynamic
 equipment classes. Use commit
-[`65a5e70`](https://github.com/lyullee/lh2dt_models/commit/65a5e70) or a later
+[`16f7a4b`](https://github.com/lyullee/lh2dt_models/commit/16f7a4b) or a later
 release of that repository. `DynamicHEMPipe`, `LayeredTank`, and
 `DynamicVaporizer` hash their provider-owned state histories and report both
 residual pairs. Their packets can therefore pass the source-dynamics check
@@ -269,6 +269,14 @@ when the declared termination and provider-qualification gates also pass.
 upstream inventory must be supplied by a separate dynamic equipment provider,
 so their omission of `dynamic_state_closure` is intentional and remains
 operator-limited.
+
+PRISM currently retains three native diagnostic handoffs under
+`results/20261115/`: `native_dynamic_pipe_closure_check_current`,
+`native_layered_tank_closure_check_current`, and
+`native_dynamic_thermal_closure_check_current`. All three preserve the
+provider digest and report `READY` for source dynamics after reviewed
+isolation. The records are still synthetic and do not promote frequency,
+physical validation, or facility IR/F-N claims.
 
 ## 6. Python resolver example
 

@@ -32,6 +32,7 @@ from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
     EquipmentStateSnapshot,
 )
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status  # noqa: E402
 
 
 def _tree_digest(root: Path) -> str:
@@ -135,7 +136,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         },
     })
     event_id = args.event_id
-    request = AccidentReleaseExportRequest.from_mapping({
+    request_payload: dict[str, Any] = {
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
         "component_id": args.component_id,
@@ -159,7 +160,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": f"native external {model_class} finite-volume accident export; synthetic geometry and state",
         "provider_termination_required": True,
-    })
+    }
+    if args.isolation_time_s is not None:
+        request_payload["isolation_time_s"] = args.isolation_time_s
+        request_payload["post_isolation_observation_s"] = args.post_isolation_observation_s
+    request = AccidentReleaseExportRequest.from_mapping(request_payload)
     native_request = {
         "event_id": event_id,
         "component_id": args.component_id,
@@ -178,6 +183,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_source_digest": source_digest,
         "state_snapshot_digest": snapshot.digest(),
     }
+    if request.isolation_time_s is not None:
+        native_request["isolation_time_s"] = request.isolation_time_s
+        native_request["post_isolation_observation_s"] = request.post_isolation_observation_s
     native_response_raw = model.export_accident_history(native_request)
     native_response, source_state_completion = complete_isentropic_throat_source_states(
         native_response_raw,
@@ -186,6 +194,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     result = export_equipment_gas_accident_history(NativeDynamicThermalProvider(native_response), request)
     data = native_response["data"]
     meta = data.get("provider_meta") if isinstance(data.get("provider_meta"), Mapping) else {}
+    closure_audit = dynamic_state_closure_status(result.release.model_dump(mode="json"))
+    declared_closure = meta.get("dynamic_state_closure")
     verification = {
         "schema_version": "prism.native_lh2dt_dynamic_thermal_packet_verification.v1",
         "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
@@ -201,6 +211,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "available_mass_kg": data.get("available_mass_kg"),
         "cumulative_mass_out_kg": data.get("cumulative_mass_out_kg"),
         "provider_mass_residual_kg": meta.get("residual_mass_kg"),
+        "dynamic_state_closure": {
+            "declared_by_provider": isinstance(declared_closure, Mapping),
+            "prism_source_dynamics_status": (
+                "READY" if closure_audit.get("ready") is True else "BLOCKED"
+            ),
+            "ready": closure_audit.get("ready"),
+            "blocking_reasons": closure_audit.get("blocking_reasons", []),
+            "state_history_digest": (
+                declared_closure.get("state_history_digest")
+                if isinstance(declared_closure, Mapping)
+                else None
+            ),
+        },
         "final_mass_kg": meta.get("final_mass_kg"),
         "state_snapshot_digest_match": native_response.get("provider_state_snapshot_digest") == snapshot.digest(),
         "native_result_digest": canonical_digest(native_response),
@@ -241,6 +264,8 @@ def main() -> int:
     parser.add_argument("--stroke-time-s", type=float, default=0.05)
     parser.add_argument("--horizon-s", type=float, default=0.1)
     parser.add_argument("--time-step-s", type=float, default=0.05)
+    parser.add_argument("--isolation-time-s", type=float, default=None)
+    parser.add_argument("--post-isolation-observation-s", type=float, default=0.0)
     parser.add_argument("--wall-temperature-k", type=float, default=300.0)
     parser.add_argument("--thermal-boundary-temperature-k", type=float, default=300.0)
     parser.add_argument("--thermal-boundary-ua-w-k", type=float, default=5.0)

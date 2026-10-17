@@ -1,0 +1,62 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_thermal_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "mode": "vaporizer",
+  "provider_model": "lh2dt.dynamic_vaporizer.DynamicVaporizer",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "9f7b1aa27ae7f90ffc7aea9529c6727b44e7a3fc59cd26a8ebf3f50cede7fed5",
+  "provider_packet_promoted": false,
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.1,
+  "available_mass_kg": 0.004029121339141301,
+  "cumulative_mass_out_kg": 6.0555853898309935e-05,
+  "provider_mass_residual_kg": 0.0,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "READY",
+    "ready": true,
+    "blocking_reasons": [],
+    "state_history_digest": "9828cf626c4ea4afd04afe88e49deb74dea2da6c1b44ab27caf9603fe510a1da"
+  },
+  "final_mass_kg": 0.003968565485242991,
+  "state_snapshot_digest_match": true,
+  "native_result_digest": "9f7b1aa27ae7f90ffc7aea9529c6727b44e7a3fc59cd26a8ebf3f50cede7fed5",
+  "native_provider_result_digest": "c22cb1a3aabca1186f62c68b9bc2e15d06fb50cb4b94c5f48740b5b7b12d0332",
+  "native_source_trace_completed_in_packet": true,
+  "source_state_completion": {
+    "schema_version": "prism.native_source_state_completion.v1",
+    "status": "COMPLETED_ISENTROPIC_THROAT_FIELDS",
+    "interval_count": 2,
+    "intervals": [
+      {
+        "interval": 0,
+        "time_s": 0.0,
+        "source_entropy_completed": true,
+        "throat_state_completed": true
+      },
+      {
+        "interval": 1,
+        "time_s": 0.05,
+        "source_entropy_completed": true,
+        "throat_state_completed": true
+      }
+    ],
+    "source_pressure_inferred": false,
+    "throat_pressure_inferred": false,
+    "near_field_plane_generated": false,
+    "physical_validation_claim": false,
+    "provider_packet_qualified": false,
+    "facility_qra_claim": false
+  },
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic finite-volume geometry, thermal boundary, gas state and atmospheric opening",
+    "source entropy and throat thermodynamic fields are completed from the native source pressure/temperature/throat pressure using the same provider property backend",
+    "this deterministic completion is not an independent near-field calculation; high-speed output still requires the separate compressible-plane handoff",
+    "provider packet remains diagnostic and has no field frequency or independent physical validation"
+  ]
+}

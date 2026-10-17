@@ -4296,18 +4296,25 @@
   "process_forecast_facility_campaign_evidence_gate_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "external_lh2dt_dynamic_state_closure_implemented": true,
   "external_lh2dt_dynamic_state_closure_schema": "prism.provider_dynamic_state_closure.v1",
-  "external_lh2dt_dynamic_state_closure_commit": "65a5e70",
+  "external_lh2dt_dynamic_state_closure_commit": "16f7a4b",
   "external_lh2dt_dynamic_state_closure_models": [
     "DynamicHEMPipe",
     "LayeredTank",
     "DynamicVaporizer"
   ],
   "external_lh2dt_dynamic_state_closure_status": "NATIVE_EXPORT_READY; state history digest and explicit residuals are emitted by the finite-volume accident exporters; fixed-source boundaries remain operator-limited",
-  "external_lh2dt_dynamic_state_closure_test_status": "375 external tests passed, 1 warning",
+  "external_lh2dt_dynamic_state_closure_test_status": "376 external lh2dt_models tests passed, 1 warning",
   "external_lh2dt_dynamic_state_closure_facility_qra_promotion": false,
   "external_lh2dt_dynamic_pipe_prism_integration_implemented": true,
   "external_lh2dt_dynamic_pipe_prism_integration_record": "results/20261115/native_dynamic_pipe_closure_check_current/verification.json",
   "external_lh2dt_dynamic_pipe_prism_integration_status": "ONE_SYNTHETIC_NATIVE_DYNAMIC_PIPE_CASE_EXECUTED; provider closure READY at PRISM source-dynamics gate, while promotion/physical validation/frequency/facility-QRA remain withheld",
   "external_lh2dt_dynamic_pipe_prism_integration_facility_qra_promotion": false,
-  "external_lh2dt_dynamic_state_closure_repository": "https://github.com/lyullee/lh2dt_models"
+  "external_lh2dt_dynamic_state_closure_repository": "https://github.com/lyullee/lh2dt_models",
+  "external_lh2dt_dynamic_pipe_closure_record": "results/20261115/native_dynamic_pipe_closure_check_current/verification.json",
+  "external_lh2dt_dynamic_pipe_closure_status": "READY_SOURCE_DYNAMICS_DIAGNOSTIC; reviewed isolation success and explicit provider closure",
+  "external_lh2dt_layered_tank_closure_record": "results/20261115/native_layered_tank_closure_check_current/verification.json",
+  "external_lh2dt_layered_tank_closure_status": "READY_SOURCE_DYNAMICS_DIAGNOSTIC; reviewed isolation success and explicit provider closure",
+  "external_lh2dt_dynamic_thermal_closure_record": "results/20261115/native_dynamic_thermal_closure_check_current/verification.json",
+  "external_lh2dt_dynamic_thermal_closure_status": "READY_SOURCE_DYNAMICS_DIAGNOSTIC; reviewed isolation success and explicit provider closure",
+  "external_lh2dt_native_closure_facility_qra_promotion": false
 }

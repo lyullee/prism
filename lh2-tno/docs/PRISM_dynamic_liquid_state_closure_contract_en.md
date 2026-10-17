@@ -55,7 +55,7 @@ statement.
 
 The companion `lh2dt_models` repository now emits this object directly from
 the finite-volume accident exporters in commit
-[`65a5e70`](https://github.com/lyullee/lh2dt_models/commit/65a5e70):
+[`16f7a4b`](https://github.com/lyullee/lh2dt_models/commit/16f7a4b):
 
 - `DynamicHEMPipe.export_accident_history` records its mass, internal-energy,
   wall-temperature, and pressure state history;
@@ -71,6 +71,15 @@ basis and isolation fields. Fixed-source valves, vent stacks, and mapped
 pumps intentionally do not emit this record because they do not own an
 upstream dynamic inventory; PRISM therefore keeps those accident routes
 operator-limited until an upstream dynamic provider supplies the contract.
+
+Three current native diagnostic records demonstrate the complete source-side
+handoff: `results/20261115/native_dynamic_pipe_closure_check_current`,
+`results/20261115/native_layered_tank_closure_check_current`, and
+`results/20261115/native_dynamic_thermal_closure_check_current`. Each uses a
+provider-reviewed isolation termination and is `READY` at the PRISM
+source-dynamics gate. They remain synthetic diagnostic cases: none claims
+independent physical validation, a literature initiating frequency, or
+facility IR/F-N promotion.
 
 ## Release of the operator limitation
 
