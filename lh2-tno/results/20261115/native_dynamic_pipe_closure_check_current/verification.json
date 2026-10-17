@@ -1,0 +1,70 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "713fd217389fe8ba19483546852f288c381ae72fe1f4bbfa426c990e549049ac",
+  "provider_result_digest": "3654abbc714cc82bd96db20004dc6e286edfa4fd5fc55d32d9ef42858e30fd45",
+  "provider_packet_promoted": false,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "native-dynamic-pipe-diagnostic",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 1000000.0,
+    "temperature_k": 300.0,
+    "mass_kg": 0.06310489224680658,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 1000000.0,
+        "sensor_location": "native-dynamic-pipe-diagnostic.fluid_volume",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_digest": "9f18d7e9b3fcdaab649e95c208004269ee7483547c9dbfb29f3f97c842a4de50",
+  "provider_echo_digest": "9f18d7e9b3fcdaab649e95c208004269ee7483547c9dbfb29f3f97c842a4de50",
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "9f18d7e9b3fcdaab649e95c208004269ee7483547c9dbfb29f3f97c842a4de50",
+    "provider_echo_digest": "9f18d7e9b3fcdaab649e95c208004269ee7483547c9dbfb29f3f97c842a4de50",
+    "digest_match": true
+  },
+  "phase_basis": "gas",
+  "source_phase": "supercritical_gas",
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.060000000000000005,
+  "available_mass_kg": 0.06310489224680658,
+  "cumulative_mass_out_kg": 1.6135811961058726e-05,
+  "mass_residual_kg": 0.0,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "READY",
+    "ready": true,
+    "blocking_reasons": [],
+    "state_history_digest": "8ac0fb128225c7a3edfff10e1339fa793775b5e004e27cd50533ea696a6a8d28"
+  },
+  "isolation_time_s": 0.05,
+  "post_isolation_observation_s": 0.01,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+    "native provider history remains diagnostic until independent qualification is supplied",
+    "airborne liquid remains zero under the native provider contract"
+  ]
+}

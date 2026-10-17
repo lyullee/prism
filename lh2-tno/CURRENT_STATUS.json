@@ -5784,5 +5784,12 @@
     "MappedPump, Valve, and VentStack remain fixed-source and do not emit dynamic closure",
     "airborne liquid and two-sided rupture still require separate provider contracts",
     "native exporter evidence does not itself qualify a facility provider or physical validation"
-  ]
+  ],
+  "external_lh2dt_dynamic_pipe_prism_integration_implemented": true,
+  "external_lh2dt_dynamic_pipe_prism_integration_record": "results/20261115/native_dynamic_pipe_closure_check_current/verification.json",
+  "external_lh2dt_dynamic_pipe_prism_integration_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC; DynamicHEMPipe provider closure declared and PRISM source-dynamics audit READY for one synthetic reviewed-isolation gas case",
+  "external_lh2dt_dynamic_pipe_prism_integration_provider_packet_promoted": false,
+  "external_lh2dt_dynamic_pipe_prism_integration_frequency_inference_performed": false,
+  "external_lh2dt_dynamic_pipe_prism_integration_physical_validation_claim": false,
+  "external_lh2dt_dynamic_pipe_prism_integration_facility_qra_claim": false
 }
