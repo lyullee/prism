@@ -111,6 +111,46 @@ def build_status_consistency_report(
     """Return a fail-closed cross-artifact consistency report."""
     checks: list[dict[str, Any]] = []
 
+    current_ci = current_status.get("latest_github_actions_run")
+    goal_ci = development_goal.get("latest_github_actions_run")
+    ci_commit = (
+        current_ci.get("commit")
+        if isinstance(current_ci, Mapping)
+        else None
+    )
+    ci_run_ok = (
+        isinstance(current_ci, Mapping)
+        and isinstance(goal_ci, Mapping)
+        and dict(current_ci) == dict(goal_ci)
+        and isinstance(current_ci.get("run_number"), int)
+        and not isinstance(current_ci.get("run_number"), bool)
+        and current_ci.get("run_number", 0) > 0
+        and current_ci.get("status") == "completed"
+        and current_ci.get("conclusion") == "success"
+        and isinstance(ci_commit, str)
+        and len(ci_commit) >= 7
+        and isinstance(current_ci.get("url"), str)
+        and current_ci.get("url", "").startswith(
+            "https://github.com/lyullee/prism/actions/runs/"
+        )
+        and isinstance(current_status.get("latest_remote_verified_commit"), str)
+        and current_status["latest_remote_verified_commit"] == ci_commit[:8]
+        and isinstance(development_goal.get("latest_remote_verified_commit"), str)
+        and development_goal["latest_remote_verified_commit"] == ci_commit[:8]
+    )
+    _check(
+        checks,
+        "latest_github_actions_run",
+        ci_run_ok,
+        {
+            "current": dict(current_ci) if isinstance(current_ci, Mapping) else current_ci,
+            "development_goal": dict(goal_ci) if isinstance(goal_ci, Mapping) else goal_ci,
+            "latest_remote_verified_commit": current_status.get(
+                "latest_remote_verified_commit"
+            ),
+        },
+    )
+
     audit_checks = audit.get("checks")
     audit_case_check = next(
         (

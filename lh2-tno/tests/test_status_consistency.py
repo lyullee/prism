@@ -54,6 +54,24 @@ def test_current_published_artifacts_are_consistent() -> None:
     assert all(row["status"] == "PASS" for row in report["checks"])
 
 
+def test_latest_github_actions_run_is_bound_to_both_status_ledgers() -> None:
+    report = _report()
+    check = next(
+        row for row in report["checks"] if row["name"] == "latest_github_actions_run"
+    )
+    assert check["status"] == "PASS"
+    current_status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    current_status["latest_github_actions_run"]["conclusion"] = "failure"
+    drifted = _report(current_status=current_status)
+    drifted_check = next(
+        row
+        for row in drifted["checks"]
+        if row["name"] == "latest_github_actions_run"
+    )
+    assert drifted_check["status"] == "FAIL"
+    assert drifted["status"] == "INCONSISTENT"
+
+
 def test_latest_case_coverage_pointer_carries_current_counts() -> None:
     report = _report()
     check = next(

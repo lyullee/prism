@@ -14,6 +14,27 @@
   },
   "checks": [
     {
+      "name": "latest_github_actions_run",
+      "status": "PASS",
+      "evidence": {
+        "current": {
+          "run_number": 1362,
+          "status": "completed",
+          "conclusion": "success",
+          "commit": "4feb383ab89d39906e1fe732c24ca7db7ea8afda",
+          "url": "https://github.com/lyullee/prism/actions/runs/39047804732"
+        },
+        "development_goal": {
+          "run_number": 1362,
+          "status": "completed",
+          "conclusion": "success",
+          "commit": "4feb383ab89d39906e1fe732c24ca7db7ea8afda",
+          "url": "https://github.com/lyullee/prism/actions/runs/39047804732"
+        },
+        "latest_remote_verified_commit": "4feb383a"
+      }
+    },
+    {
       "name": "latest_facility_case_packet_coverage_pointer",
       "status": "PASS",
       "evidence": {
@@ -250,7 +271,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1472
+        "full_portable_test_count": 1475
       }
     },
     {
@@ -281,7 +302,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1472
+        "full_portable_test_count": 1475
       }
     },
     {
