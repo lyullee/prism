@@ -75,6 +75,22 @@ def test_two_sided_rupture_catalog_covers_reliquefier_events():
     )
 
 
+def test_pressure_equalization_request_maps_to_bounded_inventory_family():
+    request = SimpleNamespace(
+        resolved_liquid_release=None,
+        resolved_release_set=None,
+        source_operator="equipment_pressure_equalization",
+        resolved_release=SimpleNamespace(
+            vertical_handoff=None,
+            boundary_kind="resolved_atmospheric_gas_exit",
+            event_kind="accidental_leak",
+        ),
+    )
+    assert scenario_families_for_request("vaporizer", "inventory_over_600s", request) == (
+        "inventory_over_600s",
+    )
+
+
 def test_consumed_provider_request_adds_vertical_handoff_family():
     request = SimpleNamespace(
         resolved_liquid_release=None,

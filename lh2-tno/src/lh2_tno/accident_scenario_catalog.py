@@ -124,10 +124,10 @@ _SCENARIOS: tuple[dict[str, Any], ...] = (
         "equipment_kinds": ("storage_tank", "pipe", "valve", "pump", "vaporizer", "reliquefier"),
         "release_modes": ("inventory_over_600s",),
         "provider_schemas": ("prism.resolved_release.v1",),
-        "termination_bases": ("inventory_over_600s",),
-        "required_source_operators": ("equipment_inventory_over_600s", "equipment_liquid_over_600s"),
-        "consequence_path": "600 s provider history -> bounded release -> SLABx-LH2/TNO damage chain",
-        "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+        "termination_bases": ("inventory_over_600s", "model_pressure_equalization"),
+        "required_source_operators": ("equipment_inventory_over_600s", "equipment_liquid_over_600s", "equipment_pressure_equalization"),
+        "consequence_path": "600 s provider history or explicit pressure equalization -> bounded release -> SLABx-LH2/TNO damage chain",
+        "uncomputed_default_reason": "provider must supply exactly 600 s or an explicit pressure-equalization boundary with a closed mass ledger",
     },
     {
         "family": "two_sided_rupture",
@@ -268,6 +268,7 @@ def scenario_families_for_request(
         "inventory_over_600s",
         "equipment_inventory_over_600s",
         "equipment_liquid_over_600s",
+        "equipment_pressure_equalization",
     }:
         families.append("inventory_over_600s")
     return tuple(dict.fromkeys(families))
