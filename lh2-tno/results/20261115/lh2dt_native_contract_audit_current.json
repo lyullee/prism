@@ -1,17 +1,14 @@
 {
   "schema_version": "prism.external_model_contract_audit.v1",
   "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
-  "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models",
-  "external_model_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
+  "external_model_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
   "external_model_git_provenance": {
     "repository_detected": true,
-    "head": "b483f7921d7e67a269947f36393fdd3b9ab9e7b3",
+    "head": "16f7a4b38d16295ad481492ec90af7903125d4ee",
     "worktree_clean": false,
     "dirty_paths": [
-      "CHANGELOG.md",
-      "src/lh2dt/vaporizer.py",
-      "docs/vaporizer_design_point.md",
-      "tests/test_vaporizer_design_point.py"
+      "docs/benchmarks/nasa_tn_d4171_hem_validation.md"
     ],
     "status": "GIT_WORKTREE_DIRTY"
   },
@@ -26,7 +23,7 @@
       "component_kind": "storage_tank",
       "model_package": "lh2dt.layered_tank",
       "model_class": "LayeredTank",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\layered_tank.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\layered_tank.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
@@ -50,7 +47,7 @@
       "component_kind": "pipe",
       "model_package": "lh2dt.dynamic_pipe",
       "model_class": "DynamicHEMPipe",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\dynamic_pipe.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\dynamic_pipe.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
@@ -74,7 +71,7 @@
       "component_kind": "valve",
       "model_package": "lh2dt.valve",
       "model_class": "StrokeLimitedCommandedValve",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\valve.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\valve.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
@@ -98,7 +95,7 @@
       "component_kind": "vent_stack",
       "model_package": "lh2dt.vent_stack",
       "model_class": "VentStack",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\vent_stack.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\vent_stack.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
@@ -122,7 +119,7 @@
       "component_kind": "pump",
       "model_package": "lh2dt.pump",
       "model_class": "MappedPump",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\pump.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\pump.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
@@ -146,7 +143,7 @@
       "component_kind": "vaporizer",
       "model_package": "lh2dt.dynamic_vaporizer",
       "model_class": "DynamicVaporizer",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\dynamic_vaporizer.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\dynamic_vaporizer.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
@@ -170,7 +167,7 @@
       "component_kind": "reliquefier",
       "model_package": "lh2dt.dynamic_reliquefier",
       "model_class": "DynamicReliquefier",
-      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models\\src\\lh2dt\\dynamic_reliquefier.py",
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\src\\lh2dt\\dynamic_reliquefier.py",
       "source_exists": true,
       "native_accident_export_method": true,
       "native_termination_ledger_methods": [
