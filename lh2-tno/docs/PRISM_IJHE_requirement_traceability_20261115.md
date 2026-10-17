@@ -197,4 +197,3 @@ The near-receptor diagnostic monitor path was measured again with the current co
 - A separate attempt against the 24-case full-scope campaign exceeded the configured backend deadline on its first fresh-physics request. Its partial process was terminated and no result was promoted; this does not change the authoritative campaign or risk ledger.
 
 The machine-readable recheck is [`examples/native_lh2_realtime_cache_recheck_20261018.json`](../examples/native_lh2_realtime_cache_recheck_20261018.json).
-
