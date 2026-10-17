@@ -1,0 +1,43 @@
+{
+  "schema_version": "prism.external_lh2dt_pressure_equalization_candidate.v1",
+  "checked_at": "2026-10-18",
+  "external_repository": "https://github.com/lyullee/lh2dt_models",
+  "external_commit": "7072374",
+  "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+  "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "provider_result_digest": "2d2e974560db55d7eedae5ecc27644ab8c82b8f691097a0ab8e5733275451436",
+  "event_id": "generic-lh2-full-bore-diagnostic/transfer-line/full-bore",
+  "component_id": "liquid-transfer-line-01",
+  "termination_basis": "model_pressure_equalization",
+  "provider_duration_s": 0.03141380098162305,
+  "provider_mass_residual_kg": 0.0,
+  "pressure_equalization_evidence": {
+    "pressure_equalization_time_s": 0.03141380098162305,
+    "post_pressure_equalization_observation_s": 0.2,
+    "pressure_equalization_success": true,
+    "terminal_source_pressure_pa_abs": 101325.00000000426,
+    "ambient_pressure_pa_abs": 101325.0,
+    "max_post_pressure_equalization_flow_kg_s": 0.0
+  },
+  "state_snapshot_digest_match": true,
+  "consequence_chain_executed": true,
+  "strict_single_case_release_boundary": {
+    "status": "PASS",
+    "pressure_equalization_status": "provider_declared_pressure_equalization",
+    "facility_release_boundary_ready_for_this_case": true,
+    "provider_qualification_evaluated": false,
+    "independent_physical_validation_claim": false,
+    "facility_qra_promotion": false
+  },
+  "authoritative_campaign_rebind": {
+    "status": "PENDING",
+    "reason": "current 24-event campaign retains the prior provider digest; this candidate is not silently substituted into the authoritative campaign",
+    "current_campaign_provider_packet_promoted": false
+  },
+  "limitations": [
+    "synthetic 1 m pipe geometry and initial state",
+    "provider qualification sidecar is absent",
+    "independent physical validation is absent",
+    "this candidate does not promote facility IR/F-N or facility QRA"
+  ]
+}

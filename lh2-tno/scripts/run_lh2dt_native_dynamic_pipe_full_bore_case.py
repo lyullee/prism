@@ -73,6 +73,7 @@ def _request(source_digest: str, snapshot: EquipmentStateSnapshot) -> AccidentRe
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
+        "post_pressure_equalization_observation_s": 0.2,
         "provider_source_digest": source_digest,
         "provider_boundary_reference": "native lh2dt DynamicHEMPipe finite full-bore accidental outlet",
         "input_origin": "model_prediction",
@@ -166,6 +167,7 @@ def run(args: Any) -> dict[str, Any]:
         "initial_temperature_k": 27.0,
         "initial_quality": 0.1,
         "time_step_s": 0.01,
+        "post_pressure_equalization_observation_s": 0.2,
         "discharge_coefficient": 0.8,
         "impact_position_m": [5.0, 0.0, 0.001],
         "direction_enu": [1.0, 0.0, 0.0],
@@ -191,8 +193,9 @@ def run(args: Any) -> dict[str, Any]:
     _save(args.output_dir / "consequence_result.json", consequence)
     data = consequence.get("data", {})
     provider_data = adapted.provider_response.get("data", {})
-    final_pressure = provider_data.get("provider_meta", {}).get("final_pressure_pa_abs")
-    pressure_equalized = provider_data.get("provider_meta", {}).get("pressure_equalized")
+    provider_meta = provider_data.get("provider_meta", {})
+    final_pressure = provider_meta.get("final_pressure_pa_abs")
+    pressure_equalized = provider_meta.get("pressure_equalized")
     pressure_matches_ambient = (
         isinstance(final_pressure, (int, float))
         and math.isclose(float(final_pressure), 101325.0, rel_tol=0.0, abs_tol=1.0e-3)
@@ -217,6 +220,18 @@ def run(args: Any) -> dict[str, Any]:
         "provider_final_pressure_pa_abs": final_pressure,
         "provider_pressure_equalized": pressure_equalized,
         "provider_final_pressure_matches_ambient": pressure_matches_ambient,
+        "pressure_equalization_time_s": provider_meta.get("pressure_equalization_time_s"),
+        "post_pressure_equalization_observation_s": provider_meta.get(
+            "post_pressure_equalization_observation_s"
+        ),
+        "pressure_equalization_success": provider_meta.get("pressure_equalization_success"),
+        "terminal_source_pressure_pa_abs": provider_meta.get(
+            "terminal_source_pressure_pa_abs"
+        ),
+        "ambient_pressure_pa_abs": provider_meta.get("ambient_pressure_pa_abs"),
+        "max_post_pressure_equalization_flow_kg_s": provider_meta.get(
+            "max_post_pressure_equalization_flow_kg_s"
+        ),
         "state_snapshot": adapted.request.state_snapshot.to_mapping() if adapted.request.state_snapshot is not None else None,
         "state_snapshot_handoff": {
             "present": adapted.request.state_snapshot is not None,

@@ -196,6 +196,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         # the controls that PRISM will later require it to echo.
         native_request["isolation_time_s"] = request.isolation_time_s
         native_request["post_isolation_observation_s"] = request.post_isolation_observation_s
+    if request.post_pressure_equalization_observation_s is not None:
+        native_request["post_pressure_equalization_observation_s"] = (
+            request.post_pressure_equalization_observation_s
+        )
     native_response = pipe.export_accident_history(native_request)
     result = (
         export_equipment_gas_accident_history(

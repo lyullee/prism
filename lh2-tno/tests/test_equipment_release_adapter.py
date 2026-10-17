@@ -175,6 +175,40 @@ def test_adapter_accepts_null_optional_isolation_metadata_when_clock_not_request
     assert release.provider_mass_balance.isolation_success is None
 
 
+def test_adapter_rejects_pressure_observation_without_equalization_clock():
+    response = _response()
+    response["data"]["provider_meta"] = {
+        "initial_mass_kg": 1.0,
+        "final_mass_kg": 0.985,
+        "residual_mass_kg": 0.985,
+        "post_pressure_equalization_observation_s": 0.2,
+    }
+    with pytest.raises(EquipmentReleaseExportError, match="requires pressure_equalization_time_s"):
+        _build(response)
+
+
+def test_adapter_preserves_explicit_pressure_equalization_balance():
+    response = _response()
+    response["data"]["provider_meta"] = {
+        "initial_mass_kg": 1.0,
+        "final_mass_kg": 0.985,
+        "residual_mass_kg": 0.985,
+        "pressure_equalization_time_s": 0.15,
+        "post_pressure_equalization_observation_s": 0.2,
+        "pressure_equalization_success": True,
+        "terminal_source_pressure_pa_abs": 100000.0,
+        "ambient_pressure_pa_abs": 100000.0,
+        "max_post_pressure_equalization_flow_kg_s": 0.0,
+    }
+    release = _build(response)
+    balance = release.provider_mass_balance
+    assert balance is not None
+    assert balance.pressure_equalization_time_s == pytest.approx(0.15)
+    assert balance.post_pressure_equalization_observation_s == pytest.approx(0.2)
+    assert balance.pressure_equalization_success is True
+    assert balance.max_post_pressure_equalization_flow_kg_s == pytest.approx(0.0)
+
+
 def test_gas_adapter_preserves_explicit_hydrogen_property_basis():
     response = _response()
     response["data"]["fluid"] = "Hydrogen"

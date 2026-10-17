@@ -50,6 +50,12 @@ def audit_provider_mass_balance_records(
             "cumulative_mass_in_kg",
             "final_mass_kg",
             "isolation_time_s",
+            "post_isolation_observation_s",
+            "pressure_equalization_time_s",
+            "post_pressure_equalization_observation_s",
+            "terminal_source_pressure_pa_abs",
+            "ambient_pressure_pa_abs",
+            "max_post_pressure_equalization_flow_kg_s",
         ):
             value = _finite(metadata.get(key))
             if value is not None:
@@ -59,6 +65,10 @@ def audit_provider_mass_balance_records(
             payload["reported_residual_mass_kg"] = residual
         if isinstance(metadata.get("isolation_success"), bool):
             payload["isolation_success"] = metadata["isolation_success"]
+        if isinstance(metadata.get("pressure_equalization_success"), bool):
+            payload["pressure_equalization_success"] = metadata[
+                "pressure_equalization_success"
+            ]
         if "dynamic_state_closure" in metadata:
             # Preserve the provider's explicit dynamic-state qualification
             # record.  The audit validates it through ProviderMassBalance;

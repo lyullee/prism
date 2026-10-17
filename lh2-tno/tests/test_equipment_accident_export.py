@@ -106,6 +106,17 @@ def _response(request):
             "post_isolation_observation_s": request.get("post_isolation_observation_s"),
             "isolation_success": True,
         }
+    if request.get("post_pressure_equalization_observation_s") is not None:
+        response["data"].setdefault("provider_meta", {}).update({
+            "pressure_equalization_time_s": 0.15,
+            "post_pressure_equalization_observation_s": request[
+                "post_pressure_equalization_observation_s"
+            ],
+            "pressure_equalization_success": True,
+            "terminal_source_pressure_pa_abs": 100000.0,
+            "ambient_pressure_pa_abs": 100000.0,
+            "max_post_pressure_equalization_flow_kg_s": 0.0,
+        })
     return response
 
 
@@ -203,6 +214,32 @@ def test_isolation_observation_requires_an_isolation_clock():
     with pytest.raises(EquipmentAccidentExportError, match="requires an explicit isolation_time_s"):
         AccidentReleaseExportRequest.from_mapping(
             _request(post_isolation_observation_s=0.02)
+        )
+
+
+def test_explicit_pressure_equalization_observation_is_forwarded_and_echo_checked():
+    provider = _Provider()
+    result = export_equipment_gas_accident_history(
+        provider,
+        _request(post_pressure_equalization_observation_s=0.2),
+    )
+    assert provider.requests[0]["post_pressure_equalization_observation_s"] == pytest.approx(0.2)
+    assert result.request.post_pressure_equalization_observation_s == pytest.approx(0.2)
+
+
+def test_pressure_equalization_observation_cannot_be_silently_dropped():
+    class DroppingProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response(request)
+            response["data"]["provider_meta"].pop(
+                "max_post_pressure_equalization_flow_kg_s"
+            )
+            return response
+
+    with pytest.raises(EquipmentAccidentExportError, match="pressure-equalization fields"):
+        export_equipment_gas_accident_history(
+            DroppingProvider(),
+            _request(post_pressure_equalization_observation_s=0.2),
         )
 
 

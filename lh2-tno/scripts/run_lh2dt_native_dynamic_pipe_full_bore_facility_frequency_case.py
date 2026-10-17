@@ -75,6 +75,7 @@ def _request(source_digest: str, state_digest: str) -> AccidentReleaseExportRequ
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
+        "post_pressure_equalization_observation_s": 0.2,
         "provider_source_digest": source_digest,
         "provider_boundary_reference": "native lh2dt DynamicHEMPipe finite full-bore atmospheric accidental outlet",
         "input_origin": "model_prediction",
@@ -164,6 +165,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "initial_temperature_k": 27.0,
             "initial_quality": 0.1,
             "time_step_s": 0.01,
+            "post_pressure_equalization_observation_s": 0.2,
             "minimum_step_s": 0.0005,
             "discharge_coefficient": 0.8,
             "impact_position_m": [5.0, 0.0, 1.0],
@@ -289,6 +291,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_final_pressure_pa_abs": final_pressure,
         "provider_pressure_equalized": pressure_equalized,
         "provider_final_pressure_matches_ambient": pressure_matches_ambient,
+        "pressure_equalization_time_s": provider_meta.get("pressure_equalization_time_s"),
+        "post_pressure_equalization_observation_s": provider_meta.get(
+            "post_pressure_equalization_observation_s"
+        ),
+        "pressure_equalization_success": provider_meta.get("pressure_equalization_success"),
+        "terminal_source_pressure_pa_abs": provider_meta.get(
+            "terminal_source_pressure_pa_abs"
+        ),
+        "ambient_pressure_pa_abs": provider_meta.get("ambient_pressure_pa_abs"),
+        "max_post_pressure_equalization_flow_kg_s": provider_meta.get(
+            "max_post_pressure_equalization_flow_kg_s"
+        ),
         "provider_energy_residual_j": release.cumulative_specific_enthalpy_out_j - release.integrated_specific_enthalpy_out_j,
         "literature_frequency_bound": True,
         "frequency_source": "compiled campaign LH2_PIPE AREA_100% literature row",

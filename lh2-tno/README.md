@@ -976,6 +976,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Current IJHE objective coverage audit](docs/PRISM_IJHE_objective_coverage_current_20261115.md)
 - [Latest facility-handoff IJHE audit detail](docs/PRISM_IJHE_facility_handoff_audit_20261115.md)
 - [Provider pressure-equalization candidate audit](docs/PRISM_pressure_equalization_candidate_20261018.md)
+- [Explicit provider pressure-equalization candidate packet](docs/PRISM_pressure_equalization_explicit_candidate_20261018.md)
 - [Latest IJHE audit metadata verifier](src/lh2_tno/latest_ijhe_audit_verification.py)
 - [Current-state recheck (2026-10-18)](docs/PRISM_현재상태_재점검_20261018.md)
 - [Receptor-geometry interpretation](docs/PRISM_receptor_geometry_interpretation_20261115.md)

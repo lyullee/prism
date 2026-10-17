@@ -123,6 +123,20 @@ def _isolation_control_payload(
     return payload
 
 
+def _pressure_equalization_control_payload(
+    post_pressure_equalization_observation_s: float | None,
+) -> dict[str, float]:
+    """Serialize only an explicitly requested natural-stop observation tail."""
+
+    if post_pressure_equalization_observation_s is None:
+        return {}
+    return {
+        "post_pressure_equalization_observation_s": (
+            post_pressure_equalization_observation_s
+        )
+    }
+
+
 def _digest(value: Any, field: str) -> str:
     text = _text(value, field)
     if len(text) != 64:
@@ -293,6 +307,54 @@ def _require_provider_isolation_echo(
         )
 
 
+def _require_provider_pressure_equalization_echo(
+    response: Mapping[str, Any],
+    request: Any,
+) -> None:
+    """Require a provider to echo an explicitly requested natural-stop tail."""
+
+    requested_observation = getattr(
+        request, "post_pressure_equalization_observation_s", None
+    )
+    if requested_observation is None:
+        return
+    data = response.get("data")
+    meta = data.get("provider_meta") if isinstance(data, Mapping) else None
+    if not isinstance(meta, Mapping):
+        raise EquipmentAccidentExportError(
+            "declared pressure-equalization observation requires provider data metadata"
+        )
+    required = (
+        "pressure_equalization_time_s",
+        "post_pressure_equalization_observation_s",
+        "pressure_equalization_success",
+        "terminal_source_pressure_pa_abs",
+        "ambient_pressure_pa_abs",
+        "max_post_pressure_equalization_flow_kg_s",
+    )
+    missing = [field for field in required if field not in meta]
+    if missing:
+        raise EquipmentAccidentExportError(
+            "provider result must echo pressure-equalization fields: "
+            + ", ".join(missing)
+        )
+    if not isinstance(meta["pressure_equalization_success"], bool):
+        raise EquipmentAccidentExportError(
+            "provider pressure_equalization_success must be boolean"
+        )
+    try:
+        echoed_observation = float(meta["post_pressure_equalization_observation_s"])
+        requested = float(requested_observation)
+    except (TypeError, ValueError) as error:
+        raise EquipmentAccidentExportError(
+            "provider pressure-equalization observation must be numeric"
+        ) from error
+    if not math.isclose(echoed_observation, requested, rel_tol=0.0, abs_tol=1.0e-9):
+        raise EquipmentAccidentExportError(
+            "provider pressure-equalization observation disagrees with request"
+        )
+
+
 def _reject_synthetic_qualified_request(input_origin: str, evidence_status: str) -> None:
     """Keep synthetic scenarios outside the qualified-provider path.
 
@@ -337,6 +399,7 @@ class AccidentReleaseExportRequest:
     provider_termination_required: bool = True
     isolation_time_s: float | None = None
     post_isolation_observation_s: float | None = None
+    post_pressure_equalization_observation_s: float | None = None
     state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
 
     def __post_init__(self) -> None:
@@ -367,6 +430,14 @@ class AccidentReleaseExportRequest:
         )
         object.__setattr__(self, "isolation_time_s", isolation)
         object.__setattr__(self, "post_isolation_observation_s", observation)
+        object.__setattr__(
+            self,
+            "post_pressure_equalization_observation_s",
+            _optional_nonnegative(
+                self.post_pressure_equalization_observation_s,
+                "post_pressure_equalization_observation_s",
+            ),
+        )
         if self.evidence_status not in _EVIDENCE_STATUSES:
             raise EquipmentAccidentExportError(
                 f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
@@ -436,6 +507,9 @@ class AccidentReleaseExportRequest:
             "provider_termination_required": self.provider_termination_required,
             **_isolation_control_payload(
                 self.isolation_time_s, self.post_isolation_observation_s
+            ),
+            **_pressure_equalization_control_payload(
+                self.post_pressure_equalization_observation_s
             ),
             **_state_snapshot_payload(self.state_snapshot),
         }
@@ -877,6 +951,7 @@ def _call_provider(
                 "provider state snapshot digest must echo the request snapshot digest"
             )
     _require_provider_isolation_echo(response, request)
+    _require_provider_pressure_equalization_echo(response, request)
     _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 

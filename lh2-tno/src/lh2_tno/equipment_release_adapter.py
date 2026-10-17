@@ -227,6 +227,10 @@ def _provider_mass_balance(
                 key == "post_pressure_equalization_observation_s"
                 and metadata.get("pressure_equalization_time_s") is None
             ):
+                value = _finite(
+                    metadata[key],
+                    "provider data.provider_meta.post_pressure_equalization_observation_s",
+                )
                 if value != 0.0:
                     raise EquipmentReleaseExportError(
                         "provider data.provider_meta.post_pressure_equalization_observation_s "
