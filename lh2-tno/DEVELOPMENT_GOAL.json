@@ -4133,7 +4133,7 @@
   "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
   "latest_provider_packet_collection_manifest_case_count": 44,
   "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
-  "latest_local_full_test_run_commit": "pending-quantitative-attachment-gate",
+  "latest_local_full_test_run_commit": "2e93a37e",
   "current_development": {
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
@@ -4543,10 +4543,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1343,
+    "run_number": 1344,
     "status": "success",
-    "commit": "e63dcc52",
-    "url": "https://github.com/lyullee/prism/actions/runs/39037619437"
+    "commit": "2e93a37e",
+    "url": "https://github.com/lyullee/prism/actions/runs/39037963820"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
@@ -4777,4 +4777,4 @@
   "generic_quantitative_evidence_coverage_facility_ir_fn_claim": false,
   "generic_quantitative_evidence_coverage_facility_qra_claim": false,
   "generic_quantitative_evidence_coverage_physical_validation_claim": false
-}
+}\n
