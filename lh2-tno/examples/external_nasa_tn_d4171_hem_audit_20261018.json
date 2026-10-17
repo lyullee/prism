@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.external_nasa_tn_d4171_hem_benchmark.v1",
+  "status": "NEGATIVE_BASELINE_VALIDATION_EVIDENCE",
+  "diagnostic_only": true,
+  "result_record": "examples\\external_nasa_tn_d4171_hem_results_20261018.json",
+  "source_report": "NASA TN D-4171",
+  "source_url": "https://ntrs.nasa.gov/citations/19670028965",
+  "model": "closed rigid homogeneous-equilibrium hydrogen inventory",
+  "point_count": 21,
+  "heating_modes": [
+    "lower",
+    "uniform",
+    "upper"
+  ],
+  "overall": {
+    "count": 21,
+    "mean_predicted_over_observed": 0.47970035197664584,
+    "mean_absolute_percentage_error_percent": 52.02996480233541,
+    "normalized_rmse": 0.3703297787584494
+  },
+  "source_markdown": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016\\docs\\benchmarks\\nasa_tn_d4171_hem_validation.md",
+  "source_markdown_sha256": "f32c3fa52312a9089b44ab24094be964869dbd7e20c9977102a84e4902f03dd8",
+  "external_source_commit": "7072374",
+  "external_source_tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "blocking_reasons": [],
+  "physical_validation_claim": false,
+  "provider_release_packet_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "promotion_allowed": false,
+  "interpretation": "The unfitted homogeneous-equilibrium baseline under-predicts the NASA TN D-4171 pressure-rise data, especially for upper heating. This is negative model-limit evidence for storage/vent pressure dynamics; it does not qualify a provider release or promote physical validation, frequency, or facility QRA."
+}

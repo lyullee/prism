@@ -289,6 +289,11 @@ def main() -> int:
         help="optional provenance-only audit of external pump test points",
     )
     parser.add_argument(
+        "--nasa-hem-benchmark-evidence",
+        type=Path,
+        help="optional negative-evidence audit of the NASA TN D-4171 HEM benchmark",
+    )
+    parser.add_argument(
         "--external-release-artifact-intake",
         type=Path,
         help="optional provenance-only inventory of external release-shaped JSON artifacts",
@@ -805,6 +810,15 @@ def main() -> int:
             external_pump_test_point_audit["_record_path"] = str(
                 args.external_pump_test_point_audit
             )
+        nasa_hem_benchmark_evidence = (
+            _object(args.nasa_hem_benchmark_evidence)
+            if args.nasa_hem_benchmark_evidence
+            else None
+        )
+        if nasa_hem_benchmark_evidence is not None:
+            nasa_hem_benchmark_evidence["_record_path"] = str(
+                args.nasa_hem_benchmark_evidence
+            )
         external_release_artifact_intake = (
             _object(args.external_release_artifact_intake)
             if args.external_release_artifact_intake
@@ -882,6 +896,7 @@ def main() -> int:
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,
             external_pump_test_point_audit=external_pump_test_point_audit,
+            nasa_hem_benchmark_evidence=nasa_hem_benchmark_evidence,
             external_release_artifact_intake=external_release_artifact_intake,
             external_model_root_review=external_model_root_review,
             hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,

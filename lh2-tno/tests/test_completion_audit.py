@@ -873,6 +873,55 @@ def test_completion_audit_blocks_external_pump_test_point_promotion_claim():
     assert check["status"] == "BLOCKED"
 
 
+def _nasa_hem_benchmark_evidence():
+    return {
+        "schema_version": "prism.external_nasa_tn_d4171_hem_benchmark.v1",
+        "status": "NEGATIVE_BASELINE_VALIDATION_EVIDENCE",
+        "diagnostic_only": True,
+        "source_report": "NASA TN D-4171",
+        "point_count": 21,
+        "heating_modes": ["lower", "uniform", "upper"],
+        "overall": {"count": 21},
+        "blocking_reasons": [],
+        "physical_validation_claim": False,
+        "provider_release_packet_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "promotion_allowed": False,
+    }
+
+
+def test_completion_audit_records_nasa_hem_negative_evidence_without_promotion():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        nasa_hem_benchmark_evidence=_nasa_hem_benchmark_evidence(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_nasa_tn_d4171_hem_benchmark"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_nasa_hem_promotion_claim():
+    evidence = _nasa_hem_benchmark_evidence()
+    evidence["promotion_allowed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        nasa_hem_benchmark_evidence=evidence,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_nasa_tn_d4171_hem_benchmark"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _external_release_artifact_intake():
     return {
         "schema_version": "prism.external_release_artifact_intake.v1",

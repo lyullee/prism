@@ -6454,5 +6454,11 @@
   "external_pump_test_point_facility_qra_claim": false,
   "external_pump_configuration_crosswalk_record": "examples/external_pump_configuration_crosswalk_20261018.json",
   "external_pump_configuration_crosswalk_status": "NO_EXACT_EXTERNAL_CONFIGURATION_MATCH; NASA piston and centrifugal candidates remain unreviewed against generic MappedPump",
-  "external_pump_test_point_completion_audit_check": "diagnostic_external_pump_test_point_audit"
+  "external_pump_test_point_completion_audit_check": "diagnostic_external_pump_test_point_audit",
+  "external_nasa_tn_d4171_hem_result_record": "examples/external_nasa_tn_d4171_hem_results_20261018.json",
+  "external_nasa_tn_d4171_hem_audit_record": "examples/external_nasa_tn_d4171_hem_audit_20261018.json",
+  "external_nasa_tn_d4171_hem_audit_status": "NEGATIVE_BASELINE_VALIDATION_EVIDENCE; 21 unfitted tests; mean predicted/observed 0.480; upper-heating mean 0.232; no promotion",
+  "external_nasa_tn_d4171_hem_completion_audit_check": "diagnostic_nasa_tn_d4171_hem_benchmark",
+  "external_nasa_tn_d4171_hem_physical_validation_claim": false,
+  "external_nasa_tn_d4171_hem_facility_qra_claim": false
 }

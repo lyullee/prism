@@ -270,3 +270,21 @@ The same pump audit is now an optional, explicit check in the IJHE completion
 audit (`diagnostic_external_pump_test_point_audit`). This keeps the candidate
 points visible in the readiness report while requiring configuration review and
 an independent holdout before any validation or facility-QRA promotion.
+
+## 2026-10-18 NASA TN D-4171 HEM benchmark recheck
+
+The current external model workspace contains a newly generated, untracked
+benchmark document for NASA TN D-4171. Its result file was copied into the
+PRISM evidence ledger and checked against 21 unfitted tests. The homogeneous
+equilibrium baseline under-predicts pressure-rise rates in every test, with a
+mean predicted/observed ratio of 0.480, MAPE of 52.0%, and NRMSE of 0.370;
+upper-heating cases average only 0.232 of the observed rate. This is negative
+model-limit evidence for storage and vent pressure dynamics, not a facility
+validation result. The completion audit now exposes it as
+`diagnostic_nasa_tn_d4171_hem_benchmark`, with all provider, frequency,
+physical-validation, and facility-QRA promotion flags fixed to false.
+
+The hash-bound audit is
+[`examples/external_nasa_tn_d4171_hem_audit_20261018.json`](../examples/external_nasa_tn_d4171_hem_audit_20261018.json);
+the copied result table is
+[`examples/external_nasa_tn_d4171_hem_results_20261018.json`](../examples/external_nasa_tn_d4171_hem_results_20261018.json).

@@ -1,0 +1,257 @@
+{
+  "source_title": "Normal Gravity Self-Pressurization of 9-Inch Diameter Spherical Liquid Hydrogen Tankage",
+  "source_report": "NASA TN D-4171",
+  "source_url": "https://ntrs.nasa.gov/citations/19670028965",
+  "model": "closed rigid homogeneous-equilibrium hydrogen inventory",
+  "assumptions": [
+    "9 inch internal spherical diameter",
+    "tests begin at 1 atmosphere absolute pressure",
+    "nominal endpoint is 100 psia absolute",
+    "Table I average heat flux multiplied by full inner spherical area",
+    "all net heat enters a spatially homogeneous equilibrium hydrogen inventory",
+    "no parameter is fitted to the 21 pressure-rise observations"
+  ],
+  "points": [
+    {
+      "test_number": 1,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.34600000000000003,
+      "net_average_heat_flux_W_m2": 55.2053380375,
+      "observed_pressure_rise_Pa_s": 402.1941754348,
+      "predicted_pressure_rise_Pa_s": 215.3775575269134,
+      "predicted_over_observed": 0.5355064063125111,
+      "predicted_duration_s": 2730.789298895755
+    },
+    {
+      "test_number": 2,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.514,
+      "net_average_heat_flux_W_m2": 57.413551559,
+      "observed_pressure_rise_Pa_s": 413.68543759008,
+      "predicted_pressure_rise_Pa_s": 185.57757881734958,
+      "predicted_over_observed": 0.4485958700853231,
+      "predicted_duration_s": 3169.298430688514
+    },
+    {
+      "test_number": 3,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.349,
+      "net_average_heat_flux_W_m2": 188.9599856255,
+      "observed_pressure_rise_Pa_s": 1298.51262354664,
+      "predicted_pressure_rise_Pa_s": 734.491578628606,
+      "predicted_over_observed": 0.5656406917496744,
+      "predicted_duration_s": 800.7589827169375
+    },
+    {
+      "test_number": 4,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.489,
+      "net_average_heat_flux_W_m2": 205.04839842500002,
+      "observed_pressure_rise_Pa_s": 1551.3203909627998,
+      "predicted_pressure_rise_Pa_s": 680.1348283641582,
+      "predicted_over_observed": 0.43842318603318586,
+      "predicted_duration_s": 864.756081866009
+    },
+    {
+      "test_number": 5,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.765,
+      "net_average_heat_flux_W_m2": 229.023288087,
+      "observed_pressure_rise_Pa_s": 1953.5145663976,
+      "predicted_pressure_rise_Pa_s": 589.2791578686645,
+      "predicted_over_observed": 0.3016507621723708,
+      "predicted_duration_s": 998.0850696366969
+    },
+    {
+      "test_number": 6,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.368,
+      "net_average_heat_flux_W_m2": 332.493864523,
+      "observed_pressure_rise_Pa_s": 2217.81359596904,
+      "predicted_pressure_rise_Pa_s": 1262.952754639858,
+      "predicted_over_observed": 0.5694584779060434,
+      "predicted_duration_s": 465.69495743688077
+    },
+    {
+      "test_number": 7,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.507,
+      "net_average_heat_flux_W_m2": 352.052327142,
+      "observed_pressure_rise_Pa_s": 2711.93786864608,
+      "predicted_pressure_rise_Pa_s": 1146.1273490103133,
+      "predicted_over_observed": 0.42262301148606735,
+      "predicted_duration_s": 513.1635065027208
+    },
+    {
+      "test_number": 8,
+      "heating_mode": "uniform",
+      "initial_fill_fraction": 0.772,
+      "net_average_heat_flux_W_m2": 405.680369807,
+      "observed_pressure_rise_Pa_s": 3481.85243304984,
+      "predicted_pressure_rise_Pa_s": 1037.915518076917,
+      "predicted_over_observed": 0.2980929083108158,
+      "predicted_duration_s": 566.6653201279277
+    },
+    {
+      "test_number": 9,
+      "heating_mode": "lower",
+      "initial_fill_fraction": 0.293,
+      "net_average_heat_flux_W_m2": 124.6063344275,
+      "observed_pressure_rise_Pa_s": 677.98446716152,
+      "predicted_pressure_rise_Pa_s": 520.102957927843,
+      "predicted_over_observed": 0.7671310820811711,
+      "predicted_duration_s": 1130.835193977877
+    },
+    {
+      "test_number": 10,
+      "heating_mode": "lower",
+      "initial_fill_fraction": 0.49,
+      "net_average_heat_flux_W_m2": 140.69474722700002,
+      "observed_pressure_rise_Pa_s": 563.07184560872,
+      "predicted_pressure_rise_Pa_s": 466.18875945746527,
+      "predicted_over_observed": 0.8279383227791876,
+      "predicted_duration_s": 1261.6149947529193
+    },
+    {
+      "test_number": 11,
+      "heating_mode": "lower",
+      "initial_fill_fraction": 0.735,
+      "net_average_heat_flux_W_m2": 134.385565737,
+      "observed_pressure_rise_Pa_s": 413.68543759008,
+      "predicted_pressure_rise_Pa_s": 354.41555904839805,
+      "predicted_over_observed": 0.8567271816794955,
+      "predicted_duration_s": 1659.4946646698536
+    },
+    {
+      "test_number": 12,
+      "heating_mode": "lower",
+      "initial_fill_fraction": 0.31,
+      "net_average_heat_flux_W_m2": 231.2315016085,
+      "observed_pressure_rise_Pa_s": 1264.0388370808,
+      "predicted_pressure_rise_Pa_s": 943.9979028556291,
+      "predicted_over_observed": 0.7468108377395424,
+      "predicted_duration_s": 623.0424109392849
+    },
+    {
+      "test_number": 13,
+      "heating_mode": "lower",
+      "initial_fill_fraction": 0.478,
+      "net_average_heat_flux_W_m2": 237.22522402400003,
+      "observed_pressure_rise_Pa_s": 988.2485453540799,
+      "predicted_pressure_rise_Pa_s": 796.0366911123891,
+      "predicted_over_observed": 0.8055025174129418,
+      "predicted_duration_s": 738.8487690120322
+    },
+    {
+      "test_number": 14,
+      "heating_mode": "lower",
+      "initial_fill_fraction": 0.74,
+      "net_average_heat_flux_W_m2": 238.80251939650003,
+      "observed_pressure_rise_Pa_s": 723.94951578264,
+      "predicted_pressure_rise_Pa_s": 627.182792235889,
+      "predicted_over_observed": 0.8663349840877518,
+      "predicted_duration_s": 937.7660493841983
+    },
+    {
+      "test_number": 15,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.365,
+      "net_average_heat_flux_W_m2": 48.8961565475,
+      "observed_pressure_rise_Pa_s": 528.59805914288,
+      "predicted_pressure_rise_Pa_s": 186.39918220681898,
+      "predicted_over_observed": 0.3526293352439936,
+      "predicted_duration_s": 3155.328914824412
+    },
+    {
+      "test_number": 16,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.505,
+      "net_average_heat_flux_W_m2": 53.94350173950001,
+      "observed_pressure_rise_Pa_s": 666.4932050062399,
+      "predicted_pressure_rise_Pa_s": 175.97816522278606,
+      "predicted_over_observed": 0.26403594800510904,
+      "predicted_duration_s": 3342.1801424751125
+    },
+    {
+      "test_number": 17,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.804,
+      "net_average_heat_flux_W_m2": 61.829978602000004,
+      "observed_pressure_rise_Pa_s": 1011.23106966464,
+      "predicted_pressure_rise_Pa_s": 157.12798138358548,
+      "predicted_over_observed": 0.15538286559539224,
+      "predicted_duration_s": 3743.1317079100572
+    },
+    {
+      "test_number": 18,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.34299999999999997,
+      "net_average_heat_flux_W_m2": 76.341096029,
+      "observed_pressure_rise_Pa_s": 942.2834967329599,
+      "predicted_pressure_rise_Pa_s": 298.9414244810882,
+      "predicted_over_observed": 0.3172521067359914,
+      "predicted_duration_s": 1967.4447271325155
+    },
+    {
+      "test_number": 19,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.512,
+      "net_average_heat_flux_W_m2": 87.06670456200001,
+      "observed_pressure_rise_Pa_s": 1287.0213613913597,
+      "predicted_pressure_rise_Pa_s": 282.0010966380045,
+      "predicted_over_observed": 0.2191114344311595,
+      "predicted_duration_s": 2085.6327735199898
+    },
+    {
+      "test_number": 20,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.47700000000000004,
+      "net_average_heat_flux_W_m2": 120.50536645900002,
+      "observed_pressure_rise_Pa_s": 2125.8834987268,
+      "predicted_pressure_rise_Pa_s": 404.7987037489233,
+      "predicted_over_observed": 0.19041434019849102,
+      "predicted_duration_s": 1452.9461776181995
+    },
+    {
+      "test_number": 21,
+      "heating_mode": "upper",
+      "initial_fill_fraction": 0.77,
+      "net_average_heat_flux_W_m2": 169.086063932,
+      "observed_pressure_rise_Pa_s": 3481.85243304984,
+      "predicted_pressure_rise_Pa_s": 433.29954894833133,
+      "predicted_over_observed": 0.1244451214633452,
+      "predicted_duration_s": 1357.3767402811995
+    }
+  ],
+  "overall": {
+    "count": 21,
+    "mean_predicted_over_observed": 0.47970035197664584,
+    "mean_absolute_percentage_error_percent": 52.02996480233541,
+    "root_mean_squared_error_Pa_s": 1140.4891611942096,
+    "normalized_rmse": 0.3703297787584494
+  },
+  "by_heating_mode": {
+    "lower": {
+      "count": 6,
+      "mean_predicted_over_observed": 0.8117408209633483,
+      "mean_absolute_percentage_error_percent": 18.825917903665168,
+      "root_mean_squared_error_Pa_s": 176.33359347137235,
+      "normalized_rmse": 0.20736507148319655
+    },
+    "uniform": {
+      "count": 8,
+      "mean_predicted_over_observed": 0.44749891425699895,
+      "mean_absolute_percentage_error_percent": 55.25010857430011,
+      "root_mean_squared_error_Pa_s": 1243.0559808144476,
+      "normalized_rmse": 0.4036343895433058
+    },
+    "upper": {
+      "count": 7,
+      "mean_predicted_over_observed": 0.23189587881049745,
+      "mean_absolute_percentage_error_percent": 76.81041211895027,
+      "root_mean_squared_error_Pa_s": 1452.4343837750075,
+      "normalized_rmse": 0.4918080869050007
+    }
+  },
+  "energy_partitions": []
+}

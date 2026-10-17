@@ -159,6 +159,7 @@ def build_ijhe_completion_audit(
     dynamic_state_closure_ledger_audit: Mapping[str, Any] | None = None,
     facility_qra_gate_summary: Mapping[str, Any] | None = None,
     external_pump_test_point_audit: Mapping[str, Any] | None = None,
+    nasa_hem_benchmark_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -5130,6 +5131,50 @@ def build_ijhe_completion_audit(
             "never creates a release packet, frequency, physical-validation claim, or facility QRA result."
         )
         checks.append(pump_check)
+    if nasa_hem_benchmark_evidence is not None:
+        hem = nasa_hem_benchmark_evidence
+        overall = hem.get("overall")
+        overall = overall if isinstance(overall, Mapping) else {}
+        blockers = hem.get("blocking_reasons")
+        hem_check_valid = (
+            hem.get("schema_version") == "prism.external_nasa_tn_d4171_hem_benchmark.v1"
+            and hem.get("status") == "NEGATIVE_BASELINE_VALIDATION_EVIDENCE"
+            and hem.get("diagnostic_only") is True
+            and hem.get("source_report") == "NASA TN D-4171"
+            and hem.get("point_count") == 21
+            and isinstance(hem.get("heating_modes"), list)
+            and set(hem.get("heating_modes", [])) == {"lower", "uniform", "upper"}
+            and isinstance(overall.get("count"), int)
+            and overall.get("count") == 21
+            and isinstance(blockers, list)
+            and not blockers
+            and hem.get("physical_validation_claim") is False
+            and hem.get("provider_release_packet_claim") is False
+            and hem.get("frequency_inference_performed") is False
+            and hem.get("facility_qra_claim") is False
+            and hem.get("promotion_allowed") is False
+        )
+        hem_check = _check(
+            "diagnostic_nasa_tn_d4171_hem_benchmark",
+            hem_check_valid,
+            {
+                "record": hem.get("_record_path"),
+                "source_report": hem.get("source_report"),
+                "status": hem.get("status"),
+                "point_count": hem.get("point_count"),
+                "heating_modes": hem.get("heating_modes"),
+                "overall": dict(overall),
+                "promotion_allowed": hem.get("promotion_allowed"),
+            },
+            "NASA TN D-4171 HEM evidence is missing, inconsistent, or carries an unsafe promotion claim",
+        )
+        hem_check["diagnostic_only"] = True
+        hem_check["interpretation"] = (
+            "This negative benchmark records a model limitation for homogeneous-equilibrium "
+            "storage pressure dynamics. It supports model selection and uncertainty discussion, "
+            "but does not validate the facility chain or create a QRA promotion basis."
+        )
+        checks.append(hem_check)
     if external_model_root_review is not None:
         model_review = external_model_root_review
         provider_artifacts = model_review.get("provider_like_artifacts")
