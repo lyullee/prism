@@ -1,6 +1,6 @@
 # PRISM v0.6.3 IJHE 요구사항 추적표 (2026-11-15)
 
-이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **56개 검사 중 51 PASS, 5 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 예측 facility-campaign quantitative-evidence gate와 외부 설비 모델 release intake가 포함되어, 증거가 없는 예측 요청이나 자격화되지 않은 모델 출력을 downstream 시설 집계로 넘기지 않는지 확인한다.
+이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 vertical/inventory/isolation union IJHE 감사는 **57개 검사 중 52 PASS, 5 BLOCKED**인 `INCOMPLETE_EVIDENCE`다. 최신 감사에는 예측 facility-campaign quantitative-evidence gate와 외부 설비 모델 release intake가 포함되어, 증거가 없는 예측 요청이나 자격화되지 않은 모델 출력을 downstream 시설 집계로 넘기지 않는지 확인한다.
 
 외부 `lh2dt` 모델 정본에서 탱크·배관·펌프·밸브·기화기·재액화기·벤트의 release-shaped export 7개를 확인했다. 이 7개는 포트·방출시간·질량·종료근거를 보존하지만 모두 `model_prediction` 원점이고 exact qualification sidecar가 없으므로, 모델 연결 진단 근거로만 기록하고 provider·빈도·물리검증·시설 QRA 승격에는 사용하지 않는다.
 

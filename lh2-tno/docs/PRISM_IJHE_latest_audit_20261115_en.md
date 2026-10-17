@@ -13,7 +13,7 @@ release-boundary request open.
 
 ## Current result
 
-The latest audit is `INCOMPLETE_EVIDENCE` with **56 checks: 51 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
+The latest audit is `INCOMPLETE_EVIDENCE` with **57 checks: 52 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
 | Item | Current evidence |
 |---|---:|
