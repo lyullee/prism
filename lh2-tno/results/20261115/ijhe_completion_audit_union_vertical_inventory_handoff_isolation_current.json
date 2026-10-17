@@ -6247,11 +6247,12 @@
         },
         "provider_response_pair_count": 7,
         "provider_response_normalized_count": 7,
-        "provider_response_mismatch_count": 0
+        "provider_response_mismatch_count": 0,
+        "provider_response_result_digest_bound_count": 7
       },
       "blocking_reason": null,
       "diagnostic_only": true,
-      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Sibling provider responses are compared for identity, clock, mass, termination, and source-digest consistency. The seven current pairs normalize successfully, but all remain diagnostic model-prediction rows without qualification sidecars; no frequency, physical-validation, or facility QRA is inferred."
+      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Sibling provider responses are compared for identity, clock, mass, termination, source-digest, and canonical result-digest consistency. The seven current pairs normalize and bind their canonical result digests, but all remain diagnostic model-prediction rows without qualification sidecars; no frequency, physical-validation, or facility QRA is inferred."
     }
   ],
   "blocking_reasons": [

@@ -5049,6 +5049,9 @@ def build_ijhe_completion_audit(
                 "provider_response_mismatch_count": intake.get(
                     "provider_response_mismatch_count"
                 ),
+                "provider_response_result_digest_bound_count": intake.get(
+                    "provider_response_result_digest_bound_count"
+                ),
                 "actual_origin_row_count": actual_origin_row_count,
                 "synthetic_or_model_prediction_row_count": synthetic_or_model_prediction_row_count,
                 "error_count": intake.get("error_count"),

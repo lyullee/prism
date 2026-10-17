@@ -27,8 +27,9 @@ mean that the release boundary is closed.
 
 The audit intentionally leaves these gaps visible:
 
-- a response without a digest-bound `provider_result_digest` cannot establish
-  exact result provenance;
+- the response's canonical SHA-256 must match the
+  `provider_result_digest` carried by the resolved release; the response does
+  not need a duplicated mutable digest field;
 - a nonzero residual or a missing mass ledger cannot be repaired by the
   intake;
 - `synthetic_diagnostic_horizon` is not converted into a physical termination;
@@ -39,8 +40,8 @@ The audit intentionally leaves these gaps visible:
   created.
 
 For the current seven external model exports, all seven response/release
-pairs have matching identity, clock, mass, termination, and source-digest
-fields. The normalized count is therefore 7/7. All seven remain
+pairs have matching identity, clock, mass, termination, source-digest, and
+canonical result-digest fields. The normalized count is therefore 7/7. All seven remain
 `model_prediction` rows without an exact qualification sidecar, so the strict
 IJHE blockers are unchanged. The machine-readable report is
 `results/20261115/external_native_contract_intake_current.json`.

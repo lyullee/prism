@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 
 from lh2_tno.external_release_artifact_intake import audit_external_release_artifacts
+from lh2_tno.external_release_normalization import audit_external_release_response
+from lh2_tno.contracts import canonical_digest
 
 
 def _release(origin: str = "synthetic") -> dict:
@@ -229,3 +231,37 @@ def test_external_release_response_mismatch_is_explicit(tmp_path: Path) -> None:
     assert audit["checks"]["identity_matches"] is False
     assert audit["checks"]["source_digest_matches"] is False
     assert audit["closure_ready"] is False
+
+
+def test_external_release_response_binds_canonical_result_digest() -> None:
+    release = _release("model_prediction")
+    release.update(
+        {
+            "termination_provenance": "native model ledger",
+            "cumulative_mass_out_kg": 2.0,
+        }
+    )
+    response = {
+        "provider_export_schema": "prism.native_provider_response.v1",
+        "provider_model": "native-test-model",
+        "provider_source_digest": "a" * 64,
+        "provider_state_snapshot_digest": "c" * 64,
+        "data": {
+            "event_id": release["event_id"],
+            "component_id": release["component_id"],
+            "port_id": release["port_id"],
+            "duration_s": release["duration_s"],
+            "available_mass_kg": release["available_mass_kg"],
+            "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+            "termination_basis": release["termination_basis"],
+            "termination_provenance": release["termination_provenance"],
+        },
+    }
+    release["provider_result_digest"] = canonical_digest(response)
+
+    audit = audit_external_release_response(release, response)
+
+    assert audit["status"] == "NORMALIZED_PROVIDER_RESPONSE"
+    assert audit["checks"]["result_digest_rebound"] is True
+    assert audit["provider_result_digest_binding"] == "canonical_response_digest"
+    assert audit["computed_provider_result_digest"] == release["provider_result_digest"]

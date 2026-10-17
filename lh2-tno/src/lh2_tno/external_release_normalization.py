@@ -20,6 +20,8 @@ import math
 from pathlib import Path
 from typing import Any, Mapping
 
+from .contracts import canonical_digest
+
 
 SCHEMA = "prism.external_release_response_normalization.v1"
 MASS_TOLERANCE_KG = 1.0e-8
@@ -118,9 +120,19 @@ def audit_external_release_response(
             response.get("provider_state_snapshot_digest"), str
         )
         and bool(response.get("provider_state_snapshot_digest")),
-        "result_digest_rebound": isinstance(response.get("provider_result_digest"), str)
-        and response.get("provider_result_digest") == release.get("provider_result_digest"),
+        # The native response does not need to duplicate the digest as a
+        # mutable field.  PRISM's provider contract binds it to the canonical
+        # response bytes; recomputing that digest is the exact handoff check.
+        "result_digest_rebound": False,
     }
+
+    try:
+        computed_result_digest = canonical_digest(response)
+    except (TypeError, ValueError, OverflowError):
+        computed_result_digest = None
+    checks["result_digest_rebound"] = computed_result_digest == release.get(
+        "provider_result_digest"
+    )
 
     ledger = _mass_ledger(meta, payload)
     if ledger is not None:
@@ -149,7 +161,9 @@ def audit_external_release_response(
     for name, ok in checks.items():
         if not ok:
             if name == "result_digest_rebound":
-                reasons.append("provider response does not carry a digest-bound provider_result_digest")
+                reasons.append(
+                    "canonical provider response digest does not match resolved release provider_result_digest"
+                )
             elif name == "mass_ledger_closed":
                 reasons.append("native provider mass ledger does not close within tolerance")
             elif name == "isolation_clock_valid":
@@ -188,6 +202,12 @@ def audit_external_release_response(
         "port_id": release.get("port_id"),
         "provider_model": response.get("provider_model"),
         "provider_state_snapshot_digest": response.get("provider_state_snapshot_digest"),
+        "computed_provider_result_digest": computed_result_digest,
+        "provider_result_digest_binding": (
+            "canonical_response_digest"
+            if checks["result_digest_rebound"]
+            else "UNBOUND"
+        ),
         "checks": checks,
         "provider_mass_balance_candidate": ledger,
         "isolation_evidence_candidate": isolation,

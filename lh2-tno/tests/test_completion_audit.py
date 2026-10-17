@@ -744,6 +744,7 @@ def _external_release_artifact_intake():
         "provider_response_pair_count": 2,
         "provider_response_normalized_count": 2,
         "provider_response_mismatch_count": 0,
+        "provider_response_result_digest_bound_count": 2,
         "error_count": 0,
         "artifacts": [
             {"diagnostic_only": True, "qualification_bound": False},
@@ -774,6 +775,7 @@ def test_completion_audit_records_external_release_artifact_inventory_without_pr
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
     assert check["evidence"]["provider_response_normalized_count"] == 2
+    assert check["evidence"]["provider_response_result_digest_bound_count"] == 2
     assert report["complete_facility_qra_claim"] is False
 
 

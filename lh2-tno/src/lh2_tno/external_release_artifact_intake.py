@@ -278,6 +278,7 @@ def audit_external_release_artifacts(
     provider_response_pair_count = 0
     provider_response_normalized_count = 0
     provider_response_mismatch_count = 0
+    provider_response_result_digest_bound_count = 0
     for path in files:
         try:
             payload = _read_json(path)
@@ -358,6 +359,11 @@ def audit_external_release_artifacts(
                     provider_response_normalized_count += 1
                 else:
                     provider_response_mismatch_count += 1
+                response_checks = provider_response_audit.get("checks")
+                if isinstance(response_checks, Mapping) and response_checks.get(
+                    "result_digest_rebound"
+                ) is True:
+                    provider_response_result_digest_bound_count += 1
                 reasons.extend(
                     f"provider response: {item}"
                     for item in provider_response_audit.get("blocking_reasons", [])
@@ -429,6 +435,7 @@ def audit_external_release_artifacts(
         "provider_response_pair_count": provider_response_pair_count,
         "provider_response_normalized_count": provider_response_normalized_count,
         "provider_response_mismatch_count": provider_response_mismatch_count,
+        "provider_response_result_digest_bound_count": provider_response_result_digest_bound_count,
         "error_count": len(errors),
         "artifacts": artifacts,
         "errors": errors,
