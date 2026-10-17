@@ -4619,5 +4619,8 @@
   "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_record": "results/20261017/header_bound_frequency_uncertainty_audit_current.json",
   "inspection_center_header_bound_facility_bridge_frequency_uncertainty_audit_status": "PASS_DIAGNOSTIC_ONLY; 1 explicit bound and 2 unbound branches reconciled from component rows; no imputation or inference",
   "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_audit_record": "results/20261017/header_bound_frequency_uncertainty_audit_population_diagnostic.json",
-  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_audit_status": "PASS_DIAGNOSTIC_ONLY; population-bound replay reconciled with the same 1/2 frequency-bound coverage"
+  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_audit_status": "PASS_DIAGNOSTIC_ONLY; population-bound replay reconciled with the same 1/2 frequency-bound coverage",
+  "ijhe_completion_audit_latest_verification_after_frequency_audit_record": "results/20261017/latest_ijhe_audit_verification_after_frequency_audit.json",
+  "ijhe_completion_audit_latest_verification_after_frequency_audit_status": "PASS; latest audit pointer and 57-check INCOMPLETE_EVIDENCE ledger remain internally consistent; no promotion claim",
+  "ijhe_completion_audit_latest_verification_after_frequency_audit_blocking_reason_count": 0
 }
