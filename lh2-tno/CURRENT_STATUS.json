@@ -2000,8 +2000,8 @@
   "current_union_facility_evidence_request_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
   "current_union_full_test_count": 1419,
-  "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json",
-  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 33 objective checks, core blockers 0, strict evidence gates 4 remain blocked; observed-state replay/runtime, external-equipment readiness, provider-request, release-closure, independent IR/F-N closure and completion-alignment diagnostics are explicitly recorded",
+  "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 34 objective checks, core blockers 0, strict evidence gates 4 remain blocked; facility provider intake alignment PASS 44/44",
   "current_union_risk_atom_chain_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_chain_closure_audit.json",
   "current_union_risk_atom_chain_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 24 events, 24 cases and 96 risk atoms reach the facility damage ledger; operator-limited and synthetic evidence remain diagnostic-only",
   "current_union_facility_ir_fn_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC; 176 risk atoms independently reproduce conditional facility IR/F-N with 0 IR mismatches and 0 F/N mismatches; diagnostic-only and facility QRA remains withheld",
@@ -5499,8 +5499,8 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "cdf8cca6",
-  "current_union_ijhe_objective_coverage_audit_check_count": 33,
+  "latest_local_full_test_run_commit": "9923456e",
+  "current_union_ijhe_objective_coverage_audit_check_count": 34,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
@@ -5508,7 +5508,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6",
+  "current_union_ijhe_objective_coverage_audit_sha256": "7250384E367146195D0C25A768977365AD3AEB53B375C120F1827B72175ACA26",
   "current_union_ijhe_objective_coverage_audit_realtime_status": "CONDITIONALLY_COMPLETE; cached_diagnostic_1hz meets benchmark, fresh_physics_background is explicitly not a 1 Hz claim",
   "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
   "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 34 checks; core blockers 0; strict blockers 4; facility provider intake alignment PASS 44/44",
@@ -6017,11 +6017,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1349,
+    "run_number": 1350,
     "status": "completed",
     "conclusion": "success",
-    "commit": "cdf8cca6b45e29180d9ca55f6b6f7a6030999b40",
-    "url": "https://github.com/lyullee/prism/actions/runs/39040106386"
+    "commit": "9923456e3856527a5799d66496b40944ef0ccb8d",
+    "url": "https://github.com/lyullee/prism/actions/runs/39040545249"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
@@ -6269,7 +6269,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "Actions #1349 success; 1463 passed, 1 warning locally",
+  "latest_ci_validation": "Actions #1350 success; 1465 passed, 1 warning locally",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
