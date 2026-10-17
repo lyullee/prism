@@ -124,3 +124,22 @@ This recheck strengthens the unresolved-evidence record but keeps
 `accepted=false`, `physical_validation_claim=false`, and
 `facility_qra_claim=false`.  It must not be replaced by the converged
 pseudo-source record.
+
+## 5120 -> 10240 source-grid recheck
+
+The same native source was rerun at 5120 and 10240 field steps with
+`puff_steps=120`, `substeps=3`, and the native SLABx path. The final changes
+were 9.070% for hydrogen volume fraction at 30 m, 3.757% for centre height,
+2.232% for cloud depth, 0.132% for temperature, 1.843% for sensor MAE, and
+0.198% for sensor RMSE. The worst quantity remains the hydrogen volume
+fraction, so the all-quantity 2% criterion is still open.
+
+The recorded runtimes were 14.56 s and 18.42 s for the two field levels. This
+is a processing-time observation for the native source path, not a 1 Hz service
+claim. The machine-readable records are:
+
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/refinement.json`
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json`
+
+The gate remains `accepted=false`; no physical-validation or facility-QRA
+promotion is made from this recheck.
