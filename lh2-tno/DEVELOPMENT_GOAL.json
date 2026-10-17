@@ -4850,5 +4850,18 @@
   "slabx_lh2_scope_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
   "slabx_lh2_active_development_in_scope": false,
   "slabx_lh2_active_development_policy": "Do not modify or revalidate SLABx-LH2 in the remaining PRISM objective; retain only the explicit input/unit/clock/failure handoff contract. Do not use the component record to infer frequency, provider qualification, physical full-chain validation, or facility IR/F-N/QRA.",
-  "slabx_lh2_scope_decision_basis": "User-confirmed component validation and publication; current 5/5 component audit remains the provenance record."
+  "slabx_lh2_scope_decision_basis": "User-confirmed component validation and publication; current 5/5 component audit remains the provenance record.",
+  "latest_native_external_base_recheck_record": "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/verification.json",
+  "latest_native_external_base_recheck_campaign": "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/campaign_result.json",
+  "latest_native_external_base_recheck_status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC_CANDIDATE; 34 events, 44 cases, 176 risk atoms; 23 EXECUTED, 21 EXECUTED_OPERATOR_LIMITED; authoritative union unchanged",
+  "latest_native_external_base_recheck_case_count": 44,
+  "latest_native_external_base_recheck_executed_case_count": 23,
+  "latest_native_external_base_recheck_operator_limited_case_count": 21,
+  "latest_native_external_base_recheck_new_reclassification_candidate_count": 9,
+  "latest_native_external_base_recheck_qualified_provider_packet_case_count": 0,
+  "latest_native_external_base_recheck_physical_validation_claim": false,
+  "latest_native_external_base_recheck_facility_qra_claim": false,
+  "latest_native_external_base_recheck_authoritative_union_replaced": false,
+  "latest_native_external_base_recheck_reason": "Candidate provider result digests differ from the authoritative union and base state-snapshot binding was not requalified; retain as diagnostic evidence only.",
+  "latest_native_external_base_recheck_verification_sha256": "8c1f484e25d0852cd3e4618bf67c5920e3371bdbfac00dee65239fd66b71ca53"
 }
