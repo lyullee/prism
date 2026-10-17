@@ -1,0 +1,345 @@
+{
+  "schema_version": "prism.external_lh2dt_full_scope_worktree_recheck.v1",
+  "status": "CURRENT_UNCOMMITTED_SOURCE_FULL_SCOPE_DIAGNOSTIC_PASS",
+  "recheck_date_kst": "2026-10-18",
+  "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\lh2dt_models",
+  "external_model_git_commit": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+  "external_model_worktree_dirty": true,
+  "external_model_source_digest": "d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce",
+  "external_source_test_receipt": "392 passed, 1 warning",
+  "frequency_plan": "results/20261115/native_external_facility_full_scope_campaign_current/frequency_plan.json",
+  "frequency_plan_sha256": "c973bf1911b18b207e70a5bc836612e38adcbf1d38b059bf155bfca5de783e0d",
+  "g1_plan_change": "inventory_over_600s bounded provider inventory horizon; prior instantaneous-inventory attempt was fail-closed and was not used",
+  "catalog": {
+    "frequency_event_count": 24,
+    "exact_native_packet_count": 24,
+    "uncomputed_event_count": 0,
+    "retry_succeeded_event_count": 1,
+    "packet_kind_counts": {
+      "accidental_release": 21,
+      "emergency_relief": 1,
+      "two_sided_rupture": 2
+    },
+    "state_snapshot_record_count": 24,
+    "state_snapshot_bound_count": 20,
+    "state_snapshot_unbound_count": 0,
+    "state_snapshot_digest_mismatch_count": 0,
+    "all_event_rows_exact_native_packet": true
+  },
+  "campaign": {
+    "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+    "packet_count": 24,
+    "executed_case_count": 24,
+    "uncomputed_case_count": 0,
+    "failed_case_count": 0,
+    "operator_limited_case_count": 11,
+    "withheld_case_count": 11,
+    "risk_atom_count": 96,
+    "matched_event_chain_closed": true,
+    "matched_event_risk_atom_chain_closed": true,
+    "frequency_scenario_count": 3,
+    "campaign_elapsed_ms": 504688.6607000488,
+    "known_contribution_annual_ir_low_high": {
+      "worker-01": [
+        3.7804000000000134e-06,
+        3.7804000662898812e-06
+      ]
+    },
+    "declared_scope_annual_ir_low_high": null,
+    "total_facility_annual_ir_low_high": null,
+    "coverage": {
+      "generated_initiation_frequency_per_year": 0.0138259,
+      "fully_executed_case_weighted_frequency_per_year": 0.0119875,
+      "fraction_of_generated_initiation_frequency": 0.8670321642714036,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 11,
+      "numerically_executed_case_count": 24,
+      "dynamic_state_closure_status_counts": {
+        "BLOCKED": 9,
+        "NOT_DECLARED": 2,
+        "READY": 13
+      },
+      "dynamic_state_closure_ready_case_count": 13,
+      "dynamic_state_closure_blocked_case_count": 9,
+      "external_catalogue_scope_gap_component_count": 0,
+      "meaning": "frequency coverage only; not fraction of risk captured, not physical validation",
+      "by_component": [
+        {
+          "component_id": "storage-tank-01",
+          "kind": "storage_tank",
+          "scope_status": "PARTIAL",
+          "excluded_reason": null,
+          "generated_event_count": 5,
+          "generated_port_scoped_event_count": 5,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "tank-accident-out"
+          ],
+          "generated_initiation_frequency_per_year": 0.0008248999999999999,
+          "campaign_case_count": 5,
+          "executed_case_count": 5,
+          "fully_validated_case_count": 4,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 1,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 5,
+          "dynamic_state_closure_status_counts": {
+            "BLOCKED": 1,
+            "READY": 4
+          },
+          "dynamic_state_closure_ready_case_count": 4,
+          "dynamic_state_closure_blocked_case_count": 1,
+          "uncomputed_reasons": [
+            "source operator has declared constant-state or open physical closure limitations"
+          ]
+        },
+        {
+          "component_id": "liquid-transfer-line-01",
+          "kind": "pipe",
+          "scope_status": "EXECUTED",
+          "excluded_reason": null,
+          "generated_event_count": 5,
+          "generated_port_scoped_event_count": 5,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "line-accident-out"
+          ],
+          "generated_initiation_frequency_per_year": 6.379999999999999e-05,
+          "campaign_case_count": 5,
+          "executed_case_count": 5,
+          "fully_validated_case_count": 5,
+          "operator_limited_case_count": 0,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 0,
+          "numerically_executed_case_count": 5,
+          "dynamic_state_closure_status_counts": {
+            "READY": 5
+          },
+          "dynamic_state_closure_ready_case_count": 5,
+          "dynamic_state_closure_blocked_case_count": 0,
+          "uncomputed_reasons": []
+        },
+        {
+          "component_id": "transfer-valve-01",
+          "kind": "valve",
+          "scope_status": "PARTIAL",
+          "excluded_reason": null,
+          "generated_event_count": 5,
+          "generated_port_scoped_event_count": 5,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "valve-accident-out"
+          ],
+          "generated_initiation_frequency_per_year": 0.0002072,
+          "campaign_case_count": 5,
+          "executed_case_count": 5,
+          "fully_validated_case_count": 0,
+          "operator_limited_case_count": 5,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 5,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 5,
+          "numerically_executed_case_count": 5,
+          "dynamic_state_closure_status_counts": {
+            "BLOCKED": 5
+          },
+          "dynamic_state_closure_ready_case_count": 0,
+          "dynamic_state_closure_blocked_case_count": 5,
+          "uncomputed_reasons": [
+            "source operator has declared constant-state or open physical closure limitations"
+          ]
+        },
+        {
+          "component_id": "pressure-relief-vent-01",
+          "kind": "vent_stack",
+          "scope_status": "PARTIAL",
+          "excluded_reason": null,
+          "generated_event_count": 1,
+          "generated_port_scoped_event_count": 1,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "vent-accident-out"
+          ],
+          "generated_initiation_frequency_per_year": 2e-05,
+          "campaign_case_count": 1,
+          "executed_case_count": 1,
+          "fully_validated_case_count": 0,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 1,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "dynamic_state_closure_status_counts": {
+            "BLOCKED": 1
+          },
+          "dynamic_state_closure_ready_case_count": 0,
+          "dynamic_state_closure_blocked_case_count": 1,
+          "uncomputed_reasons": [
+            "source operator has declared constant-state or open physical closure limitations"
+          ]
+        },
+        {
+          "component_id": "liquid-transfer-pump-01",
+          "kind": "pump",
+          "scope_status": "PARTIAL",
+          "excluded_reason": null,
+          "generated_event_count": 2,
+          "generated_port_scoped_event_count": 2,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "pump-accident-out"
+          ],
+          "generated_initiation_frequency_per_year": 0.0006000000000000001,
+          "campaign_case_count": 2,
+          "executed_case_count": 2,
+          "fully_validated_case_count": 0,
+          "operator_limited_case_count": 2,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 2,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 2,
+          "numerically_executed_case_count": 2,
+          "dynamic_state_closure_status_counts": {
+            "BLOCKED": 2
+          },
+          "dynamic_state_closure_ready_case_count": 0,
+          "dynamic_state_closure_blocked_case_count": 2,
+          "uncomputed_reasons": [
+            "source operator has declared constant-state or open physical closure limitations"
+          ]
+        },
+        {
+          "component_id": "ambient-vaporizer-01",
+          "kind": "vaporizer",
+          "scope_status": "EXECUTED",
+          "excluded_reason": null,
+          "generated_event_count": 3,
+          "generated_port_scoped_event_count": 3,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "vaporizer-accident-out"
+          ],
+          "generated_initiation_frequency_per_year": 0.0011,
+          "campaign_case_count": 3,
+          "executed_case_count": 3,
+          "fully_validated_case_count": 3,
+          "operator_limited_case_count": 0,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 0,
+          "numerically_executed_case_count": 3,
+          "dynamic_state_closure_status_counts": {
+            "READY": 3
+          },
+          "dynamic_state_closure_ready_case_count": 3,
+          "dynamic_state_closure_blocked_case_count": 0,
+          "uncomputed_reasons": []
+        },
+        {
+          "component_id": "reliquefier-01",
+          "kind": "reliquefier",
+          "scope_status": "PARTIAL",
+          "excluded_reason": null,
+          "generated_event_count": 3,
+          "generated_port_scoped_event_count": 3,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [
+            "reliquefier-accident-out-1",
+            "reliquefier-accident-out-2"
+          ],
+          "generated_initiation_frequency_per_year": 0.01101,
+          "campaign_case_count": 3,
+          "executed_case_count": 3,
+          "fully_validated_case_count": 1,
+          "operator_limited_case_count": 2,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 2,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 2,
+          "numerically_executed_case_count": 3,
+          "dynamic_state_closure_status_counts": {
+            "NOT_DECLARED": 2,
+            "READY": 1
+          },
+          "dynamic_state_closure_ready_case_count": 1,
+          "dynamic_state_closure_blocked_case_count": 0,
+          "uncomputed_reasons": [
+            "source operator has declared constant-state or open physical closure limitations"
+          ]
+        },
+        {
+          "component_id": "receiving-boundary-01",
+          "kind": "boundary",
+          "scope_status": "EXCLUDED",
+          "excluded_reason": "boundary is an interface, not an accidental-release equipment item in this generic example",
+          "generated_event_count": 0,
+          "generated_port_scoped_event_count": 0,
+          "generated_port_unbound_event_count": 0,
+          "reviewed_accident_port_ids": [],
+          "generated_initiation_frequency_per_year": 0,
+          "campaign_case_count": 0,
+          "executed_case_count": 0,
+          "fully_validated_case_count": 0,
+          "operator_limited_case_count": 0,
+          "domain_incomplete_case_count": 0,
+          "uncomputed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 0,
+          "numerically_executed_case_count": 0,
+          "dynamic_state_closure_status_counts": {},
+          "dynamic_state_closure_ready_case_count": 0,
+          "dynamic_state_closure_blocked_case_count": 0,
+          "uncomputed_reasons": []
+        }
+      ],
+      "scenario_family_event_counts": {
+        "inventory_depletion": 17,
+        "inventory_over_600s": 2,
+        "liquid_two_phase": 17,
+        "pipe_hole": 5,
+        "pump_hole": 2,
+        "reliquefier_hole": 1,
+        "two_sided_rupture": 2,
+        "valve_hole": 5,
+        "vaporizer_hole": 1,
+        "vent_hole": 1,
+        "vessel_hole": 5
+      }
+    },
+    "hazop_binding": {
+      "status": "EXACT_REVIEWED_BINDING",
+      "bound_event_count": 24,
+      "unbound_event_count": 0,
+      "orphan_binding_count": 0
+    },
+    "provider_packet_case_count": 24,
+    "qualified_provider_packet_case_count": 0,
+    "provider_packet_missing_evidence_case_count": 24,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "interpretation": [
+    "Current dirty external source and current reviewed plan produce an exact 24/24 packet catalog and 24/24 diagnostic consequence chains with 96 risk atoms.",
+    "Execution closure does not equal qualified evidence: 11 cases remain operator-limited/withheld and provider qualification is 0/24.",
+    "Conditional known-contribution IR is available only for the executed diagnostic subset; declared-scope and total-facility IR/F-N remain withheld.",
+    "Do not replace the authoritative 34-event/44-case/176-risk-atom union with this recheck. Rebind only after the external source is committed, qualification sidecars and independent validation are supplied, and scope closure is reviewed."
+  ],
+  "promotion": {
+    "authoritative_union_rebound": false,
+    "provider_packet_promoted": false,
+    "frequency_inference": false,
+    "physical_validation": false,
+    "facility_qra": false
+  },
+  "source_artifacts": {
+    "catalog_verification": "examples/external_lh2dt_full_scope_worktree_catalog_verification_20261018.json",
+    "campaign_verification": "examples/external_lh2dt_full_scope_worktree_campaign_verification_20261018.json"
+  }
+}
