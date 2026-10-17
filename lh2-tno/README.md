@@ -71,7 +71,8 @@ For accidental gas, liquid, and two-phase releases, the optional [dynamic state 
 shows how an equipment twin can prove that changing pressure and inventory
 were fed back into the release history. Without that explicit evidence, PRISM
 keeps the source `EXECUTED_OPERATOR_LIMITED` even when the downstream
-consequence chain runs successfully.
+consequence chain runs successfully. Campaign and facility ledgers retain the
+closure status per case and per equipment component.
 
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 

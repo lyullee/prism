@@ -1349,6 +1349,25 @@ def merge_facility_campaign_results(
     case_status_counts: dict[str, int] = defaultdict(int)
     for status in case_status_by_identity.values():
         case_status_counts[status] += 1
+    # Keep provider dynamic-source readiness at the same case identity level
+    # as the facility status ledger. A case may appear in both ``cases`` and
+    # ``uncomputed_cases``; the evaluated row wins, just as it does for the
+    # ordinary case status. Missing evidence is reported explicitly and is
+    # never inferred from a numerical result.
+    dynamic_state_closure_by_identity: dict[tuple[str, ...], str] = {}
+    for case in merged_cases:
+        dynamic_state_closure_by_identity[_case_identity(case)] = str(
+            case.get('dynamic_state_closure_status', 'NOT_DECLARED')
+        )
+    for case in merged_missing:
+        identity = _case_identity(case)
+        if identity not in dynamic_state_closure_by_identity:
+            dynamic_state_closure_by_identity[identity] = str(
+                case.get('dynamic_state_closure_status', 'NOT_EVALUATED')
+            )
+    dynamic_state_closure_status_counts: dict[str, int] = defaultdict(int)
+    for status in dynamic_state_closure_by_identity.values():
+        dynamic_state_closure_status_counts[status] += 1
     conditional_case_count = len(case_status_by_identity)
     conditional_executed_case_count = sum(
         status.startswith("EXECUTED") for status in case_status_by_identity.values()
@@ -1383,6 +1402,9 @@ def merge_facility_campaign_results(
     # actually joined to the facility chain?" and prevents a facility total
     # from hiding a missing or operator-limited component handoff.
     component_case_status_by_identity: dict[str, dict[tuple[str, ...], str]] = defaultdict(dict)
+    component_dynamic_state_closure_by_identity: dict[
+        str, dict[tuple[str, ...], str]
+    ] = defaultdict(dict)
     component_strict_uncomputed_counts: dict[str, int] = defaultdict(int)
     component_strict_uncomputed_status_counts: dict[str, dict[str, int]] = defaultdict(
         lambda: defaultdict(int)
@@ -1396,6 +1418,9 @@ def merge_facility_campaign_results(
             not previous.startswith("EXECUTED") and status.startswith("EXECUTED")
         ):
             component_case_status_by_identity[component_id][identity] = status
+            component_dynamic_state_closure_by_identity[component_id][identity] = str(
+                case.get('dynamic_state_closure_status', 'NOT_DECLARED')
+            )
     for case in merged_missing:
         component_id = _case_component_id(case, event_component)
         identity = _case_identity(case)
@@ -1405,6 +1430,9 @@ def merge_facility_campaign_results(
         previous = component_case_status_by_identity[component_id].get(identity)
         if previous is None:
             component_case_status_by_identity[component_id][identity] = status
+            component_dynamic_state_closure_by_identity[component_id][identity] = str(
+                case.get('dynamic_state_closure_status', 'NOT_EVALUATED')
+            )
 
     component_event_ids: dict[str, set[str]] = defaultdict(set)
     for event in merged_events:
@@ -1449,6 +1477,11 @@ def merge_facility_campaign_results(
         component_qualified_evidence_withheld_count = (
             component_operator_limited_count + component_domain_incomplete_count
         )
+        component_dynamic_state_closure_status_counts: dict[str, int] = defaultdict(int)
+        for dynamic_status in component_dynamic_state_closure_by_identity.get(
+            component_id, {}
+        ).values():
+            component_dynamic_state_closure_status_counts[dynamic_status] += 1
         component_status = component_statuses.get(
             component_id,
             "MISSING_COVERAGE_LEDGER" if component_id in expected_components else "UNKNOWN_COMPONENT",
@@ -1489,6 +1522,15 @@ def merge_facility_campaign_results(
             "numerically_executed_case_count": component_numerically_executed_count,
             "risk_atom_count": len(component_atoms.get(component_id, [])),
             "case_status_counts": dict(sorted(status_counts.items())),
+            "dynamic_state_closure_status_counts": dict(
+                sorted(component_dynamic_state_closure_status_counts.items())
+            ),
+            "dynamic_state_closure_ready_case_count": component_dynamic_state_closure_status_counts.get(
+                "READY", 0
+            ),
+            "dynamic_state_closure_blocked_case_count": component_dynamic_state_closure_status_counts.get(
+                "BLOCKED", 0
+            ),
             "strict_uncomputed_status_counts": dict(
                 sorted(component_strict_uncomputed_status_counts.get(component_id, {}).items())
             ),
@@ -1658,6 +1700,15 @@ def merge_facility_campaign_results(
         ],
         "stage_timing": timing["stage_elapsed_ms"],
         "case_status_counts": dict(sorted(case_status_counts.items())),
+        "dynamic_state_closure_status_counts": dict(
+            sorted(dynamic_state_closure_status_counts.items())
+        ),
+        "dynamic_state_closure_ready_case_count": dynamic_state_closure_status_counts.get(
+            "READY", 0
+        ),
+        "dynamic_state_closure_blocked_case_count": dynamic_state_closure_status_counts.get(
+            "BLOCKED", 0
+        ),
         "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
         "operator_limited_case_count": operator_limited_case_count,
         "domain_incomplete_case_count": domain_incomplete_case_count,

@@ -574,6 +574,29 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     mass_ledger=data.get('mass_ledger'),
                     termination=q.release_termination.model_dump(mode='json'),
                     provider_packet_identity=packet_identity)
+                # Preserve the provider-owned dynamic source audit at the
+                # campaign case boundary.  Facility aggregation must be able
+                # to distinguish a ready dynamic accident source from a
+                # numerically executed but operator-limited source; a generic
+                # status string alone loses that reason.
+                source_history = data.get('source')
+                dynamic_closure = (
+                    source_history.get('dynamic_state_closure')
+                    if isinstance(source_history, Mapping)
+                    else None
+                )
+                if isinstance(dynamic_closure, Mapping):
+                    row['dynamic_state_closure_status'] = (
+                        'READY' if dynamic_closure.get('ready') is True else 'BLOCKED'
+                    )
+                    row['dynamic_state_closure_ready'] = dynamic_closure.get('ready') is True
+                    row['dynamic_state_closure_blocking_reasons'] = list(
+                        dynamic_closure.get('blocking_reasons', [])
+                    )
+                else:
+                    row['dynamic_state_closure_status'] = 'NOT_DECLARED'
+                    row['dynamic_state_closure_ready'] = None
+                    row['dynamic_state_closure_blocking_reasons'] = []
                 explosion = data.get('explosion', {})
                 row['domain_assessment'] = {
                     'domain_truncated': explosion.get('domain_truncated'),
@@ -700,10 +723,30 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'not_numerically_executed_case_count': sum(case['status'] in {'UNCOMPUTED','FAILED'} for case in component_cases),
             'qualified_evidence_withheld_case_count': sum(case['status'] in {'EXECUTED_OPERATOR_LIMITED','EXECUTED_DOMAIN_INCOMPLETE'} for case in component_cases),
             'numerically_executed_case_count': sum(case['status'].startswith('EXECUTED') for case in component_cases),
+            'dynamic_state_closure_status_counts': dict(
+                sorted(
+                    Counter(
+                        str(case.get('dynamic_state_closure_status', 'NOT_EVALUATED'))
+                        for case in component_cases
+                    ).items()
+                )
+            ),
+            'dynamic_state_closure_ready_case_count': sum(
+                case.get('dynamic_state_closure_status') == 'READY'
+                for case in component_cases
+            ),
+            'dynamic_state_closure_blocked_case_count': sum(
+                case.get('dynamic_state_closure_status') == 'BLOCKED'
+                for case in component_cases
+            ),
             'uncomputed_reasons': sorted({case.get('reason') for case in component_cases if case['status'] != 'EXECUTED' and case.get('reason')}),
         })
     scenario_family_event_counts = Counter(
         family for families in event_scenario_families.values() for family in families
+    )
+    dynamic_state_closure_status_counts = Counter(
+        str(case.get('dynamic_state_closure_status', 'NOT_EVALUATED'))
+        for case in cases
     )
     event_rows = []
     for event in events.values():
@@ -744,6 +787,15 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'not_numerically_executed_case_count':sum(case['status'] in {'UNCOMPUTED','FAILED'} for case in cases),
             'qualified_evidence_withheld_case_count':sum(case['status'] in {'EXECUTED_OPERATOR_LIMITED','EXECUTED_DOMAIN_INCOMPLETE'} for case in cases),
             'numerically_executed_case_count':sum(case['status'].startswith('EXECUTED') for case in cases),
+            'dynamic_state_closure_status_counts': dict(
+                sorted(dynamic_state_closure_status_counts.items())
+            ),
+            'dynamic_state_closure_ready_case_count': sum(
+                case.get('dynamic_state_closure_status') == 'READY' for case in cases
+            ),
+            'dynamic_state_closure_blocked_case_count': sum(
+                case.get('dynamic_state_closure_status') == 'BLOCKED' for case in cases
+            ),
             'external_catalogue_scope_gap_component_count': len(external_catalog_scope_gaps),
             'meaning':'frequency coverage only; not fraction of risk captured, not physical validation',
             'by_component':component_coverage,

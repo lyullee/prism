@@ -251,6 +251,13 @@ accidental gas and emergency-relief packets; normal operating vents do not
 require it. Clearing this source flag still
 does not qualify the provider, frequency, or facility IR/F-N result.
 
+After a campaign, the case row carries `dynamic_state_closure_status`, and the
+facility ledger exposes global and per-component status counts. Use these
+counts to select equipment that is ready for a dynamic release review and to
+request missing provider evidence. Do not treat `READY` as provider
+qualification; exact packet evidence and independent physical validation are
+separate gates.
+
 ## 6. Python resolver example
 
 ```python

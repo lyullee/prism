@@ -73,6 +73,13 @@ unsupported termination basis leaves `operator_limited=true`; PRISM never
 repairs the provider record or infers a pressure response from the outlet
 flow.
 
+The campaign case ledger preserves this audit at the equipment boundary with
+`dynamic_state_closure_status` (`READY`, `BLOCKED`, `NOT_DECLARED`, or
+`NOT_EVALUATED`). The merged facility ledger reports the same counts globally
+and for each component. This makes it possible to see which equipment can
+support a dynamic release calculation without mistaking a conditional
+diagnostic total for a qualified facility QRA.
+
 ## What this does not qualify
 
 This contract closes one source-model connection for the selected accident

@@ -395,8 +395,14 @@ def test_facility_ledger_exposes_component_case_accounting_and_gate_categories()
         incomplete=True,
     )
     result["cases"][0]["status"] = "EXECUTED_OPERATOR_LIMITED"
+    result["cases"][0]["dynamic_state_closure_status"] = "BLOCKED"
+    result["cases"][0]["dynamic_state_closure_ready"] = False
+    result["cases"][0]["dynamic_state_closure_blocking_reasons"] = [
+        "provider dynamic pressure/inventory closure evidence is missing"
+    ]
     result["cases"][0]["provider_packet_identity"] = {"component_id": "pipe-01"}
     result["uncomputed_cases"][0]["status"] = "EXECUTED_OPERATOR_LIMITED"
+    result["uncomputed_cases"][0]["dynamic_state_closure_status"] = "BLOCKED"
     result["uncomputed_cases"][0]["provider_packet_identity"] = {"component_id": "pipe-01"}
     merged = merge_facility_campaign_results(
         [result], expected_component_ids=("pipe-01", "tank-01")
@@ -413,6 +419,12 @@ def test_facility_ledger_exposes_component_case_accounting_and_gate_categories()
     assert coverage["not_numerically_executed_case_count"] == 0
     assert coverage["qualified_evidence_withheld_case_count"] == 1
     assert coverage["numerically_executed_case_count"] == 1
+    assert coverage["dynamic_state_closure_status_counts"] == {"BLOCKED": 1}
+    assert coverage["dynamic_state_closure_ready_case_count"] == 0
+    assert coverage["dynamic_state_closure_blocked_case_count"] == 1
+    assert merged["conditional_diagnostic_facility_coverage"][
+        "dynamic_state_closure_status_counts"
+    ] == {"BLOCKED": 1}
     assert coverage["strict_gate_categories"] == [
         "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
     ]
