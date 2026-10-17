@@ -7,15 +7,16 @@ packet, infer a frequency, or open the facility IR/F-N result.
 
 ## What was scanned
 
-| Workspace | Scan result | JSON artifacts | Provider responses | Qualification records | Physical-validation claims | Complete facility-QRA claims |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `_external_lh2dt_models_20261016` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 1 | 0 | 0 | 0 | 0 |
-| `SLABx_LH2/.release-work/DynamicLH2PoolX-review` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 40 | 0 | 0 | 0 | 0 |
-| `액화수소검사지원센터 데이터` | `NO_EXTERNAL_JSON_ARTIFACTS` | 0 | 0 | 0 | 0 | 0 |
+| Workspace | Scan result | JSON artifacts | Supporting files | Provider responses | Qualification records | Physical-validation claims | Complete facility-QRA claims |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `_external_lh2dt_models_20261016` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 1 | 2 | 0 | 0 | 0 | 0 |
+| `SLABx_LH2/.release-work/DynamicLH2PoolX-review` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 40 | 15 | 0 | 0 | 0 | 0 |
+| `액화수소검사지원센터 데이터` | `NO_EXTERNAL_JSON_ARTIFACTS` | 0 | 24 | 0 | 0 | 0 | 0 |
 
 The inspection-centre workspace is primarily workbook and document data.  Its
 signals remain useful for state and HAZOP diagnostics, but the scan found no
-provider release artifact.  The SLABx workspace contains validation material;
+provider release artifact.  The LH2 model workspace contains two NASA reference
+tables, and the SLABx workspace contains validation CSVs;
 the separate high-resolution comparison audit is still treated as component
 comparison evidence.  It is not an end-to-end accident-release validation
 packet.

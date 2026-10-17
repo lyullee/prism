@@ -56,6 +56,7 @@ def main() -> int:
         "status": report["status"],
         "root_count": report["root_count"],
         "artifact_count": report["summary"]["artifact_count"],
+        "supporting_file_count": report["summary"]["supporting_file_count"],
         "qualification_artifact_count": report["summary"][
             "qualification_artifact_count"
         ],

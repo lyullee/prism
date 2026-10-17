@@ -81,6 +81,21 @@ def test_provider_artifact_audit_reads_korean_windows_encoded_json(tmp_path):
     assert report["provider_response_count"] == 1
 
 
+def test_provider_artifact_audit_indexes_supporting_documents_without_promotion(tmp_path):
+    (tmp_path / "observations.csv").write_text("time,pressure\n0,1\n", encoding="utf-8")
+    (tmp_path / "validation.pdf").write_bytes(b"%PDF-1.4\n")
+
+    report = audit_provider_artifact_root(tmp_path)
+
+    assert report["artifact_count"] == 0
+    assert report["supporting_file_count"] == 2
+    assert {row["suffix"] for row in report["supporting_files"]} == {".csv", ".pdf"}
+    assert report["promotion_policy"][
+        "supporting_documents_are_not_qualification_evidence"
+    ] is True
+    assert report["qualification_artifact_count"] == 0
+
+
 def test_provider_artifact_audit_roots_keeps_sources_separate_and_fail_closed(
     tmp_path,
 ):

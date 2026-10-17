@@ -1,20 +1,36 @@
 """Audit external digital-twin artifacts without promoting them to QRA inputs.
 
 External equipment projects often export a mixture of provider responses,
-verification ledgers and campaign summaries.  This module inventories those
-files and checks whether the artifacts contain the separate qualification
+verification ledgers, campaign summaries, and supporting source documents.
+This module inventories those files and checks whether the artifacts contain the separate qualification
 evidence required by PRISM.  It deliberately does not load a release packet,
 assign a frequency, or claim physical validation.
 """
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Mapping
 
 
 PROVIDER_ARTIFACT_AUDIT_SCHEMA = "prism.provider_artifact_audit.v1"
 QUALIFICATION_SCHEMA = "prism.provider_qualification_evidence.v1"
+
+# These files can contain source observations, operating sequences, or model
+# validation material.  They are inventoried separately because merely finding
+# one must never make it a provider release or a qualification sidecar.
+SUPPORTING_EVIDENCE_SUFFIXES = frozenset({
+    ".csv",
+    ".xlsx",
+    ".xls",
+    ".pdf",
+    ".pptx",
+    ".parquet",
+    ".h5",
+    ".hdf5",
+    ".mat",
+})
 
 
 def _contains_qualification(value: Any) -> bool:
@@ -82,6 +98,22 @@ def _read_json(path: Path) -> Any:
     raise ValueError(f"unable to decode JSON artifact: {path}")
 
 
+def _iter_source_files(source_root: Path):
+    """Yield files while pruning local runtimes before descending into them."""
+
+    runtime_names = {".git", "__pycache__", "venv", "virtualenv"}
+    for directory, dirnames, filenames in os.walk(source_root, topdown=True):
+        dirnames[:] = [
+            name
+            for name in dirnames
+            if name not in runtime_names
+            and not name.casefold().startswith(".venv")
+        ]
+        base = Path(directory)
+        for filename in filenames:
+            yield base / filename
+
+
 def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
     """Inventory JSON artifacts below ``root`` using relative paths only."""
     source_root = Path(root).resolve()
@@ -91,15 +123,33 @@ def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
             "status": "MISSING_SOURCE_ROOT",
             "source_root_provided": str(root),
             "artifact_count": 0,
+            "supporting_file_count": 0,
+            "supporting_files": [],
             "blocking_reasons": ["external provider artifact root does not exist"],
         }
 
     rows: list[dict[str, Any]] = []
+    supporting_files: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
-    for path in sorted(source_root.rglob("*.json")):
+    for path in sorted(_iter_source_files(source_root)):
         if _is_runtime_path(path):
             continue
         relative = path.relative_to(source_root).as_posix()
+        if path.suffix.casefold() != ".json":
+            if path.suffix.casefold() in SUPPORTING_EVIDENCE_SUFFIXES:
+                try:
+                    size_bytes = path.stat().st_size
+                except OSError as error:
+                    errors.append({"file": relative, "error": str(error)})
+                    continue
+                supporting_files.append({
+                    "file": relative,
+                    "suffix": path.suffix.casefold(),
+                    "size_bytes": size_bytes,
+                    "qualification_evidence_present": False,
+                    "provider_release_promoted": False,
+                })
+            continue
         try:
             payload = _read_json(path)
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
@@ -146,6 +196,8 @@ def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
         "status": status,
         "source_root_provided": str(root),
         "artifact_count": len(rows),
+        "supporting_file_count": len(supporting_files),
+        "supporting_files": supporting_files,
         "provider_response_count": len(provider_rows),
         "verification_artifact_count": len(verification_rows),
         "qualification_artifact_count": len(qualification_rows),
@@ -159,6 +211,7 @@ def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
             "provider_release_packet_promoted": False,
             "physical_validation_promoted": False,
             "facility_qra_promoted": False,
+            "supporting_documents_are_not_qualification_evidence": True,
             "qualification_requires_separate_exact_digest_bound_evidence": True,
         },
         "blocking_reasons": list(dict.fromkeys(blockers)),
@@ -198,6 +251,7 @@ def audit_provider_artifact_roots(
         "physical_validation_artifact_count",
         "complete_facility_qra_artifact_count",
         "diagnostic_artifact_count",
+        "supporting_file_count",
     )
     totals = {
         key: sum(int(item.get(key, 0)) for item in inventories.values())
@@ -236,6 +290,7 @@ def audit_provider_artifact_roots(
             "provider_release_packet_promoted": False,
             "physical_validation_promoted": False,
             "facility_qra_promoted": False,
+            "supporting_documents_are_not_qualification_evidence": True,
             "qualification_requires_separate_exact_digest_bound_evidence": True,
         },
     }
