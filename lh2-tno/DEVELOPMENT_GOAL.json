@@ -4543,11 +4543,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1381,
+    "run_number": 1384,
     "status": "completed",
     "conclusion": "success",
-    "commit": "2b82843f24104be141d58b47bcbba8aaa7aa2e76",
-    "url": "https://github.com/lyullee/prism/actions/runs/39066573438"
+    "commit": "534d1b4f96e016570293f2e1f2deadafc196e01c",
+    "url": "https://github.com/lyullee/prism/actions/runs/39067568932"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "025e99537e31ee1d951c0322374cf8d8e0772aa3c99edd7ceb85f8660e43e7e9",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
@@ -4827,7 +4827,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "Actions #1383 success; commit 2b82843f validated; current local full suite 1504 passed, 1 warning",
+  "latest_ci_validation": "Actions #1384 success; commit 534d1b4f validated; current local full suite 1504 passed, 1 warning",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
