@@ -4105,7 +4105,7 @@
   "slabx_lh2_test6_numerical_sensitivity_interpretation": "Actual FFI source output is materially sensitive to RK substeps and adaptive settings; no setting is promoted to physical validation or facility QRA without reviewed convergence.",
   "latest_provider_packet_collection_manifest_case_count": 44,
   "latest_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
-  "latest_local_full_test_run_commit": "009f31f0",
+  "latest_local_full_test_run_commit": "b7a07215",
   "current_development": {
     "per_branch_provider_identity_handoff_implemented": true,
     "per_branch_provider_identity_handoff_record": "docs/PRISM_multi_provider_identity_handoff_20261115.md",
