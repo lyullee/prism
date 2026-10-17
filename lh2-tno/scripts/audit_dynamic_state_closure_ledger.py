@@ -20,6 +20,20 @@ def _read(path: Path) -> tuple[object, str]:
     return json.loads(raw.decode("utf-8")), hashlib.sha256(raw).hexdigest()
 
 
+def _unwrap_campaign(value: object) -> object:
+    """Accept a direct campaign or an explicit ``{"result": ...}`` wrapper."""
+    if isinstance(value, dict) and isinstance(value.get("result"), dict):
+        return value["result"]
+    return value
+
+
+def _unwrap_facility(value: object) -> object:
+    """Accept a direct ledger or a facility-assessment ledger wrapper."""
+    if isinstance(value, dict) and isinstance(value.get("facility_risk_ledger"), dict):
+        return value["facility_risk_ledger"]
+    return value
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -36,12 +50,13 @@ def main() -> int:
     campaign_digests: list[str] = []
     for path in args.campaign:
         value, digest = _read(path)
-        campaigns.append(value)
+        campaigns.append(_unwrap_campaign(value))
         campaign_digests.append(digest)
     facility = None
     facility_digest = None
     if args.facility is not None:
         facility, facility_digest = _read(args.facility)
+        facility = _unwrap_facility(facility)
     if any(not isinstance(value, dict) for value in campaigns):
         raise SystemExit("each campaign file must contain one JSON object")
     if facility is not None and not isinstance(facility, dict):

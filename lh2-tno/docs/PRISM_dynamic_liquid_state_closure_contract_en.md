@@ -107,6 +107,11 @@ The report uses schema
 stored counts agree with explicit case rows. It does not qualify an external
 provider, close physical validation, or promote facility IR/F-N.
 
+The command accepts a direct facility ledger or a saved facility-assessment
+JSON containing an explicit `facility_risk_ledger` object. Campaign inputs may
+likewise be direct ledgers or an explicit `result` wrapper; no fields are
+inferred while unwrapping.
+
 Attach the same report to the IJHE completion audit with
 `--dynamic-state-closure-ledger-audit`. The completion audit records a
 separate diagnostic check; a ledger-consistency pass never becomes a provider

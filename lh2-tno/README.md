@@ -96,6 +96,10 @@ Attach the resulting JSON to `scripts/build_ijhe_completion_audit.py` with
 `--dynamic-state-closure-ledger-audit` when producing an IJHE readiness record.
 The added check remains diagnostic and fail-closed.
 
+The CLI also accepts a facility-assessment file when it contains an explicit
+`facility_risk_ledger` object, so saved assessment artifacts can be audited
+without manual extraction.
+
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 
 ## What PRISM does not infer
