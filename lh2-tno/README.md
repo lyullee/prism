@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,376 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,379 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -73,6 +73,24 @@ were fed back into the release history. Without that explicit evidence, PRISM
 keeps the source `EXECUTED_OPERATOR_LIMITED` even when the downstream
 consequence chain runs successfully. Campaign and facility ledgers retain the
 closure status per case and per equipment component.
+
+To check that these status counts remain consistent after campaign merging,
+run the independent cross-ledger audit. Supply every campaign used in the
+facility merge plus the merged facility ledger:
+
+```powershell
+python scripts/audit_dynamic_state_closure_ledger.py `
+  --campaign results/campaign_tank.json `
+  --campaign results/campaign_transfer_line.json `
+  --facility results/facility_ledger.json `
+  --output results/dynamic_state_closure_ledger_audit.json
+```
+
+The audit recomputes counts from explicit case identities and reports
+`PASS`/`BLOCKED` under schema
+`prism.dynamic_state_closure_ledger_audit.v1`. A passing accounting audit is
+diagnostic evidence only; it does not qualify provider physics or facility
+IR/F-N.
 
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 

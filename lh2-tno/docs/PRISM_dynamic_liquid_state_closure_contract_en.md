@@ -85,6 +85,28 @@ external response before campaign execution. A scalar `CLOSED` mass ledger
 with no explicit pressure/inventory feedback record is still reported as
 `BLOCKED` for an accidental or relief release.
 
+## Cross-ledger consistency audit
+
+The independent `dynamic_state_closure_audit` recomputes status counts from
+the raw case identities and compares them with the stored campaign coverage,
+facility coverage, and per-component coverage. When all campaign files used
+for a merge are supplied, it also compares the campaign identity ledger with
+the merged facility ledger. It catches a stale READY/BLOCKED count or a
+component row that was changed after execution.
+
+```powershell
+python scripts/audit_dynamic_state_closure_ledger.py `
+  --campaign results/campaign_tank.json `
+  --campaign results/campaign_transfer_line.json `
+  --facility results/facility_ledger.json `
+  --output results/dynamic_state_closure_ledger_audit.json
+```
+
+The report uses schema
+`prism.dynamic_state_closure_ledger_audit.v1`. `PASS` means only that the
+stored counts agree with explicit case rows. It does not qualify an external
+provider, close physical validation, or promote facility IR/F-N.
+
 ## What this does not qualify
 
 This contract closes one source-model connection for the selected accident
