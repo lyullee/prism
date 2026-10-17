@@ -100,6 +100,15 @@ is end-to-end diagnostic evidence only: no initiating frequency, provider
 qualification, independent physical validation, or facility IR/F-N claim is
 created.
 
+The clean-source seven-equipment snapshot used for the current status pointer
+is the compact record
+[`examples/native_external_multi_equipment_recheck_current_20261017.json`](examples/native_external_multi_equipment_recheck_current_20261017.json).
+Run `scripts/verify_latest_ijhe_audit.py` to bind that record to
+`CURRENT_STATUS.json` and check its source digest, equipment identities,
+state-snapshot echoes, dynamic closures, and fail-closed promotion flags. This
+verification is diagnostic bookkeeping; it does not qualify provider packets
+or open the facility-QRA gate.
+
 The current facility-level diagnostic replay is stored under
 `results/20261115/native_external_facility_campaign_current/` with its
 seven input packet directories in

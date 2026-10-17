@@ -25,6 +25,22 @@ therefore proves that the equipment state, isolation boundary, dynamic source
 closure, and PRISM packet identity are connected; it does not qualify the
 packets, assign a field frequency, or open the facility QRA gate.
 
+The compact clean-source record is
+[`native_external_multi_equipment_recheck_current_20261017.json`](../examples/native_external_multi_equipment_recheck_current_20261017.json).
+`CURRENT_STATUS.json` points to this record, and
+`scripts/verify_latest_ijhe_audit.py` now verifies its source commit/digest,
+seven unique equipment rows, state-snapshot echoes, dynamic-closure rows, and
+the four fail-closed promotion flags. A successful verification means the
+diagnostic replay is internally consistent; it does not change the
+`INCOMPLETE_EVIDENCE` audit or the withheld facility-QRA status.
+
+```powershell
+python scripts/verify_latest_ijhe_audit.py `
+  --current-status CURRENT_STATUS.json `
+  --audit results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json `
+  --output results/20261115/verify_latest_ijhe_audit_current.json
+```
+
 PRISM now has one reproducible command that executes the external `lh2dt`
 accident exporters for the seven declared outdoor equipment families and
 records their packet identities in one manifest:

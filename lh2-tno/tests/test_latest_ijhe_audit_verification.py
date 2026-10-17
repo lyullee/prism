@@ -48,6 +48,144 @@ def test_latest_ijhe_audit_verification_passes_without_opening_qualification(tmp
     assert result["complete_facility_qra_claim"] is False
 
 
+def _native_multi_equipment_recheck() -> dict:
+    return {
+        "schema_version": "prism.native_external_multi_equipment_recheck_compact.v1",
+        "source_repository": "lyullee/lh2dt_models",
+        "source_commit": "16f7a4b",
+        "external_source_digest": "a" * 64,
+        "status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC",
+        "equipment_count": 2,
+        "equipment": [
+            {
+                "equipment": "layered_tank",
+                "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+                "state_snapshot_digest_match": True,
+                "dynamic_state_closure": {
+                    "declared_by_provider": True,
+                    "prism_source_dynamics_status": "READY",
+                    "ready": True,
+                    "blocking_reasons": [],
+                },
+            },
+            {
+                "equipment": "vent_stack",
+                "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+                "state_snapshot_digest_match": True,
+                "dynamic_state_closure": None,
+            },
+        ],
+        "provider_packet_promoted_count": 0,
+        "physical_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+    }
+
+
+def test_latest_ijhe_audit_verification_binds_clean_native_multi_equipment_recheck(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "native_recheck.json", _native_multi_equipment_recheck())
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "external_lh2dt_native_multi_equipment_recheck_compact_record": "native_recheck.json",
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["native_external_multi_equipment_recheck_valid"] is True
+    assert result["native_external_multi_equipment_recheck_equipment_count"] == 2
+    assert result["native_external_multi_equipment_recheck_dynamic_closure_ready_count"] == 1
+
+
+def test_latest_ijhe_audit_verification_blocks_native_recheck_promotion_flags(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    bad = _native_multi_equipment_recheck()
+    bad["facility_qra_claim"] = True
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "native_recheck.json", bad)
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "external_lh2dt_native_multi_equipment_recheck_compact_record": "native_recheck.json",
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("native external multi-equipment recheck" in reason for reason in result["blocking_reasons"])
+
+
+def test_latest_ijhe_audit_verification_blocks_native_recheck_status_digest_drift(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "native_recheck.json", _native_multi_equipment_recheck())
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "external_lh2dt_native_multi_equipment_recheck_compact_record": "native_recheck.json",
+        "external_lh2dt_native_multi_equipment_recheck_compact_source_digest": "b" * 64,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("source_digest" in reason for reason in result["blocking_reasons"])
+
+
 def test_latest_ijhe_audit_verification_blocks_count_drift(tmp_path: Path):
     audit = {
         "status": "INCOMPLETE_EVIDENCE",

@@ -34,6 +34,7 @@ def verify_latest_ijhe_audit(
     receptor_geometry: Mapping[str, Any] | Path | None = None,
     scope_matrix: Mapping[str, Any] | Path | None = None,
     release_boundary: Mapping[str, Any] | Path | None = None,
+    native_external_multi_equipment_recheck: Mapping[str, Any] | Path | None = None,
 ) -> dict[str, Any]:
     """Verify status/audit/handoff identity without changing qualification gates."""
 
@@ -318,6 +319,116 @@ def verify_latest_ijhe_audit(
                             f"latest audit embedded release-trace {key} disagrees with source ledger"
                         )
 
+    # The clean-source native multi-equipment replay is a supplemental
+    # diagnostic record.  Bind it to the current status ledger when present,
+    # but keep every qualification boundary fail-closed: a replay is evidence
+    # that the adapters execute, not a qualified provider packet, frequency,
+    # physical-validation result, or facility QRA.
+    native_recheck_value: dict[str, Any] = {}
+    native_recheck_path: Path | None = None
+    native_recheck_pointer = status.get(
+        "external_lh2dt_native_multi_equipment_recheck_compact_record"
+    )
+    if native_external_multi_equipment_recheck is None and isinstance(
+        native_recheck_pointer, str
+    ):
+        native_recheck_path = _relative_or_absolute(native_recheck_pointer, root=base)
+        if not native_recheck_path.exists():
+            reasons.append(
+                "native external multi-equipment recheck record does not exist"
+            )
+        else:
+            native_recheck_value = _read_object(native_recheck_path)
+    elif isinstance(native_external_multi_equipment_recheck, Path):
+        native_recheck_path = native_external_multi_equipment_recheck
+        native_recheck_value = _read_object(native_recheck_path)
+    elif isinstance(native_external_multi_equipment_recheck, Mapping):
+        native_recheck_value = dict(native_external_multi_equipment_recheck)
+    if native_recheck_pointer is not None or native_external_multi_equipment_recheck is not None:
+        rows = native_recheck_value.get("equipment")
+        row_valid = isinstance(rows, list) and all(
+            isinstance(row, Mapping)
+            and row.get("status") == "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC"
+            and row.get("state_snapshot_digest_match") is True
+            for row in rows
+        )
+        names = [row.get("equipment") for row in rows] if isinstance(rows, list) else []
+        dynamic_rows = [
+            row.get("dynamic_state_closure")
+            for row in rows
+            if isinstance(row, Mapping) and row.get("dynamic_state_closure") is not None
+        ] if isinstance(rows, list) else []
+        dynamic_valid = all(
+            isinstance(row, Mapping)
+            and row.get("declared_by_provider") is True
+            and row.get("prism_source_dynamics_status") == "READY"
+            and row.get("ready") is True
+            and row.get("blocking_reasons") == []
+            for row in dynamic_rows
+        )
+        expected_equipment_count = native_recheck_value.get("equipment_count")
+        native_recheck_valid = (
+            native_recheck_value.get("schema_version")
+            == "prism.native_external_multi_equipment_recheck_compact.v1"
+            and native_recheck_value.get("status")
+            == "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC"
+            and isinstance(expected_equipment_count, int)
+            and expected_equipment_count > 0
+            and isinstance(rows, list)
+            and len(rows) == expected_equipment_count
+            and len(set(names)) == len(names)
+            and row_valid
+            and dynamic_valid
+            and isinstance(native_recheck_value.get("source_repository"), str)
+            and bool(native_recheck_value.get("source_repository"))
+            and isinstance(native_recheck_value.get("source_commit"), str)
+            and bool(native_recheck_value.get("source_commit"))
+            and isinstance(native_recheck_value.get("external_source_digest"), str)
+            and bool(native_recheck_value.get("external_source_digest"))
+            and native_recheck_value.get("provider_packet_promoted_count") == 0
+            and native_recheck_value.get("physical_validation_claim") is False
+            and native_recheck_value.get("frequency_inference_performed") is False
+            and native_recheck_value.get("facility_qra_claim") is False
+        )
+        if not native_recheck_valid:
+            reasons.append(
+                "native external multi-equipment recheck is malformed or permits unsafe promotion"
+            )
+        for status_key, record_key in (
+            (
+                "external_lh2dt_native_multi_equipment_recheck_compact_source_digest",
+                "external_source_digest",
+            ),
+            (
+                "external_lh2dt_native_multi_equipment_recheck_compact_dynamic_closure_ready_count",
+                "dynamic_closure_ready_count",
+            ),
+            (
+                "external_lh2dt_native_multi_equipment_recheck_compact_provider_packet_promoted_count",
+                "provider_packet_promoted_count",
+            ),
+            (
+                "external_lh2dt_native_multi_equipment_recheck_compact_facility_qra_claim",
+                "facility_qra_claim",
+            ),
+        ):
+            expected = status.get(status_key)
+            if expected is None:
+                continue
+            if record_key == "dynamic_closure_ready_count":
+                actual = sum(
+                    isinstance(row, Mapping)
+                    and isinstance(row.get("dynamic_state_closure"), Mapping)
+                    and row["dynamic_state_closure"].get("ready") is True
+                    for row in rows
+                ) if isinstance(rows, list) else None
+            else:
+                actual = native_recheck_value.get(record_key)
+            if actual != expected:
+                reasons.append(
+                    f"status ledger {status_key} disagrees with native external recheck"
+                )
+
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
     # identity and fail-closed claims here as well.  This keeps a stale or
@@ -398,6 +509,28 @@ def verify_latest_ijhe_audit(
             len(release_value.get("asset_summary", {}))
             if release_value and isinstance(release_value.get("asset_summary"), Mapping)
             else None
+        ),
+        "native_external_multi_equipment_recheck_record": (
+            str(native_recheck_path) if native_recheck_path else None
+        ),
+        "native_external_multi_equipment_recheck_status": (
+            native_recheck_value.get("status") if native_recheck_value else None
+        ),
+        "native_external_multi_equipment_recheck_equipment_count": (
+            native_recheck_value.get("equipment_count") if native_recheck_value else None
+        ),
+        "native_external_multi_equipment_recheck_dynamic_closure_ready_count": (
+            sum(
+                isinstance(row, Mapping)
+                and isinstance(row.get("dynamic_state_closure"), Mapping)
+                and row["dynamic_state_closure"].get("ready") is True
+                for row in native_recheck_value.get("equipment", [])
+            )
+            if isinstance(native_recheck_value.get("equipment"), list)
+            else None
+        ),
+        "native_external_multi_equipment_recheck_valid": (
+            native_recheck_valid if native_recheck_pointer is not None or native_external_multi_equipment_recheck is not None else None
         ),
         "blocking_reasons": reasons,
         "interpretation": (

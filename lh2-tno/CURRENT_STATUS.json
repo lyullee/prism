@@ -5922,5 +5922,11 @@
   "ijhe_completion_audit_current_20261115_check_count": 57,
   "ijhe_completion_audit_current_20261115_blocking_reason_count": 5,
   "ijhe_completion_audit_current_20261115_validation_matrix_domain_count": 9,
-  "ijhe_completion_audit_current_20261115_facility_qra_gate_summary_check": "PASS structural reconciliation; FACILITY_QRA_WITHHELD; 5 incomplete gates"
+  "ijhe_completion_audit_current_20261115_facility_qra_gate_summary_check": "PASS structural reconciliation; FACILITY_QRA_WITHHELD; 5 incomplete gates",
+  "external_lh2dt_native_multi_equipment_recheck_compact_record": "examples/native_external_multi_equipment_recheck_current_20261017.json",
+  "external_lh2dt_native_multi_equipment_recheck_compact_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; clean source lh2dt_models@16f7a4b; 7 equipment rows; 4 dynamic closure READY; no provider, frequency, physical-validation, or facility-QRA promotion",
+  "external_lh2dt_native_multi_equipment_recheck_compact_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+  "external_lh2dt_native_multi_equipment_recheck_compact_dynamic_closure_ready_count": 4,
+  "external_lh2dt_native_multi_equipment_recheck_compact_provider_packet_promoted_count": 0,
+  "external_lh2dt_native_multi_equipment_recheck_compact_facility_qra_claim": false
 }
