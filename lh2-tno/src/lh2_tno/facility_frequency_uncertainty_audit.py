@@ -66,6 +66,88 @@ def _object(value: Any, label: str) -> Mapping[str, Any]:
     return value
 
 
+def _family_frequency_coverage(campaign: Mapping[str, Any]) -> dict[str, Any]:
+    """Summarize explicit family-to-event frequency coverage.
+
+    Families are read only from risk-atom metadata.  This intentionally does
+    not derive a family from an event ID, component kind, or release name.
+    Missing labels and missing event identities remain visible in the summary.
+    """
+
+    events = {
+        str(row.get("id")): row
+        for row in campaign.get("events", ())
+        if isinstance(row, Mapping) and row.get("id")
+    }
+    rows: dict[str, dict[str, Any]] = {}
+    unclassified_atom_count = 0
+    for atom in campaign.get("risk_atoms", ()):
+        if not isinstance(atom, Mapping):
+            continue
+        raw_families = atom.get("scenario_families")
+        families = (
+            tuple(sorted({str(value).strip() for value in raw_families if str(value).strip()}))
+            if isinstance(raw_families, Sequence) and not isinstance(raw_families, (str, bytes))
+            else ()
+        )
+        if not families:
+            unclassified_atom_count += 1
+            continue
+        event_id = str(atom.get("event_id") or "")
+        event = events.get(event_id)
+        for family in families:
+            row = rows.setdefault(
+                family,
+                {
+                    "risk_atom_count": 0,
+                    "event_ids": set(),
+                    "missing_event_ids": set(),
+                    "published_bound_event_count": 0,
+                    "published_rate_only_event_count": 0,
+                },
+            )
+            row["risk_atom_count"] += 1
+            if event is None:
+                row["missing_event_ids"].add(event_id)
+                continue
+            row["event_ids"].add(event_id)
+            p05 = event.get("marginal_p05_per_year")
+            p95 = event.get("marginal_p95_per_year")
+            if (
+                _finite(p05)
+                and _finite(p95)
+                and float(p05) <= float(p95)
+            ):
+                row["published_bound_event_count"] += 1
+            else:
+                row["published_rate_only_event_count"] += 1
+
+    coverage: dict[str, Any] = {}
+    for family, raw in sorted(rows.items()):
+        missing_events = sorted(raw["missing_event_ids"])
+        status = (
+            "MISSING_EVENT_FREQUENCY"
+            if missing_events
+            else "PUBLISHED_BOUNDS_COMPLETE"
+            if raw["published_rate_only_event_count"] == 0
+            else "PUBLISHED_RATE_ONLY"
+        )
+        coverage[family] = {
+            "status": status,
+            "risk_atom_count": raw["risk_atom_count"],
+            "event_ids": sorted(raw["event_ids"]),
+            "missing_event_ids": missing_events,
+            "published_bound_event_count": raw["published_bound_event_count"],
+            "published_rate_only_event_count": raw["published_rate_only_event_count"],
+        }
+    return {
+        "families": coverage,
+        "unclassified_atom_count": unclassified_atom_count,
+        "frequency_inference_performed": False,
+        "family_labels_are_explicit": True,
+    }
+
+
 def build_facility_frequency_uncertainty_audit(
     campaign_result: Mapping[str, Any],
     frequency_scenarios: Mapping[str, Any],
@@ -156,6 +238,7 @@ def build_facility_frequency_uncertainty_audit(
     mismatches.extend(invariant_reasons)
     blocking = list(dict.fromkeys(mismatches))
     closed = bool(recomputed_rows) and not blocking
+    family_frequency_coverage = _family_frequency_coverage(campaign)
     return {
         "schema_version": FACILITY_FREQUENCY_AUDIT_SCHEMA,
         "status": (
@@ -186,6 +269,7 @@ def build_facility_frequency_uncertainty_audit(
         "physical_validation_claim": False,
         "facility_qra_claim": False,
         "diagnostic_only": True,
+        "scenario_family_frequency_coverage": family_frequency_coverage,
         "interpretation": (
             "Published and fixed literature-frequency scenarios reproduce the saved conditional "
             "IR/F-N sensitivity without rerunning physics or inferring missing frequency. "

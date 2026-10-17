@@ -90,6 +90,10 @@ def test_frequency_uncertainty_audit_closes_when_saved_rows_match():
     assert result["scenario_count"] == 2
     assert result["mismatch_count"] == 0
     assert result["frequency_inference_performed"] is False
+    coverage = result["scenario_family_frequency_coverage"]
+    assert coverage["unclassified_atom_count"] == 0
+    assert coverage["families"]["vessel_hole"]["status"] == "PUBLISHED_BOUNDS_COMPLETE"
+    assert coverage["families"]["vessel_hole"]["published_bound_event_count"] == 1
 
 
 def test_frequency_uncertainty_audit_detects_stale_ir():

@@ -13,8 +13,8 @@
   "risk_atom_count": 176,
   "recomputed_campaign_digest": "d911e0a81b5a54a1997c487a78bf3924962ed484a86a830eea0f3f6ea1903069",
   "stored_campaign_digest": "d911e0a81b5a54a1997c487a78bf3924962ed484a86a830eea0f3f6ea1903069",
-  "recomputed_physical_risk_atoms_digest": "f81cb717d61a364eb7753050c1c4247716840c8db7532251db8272514cffee18",
-  "stored_physical_risk_atoms_digest": "f81cb717d61a364eb7753050c1c4247716840c8db7532251db8272514cffee18",
+  "recomputed_physical_risk_atoms_digest": "aba841c1850f1449a434c3730e3c8896e5e199d57aa4c2f2e9854930e21d4cab",
+  "stored_physical_risk_atoms_digest": "aba841c1850f1449a434c3730e3c8896e5e199d57aa4c2f2e9854930e21d4cab",
   "correlation_comparison_present": true,
   "facility_credible_interval": false,
   "statistical_confidence_interval": false,
@@ -26,6 +26,204 @@
   "physical_validation_claim": false,
   "facility_qra_claim": false,
   "diagnostic_only": true,
+  "scenario_family_frequency_coverage": {
+    "families": {
+      "inventory_depletion": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 152,
+        "event_ids": [
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 140,
+        "published_rate_only_event_count": 12
+      },
+      "inventory_over_600s": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 4,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 0,
+        "published_rate_only_event_count": 4
+      },
+      "liquid_two_phase": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 68,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 60,
+        "published_rate_only_event_count": 8
+      },
+      "pipe_hole": {
+        "status": "PUBLISHED_BOUNDS_COMPLETE",
+        "risk_atom_count": 100,
+        "event_ids": [
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 100,
+        "published_rate_only_event_count": 0
+      },
+      "pump_hole": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 8,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 0,
+        "published_rate_only_event_count": 8
+      },
+      "reliquefier_hole": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 4,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 0,
+        "published_rate_only_event_count": 4
+      },
+      "two_sided_rupture": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 8,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 0,
+        "published_rate_only_event_count": 8
+      },
+      "valve_hole": {
+        "status": "PUBLISHED_BOUNDS_COMPLETE",
+        "risk_atom_count": 20,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 20,
+        "published_rate_only_event_count": 0
+      },
+      "vaporizer_hole": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 4,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 0,
+        "published_rate_only_event_count": 4
+      },
+      "vent_hole": {
+        "status": "PUBLISHED_RATE_ONLY",
+        "risk_atom_count": 4,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 0,
+        "published_rate_only_event_count": 4
+      },
+      "vertical_handoff": {
+        "status": "PUBLISHED_BOUNDS_COMPLETE",
+        "risk_atom_count": 40,
+        "event_ids": [
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 40,
+        "published_rate_only_event_count": 0
+      },
+      "vessel_hole": {
+        "status": "PUBLISHED_BOUNDS_COMPLETE",
+        "risk_atom_count": 20,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+        ],
+        "missing_event_ids": [],
+        "published_bound_event_count": 20,
+        "published_rate_only_event_count": 0
+      }
+    },
+    "unclassified_atom_count": 0,
+    "frequency_inference_performed": false,
+    "family_labels_are_explicit": true
+  },
   "interpretation": "Published and fixed literature-frequency scenarios reproduce the saved conditional IR/F-N sensitivity without rerunning physics or inferring missing frequency. Scope, provider, validation and facility-QRA gates remain independent.",
   "_record_path": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_frequency_uncertainty_audit.json"
 }

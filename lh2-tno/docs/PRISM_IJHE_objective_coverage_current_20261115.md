@@ -139,6 +139,14 @@ by component, release branch, and explicitly declared scenario family. This is
 an actionable provider handoff ledger; it does not derive a family from an
 event-id string, assign frequency, or promote facility IR/F-N.
 
+The companion frequency record
+[`facility_frequency_uncertainty_audit.json`](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_frequency_uncertainty_audit.json)
+recomputes five explicit literature scenarios across 176 risk atoms and 12
+explicit scenario families. Four families have published p05/p95 bounds; eight
+families retain only their published rate and are therefore shown as
+`PUBLISHED_RATE_ONLY`. That distinction is preserved in the uncertainty
+ledger rather than filled by sensor data or an inferred distribution.
+
 ## Completion criteria
 
 The audit uses the following five criteria:
