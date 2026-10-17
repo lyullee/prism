@@ -149,3 +149,12 @@ case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했�
 - 현재 상태 원장: `CURRENT_STATUS.json`
 
 이 표는 완료를 선언하는 문서가 아니라, 계산 연결과 승격 증거를 한눈에 구분하는 IJHE 제출용 추적성 문서다.
+
+
+The current full-scope readiness audit now emits a provider-qualification request
+catalog at
+`results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json`.
+It separates 13 exact packet rows that need qualification sidecars from 11 rows
+that first need release-closure evidence. This catalog preserves packet identity
+and blocking reasons; it does not infer rates, physical validation or facility
+IR/F-N.

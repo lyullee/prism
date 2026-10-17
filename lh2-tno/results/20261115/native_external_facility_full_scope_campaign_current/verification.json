@@ -1113,5 +1113,12 @@
     "physical_validation_evidence_missing": 13,
     "qualification_sidecar_missing": 13,
     "synthetic_or_screening_boundary_declared": 13
-  }
+  },
+  "provider_qualification_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
+  "provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 requests: 13 exact diagnostic packets need qualification-only evidence and 11 candidates need release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
+  "provider_qualification_request_count": 24,
+  "provider_qualification_only_request_count": 13,
+  "provider_closure_and_qualification_request_count": 11,
+  "provider_qualification_request_frequency_inference_allowed": false,
+  "provider_qualification_request_facility_qra_allowed": false
 }

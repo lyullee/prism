@@ -157,3 +157,11 @@ The 24-case fresh-physics replay took 814,290.39 ms in total; case p95 was
 campaign measurements. The cached monitoring path has a separate
 `cached_diagnostic_1hz` contract, and this replay does not claim fresh-physics
 1 Hz operation.
+
+The next evidence intake is compiled in
+[`provider_qualification_requests.json`](../results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json).
+It contains 24 identity-preserving requests: 13 exact diagnostic packets need
+qualification-only sidecars, while 11 candidates first need release-closure
+evidence and then qualification evidence. The catalog is an intake worksheet,
+not a promotion step. It keeps qualified-provider count at zero and leaves
+frequency inference, independent physical validation and facility QRA disabled.

@@ -5867,5 +5867,12 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_readiness_status": "PARTIAL_DIAGNOSTIC_EVIDENCE; 24 packet candidates, 13 exact strict diagnostic matches, 0 qualified provider packets; qualification and physical-validation sidecars absent",
   "external_lh2dt_native_facility_full_scope_provider_qualification_candidate_event_count": 24,
   "external_lh2dt_native_facility_full_scope_provider_qualification_exact_match_event_count": 13,
-  "external_lh2dt_native_facility_full_scope_provider_qualification_qualified_count": 0
+  "external_lh2dt_native_facility_full_scope_provider_qualification_qualified_count": 0,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 requests: 13 exact diagnostic packets need qualification-only evidence and 11 candidates need release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_count": 24,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_only_request_count": 13,
+  "external_lh2dt_native_facility_full_scope_provider_closure_and_qualification_request_count": 11,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_frequency_inference_allowed": false,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_facility_qra_allowed": false
 }
