@@ -294,6 +294,54 @@ def test_liquid_adapter_promotes_partition_and_mass_ledger():
     assert release.integrated_specific_enthalpy_out_j == pytest.approx(40000.0)
 
 
+def test_liquid_adapter_preserves_explicit_dynamic_state_closure_evidence():
+    response = _liquid_response()
+    response["data"]["termination_basis"] = "reviewed_isolation_success"
+    response["data"]["provider_meta"] = {
+        "initial_mass_kg": 1.0,
+        "final_mass_kg": 0.96,
+        "isolation_time_s": 0.1,
+        "post_isolation_observation_s": 0.1,
+        "isolation_success": True,
+        "dynamic_state_closure": {
+            "schema_version": "prism.provider_dynamic_state_closure.v1",
+            "inventory_feedback_closed": True,
+            "pressure_feedback_closed": True,
+            "state_history_digest": "d" * 64,
+            "max_abs_inventory_residual_kg": 1.0e-10,
+            "inventory_tolerance_kg": 1.0e-8,
+            "max_abs_pressure_residual_pa": 1.0,
+            "pressure_tolerance_pa": 5.0,
+            "provenance": "provider dynamic tank state closure",
+        },
+    }
+    release = _build_liquid(response)
+    assert release.provider_mass_balance is not None
+    closure = release.provider_mass_balance.dynamic_state_closure
+    assert closure is not None
+    assert closure.pressure_feedback_closed is True
+    assert closure.state_history_digest == "d" * 64
+
+
+def test_liquid_adapter_rejects_dynamic_state_closure_outside_tolerance():
+    response = _liquid_response()
+    response["data"]["provider_meta"] = {
+        "dynamic_state_closure": {
+            "schema_version": "prism.provider_dynamic_state_closure.v1",
+            "inventory_feedback_closed": True,
+            "pressure_feedback_closed": True,
+            "state_history_digest": "d" * 64,
+            "max_abs_inventory_residual_kg": 1.0,
+            "inventory_tolerance_kg": 1.0e-8,
+            "max_abs_pressure_residual_pa": 1.0,
+            "pressure_tolerance_pa": 5.0,
+            "provenance": "invalid dynamic state closure",
+        },
+    }
+    with pytest.raises(EquipmentReleaseExportError, match="mass-balance metadata failed strict validation"):
+        _build_liquid(response)
+
+
 def test_liquid_adapter_preserves_explicit_hydrogen_property_basis():
     response = _liquid_response()
     response["data"]["fluid"] = "Hydrogen"

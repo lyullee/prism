@@ -58,6 +58,11 @@ def audit_provider_mass_balance_records(
             payload["reported_residual_mass_kg"] = residual
         if isinstance(metadata.get("isolation_success"), bool):
             payload["isolation_success"] = metadata["isolation_success"]
+        if "dynamic_state_closure" in metadata:
+            # Preserve the provider's explicit dynamic-state qualification
+            # record.  The audit validates it through ProviderMassBalance;
+            # it never infers this record from a closed scalar mass balance.
+            payload["dynamic_state_closure"] = metadata["dynamic_state_closure"]
         initial = _finite(payload.get("initial_mass_kg"))
         final = _finite(payload.get("final_mass_kg"))
         cumulative_in = _finite(payload.get("cumulative_mass_in_kg")) or 0.0

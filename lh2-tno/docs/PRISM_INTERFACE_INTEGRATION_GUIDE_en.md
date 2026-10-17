@@ -229,6 +229,25 @@ Use the provider-calculated termination basis:
 
 Include initial mass, cumulative outflow, final mass, residual, isolation time, and observation horizon in `provider_meta` whenever available. An unresolved residual must remain visible in the result.
 
+### 5.3 Dynamic LH2 source-state closure
+
+For a liquid or two-phase release, a closed atmospheric mass integral does not
+by itself prove that the equipment model changed tank pressure and inventory
+while calculating the leak. To remove the source-dynamics `operator_limited`
+flag, add the optional `provider_meta.dynamic_state_closure` object described
+in the [dynamic closure contract](PRISM_dynamic_liquid_state_closure_contract_en.md).
+It must include:
+
+- explicit `inventory_feedback_closed=true` and `pressure_feedback_closed=true`;
+- a 64-character state-history digest;
+- inventory and pressure residuals with provider-declared tolerances; and
+- a provider mass ledger that closes from initial state to final state.
+
+The packet must also carry a compatible reviewed termination basis. Missing or
+invalid fields leave the source `EXECUTED_OPERATOR_LIMITED`; PRISM never
+reconstructs tank dynamics from outlet flow. Clearing this source flag still
+does not qualify the provider, frequency, or facility IR/F-N result.
+
 ## 6. Python resolver example
 
 ```python

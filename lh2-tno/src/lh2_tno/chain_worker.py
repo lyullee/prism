@@ -204,7 +204,7 @@ def run_chain(p,roots,module):
             requested_duration_s=duration,effective_duration_s=duration,
             source_duration_mode='declared',
             termination_basis=release_termination.get('basis'),
-            operator_limited=True)
+            operator_limited=bool(source_history.get('operator_limited', True)))
     elif source_operator == 'inventory_liquid_jet':
         jetmod=module('slabx_lh2.lh2_jet_source',roots['slabx_lh2'])
         spray=source['liquid_jet']

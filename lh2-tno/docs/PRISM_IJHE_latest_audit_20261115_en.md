@@ -87,6 +87,15 @@ equipment state + operating mode
 
 The current-state monitor can consume a cached or already-computed provider result for low latency. The predicted-state path runs the same gate when the simulation reaches a declared risk condition. A fresh physics call is never described as a 1 Hz calculation merely because the cache path meets a 1 Hz service target.
 
+For liquid/two-phase source histories, the code now has an explicit
+`prism.provider_dynamic_state_closure.v1` opt-in. It requires provider-owned
+pressure and inventory feedback flags, a state-history digest, bounded
+residuals, and a closed initial/final/outgoing mass ledger before the source
+can leave `EXECUTED_OPERATOR_LIMITED`. Existing packets do not contain this
+evidence, so the current audit counts are intentionally unchanged. The
+contract and integration example are documented in
+[`PRISM_dynamic_liquid_state_closure_contract_en.md`](PRISM_dynamic_liquid_state_closure_contract_en.md).
+
 ## Strict blockers
 
 1. The release boundary is not closed for every declared case. Only 13 of 44 cases are currently strict-boundary eligible; 29 require operator review and 2 remain numerically open.

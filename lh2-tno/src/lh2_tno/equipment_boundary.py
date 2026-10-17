@@ -26,6 +26,43 @@ ProviderTerminationBasis = Literal[
 ]
 
 
+class ProviderDynamicStateClosure(Contract):
+    """Explicit proof that an equipment release used dynamic state feedback.
+
+    A resolved liquid packet contains the atmospheric boundary history, but
+    that history alone cannot prove that tank pressure and inventory evolved
+    during the release.  This opt-in record is therefore deliberately strict:
+    both feedback paths, their state-history digest, and bounded residuals
+    must be supplied by the equipment provider.  Its presence never creates a
+    frequency or a termination basis; it only permits the consequence chain to
+    consume a genuinely dynamic source instead of labelling it constant-state.
+    """
+
+    schema_version: Literal['prism.provider_dynamic_state_closure.v1'] = (
+        'prism.provider_dynamic_state_closure.v1'
+    )
+    inventory_feedback_closed: Literal[True] = True
+    pressure_feedback_closed: Literal[True] = True
+    state_history_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
+    max_abs_inventory_residual_kg: Nonnegative
+    inventory_tolerance_kg: Positive
+    max_abs_pressure_residual_pa: Nonnegative
+    pressure_tolerance_pa: Positive
+    provenance: Name
+
+    @model_validator(mode='after')
+    def residuals_within_declared_tolerances(self):
+        if self.max_abs_inventory_residual_kg > self.inventory_tolerance_kg:
+            raise ValueError(
+                'dynamic state inventory residual exceeds declared tolerance'
+            )
+        if self.max_abs_pressure_residual_pa > self.pressure_tolerance_pa:
+            raise ValueError(
+                'dynamic state pressure residual exceeds declared tolerance'
+            )
+        return self
+
+
 class ProviderMassBalance(Contract):
     """Optional provider-owned inventory/mass-balance evidence.
 
@@ -54,6 +91,7 @@ class ProviderMassBalance(Contract):
     isolation_time_s: Nonnegative | None = None
     post_isolation_observation_s: Nonnegative | None = None
     isolation_success: bool | None = None
+    dynamic_state_closure: ProviderDynamicStateClosure | None = None
 
     @model_validator(mode='after')
     def has_evidence(self):

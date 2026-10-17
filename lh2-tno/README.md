@@ -67,6 +67,12 @@ When a qualified equipment model returns a reviewed termination packet, the
 connects response intake, provider termination evidence, and case-level packet
 matching without silently promoting the result to facility QRA.
 
+For liquid/two-phase releases, the optional [dynamic state closure contract](docs/PRISM_dynamic_liquid_state_closure_contract_en.md)
+shows how an equipment twin can prove that changing pressure and inventory
+were fed back into the release history. Without that explicit evidence, PRISM
+keeps the source `EXECUTED_OPERATOR_LIMITED` even when the downstream
+consequence chain runs successfully.
+
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 
 ## What PRISM does not infer

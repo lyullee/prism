@@ -189,6 +189,7 @@ def _provider_mass_balance(
         "isolation_time_s",
         "post_isolation_observation_s",
         "isolation_success",
+        "dynamic_state_closure",
     )
     if not any(key in metadata for key in recognized):
         return None
@@ -245,6 +246,14 @@ def _provider_mass_balance(
                     "provider data.provider_meta.isolation_success must be boolean"
                 )
             payload["isolation_success"] = value
+    if "dynamic_state_closure" in metadata:
+        value = metadata["dynamic_state_closure"]
+        if value is not None:
+            if not isinstance(value, Mapping):
+                raise EquipmentReleaseExportError(
+                    "provider data.provider_meta.dynamic_state_closure must be an object"
+                )
+            payload["dynamic_state_closure"] = dict(value)
 
     initial = payload.get("initial_mass_kg")
     cumulative_in = payload.get("cumulative_mass_in_kg", 0.0)

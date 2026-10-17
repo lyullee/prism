@@ -579,6 +579,46 @@ def test_resolved_liquid_provider_closes_partition_and_worker_rows():
     assert all(row['discharge_recalculated'] is False for row in rows)
     assert history['discharge_recalculated'] is False
     assert history['equipment_dynamics_recalculated'] is False
+    assert history['operator_limited'] is True
+    assert history['dynamic_state_closure']['ready'] is False
+    assert 'provider dynamic pressure/inventory closure evidence is missing' in history['limitations']
+
+
+def test_resolved_liquid_dynamic_state_closure_releases_operator_limit():
+    d = liquid_packet()
+    d.update(
+        input_origin='model_prediction',
+        termination_basis='reviewed_isolation_success',
+        provider_mass_balance={
+            'schema_version': 'prism.provider_mass_balance.v1',
+            'initial_mass_kg': 5.0,
+            'cumulative_mass_out_kg': d['cumulative_mass_out_kg'],
+            'final_mass_kg': 5.0 - d['cumulative_mass_out_kg'],
+            'derived_accounting_residual_kg': 0.0,
+            'isolation_time_s': 0.2,
+            'post_isolation_observation_s': 0.1,
+            'isolation_success': True,
+            'dynamic_state_closure': {
+                'schema_version': 'prism.provider_dynamic_state_closure.v1',
+                'inventory_feedback_closed': True,
+                'pressure_feedback_closed': True,
+                'state_history_digest': 'c' * 64,
+                'max_abs_inventory_residual_kg': 1.0e-10,
+                'inventory_tolerance_kg': 1.0e-8,
+                'max_abs_pressure_residual_pa': 2.0,
+                'pressure_tolerance_pa': 10.0,
+                'provenance': 'synthetic dynamic state closure test',
+            },
+        },
+    )
+    release = ResolvedLiquidRelease.model_validate_json(json.dumps(d))
+    _, history = resolve_liquid_rows(release.model_dump(mode='json'), 101325.)
+    assert history['dynamic_state_closure']['ready'] is True
+    assert history['operator_limited'] is False
+    assert history['limitations'] == [
+        'provider owns liquid/two-phase flash and droplet partition',
+        'airborne liquid is rejected until a validated droplet adapter is supplied',
+    ]
 
 
 def test_resolved_liquid_provider_rejects_airborne_liquid_without_adapter():
