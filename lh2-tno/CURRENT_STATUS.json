@@ -6114,5 +6114,15 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_closure_status_counts": {
     "CLOSURE_EVIDENCE_OPEN": 19,
     "CLOSURE_READY_FOR_QUALIFICATION": 7
+  },
+  "latest_observed_state_data_recheck_record": "results/20261115/inspection_center_observed_state_evidence_recheck_20261017.json",
+  "latest_observed_state_data_recheck_status": "OBSERVATION_STATE_EVIDENCE_ONLY; 3 external XLSX sources, 8,955 samples, 3 components; no frequency or accident release inferred",
+  "latest_observed_runtime_frame_recheck_record": "results/20261115/inspection_center_observed_state_runtime_frames_recheck_20261017.json",
+  "latest_observed_runtime_frame_recheck_status": "STATE_RUNTIME_FRAMES_READY; 3 explicit operating-mode bindings; state-only handoff remains diagnostic",
+  "latest_inspection_center_facility_ijhe_handoff_recheck_record": "results/20261115/inspection_center_facility_ijhe_handoff_recheck_20261017.json",
+  "latest_inspection_center_facility_ijhe_handoff_recheck_status": "PASS_WITH_SCOPE_LIMITATIONS; 12 checks; provider release, qualification, frequency, and facility QRA promotion remain false",
+  "native_provider_audit_closure_counts_exposed": {
+    "CLOSURE_READY_FOR_QUALIFICATION": 7,
+    "CLOSURE_EVIDENCE_OPEN": 19
   }
 }
