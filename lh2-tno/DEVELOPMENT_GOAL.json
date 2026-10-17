@@ -4513,12 +4513,12 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1300,
+    "run_number": 1313,
     "workflow": "Python contracts and numerical checks",
-    "commit": "fce86e016bd75a8ed070bf9602c1a95d9f62e02c",
+    "commit": "2b1f474f",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/lyullee/prism/actions/runs/39016979143",
+    "url": "https://github.com/lyullee/prism/actions/runs/39022092049",
     "verified_kst": "2026-10-17"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6",
