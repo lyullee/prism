@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,411 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,412 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -148,6 +148,15 @@ view rather than a facility-QRA claim. The exact HAZOP mode binding is
 generated from the reviewed frequency plan by
 `scripts/build_hazop_event_mode_binding_from_frequency_plan.py`; missing mode
 or scenario fields fail closed.
+
+The same record now includes a clean-source isolation replay. The corrected
+valve adapter reaches the declared observation horizon after splitting a step
+at the isolation command, so all five transfer-valve opening bins prove the
+external provider's zero-opening and zero-flow diagnostic condition. The
+replay executed 24/24 cases with 0 uncomputed, 0 failed, and 96 diagnostic risk
+atoms in about 388.3 s offline. This is a provider termination check for
+synthetic inputs; it does not establish field isolation reliability, provider
+qualification, physical validation, facility IR/F-N, or facility QRA.
 
 To apply the audit gate to a saved facility assessment without rerunning
 physics, use:

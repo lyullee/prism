@@ -200,3 +200,16 @@ record is
 
 The audit is consumed by a derived assessment at
 `results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json`. This assessment reuses the saved risk ledger and frequency scenarios, adds the native qualification gate, and keeps `qualified_facility_qra_available=false` when the audit has no qualified packets. It does not rerun physics or modify risk atoms.
+
+### Clean-source isolation replay
+
+The clean external-source replay was repeated with the provider isolation
+branch enabled after correcting the valve adapter's split-step horizon
+accounting. The packet catalog and facility campaign are recorded under
+`results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/`.
+All 24 event identities matched and executed, with 0 uncomputed cases, 0
+failed cases, 96 diagnostic risk atoms, and five transfer-valve opening bins
+confirming the provider's declared zero-flow observation. The replay took
+388,256.043 ms offline. The result remains diagnostic: field isolation
+reliability, provider qualification, independent physical validation,
+facility IR/F-N and facility QRA are still withheld.

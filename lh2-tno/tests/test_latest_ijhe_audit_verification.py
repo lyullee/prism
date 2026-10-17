@@ -187,6 +187,82 @@ def test_latest_ijhe_audit_verification_blocks_clean_scope_promotion(tmp_path: P
     assert any("clean full-scope replay" in reason for reason in result["blocking_reasons"])
 
 
+def _native_clean_full_scope_isolation_replay() -> dict:
+    return {
+        "schema_version": "prism.native_external_facility_full_scope_clean_source_isolation_replay.v1",
+        "status": "EXECUTED_DIAGNOSTIC_CLEAN_EXTERNAL_SOURCE_WITH_ISOLATION",
+        "source": {
+            "repository": "https://github.com/lyullee/lh2dt_models",
+            "commit": "16f7a4b",
+            "source_tree_sha256": "b" * 64,
+        },
+        "adapter": {"transfer_valve_isolation_success_event_count": 5},
+        "packet_catalog": {
+            "event_count": 24,
+            "exact_native_packet_count": 24,
+            "uncomputed_event_count": 0,
+            "isolation_requested": True,
+            "isolation_time_s": 0.05,
+            "post_isolation_observation_s": 0.1,
+        },
+        "facility_campaign": {
+            "packet_count": 24,
+            "event_count": 24,
+            "matched_event_case_record_count": 24,
+            "matched_event_executed_case_count": 24,
+            "matched_event_uncomputed_case_count": 0,
+            "matched_event_failed_case_count": 0,
+            "risk_atom_count": 96,
+            "hazop_event_mode_binding": {"bound_event_count": 24, "unbound_event_count": 0},
+            "provider_packet_promoted": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+        },
+    }
+
+
+def test_latest_ijhe_audit_verification_binds_clean_isolation_replay(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "isolation_scope.json", _native_clean_full_scope_isolation_replay())
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "external_lh2dt_native_clean_full_scope_isolation_replay_record": "isolation_scope.json",
+        "external_lh2dt_native_clean_full_scope_isolation_replay_source_digest": "b" * 64,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_packet_count": 24,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_executed_case_count": 24,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_uncomputed_case_count": 0,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_failed_case_count": 0,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_risk_atom_count": 96,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_transfer_valve_isolation_success_count": 5,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_qra_claim": False,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["native_external_clean_full_scope_isolation_replay_valid"] is True
+    assert result["native_external_clean_full_scope_isolation_replay_packet_count"] == 24
+
+
 def test_latest_ijhe_audit_verification_binds_clean_native_multi_equipment_recheck(tmp_path: Path):
     audit = {
         "status": "INCOMPLETE_EVIDENCE",

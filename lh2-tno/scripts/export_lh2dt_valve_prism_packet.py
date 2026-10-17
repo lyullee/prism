@@ -169,20 +169,26 @@ class ValveAccidentProvider:
             raise ValueError("Valve outlet quality is outside the liquid/two-phase atmospheric contract")
         else:
             gas_fraction = float(quality)
-        intervals = int(round(total_duration / self.time_step_s))
         enthalpy = float(result.outlet_specific_enthalpy_J_kg)
         steps: list[dict[str, Any]] = []
         cumulative_mass = 0.0
         cumulative_enthalpy = 0.0
         elapsed = 0.0
         zero_flow_after_isolation = True
-        for index in range(intervals):
-            dt = self.time_step_s
+        # Integrate to the declared end time rather than pre-computing the
+        # number of nominal steps.  An isolation command can split one step
+        # at the command time; counting only ``total_duration / dt`` would
+        # then stop short of the final observation interval and could never
+        # prove the actuator had reached zero opening.
+        while elapsed < total_duration - 1.0e-12:
+            dt = min(self.time_step_s, total_duration - elapsed)
             if (
                 self.isolation_time_s is not None
                 and elapsed < self.isolation_time_s < elapsed + dt
             ):
                 dt = self.isolation_time_s - elapsed
+            if dt <= 1.0e-12:
+                raise ValueError("valve integration produced a zero-length interval")
             if self.isolation_time_s is not None and elapsed >= self.isolation_time_s - 1.0e-12:
                 actuator.set_target_opening(0.0)
             opening = actuator.advance(dt)
@@ -229,6 +235,9 @@ class ValveAccidentProvider:
                 }],
             })
             elapsed += dt
+        if not math.isclose(elapsed, total_duration, rel_tol=0.0, abs_tol=1.0e-9):
+            raise ValueError("valve integration did not reach the declared observation horizon")
+        elapsed = total_duration
         isolation_success = (
             self.isolation_time_s is not None
             and self.post_isolation_observation_s is not None

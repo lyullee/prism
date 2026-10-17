@@ -37,7 +37,27 @@ The small tracked evidence set is:
 - [`state_snapshot_binding_audit.json`](../results/20261115/native_external_facility_full_scope_clean_source_replay_20261017/state_snapshot_binding_audit.json)
 - [`hazop_event_mode_binding_clean_source.json`](../results/20261115/native_external_facility_full_scope_campaign_current/hazop_event_mode_binding_clean_source.json)
 
-The packet catalog was intentionally run without isolation qualification. The
-four valve isolation gaps remain explicit, provider qualification remains zero,
-independent physical validation remains absent, literature frequency inference
-was not performed, and `facility_qra_claim=false` remains enforced.
+The no-isolation replay above remains preserved as a baseline. A follow-up
+replay also exercised the explicit provider isolation branch after fixing a
+time-step accounting bug in the valve adapter: splitting a step at the
+isolation command had previously caused the precomputed loop count to stop
+before the end of the observation horizon. The corrected adapter integrates
+until the declared end time and proves the external actuator's zero-flow
+observation without inferring field isolation reliability.
+
+The isolation replay uses `isolation_time_s=0.05` and
+`post_isolation_observation_s=0.10` with a `0.05 s` stroke. It produced 24/24
+exact packet identities, 24/24 executed cases, 0 uncomputed cases, 0 failed
+cases, 96 diagnostic risk atoms, and 5/5 transfer-valve isolation successes.
+The campaign took 388,256.043 ms (about 6.47 minutes) offline. Its compact
+evidence is recorded in:
+
+- [`clean_source_isolation_replay_summary.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/clean_source_isolation_replay_summary.json)
+- [`packet_catalog_verification.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/packet_catalog_verification.json)
+- [`facility_campaign_verification.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_campaign_verification.json)
+
+The follow-up remains diagnostic: provider qualification is zero, independent
+physical validation is absent, literature frequency inference was not
+performed, facility IR/F-N is withheld, and `facility_qra_claim=false` remains
+enforced. The excluded receiving boundary is still outside the generic
+equipment scope.

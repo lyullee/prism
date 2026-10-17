@@ -36,6 +36,7 @@ def verify_latest_ijhe_audit(
     release_boundary: Mapping[str, Any] | Path | None = None,
     native_external_multi_equipment_recheck: Mapping[str, Any] | Path | None = None,
     native_external_clean_full_scope_replay: Mapping[str, Any] | Path | None = None,
+    native_external_clean_full_scope_isolation_replay: Mapping[str, Any] | Path | None = None,
 ) -> dict[str, Any]:
     """Verify status/audit/handoff identity without changing qualification gates."""
 
@@ -519,6 +520,113 @@ def verify_latest_ijhe_audit(
                     f"status ledger {status_key} disagrees with clean full-scope replay"
                 )
 
+    # The isolation replay is a separate diagnostic record because it proves a
+    # stronger provider termination branch than the earlier no-isolation
+    # replay.  It still cannot promote a provider packet, infer field
+    # isolation reliability, or open the facility-QRA gate.
+    isolation_scope_value: dict[str, Any] = {}
+    isolation_scope_path: Path | None = None
+    isolation_scope_valid = False
+    isolation_scope_pointer = status.get(
+        "external_lh2dt_native_clean_full_scope_isolation_replay_record"
+    )
+    if native_external_clean_full_scope_isolation_replay is None and isinstance(
+        isolation_scope_pointer, str
+    ):
+        isolation_scope_path = _relative_or_absolute(isolation_scope_pointer, root=base)
+        if not isolation_scope_path.exists():
+            reasons.append("native clean full-scope isolation replay record does not exist")
+        else:
+            isolation_scope_value = _read_object(isolation_scope_path)
+    elif isinstance(native_external_clean_full_scope_isolation_replay, Path):
+        isolation_scope_path = native_external_clean_full_scope_isolation_replay
+        isolation_scope_value = _read_object(isolation_scope_path)
+    elif isinstance(native_external_clean_full_scope_isolation_replay, Mapping):
+        isolation_scope_value = dict(native_external_clean_full_scope_isolation_replay)
+    if isolation_scope_pointer is not None or native_external_clean_full_scope_isolation_replay is not None:
+        source = isolation_scope_value.get("source")
+        packet_catalog = isolation_scope_value.get("packet_catalog")
+        campaign = isolation_scope_value.get("facility_campaign")
+        adapter = isolation_scope_value.get("adapter")
+        isolation_scope_valid = (
+            isolation_scope_value.get("schema_version")
+            == "prism.native_external_facility_full_scope_clean_source_isolation_replay.v1"
+            and isolation_scope_value.get("status")
+            == "EXECUTED_DIAGNOSTIC_CLEAN_EXTERNAL_SOURCE_WITH_ISOLATION"
+            and isinstance(source, Mapping)
+            and isinstance(source.get("repository"), str)
+            and bool(source.get("repository"))
+            and isinstance(source.get("commit"), str)
+            and bool(source.get("commit"))
+            and isinstance(source.get("source_tree_sha256"), str)
+            and len(source.get("source_tree_sha256")) == 64
+            and isinstance(adapter, Mapping)
+            and adapter.get("transfer_valve_isolation_success_event_count") == 5
+            and isinstance(packet_catalog, Mapping)
+            and packet_catalog.get("event_count") == 24
+            and packet_catalog.get("exact_native_packet_count") == 24
+            and packet_catalog.get("uncomputed_event_count") == 0
+            and packet_catalog.get("isolation_requested") is True
+            and packet_catalog.get("isolation_time_s") == 0.05
+            and packet_catalog.get("post_isolation_observation_s") == 0.1
+            and isinstance(campaign, Mapping)
+            and campaign.get("packet_count") == 24
+            and campaign.get("event_count") == 24
+            and campaign.get("matched_event_case_record_count") == 24
+            and campaign.get("matched_event_executed_case_count") == 24
+            and campaign.get("matched_event_uncomputed_case_count") == 0
+            and campaign.get("matched_event_failed_case_count") == 0
+            and campaign.get("risk_atom_count") == 96
+            and campaign.get("hazop_event_mode_binding", {}).get("bound_event_count") == 24
+            and campaign.get("hazop_event_mode_binding", {}).get("unbound_event_count") == 0
+            and campaign.get("provider_packet_promoted") is False
+            and campaign.get("physical_validation_claim") is False
+            and campaign.get("facility_qra_claim") is False
+        )
+        if not isolation_scope_valid:
+            reasons.append(
+                "native clean full-scope isolation replay is malformed or permits unsafe promotion"
+            )
+        for status_key, actual in (
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_source_digest",
+                source.get("source_tree_sha256") if isinstance(source, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_packet_count",
+                campaign.get("packet_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_executed_case_count",
+                campaign.get("matched_event_executed_case_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_uncomputed_case_count",
+                campaign.get("matched_event_uncomputed_case_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_failed_case_count",
+                campaign.get("matched_event_failed_case_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_risk_atom_count",
+                campaign.get("risk_atom_count") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_transfer_valve_isolation_success_count",
+                adapter.get("transfer_valve_isolation_success_event_count") if isinstance(adapter, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_qra_claim",
+                campaign.get("facility_qra_claim") if isinstance(campaign, Mapping) else None,
+            ),
+        ):
+            expected = status.get(status_key)
+            if expected is not None and actual != expected:
+                reasons.append(
+                    f"status ledger {status_key} disagrees with clean full-scope isolation replay"
+                )
+
     # The actual FFI Test 6 convergence record is optional for historical
     # callers, but when the current status ledger points to it we verify the
     # identity and fail-closed claims here as well.  This keeps a stale or
@@ -646,6 +754,42 @@ def verify_latest_ijhe_audit(
         "native_external_clean_full_scope_replay_risk_atom_count": (
             clean_scope_value.get("facility_campaign", {}).get("risk_atom_count")
             if isinstance(clean_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_record": (
+            str(isolation_scope_path) if isolation_scope_path else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_status": (
+            isolation_scope_value.get("status") if isolation_scope_value else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_valid": (
+            isolation_scope_valid
+            if isolation_scope_pointer is not None or native_external_clean_full_scope_isolation_replay is not None
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_packet_count": (
+            isolation_scope_value.get("facility_campaign", {}).get("packet_count")
+            if isinstance(isolation_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_executed_case_count": (
+            isolation_scope_value.get("facility_campaign", {}).get("matched_event_executed_case_count")
+            if isinstance(isolation_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_uncomputed_case_count": (
+            isolation_scope_value.get("facility_campaign", {}).get("matched_event_uncomputed_case_count")
+            if isinstance(isolation_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_failed_case_count": (
+            isolation_scope_value.get("facility_campaign", {}).get("matched_event_failed_case_count")
+            if isinstance(isolation_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_risk_atom_count": (
+            isolation_scope_value.get("facility_campaign", {}).get("risk_atom_count")
+            if isinstance(isolation_scope_value.get("facility_campaign"), Mapping)
             else None
         ),
         "blocking_reasons": reasons,
