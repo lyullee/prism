@@ -428,6 +428,31 @@ summary from an exact campaign case, use
 with the campaign result, the matching `resolved_release.json`, and the exact
 component/event/scenario-family identity.
 
+To feed the attached evidence into the generic quantitative-evidence gate,
+convert it into the four required blocks and replay both paths:
+
+```powershell
+python scripts/build_generic_quantitative_attachments.py `
+  --attachment results/20261115/generic_provider_chain_attachment_all_components.json `
+  --output results/20261115/generic_quantitative_attachments_all_components.json `
+  --current-output results/20261115/generic_current_quantitative_attachments.json `
+  --forecast-output results/20261115/generic_forecast_quantitative_attachments.json
+
+python scripts/run_generic_facility_hazop_handoff.py `
+  --frames examples/generic_facility_forecast_frames.json `
+  --tables examples/generic_provider_bound_hazop_tables.json `
+  --current-frames examples/generic_facility_current_frames.json `
+  --current-attachments results/20261115/generic_current_quantitative_attachments.json `
+  --forecast-attachments results/20261115/generic_forecast_quantitative_attachments.json `
+  --output results/20261115/generic_provider_bound_hazop_quantitative_handoff_with_evidence.json
+```
+
+Both coverage gates then report `QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE` for
+the three current and three forecast requests. The handoff evaluator remains
+diagnostic and keeps `facility_ir_fn_calculated` and `facility_qra_promotion`
+false until qualified provider evidence, independent validation and complete
+facility scope are available.
+
 ### Importing process-model forecast workbooks
 
 Process-model exports can be converted into the same forecast frames with

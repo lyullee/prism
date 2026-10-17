@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1454 passed, 1 warning",
+  "latest_local_full_test_run": "1455 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -5499,7 +5499,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "e63dcc52",
+  "latest_local_full_test_run_commit": "pending-quantitative-attachment-gate",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -6218,5 +6218,16 @@
     "results/20261115/generic_vent_provider_bound_hazop_evidence_summary.json"
   ],
   "generic_provider_chain_attachment_component_count": 3,
-  "generic_provider_chain_attachment_provider_qualification_claim": false
+  "generic_provider_chain_attachment_provider_qualification_claim": false,
+  "generic_quantitative_attachments_record": "results/20261115/generic_quantitative_attachments_all_components.json",
+  "generic_quantitative_attachments_current_record": "results/20261115/generic_current_quantitative_attachments.json",
+  "generic_quantitative_attachments_forecast_record": "results/20261115/generic_forecast_quantitative_attachments.json",
+  "generic_quantitative_attachments_status": "FOUR_BLOCK_DIAGNOSTIC_EVIDENCE_BOUND; 3 current and 3 forecast requests",
+  "generic_quantitative_evidence_coverage_record": "results/20261115/generic_provider_bound_hazop_quantitative_handoff_with_evidence.json",
+  "generic_quantitative_evidence_coverage_current_status": "QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE",
+  "generic_quantitative_evidence_coverage_forecast_status": "QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE",
+  "generic_quantitative_evidence_coverage_request_count": 6,
+  "generic_quantitative_evidence_coverage_facility_ir_fn_claim": false,
+  "generic_quantitative_evidence_coverage_facility_qra_claim": false,
+  "generic_quantitative_evidence_coverage_physical_validation_claim": false
 }

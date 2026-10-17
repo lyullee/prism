@@ -1,0 +1,426 @@
+{
+  "schema_version": "prism.generic_quantitative_attachments.v1",
+  "current_attachments": {
+    "current|storage-tank-01|TK01-receiving-liquid-hole:receiving:liquid_two_phase|10": {
+      "path": "current",
+      "evidence": {
+        "provider_release_packet": {
+          "status": "PROVIDER_RELEASE_EVIDENCE_ATTACHED",
+          "source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+          "release_start_s": 0.0,
+          "release_end_s": 0.05,
+          "duration_s": 0.05,
+          "termination_basis": "inventory_depletion",
+          "isolation_time_s": 0.05,
+          "post_isolation_observation_s": 0.0,
+          "inventory_initial_kg": 0.028492061899609754,
+          "inventory_out_kg": 0.008231481218448094,
+          "mass_residual_kg": 0.020260580681161662,
+          "inventory_status": "INVENTORY_NOT_CLOSED"
+        },
+        "frequency_binding": {
+          "status": "LITERATURE_FREQUENCY_BOUND_DIAGNOSTIC",
+          "literature_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "annual_frequency": null,
+          "annual_frequency_low": null,
+          "annual_frequency_high": null,
+          "source_provenance": null,
+          "frequency_inference_performed": false
+        },
+        "slabx_lh2_consequence": {
+          "status": "SLABX_LH2_CHAIN_EVIDENCE_ATTACHED",
+          "result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "receptor_damage_or_harm_outputs": {
+            "stages": [
+              "equipment_resolved_liquid_two_phase_exit",
+              "rainout_and_dynamic_pool",
+              "vector_cryogenic_near_field",
+              "SLABx_dispersion",
+              "finite_inventory_cloud",
+              "ignition_branches",
+              "fire_radiation",
+              "multi_energy_blast_zones",
+              "TNO_human_damage",
+              "conditional_risk"
+            ],
+            "full_chain_executed": true,
+            "physical_validation_claim": false
+          },
+          "processing_time_ms": 23172.54870000761
+        },
+        "facility_condition_binding": {
+          "status": "CONDITIONAL_FACILITY_CONDITION_BOUND",
+          "population_condition_id": "synthetic-generic-worker-west-3ms",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "facility_port_or_endpoint_id": "tank-accident-out",
+          "facility_ir_fn_available": false,
+          "facility_qra_promotion": false
+        }
+      },
+      "provenance": {
+        "source_record": "lh2-tno/results/20261115/generic_storage_provider_bound_hazop_diagnostic.json",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "scenario_family": "liquid_two_phase",
+        "diagnostic_only": true
+      }
+    },
+    "current|liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10": {
+      "path": "current",
+      "evidence": {
+        "provider_release_packet": {
+          "status": "PROVIDER_RELEASE_EVIDENCE_ATTACHED",
+          "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+          "release_start_s": 0.0,
+          "release_end_s": 0.49999999999999994,
+          "duration_s": 0.49999999999999994,
+          "termination_basis": "reviewed_isolation_success",
+          "isolation_time_s": 0.3,
+          "post_isolation_observation_s": 0.2,
+          "inventory_initial_kg": 0.10622803086219497,
+          "inventory_out_kg": 1.5142271983109373e-05,
+          "mass_residual_kg": 0.0,
+          "inventory_status": "INVENTORY_CLOSED"
+        },
+        "frequency_binding": {
+          "status": "LITERATURE_FREQUENCY_BOUND_DIAGNOSTIC",
+          "literature_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "annual_frequency": 3.4e-05,
+          "annual_frequency_low": 3.4e-05,
+          "annual_frequency_high": 3.4e-05,
+          "source_provenance": "external campaign catalogue; carried by exact event identity",
+          "frequency_inference_performed": false
+        },
+        "slabx_lh2_consequence": {
+          "status": "SLABX_LH2_CHAIN_EVIDENCE_ATTACHED",
+          "result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "receptor_damage_or_harm_outputs": {
+            "stages": [
+              "equipment_resolved_release",
+              "rainout_and_dynamic_pool",
+              "SLABx_dispersion",
+              "finite_inventory_cloud",
+              "ignition_branches",
+              "fire_radiation",
+              "multi_energy_blast_zones",
+              "TNO_human_damage",
+              "conditional_risk"
+            ],
+            "full_chain_executed": true,
+            "physical_validation_claim": false
+          },
+          "processing_time_ms": 81567.22739999532
+        },
+        "facility_condition_binding": {
+          "status": "CONDITIONAL_FACILITY_CONDITION_BOUND",
+          "population_condition_id": "synthetic-generic-worker-west-3ms",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "facility_port_or_endpoint_id": "line-accident-out",
+          "facility_ir_fn_available": false,
+          "facility_qra_promotion": false
+        }
+      },
+      "provenance": {
+        "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "scenario_family": "pipe_hole",
+        "diagnostic_only": true
+      }
+    },
+    "current|pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10": {
+      "path": "current",
+      "evidence": {
+        "provider_release_packet": {
+          "status": "PROVIDER_RELEASE_EVIDENCE_ATTACHED",
+          "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+          "release_start_s": 0.0,
+          "release_end_s": 0.5,
+          "duration_s": 0.5,
+          "termination_basis": "emergency_relief_discharge",
+          "isolation_time_s": 0.5,
+          "post_isolation_observation_s": 0.0,
+          "inventory_initial_kg": 0.0008087150217064195,
+          "inventory_out_kg": 0.0006739291847553497,
+          "mass_residual_kg": null,
+          "inventory_status": "INVENTORY_NOT_CLOSED"
+        },
+        "frequency_binding": {
+          "status": "LITERATURE_FREQUENCY_BOUND_DIAGNOSTIC",
+          "literature_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+          "annual_frequency": 2e-05,
+          "annual_frequency_low": 2e-05,
+          "annual_frequency_high": 2e-05,
+          "source_provenance": "external campaign catalogue; carried by exact event identity",
+          "frequency_inference_performed": false
+        },
+        "slabx_lh2_consequence": {
+          "status": "SLABX_LH2_CHAIN_EVIDENCE_ATTACHED",
+          "result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "receptor_damage_or_harm_outputs": {
+            "stages": [
+              "equipment_resolved_release",
+              "direct_gas_release",
+              "SLABx_dispersion",
+              "finite_inventory_cloud",
+              "ignition_branches",
+              "fire_radiation",
+              "multi_energy_blast_zones",
+              "TNO_human_damage",
+              "conditional_risk"
+            ],
+            "full_chain_executed": true,
+            "physical_validation_claim": false
+          },
+          "processing_time_ms": 4234.651100006886
+        },
+        "facility_condition_binding": {
+          "status": "CONDITIONAL_FACILITY_CONDITION_BOUND",
+          "population_condition_id": "synthetic-generic-worker-west-3ms",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "facility_port_or_endpoint_id": "vent-accident-out",
+          "facility_ir_fn_available": false,
+          "facility_qra_promotion": false
+        }
+      },
+      "provenance": {
+        "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "operating_mode": "standby",
+        "scenario_family": "vent_hole",
+        "diagnostic_only": true
+      }
+    }
+  },
+  "forecast_attachments": {
+    "storage-tank-01|TK01-receiving-liquid-hole:receiving:liquid_two_phase|10": {
+      "path": "forecast",
+      "evidence": {
+        "provider_release_packet": {
+          "status": "PROVIDER_RELEASE_EVIDENCE_ATTACHED",
+          "source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+          "release_start_s": 0.0,
+          "release_end_s": 0.05,
+          "duration_s": 0.05,
+          "termination_basis": "inventory_depletion",
+          "isolation_time_s": 0.05,
+          "post_isolation_observation_s": 0.0,
+          "inventory_initial_kg": 0.028492061899609754,
+          "inventory_out_kg": 0.008231481218448094,
+          "mass_residual_kg": 0.020260580681161662,
+          "inventory_status": "INVENTORY_NOT_CLOSED"
+        },
+        "frequency_binding": {
+          "status": "LITERATURE_FREQUENCY_BOUND_DIAGNOSTIC",
+          "literature_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "annual_frequency": null,
+          "annual_frequency_low": null,
+          "annual_frequency_high": null,
+          "source_provenance": null,
+          "frequency_inference_performed": false
+        },
+        "slabx_lh2_consequence": {
+          "status": "SLABX_LH2_CHAIN_EVIDENCE_ATTACHED",
+          "result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "receptor_damage_or_harm_outputs": {
+            "stages": [
+              "equipment_resolved_liquid_two_phase_exit",
+              "rainout_and_dynamic_pool",
+              "vector_cryogenic_near_field",
+              "SLABx_dispersion",
+              "finite_inventory_cloud",
+              "ignition_branches",
+              "fire_radiation",
+              "multi_energy_blast_zones",
+              "TNO_human_damage",
+              "conditional_risk"
+            ],
+            "full_chain_executed": true,
+            "physical_validation_claim": false
+          },
+          "processing_time_ms": 23172.54870000761
+        },
+        "facility_condition_binding": {
+          "status": "CONDITIONAL_FACILITY_CONDITION_BOUND",
+          "population_condition_id": "synthetic-generic-worker-west-3ms",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "facility_port_or_endpoint_id": "tank-accident-out",
+          "facility_ir_fn_available": false,
+          "facility_qra_promotion": false
+        }
+      },
+      "provenance": {
+        "source_record": "lh2-tno/results/20261115/generic_storage_provider_bound_hazop_diagnostic.json",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "scenario_family": "liquid_two_phase",
+        "diagnostic_only": true
+      }
+    },
+    "liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10": {
+      "path": "forecast",
+      "evidence": {
+        "provider_release_packet": {
+          "status": "PROVIDER_RELEASE_EVIDENCE_ATTACHED",
+          "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+          "release_start_s": 0.0,
+          "release_end_s": 0.49999999999999994,
+          "duration_s": 0.49999999999999994,
+          "termination_basis": "reviewed_isolation_success",
+          "isolation_time_s": 0.3,
+          "post_isolation_observation_s": 0.2,
+          "inventory_initial_kg": 0.10622803086219497,
+          "inventory_out_kg": 1.5142271983109373e-05,
+          "mass_residual_kg": 0.0,
+          "inventory_status": "INVENTORY_CLOSED"
+        },
+        "frequency_binding": {
+          "status": "LITERATURE_FREQUENCY_BOUND_DIAGNOSTIC",
+          "literature_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "annual_frequency": 3.4e-05,
+          "annual_frequency_low": 3.4e-05,
+          "annual_frequency_high": 3.4e-05,
+          "source_provenance": "external campaign catalogue; carried by exact event identity",
+          "frequency_inference_performed": false
+        },
+        "slabx_lh2_consequence": {
+          "status": "SLABX_LH2_CHAIN_EVIDENCE_ATTACHED",
+          "result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "receptor_damage_or_harm_outputs": {
+            "stages": [
+              "equipment_resolved_release",
+              "rainout_and_dynamic_pool",
+              "SLABx_dispersion",
+              "finite_inventory_cloud",
+              "ignition_branches",
+              "fire_radiation",
+              "multi_energy_blast_zones",
+              "TNO_human_damage",
+              "conditional_risk"
+            ],
+            "full_chain_executed": true,
+            "physical_validation_claim": false
+          },
+          "processing_time_ms": 81567.22739999532
+        },
+        "facility_condition_binding": {
+          "status": "CONDITIONAL_FACILITY_CONDITION_BOUND",
+          "population_condition_id": "synthetic-generic-worker-west-3ms",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "facility_port_or_endpoint_id": "line-accident-out",
+          "facility_ir_fn_available": false,
+          "facility_qra_promotion": false
+        }
+      },
+      "provenance": {
+        "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "scenario_family": "pipe_hole",
+        "diagnostic_only": true
+      }
+    },
+    "pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10": {
+      "path": "forecast",
+      "evidence": {
+        "provider_release_packet": {
+          "status": "PROVIDER_RELEASE_EVIDENCE_ATTACHED",
+          "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+          "release_start_s": 0.0,
+          "release_end_s": 0.5,
+          "duration_s": 0.5,
+          "termination_basis": "emergency_relief_discharge",
+          "isolation_time_s": 0.5,
+          "post_isolation_observation_s": 0.0,
+          "inventory_initial_kg": 0.0008087150217064195,
+          "inventory_out_kg": 0.0006739291847553497,
+          "mass_residual_kg": null,
+          "inventory_status": "INVENTORY_NOT_CLOSED"
+        },
+        "frequency_binding": {
+          "status": "LITERATURE_FREQUENCY_BOUND_DIAGNOSTIC",
+          "literature_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+          "annual_frequency": 2e-05,
+          "annual_frequency_low": 2e-05,
+          "annual_frequency_high": 2e-05,
+          "source_provenance": "external campaign catalogue; carried by exact event identity",
+          "frequency_inference_performed": false
+        },
+        "slabx_lh2_consequence": {
+          "status": "SLABX_LH2_CHAIN_EVIDENCE_ATTACHED",
+          "result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "receptor_damage_or_harm_outputs": {
+            "stages": [
+              "equipment_resolved_release",
+              "direct_gas_release",
+              "SLABx_dispersion",
+              "finite_inventory_cloud",
+              "ignition_branches",
+              "fire_radiation",
+              "multi_energy_blast_zones",
+              "TNO_human_damage",
+              "conditional_risk"
+            ],
+            "full_chain_executed": true,
+            "physical_validation_claim": false
+          },
+          "processing_time_ms": 4234.651100006886
+        },
+        "facility_condition_binding": {
+          "status": "CONDITIONAL_FACILITY_CONDITION_BOUND",
+          "population_condition_id": "synthetic-generic-worker-west-3ms",
+          "weather_condition_id": "synthetic-generic-worker-west-3ms",
+          "ignition_branch_id": "provider-chain-multi-branch",
+          "facility_port_or_endpoint_id": "vent-accident-out",
+          "facility_ir_fn_available": false,
+          "facility_qra_promotion": false
+        }
+      },
+      "provenance": {
+        "source_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+        "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "operating_mode": "standby",
+        "scenario_family": "vent_hole",
+        "diagnostic_only": true
+      }
+    }
+  },
+  "summary": {
+    "current_attachment_count": 3,
+    "forecast_attachment_count": 3,
+    "total_attachment_count": 6
+  },
+  "policy": {
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "missing_cases_assigned_zero": false,
+    "provider_qualification_claim": false,
+    "physical_validation_claim": false,
+    "facility_ir_fn_claim": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  }
+}

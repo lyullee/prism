@@ -92,6 +92,17 @@ To regenerate a line or vent summary from the campaign evidence, use
 result, the matching `resolved_release.json`, and the exact component/event and
 scenario-family identity. The script rejects duplicate or mismatched cases.
 
+The attached provider evidence can be reshaped into the quantitative handoff's
+four required blocks with
+`scripts/build_generic_quantitative_attachments.py`. Write separate current
+and forecast maps, then pass them to `run_generic_facility_hazop_handoff.py`
+using `--current-attachments` and `--forecast-attachments`. The resulting
+record reports `QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE` for all six requests,
+while its evaluator policy still keeps fresh release creation, facility IR/F-N
+calculation and facility-QRA promotion false. Coverage completeness therefore
+means that every evidence block is present and traceable; it does not mean
+that the provider or facility has been qualified.
+
 ## What this proves and what it does not
 
 The replay proves that a multi-equipment forecast can preserve component

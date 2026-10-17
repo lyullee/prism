@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from attach_generic_provider_chain import attach, attach_many
 from build_generic_campaign_provider_evidence import build
+from build_generic_quantitative_attachments import build as build_quantitative_attachments
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -82,3 +83,28 @@ def test_campaign_case_evidence_preserves_inventory_and_slabx_stage():
     assert evidence["provider_release_boundary"]["inventory_status"] == "INVENTORY_CLOSED"
     assert "SLABx_dispersion" in evidence["consequence_chain"]["stages"]
     assert evidence["policy"]["provider_qualification_claim"] is False
+
+
+def test_provider_chain_converts_to_complete_current_and_forecast_contract_coverage():
+    attachment = json.loads(
+        (ROOT / "results/20261115/generic_provider_chain_attachment_all_components.json")
+        .read_text(encoding="utf-8")
+    )
+    result = build_quantitative_attachments(attachment)
+    assert result["summary"] == {
+        "current_attachment_count": 3,
+        "forecast_attachment_count": 3,
+        "total_attachment_count": 6,
+    }
+    for mapping in (result["current_attachments"], result["forecast_attachments"]):
+        assert len(mapping) == 3
+        for row in mapping.values():
+            assert set(row["evidence"]) == {
+                "provider_release_packet",
+                "frequency_binding",
+                "slabx_lh2_consequence",
+                "facility_condition_binding",
+            }
+            assert row["evidence"]["provider_release_packet"]["status"]
+            assert row["evidence"]["slabx_lh2_consequence"]["status"]
+    assert result["policy"]["facility_qra_promotion"] is False
