@@ -18,3 +18,7 @@ SLABx-LH2 remains a frozen, validated consequence component. Its existing 5/5 co
 The external `lh2dt` Python source tree was rechecked at source commit `7072374c59b726f4e938cd37e7695684ddc70b68` with source-tree digest `3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74`. Its full suite passed `377` tests with one warning. The workspace has one untracked benchmark document, `docs/benchmarks/nasa_tn_d4171_hem_validation.md`; this is documentation intake, not a source-code change.
 
 PRISM's full portable suite passed `1521` tests with one warning. The audit artifact remains fail-closed and diagnostic-only.
+
+## Continuous integration
+
+GitHub Actions run #1400 for commit `d8d52767` completed successfully. The API record is the authoritative status; the web page briefly showed a stale in-progress view during the recheck.

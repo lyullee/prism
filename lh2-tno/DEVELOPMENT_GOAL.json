@@ -3048,7 +3048,7 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "IJHE objective/provider-intake/worklist/verifier and native-recheck-comparison tests passed; full suite 1504 passed separately (1 pytest-asyncio deprecation warning)",
   "latest_remote_verified_commit": "a932e77a",
-  "latest_remote_ci_run": "run 1385 completed successfully for commit a932e77a; Python contracts and numerical checks job succeeded",
+  "latest_remote_ci_run": "run 1400 completed successfully for commit d8d52767; Python contracts and numerical checks job succeeded",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
   "v060_readiness_frequency_port_binding_evidence_request_fallback_implemented": true,
@@ -4543,11 +4543,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1385,
+    "run_number": 1400,
     "status": "completed",
     "conclusion": "success",
-    "commit": "a932e77a0cb7a1312d1e620ee9d11ecc32db7e7b",
-    "url": "https://github.com/lyullee/prism/actions/runs/39068264827"
+    "commit": "d8d5276737de18812ada9635bfece51076f46637",
+    "url": "https://github.com/lyullee/prism/actions/runs/39076006253"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "025e99537e31ee1d951c0322374cf8d8e0772aa3c99edd7ceb85f8660e43e7e9",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
@@ -4827,7 +4827,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "Actions run 39073656583 success; commit bd168e8f validated; current local full suite 1504 passed, 1 warning",
+  "latest_ci_validation": "Actions run 39076006253 success; commit d8d52767 validated; current local full suite 1521 passed, 1 warning; external lh2dt suite 377 passed, 1 warning",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
@@ -5035,5 +5035,7 @@
   ],
   "ijhe_completion_audit_latest_recheck_20261018_external_pump_test_point_status": "TEST_POINTS_EXTRACTED_CONFIGURATION_REVIEW_REQUIRED; promotion false",
   "ijhe_completion_audit_latest_recheck_20261018_nasa_hem_status": "NEGATIVE_BASELINE_VALIDATION_EVIDENCE; promotion false",
-  "ijhe_completion_audit_latest_recheck_20261018_slabx_status": "CLOSED_VALIDATED_COMPONENT; no SLABx-LH2 code or validation change"
+  "ijhe_completion_audit_latest_recheck_20261018_slabx_status": "CLOSED_VALIDATED_COMPONENT; no SLABx-LH2 code or validation change",
+  "ci_recheck_20261018_status": "PASS; GitHub Actions run 1400 completed successfully; no CI failure remains for the current audit refresh",
+  "ci_recheck_20261018_record": "https://github.com/lyullee/prism/actions/runs/39076006253"
 }
