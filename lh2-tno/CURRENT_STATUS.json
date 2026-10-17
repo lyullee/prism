@@ -5512,7 +5512,7 @@
   "current_union_ijhe_objective_coverage_audit_realtime_status": "CONDITIONALLY_COMPLETE; cached_diagnostic_1hz meets benchmark, fresh_physics_background is explicitly not a 1 Hz claim",
   "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified.json",
   "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; core blockers 0; strict blockers 4; reverified PRESLHY evidence included",
-  "latest_ijhe_objective_coverage_audit_check_count": 34,
+  "latest_ijhe_objective_coverage_audit_check_count": 33,
   "latest_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "latest_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
