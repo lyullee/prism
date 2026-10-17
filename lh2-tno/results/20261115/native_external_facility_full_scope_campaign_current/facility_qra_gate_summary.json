@@ -1,0 +1,132 @@
+{
+  "schema_version": "prism.facility_qra_gate_summary.v1",
+  "status": "FACILITY_QRA_WITHHELD",
+  "facility_id": "generic-lh2-full-scope-example",
+  "promotion_allowed": false,
+  "facility_qra_claim": false,
+  "diagnostic_facility_risk_available": true,
+  "gates": {
+    "facility_scope": {
+      "complete": false,
+      "status": "PARTIAL_FACILITY_SCOPE",
+      "event_count": 24,
+      "case_count": 24,
+      "uncomputed_case_count": 11,
+      "blocking_reasons": [
+        "facility scope is partial or retains uncomputed cases"
+      ]
+    },
+    "release_boundary": {
+      "complete": false,
+      "status": "WITHHELD",
+      "withheld_case_count": 11,
+      "blocking_reasons": [
+        "11 case(s) are withheld from the release ledger",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: termination basis model_pressure_equalization is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1: termination basis inventory_over_600s is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary"
+      ]
+    },
+    "provider_qualification": {
+      "complete": false,
+      "status": "NO_QUALIFIED_PROVIDER_EVIDENCE",
+      "qualification_status": "NO_QUALIFIED_PROVIDER_EVIDENCE",
+      "release_identity_count": 26,
+      "exact_match_count": 0,
+      "qualified_provider_packet_count": 0,
+      "blocking_reasons": [
+        "provider qualification coverage is not a full worklist qualification",
+        "provider qualification coverage has unmatched worklist events",
+        "provider qualification coverage has no qualified packets"
+      ]
+    },
+    "physical_validation": {
+      "complete": false,
+      "status": "RESTRICTED_EVIDENCE_MATRIX",
+      "decision": "FACILITY_QRA_WITHHELD",
+      "evidence_domain_count": 7,
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "accident_release_validation_claim": false,
+      "facility_qra_claim": false,
+      "blocking_reasons": [
+        "independent full-chain physical validation is not available"
+      ]
+    },
+    "frequency_port_binding": {
+      "complete": true,
+      "status": "ALIGNED",
+      "port_scoped_event_count": 24,
+      "port_unbound_event_count": 0,
+      "mismatch_count": 0,
+      "frequency_inference_allowed": false,
+      "blocking_reasons": []
+    },
+    "case_traceability": {
+      "complete": false,
+      "status": "CLOSED",
+      "risk_atom_count": 96,
+      "eligible_risk_atom_count": 52,
+      "withheld_risk_atom_count": 44,
+      "unmatched_risk_atom_count": 0,
+      "ambiguous_risk_atom_count": 0,
+      "blocking_reasons": [
+        "44 risk atoms are linked to non-EXECUTED case status"
+      ]
+    }
+  },
+  "blocking_reasons": [
+    "facility_scope: facility scope is partial or retains uncomputed cases",
+    "release_boundary: 11 case(s) are withheld from the release ledger",
+    "release_boundary: generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: termination basis model_pressure_equalization is not a reviewed release boundary",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1: termination basis inventory_over_600s is not a reviewed release boundary",
+    "release_boundary: generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+    "release_boundary: generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+    "release_boundary: generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+    "release_boundary: generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary",
+    "provider_qualification: provider qualification coverage is not a full worklist qualification",
+    "provider_qualification: provider qualification coverage has unmatched worklist events",
+    "provider_qualification: provider qualification coverage has no qualified packets",
+    "physical_validation: independent full-chain physical validation is not available",
+    "case_traceability: 44 risk atoms are linked to non-EXECUTED case status"
+  ],
+  "source_records": {
+    "assessment": "results\\20261115\\native_external_facility_full_scope_campaign_current\\facility_assessment_provider_qualification_current.json",
+    "provider_audit": "results\\20261115\\native_external_facility_full_scope_campaign_current\\provider_qualification_audit.json",
+    "validation_matrix": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix.json"
+  },
+  "policy": {
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "missing_evidence_assigned_zero_risk": false,
+    "diagnostic_ir_fn_may_remain_available": true,
+    "all_gates_required_for_facility_qra": true
+  }
+}

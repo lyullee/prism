@@ -148,6 +148,22 @@ validation. The current matrix is `RESTRICTED_EVIDENCE_MATRIX` with decision
 and keeps qualified facility QRA disabled. A component replay or a passing
 metadata check cannot open this gate.
 
+For a single machine-readable decision across the assessment, provider audit,
+and validation matrix, build the facility gate summary:
+
+```powershell
+python scripts/build_facility_qra_gate_summary.py `
+  --assessment results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json `
+  --provider-audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
+  --validation-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json `
+  --output results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json
+```
+
+The six-gate result is documented in
+[`PRISM_facility_qra_gate_summary_20261115_en.md`](docs/PRISM_facility_qra_gate_summary_20261115_en.md).
+It currently reports `FACILITY_QRA_WITHHELD`; the diagnostic IR/F-N view remains
+visible, and missing evidence is never assigned zero risk.
+
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the
 facility merge plus the merged facility ledger:

@@ -5895,5 +5895,15 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_physical_validation_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json",
   "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_physical_validation_gate_status": "RESTRICTED_EVIDENCE_MATRIX; decision FACILITY_QRA_WITHHELD; physical/full-chain/accident-release/facility-QRA claims false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_physical_validation_gate_complete": false,
-  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_physical_validation_facility_qra_allowed": false
+  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_physical_validation_facility_qra_allowed": false,
+  "facility_qra_gate_summary_implemented": true,
+  "facility_qra_gate_summary_schema": "prism.facility_qra_gate_summary.v1",
+  "facility_qra_gate_summary_module": "src/lh2_tno/facility_qra_gate.py",
+  "facility_qra_gate_summary_script": "scripts/build_facility_qra_gate_summary.py",
+  "facility_qra_gate_summary_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json",
+  "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD; six-gate reconciliation; diagnostic facility risk available; 25 explicit blocking reasons",
+  "facility_qra_gate_summary_promotion_allowed": false,
+  "facility_qra_gate_summary_frequency_port_gate_aligned": true,
+  "facility_qra_gate_summary_provider_qualification_complete": false,
+  "facility_qra_gate_summary_physical_validation_complete": false
 }
