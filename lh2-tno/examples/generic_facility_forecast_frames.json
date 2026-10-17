@@ -1,0 +1,173 @@
+[
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 0.0,
+    "forecast_time_s": 0.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "tank_pressure": {
+        "component_id": "storage-tank-01",
+        "quantity": "pressure",
+        "value_si": 500000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "liquid-transfer-line-01",
+    "operating_mode": "supply",
+    "captured_at_s": 0.0,
+    "forecast_time_s": 0.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "transfer_flow": {
+        "component_id": "liquid-transfer-line-01",
+        "quantity": "mass_flow",
+        "value_si": 0.1,
+        "sensor_location": "liquid-transfer-line-01",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "pressure-relief-vent-01",
+    "operating_mode": "standby",
+    "captured_at_s": 0.0,
+    "forecast_time_s": 0.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "vent_pressure": {
+        "component_id": "pressure-relief-vent-01",
+        "quantity": "pressure",
+        "value_si": 650000.0,
+        "sensor_location": "pressure-relief-vent-01.inlet",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 10.0,
+    "forecast_time_s": 10.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "tank_pressure": {
+        "component_id": "storage-tank-01",
+        "quantity": "pressure",
+        "value_si": 650000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "liquid-transfer-line-01",
+    "operating_mode": "supply",
+    "captured_at_s": 10.0,
+    "forecast_time_s": 10.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "transfer_flow": {
+        "component_id": "liquid-transfer-line-01",
+        "quantity": "mass_flow",
+        "value_si": 0.01,
+        "sensor_location": "liquid-transfer-line-01",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "pressure-relief-vent-01",
+    "operating_mode": "standby",
+    "captured_at_s": 10.0,
+    "forecast_time_s": 10.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "vent_pressure": {
+        "component_id": "pressure-relief-vent-01",
+        "quantity": "pressure",
+        "value_si": 750000.0,
+        "sensor_location": "pressure-relief-vent-01.inlet",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 20.0,
+    "forecast_time_s": 20.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "tank_pressure": {
+        "component_id": "storage-tank-01",
+        "quantity": "pressure",
+        "value_si": 500000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "liquid-transfer-line-01",
+    "operating_mode": "supply",
+    "captured_at_s": 20.0,
+    "forecast_time_s": 20.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "transfer_flow": {
+        "component_id": "liquid-transfer-line-01",
+        "quantity": "mass_flow",
+        "value_si": 0.1,
+        "sensor_location": "liquid-transfer-line-01",
+        "quality": "valid"
+      }
+    }
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "pressure-relief-vent-01",
+    "operating_mode": "standby",
+    "captured_at_s": 20.0,
+    "forecast_time_s": 20.0,
+    "origin": "model_prediction",
+    "source_provenance": "synthetic generic outdoor facility forecast; replace with reviewed process-model export",
+    "values": {
+      "vent_pressure": {
+        "component_id": "pressure-relief-vent-01",
+        "quantity": "pressure",
+        "value_si": 650000.0,
+        "sensor_location": "pressure-relief-vent-01.inlet",
+        "quality": "valid"
+      }
+    }
+  }
+]

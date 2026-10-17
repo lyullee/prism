@@ -6171,5 +6171,18 @@
   "facility_receptor_geometry_contract_latest": "results/20261115/facility_receptor_geometry_current.json",
   "facility_receptor_geometry_contract_schema": "prism.facility_receptor_geometry.v1",
   "facility_receptor_geometry_contract_status": "EXPLICIT_FACILITY_RECEPTOR_GEOMETRY; population set closed for current synthetic annual conditions; diagnostic only",
-  "facility_receptor_geometry_contract_sha256": "ddf1cf2d6f5180652c64c834442ead356073c2081817bc13bb7356b5ded3ba0f"
+  "facility_receptor_geometry_contract_sha256": "ddf1cf2d6f5180652c64c834442ead356073c2081817bc13bb7356b5ded3ba0f",
+  "generic_outdoor_facility_hazop_handoff_latest_record": "results/20261115/generic_outdoor_facility_hazop_quantitative_handoff.json",
+  "generic_outdoor_facility_hazop_handoff_latest_status": "DIAGNOSTIC_HAZOP_TO_QUANTITATIVE_HANDOFF; 3 components, 3 mode-bound triggers, 3 requests withheld pending provider/frequency/SLABx-LH2/facility evidence",
+  "generic_outdoor_facility_hazop_handoff_component_count": 3,
+  "generic_outdoor_facility_hazop_handoff_trigger_count": 3,
+  "generic_outdoor_facility_hazop_handoff_quantitative_request_count": 3,
+  "generic_outdoor_facility_hazop_handoff_withheld_count": 3,
+  "generic_outdoor_facility_hazop_handoff_operating_mode_taken_from_input": true,
+  "generic_outdoor_facility_hazop_handoff_operating_mode_inferred": false,
+  "generic_outdoor_facility_hazop_handoff_frequency_inference_performed": false,
+  "generic_outdoor_facility_hazop_handoff_provider_release_created": false,
+  "generic_outdoor_facility_hazop_handoff_slabx_lh2_calculated": false,
+  "generic_outdoor_facility_hazop_handoff_facility_ir_fn_calculated": false,
+  "generic_outdoor_facility_hazop_handoff_facility_qra_claim": false
 }

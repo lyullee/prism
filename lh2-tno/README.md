@@ -379,6 +379,19 @@ records without inferring frequencies or replacing missing cases with zero.
 The same adapter can be requested in `run_hazop_integrated_risk(...)` with
 `forecast_campaign_bindings=...`.
 
+For a facility-neutral end-to-end handoff example, run
+[`scripts/run_generic_facility_hazop_handoff.py`](scripts/run_generic_facility_hazop_handoff.py)
+with [`examples/generic_facility_forecast_frames.json`](examples/generic_facility_forecast_frames.json)
+and [`examples/generic_facility_hazop_tables.json`](examples/generic_facility_hazop_tables.json).
+The replay covers a storage tank, transfer line, and relief vent on one exact
+forecast grid and keeps `receiving`, `supply`, and `standby` in the input
+frames. It emits one quantitative request when each HAZOP deviation is first
+reached. The requests are deliberately withheld until the provider release,
+literature frequency, SLABx-LH2, and facility-condition evidence contracts are
+supplied; the example does not claim a facility QRA. The complete contract and
+expected diagnostic result are documented in
+[`PRISM_generic_outdoor_facility_hazop_handoff_en.md`](docs/PRISM_generic_outdoor_facility_hazop_handoff_en.md).
+
 ### Importing process-model forecast workbooks
 
 Process-model exports can be converted into the same forecast frames with

@@ -4718,5 +4718,18 @@
   "v060_current_readiness_report_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
   "v060_current_readiness_report_completion_audit_status": "INCOMPLETE_EVIDENCE",
   "v060_current_readiness_report_authoritative_for": "2026-11-15 native full-scope union assessment with vertical, inventory and isolation extensions",
-  "v060_current_readiness_report_sha256": "9d3d86b810098c79efaa806a05f2e07d5c9393d9d67e8a742caa9c007da1151c"
+  "v060_current_readiness_report_sha256": "9d3d86b810098c79efaa806a05f2e07d5c9393d9d67e8a742caa9c007da1151c",
+  "generic_outdoor_facility_hazop_handoff_latest_record": "results/20261115/generic_outdoor_facility_hazop_quantitative_handoff.json",
+  "generic_outdoor_facility_hazop_handoff_latest_status": "DIAGNOSTIC_HAZOP_TO_QUANTITATIVE_HANDOFF; 3 components, 3 mode-bound triggers, 3 requests withheld pending provider/frequency/SLABx-LH2/facility evidence",
+  "generic_outdoor_facility_hazop_handoff_component_count": 3,
+  "generic_outdoor_facility_hazop_handoff_trigger_count": 3,
+  "generic_outdoor_facility_hazop_handoff_quantitative_request_count": 3,
+  "generic_outdoor_facility_hazop_handoff_withheld_count": 3,
+  "generic_outdoor_facility_hazop_handoff_operating_mode_taken_from_input": true,
+  "generic_outdoor_facility_hazop_handoff_operating_mode_inferred": false,
+  "generic_outdoor_facility_hazop_handoff_frequency_inference_performed": false,
+  "generic_outdoor_facility_hazop_handoff_provider_release_created": false,
+  "generic_outdoor_facility_hazop_handoff_slabx_lh2_calculated": false,
+  "generic_outdoor_facility_hazop_handoff_facility_ir_fn_calculated": false,
+  "generic_outdoor_facility_hazop_handoff_facility_qra_claim": false
 }
