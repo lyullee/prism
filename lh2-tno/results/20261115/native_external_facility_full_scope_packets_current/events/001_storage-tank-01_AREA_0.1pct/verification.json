@@ -1,76 +1,35 @@
 {
-  "status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-  "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
-  "provider_result_digest": "ddcdd2065f524292b7eb2aa93631a15662a126f63d71ebeb8796161bdb853148",
-  "provider_run_meta": {
-    "status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED",
-    "available_mass_kg": 0.028492061899609754,
-    "threshold_mass_kg": 0.028392061899609754,
-    "remaining_mass_kg": 0.02839148396988562,
-    "cumulative_mass_out_kg": 0.00010057792972414069,
-    "duration_s": 5.999999999999993e-05,
-    "interval_count": 60,
-    "max_abs_mass_residual_kg": 5.753894810698462e-18,
-    "max_abs_energy_residual_j": 0.00014341542033503157,
-    "termination_basis": "inventory_depletion_positive_threshold",
-    "operator_limited": true,
-    "physical_validation_claim": false
-  },
-  "strict_packet_duration_s": 5.999999999999993e-05,
-  "strict_packet_mass_residual_kg": 1.0842021724855044e-19,
-  "strict_packet_energy_residual_j": 3.1086244689504383e-15,
+  "schema_version": "prism.native_lh2dt_layered_tank_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "f711f513da677f4ffe18e5efd49663adfe201d707135c2cb9b129cc651ad7b1c",
+  "provider_method": "export_accident_history",
   "provider_packet_promoted": false,
-  "state_snapshot": {
-    "schema_version": "prism.equipment_state_snapshot.v1",
-    "component_id": "storage-tank-01",
-    "captured_at_s": 0.0,
-    "origin": "model_prediction",
-    "pressure_pa_abs": 204952.5178434031,
-    "temperature_k": 22.96893651066565,
-    "mass_kg": 0.028492061899609754,
-    "liquid_fraction": null,
-    "phase": "liquid",
-    "position_enu_m": [
-      0.0,
-      0.0,
-      1.0
-    ],
-    "measurements": {
-      "initial_pressure": {
-        "quantity": "pressure",
-        "value_si": 204952.5178434031,
-        "sensor_location": "storage-tank-01.liquid_cell_0",
-        "quality": "valid"
-      },
-      "initial_temperature": {
-        "quantity": "temperature",
-        "value_si": 22.96893651066565,
-        "sensor_location": "storage-tank-01.liquid_cell_0",
-        "quality": "valid"
-      },
-      "initial_mass": {
-        "quantity": "mass",
-        "value_si": 0.028492061899609754,
-        "sensor_location": "storage-tank-01.inventory",
-        "quality": "valid"
-      }
-    },
-    "source_digest": null,
-    "quality": "valid"
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.5,
+  "available_mass_kg": 434.50988152270014,
+  "cumulative_mass_out_kg": 0.740487604819874,
+  "mass_residual_kg": 5.684341886080802e-14,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "READY",
+    "ready": true,
+    "blocking_reasons": [],
+    "state_history_digest": "19ebc04aa37a088d89a48369ee89adee045b2cfdbe0bfa0c93504ef34b153988"
   },
-  "state_snapshot_handoff": {
-    "present": true,
-    "schema_version": "prism.equipment_state_snapshot.v1",
-    "digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-    "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-    "digest_match": true
-  },
+  "distributed_boiling_model": "phase_change_complementarity",
+  "isolation_time_s": 0.3,
+  "post_isolation_observation_s": 0.2,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
   "physical_validation_claim": false,
-  "frequency_inference": false,
+  "frequency_inference_performed": false,
   "facility_qra_claim": false,
   "limitations": [
-    "synthetic LayeredTank geometry, opening and atmospheric boundary",
-    "liquid-port ground interception is explicit; flash and airborne-liquid physics are not supplied",
-    "provider packet remains synthetic_diagnostic and is not a qualified facility release"
+    "synthetic geometry, inventory and atmospheric boundary",
+    "native provider history is diagnostic evidence until independent qualification is supplied",
+    "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
   ]
 }

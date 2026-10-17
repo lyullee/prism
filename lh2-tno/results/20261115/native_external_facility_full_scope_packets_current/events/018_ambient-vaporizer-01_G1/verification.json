@@ -2,7 +2,7 @@
   "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
   "provider_model": "lh2dt.DynamicVaporizer",
   "release_mode": "instantaneous_inventory",
-  "provider_result_digest": "2dbb71e404318d03dfe042c32de49ff5c96a35c28cbf55ec3bb6cde52f4c30ac",
+  "provider_result_digest": "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e",
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "ambient-vaporizer-01",
@@ -14,7 +14,7 @@
     "liquid_fraction": null,
     "phase": "vapour",
     "position_enu_m": [
-      0.0,
+      10.0,
       0.0,
       1.0
     ],
@@ -24,8 +24,8 @@
   },
   "state_snapshot_handoff": {
     "present": true,
-    "digest": "83083729d95584b40872c302715764d3f7180258ecf51890bf21456808db6c31",
-    "provider_echo_digest": "83083729d95584b40872c302715764d3f7180258ecf51890bf21456808db6c31",
+    "digest": "0f0b749d9314a8ca5f7303e7f35802eb2a9114c6295f6043b7ae715f193571e0",
+    "provider_echo_digest": "0f0b749d9314a8ca5f7303e7f35802eb2a9114c6295f6043b7ae715f193571e0",
     "digest_match": true
   },
   "strict_packet_duration_s": 1.6000000000000003,

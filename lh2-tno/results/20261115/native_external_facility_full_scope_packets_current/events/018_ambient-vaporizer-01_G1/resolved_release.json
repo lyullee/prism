@@ -16,11 +16,11 @@
     "energy_reference": "CoolProp-HEOS:Hydrogen:native"
   },
   "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
-  "provider_result_digest": "2dbb71e404318d03dfe042c32de49ff5c96a35c28cbf55ec3bb6cde52f4c30ac",
+  "provider_result_digest": "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e",
   "provider_boundary_reference": "lh2dt.DynamicVaporizer explicit inventory outlet",
   "input_origin": "model_prediction",
   "position_enu_m": [
-    0.0,
+    10.0,
     0.0,
     1.0
   ],

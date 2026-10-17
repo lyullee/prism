@@ -65,6 +65,24 @@ def _event_port(manifest: EquipmentManifest, event: FrequencyEvent) -> str:
     return _port_by_component(manifest, event.model_component_id)
 
 
+def _event_positions(manifest: EquipmentManifest, event: FrequencyEvent) -> list[list[float]]:
+    """Return declared accident-port coordinates without inventing geometry."""
+
+    port_ids = (
+        ["reliquefier-accident-out-1", "reliquefier-accident-out-2"]
+        if event.model_component_id == "reliquefier-01"
+        and event.release.mode == "two_sided_rupture"
+        else [_event_port(manifest, event)]
+    )
+    positions: list[list[float]] = []
+    for port_id in port_ids:
+        port = next((candidate for candidate in manifest.ports if candidate.id == port_id), None)
+        if port is None or port.position_enu_m is None:
+            raise ValueError(f"declared accident port position is missing for {port_id}")
+        positions.append([float(value) for value in port.position_enu_m])
+    return positions
+
+
 def _spec(
     event: FrequencyEvent,
     manifest: EquipmentManifest,
@@ -87,13 +105,35 @@ def _spec(
         "--event-id", event.id,
     ]
     if event.model_component_id == "storage-tank-01":
-        script = "export_lh2dt_layered_tank_prism_packet.py"
-        area = math.pi * float(event.release.hole_diameter_m) ** 2 / 4.0
-        args = [
-            "--time-step-s", "0.05", "--target-release-kg", "0.0001",
-            "--max-intervals", "64", "--full-open-area-m2", repr(area),
-            "--port-id", port, "--nozzle-height-m", "1.0",
-        ]
+        # The native layered-tank solver is used for the qualified small and
+        # medium openings.  A full-bore 1.27 m opening is outside its finite
+        # positive-cell-mass diagnostic envelope, so retain the reviewed
+        # legacy inventory exporter for that declared frequency bin.
+        if float(event.release.hole_diameter_m) >= 1.0:
+            script = "export_lh2dt_layered_tank_prism_packet.py"
+            full_open_area = math.pi * float(event.release.hole_diameter_m) ** 2 / 4.0
+            args = [
+                "--time-step-s", "0.05", "--target-release-kg", "0.0001",
+                "--max-intervals", "64", "--full-open-area-m2", repr(full_open_area),
+                "--port-id", port,
+                "--nozzle-height-m", "1.0",
+            ]
+        else:
+            script = "export_lh2dt_native_layered_tank_prism_packet.py"
+            total_duration = (
+                isolation_time_s + float(post_isolation_observation_s or 0.0)
+                if isolation_time_s is not None else 0.05
+            )
+            args = [
+                "--failure-opening-diameter-m", repr(float(event.release.hole_diameter_m)),
+                "--horizon-s", repr(total_duration), "--time-step-s", "0.01",
+                "--port-id", port, "--nozzle-height-m", "1.0",
+            ]
+            if isolation_time_s is not None:
+                args.extend([
+                    "--isolation-time-s", repr(isolation_time_s),
+                    "--post-isolation-observation-s", repr(float(post_isolation_observation_s)),
+                ])
     elif event.model_component_id == "liquid-transfer-line-01":
         if isolation_time_s is None:
             script = "export_lh2dt_dynamic_pipe_prism_packet.py"
@@ -213,6 +253,8 @@ def _spec(
                 ])
     else:
         raise ValueError(f"no native exporter mapping for {event.model_component_id}")
+    positions = _event_positions(manifest, event)
+    args.extend(["--position-enu-m", *(repr(value) for position in positions for value in position)])
     # Two-sided exporter needs the exact event id but creates its own two endpoint ports.
     if event.model_component_id == "reliquefier-01" and event.release.mode == "two_sided_rupture":
         command = [sys.executable, str(ROOT / "scripts" / script), *common, *args]
@@ -293,6 +335,10 @@ def _retry_commands(spec: dict[str, Any]) -> list[list[str]]:
 
     command = list(spec["command"])
     if spec["component_id"] == "storage-tank-01":
+        # Native LayeredTank packets carry their own reviewed isolation clock
+        # and do not expose the legacy target-release retry controls.
+        if "--target-release-kg" not in command:
+            return []
         # The 1.27 m generic tank is intentionally much larger than the
         # external diagnostic vessel.  Large openings need a micro-step to
         # keep the provider's positive-mass/EOS solve finite.

@@ -1,10 +1,11 @@
 {
   "provider_export_schema": "prism.external_accident_history.v1",
-  "provider_state_snapshot_digest": "ccc8ac0d4ce8f62295a9a5962e75b2a721da63f51b9b5df3655e3dcf2149a51b",
+  "provider_state_snapshot_digest": "9cf7267a45da59138481144b0f04c8a7d19649c625bec8e72cc608dede992b2a",
   "provider_model": "lh2dt.VentStack",
-  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
   "data": {
     "event_kind": "emergency_relief",
+    "source_operator": "equipment_emergency_relief",
     "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
     "component_id": "pressure-relief-vent-01",
     "port_id": "vent-accident-out",
@@ -14,6 +15,9 @@
     "cumulative_static_enthalpy_out_j": 447.1260099855737,
     "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
     "termination_basis": "emergency_relief_discharge",
+    "relief_setpoint_pa": null,
+    "relief_capacity_kg_s": null,
+    "discharge_complete": false,
     "fluid": "Hydrogen",
     "steps": [
       {
@@ -148,7 +152,10 @@
         "temperature_k": 40.0
       },
       "downstream_pressure_pa": 101325.0,
-      "model_class": "lh2dt.VentStack"
+      "model_class": "lh2dt.VentStack",
+      "relief_setpoint_pa": null,
+      "relief_capacity_kg_s": null,
+      "discharge_complete": false
     }
   }
 }

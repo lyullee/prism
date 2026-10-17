@@ -103,7 +103,8 @@ def _annotate_inventory_depletion_response(
 
 
 def _request(*, source_digest: str, component_id: str, opening_diameter_m: float,
-             state_snapshot: EquipmentStateSnapshot, height_m: float, model_class: str,
+             state_snapshot: EquipmentStateSnapshot, height_m: float,
+             position_enu_m: list[float], model_class: str,
              event_id: str | None, port_id: str | None,
              model_revision: str, mode: str, horizon_s: float = 600.0,
              isolation_time_s: float | None = None,
@@ -118,7 +119,7 @@ def _request(*, source_digest: str, component_id: str, opening_diameter_m: float
         "failure_mode": "explicit_atmospheric_outlet_valve",
         "failure_opening_diameter_m": opening_diameter_m,
         "horizon_s": horizon_s,
-        "position_enu_m": [0.0, 0.0, height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
@@ -492,6 +493,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     component_id = args.component_id
     port_id = f"{component_id}.accident-out"
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     state_snapshot = EquipmentStateSnapshot.from_mapping({
         "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
         "component_id": component_id,
@@ -500,7 +506,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.inlet_pressure_pa,
         "temperature_k": args.inlet_temperature_k,
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "source_digest": source_digest,
     })
     if args.termination_mode == "inventory_depletion":
@@ -512,7 +518,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "event_id": args.event_id or f"{component_id}/inventory-depletion",
             "release_mode": "instantaneous_inventory",
             "horizon_s": args.duration_s,
-            "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+            "position_enu_m": position_enu_m,
             "direction_enu": [1.0, 0.0, 0.0],
             "ambient_pressure_pa_abs": 101325.0,
             "ambient_temperature_k": 288.15,
@@ -537,7 +543,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             source_digest=source_digest, component_id=component_id,
             opening_diameter_m=args.opening_diameter_m,
             state_snapshot=state_snapshot,
-            height_m=args.nozzle_height_m, model_class=model_class,
+            height_m=args.nozzle_height_m, position_enu_m=position_enu_m,
+            model_class=model_class,
             model_revision=args.model_revision, mode=args.mode, event_id=args.event_id,
             port_id=args.port_id,
             horizon_s=args.duration_s if args.isolation_time_s is not None else 600.0,
@@ -642,6 +649,10 @@ def main() -> int:
         help="optional zero-flow observation after valve stroke completion",
     )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     parser.add_argument("--component-id", default="dynamic-vaporizer-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
     parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")

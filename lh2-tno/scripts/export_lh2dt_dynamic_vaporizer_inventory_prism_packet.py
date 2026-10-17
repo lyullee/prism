@@ -103,7 +103,7 @@ def _coarsen_steps(steps: list[dict[str, Any]], *, duration_s: float, maximum_st
 
 def _request(*, source_digest: str, component_id: str, event_id: str | None,
              port_id: str | None, mode: str, state_snapshot: EquipmentStateSnapshot,
-             height_m: float, model_class: str, revision: str,
+             height_m: float, position_enu_m: list[float], model_class: str, revision: str,
              failure_opening_diameter_m: float | None = None) -> InventoryReleaseExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return InventoryReleaseExportRequest.from_mapping({
@@ -114,7 +114,7 @@ def _request(*, source_digest: str, component_id: str, event_id: str | None,
         "event_id": event_id or f"{component_id}/{port_id}/{mode}",
         "release_mode": mode,
         "horizon_s": 600.0,
-        "position_enu_m": [0.0, 0.0, height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
@@ -341,6 +341,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
     model_class = "lh2dt.DynamicVaporizer" if args.mode == "vaporizer" else "lh2dt.DynamicReliquefier"
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     state_snapshot = EquipmentStateSnapshot.from_mapping({
         "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
         "component_id": args.component_id,
@@ -349,12 +354,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.inlet_pressure_pa,
         "temperature_k": args.inlet_temperature_k,
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "source_digest": source_digest,
     })
     request = _request(source_digest=source_digest, component_id=args.component_id, event_id=args.event_id,
                        port_id=args.port_id, mode=args.release_mode, state_snapshot=state_snapshot,
-                       height_m=args.nozzle_height_m, model_class=model_class, revision=args.model_revision,
+                       height_m=args.nozzle_height_m, position_enu_m=position_enu_m,
+                       model_class=model_class, revision=args.model_revision,
                        failure_opening_diameter_m=args.failure_opening_diameter_m)
     provider = DynamicGasInventoryProvider(root, mode=args.mode, release_mode=args.release_mode,
         duration_s=args.duration_s, time_step_s=args.time_step_s, fluid_volume_m3=args.fluid_volume_m3,
@@ -425,6 +431,10 @@ def main() -> int:
     parser.add_argument("--discharge-coefficient", type=float, default=0.7)
     parser.add_argument("--stroke-time-s", type=float, default=0.2)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     parser.add_argument("--component-id", default="dynamic-vaporizer-diagnostic")
     parser.add_argument("--event-id", default=None)
     parser.add_argument("--port-id", default=None)

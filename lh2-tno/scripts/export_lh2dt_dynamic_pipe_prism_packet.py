@@ -381,6 +381,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     component_id = args.component_id
     port_id = args.port_id or f"{component_id}.accident-out"
     event_id = args.event_id or f"{component_id}/{port_id}/{args.inner_diameter_m:.12g}m"
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     snapshot = EquipmentStateSnapshot.from_mapping({
         "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
         "component_id": component_id,
@@ -388,7 +393,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "origin": "model_prediction",
         "pressure_pa_abs": args.inlet_pressure_pa,
         "temperature_k": args.inlet_temperature_k,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "measurements": {
             "inlet_pressure": {
                 "quantity": "pressure",
@@ -408,7 +413,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         port_id=port_id,
         event_id=event_id,
         opening_diameter_m=args.inner_diameter_m,
-        position_enu_m=[0.0, 0.0, args.nozzle_height_m],
+        position_enu_m=position_enu_m,
         model_revision=args.model_revision,
         state_snapshot=snapshot,
     )
@@ -492,6 +497,10 @@ def main() -> int:
         help="optional provider inlet isolation time; after this time the pipe inlet is held at its state",
     )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     parser.add_argument("--component-id", default="dynamic-pipe-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
     parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")

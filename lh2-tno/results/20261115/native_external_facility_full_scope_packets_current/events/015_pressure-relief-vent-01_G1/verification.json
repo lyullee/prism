@@ -1,7 +1,7 @@
 {
   "status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
   "provider_model": "lh2dt.VentStack",
-  "provider_result_digest": "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75",
+  "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "pressure-relief-vent-01",
@@ -14,17 +14,17 @@
     "phase": "vapour",
     "position_enu_m": [
       0.0,
-      0.0,
-      2.0
+      3.0,
+      5.0
     ],
     "measurements": {},
-    "source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+    "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
     "quality": "valid"
   },
   "state_snapshot_handoff": {
     "present": true,
-    "digest": "ccc8ac0d4ce8f62295a9a5962e75b2a721da63f51b9b5df3655e3dcf2149a51b",
-    "provider_echo_digest": "ccc8ac0d4ce8f62295a9a5962e75b2a721da63f51b9b5df3655e3dcf2149a51b",
+    "digest": "9cf7267a45da59138481144b0f04c8a7d19649c625bec8e72cc608dede992b2a",
+    "provider_echo_digest": "9cf7267a45da59138481144b0f04c8a7d19649c625bec8e72cc608dede992b2a",
     "digest_match": true
   },
   "strict_packet_duration_s": 0.5,

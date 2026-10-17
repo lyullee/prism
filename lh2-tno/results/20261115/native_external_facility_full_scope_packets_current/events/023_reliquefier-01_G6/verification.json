@@ -1,62 +1,52 @@
 {
-  "schema_version": "prism.native_lh2dt_dynamic_thermal_packet_verification.v1",
-  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.DynamicReliquefier",
   "mode": "reliquefier",
-  "provider_model": "lh2dt.dynamic_reliquefier.DynamicReliquefier",
-  "provider_export_schema": "prism.external_accident_history.v1",
-  "provider_method": "export_accident_history",
-  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
-  "provider_result_digest": "e8ecb092cbafed8f81a05cdc323f8dc5bf0ce4ea2bd4042ce1de56dbde958d51",
-  "provider_packet_promoted": false,
-  "termination_basis": "reviewed_isolation_success",
-  "duration_s": 0.1,
-  "available_mass_kg": 0.0008198175196090351,
-  "cumulative_mass_out_kg": 1.0508063795789736e-06,
-  "provider_mass_residual_kg": 0.0,
-  "dynamic_state_closure": {
-    "declared_by_provider": true,
-    "prism_source_dynamics_status": "READY",
-    "ready": true,
-    "blocking_reasons": [],
-    "state_history_digest": "73da568b6ee1bf757f32382527207200843f95e5a6400debe69b585361621e5e"
-  },
-  "final_mass_kg": 0.0008187667132294561,
-  "state_snapshot_digest_match": true,
-  "native_result_digest": "e8ecb092cbafed8f81a05cdc323f8dc5bf0ce4ea2bd4042ce1de56dbde958d51",
-  "native_provider_result_digest": "71aae6db555ddabc47a8dd949d533cd35862f9161440b980aa8e9c2f5a5a076e",
-  "native_source_trace_completed_in_packet": true,
-  "source_state_completion": {
-    "schema_version": "prism.native_source_state_completion.v1",
-    "status": "COMPLETED_ISENTROPIC_THROAT_FIELDS",
-    "interval_count": 2,
-    "intervals": [
-      {
-        "interval": 0,
-        "time_s": 0.0,
-        "source_entropy_completed": true,
-        "throat_state_completed": true
-      },
-      {
-        "interval": 1,
-        "time_s": 0.05,
-        "source_entropy_completed": true,
-        "throat_state_completed": true
-      }
+  "termination_mode": "synthetic_horizon",
+  "provider_result_digest": "cfb13ec741c6f9db4d33bc9caffe3fb0876ba4737d4121b4edfc96513776cba9",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "reliquefier-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 300.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      13.0,
+      0.0,
+      1.0
     ],
-    "source_pressure_inferred": false,
-    "throat_pressure_inferred": false,
-    "near_field_plane_generated": false,
-    "physical_validation_claim": false,
-    "provider_packet_qualified": false,
-    "facility_qra_claim": false
+    "measurements": {},
+    "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "quality": "valid"
   },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "51befa8bf7a072dcf97cc591dc8fec709455f1dc7cf885442e5cf5962cd89387",
+    "provider_echo_digest": "51befa8bf7a072dcf97cc591dc8fec709455f1dc7cf885442e5cf5962cd89387",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.7,
+  "strict_packet_interval_count": 14,
+  "strict_packet_mass_residual_kg": 8.470329472543003e-22,
+  "strict_packet_energy_residual_j": 3.552713678800501e-15,
+  "provider_packet_promoted": false,
   "physical_validation_claim": false,
-  "frequency_inference_performed": false,
+  "frequency_inference": false,
   "facility_qra_claim": false,
+  "termination_basis": "reviewed_isolation_success",
+  "isolation": {
+    "requested": true,
+    "isolation_time_s": 0.3,
+    "post_isolation_observation_s": 0.2,
+    "provider_isolation_success": true
+  },
   "limitations": [
-    "synthetic finite-volume geometry, thermal boundary, gas state and atmospheric opening",
-    "source entropy and throat thermodynamic fields are completed from the native source pressure/temperature/throat pressure using the same provider property backend",
-    "this deterministic completion is not an independent near-field calculation; high-speed output still requires the separate compressible-plane handoff",
-    "provider packet remains diagnostic and has no field frequency or independent physical validation"
+    "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
+    "isolation command is a diagnostic provider contract, not field isolation reliability",
+    "no site calibration, failure frequency or independent physical validation"
   ]
 }

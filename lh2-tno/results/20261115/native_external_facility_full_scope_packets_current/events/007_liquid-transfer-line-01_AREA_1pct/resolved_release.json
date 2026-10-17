@@ -16,12 +16,12 @@
     "backend": "CoolProp-HEOS",
     "energy_reference": "CoolProp-HEOS:Hydrogen:native"
   },
-  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-  "provider_result_digest": "1f44835da5eff88e625ae2b6f591a2f3084875929c0f74d2eed8433daa440ee7",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "efba22e90663c30f75720d190c181d1142757b2dcaa0d46e4b2dfe187ac701a3",
   "provider_boundary_reference": "lh2dt.DynamicHEMPipe.export_accident_history native outlet",
   "input_origin": "model_prediction",
   "position_enu_m": [
-    0.0,
+    5.0,
     0.0,
     1.0
   ],
@@ -32,10 +32,10 @@
   ],
   "ambient_pressure_pa_abs": 101325.0,
   "ambient_temperature_k": 288.15,
-  "duration_s": 0.3,
+  "duration_s": 0.49999999999999994,
   "available_mass_kg": 0.10622803086219497,
-  "cumulative_mass_out_kg": 0.0004750626227775085,
-  "cumulative_specific_enthalpy_out_j": 38.712591784314554,
+  "cumulative_mass_out_kg": 0.0015054887924872244,
+  "cumulative_specific_enthalpy_out_j": 122.61511726358216,
   "reference_area_m2": 4.908738521234054e-06,
   "reference_area_provenance": "explicit failed pipe opening area",
   "steps": [
@@ -69,21 +69,21 @@
     },
     {
       "time_s": 0.05,
-      "total_mass_flow_kg_s": 0.004314504016878987,
-      "gas_mass_flow_kg_s": 0.0007834299422674263,
-      "ground_liquid_mass_flow_kg_s": 0.0035310740746115612,
+      "total_mass_flow_kg_s": 0.0051763664553037105,
+      "gas_mass_flow_kg_s": 0.0009399273838588642,
+      "ground_liquid_mass_flow_kg_s": 0.004236439071444846,
       "airborne_liquid_mass_flow_kg_s": 0.0,
       "specific_enthalpy_j_kg": 81477.2626987432,
       "gas_pressure_pa_abs": 101325.0,
       "gas_temperature_k": 20.36890353912107,
       "gas_density_kg_m3": 6.763337248037906,
       "gas_effective_area_m2": 4.908738521234054e-06,
-      "gas_velocity_m_s": 23.597675441989296,
+      "gas_velocity_m_s": 28.31153131465113,
       "gas_velocity_origin": "mass_continuity_from_declared_area",
       "provider_port_state": null,
       "droplet_class_outcomes": [
         {
-          "ground_liquid_mass_flow_kg_s": 0.0035310740746115612,
+          "ground_liquid_mass_flow_kg_s": 0.004236439071444846,
           "airborne_liquid_mass_flow_kg_s": 0.0,
           "flight_time_s": 0.0,
           "impact_position_m": [
@@ -97,21 +97,21 @@
     },
     {
       "time_s": 0.1,
-      "total_mass_flow_kg_s": 0.0,
-      "gas_mass_flow_kg_s": 0.0,
-      "ground_liquid_mass_flow_kg_s": 0.0,
+      "total_mass_flow_kg_s": 0.0051659820038419775,
+      "gas_mass_flow_kg_s": 0.0009377843478751717,
+      "ground_liquid_mass_flow_kg_s": 0.0042281976559668056,
       "airborne_liquid_mass_flow_kg_s": 0.0,
-      "specific_enthalpy_j_kg": 81458.63079409586,
-      "gas_pressure_pa_abs": null,
-      "gas_temperature_k": null,
-      "gas_density_kg_m3": null,
-      "gas_effective_area_m2": null,
-      "gas_velocity_m_s": null,
-      "gas_velocity_origin": null,
+      "specific_enthalpy_j_kg": 81454.90333290055,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 6.76501651075083,
+      "gas_effective_area_m2": 4.908738521234054e-06,
+      "gas_velocity_m_s": 28.239969300907397,
+      "gas_velocity_origin": "mass_continuity_from_declared_area",
       "provider_port_state": null,
       "droplet_class_outcomes": [
         {
-          "ground_liquid_mass_flow_kg_s": 0.0,
+          "ground_liquid_mass_flow_kg_s": 0.0042281976559668056,
           "airborne_liquid_mass_flow_kg_s": 0.0,
           "flight_time_s": 0.0,
           "impact_position_m": [
@@ -125,21 +125,21 @@
     },
     {
       "time_s": 0.15000000000000002,
-      "total_mass_flow_kg_s": 0.0,
-      "gas_mass_flow_kg_s": 0.0,
-      "ground_liquid_mass_flow_kg_s": 0.0,
+      "total_mass_flow_kg_s": 0.005155595124696649,
+      "gas_mass_flow_kg_s": 0.0009356415103364685,
+      "ground_liquid_mass_flow_kg_s": 0.00421995361436018,
       "airborne_liquid_mass_flow_kg_s": 0.0,
-      "specific_enthalpy_j_kg": 81458.63079409586,
-      "gas_pressure_pa_abs": null,
-      "gas_temperature_k": null,
-      "gas_density_kg_m3": null,
-      "gas_effective_area_m2": null,
-      "gas_velocity_m_s": null,
-      "gas_velocity_origin": null,
+      "specific_enthalpy_j_kg": 81432.5095108009,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 6.766699197264803,
+      "gas_effective_area_m2": 4.908738521234054e-06,
+      "gas_velocity_m_s": 28.168434527431952,
+      "gas_velocity_origin": "mass_continuity_from_declared_area",
       "provider_port_state": null,
       "droplet_class_outcomes": [
         {
-          "ground_liquid_mass_flow_kg_s": 0.0,
+          "ground_liquid_mass_flow_kg_s": 0.00421995361436018,
           "airborne_liquid_mass_flow_kg_s": 0.0,
           "flight_time_s": 0.0,
           "impact_position_m": [
@@ -153,11 +153,67 @@
     },
     {
       "time_s": 0.2,
+      "total_mass_flow_kg_s": 0.005145205858380284,
+      "gas_mass_flow_kg_s": 0.0009334988820048345,
+      "ground_liquid_mass_flow_kg_s": 0.00421170697637545,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 81410.08128961654,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 6.768385307768571,
+      "gas_effective_area_m2": 4.908738521234054e-06,
+      "gas_velocity_m_s": 28.096927405605282,
+      "gas_velocity_origin": "mass_continuity_from_declared_area",
+      "provider_port_state": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.00421170697637545,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    },
+    {
+      "time_s": 0.25,
+      "total_mass_flow_kg_s": 0.0042798779688506886,
+      "gas_mass_flow_kg_s": 0.0007762874881499842,
+      "ground_liquid_mass_flow_kg_s": 0.0035035904807007045,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 81387.61872747513,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 6.770074842382771,
+      "gas_effective_area_m2": 4.908738521234054e-06,
+      "gas_velocity_m_s": 23.359267387899415,
+      "gas_velocity_origin": "mass_continuity_from_declared_area",
+      "provider_port_state": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.0035035904807007045,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    },
+    {
+      "time_s": 0.3,
       "total_mass_flow_kg_s": 0.0,
       "gas_mass_flow_kg_s": 0.0,
       "ground_liquid_mass_flow_kg_s": 0.0,
       "airborne_liquid_mass_flow_kg_s": 0.0,
-      "specific_enthalpy_j_kg": 81458.63079409586,
+      "specific_enthalpy_j_kg": 81368.87222500517,
       "gas_pressure_pa_abs": null,
       "gas_temperature_k": null,
       "gas_density_kg_m3": null,
@@ -180,12 +236,68 @@
       ]
     },
     {
-      "time_s": 0.25,
+      "time_s": 0.35,
       "total_mass_flow_kg_s": 0.0,
       "gas_mass_flow_kg_s": 0.0,
       "ground_liquid_mass_flow_kg_s": 0.0,
       "airborne_liquid_mass_flow_kg_s": 0.0,
-      "specific_enthalpy_j_kg": 81458.63079409586,
+      "specific_enthalpy_j_kg": 81368.87222500517,
+      "gas_pressure_pa_abs": null,
+      "gas_temperature_k": null,
+      "gas_density_kg_m3": null,
+      "gas_effective_area_m2": null,
+      "gas_velocity_m_s": null,
+      "gas_velocity_origin": null,
+      "provider_port_state": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    },
+    {
+      "time_s": 0.39999999999999997,
+      "total_mass_flow_kg_s": 0.0,
+      "gas_mass_flow_kg_s": 0.0,
+      "ground_liquid_mass_flow_kg_s": 0.0,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 81368.87222500517,
+      "gas_pressure_pa_abs": null,
+      "gas_temperature_k": null,
+      "gas_density_kg_m3": null,
+      "gas_effective_area_m2": null,
+      "gas_velocity_m_s": null,
+      "gas_velocity_origin": null,
+      "provider_port_state": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    },
+    {
+      "time_s": 0.44999999999999996,
+      "total_mass_flow_kg_s": 0.0,
+      "gas_mass_flow_kg_s": 0.0,
+      "ground_liquid_mass_flow_kg_s": 0.0,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 81368.87222500517,
       "gas_pressure_pa_abs": null,
       "gas_temperature_k": null,
       "gas_density_kg_m3": null,
@@ -217,13 +329,24 @@
     "schema_version": "prism.provider_mass_balance.v1",
     "initial_mass_kg": 0.10622803086219497,
     "cumulative_mass_in_kg": null,
-    "cumulative_mass_out_kg": 0.0004750626227775085,
-    "final_mass_kg": 0.10575296823941746,
+    "cumulative_mass_out_kg": 0.0015054887924872244,
+    "final_mass_kg": 0.10472254206970774,
     "reported_residual_mass_kg": 0.0,
     "derived_accounting_residual_kg": 0.0,
-    "isolation_time_s": 0.1,
+    "isolation_time_s": 0.3,
     "post_isolation_observation_s": 0.2,
-    "isolation_success": true
+    "isolation_success": true,
+    "dynamic_state_closure": {
+      "schema_version": "prism.provider_dynamic_state_closure.v1",
+      "inventory_feedback_closed": true,
+      "pressure_feedback_closed": true,
+      "state_history_digest": "e88a04594cf8b55f5d362302d220178673385f9d55c477715f3f3116be899c57",
+      "max_abs_inventory_residual_kg": 1.3877787807814457e-17,
+      "inventory_tolerance_kg": 1.0622803086219498e-10,
+      "max_abs_pressure_residual_pa": 0.0,
+      "pressure_tolerance_pa": 2.4719137283481375e-05,
+      "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+    }
   },
   "failure_opening_diameter_m": 0.0025000000000000005
 }

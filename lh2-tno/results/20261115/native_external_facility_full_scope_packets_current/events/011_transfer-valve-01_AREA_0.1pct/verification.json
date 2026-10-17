@@ -1,7 +1,7 @@
 {
   "status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
   "provider_model": "lh2dt.StrokeLimitedCommandedValve",
-  "provider_result_digest": "bd33e46eb899d151696065a2a1489c7be03e5a1db0a921b5cdbdd0ecd9439c37",
+  "provider_result_digest": "7e29e7aff1519ea3537c14dbfcf2a76fc0722cf78ad8289dbbff00b0a090f956",
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "transfer-valve-01",
@@ -13,24 +13,24 @@
     "liquid_fraction": null,
     "phase": "liquid",
     "position_enu_m": [
+      7.0,
       0.0,
-      0.0,
-      0.5
+      1.0
     ],
     "measurements": {},
-    "source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+    "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
     "quality": "valid"
   },
   "state_snapshot_handoff": {
     "present": true,
-    "digest": "4f073e534078a7609e6934a9664db72ac7cfff7a2e900e91850b28107fa59f1c",
-    "provider_echo_digest": "4f073e534078a7609e6934a9664db72ac7cfff7a2e900e91850b28107fa59f1c",
+    "digest": "faefb2cd5476332064319350dd817b06e460c290611f5876a3cdd4da56cb93c3",
+    "provider_echo_digest": "faefb2cd5476332064319350dd817b06e460c290611f5876a3cdd4da56cb93c3",
     "digest_match": true
   },
-  "strict_packet_duration_s": 0.3,
-  "strict_packet_interval_count": 6,
-  "strict_packet_mass_residual_kg": 0.0,
-  "strict_packet_energy_residual_j": 0.0,
+  "strict_packet_duration_s": 0.49999999999999994,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": 1.0842021724855044e-19,
+  "strict_packet_energy_residual_j": -2.220446049250313e-16,
   "provider_packet_promoted": false,
   "physical_validation_claim": false,
   "frequency_inference": false,
@@ -38,7 +38,7 @@
   "termination_basis": "reviewed_isolation_success",
   "isolation": {
     "requested": true,
-    "isolation_time_s": 0.1,
+    "isolation_time_s": 0.3,
     "post_isolation_observation_s": 0.2,
     "provider_isolation_success": true
   },

@@ -48,7 +48,7 @@ def _save(path: Path, value: object) -> None:
 
 def _request(*, source_digest: str, component_id: str, port_id: str,
              event_id: str, opening_diameter_m: float, state_snapshot: EquipmentStateSnapshot,
-             height_m: float, revision: str) -> AccidentReleaseExportRequest:
+             position_enu_m: list[float], revision: str) -> AccidentReleaseExportRequest:
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
@@ -58,7 +58,7 @@ def _request(*, source_digest: str, component_id: str, port_id: str,
         "failure_mode": "explicit_two_sided_full_bore_rupture",
         "failure_opening_diameter_m": opening_diameter_m,
         "horizon_s": 600.0,
-        "position_enu_m": [0.0, 0.0, height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0 if port_id.endswith("-1") else -1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
@@ -206,6 +206,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
     event_id = args.event_id or f"{args.component_id}/two-sided/{args.opening_diameter_m:.12g}m"
+    positions = (
+        [
+            [float(value) for value in args.position_enu_m[:3]],
+            [float(value) for value in args.position_enu_m[3:]],
+        ]
+        if args.position_enu_m is not None
+        else [[0.0, 0.0, float(args.nozzle_height_m)]] * 2
+    )
     state_snapshot = EquipmentStateSnapshot.from_mapping({
         "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
         "component_id": args.component_id,
@@ -214,7 +222,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.inlet_pressure_pa,
         "temperature_k": args.inlet_temperature_k,
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": positions[0],
         "source_digest": source_digest,
     })
     provider = TwoSidedReliquefierProvider(root, duration_s=args.duration_s, time_step_s=args.time_step_s,
@@ -223,10 +231,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         boundary_temperature_k=args.boundary_temperature_k, maximum_heat_w=args.maximum_heat_w,
         inlet_pressure_pa=args.inlet_pressure_pa, inlet_temperature_k=args.inlet_temperature_k,
         opening_diameter_m=args.opening_diameter_m, discharge_coefficient=args.discharge_coefficient)
-    requests = [_request(source_digest=source_digest, component_id=args.component_id, port_id=port,
-                          event_id=event_id, opening_diameter_m=args.opening_diameter_m,
-                          state_snapshot=state_snapshot, height_m=args.nozzle_height_m,
-                          revision=args.model_revision) for port in ("reliquefier-accident-out-1", "reliquefier-accident-out-2")]
+    requests = [
+        _request(
+            source_digest=source_digest,
+            component_id=args.component_id,
+            port_id=port,
+            event_id=event_id,
+            opening_diameter_m=args.opening_diameter_m,
+            state_snapshot=state_snapshot,
+            position_enu_m=positions[index],
+            revision=args.model_revision,
+        )
+        for index, port in enumerate(
+            ("reliquefier-accident-out-1", "reliquefier-accident-out-2")
+        )
+    ]
     results = [export_equipment_gas_accident_history(provider, request) for request in requests]
     releases = tuple(result.release for result in results)
     available_mass = releases[0].available_mass_kg
@@ -292,6 +311,11 @@ def main() -> int:
     parser.add_argument("--opening-diameter-m", type=float, default=0.025)
     parser.add_argument("--discharge-coefficient", type=float, default=0.7)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=6, default=None,
+        metavar=("X1", "Y1", "Z1", "X2", "Y2", "Z2"),
+        help="absolute ENU positions for rupture endpoints 1 and 2",
+    )
     parser.add_argument("--component-id", default="reliquefier-01")
     parser.add_argument("--event-id", default=None)
     parser.add_argument("--model-revision", default="external-library-dynamic-reliquefier-two-sided-0.1.1")

@@ -4,8 +4,8 @@
   "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
   "provider_export_schema": "prism.external_accident_history.v1",
   "provider_method": "export_accident_history",
-  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-  "provider_result_digest": "786c90a02e6fae8b442aaaf0ee8723b308129c937c1a03265a63d12849274a1c",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
   "provider_packet_promoted": false,
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
@@ -18,7 +18,7 @@
     "liquid_fraction": null,
     "phase": "two_phase",
     "position_enu_m": [
-      0.0,
+      5.0,
       0.0,
       1.0
     ],
@@ -39,24 +39,33 @@
     "source_digest": null,
     "quality": "valid"
   },
-  "state_snapshot_digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
-  "provider_echo_digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
+  "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+  "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
   "state_snapshot_handoff": {
     "present": true,
-    "digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
-    "provider_echo_digest": "4084b84b5be282ee09cf15a6dfb143346a6693e45f483c2927cfbc0fb39e73ad",
+    "digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+    "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
     "digest_match": true
   },
   "phase_basis": "two_phase",
   "source_phase": "twophase",
-  "termination_basis": "reviewed_isolation_success",
-  "duration_s": 0.30000000000000004,
+  "termination_basis": "model_pressure_equalization",
+  "duration_s": 0.24005155145460036,
   "available_mass_kg": 0.10622803086219497,
-  "cumulative_mass_out_kg": 0.04473063270730533,
+  "cumulative_mass_out_kg": 0.06826147353425363,
   "mass_residual_kg": 0.0,
-  "isolation_time_s": 0.1,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "BLOCKED",
+    "ready": false,
+    "blocking_reasons": [
+      "dynamic source requires a reviewed isolation, inventory depletion, or relief termination basis"
+    ],
+    "state_history_digest": "644fac96797de91723b17888f1637b2c9a7ebf9a28e687617757de9bc0c032c6"
+  },
+  "isolation_time_s": 0.3,
   "post_isolation_observation_s": 0.2,
-  "isolation_success": true,
+  "isolation_success": false,
   "state_snapshot_digest_match": true,
   "physical_validation_claim": false,
   "frequency_inference_performed": false,

@@ -12,20 +12,20 @@
     "liquid_fraction": null,
     "phase": "vapour",
     "position_enu_m": [
-      0.0,
+      13.0,
       0.0,
       1.0
     ],
     "measurements": {},
-    "source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+    "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
     "quality": "valid"
   },
   "state_snapshot_handoff": {
     "present": true,
-    "digest": "f97892c044a268ec9f7278ce9f0cf1e594ebacfe2d3ebcb71f520350f930022b",
+    "digest": "51befa8bf7a072dcf97cc591dc8fec709455f1dc7cf885442e5cf5962cd89387",
     "provider_echo_digest": [
-      "f97892c044a268ec9f7278ce9f0cf1e594ebacfe2d3ebcb71f520350f930022b",
-      "f97892c044a268ec9f7278ce9f0cf1e594ebacfe2d3ebcb71f520350f930022b"
+      "51befa8bf7a072dcf97cc591dc8fec709455f1dc7cf885442e5cf5962cd89387",
+      "51befa8bf7a072dcf97cc591dc8fec709455f1dc7cf885442e5cf5962cd89387"
     ],
     "digest_match": true
   },

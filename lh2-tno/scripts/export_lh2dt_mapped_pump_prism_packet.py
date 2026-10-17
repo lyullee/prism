@@ -48,7 +48,8 @@ def _save(path: Path, value: object) -> None:
 
 
 def _request(*, source_digest: str, component_id: str, opening_diameter_m: float,
-             state_snapshot: EquipmentStateSnapshot, height_m: float, model_revision: str,
+             state_snapshot: EquipmentStateSnapshot, height_m: float,
+             position_enu_m: list[float], model_revision: str,
              event_id: str | None, port_id: str | None) -> AccidentReleaseExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return AccidentReleaseExportRequest.from_mapping({
@@ -60,7 +61,7 @@ def _request(*, source_digest: str, component_id: str, opening_diameter_m: float
         "failure_mode": "explicit_pump_downstream_atmospheric_outlet",
         "failure_opening_diameter_m": opening_diameter_m,
         "horizon_s": 600.0,
-        "position_enu_m": [0.0, 0.0, height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
@@ -256,6 +257,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
     component_id = args.component_id
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     state_snapshot = EquipmentStateSnapshot.from_mapping({
         "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
         "component_id": component_id,
@@ -264,14 +270,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.inlet_pressure_pa,
         "temperature_k": args.inlet_temperature_k,
         "phase": "liquid",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "source_digest": source_digest,
     })
     request = _request(
         source_digest=source_digest, component_id=component_id,
         opening_diameter_m=args.opening_diameter_m,
         state_snapshot=state_snapshot,
-        height_m=args.nozzle_height_m, model_revision=args.model_revision,
+        height_m=args.nozzle_height_m, position_enu_m=position_enu_m,
+        model_revision=args.model_revision,
         event_id=args.event_id,
         port_id=args.port_id,
     )
@@ -341,6 +348,10 @@ def main() -> int:
         help="solve the pump discharge pressure so mapped-pump and atmospheric-valve flows match",
     )
     parser.add_argument("--nozzle-height-m", type=float, default=0.5)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     parser.add_argument("--component-id", default="mapped-pump-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
     parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")

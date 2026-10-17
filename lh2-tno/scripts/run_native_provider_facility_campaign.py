@@ -21,6 +21,16 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
+
+def _display_path(path: Path) -> str:
+    """Serialize workspace paths portably instead of embedding host paths."""
+
+    try:
+        value = path.resolve().relative_to(ROOT.resolve())
+    except ValueError:
+        value = path
+    return str(value).replace("\\", "/")
+
 from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest  # noqa: E402
 from lh2_tno.campaign import RiskCampaign  # noqa: E402
 from lh2_tno.contracts import canonical_digest  # noqa: E402
@@ -545,7 +555,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "mass_residual_kg": packet.cumulative_mass_out_kg - packet.integrated_mass_kg,
                 "provider_packet_digest": canonical_digest(packet.model_dump(mode="json")),
                 "provider_result_digest": packet.provider_result_digest,
-                "packet_path": str(args.packets[index]).replace("\\", "/"),
+                "packet_path": _display_path(args.packets[index]),
                 "termination_basis": (
                     "two_sided_rupture"
                     if isinstance(packet, ResolvedGasReleaseSet)

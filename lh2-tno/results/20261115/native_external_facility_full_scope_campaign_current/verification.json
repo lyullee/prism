@@ -41,17 +41,20 @@
   "matched_event_case_chain_closed": true,
   "matched_event_risk_atom_chain_closed": true,
   "matched_event_chain_closed": true,
-  "matched_event_executed_case_count": 7,
+  "matched_event_executed_case_count": 24,
   "matched_event_case_record_count": 24,
   "matched_event_uncomputed_case_count": 0,
-  "matched_event_risk_atom_event_count": 7,
+  "matched_event_failed_case_count": 0,
+  "matched_event_withheld_case_count": 16,
+  "matched_event_risk_atom_event_count": 24,
   "event_count": 24,
   "case_count": 24,
-  "executed_case_count": 7,
+  "executed_case_count": 24,
   "uncomputed_case_count": 0,
-  "operator_limited_case_count": 5,
-  "withheld_case_count": 23,
-  "risk_atom_count": 28,
+  "failed_case_count": 0,
+  "operator_limited_case_count": 16,
+  "withheld_case_count": 16,
+  "risk_atom_count": 96,
   "conditional_diagnostic_facility_risk_available": true,
   "facility_total_risk_available": false,
   "frequency_scenario_count": 3,
@@ -60,13 +63,13 @@
   "facility_qra_claim": false,
   "hazop_event_mode_binding": {
     "status": "EXACT_REVIEWED_BINDING",
-    "path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261112/native_isolation_catalog_facility_chain_hazop_mode/hazop_event_mode_binding.json",
+    "path": "results/20261112/native_isolation_catalog_facility_chain_hazop_mode/hazop_event_mode_binding.json",
     "bound_event_count": 24,
     "unbound_event_count": 0,
     "orphan_binding_count": 0,
     "binding_digest": "c0a22d6b0268dd8c41f7551f97a4263f65c305664b8759dce2f9256db07f1158"
   },
-  "campaign_elapsed_ms": 41909.20960000949,
+  "campaign_elapsed_ms": 812260.7239000208,
   "packet_digests": [
     {
       "component_id": "storage-tank-01",
@@ -91,17 +94,27 @@
       ],
       "failure_opening_diameter_m": 0.012700000000000001,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.05,
-      "available_mass_kg": 0.028492061899609754,
-      "cumulative_mass_out_kg": 0.008166514093845672,
-      "integrated_mass_kg": 0.008166514093845672,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "4adbef690869b9eddacdb501cad065f20a7b9614656c4144503700ba5d2b9bff",
-      "provider_result_digest": "ff9082d0079b51b9569dea616172e4b54c1d81a117b84547119e0af6aef58008",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/000_storage-tank-01_AREA_0.01pct/resolved_release.json",
-      "termination_basis": "inventory_depletion",
-      "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
-      "dynamic_state_closure": null
+      "duration_s": 0.5,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 0.0740612387083407,
+      "integrated_mass_kg": 0.07406123870834073,
+      "mass_residual_kg": -4.163336342344337e-17,
+      "provider_packet_digest": "f897328e59e2a087fabfff3aea07ec005ff6343990e44909c4473355c84b0683",
+      "provider_result_digest": "5863a731614c1a73be2e62a46bf5a5f8fc71e91a04c7ef2d0dda0d6f052c45bc",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/000_storage-tank-01_AREA_0.01pct/resolved_release.json",
+      "termination_basis": "reviewed_isolation_success",
+      "termination_provenance": "LayeredTank native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "497bf85ad0a7e4cc0887fc8e0b80bb2f617a38848fef4f2bd5aa4826b5240340",
+        "max_abs_inventory_residual_kg": 3.410605131648481e-13,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "storage-tank-01",
@@ -126,17 +139,27 @@
       ],
       "failure_opening_diameter_m": 0.040160926284138414,
       "failure_opening_diameters_m": null,
-      "duration_s": 5.999999999999993e-05,
-      "available_mass_kg": 0.028492061899609754,
-      "cumulative_mass_out_kg": 0.00010057792972414069,
-      "integrated_mass_kg": 0.00010057792972414058,
-      "mass_residual_kg": 1.0842021724855044e-19,
-      "provider_packet_digest": "d2c7e7754baa4ffbfe1915ebe203f3e55cfb2c38592480e5ab5d498166e7f636",
-      "provider_result_digest": "ddcdd2065f524292b7eb2aa93631a15662a126f63d71ebeb8796161bdb853148",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/001_storage-tank-01_AREA_0.1pct/resolved_release.json",
-      "termination_basis": "inventory_depletion",
-      "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
-      "dynamic_state_closure": null
+      "duration_s": 0.5,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 0.740487604819874,
+      "integrated_mass_kg": 0.7404876048198742,
+      "mass_residual_kg": -2.220446049250313e-16,
+      "provider_packet_digest": "e8614d8150e6dd836fd0d30f7d45700a42f8b024b40663b9ce4cd68a68ee2a97",
+      "provider_result_digest": "f711f513da677f4ffe18e5efd49663adfe201d707135c2cb9b129cc651ad7b1c",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/001_storage-tank-01_AREA_0.1pct/resolved_release.json",
+      "termination_basis": "reviewed_isolation_success",
+      "termination_provenance": "LayeredTank native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "19ebc04aa37a088d89a48369ee89adee045b2cfdbe0bfa0c93504ef34b153988",
+        "max_abs_inventory_residual_kg": 1.1368683772161603e-13,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "storage-tank-01",
@@ -161,17 +184,27 @@
       ],
       "failure_opening_diameter_m": 0.127,
       "failure_opening_diameters_m": null,
-      "duration_s": 5.999999999999999e-06,
-      "available_mass_kg": 0.028492061899609754,
-      "cumulative_mass_out_kg": 0.00010057966768755135,
-      "integrated_mass_kg": 0.00010057966768755134,
-      "mass_residual_kg": 1.3552527156068805e-20,
-      "provider_packet_digest": "7403088930015905a60d62bae56a01467dc496c85506ff1b5019ecf1fd0fb7a8",
-      "provider_result_digest": "c51997811fae138e6348b88c605bfe0fcfcb1fd481403099cb63245315eb2983",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/002_storage-tank-01_AREA_1pct/resolved_release.json",
-      "termination_basis": "inventory_depletion",
-      "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
-      "dynamic_state_closure": null
+      "duration_s": 0.5,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 7.392533571775642,
+      "integrated_mass_kg": 7.392533571775646,
+      "mass_residual_kg": -3.552713678800501e-15,
+      "provider_packet_digest": "91259eba74d669c432ed1e7970df727fbf024f8a4283d654a7a42391ee327632",
+      "provider_result_digest": "1eaa94922fdc4ac8b42af4a9c54813d325985eaad91615ca8b672fbd636e6ace",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/002_storage-tank-01_AREA_1pct/resolved_release.json",
+      "termination_basis": "reviewed_isolation_success",
+      "termination_provenance": "LayeredTank native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "9e511e4346b6631b2d17f68d24401c82e67106376414f3144c2966948eb71f57",
+        "max_abs_inventory_residual_kg": 1.1368683772161603e-13,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "storage-tank-01",
@@ -196,17 +229,27 @@
       ],
       "failure_opening_diameter_m": 0.4016092628413842,
       "failure_opening_diameters_m": null,
-      "duration_s": 1e-06,
-      "available_mass_kg": 0.028492061899609754,
-      "cumulative_mass_out_kg": 0.00016756351240572947,
-      "integrated_mass_kg": 0.00016756351240572947,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "86d89e69bfc50e697ba7159cf291b4c0ea6b0b194fb9e90e4de94ab47bf8391d",
-      "provider_result_digest": "89b8306b4968aa355e7fbdfadeae53cb261d5859a10c920a7eb0992332fd86b3",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/003_storage-tank-01_AREA_10pct/resolved_release.json",
-      "termination_basis": "inventory_depletion",
-      "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
-      "dynamic_state_closure": null
+      "duration_s": 0.5,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 72.7035039126475,
+      "integrated_mass_kg": 72.70350391264752,
+      "mass_residual_kg": -1.4210854715202004e-14,
+      "provider_packet_digest": "79d94843dd3100395f83b8dc97d4ed5f492062231d3182fbf04ea6dcf3f92e8a",
+      "provider_result_digest": "2be9e9cf952732799314261fe32152fc0186b9a4d94cf79c26e6cede4ba7d7c1",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/003_storage-tank-01_AREA_10pct/resolved_release.json",
+      "termination_basis": "reviewed_isolation_success",
+      "termination_provenance": "LayeredTank native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "b58bc0bc01887e0436db03ccc61ef3855ed4d286c91f03ed13a07e24164ccd91",
+        "max_abs_inventory_residual_kg": 5.684341886080802e-14,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "storage-tank-01",
@@ -236,9 +279,9 @@
       "cumulative_mass_out_kg": 0.0016625666208320196,
       "integrated_mass_kg": 0.0016625666208320196,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "a4690facee2c2d35fbb914dd91dec7c87b69b2116a2a881e4cdc16363f2866a4",
-      "provider_result_digest": "77f0fce14bead315f16567ba441127d9204fc1575e0fe09c353566f58d6a51be",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/004_storage-tank-01_AREA_100pct/resolved_release.json",
+      "provider_packet_digest": "0566ee7e52043a57078c5eeeb62326d394a26cef1c8caccdc2aa6bb1b926bcf5",
+      "provider_result_digest": "f496c26fe539baa1af17f069ec0e5e930f90569d8ac781f38d409914564c5979",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/004_storage-tank-01_AREA_100pct/resolved_release.json",
       "termination_basis": "inventory_depletion",
       "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
       "dynamic_state_closure": null
@@ -253,30 +296,40 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        5.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          5.0,
           0.0,
           1.0
         ]
       ],
       "failure_opening_diameter_m": 0.00025,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
+      "duration_s": 0.49999999999999994,
       "available_mass_kg": 0.10622803086219497,
-      "cumulative_mass_out_kg": 4.7591905520014575e-06,
-      "integrated_mass_kg": 4.7591905520014575e-06,
+      "cumulative_mass_out_kg": 1.5142271983109373e-05,
+      "integrated_mass_kg": 1.5142271983109373e-05,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "2ae55482aec69ca57df0d05e10b732ca5542a5dd167f627f9b637fdddd5fb951",
-      "provider_result_digest": "a638f9d2f9b2c270975e20bb6b35812e1f4e1753e1548d4918a40dc483068407",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json",
+      "provider_packet_digest": "219684ff636b45c010d16330b98c835037b0e2bdba90ae3fb5c14fe417a2db2f",
+      "provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "a838edd9f7f0cf4a90d662116bf1a50bbd0c3b82d5eedde0ed604394d45573ef",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1.0622803086219498e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 2.499718403563069e-05,
+        "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "liquid-transfer-line-01",
@@ -288,30 +341,40 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        5.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          5.0,
           0.0,
           1.0
         ]
       ],
       "failure_opening_diameter_m": 0.0007905694150420948,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
+      "duration_s": 0.49999999999999994,
       "available_mass_kg": 0.10622803086219497,
-      "cumulative_mass_out_kg": 4.758412078620518e-05,
-      "integrated_mass_kg": 4.758412078620518e-05,
+      "cumulative_mass_out_kg": 0.0001513433127012609,
+      "integrated_mass_kg": 0.0001513433127012609,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "7096fd4ab0e6e47dec1e00aa513d4a80c945b1da9cc465a10bfaf03a04e3966a",
-      "provider_result_digest": "9e3d8d63604568b956662dea7ea36cdad2057e294a7fad25d1de2638f254a0ca",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json",
+      "provider_packet_digest": "3213dedb57d2d1adabd8c2308ecfdc831ff9208c126b9d43112e295b416c63a2",
+      "provider_result_digest": "6be9f88022775f524497a9aebcb3532a05732f5a9aebe345e4a6db4294de9641",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "a1ec356883e5a7eac9acc2ab663acb6f97a7ae70369626e391c604ac720e8c39",
+        "max_abs_inventory_residual_kg": 1.3877787807814457e-17,
+        "inventory_tolerance_kg": 1.0622803086219498e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 2.4971846960018953e-05,
+        "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "liquid-transfer-line-01",
@@ -323,30 +386,40 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        5.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          5.0,
           0.0,
           1.0
         ]
       ],
       "failure_opening_diameter_m": 0.0025000000000000005,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
+      "duration_s": 0.49999999999999994,
       "available_mass_kg": 0.10622803086219497,
-      "cumulative_mass_out_kg": 0.0004750626227775085,
-      "integrated_mass_kg": 0.0004750626227775085,
+      "cumulative_mass_out_kg": 0.0015054887924872244,
+      "integrated_mass_kg": 0.0015054887924872244,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "cc9fd8d056528a4668ebeb92aef5aa5bf53d5a5a289116984c8b6cb968a583c3",
-      "provider_result_digest": "1f44835da5eff88e625ae2b6f591a2f3084875929c0f74d2eed8433daa440ee7",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json",
+      "provider_packet_digest": "281adf715f62d109802ca5568f7a6eff9097da69352cca53d85f97ea1ae9a7a9",
+      "provider_result_digest": "efba22e90663c30f75720d190c181d1142757b2dcaa0d46e4b2dfe187ac701a3",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "e88a04594cf8b55f5d362302d220178673385f9d55c477715f3f3116be899c57",
+        "max_abs_inventory_residual_kg": 1.3877787807814457e-17,
+        "inventory_tolerance_kg": 1.0622803086219498e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 2.4719137283481375e-05,
+        "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "liquid-transfer-line-01",
@@ -358,30 +431,40 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        5.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          5.0,
           0.0,
           1.0
         ]
       ],
       "failure_opening_diameter_m": 0.00790569415042095,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
+      "duration_s": 0.49999999999999994,
       "available_mass_kg": 0.10622803086219497,
-      "cumulative_mass_out_kg": 0.004673369291283811,
-      "integrated_mass_kg": 0.004673369291283811,
+      "cumulative_mass_out_kg": 0.014281290905359737,
+      "integrated_mass_kg": 0.014281290905359737,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "3bc671a16cfd770fd40bf8d75a052a1767c17a9c50e0a89a4a8cca830b01c2c4",
-      "provider_result_digest": "1f18394a3d5d7dfa3332aa426bae2b25e4c3f3ec430d9dd740fdb246ee26a821",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json",
+      "provider_packet_digest": "920590c258f1205aa9f44706e354259d11611cd4122ea26f1e8d695f369c000a",
+      "provider_result_digest": "e1a0ee052be9d2e17932952a2f1b01ae48b3aa6be0b136085fa0342ecbff09f0",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "9eaf54caa6e5a02b0a72d63146f77bdfb7c1822eb2e9e6e2397ef5ea23a19ba4",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1.0622803086219498e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 2.2260771379780337e-05,
+        "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "liquid-transfer-line-01",
@@ -393,30 +476,40 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        5.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          5.0,
           0.0,
           1.0
         ]
       ],
       "failure_opening_diameter_m": 0.025,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.30000000000000004,
+      "duration_s": 0.24005155145460036,
       "available_mass_kg": 0.10622803086219497,
-      "cumulative_mass_out_kg": 0.04473063270730533,
-      "integrated_mass_kg": 0.044730632707305325,
-      "mass_residual_kg": 6.938893903907228e-18,
-      "provider_packet_digest": "13580c8f930b59ba19d6a86162958b2247f67f23a726c81d413be0e4ef7c3ff5",
-      "provider_result_digest": "786c90a02e6fae8b442aaaf0ee8723b308129c937c1a03265a63d12849274a1c",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json",
-      "termination_basis": "reviewed_isolation_success",
-      "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": null
+      "cumulative_mass_out_kg": 0.06826147353425363,
+      "integrated_mass_kg": 0.06826147353425362,
+      "mass_residual_kg": 1.3877787807814457e-17,
+      "provider_packet_digest": "0950424f0f2c1fb7dbb868bbfbb92476ed5c154d14a53e6bf7471560a5d3b511",
+      "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json",
+      "termination_basis": "model_pressure_equalization",
+      "termination_provenance": "DynamicHEMPipe native pressure reached the atmospheric boundary and the outlet mass flow fell below the resolved termination threshold",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "644fac96797de91723b17888f1637b2c9a7ebf9a28e687617757de9bc0c032c6",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1.0622803086219498e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.0132499999999832e-05,
+        "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
     },
     {
       "component_id": "transfer-valve-01",
@@ -428,27 +521,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        7.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          7.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.00025,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
-      "available_mass_kg": 1.8985903127889936e-05,
-      "cumulative_mass_out_kg": 1.582158593990828e-05,
-      "integrated_mass_kg": 1.582158593990828e-05,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "6e00987dcd194b80b673af0a860d5ae386b885b5cc86180b4292a87d3f323cf1",
-      "provider_result_digest": "9b837de142516329e65db7c24b7816ecfce3c004982e00376481510260a27297",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json",
+      "duration_s": 0.49999999999999994,
+      "available_mass_kg": 5.695770938366981e-05,
+      "cumulative_mass_out_kg": 4.7464757819724845e-05,
+      "integrated_mass_kg": 4.746475781972484e-05,
+      "mass_residual_kg": 6.776263578034403e-21,
+      "provider_packet_digest": "540f783a605b0be96adac51913e52e6c69e5a91fc7cbfc3673a3221fd6cf9999",
+      "provider_result_digest": "adad11219a7fac005ba8888fb3ae6c9c03822c2abd5faa4a8d5d4eb1f9624541",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
       "dynamic_state_closure": null
@@ -463,27 +556,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        7.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          7.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.0007905694150420948,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
-      "available_mass_kg": 0.0001898590312788994,
-      "cumulative_mass_out_kg": 0.00015821585939908284,
-      "integrated_mass_kg": 0.00015821585939908284,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "77a9b18c19c678ff2244ccada306c8ce7047bbce40569973570748eb9c88d158",
-      "provider_result_digest": "bd33e46eb899d151696065a2a1489c7be03e5a1db0a921b5cdbdd0ecd9439c37",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json",
+      "duration_s": 0.49999999999999994,
+      "available_mass_kg": 0.0005695770938366982,
+      "cumulative_mass_out_kg": 0.00047464757819724857,
+      "integrated_mass_kg": 0.00047464757819724846,
+      "mass_residual_kg": 1.0842021724855044e-19,
+      "provider_packet_digest": "b8100aebac29a2494da8cd54fbca11d26cd591de853121048a18eef3323d57e9",
+      "provider_result_digest": "7e29e7aff1519ea3537c14dbfcf2a76fc0722cf78ad8289dbbff00b0a090f956",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
       "dynamic_state_closure": null
@@ -498,27 +591,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        7.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          7.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.0025000000000000005,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
-      "available_mass_kg": 0.0018985903127889947,
-      "cumulative_mass_out_kg": 0.001582158593990829,
-      "integrated_mass_kg": 0.001582158593990829,
+      "duration_s": 0.49999999999999994,
+      "available_mass_kg": 0.005695770938366984,
+      "cumulative_mass_out_kg": 0.004746475781972487,
+      "integrated_mass_kg": 0.004746475781972487,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "1e507b2e6d884c7293c96f67688c5fd7e9dd984aa491326bb868928804164c9f",
-      "provider_result_digest": "6e6860e162c489f5b81efa43c6881a5cbfe3570fae44b203b4a57af76d4f19ed",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/012_transfer-valve-01_AREA_1pct/resolved_release.json",
+      "provider_packet_digest": "6045f5cc8ab51b93d5101d37156051190247361a83c894fa2545b652b11c2c6c",
+      "provider_result_digest": "5a9b1bb78bb5c069350c1f1ce0e318a7a4ebb8186d13415139a94b7908e70b6e",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/012_transfer-valve-01_AREA_1pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
       "dynamic_state_closure": null
@@ -533,27 +626,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        7.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          7.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.00790569415042095,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
-      "available_mass_kg": 0.018985903127889944,
-      "cumulative_mass_out_kg": 0.015821585939908286,
-      "integrated_mass_kg": 0.015821585939908286,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "b7cf9bba5d07f6560dc629ce69e6cda5996a4a909e85628223e751e7a09deef4",
-      "provider_result_digest": "fffed864878f499c2534d609f61c22f4838ff3aa8f13225582c6505605ad214d",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/013_transfer-valve-01_AREA_10pct/resolved_release.json",
+      "duration_s": 0.49999999999999994,
+      "available_mass_kg": 0.05695770938366983,
+      "cumulative_mass_out_kg": 0.04746475781972486,
+      "integrated_mass_kg": 0.04746475781972485,
+      "mass_residual_kg": 1.3877787807814457e-17,
+      "provider_packet_digest": "24a57ad26940c17182f6af5b88fc741a1f47260eff65511ef2222049017d9139",
+      "provider_result_digest": "349de3d158514b1ecfab6ff631e94161797c72aefa6b8655e2405ce0abf3b3f2",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/013_transfer-valve-01_AREA_10pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
       "dynamic_state_closure": null
@@ -568,27 +661,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        7.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          7.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.025,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.3,
-      "available_mass_kg": 0.1898590312788994,
-      "cumulative_mass_out_kg": 0.15821585939908284,
-      "integrated_mass_kg": 0.15821585939908284,
+      "duration_s": 0.49999999999999994,
+      "available_mass_kg": 0.5695770938366981,
+      "cumulative_mass_out_kg": 0.47464757819724845,
+      "integrated_mass_kg": 0.47464757819724845,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "7cefad8e8d0a60802c2ca55d2ef31d228f0e7b08a1003aef79323ba4130de632",
-      "provider_result_digest": "2c5b0a273281fb9eff50ab0fac1bfa80199817ee82f7752a150087d703c5b653",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/014_transfer-valve-01_AREA_100pct/resolved_release.json",
+      "provider_packet_digest": "c4b5b5cad0e84de67a8b534dc131d315e639bc9f1777ee7e4a7495c8ff2925d5",
+      "provider_result_digest": "28be80a5f895589fb5f3ffa12c0cc385befbad509a705bac34cf3c384ad280f5",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/014_transfer-valve-01_AREA_100pct/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
       "dynamic_state_closure": null
@@ -604,14 +697,14 @@
       "event_kind": "emergency_relief",
       "position_enu_m": [
         0.0,
-        0.0,
-        2.0
+        3.0,
+        5.0
       ],
       "positions_enu_m": [
         [
           0.0,
-          0.0,
-          2.0
+          3.0,
+          5.0
         ]
       ],
       "failure_opening_diameter_m": null,
@@ -621,9 +714,9 @@
       "cumulative_mass_out_kg": 0.0006739291847553497,
       "integrated_mass_kg": 0.0006739291847553497,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "2e272dd2f64ca58763644229492d126a134850dd1e2f0b5a8004ecbc2e95ba89",
-      "provider_result_digest": "b10c82091025c81587785288ff8c5676bf3e23ce85f6fbfdca7db0797085de75",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/015_pressure-relief-vent-01_G1/resolved_release.json",
+      "provider_packet_digest": "c0debd7cdf7a76dce22ba8755ff1f66ee8a9cab7e83bc90293d9993c41b71ba5",
+      "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/015_pressure-relief-vent-01_G1/resolved_release.json",
       "termination_basis": "emergency_relief_discharge",
       "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
       "dynamic_state_closure": null
@@ -638,27 +731,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        6.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          6.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.025,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.30000000000000004,
+      "duration_s": 0.5,
       "available_mass_kg": 1.0,
-      "cumulative_mass_out_kg": 0.0560663237977497,
-      "integrated_mass_kg": 0.0560663237977497,
+      "cumulative_mass_out_kg": 0.16819897139324907,
+      "integrated_mass_kg": 0.16819897139324907,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "549dd0314dd8d8fb160313ab27da02e243de80d49191a73370fef023319bdbe8",
-      "provider_result_digest": "8de252cd6c117e4804f1a42ed8bca42b961c1c0fbf53d3ecace33ce46d758c13",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/016_liquid-transfer-pump-01_G1/resolved_release.json",
+      "provider_packet_digest": "7c7312f625c97813e87a856dfd16819eba0672255723ad9c2adfb03ee78aeaf1",
+      "provider_result_digest": "bb2f9d2b69bee2e61c287134daa3bea1128267dfed1ec5eea382815dd6739c36",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/016_liquid-transfer-pump-01_G1/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval",
       "dynamic_state_closure": null
@@ -673,27 +766,27 @@
       "release_kind": "liquid",
       "event_kind": "accidental_leak",
       "position_enu_m": [
+        6.0,
         0.0,
-        0.0,
-        0.5
+        1.0
       ],
       "positions_enu_m": [
         [
+          6.0,
           0.0,
-          0.0,
-          0.5
+          1.0
         ]
       ],
       "failure_opening_diameter_m": 0.0025000000000000005,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.30000000000000004,
+      "duration_s": 0.5,
       "available_mass_kg": 1.0,
-      "cumulative_mass_out_kg": 0.0005606632379774973,
-      "integrated_mass_kg": 0.0005606632379774973,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "b620ac85321f337954a98505fe118424a4b8dcb379f7b975238a36cd6c903f2b",
-      "provider_result_digest": "8930c89e45b3808486014f79c1da59742e986916b9690ebde5f037a319be4435",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/017_liquid-transfer-pump-01_G2/resolved_release.json",
+      "cumulative_mass_out_kg": 0.0016819897139324917,
+      "integrated_mass_kg": 0.0016819897139324915,
+      "mass_residual_kg": 2.168404344971009e-19,
+      "provider_packet_digest": "725a5291c61973c791b28c7054b018b5f9eede9721a917b98adc5cbe89c70ffe",
+      "provider_result_digest": "f56da7352098b4e13910a123c133d7a865b791086b11ce3e87cf37c98ac1841c",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/017_liquid-transfer-pump-01_G2/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval",
       "dynamic_state_closure": null
@@ -708,13 +801,13 @@
       "release_kind": "gas",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        10.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          10.0,
           0.0,
           1.0
         ]
@@ -726,9 +819,9 @@
       "cumulative_mass_out_kg": 4.956379784841932e-06,
       "integrated_mass_kg": 4.956379784841933e-06,
       "mass_residual_kg": -8.470329472543003e-22,
-      "provider_packet_digest": "4563b781d41d417f919657c12842d67369b5ff89ec87869d616a1dabb0777c3c",
-      "provider_result_digest": "2dbb71e404318d03dfe042c32de49ff5c96a35c28cbf55ec3bb6cde52f4c30ac",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/018_ambient-vaporizer-01_G1/resolved_release.json",
+      "provider_packet_digest": "4993f1cd2d37e4a4618bee7f38771cb193b87a51282846aece187fc2123a45f8",
+      "provider_result_digest": "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/018_ambient-vaporizer-01_G1/resolved_release.json",
       "termination_basis": "inventory_depletion",
       "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume releasable-inventory ledger; atmospheric-pressure equilibrium residual is retained",
       "dynamic_state_closure": null
@@ -743,13 +836,13 @@
       "release_kind": "gas",
       "event_kind": "accidental_leak",
       "position_enu_m": [
-        0.0,
+        10.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          10.0,
           0.0,
           1.0
         ]
@@ -761,9 +854,9 @@
       "cumulative_mass_out_kg": 4.956379784841932e-06,
       "integrated_mass_kg": 4.956379784841932e-06,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "c1b74e6963b9b75eeec0171e0d00b4bad37f9b5389b86ab76df3c56ae4154fec",
-      "provider_result_digest": "b50e60e51d928a7150cd325d2a4e051150c55fad5c860554a03d70dac67cfab4",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/019_ambient-vaporizer-01_G2/resolved_release.json",
+      "provider_packet_digest": "054c3ecf821bee7e7cddf65d2c14c1528e12d715f57db0caafbc1ab3053f2362",
+      "provider_result_digest": "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/019_ambient-vaporizer-01_G2/resolved_release.json",
       "termination_basis": "inventory_over_600s",
       "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
       "dynamic_state_closure": null
@@ -791,27 +884,17 @@
       ],
       "failure_opening_diameter_m": 0.01,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.1,
-      "available_mass_kg": 0.0008198175196090351,
-      "cumulative_mass_out_kg": 1.6812902073263578e-05,
-      "integrated_mass_kg": 1.6812902073263578e-05,
+      "duration_s": 0.7,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.221896865709533e-06,
+      "integrated_mass_kg": 7.221896865709533e-06,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "4d156211017ca4c8f3682c12d4ff297cc176d752a0f8b43f97f5e0c795d935ba",
-      "provider_result_digest": "e27ef59d6e4809f16ac1e348974838427d3577b6c309f9f3b6e27a8314eb523e",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/020_ambient-vaporizer-01_G3/resolved_release.json",
+      "provider_packet_digest": "30379eabd417db916c41a2ae7900ee2648d471e45c939d341b05e4cd9e3a5c4a",
+      "provider_result_digest": "ff86542b92ba142715461fff1807e0b408006b207ace8102dcbd4e8263fffa2b",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/020_ambient-vaporizer-01_G3/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
-      "termination_provenance": "DynamicVaporizer native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": {
-        "schema_version": "prism.provider_dynamic_state_closure.v1",
-        "inventory_feedback_closed": true,
-        "pressure_feedback_closed": true,
-        "state_history_digest": "1a9a48d2ae5d254289b81cf13d993eb3f81d9fd0e4c5a5a04ce7f81059c551fd",
-        "max_abs_inventory_residual_kg": 0.0,
-        "inventory_tolerance_kg": 1e-10,
-        "max_abs_pressure_residual_pa": 0.0,
-        "pressure_tolerance_pa": 1.0150000000000001e-05,
-        "provenance": "DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
-      }
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "dynamic_state_closure": null
     },
     {
       "component_id": "reliquefier-01",
@@ -824,18 +907,18 @@
       "release_kind": "gas",
       "event_kind": "two_sided_rupture",
       "position_enu_m": [
-        0.0,
+        13.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          13.0,
           0.0,
           1.0
         ],
         [
-          0.0,
+          13.5,
           0.0,
           1.0
         ]
@@ -850,9 +933,9 @@
       "cumulative_mass_out_kg": 7.191692033908254e-08,
       "integrated_mass_kg": 7.191692033908256e-08,
       "mass_residual_kg": -1.3234889800848443e-23,
-      "provider_packet_digest": "0db9001a61d3b9f8406c5475b2055214bc04fe2d8cddbbb8b682c77dc193e6bb",
-      "provider_result_digest": "4db10be6b5362f052b3c47300e948a50dc6f9b1b69cff23fc35c529757ab6855",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/021_reliquefier-01_G4/resolved_release_set.json",
+      "provider_packet_digest": "a546c50049c40db1bbb661d67026f7f2fc07b224d1b151d7454c50b5f62b2829",
+      "provider_result_digest": "6961c654f42c9e8c09999bd19afe3111bcaabc635cc71869836b7cd746d2534c",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/021_reliquefier-01_G4/resolved_release_set.json",
       "termination_basis": "two_sided_rupture",
       "termination_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
       "dynamic_state_closure": null
@@ -868,18 +951,18 @@
       "release_kind": "gas",
       "event_kind": "two_sided_rupture",
       "position_enu_m": [
-        0.0,
+        13.0,
         0.0,
         1.0
       ],
       "positions_enu_m": [
         [
-          0.0,
+          13.0,
           0.0,
           1.0
         ],
         [
-          0.0,
+          13.5,
           0.0,
           1.0
         ]
@@ -894,9 +977,9 @@
       "cumulative_mass_out_kg": 7.191692033908254e-08,
       "integrated_mass_kg": 7.191692033908256e-08,
       "mass_residual_kg": -1.3234889800848443e-23,
-      "provider_packet_digest": "eccadc3a3e56383896b566ac2402ec05bab6ed53bed1062c42a39d24fe5f7c82",
-      "provider_result_digest": "9d60cdc0cd1c876b7e054f9982495124e09d760a41f0a2ee72be3e015d76293f",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/022_reliquefier-01_G5/resolved_release_set.json",
+      "provider_packet_digest": "75e10a97aeda383220e5144bca94eeb3417c2de5b1a64e95a554e8ebafc3bd09",
+      "provider_result_digest": "1a8e898b20cf57e3a7767489d4b29acb024f72e0d9fd42c5436c24b3eb3c2e62",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/022_reliquefier-01_G5/resolved_release_set.json",
       "termination_basis": "two_sided_rupture",
       "termination_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
       "dynamic_state_closure": null
@@ -922,29 +1005,19 @@
           1.0
         ]
       ],
-      "failure_opening_diameter_m": 0.0025,
+      "failure_opening_diameter_m": 0.0025000000000000005,
       "failure_opening_diameters_m": null,
-      "duration_s": 0.1,
-      "available_mass_kg": 0.0008198175196090351,
-      "cumulative_mass_out_kg": 1.0508063795789736e-06,
-      "integrated_mass_kg": 1.0508063795789736e-06,
-      "mass_residual_kg": 0.0,
-      "provider_packet_digest": "ec5e4885cc4a3ba57b68ba9eb63f7d4804435996f5151f483127ee8adc9607fa",
-      "provider_result_digest": "e8ecb092cbafed8f81a05cdc323f8dc5bf0ce4ea2bd4042ce1de56dbde958d51",
-      "packet_path": "C:/Users/lyul/Documents/ChatGPT/TNO 위험성 분석 프로젝트/lh2-tno/results/20261115/native_external_facility_full_scope_packets_current/events/023_reliquefier-01_G6/resolved_release.json",
+      "duration_s": 0.7,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 5.131372693670887e-06,
+      "integrated_mass_kg": 5.131372693670886e-06,
+      "mass_residual_kg": 8.470329472543003e-22,
+      "provider_packet_digest": "98e51dc3ebec926332562b399b0b0ba811e3fee17ff5d8cf251e382f148d703b",
+      "provider_result_digest": "cfb13ec741c6f9db4d33bc9caffe3fb0876ba4737d4121b4edfc96513776cba9",
+      "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/023_reliquefier-01_G6/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
-      "termination_provenance": "DynamicReliquefier native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
-      "dynamic_state_closure": {
-        "schema_version": "prism.provider_dynamic_state_closure.v1",
-        "inventory_feedback_closed": true,
-        "pressure_feedback_closed": true,
-        "state_history_digest": "73da568b6ee1bf757f32382527207200843f95e5a6400debe69b585361621e5e",
-        "max_abs_inventory_residual_kg": 0.0,
-        "inventory_tolerance_kg": 1e-10,
-        "max_abs_pressure_residual_pa": 0.0,
-        "pressure_tolerance_pa": 1.0150000000000001e-05,
-        "provenance": "DynamicReliquefier recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
-      }
+      "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
+      "dynamic_state_closure": null
     }
   ],
   "limitations": [

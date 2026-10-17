@@ -208,6 +208,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     component_id = args.component_id
     port_id = args.port_id or f"{component_id}.accident-out"
     event_id = args.event_id or f"{component_id}/{port_id}/{opening_diameter_m:.12g}m"
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     direction = [1.0 / math.sqrt(2.0), 0.0, -1.0 / math.sqrt(2.0)]
     provider_export, provider_meta = _run_provider(
         root,
@@ -226,7 +231,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         temperature_k=float(initial_state["temperature_k"]),
         mass_kg=float(initial_state["mass_kg"]),
         phase="liquid" if initial_state.get("phase") == "liquid" else "unknown",
-        position_enu_m=(0.0, 0.0, float(args.nozzle_height_m)),
+        position_enu_m=tuple(position_enu_m),
         measurements={
             "initial_pressure": {
                 "quantity": "pressure",
@@ -251,7 +256,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         port_id=port_id,
         event_id=event_id,
         opening_diameter_m=opening_diameter_m,
-        position_enu_m=[0.0, 0.0, args.nozzle_height_m],
+        position_enu_m=position_enu_m,
         direction_enu=direction,
         model_revision=args.model_revision,
         state_snapshot=state_snapshot,
@@ -321,6 +326,10 @@ def main() -> int:
         help="Optional event identity to preserve when exporting a worklist item.",
     )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     parser.add_argument("--model-revision", default="external-library-layered-tank-0.1.1")
     args = parser.parse_args()
     try:

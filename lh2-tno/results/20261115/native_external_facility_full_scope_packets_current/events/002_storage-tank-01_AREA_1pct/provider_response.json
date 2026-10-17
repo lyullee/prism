@@ -1,147 +1,1251 @@
 {
   "provider_export_schema": "prism.external_accident_history.v1",
-  "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
-  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-  "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_state_snapshot_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
   "data": {
     "event_kind": "accidental_leak",
     "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
     "component_id": "storage-tank-01",
     "port_id": "tank-accident-out",
-    "duration_s": 5.999999999999999e-06,
-    "available_mass_kg": 0.028492061899609754,
-    "cumulative_mass_out_kg": 0.00010057966768755135,
-    "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
-    "termination_basis": "inventory_depletion",
+    "duration_s": 0.5,
+    "available_mass_kg": 434.50988152270014,
+    "cumulative_mass_out_kg": 7.392533571775642,
+    "cumulative_specific_enthalpy_out_j": 647052.6742632035,
+    "termination_basis": "reviewed_isolation_success",
+    "termination_provenance": "LayeredTank native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
     "upstream_service": "LH2",
     "fluid": "Hydrogen",
-    "phase_basis": "liquid",
+    "phase_basis": "two_phase",
     "reference_area_m2": 0.012667686977437444,
-    "reference_area_provenance": "external LayeredTank commanded-valve full-opening area",
-    "cumulative_specific_enthalpy_out_j": 2.8534446675684877,
-    "droplet_partition_provenance": "provider liquid-port ground interception; no airborne-liquid promotion",
+    "reference_area_provenance": "explicit failed atmospheric opening area",
+    "droplet_partition_provenance": "native LayeredTank outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
     "steps": [
       {
         "time_s": 0.0,
-        "total_mass_flow_kg_s": 16.775098978004962,
-        "gas_mass_flow_kg_s": 0.0,
-        "ground_liquid_mass_flow_kg_s": 16.775098978004962,
+        "total_mass_flow_kg_s": 24.82476586733922,
+        "gas_mass_flow_kg_s": 4.887035976019009,
+        "ground_liquid_mass_flow_kg_s": 19.937729891320213,
         "airborne_liquid_mass_flow_kg_s": 0.0,
-        "specific_enthalpy_j_kg": 28371.660189883205,
+        "specific_enthalpy_j_kg": 87813.15221000186,
         "droplet_class_outcomes": [
           {
-            "ground_liquid_mass_flow_kg_s": 16.775098978004962,
+            "ground_liquid_mass_flow_kg_s": 19.937729891320213,
             "airborne_liquid_mass_flow_kg_s": 0.0,
             "flight_time_s": 0.0,
             "impact_position_m": [
               0.0,
               0.0,
-              0.0
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.31297074282039,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 61.110302880609154,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.01,
+        "total_mass_flow_kg_s": 24.821431278245978,
+        "gas_mass_flow_kg_s": 4.885315201577774,
+        "ground_liquid_mass_flow_kg_s": 19.936116076668203,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87794.02525831119,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.936116076668203,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3142234862110245,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 61.07666530026728,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.02,
+        "total_mass_flow_kg_s": 24.81829929064592,
+        "gas_mass_flow_kg_s": 4.88359275603095,
+        "ground_liquid_mass_flow_kg_s": 19.93470653461497,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87774.14659072738,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.93470653461497,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3155259911558375,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 61.04253920381685,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.03,
+        "total_mass_flow_kg_s": 24.815167499091064,
+        "gas_mass_flow_kg_s": 4.881870829652677,
+        "ground_liquid_mass_flow_kg_s": 19.933296669438388,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87754.27154432374,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.933296669438388,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.316828796159261,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 61.00843077072446,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.04,
+        "total_mass_flow_kg_s": 24.812035902623805,
+        "gas_mass_flow_kg_s": 4.880149421739638,
+        "ground_liquid_mass_flow_kg_s": 19.931886480884167,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87734.40011168458,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.931886480884167,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.318131901746504,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.97433998106697,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.05,
+        "total_mass_flow_kg_s": 24.808904500292766,
+        "gas_mass_flow_kg_s": 4.878428531591037,
+        "ground_liquid_mass_flow_kg_s": 19.930475968701728,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87714.5322854104,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.930475968701728,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.319435308442472,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.940266814978415,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.060000000000000005,
+        "total_mass_flow_kg_s": 24.805773291153496,
+        "gas_mass_flow_kg_s": 4.876708158508441,
+        "ground_liquid_mass_flow_kg_s": 19.929065132645054,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87694.66805811292,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.929065132645054,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.320739016772099,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.906211252644695,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.07,
+        "total_mass_flow_kg_s": 24.802642274248967,
+        "gas_mass_flow_kg_s": 4.874988301792301,
+        "ground_liquid_mass_flow_kg_s": 19.927653972456664,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87674.80742242123,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.927653972456664,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.322043027259951,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.87217327426398,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.08,
+        "total_mass_flow_kg_s": 24.79951144863708,
+        "gas_mass_flow_kg_s": 4.873268960747029,
+        "ground_liquid_mass_flow_kg_s": 19.926242487890054,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87654.95037097599,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.926242487890054,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.323347340430593,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.838152860106455,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.09,
+        "total_mass_flow_kg_s": 24.796380815742367,
+        "gas_mass_flow_kg_s": 4.8715501351433526,
+        "ground_liquid_mass_flow_kg_s": 19.924830680599015,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87635.0968964354,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.924830680599015,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3246519568082045,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.80414999628886,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.09999999999999999,
+        "total_mass_flow_kg_s": 24.79325036883955,
+        "gas_mass_flow_kg_s": 4.869831823151666,
+        "ground_liquid_mass_flow_kg_s": 19.923418545687884,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87615.24699146618,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.923418545687884,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.325956876917164,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.77016464897328,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.10999999999999999,
+        "total_mass_flow_kg_s": 24.790120111015856,
+        "gas_mass_flow_kg_s": 4.868114024872147,
+        "ground_liquid_mass_flow_kg_s": 19.92200608614371,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87595.40064876131,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.92200608614371,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.327262101280896,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.73619680844172,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.11999999999999998,
+        "total_mass_flow_kg_s": 24.78699004090372,
+        "gas_mass_flow_kg_s": 4.866396739530187,
+        "ground_liquid_mass_flow_kg_s": 19.920593301373536,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87575.55786101651,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.920593301373536,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.32856763042339,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.702246454073084,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.12999999999999998,
+        "total_mass_flow_kg_s": 24.783860157463266,
+        "gas_mass_flow_kg_s": 4.864679966417061,
+        "ground_liquid_mass_flow_kg_s": 19.919180191046205,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87555.71862094736,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.919180191046205,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.329873464868103,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.66831356609624,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.13999999999999999,
+        "total_mass_flow_kg_s": 24.780730459718995,
+        "gas_mass_flow_kg_s": 4.862963704837914,
+        "ground_liquid_mass_flow_kg_s": 19.917766754881082,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87535.8829212846,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.917766754881082,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.331179605138247,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.63439812493783,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.15,
+        "total_mass_flow_kg_s": 24.77760094671275,
+        "gas_mass_flow_kg_s": 4.861247954102106,
+        "ground_liquid_mass_flow_kg_s": 19.91635299261064,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87516.05075476663,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.91635299261064,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.332486051757292,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.60050011109687,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.16,
+        "total_mass_flow_kg_s": 24.774471617582524,
+        "gas_mass_flow_kg_s": 4.8595327135332935,
+        "ground_liquid_mass_flow_kg_s": 19.91493890404923,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87496.22211404273,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.91493890404923,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.333792805255342,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.566619505209346,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.17,
+        "total_mass_flow_kg_s": 24.77134247113929,
+        "gas_mass_flow_kg_s": 4.857817982415699,
+        "ground_liquid_mass_flow_kg_s": 19.913524488723592,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87476.3969922003,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.913524488723592,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.335099866134375,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.532756287710896,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.18000000000000002,
+        "total_mass_flow_kg_s": 24.768213506795064,
+        "gas_mass_flow_kg_s": 4.856103760117275,
+        "ground_liquid_mass_flow_kg_s": 19.91210974667779,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87456.57538170503,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.91210974667779,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.336407234938115,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.4989104397035,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.19000000000000003,
+        "total_mass_flow_kg_s": 24.765084723300316,
+        "gas_mass_flow_kg_s": 4.854390045920737,
+        "ground_liquid_mass_flow_kg_s": 19.910694677379578,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87436.75727581704,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.910694677379578,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.337714912158641,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.46508194174232,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.20000000000000004,
+        "total_mass_flow_kg_s": 24.761956119942155,
+        "gas_mass_flow_kg_s": 4.852676839137905,
+        "ground_liquid_mass_flow_kg_s": 19.90927928080425,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87416.94266641873,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.90927928080425,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3390228983796995,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.431270773892564,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.21000000000000005,
+        "total_mass_flow_kg_s": 24.758827695603298,
+        "gas_mass_flow_kg_s": 4.850964139099926,
+        "ground_liquid_mass_flow_kg_s": 19.907863556503372,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87397.1315471617,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.907863556503372,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3403311940690426,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.39747691758887,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.22000000000000006,
+        "total_mass_flow_kg_s": 24.7556994497357,
+        "gas_mass_flow_kg_s": 4.849251945200705,
+        "ground_liquid_mass_flow_kg_s": 19.906447504534995,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87377.32391081219,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.906447504534995,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.341639799753588,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.36370035450411,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.23000000000000007,
+        "total_mass_flow_kg_s": 24.752571381019923,
+        "gas_mass_flow_kg_s": 4.84754025666928,
+        "ground_liquid_mass_flow_kg_s": 19.905031124350643,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87357.51974988233,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.905031124350643,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.342948715977808,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.329941064113626,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.24000000000000007,
+        "total_mass_flow_kg_s": 24.749443488672323,
+        "gas_mass_flow_kg_s": 4.845829072869284,
+        "ground_liquid_mass_flow_kg_s": 19.903614415803037,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87337.71905741103,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.903614415803037,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3442579432521375,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.296199027914504,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.25000000000000006,
+        "total_mass_flow_kg_s": 24.746315771778203,
+        "gas_mass_flow_kg_s": 4.844118393130384,
+        "ground_liquid_mass_flow_kg_s": 19.90219737864782,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87317.92182628131,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.90219737864782,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.345567482098052,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.26247422689743,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.26000000000000006,
+        "total_mass_flow_kg_s": 24.74318822942671,
+        "gas_mass_flow_kg_s": 4.84240821678397,
+        "ground_liquid_mass_flow_kg_s": 19.90078001264274,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87298.12804938697,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.90078001264274,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.346877333037065,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.22876664209588,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.2700000000000001,
+        "total_mass_flow_kg_s": 24.740060860686423,
+        "gas_mass_flow_kg_s": 4.840698543158663,
+        "ground_liquid_mass_flow_kg_s": 19.899362317527764,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87278.33771963784,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.899362317527764,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.3481874965903895,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.19507625453338,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.2800000000000001,
+        "total_mass_flow_kg_s": 24.73693366465248,
+        "gas_mass_flow_kg_s": 4.838989371589316,
+        "ground_liquid_mass_flow_kg_s": 19.897944293063162,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87258.5508299557,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 19.897944293063162,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.349497973279186,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 60.16140304533316,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.2900000000000001,
+        "total_mass_flow_kg_s": 20.611783944555075,
+        "gas_mass_flow_kg_s": 4.031121701005319,
+        "ground_liquid_mass_flow_kg_s": 16.580662243549757,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87238.76737327465,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.580662243549757,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 6.350808763624557,
+        "gas_effective_area_m2": 0.012667686977437444,
+        "gas_velocity_m_s": 50.1071326449989,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.3000000000000001,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661226389,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
             ],
             "droplet_diameter_m": 0.001
           }
         ]
       },
       {
-        "time_s": 1e-06,
-        "total_mass_flow_kg_s": 16.770344592014222,
+        "time_s": 0.3100000000000001,
+        "total_mass_flow_kg_s": 0.0,
         "gas_mass_flow_kg_s": 0.0,
-        "ground_liquid_mass_flow_kg_s": 16.770344592014222,
+        "ground_liquid_mass_flow_kg_s": 0.0,
         "airborne_liquid_mass_flow_kg_s": 0.0,
-        "specific_enthalpy_j_kg": 28370.97023244202,
+        "specific_enthalpy_j_kg": 87222.82661226123,
         "droplet_class_outcomes": [
           {
-            "ground_liquid_mass_flow_kg_s": 16.770344592014222,
+            "ground_liquid_mass_flow_kg_s": 0.0,
             "airborne_liquid_mass_flow_kg_s": 0.0,
             "flight_time_s": 0.0,
             "impact_position_m": [
               0.0,
               0.0,
-              0.0
+              1.0
             ],
             "droplet_diameter_m": 0.001
           }
         ]
       },
       {
-        "time_s": 2e-06,
-        "total_mass_flow_kg_s": 16.765624121529644,
+        "time_s": 0.3200000000000001,
+        "total_mass_flow_kg_s": 0.0,
         "gas_mass_flow_kg_s": 0.0,
-        "ground_liquid_mass_flow_kg_s": 16.765624121529644,
+        "ground_liquid_mass_flow_kg_s": 0.0,
         "airborne_liquid_mass_flow_kg_s": 0.0,
-        "specific_enthalpy_j_kg": 28370.31533007819,
+        "specific_enthalpy_j_kg": 87222.82661225856,
         "droplet_class_outcomes": [
           {
-            "ground_liquid_mass_flow_kg_s": 16.765624121529644,
+            "ground_liquid_mass_flow_kg_s": 0.0,
             "airborne_liquid_mass_flow_kg_s": 0.0,
             "flight_time_s": 0.0,
             "impact_position_m": [
               0.0,
               0.0,
-              0.0
+              1.0
             ],
             "droplet_diameter_m": 0.001
           }
         ]
       },
       {
-        "time_s": 3e-06,
-        "total_mass_flow_kg_s": 16.760908700388164,
+        "time_s": 0.3300000000000001,
+        "total_mass_flow_kg_s": 0.0,
         "gas_mass_flow_kg_s": 0.0,
-        "ground_liquid_mass_flow_kg_s": 16.760908700388164,
+        "ground_liquid_mass_flow_kg_s": 0.0,
         "airborne_liquid_mass_flow_kg_s": 0.0,
-        "specific_enthalpy_j_kg": 28369.660859329313,
+        "specific_enthalpy_j_kg": 87222.8266122559,
         "droplet_class_outcomes": [
           {
-            "ground_liquid_mass_flow_kg_s": 16.760908700388164,
+            "ground_liquid_mass_flow_kg_s": 0.0,
             "airborne_liquid_mass_flow_kg_s": 0.0,
             "flight_time_s": 0.0,
             "impact_position_m": [
               0.0,
               0.0,
-              0.0
+              1.0
             ],
             "droplet_diameter_m": 0.001
           }
         ]
       },
       {
-        "time_s": 4e-06,
-        "total_mass_flow_kg_s": 16.756198320774228,
+        "time_s": 0.34000000000000014,
+        "total_mass_flow_kg_s": 0.0,
         "gas_mass_flow_kg_s": 0.0,
-        "ground_liquid_mass_flow_kg_s": 16.756198320774228,
+        "ground_liquid_mass_flow_kg_s": 0.0,
         "airborne_liquid_mass_flow_kg_s": 0.0,
-        "specific_enthalpy_j_kg": 28369.006819657527,
+        "specific_enthalpy_j_kg": 87222.82661225324,
         "droplet_class_outcomes": [
           {
-            "ground_liquid_mass_flow_kg_s": 16.756198320774228,
+            "ground_liquid_mass_flow_kg_s": 0.0,
             "airborne_liquid_mass_flow_kg_s": 0.0,
             "flight_time_s": 0.0,
             "impact_position_m": [
               0.0,
               0.0,
-              0.0
+              1.0
             ],
             "droplet_diameter_m": 0.001
           }
         ]
       },
       {
-        "time_s": 4.9999999999999996e-06,
-        "total_mass_flow_kg_s": 16.751492974840133,
+        "time_s": 0.35000000000000014,
+        "total_mass_flow_kg_s": 0.0,
         "gas_mass_flow_kg_s": 0.0,
-        "ground_liquid_mass_flow_kg_s": 16.751492974840133,
+        "ground_liquid_mass_flow_kg_s": 0.0,
         "airborne_liquid_mass_flow_kg_s": 0.0,
-        "specific_enthalpy_j_kg": 28368.353210525995,
+        "specific_enthalpy_j_kg": 87222.82661225057,
         "droplet_class_outcomes": [
           {
-            "ground_liquid_mass_flow_kg_s": 16.751492974840133,
+            "ground_liquid_mass_flow_kg_s": 0.0,
             "airborne_liquid_mass_flow_kg_s": 0.0,
             "flight_time_s": 0.0,
             "impact_position_m": [
               0.0,
               0.0,
-              0.0
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.36000000000000015,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661224791,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.37000000000000016,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661224525,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.38000000000000017,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661224258,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.3900000000000002,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661223992,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.4000000000000002,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661223726,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.4100000000000002,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.8266122346,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.4200000000000002,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661223193,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.4300000000000002,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661222927,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.4400000000000002,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.8266122266,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.45000000000000023,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661222394,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.46000000000000024,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661222128,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.47000000000000025,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661221862,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.48000000000000026,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661221595,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.49000000000000027,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 87222.82661221329,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              1.0
             ],
             "droplet_diameter_m": 0.001
           }
@@ -149,8 +1253,34 @@
       }
     ],
     "provider_meta": {
-      "status": "PRECOMPUTED_EXTERNAL_LAYERED_TANK_EXPORT",
-      "source_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      "native_inventory_owner": "LayeredTank",
+      "initial_mass_kg": 434.50988152270014,
+      "final_mass_kg": 427.1173479509245,
+      "residual_mass_kg": 0.0,
+      "maximum_mass_balance_residual_kg": 1.1368683772161603e-13,
+      "initial_pressure_pa_abs": 500000.0,
+      "initial_liquid_volume_fraction": 0.43,
+      "liquid_cell_index": 2,
+      "isolation_time_s": 0.3,
+      "post_isolation_observation_s": 0.2,
+      "isolation_success": true,
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "9e511e4346b6631b2d17f68d24401c82e67106376414f3144c2966948eb71f57",
+        "max_abs_inventory_residual_kg": 1.1368683772161603e-13,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      },
+      "time_step_s": 0.01,
+      "valve": {
+        "area_m2": 0.012667686977437444,
+        "discharge_coefficient": 0.7,
+        "choked_intervals": 30
+      }
     }
   }
 }

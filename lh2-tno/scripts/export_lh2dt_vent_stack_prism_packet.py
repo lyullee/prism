@@ -46,7 +46,7 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def _request(*, source_digest: str, component_id: str, port_id: str | None, event_id: str | None, state_snapshot: EquipmentStateSnapshot, height_m: float, revision: str) -> EmergencyReliefExportRequest:
+def _request(*, source_digest: str, component_id: str, port_id: str | None, event_id: str | None, state_snapshot: EquipmentStateSnapshot, height_m: float, position_enu_m: list[float], revision: str) -> EmergencyReliefExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return EmergencyReliefExportRequest.from_mapping({
         "schema_version": "prism.equipment_emergency_relief_export_request.v1",
@@ -55,7 +55,7 @@ def _request(*, source_digest: str, component_id: str, port_id: str | None, even
         "port_id": port_id,
         "event_id": event_id or f"{component_id}/{port_id}/maximum-relief-discharge",
         "horizon_s": 600.0,
-        "position_enu_m": [0.0, 0.0, height_m],
+        "position_enu_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
         "ambient_temperature_k": 288.15,
@@ -181,6 +181,11 @@ class VentStackAccidentProvider:
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     component_id = args.component_id
     stack = {
         "length_m": args.length_m,
@@ -200,10 +205,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.inlet_pressure_pa,
         "temperature_k": args.inlet_temperature_k,
         "phase": "vapour",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "source_digest": source_digest,
     })
-    request = _request(source_digest=source_digest, component_id=component_id, port_id=args.port_id, event_id=args.event_id, state_snapshot=state_snapshot, height_m=args.nozzle_height_m, revision=args.model_revision)
+    request = _request(source_digest=source_digest, component_id=component_id, port_id=args.port_id, event_id=args.event_id, state_snapshot=state_snapshot, height_m=args.nozzle_height_m, position_enu_m=position_enu_m, revision=args.model_revision)
     provider = VentStackAccidentProvider(
         root,
         duration_s=args.duration_s,
@@ -277,6 +282,10 @@ def main() -> int:
         help="provider explicitly declares that the relief discharge ended",
     )
     parser.add_argument("--nozzle-height-m", type=float, default=2.0)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     parser.add_argument("--component-id", default="vent-stack-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
     parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")

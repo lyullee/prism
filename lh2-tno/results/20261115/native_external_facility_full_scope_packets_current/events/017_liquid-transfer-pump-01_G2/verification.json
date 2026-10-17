@@ -4,23 +4,23 @@
   "provider_model": "lh2dt.pump.MappedPump",
   "provider_export_schema": "prism.external_accident_history.v1",
   "provider_method": "export_accident_history",
-  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-  "provider_result_digest": "8930c89e45b3808486014f79c1da59742e986916b9690ebde5f037a319be4435",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "f56da7352098b4e13910a123c133d7a865b791086b11ce3e87cf37c98ac1841c",
   "provider_packet_promoted": false,
   "phase_basis": "liquid",
   "termination_basis": "reviewed_isolation_success",
   "isolation": {
     "requested": true,
     "isolation_success": true,
-    "isolation_time_s": 0.1,
+    "isolation_time_s": 0.3,
     "post_isolation_observation_s": 0.2,
     "zero_flow_kg_s": 0.0,
     "termination_basis": "reviewed_isolation_success"
   },
-  "duration_s": 0.30000000000000004,
+  "duration_s": 0.5,
   "available_mass_kg": 1.0,
-  "cumulative_mass_out_kg": 0.0005606632379774973,
-  "upstream_reserve_remaining_kg": 0.9994393367620225,
+  "cumulative_mass_out_kg": 0.0016819897139324917,
+  "upstream_reserve_remaining_kg": 0.9983180102860675,
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "liquid-transfer-pump-01",
@@ -32,9 +32,9 @@
     "liquid_fraction": null,
     "phase": "liquid",
     "position_enu_m": [
+      6.0,
       0.0,
-      0.0,
-      0.5
+      1.0
     ],
     "measurements": {
       "upstream_pressure": {
@@ -53,12 +53,12 @@
     "source_digest": null,
     "quality": "valid"
   },
-  "state_snapshot_digest": "dbb35fe8ed351316a3f45c2309410c8f7ad60749f02457da1980980941633535",
-  "provider_echo_digest": "dbb35fe8ed351316a3f45c2309410c8f7ad60749f02457da1980980941633535",
+  "state_snapshot_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+  "provider_echo_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
   "state_snapshot_handoff": {
     "present": true,
-    "digest": "dbb35fe8ed351316a3f45c2309410c8f7ad60749f02457da1980980941633535",
-    "provider_echo_digest": "dbb35fe8ed351316a3f45c2309410c8f7ad60749f02457da1980980941633535",
+    "digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+    "provider_echo_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
     "digest_match": true
   },
   "pump_operating_point": {
@@ -69,7 +69,7 @@
     "cavitation_margin_m": null
   },
   "state_snapshot_digest_match": true,
-  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_mass_residual_kg": 2.168404344971009e-19,
   "physical_validation_claim": false,
   "frequency_inference_performed": false,
   "facility_qra_claim": false,

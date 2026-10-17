@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 import json
+from pathlib import Path
 
+from scripts.build_native_generic_scope_packet_catalog import _event_positions, _spec
+from lh2_tno.equipment_manifest import EquipmentManifest
+from lh2_tno.frequency import FrequencyPlan, generate_events
 from scripts.run_native_provider_facility_campaign import (
     _dynamic_state_closure_dump,
     _facility_frequency_scenarios,
@@ -10,6 +14,29 @@ from scripts.run_native_provider_facility_campaign import (
     _packet_event_match,
     _bind_hazop_event_modes,
 )
+
+
+def test_native_scope_export_spec_carries_declared_single_and_two_sided_positions() -> None:
+    root = Path(__file__).resolve().parents[1]
+    manifest = EquipmentManifest.from_json(root / "examples/generic_lh2_full_scope_manifest.json")
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples/generic_lh2_full_scope_frequency_plan.json").read_text(encoding="utf-8")
+    )
+    events = generate_events(manifest.to_facility(), plan)
+    reliquefier_event = next(
+        event for event in events
+        if event.model_component_id == "reliquefier-01" and event.release.mode == "two_sided_rupture"
+    )
+    assert _event_positions(manifest, reliquefier_event) == [[13.0, 0.0, 1.0], [13.5, 0.0, 1.0]]
+    spec = _spec(
+        reliquefier_event,
+        manifest,
+        root / ".tmp-test-output",
+        root / "external-model",
+        event_index=0,
+    )
+    command = spec["command"]
+    assert command[-6:] == ["13.0", "0.0", "1.0", "13.5", "0.0", "1.0"]
 
 
 def test_multi_equipment_frequency_scenarios_keep_missing_bounds_fixed() -> None:

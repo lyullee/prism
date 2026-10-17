@@ -96,17 +96,22 @@ It contains all 24 reviewed event packets: five storage-tank openings, five
 transfer-line openings, five transfer-valve openings, one relief discharge,
 two pump cases, three vaporizer cases, and three reliquefier cases including
 two-sided rupture sets. Every packet matched a frequency event and received a
-case record. Seven cases executed through the consequence path; the remaining
-17 are retained as explicit failed or withheld records because their declared
-facility port geometry or consequence-domain qualification is not yet
-complete. They are not converted to zero risk.
+case record. After regenerating the packets with the manifest port coordinates,
+all 24 cases executed through the consequence path. The resulting 16
+operator-limited records remain explicit withheld assessments; they are not
+converted to zero risk. Eight cases have a fully closed diagnostic consequence
+chain. The 100% tank opening uses the previously validated inventory-depletion
+packet because both tank solvers lose finite positive pressure at that declared
+full-bore geometry; this fallback is recorded in the catalog audit.
 
 The corresponding `verification.json` therefore reports
 `matched_event_case_record_count=24`,
-`matched_event_executed_case_count=7`,
-`matched_event_failed_case_count=17`, and
+`matched_event_executed_case_count=24`,
+`matched_event_failed_case_count=0`,
+`matched_event_withheld_case_count=16`,
+`conditional_diagnostic_facility_risk_available=true`, and
 `facility_qra_claim=false`. This is a coverage and handoff audit, not a claim
 that the generic facility has a complete annual IR/F-N result. The next
-qualification step is to regenerate the remaining provider packets with the
-manifest port coordinates and then independently validate the consequence
-boundaries before promoting them.
+qualification step is to replace the remaining operator-limited provider
+branches with provider-owned closure evidence and independently validate the
+consequence boundaries before promoting them.

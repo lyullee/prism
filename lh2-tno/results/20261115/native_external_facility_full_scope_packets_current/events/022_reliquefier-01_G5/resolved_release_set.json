@@ -21,12 +21,12 @@
         "backend": "CoolProp-HEOS",
         "energy_reference": "CoolProp-HEOS:Hydrogen:native"
       },
-      "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-      "provider_result_digest": "3efe25b8ead45ff22dcc5d2ebdde6e2d5fc49c275b9c31124e6142dd34754f0b",
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "8c247b5c1f9ddeaaacf1b7e81032118369bac1a2ba1944fadf901ce1eb391a5f",
       "provider_boundary_reference": "lh2dt DynamicReliquefier shared state with two explicit atmospheric outlets",
       "input_origin": "model_prediction",
       "position_enu_m": [
-        0.0,
+        13.0,
         0.0,
         1.0
       ],
@@ -207,12 +207,12 @@
         "backend": "CoolProp-HEOS",
         "energy_reference": "CoolProp-HEOS:Hydrogen:native"
       },
-      "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-      "provider_result_digest": "fa33c6d5fc2b200b7fbb4ba1f4de32e70719d5501854efaf236a0a08ec7f4669",
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "34aff9548a174db1b0bb49d96a2cfcbc4c8bb194caf1947feca4822fe84fe928",
       "provider_boundary_reference": "lh2dt DynamicReliquefier shared state with two explicit atmospheric outlets",
       "input_origin": "model_prediction",
       "position_enu_m": [
-        0.0,
+        13.5,
         0.0,
         1.0
       ],
@@ -380,6 +380,6 @@
   "available_mass_kg": 0.0008238536226639276,
   "cumulative_mass_out_kg": 7.191692033908254e-08,
   "inventory_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
-  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
-  "provider_result_digest": "9d60cdc0cd1c876b7e054f9982495124e09d760a41f0a2ee72be3e015d76293f"
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "1a8e898b20cf57e3a7767489d4b29acb024f72e0d9fd42c5436c24b3eb3c2e62"
 }

@@ -102,6 +102,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     component_id = args.component_id
     port_id = args.port_id
     event_id = args.event_id
+    position_enu_m = (
+        [float(value) for value in args.position_enu_m]
+        if args.position_enu_m is not None
+        else [0.0, 0.0, float(args.nozzle_height_m)]
+    )
     initial_native_state = tank.initialize_saturated(
         args.initial_pressure_pa_abs,
         args.liquid_volume_fraction,
@@ -117,7 +122,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "temperature_k": float(initial_native_liquid.temperature_K),
         "mass_kg": float(tank.total_mass_kg(initial_native_state)),
         "phase": "liquid",
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         "measurements": {
             "initial_pressure": {
                 "quantity": "pressure",
@@ -141,7 +146,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "failure_mode": "explicit_failed_opening",
         "failure_opening_diameter_m": args.failure_opening_diameter_m,
         "horizon_s": args.horizon_s,
-        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "position_enu_m": position_enu_m,
         # Use a horizontal side outlet for the generic outdoor consequence
         # chain.  A downward/vertical outlet requires an explicit provider
         # vertical-handoff packet and is intentionally not inferred here.
@@ -177,7 +182,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "horizon_s": args.horizon_s,
         "time_step_s": args.time_step_s,
         "minimum_step_s": args.minimum_step_s,
-        "impact_position_m": [0.0, 0.0, args.nozzle_height_m],
+        "impact_position_m": position_enu_m,
         "direction_enu": [1.0, 0.0, 0.0],
         "provider_source_digest": source_digest,
         "state_snapshot_digest": snapshot.digest(),
@@ -272,6 +277,10 @@ def main() -> int:
     parser.add_argument("--isolation-time-s", type=float, default=None)
     parser.add_argument("--post-isolation-observation-s", type=float, default=0.0)
     parser.add_argument("--nozzle-height-m", type=float, default=0.5)
+    parser.add_argument(
+        "--position-enu-m", type=float, nargs=3, default=None,
+        help="absolute ENU release position; defaults to the origin with nozzle height",
+    )
     args = parser.parse_args()
     try:
         result = run(args)

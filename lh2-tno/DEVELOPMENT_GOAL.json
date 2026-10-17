@@ -4350,13 +4350,17 @@
   "external_lh2dt_native_facility_campaign_hazop_binding_digest": "c0a22d6b0268dd8c41f7551f97a4263f65c305664b8759dce2f9256db07f1158",
   "external_lh2dt_native_facility_full_scope_packet_record": "results/20261115/native_external_facility_full_scope_packets_current/",
   "external_lh2dt_native_facility_full_scope_campaign_record": "results/20261115/native_external_facility_full_scope_campaign_current/verification.json",
-  "external_lh2dt_native_facility_full_scope_campaign_status": "FULL_SCOPE_PACKET_MATCHED_PARTIAL_CONSEQUENCE; 24/24 events matched and case-recorded, 7 executed, 17 failed/withheld by explicit geometry or consequence-domain limitations; facility-wide QRA promotion withheld",
+  "external_lh2dt_native_facility_full_scope_campaign_status": "FULL_SCOPE_PACKET_MATCHED_AND_EXECUTED_PARTIAL_CONSEQUENCE; 24/24 events matched and executed through the consequence path, 16 operator-limited assessments explicitly withheld; conditional diagnostic facility risk is available, while facility-wide QRA promotion remains withheld",
   "external_lh2dt_native_facility_full_scope_packet_count": 24,
   "external_lh2dt_native_facility_full_scope_case_record_count": 24,
-  "external_lh2dt_native_facility_full_scope_executed_case_count": 7,
-  "external_lh2dt_native_facility_full_scope_failed_case_count": 17,
-  "external_lh2dt_native_facility_full_scope_risk_atom_count": 28,
+  "external_lh2dt_native_facility_full_scope_executed_case_count": 24,
+  "external_lh2dt_native_facility_full_scope_failed_case_count": 0,
+  "external_lh2dt_native_facility_full_scope_risk_atom_count": 96,
   "external_lh2dt_native_facility_full_scope_facility_qra_claim": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_claim": false,
-  "external_lh2dt_native_facility_full_scope_physical_validation_claim": false
+  "external_lh2dt_native_facility_full_scope_physical_validation_claim": false,
+  "external_lh2dt_native_facility_full_scope_withheld_assessment_count": 16,
+  "external_lh2dt_native_facility_full_scope_campaign_elapsed_ms": 812260.7239000208,
+  "external_lh2dt_native_facility_full_scope_operator_limited_case_count": 16,
+  "external_lh2dt_native_facility_full_scope_conditional_diagnostic_facility_risk_available": true
 }
