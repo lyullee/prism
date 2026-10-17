@@ -162,6 +162,22 @@ families retain only their published rate and are therefore shown as
 `PUBLISHED_RATE_ONLY`. That distinction is preserved in the uncertainty
 ledger rather than filled by sensor data or an inferred distribution.
 
+### New external-base recheck
+
+A newer external-base replay was compared with the authoritative 34-event,
+44-case union. It produced 23 `EXECUTED` and 21
+`EXECUTED_OPERATOR_LIMITED` cases, compared with 15 and 29 in the
+authoritative union, and identified nine possible reclassification candidates.
+The replay remains diagnostic-only because its provider result/source digests
+and base state-snapshot qualification do not match the authoritative release
+ledger. It therefore does not replace the union, assign frequency, or open
+facility QRA. The comparison and reproducible command are recorded in
+[`PRISM_native_external_base_recheck_20261018.md`](PRISM_native_external_base_recheck_20261018.md).
+
+The external workspace recheck found no new qualification or independent
+release-to-damage evidence. Its counts and promotion boundary are recorded in
+[`PRISM_external_evidence_recheck_20261018.md`](PRISM_external_evidence_recheck_20261018.md).
+
 ## Completion criteria
 
 The audit uses the following five criteria:
@@ -188,13 +204,13 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore confirms numerical-gate consistency; it does not mean that
 independent physical validation or facility QRA is complete.
 
-The current objective ledger contains 37 checks after reconciling the latest completion audit and
+The current objective ledger contains 38 checks after reconciling the latest completion audit and
 independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.
 The external-release inventory remains a separate optional diagnostic row when it is not embedded
 in the completion audit.
 
 The verifier now also binds the latest union facility scope matrix and release-boundary
-case audit. It cross-checks the 44-case count and the 13 eligible/31 blocked release
+case audit. It cross-checks the 44-case count and the 15 eligible/29 blocked release
 split against `CURRENT_STATUS.json`, requires the declared scope matrix and audit
 schemas, and keeps facility IR/F-N, provider qualification, and physical-validation
 claims false. This prevents a stale scope or release ledger from being mistaken for
