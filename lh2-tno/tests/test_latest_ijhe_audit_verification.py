@@ -197,6 +197,14 @@ def _native_clean_full_scope_isolation_replay() -> dict:
             "source_tree_sha256": "b" * 64,
         },
         "adapter": {"transfer_valve_isolation_success_event_count": 5},
+        "facility_risk_summary": {
+            "sha256": "c" * 64,
+            "conditional_diagnostic_facility_risk_available": True,
+            "facility_total_risk_available": False,
+            "scenario_count": 3,
+            "receptor_count": 1,
+            "frequency_reallocation_performed": False,
+        },
         "packet_catalog": {
             "event_count": 24,
             "exact_native_packet_count": 24,
@@ -249,6 +257,9 @@ def test_latest_ijhe_audit_verification_binds_clean_isolation_replay(tmp_path: P
         "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
         "external_lh2dt_native_clean_full_scope_isolation_replay_record": "isolation_scope.json",
         "external_lh2dt_native_clean_full_scope_isolation_replay_source_digest": "b" * 64,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_sha256": "c" * 64,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_scenario_count": 3,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count": 1,
         "external_lh2dt_native_clean_full_scope_isolation_replay_packet_count": 24,
         "external_lh2dt_native_clean_full_scope_isolation_replay_executed_case_count": 24,
         "external_lh2dt_native_clean_full_scope_isolation_replay_uncomputed_case_count": 0,
@@ -260,6 +271,7 @@ def test_latest_ijhe_audit_verification_binds_clean_isolation_replay(tmp_path: P
     result = verify_latest_ijhe_audit(status, root=tmp_path)
     assert result["status"] == "PASS"
     assert result["native_external_clean_full_scope_isolation_replay_valid"] is True
+    assert result["native_external_clean_full_scope_isolation_replay_facility_risk_summary_valid"] is True
     assert result["native_external_clean_full_scope_isolation_replay_packet_count"] == 24
 
 

@@ -71,5 +71,14 @@
     "facility-wide IR/F-N and facility QRA promotion remain false",
     "literature frequencies are used as supplied; no sensor frequency inference was performed",
     "the excluded receiving boundary remains outside the accident equipment scope"
-  ]
+  ],
+  "facility_risk_summary": {
+    "path": "results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_risk_summary.json",
+    "sha256": "10fd5bbbe5dd1aa497d65ffad9fabf3ce04237798889edba49c967f75d4f0ace",
+    "conditional_diagnostic_facility_risk_available": true,
+    "facility_total_risk_available": false,
+    "scenario_count": 3,
+    "receptor_count": 1,
+    "frequency_reallocation_performed": false
+  }
 }

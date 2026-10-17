@@ -55,6 +55,16 @@ evidence is recorded in:
 - [`clean_source_isolation_replay_summary.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/clean_source_isolation_replay_summary.json)
 - [`packet_catalog_verification.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/packet_catalog_verification.json)
 - [`facility_campaign_verification.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_campaign_verification.json)
+- [`facility_risk_summary.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_risk_summary.json)
+
+The risk summary preserves the actual conditional facility connection: one
+synthetic outdoor receptor, three literature-frequency scenarios, explicit
+weather/population and ignition cross-products, component ranking, release
+termination/inventory ledger, and a conditional annual IR/F-N curve. In the
+recorded synthetic condition the worker receptor's diagnostic annual IR is
+`3.37e-6` at both uncertainty endpoints and the F-N diagnostic curve is
+available at the `N >= 1` threshold. These values are screening outputs from
+the declared atoms, not a qualified facility-wide annual risk claim.
 
 The follow-up remains diagnostic: provider qualification is zero, independent
 physical validation is absent, literature frequency inference was not

@@ -157,6 +157,12 @@ replay executed 24/24 cases with 0 uncomputed, 0 failed, and 96 diagnostic risk
 atoms in about 388.3 s offline. This is a provider termination check for
 synthetic inputs; it does not establish field isolation reliability, provider
 qualification, physical validation, facility IR/F-N, or facility QRA.
+The companion `facility_risk_summary.json` retains the connected conditional
+IR/F-N result, three literature-frequency scenarios, explicit weather,
+population, release-termination and ignition branch accounting, and the
+component ranking. For the recorded synthetic condition, the worker receptor
+diagnostic annual IR is `3.37e-6`; the value remains conditional and does not
+open the facility-QRA gate.
 
 To apply the audit gate to a saved facility assessment without rerunning
 physics, use:

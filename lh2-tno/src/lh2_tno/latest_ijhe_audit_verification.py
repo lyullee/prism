@@ -548,6 +548,7 @@ def verify_latest_ijhe_audit(
         packet_catalog = isolation_scope_value.get("packet_catalog")
         campaign = isolation_scope_value.get("facility_campaign")
         adapter = isolation_scope_value.get("adapter")
+        facility_risk_summary = isolation_scope_value.get("facility_risk_summary")
         isolation_scope_valid = (
             isolation_scope_value.get("schema_version")
             == "prism.native_external_facility_full_scope_clean_source_isolation_replay.v1"
@@ -562,6 +563,14 @@ def verify_latest_ijhe_audit(
             and len(source.get("source_tree_sha256")) == 64
             and isinstance(adapter, Mapping)
             and adapter.get("transfer_valve_isolation_success_event_count") == 5
+            and isinstance(facility_risk_summary, Mapping)
+            and isinstance(facility_risk_summary.get("sha256"), str)
+            and len(facility_risk_summary.get("sha256")) == 64
+            and facility_risk_summary.get("conditional_diagnostic_facility_risk_available") is True
+            and facility_risk_summary.get("facility_total_risk_available") is False
+            and facility_risk_summary.get("scenario_count") == 3
+            and facility_risk_summary.get("receptor_count") == 1
+            and facility_risk_summary.get("frequency_reallocation_performed") is False
             and isinstance(packet_catalog, Mapping)
             and packet_catalog.get("event_count") == 24
             and packet_catalog.get("exact_native_packet_count") == 24
@@ -619,6 +628,18 @@ def verify_latest_ijhe_audit(
             (
                 "external_lh2dt_native_clean_full_scope_isolation_replay_facility_qra_claim",
                 campaign.get("facility_qra_claim") if isinstance(campaign, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_sha256",
+                facility_risk_summary.get("sha256") if isinstance(facility_risk_summary, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_scenario_count",
+                facility_risk_summary.get("scenario_count") if isinstance(facility_risk_summary, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count",
+                facility_risk_summary.get("receptor_count") if isinstance(facility_risk_summary, Mapping) else None,
             ),
         ):
             expected = status.get(status_key)
@@ -790,6 +811,13 @@ def verify_latest_ijhe_audit(
         "native_external_clean_full_scope_isolation_replay_risk_atom_count": (
             isolation_scope_value.get("facility_campaign", {}).get("risk_atom_count")
             if isinstance(isolation_scope_value.get("facility_campaign"), Mapping)
+            else None
+        ),
+        "native_external_clean_full_scope_isolation_replay_facility_risk_summary_valid": (
+            isinstance(isolation_scope_value.get("facility_risk_summary"), Mapping)
+            and isolation_scope_value.get("facility_risk_summary", {}).get("conditional_diagnostic_facility_risk_available") is True
+            and isolation_scope_value.get("facility_risk_summary", {}).get("facility_total_risk_available") is False
+            if isolation_scope_pointer is not None or native_external_clean_full_scope_isolation_replay is not None
             else None
         ),
         "blocking_reasons": reasons,
