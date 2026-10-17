@@ -79,6 +79,7 @@ def build_ijhe_objective_coverage_audit(
     external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_provider_intake_audit: Mapping[str, Any] | None = None,
     header_bound_facility_bridge: Mapping[str, Any] | None = None,
+    generic_diagnostic_quantitative_evaluation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -142,6 +143,9 @@ def build_ijhe_objective_coverage_audit(
     )
     header_bound_facility_bridge_path = _record_path(
         header_bound_facility_bridge, None
+    )
+    generic_diagnostic_quantitative_evaluation_path = _record_path(
+        generic_diagnostic_quantitative_evaluation, None
     )
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
@@ -2689,6 +2693,84 @@ def build_ijhe_objective_coverage_audit(
                 "실제 모니터링 입력과 명시적 운전 모드에서 HAZOP를 거쳐 각 설비 branch를 개별 실행한 "
                 "진단 경로다. 모델 예측/운영자 제한 packet과 synthetic receptor를 사용하므로 "
                 "시설 QRA·독립 물리검증·빈도 학습으로 승격하지 않는다."
+            ),
+        ))
+
+    # The generic facility handoff now exposes the exact attached provider and
+    # consequence result for current and forecast requests.  This remains a
+    # diagnostic row: it does not turn attached evidence into fresh physics or
+    # a qualified facility total.
+    generic_current_eval = (
+        generic_diagnostic_quantitative_evaluation.get("current_diagnostic_evaluation", {})
+        if isinstance(generic_diagnostic_quantitative_evaluation, Mapping)
+        else {}
+    )
+    generic_forecast_eval = (
+        generic_diagnostic_quantitative_evaluation.get("forecast_diagnostic_evaluation", {})
+        if isinstance(generic_diagnostic_quantitative_evaluation, Mapping)
+        else {}
+    )
+    if not isinstance(generic_current_eval, Mapping):
+        generic_current_eval = {}
+    if not isinstance(generic_forecast_eval, Mapping):
+        generic_forecast_eval = {}
+    generic_current_summary = generic_current_eval.get("summary", {})
+    generic_forecast_summary = generic_forecast_eval.get("summary", {})
+    if not isinstance(generic_current_summary, Mapping):
+        generic_current_summary = {}
+    if not isinstance(generic_forecast_summary, Mapping):
+        generic_forecast_summary = {}
+    generic_policy = (
+        generic_diagnostic_quantitative_evaluation.get("policy", {})
+        if isinstance(generic_diagnostic_quantitative_evaluation, Mapping)
+        else {}
+    )
+    if not isinstance(generic_policy, Mapping):
+        generic_policy = {}
+    generic_diag_ok = (
+        isinstance(generic_diagnostic_quantitative_evaluation, Mapping)
+        and generic_diagnostic_quantitative_evaluation.get("schema_version")
+        == "prism.generic_outdoor_facility_hazop_handoff.v1"
+        and generic_current_eval.get("status") == "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE"
+        and generic_forecast_eval.get("status") == "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE"
+        and generic_current_summary.get("request_count") == generic_current_summary.get("diagnostic_chain_attached_count")
+        and generic_forecast_summary.get("request_count") == generic_forecast_summary.get("diagnostic_chain_attached_count")
+        and isinstance(generic_current_summary.get("request_count"), int)
+        and generic_current_summary.get("request_count", 0) > 0
+        and isinstance(generic_forecast_summary.get("request_count"), int)
+        and generic_forecast_summary.get("request_count", 0) > 0
+        and generic_policy.get("evidence_reused_without_new_physics") is True
+        and generic_policy.get("frequency_inference_performed") is False
+        and generic_policy.get("sensor_frequency_learning_used") is False
+        and generic_policy.get("facility_ir_fn_calculated") is False
+        and generic_policy.get("facility_qra_promotion") is False
+        and generic_policy.get("physical_validation_claim") is False
+        and generic_policy.get("diagnostic_only") is True
+    )
+    if generic_diagnostic_quantitative_evaluation is not None:
+        rows.append(_row(
+            "diagnostic_generic_current_forecast_quantitative_evaluation",
+            "일반 옥외 LH2의 현재·예측 HAZOP 요청이 동일한 설비별 provider·SLABx-LH2 정량 증거로 연결되어야 한다",
+            "PASS" if generic_diag_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(generic_diagnostic_quantitative_evaluation_path,),
+            observed={
+                "current_status": generic_current_eval.get("status"),
+                "forecast_status": generic_forecast_eval.get("status"),
+                "current_request_count": generic_current_summary.get("request_count"),
+                "current_diagnostic_chain_attached_count": generic_current_summary.get("diagnostic_chain_attached_count"),
+                "current_frequency_value_withheld_count": generic_current_summary.get("frequency_value_withheld_count"),
+                "forecast_request_count": generic_forecast_summary.get("request_count"),
+                "forecast_diagnostic_chain_attached_count": generic_forecast_summary.get("diagnostic_chain_attached_count"),
+                "forecast_frequency_value_withheld_count": generic_forecast_summary.get("frequency_value_withheld_count"),
+                "facility_ir_fn_calculated": generic_policy.get("facility_ir_fn_calculated"),
+                "facility_qra_promotion": generic_policy.get("facility_qra_promotion"),
+            },
+            blocking_reason=None if generic_diag_ok else (
+                "일반 시설 현재·예측 정량 증거 연결이 exact request 수·chain 상태·승격 차단 정책을 만족하지 않는다"
+            ),
+            interpretation=(
+                "현재·예측 경로의 provider/SLABx 결과를 exact request key로 재사용하는 진단 연결이다. "
+                "새 물리계산이나 빈도 추론을 수행하지 않으며, 시설 IR/F-N·QRA 승격은 계속 보류한다."
             ),
         ))
 

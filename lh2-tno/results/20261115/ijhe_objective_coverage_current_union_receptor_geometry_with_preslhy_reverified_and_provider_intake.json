@@ -1065,6 +1065,28 @@
       },
       "blocking_reason": null,
       "interpretation": "실제 모니터링 입력과 명시적 운전 모드에서 HAZOP를 거쳐 각 설비 branch를 개별 실행한 진단 경로다. 모델 예측/운영자 제한 packet과 synthetic receptor를 사용하므로 시설 QRA·독립 물리검증·빈도 학습으로 승격하지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_current_forecast_quantitative_evaluation",
+      "requirement": "일반 옥외 LH2의 현재·예측 HAZOP 요청이 동일한 설비별 provider·SLABx-LH2 정량 증거로 연결되어야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results/20261115/generic_provider_bound_hazop_quantitative_handoff_with_evidence.json"
+      ],
+      "observed": {
+        "current_status": "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE",
+        "forecast_status": "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE",
+        "current_request_count": 3,
+        "current_diagnostic_chain_attached_count": 3,
+        "current_frequency_value_withheld_count": 1,
+        "forecast_request_count": 3,
+        "forecast_diagnostic_chain_attached_count": 3,
+        "forecast_frequency_value_withheld_count": 1,
+        "facility_ir_fn_calculated": false,
+        "facility_qra_promotion": false
+      },
+      "blocking_reason": null,
+      "interpretation": "현재·예측 경로의 provider/SLABx 결과를 exact request key로 재사용하는 진단 연결이다. 새 물리계산이나 빈도 추론을 수행하지 않으며, 시설 IR/F-N·QRA 승격은 계속 보류한다."
     }
   ],
   "core_chain_check_ids": [

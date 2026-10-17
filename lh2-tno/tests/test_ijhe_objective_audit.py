@@ -302,6 +302,47 @@ def test_objective_audit_records_header_bound_monitoring_consequence_bridge():
     }.issubset(set(report["strict_blocking_check_ids"]))
 
 
+def test_objective_audit_records_generic_current_forecast_quantitative_evaluation():
+    inputs = _inputs()
+    inputs["generic_diagnostic_quantitative_evaluation"] = {
+        "schema_version": "prism.generic_outdoor_facility_hazop_handoff.v1",
+        "current_diagnostic_evaluation": {
+            "status": "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE",
+            "summary": {
+                "request_count": 3,
+                "diagnostic_chain_attached_count": 3,
+                "frequency_value_withheld_count": 1,
+            },
+        },
+        "forecast_diagnostic_evaluation": {
+            "status": "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE",
+            "summary": {
+                "request_count": 3,
+                "diagnostic_chain_attached_count": 3,
+                "frequency_value_withheld_count": 1,
+            },
+        },
+        "policy": {
+            "evidence_reused_without_new_physics": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_ir_fn_calculated": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+            "diagnostic_only": True,
+        },
+        "_record_path": "generic-quantitative-evaluation.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_current_forecast_quantitative_evaluation"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["current_frequency_value_withheld_count"] == 1
+    assert check["id"] not in report["strict_blocking_check_ids"]
+
+
 def test_objective_audit_aligns_latest_full_completion_audit():
     inputs = _inputs()
     names = [

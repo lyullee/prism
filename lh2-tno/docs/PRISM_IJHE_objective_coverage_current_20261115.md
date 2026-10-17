@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 35 |
+| Objective rows | 36 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (57 checks: 52 PASS, 5 BLOCKED) |
@@ -63,6 +63,8 @@ The current chain is explicit and auditable:
 7. The monitor path distinguishes `cached_diagnostic_1hz` from `fresh_physics_background`; the benchmark records both timings and makes no fresh-physics 1 Hz claim.
 
 A separate header-bound diagnostic replay now appears as `diagnostic_header_bound_monitoring_to_consequence_bridge`. It executes three equipment branches from explicit state and operating mode through HAZOP, provider release, SLABx-LH2 consequence, literature-frequency identity, and conditional risk. The bridge uses model-prediction/operator-limited packets and a synthetic receptor, so it documents the executable monitoring seam without opening provider qualification, independent physical validation, or facility QRA.
+
+The generic facility handoff now adds `diagnostic_generic_current_forecast_quantitative_evaluation`. It binds the three current-state and three forecast-state requests to the exact provider/consequence evidence already attached to the generic storage tank, transfer line, and relief vent examples. Two rows carry explicit literature rates; the storage-tank row keeps its missing rate as `CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD`. This row reuses evidence and does not run fresh physics, infer frequency, or promote facility IR/F-N/QRA.
 
 Every campaign result now also carries a `prism.facility_receptor_geometry.v1`
 contract. It records each receptor coordinate, the nearest non-boundary
@@ -179,7 +181,7 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore confirms numerical-gate consistency; it does not mean that
 independent physical validation or facility QRA is complete.
 
-The current objective ledger contains 35 checks after reconciling the latest completion audit and
+The current objective ledger contains 36 checks after reconciling the latest completion audit and
 independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.
 The external-release inventory remains a separate optional diagnostic row when it is not embedded
 in the completion audit.

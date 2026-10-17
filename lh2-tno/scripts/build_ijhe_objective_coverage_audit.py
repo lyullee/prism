@@ -60,6 +60,7 @@ def main() -> int:
     parser.add_argument("--external-release-artifact-intake", type=Path)
     parser.add_argument("--facility-provider-intake-audit", type=Path)
     parser.add_argument("--header-bound-facility-bridge", type=Path)
+    parser.add_argument("--generic-diagnostic-quantitative-evaluation", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -200,6 +201,11 @@ def main() -> int:
             header_bound_facility_bridge=(
                 _object(args.header_bound_facility_bridge)
                 if args.header_bound_facility_bridge
+                else None
+            ),
+            generic_diagnostic_quantitative_evaluation=(
+                _object(args.generic_diagnostic_quantitative_evaluation)
+                if args.generic_diagnostic_quantitative_evaluation
                 else None
             ),
         )
