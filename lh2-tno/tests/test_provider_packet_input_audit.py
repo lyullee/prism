@@ -15,7 +15,9 @@ def _release() -> dict:
             encoding="utf-8"
         )
     )
-    return catalog["releases"][0]
+    release = dict(catalog["releases"][0])
+    release["input_origin"] = "reviewed_measurement"
+    return release
 
 
 def _qualification() -> dict:

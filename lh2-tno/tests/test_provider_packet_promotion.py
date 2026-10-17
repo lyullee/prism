@@ -19,7 +19,9 @@ def _release() -> dict:
             encoding="utf-8"
         )
     )
-    return catalog["releases"][0]
+    release = dict(catalog["releases"][0])
+    release["input_origin"] = "reviewed_measurement"
+    return release
 
 
 def _qualification(**updates: object) -> dict:
@@ -57,6 +59,14 @@ def test_synthetic_input_origin_is_never_promoted():
     release["input_origin"] = "synthetic"
 
     with pytest.raises(ProviderPacketPromotionError, match="synthetic"):
+        build_provider_packet_evidence_from_records(release, _qualification())
+
+
+def test_model_prediction_input_origin_is_never_promoted():
+    release = _release()
+    release["input_origin"] = "model_prediction"
+
+    with pytest.raises(ProviderPacketPromotionError, match="reviewed_measurement"):
         build_provider_packet_evidence_from_records(release, _qualification())
 
 

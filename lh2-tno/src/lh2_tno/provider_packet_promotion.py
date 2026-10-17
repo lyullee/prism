@@ -4,7 +4,8 @@ The provider export adapter validates a live provider response.  This module
 covers the reproducible file boundary used when a provider sends PRISM a
 saved ``prism.resolved_release.v1`` (or two-sided release-set) packet and a
 separate ``prism.provider_qualification_evidence.v1`` record.  It never
-assigns a frequency and it rejects packets marked as synthetic input.
+assigns a frequency and it rejects synthetic or model-prediction packets from
+qualified promotion.
 """
 from __future__ import annotations
 
@@ -155,9 +156,14 @@ def build_provider_packet_evidence_from_records(
     evidence_id = qualification_payload.get("evidence_id")
     if not isinstance(evidence_id, str) or not evidence_id.strip():
         raise ProviderPacketPromotionError("qualification evidence_id is required")
-    if any(packet.input_origin == "synthetic" for packet in packets):
+    origins = {packet.input_origin for packet in packets}
+    if "synthetic" in origins:
         raise ProviderPacketPromotionError(
             "synthetic input-origin packets cannot be promoted to qualified evidence"
+        )
+    if origins != {"reviewed_measurement"}:
+        raise ProviderPacketPromotionError(
+            "only reviewed_measurement input-origin packets can be promoted to qualified evidence"
         )
 
     source_digests = tuple(packet.provider_source_digest for packet in packets)
