@@ -365,6 +365,8 @@ def load_xlsx_runtime_source(
     origin: str = "historian_measured",
     sheet: str | None = None,
     sheet_index: int = 0,
+    data_row_start: int | None = None,
+    data_row_end: int | None = None,
     arrival_delay_s: float = 0.0,
     timestamp_scale_to_s: float = 1.0,
     timestamp_base: str | datetime | None = None,
@@ -387,6 +389,16 @@ def load_xlsx_runtime_source(
         ) from error
     if not isinstance(sheet_index, int) or sheet_index < 0:
         raise TabularRuntimeAdapterError("sheet_index must be a non-negative integer")
+    if data_row_start is not None and (
+        not isinstance(data_row_start, int) or isinstance(data_row_start, bool) or data_row_start < 2
+    ):
+        raise TabularRuntimeAdapterError("data_row_start must be an integer >= 2 when supplied")
+    if data_row_end is not None and (
+        not isinstance(data_row_end, int) or isinstance(data_row_end, bool) or data_row_end < 2
+    ):
+        raise TabularRuntimeAdapterError("data_row_end must be an integer >= 2 when supplied")
+    if data_row_start is not None and data_row_end is not None and data_row_end < data_row_start:
+        raise TabularRuntimeAdapterError("data_row_end must be >= data_row_start")
     workbook = openpyxl.load_workbook(source_path, read_only=True, data_only=True)
     try:
         if sheet is None:
@@ -410,6 +422,14 @@ def load_xlsx_runtime_source(
         if len(set(headers)) != len(headers):
             raise TabularRuntimeAdapterError("XLSX header contains duplicate column names")
         rows = [dict(zip(headers, row)) for row in iterator]
+        # Worksheet row numbers include the header at row 1.  An explicit
+        # range is required when one workbook contains multiple sessions with
+        # clocks that restart; silently sorting or offsetting those rows would
+        # change the recorded process chronology.
+        if data_row_start is not None or data_row_end is not None:
+            start = 2 if data_row_start is None else data_row_start
+            end = (len(rows) + 1) if data_row_end is None else data_row_end
+            rows = rows[start - 2 : end - 1]
     finally:
         workbook.close()
     return _build_runtime_source_from_rows(
@@ -428,7 +448,12 @@ def load_xlsx_runtime_source(
         timestamp_base=timestamp_base,
         ambient_pressure_pa=ambient_pressure_pa,
         format_name="xlsx",
-        format_metadata={"sheet": sheet, "sheet_index": sheet_index},
+        format_metadata={
+            "sheet": sheet,
+            "sheet_index": sheet_index,
+            "data_row_start": data_row_start,
+            "data_row_end": data_row_end,
+        },
     )
 
 

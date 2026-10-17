@@ -4665,5 +4665,17 @@
     "missing": 0
   },
   "facility_state_origin_accounting_frequency_inference_performed": false,
-  "facility_state_origin_accounting_sensor_frequency_learning_used": false
+  "facility_state_origin_accounting_sensor_frequency_learning_used": false,
+  "inspection_center_receiving_runtime_replay_record": "examples/inspection_center_receiving_runtime_replay_20260121.json",
+  "inspection_center_receiving_runtime_replay_status": "DIAGNOSTIC_STATE_REPLAY_READY; 121 explicit rows; historian_measured origin; receiving mode; no release/frequency/QRA",
+  "inspection_center_receiving_runtime_replay_sample_count": 121,
+  "inspection_center_receiving_runtime_replay_operating_mode": "receiving",
+  "inspection_center_receiving_runtime_replay_frequency_inference": false,
+  "inspection_center_receiving_runtime_replay_facility_qra_claim": false,
+  "inspection_center_receiving_hazop_runtime_replay_record": "examples/inspection_center_receiving_hazop_runtime_replay_20260121.json",
+  "inspection_center_receiving_hazop_runtime_replay_status": "OBSERVED_STATE_HAZOP_REPLAY_COMPLETED; explicit receiving mode; NO_DEVIATION at selected sample; provider release withheld",
+  "inspection_center_receiving_hazop_runtime_replay_selected_scenario_count": 0,
+  "inspection_center_receiving_hazop_runtime_replay_operating_mode_taken_from_input": true,
+  "inspection_center_receiving_hazop_runtime_replay_operating_mode_inferred": false,
+  "inspection_center_receiving_hazop_runtime_replay_frequency_inference": false
 }

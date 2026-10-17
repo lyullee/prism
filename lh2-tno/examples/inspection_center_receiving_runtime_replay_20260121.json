@@ -1,0 +1,98 @@
+{
+  "schema_version": "prism.inspection_center_runtime_replay.v1",
+  "status": "DIAGNOSTIC_STATE_REPLAY_READY",
+  "source": {
+    "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
+    "sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+    "sheet": "1월 21일",
+    "excel_data_row_start": 2,
+    "excel_data_row_end": 122,
+    "sample_count": 121,
+    "session_selection_reason": "The worksheet clock restarts after row 122; the session range is explicit and no rows are sorted or joined."
+  },
+  "state_binding": {
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "origin": "historian_measured",
+    "timestamp_column": "일시",
+    "pressure_column": "PT1111 (MPa)",
+    "temperature_column": "TT1112 (℃)",
+    "pressure_basis": "gauge",
+    "ambient_pressure_pa": 101325.0,
+    "source_units": {
+      "pressure": "MPa",
+      "temperature": "degC"
+    },
+    "sensor_locations": {
+      "pressure": "tank-vapour",
+      "temperature": "tank-vapour"
+    },
+    "review_status": "explicit_mapping_recorded; engineering owner review remains required before qualification"
+  },
+  "latest_runtime_frame": {
+    "source_id": "inspection-center-receiving-20260121",
+    "component_id": "storage-tank-01",
+    "captured_at_s": 39600.0,
+    "origin": "historian_measured",
+    "quality": "valid",
+    "values": {
+      "P": {
+        "component_id": "storage-tank-01",
+        "quantity": "pressure",
+        "value_si": 261325.0,
+        "sensor_location": "tank-vapour",
+        "quality": "valid"
+      },
+      "T": {
+        "component_id": "storage-tank-01",
+        "quantity": "temperature",
+        "value_si": 296.95,
+        "sensor_location": "tank-vapour",
+        "quality": "valid"
+      }
+    },
+    "state_snapshot": {
+      "schema_version": "prism.equipment_state_snapshot.v1",
+      "component_id": "storage-tank-01",
+      "captured_at_s": 39600.0,
+      "origin": "historian_measured",
+      "pressure_pa_abs": 261325.0,
+      "temperature_k": 296.95,
+      "mass_kg": null,
+      "liquid_fraction": null,
+      "phase": null,
+      "position_enu_m": null,
+      "measurements": {
+        "P": {
+          "quantity": "pressure",
+          "value_si": 261325.0,
+          "sensor_location": "tank-vapour",
+          "quality": "valid"
+        },
+        "T": {
+          "quantity": "temperature",
+          "value_si": 296.95,
+          "sensor_location": "tank-vapour",
+          "quality": "valid"
+        }
+      },
+      "source_digest": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+      "quality": "valid"
+    },
+    "state_snapshot_digest": "bfb112e16b1e0cbd820cf6ea76e1cbca86b56a2bb5999a91292f4489733bbfb9",
+    "source_sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+    "operating_mode": "receiving",
+    "frame_digest": "e4fb6af6e410d2bab0d564203b5d251c3d2ab87678f64a0a32d25c4c0d7e4620"
+  },
+  "policy": {
+    "state_only": true,
+    "hazop_mode_input_bound": true,
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "interpretation": "A real inspection-centre operating row was converted to the canonical state-frame contract. The frame can enter the monitoring/HAZOP path, but it does not create an accident release, frequency, SLABx-LH2 result, or facility IR/F-N value."
+}

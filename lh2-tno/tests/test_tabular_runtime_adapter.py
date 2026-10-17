@@ -187,6 +187,45 @@ def test_xlsx_adapter_preserves_explicit_sheet_and_mode(tmp_path):
     assert frames["frames"][0]["values"]["pressure"]["value_si"] == pytest.approx(650000.0)
 
 
+def test_xlsx_adapter_can_select_one_explicit_session_range(tmp_path):
+    openpyxl = pytest.importorskip("openpyxl")
+    path = tmp_path / "multi-session.xlsx"
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.append(["captured_at", "PT1105A", "TT1106"])
+    worksheet.append([0, 6.2, -160])
+    worksheet.append([1, 6.3, -159.5])
+    worksheet.append([0, 6.4, -159])
+    workbook.save(path)
+    workbook.close()
+
+    source = load_xlsx_runtime_source(
+        path,
+        source_id="xlsx-session-1",
+        component_id="TK-01",
+        timestamp_column="captured_at",
+        operating_mode="receiving",
+        data_row_start=2,
+        data_row_end=3,
+        bindings=_bindings(),
+        normalizer=_normalizer(),
+    )
+    assert len(source["samples"]) == 2
+    assert source["tabular_binding"]["data_row_start"] == 2
+    assert source["tabular_binding"]["data_row_end"] == 3
+
+    with pytest.raises(TabularRuntimeAdapterError, match="strictly increasing"):
+        load_xlsx_runtime_source(
+            path,
+            source_id="xlsx-all-sessions",
+            component_id="TK-01",
+            timestamp_column="captured_at",
+            operating_mode="receiving",
+            bindings=_bindings(),
+            normalizer=_normalizer(),
+        )
+
+
 def test_xlsx_adapter_requires_base_for_datetime_timestamps(tmp_path):
     openpyxl = pytest.importorskip("openpyxl")
     from datetime import datetime

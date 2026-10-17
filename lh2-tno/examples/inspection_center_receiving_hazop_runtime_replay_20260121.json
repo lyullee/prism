@@ -1,0 +1,120 @@
+{
+  "schema_version": "prism.inspection_center_hazop_runtime_replay.v1",
+  "status": "OBSERVED_STATE_HAZOP_REPLAY_COMPLETED",
+  "source_replay": {
+    "relative_path": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
+    "sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+    "sheet": "1월 21일",
+    "excel_data_row_start": 2,
+    "excel_data_row_end": 122,
+    "sample_count": 121
+  },
+  "runtime_frame": {
+    "source_id": "inspection-center-receiving-20260121",
+    "component_id": "lh2-intake-tank",
+    "captured_at_s": 39600.0,
+    "origin": "historian_measured",
+    "quality": "valid",
+    "values": {
+      "pressure": {
+        "component_id": "lh2-intake-tank",
+        "quantity": "pressure",
+        "value_si": 261325.0,
+        "sensor_location": "tank-vapour",
+        "quality": "valid"
+      },
+      "temperature": {
+        "component_id": "lh2-intake-tank",
+        "quantity": "temperature",
+        "value_si": 296.95,
+        "sensor_location": "tank-vapour",
+        "quality": "valid"
+      }
+    },
+    "state_snapshot": {
+      "schema_version": "prism.equipment_state_snapshot.v1",
+      "component_id": "lh2-intake-tank",
+      "captured_at_s": 39600.0,
+      "origin": "historian_measured",
+      "pressure_pa_abs": 261325.0,
+      "temperature_k": 296.95,
+      "mass_kg": null,
+      "liquid_fraction": null,
+      "phase": null,
+      "position_enu_m": null,
+      "measurements": {
+        "pressure": {
+          "quantity": "pressure",
+          "value_si": 261325.0,
+          "sensor_location": "tank-vapour",
+          "quality": "valid"
+        },
+        "temperature": {
+          "quantity": "temperature",
+          "value_si": 296.95,
+          "sensor_location": "tank-vapour",
+          "quality": "valid"
+        }
+      },
+      "source_digest": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+      "quality": "valid"
+    },
+    "state_snapshot_digest": "ab874ad577042ffc3c880c716170980d1867cf32cf3e02dfca3119049f428d5f",
+    "source_sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+    "operating_mode": "receiving",
+    "frame_digest": "1ed9e2513054e8eb2f51096512082dd7229d9234e8ab38d19a1615a5fafa14da"
+  },
+  "hazop_selection": {
+    "schema_version": "prism.hazop_operating_mode_selection.v1",
+    "status": "NO_DEVIATION",
+    "facility_id": "generic-outdoor-lh2-diagnostic",
+    "table_id": "inspection-center-intake-hazop-diagnostic-v1",
+    "table_digest": "04fc1a817b912fa2e4fd57d88466ddbec9f84d7b5eed45c82239997743c5e879",
+    "state_digest": "6a8bdad407efc28f4ccdeca9d540bd7d010088b13ebcdfdce3a4b5e0f6524237",
+    "component_id": "lh2-intake-tank",
+    "operating_mode": "receiving",
+    "captured_at_s": 39600.0,
+    "applicable_row_count": 1,
+    "active_deviation_count": 0,
+    "selected_scenario_count": 0,
+    "checks": [
+      {
+        "row_id": "inspection-intake-receiving-high-pressure",
+        "component_id": "lh2-intake-tank",
+        "operating_mode": "receiving",
+        "variable_tag": "pressure",
+        "deviation": "receiving pressure deviation",
+        "trigger": "at_or_above",
+        "scenario_family": "vessel_hole",
+        "release_mode": "hole",
+        "status": "NORMAL",
+        "value_si": 261325.0,
+        "quantity": "pressure",
+        "threshold_low_si": null,
+        "threshold_high_si": 500000.0
+      }
+    ],
+    "selected_scenarios": [],
+    "blocking_reasons": [],
+    "policy": {
+      "operating_mode_taken_from_input": true,
+      "frequency_inference_performed": false,
+      "sensor_frequency_learning_used": false,
+      "release_packet_created": false,
+      "consequence_calculated": false,
+      "facility_qra_claim": false
+    },
+    "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+  },
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "operating_mode_inferred": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "The measured receiving-mode frame was passed through explicit HAZOP table selection. No deviation was selected at this sample, and no accident release, frequency, SLABx-LH2 consequence, or facility IR/F-N value was created."
+}
