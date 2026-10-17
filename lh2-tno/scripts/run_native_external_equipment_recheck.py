@@ -117,7 +117,8 @@ def summarise_packet(name: str, packet_dir: Path, command: list[str], *, exit_co
         for key in (
             "status", "provider_model", "provider_export_schema", "provider_method",
             "provider_source_digest", "provider_result_digest", "termination_basis",
-            "duration_s", "provider_packet_promoted", "physical_validation_claim",
+            "duration_s", "isolation_time_s", "post_isolation_observation_s",
+            "isolation_success", "provider_packet_promoted", "physical_validation_claim",
             "frequency_inference_performed", "facility_qra_claim", "state_snapshot_digest_match",
             "isolation_success", "phase_basis", "source_phase",
             "dynamic_state_closure",

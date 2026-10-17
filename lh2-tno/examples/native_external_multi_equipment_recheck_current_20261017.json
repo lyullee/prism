@@ -1,0 +1,116 @@
+{
+  "schema_version": "prism.native_external_multi_equipment_recheck_compact.v1",
+  "source_repository": "lyullee/lh2dt_models",
+  "source_commit": "16f7a4b",
+  "external_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+  "status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC",
+  "equipment_count": 7,
+  "equipment": [
+    {
+      "equipment": "layered_tank",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.30000000000000004,
+      "isolation_time_s": 0.2,
+      "post_isolation_observation_s": 0.1,
+      "isolation_success": true,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": {
+        "declared_by_provider": true,
+        "prism_source_dynamics_status": "READY",
+        "ready": true,
+        "blocking_reasons": [],
+        "state_history_digest": "cb166c3f18cf70ff7f6d2a45d4d54add0bb217f789980c38d6903e50e4266b89"
+      }
+    },
+    {
+      "equipment": "dynamic_pipe",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.060000000000000005,
+      "isolation_time_s": 0.05,
+      "post_isolation_observation_s": 0.01,
+      "isolation_success": true,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": {
+        "declared_by_provider": true,
+        "prism_source_dynamics_status": "READY",
+        "ready": true,
+        "blocking_reasons": [],
+        "state_history_digest": "cd1ab52f56ea6785ef7de282caac5202e738ce8c422dd87ee2c649c6639122de"
+      }
+    },
+    {
+      "equipment": "stroke_limited_valve",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "isolation_time_s": null,
+      "post_isolation_observation_s": null,
+      "isolation_success": null,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": null
+    },
+    {
+      "equipment": "mapped_pump",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.1,
+      "isolation_time_s": null,
+      "post_isolation_observation_s": null,
+      "isolation_success": null,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": null
+    },
+    {
+      "equipment": "dynamic_vaporizer",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.1,
+      "isolation_time_s": 0.05,
+      "post_isolation_observation_s": 0.05,
+      "isolation_success": true,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": {
+        "declared_by_provider": true,
+        "prism_source_dynamics_status": "READY",
+        "ready": true,
+        "blocking_reasons": [],
+        "state_history_digest": "73da568b6ee1bf757f32382527207200843f95e5a6400debe69b585361621e5e"
+      }
+    },
+    {
+      "equipment": "dynamic_reliquefier",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.1,
+      "isolation_time_s": 0.05,
+      "post_isolation_observation_s": 0.05,
+      "isolation_success": true,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": {
+        "declared_by_provider": true,
+        "prism_source_dynamics_status": "READY",
+        "ready": true,
+        "blocking_reasons": [],
+        "state_history_digest": "73da568b6ee1bf757f32382527207200843f95e5a6400debe69b585361621e5e"
+      }
+    },
+    {
+      "equipment": "vent_stack",
+      "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "isolation_time_s": null,
+      "post_isolation_observation_s": null,
+      "isolation_success": null,
+      "state_snapshot_digest_match": true,
+      "dynamic_state_closure": null
+    }
+  ],
+  "provider_packet_promoted_count": 0,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "reproduction": "python scripts/run_native_external_equipment_recheck.py --lh2dt-root <clean lh2dt_models@16f7a4b> --output-dir <output>"
+}

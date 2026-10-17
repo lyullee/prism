@@ -1,5 +1,30 @@
 # Native external LH2 multi-equipment recheck (2026-10-17)
 
+## Current clean-source recheck
+
+The seven-equipment runner was repeated against a clean archive of the
+upstream `lh2dt_models` `main` commit `16f7a4b` (source-tree digest
+`81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648`). All
+seven native exporters completed and their state-snapshot digests matched the
+PRISM request identities. The result is still diagnostic:
+
+| Equipment | Termination | Isolation echo | Dynamic state closure |
+| --- | --- | --- | --- |
+| LayeredTank | `reviewed_isolation_success` | 0.20 s + 0.10 s, success | ready |
+| DynamicHEMPipe | `reviewed_isolation_success` | 0.05 s + 0.01 s, success | ready |
+| StrokeLimitedCommandedValve | `synthetic_diagnostic_horizon` | not declared | not applicable |
+| MappedPump | `reviewed_isolation_success` | provider-owned downstream check | not applicable |
+| DynamicVaporizer | `reviewed_isolation_success` | 0.05 s + 0.05 s, success | ready |
+| DynamicReliquefier | `reviewed_isolation_success` | 0.05 s + 0.05 s, success | ready |
+| VentStack | `synthetic_diagnostic_horizon` | not declared | not applicable |
+
+The clean replay recorded `equipment_count=7`,
+`provider_packet_promoted_count=0`, `physical_validation_claim=false`,
+`frequency_inference_performed=false`, and `facility_qra_claim=false`. It
+therefore proves that the equipment state, isolation boundary, dynamic source
+closure, and PRISM packet identity are connected; it does not qualify the
+packets, assign a field frequency, or open the facility QRA gate.
+
 PRISM now has one reproducible command that executes the external `lh2dt`
 accident exporters for the seven declared outdoor equipment families and
 records their packet identities in one manifest:

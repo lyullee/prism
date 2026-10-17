@@ -53,6 +53,9 @@ def test_summarise_packet_preserves_diagnostic_gate(tmp_path: Path) -> None:
             "provider_source_digest": "source",
             "provider_result_digest": "result",
             "termination_basis": "reviewed_isolation_success",
+            "isolation_time_s": 0.05,
+            "post_isolation_observation_s": 0.05,
+            "isolation_success": True,
             "provider_packet_promoted": False,
             "physical_validation_claim": False,
             "frequency_inference_performed": False,
@@ -65,6 +68,9 @@ def test_summarise_packet_preserves_diagnostic_gate(tmp_path: Path) -> None:
     assert summary["verification_present"] is True
     assert summary["provider_packet_promoted"] is False
     assert summary["termination_basis"] == "reviewed_isolation_success"
+    assert summary["isolation_time_s"] == 0.05
+    assert summary["post_isolation_observation_s"] == 0.05
+    assert summary["isolation_success"] is True
     assert summary["state_snapshot_digest_match"] is True
 
 
