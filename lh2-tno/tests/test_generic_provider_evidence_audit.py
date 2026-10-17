@@ -70,7 +70,17 @@ def test_exact_sidecar_is_counted_but_does_not_open_qra_gate(tmp_path):
 def test_missing_sidecar_is_fail_closed(tmp_path):
     report = audit_generic_provider_evidence(_write_catalogue(tmp_path))
     assert report["status"] == "NO_QUALIFIED_PROVIDER_EVIDENCE"
+    assert report["qualification_sidecar_present_count"] == 0
     assert report["missing_sidecar_count"] == 1
+    assert report["exact_match_count"] == 0
+
+
+def test_invalid_sidecar_file_is_present_but_not_qualified(tmp_path):
+    catalogue = _write_catalogue(tmp_path)
+    event_dir = tmp_path / "event"
+    (event_dir / "provider_qualification.json").write_text("not-json", encoding="utf-8")
+    report = audit_generic_provider_evidence(catalogue)
+    assert report["qualification_sidecar_present_count"] == 1
     assert report["exact_match_count"] == 0
 
 

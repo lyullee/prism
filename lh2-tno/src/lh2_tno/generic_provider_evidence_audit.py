@@ -290,7 +290,14 @@ def audit_generic_provider_evidence(
         packet = item["packet"]
         sidecar, sidecar_path = group_sidecars[str(packet_path)]
         row["qualification_sidecar_path"] = sidecar_path
-        if item["sidecar_path"] is not None:
+        # ``sidecar_path`` is also populated for an explicitly requested but
+        # missing path, so it is not evidence that a sidecar file exists.
+        # Count presence from the parsed sidecar or from an actual file on
+        # disk; a placeholder path must remain absent evidence.
+        if item["sidecar"] is not None or (
+            item["sidecar_path"] is not None
+            and Path(str(item["sidecar_path"])).is_file()
+        ):
             counts["sidecar_present"] += 1
         matched, reason = _match_sidecar(group_packets[str(packet_path)], sidecar)
         row["exact_match"] = matched
