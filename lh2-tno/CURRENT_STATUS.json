@@ -6258,5 +6258,8 @@
   "validation_evidence_matrix_with_preslhy_reverified_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix_with_preslhy_reverified.json",
   "validation_evidence_matrix_with_preslhy_reverified_status": "RESTRICTED_EVIDENCE_MATRIX; 11 domains; FACILITY_QRA_WITHHELD; physical validation false",
   "latest_ijhe_objective_coverage_audit_physical_validation_claim": false,
-  "latest_ijhe_objective_coverage_audit_strict_facility_state_snapshot_status": "PASS; union_event_count=34; base_state_snapshot_bound=24; extension_state_snapshot_bound=10; provider_result_digest_mismatch=0"
+  "latest_ijhe_objective_coverage_audit_strict_facility_state_snapshot_status": "PASS; union_event_count=34; base_state_snapshot_bound=24; extension_state_snapshot_bound=10; provider_result_digest_mismatch=0",
+  "ijhe_completion_audit_latest_verification_after_preslhy_reverified_record": "results/20261115/latest_ijhe_audit_verification_after_preslhy_reverified.json",
+  "ijhe_completion_audit_latest_verification_after_preslhy_reverified_status": "PASS; latest scope/release-boundary pointers remain internally consistent; PRESLHY reverified evidence remains restricted and facility QRA withheld",
+  "ijhe_completion_audit_latest_verification_after_preslhy_reverified_blocking_reason_count": 0
 }
