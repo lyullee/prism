@@ -224,6 +224,7 @@ def test_latest_ijhe_audit_verification_binds_facility_qra_gate_summary(tmp_path
     result = verify_latest_ijhe_audit(status, root=tmp_path)
     assert result["status"] == "PASS"
     assert result["facility_qra_gate_summary_blocking_reason_count"] == 1
+    assert result["facility_qra_gate_summary_record"].endswith("gate.json")
 
     gate["blocking_reasons"].append("provider")
     _write(tmp_path / "gate.json", gate)

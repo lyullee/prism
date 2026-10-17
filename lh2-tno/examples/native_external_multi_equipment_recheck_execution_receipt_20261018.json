@@ -1,0 +1,88 @@
+{
+  "schema_version": "prism.native_external_multi_equipment_recheck_execution_receipt.v1",
+  "status": "CURRENT_SOURCE_AND_CHAIN_REPLAY_MATCHED",
+  "execution_date": "2026-10-18",
+  "source_repository": "lyullee/lh2dt_models",
+  "source_commit": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+  "external_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "equipment_count": 7,
+  "rows": [
+    {
+      "equipment": "dynamic_pipe",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "dynamic_reliquefier",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "dynamic_vaporizer",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "layered_tank",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "mapped_pump",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "stroke_limited_valve",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "vent_stack",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "export_status_match": true,
+      "chain_status_match": true,
+      "chain_duration_match": true,
+      "chain_mass_residual_match": true
+    }
+  ],
+  "all_export_rows_match": true,
+  "all_chain_rows_match": true,
+  "provider_packet_promoted_count": 0,
+  "frequency_inference_performed": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The external source tree and the seven-equipment exporter plus PRISM consequence-chain replay were executed again. All recorded provider and chain identity fields match the committed diagnostic manifests. This confirms reproducibility only; it does not qualify provider packets or open facility QRA."
+}
