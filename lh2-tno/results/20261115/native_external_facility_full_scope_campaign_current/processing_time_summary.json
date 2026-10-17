@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.native_external_facility_processing_time.v1",
+  "campaign_record": "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json",
+  "case_count": 24,
+  "fresh_physics_case_count": 24,
+  "case_elapsed_ms": {
+    "min": 1662.1687000151724,
+    "median": 16830.931650009006,
+    "p95": 105548.89806998684,
+    "p99": 136013.8801619882,
+    "max": 143849.68819998903
+  },
+  "campaign_elapsed_ms": 814290.3899999801,
+  "stage_elapsed_ms_sum": {
+    "source": 15667.469400039408,
+    "pool": 331075.01499998034,
+    "near_field_and_dispersion": 426535.7667999633,
+    "cloud_observation": 16301.727999991272,
+    "fire_explosion_damage_risk": 2365.7086998864543,
+    "endpoint_a": 7070.997600007104,
+    "endpoint_b": 7301.13729997538,
+    "endpoint_aggregation": 14375.09279997903
+  },
+  "interpretation": {
+    "full_scope_mode": "offline diagnostic replay across 24 cases; not an online service-level measurement",
+    "cached_monitoring_mode": "cached_diagnostic_1hz is a separate runtime path and must not be inferred from this campaign time",
+    "fresh_physics_1hz_claim": false,
+    "facility_qra_promotion": false
+  },
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_digest": "4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1"
+}

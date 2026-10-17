@@ -141,3 +141,11 @@ component, port, operating-mode/HAZOP identity and required provider evidence.
 Its promotion policy continues to forbid frequency inference from sensors and
 keeps facility QRA promotion closed until the provider and validation gates are
 actually satisfied.
+
+Processing-time evidence is saved in
+[`processing_time_summary.json`](../results/20261115/native_external_facility_full_scope_campaign_current/processing_time_summary.json).
+The 24-case fresh-physics replay took 814,290.39 ms in total; case p95 was
+105,548.90 ms and the slowest case was 143,849.69 ms. These are offline
+campaign measurements. The cached monitoring path has a separate
+`cached_diagnostic_1hz` contract, and this replay does not claim fresh-physics
+1 Hz operation.

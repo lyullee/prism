@@ -4376,5 +4376,9 @@
   "external_lh2dt_native_facility_full_scope_evidence_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json",
   "external_lh2dt_native_facility_full_scope_evidence_request_status": "OPEN_EVIDENCE_REQUEST; 24 case requests, 12 family requests, 11 operator-limited case requests; frequency inference and facility QRA promotion remain false",
   "external_lh2dt_native_facility_full_scope_evidence_request_case_count": 24,
-  "external_lh2dt_native_facility_full_scope_evidence_request_operator_limited_case_count": 11
+  "external_lh2dt_native_facility_full_scope_evidence_request_operator_limited_case_count": 11,
+  "external_lh2dt_native_facility_full_scope_processing_time_record": "results/20261115/native_external_facility_full_scope_campaign_current/processing_time_summary.json",
+  "external_lh2dt_native_facility_full_scope_processing_time_status": "OFFLINE_DIAGNOSTIC_TIMING; 24 fresh-physics cases, campaign 814290.39 ms, case p95 105548.90 ms; no fresh-physics 1 Hz claim",
+  "external_lh2dt_native_facility_full_scope_processing_time_campaign_elapsed_ms": 814290.3899999801,
+  "external_lh2dt_native_facility_full_scope_processing_time_case_p95_ms": 105548.89806998684
 }

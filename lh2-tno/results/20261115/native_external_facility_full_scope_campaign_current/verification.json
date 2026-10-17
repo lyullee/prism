@@ -1097,5 +1097,10 @@
   "facility_evidence_request_case_count": 24,
   "facility_evidence_request_family_count": 12,
   "facility_evidence_request_blocking_reason_count": 11,
-  "facility_evidence_request_operator_limited_case_count": 11
+  "facility_evidence_request_operator_limited_case_count": 11,
+  "processing_time_summary_record": "results/20261115/native_external_facility_full_scope_campaign_current/processing_time_summary.json",
+  "processing_time_case_count": 24,
+  "processing_time_campaign_elapsed_ms": 814290.3899999801,
+  "processing_time_case_p95_ms": 105548.89806998684,
+  "processing_time_fresh_physics_1hz_claim": false
 }

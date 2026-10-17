@@ -45,6 +45,11 @@ unsupported/no-event families explicit. It is an intake contract for the
 missing provider and validation evidence, not a frequency source or a QRA
 promotion mechanism.
 
+The full-scope processing-time record reports 24 fresh-physics cases, a total
+campaign time of 814,290.39 ms, and a case p95 of 105,548.90 ms. This is an
+offline diagnostic benchmark. The online monitor uses the separately measured
+cached-result path; no fresh-physics 1 Hz service claim is made.
+
 ## What is connected
 
 The current chain is explicit and auditable:
