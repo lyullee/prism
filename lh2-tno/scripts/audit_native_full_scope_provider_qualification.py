@@ -33,6 +33,7 @@ def main() -> int:
         "release_identity_request_count": report["release_identity_request_count"],
         "exact_match_count": report["exact_match_count"],
         "qualified_provider_packet_count": report["qualified_provider_packet_count"],
+        "closure_status_counts": report["closure_status_counts"],
         "output": str(args.output),
     }, ensure_ascii=False))
     return 0

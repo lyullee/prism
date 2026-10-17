@@ -76,6 +76,8 @@ def test_native_catalogue_is_flattened_and_missing_sidecar_is_blocked(tmp_path):
     assert report["release_identity_request_count"] == 1
     assert report["missing_sidecar_count"] == 1
     assert report["qualified_provider_packet_count"] == 0
+    assert report["closure_status_counts"] == {"CLOSURE_EVIDENCE_OPEN": 1}
+    assert report["event_closure_status_counts"] == {"CLOSURE_EVIDENCE_OPEN": 1}
     assert report["facility_qra_allowed"] is False
 
 
@@ -86,6 +88,7 @@ def test_native_exact_sidecar_remains_unqualified_until_closure_is_explicit(tmp_
     )
     assert report["exact_match_count"] == 1
     assert report["qualified_provider_packet_count"] == 0
+    assert report["closure_status_counts"] == {"CLOSURE_EVIDENCE_OPEN": 1}
     assert report["rows"][0]["status"] == "QUALIFIED_SIDECAR_EXACT_MATCH"
 
 
@@ -101,4 +104,5 @@ def test_native_exact_sidecar_is_qualified_when_ready_closure_is_explicit(tmp_pa
     )
     assert report["exact_match_count"] == 1
     assert report["qualified_provider_packet_count"] == 1
+    assert report["closure_status_counts"] == {"CLOSURE_READY_FOR_QUALIFICATION": 1}
     assert report["rows"][0]["qualified_provider_packet"] is True

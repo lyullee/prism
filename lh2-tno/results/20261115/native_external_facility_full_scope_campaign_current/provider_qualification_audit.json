@@ -9,6 +9,14 @@
     "release_closure_and_qualification": 19,
     "qualification_only": 7
   },
+  "closure_status_counts": {
+    "CLOSURE_EVIDENCE_OPEN": 19,
+    "CLOSURE_READY_FOR_QUALIFICATION": 7
+  },
+  "event_closure_status_counts": {
+    "CLOSURE_EVIDENCE_OPEN": 19,
+    "CLOSURE_READY_FOR_QUALIFICATION": 7
+  },
   "qualification_sidecar_present_count": 0,
   "exact_match_count": 0,
   "qualified_provider_packet_count": 0,

@@ -201,6 +201,7 @@ The native request catalog is audited directly by
 `scripts/audit_native_full_scope_provider_qualification.py`. The current audit
 record is
 `results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json`: 24 event rows and 26 release identities are checked, all 26 sidecars are currently missing, and the qualified-provider count is zero. An exact sidecar match would still remain diagnostic until its release-closure status and independent validation evidence are present.
+The audit also emits closure_status_counts and vent_closure_status_counts at the top level. The current counts are 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN, so downstream status records can be regenerated from the audit without copying counts from nested request rows.
 
 The audit is consumed by a derived assessment at
 `results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json`. This assessment reuses the saved risk ledger and frequency scenarios, adds the native qualification gate, and keeps `qualified_facility_qra_available=false` when the audit has no qualified packets. It does not rerun physics or modify risk atoms.

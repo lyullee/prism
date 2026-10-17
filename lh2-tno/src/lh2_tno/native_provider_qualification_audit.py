@@ -9,6 +9,7 @@ QRA claim.
 from __future__ import annotations
 
 from collections.abc import Mapping
+from collections import Counter
 import json
 from pathlib import Path
 import re
@@ -127,6 +128,10 @@ def audit_native_full_scope_provider_qualification(
     generic, event_row_count, request_kind_counts = _native_to_generic(
         value, catalogue_path=catalogue_path, packet_root=root
     )
+    closure_status_counts = Counter(
+        str(request.get("closure_status") or "CLOSURE_EVIDENCE_OPEN")
+        for request in generic["requests"]
+    )
     report = audit_generic_provider_evidence(
         generic,
         packet_root=root or catalogue_path.parent,
@@ -140,6 +145,12 @@ def audit_native_full_scope_provider_qualification(
         "event_row_count": event_row_count,
         "release_identity_request_count": report["request_count"],
         "request_kind_counts": request_kind_counts,
+        # Keep closure state visible at the same level as request-kind and
+        # qualification counts.  A qualification audit must never force a
+        # caller to re-open the nested request catalogue to determine whether
+        # a matching sidecar is still waiting for release-boundary evidence.
+        "closure_status_counts": dict(sorted(closure_status_counts.items())),
+        "event_closure_status_counts": dict(sorted(closure_status_counts.items())),
         "qualification_sidecar_present_count": report["qualification_sidecar_present_count"],
         "exact_match_count": report["exact_match_count"],
         "qualified_provider_packet_count": report["qualified_provider_packet_count"],
