@@ -33,6 +33,7 @@ from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
     EquipmentStateSnapshot,
 )
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status  # noqa: E402
 
 
 def _tree_digest(root: Path) -> str:
@@ -269,6 +270,7 @@ class DynamicVaporizerAccidentProvider:
                 self.boundary_ua_w_k, self.maximum_heat_w,
                 properties=HydrogenProperties("Hydrogen"),
             )
+        from lh2dt.dynamic_state_closure import build_dynamic_state_closure
         properties = model.properties
         ambient_pressure = float(request["ambient_pressure_pa_abs"])
         ambient_temperature = float(request["ambient_temperature_k"])
@@ -332,6 +334,20 @@ class DynamicVaporizerAccidentProvider:
         choked_count = 0
         time_s = 0.0
         zero_flow_after_isolation = True
+        state_history: list[dict[str, Any]] = []
+
+        def record_state(time_value: float, current_state: Any, mass_out: float) -> None:
+            fluid_state = model.thermo(current_state)
+            state_history.append({
+                "time_s": float(time_value),
+                "mass_kg": float(current_state.mass_kg),
+                "internal_energy_j": float(current_state.internal_energy_J),
+                "wall_temperature_k": float(current_state.wall_temperature_K),
+                "pressure_pa_abs": float(fluid_state.pressure_Pa),
+                "cumulative_mass_out_kg": float(mass_out),
+            })
+
+        record_state(0.0, state, 0.0)
         for index in range(intervals):
             fluid = model.thermo(state)
             if (
@@ -415,6 +431,7 @@ class DynamicVaporizerAccidentProvider:
                 zero_flow_after_isolation = False
             state = result.state
             time_s += self.time_step_s
+            record_state(time_s, state, cumulative_mass)
             if state.mass_kg <= 0.0:
                 raise ValueError("dynamic gas unit inventory depleted before diagnostic horizon")
         if not math.isclose(time_s, total_duration, rel_tol=0.0, abs_tol=1.0e-10):
@@ -429,6 +446,32 @@ class DynamicVaporizerAccidentProvider:
         )
         if self.isolation_time_s is not None and not isolation_success:
             raise ValueError("declared isolation observation did not confirm zero flow")
+        maximum_inventory_residual = max(
+            abs(initial_mass - row["cumulative_mass_out_kg"] - row["mass_kg"])
+            for row in state_history
+        )
+        maximum_pressure_residual = max(
+            abs(
+                float(model.thermo(type(state)(
+                    mass_kg=float(row["mass_kg"]),
+                    internal_energy_J=float(row["internal_energy_j"]),
+                    wall_temperature_K=float(row["wall_temperature_k"]),
+                )).pressure_Pa) - row["pressure_pa_abs"]
+            )
+            for row in state_history
+        )
+        dynamic_closure = build_dynamic_state_closure(
+            state_history,
+            max_abs_inventory_residual_kg=maximum_inventory_residual,
+            inventory_tolerance_kg=max(1.0e-10, initial_mass * 1.0e-9),
+            max_abs_pressure_residual_pa=maximum_pressure_residual,
+            pressure_tolerance_pa=max(1.0e-6, self.inlet_pressure_pa * 1.0e-10),
+            provenance=(
+                f"{model_class} recomputed pressure from its finite-volume mass, "
+                "internal-energy, and wall-temperature state before each native "
+                "outlet evaluation; the digest covers the complete provider history."
+            ),
+        )
         termination_basis = (
             "reviewed_isolation_success"
             if isolation_success
@@ -479,6 +522,7 @@ class DynamicVaporizerAccidentProvider:
                     "post_isolation_observation_s": self.post_isolation_observation_s,
                     "isolation_success": isolation_success,
                     "post_isolation_zero_flow": zero_flow_after_isolation,
+                    "dynamic_state_closure": dynamic_closure,
                 },
             },
         }
@@ -573,8 +617,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     else:
         result = export_equipment_gas_accident_history(provider, request)
     release = result.release.model_dump(mode="json")
+    closure_audit = dynamic_state_closure_status(release)
     verification = {
-        "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "status": (
+            "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC"
+            if closure_audit.get("ready") is True
+            else "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED"
+        ),
         "provider_model": model_class,
         "mode": args.mode,
         "termination_mode": args.termination_mode,
@@ -594,6 +643,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "physical_validation_claim": False,
         "frequency_inference": False,
         "facility_qra_claim": False,
+        "dynamic_state_closure": {
+            "ready": closure_audit.get("ready"),
+            "blocking_reasons": closure_audit.get("blocking_reasons", []),
+            "provider_record_present": closure_audit.get("checks", {}).get("record_present", False),
+        },
         "termination_basis": result.release.termination_basis,
         "isolation": {
             "requested": args.isolation_time_s is not None,

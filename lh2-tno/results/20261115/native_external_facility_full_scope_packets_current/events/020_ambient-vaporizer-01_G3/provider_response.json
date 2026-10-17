@@ -398,7 +398,18 @@
       "isolation_time_s": 0.3,
       "post_isolation_observation_s": 0.2,
       "isolation_success": true,
-      "post_isolation_zero_flow": true
+      "post_isolation_zero_flow": true,
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "15b6eb9b44e5150efc3352cf467f21cd4d70a11a9cfe0f15a65974e65e181384",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each native outlet evaluation; the digest covers the complete provider history."
+      }
     }
   }
 }

@@ -1,9 +1,9 @@
 {
-  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
   "provider_model": "lh2dt.DynamicVaporizer",
   "mode": "vaporizer",
   "termination_mode": "synthetic_horizon",
-  "provider_result_digest": "ff86542b92ba142715461fff1807e0b408006b207ace8102dcbd4e8263fffa2b",
+  "provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971",
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "ambient-vaporizer-01",
@@ -37,6 +37,11 @@
   "physical_validation_claim": false,
   "frequency_inference": false,
   "facility_qra_claim": false,
+  "dynamic_state_closure": {
+    "ready": true,
+    "blocking_reasons": [],
+    "provider_record_present": true
+  },
   "termination_basis": "reviewed_isolation_success",
   "isolation": {
     "requested": true,

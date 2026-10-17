@@ -29,6 +29,7 @@ from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
     EquipmentStateSnapshot,
 )
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status  # noqa: E402
 
 
 def _tree_digest(root: Path) -> str:
@@ -182,6 +183,7 @@ class DynamicGasInventoryProvider:
                                        properties=HydrogenProperties("Hydrogen"))
         else:
             raise ValueError("mode must be vaporizer or reliquefier")
+        from lh2dt.dynamic_state_closure import build_dynamic_state_closure
         properties = model.properties
         inlet = properties.from_pT(self.inlet_pressure_pa, self.inlet_temperature_k)
         if inlet.phase not in {"gas", "supercritical_gas"}:
@@ -196,11 +198,25 @@ class DynamicGasInventoryProvider:
                                             stroke_time_s=self.stroke_time_s, initial_opening=0.0)
         valve.set_target_opening(1.0)
         steps: list[dict[str, Any]] = []
+        state_history: list[dict[str, Any]] = []
         cumulative_mass = 0.0
         cumulative_enthalpy = 0.0
         time_s = 0.0
         intervals = int(math.ceil(self.duration_s / self.time_step_s)) if self.release_mode == "instantaneous_inventory" else int(round(self.duration_s / self.time_step_s))
         terminated = False
+
+        def record_state(time_value: float, current_state: Any, mass_out: float) -> None:
+            fluid_state = model.thermo(current_state)
+            state_history.append({
+                "time_s": float(time_value),
+                "mass_kg": float(current_state.mass_kg),
+                "internal_energy_j": float(current_state.internal_energy_J),
+                "wall_temperature_k": float(current_state.wall_temperature_K),
+                "pressure_pa_abs": float(fluid_state.pressure_Pa),
+                "cumulative_mass_out_kg": float(mass_out),
+            })
+
+        record_state(0.0, state, 0.0)
         for index in range(intervals):
             fluid = model.thermo(state)
             dt = self.time_step_s
@@ -269,6 +285,7 @@ class DynamicGasInventoryProvider:
             })
             state = result.state
             time_s += dt
+            record_state(time_s, state, cumulative_mass)
             if self.release_mode == "instantaneous_inventory" and state.mass_kg <= 1.0e-10:
                 terminated = True
                 break
@@ -293,6 +310,32 @@ class DynamicGasInventoryProvider:
                 - float(row["time_s"])
             )
             for index, row in enumerate(packet_steps)
+        )
+        maximum_inventory_residual = max(
+            abs(initial_mass - row["cumulative_mass_out_kg"] - row["mass_kg"])
+            for row in state_history
+        )
+        maximum_pressure_residual = max(
+            abs(
+                float(model.thermo(type(state)(
+                    mass_kg=float(row["mass_kg"]),
+                    internal_energy_J=float(row["internal_energy_j"]),
+                    wall_temperature_K=float(row["wall_temperature_k"]),
+                )).pressure_Pa) - row["pressure_pa_abs"]
+            )
+            for row in state_history
+        )
+        dynamic_closure = build_dynamic_state_closure(
+            state_history,
+            max_abs_inventory_residual_kg=maximum_inventory_residual,
+            inventory_tolerance_kg=max(1.0e-10, initial_mass * 1.0e-9),
+            max_abs_pressure_residual_pa=maximum_pressure_residual,
+            pressure_tolerance_pa=max(1.0e-6, self.inlet_pressure_pa * 1.0e-10),
+            provenance=(
+                f"{model_class} recomputed pressure from its finite-volume mass, "
+                "internal-energy, and wall-temperature state before each inventory "
+                "outlet evaluation; the digest covers the complete provider history."
+            ),
         )
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
@@ -332,6 +375,7 @@ class DynamicGasInventoryProvider:
                     "diagnostic_valve_area_is_not_failure_opening": True,
                     "raw_interval_count": len(steps),
                     "packet_interval_count": len(packet_steps),
+                    "dynamic_state_closure": dynamic_closure,
                 },
             },
         }
@@ -371,8 +415,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         discharge_coefficient=args.discharge_coefficient, stroke_time_s=args.stroke_time_s)
     result = export_equipment_inventory_release_history(provider, request, release_kind="gas")
     release = result.release.model_dump(mode="json")
+    closure_audit = dynamic_state_closure_status(release)
     verification = {
-        "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "status": (
+            "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_DIAGNOSTIC"
+            if closure_audit.get("ready") is True
+            else "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED"
+        ),
         "provider_model": model_class,
         "release_mode": args.release_mode,
         "provider_result_digest": result.provider_result_digest,
@@ -391,6 +440,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "physical_validation_claim": False,
         "frequency_inference": False,
         "facility_qra_claim": False,
+        "dynamic_state_closure": {
+            "ready": closure_audit.get("ready"),
+            "blocking_reasons": closure_audit.get("blocking_reasons", []),
+            "provider_record_present": closure_audit.get("checks", {}).get("record_present", False),
+        },
         "limitations": [
             "synthetic dynamic gas-unit inventory and diagnostic valve area",
             (

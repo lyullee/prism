@@ -45,15 +45,15 @@
   "matched_event_case_record_count": 24,
   "matched_event_uncomputed_case_count": 0,
   "matched_event_failed_case_count": 0,
-  "matched_event_withheld_case_count": 16,
+  "matched_event_withheld_case_count": 14,
   "matched_event_risk_atom_event_count": 24,
   "event_count": 24,
   "case_count": 24,
   "executed_case_count": 24,
   "uncomputed_case_count": 0,
   "failed_case_count": 0,
-  "operator_limited_case_count": 16,
-  "withheld_case_count": 16,
+  "operator_limited_case_count": 14,
+  "withheld_case_count": 14,
   "risk_atom_count": 96,
   "conditional_diagnostic_facility_risk_available": true,
   "facility_total_risk_available": false,
@@ -69,7 +69,7 @@
     "orphan_binding_count": 0,
     "binding_digest": "c0a22d6b0268dd8c41f7551f97a4263f65c305664b8759dce2f9256db07f1158"
   },
-  "campaign_elapsed_ms": 812260.7239000208,
+  "campaign_elapsed_ms": 800943.9129999955,
   "packet_digests": [
     {
       "component_id": "storage-tank-01",
@@ -889,12 +889,22 @@
       "cumulative_mass_out_kg": 7.221896865709533e-06,
       "integrated_mass_kg": 7.221896865709533e-06,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "30379eabd417db916c41a2ae7900ee2648d471e45c939d341b05e4cd9e3a5c4a",
-      "provider_result_digest": "ff86542b92ba142715461fff1807e0b408006b207ace8102dcbd4e8263fffa2b",
+      "provider_packet_digest": "5b2d44800abf49531e68e921ffe330afc58a93dfa3151f1f17de1dea18c3e62b",
+      "provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971",
       "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/020_ambient-vaporizer-01_G3/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "15b6eb9b44e5150efc3352cf467f21cd4d70a11a9cfe0f15a65974e65e181384",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each native outlet evaluation; the digest covers the complete provider history."
+      }
     },
     {
       "component_id": "reliquefier-01",
@@ -1005,19 +1015,29 @@
           1.0
         ]
       ],
-      "failure_opening_diameter_m": 0.0025000000000000005,
+      "failure_opening_diameter_m": 0.0025,
       "failure_opening_diameters_m": null,
       "duration_s": 0.7,
       "available_mass_kg": 0.0008238536226639276,
-      "cumulative_mass_out_kg": 5.131372693670887e-06,
-      "integrated_mass_kg": 5.131372693670886e-06,
-      "mass_residual_kg": 8.470329472543003e-22,
-      "provider_packet_digest": "98e51dc3ebec926332562b399b0b0ba811e3fee17ff5d8cf251e382f148d703b",
-      "provider_result_digest": "cfb13ec741c6f9db4d33bc9caffe3fb0876ba4737d4121b4edfc96513776cba9",
+      "cumulative_mass_out_kg": 5.131372693670883e-06,
+      "integrated_mass_kg": 5.131372693670884e-06,
+      "mass_residual_kg": -8.470329472543003e-22,
+      "provider_packet_digest": "073ec493cc9e7e544a72540d32ea647ad2c8910e411f8f7c466a3ea3c1271677",
+      "provider_result_digest": "4ecf333fee42ddb55fe619d2496e0eeb106d90e4cd0c3a36103d6dafc1e1eb14",
       "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/023_reliquefier-01_G6/resolved_release.json",
       "termination_basis": "reviewed_isolation_success",
       "termination_provenance": "external StrokeLimitedCommandedValve reached zero opening at the declared isolation command and remained at zero flow through the observation interval",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "dad20e7eb0cf5bc731fc0ac29e5390ca1ac77de2436e5660bfdc48bc1bbd7694",
+        "max_abs_inventory_residual_kg": 2.168404344971009e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicReliquefier recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each native outlet evaluation; the digest covers the complete provider history."
+      }
     }
   ],
   "limitations": [
