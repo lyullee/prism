@@ -6429,5 +6429,11 @@
   "latest_native_external_full_scope_campaign_rebaseline_identity_match_count": 24,
   "latest_native_external_full_scope_campaign_rebaseline_result_digest_changed_count": 24,
   "latest_native_external_full_scope_campaign_rebaseline_authoritative_union_rebound": false,
-  "latest_native_external_full_scope_campaign_rebaseline_facility_qra_allowed": false
+  "latest_native_external_full_scope_campaign_rebaseline_facility_qra_allowed": false,
+  "latest_native_external_full_scope_provider_request_rebaseline_record": "examples/native_external_full_scope_provider_request_rebaseline_20261018.json",
+  "latest_native_external_full_scope_provider_request_rebaseline_status": "REQUEST_CATALOG_REBASELINE_APPLIED_QUALIFICATION_WITHHELD; 24 event requests plus 2 reliquefier endpoint requests matched; current provider digests bound; no qualification sidecar or QRA promotion",
+  "latest_native_external_full_scope_provider_request_rebaseline_event_count": 26,
+  "latest_native_external_full_scope_provider_request_rebaseline_identity_match_count": 26,
+  "latest_native_external_full_scope_provider_request_rebaseline_result_digest_changed_count": 26,
+  "latest_native_external_full_scope_provider_request_rebaseline_facility_qra_allowed": false
 }

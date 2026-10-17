@@ -5,6 +5,7 @@ import pytest
 from lh2_tno.provider_request_rebaseline import (
     ProviderRequestRebaselineError,
     rebaseline_provider_request_catalog,
+    rebaseline_provider_request_catalog_batch,
 )
 
 
@@ -101,3 +102,50 @@ def test_rebaseline_rejects_identity_mismatch():
         rebaseline_provider_request_catalog(
             _catalog(), packet, event_id=EVENT, acknowledged=True
         )
+
+
+def test_batch_rebaseline_updates_all_requests_without_promotion():
+    second_event = "facility/line/AREA_10%"
+    catalog = _catalog()
+    second = copy.deepcopy(catalog["requests"][0])
+    second["event_id"] = second_event
+    second["requests"][0]["request_id"] = second_event
+    second["requests"][0]["current_packet"]["event_id"] = second_event
+    catalog["requests"].append(second)
+    packet = _packet()
+    packet2 = copy.deepcopy(packet)
+    packet2["event_id"] = second_event
+    packet2["provider_source_digest"] = "e" * 64
+    packet2["provider_result_digest"] = "f" * 64
+    report = rebaseline_provider_request_catalog_batch(
+        catalog,
+        {EVENT: packet, second_event: packet2},
+        acknowledged=True,
+    )
+    assert report["event_count"] == 2
+    assert report["identity_match_count"] == 2
+    assert report["result_digest_changed_count"] == 2
+    assert report["catalog"]["facility_qra_allowed"] is False
+
+
+def test_batch_rebaseline_updates_two_endpoint_requests_separately():
+    catalog = _catalog()
+    endpoint = copy.deepcopy(catalog["requests"][0]["requests"][0])
+    endpoint["current_packet"]["port_id"] = "line-out-2"
+    endpoint["current_packet"]["provider_result_digest"] = "e" * 64
+    catalog["requests"][0]["requests"].append(endpoint)
+    packet1 = _packet()
+    packet2 = copy.deepcopy(packet1)
+    packet2["port_id"] = "line-out-2"
+    packet2["provider_result_digest"] = "f" * 64
+    report = rebaseline_provider_request_catalog_batch(
+        catalog,
+        {f"{EVENT}::line-out": packet1, f"{EVENT}::line-out-2": packet2},
+        acknowledged=True,
+    )
+    assert report["event_count"] == 2
+    requests = report["catalog"]["requests"][0]["requests"]
+    assert {row["current_packet"]["provider_result_digest"] for row in requests} == {
+        NEW_RESULT,
+        "f" * 64,
+    }

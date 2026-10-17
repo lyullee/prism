@@ -1,0 +1,287 @@
+{
+  "schema_version": "prism.provider_qualification_request_catalog_rebaseline.v1",
+  "status": "REQUEST_CATALOG_REBASELINE_APPLIED_QUALIFICATION_WITHHELD",
+  "acknowledged": true,
+  "event_count": 26,
+  "identity_match_count": 26,
+  "result_digest_changed_count": 26,
+  "qualified_provider_packet_count": 0,
+  "frequency_inference_allowed": false,
+  "facility_qra_allowed": false,
+  "physical_validation_claim": false,
+  "rows": [
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "port_id": "vaporizer-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "d4da7db31ed1d41128a344e5df09ef6814d993822d7677be28edec0179a9fb54",
+      "current_provider_result_digest": "ed5834cf6bc19e46030f9f4e10e570a74cee905619f3df17ee7f603471c02191",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "port_id": "vaporizer-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73",
+      "current_provider_result_digest": "d6378341caeaa7443d469562b05647b635f4abed6faa2b74ff93eca3d41d0af0",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "port_id": "vaporizer-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971",
+      "current_provider_result_digest": "42975a24fe5deca3557dbe9b047160747307db4f955b6112c375b29a62bb3cce",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "port_id": "vent-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+      "current_provider_result_digest": "badfbee5d0680a9c73c246c76c39d18b0578258f9aa29c8b5fced5e2c81d210b",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/reliquefier/G4::reliquefier-accident-out-1",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "port_id": "reliquefier-accident-out-1",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "c4851ed57197c9dcb52bc0a64449c1109e8262ee5b99c58724c2c5d881b53bb6",
+      "current_provider_result_digest": "e96ad9e37244b48745b06ed49b1122acd5b6ecbff62aa52ac0ba757f1d028bbb",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/reliquefier/G4::reliquefier-accident-out-2",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "port_id": "reliquefier-accident-out-2",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "8845cfc0ee3841f2c6edf55049bfec8d13b7cda55cdc1b5da9f543072b890897",
+      "current_provider_result_digest": "15abdc317c982164813d693348ee732716df87d7c26e3f847c17999603746fb0",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/reliquefier/G5::reliquefier-accident-out-1",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "port_id": "reliquefier-accident-out-1",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "8c247b5c1f9ddeaaacf1b7e81032118369bac1a2ba1944fadf901ce1eb391a5f",
+      "current_provider_result_digest": "d5ab539615e8b26bac1ce5bd4a93a531a1027297e1a4b631fe98d2fa704d8b0f",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/reliquefier/G5::reliquefier-accident-out-2",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "port_id": "reliquefier-accident-out-2",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "34aff9548a174db1b0bb49d96a2cfcbc4c8bb194caf1947feca4822fe84fe928",
+      "current_provider_result_digest": "da12027fd84a9a589837b2b1f74f8e6e05176988dd38fea432c2354dea496044",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "port_id": "reliquefier-accident-out-1",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "4ecf333fee42ddb55fe619d2496e0eeb106d90e4cd0c3a36103d6dafc1e1eb14",
+      "current_provider_result_digest": "ec6104dc52a2d3cfeb1712f8adf95aba0a33e030fa07cfe3a5b545b0561b5d04",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "port_id": "tank-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "5863a731614c1a73be2e62a46bf5a5f8fc71e91a04c7ef2d0dda0d6f052c45bc",
+      "current_provider_result_digest": "bb2d048ef038b2a7ebf3c810eb74cbb110a309e42dcb14bd78325d518ef363df",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "port_id": "tank-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "f711f513da677f4ffe18e5efd49663adfe201d707135c2cb9b129cc651ad7b1c",
+      "current_provider_result_digest": "1b72ccf0669a5de8a0e01fe420cc4ce4ccaa132efc433cfd6449037be9c5da39",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "port_id": "tank-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "1eaa94922fdc4ac8b42af4a9c54813d325985eaad91615ca8b672fbd636e6ace",
+      "current_provider_result_digest": "a93c107ac43e81b912e79cd0934ca7b148386d93a5cd9797b67673e3880ff269",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "port_id": "tank-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "2be9e9cf952732799314261fe32152fc0186b9a4d94cf79c26e6cede4ba7d7c1",
+      "current_provider_result_digest": "72121a7cb7a6059c7df52eff5f5135c423d24892804c3fe9bef33b62b323eae2",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "port_id": "tank-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "f496c26fe539baa1af17f069ec0e5e930f90569d8ac781f38d409914564c5979",
+      "current_provider_result_digest": "e2dca3dacce169fff97204845758642ef19a26557b726b73e0cfad3d1e980181",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "port_id": "line-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+      "current_provider_result_digest": "7f53fb80f7659f7d50f934ebfff6990b2f5c217d583157c67b6d5c0155b8ca09",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "port_id": "line-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "6be9f88022775f524497a9aebcb3532a05732f5a9aebe345e4a6db4294de9641",
+      "current_provider_result_digest": "67d1b9141a6e9bfc0fd8e3b52f812c48da1dfc324844ea2c8c0349641c79bc2f",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "port_id": "line-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "efba22e90663c30f75720d190c181d1142757b2dcaa0d46e4b2dfe187ac701a3",
+      "current_provider_result_digest": "d16448ab9eb97147ff5296c5db37a937a89a76ff0b30d96e530a50166977fecd",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "port_id": "line-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "e1a0ee052be9d2e17932952a2f1b01ae48b3aa6be0b136085fa0342ecbff09f0",
+      "current_provider_result_digest": "ae638774c3530d70fefb270791df12a2377f358ae31eb94f91b40fa65066d37c",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "port_id": "line-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
+      "current_provider_result_digest": "50e22d0bbf00484bd0abcf0aa3dafc9fe33d3a20c3433d0a23c99bbb16dde019",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "port_id": "pump-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "bb2f9d2b69bee2e61c287134daa3bea1128267dfed1ec5eea382815dd6739c36",
+      "current_provider_result_digest": "4dd3764d3309dee34b165ceaea79e8f38f57fb4d86a6b65aed45f8c8f9711090",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "port_id": "pump-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "f56da7352098b4e13910a123c133d7a865b791086b11ce3e87cf37c98ac1841c",
+      "current_provider_result_digest": "71c7f59fbd77c939f19f9f064966b4996534ed629ae01969cbde5144319d857c",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "port_id": "valve-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "adad11219a7fac005ba8888fb3ae6c9c03822c2abd5faa4a8d5d4eb1f9624541",
+      "current_provider_result_digest": "f4939c5b39c76a1049949698c5cdbcb238f1b36e90a302298caafdddc0c935fe",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "port_id": "valve-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "7e29e7aff1519ea3537c14dbfcf2a76fc0722cf78ad8289dbbff00b0a090f956",
+      "current_provider_result_digest": "8f7cd799a0866eaa982b3a7685e6b7782a8c93abc454747f2335fc5ef1ae2467",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "port_id": "valve-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "5a9b1bb78bb5c069350c1f1ce0e318a7a4ebb8186d13415139a94b7908e70b6e",
+      "current_provider_result_digest": "749d800e8f0aae1bf870c26e62dcab75cf6d70ed8e6da3cc482bf41de426e197",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "port_id": "valve-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "349de3d158514b1ecfab6ff631e94161797c72aefa6b8655e2405ce0abf3b3f2",
+      "current_provider_result_digest": "4d45d4081583c03365e12f3225898912622a1169ea126db58ba18dcfe3a07106",
+      "result_digest_changed": true
+    },
+    {
+      "request_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "port_id": "valve-accident-out",
+      "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "previous_provider_result_digest": "28be80a5f895589fb5f3ffa12c0cc385befbad509a705bac34cf3c384ad280f5",
+      "current_provider_result_digest": "33fe57831137424dba1125c4b151da94a5e21ea172323990d3843defe12f687e",
+      "result_digest_changed": true
+    }
+  ],
+  "promotion": {
+    "qualification_sidecar_created": false,
+    "provider_packet_promoted": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "physical_validation_claim": false
+  },
+  "rebaseline_date_kst": "2026-10-18",
+  "catalog_source": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
+  "current_packet_root": ".tmp_native_generic_scope_packets_latest_isolation_20261018",
+  "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "interpretation": "All 24 event requests and both reliquefier endpoint requests were rebound to current provider digests after exact identity matching. Previous digests are retained in the generated catalog; qualification evidence was not created and no QRA gate was opened."
+}

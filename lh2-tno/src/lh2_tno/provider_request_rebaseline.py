@@ -73,7 +73,9 @@ def _current_packet(packet: Mapping[str, Any]) -> dict[str, Any]:
     return result
 
 
-def _find_request(catalog: Mapping[str, Any], event_id: str) -> tuple[int, int, dict[str, Any]]:
+def _find_request(
+    catalog: Mapping[str, Any], event_id: str, *, port_id: str | None = None
+) -> tuple[int, int, dict[str, Any]]:
     rows = catalog.get("requests")
     if not isinstance(rows, list):
         raise ProviderRequestRebaselineError("catalog.requests must be a list")
@@ -85,7 +87,17 @@ def _find_request(catalog: Mapping[str, Any], event_id: str) -> tuple[int, int, 
         if not isinstance(requests, list):
             continue
         for request_index, request_value in enumerate(requests):
-            if isinstance(request_value, Mapping) and request_value.get("request_id") == event_id:
+            if (
+                isinstance(request_value, Mapping)
+                and request_value.get("request_id") == event_id
+                and (
+                    port_id is None
+                    or (
+                        isinstance(request_value.get("current_packet"), Mapping)
+                        and request_value["current_packet"].get("port_id") == port_id
+                    )
+                )
+            ):
                 matches.append((row_index, request_index, dict(request_value)))
     if len(matches) != 1:
         raise ProviderRequestRebaselineError(
@@ -99,6 +111,7 @@ def rebaseline_provider_request_catalog(
     current_packet: Mapping[str, Any] | str | Path,
     *,
     event_id: str,
+    port_id: str | None = None,
     acknowledged: bool = False,
     additional_blockers: list[str] | tuple[str, ...] = (),
 ) -> dict[str, Any]:
@@ -135,7 +148,9 @@ def rebaseline_provider_request_catalog(
             f"current packet event_id does not match requested event: {current['event_id']!r}"
         )
 
-    row_index, request_index, old_request = _find_request(source_catalog, event_id)
+    row_index, request_index, old_request = _find_request(
+        source_catalog, event_id, port_id=port_id
+    )
     old_packet = old_request.get("current_packet")
     if not isinstance(old_packet, Mapping):
         raise ProviderRequestRebaselineError("request.current_packet must be an object")
@@ -220,4 +235,95 @@ def rebaseline_provider_request_catalog(
     }
 
 
-__all__ = ["SCHEMA", "ProviderRequestRebaselineError", "rebaseline_provider_request_catalog"]
+def rebaseline_provider_request_catalog_batch(
+    catalog: Mapping[str, Any] | str | Path,
+    current_packets: Mapping[str, Mapping[str, Any] | str | Path],
+    *,
+    acknowledged: bool = False,
+    additional_blockers_by_event: Mapping[str, list[str] | tuple[str, ...]] | None = None,
+) -> dict[str, Any]:
+    """Rebaseline every request in ``current_packets`` with one acknowledgement.
+
+    The single-event function remains the identity and validation authority;
+    this wrapper only applies it repeatedly and reports an aggregate digest
+    map.  The returned catalog still has zero qualified packets and closed
+    frequency/facility-QRA gates.
+    """
+    if not acknowledged:
+        raise ProviderRequestRebaselineError(
+            "explicit acknowledgement is required to rebaseline provider request digests"
+        )
+    if not isinstance(current_packets, Mapping) or not current_packets:
+        raise ProviderRequestRebaselineError("current_packets must be a non-empty event mapping")
+    working: Mapping[str, Any] | str | Path = catalog
+    rows: list[dict[str, Any]] = []
+    for request_key in sorted(current_packets):
+        packet_value = current_packets[request_key]
+        packet_event_id = (
+            packet_value.get("event_id")
+            if isinstance(packet_value, Mapping)
+            else request_key.split("::", 1)[0]
+        )
+        if not isinstance(packet_event_id, str) or not packet_event_id:
+            raise ProviderRequestRebaselineError(
+                f"current packet mapping entry has no event_id: {request_key}"
+            )
+        blockers = (additional_blockers_by_event or {}).get(packet_event_id, ())
+        report = rebaseline_provider_request_catalog(
+            working,
+            packet_value,
+            event_id=packet_event_id,
+            port_id=(
+                packet_value.get("port_id")
+                if isinstance(packet_value, Mapping)
+                else None
+            ),
+            acknowledged=True,
+            additional_blockers=blockers,
+        )
+        working = report["catalog"]
+        row = report["rebaseline"]
+        rows.append({
+            "request_key": request_key,
+            "event_id": packet_event_id,
+            "port_id": (
+                packet_value.get("port_id")
+                if isinstance(packet_value, Mapping)
+                else None
+            ),
+            "previous_provider_source_digest": row["previous_provider_source_digest"],
+            "current_provider_source_digest": row["current_provider_source_digest"],
+            "previous_provider_result_digest": row["previous_provider_result_digest"],
+            "current_provider_result_digest": row["current_provider_result_digest"],
+            "result_digest_changed": row["previous_provider_result_digest"] != row["current_provider_result_digest"],
+        })
+    final_catalog = dict(working)
+    return {
+        "schema_version": "prism.provider_qualification_request_catalog_rebaseline.v1",
+        "status": "REQUEST_CATALOG_REBASELINE_APPLIED_QUALIFICATION_WITHHELD",
+        "acknowledged": True,
+        "event_count": len(rows),
+        "identity_match_count": len(rows),
+        "result_digest_changed_count": sum(row["result_digest_changed"] for row in rows),
+        "qualified_provider_packet_count": 0,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "physical_validation_claim": False,
+        "rows": rows,
+        "catalog": final_catalog,
+        "promotion": {
+            "qualification_sidecar_created": False,
+            "provider_packet_promoted": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "physical_validation_claim": False,
+        },
+    }
+
+
+__all__ = [
+    "SCHEMA",
+    "ProviderRequestRebaselineError",
+    "rebaseline_provider_request_catalog",
+    "rebaseline_provider_request_catalog_batch",
+]
