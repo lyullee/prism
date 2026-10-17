@@ -2,6 +2,15 @@
   "schema_version": "prism.consequence_backend_chain_contract.v1",
   "contract_id": "prism-lh2-outdoor-release-to-harm-v1",
   "description": "Declared outdoor LH2 consequence chain used by the diagnostic facility campaign.",
+  "required_campaign_fields": [
+    "annual_conditions",
+    "population_accounting",
+    "conditional_diagnostic_facility_risk_available",
+    "conditional_diagnostic_facility_annual_ir_low_high",
+    "conditional_diagnostic_facility_expected_death_fn_low_high",
+    "facility_total_risk_available",
+    "complete_facility_qra_claim"
+  ],
   "stages": [
     {
       "stage_id": "source",
@@ -61,15 +70,47 @@
         "inventory_over_600s",
         "vertical_handoff"
       ],
-      "required_case_fields": ["provider_packet_identity", "termination", "mass_ledger.released_kg", "domain_assessment"],
-      "required_atom_fields": ["receptor_harm_low_high", "expected_deaths_low_high"]
+      "required_case_fields": [
+        "provider_packet_identity",
+        "termination",
+        "mass_ledger.released_kg",
+        "domain_assessment",
+        "annual_condition_id",
+        "annual_condition_probability",
+        "release_branch_probability",
+        "initiating_frequency_per_year"
+      ],
+      "required_atom_fields": [
+        "annual_condition_id",
+        "release_branch_id",
+        "ignition_branch",
+        "conditional_weight",
+        "receptor_harm_low_high",
+        "expected_deaths_low_high"
+      ]
     },
     {
       "path_id": "two_sided_rupture_harm",
       "stage_ids": ["endpoint_a", "endpoint_aggregation", "endpoint_b"],
       "scenario_families": ["two_sided_rupture"],
-      "required_case_fields": ["provider_packet_identity", "termination", "mass_ledger.released_kg", "domain_assessment"],
-      "required_atom_fields": ["receptor_harm_low_high", "expected_deaths_low_high"]
+      "required_case_fields": [
+        "provider_packet_identity",
+        "termination",
+        "mass_ledger.released_kg",
+        "domain_assessment",
+        "annual_condition_id",
+        "annual_condition_probability",
+        "release_branch_probability",
+        "initiating_frequency_per_year"
+      ],
+      "required_atom_fields": [
+        "annual_condition_id",
+        "release_branch_id",
+        "ignition_branch",
+        "conditional_weight",
+        "receptor_harm_low_high",
+        "expected_deaths_low_high"
+      ]
     }
   ],
   "policy": {

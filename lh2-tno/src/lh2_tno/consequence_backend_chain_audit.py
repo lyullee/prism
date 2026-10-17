@@ -94,6 +94,23 @@ def audit_consequence_backend_chain(
     if dispersion_stage is not None and "SLABx" not in dispersion_stage["owner"]:
         blockers.append("near-field/dispersion stage owner does not declare SLABx-LH2")
 
+    campaign_fields_raw = backend_contract.get("required_campaign_fields", [])
+    if not isinstance(campaign_fields_raw, Sequence) or isinstance(campaign_fields_raw, (str, bytes)):
+        blockers.append("backend_contract.required_campaign_fields must be an array")
+        campaign_fields_raw = []
+    required_campaign_fields = [
+        str(field).strip() for field in campaign_fields_raw if str(field).strip()
+    ]
+    missing_campaign_fields = [
+        field for field in required_campaign_fields
+        if not _has_path(campaign_result, field)
+    ]
+    if missing_campaign_fields:
+        blockers.append(
+            "campaign result is missing required facility field(s): "
+            f"{missing_campaign_fields}"
+        )
+
     path_rows_raw = backend_contract.get("paths")
     if path_rows_raw is None:
         path_rows_raw = [{
@@ -254,6 +271,8 @@ def audit_consequence_backend_chain(
         "stage_coverage": stage_coverage,
         "stage_missing_counts": stage_missing_counts,
         "missing_field_counts": missing_field_counts,
+        "required_campaign_fields": required_campaign_fields,
+        "missing_campaign_fields": missing_campaign_fields,
         "missing_backend_digest_case_count": missing_digest_count,
         "case_rows": case_rows,
         "blocking_reasons": list(dict.fromkeys(blockers)),

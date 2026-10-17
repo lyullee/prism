@@ -47,6 +47,12 @@ match.  A case with a named accident family cannot fall back to a generic
 release path.  If no contract path lists that family, the case is reported as
 uncomputed and its IR/F-N contribution is withheld.
 
+The same contract now requires the facility-level diagnostic fields for the
+annual weather and population partition, conditional individual risk, and
+conditional F-N result.  These fields prove that the aggregation interface
+was exercised; their presence does not promote synthetic conditions or
+operator-limited releases to a qualified facility QRA.
+
 ## Reproduction
 
 Run from the `lh2-tno` package directory:

@@ -96,3 +96,20 @@ def test_published_lh2_backend_contract_lists_every_declared_accident_family() -
         row["family"] for row in accident_scenario_catalog()
     } <= declared
 
+
+def test_backend_chain_requires_declared_facility_aggregate_fields() -> None:
+    contract = deepcopy(CONTRACT)
+    contract["required_campaign_fields"] = [
+        "annual_conditions",
+        "conditional_diagnostic_facility_expected_death_fn_low_high",
+    ]
+    campaign = {"status": "PARTIAL_FACILITY_SCOPE", "cases": [_case()]}
+    campaign["annual_conditions"] = []
+
+    report = audit_consequence_backend_chain(campaign, contract)
+
+    assert report["status"] == "INCOMPLETE_CONSEQUENCE_BACKEND_CHAIN"
+    assert report["missing_campaign_fields"] == [
+        "conditional_diagnostic_facility_expected_death_fn_low_high"
+    ]
+
