@@ -4401,7 +4401,7 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_entry_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_promotion_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; sidecar files present 0; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_event_row_count": 24,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_release_identity_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_exact_match_count": 0,
@@ -4627,5 +4627,6 @@
   "ijhe_completion_audit_latest_verification_after_termination_request_fix_record": "results/20261017/latest_ijhe_audit_verification_after_termination_request_fix.json",
   "ijhe_completion_audit_latest_verification_after_termination_request_fix_status": "PASS; release-closure request tightening leaves the latest 57-check audit internally consistent; facility QRA remains withheld",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 26 release identities audited, 0 exact qualified sidecars; request kinds now reflect termination-ledger closure"
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 26 release identities audited, 0 exact qualified sidecars; request kinds now reflect termination-ledger closure",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_sidecar_present_count": 0
 }
