@@ -752,13 +752,13 @@
       "name": "diagnostic_adapter_execution_contract",
       "status": "PASS",
       "evidence": {
-        "source": "diagnostic_adapter_registry",
-        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED",
+        "source": "current_status",
+        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED; 7/7 PRISM-side adapter classes resolved, 0 provider instances and 0 qualified packets",
         "adapter_count": 7,
         "resolved_adapter_count": 7,
         "provider_instance_count": 0,
         "qualified_provider_packet_count": 0,
-        "record": null
+        "record": "results/20261014/diagnostic_adapter_registry_audit_live.json"
       },
       "blocking_reason": null
     },
@@ -898,6 +898,12 @@
             "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
             "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
           },
+          "population_source_status_counts": {
+            "unqualified": 5
+          },
+          "population_source_digest_count": 0,
+          "population_source_unqualified_row_count": 5,
+          "population_source_qualification_status": "UNQUALIFIED_SYNTHETIC_OR_UNVERIFIED",
           "receptor_ids": [
             "worker-01"
           ]
@@ -2453,8 +2459,8 @@
                 "time_s": 0.5,
                 "provenance": "selected exact strict emergency-relief worklist packet; provider clock retained"
               },
-              "isolation_status": "not_declared",
-              "inventory_status": "not_inventory_termination",
+              "isolation_status": "not_applicable",
+              "inventory_status": "not_applicable",
               "provider": {
                 "packet_consumed": true,
                 "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -4329,6 +4335,10 @@
           "conditional_uncomputed_case_count": 0,
           "overlapping_case_uncomputed_count": 29,
           "risk_atom_count": 176,
+          "zero_harm_atom_count": 176,
+          "positive_harm_atom_count": 0,
+          "zero_expected_death_atom_count": 176,
+          "positive_expected_death_atom_count": 0,
           "annual_condition_count": 5,
           "population_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
           "population_row_count": 5,
@@ -4430,6 +4440,11 @@
             "EXECUTED": 15,
             "EXECUTED_OPERATOR_LIMITED": 29
           },
+          "dynamic_state_closure_status_counts": {
+            "NOT_DECLARED": 44
+          },
+          "dynamic_state_closure_ready_case_count": 0,
+          "dynamic_state_closure_blocked_case_count": 0,
           "uncomputed_status_counts": {
             "EXECUTED_OPERATOR_LIMITED": 29
           },
@@ -4440,6 +4455,37 @@
           "not_numerically_executed_case_count": 0,
           "qualified_evidence_withheld_case_count": 29,
           "numerically_executed_case_count": 44,
+          "risk_atom_case_traceability": {
+            "schema_version": "prism.facility_case_risk_atom_trace.v1",
+            "status": "CLOSED",
+            "risk_atom_count": 176,
+            "matched_risk_atom_count": 176,
+            "exact_case_match_count": 0,
+            "case_parent_no_ignition_match_count": 176,
+            "legacy_event_only_match_count": 0,
+            "eligible_risk_atom_count": 60,
+            "withheld_risk_atom_count": 116,
+            "unmatched_risk_atom_count": 0,
+            "ambiguous_risk_atom_count": 0,
+            "uncomputed_case_row_count": 29,
+            "case_status_atom_counts": {
+              "EXECUTED": 60,
+              "EXECUTED_OPERATOR_LIMITED": 116
+            },
+            "case_match_kind_counts": {
+              "CASE_PARENT_NO_IGNITION": 176
+            },
+            "strict_facility_qra_promotion_blocked": true,
+            "blocking_reasons": [
+              "116 risk atoms are linked to non-EXECUTED case status"
+            ],
+            "policy": {
+              "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
+              "withheld_case_atoms_excluded_from_strict_facility_qra": true,
+              "missing_case_status_is_not_inferred": true,
+              "frequency_reallocation_performed": false
+            }
+          },
           "observed_component_count": 9,
           "expected_component_count": 9,
           "component_status_counts": {
@@ -4479,6 +4525,11 @@
               "case_status_counts": {
                 "EXECUTED": 3
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 3
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {},
               "strict_gate_categories": [],
               "frequency_is_not_reallocated": true
@@ -4510,6 +4561,11 @@
               "case_status_counts": {
                 "EXECUTED": 10
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 10
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {},
               "strict_gate_categories": [],
               "frequency_is_not_reallocated": true
@@ -4549,6 +4605,11 @@
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 5
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
               },
@@ -4587,6 +4648,11 @@
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 2
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 2
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 2
               },
@@ -4623,6 +4689,11 @@
               "case_status_counts": {
                 "EXECUTED": 1
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 1
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {},
               "strict_gate_categories": [],
               "frequency_is_not_reallocated": true
@@ -4646,6 +4717,9 @@
               "numerically_executed_case_count": 0,
               "risk_atom_count": 0,
               "case_status_counts": {},
+              "dynamic_state_closure_status_counts": {},
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {},
               "strict_gate_categories": [
                 "FAMILY_SCOPE_PARTIAL"
@@ -4684,6 +4758,11 @@
                 "EXECUTED": 1,
                 "EXECUTED_OPERATOR_LIMITED": 2
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 3
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 2
               },
@@ -4728,6 +4807,11 @@
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 5
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
               },
@@ -4772,6 +4856,11 @@
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 5
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
               },
@@ -4808,6 +4897,11 @@
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 10
               },
+              "dynamic_state_closure_status_counts": {
+                "NOT_DECLARED": 10
+              },
+              "dynamic_state_closure_ready_case_count": 0,
+              "dynamic_state_closure_blocked_case_count": 0,
               "strict_uncomputed_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 10
               },
@@ -4819,7 +4913,7 @@
             }
           },
           "required_accident_family_count": 12,
-          "scope_blocker_count": 20
+          "scope_blocker_count": 21
         },
         "facility_total_risk_available": false,
         "complete_facility_qra_claim": false,
@@ -4905,18 +4999,11 @@
       "blocking_reason": "facility release boundary is not closed across all declared cases",
       "evidence": {
         "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "schema": "prism.facility_release_boundary_gate.v1",
         "schema_version": "prism.facility_release_boundary_gate.v1",
         "strict_release_boundary_ready": false,
         "case_count": 44,
-        "withheld_case_count": 29,
-        "termination_basis_counts": {
-          "emergency_relief_discharge": 1,
-          "inventory_depletion": 25,
-          "inventory_over_600s": 1,
-          "reviewed_isolation_success": 15,
-          "two_sided_rupture": 2
-        },
-        "checks": {
+        "facility_gate_checks": {
           "all_rows_complete": false,
           "all_termination_bases_allowed": false,
           "all_isolation_or_inventory_statuses_closed": true,
@@ -4968,12 +5055,75 @@
           "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
           "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
         ],
-        "residual_tolerance_kg": 1e-08,
-        "provider_qualification_evaluated": false,
-        "independent_physical_validation_claim": false,
-        "frequency_inference_performed": false,
-        "facility_ir_fn_promotion": false,
-        "policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates"
+        "promotion_policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates",
+        "raw_ledger_reconciliation": {
+          "status": "MATCHED",
+          "compared_fields": [
+            "schema_version",
+            "strict_release_boundary_ready",
+            "case_count",
+            "withheld_case_count",
+            "checks",
+            "blocking_reasons",
+            "residual_tolerance_kg"
+          ],
+          "mismatched_fields": [],
+          "recomputed_schema_version": "prism.facility_release_boundary_gate.v1",
+          "recomputed_case_count": 44,
+          "recomputed_withheld_case_count": 29,
+          "recomputed_checks": {
+            "all_rows_complete": false,
+            "all_termination_bases_allowed": false,
+            "all_isolation_or_inventory_statuses_closed": true,
+            "all_mass_residuals_closed": false,
+            "all_provider_mass_balances_closed": true,
+            "no_withheld_cases": false
+          },
+          "recomputed_blocking_reasons": [
+            "29 case(s) are withheld from the release ledger",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+            "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+            "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+            "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+            "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
+          ]
+        }
       },
       "interpretation": "Every declared case must have an allowed provider-owned termination basis and a closed mass/inventory ledger before the facility chain can be promoted. This gate does not assign frequency or validate physics."
     },
@@ -4983,12 +5133,19 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "scenario_count": 5,
-        "valid_scenario_count": 5,
-        "facility_credible_interval": false,
-        "fresh_physics_executed": false,
-        "correlation_comparison_present": true,
-        "conditional_diagnostic_facility_risk": "each scenario reweights the saved risk atoms and exposes a conditional facility IR/F-N diagnostic; incomplete scope, synthetic horizons, and operator limits still withhold a qualified facility total"
+        "scenario_count": 0,
+        "valid_scenario_count": 0,
+        "facility_credible_interval": null,
+        "fresh_physics_executed": null,
+        "correlation_comparison_present": null,
+        "conditional_diagnostic_facility_risk": null,
+        "facility_frequency_uncertainty_audit": {
+          "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_frequency_uncertainty_audit.json",
+          "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+          "scenario_count": 5,
+          "risk_atom_count": 176,
+          "mismatch_count": 0
+        }
       },
       "interpretation": "Published frequency scenarios are re-applied to saved diagnostic risk atoms and asset rankings; this does not create a complete-facility confidence interval or claim fresh-physics validation."
     },
@@ -5243,12 +5400,12 @@
       "name": "provider_worklist_coverage",
       "status": "PASS",
       "evidence": {
-        "source": "provider_worklist",
-        "status": "READY_FOR_PROVIDER_PACKETS",
+        "source": "current_status",
+        "status": "STRUCTURAL_CATALOGS_AVAILABLE; 24 synthetic provider packets exact-matched; actual qualified packet count remains 0; mixed campaign execution is partial and fail-closed",
         "frequency_event_count": 24,
-        "provider_packet_count": 0,
-        "uncomputed_provider_packet_count": 24,
-        "diagnostic_release_adapter_component_count": null,
+        "provider_packet_count": 24,
+        "uncomputed_provider_packet_count": 0,
+        "diagnostic_release_adapter_component_count": 7,
         "structural_diagnostic_coverage": true,
         "native_scope_catalog_structural_coverage": true,
         "native_scope_catalog_evidence": {
@@ -5407,10 +5564,17 @@
       "name": "frequency_uncertainty_reported",
       "status": "PASS",
       "evidence": {
-        "uncertainty_result_present": true,
-        "scenario_count": 5,
-        "facility_credible_interval": false,
-        "conditional_frequency_uncertainty": true
+        "uncertainty_result_present": false,
+        "scenario_count": 0,
+        "facility_credible_interval": null,
+        "conditional_frequency_uncertainty": true,
+        "facility_frequency_uncertainty_audit": {
+          "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_frequency_uncertainty_audit.json",
+          "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+          "scenario_count": 5,
+          "risk_atom_count": 176,
+          "mismatch_count": 0
+        }
       },
       "blocking_reason": null
     },
@@ -5433,7 +5597,7 @@
       "evidence": {
         "implemented": true,
         "module": "src/lh2_tno/service.py",
-        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; latest local full suite 1281 passed, 1 warning; GitHub Actions run 38947028662 completed successfully.",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1504 passed, 1 warning; GitHub Actions run 39073656583 (bd168e8f) completed successfully.",
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null
@@ -5480,6 +5644,29 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
+    },
+    {
+      "name": "facility_qra_gate_summary",
+      "status": "PASS",
+      "evidence": {
+        "status": "FACILITY_QRA_WITHHELD",
+        "promotion_allowed": false,
+        "facility_qra_claim": false,
+        "gate_names": [
+          "case_traceability",
+          "facility_scope",
+          "frequency_port_binding",
+          "physical_validation",
+          "provider_qualification",
+          "release_boundary"
+        ],
+        "incomplete_gate_count": 5,
+        "blocking_reason_count": 50,
+        "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_qra_gate_summary.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": false,
+      "interpretation": "The unified gate summary is a structural promotion control. It does not create provider evidence, physical validation, frequency, or risk atoms."
     },
     {
       "name": "scope_ledger_consistency",
@@ -5901,6 +6088,93 @@
       "interpretation": "The external DynamicVaporizer branch carries an explicit isolation command and post-close zero-flow observation. It may enter the diagnostic vaporizer-hole chain, but synthetic geometry and absent qualification keep facility promotion closed."
     },
     {
+      "name": "diagnostic_external_pump_test_point_audit",
+      "status": "PASS",
+      "evidence": {
+        "record": "examples\\external_pump_test_point_audit_20261018.json",
+        "schema_version": "prism.external_pump_test_point_audit.v1",
+        "status": "TEST_POINTS_EXTRACTED_CONFIGURATION_REVIEW_REQUIRED",
+        "document_count": 2,
+        "test_point_count": 8,
+        "prism_component_id": "liquid-transfer-pump-01",
+        "configuration_match_status": "UNREVIEWED",
+        "holdout_status": "NOT_STARTED",
+        "blocking_reasons": [
+          "exact PRISM pump configuration and port are not reviewed as matched",
+          "independent no-fit holdout comparison is not completed and reviewed",
+          "independent holdout result is absent"
+        ],
+        "promotion_allowed": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "External pump test points are tracked as provenance-bound candidate comparison inputs. Configuration matching and independent holdout review remain explicit gates; this check never creates a release packet, frequency, physical-validation claim, or facility QRA result."
+    },
+    {
+      "name": "diagnostic_nasa_tn_d4171_hem_benchmark",
+      "status": "PASS",
+      "evidence": {
+        "record": "examples\\external_nasa_tn_d4171_hem_audit_20261018.json",
+        "source_report": "NASA TN D-4171",
+        "status": "NEGATIVE_BASELINE_VALIDATION_EVIDENCE",
+        "point_count": 21,
+        "heating_modes": [
+          "lower",
+          "uniform",
+          "upper"
+        ],
+        "overall": {
+          "count": 21,
+          "mean_predicted_over_observed": 0.47970035197664584,
+          "mean_absolute_percentage_error_percent": 52.02996480233541,
+          "normalized_rmse": 0.3703297787584494
+        },
+        "promotion_allowed": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "This negative benchmark records a model limitation for homogeneous-equilibrium storage pressure dynamics. It supports model selection and uncertainty discussion, but does not validate the facility chain or create a QRA promotion basis."
+    },
+    {
+      "name": "diagnostic_external_release_artifact_intake",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261115\\external_native_contract_intake_current.json",
+        "schema_version": "prism.external_release_artifact_intake.v1",
+        "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
+        "artifact_file_count": 7,
+        "release_row_count": 7,
+        "qualification_file_count": 0,
+        "qualified_sidecar_row_count": 0,
+        "closure_ready_row_count": 0,
+        "closure_status_counts": {
+          "CLOSURE_EVIDENCE_OPEN": 7
+        },
+        "provider_response_pair_count": 7,
+        "provider_response_normalized_count": 7,
+        "provider_response_mismatch_count": 0,
+        "provider_response_result_digest_bound_count": 7,
+        "provider_source_state_complete_count": 2,
+        "provider_source_state_incomplete_count": 2,
+        "compressible_handoff_candidate_count": 4,
+        "compressible_handoff_blocked_count": 2,
+        "actual_origin_row_count": 0,
+        "synthetic_or_model_prediction_row_count": 7,
+        "error_count": 0,
+        "policy": {
+          "frequency_assigned": false,
+          "provider_release_packet_promoted": false,
+          "physical_validation_promoted": false,
+          "facility_qra_promoted": false,
+          "qualification_requires_exact_digest_bound_sidecar": true,
+          "provider_ports_never_substituted_for_frequency_ports": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. When a sibling provider_response.json exists, its identity, clock, inventory, termination declaration, source digest, and explicit mass/isolation evidence are also compared. Gas-shaped responses are also checked for the exact source/throat fields required by the optional compressible handoff; missing fields block that adapter and never fall back to atmospheric packet velocity. A normalized response remains diagnostic: synthetic or model-prediction rows still require a separate exact provider qualification sidecar, and no frequency or facility QRA is inferred."
+    },
+    {
       "name": "diagnostic_facility_evidence_request_coverage",
       "status": "PASS",
       "evidence": {
@@ -5911,7 +6185,7 @@
         "assessment_case_count": 44,
         "family_request_count": 12,
         "component_request_count": 9,
-        "blocking_reason_count": 20,
+        "blocking_reason_count": 21,
         "case_identity_complete": true,
         "facility_total_risk_available": false,
         "complete_facility_qra_claim": false,
@@ -6160,68 +6434,6 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The digital-twin view exposes release-boundary, provider-qualification, independent-validation and facility IR/F-N gates separately. A diagnostic gate status never opens facility-QRA promotion."
-    },
-    {
-      "name": "diagnostic_external_release_artifact_intake",
-      "status": "PASS",
-      "evidence": {
-        "record": "results\\20261115\\external_native_contract_intake_current.json",
-        "schema_version": "prism.external_release_artifact_intake.v1",
-        "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
-        "artifact_file_count": 7,
-        "release_row_count": 7,
-        "qualification_file_count": 0,
-        "qualified_sidecar_row_count": 0,
-        "closure_ready_row_count": 0,
-        "closure_status_counts": {
-          "CLOSURE_EVIDENCE_OPEN": 7
-        },
-        "actual_origin_row_count": 0,
-        "synthetic_or_model_prediction_row_count": 7,
-        "error_count": 0,
-        "policy": {
-          "frequency_assigned": false,
-          "provider_release_packet_promoted": false,
-          "physical_validation_promoted": false,
-          "facility_qra_promoted": false,
-          "qualification_requires_exact_digest_bound_sidecar": true,
-          "provider_ports_never_substituted_for_frequency_ports": true
-        },
-        "provider_response_pair_count": 7,
-        "provider_response_normalized_count": 7,
-        "provider_response_mismatch_count": 0,
-        "provider_response_result_digest_bound_count": 7,
-        "provider_source_state_complete_count": 2,
-        "provider_source_state_incomplete_count": 2,
-        "compressible_handoff_candidate_count": 4,
-        "compressible_handoff_blocked_count": 2
-      },
-      "blocking_reason": null,
-      "diagnostic_only": true,
-      "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Sibling provider responses are compared for identity, clock, mass, termination, source-digest, and canonical result-digest consistency. Gas-shaped responses are also checked for the exact provider source/throat fields required by the optional compressible handoff; the current valve and vent rows are explicitly blocked because those states are missing, and atmospheric packet velocity is never substituted. All seven pairs remain diagnostic model-prediction rows without qualification sidecars; no frequency, physical-validation, or facility QRA is inferred."
-    },
-    {
-      "name": "facility_qra_gate_summary",
-      "status": "PASS",
-      "evidence": {
-        "status": "FACILITY_QRA_WITHHELD",
-        "promotion_allowed": false,
-        "facility_qra_claim": false,
-        "gate_names": [
-          "case_traceability",
-          "facility_scope",
-          "frequency_port_binding",
-          "physical_validation",
-          "provider_qualification",
-          "release_boundary"
-        ],
-        "incomplete_gate_count": 5,
-        "blocking_reason_count": 50,
-        "record": "results\\\\20261115\\\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\\\facility_qra_gate_summary.json"
-      },
-      "blocking_reason": null,
-      "diagnostic_only": false,
-      "interpretation": "The unified gate summary is a structural promotion control. It does not create provider evidence, physical validation, frequency, or risk atoms."
     }
   ],
   "blocking_reasons": [
