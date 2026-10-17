@@ -38,6 +38,16 @@
     "endpoint_b": 0
   },
   "missing_field_counts": {},
+  "required_campaign_fields": [
+    "annual_conditions",
+    "population_accounting",
+    "conditional_diagnostic_facility_risk_available",
+    "conditional_diagnostic_facility_annual_ir_low_high",
+    "conditional_diagnostic_facility_expected_death_fn_low_high",
+    "facility_total_risk_available",
+    "complete_facility_qra_claim"
+  ],
+  "missing_campaign_fields": [],
   "missing_backend_digest_case_count": 0,
   "case_rows": [
     {

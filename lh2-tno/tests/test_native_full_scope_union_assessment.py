@@ -188,6 +188,16 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert consequence_backend_chain_audit["case_count"] == 44
     assert consequence_backend_chain_audit["closed_case_count"] == 44
     assert consequence_backend_chain_audit["stage_count"] == 8
+    assert consequence_backend_chain_audit["required_campaign_fields"] == [
+        "annual_conditions",
+        "population_accounting",
+        "conditional_diagnostic_facility_risk_available",
+        "conditional_diagnostic_facility_annual_ir_low_high",
+        "conditional_diagnostic_facility_expected_death_fn_low_high",
+        "facility_total_risk_available",
+        "complete_facility_qra_claim",
+    ]
+    assert consequence_backend_chain_audit["missing_campaign_fields"] == []
     assert provider_packet_collection_manifest["schema"] == (
         "prism.provider_packet_collection_manifest.v1"
     )
