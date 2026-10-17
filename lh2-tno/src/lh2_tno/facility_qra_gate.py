@@ -59,9 +59,14 @@ def build_facility_qra_gate_summary(
         ledger.get("risk_atom_case_traceability"),
         "assessment.facility_risk_ledger.risk_atom_case_traceability",
     )
-    provider_gate = _mapping(
-        assessment.get("provider_qualification_coverage"),
-        "assessment.provider_qualification_coverage",
+    # The facility-scope assessment and the provider-qualification audit are
+    # separate ledgers.  A full-scope assessment may therefore not carry the
+    # provider-coverage projection that exists in the qualification-focused
+    # assessment.  Treat an absent projection as an incomplete gate rather
+    # than rejecting the whole summary or treating the missing value as pass.
+    provider_gate_value = assessment.get("provider_qualification_coverage")
+    provider_gate = (
+        provider_gate_value if isinstance(provider_gate_value, Mapping) else {}
     )
 
     gates: dict[str, dict[str, Any]] = {}

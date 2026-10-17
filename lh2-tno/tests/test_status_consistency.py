@@ -72,7 +72,7 @@ def test_current_union_pointer_evidence_reports_current_audit_counts() -> None:
     assert report["status"] == "CONSISTENT"
     for name in ("current_status_audit_pointer", "development_goal_audit_pointer"):
         evidence = next(row for row in report["checks"] if row["name"] == name)["evidence"]
-        assert evidence["check_count"] == 56
+        assert evidence["check_count"] == 57
         assert evidence["blocking_reason_count"] == 5
         gate_check = next(
             row for row in load_json_object(CURRENT_AUDIT)["checks"]

@@ -23,15 +23,19 @@ Rebuild the current summary with:
 
 ```powershell
 python scripts/build_facility_qra_gate_summary.py `
-  --assessment results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json `
+  --assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
   --provider-audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
   --validation-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json `
   --output results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json
 ```
 
-The current record is `FACILITY_QRA_WITHHELD`. The frequency-port gate is
-aligned, but the declared scope retains 11 withheld cases, qualified provider
-packets are `0/26`, and the physical-validation matrix remains restricted.
+The current record is `FACILITY_QRA_WITHHELD`. The full union contains 34
+events and 44 cases; 29 cases remain withheld by the strict release boundary.
+The frequency-port gate is aligned, qualified provider packets are `0/26`, and
+the physical-validation matrix remains restricted. The summary currently has
+47 explicit blocking reasons. The provider qualification audit remains a
+separate input, so missing provider evidence cannot be hidden by the full-scope
+assessment.
 The summary is therefore a review control and does not claim a regulatory or
 publication-ready facility QRA.
 

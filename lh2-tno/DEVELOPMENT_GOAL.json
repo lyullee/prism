@@ -1457,7 +1457,7 @@
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 56 checks, 51 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; forecast facility campaign evidence gate is withheld",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "dynamic_state_closure_ledger_audit_latest_record": "results/20261115/dynamic_state_closure_ledger_audit_current.json",
   "dynamic_state_closure_ledger_audit_latest_status": "BLOCKED; 40 checks, 29 blocked; the saved 44-case campaign/facility snapshot predates explicit dynamic-state closure coverage fields; no closure status is inferred",
   "dynamic_state_closure_ledger_audit_policy": "The audit recomputes explicit READY/BLOCKED/NOT_DECLARED/NOT_EVALUATED case identities and compares campaign, facility and component ledgers; BLOCKED is evidence of a missing or inconsistent ledger, not zero risk or provider qualification",
@@ -1494,10 +1494,10 @@
   "equipment_state_release_audit_record": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
   "equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases, 9 components; synthetic-horizon termination basis/provider echo present in 10 cases; all remain operator-limited",
   "ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 51,
+    "PASS": 52,
     "BLOCKED": 5
   },
-  "ijhe_completion_audit_latest_check_count": 56,
+  "ijhe_completion_audit_latest_check_count": 57,
   "ijhe_completion_audit_latest_blocking_reason_count": 5,
   "ijhe_completion_audit_latest_blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
@@ -2370,7 +2370,7 @@
   "facility_assessment_latest_provider_qualification_complete": false,
   "scope_matrix_latest_record": "results/20261031/native_full_scope_union_pipefix_state_bound/scope_matrix.json",
   "ijhe_audit_latest_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 56 checks, 51 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; forecast facility campaign evidence gate is withheld",
+  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "ijhe_audit_latest_blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
@@ -2385,7 +2385,7 @@
   "scope_matrix_conditional_blocking_reasons": [],
   "scope_matrix_conditional_uncomputed_case_count": 0,
   "scope_matrix_conditional_status_policy": "Numerical execution and facility qualification are reported separately; operator-limited cases never open facility IR/F-N.",
-  "ijhe_audit_latest_check_count": 56,
+  "ijhe_audit_latest_check_count": 57,
   "ijhe_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; local full suite 1337 passed, 1 warning; facility QRA remains fail-closed",
   "ijhe_audit_latest_conditional_scope_check_status": "PASS diagnostic-only; all 12 declared families have numerical conditional execution; strict facility matrix remains partial",
   "facility_ledger_latest_conditional_case_count": 44,
@@ -2734,9 +2734,9 @@
   "facility_release_boundary_gate_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
   "facility_release_boundary_gate_completion_audit_record": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json",
   "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 4 completion-audit tests, public assessment propagation assertion, union case-coverage/raw-ledger reconciliation assertions, and state-snapshot result-binding tests; full portable suite 707 passed, 1 skipped",
-  "v060_ijhe_completion_audit_latest_check_count": 56,
+  "v060_ijhe_completion_audit_latest_check_count": 57,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 51,
+    "PASS": 52,
     "BLOCKED": 5
   },
   "v060_ijhe_completion_audit_latest_blocked_checks": [
@@ -4174,7 +4174,7 @@
   "external_release_compressible_handoff_blocked_count": 2,
   "external_release_response_normalization_promotion": false,
   "external_release_response_normalization_interpretation": "All seven native provider_response/resolved_release pairs agree on identity, clock, mass, termination declaration, source digest, and canonical provider result digest. Four gas-shaped rows are candidates for the optional compressible handoff: reliquefier and vaporizer have complete provider source/throat states, while valve and vent are explicitly blocked for missing states; atmospheric packet velocity is never substituted. Model-prediction origin, residual inventory, diagnostic horizons, qualification, physical validation, frequency, and facility QRA remain explicitly open.",
-  "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current release-boundary and facility-case coverage evidence refreshed; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
+  "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "inspection_center_operation_sequence_evidence_record": "results/20261115/inspection_center_operation_sequence_evidence.json",
   "inspection_center_operation_sequence_evidence_status": "OPERATION_SEQUENCE_SCREENED_DIAGNOSTIC_ONLY; explicit 6.5 bar vent and 6.0 bar close labels retained as owner-review candidates",
   "inspection_center_operation_sequence_release_boundary_closed": false,
@@ -4419,7 +4419,7 @@
   "facility_qra_gate_summary_module": "src/lh2_tno/facility_qra_gate.py",
   "facility_qra_gate_summary_script": "scripts/build_facility_qra_gate_summary.py",
   "facility_qra_gate_summary_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json",
-  "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD; six-gate reconciliation; diagnostic facility risk available; 25 explicit blocking reasons",
+  "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD; six-gate reconciliation over full union (34 events/44 cases); diagnostic facility risk available; 47 explicit blocking reasons",
   "facility_qra_gate_summary_promotion_allowed": false,
   "facility_qra_gate_summary_frequency_port_gate_aligned": true,
   "facility_qra_gate_summary_provider_qualification_complete": false,
@@ -4436,7 +4436,7 @@
   "validation_evidence_matrix_current_20261115_slabx_independent_domain": "INDEPENDENT_COMPARISON_REVIEW_READY; physical-validation claim false",
   "validation_evidence_matrix_current_20261115_rebuild_options": "--slabx-direct-comparison-evidence; --slabx-independent-comparison-evidence",
   "ijhe_completion_audit_current_20261115_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "ijhe_completion_audit_current_20261115_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; unified facility-QRA gate summary check PASS; promotion remains withheld",
+  "ijhe_completion_audit_current_20261115_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "ijhe_completion_audit_current_20261115_check_count": 57,
   "ijhe_completion_audit_current_20261115_blocking_reason_count": 5,
   "ijhe_completion_audit_current_20261115_validation_matrix_domain_count": 9,

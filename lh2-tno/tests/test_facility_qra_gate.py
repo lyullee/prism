@@ -100,3 +100,30 @@ def test_facility_qra_gate_withholds_restricted_validation_and_provider():
     assert result["gates"]["provider_qualification"]["complete"] is False
     assert result["gates"]["physical_validation"]["complete"] is False
     assert result["policy"]["missing_evidence_assigned_zero_risk"] is False
+
+
+def test_facility_qra_gate_uses_full_scope_without_provider_projection():
+    assessment, provider, validation = _inputs()
+    assessment.pop("provider_qualification_coverage")
+    provider["qualified_provider_packet_count"] = 0
+    provider["status"] = "NO_QUALIFIED_PROVIDER_EVIDENCE"
+    validation["status"] = "RESTRICTED_EVIDENCE_MATRIX"
+    validation["decision"] = "FACILITY_QRA_WITHHELD"
+    for field in (
+        "physical_validation_claim",
+        "full_chain_validation_claim",
+        "accident_release_validation_claim",
+        "facility_qra_claim",
+    ):
+        validation[field] = False
+    result = build_facility_qra_gate_summary(
+        assessment,
+        provider,
+        validation,
+        assessment_record="full-scope-assessment.json",
+        provider_audit_record="provider.json",
+        validation_record="validation.json",
+    )
+    assert result["status"] == "FACILITY_QRA_WITHHELD"
+    assert result["gates"]["facility_scope"]["case_count"] == 1
+    assert result["gates"]["provider_qualification"]["complete"] is False

@@ -6274,7 +6274,7 @@
           "release_boundary"
         ],
         "incomplete_gate_count": 5,
-        "blocking_reason_count": 25,
+        "blocking_reason_count": 47,
         "record": "results\\20261115\\native_external_facility_full_scope_campaign_current\\facility_qra_gate_summary.json"
       },
       "blocking_reason": null,
