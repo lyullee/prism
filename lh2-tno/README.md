@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,383 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,394 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -108,6 +108,27 @@ seven input packet directories in
 produces a conditional IR/F-N view across three literature-frequency
 scenarios. Facility-wide QRA promotion remains closed until the missing
 provider, release-boundary, physical-validation and scope evidence is supplied.
+
+The current 24-event native full-scope replay is stored under
+`results/20261115/native_external_facility_full_scope_campaign_current/`. It
+retains 24 exact packet matches, 96 conditional risk atoms, and 11
+operator-limited case assessments. The companion
+`provider_qualification_requests.json` is the provider handoff worksheet: 13
+exact packets need qualification sidecars and 11 candidates need release
+closure plus qualification evidence. Generate the fillable sidecar manifest
+with:
+
+```powershell
+python scripts/build_provider_sidecar_manifest_template.py `
+  --catalogue results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json `
+  --output results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json
+```
+
+The resulting 26 release identities preserve packet digests and indexes. They
+remain `TEMPLATE_ONLY`; replacing a placeholder with a reviewed
+`prism.provider_qualification_evidence.v1` sidecar is required before a
+provider result can be qualified. This workflow never infers frequency from
+signals and never enables facility QRA by itself.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the
