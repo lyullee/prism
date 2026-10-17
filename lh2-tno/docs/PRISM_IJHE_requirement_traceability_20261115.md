@@ -4,6 +4,11 @@
 
 외부 `lh2dt` 모델 정본에서 탱크·배관·펌프·밸브·기화기·재액화기·벤트의 release-shaped export 7개를 확인했다. 이 7개는 포트·방출시간·질량·종료근거를 보존하지만 모두 `model_prediction` 원점이고 exact qualification sidecar가 없으므로, 모델 연결 진단 근거로만 기록하고 provider·빈도·물리검증·시설 QRA 승격에는 사용하지 않는다.
 
+SLABx-LH2 FFI Test 6의 실제 소스는 40,960→81,920 격자 재검증에서 모든
+모니터링 항목의 변화율이 2% 미만으로 수렴하여 수치 게이트가 승인됐다.
+이는 수치해석 수렴 근거이며 독립 물리검증이나 시설 QRA 승격을 의미하지
+않는다.
+
 각 export의 같은 폴더에 있는 `provider_response.json`도 함께 대조한다. 7/7 행에서 event·component·port ID, 방출시간, 가용·누적 방출질량, 종료근거, provider source digest와 canonical provider result digest가 `resolved_release.json`과 일치한다. 이 정규화는 모델 출력과 PRISM 경계가 서로 다른 사고나 포트를 가리키지 않는지 확인하는 진단 단계다. 질량 잔차가 남거나, `synthetic_diagnostic_horizon`인 경우는 그대로 열린 근거로 남기며, 잔여 재고를 0으로 고치거나 빈도·물리검증·시설 QRA를 승격하지 않는다. 상세 규칙은 [`external release-response normalization`](PRISM_external_release_response_normalization_en.md)에 기록했다.
 
 ## 요구사항별 판정
@@ -154,10 +159,11 @@ case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했�
 The current full-scope readiness audit now emits a provider-qualification request
 catalog at
 `results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json`.
-The readiness audit found 13 exact packet rows, but the request builder now
-checks each packet's family-specific termination ledger before assigning the
-qualification-only label. The current catalog therefore has 7 qualification-only
-requests and 19 rows that first need release-closure evidence. This catalog
+The readiness audit found 20 packet-level closure-ready identities and 6
+identities that still need release-closure evidence. The request builder checks
+each packet's family-specific termination ledger before assigning the
+qualification-only label. The current catalog therefore contains 20
+qualification-only requests and 6 closure-and-qualification requests. This catalog
 preserves packet identity and blocking reasons; it does not infer rates,
 physical validation or facility IR/F-N.
 

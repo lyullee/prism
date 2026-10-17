@@ -15,6 +15,11 @@ release-boundary request open.
 
 The latest audit is `INCOMPLETE_EVIDENCE` with **57 checks: 52 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
+The actual-source SLABx-LH2 FFI Test 6 numerical-resolution gate is now
+accepted by the 40,960-to-81,920 refinement. This closes only the numerical
+convergence check; the result remains component evidence and does not close
+the independent physical-validation gate.
+
 | Item | Current evidence |
 |---|---:|
 | HAZOP-bound events | 34/34 |
