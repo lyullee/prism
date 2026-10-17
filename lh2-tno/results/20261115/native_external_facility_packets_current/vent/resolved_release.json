@@ -1,0 +1,74 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "pressure-relief-vent-01",
+  "port_id": "vent-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+  "event_kind": "emergency_relief",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "native external VentStack accident export; synthetic upstream state and geometry",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
+  "provider_result_digest": "f0612f615cc5adffeac0224a1d35ec1da686237a1f462e342d5fbd5fedd98bd6",
+  "provider_boundary_reference": "lh2dt.VentStack.export_accident_history native gas outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    3.0,
+    5.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.1,
+  "available_mass_kg": 1.0,
+  "cumulative_mass_out_kg": 3.827489552640163e-05,
+  "cumulative_static_enthalpy_out_j": 151.50288848483862,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 0.0003827489552640163,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3958283.5276541375,
+      "temperature_k": 300.0002044224795,
+      "density_kg_m3": 0.08184043204976539,
+      "effective_area_m2": 7.853981633974483e-05,
+      "velocity_m_s": 59.546497170479235,
+      "area_provenance": "native VentStack circular terminal area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    },
+    {
+      "time_s": 0.05,
+      "mass_flow_kg_s": 0.0003827489552640163,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3958283.5276541375,
+      "temperature_k": 300.0002044224795,
+      "density_kg_m3": 0.08184043204976539,
+      "effective_area_m2": 7.853981633974483e-05,
+      "velocity_m_s": 59.546497170479235,
+      "area_provenance": "native VentStack circular terminal area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    }
+  ],
+  "termination_provenance": "operator-declared bounded VentStack horizon; upstream reserve remains explicit",
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "provider_mass_balance": null,
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": null
+}

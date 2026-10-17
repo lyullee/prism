@@ -3,7 +3,9 @@ from __future__ import annotations
 from types import SimpleNamespace
 
 from scripts.run_native_provider_facility_campaign import (
+    _dynamic_state_closure_dump,
     _facility_frequency_scenarios,
+    _has_explicit_provider_source_states,
     _packet_event_match,
 )
 
@@ -54,3 +56,26 @@ def test_emergency_relief_packet_matches_relief_event_without_opening() -> None:
     )
 
     assert _packet_event_match(packet, [relief_event]).id == "facility/vent/G1"
+
+
+def test_low_speed_gas_packet_requires_provider_source_state_for_slabx_path() -> None:
+    state = object()
+    packet = SimpleNamespace(
+        boundary_kind="resolved_atmospheric_gas_exit",
+        steps=[SimpleNamespace(provider_source_state=state), SimpleNamespace(provider_source_state=state)],
+    )
+    assert _has_explicit_provider_source_states(packet) is True
+    packet.steps[1].provider_source_state = None
+    assert _has_explicit_provider_source_states(packet) is False
+
+
+def test_dynamic_state_closure_dump_preserves_provider_evidence() -> None:
+    closure = SimpleNamespace(
+        model_dump=lambda mode: {
+            "schema_version": "prism.provider_dynamic_state_closure.v1",
+            "state_history_digest": "b" * 64,
+        }
+    )
+    packet = SimpleNamespace(provider_mass_balance=SimpleNamespace(dynamic_state_closure=closure))
+    assert _dynamic_state_closure_dump(packet)["state_history_digest"] == "b" * 64
+    assert _dynamic_state_closure_dump(SimpleNamespace(provider_mass_balance=None)) is None

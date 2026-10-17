@@ -4328,5 +4328,19 @@
   "external_lh2dt_native_multi_equipment_chain_recheck_chain_count": 7,
   "external_lh2dt_native_multi_equipment_chain_recheck_dynamic_closure_carried_count": 4,
   "external_lh2dt_native_multi_equipment_chain_recheck_provider_packet_promoted_count": 0,
-  "external_lh2dt_native_multi_equipment_chain_recheck_facility_qra_claim": false
+  "external_lh2dt_native_multi_equipment_chain_recheck_facility_qra_claim": false,
+  "external_lh2dt_native_facility_packet_set_record": "results/20261115/native_external_facility_packets_current/",
+  "external_lh2dt_native_facility_campaign_record": "results/20261115/native_external_facility_campaign_current/verification.json",
+  "external_lh2dt_native_facility_campaign_status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC; 7/24 literature events matched and executed, 17 UNCOMPUTED, 28 risk atoms, 3 frequency scenarios, conditional IR/F-N available; facility-wide QRA promotion withheld",
+  "external_lh2dt_native_facility_campaign_packet_count": 7,
+  "external_lh2dt_native_facility_campaign_catalog_event_count": 24,
+  "external_lh2dt_native_facility_campaign_executed_case_count": 7,
+  "external_lh2dt_native_facility_campaign_uncomputed_case_count": 17,
+  "external_lh2dt_native_facility_campaign_risk_atom_count": 28,
+  "external_lh2dt_native_facility_campaign_frequency_scenario_count": 3,
+  "external_lh2dt_native_facility_campaign_conditional_ir_fn_available": true,
+  "external_lh2dt_native_facility_campaign_facility_total_risk_available": false,
+  "external_lh2dt_native_facility_campaign_facility_qra_claim": false,
+  "external_lh2dt_native_facility_campaign_provider_qualification_claim": false,
+  "external_lh2dt_native_facility_campaign_physical_validation_claim": false
 }

@@ -54,3 +54,22 @@ sensor alarms, does not fill missing opening bins, and does not publish a
 facility-wide annual IR/F-N total. Independent provider qualification,
 SLABx-LH2 validation and complete facility release-boundary evidence remain
 required before promotion.
+
+## Rechecked current record (2026-11-15)
+
+The current packet set is saved under
+`results/20261115/native_external_facility_packets_current/` and was replayed
+with the same facility manifest, weather/ignition context, population and
+frequency plan into
+`results/20261115/native_external_facility_campaign_current/`. The replay
+matched and executed 7 of the 24 literature events, retained 17 `UNCOMPUTED`
+opening bins, produced 28 conditional risk atoms, and evaluated three
+literature-frequency scenarios. Four of the seven dynamic equipment packets
+carry the provider-owned state-closure digest; the valve and relief rows are
+kept as explicit diagnostic/operator-limited boundaries.
+
+The conditional diagnostic facility IR/F-N view is available in
+`facility_assessment.json`, while `verification.json` records
+`facility_total_risk_available=false` and `facility_qra_claim=false`. No
+missing event is assigned zero risk, and no provider qualification,
+independent physical validation, or facility-wide promotion is inferred.

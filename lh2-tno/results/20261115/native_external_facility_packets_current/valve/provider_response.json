@@ -1,0 +1,85 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_state_snapshot_digest": "8e96952fb11240a761983074465ca319735e1a9bd907f3bcf13ee9185f2791fe",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+    "component_id": "transfer-valve-01",
+    "port_id": "valve-accident-out",
+    "duration_s": 0.1,
+    "available_mass_kg": 100.0,
+    "cumulative_mass_out_kg": 1.2111170779661988e-06,
+    "cumulative_static_enthalpy_out_j": 4.7960409861580935,
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "termination_provenance": "operator-declared bounded valve horizon; upstream reserve remains explicit",
+    "fluid": "Hydrogen",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 1.2111170779661986e-05,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3960014.33173742,
+        "temperature_k": 300.1211294686865,
+        "density_kg_m3": 0.08180746853480732,
+        "effective_area_m2": 4.9087385212340514e-08,
+        "velocity_m_s": 3015.9440150666587,
+        "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 500000.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.4029121339141301,
+          "source_specific_enthalpy_j_kg": 3960014.33173742,
+          "source_specific_entropy_j_kgk": 46876.852666108665,
+          "opening": 1.0,
+          "choked": true,
+          "throat_pressure_pa_abs": 261197.2645127105,
+          "throat_temperature_k": 248.38032212547427,
+          "throat_density_kg_m3": 0.254537963579241,
+          "throat_specific_enthalpy_j_kg": 3225978.3336829953,
+          "throat_mass_flux_kg_m2_s": 308.40843139413266,
+          "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+        }
+      },
+      {
+        "time_s": 0.05,
+        "mass_flow_kg_s": 1.2111170779661986e-05,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3960014.33173742,
+        "temperature_k": 300.1211294686865,
+        "density_kg_m3": 0.08180746853480732,
+        "effective_area_m2": 4.9087385212340514e-08,
+        "velocity_m_s": 3015.9440150666587,
+        "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 500000.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.4029121339141301,
+          "source_specific_enthalpy_j_kg": 3960014.33173742,
+          "source_specific_entropy_j_kgk": 46876.852666108665,
+          "opening": 1.0,
+          "choked": true,
+          "throat_pressure_pa_abs": 261197.2645127105,
+          "throat_temperature_k": 248.38032212547427,
+          "throat_density_kg_m3": 0.254537963579241,
+          "throat_specific_enthalpy_j_kg": 3225978.3336829953,
+          "throat_mass_flux_kg_m2_s": 308.40843139413266,
+          "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+        }
+      }
+    ],
+    "provider_meta": {
+      "native_inventory_owner": "upstream_provider_declared",
+      "initial_source_phase": "supercritical_gas",
+      "time_step_s": 0.05,
+      "valve": {
+        "area_m2": 4.9087385212340514e-08,
+        "final_opening": 1.0,
+        "choked_intervals": 2
+      }
+    }
+  }
+}

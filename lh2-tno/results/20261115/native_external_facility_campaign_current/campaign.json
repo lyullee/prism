@@ -1,0 +1,2082 @@
+{
+  "id": "native-provider-multi-equipment-facility-campaign",
+  "frequency_plan": {
+    "id": "generic-lh2-full-scope-frequency-example",
+    "assets": [
+      {
+        "id": "storage-shell",
+        "model_component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "port_ids_by_loc": {},
+        "profile": "LH2_VESSEL",
+        "classification_basis": "synthetic example only; real tank classification and applicability review required",
+        "physical_scope_ids": [
+          "storage-tank-01-shell"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 1.27,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      },
+      {
+        "id": "transfer-line",
+        "model_component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "port_ids_by_loc": {},
+        "profile": "LH2_PIPE",
+        "classification_basis": "synthetic example only; real pipe length, segmentation and failure exposure review required",
+        "physical_scope_ids": [
+          "liquid-transfer-line-01-segment"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 0.025,
+        "length_per_item_m": 10.0,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": 1.0,
+        "location_weight_provenance": "synthetic single-segment demonstration; replace with reviewed segment allocation for a facility",
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      },
+      {
+        "id": "transfer-valve",
+        "model_component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "port_ids_by_loc": {},
+        "profile": "LH2_VALVE",
+        "classification_basis": "synthetic example only; real valve construction and exposure review required",
+        "physical_scope_ids": [
+          "transfer-valve-01-body"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 0.025,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      },
+      {
+        "id": "pressure-relief-vent",
+        "model_component_id": "pressure-relief-vent-01",
+        "port_ids": [
+          "vent-accident-out"
+        ],
+        "port_ids_by_loc": {},
+        "profile": "TNO_RELIEF_DEVICE",
+        "classification_basis": "synthetic example only; direct substance contact and atmospheric discharge must be confirmed",
+        "physical_scope_ids": [
+          "pressure-relief-vent-01-device"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 0.025,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": true
+      },
+      {
+        "id": "transfer-pump",
+        "model_component_id": "liquid-transfer-pump-01",
+        "port_ids": [
+          "pump-accident-out"
+        ],
+        "port_ids_by_loc": {},
+        "profile": "TNO_PUMP_STANDARD",
+        "classification_basis": "synthetic example only; largest connecting pipe and pump construction require review",
+        "physical_scope_ids": [
+          "liquid-transfer-pump-01-connection"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 0.025,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      },
+      {
+        "id": "ambient-vaporizer",
+        "model_component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "port_ids_by_loc": {},
+        "profile": "TNO_HX_OUTSIDE_TUBES",
+        "classification_basis": "synthetic design classification only: hydrogen is outside tubes; real exchanger layout and dangerous-fluid side require review",
+        "physical_scope_ids": [
+          "ambient-vaporizer-01-exchanger"
+        ],
+        "count": 1,
+        "nominal_diameter_m": null,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      },
+      {
+        "id": "reliquefier",
+        "model_component_id": "reliquefier-01",
+        "port_ids": null,
+        "port_ids_by_loc": {
+          "G4": [
+            "reliquefier-accident-out-1",
+            "reliquefier-accident-out-2"
+          ],
+          "G5": [
+            "reliquefier-accident-out-1",
+            "reliquefier-accident-out-2"
+          ],
+          "G6": [
+            "reliquefier-accident-out-1"
+          ]
+        },
+        "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+        "classification_basis": "synthetic design classification only: hydrogen is inside weak-shell tubes; real exchanger layout and tube count require review",
+        "physical_scope_ids": [
+          "reliquefier-01-exchanger"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 0.025,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      }
+    ],
+    "excluded_model_components": {
+      "receiving-boundary-01": "boundary is an interface, not an accidental-release equipment item in this generic example"
+    },
+    "precomputed_events": null,
+    "precomputed_events_provenance": null
+  },
+  "annual_conditions": [
+    {
+      "id": "synthetic-generic-worker-west-3ms",
+      "annual_probability": 1.0,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "worker-01",
+          "persons": 1.0,
+          "presence_probability": 1.0,
+          "provenance": "synthetic generic outdoor receptor; not site occupancy data"
+        }
+      ],
+      "provenance": "synthetic single outdoor weather/population condition for generic LH2 campaign"
+    }
+  ],
+  "event_routes": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-liquid-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external liquid provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "storage-tank-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": null,
+            "resolved_release_set": null,
+            "resolved_liquid_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "storage-tank-01",
+              "port_id": "tank-accident-out",
+              "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external LayeredTank accident export; synthetic geometry and state",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_liquid_exit",
+              "phase_basis": "two_phase",
+              "enthalpy_convention": "provider_total_outlet_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+              "provider_result_digest": "d236884a1f80104a49dcfcb25b861e6f87b188d8ebf689a54df6e73809441a0c",
+              "provider_boundary_reference": "lh2dt.LayeredTank.export_accident_history native liquid outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.30000000000000004,
+              "available_mass_kg": 434.50988152270014,
+              "cumulative_mass_out_kg": 0.045512888609354325,
+              "cumulative_specific_enthalpy_out_j": 3996.590648829178,
+              "reference_area_m2": 0.00012667686977437442,
+              "reference_area_provenance": "explicit failed atmospheric opening area",
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "total_mass_flow_kg_s": 0.2482534831244407,
+                  "gas_mass_flow_kg_s": 0.04887150636926454,
+                  "ground_liquid_mass_flow_kg_s": 0.1993819767551762,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": 87813.15221000186,
+                  "gas_pressure_pa_abs": 101325.0,
+                  "gas_temperature_k": 20.27125066090695,
+                  "gas_density_kg_m3": 6.31297074282039,
+                  "gas_effective_area_m2": 0.00012667686977437442,
+                  "gas_velocity_m_s": 61.11173666640835,
+                  "gas_velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.1993819767551762,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                },
+                {
+                  "time_s": 0.1,
+                  "total_mass_flow_kg_s": 0.20687540296910253,
+                  "gas_mass_flow_kg_s": 0.040724876224574325,
+                  "ground_liquid_mass_flow_kg_s": 0.1661505267445282,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": 87811.23965102456,
+                  "gas_pressure_pa_abs": 101325.0,
+                  "gas_temperature_k": 20.27125066090695,
+                  "gas_density_kg_m3": 6.3130959858713664,
+                  "gas_effective_area_m2": 0.00012667686977437442,
+                  "gas_velocity_m_s": 50.9237124615567,
+                  "gas_velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.1661505267445282,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                },
+                {
+                  "time_s": 0.2,
+                  "total_mass_flow_kg_s": 0.0,
+                  "gas_mass_flow_kg_s": 0.0,
+                  "ground_liquid_mass_flow_kg_s": 0.0,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": 87809.63609770624,
+                  "gas_pressure_pa_abs": null,
+                  "gas_temperature_k": null,
+                  "gas_density_kg_m3": null,
+                  "gas_effective_area_m2": null,
+                  "gas_velocity_m_s": null,
+                  "gas_velocity_origin": null,
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.0,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                }
+              ],
+              "termination_provenance": "LayeredTank native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+              "droplet_partition_provenance": "native LayeredTank outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+              "pool_footprint": null,
+              "no_rainout_evidence": null,
+              "termination_basis": "reviewed_isolation_success",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 434.50988152270014,
+                "cumulative_mass_in_kg": null,
+                "cumulative_mass_out_kg": 0.045512888609354325,
+                "final_mass_kg": 434.4643686340908,
+                "reported_residual_mass_kg": -5.684341886080802e-14,
+                "derived_accounting_residual_kg": 5.684341886080802e-14,
+                "isolation_time_s": 0.2,
+                "post_isolation_observation_s": 0.1,
+                "isolation_success": true,
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "531b6db72e3b9df24e55acc5fc93939ecc74016b9d527710fb6a0f82037c526d",
+                  "max_abs_inventory_residual_kg": 5.684341886080802e-14,
+                  "inventory_tolerance_kg": 4.3450988152270015e-07,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 5e-05,
+                  "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+                }
+              },
+              "failure_opening_diameter_m": 0.0127
+            },
+            "available_mass_kg": 434.50988152270014,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": {
+              "footprint_origin": "declared_sensitivity",
+              "footprint_provenance": null,
+              "footprint_evidence_digest": null,
+              "fluid": "Hydrogen",
+              "fluid_translation": "none",
+              "translation_provenance": null,
+              "radius_m": 0.005,
+              "conductivity_w_mk": 0.6,
+              "diffusivity_m2_s": 1.5e-07,
+              "initial_temperature_k": 288.15,
+              "domain_radius_m": 0.25,
+              "radial_step_m": 0.00025,
+              "maximum_time_step_s": 0.01
+            },
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.3,
+              0.30000000000000004,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "reviewed_isolation_success",
+              "time_s": 0.30000000000000004,
+              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "equipment_liquid_release",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-liquid-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external liquid provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "liquid-transfer-line-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": null,
+            "resolved_release_set": null,
+            "resolved_liquid_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "liquid-transfer-line-01",
+              "port_id": "line-accident-out",
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external DynamicHEMPipe accident export; synthetic geometry and state",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_liquid_exit",
+              "phase_basis": "two_phase",
+              "enthalpy_convention": "provider_total_outlet_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+              "provider_result_digest": "31c53ddf8fc864c3e3a2756ae4fcb8608ac9be64078f1e23c296f9815c619ddd",
+              "provider_boundary_reference": "lh2dt.DynamicHEMPipe.export_accident_history native outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                5.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.060000000000000005,
+              "available_mass_kg": 2.5156266507964498,
+              "cumulative_mass_out_kg": 0.00037254245348956725,
+              "cumulative_specific_enthalpy_out_j": 46.546979302261775,
+              "reference_area_m2": 4.908738521234052e-06,
+              "reference_area_provenance": "explicit failed pipe opening area",
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "total_mass_flow_kg_s": 0.007450849069791344,
+                  "gas_mass_flow_kg_s": 0.0020746954589558387,
+                  "ground_liquid_mass_flow_kg_s": 0.005376153610835506,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": 124944.09393147266,
+                  "gas_pressure_pa_abs": 101325.0,
+                  "gas_temperature_k": 20.36890353912107,
+                  "gas_density_kg_m3": 4.561941939468565,
+                  "gas_effective_area_m2": 4.908738521234052e-06,
+                  "gas_velocity_m_s": 92.64771315990112,
+                  "gas_velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.005376153610835506,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                },
+                {
+                  "time_s": 0.05,
+                  "total_mass_flow_kg_s": 0.0,
+                  "gas_mass_flow_kg_s": 0.0,
+                  "ground_liquid_mass_flow_kg_s": 0.0,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": 124942.26664821368,
+                  "gas_pressure_pa_abs": null,
+                  "gas_temperature_k": null,
+                  "gas_density_kg_m3": null,
+                  "gas_effective_area_m2": null,
+                  "gas_velocity_m_s": null,
+                  "gas_velocity_origin": null,
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.0,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                }
+              ],
+              "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+              "droplet_partition_provenance": "DynamicHEMPipe HEM outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+              "pool_footprint": null,
+              "no_rainout_evidence": null,
+              "termination_basis": "reviewed_isolation_success",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 2.5156266507964498,
+                "cumulative_mass_in_kg": null,
+                "cumulative_mass_out_kg": 0.00037254245348956725,
+                "final_mass_kg": 2.51525410834296,
+                "reported_residual_mass_kg": 0.0,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": 0.05,
+                "post_isolation_observation_s": 0.01,
+                "isolation_success": true,
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "5b01c67cba6a74c545aa96d503f4413d61976d79f0dbec162b446d1575a27265",
+                  "max_abs_inventory_residual_kg": 0.0,
+                  "inventory_tolerance_kg": 2.5156266507964497e-09,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 4.999414767097515e-05,
+                  "provenance": "DynamicHEMPipe recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+                }
+              },
+              "failure_opening_diameter_m": 0.0025
+            },
+            "available_mass_kg": 2.5156266507964498,
+            "source_position_enu_m": [
+              5.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": {
+              "footprint_origin": "declared_sensitivity",
+              "footprint_provenance": null,
+              "footprint_evidence_digest": null,
+              "fluid": "Hydrogen",
+              "fluid_translation": "none",
+              "translation_provenance": null,
+              "radius_m": 0.005,
+              "conductivity_w_mk": 0.6,
+              "diffusivity_m2_s": 1.5e-07,
+              "initial_temperature_k": 288.15,
+              "domain_radius_m": 0.25,
+              "radial_step_m": 0.00025,
+              "maximum_time_step_s": 0.01
+            },
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.05,
+              0.060000000000000005,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "reviewed_isolation_success",
+              "time_s": 0.060000000000000005,
+              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "equipment_liquid_release",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-gas-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external gas provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "transfer-valve-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "transfer-valve-01",
+              "port_id": "valve-accident-out",
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external StrokeLimitedCommandedValve gas export; synthetic upstream state and reserve",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+              "provider_result_digest": "c4280c353f383d3f200fa224a88e8a92e652926c52882d635bfb9d782461a3c9",
+              "provider_boundary_reference": "lh2dt.StrokeLimitedCommandedValve.export_accident_history native gas outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                7.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.1,
+              "available_mass_kg": 100.0,
+              "cumulative_mass_out_kg": 1.2111170779661988e-06,
+              "cumulative_static_enthalpy_out_j": 4.7960409861580935,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 1.2111170779661986e-05,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3960014.33173742,
+                  "temperature_k": 300.1211294686865,
+                  "density_kg_m3": 0.08180746853480732,
+                  "effective_area_m2": 4.9087385212340514e-08,
+                  "velocity_m_s": 3015.9440150666587,
+                  "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": {
+                    "source_pressure_pa_abs": 500000.0,
+                    "source_temperature_k": 300.0,
+                    "source_density_kg_m3": 0.4029121339141301,
+                    "source_specific_enthalpy_j_kg": 3960014.33173742,
+                    "source_specific_entropy_j_kgk": 46876.852666108665,
+                    "throat_pressure_pa_abs": 261197.2645127105,
+                    "throat_temperature_k": 248.38032212547427,
+                    "throat_density_kg_m3": 0.254537963579241,
+                    "throat_specific_enthalpy_j_kg": 3225978.3336829953,
+                    "throat_mass_flux_kg_m2_s": 308.40843139413266,
+                    "choked": true,
+                    "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+                  },
+                  "provider_port_state": null
+                },
+                {
+                  "time_s": 0.05,
+                  "mass_flow_kg_s": 1.2111170779661986e-05,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3960014.33173742,
+                  "temperature_k": 300.1211294686865,
+                  "density_kg_m3": 0.08180746853480732,
+                  "effective_area_m2": 4.9087385212340514e-08,
+                  "velocity_m_s": 3015.9440150666587,
+                  "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": {
+                    "source_pressure_pa_abs": 500000.0,
+                    "source_temperature_k": 300.0,
+                    "source_density_kg_m3": 0.4029121339141301,
+                    "source_specific_enthalpy_j_kg": 3960014.33173742,
+                    "source_specific_entropy_j_kgk": 46876.852666108665,
+                    "throat_pressure_pa_abs": 261197.2645127105,
+                    "throat_temperature_k": 248.38032212547427,
+                    "throat_density_kg_m3": 0.254537963579241,
+                    "throat_specific_enthalpy_j_kg": 3225978.3336829953,
+                    "throat_mass_flux_kg_m2_s": 308.40843139413266,
+                    "choked": true,
+                    "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+                  },
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "operator-declared bounded valve horizon; upstream reserve remains explicit",
+              "termination_basis": "synthetic_diagnostic_horizon",
+              "provider_mass_balance": null,
+              "vertical_handoff": null,
+              "compressible_plane_handoff": {
+                "position_enu_m": [
+                  7.0,
+                  0.0,
+                  1.0
+                ],
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "velocity_m_s": 1617.2851481653224,
+                "density_kg_m3": 0.13099049111660158,
+                "temperature_k": 187.41857521101977,
+                "h2_mass_fraction": 1.0,
+                "half_width_m": 0.00011955008356608223,
+                "depth_m": 0.00023910016713216446,
+                "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+                "states": [
+                  {
+                    "time_s": 0.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 1617.2851481653224,
+                    "density_kg_m3": 0.13099049111660158,
+                    "temperature_k": 187.41857521101977,
+                    "h2_mass_fraction": 1.0,
+                    "half_width_m": 0.00011955008356608223,
+                    "depth_m": 0.00023910016713216446,
+                    "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+                  },
+                  {
+                    "time_s": 0.05,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 1617.2851481653224,
+                    "density_kg_m3": 0.13099049111660158,
+                    "temperature_k": 187.41857521101977,
+                    "h2_mass_fraction": 1.0,
+                    "half_width_m": 0.00011955008356608223,
+                    "depth_m": 0.00023910016713216446,
+                    "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+                  }
+                ]
+              },
+              "failure_opening_diameter_m": 0.00025
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 100.0,
+            "source_position_enu_m": [
+              7.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.05,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "reviewed_isolation_success",
+              "time_s": 0.1,
+              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "integrated_transient",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-gas-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external gas provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "pressure-relief-vent-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "pressure-relief-vent-01",
+              "port_id": "vent-accident-out",
+              "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+              "event_kind": "emergency_relief",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external VentStack accident export; synthetic upstream state and geometry",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cec536c3c69030899982e0e4f7dad5b8ccf2bfd5c056ab335c33a0e51ba07452",
+              "provider_result_digest": "f0612f615cc5adffeac0224a1d35ec1da686237a1f462e342d5fbd5fedd98bd6",
+              "provider_boundary_reference": "lh2dt.VentStack.export_accident_history native gas outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                0.0,
+                3.0,
+                5.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.1,
+              "available_mass_kg": 1.0,
+              "cumulative_mass_out_kg": 3.827489552640163e-05,
+              "cumulative_static_enthalpy_out_j": 151.50288848483862,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 0.0003827489552640163,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3958283.5276541375,
+                  "temperature_k": 300.0002044224795,
+                  "density_kg_m3": 0.08184043204976539,
+                  "effective_area_m2": 7.853981633974483e-05,
+                  "velocity_m_s": 59.546497170479235,
+                  "area_provenance": "native VentStack circular terminal area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                },
+                {
+                  "time_s": 0.05,
+                  "mass_flow_kg_s": 0.0003827489552640163,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3958283.5276541375,
+                  "temperature_k": 300.0002044224795,
+                  "density_kg_m3": 0.08184043204976539,
+                  "effective_area_m2": 7.853981633974483e-05,
+                  "velocity_m_s": 59.546497170479235,
+                  "area_provenance": "native VentStack circular terminal area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "operator-declared bounded VentStack horizon; upstream reserve remains explicit",
+              "termination_basis": "synthetic_diagnostic_horizon",
+              "provider_mass_balance": null,
+              "vertical_handoff": null,
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": null
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 1.0,
+            "source_position_enu_m": [
+              0.0,
+              3.0,
+              5.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.05,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "emergency_relief_discharge",
+              "time_s": 0.1,
+              "provenance": "native provider emergency-relief duration retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "equipment_emergency_relief",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-liquid-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external liquid provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "liquid-transfer-pump-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": null,
+            "resolved_release_set": null,
+            "resolved_liquid_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "liquid-transfer-pump-01",
+              "port_id": "pump-accident-out",
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external MappedPump H-Q-N accident export; synthetic source state and reserve",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_liquid_exit",
+              "phase_basis": "liquid",
+              "enthalpy_convention": "provider_total_outlet_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+              "provider_result_digest": "81182dc2df130fa5f0437e02bd9a4754cb7f29f8a42a6a9904041fef34f94682",
+              "provider_boundary_reference": "lh2dt.MappedPump.export_accident_history native liquid/two-phase outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                6.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.1,
+              "available_mass_kg": 1.0,
+              "cumulative_mass_out_kg": 0.0002803316189887485,
+              "cumulative_specific_enthalpy_out_j": -0.950079570226665,
+              "reference_area_m2": 4.908738521234052e-06,
+              "reference_area_provenance": "explicit failed atmospheric pump opening area",
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "total_mass_flow_kg_s": 0.00560663237977497,
+                  "gas_mass_flow_kg_s": 0.0,
+                  "ground_liquid_mass_flow_kg_s": 0.00560663237977497,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": -3389.1273972373338,
+                  "gas_pressure_pa_abs": null,
+                  "gas_temperature_k": null,
+                  "gas_density_kg_m3": null,
+                  "gas_effective_area_m2": null,
+                  "gas_velocity_m_s": null,
+                  "gas_velocity_origin": null,
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.00560663237977497,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        6.0,
+                        0.0,
+                        0.001
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                },
+                {
+                  "time_s": 0.05,
+                  "total_mass_flow_kg_s": 0.0,
+                  "gas_mass_flow_kg_s": 0.0,
+                  "ground_liquid_mass_flow_kg_s": 0.0,
+                  "airborne_liquid_mass_flow_kg_s": 0.0,
+                  "specific_enthalpy_j_kg": -3389.1273972373338,
+                  "gas_pressure_pa_abs": null,
+                  "gas_temperature_k": null,
+                  "gas_density_kg_m3": null,
+                  "gas_effective_area_m2": null,
+                  "gas_velocity_m_s": null,
+                  "gas_velocity_origin": null,
+                  "provider_port_state": null,
+                  "droplet_class_outcomes": [
+                    {
+                      "ground_liquid_mass_flow_kg_s": 0.0,
+                      "airborne_liquid_mass_flow_kg_s": 0.0,
+                      "flight_time_s": 0.0,
+                      "impact_position_m": [
+                        6.0,
+                        0.0,
+                        0.001
+                      ],
+                      "droplet_diameter_m": 0.001
+                    }
+                  ]
+                }
+              ],
+              "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval",
+              "droplet_partition_provenance": "native pump outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+              "pool_footprint": null,
+              "no_rainout_evidence": null,
+              "termination_basis": "reviewed_isolation_success",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 1.0,
+                "cumulative_mass_in_kg": null,
+                "cumulative_mass_out_kg": 0.0002803316189887485,
+                "final_mass_kg": 0.9997196683810112,
+                "reported_residual_mass_kg": 0.9997196683810112,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": 0.05,
+                "post_isolation_observation_s": 0.05,
+                "isolation_success": true,
+                "dynamic_state_closure": null
+              },
+              "failure_opening_diameter_m": 0.0025
+            },
+            "available_mass_kg": 1.0,
+            "source_position_enu_m": [
+              6.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": {
+              "footprint_origin": "declared_sensitivity",
+              "footprint_provenance": null,
+              "footprint_evidence_digest": null,
+              "fluid": "Hydrogen",
+              "fluid_translation": "none",
+              "translation_provenance": null,
+              "radius_m": 0.005,
+              "conductivity_w_mk": 0.6,
+              "diffusivity_m2_s": 1.5e-07,
+              "initial_temperature_k": 288.15,
+              "domain_radius_m": 0.25,
+              "radial_step_m": 0.00025,
+              "maximum_time_step_s": 0.01
+            },
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.05,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "reviewed_isolation_success",
+              "time_s": 0.1,
+              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "equipment_liquid_release",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-gas-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external gas provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "ambient-vaporizer-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "ambient-vaporizer-01",
+              "port_id": "vaporizer-accident-out",
+              "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external DynamicVaporizer finite-volume accident export; synthetic geometry and state",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+              "provider_result_digest": "e27ef59d6e4809f16ac1e348974838427d3577b6c309f9f3b6e27a8314eb523e",
+              "provider_boundary_reference": "lh2dt.DynamicVaporizer.export_accident_history native gas outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                10.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.1,
+              "available_mass_kg": 0.0008198175196090351,
+              "cumulative_mass_out_kg": 1.6812902073263578e-05,
+              "cumulative_static_enthalpy_out_j": 66.5501968899111,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 0.00033625804146527157,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3958281.3603453613,
+                  "temperature_k": 300.00005299820754,
+                  "density_kg_m3": 0.08184047334386349,
+                  "effective_area_m2": 7.853981633974483e-05,
+                  "velocity_m_s": 52.31360696435685,
+                  "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": {
+                    "source_pressure_pa_abs": 101500.0,
+                    "source_temperature_k": 300.0,
+                    "source_density_kg_m3": 0.0819817519609035,
+                    "source_specific_enthalpy_j_kg": 3958281.3603453613,
+                    "source_specific_entropy_j_kgk": 53457.385950011405,
+                    "throat_pressure_pa_abs": 101325.0,
+                    "throat_temperature_k": 299.85081827519684,
+                    "throat_density_kg_m3": 0.0818811906168217,
+                    "throat_specific_enthalpy_j_kg": 3956145.428810143,
+                    "throat_mass_flux_kg_m2_s": 5.351712945359748,
+                    "choked": false,
+                    "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+                  },
+                  "provider_port_state": null
+                },
+                {
+                  "time_s": 0.05,
+                  "mass_flow_kg_s": 0.0,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3788932.532138952,
+                  "temperature_k": 288.15,
+                  "density_kg_m3": 0.08520493577522305,
+                  "effective_area_m2": 7.853981633974483e-05,
+                  "velocity_m_s": 0.0,
+                  "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": {
+                    "source_pressure_pa_abs": 98609.99494086974,
+                    "source_temperature_k": 297.5647053728009,
+                    "source_density_kg_m3": 0.08030046175357715,
+                    "source_specific_enthalpy_j_kg": 3923423.475254477,
+                    "source_specific_entropy_j_kgk": 53459.92938194878,
+                    "throat_pressure_pa_abs": 101325.0,
+                    "throat_temperature_k": 299.90410899046356,
+                    "throat_density_kg_m3": 0.0818666461012149,
+                    "throat_specific_enthalpy_j_kg": 3956908.1467265827,
+                    "throat_mass_flux_kg_m2_s": 0.0,
+                    "choked": false,
+                    "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+                  },
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "DynamicVaporizer native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+              "termination_basis": "reviewed_isolation_success",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.0008198175196090351,
+                "cumulative_mass_in_kg": null,
+                "cumulative_mass_out_kg": 1.6812902073263578e-05,
+                "final_mass_kg": 0.0008030046175357715,
+                "reported_residual_mass_kg": 0.0,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": 0.05,
+                "post_isolation_observation_s": 0.05,
+                "isolation_success": true,
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "1a9a48d2ae5d254289b81cf13d993eb3f81d9fd0e4c5a5a04ce7f81059c551fd",
+                  "max_abs_inventory_residual_kg": 0.0,
+                  "inventory_tolerance_kg": 1e-10,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 1.0150000000000001e-05,
+                  "provenance": "DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+                }
+              },
+              "vertical_handoff": null,
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.01
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.0008198175196090351,
+            "source_position_enu_m": [
+              10.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.05,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "reviewed_isolation_success",
+              "time_s": 0.1,
+              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "integrated_transient",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "uncomputed-opening-bin",
+          "probability_given_event": 1.0,
+          "provenance": "no native provider packet for this opening bin",
+          "request": null,
+          "uncomputed_reason": "provider release evidence is not supplied for this event"
+        }
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "branches": [
+        {
+          "id": "native-provider-gas-packet",
+          "probability_given_event": 1.0,
+          "provenance": "native external gas provider packet; exact component/opening match; diagnostic only",
+          "request": {
+            "component_id": "reliquefier-01",
+            "operating_mode": null,
+            "hazop_scenario_id": null,
+            "state_snapshot": null,
+            "state_snapshot_digest": null,
+            "provider_state_snapshot_digest": null,
+            "provider_state_snapshot_digests": null,
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "reliquefier-01",
+              "port_id": "reliquefier-accident-out-1",
+              "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "native external DynamicReliquefier finite-volume accident export; synthetic geometry and state",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "Hydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+              },
+              "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+              "provider_result_digest": "e8ecb092cbafed8f81a05cdc323f8dc5bf0ce4ea2bd4042ce1de56dbde958d51",
+              "provider_boundary_reference": "lh2dt.DynamicReliquefier.export_accident_history native gas outlet",
+              "input_origin": "model_prediction",
+              "position_enu_m": [
+                13.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "ambient_pressure_pa_abs": 101325.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.1,
+              "available_mass_kg": 0.0008198175196090351,
+              "cumulative_mass_out_kg": 1.0508063795789736e-06,
+              "cumulative_static_enthalpy_out_j": 4.159387305619444,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 2.1016127591579473e-05,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3958281.3603453613,
+                  "temperature_k": 300.00005299820754,
+                  "density_kg_m3": 0.08184047334386349,
+                  "effective_area_m2": 4.908738521234052e-06,
+                  "velocity_m_s": 52.31360696435685,
+                  "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": {
+                    "source_pressure_pa_abs": 101500.0,
+                    "source_temperature_k": 300.0,
+                    "source_density_kg_m3": 0.0819817519609035,
+                    "source_specific_enthalpy_j_kg": 3958281.3603453613,
+                    "source_specific_entropy_j_kgk": 53457.385950011405,
+                    "throat_pressure_pa_abs": 101325.0,
+                    "throat_temperature_k": 299.85081827519684,
+                    "throat_density_kg_m3": 0.0818811906168217,
+                    "throat_specific_enthalpy_j_kg": 3956145.428810143,
+                    "throat_mass_flux_kg_m2_s": 5.351712945359748,
+                    "choked": false,
+                    "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+                  },
+                  "provider_port_state": null
+                },
+                {
+                  "time_s": 0.05,
+                  "mass_flow_kg_s": 0.0,
+                  "pressure_pa_abs": 101325.0,
+                  "specific_enthalpy_j_kg": 3788932.532138952,
+                  "temperature_k": 288.15,
+                  "density_kg_m3": 0.08520493577522305,
+                  "effective_area_m2": 4.908738521234052e-06,
+                  "velocity_m_s": 0.0,
+                  "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": {
+                    "source_pressure_pa_abs": 101318.68452689658,
+                    "source_temperature_k": 299.848688865458,
+                    "source_density_kg_m3": 0.08187667132294561,
+                    "source_specific_enthalpy_j_kg": 3956114.924707096,
+                    "source_specific_entropy_j_kgk": 53457.54145370315,
+                    "throat_pressure_pa_abs": 101325.0,
+                    "throat_temperature_k": 299.85407618109264,
+                    "throat_density_kg_m3": 0.0818803012954971,
+                    "throat_specific_enthalpy_j_kg": 3956192.0569726597,
+                    "throat_mass_flux_kg_m2_s": 0.0,
+                    "choked": false,
+                    "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+                  },
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "DynamicReliquefier native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+              "termination_basis": "reviewed_isolation_success",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.0008198175196090351,
+                "cumulative_mass_in_kg": null,
+                "cumulative_mass_out_kg": 1.0508063795789736e-06,
+                "final_mass_kg": 0.0008187667132294561,
+                "reported_residual_mass_kg": 0.0,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": 0.05,
+                "post_isolation_observation_s": 0.05,
+                "isolation_success": true,
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "73da568b6ee1bf757f32382527207200843f95e5a6400debe69b585361621e5e",
+                  "max_abs_inventory_residual_kg": 0.0,
+                  "inventory_tolerance_kg": 1e-10,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 1.0150000000000001e-05,
+                  "provenance": "DynamicReliquefier recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+                }
+              },
+              "vertical_handoff": null,
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.0025
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.0008198175196090351,
+            "source_position_enu_m": [
+              13.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "declared diagnostic sensitivity; replace with reviewed facility input",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.05,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "declared LH2 jet sensitivity; replace with reviewed facility input",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "reviewed_isolation_success",
+              "time_s": 0.1,
+              "provenance": "native provider isolation clock retained for multi-packet facility diagnostic"
+            },
+            "source_operator": "integrated_transient",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    }
+  ],
+  "scope_provenance": "multiple native provider packets bound to exact facility events; unmatched bins remain withheld",
+  "maximum_physics_cases": 30,
+  "provider_packet_evidence": [],
+  "physical_validation_evidence": {
+    "status": "not_validated",
+    "evidence_id": null,
+    "evidence_digest": null
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "id": "generic-lh2-full-scope-frequency-example",
+  "assets": [
+    {
+      "id": "storage-shell",
+      "model_component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "port_ids_by_loc": {},
+      "profile": "LH2_VESSEL",
+      "classification_basis": "synthetic example only; real tank classification and applicability review required",
+      "physical_scope_ids": [
+        "storage-tank-01-shell"
+      ],
+      "count": 1,
+      "nominal_diameter_m": 1.27,
+      "length_per_item_m": null,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "relief_direct_substance_contact_and_atmospheric_discharge": null
+    },
+    {
+      "id": "transfer-line",
+      "model_component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "port_ids_by_loc": {},
+      "profile": "LH2_PIPE",
+      "classification_basis": "synthetic example only; real pipe length, segmentation and failure exposure review required",
+      "physical_scope_ids": [
+        "liquid-transfer-line-01-segment"
+      ],
+      "count": 1,
+      "nominal_diameter_m": 0.025,
+      "length_per_item_m": 10.0,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": 1.0,
+      "location_weight_provenance": "synthetic single-segment demonstration; replace with reviewed segment allocation for a facility",
+      "relief_direct_substance_contact_and_atmospheric_discharge": null
+    },
+    {
+      "id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "port_ids_by_loc": {},
+      "profile": "LH2_VALVE",
+      "classification_basis": "synthetic example only; real valve construction and exposure review required",
+      "physical_scope_ids": [
+        "transfer-valve-01-body"
+      ],
+      "count": 1,
+      "nominal_diameter_m": 0.025,
+      "length_per_item_m": null,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "relief_direct_substance_contact_and_atmospheric_discharge": null
+    },
+    {
+      "id": "pressure-relief-vent",
+      "model_component_id": "pressure-relief-vent-01",
+      "port_ids": [
+        "vent-accident-out"
+      ],
+      "port_ids_by_loc": {},
+      "profile": "TNO_RELIEF_DEVICE",
+      "classification_basis": "synthetic example only; direct substance contact and atmospheric discharge must be confirmed",
+      "physical_scope_ids": [
+        "pressure-relief-vent-01-device"
+      ],
+      "count": 1,
+      "nominal_diameter_m": 0.025,
+      "length_per_item_m": null,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "relief_direct_substance_contact_and_atmospheric_discharge": true
+    },
+    {
+      "id": "transfer-pump",
+      "model_component_id": "liquid-transfer-pump-01",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "port_ids_by_loc": {},
+      "profile": "TNO_PUMP_STANDARD",
+      "classification_basis": "synthetic example only; largest connecting pipe and pump construction require review",
+      "physical_scope_ids": [
+        "liquid-transfer-pump-01-connection"
+      ],
+      "count": 1,
+      "nominal_diameter_m": 0.025,
+      "length_per_item_m": null,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "relief_direct_substance_contact_and_atmospheric_discharge": null
+    },
+    {
+      "id": "ambient-vaporizer",
+      "model_component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_ids_by_loc": {},
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "classification_basis": "synthetic design classification only: hydrogen is outside tubes; real exchanger layout and dangerous-fluid side require review",
+      "physical_scope_ids": [
+        "ambient-vaporizer-01-exchanger"
+      ],
+      "count": 1,
+      "nominal_diameter_m": null,
+      "length_per_item_m": null,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "relief_direct_substance_contact_and_atmospheric_discharge": null
+    },
+    {
+      "id": "reliquefier",
+      "model_component_id": "reliquefier-01",
+      "port_ids": null,
+      "port_ids_by_loc": {
+        "G4": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "G5": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "G6": [
+          "reliquefier-accident-out-1"
+        ]
+      },
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "classification_basis": "synthetic design classification only: hydrogen is inside weak-shell tubes; real exchanger layout and tube count require review",
+      "physical_scope_ids": [
+        "reliquefier-01-exchanger"
+      ],
+      "count": 1,
+      "nominal_diameter_m": 0.025,
+      "length_per_item_m": null,
+      "vessel_external_impact_or_operating_error": null,
+      "pipe_conditions": null,
+      "pipe_correction_factor": null,
+      "correction_provenance": null,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "relief_direct_substance_contact_and_atmospheric_discharge": null
+    }
+  ],
+  "excluded_model_components": {
+    "receiving-boundary-01": "boundary is an interface, not an accidental-release equipment item in this generic example"
+  },
+  "precomputed_events": null,
+  "precomputed_events_provenance": null
+}

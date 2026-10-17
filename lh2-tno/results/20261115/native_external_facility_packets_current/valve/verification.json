@@ -1,0 +1,42 @@
+{
+  "schema_version": "prism.native_lh2dt_stroke_valve_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "c4280c353f383d3f200fa224a88e8a92e652926c52882d635bfb9d782461a3c9",
+  "native_provider_result_digest": "006eb70042b90b576edb60047e09e4dc07adc9de3aea649ee40f450f2abbdc33",
+  "strict_provider_result_digest": "c4280c353f383d3f200fa224a88e8a92e652926c52882d635bfb9d782461a3c9",
+  "native_source_trace_preserved_in_packet": true,
+  "source_state_completion": {
+    "status": "PROVIDER_NATIVE_SOURCE_THROAT_FIELDS",
+    "interval_count": 2,
+    "inference_performed": false,
+    "provenance": "external native ValveResult throat pressure and provider property state"
+  },
+  "provider_packet_promoted": false,
+  "phase_basis": "supercritical_gas",
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "duration_s": 0.1,
+  "available_mass_kg": 100.0,
+  "cumulative_mass_out_kg": 1.2111170779661988e-06,
+  "upstream_reserve_remaining_kg": 99.99999878888292,
+  "final_opening": 1.0,
+  "choked_intervals": 2,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "compressible_handoff_requested": true,
+  "compressible_handoff_generated": true,
+  "limitations": [
+    "synthetic gas source state, valve geometry and upstream reserve",
+    "StrokeLimitedCommandedValve owns no upstream inventory or isolation reliability",
+    "native source entropy and hydraulic throat state are preserved in the strict packet; this is not an expansion/mixing solution",
+    "bounded diagnostic horizon leaves explicit reserve and is not a qualified facility frequency case"
+  ],
+  "compressible_handoff_algorithm": "birch_momentum_energy",
+  "compressible_handoff_state_count": 2,
+  "compressible_handoff_provider_qualified": false
+}

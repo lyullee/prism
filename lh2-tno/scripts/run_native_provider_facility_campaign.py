@@ -176,6 +176,29 @@ def _packet_event_match(packet: Any, events: list[Any]) -> Any:
     return matches[0]
 
 
+def _has_explicit_provider_source_states(packet: Any) -> bool:
+    """Return whether a gas packet has provider-owned source states per step.
+
+    A compressible-plane handoff remains mandatory for high-speed gas paths.
+    Low-speed atmospheric gas exits may use the ordinary SLABx-LH2 route only
+    when every interval retains the upstream provider state, so PRISM never
+    reconstructs a near-field state from outlet flow alone.
+    """
+    if getattr(packet, "boundary_kind", None) != "resolved_atmospheric_gas_exit":
+        return False
+    steps = getattr(packet, "steps", ())
+    return bool(steps) and all(
+        getattr(step, "provider_source_state", None) is not None for step in steps
+    )
+
+
+def _dynamic_state_closure_dump(packet: Any) -> dict[str, Any] | None:
+    """Return provider closure evidence without treating it as qualification."""
+    mass_balance = getattr(packet, "provider_mass_balance", None)
+    closure = getattr(mass_balance, "dynamic_state_closure", None)
+    return closure.model_dump(mode="json") if closure is not None else None
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     packets = []
     for path in args.packets:
@@ -187,12 +210,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if not packets:
         raise ValueError("at least one provider packet is required")
     for packet in packets:
-        if (
-            not isinstance(packet, ResolvedLiquidRelease)
-            and packet.event_kind != "emergency_relief"
-            and packet.compressible_plane_handoff is None
-        ):
-            raise ValueError(f"gas packet {packet.event_id} lacks compressible_plane_handoff")
+        if not isinstance(packet, ResolvedLiquidRelease) and packet.event_kind != "emergency_relief":
+            if packet.compressible_plane_handoff is None and not _has_explicit_provider_source_states(packet):
+                raise ValueError(
+                    f"gas packet {packet.event_id} lacks compressible_plane_handoff "
+                    "and complete provider_source_state rows"
+                )
     context = _object(args.request_context)
     manifest = EquipmentManifest.from_json(args.manifest)
     facility = manifest.to_facility()
@@ -314,10 +337,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "mass_residual_kg": packet.cumulative_mass_out_kg - packet.integrated_mass_kg,
                 "provider_packet_digest": canonical_digest(packet.model_dump(mode="json")),
                 "provider_result_digest": packet.provider_result_digest,
+                "packet_path": str(args.packets[index]).replace("\\", "/"),
                 "termination_basis": packet.termination_basis,
                 "termination_provenance": packet.termination_provenance,
+                "dynamic_state_closure": _dynamic_state_closure_dump(packet),
             }
-            for packet in packets
+            for index, packet in enumerate(packets)
         ],
         "limitations": [
             "provider packets, facility geometry, weather and population remain synthetic or diagnostic",

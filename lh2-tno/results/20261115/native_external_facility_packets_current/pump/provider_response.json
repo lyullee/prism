@@ -1,0 +1,94 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.pump.MappedPump",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_state_snapshot_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+    "component_id": "liquid-transfer-pump-01",
+    "port_id": "pump-accident-out",
+    "duration_s": 0.1,
+    "available_mass_kg": 1.0,
+    "cumulative_mass_out_kg": 0.0002803316189887485,
+    "cumulative_specific_enthalpy_out_j": -0.950079570226665,
+    "termination_basis": "reviewed_isolation_success",
+    "termination_provenance": "native MappedPump release was followed by an explicit atmospheric isolation-valve zero-flow check through the declared observation interval",
+    "upstream_service": "LH2",
+    "fluid": "Hydrogen",
+    "phase_basis": "liquid",
+    "reference_area_m2": 4.908738521234052e-06,
+    "reference_area_provenance": "explicit failed atmospheric pump opening area",
+    "droplet_partition_provenance": "native pump outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "total_mass_flow_kg_s": 0.00560663237977497,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.00560663237977497,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": -3389.1273972373338,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.00560663237977497,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              6.0,
+              0.0,
+              0.001
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.05,
+        "total_mass_flow_kg_s": 0.0,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": -3389.1273972373338,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              6.0,
+              0.0,
+              0.001
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      }
+    ],
+    "provider_meta": {
+      "native_inventory_owner": "upstream_provider_declared",
+      "pump_operating_point": {
+        "mass_flow_kg_s": 0.013333333333333332,
+        "pressure_rise_pa": 100000.0,
+        "map_head_pressure_rise_pa": 100000.0,
+        "map_limited": false,
+        "momentum_residual_pa": 0.0,
+        "cavitation_margin_m": null
+      },
+      "time_step_s": 0.05,
+      "valve": {
+        "area_m2": 4.908738521234052e-06,
+        "discharge_coefficient": 0.7,
+        "choked_intervals": 0
+      },
+      "isolation_time_s": 0.05,
+      "post_isolation_observation_s": 0.05,
+      "isolation_success": true,
+      "isolation_owner": "explicit_downstream_atmospheric_valve",
+      "post_isolation_zero_flow": true,
+      "initial_mass_kg": 1.0,
+      "final_mass_kg": 0.9997196683810112,
+      "residual_mass_kg": 0.9997196683810112,
+      "isolation_valve_zero_flow_kg_s": 0.0
+    }
+  }
+}

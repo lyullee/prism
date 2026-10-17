@@ -1,0 +1,122 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "native external DynamicVaporizer finite-volume accident export; synthetic geometry and state",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "e27ef59d6e4809f16ac1e348974838427d3577b6c309f9f3b6e27a8314eb523e",
+  "provider_boundary_reference": "lh2dt.DynamicVaporizer.export_accident_history native gas outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    10.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.1,
+  "available_mass_kg": 0.0008198175196090351,
+  "cumulative_mass_out_kg": 1.6812902073263578e-05,
+  "cumulative_static_enthalpy_out_j": 66.5501968899111,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 0.00033625804146527157,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3958281.3603453613,
+      "temperature_k": 300.00005299820754,
+      "density_kg_m3": 0.08184047334386349,
+      "effective_area_m2": 7.853981633974483e-05,
+      "velocity_m_s": 52.31360696435685,
+      "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": {
+        "source_pressure_pa_abs": 101500.0,
+        "source_temperature_k": 300.0,
+        "source_density_kg_m3": 0.0819817519609035,
+        "source_specific_enthalpy_j_kg": 3958281.3603453613,
+        "source_specific_entropy_j_kgk": 53457.385950011405,
+        "throat_pressure_pa_abs": 101325.0,
+        "throat_temperature_k": 299.85081827519684,
+        "throat_density_kg_m3": 0.0818811906168217,
+        "throat_specific_enthalpy_j_kg": 3956145.428810143,
+        "throat_mass_flux_kg_m2_s": 5.351712945359748,
+        "choked": false,
+        "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+      },
+      "provider_port_state": null
+    },
+    {
+      "time_s": 0.05,
+      "mass_flow_kg_s": 0.0,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3788932.532138952,
+      "temperature_k": 288.15,
+      "density_kg_m3": 0.08520493577522305,
+      "effective_area_m2": 7.853981633974483e-05,
+      "velocity_m_s": 0.0,
+      "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": {
+        "source_pressure_pa_abs": 98609.99494086974,
+        "source_temperature_k": 297.5647053728009,
+        "source_density_kg_m3": 0.08030046175357715,
+        "source_specific_enthalpy_j_kg": 3923423.475254477,
+        "source_specific_entropy_j_kgk": 53459.92938194878,
+        "throat_pressure_pa_abs": 101325.0,
+        "throat_temperature_k": 299.90410899046356,
+        "throat_density_kg_m3": 0.0818666461012149,
+        "throat_specific_enthalpy_j_kg": 3956908.1467265827,
+        "throat_mass_flux_kg_m2_s": 0.0,
+        "choked": false,
+        "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+      },
+      "provider_port_state": null
+    }
+  ],
+  "termination_provenance": "DynamicVaporizer native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+  "termination_basis": "reviewed_isolation_success",
+  "provider_mass_balance": {
+    "schema_version": "prism.provider_mass_balance.v1",
+    "initial_mass_kg": 0.0008198175196090351,
+    "cumulative_mass_in_kg": null,
+    "cumulative_mass_out_kg": 1.6812902073263578e-05,
+    "final_mass_kg": 0.0008030046175357715,
+    "reported_residual_mass_kg": 0.0,
+    "derived_accounting_residual_kg": 0.0,
+    "isolation_time_s": 0.05,
+    "post_isolation_observation_s": 0.05,
+    "isolation_success": true,
+    "dynamic_state_closure": {
+      "schema_version": "prism.provider_dynamic_state_closure.v1",
+      "inventory_feedback_closed": true,
+      "pressure_feedback_closed": true,
+      "state_history_digest": "1a9a48d2ae5d254289b81cf13d993eb3f81d9fd0e4c5a5a04ce7f81059c551fd",
+      "max_abs_inventory_residual_kg": 0.0,
+      "inventory_tolerance_kg": 1e-10,
+      "max_abs_pressure_residual_pa": 0.0,
+      "pressure_tolerance_pa": 1.0150000000000001e-05,
+      "provenance": "DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before every native outlet evaluation; the digest covers the initial and terminal provider state history."
+    }
+  },
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.01
+}

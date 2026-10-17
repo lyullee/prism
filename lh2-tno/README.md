@@ -100,6 +100,15 @@ is end-to-end diagnostic evidence only: no initiating frequency, provider
 qualification, independent physical validation, or facility IR/F-N claim is
 created.
 
+The current facility-level diagnostic replay is stored under
+`results/20261115/native_external_facility_campaign_current/` with its
+seven input packet directories in
+`results/20261115/native_external_facility_packets_current/`. It matches 7 of
+24 catalogue events, keeps 17 opening bins explicitly `UNCOMPUTED`, and
+produces a conditional IR/F-N view across three literature-frequency
+scenarios. Facility-wide QRA promotion remains closed until the missing
+provider, release-boundary, physical-validation and scope evidence is supplied.
+
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the
 facility merge plus the merged facility ledger:

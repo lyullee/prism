@@ -1,0 +1,35 @@
+{
+  "schema_version": "prism.native_lh2dt_layered_tank_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "d236884a1f80104a49dcfcb25b861e6f87b188d8ebf689a54df6e73809441a0c",
+  "provider_method": "export_accident_history",
+  "provider_packet_promoted": false,
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.30000000000000004,
+  "available_mass_kg": 434.50988152270014,
+  "cumulative_mass_out_kg": 0.045512888609354325,
+  "mass_residual_kg": -5.684341886080802e-14,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "READY",
+    "ready": true,
+    "blocking_reasons": [],
+    "state_history_digest": "531b6db72e3b9df24e55acc5fc93939ecc74016b9d527710fb6a0f82037c526d"
+  },
+  "distributed_boiling_model": "phase_change_complementarity",
+  "isolation_time_s": 0.2,
+  "post_isolation_observation_s": 0.1,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic geometry, inventory and atmospheric boundary",
+    "native provider history is diagnostic evidence until independent qualification is supplied",
+    "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+  ]
+}

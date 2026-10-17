@@ -1,0 +1,21 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_ATTACHED_AND_VALIDATED",
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "component_id": "transfer-valve-01",
+  "port_id": "valve-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+  "upstream_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "upstream_provider_result_digest": "c4280c353f383d3f200fa224a88e8a92e652926c52882d635bfb9d782461a3c9",
+  "handoff_provider_source_digest": "d6297ae168fef322dc42a84b74c37ab33f6bd08527314c6d2965a99cbb16e1bc",
+  "handoff_provider_result_digest": "cae641e223ca0f4601a873c7a094e07f1a5f968a8c86d928c1f46f0fe2109d6b",
+  "handoff_model": "prism-notional-plane-adapter",
+  "handoff_revision": "0.1.0",
+  "evidence_status": "synthetic_diagnostic",
+  "scenario_provenance": "Optional source-state notional-plane diagnostic; provider source/throat states were captured, but provider qualification and independent near-field validation are pending",
+  "handoff_state_count": 2,
+  "upstream_interval_count": 2,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The external handoff is conservation-checked and bound to one exact provider history. This command does not qualify the provider, assign frequency, or promote facility IR/F-N."
+}
