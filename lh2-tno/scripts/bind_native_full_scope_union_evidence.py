@@ -74,6 +74,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         slabx_validation_path=args.slabx_validation_evidence,
         slabx_direct_comparison_path=args.slabx_direct_comparison_evidence,
         slabx_independent_comparison_path=args.slabx_independent_comparison_evidence,
+        nasa_d4171_benchmark_path=getattr(args, "nasa_d4171_benchmark", None),
         ijhe_audit_path=args.ijhe_audit_source,
         external_sweep_path=args.external_sweep,
     )
@@ -578,6 +579,15 @@ def main() -> int:
         help=(
             "Optional independent SLABx-LH2 comparison audit; "
             "source-gate status remains explicit and cannot open physical validation."
+        ),
+    )
+    parser.add_argument(
+        "--nasa-d4171-benchmark",
+        type=Path,
+        default=None,
+        help=(
+            "Optional public NASA TN D-4171 tank benchmark; restricted component "
+            "evidence only and never a facility-QRA validation claim."
         ),
     )
     parser.add_argument(

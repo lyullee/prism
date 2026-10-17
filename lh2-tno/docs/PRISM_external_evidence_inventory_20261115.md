@@ -63,3 +63,35 @@ python scripts/audit_provider_artifact_workspace_roots.py `
 The generated records are local evidence ledgers and are intentionally kept
 separate from source code.  They should be regenerated when a new provider
 packet or field observation bundle is delivered.
+
+## NASA TN D-4171 component benchmark
+
+The optional `lh2dt_nasa_d4171_component_benchmark` domain records a public
+closed-tank self-pressurisation benchmark from NASA TN D-4171.  The benchmark
+contains 21 observations and is evaluated with an unfitted
+homogeneous-equilibrium state model.  In the reproduced screening run, the
+model under-predicts the measured pressure rise overall (mean absolute
+percentage error about 52%); the lower-heating subset is closer than the
+uniform and upper-heating subsets.  These results are useful for identifying
+model-form limits and for deciding which LH2 state variables need a better
+thermal boundary model.
+
+This benchmark is deliberately restricted to component evidence.  It does not
+validate an equipment accident release, isolation response, inventory
+depletion, SLABx-LH2 dispersion, ignition, frequency, IR/F-N, or facility QRA.
+It also cannot establish site-specific tank accuracy without a documented
+geometry and boundary-condition match.
+
+Reproduce the source run from the external model workspace, then pass the
+result to the optional evidence-matrix input:
+
+```powershell
+$env:PYTHONPATH = "C:\Users\lyul\Desktop\DocuData\_external_lh2dt_models_20261016\src"
+python C:\Users\lyul\Desktop\DocuData\_external_lh2dt_models_20261016\examples\run_nasa_d4171_benchmark.py `
+  --output-dir results/20261115/lh2dt_nasa_d4171_benchmark
+
+python scripts/build_validation_evidence_matrix.py `
+  --nasa-d4171-benchmark results/20261115/lh2dt_nasa_d4171_benchmark/nasa_tn_d4171_hem_results.json `
+  --output results/20261115/validation_evidence_matrix_with_nasa_d4171.json `
+  # provide the required pool/equipment/facility inputs as in the normal build
+```

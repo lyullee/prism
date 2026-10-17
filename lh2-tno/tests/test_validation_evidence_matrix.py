@@ -252,6 +252,37 @@ def test_matrix_records_slabx_component_evidence_without_opening_qra(tmp_path):
     assert matrix["facility_qra_claim"] is False
 
 
+def test_matrix_records_nasa_d4171_component_benchmark_without_opening_qra(tmp_path):
+    paths = _records(tmp_path)
+    nasa = _write(tmp_path / "nasa_d4171.json", {
+        "source_report": "NASA TN D-4171",
+        "source_url": "https://ntrs.nasa.gov/citations/19670028965",
+        "model": "closed rigid homogeneous-equilibrium hydrogen inventory",
+        "assumptions": ["no parameter is fitted to the 21 pressure-rise observations"],
+        "points": [{"test_number": 1}],
+        "overall": {"count": 21, "mean_absolute_percentage_error_percent": 52.0},
+        "by_heating_mode": {"lower": {"count": 6}},
+    })
+
+    matrix = build_validation_evidence_matrix(
+        paths["pool"],
+        paths["equipment"],
+        paths["facility"],
+        nasa_d4171_benchmark_path=nasa,
+    )
+
+    domain = next(
+        item for item in matrix["evidence_domains"]
+        if item["id"] == "lh2dt_nasa_d4171_component_benchmark"
+    )
+    assert domain["status"] == "RESTRICTED_COMPONENT_BENCHMARK"
+    assert domain["test_point_count"] == 1
+    assert domain["physical_validation_claim"] is False
+    assert domain["facility_qra_claim"] is False
+    assert matrix["physical_validation_claim"] is False
+    assert matrix["facility_qra_claim"] is False
+
+
 def test_matrix_records_dynamiclh2poolx_source_audit_without_opening_qra(tmp_path):
     paths = _records(tmp_path)
     dynamic = _write(tmp_path / "dynamiclh2poolx.json", {

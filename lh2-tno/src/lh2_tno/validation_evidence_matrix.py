@@ -726,6 +726,58 @@ def _slabx_independent_comparison_domain(
     }
 
 
+def _nasa_d4171_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Record the public NASA tank benchmark as restricted component evidence."""
+
+    if payload.get("source_report") != "NASA TN D-4171":
+        blockers.append("NASA D-4171 benchmark has an unexpected source report")
+    points = payload.get("points")
+    if not isinstance(points, list) or not points:
+        blockers.append("NASA D-4171 benchmark contains no test points")
+        points = []
+    assumptions = payload.get("assumptions")
+    if not isinstance(assumptions, list):
+        blockers.append("NASA D-4171 benchmark has no explicit assumptions")
+        assumptions = []
+    if not any("fitted" in str(item).casefold() for item in assumptions):
+        blockers.append("NASA D-4171 benchmark does not state its no-fitting boundary")
+    overall = payload.get("overall") if isinstance(payload.get("overall"), Mapping) else {}
+    by_mode = payload.get("by_heating_mode") if isinstance(payload.get("by_heating_mode"), Mapping) else {}
+    return {
+        "id": "lh2dt_nasa_d4171_component_benchmark",
+        "status": "RESTRICTED_COMPONENT_BENCHMARK",
+        "supports": [
+            "public NASA TN D-4171 self-pressurisation baseline for a closed LH2 tank",
+            "unfitted homogeneous-equilibrium mass/energy state-model comparison",
+        ],
+        "does_not_support": [
+            "equipment accident release, isolation, or inventory-depletion validation",
+            "SLABx-LH2 dispersion or pool-fire validation",
+            "initiating frequency, ignition, IR/F-N, or facility-QRA validation",
+            "site-specific tank accuracy without a declared geometry and boundary match",
+        ],
+        "source_report": payload.get("source_report"),
+        "source_url": payload.get("source_url"),
+        "model": payload.get("model"),
+        "test_point_count": len(points),
+        "overall": dict(overall),
+        "by_heating_mode": {
+            str(key): dict(value)
+            for key, value in by_mode.items()
+            if isinstance(value, Mapping)
+        },
+        "assumption_count": len(assumptions),
+        "source": _source(path, "NASA TN D-4171 restricted component benchmark", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     if payload.get("status") == "COMPLETE_EVIDENCE":
         blockers.append("IJHE audit reports complete evidence; promotion must be reviewed instead of inferred")
@@ -759,6 +811,7 @@ def build_validation_evidence_matrix(
     slabx_source_validation_gate_path: str | Path | None = None,
     slabx_direct_comparison_path: str | Path | None = None,
     slabx_independent_comparison_path: str | Path | None = None,
+    nasa_d4171_benchmark_path: str | Path | None = None,
     dynamiclh2poolx_evidence_path: str | Path | None = None,
     external_provider_validation_path: str | Path | None = None,
 ) -> dict[str, Any]:
@@ -824,6 +877,11 @@ def build_validation_evidence_matrix(
         domains.append(
             _slabx_independent_comparison_domain(independent_path, independent, blockers)
         )
+    if nasa_d4171_benchmark_path is not None:
+        nasa_path, nasa = _read_object(
+            nasa_d4171_benchmark_path, "NASA TN D-4171 benchmark"
+        )
+        domains.append(_nasa_d4171_domain(nasa_path, nasa, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
