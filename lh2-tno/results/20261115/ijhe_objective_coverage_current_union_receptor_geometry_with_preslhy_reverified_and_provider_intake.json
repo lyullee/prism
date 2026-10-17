@@ -9,8 +9,8 @@
       "requirement": "설비 상태 원문이 각 native 방출 packet에 전달되고 provider echo로 확인되어야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_external_facility_full_scope_clean_source_replay_20261017\\packet_catalog_verification.json",
-        "lh2-tno\\results\\20261110\\native_generic_scope_packets_latest2\\state_snapshot_binding_audit.json"
+        "results\\20261115\\native_external_facility_full_scope_clean_source_replay_20261017\\packet_catalog_verification.json",
+        "results\\20261110\\native_generic_scope_packets_latest2\\state_snapshot_binding_audit.json"
       ],
       "observed": {
         "catalog_event_count": 24,
@@ -29,9 +29,9 @@
       "requirement": "native 방출이 지속시간·재고/차단 경계를 거쳐 SLABx-LH2와 최종 피해 계산까지 도달해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261110\\native_generic_scope_packets_latest2\\native_generic_scope_worklist_packet_evidence_latest.json",
-        "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261110\\native_generic_scope_packets_latest2\\native_generic_scope_worklist_packet_evidence_latest.json",
+        "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "packet_event_count": 24,
@@ -51,8 +51,8 @@
       "requirement": "방출에서 확산·점화·화재/폭발·수용점 피해와 IR/F-N 진단까지 이어져야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "conditional_facility_risk_available": true,
@@ -68,7 +68,7 @@
       "requirement": "SLABx-LH2의 극저온 풀·옥외 확산 구성요소 근거를 추적하되 전체 chain 검증과 분리해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\slabx_lh2_validation_audit_current_recheck.json"
+        "results\\20261115\\slabx_lh2_validation_audit_current_recheck.json"
       ],
       "observed": {
         "slabx_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
@@ -88,8 +88,8 @@
       "requirement": "문헌 빈도를 그대로 입력하되 여러 빈도 시나리오의 불확실성을 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "frequency_scenario_count": 5,
@@ -107,8 +107,8 @@
       "requirement": "기상·점화·인구 분기를 명시적으로 곱해 최종 피해를 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "population_accounting_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
@@ -126,8 +126,8 @@
       "requirement": "탱크·배관·밸브·펌프·벤트·기화기·재액화기 등 일반 LH2 설비 사고 범위를 명시해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "required_family_count": 12,
@@ -327,8 +327,8 @@
       "requirement": "디지털 트윈 모니터링 입력에서 빠른 결과를 내고 신규 물리 계산의 시간을 별도로 보여줘야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json"
       ],
       "observed": {
         "cache_p95_ms": 24.54430004581809,
@@ -410,7 +410,7 @@
       "requirement": "실증 또는 독립 실험으로 방출·확산·피해 계산을 검증해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix_with_preslhy_reverified.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix_with_preslhy_reverified.json"
       ],
       "observed": {
         "validation_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
@@ -425,9 +425,9 @@
       "requirement": "각 facility case에 exact qualified provider packet이 있어야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
-        "lh2-tno\\results\\20261110\\native_generic_scope_packets_latest2\\native_generic_scope_worklist_packet_evidence_latest.json",
-        "lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+        "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261110\\native_generic_scope_packets_latest2\\native_generic_scope_worklist_packet_evidence_latest.json",
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "provider_packet_case_count": 24,
@@ -442,8 +442,8 @@
       "requirement": "선언한 주요사고 범위가 모든 설비·사고 family에 대해 엄격히 complete여야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
-        "lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "scope_matrix_complete": false,
@@ -467,8 +467,8 @@
       "requirement": "시설 전체 IR/F-N을 qualified QRA 결과로 승격해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "facility_total_risk_available": false,
@@ -483,9 +483,9 @@
       "requirement": "시설 전체 사건이 설비 상태 snapshot과 native 방출 결과 digest까지 일대일로 이어져야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\extension_state_snapshot_coverage.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\extension_state_snapshot_coverage.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "observed": {
         "union_event_count": 34,
@@ -507,7 +507,7 @@
       "requirement": "실증 상태자료의 원문 해시와 상태 장부 재생성이 일치해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261101\\inspection_center_observed_state_replay_audit.json"
+        "results\\20261101\\inspection_center_observed_state_replay_audit.json"
       ],
       "observed": {
         "source_count": 3,
@@ -528,8 +528,8 @@
       "requirement": "관측 상태를 실시간 정상상태 모델/provider resolver 입력으로 내보내되 사고 방출·빈도·QRA로 자동 승격하지 않아야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261110\\inspection_center_observed_state_runtime_frames_with_modes.json",
-        "lh2-tno\\results\\20261101\\inspection_center_observed_state_replay_audit.json"
+        "results\\20261110\\inspection_center_observed_state_runtime_frames_with_modes.json",
+        "results\\20261101\\inspection_center_observed_state_replay_audit.json"
       ],
       "observed": {
         "source_count": 3,
@@ -569,7 +569,7 @@
       "requirement": "관측 정상상태 신호를 일반 액화수소 설비 모델에 연결하되 시설 identity·사고 방출·빈도와 분리해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\observed_state_model_binding_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\observed_state_model_binding_audit.json"
       ],
       "observed": {
         "schema": "prism.observed_state_model_binding_audit.v1",
@@ -599,7 +599,7 @@
       "requirement": "검사센터 시계열 자료를 상태·HAZOP 진단 입력으로만 사용하고 방출·빈도·물리검증·시설 QRA로 승격하지 않아야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\inspection_center_source_inventory_suitability.json"
+        "results\\20261115\\inspection_center_source_inventory_suitability.json"
       ],
       "observed": {
         "schema_version": "prism.inspection_center_source_inventory_suitability.v1",
@@ -629,7 +629,7 @@
       "requirement": "외부 옥외 LH2 관측자료를 해시·사건시계·범위 정책과 함께 감사 장부에 기록해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\preslhy_trial10_external_field_evidence_reverified_current.json"
+        "results\\20261115\\preslhy_trial10_external_field_evidence_reverified_current.json"
       ],
       "observed": {
         "status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE",
@@ -654,7 +654,7 @@
       "requirement": "외부 옥외 LH2 관측과 모델 농도를 동일 센서·공통시계·운반지연으로 비교하되 독립 물리검증으로 자동 승격하지 않아야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\preslhy_trial10_field_model_comparison_reverified_current.json"
+        "results\\20261115\\preslhy_trial10_field_model_comparison_reverified_current.json"
       ],
       "observed": {
         "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
@@ -673,7 +673,7 @@
       "requirement": "검사센터 시계열과 외부 검증 장부를 입력 준비도만으로 기록하고 사고 방출·빈도·시설 QRA로 승격하지 않아야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261104\\validation_intake_audit_current.json"
+        "results\\20261104\\validation_intake_audit_current.json"
       ],
       "observed": {
         "intake_status": "SCREENED_NO_PROMOTION",
@@ -694,7 +694,7 @@
       "requirement": "외부 액화수소 설비 모델의 상태 입력 준비도와 사고 방출 경계를 분리하여 기록해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261104\\external_equipment_model_audit_current.json"
+        "results\\20261104\\external_equipment_model_audit_current.json"
       ],
       "observed": {
         "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
@@ -725,7 +725,7 @@
       "requirement": "설비 ID·P&ID component kind·사고 family를 명시적으로 연결하되 시나리오 목록이 방출·빈도·시설 QRA를 만들지 않아야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261104\\equipment_scenario_coverage_audit_current.json"
+        "results\\20261104\\equipment_scenario_coverage_audit_current.json"
       ],
       "observed": {
         "status": "CROSSWALK_REQUIRED",
@@ -744,7 +744,7 @@
       "requirement": "문헌 빈도를 확정 설비·사고 family에만 연결하고 미계산 family와 provider 방출 요구를 보존해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261104\\equipment_frequency_binding_audit_current.json"
+        "results\\20261104\\equipment_frequency_binding_audit_current.json"
       ],
       "observed": {
         "status": "FREQUENCY_BINDING_WITHHELD",
@@ -763,7 +763,7 @@
       "requirement": "일반 옥외 액화수소시설의 설비·사고군 crosswalk를 objective 원장에 연결하되 방출·빈도·QRA 승격은 차단해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261105\\generic_lh2_full_scope_equipment_scenario_coverage.json"
+        "results\\20261105\\generic_lh2_full_scope_equipment_scenario_coverage.json"
       ],
       "observed": {
         "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
@@ -783,7 +783,7 @@
       "requirement": "일반 시설 설비 사고군에 문헌 빈도를 연결하되 현장 학습·provider 방출·피해 결합과 미계산 사고를 보존해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261105\\generic_lh2_full_scope_equipment_frequency_binding.json"
+        "results\\20261105\\generic_lh2_full_scope_equipment_frequency_binding.json"
       ],
       "observed": {
         "status": "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
@@ -804,7 +804,7 @@
       "requirement": "방출 종료·격리·재고 소진·질량잔차의 provider closure를 사건별로 추적하고 미해결 항목을 표시해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "lh2-tno\\results\\20261106\\release_closure_worklist.json"
+        "results\\20261106\\release_closure_worklist.json"
       ],
       "observed": {
         "schema_version": "prism.release_closure_worklist.v1",
@@ -840,7 +840,7 @@
       "requirement": "재고소진 provider가 실제 종료경계에 도달하지 못하면 외삽·종료기준 대체 없이 미해결로 보존해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\inventory_termination_margin_probe.json"
+        "results\\20261115\\inventory_termination_margin_probe.json"
       ],
       "observed": {
         "status": "TERMINATION_MARGIN_DIAGNOSTIC_COMPLETED",
@@ -867,7 +867,7 @@
       "requirement": "모든 generic LH2 provider packet에 종료근거 또는 qualification 증거 요청이 정확히 하나씩 있어야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261106\\generic_lh2_provider_evidence_requests.json"
+        "results\\20261106\\generic_lh2_provider_evidence_requests.json"
       ],
       "observed": {
         "schema_version": "prism.generic_provider_evidence_requests.v1",
@@ -891,7 +891,7 @@
       "requirement": "generic LH2 provider의 사건별 방출 종료·차단·재고 closure 상태와 승격 차단을 직접 검증해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261106\\generic_lh2_provider_release_closure_current.json"
+        "results\\20261106\\generic_lh2_provider_release_closure_current.json"
       ],
       "observed": {
         "schema_version": "prism.generic_provider_release_closure_audit.v1",
@@ -924,7 +924,7 @@
       "requirement": "provider evidence catalog의 각 packet에 qualification sidecar exact-match 감사가 실행되어야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261106\\generic_lh2_provider_evidence_audit_current.json"
+        "results\\20261106\\generic_lh2_provider_evidence_audit_current.json"
       ],
       "observed": {
         "schema_version": "prism.generic_provider_evidence_audit.v1",
@@ -944,7 +944,7 @@
       "requirement": "저장된 risk atom에서 시설 조건부 IR/F-N을 독립 재계산해 집계값과 일치시켜야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_aggregate_closure_audit.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_aggregate_closure_audit.json"
       ],
       "observed": {
         "schema_version": "prism.facility_aggregate_closure_audit.v1",
@@ -966,7 +966,7 @@
       "requirement": "외부 LH2 방출 파일을 전체 검색하되 정확한 qualification sidecar와 종료근거가 없으면 진단 inventory로만 유지해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261108\\external_release_artifact_intake.json"
+        "results\\20261108\\external_release_artifact_intake.json"
       ],
       "observed": {
         "schema_version": "prism.external_release_artifact_intake.v1",
@@ -1001,7 +1001,7 @@
       "requirement": "최신 시설 전체 완료감사의 case·구조적 작업목록·진단 검사·차단 이유를 IJHE 목표 원장과 일치시켜야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "schema_version": "prism.ijhe_completion_audit.v1",
@@ -1028,7 +1028,7 @@
       "requirement": "시설 증거 요청 44개와 provider 제출 템플릿의 설비·사건·포트·digest 기준이 일치해야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_provider_intake_audit.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_provider_intake_audit.json"
       ],
       "observed": {
         "request_case_count": 44,
@@ -1040,6 +1040,31 @@
       },
       "blocking_reason": null,
       "interpretation": "이 행은 provider 자료 제출 전 intake 계약만 검증한다. 정렬 PASS는 provider packet 도착, 빈도 승격, 물리검증 또는 시설 QRA 완료를 뜻하지 않는다."
+    },
+    {
+      "id": "diagnostic_header_bound_monitoring_to_consequence_bridge",
+      "requirement": "명시적 설비 상태와 운전 모드가 HAZOP·provider 방출·SLABx-LH2 피해까지 연결되는 실행 경로를 재현해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261017\\header_bound_facility_bridge_current_population_diagnostic.json"
+      ],
+      "observed": {
+        "facility_id": "generic-outdoor-lh2-diagnostic",
+        "component_count": 3,
+        "selected_component_count": 3,
+        "executed_component_count": 3,
+        "ready_provider_scenario_count": 3,
+        "withheld_provider_scenario_count": 0,
+        "preflight_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY",
+        "frequency_uncertainty_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+        "wall_elapsed_ms": 11917.880600027274,
+        "facility_annual_ir_available": false,
+        "facility_fn_available": false,
+        "provider_packets_qualified": false,
+        "physical_validation_claim": false
+      },
+      "blocking_reason": null,
+      "interpretation": "실제 모니터링 입력과 명시적 운전 모드에서 HAZOP를 거쳐 각 설비 branch를 개별 실행한 진단 경로다. 모델 예측/운영자 제한 packet과 synthetic receptor를 사용하므로 시설 QRA·독립 물리검증·빈도 학습으로 승격하지 않는다."
     }
   ],
   "core_chain_check_ids": [
@@ -1078,8 +1103,8 @@
       "status": "CONDITIONAL_PASS",
       "check_id": "equipment_state_to_native_release",
       "evidence": [
-        "lh2-tno\\results\\20261115\\native_external_facility_full_scope_clean_source_replay_20261017\\packet_catalog_verification.json",
-        "lh2-tno\\results\\20261110\\native_generic_scope_packets_latest2\\state_snapshot_binding_audit.json"
+        "results\\20261115\\native_external_facility_full_scope_clean_source_replay_20261017\\packet_catalog_verification.json",
+        "results\\20261110\\native_generic_scope_packets_latest2\\state_snapshot_binding_audit.json"
       ],
       "strict_gate_ids": [
         "qualified_provider_evidence"
@@ -1094,8 +1119,8 @@
       "status": "CONDITIONAL_PASS",
       "check_id": "release_to_final_damage",
       "evidence": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "strict_gate_ids": [
         "qualified_provider_evidence",
@@ -1112,8 +1137,8 @@
       "status": "CONDITIONAL_PASS",
       "check_id": "generic_lh2_scope",
       "evidence": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "strict_gate_ids": [
         "strict_facility_scope",
@@ -1130,8 +1155,8 @@
       "status": "CONDITIONAL_PASS",
       "check_id": "literature_frequency_uncertainty",
       "evidence": [
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\verification.json"
       ],
       "strict_gate_ids": [
         "qualified_provider_evidence"
@@ -1146,8 +1171,8 @@
       "status": "CONDITIONAL_PASS",
       "check_id": "realtime_processing",
       "evidence": [
-        "lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
-        "lh2-tno\\results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json"
       ],
       "strict_gate_ids": [
         "independent_physical_validation"

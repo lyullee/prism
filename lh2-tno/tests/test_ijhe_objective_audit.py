@@ -248,6 +248,60 @@ def test_objective_audit_blocks_misaligned_facility_provider_intake():
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
 
 
+def test_objective_audit_records_header_bound_monitoring_consequence_bridge():
+    inputs = _inputs()
+    inputs["header_bound_facility_bridge"] = {
+        "schema_version": "prism.inspection_center_header_bound_facility_hazop_bridge.v1",
+        "facility_id": "generic-outdoor-lh2-diagnostic",
+        "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+        "component_count": 3,
+        "facility_annual_ir_available": False,
+        "facility_fn_available": False,
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_annual_qra_promotion": False,
+            "branch_results_auto_merged": False,
+            "conditional_expected_death_fn_calculated": True,
+        },
+        "preflight": {
+            "status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY",
+            "selected_scenario_count": 3,
+            "ready_for_provider_chain_count": 3,
+            "withheld_provider_chain_count": 0,
+        },
+        "facility_bridge_audit": {
+            "status": "MULTI_EQUIPMENT_HEADER_BOUND_FACILITY_RUNTIME_EXECUTED_DIAGNOSTIC",
+            "component_count": 3,
+            "selected_component_count": 3,
+            "executed_component_count": 3,
+            "ready_provider_scenario_count": 3,
+            "withheld_provider_scenario_count": 0,
+            "facility_qra_claim": False,
+            "provider_packets_qualified": False,
+            "physical_validation_claim": False,
+            "frequency_uncertainty_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+            "wall_elapsed_ms": 12000.0,
+        },
+        "_record_path": "header-bound-bridge.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_header_bound_monitoring_to_consequence_bridge"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["executed_component_count"] == 3
+    assert "diagnostic_header_bound_monitoring_to_consequence_bridge" not in report["strict_blocking_check_ids"]
+    assert {
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+    }.issubset(set(report["strict_blocking_check_ids"]))
+
+
 def test_objective_audit_aligns_latest_full_completion_audit():
     inputs = _inputs()
     names = [

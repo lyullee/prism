@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 34 |
+| Objective rows | 35 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (57 checks: 52 PASS, 5 BLOCKED) |
@@ -61,6 +61,8 @@ The current chain is explicit and auditable:
 5. Ignition, weather, population and receptor branches are accounted for before conditional individual-risk and F/N diagnostics are calculated.
 6. Literature-based frequency ports and uncertainty cases are retained in the same event/case identity.
 7. The monitor path distinguishes `cached_diagnostic_1hz` from `fresh_physics_background`; the benchmark records both timings and makes no fresh-physics 1 Hz claim.
+
+A separate header-bound diagnostic replay now appears as `diagnostic_header_bound_monitoring_to_consequence_bridge`. It executes three equipment branches from explicit state and operating mode through HAZOP, provider release, SLABx-LH2 consequence, literature-frequency identity, and conditional risk. The bridge uses model-prediction/operator-limited packets and a synthetic receptor, so it documents the executable monitoring seam without opening provider qualification, independent physical validation, or facility QRA.
 
 Every campaign result now also carries a `prism.facility_receptor_geometry.v1`
 contract. It records each receptor coordinate, the nearest non-boundary
@@ -177,7 +179,7 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore confirms numerical-gate consistency; it does not mean that
 independent physical validation or facility QRA is complete.
 
-The current objective ledger contains 34 checks after reconciling the latest completion audit and
+The current objective ledger contains 35 checks after reconciling the latest completion audit and
 independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.
 The external-release inventory remains a separate optional diagnostic row when it is not embedded
 in the completion audit.
@@ -214,6 +216,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --facility-aggregate-closure-audit results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_aggregate_closure_audit.json `
   --inspection-center-source-inventory results/20261115/inspection_center_source_inventory_suitability.json `
   --inventory-termination-margin-probe results/20261115/inventory_termination_margin_probe.json `
+  --header-bound-facility-bridge results/20261017/header_bound_facility_bridge_current_population_diagnostic.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --output results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json
 ```

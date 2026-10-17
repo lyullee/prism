@@ -78,6 +78,7 @@ def build_ijhe_objective_coverage_audit(
     inventory_termination_margin_probe: Mapping[str, Any] | None = None,
     external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_provider_intake_audit: Mapping[str, Any] | None = None,
+    header_bound_facility_bridge: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -138,6 +139,9 @@ def build_ijhe_objective_coverage_audit(
     )
     facility_provider_intake_audit_path = _record_path(
         facility_provider_intake_audit, None
+    )
+    header_bound_facility_bridge_path = _record_path(
+        header_bound_facility_bridge, None
     )
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
@@ -2594,6 +2598,97 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "이 행은 provider 자료 제출 전 intake 계약만 검증한다. "
                 "정렬 PASS는 provider packet 도착, 빈도 승격, 물리검증 또는 시설 QRA 완료를 뜻하지 않는다."
+            ),
+        ))
+
+    # The header-bound bridge is the executable monitoring-path demonstration:
+    # explicit state + operating mode -> HAZOP -> provider packet -> SLABx-LH2
+    # consequence. It is intentionally diagnostic because the bridge uses
+    # model-prediction/operator-limited packets and a synthetic receptor; this
+    # row must never alter the four strict qualification gates above.
+    bridge_audit = (
+        header_bound_facility_bridge.get("facility_bridge_audit", {})
+        if isinstance(header_bound_facility_bridge, Mapping)
+        else {}
+    )
+    if not isinstance(bridge_audit, Mapping):
+        bridge_audit = {}
+    bridge_preflight = (
+        header_bound_facility_bridge.get("preflight", {})
+        if isinstance(header_bound_facility_bridge, Mapping)
+        else {}
+    )
+    if not isinstance(bridge_preflight, Mapping):
+        bridge_preflight = {}
+    bridge_policy = (
+        header_bound_facility_bridge.get("policy", {})
+        if isinstance(header_bound_facility_bridge, Mapping)
+        else {}
+    )
+    if not isinstance(bridge_policy, Mapping):
+        bridge_policy = {}
+    bridge_ok = (
+        isinstance(header_bound_facility_bridge, Mapping)
+        and header_bound_facility_bridge.get("schema_version")
+        == "prism.inspection_center_header_bound_facility_hazop_bridge.v1"
+        and header_bound_facility_bridge.get("status")
+        == "FACILITY_HAZOP_RUNTIME_EVALUATED"
+        and isinstance(header_bound_facility_bridge.get("component_count"), int)
+        and header_bound_facility_bridge.get("component_count", 0) > 0
+        and bridge_audit.get("status")
+        == "MULTI_EQUIPMENT_HEADER_BOUND_FACILITY_RUNTIME_EXECUTED_DIAGNOSTIC"
+        and bridge_audit.get("selected_component_count")
+        == bridge_audit.get("component_count")
+        and bridge_audit.get("executed_component_count")
+        == bridge_audit.get("selected_component_count")
+        and bridge_audit.get("ready_provider_scenario_count", 0) > 0
+        and bridge_audit.get("withheld_provider_scenario_count") == 0
+        and bridge_preflight.get("status")
+        == "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY"
+        and bridge_preflight.get("selected_scenario_count")
+        == bridge_preflight.get("ready_for_provider_chain_count")
+        and bridge_preflight.get("withheld_provider_chain_count") == 0
+        and bridge_policy.get("operating_mode_taken_from_input") is True
+        and bridge_policy.get("frequency_inference_performed") is False
+        and bridge_policy.get("sensor_frequency_learning_used") is False
+        and bridge_policy.get("facility_annual_qra_promotion") is False
+        and bridge_policy.get("branch_results_auto_merged") is False
+        and header_bound_facility_bridge.get("facility_annual_ir_available") is False
+        and header_bound_facility_bridge.get("facility_fn_available") is False
+        and bridge_policy.get("conditional_expected_death_fn_calculated") is True
+        and bridge_audit.get("facility_qra_claim") is False
+        and bridge_audit.get("provider_packets_qualified") is False
+        and bridge_audit.get("physical_validation_claim") is False
+    )
+    if header_bound_facility_bridge is not None:
+        rows.append(_row(
+            "diagnostic_header_bound_monitoring_to_consequence_bridge",
+            "명시적 설비 상태와 운전 모드가 HAZOP·provider 방출·SLABx-LH2 피해까지 연결되는 실행 경로를 재현해야 한다",
+            "PASS" if bridge_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(header_bound_facility_bridge_path,),
+            observed={
+                "facility_id": header_bound_facility_bridge.get("facility_id"),
+                "component_count": header_bound_facility_bridge.get("component_count"),
+                "selected_component_count": bridge_audit.get("selected_component_count"),
+                "executed_component_count": bridge_audit.get("executed_component_count"),
+                "ready_provider_scenario_count": bridge_audit.get("ready_provider_scenario_count"),
+                "withheld_provider_scenario_count": bridge_audit.get("withheld_provider_scenario_count"),
+                "preflight_status": bridge_preflight.get("status"),
+                "frequency_uncertainty_status": bridge_audit.get("frequency_uncertainty_status"),
+                "wall_elapsed_ms": bridge_audit.get("wall_elapsed_ms"),
+                "facility_annual_ir_available": header_bound_facility_bridge.get("facility_annual_ir_available"),
+                "facility_fn_available": header_bound_facility_bridge.get("facility_fn_available"),
+                "provider_packets_qualified": bridge_audit.get("provider_packets_qualified"),
+                "physical_validation_claim": bridge_audit.get("physical_validation_claim"),
+            },
+            blocking_reason=None if bridge_ok else (
+                "header-bound monitoring-to-consequence bridge가 schema·scenario execution·"
+                "diagnostic-only 승격 차단 조건을 모두 만족하지 않는다"
+            ),
+            interpretation=(
+                "실제 모니터링 입력과 명시적 운전 모드에서 HAZOP를 거쳐 각 설비 branch를 개별 실행한 "
+                "진단 경로다. 모델 예측/운영자 제한 packet과 synthetic receptor를 사용하므로 "
+                "시설 QRA·독립 물리검증·빈도 학습으로 승격하지 않는다."
             ),
         ))
 
