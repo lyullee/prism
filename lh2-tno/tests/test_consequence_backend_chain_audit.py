@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import json
+from pathlib import Path
 
+from lh2_tno.accident_scenario_catalog import accident_scenario_catalog
 from lh2_tno.consequence_backend_chain_audit import audit_consequence_backend_chain
 
 
@@ -78,4 +81,18 @@ def test_backend_chain_does_not_substitute_default_path_for_unknown_family() -> 
         "no backend path matches" in reason
         for reason in report["case_rows"][0]["blocking_reasons"]
     )
+
+
+def test_published_lh2_backend_contract_lists_every_declared_accident_family() -> None:
+    contract_path = Path(__file__).parents[1] / "examples" / "lh2_consequence_backend_chain_contract.json"
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    declared = {
+        family
+        for path in contract["paths"]
+        for family in path.get("scenario_families", [])
+    }
+
+    assert {
+        row["family"] for row in accident_scenario_catalog()
+    } <= declared
 
