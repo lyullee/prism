@@ -1,0 +1,203 @@
+{
+  "schema_version": "prism.native_dynamic_pipe_exact_area100_request_rebaseline_record.v1",
+  "status": "REQUEST_REBASELINE_APPLIED_QUALIFICATION_WITHHELD",
+  "rebaseline_date_kst": "2026-10-18",
+  "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+  "request_catalog_schema": "prism.native_full_scope_provider_qualification_requests.v1",
+  "previous_request": {
+    "request_schema": "prism.provider_qualification_request.v1",
+    "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "status": "OPEN",
+    "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+    "current_packet": {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "event_kind": "accidental_leak",
+      "input_origin": "model_prediction",
+      "termination_basis": "model_pressure_equalization",
+      "termination_provenance": "DynamicHEMPipe native pressure reached the atmospheric boundary and the outlet mass flow fell below the resolved termination threshold",
+      "duration_s": 0.24005155145460036,
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.06826147353425363,
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218"
+    },
+    "blocking_reasons": [
+      "qualification_sidecar_missing",
+      "physical_validation_evidence_missing",
+      "synthetic_or_screening_boundary_declared"
+    ],
+    "required_evidence": [
+      {
+        "field": "qualification_sidecar",
+        "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+        "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+      },
+      {
+        "field": "provider_source_digest",
+        "accepted": "exact SHA-256 of the provider source/state input",
+        "reason": "qualification must identify the source state used by the packet"
+      },
+      {
+        "field": "provider_result_digest",
+        "accepted": "exact SHA-256 of the resolved release result",
+        "reason": "qualification must bind to the result consumed by SLABx-LH2"
+      },
+      {
+        "field": "independent_validation_reference",
+        "accepted": "reviewed validation record or explicit validation gap",
+        "reason": "provider qualification is separate from independent physical validation"
+      }
+    ],
+    "qualification_sidecar_required": {
+      "schema_version": "prism.provider_qualification_evidence.v1",
+      "status": "qualified_actual",
+      "provider_origin": [
+        "native_provider",
+        "reviewed_actual"
+      ],
+      "evidence_id": "nonempty reviewed evidence identifier",
+      "provider_source_digests": [
+        "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
+      ],
+      "provider_result_digests": [
+        "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218"
+      ],
+      "exact_digest_binding": true
+    },
+    "acceptance": {
+      "exact_event_component_port_match": true,
+      "termination_evidence_already_closed": true,
+      "termination_evidence_review_required": false,
+      "qualification_sidecar_digest_bound": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false
+    },
+    "request_kind": "qualification_only",
+    "readiness_status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+    "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\009_liquid-transfer-line-01_AREA_100pct\\resolved_release.json",
+    "packet_index": 0,
+    "packet_count": 1
+  },
+  "current_request": {
+    "request_schema": "prism.provider_qualification_request.v1",
+    "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "status": "OPEN",
+    "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+    "current_packet": {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "event_kind": "accidental_leak",
+      "input_origin": "model_prediction",
+      "termination_basis": "model_pressure_equalization",
+      "termination_provenance": "DynamicHEMPipe native pressure reached the atmospheric boundary and the outlet mass flow fell below the resolved termination threshold",
+      "duration_s": 0.24005155145460036,
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.06826147353425363,
+      "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f"
+    },
+    "blocking_reasons": [
+      "qualification_sidecar_missing",
+      "physical_validation_evidence_missing",
+      "synthetic_or_screening_boundary_declared",
+      "native isolation evidence is absent or outside the release clock",
+      "input origin remains diagnostic and is not qualified actual evidence"
+    ],
+    "required_evidence": [
+      {
+        "field": "qualification_sidecar",
+        "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+        "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+      },
+      {
+        "field": "provider_source_digest",
+        "accepted": "exact SHA-256 of the provider source/state input",
+        "reason": "qualification must identify the source state used by the packet"
+      },
+      {
+        "field": "provider_result_digest",
+        "accepted": "exact SHA-256 of the resolved release result",
+        "reason": "qualification must bind to the result consumed by SLABx-LH2"
+      },
+      {
+        "field": "independent_validation_reference",
+        "accepted": "reviewed validation record or explicit validation gap",
+        "reason": "provider qualification is separate from independent physical validation"
+      }
+    ],
+    "qualification_sidecar_required": {
+      "schema_version": "prism.provider_qualification_evidence.v1",
+      "status": "qualified_actual",
+      "provider_origin": [
+        "native_provider",
+        "reviewed_actual"
+      ],
+      "evidence_id": "nonempty reviewed evidence identifier",
+      "provider_source_digests": [
+        "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+      ],
+      "provider_result_digests": [
+        "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f"
+      ],
+      "exact_digest_binding": true
+    },
+    "acceptance": {
+      "exact_event_component_port_match": true,
+      "termination_evidence_already_closed": true,
+      "termination_evidence_review_required": false,
+      "qualification_sidecar_digest_bound": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false
+    },
+    "request_kind": "qualification_only",
+    "readiness_status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+    "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\.tmp_native_dynamic_pipe_exact_area100_current_20261018\\resolved_release.json",
+    "packet_index": 0,
+    "packet_count": 1,
+    "rebaseline": {
+      "schema_version": "prism.provider_qualification_request_rebaseline.v1",
+      "status": "DIGESTS_REBASED_TO_CURRENT_PACKET",
+      "acknowledged": true,
+      "previous_request": {
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218"
+      },
+      "current_request": {
+        "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f"
+      },
+      "packet_source": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\.tmp_native_dynamic_pipe_exact_area100_current_20261018\\resolved_release.json",
+      "independent_reverification": false,
+      "qualification_sidecar_created": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "physical_validation_claim": false,
+      "reason": "external provider packet was explicitly re-exported; prior digest binding is preserved for review"
+    }
+  },
+  "rebaseline": {
+    "schema_version": "prism.provider_qualification_request_rebaseline.v1",
+    "status": "DIGESTS_REBASED_TO_CURRENT_PACKET",
+    "acknowledged": true,
+    "catalog_source": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_campaign_current\\provider_qualification_requests.json",
+    "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "previous_provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "previous_provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
+    "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "current_provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+    "independent_reverification": false,
+    "qualification_sidecar_created": false,
+    "promotion_allowed": false
+  },
+  "promotion": {
+    "provider_packet_promoted": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "physical_validation_claim": false,
+    "slabx_lh2_modified": false
+  },
+  "interpretation": "The exact request was explicitly rebound to the latest packet digests after identity matching. The previous digests remain recorded; no qualification sidecar was created and no facility risk gate was opened."
+}
