@@ -28042,5 +28042,20 @@
   "provider_qualification_audit_exact_match_count": 0,
   "provider_qualification_audit_qualified_provider_packet_count": 0,
   "provider_qualification_audit_facility_qra_allowed": false,
+  "physical_validation_gate": {
+    "schema": "prism.validation_evidence_matrix.v1",
+    "status": "RESTRICTED_EVIDENCE_MATRIX",
+    "decision": "FACILITY_QRA_WITHHELD",
+    "evidence_domain_count": 7,
+    "physical_validation_claim": false,
+    "full_chain_validation_claim": false,
+    "accident_release_validation_claim": false,
+    "facility_qra_claim": false,
+    "complete": false,
+    "promotion_allowed": false,
+    "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix.json"
+  },
+  "physical_validation_gate_complete": false,
+  "physical_validation_evidence_record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix.json",
   "facility_qra_claim": false
 }

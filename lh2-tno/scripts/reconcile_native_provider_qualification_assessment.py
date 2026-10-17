@@ -32,6 +32,8 @@ def reconcile_assessment(
     *,
     assessment_record: str,
     audit_record: str,
+    validation_matrix: dict[str, Any] | None = None,
+    validation_record: str | None = None,
 ) -> dict[str, Any]:
     if assessment.get("schema_version") != "prism.facility_assessment.v1":
         raise ValueError("assessment must use prism.facility_assessment.v1")
@@ -63,6 +65,45 @@ def reconcile_assessment(
         "qualified_provider_packet_count"
     )
     result["provider_qualification_audit_facility_qra_allowed"] = False
+    if validation_matrix is not None:
+        if validation_matrix.get("schema_version") != "prism.validation_evidence_matrix.v1":
+            raise ValueError("validation matrix must use prism.validation_evidence_matrix.v1")
+        validation_claims = {
+            key: validation_matrix.get(key)
+            for key in (
+                "physical_validation_claim",
+                "full_chain_validation_claim",
+                "accident_release_validation_claim",
+                "facility_qra_claim",
+            )
+        }
+        matrix_gate_open = (
+            validation_matrix.get("status") == "INDEPENDENT_VALIDATED"
+            and validation_matrix.get("decision") == "FACILITY_QRA_ALLOWED"
+            and all(value is True for value in validation_claims.values())
+        )
+        result["physical_validation_gate"] = {
+            "schema": validation_matrix.get("schema_version"),
+            "status": validation_matrix.get("status"),
+            "decision": validation_matrix.get("decision"),
+            "evidence_domain_count": len(validation_matrix.get("evidence_domains", ()))
+            if isinstance(validation_matrix.get("evidence_domains"), list)
+            else 0,
+            **validation_claims,
+            "complete": matrix_gate_open,
+            "promotion_allowed": matrix_gate_open,
+            "record": validation_record,
+        }
+        result["physical_validation_gate_complete"] = matrix_gate_open
+        result["physical_validation_evidence_record"] = validation_record
+    else:
+        result["physical_validation_gate"] = {
+            "status": "NOT_SUPPLIED",
+            "complete": False,
+            "promotion_allowed": False,
+            "record": None,
+        }
+        result["physical_validation_gate_complete"] = False
     result["facility_qra_claim"] = False
     return result
 
@@ -71,6 +112,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--assessment", required=True, type=Path)
     parser.add_argument("--audit", required=True, type=Path)
+    parser.add_argument("--validation-evidence-matrix", type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     result = reconcile_assessment(
@@ -78,6 +120,16 @@ def main() -> int:
         _object(args.audit),
         assessment_record=str(args.assessment),
         audit_record=str(args.audit),
+        validation_matrix=(
+            _object(args.validation_evidence_matrix)
+            if args.validation_evidence_matrix
+            else None
+        ),
+        validation_record=(
+            str(args.validation_evidence_matrix)
+            if args.validation_evidence_matrix
+            else None
+        ),
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -87,6 +139,7 @@ def main() -> int:
         "provider_qualification_coverage_complete": gate["complete"],
         "qualified_provider_packet_count": gate["qualified_provider_packet_count"],
         "facility_qra_allowed": result["provider_qualification_audit_facility_qra_allowed"],
+        "physical_validation_gate_complete": result["physical_validation_gate_complete"],
         "output": str(args.output),
     }, ensure_ascii=False))
     return 0 if result["status"] == "FACILITY_SCOPE_EXECUTED" else 2

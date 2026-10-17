@@ -1137,5 +1137,10 @@
   "provider_qualification_assessment_status": "PARTIAL_FACILITY_SCOPE; native qualification audit is consumed as an explicit provider gate; 26 release identities, 0 exact matches, 0 qualified packets; facility QRA remains false",
   "provider_qualification_assessment_provider_gate_complete": false,
   "provider_qualification_assessment_qualified_provider_packet_count": 0,
-  "provider_qualification_assessment_facility_qra_available": false
+  "provider_qualification_assessment_facility_qra_available": false,
+  "provider_qualification_assessment_physical_validation_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json",
+  "provider_qualification_assessment_physical_validation_gate_status": "RESTRICTED_EVIDENCE_MATRIX",
+  "provider_qualification_assessment_physical_validation_gate_decision": "FACILITY_QRA_WITHHELD",
+  "provider_qualification_assessment_physical_validation_gate_complete": false,
+  "provider_qualification_assessment_physical_validation_facility_qra_allowed": false
 }

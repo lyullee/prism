@@ -137,12 +137,16 @@ physics, use:
 python scripts/reconcile_native_provider_qualification_assessment.py `
   --assessment results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json `
   --audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
+  --validation-evidence-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix.json `
   --output results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json
 ```
 
 The derived assessment preserves the conditional IR/F-N view while exposing
-the provider gate. With the current missing sidecars it remains
-`PARTIAL_FACILITY_SCOPE` and keeps qualified facility QRA disabled.
+two independent fail-closed gates: provider qualification and physical
+validation. The current matrix is `RESTRICTED_EVIDENCE_MATRIX` with decision
+`FACILITY_QRA_WITHHELD`, so the assessment remains `PARTIAL_FACILITY_SCOPE`
+and keeps qualified facility QRA disabled. A component replay or a passing
+metadata check cannot open this gate.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the

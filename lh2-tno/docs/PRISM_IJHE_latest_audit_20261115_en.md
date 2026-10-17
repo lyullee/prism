@@ -132,7 +132,7 @@ python scripts/verify_latest_ijhe_audit.py `
   --output results/20261115/latest_ijhe_audit_verification.json
 ```
 
-The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
+The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N. The saved facility assessment now consumes the validation-evidence matrix explicitly: its physical-validation gate is `RESTRICTED_EVIDENCE_MATRIX` with decision `FACILITY_QRA_WITHHELD`, and its `physical_validation_gate_complete` flag is `false`.
 
 The current status ledger records **1,397 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
