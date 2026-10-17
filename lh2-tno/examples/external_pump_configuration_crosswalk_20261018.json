@@ -1,0 +1,45 @@
+{
+  "schema_version": "prism.external_pump_configuration_crosswalk.v1",
+  "status": "NO_EXACT_EXTERNAL_CONFIGURATION_MATCH",
+  "prism_component": {
+    "component_id": "liquid-transfer-pump-01",
+    "kind": "pump",
+    "model_class": "lh2dt.MappedPump",
+    "declared_parameters_si": {
+      "diameter_m": 0.025
+    },
+    "configuration_origin": "synthetic_generic_lh2_facility_scope_example",
+    "accident_port": "pump-accident-out"
+  },
+  "candidate_documents": [
+    {
+      "document_id": "nasa-piston-1959",
+      "equipment_family": "cryogenic_piston_pump",
+      "configuration_id": "NASA-piston-five-cylinder",
+      "match_status": "NO_MATCH_PUMP_TYPE_AND_CONFIGURATION_UNREVIEWED",
+      "reason": "The document describes a five-cylinder submerged piston pump; the PRISM component is a generic mapped pump with no reviewed piston geometry, cylinder count, or nameplate identity."
+    },
+    {
+      "document_id": "nasa-centrifugal-1991",
+      "equipment_family": "lh2_centrifugal_pump",
+      "configuration_id": "NASA-CR-187117-config-2",
+      "match_status": "NO_MATCH_PUMP_GEOMETRY_AND_SPEED_UNREVIEWED",
+      "reason": "The document describes a 2-inch-tip, 77,000 rpm small centrifugal stage; the PRISM component declares only a 0.025 m generic diameter and has no reviewed speed, impeller, or test-article identity."
+    }
+  ],
+  "validation_decision": {
+    "exact_configuration_match": false,
+    "independent_no_fit_holdout_ready": false,
+    "physical_validation_claim": false,
+    "provider_release_packet_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false,
+    "promotion_allowed": false
+  },
+  "required_next_evidence": [
+    "site or equipment-owner nameplate and pump type for liquid-transfer-pump-01",
+    "reviewed speed, flow, pressure, temperature and geometry mapping to one external test configuration",
+    "independent no-fit comparison with a held-out test point or curve and uncertainty",
+    "separate pump failure-mode release history with duration, isolation and inventory closure"
+  ]
+}

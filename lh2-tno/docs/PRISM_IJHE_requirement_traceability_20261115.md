@@ -258,3 +258,10 @@ performed. Consequently physical validation, accident-release qualification,
 frequency, and facility QRA remain closed. The audit and source manifest are
 [`examples/external_pump_test_point_audit_20261018.json`](../examples/external_pump_test_point_audit_20261018.json)
 and [`examples/external_pump_test_point_manifest_20261018.json`](../examples/external_pump_test_point_manifest_20261018.json).
+
+The configuration crosswalk makes the remaining comparison decision explicit:
+the current generic `liquid-transfer-pump-01` has no reviewed exact match to
+either NASA test article. It therefore cannot use either document as a fitted
+pump map or as an independent validation result. The crosswalk and required
+evidence are recorded in
+[`examples/external_pump_configuration_crosswalk_20261018.json`](../examples/external_pump_configuration_crosswalk_20261018.json).

@@ -6451,5 +6451,7 @@
   "external_pump_test_point_count": 8,
   "external_pump_test_point_document_count": 2,
   "external_pump_test_point_physical_validation_claim": false,
-  "external_pump_test_point_facility_qra_claim": false
+  "external_pump_test_point_facility_qra_claim": false,
+  "external_pump_configuration_crosswalk_record": "examples/external_pump_configuration_crosswalk_20261018.json",
+  "external_pump_configuration_crosswalk_status": "NO_EXACT_EXTERNAL_CONFIGURATION_MATCH; NASA piston and centrifugal candidates remain unreviewed against generic MappedPump"
 }

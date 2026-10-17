@@ -5014,5 +5014,7 @@
   "external_pump_test_point_manifest": "examples/external_pump_test_point_manifest_20261018.json",
   "external_pump_test_point_audit_status": "TEST_POINTS_EXTRACTED_CONFIGURATION_REVIEW_REQUIRED; source-bound candidate inputs only; no physical-validation or QRA promotion",
   "external_pump_test_point_count": 8,
-  "external_pump_test_point_promotion_allowed": false
+  "external_pump_test_point_promotion_allowed": false,
+  "external_pump_configuration_crosswalk_record": "examples/external_pump_configuration_crosswalk_20261018.json",
+  "external_pump_configuration_crosswalk_exact_match": false
 }
