@@ -1,0 +1,112 @@
+{
+  "schema_version": "prism.header_bound_facility_bridge_summary.v2",
+  "source_record": "results/20261017/header_bound_facility_bridge_current.json",
+  "provider_binding_record": "results\\20261017\\inspection_center_header_bound_provider_binding_current.json",
+  "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "component_count": 3,
+  "selected_component_count": 3,
+  "executed_component_count": 3,
+  "ready_provider_scenario_count": 3,
+  "withheld_provider_scenario_count": 0,
+  "preflight_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY",
+  "risk_atom_count": 3,
+  "facility_annual_ir_available": false,
+  "facility_fn_available": false,
+  "provider_packets_qualified": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "sensor_frequency_learning_used": false,
+  "diagnostic_only": true,
+  "wall_elapsed_ms": 11396.32430000347,
+  "rows": [
+    {
+      "observed_component_id": "lh2-intake-tank",
+      "operating_mode": "receiving",
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "scenario_family": "vessel_hole",
+      "provider_component_id": "storage-tank-01",
+      "provider_port_id": "tank-accident-out",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "provider_input_origin": "model_prediction",
+      "release_duration_s": 0.15000000000000002,
+      "available_mass_kg": 0.01677670997923311,
+      "cumulative_mass_out_kg": 0.01677670997923311,
+      "remaining_mass_kg": 0.0,
+      "termination_basis": "reviewed_isolation_success",
+      "isolation_status": "ISOLATION_SUCCESS_DECLARED",
+      "mass_status": "MASS_BALANCE_CLOSED",
+      "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "slabx_service_elapsed_ms": 5108.748099999502,
+      "realtime_deadline_status": "MET",
+      "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
+      "conditional_current_weather_ir": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "frequency_is_not_inferred": true
+    },
+    {
+      "observed_component_id": "lh2-storage-vent",
+      "operating_mode": "standby",
+      "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "scenario_family": "vent_hole",
+      "provider_component_id": "pressure-relief-vent-01",
+      "provider_port_id": "vent-accident-out",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "provider_input_origin": "model_prediction",
+      "release_duration_s": 0.5,
+      "available_mass_kg": 0.0008087150217064195,
+      "cumulative_mass_out_kg": 0.0006739291847553497,
+      "remaining_mass_kg": 0.00013478583695106987,
+      "termination_basis": "emergency_relief_discharge",
+      "isolation_status": "EMERGENCY_RELIEF_TERMINATION",
+      "mass_status": "MASS_BALANCE_CLOSED",
+      "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "slabx_service_elapsed_ms": 4607.965300005162,
+      "realtime_deadline_status": "MET",
+      "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
+      "conditional_current_weather_ir": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "frequency_is_not_inferred": true
+    },
+    {
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "operating_mode": "supply",
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "scenario_family": "vaporizer_hole",
+      "provider_component_id": "ambient-vaporizer-01",
+      "provider_port_id": "vaporizer-accident-out",
+      "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_input_origin": "model_prediction",
+      "release_duration_s": 0.5,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.221896865709533e-06,
+      "remaining_mass_kg": 0.0008166317257982181,
+      "termination_basis": "reviewed_isolation_success",
+      "isolation_status": "ISOLATION_SUCCESS_DECLARED",
+      "mass_status": "MASS_BALANCE_CLOSED",
+      "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "slabx_service_elapsed_ms": 1638.2671000028495,
+      "realtime_deadline_status": "MET",
+      "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
+      "conditional_current_weather_ir": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "frequency_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "frequency_is_not_inferred": true
+    }
+  ],
+  "interpretation": "Fresh observed-state -> explicit operating mode -> HAZOP -> provider release -> SLABx-LH2 consequence -> literature frequency binding was replayed for three equipment branches. All branches are diagnostic because the provider input origin is model_prediction and provider qualification, independent physical validation, and complete facility boundary evidence remain open. The result must not be promoted to annual facility IR/F-N."
+}

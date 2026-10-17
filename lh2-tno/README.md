@@ -652,6 +652,13 @@ This is still a diagnostic replay: provider qualification, physical validation,
 and facility annual IR/F-N remain withheld. Fresh physics took about 10.4 s for
 three branches; the cached control-loop benchmark is reported separately.
 
+The [current bridge replay](docs/PRISM_header_bound_current_bridge_20261017.md)
+refreshes that same connection from the latest observed-state and HAZOP records.
+Its [compact result](results/20261017/header_bound_facility_bridge_current_summary.json)
+records release duration, termination basis, mass ledger, SLABx-LH2 execution
+time (about 11.4 s for three fresh branches in the current replay), and the
+still-closed facility-QRA gates for each equipment branch.
+
 ## Equipment and provider boundary
 
 The state frame contains facility ID, component ID, operating mode, timestamp, measured or predicted values, units, signal quality, and provenance. It does not contain `resolved_release`, opening diameter, annual frequency, duration, or termination basis.
@@ -787,6 +794,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Case-status trace from facility cases to risk atoms](docs/PRISM_case_status_risk_atom_trace_20261017.md)
 - [Header-bound facility bridge summary](results/20261115/header_bound_facility_bridge_summary.json)
 - [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
+- [Current header-bound bridge replay record](docs/PRISM_header_bound_current_bridge_20261017.md)
+- [Current header-bound bridge replay summary](results/20261017/header_bound_facility_bridge_current_summary.json)
 - [Header-bound facility runtime frames](examples/inspection_center_header_bound_runtime_frames_20261115.json)
 - [Native multi-equipment facility campaign](docs/PRISM_native_multi_equipment_facility_campaign_20261016.md)
 - [Native external seven-equipment recheck](docs/PRISM_native_external_multi_equipment_recheck_20261017.md)
