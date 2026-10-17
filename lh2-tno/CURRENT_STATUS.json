@@ -6305,7 +6305,7 @@
   "latest_native_external_base_recheck_summary": "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/native_external_base_recheck_summary.json",
   "latest_native_external_base_recheck_summary_status": "DIAGNOSTIC_CANDIDATE; 34 events, 44 cases, 176 risk atoms; 23 EXECUTED, 21 EXECUTED_OPERATOR_LIMITED; authoritative union unchanged",
   "latest_external_evidence_recheck_record": "results/20261115/external_provider_workspace_roots_inventory_current.json",
-  "latest_external_evidence_recheck_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY; 4 roots, 43 JSON artifacts, 43 supporting files, 0 qualification records, 0 provider responses, 0 independent physical-validation claims; facility IR/F-N promotion false",
+  "latest_external_evidence_recheck_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY; 3 roots, 42 JSON artifacts, 41 supporting files, 0 qualification records, 0 provider responses, 0 independent physical-validation claims; facility IR/F-N promotion false",
   "latest_external_evidence_recheck_inspection_center_status": "NO_EXTERNAL_JSON_ARTIFACTS; 24 supporting files recognized; state/scenario evidence only",
   "external_lh2dt_native_multi_equipment_recheck_comparison_record": "results/20261115/native_external_multi_equipment_recheck_current/recheck_comparison_current.json",
   "external_lh2dt_native_multi_equipment_recheck_comparison_status": "MATCHED_CURRENT_EXTERNAL_SOURCE_AND_CHAIN",

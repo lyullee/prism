@@ -1,7 +1,7 @@
 {
   "schema_version": "prism.provider_artifact_roots_audit.v1",
   "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
-  "root_count": 4,
+  "root_count": 3,
   "roots": {
     "external_lh2dt": {
       "schema_version": "prism.provider_artifact_audit.v1",
@@ -42,60 +42,6 @@
         },
         {
           "file": "docs/benchmarks/nasa_tn_d4171_hem_results.json",
-          "kind": "other_json",
-          "qualification_evidence_present": false,
-          "physical_validation_claim": false,
-          "complete_facility_qra_claim": false,
-          "diagnostic_only": true
-        }
-      ],
-      "errors": [],
-      "promotion_policy": {
-        "frequency_assigned": false,
-        "provider_release_packet_promoted": false,
-        "physical_validation_promoted": false,
-        "facility_qra_promoted": false,
-        "supporting_documents_are_not_qualification_evidence": true,
-        "qualification_requires_separate_exact_digest_bound_evidence": true
-      },
-      "blocking_reasons": [
-        "no provider_response.json artifact was found",
-        "no prism.provider_qualification_evidence.v1 record was found",
-        "no artifact claims independent physical validation",
-        "no artifact claims a complete facility QRA"
-      ]
-    },
-    "prism_clean_lh2dt": {
-      "schema_version": "prism.provider_artifact_audit.v1",
-      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
-      "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\_prism_clean_lh2dt_models_16f7a4b",
-      "artifact_count": 1,
-      "supporting_file_count": 2,
-      "supporting_files": [
-        {
-          "file": "src/lh2dt/data/nasa_tn_d4171_table1.csv",
-          "suffix": ".csv",
-          "size_bytes": 1636,
-          "qualification_evidence_present": false,
-          "provider_release_promoted": false
-        },
-        {
-          "file": "src/lh2dt/data/nasa_tn_d4171_table2.csv",
-          "suffix": ".csv",
-          "size_bytes": 1406,
-          "qualification_evidence_present": false,
-          "provider_release_promoted": false
-        }
-      ],
-      "provider_response_count": 0,
-      "verification_artifact_count": 0,
-      "qualification_artifact_count": 0,
-      "physical_validation_artifact_count": 0,
-      "complete_facility_qra_artifact_count": 0,
-      "diagnostic_artifact_count": 1,
-      "artifacts": [
-        {
-          "file": ".zenodo.json",
           "kind": "other_json",
           "qualification_evidence_present": false,
           "physical_validation_claim": false,
@@ -777,14 +723,14 @@
     }
   },
   "summary": {
-    "artifact_count": 43,
+    "artifact_count": 42,
     "provider_response_count": 0,
     "verification_artifact_count": 0,
     "qualification_artifact_count": 0,
     "physical_validation_artifact_count": 0,
     "complete_facility_qra_artifact_count": 0,
-    "diagnostic_artifact_count": 43,
-    "supporting_file_count": 43,
+    "diagnostic_artifact_count": 42,
+    "supporting_file_count": 41,
     "qualification_evidence_present": false,
     "independent_physical_validation_present": false,
     "complete_facility_qra_claim_present": false,
