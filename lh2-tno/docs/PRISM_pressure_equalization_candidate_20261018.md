@@ -34,6 +34,15 @@ pressure-equalization boundary.  The audit sets
 `packet_mutation_allowed=false`, `qualified_provider_packet_allowed=false`,
 `frequency_inference_allowed=false`, and `facility_qra_allowed=false`.
 
+The facility release-ledger gate now recognizes `model_pressure_equalization`
+as a possible strict boundary only when the consuming packet carries the same
+explicit pressure-equalization fields: equalization time, a positive
+observation tail, successful zero-flow declaration, terminal source pressure
+at or below ambient, and maximum post-stop flow. A packet that only carries a
+dynamic-state residual or a short bounded history remains blocked. The current
+transfer-line full-bore row therefore remains diagnostic until the provider
+re-exports those fields and the campaign is rebound to its new result digest.
+
 The inventory dynamic-vaporizer adapter now also accepts an explicit
 `--release-mode pressure_equalization` export.  Its provider metadata records
 the equalization time, the post-equalization observation interval, the

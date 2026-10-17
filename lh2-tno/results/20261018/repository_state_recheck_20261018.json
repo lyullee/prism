@@ -5,7 +5,7 @@
   "remote_main": "3a66c8307eda22dcb2466fd11d5e4a6a1f200fb4",
   "local_remote_match": true,
   "tracked_worktree_clean_before_recheck": true,
-  "local_test_count": 1498,
+  "local_test_count": 1500,
   "local_test_status": "PASS",
   "pytest_warning_count": 1,
   "latest_executable_github_actions": {
@@ -28,11 +28,13 @@
     "risk_atoms": 96,
     "facility_total_risk_available": false,
     "provider_packet_promoted": false,
-    "physical_validation_claim": false
+    "physical_validation_claim": false,
+    "strict_release_boundary_pressure_equalization_status": "BLOCKED_CURRENT_PACKET_EXPLICIT_FIELDS_MISSING"
   },
   "current_ijhe_boundary": "INCOMPLETE_EVIDENCE; facility IR/F-N, qualified provider packets, independent full-chain physical validation and declared-scope closure remain blocked",
   "stale_records_corrected": [
     "CURRENT_STATUS.json",
     "DEVELOPMENT_GOAL.json"
-  ]
+  ],
+  "pressure_equalization_release_boundary_contract": "IMPLEMENTED_FAIL_CLOSED"
 }

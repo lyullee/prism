@@ -5184,6 +5184,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -5262,6 +5263,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
@@ -5340,6 +5342,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
@@ -5418,6 +5421,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
@@ -5496,6 +5500,7 @@
         },
         "isolation_status": "not_declared",
         "inventory_status": "provider_declared_inventory_depletion",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
@@ -5548,6 +5553,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
@@ -5626,6 +5632,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
@@ -5704,6 +5711,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
@@ -5782,6 +5790,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
@@ -5860,6 +5869,7 @@
         },
         "isolation_status": "not_declared",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
@@ -5938,6 +5948,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
@@ -6006,6 +6017,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
@@ -6074,6 +6086,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
@@ -6142,6 +6155,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
@@ -6210,6 +6224,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
@@ -6276,8 +6291,9 @@
           "time_s": 0.5,
           "provenance": "native provider emergency-relief duration retained for multi-packet facility diagnostic"
         },
-        "isolation_status": "not_declared",
-        "inventory_status": "not_inventory_termination",
+        "isolation_status": "not_applicable",
+        "inventory_status": "not_applicable",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -6330,6 +6346,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
@@ -6398,6 +6415,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
@@ -6466,6 +6484,7 @@
         },
         "isolation_status": "not_declared",
         "inventory_status": "provider_declared_inventory_over_600s",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
@@ -6544,6 +6563,7 @@
         },
         "isolation_status": "not_declared",
         "inventory_status": "provider_declared_inventory_over_600s",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
@@ -6622,6 +6642,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -6700,6 +6721,7 @@
         },
         "isolation_status": "not_declared",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
@@ -6759,6 +6781,7 @@
         },
         "isolation_status": "not_declared",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
@@ -6818,6 +6841,7 @@
         },
         "isolation_status": "provider_declared_isolation_success",
         "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
@@ -6911,6 +6935,7 @@
       "one_row": "event × release branch × annual condition",
       "isolation": "reported only when the provider termination basis explicitly says reviewed_isolation_success",
       "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
+      "pressure_equalization": "closed only from explicit provider zero-flow, pressure and observation fields; never inferred from a bounded history",
       "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
       "operator_limited": "numerically executed but not qualified facility evidence",
       "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"

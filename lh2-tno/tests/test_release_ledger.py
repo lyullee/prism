@@ -166,6 +166,77 @@ def test_release_ledger_treats_emergency_relief_as_a_distinct_non_isolation_boun
     assert gate["blocking_reasons"] == []
 
 
+def test_facility_release_boundary_accepts_explicit_pressure_equalization():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "vaporizer/pressure-equalization",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "model_pressure_equalization",
+                "time_s": 1.0,
+                "provenance": "provider pressure and zero-flow ledger",
+            },
+            "provider_packet_identity": {
+                "provider_result_digests": ["b" * 64],
+                "provider_mass_balances": [{
+                    "initial_mass_kg": 1.0,
+                    "cumulative_mass_out_kg": 0.015,
+                    "final_mass_kg": 0.985,
+                    "derived_accounting_residual_kg": 0.0,
+                    "pressure_equalization_time_s": 1.0,
+                    "post_pressure_equalization_observation_s": 1.0,
+                    "pressure_equalization_success": True,
+                    "terminal_source_pressure_pa_abs": 99999.0,
+                    "ambient_pressure_pa_abs": 100000.0,
+                    "max_post_pressure_equalization_flow_kg_s": 0.0,
+                }],
+            },
+            "mass_ledger": {
+                "released_kg": 0.015,
+                "end_to_end_residual_kg": 0.0,
+            },
+        }]
+    )
+    row = ledger["rows"][0]
+    assert row["pressure_equalization_status"] == (
+        "provider_declared_pressure_equalization"
+    )
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is True
+    assert gate["blocking_reasons"] == []
+
+
+def test_facility_release_boundary_rejects_pressure_equalization_without_explicit_evidence():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "vaporizer/pressure-equalization-open",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "model_pressure_equalization",
+                "time_s": 1.0,
+            },
+            "provider_packet_identity": {
+                "provider_result_digests": ["b" * 64],
+                "provider_mass_balances": [{
+                    "initial_mass_kg": 1.0,
+                    "cumulative_mass_out_kg": 0.015,
+                    "final_mass_kg": 0.985,
+                    "derived_accounting_residual_kg": 0.0,
+                }],
+            },
+            "mass_ledger": {
+                "released_kg": 0.015,
+                "end_to_end_residual_kg": 0.0,
+            },
+        }]
+    )
+    row = ledger["rows"][0]
+    assert row["pressure_equalization_status"] == "not_declared"
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is False
+    assert any("pressure-equalization" in reason for reason in gate["blocking_reasons"])
+
+
 def test_provider_mass_balance_is_carried_and_blocks_unbalanced_promotion():
     ledger = build_release_termination_inventory_ledger(
         [{

@@ -19,6 +19,9 @@ RELEASE_BOUNDARY_GATE_SCHEMA = "prism.facility_release_boundary_gate.v1"
 _ALLOWED_STRICT_TERMINATION_BASES = {
     "reviewed_isolation_success",
     "inventory_depletion",
+    # A provider-owned natural stop is accepted only with explicit
+    # pressure/zero-flow evidence; a bounded history is never inferred.
+    "model_pressure_equalization",
     # A pressure-relief discharge has its own provider-owned termination
     # evidence.  It is not a hole event and therefore has no isolation or
     # inventory-depletion step to declare.
@@ -118,6 +121,58 @@ def _inventory_status(termination_basis: str | None) -> str:
     return "not_inventory_termination"
 
 
+def _pressure_equalization_status(identity: Mapping[str, Any] | None) -> str:
+    """Classify explicit provider pressure-equalization evidence.
+
+    A natural stop is never inferred from a short history or a residual alone.
+    Every provider mass-balance row must carry the explicit termination fields
+    defined by the accident-export contract.
+    """
+
+    if not isinstance(identity, Mapping):
+        return "not_declared"
+    raw = identity.get("provider_mass_balances")
+    if not isinstance(raw, Sequence) or isinstance(raw, (str, bytes)) or not raw:
+        return "not_declared"
+    saw_pressure_fields = False
+    required = (
+        "pressure_equalization_time_s",
+        "post_pressure_equalization_observation_s",
+        "pressure_equalization_success",
+        "terminal_source_pressure_pa_abs",
+        "ambient_pressure_pa_abs",
+        "max_post_pressure_equalization_flow_kg_s",
+    )
+    for balance in raw:
+        if not isinstance(balance, Mapping):
+            return "provider_declared_pressure_equalization_invalid"
+        if any(key in balance for key in required):
+            saw_pressure_fields = True
+        valid = (
+            balance.get("pressure_equalization_success") is True
+            and _finite(balance.get("pressure_equalization_time_s")) is not None
+            and _finite(balance.get("post_pressure_equalization_observation_s")) is not None
+            and _finite(balance.get("terminal_source_pressure_pa_abs")) is not None
+            and _finite(balance.get("ambient_pressure_pa_abs")) is not None
+            and _finite(balance.get("max_post_pressure_equalization_flow_kg_s")) is not None
+        )
+        if valid:
+            valid = (
+                float(balance["pressure_equalization_time_s"]) >= 0.0
+                and float(balance["post_pressure_equalization_observation_s"]) > 0.0
+                and float(balance["max_post_pressure_equalization_flow_kg_s"]) <= 1.0e-12
+                and float(balance["terminal_source_pressure_pa_abs"])
+                <= float(balance["ambient_pressure_pa_abs"]) + 1.0e-3
+            )
+        if not valid:
+            return (
+                "provider_declared_pressure_equalization_invalid"
+                if saw_pressure_fields
+                else "not_declared"
+            )
+    return "provider_declared_pressure_equalization"
+
+
 def _row(case: Mapping[str, Any]) -> dict[str, Any]:
     status = str(case.get("status", "UNKNOWN"))
     termination = case.get("termination")
@@ -131,6 +186,7 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
     identity = case.get("provider_packet_identity")
     identity = identity if isinstance(identity, Mapping) else None
     provider_inventory = _provider_inventory(identity)
+    pressure_equalization_status = _pressure_equalization_status(identity)
     provider_durations = (
         identity.get("duration_s") if isinstance(identity, Mapping) else None
     )
@@ -164,6 +220,7 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
         },
         "isolation_status": _isolation_status(basis),
         "inventory_status": _inventory_status(basis),
+        "pressure_equalization_status": pressure_equalization_status,
         "provider": {
             "packet_consumed": provider_inventory["packet_consumed"],
             "event_id": identity.get("event_id") if identity else None,
@@ -240,6 +297,7 @@ def build_release_termination_inventory_ledger(
             "one_row": "event × release branch × annual condition",
             "isolation": "reported only when the provider termination basis explicitly says reviewed_isolation_success",
             "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
+            "pressure_equalization": "closed only from explicit provider zero-flow, pressure and observation fields; never inferred from a bounded history",
             "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
             "operator_limited": "numerically executed but not qualified facility evidence",
             "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows",
@@ -257,10 +315,10 @@ def evaluate_facility_release_boundary(
     This is deliberately a *release-boundary* gate only.  It does not qualify
     an external provider, validate SLABx-LH2 or a physical experiment, assign
     a frequency, or promote facility IR/F-N.  A row must have a complete
-    numerical ledger, an explicit reviewed isolation or inventory-depletion
-    termination, and a finite mass residual.  Operator-limited, synthetic
-    horizon, 600-second horizon, emergency-relief, and two-sided rows remain
-    visible but cannot silently close this gate.
+    numerical ledger, an explicit reviewed isolation, inventory-depletion,
+    pressure-equalization, or emergency-relief termination, and a finite mass
+    residual.  Operator-limited, synthetic horizon, 600-second horizon, and
+    two-sided rows remain visible but cannot silently close this gate.
     """
     if not isinstance(ledger, Mapping):
         raise TypeError("release ledger must be a mapping")
@@ -335,6 +393,14 @@ def evaluate_facility_release_boundary(
                 checks["all_isolation_or_inventory_statuses_closed"] = False
                 blocking.append(
                     f"{label}: emergency-relief isolation and inventory statuses must be not_applicable"
+                )
+        elif basis == "model_pressure_equalization":
+            if row.get("pressure_equalization_status") != (
+                "provider_declared_pressure_equalization"
+            ):
+                checks["all_isolation_or_inventory_statuses_closed"] = False
+                blocking.append(
+                    f"{label}: pressure-equalization termination lacks explicit provider pressure/zero-flow evidence"
                 )
 
         mass = row.get("mass_ledger")
