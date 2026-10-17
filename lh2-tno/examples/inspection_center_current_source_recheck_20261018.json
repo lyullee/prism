@@ -12,7 +12,14 @@
   "external_lh2dt_source": {
     "commit": "7072374",
     "tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
-    "changed_from_prior": false
+    "changed_from_prior": false,
+    "test_recheck": {
+      "command": "python -m pytest -q",
+      "passed": 377,
+      "failed": 0,
+      "warnings": 1,
+      "status": "PASS"
+    }
   },
   "data_files": [
     {

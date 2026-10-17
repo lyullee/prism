@@ -6441,5 +6441,8 @@
   "latest_inspection_center_current_source_recheck_core_summary_matches_prior": true,
   "latest_inspection_center_current_source_recheck_provider_qualification_claim": false,
   "latest_inspection_center_current_source_recheck_frequency_inference": false,
-  "latest_inspection_center_current_source_recheck_facility_qra_claim": false
+  "latest_inspection_center_current_source_recheck_facility_qra_claim": false,
+  "external_lh2dt_source_test_recheck_record": "examples/external_lh2dt_source_test_recheck_20261018.json",
+  "external_lh2dt_source_test_recheck_status": "PASS; 377 tests passed, 0 failed, 1 deprecation warning; source digest 3b186dff…",
+  "external_lh2dt_source_test_recheck_facility_qra_claim": false
 }

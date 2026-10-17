@@ -1,0 +1,12 @@
+{
+  "schema_version": "prism.external_lh2dt_source_test_recheck.v1",
+  "checked_on": "2026-10-18",
+  "source_commit": "7072374",
+  "source_tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "command": "python -m pytest -q",
+  "status": "PASS",
+  "passed": 377,
+  "failed": 0,
+  "warnings": 1,
+  "interpretation": "The current external model source reproduces a clean test pass. This verifies source-level regression status only; it does not qualify facility accident releases, independent full-chain physical validation, frequencies, or facility QRA."
+}

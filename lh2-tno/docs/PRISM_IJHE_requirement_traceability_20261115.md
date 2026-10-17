@@ -237,3 +237,9 @@ engineering units. The core summary matches the stored evidence ledger and no
 new release, frequency, provider-qualification, physical-validation, or
 facility-QRA evidence was found. The machine-readable record is
 [`examples/inspection_center_current_source_recheck_20261018.json`](../examples/inspection_center_current_source_recheck_20261018.json).
+
+The same source tree was also tested directly with its current Python test
+suite: 377 tests passed with one deprecation warning. This is a source-level
+regression check only; it does not turn the external model into qualified
+facility accident evidence. The test receipt is
+[`examples/external_lh2dt_source_test_recheck_20261018.json`](../examples/external_lh2dt_source_test_recheck_20261018.json).

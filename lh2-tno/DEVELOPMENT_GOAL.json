@@ -5006,5 +5006,8 @@
   "inspection_center_current_source_recheck_record": "examples/inspection_center_current_source_recheck_20261018.json",
   "inspection_center_current_source_recheck_status": "UNCHANGED_FROM_PRIOR_RECHECK; source hashes and audit counts reproduce prior evidence ledger",
   "inspection_center_current_source_recheck_core_summary_matches_prior": true,
-  "inspection_center_current_source_recheck_promotion_allowed": false
+  "inspection_center_current_source_recheck_promotion_allowed": false,
+  "external_lh2dt_source_test_recheck_record": "examples/external_lh2dt_source_test_recheck_20261018.json",
+  "external_lh2dt_source_test_recheck_status": "PASS; 377 tests passed, 0 failed, 1 warning; source-level regression evidence only",
+  "external_lh2dt_source_test_recheck_promotion_allowed": false
 }
