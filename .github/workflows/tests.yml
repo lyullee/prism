@@ -7,9 +7,22 @@ on:
   push:
     branches:
       - main
+    # Evidence ledgers and documentation are committed frequently while the
+    # executable contract is unchanged.  Do not create an email-producing CI
+    # run for those bookkeeping-only updates.
+    paths-ignore:
+      - 'lh2-tno/results/**'
+      - 'lh2-tno/docs/**'
+      - 'lh2-tno/CURRENT_STATUS.json'
+      - 'lh2-tno/DEVELOPMENT_GOAL.json'
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'lh2-tno/results/**'
+      - 'lh2-tno/docs/**'
+      - 'lh2-tno/CURRENT_STATUS.json'
+      - 'lh2-tno/DEVELOPMENT_GOAL.json'
 
 permissions:
   contents: read
