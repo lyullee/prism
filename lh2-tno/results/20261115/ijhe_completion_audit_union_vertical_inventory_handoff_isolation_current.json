@@ -5530,10 +5530,10 @@
       "evidence": {
         "status": "RESTRICTED_EVIDENCE_MATRIX",
         "decision": "FACILITY_QRA_WITHHELD",
-        "domain_count": 8,
+        "domain_count": 9,
         "blocking_reason_count": 0,
         "claims_closed": true,
-        "record": "results\\20261114\\validation_evidence_matrix_with_provider_intake.json"
+        "record": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\validation_evidence_matrix.json"
       },
       "blocking_reason": null,
       "diagnostic_only": true,
@@ -6257,6 +6257,29 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "External release-shaped JSON is inventoried with exact file digests and equipment/port identity. Sibling provider responses are compared for identity, clock, mass, termination, source-digest, and canonical result-digest consistency. Gas-shaped responses are also checked for the exact provider source/throat fields required by the optional compressible handoff; the current valve and vent rows are explicitly blocked because those states are missing, and atmospheric packet velocity is never substituted. All seven pairs remain diagnostic model-prediction rows without qualification sidecars; no frequency, physical-validation, or facility QRA is inferred."
+    },
+    {
+      "name": "facility_qra_gate_summary",
+      "status": "PASS",
+      "evidence": {
+        "status": "FACILITY_QRA_WITHHELD",
+        "promotion_allowed": false,
+        "facility_qra_claim": false,
+        "gate_names": [
+          "case_traceability",
+          "facility_scope",
+          "frequency_port_binding",
+          "physical_validation",
+          "provider_qualification",
+          "release_boundary"
+        ],
+        "incomplete_gate_count": 5,
+        "blocking_reason_count": 25,
+        "record": "results\\20261115\\native_external_facility_full_scope_campaign_current\\facility_qra_gate_summary.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": false,
+      "interpretation": "The unified gate summary is a structural promotion control. It does not create provider evidence, physical validation, frequency, or risk atoms."
     }
   ],
   "blocking_reasons": [

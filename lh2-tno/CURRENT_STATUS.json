@@ -5427,7 +5427,7 @@
   "inspection_center_facility_campaign_handoff_qualified_total_ir_fn_available": false,
   "inspection_center_facility_campaign_handoff_state_release_interpretation": "The canonical provider-bound state snapshot and digest now propagate into the selected case identity and close the structural state-to-release audit; provider qualification and facility-QRA promotion remain diagnostic or withheld.",
   "latest_ijhe_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "latest_ijhe_completion_audit_check_count": 56,
+  "latest_ijhe_completion_audit_check_count": 57,
   "latest_ijhe_completion_audit_blocking_reason_count": 5,
   "external_release_artifact_intake_latest_record": "results/20261115/external_native_contract_intake_current.json",
   "external_release_response_normalization_schema": "prism.external_release_response_normalization.v1",
@@ -5916,5 +5916,11 @@
   "validation_evidence_matrix_current_20261115_domain_count": 9,
   "validation_evidence_matrix_current_20261115_slabx_direct_domain": "REVIEW_READY_COMPONENT_EVIDENCE",
   "validation_evidence_matrix_current_20261115_slabx_independent_domain": "INDEPENDENT_COMPARISON_REVIEW_READY; physical-validation claim false",
-  "validation_evidence_matrix_current_20261115_rebuild_options": "--slabx-direct-comparison-evidence; --slabx-independent-comparison-evidence"
+  "validation_evidence_matrix_current_20261115_rebuild_options": "--slabx-direct-comparison-evidence; --slabx-independent-comparison-evidence",
+  "ijhe_completion_audit_current_20261115_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
+  "ijhe_completion_audit_current_20261115_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; unified facility-QRA gate summary check PASS; promotion remains withheld",
+  "ijhe_completion_audit_current_20261115_check_count": 57,
+  "ijhe_completion_audit_current_20261115_blocking_reason_count": 5,
+  "ijhe_completion_audit_current_20261115_validation_matrix_domain_count": 9,
+  "ijhe_completion_audit_current_20261115_facility_qra_gate_summary_check": "PASS structural reconciliation; FACILITY_QRA_WITHHELD; 5 incomplete gates"
 }
