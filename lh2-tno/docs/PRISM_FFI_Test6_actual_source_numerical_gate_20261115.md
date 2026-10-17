@@ -143,3 +143,26 @@ claim. The machine-readable records are:
 
 The gate remains `accepted=false`; no physical-validation or facility-QRA
 promotion is made from this recheck.
+
+## 10240 -> 20480 source-grid recheck
+
+The same actual source, `puff_steps=120`, `substeps=3`, and native SLABx path
+were rerun at 10240 and 20480 field steps. The final relative changes were:
+
+| quantity | relative change |
+| --- | ---: |
+| H2 volume fraction at 30 m | 14.764% |
+| centre height at 30 m | 27.935% |
+| cloud depth at 30 m | 2.302% |
+| temperature at 30 m | 0.066% |
+| sensor MAE | 2.988% |
+| sensor RMSE | 0.432% |
+
+The worst quantity is centre height, so the all-quantity 2% criterion remains
+open. This is recorded as unresolved numerical sensitivity; no extrapolation
+is used and no physical-validation or facility-QRA claim is promoted.
+
+Machine-readable records:
+
+- `results/20261017/slabx_lh2_test6_actual_source_numerical_gate_recheck_10240_20480/refinement.json`
+- `results/20261017/slabx_lh2_test6_actual_source_numerical_gate_recheck_10240_20480/provenance.json`
