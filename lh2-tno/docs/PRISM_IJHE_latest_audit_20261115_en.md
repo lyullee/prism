@@ -46,11 +46,13 @@ assessment release ledger separately reports 15 complete rows and 29
 conditional facility view and is not a provider-qualification result. No count
 is silently substituted for another.
 
-The conditional facility chain has 44 evaluated cases and 176 risk atoms. At
-the declared 20 m worker receptor, all 176 atoms have zero harm in this union,
-so the conditional IR/F-N arrays contain no positive point. This result is
-retained as a geometry-bound diagnostic output; the qualified facility IR/F-N
-claim remains withheld.
+The conditional facility chain has 44 evaluated cases and 176 risk atoms. The
+risk-atom chain audit finds all 44 cases complete across the required source,
+pool, near-field/dispersion, cloud-observation, and fire/explosion-damage
+stages, with no missing or duplicate atom. At the declared 20 m worker
+receptor, all 176 atoms have zero harm in this union, so the conditional IR/F-N
+arrays contain no positive point. This result is retained as a geometry-bound
+diagnostic output; the qualified facility IR/F-N claim remains withheld.
 
 The unified facility-QRA gate summary is now bound to the same authoritative
 34-event/44-case union assessment and scope matrix:
