@@ -16,6 +16,7 @@
 - 권위 union의 176개 risk atom은 계산 경로에 도달했지만 선언된 synthetic receptor에서 `zero_harm_atom_count=176`, `positive_harm_atom_count=0`, 조건부 IR `[0.0, 0.0]/년`으로 기록된다. 이는 계산 누락이 아니라 해당 수용점에서의 명시적 0 영향 결과다. 비영 조건부 IR을 보인 외부-base 후보는 provider/state identity가 달라 권위 원장에 대체하지 않는다.
 - 최신 44-case release-closure worklist를 권위 시설평가와 다시 맞췄다. 종료 closure 미종료는 0건, 질량잔차 미종료도 0건이며, provider qualification 44건·격리 29건·재고 closure 24건은 증거가 없어 계속 보류된다.
 - `ambient-vaporizer/G2`는 외부 동적 상태 이력에서 6.3 s 시점의 첫 무유량과 6.3 s 연속 무유량 관찰이 확인되어 `model_pressure_equalization` 후보로 식별됐다. 이는 PRISM의 읽기 전용 후보 감사 결과이며, 설비 모델이 해당 종료 basis와 동일한 result digest를 재수출하기 전에는 권위 packet이나 시설 QRA에 반영하지 않는다. 세부 내용은 [`PRISM_pressure_equalization_candidate_20261018.md`](PRISM_pressure_equalization_candidate_20261018.md)에 기록했다.
+- 상태 스냅샷의 재고량과 provider 질량수지의 초기 재고량을 44개 케이스에서 수치 대조했다. 8개가 비교 가능했고 7개는 일치했지만, `storage-shell/AREA_0.01%` 한 건은 0.02849 kg 대 71.76440 kg으로 99.96% 차이가 났다. 나머지 36개는 비교 필드가 없어 일치로 세지 않았다. 이 결과는 `diagnostic_state_release_mass_consistency`에 기록했으며 값을 임의 보정하거나 provider/QRA로 승격하지 않는다.
 
 ## 남은 게이트
 
@@ -44,4 +45,4 @@
 
 ## 현재 판정
 
-현재 판정은 `INCOMPLETE_EVIDENCE`이다. HAZOP→운전모드→사고 요청→네 개 정량 증거 블록의 연결은 닫혔지만, qualified provider evidence, 독립 물리검증, strict facility scope, 시설 IR/F-N 승격 게이트가 남아 있다.
+현재 판정은 `INCOMPLETE_EVIDENCE`이다. HAZOP→운전모드→사고 요청→네 개 정량 증거 블록의 연결은 닫혔지만, 상태 재고량과 방출 초기 재고량의 수치 일관성 검토 1건을 포함해 qualified provider evidence, 독립 물리검증, strict facility scope, 시설 IR/F-N 승격 게이트가 남아 있다.

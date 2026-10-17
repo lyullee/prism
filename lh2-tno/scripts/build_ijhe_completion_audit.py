@@ -294,6 +294,11 @@ def main() -> int:
         help="optional negative-evidence audit of the NASA TN D-4171 HEM benchmark",
     )
     parser.add_argument(
+        "--state-release-mass-consistency-audit",
+        type=Path,
+        help="optional numeric equipment-state to release mass consistency audit",
+    )
+    parser.add_argument(
         "--external-release-artifact-intake",
         type=Path,
         help="optional provenance-only inventory of external release-shaped JSON artifacts",
@@ -819,6 +824,15 @@ def main() -> int:
             nasa_hem_benchmark_evidence["_record_path"] = str(
                 args.nasa_hem_benchmark_evidence
             )
+        state_release_mass_consistency_audit = (
+            _object(args.state_release_mass_consistency_audit)
+            if args.state_release_mass_consistency_audit
+            else None
+        )
+        if state_release_mass_consistency_audit is not None:
+            state_release_mass_consistency_audit["_record_path"] = str(
+                args.state_release_mass_consistency_audit
+            )
         external_release_artifact_intake = (
             _object(args.external_release_artifact_intake)
             if args.external_release_artifact_intake
@@ -897,6 +911,7 @@ def main() -> int:
             external_document_evidence=external_document_evidence,
             external_pump_test_point_audit=external_pump_test_point_audit,
             nasa_hem_benchmark_evidence=nasa_hem_benchmark_evidence,
+            state_release_mass_consistency_audit=state_release_mass_consistency_audit,
             external_release_artifact_intake=external_release_artifact_intake,
             external_model_root_review=external_model_root_review,
             hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,

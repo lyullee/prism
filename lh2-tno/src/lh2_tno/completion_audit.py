@@ -160,6 +160,7 @@ def build_ijhe_completion_audit(
     facility_qra_gate_summary: Mapping[str, Any] | None = None,
     external_pump_test_point_audit: Mapping[str, Any] | None = None,
     nasa_hem_benchmark_evidence: Mapping[str, Any] | None = None,
+    state_release_mass_consistency_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -5175,6 +5176,61 @@ def build_ijhe_completion_audit(
             "but does not validate the facility chain or create a QRA promotion basis."
         )
         checks.append(hem_check)
+    if state_release_mass_consistency_audit is not None:
+        mass_audit = state_release_mass_consistency_audit
+        mismatch_rows = mass_audit.get("mismatch_rows")
+        not_comparable_ids = mass_audit.get("not_comparable_case_ids")
+        mass_check_valid = (
+            mass_audit.get("schema_version") == "prism.state_release_mass_consistency_audit.v1"
+            and mass_audit.get("status") in {
+                "MASS_STATE_CONSISTENCY_PASS",
+                "MASS_STATE_CONSISTENCY_REVIEW_REQUIRED",
+            }
+            and mass_audit.get("diagnostic_only") is True
+            and isinstance(mass_audit.get("case_count"), int)
+            and mass_audit.get("case_count", 0) >= 0
+            and isinstance(mass_audit.get("comparable_case_count"), int)
+            and mass_audit.get("comparable_case_count", 0) >= 0
+            and isinstance(mass_audit.get("matched_case_count"), int)
+            and mass_audit.get("matched_case_count", 0) >= 0
+            and isinstance(mass_audit.get("mismatch_case_count"), int)
+            and mass_audit.get("mismatch_case_count", 0) >= 0
+            and isinstance(mass_audit.get("not_comparable_case_count"), int)
+            and mass_audit.get("not_comparable_case_count", 0) >= 0
+            and isinstance(mismatch_rows, list)
+            and len(mismatch_rows) == mass_audit.get("mismatch_case_count")
+            and isinstance(not_comparable_ids, list)
+            and len(not_comparable_ids) == mass_audit.get("not_comparable_case_count")
+            and mass_audit.get("provider_packet_promoted") is False
+            and mass_audit.get("physical_validation_claim") is False
+            and mass_audit.get("facility_qra_claim") is False
+            and mass_audit.get("frequency_inference_performed") is False
+            and mass_audit.get("promotion_allowed") is False
+        )
+        mass_check = _check(
+            "diagnostic_state_release_mass_consistency",
+            mass_check_valid,
+            {
+                "record": mass_audit.get("_record_path"),
+                "schema_version": mass_audit.get("schema_version"),
+                "status": mass_audit.get("status"),
+                "case_count": mass_audit.get("case_count"),
+                "comparable_case_count": mass_audit.get("comparable_case_count"),
+                "matched_case_count": mass_audit.get("matched_case_count"),
+                "mismatch_case_count": mass_audit.get("mismatch_case_count"),
+                "not_comparable_case_count": mass_audit.get("not_comparable_case_count"),
+                "mismatch_rows": mismatch_rows,
+                "promotion_allowed": mass_audit.get("promotion_allowed"),
+            },
+            "state-to-release mass consistency audit is missing, inconsistent, or carries an unsafe promotion claim",
+        )
+        mass_check["diagnostic_only"] = True
+        mass_check["interpretation"] = (
+            "This diagnostic checks numeric inventory continuity at the equipment-state to release "
+            "boundary. Review-required mismatches remain visible and are not corrected or promoted "
+            "into provider, frequency, physical-validation, or facility-QRA evidence."
+        )
+        checks.append(mass_check)
     if external_model_root_review is not None:
         model_review = external_model_root_review
         provider_artifacts = model_review.get("provider_like_artifacts")

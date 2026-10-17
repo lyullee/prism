@@ -6136,6 +6136,36 @@
       "interpretation": "This negative benchmark records a model limitation for homogeneous-equilibrium storage pressure dynamics. It supports model selection and uncertainty discussion, but does not validate the facility chain or create a QRA promotion basis."
     },
     {
+      "name": "diagnostic_state_release_mass_consistency",
+      "status": "PASS",
+      "evidence": {
+        "record": "examples\\state_release_mass_consistency_audit_20261018.json",
+        "schema_version": "prism.state_release_mass_consistency_audit.v1",
+        "status": "MASS_STATE_CONSISTENCY_REVIEW_REQUIRED",
+        "case_count": 44,
+        "comparable_case_count": 8,
+        "matched_case_count": 7,
+        "mismatch_case_count": 1,
+        "not_comparable_case_count": 36,
+        "mismatch_rows": [
+          {
+            "case_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+            "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+            "asset_id": "storage-shell",
+            "state_snapshot_component_id": "storage-tank-01",
+            "state_mass_kg": 0.028492061899609754,
+            "provider_initial_mass_kg": 71.7644005715206,
+            "absolute_difference_kg": 71.73590850962098,
+            "relative_difference": 0.9996029777762692
+          }
+        ],
+        "promotion_allowed": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "This diagnostic checks numeric inventory continuity at the equipment-state to release boundary. Review-required mismatches remain visible and are not corrected or promoted into provider, frequency, physical-validation, or facility-QRA evidence."
+    },
+    {
       "name": "diagnostic_external_release_artifact_intake",
       "status": "PASS",
       "evidence": {

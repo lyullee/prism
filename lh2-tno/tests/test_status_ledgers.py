@@ -32,7 +32,7 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
     assessment = _json(ASSESSMENT_PATH)
 
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 59
+    assert len(audit["checks"]) == 60
     assert len(audit["blocking_reasons"]) == 5
     case_check = next(
         check for check in audit["checks"]
