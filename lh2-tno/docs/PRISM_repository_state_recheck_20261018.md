@@ -4,7 +4,7 @@ This record reconciles the current checkout, GitHub `main`, CI history, package 
 
 ## Findings
 
-- Local `HEAD` and GitHub `main` are identical at `534d1b4f96e016570293f2e1f2deadafc196e01c`.
+- The latest executable code commit validated by GitHub is `534d1b4f96e016570293f2e1f2deadafc196e01c`; later `main` commits in this record are documentation-only reconciliations of that validated code state.
 - The tracked worktree was clean before this record was added.
 - The complete local test suite passes: **1,504 passed, 1 warning**. The warning is the existing `pytest-asyncio` deprecation warning.
 - The latest executable GitHub Actions run is [run 1384](https://github.com/lyullee/prism/actions/runs/39067568932), a successful validation of commit `534d1b4f`.
