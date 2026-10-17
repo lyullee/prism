@@ -54,6 +54,23 @@ def test_current_published_artifacts_are_consistent() -> None:
     assert all(row["status"] == "PASS" for row in report["checks"])
 
 
+def test_current_status_aliases_match_authoritative_union_and_audit() -> None:
+    """Prevent a current-status alias from silently reverting to an old snapshot."""
+    status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    audit = load_json_object(CURRENT_AUDIT)
+    assessment = load_json_object(CURRENT_ASSESSMENT)
+    assert status["full_portable_test_count_latest"] == status["current_union_full_test_count"]
+    assert str(status["full_portable_test_count_latest"]) in status["full_portable_test_status_latest"]
+    assert status["latest_ijhe_audit_metadata_verifier_check_count"] == len(audit["checks"])
+    assert status["latest_union_event_count"] == assessment["event_count"]
+    assert status["latest_union_case_count"] == assessment["case_count"]
+    assert status["latest_union_risk_atom_count"] == assessment["risk_atom_count"]
+    population_status = status["facility_population_accounting_latest_status"]
+    assert f"{assessment['event_count']} events" in population_status
+    assert f"{assessment['case_count']} cases" in population_status
+    assert f"{assessment['risk_atom_count']} risk atoms" in population_status
+
+
 def test_latest_github_actions_run_is_bound_to_both_status_ledgers() -> None:
     report = _report()
     check = next(
