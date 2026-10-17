@@ -295,7 +295,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1396 passed, 1 warning",
+  "latest_local_full_test_run": "1397 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -2089,8 +2089,8 @@
   "inventory_depletion_facility_merge_physical_validation_claim": false,
   "inventory_depletion_facility_merge_frequency_inference": false,
   "inventory_depletion_facility_merge_facility_qra_claim": false,
-  "full_portable_test_count": 1396,
-  "full_portable_test_status": "1396 passed, 1 warning",
+  "full_portable_test_count": 1397,
+  "full_portable_test_status": "1397 passed, 1 warning",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_record": "examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 240 risk atoms across 11 components; isolation success/failure and inventory depletion diagnostics are merged; qualified facility total withheld",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_event_count": 41,
@@ -4404,5 +4404,10 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_exact_match_count": 0,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_missing_sidecar_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_qualified_provider_packet_count": 0,
-  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_facility_qra_allowed": false
+  "external_lh2dt_native_facility_full_scope_provider_qualification_audit_facility_qra_allowed": false,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_status": "PARTIAL_FACILITY_SCOPE; native qualification audit is consumed as an explicit provider gate; 26 release identities, 0 exact matches, 0 qualified packets; facility QRA remains false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_provider_gate_complete": false,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_qualified_provider_packet_count": 0,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_assessment_facility_qra_available": false
 }

@@ -143,6 +143,15 @@ def audit_native_full_scope_provider_qualification(
         "qualification_sidecar_present_count": report["qualification_sidecar_present_count"],
         "exact_match_count": report["exact_match_count"],
         "qualified_provider_packet_count": report["qualified_provider_packet_count"],
+        # These aliases intentionally follow ``build_facility_assessment``'s
+        # provider-coverage contract so the audit can be consumed directly by
+        # a facility assessment reconciliation step.
+        "qualification_assessed": True,
+        "qualification_status": report["status"],
+        "worklist_event_count": report["request_count"],
+        "unqualified_exact_match_count": max(
+            0, report["exact_match_count"] - report["qualified_provider_packet_count"]
+        ),
         "missing_packet_count": report["missing_packet_count"],
         "missing_sidecar_count": report["missing_sidecar_count"],
         "invalid_count": report["invalid_count"],

@@ -171,3 +171,9 @@ event rows into release identities without changing packet data, then reuses
 the exact digest and sidecar checks. The current audit reports 24 rows, 26
 release identities, 0 exact matches and 26 missing sidecars; it keeps frequency
 inference and facility QRA disabled.
+
+The native audit is now consumed by
+`scripts/reconcile_native_provider_qualification_assessment.py`, which rebuilds
+the facility assessment gate from the saved risk ledger and frequency scenarios.
+The derived current assessment preserves conditional IR/F-N while explicitly
+reporting provider gate completeness and keeps qualified facility QRA false.

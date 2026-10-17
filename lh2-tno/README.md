@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,396 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,397 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -129,6 +129,20 @@ remain `TEMPLATE_ONLY`; replacing a placeholder with a reviewed
 `prism.provider_qualification_evidence.v1` sidecar is required before a
 provider result can be qualified. This workflow never infers frequency from
 signals and never enables facility QRA by itself.
+
+To apply the audit gate to a saved facility assessment without rerunning
+physics, use:
+
+```powershell
+python scripts/reconcile_native_provider_qualification_assessment.py `
+  --assessment results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json `
+  --audit results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json `
+  --output results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment_provider_qualification_current.json
+```
+
+The derived assessment preserves the conditional IR/F-N view while exposing
+the provider gate. With the current missing sidecars it remains
+`PARTIAL_FACILITY_SCOPE` and keeps qualified facility QRA disabled.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the
