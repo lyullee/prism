@@ -73,7 +73,10 @@ The diagnostic chain is now connected at the data-contract level: a live state a
 Use the metadata verifier after regenerating the audit:
 
 ```powershell
-python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
+python scripts/verify_latest_ijhe_audit.py `
+  --current-status CURRENT_STATUS.json `
+  --audit results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json `
+  --output results/20261115/latest_ijhe_audit_verification.json
 ```
 
 A `PASS` result means that `CURRENT_STATUS.json` points to the stored audit, the check and blocker counts agree, and the facility handoff remains diagnostic-only. It does not mean that the five strict IJHE gates are open.
