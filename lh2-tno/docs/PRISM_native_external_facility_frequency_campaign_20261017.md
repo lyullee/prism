@@ -127,3 +127,17 @@ that the generic facility has a complete annual IR/F-N result. The next
 qualification step is to replace the remaining operator-limited provider
 branches with provider-owned closure evidence and independently validate the
 consequence boundaries before promoting them.
+
+## Current scope and evidence-request records
+
+The full-scope replay now also writes a [`scope_matrix.json`](../results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json)
+and a [`facility_evidence_request.json`](../results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json).
+The matrix covers all 12 declared outdoor accident families and retains nine
+family-level blockers, including `NO_EVENT_GENERATED` rows; an unsupported
+family is never silently assigned zero frequency. The evidence request contains
+24 exact case requests and 12 family requests, with 11 requests currently
+marked `EXECUTED_OPERATOR_LIMITED`. Each request preserves the event,
+component, port, operating-mode/HAZOP identity and required provider evidence.
+Its promotion policy continues to forbid frequency inference from sensors and
+keeps facility QRA promotion closed until the provider and validation gates are
+actually satisfied.

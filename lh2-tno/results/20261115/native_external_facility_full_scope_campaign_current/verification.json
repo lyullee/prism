@@ -1087,5 +1087,15 @@
     "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: qualified provider packet promotion is unavailable",
     "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: provider packet evidence does not match all consumed packets"
   ],
-  "facility_assessment_digest": "4154464cfd6c4095e75001a5b0fb0c014f3022d2f44ff645635811a5e1ec9e7f"
+  "facility_assessment_digest": "4154464cfd6c4095e75001a5b0fb0c014f3022d2f44ff645635811a5e1ec9e7f",
+  "scope_matrix_record": "results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json",
+  "scope_matrix_status": "PARTIAL_DECLARED_SCOPE",
+  "scope_matrix_row_count": 12,
+  "scope_matrix_blocking_reason_count": 9,
+  "facility_evidence_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json",
+  "facility_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
+  "facility_evidence_request_case_count": 24,
+  "facility_evidence_request_family_count": 12,
+  "facility_evidence_request_blocking_reason_count": 11,
+  "facility_evidence_request_operator_limited_case_count": 11
 }

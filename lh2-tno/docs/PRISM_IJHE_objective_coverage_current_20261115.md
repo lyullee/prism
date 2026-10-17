@@ -38,6 +38,13 @@ replay strengthens the state-to-release-to-consequence evidence, but it does
 not replace the authoritative union audit or close provider qualification,
 independent physical validation, or strict facility-QRA gates.
 
+The same replay now publishes a 12-family [`scope_matrix.json`](../results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json)
+and a 24-case [`facility_evidence_request.json`](../results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json).
+The request catalog marks 11 cases as `EXECUTED_OPERATOR_LIMITED` and keeps
+unsupported/no-event families explicit. It is an intake contract for the
+missing provider and validation evidence, not a frequency source or a QRA
+promotion mechanism.
+
 ## What is connected
 
 The current chain is explicit and auditable:

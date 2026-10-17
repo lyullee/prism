@@ -5852,5 +5852,11 @@
   "external_lh2dt_native_facility_full_scope_g1_residual_inventory_correction_status": "CORRECTED_AND_REPLAYED_DIAGNOSTIC_ONLY; the previous instantaneous_inventory packet reached atmospheric zero flow with residual provider mass, so it is rejected fail-closed; G1 now uses an explicit inventory_over_600s event, packet, HAZOP binding and facility replay; provider qualification, physical validation and facility QRA remain withheld",
   "external_lh2dt_native_facility_full_scope_qra_blocking_reason_count": 14,
   "external_lh2dt_native_facility_full_scope_qra_blocking_reasons_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json",
-  "external_lh2dt_native_facility_full_scope_qra_blocking_reasons_status": "EXPLICIT_AND_FAIL_CLOSED; assessment and verification list incomplete scope, non-EXECUTED/operator-limited case traces, unavailable qualified provider promotion, and absent independent physical-validation evidence"
+  "external_lh2dt_native_facility_full_scope_qra_blocking_reasons_status": "EXPLICIT_AND_FAIL_CLOSED; assessment and verification list incomplete scope, non-EXECUTED/operator-limited case traces, unavailable qualified provider promotion, and absent independent physical-validation evidence",
+  "external_lh2dt_native_facility_full_scope_scope_matrix_record": "results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json",
+  "external_lh2dt_native_facility_full_scope_scope_matrix_status": "PARTIAL_DECLARED_SCOPE; 12 major outdoor accident families, 9 family blockers, unsupported/no-event rows retained explicitly",
+  "external_lh2dt_native_facility_full_scope_evidence_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json",
+  "external_lh2dt_native_facility_full_scope_evidence_request_status": "OPEN_EVIDENCE_REQUEST; 24 case requests, 12 family requests, 11 operator-limited case requests; frequency inference and facility QRA promotion remain false",
+  "external_lh2dt_native_facility_full_scope_evidence_request_case_count": 24,
+  "external_lh2dt_native_facility_full_scope_evidence_request_operator_limited_case_count": 11
 }
