@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1436 passed, 1 warning",
+  "latest_local_full_test_run": "1437 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -2509,7 +2509,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1419 passed, 1 warning; facility QRA remains fail-closed.",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1437 passed, 1 warning; facility QRA remains fail-closed.",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -3480,7 +3480,7 @@
   "ijhe_audit_latest_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "ijhe_audit_latest_check_count": 57,
-  "ijhe_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1419 passed, 1 warning; facility QRA remains fail-closed.",
+  "ijhe_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1437 passed, 1 warning; facility QRA remains fail-closed.",
   "slabx_lh2_validation_evidence_implemented": true,
   "slabx_lh2_validation_evidence_module": "src/lh2_tno/slabx_validation_audit.py",
   "slabx_lh2_validation_evidence_script": "scripts/audit_slabx_lh2_validation.py",
@@ -5480,7 +5480,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "f68c6e5d",
+  "latest_local_full_test_run_commit": "049746ad",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -5999,10 +5999,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1331,
+    "run_number": 1332,
     "status": "success",
-    "commit": "cc7ec425",
-    "url": "https://github.com/lyullee/prism/actions/runs/39030686654"
+    "commit": "049746ad",
+    "url": "https://github.com/lyullee/prism/actions/runs/39031271809"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
