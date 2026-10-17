@@ -85,3 +85,28 @@ label binding only: it does not change the literature frequency or release
 physics, and the campaign still withholds facility-wide QRA promotion. If the
 binding file is omitted, modes remain absent; no mode is inferred from a
 component name, pressure, or leak size.
+
+## Full-scope packet replay (2026-11-15)
+
+The tracked full-scope replay is saved under
+`results/20261115/native_external_facility_full_scope_packets_current/` and
+was evaluated into
+`results/20261115/native_external_facility_full_scope_campaign_current/`.
+It contains all 24 reviewed event packets: five storage-tank openings, five
+transfer-line openings, five transfer-valve openings, one relief discharge,
+two pump cases, three vaporizer cases, and three reliquefier cases including
+two-sided rupture sets. Every packet matched a frequency event and received a
+case record. Seven cases executed through the consequence path; the remaining
+17 are retained as explicit failed or withheld records because their declared
+facility port geometry or consequence-domain qualification is not yet
+complete. They are not converted to zero risk.
+
+The corresponding `verification.json` therefore reports
+`matched_event_case_record_count=24`,
+`matched_event_executed_case_count=7`,
+`matched_event_failed_case_count=17`, and
+`facility_qra_claim=false`. This is a coverage and handoff audit, not a claim
+that the generic facility has a complete annual IR/F-N result. The next
+qualification step is to regenerate the remaining provider packets with the
+manifest port coordinates and then independently validate the consequence
+boundaries before promoting them.

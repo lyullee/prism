@@ -24,15 +24,20 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest  # noqa: E402
 from lh2_tno.campaign import RiskCampaign  # noqa: E402
 from lh2_tno.contracts import canonical_digest  # noqa: E402
-from lh2_tno.equipment_boundary import ResolvedLiquidRelease  # noqa: E402
+from lh2_tno.equipment_boundary import (  # noqa: E402
+    ResolvedGasReleaseSet,
+    ResolvedLiquidRelease,
+)
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.frequency import FrequencyPlan, generate_events  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     build_consequence_request_from_provider_release,
+    build_consequence_request_from_provider_release_set,
     load_provider_emergency_relief,
     load_provider_release,
+    load_provider_release_set,
 )
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
 
@@ -73,8 +78,19 @@ def _request_defaults(
     ):
         defaults.pop(key, None)
     is_liquid = isinstance(packet, ResolvedLiquidRelease)
+    is_two_sided = isinstance(packet, ResolvedGasReleaseSet)
     if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief":
         defaults["source_operator"] = "equipment_emergency_relief"
+    elif is_two_sided:
+        defaults["source_operator"] = "equipment_two_sided_rupture"
+    elif getattr(packet, "termination_basis", None) == "inventory_depletion":
+        defaults["source_operator"] = (
+            "equipment_liquid_release" if is_liquid else "equipment_inventory_depletion"
+        )
+    elif getattr(packet, "termination_basis", None) == "inventory_over_600s":
+        defaults["source_operator"] = (
+            "equipment_liquid_over_600s" if is_liquid else "equipment_inventory_over_600s"
+        )
     else:
         defaults["source_operator"] = "equipment_liquid_release" if is_liquid else "integrated_transient"
     defaults["source_duration_mode"] = "declared"
@@ -85,16 +101,25 @@ def _request_defaults(
         if event.operating_mode is not None:
             defaults["operating_mode"] = event.operating_mode
             defaults["hazop_scenario_id"] = event.hazop_scenario_id
+    packet_termination_basis = getattr(packet, "termination_basis", None)
     defaults["release_termination"] = {
         "basis": (
             "emergency_relief_discharge"
             if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief"
+            else "two_sided_rupture"
+            if is_two_sided
+            else packet_termination_basis
+            if packet_termination_basis in {"inventory_depletion", "inventory_over_600s"}
             else "reviewed_isolation_success"
         ),
         "time_s": "provider_duration",
         "provenance": (
             "native provider emergency-relief duration retained for multi-packet facility diagnostic"
             if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief"
+            else "native provider two-sided endpoint histories retained for multi-packet facility diagnostic"
+            if is_two_sided
+            else "native provider inventory termination retained for multi-packet facility diagnostic"
+            if packet_termination_basis in {"inventory_depletion", "inventory_over_600s"}
             else "native provider isolation clock retained for multi-packet facility diagnostic"
         ),
     }
@@ -155,6 +180,20 @@ def _facility_frequency_scenarios(events: list[dict[str, Any]]) -> tuple[Literat
 
 
 def _packet_event_match(packet: Any, events: list[Any]) -> Any:
+    if isinstance(packet, ResolvedGasReleaseSet):
+        matches = [
+            event for event in events
+            if event.id == packet.event_id
+            and event.model_component_id == packet.component_id
+            and event.release.mode == "two_sided_rupture"
+            and event.port_ids is not None
+            and tuple(event.port_ids) == tuple(release.port_id for release in packet.releases)
+        ]
+        if len(matches) != 1:
+            raise ValueError(
+                f"two-sided packet {packet.event_id} must match exactly one facility event; found {len(matches)}"
+            )
+        return matches[0]
     if getattr(packet, "event_kind", "accidental_leak") == "emergency_relief":
         matches = [
             event for event in events
@@ -164,6 +203,26 @@ def _packet_event_match(packet: Any, events: list[Any]) -> Any:
         if len(matches) != 1:
             raise ValueError(
                 f"emergency-relief packet {packet.event_id} must match exactly one facility event; found {len(matches)}"
+            )
+        return matches[0]
+    if getattr(packet, "failure_opening_diameter_m", None) is None:
+        # Inventory events have no random-hole diameter.  They bind by the
+        # exact event identity and provider-owned termination basis instead of
+        # reconstructing an opening from the outlet history.
+        basis_to_mode = {
+            "inventory_depletion": "instantaneous_inventory",
+            "inventory_over_600s": "inventory_over_600s",
+        }
+        release_mode = basis_to_mode.get(getattr(packet, "termination_basis", None))
+        matches = [
+            event for event in events
+            if event.id == packet.event_id
+            and event.model_component_id == packet.component_id
+            and event.release.mode == release_mode
+        ]
+        if len(matches) != 1:
+            raise ValueError(
+                f"inventory packet {packet.event_id} must match exactly one facility event; found {len(matches)}"
             )
         return matches[0]
     matches = [
@@ -284,14 +343,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     packets = []
     for path in args.packets:
         raw = _object(path)
-        if raw.get("event_kind") == "emergency_relief":
+        if raw.get("provider_export_schema") == "prism.resolved_release_set.v1":
+            packets.append(load_provider_release_set(path))
+        elif raw.get("event_kind") == "emergency_relief":
             packets.append(load_provider_emergency_relief(path))
         else:
             packets.append(load_provider_release(path))
     if not packets:
         raise ValueError("at least one provider packet is required")
     for packet in packets:
-        if not isinstance(packet, ResolvedLiquidRelease) and packet.event_kind != "emergency_relief":
+        if (
+            not isinstance(packet, (ResolvedLiquidRelease, ResolvedGasReleaseSet))
+            and packet.event_kind != "emergency_relief"
+        ):
             if packet.compressible_plane_handoff is None and not _has_explicit_provider_source_states(packet):
                 raise ValueError(
                     f"gas packet {packet.event_id} lacks compressible_plane_handoff "
@@ -324,9 +388,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             }
         else:
             packet = entry[1]
-            request = build_consequence_request_from_provider_release(
-                packet, _request_defaults(context, packet, event=event)
-            )
+            if isinstance(packet, ResolvedGasReleaseSet):
+                request = build_consequence_request_from_provider_release_set(
+                    packet, _request_defaults(context, packet, event=event)
+                )
+            else:
+                request = build_consequence_request_from_provider_release(
+                    packet, _request_defaults(context, packet, event=event)
+                )
             release_kind = "liquid" if isinstance(packet, ResolvedLiquidRelease) else "gas"
             branch = {
                 "id": f"native-provider-{release_kind}-packet",
@@ -365,17 +434,28 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     result_cases = result.get("cases", [])
     withheld = result.get("uncomputed_cases", [])
     matched_event_ids = {event.id for event, _packet in matched.values()}
+    case_rows = [*result_cases, *withheld]
+    case_event_ids = {
+        str(case.get("event_id"))
+        for case in case_rows
+        if case.get("event_id") is not None
+    }
     executed_event_ids = {
         str(case.get("event_id"))
         for case in result_cases
+        if str(case.get("status", "")).startswith("EXECUTED")
+    }
+    atom_expected_event_ids = {
+        str(case.get("event_id"))
+        for case in case_rows
         if str(case.get("status", "")).startswith("EXECUTED")
     }
     risk_atom_event_ids = {
         str(atom.get("event_id"))
         for atom in result.get("risk_atoms", [])
     }
-    missing_case_events = sorted(matched_event_ids - executed_event_ids)
-    missing_atom_events = sorted(matched_event_ids - risk_atom_event_ids)
+    missing_case_events = sorted(matched_event_ids - case_event_ids)
+    missing_atom_events = sorted(atom_expected_event_ids - risk_atom_event_ids)
     if missing_case_events or missing_atom_events:
         raise ValueError(
             "matched provider event did not close the case-to-risk-atom chain: "
@@ -392,11 +472,27 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "matched_event_risk_atom_chain_closed": not missing_atom_events,
         "matched_event_chain_closed": not (missing_case_events or missing_atom_events),
         "matched_event_executed_case_count": len(matched_event_ids & executed_event_ids),
+        "matched_event_case_record_count": len(matched_event_ids & case_event_ids),
+        "matched_event_uncomputed_case_count": sum(
+            1 for case in case_rows
+            if str(case.get("event_id")) in matched_event_ids
+            and str(case.get("status", "")) == "UNCOMPUTED"
+        ),
+        "matched_event_failed_case_count": sum(
+            1 for case in case_rows
+            if str(case.get("event_id")) in matched_event_ids
+            and str(case.get("status", "")) == "FAILED"
+        ),
+        "matched_event_withheld_case_count": sum(
+            1 for case in withheld
+            if str(case.get("event_id")) in matched_event_ids
+        ),
         "matched_event_risk_atom_event_count": len(matched_event_ids & risk_atom_event_ids),
         "event_count": len(result.get("events", [])),
         "case_count": len(result_cases),
         "executed_case_count": sum(1 for case in result_cases if str(case.get("status", "")).startswith("EXECUTED")),
         "uncomputed_case_count": sum(1 for case in withheld if case.get("status") == "UNCOMPUTED"),
+        "failed_case_count": sum(1 for case in case_rows if str(case.get("status", "")) == "FAILED"),
         "operator_limited_case_count": sum(1 for case in withheld if str(case.get("status", "")).startswith("EXECUTED_OPERATOR_LIMITED")),
         "withheld_case_count": len(withheld),
         "risk_atom_count": len(result.get("risk_atoms", [])),
@@ -411,12 +507,37 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "packet_digests": [
             {
                 "component_id": packet.component_id,
-                "port_id": packet.port_id,
+                "port_id": (
+                    packet.port_id if not isinstance(packet, ResolvedGasReleaseSet) else None
+                ),
+                "port_ids": (
+                    [release.port_id for release in packet.releases]
+                    if isinstance(packet, ResolvedGasReleaseSet) else [packet.port_id]
+                ),
                 "event_id": packet.event_id,
                 "release_kind": "liquid" if isinstance(packet, ResolvedLiquidRelease) else "gas",
-                "event_kind": packet.event_kind,
-                "position_enu_m": list(packet.position_enu_m),
-                "failure_opening_diameter_m": packet.failure_opening_diameter_m,
+                "event_kind": (
+                    "two_sided_rupture"
+                    if isinstance(packet, ResolvedGasReleaseSet)
+                    else packet.event_kind
+                ),
+                "position_enu_m": list(
+                    packet.positions_enu_m[0]
+                    if isinstance(packet, ResolvedGasReleaseSet) else packet.position_enu_m
+                ),
+                "positions_enu_m": (
+                    [list(position) for position in packet.positions_enu_m]
+                    if isinstance(packet, ResolvedGasReleaseSet) else [list(packet.position_enu_m)]
+                ),
+                "failure_opening_diameter_m": (
+                    packet.failure_opening_diameter_m
+                    if not isinstance(packet, ResolvedGasReleaseSet)
+                    else None
+                ),
+                "failure_opening_diameters_m": (
+                    [release.failure_opening_diameter_m for release in packet.releases]
+                    if isinstance(packet, ResolvedGasReleaseSet) else None
+                ),
                 "duration_s": packet.duration_s,
                 "available_mass_kg": packet.available_mass_kg,
                 "cumulative_mass_out_kg": packet.cumulative_mass_out_kg,
@@ -425,8 +546,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "provider_packet_digest": canonical_digest(packet.model_dump(mode="json")),
                 "provider_result_digest": packet.provider_result_digest,
                 "packet_path": str(args.packets[index]).replace("\\", "/"),
-                "termination_basis": packet.termination_basis,
-                "termination_provenance": packet.termination_provenance,
+                "termination_basis": (
+                    "two_sided_rupture"
+                    if isinstance(packet, ResolvedGasReleaseSet)
+                    else packet.termination_basis
+                ),
+                "termination_provenance": (
+                    packet.inventory_provenance
+                    if isinstance(packet, ResolvedGasReleaseSet)
+                    else packet.termination_provenance
+                ),
                 "dynamic_state_closure": _dynamic_state_closure_dump(packet),
             }
             for index, packet in enumerate(packets)

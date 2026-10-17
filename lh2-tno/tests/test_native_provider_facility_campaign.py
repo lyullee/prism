@@ -60,6 +60,21 @@ def test_emergency_relief_packet_matches_relief_event_without_opening() -> None:
     assert _packet_event_match(packet, [relief_event]).id == "facility/vent/G1"
 
 
+def test_inventory_packet_matches_exact_termination_event_without_opening() -> None:
+    packet = SimpleNamespace(
+        event_id="facility/vaporizer/G1",
+        component_id="vaporizer",
+        failure_opening_diameter_m=None,
+        termination_basis="inventory_depletion",
+    )
+    inventory_event = SimpleNamespace(
+        id="facility/vaporizer/G1",
+        model_component_id="vaporizer",
+        release=SimpleNamespace(mode="instantaneous_inventory"),
+    )
+    assert _packet_event_match(packet, [inventory_event]).id == "facility/vaporizer/G1"
+
+
 def test_low_speed_gas_packet_requires_provider_source_state_for_slabx_path() -> None:
     state = object()
     packet = SimpleNamespace(

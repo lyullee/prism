@@ -1,0 +1,44 @@
+{
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.DynamicVaporizer",
+  "release_mode": "instantaneous_inventory",
+  "provider_result_digest": "2dbb71e404318d03dfe042c32de49ff5c96a35c28cbf55ec3bb6cde52f4c30ac",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "ambient-vaporizer-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 300.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {},
+    "source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "83083729d95584b40872c302715764d3f7180258ecf51890bf21456808db6c31",
+    "provider_echo_digest": "83083729d95584b40872c302715764d3f7180258ecf51890bf21456808db6c31",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 1.6000000000000003,
+  "strict_packet_interval_count": 16,
+  "strict_packet_mass_residual_kg": -8.470329472543003e-22,
+  "strict_packet_energy_residual_j": 0.0,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic dynamic gas-unit inventory and diagnostic valve area",
+    "no failure opening is attached",
+    "no site calibration, isolation reliability or independent validation"
+  ]
+}
