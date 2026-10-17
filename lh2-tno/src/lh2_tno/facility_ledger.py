@@ -86,6 +86,69 @@ def _stage_timing(cases: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any
     }
 
 
+def _risk_atom_endpoint_counts(
+    atoms: Sequence[Mapping[str, Any]],
+) -> dict[str, int]:
+    """Count explicit zero/positive harm and death endpoints.
+
+    These counts are diagnostic metadata for the public facility assessment.
+    They do not change the risk sum or promote a partial facility to QRA.  A
+    malformed or empty endpoint is deliberately excluded from both buckets so
+    a missing value cannot be reported as a calculated zero impact.
+    """
+    counts = {
+        "zero_harm_atom_count": 0,
+        "positive_harm_atom_count": 0,
+        "zero_expected_death_atom_count": 0,
+        "positive_expected_death_atom_count": 0,
+    }
+    for atom in atoms:
+        harm = atom.get("receptor_harm_low_high")
+        if isinstance(harm, Mapping) and harm:
+            valid_harm = True
+            positive_harm = False
+            for endpoints in harm.values():
+                if (
+                    not isinstance(endpoints, Sequence)
+                    or isinstance(endpoints, (str, bytes))
+                    or len(endpoints) != 2
+                    or any(
+                        isinstance(value, bool)
+                        or not isinstance(value, (int, float))
+                        or not math.isfinite(float(value))
+                        or float(value) < 0.0
+                        for value in endpoints
+                    )
+                ):
+                    valid_harm = False
+                    break
+                positive_harm = positive_harm or any(float(value) > 0.0 for value in endpoints)
+            if valid_harm:
+                key = "positive_harm_atom_count" if positive_harm else "zero_harm_atom_count"
+                counts[key] += 1
+
+        deaths = atom.get("expected_deaths_low_high")
+        if (
+            isinstance(deaths, Sequence)
+            and not isinstance(deaths, (str, bytes))
+            and len(deaths) == 2
+            and all(
+                not isinstance(value, bool)
+                and isinstance(value, (int, float))
+                and math.isfinite(float(value))
+                and float(value) >= 0.0
+                for value in deaths
+            )
+        ):
+            key = (
+                "positive_expected_death_atom_count"
+                if any(float(value) > 0.0 for value in deaths)
+                else "zero_expected_death_atom_count"
+            )
+            counts[key] += 1
+    return counts
+
+
 def _unwrap_campaign(row: Mapping[str, Any], index: int) -> tuple[str, Mapping[str, Any]]:
     """Accept a result directly or ``{"campaign_id", "result"}`` wrapper."""
     result = row.get("result")
@@ -1712,6 +1775,7 @@ def merge_facility_campaign_results(
         "distribution": "across separately executed equipment campaigns; not repeated-run latency",
     }
     known_ir = {receptor_id: values[:] for receptor_id, values in endpoint_ir.items()}
+    risk_atom_endpoint_counts = _risk_atom_endpoint_counts(merged_atoms)
     conditional_diagnostic_coverage = {
         "event_count": len(merged_events),
         "case_count": len(merged_cases),
@@ -1722,6 +1786,7 @@ def merge_facility_campaign_results(
         "conditional_uncomputed_case_count": conditional_uncomputed_case_count,
         "overlapping_case_uncomputed_count": overlapping_case_uncomputed_count,
         "risk_atom_count": len(merged_atoms),
+        **risk_atom_endpoint_counts,
         "annual_condition_count": population_accounting["annual_condition_count"],
         "population_status": population_accounting["status"],
         "population_row_count": population_accounting["population_row_count"],

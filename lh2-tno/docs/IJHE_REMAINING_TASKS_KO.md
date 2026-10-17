@@ -13,6 +13,7 @@
 - 시설 증거 요청은 `scripts/export_facility_evidence_worklist.py`로 설비·사고군·케이스별 작업목록(JSON/CSV)으로 펼칠 수 있다. 현재 목록은 44개 케이스, 9개 설비, 12개 사고군이며, 빈도나 위험도를 자동으로 채우지 않는다.
 - 최신 union campaign의 사례 상태는 `EXECUTED` 15건과 `EXECUTED_OPERATOR_LIMITED` 29건이다. 별도의 release-boundary 엄격 triage는 13건 strict-eligible와 31건 blocked로 집계되며, 이 두 수치는 서로 다른 gate를 나타낸다.
 - 더 최신 외부-base 재실행은 진단 후보로 23건 `EXECUTED`, 21건 `EXECUTED_OPERATOR_LIMITED`를 보여 주었지만, provider/source digest와 base state-snapshot qualification이 권위 원장과 달라 union을 교체하지 않았다. 비교 기록은 [`PRISM_native_external_base_recheck_20261018.md`](PRISM_native_external_base_recheck_20261018.md)에 있다.
+- 권위 union의 176개 risk atom은 계산 경로에 도달했지만 선언된 synthetic receptor에서 `zero_harm_atom_count=176`, `positive_harm_atom_count=0`, 조건부 IR `[0.0, 0.0]/년`으로 기록된다. 이는 계산 누락이 아니라 해당 수용점에서의 명시적 0 영향 결과다. 비영 조건부 IR을 보인 외부-base 후보는 provider/state identity가 달라 권위 원장에 대체하지 않는다.
 
 ## 남은 게이트
 
@@ -21,7 +22,7 @@
 | 1 | 설비별 실제 사고 방출 패킷 확보 | 현재 외부 qualified provider packet 수 0. 다만 44개 요청과 provider 제출 템플릿은 `ALIGNED_TEMPLATE_ONLY`로 44/44 정렬됐다. | 선언한 모든 사고 케이스에 설비 모델이 직접 만든 질량유량·상·개구·방출 시작/종료·차단·잔고 패킷을 digest로 묶고, 합성 패킷을 제거한다. |
 | 2 | 방출 경계와 종료 조건 닫기 | campaign 기준 operator-limited 29건; release-boundary triage 기준 blocked 31건(수치 미종료 2건 포함) | 각 케이스에 isolation 성공/실패, inventory depletion, emergency relief, two-sided rupture 등 종료 근거가 하나씩 있고, 누출 질량 잔차와 재고 소진을 재현한다. |
 | 3 | 선언한 사고군 전체 완성 | IJHE 감사가 사고 범위·qualified packet coverage를 BLOCKED로 판정 | 옥외 적용범위의 사고군·개구 크기·수직 벤트·배관 양단·전량 방출을 목록으로 닫고, 각 조건·기상·점화 분기가 계산 또는 명시적 제외로 기록된다. 지원되지 않는 사고를 다른 사고로 대체하지 않는다. |
-| 4 | 시설 전체 release-to-damage 및 provider 자료 검증 | **SLABx-LH2 구성요소 검증은 완료된 것으로 정리**한다. 최신 원자료 재검사는 5/5 checks PASS, SLABx-LH2 0.1.2 / SLABx 1.0.6, 6 FFI cases, 6 FLACS comparison rows, pool-radius median ratio 1.0305, 최대 질량잔차 1.77e-12 kg, 반복재고차 0을 확인했다. | SLABx 자체의 추가 검증은 남은 과업에서 제외한다. 남은 일은 설비 provider packet, 실제 release 경계·차단·재고, 시설 범위와 IR/F-N을 SLABx 입력 앞뒤에 연결하고 별도 시설 조건으로 확인하는 것이다. PRESLHY Trial 10의 모델 비교 결과는 SLABx 검증 실패가 아니라 별도 외부 설비/현장 source-axis 진단 기록이다. |
+| 4 | 시설 전체 release-to-damage 및 provider 자료 검증 | **SLABx-LH2 구성요소 검증은 완료된 것으로 정리**한다. 최신 원자료 재검사는 5/5 checks PASS, SLABx-LH2 0.1.2 / SLABx 1.0.6, 6 FFI cases, 6 FLACS comparison rows, pool-radius median ratio 1.0305, 최대 질량잔차 1.77e-12 kg, 반복재고차 0을 확인했다. | SLABx 자체의 추가 검증은 남은 과업에서 제외한다. 남은 일은 설비 provider packet, 실제 release 경계·차단·재고, 시설 범위와 IR/F-N을 **고정된 SLABx 입력 앞뒤에** 연결하고 별도 시설 조건으로 확인하는 것이다. `independent_physical_validation`은 SLABx 구성요소가 아니라 시설 전체 경로의 독립 검증을 뜻한다. PRESLHY Trial 10의 모델 비교 결과는 SLABx 검증 실패가 아니라 별도 외부 설비/현장 source-axis 진단 기록이다. |
 | 5 | 문헌 빈도 불확실성 연결 | 포트 수준 빈도 매핑은 정렬됐지만 시설 QRA는 보류 | 사고군별 문헌 하한·대표·상한을 명시하고, 빈도 범위가 설비 순위·IR·F/N 판단을 어떻게 바꾸는지 민감도 결과를 낸다. 센서값으로 빈도를 학습하거나 빈도를 추정하지 않는다. |
 | 6 | 시설 전체 IR/F-N 계산 승격 | 현재 진단용 risk atom은 있으나 시설 IR/F-N은 withheld | 모든 선언 케이스가 qualified provider와 독립 검증을 통과하고, 점화·기상·인구·차단 조건을 시설 ledger로 합친 뒤 독립 재계산과 component contribution 검사가 일치해야 한다. |
 | 7 | 실시간 처리시간 증거 | generic HAZOP 오케스트레이션 경로의 20회 측정은 p50 1.019 ms, p95 1.084 ms, p99 1.084 ms로 기록됨 | 상태→HAZOP 선택, 증거 조회, 새 provider/SLABx 계산을 분리해 p50/p95/p99와 입력 크기를 기록한다. 현재 수치는 오케스트레이션만 포함하며, 새 물리계산의 1 Hz 보장을 주장하지 않는다. |

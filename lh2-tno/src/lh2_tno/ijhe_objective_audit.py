@@ -318,10 +318,25 @@ def build_ijhe_objective_coverage_audit(
             "conditional_facility_risk_available": conditional_risk,
             "conditional_fn_curve_available": isinstance(fn_curve, list),
             "conditional_risk_atom_count": risk_atoms,
+            "conditional_annual_ir_low_high": facility_assessment.get(
+                "conditional_diagnostic_facility_annual_ir_low_high"
+            ),
+            "zero_harm_atom_count": _int(facility_coverage.get("zero_harm_atom_count")),
+            "positive_harm_atom_count": _int(facility_coverage.get("positive_harm_atom_count")),
+            "zero_expected_death_atom_count": _int(
+                facility_coverage.get("zero_expected_death_atom_count")
+            ),
+            "positive_expected_death_atom_count": _int(
+                facility_coverage.get("positive_expected_death_atom_count")
+            ),
             "facility_total_risk_available": facility_assessment.get("facility_total_risk_available"),
         },
         blocking_reason=None if damage_ok else "조건부 시설 피해 결과가 없거나 risk atom/F-N 진단이 없다",
-        interpretation="worker-01 수용점의 조건부 IR/F-N은 계산되지만 시설 전체 QRA 승격은 별도 gate다.",
+        interpretation=(
+            "worker-01 수용점의 조건부 IR/F-N은 계산되지만 시설 전체 QRA 승격은 별도 gate다. "
+            "zero_harm_atom_count와 positive_harm_atom_count는 선언된 수용점에서 영향이 0인 결과와 "
+            "계산 누락을 구분하기 위한 진단 지표다."
+        ),
     ))
 
     slabx_checks = slabx_validation_evidence.get("checks") if isinstance(slabx_validation_evidence, Mapping) else None
@@ -531,7 +546,11 @@ def build_ijhe_objective_coverage_audit(
             "facility_qra_claim": validation_evidence_matrix.get("facility_qra_claim") if isinstance(validation_evidence_matrix, Mapping) else None,
         },
         blocking_reason=None if physical_ok else "현재 evidence matrix는 제한 근거이며 독립 물리검증 claim을 열지 않았다",
-        interpretation="액화수소검사지원센터 자료와 실험 자료는 후보 근거로 보존되지만 사고 방출 검증으로 자동 승격하지 않는다.",
+        interpretation=(
+            "이 gate는 이미 고정한 SLABx-LH2 구성요소 자체가 아니라 설비 provider에서 최종 피해까지의 "
+            "시설 전체 release-to-damage 경로를 독립 자료로 검증하는 gate다. "
+            "액화수소검사지원센터 자료와 실험 자료는 후보 근거로 보존되지만 사고 방출 검증으로 자동 승격하지 않는다."
+        ),
     ))
 
     qualified_count = native_packet_campaign_ledger.get("qualified_provider_packet_count")

@@ -23,7 +23,16 @@ def _inputs():
         "facility_assessment": {
             "conditional_diagnostic_facility_risk_available": True,
             "conditional_diagnostic_facility_expected_death_fn_low_high": [[1.0]],
-            "conditional_diagnostic_facility_coverage": {"risk_atom_count": 4},
+            "conditional_diagnostic_facility_coverage": {
+                "risk_atom_count": 4,
+                "zero_harm_atom_count": 4,
+                "positive_harm_atom_count": 0,
+                "zero_expected_death_atom_count": 4,
+                "positive_expected_death_atom_count": 0,
+            },
+            "conditional_diagnostic_facility_annual_ir_low_high": {
+                "worker-01": [0.0, 0.0],
+            },
             "facility_total_risk_available": False,
             "complete_facility_qra_claim": False,
             "physical_validation_claim": False,
@@ -165,6 +174,14 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert "independent_physical_validation" in criteria["E_validation_and_processing_time"]["open_strict_gate_ids"]
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
     assert "release_to_final_damage" not in report["core_blocking_check_ids"]
+    damage_check = next(
+        row for row in report["checks"] if row["id"] == "release_to_final_damage"
+    )
+    assert damage_check["observed"]["zero_harm_atom_count"] == 4
+    assert damage_check["observed"]["positive_harm_atom_count"] == 0
+    assert damage_check["observed"]["conditional_annual_ir_low_high"] == {
+        "worker-01": [0.0, 0.0]
+    }
     assert "slabx_lh2_component_consequence_validation" not in report["core_blocking_check_ids"]
     slabx_check = next(
         row for row in report["checks"]

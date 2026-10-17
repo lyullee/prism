@@ -3262,7 +3262,7 @@
   "native_generic_scope_vertical_merged_ledger_consistency_record": "results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json",
   "native_generic_scope_vertical_merged_campaign_status": "PARTIAL_FACILITY_SCOPE; generic v12 plus vertical all-bin diagnostic; 29 events; 34 cases; 136 risk atoms; facility total withheld",
   "native_generic_scope_vertical_merged_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json",
-  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 4 blocking reasons; 29-event diagnostic union chain, restricted SLABx-LH2 evidence, exact-cache realtime benchmark and domain-recovery sensitivity are consumed; 0 domain-incomplete events persist after the outside-LFL gate; 6 prior events recovered; 22/24 event flammability proofs; 0/34 facility case packet coverage",
+  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 4 blocking reasons; 29-event diagnostic union chain, frozen validated SLABx-LH2 component, exact-cache realtime benchmark and domain-recovery sensitivity are consumed; 0 domain-incomplete events persist after the outside-LFL gate; 6 prior events recovered; 22/24 event flammability proofs; 0/34 facility case packet coverage",
   "native_generic_scope_vertical_merged_audit_blockers": [
     "only synthetic or screening provider releases are available for this campaign",
     "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
@@ -5520,7 +5520,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "latest_ijhe_objective_coverage_audit_sha256": "a2b16ad71bd08c5f89d0888eacc483a08c3d7f7c587c52aba4bddd571ae2b25b",
+  "latest_ijhe_objective_coverage_audit_sha256": "ce84fbf343a361718774072b8f4171f223d159aaceb2ae3e89a8f7a933e13afe",
   "conditional_facility_risk_interpretation_doc": "docs/PRISM_conditional_facility_risk_interpretation_20261115.md",
   "inventory_termination_margin_probe_record": "results/20261115/inventory_termination_margin_probe.json",
   "inventory_termination_margin_probe_doc": "docs/PRISM_inventory_termination_margin_20261115.md",

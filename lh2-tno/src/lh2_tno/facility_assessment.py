@@ -14,6 +14,7 @@ from typing import Any
 from .contracts import canonical_digest
 from .facility_ledger import (
     _fn_diagnostics,
+    _risk_atom_endpoint_counts,
     _population_accounting,
     _scenario_branch_accounting,
     _stage_timing,
@@ -145,6 +146,23 @@ def build_facility_assessment(
             scope_matrices=scope_matrices,
             required_accident_families=required_accident_families,
         )
+    # Older saved facility ledgers predate the explicit harm/death endpoint
+    # distribution fields. Recompute those diagnostic counts from the saved
+    # atoms without rerunning provider or consequence physics, so the public
+    # assessment can distinguish a calculated zero-impact receptor from a
+    # missing endpoint.
+    coverage = ledger.get("conditional_diagnostic_facility_coverage")
+    if not isinstance(coverage, dict):
+        coverage = {}
+        ledger["conditional_diagnostic_facility_coverage"] = coverage
+    atoms = ledger.get("risk_atoms", ())
+    atom_rows = (
+        atoms
+        if isinstance(atoms, Sequence) and not isinstance(atoms, (str, bytes))
+        else ()
+    )
+    for key, value in _risk_atom_endpoint_counts(atom_rows).items():
+        coverage.setdefault(key, value)
     scenarios = tuple(frequency_scenarios)
     uncertainty = (
         literature_frequency_uncertainty(ledger, scenarios)

@@ -79,6 +79,14 @@ it has one declared receptor and a closed population set for the synthetic
 annual conditions. This is a traceability improvement and does not close the
 independent validation, qualified-provider, strict-scope, or facility-QRA gates.
 
+For the authoritative union, the saved facility assessment reports
+`zero_harm_atom_count=176` and `positive_harm_atom_count=0` at that declared
+receptor, with a conditional IR range of `[0.0, 0.0]` per year. This is an
+explicit calculated zero-impact result for the declared geometry, not a missing
+risk calculation. The separate external-base diagnostic replay uses a different
+provider/state identity and reports a non-zero conditional range; it remains a
+comparison candidate and is not substituted into the authoritative union.
+
 The latest 57-check audit also includes the forecast facility-campaign evidence gate. The two forecast requests remain withheld because their quantitative evidence coverage is incomplete. The inspection-center handoff and receptor-geometry comparisons remain separate diagnostic records; a near-receptor result must not be substituted for the declared facility receptor geometry.
 
 The inspection-centre source boundary is documented separately in
@@ -126,7 +134,7 @@ and full release-to-damage validation remain separate gates.
 
 The following gates remain intentionally fail-closed:
 
-- **`independent_physical_validation`**: the current matrix contains screening and comparison evidence, but not an independent full-chain validation claim.
+- **`independent_physical_validation`**: this is a facility-level release-to-damage gate; the frozen, published SLABx-LH2 consequence component is outside this remaining task. The current matrix still lacks an independent full-facility validation claim.
 - **`qualified_provider_evidence`**: current packets are native diagnostic packets; no exact qualified provider packet has been promoted.
 - **`strict_facility_scope`**: some declared equipment/accident families remain partial or operator-limited for strict qualification.
 - **`strict_facility_qra`**: facility-wide IR/F/N promotion stays false until the previous gates close.

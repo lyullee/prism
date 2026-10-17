@@ -166,6 +166,18 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["conditional_diagnostic_facility_coverage"]["population_status"] == (
         "NOT_RECORDED_IN_INPUT"
     )
+    assert result["conditional_diagnostic_facility_coverage"][
+        "zero_harm_atom_count"
+    ] == 0
+    assert result["conditional_diagnostic_facility_coverage"][
+        "positive_harm_atom_count"
+    ] == 2
+    assert result["conditional_diagnostic_facility_coverage"][
+        "zero_expected_death_atom_count"
+    ] == 0
+    assert result["conditional_diagnostic_facility_coverage"][
+        "positive_expected_death_atom_count"
+    ] == 2
     assert result["conditional_diagnostic_facility_expected_death_fn_diagnostics"] == {
         "status": "CURVE_AVAILABLE",
         "endpoint_level_count_low_high": [1, 1],
