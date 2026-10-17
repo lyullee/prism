@@ -189,6 +189,34 @@ def build_status_consistency_report(
         expected_case_count = assessment.get("provider_packet_case_count")
     if not isinstance(expected_case_count, int):
         expected_case_count = 0
+    latest_coverage_status = current_status.get("latest_facility_case_packet_coverage_status")
+    latest_coverage_record = current_status.get("latest_facility_case_packet_coverage_record")
+    latest_coverage_case_count = current_status.get(
+        "latest_facility_case_packet_coverage_case_count"
+    )
+    latest_coverage_qualified_case_count = current_status.get(
+        "latest_facility_case_packet_coverage_qualified_case_count"
+    )
+    _check(
+        checks,
+        "latest_facility_case_packet_coverage_pointer",
+        _endswith(latest_coverage_record, coverage_filename)
+        and isinstance(latest_coverage_status, str)
+        and str(coverage.get("status")) in latest_coverage_status
+        and latest_coverage_case_count == coverage.get("case_request_count")
+        and latest_coverage_qualified_case_count
+        == coverage.get("qualified_provider_case_count"),
+        {
+            "record": latest_coverage_record,
+            "status": latest_coverage_status,
+            "published_case_count": latest_coverage_case_count,
+            "artifact_case_count": coverage.get("case_request_count"),
+            "published_qualified_case_count": latest_coverage_qualified_case_count,
+            "artifact_qualified_case_count": coverage.get(
+                "qualified_provider_case_count"
+            ),
+        },
+    )
     current_atom_chain_check = next(
         (
             row

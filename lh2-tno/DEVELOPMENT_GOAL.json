@@ -1747,6 +1747,8 @@
   "latest_facility_case_packet_coverage_status": "NO_CASE_MATCH; 0/44 qualified provider cases; 44 case rows and all explicit family labels retained; no frequency or facility IR/F-N promotion",
   "latest_facility_case_packet_coverage_sha256": "991a4e7013b03dd0c182853fe9ef433064a95903fc912f36d5673df803c4badb",
   "latest_facility_case_packet_coverage_unclassified_family_case_count": 0,
+  "latest_facility_case_packet_coverage_case_count": 44,
+  "latest_facility_case_packet_coverage_qualified_case_count": 0,
   "latest_facility_frequency_uncertainty_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_frequency_uncertainty_audit.json",
   "latest_facility_frequency_uncertainty_audit_schema": "prism.facility_frequency_uncertainty_audit.v1",
   "latest_facility_frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC; 5 explicit literature scenarios, 176 risk atoms, 12 explicit families; 4 families have published p05/p95 bounds and 8 remain published-rate-only; no frequency inference or facility QRA promotion",

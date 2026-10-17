@@ -54,6 +54,29 @@ def test_current_published_artifacts_are_consistent() -> None:
     assert all(row["status"] == "PASS" for row in report["checks"])
 
 
+def test_latest_case_coverage_pointer_carries_current_counts() -> None:
+    report = _report()
+    check = next(
+        row for row in report["checks"]
+        if row["name"] == "latest_facility_case_packet_coverage_pointer"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["published_case_count"] == 44
+    assert check["evidence"]["published_qualified_case_count"] == 0
+
+
+def test_latest_case_coverage_pointer_drift_is_blocked() -> None:
+    current_status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    current_status["latest_facility_case_packet_coverage_case_count"] = 34
+    report = _report(current_status=current_status)
+    check = next(
+        row for row in report["checks"]
+        if row["name"] == "latest_facility_case_packet_coverage_pointer"
+    )
+    assert check["status"] == "FAIL"
+    assert report["status"] == "INCONSISTENT"
+
+
 def test_current_union_pointer_evidence_reports_current_audit_counts() -> None:
     report = build_status_consistency_report(
         current_status=load_json_object(ROOT / "CURRENT_STATUS.json"),
