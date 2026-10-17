@@ -16,6 +16,13 @@ on:
       - 'lh2-tno/CURRENT_STATUS.json'
       - 'lh2-tno/DEVELOPMENT_GOAL.json'
       - 'lh2-tno/README.md'
+      # Keep the filters robust if the package is checked out as the
+      # repository root rather than under the lh2-tno/ subdirectory.
+      - 'results/**'
+      - 'docs/**'
+      - 'CURRENT_STATUS.json'
+      - 'DEVELOPMENT_GOAL.json'
+      - 'README.md'
   pull_request:
     branches:
       - main
@@ -25,6 +32,11 @@ on:
       - 'lh2-tno/CURRENT_STATUS.json'
       - 'lh2-tno/DEVELOPMENT_GOAL.json'
       - 'lh2-tno/README.md'
+      - 'results/**'
+      - 'docs/**'
+      - 'CURRENT_STATUS.json'
+      - 'DEVELOPMENT_GOAL.json'
+      - 'README.md'
 
 permissions:
   contents: read
