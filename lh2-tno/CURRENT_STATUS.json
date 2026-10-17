@@ -3383,7 +3383,7 @@
   "facility_case_packet_coverage_audit_module": "src/lh2_tno/facility_case_packet_coverage.py",
   "facility_case_packet_coverage_audit_script": "scripts/audit_facility_case_packet_coverage.py",
   "facility_case_packet_coverage_audit_record": "results/20261024/native_generic_scope_vertical_case_packet_coverage_v1.json",
-  "facility_case_packet_coverage_audit_status": "NO_CASE_MATCH; 0/34 qualified provider cases; no frequency or facility IR/F-N promotion",
+  "facility_case_packet_coverage_audit_status": "NO_CASE_MATCH; 0/44 qualified provider cases; every facility case remains explicitly blocked; no frequency or facility IR/F-N promotion",
   "facility_case_packet_coverage_audit_case_count": 34,
   "facility_case_packet_coverage_audit_qualified_event_count": 0,
   "facility_case_packet_coverage_audit_qualified_case_count": 0,
