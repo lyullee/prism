@@ -164,6 +164,11 @@ def main() -> int:
         help="optional independent literature-frequency sensitivity audit",
     )
     parser.add_argument(
+        "--dynamic-state-closure-ledger-audit",
+        type=Path,
+        help="optional cross-ledger dynamic-state closure status consistency audit",
+    )
+    parser.add_argument(
         "--native-provider-multi-equipment-audit",
         type=Path,
         help="optional independent native multi-equipment partial-ledger audit",
@@ -589,6 +594,15 @@ def main() -> int:
             facility_frequency_uncertainty_audit["_record_path"] = str(
                 args.facility_frequency_uncertainty_audit
             )
+        dynamic_state_closure_ledger_audit = (
+            _object(args.dynamic_state_closure_ledger_audit)
+            if args.dynamic_state_closure_ledger_audit
+            else None
+        )
+        if dynamic_state_closure_ledger_audit is not None:
+            dynamic_state_closure_ledger_audit["_record_path"] = str(
+                args.dynamic_state_closure_ledger_audit
+            )
         native_provider_multi_equipment_audit = (
             _object(args.native_provider_multi_equipment_audit)
             if args.native_provider_multi_equipment_audit
@@ -865,6 +879,7 @@ def main() -> int:
             native_provider_multi_equipment_audit=native_provider_multi_equipment_audit,
             inspection_center_facility_ijhe_handoff_audit=inspection_center_facility_ijhe_handoff_audit,
             receptor_geometry_interpretation=receptor_geometry_interpretation,
+            dynamic_state_closure_ledger_audit=dynamic_state_closure_ledger_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

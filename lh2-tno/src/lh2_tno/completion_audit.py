@@ -127,6 +127,7 @@ def build_ijhe_completion_audit(
     receptor_geometry_interpretation: Mapping[str, Any] | None = None,
     forecast_quantitative_evidence_coverage: Mapping[str, Any] | None = None,
     forecast_facility_campaign_evidence_gate: Mapping[str, Any] | None = None,
+    dynamic_state_closure_ledger_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2625,6 +2626,53 @@ def build_ijhe_completion_audit(
                 "interpretation": (
                     "Equipment-level IR/F-N contributions and the diagnostic ranking are independently "
                     "reproduced from risk atoms; missing equipment cases and provider evidence remain gates."
+                ),
+            }
+        )
+    if dynamic_state_closure_ledger_audit is not None:
+        closure_audit = dynamic_state_closure_ledger_audit
+        closure_audit_valid = (
+            closure_audit.get("schema_version")
+            == "prism.dynamic_state_closure_ledger_audit.v1"
+            and closure_audit.get("status") == "PASS"
+            and isinstance(closure_audit.get("check_count"), int)
+            and closure_audit.get("check_count", 0) > 0
+            and closure_audit.get("blocking_reason_count") == 0
+            and closure_audit.get("blocking_reasons") == []
+            and closure_audit.get("diagnostic_only") is True
+            and closure_audit.get("frequency_reallocation_performed") is False
+            and closure_audit.get("facility_qra_claim") is False
+            and closure_audit.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_dynamic_state_closure_ledger_consistency",
+                "status": "PASS" if closure_audit_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if closure_audit_valid
+                    else "dynamic-state closure status counts do not reconcile across campaign and facility ledgers"
+                ),
+                "evidence": {
+                    "record": closure_audit.get("_record_path"),
+                    "schema_version": closure_audit.get("schema_version"),
+                    "status": closure_audit.get("status"),
+                    "campaign_count": closure_audit.get("campaign_count"),
+                    "facility_supplied": closure_audit.get("facility_supplied"),
+                    "check_count": closure_audit.get("check_count"),
+                    "blocking_reason_count": closure_audit.get(
+                        "blocking_reason_count"
+                    ),
+                    "facility_qra_claim": closure_audit.get("facility_qra_claim"),
+                    "physical_validation_claim": closure_audit.get(
+                        "physical_validation_claim"
+                    ),
+                },
+                "interpretation": (
+                    "Explicit dynamic-state closure statuses are reconciled from case identities across "
+                    "the supplied campaign and facility ledgers. This is an accounting diagnostic and "
+                    "does not qualify provider physics, physical validation, accident scope, or facility QRA."
                 ),
             }
         )

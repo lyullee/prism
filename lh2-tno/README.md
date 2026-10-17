@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,379 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,381 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -91,6 +91,10 @@ The audit recomputes counts from explicit case identities and reports
 `prism.dynamic_state_closure_ledger_audit.v1`. A passing accounting audit is
 diagnostic evidence only; it does not qualify provider physics or facility
 IR/F-N.
+
+Attach the resulting JSON to `scripts/build_ijhe_completion_audit.py` with
+`--dynamic-state-closure-ledger-audit` when producing an IJHE readiness record.
+The added check remains diagnostic and fail-closed.
 
 The larger seven-equipment diagnostic is documented in the [native external facility frequency campaign](docs/PRISM_native_external_facility_frequency_campaign_20261017.md). It adds a tank, transfer line, pump, vaporizer, reliquefier and pressure-relief packet to the same frequency ledger; emergency relief is matched by its dedicated relief event rather than by a leak opening.
 

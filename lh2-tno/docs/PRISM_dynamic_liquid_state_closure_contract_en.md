@@ -107,6 +107,11 @@ The report uses schema
 stored counts agree with explicit case rows. It does not qualify an external
 provider, close physical validation, or promote facility IR/F-N.
 
+Attach the same report to the IJHE completion audit with
+`--dynamic-state-closure-ledger-audit`. The completion audit records a
+separate diagnostic check; a ledger-consistency pass never becomes a provider
+or facility qualification pass.
+
 ## What this does not qualify
 
 This contract closes one source-model connection for the selected accident
