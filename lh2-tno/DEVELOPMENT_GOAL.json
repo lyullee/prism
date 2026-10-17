@@ -4296,7 +4296,7 @@
   "process_forecast_facility_campaign_evidence_gate_completion_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "external_lh2dt_dynamic_state_closure_implemented": true,
   "external_lh2dt_dynamic_state_closure_schema": "prism.provider_dynamic_state_closure.v1",
-  "external_lh2dt_dynamic_state_closure_commit": "959aeff",
+  "external_lh2dt_dynamic_state_closure_commit": "65a5e70",
   "external_lh2dt_dynamic_state_closure_models": [
     "DynamicHEMPipe",
     "LayeredTank",
@@ -4308,5 +4308,6 @@
   "external_lh2dt_dynamic_pipe_prism_integration_implemented": true,
   "external_lh2dt_dynamic_pipe_prism_integration_record": "results/20261115/native_dynamic_pipe_closure_check_current/verification.json",
   "external_lh2dt_dynamic_pipe_prism_integration_status": "ONE_SYNTHETIC_NATIVE_DYNAMIC_PIPE_CASE_EXECUTED; provider closure READY at PRISM source-dynamics gate, while promotion/physical validation/frequency/facility-QRA remain withheld",
-  "external_lh2dt_dynamic_pipe_prism_integration_facility_qra_promotion": false
+  "external_lh2dt_dynamic_pipe_prism_integration_facility_qra_promotion": false,
+  "external_lh2dt_dynamic_state_closure_repository": "https://github.com/lyullee/lh2dt_models"
 }

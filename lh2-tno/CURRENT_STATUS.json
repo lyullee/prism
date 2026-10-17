@@ -5771,7 +5771,7 @@
   "external_lh2dt_dynamic_state_closure_implemented": true,
   "external_lh2dt_dynamic_state_closure_schema": "prism.provider_dynamic_state_closure.v1",
   "external_lh2dt_dynamic_state_closure_repository": "https://github.com/lyullee/lh2dt_models",
-  "external_lh2dt_dynamic_state_closure_commit": "959aeff",
+  "external_lh2dt_dynamic_state_closure_commit": "65a5e70",
   "external_lh2dt_dynamic_state_closure_models": [
     "lh2dt.dynamic_pipe.DynamicHEMPipe",
     "lh2dt.layered_tank.LayeredTank",

@@ -55,7 +55,7 @@ statement.
 
 The companion `lh2dt_models` repository now emits this object directly from
 the finite-volume accident exporters in commit
-[`959aeff`](https://github.com/lyullee/lh2dt_models/commit/959aeff):
+[`65a5e70`](https://github.com/lyullee/lh2dt_models/commit/65a5e70):
 
 - `DynamicHEMPipe.export_accident_history` records its mass, internal-energy,
   wall-temperature, and pressure state history;

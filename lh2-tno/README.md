@@ -77,7 +77,7 @@ closure status per case and per equipment component.
 The companion [`lh2dt_models`](https://github.com/lyullee/lh2dt_models)
 package now emits the closure object from its finite-volume
 `DynamicHEMPipe`, `LayeredTank`, and `DynamicVaporizer` accident exporters
-(commit [`959aeff`](https://github.com/lyullee/lh2dt_models/commit/959aeff)).
+(commit [`65a5e70`](https://github.com/lyullee/lh2dt_models/commit/65a5e70)).
 Those exporters hash the provider state history and report inventory and
 pressure residuals. Fixed-source valves, pumps, and vent stacks deliberately
 remain operator-limited until an upstream dynamic inventory owner is attached.

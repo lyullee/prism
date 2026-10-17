@@ -260,7 +260,7 @@ separate gates.
 
 The public `lh2dt_models` exporters implement this contract for the dynamic
 equipment classes. Use commit
-[`959aeff`](https://github.com/lyullee/lh2dt_models/commit/959aeff) or a later
+[`65a5e70`](https://github.com/lyullee/lh2dt_models/commit/65a5e70) or a later
 release of that repository. `DynamicHEMPipe`, `LayeredTank`, and
 `DynamicVaporizer` hash their provider-owned state histories and report both
 residual pairs. Their packets can therefore pass the source-dynamics check
