@@ -4532,10 +4532,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1334,
+    "run_number": 1335,
     "status": "success",
-    "commit": "b7dc700e",
-    "url": "https://github.com/lyullee/prism/actions/runs/39034220244"
+    "commit": "0ed00788",
+    "url": "https://github.com/lyullee/prism/actions/runs/39034650862"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
