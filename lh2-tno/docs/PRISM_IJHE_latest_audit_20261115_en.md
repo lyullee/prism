@@ -13,7 +13,7 @@ release-boundary request open.
 
 ## Current result
 
-The latest audit is `INCOMPLETE_EVIDENCE` with **57 checks: 52 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
+The latest audit is `INCOMPLETE_EVIDENCE` with **60 checks: 55 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
 SLABx-LH2 is now treated as a validated consequence-model component. The
 current source recheck records 5/5 checks passing, six FFI cases, six FLACS
