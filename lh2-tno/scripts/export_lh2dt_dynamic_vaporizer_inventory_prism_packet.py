@@ -228,11 +228,19 @@ class DynamicGasInventoryProvider:
             if not math.isfinite(mass_flow) or mass_flow < 0.0:
                 raise ValueError(f"inventory gas unit returned invalid outward flow at interval {index}")
             if mass_flow <= 0.0:
-                if self.release_mode == "instantaneous_inventory" and cumulative_mass > 0.0:
+                if self.release_mode == "instantaneous_inventory":
+                    # Atmospheric pressure equilibrium can stop the outlet
+                    # while a substantial provider inventory is still inside
+                    # the unit.  That is not depletion; fail closed instead
+                    # of turning the residual inventory into a false
+                    # inventory_depletion termination.
+                    if state.mass_kg > 1.0e-10:
+                        raise ValueError(
+                            "instantaneous inventory provider reached zero flow before inventory depletion; "
+                            "use an explicit bounded horizon or a provider depletion mechanism"
+                        )
                     terminated = True
                     break
-                if self.release_mode == "instantaneous_inventory":
-                    raise ValueError("inventory gas unit produced no outward flow before any inventory was released")
                 # A 600 s inventory-over-time history may include provider
                 # pressure-equilibrium intervals with zero outward flow.
                 mass_flow = 0.0
@@ -348,7 +356,10 @@ class DynamicGasInventoryProvider:
                 "component_id": request["component_id"],
                 "port_id": request["port_id"],
                 "duration_s": declared_duration,
-                "available_mass_kg": cumulative_mass if self.release_mode == "instantaneous_inventory" else initial_mass,
+                # Available mass is the initial provider inventory for both
+                # release modes.  Reporting only released mass here would
+                # hide an open residual inventory from downstream audits.
+                "available_mass_kg": initial_mass,
                 "cumulative_mass_out_kg": packet_mass,
                 "cumulative_static_enthalpy_out_j": packet_enthalpy,
                 "termination_provenance": (

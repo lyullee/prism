@@ -112,6 +112,15 @@ unsupported termination basis leaves `operator_limited=true`; PRISM never
 repairs the provider record or infers a pressure response from the outlet
 flow.
 
+For the native inventory exporter, a zero-flow interval at atmospheric
+pressure is not treated as depletion. If the provider still contains more
+than the declared residual tolerance, an `instantaneous_inventory` export
+fails closed and asks for either a real depletion mechanism or an explicit
+bounded-horizon (`inventory_over_600s`) scenario. The packet also reports the
+initial provider inventory as `available_mass_kg`; it never substitutes the
+mass released so far. This prevents pressure equalization from being silently
+reported as full inventory consumption.
+
 The campaign case ledger preserves this audit at the equipment boundary with
 `dynamic_state_closure_status` (`READY`, `BLOCKED`, `NOT_DECLARED`, or
 `NOT_EVALUATED`). The merged facility ledger reports the same counts globally
@@ -151,12 +160,17 @@ JSON containing an explicit `facility_risk_ledger` object. Campaign inputs may
 likewise be direct ledgers or an explicit `result` wrapper; no fields are
 inferred while unwrapping.
 
-The latest saved 44-case union snapshot was re-audited in
-`results/20261115/dynamic_state_closure_ledger_audit_current.json`. It is
-`BLOCKED` (40 checks, 29 blockers) because that snapshot predates the explicit
-dynamic-state coverage fields. The record is retained as an evidence gap; it
-does not convert the numerical release/consequence results into a qualified
-facility result.
+The latest native external full-scope campaign is recorded in
+`results/20261115/native_external_facility_full_scope_campaign_current/`.
+It matches and executes all 24 declared event packets and records 96 risk
+atoms. Twelve cases remain explicitly operator-limited; the conditional
+diagnostic facility IR/F-N view is available, while facility-wide QRA,
+provider qualification, and physical validation remain false. Its current
+cross-ledger report is
+`results/20261115/dynamic_state_closure_ledger_audit_current.json` (`PASS`,
+32 consistency checks, diagnostic-only). The older 44-case union audit is
+retained as a historical scope record and is not silently replaced by this
+24-case campaign.
 
 Applying `scripts/annotate_dynamic_state_closure_ledger.py` to that same
 assessment creates an explicit missing-evidence copy. Its follow-up audit is

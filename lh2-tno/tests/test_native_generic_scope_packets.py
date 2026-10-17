@@ -6,6 +6,7 @@ from types import SimpleNamespace
 from scripts.build_native_generic_scope_packet_catalog import _validate_packet
 from scripts.build_native_generic_scope_packet_catalog import _spec
 from lh2_tno.equipment_manifest import EquipmentManifest
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status
 from scripts.export_lh2dt_dynamic_vaporizer_inventory_prism_packet import _coarsen_steps
 
 
@@ -45,6 +46,33 @@ def test_inventory_trace_coarsening_preserves_clock_and_integrated_mass():
         )
         for row in compact
     )
+
+
+def test_inventory_depletion_with_residual_provider_mass_is_fail_closed():
+    packet = {
+        "termination_basis": "inventory_depletion",
+        "provider_mass_balance": {
+            "initial_mass_kg": 1.0,
+            "cumulative_mass_out_kg": 0.2,
+            "final_mass_kg": 0.8,
+            "cumulative_mass_in_kg": 0.0,
+            "derived_accounting_residual_kg": 0.0,
+            "dynamic_state_closure": {
+                "inventory_feedback_closed": True,
+                "pressure_feedback_closed": True,
+                "state_history_digest": "a" * 64,
+                "max_abs_inventory_residual_kg": 0.0,
+                "inventory_tolerance_kg": 1.0e-8,
+                "max_abs_pressure_residual_pa": 0.0,
+                "pressure_tolerance_pa": 1.0,
+            },
+        },
+    }
+    audit = dynamic_state_closure_status(packet)
+    assert audit["ready"] is False
+    assert "inventory depletion requires provider final mass at or below tolerance" in audit[
+        "blocking_reasons"
+    ]
 
 
 def test_native_packet_identity_validator_rejects_wrong_port():
