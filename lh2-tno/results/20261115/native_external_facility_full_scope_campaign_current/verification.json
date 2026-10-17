@@ -1115,18 +1115,18 @@
     "synthetic_or_screening_boundary_declared": 13
   },
   "provider_qualification_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
-  "provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 requests: 13 exact diagnostic packets need qualification-only evidence and 11 candidates need release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
+  "provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 identity-preserving requests: explicit closure status 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN; 7 packets need qualification-only evidence and 19 require release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
   "provider_qualification_request_count": 24,
-  "provider_qualification_only_request_count": 13,
-  "provider_closure_and_qualification_request_count": 11,
+  "provider_qualification_only_request_count": 7,
+  "provider_closure_and_qualification_request_count": 19,
   "provider_qualification_request_frequency_inference_allowed": false,
   "provider_qualification_request_facility_qra_allowed": false,
   "provider_qualification_sidecar_manifest_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json",
-  "provider_qualification_sidecar_manifest_status": "TEMPLATE_ONLY; 26 release identities grouped from 24 event rows; placeholder paths require reviewed prism.provider_qualification_evidence.v1 sidecars; promotion false",
+  "provider_qualification_sidecar_manifest_status": "TEMPLATE_ONLY; 26 release identities grouped from 24 event rows; explicit closure status 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN; placeholder paths require reviewed prism.provider_qualification_evidence.v1 sidecars; promotion false",
   "provider_qualification_sidecar_manifest_entry_count": 26,
   "provider_qualification_sidecar_manifest_promotion_allowed": false,
   "provider_qualification_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
-  "provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
+  "provider_qualification_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 24 event rows and 26 release identities audited; explicit closure status 7 ready and 19 open; sidecar files present 0; exact sidecar matches 0; missing sidecars 26; qualified provider packets 0; frequency inference and facility QRA false",
   "provider_qualification_audit_event_row_count": 24,
   "provider_qualification_audit_release_identity_count": 26,
   "provider_qualification_audit_exact_match_count": 0,
@@ -1147,5 +1147,19 @@
   "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD",
   "facility_qra_gate_summary_promotion_allowed": false,
   "facility_qra_gate_summary_blocking_reason_count": 25,
-  "facility_qra_gate_summary_gate_count": 6
+  "facility_qra_gate_summary_gate_count": 6,
+  "provider_qualification_request_closure_status_counts": {
+    "CLOSURE_READY_FOR_QUALIFICATION": 7,
+    "CLOSURE_EVIDENCE_OPEN": 19
+  },
+  "provider_qualification_audit_sidecar_present_count": 0,
+  "provider_qualification_audit_closure_status_counts": {
+    "CLOSURE_READY_FOR_QUALIFICATION": 7,
+    "CLOSURE_EVIDENCE_OPEN": 19
+  },
+  "provider_qualification_record_reconciled_from": {
+    "request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
+    "audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
+    "manifest_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json"
+  }
 }
