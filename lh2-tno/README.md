@@ -1017,6 +1017,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Native external facility frequency campaign verification](results/20261017/native_external_facility_frequency_campaign_20261017/verification.json)
 - [Native external provider closure recheck (diagnostic candidate)](docs/PRISM_native_external_base_recheck_20261018.md)
 - [External evidence workspace recheck](docs/PRISM_external_evidence_recheck_20261018.md)
+- [External LH2 model change recheck and latest packet replay](docs/PRISM_external_model_change_recheck_20261018_en.md)
 - [Partial inspection-centre boundary evidence audit](docs/PRISM_partial_LH2_boundary_evidence_en.md)
 - [Partial boundary evidence record](results/20261117/inspection_center_partial_boundary_evidence.json)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)

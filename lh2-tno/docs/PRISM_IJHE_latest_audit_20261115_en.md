@@ -141,6 +141,15 @@ normal operating-vent path remains outside this accident-state gate. The
 contract and integration example are documented in
 [`PRISM_dynamic_liquid_state_closure_contract_en.md`](PRISM_dynamic_liquid_state_closure_contract_en.md).
 
+A subsequent external-model recheck confirms that the latest local checkout
+(`lh2dt_models` commit `16f7a4b`) and its 22-packet full-scope root contain 13
+packets with the same closure record. A three-branch header-bound replay using
+the latest tank, relief, and vaporizer packets executed all three selected
+consequence paths; the tank and vaporizer branches were closure-ready, while
+the emergency-relief branch remained without a dynamic-state field. This is a
+candidate replay and does not change the strict IJHE blockers or promote
+facility IR/F-N. See [`external model change recheck`](PRISM_external_model_change_recheck_20261018_en.md).
+
 ## Strict blockers
 
 1. The release boundary is not closed for every declared case. Only 13 of 44 cases are currently strict-boundary eligible; 29 require operator review and 2 remain numerically open.

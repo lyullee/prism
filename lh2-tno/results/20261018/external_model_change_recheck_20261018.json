@@ -1,0 +1,112 @@
+{
+  "schema_version": "prism.external_model_change_recheck.v1",
+  "status": "LATEST_EXTERNAL_MODEL_RECHECKED_DIAGNOSTIC",
+  "checked_at": "2026-10-18",
+  "external_model": {
+    "checkout": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
+    "commit": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+    "source_tree_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "recent_change_commits": [
+      "959aeff feat: export explicit dynamic state closure evidence",
+      "65a5e70 fix: identify dynamic reliquefier closure provenance",
+      "16f7a4b feat: support native vaporizer isolation closure"
+    ],
+    "change_effect": "native accident exports can now declare prism.provider_dynamic_state_closure.v1 for supported finite-volume tank, pipe, vaporizer and reliquefier paths",
+    "latest_checkout_test": {
+      "command": "python -m pytest -q",
+      "passed": 376,
+      "warnings": 1,
+      "status": "PASS"
+    }
+  },
+  "latest_packet_root": {
+    "path": "results/20261115/native_external_facility_full_scope_packets_current",
+    "resolved_release_count": 22,
+    "dynamic_state_closure_declared_count": 13,
+    "termination_basis_counts": {
+      "reviewed_isolation_success": 17,
+      "inventory_depletion": 1,
+      "model_pressure_equalization": 1,
+      "emergency_relief_discharge": 1,
+      "inventory_over_600s": 2
+    },
+    "input_origin_counts": {
+      "model_prediction": 22
+    }
+  },
+  "header_bound_selected_cases": [
+    {
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "packet": "results/20261115/native_external_facility_full_scope_packets_current/events/000_storage-tank-01_AREA_0.01pct/resolved_release.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "port_id": "tank-accident-out",
+      "termination_basis": "reviewed_isolation_success",
+      "input_origin": "model_prediction",
+      "provider_result_digest": "5863a731614c1a73be2e62a46bf5a5f8fc71e91a04c7ef2d0dda0d6f052c45bc",
+      "dynamic_state_closure_declared": true,
+      "dynamic_state_closure_ready": true,
+      "closure_schema": "prism.provider_dynamic_state_closure.v1",
+      "packet_sha256": "091a6aced53f8ea2e585c81084ec0fa6eb9767d7feb3874be47687e9383ba311"
+    },
+    {
+      "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "packet": "results/20261115/native_external_facility_full_scope_packets_current/events/015_pressure-relief-vent-01_G1/resolved_release.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "port_id": "vent-accident-out",
+      "termination_basis": "emergency_relief_discharge",
+      "input_origin": "model_prediction",
+      "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+      "dynamic_state_closure_declared": false,
+      "dynamic_state_closure_ready": false,
+      "closure_schema": null,
+      "packet_sha256": "bd394d825d92711e8c706d04e8bc6182028caf7138d0c06f8029365e4e8276b1"
+    },
+    {
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "packet": "results/20261115/native_external_facility_full_scope_packets_current/events/020_ambient-vaporizer-01_G3/resolved_release.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "port_id": "vaporizer-accident-out",
+      "termination_basis": "reviewed_isolation_success",
+      "input_origin": "model_prediction",
+      "provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971",
+      "dynamic_state_closure_declared": true,
+      "dynamic_state_closure_ready": true,
+      "closure_schema": "prism.provider_dynamic_state_closure.v1",
+      "packet_sha256": "982ea2cfaa3706279b3d26dfab0a1abcfd6ae8fc87a1dd70a6c80d369a02e8a4"
+    }
+  ],
+  "header_bound_candidate_replay": {
+    "record": "results/20261018/header_bound_facility_bridge_latest_packets_recheck.json",
+    "sha256": "b922fcfdb5a117cbfc2532a6658186743fe1093b0c4402ab7f5155a730b21fbe",
+    "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+    "selected_component_count": 3,
+    "executed_component_count": 3,
+    "withheld_provider_scenario_count": 0,
+    "wall_elapsed_ms": 126928.11280000024,
+    "frequency_uncertainty_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+    "frequency_bound_scenario_count": 1,
+    "frequency_unbound_scenario_count": 2,
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "comparison_with_prior_header_bound_replay": {
+    "prior_record": "results/20261018/header_bound_facility_bridge_current_recheck_summary_20261018.json",
+    "prior_operator_limited_component_count": 3,
+    "prior_wall_elapsed_ms": 12826.962699997239,
+    "current_selected_dynamic_closure_ready_count": 2,
+    "current_selected_dynamic_closure_not_declared_count": 1,
+    "interpretation": "The newer packet root carries closure evidence for the tank and vaporizer branches. The relief branch has no dynamic-state closure field because it is an emergency-relief packet. This improves source traceability but does not qualify a provider packet or open facility IR/F-N."
+  },
+  "policy": {
+    "slabx_lh2_active_development_in_scope": false,
+    "slabx_lh2_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_qualification_performed": false,
+    "facility_qra_promoted": false,
+    "physical_validation_claim": false
+  }
+}
