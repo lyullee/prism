@@ -24,6 +24,11 @@ def main() -> int:
     parser.add_argument("--assessment", required=True, type=Path)
     parser.add_argument("--provider-audit", required=True, type=Path)
     parser.add_argument("--validation-matrix", required=True, type=Path)
+    parser.add_argument(
+        "--scope-matrix",
+        type=Path,
+        help="optional outdoor major-accident scope matrix; omission keeps the strict gate closed",
+    )
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     result = build_facility_qra_gate_summary(
@@ -33,6 +38,8 @@ def main() -> int:
         assessment_record=str(args.assessment),
         provider_audit_record=str(args.provider_audit),
         validation_record=str(args.validation_matrix),
+        scope_matrix=_object(args.scope_matrix) if args.scope_matrix else None,
+        scope_matrix_record=str(args.scope_matrix) if args.scope_matrix else None,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

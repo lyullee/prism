@@ -37,6 +37,8 @@ def build_facility_qra_gate_summary(
     assessment_record: str,
     provider_audit_record: str,
     validation_record: str,
+    scope_matrix: Mapping[str, Any] | None = None,
+    scope_matrix_record: str | None = None,
 ) -> dict[str, Any]:
     """Return one fail-closed strict-QRA promotion decision.
 
@@ -70,20 +72,70 @@ def build_facility_qra_gate_summary(
     )
 
     gates: dict[str, dict[str, Any]] = {}
+    scope_matrix_value = (
+        scope_matrix if isinstance(scope_matrix, Mapping) else {}
+    )
+    scope_rows = scope_matrix_value.get("rows")
+    required_families = scope_matrix_value.get("required_families")
+    row_families = {
+        row.get("family")
+        for row in scope_rows
+        if isinstance(row, Mapping) and isinstance(row.get("family"), str)
+    } if isinstance(scope_rows, list) else set()
+    required_family_set = (
+        set(required_families)
+        if isinstance(required_families, list)
+        and all(isinstance(value, str) and value for value in required_families)
+        else set()
+    )
+    scope_matrix_complete = (
+        scope_matrix_value.get("schema_version") == "prism.major_accident_scope.v1"
+        and scope_matrix_value.get("scope") == "outdoor_major_accidents"
+        and scope_matrix_value.get("matrix_complete") is True
+        and scope_matrix_value.get("conditional_chain_complete") is True
+        and bool(required_family_set)
+        and row_families == required_family_set
+        and isinstance(scope_rows, list)
+        and all(
+            isinstance(row, Mapping)
+            and row.get("status") == "EXECUTED"
+            and row.get("gap_class") == "COMPLETE"
+            and row.get("operator_limited_case_count") == 0
+            and row.get("strict_uncomputed_case_count") == 0
+            and row.get("failed_case_count") == 0
+            for row in scope_rows
+        )
+        and scope_matrix_value.get("facility_id") == assessment.get("facility_id")
+        and scope_matrix_value.get("case_count") == ledger.get("case_count")
+    )
     scope_complete = (
         ledger.get("status") == "FACILITY_SCOPE_EXECUTED"
         and _bool(ledger.get("declared_scope_numerically_complete"))
         and ledger.get("uncomputed_case_count") == 0
+        and scope_matrix_complete
     )
-    scope_reasons = [] if scope_complete else [
-        "facility scope is partial or retains uncomputed cases"
-    ]
+    scope_reasons: list[str] = []
+    if ledger.get("status") != "FACILITY_SCOPE_EXECUTED":
+        scope_reasons.append("facility scope status is not FACILITY_SCOPE_EXECUTED")
+    if not _bool(ledger.get("declared_scope_numerically_complete")):
+        scope_reasons.append("facility ledger declares an incomplete numerical scope")
+    if ledger.get("uncomputed_case_count") != 0:
+        scope_reasons.append("facility ledger retains uncomputed cases")
+    if not scope_matrix_complete:
+        scope_reasons.append(
+            "complete outdoor major-accident scope matrix is missing or incomplete"
+        )
     gates["facility_scope"] = {
         "complete": scope_complete,
         "status": ledger.get("status"),
         "event_count": ledger.get("event_count"),
         "case_count": ledger.get("case_count"),
         "uncomputed_case_count": ledger.get("uncomputed_case_count"),
+        "scope_matrix_schema": scope_matrix_value.get("schema_version"),
+        "scope_matrix_complete": scope_matrix_complete,
+        "scope_matrix_required_family_count": len(required_family_set),
+        "scope_matrix_row_count": len(scope_rows) if isinstance(scope_rows, list) else None,
+        "scope_matrix_record": scope_matrix_record,
         "blocking_reasons": scope_reasons,
     }
 

@@ -59,11 +59,28 @@ def _inputs():
         "facility_qra_claim": True,
         "evidence_domains": [{}],
     }
-    return assessment, provider, validation
+    scope = {
+        "schema_version": "prism.major_accident_scope.v1",
+        "facility_id": "facility-a",
+        "scope": "outdoor_major_accidents",
+        "matrix_complete": True,
+        "conditional_chain_complete": True,
+        "required_families": ["vessel_hole"],
+        "case_count": 1,
+        "rows": [{
+            "family": "vessel_hole",
+            "status": "EXECUTED",
+            "gap_class": "COMPLETE",
+            "operator_limited_case_count": 0,
+            "strict_uncomputed_case_count": 0,
+            "failed_case_count": 0,
+        }],
+    }
+    return assessment, provider, validation, scope
 
 
 def test_facility_qra_gate_requires_all_independent_gates():
-    assessment, provider, validation = _inputs()
+    assessment, provider, validation, scope = _inputs()
     result = build_facility_qra_gate_summary(
         assessment,
         provider,
@@ -71,6 +88,8 @@ def test_facility_qra_gate_requires_all_independent_gates():
         assessment_record="assessment.json",
         provider_audit_record="provider.json",
         validation_record="validation.json",
+        scope_matrix=scope,
+        scope_matrix_record="scope.json",
     )
     assert result["status"] == "FACILITY_QRA_ALLOWED"
     assert result["promotion_allowed"] is True
@@ -78,7 +97,7 @@ def test_facility_qra_gate_requires_all_independent_gates():
 
 
 def test_facility_qra_gate_withholds_restricted_validation_and_provider():
-    assessment, provider, validation = _inputs()
+    assessment, provider, validation, scope = _inputs()
     provider["qualified_provider_packet_count"] = 0
     provider["status"] = "NO_QUALIFIED_PROVIDER_EVIDENCE"
     validation["status"] = "RESTRICTED_EVIDENCE_MATRIX"
@@ -94,6 +113,8 @@ def test_facility_qra_gate_withholds_restricted_validation_and_provider():
         assessment_record="assessment.json",
         provider_audit_record="provider.json",
         validation_record="validation.json",
+        scope_matrix=scope,
+        scope_matrix_record="scope.json",
     )
     assert result["status"] == "FACILITY_QRA_WITHHELD"
     assert result["promotion_allowed"] is False
@@ -103,7 +124,7 @@ def test_facility_qra_gate_withholds_restricted_validation_and_provider():
 
 
 def test_facility_qra_gate_uses_full_scope_without_provider_projection():
-    assessment, provider, validation = _inputs()
+    assessment, provider, validation, scope = _inputs()
     assessment.pop("provider_qualification_coverage")
     provider["qualified_provider_packet_count"] = 0
     provider["status"] = "NO_QUALIFIED_PROVIDER_EVIDENCE"
@@ -123,7 +144,25 @@ def test_facility_qra_gate_uses_full_scope_without_provider_projection():
         assessment_record="full-scope-assessment.json",
         provider_audit_record="provider.json",
         validation_record="validation.json",
+        scope_matrix=scope,
+        scope_matrix_record="scope.json",
     )
     assert result["status"] == "FACILITY_QRA_WITHHELD"
     assert result["gates"]["facility_scope"]["case_count"] == 1
     assert result["gates"]["provider_qualification"]["complete"] is False
+
+
+def test_facility_qra_gate_withholds_without_complete_scope_matrix():
+    assessment, provider, validation, _scope = _inputs()
+    result = build_facility_qra_gate_summary(
+        assessment,
+        provider,
+        validation,
+        assessment_record="assessment.json",
+        provider_audit_record="provider.json",
+        validation_record="validation.json",
+    )
+    assert result["status"] == "FACILITY_QRA_WITHHELD"
+    assert result["gates"]["facility_scope"]["complete"] is False
+    assert result["gates"]["facility_scope"]["scope_matrix_complete"] is False
+    assert any("scope matrix" in reason for reason in result["blocking_reasons"])

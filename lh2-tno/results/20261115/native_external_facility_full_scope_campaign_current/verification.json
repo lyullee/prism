@@ -1146,7 +1146,7 @@
   "facility_qra_gate_summary_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json",
   "facility_qra_gate_summary_status": "FACILITY_QRA_WITHHELD",
   "facility_qra_gate_summary_promotion_allowed": false,
-  "facility_qra_gate_summary_blocking_reason_count": 25,
+  "facility_qra_gate_summary_blocking_reason_count": 26,
   "facility_qra_gate_summary_gate_count": 6,
   "provider_qualification_request_closure_status_counts": {
     "CLOSURE_READY_FOR_QUALIFICATION": 7,
