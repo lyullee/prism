@@ -40,6 +40,8 @@ facility-QRA claim until every release boundary has qualified provider evidence
 and independent validation. See the [English readiness audit](docs/PRISM_IJHE_latest_audit_20261115_en.md)
 for the current 44-case counts and open evidence requests.
 
+The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 26 checks pass with zero pointer or ledger blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
+
 ## What PRISM is for
 
 PRISM helps an operator or researcher answer:
