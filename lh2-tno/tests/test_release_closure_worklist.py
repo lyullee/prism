@@ -78,3 +78,32 @@ def test_synthetic_horizon_and_mass_residual_are_fail_closed():
 def test_missing_ledger_is_rejected():
     with pytest.raises(ValueError, match="release_termination_inventory_ledger"):
         build_release_closure_worklist({"facility_id": "facility"})
+
+
+def test_optional_boundary_audit_join_exposes_numerical_and_strict_counts():
+    boundary = {
+        "schema_version": "prism.release_boundary_case_audit.v1",
+        "_record_path": "release-boundary.json",
+        "rows": [{
+            "event_id": "facility/tank/hole",
+            "release_branch_id": "branch-1",
+            "annual_condition_id": "west-3ms",
+            "numerical_release_closed": True,
+            "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+            "provider_termination_evidence_status": "VALID",
+            "strict_release_boundary_eligible": False,
+            "strict_release_boundary_status": "PROMOTION_BLOCKED",
+            "release_boundary_blocking_reasons": ["status_executed_operator_limited"],
+        }],
+    }
+    report = build_release_closure_worklist(_assessment(), release_boundary_case_audit=boundary)
+    row = report["cases"][0]["boundary_audit_join"]
+    assert row["matched"] is True
+    assert row["numerical_closure_status"] == "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED"
+    assert report["summary"]["boundary_audit_join_case_count"] == 1
+    assert report["summary"]["numerically_closed_case_count"] == 1
+    assert report["summary"]["numerically_open_case_count"] == 0
+    assert report["summary"]["operator_review_required_case_count"] == 1
+    assert report["summary"]["strict_release_boundary_eligible_case_count"] == 0
+    assert report["summary"]["provider_termination_evidence_status_counts"] == {"VALID": 1}
+    assert report["boundary_audit_record"] == "release-boundary.json"

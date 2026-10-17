@@ -35,7 +35,24 @@
     "mass_closure_open_case_count": 0,
     "isolation_open_case_count": 29,
     "termination_open_case_count": 0,
-    "inventory_closure_open_case_count": 24
+    "inventory_closure_open_case_count": 24,
+    "boundary_audit_join_case_count": 44,
+    "boundary_audit_unmatched_case_count": 0,
+    "boundary_audit_duplicate_key_count": 0,
+    "numerical_closure_status_counts": {
+      "NUMERICALLY_CLOSED": 13,
+      "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 29,
+      "NUMERICALLY_OPEN": 2
+    },
+    "numerically_closed_case_count": 42,
+    "numerically_open_case_count": 2,
+    "operator_review_required_case_count": 29,
+    "provider_termination_evidence_status_counts": {
+      "INVALID": 2,
+      "VALID": 42
+    },
+    "strict_release_boundary_eligible_case_count": 13,
+    "strict_release_boundary_blocked_case_count": 31
   },
   "promotion_gates": {
     "release_boundary_promotion_allowed": false,
@@ -48,8 +65,11 @@
     "duration_is_not_inferred": true,
     "isolation_is_not_inferred": true,
     "inventory_depletion_is_not_inferred": true,
-    "mass_residual_tolerance_kg": 1e-08
+    "mass_residual_tolerance_kg": 1e-08,
+    "boundary_audit_join_is_observational": true,
+    "boundary_audit_missing_rows_are_not_inferred": true
   },
+  "boundary_audit_record": "results\\20261115\\release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
   "cases": [
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -112,7 +132,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -175,7 +204,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -238,7 +276,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -301,7 +348,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -364,7 +420,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -427,7 +492,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -490,7 +564,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -553,7 +636,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -616,7 +708,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -679,7 +780,16 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -746,7 +856,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -813,7 +934,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -880,7 +1012,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -947,7 +1090,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1014,7 +1168,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1081,7 +1246,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1148,7 +1324,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1215,7 +1402,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1282,7 +1480,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1349,7 +1558,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1405,7 +1625,16 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
         "provider-owned isolation coverage for every connected inventory path"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1461,7 +1690,18 @@
         "complete 600 s provider history and end-of-horizon inventory",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
         "provider-owned isolation coverage for every connected inventory path"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": false,
+        "numerical_closure_status": "NUMERICALLY_OPEN",
+        "provider_termination_evidence_status": "INVALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "termination_basis_inventory_over_600s_is_not_allowed"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1513,7 +1753,16 @@
         "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "vaporizer process-side state, failure mode and boundary history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1569,7 +1818,18 @@
         "relief/vent set point, capacity and discharge termination history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
         "provider-owned isolation coverage for every connected inventory path"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": false,
+        "numerical_closure_status": "NUMERICALLY_OPEN",
+        "provider_termination_evidence_status": "INVALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "provider_termination_evidence_invalid"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1628,7 +1888,18 @@
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
         "provider-owned isolation coverage for every connected inventory path"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1687,7 +1958,18 @@
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
         "provider-owned isolation coverage for every connected inventory path"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1739,7 +2021,16 @@
         "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "reliquefier failure mode, connected inventory and outlet history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": true,
+        "strict_release_boundary_status": "ELIGIBLE",
+        "release_boundary_blocking_reasons": []
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1797,7 +2088,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1864,7 +2166,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1931,7 +2244,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -1998,7 +2322,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2065,7 +2400,18 @@
         "provider-owned isolation coverage for every connected inventory path",
         "initial and final inventory with a positive threshold or an explicitly reviewed residual",
         "inventory clock and termination basis tied to the provider time history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2123,7 +2469,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2181,7 +2538,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2239,7 +2607,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2297,7 +2676,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2355,7 +2745,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2413,7 +2814,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pump trip/seal failure state and connected inventory history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2471,7 +2883,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pump trip/seal failure state and connected inventory history"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2529,7 +2952,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2587,7 +3021,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2645,7 +3090,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2703,7 +3159,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     },
     {
       "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -2761,7 +3228,18 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
-      ]
+      ],
+      "boundary_audit_join": {
+        "matched": true,
+        "numerical_release_closed": true,
+        "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+        "provider_termination_evidence_status": "VALID",
+        "strict_release_boundary_eligible": false,
+        "strict_release_boundary_status": "PROMOTION_BLOCKED",
+        "release_boundary_blocking_reasons": [
+          "status_executed_operator_limited"
+        ]
+      }
     }
   ]
 }

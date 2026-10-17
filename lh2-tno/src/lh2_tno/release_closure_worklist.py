@@ -246,6 +246,7 @@ def _case_closure(
 def build_release_closure_worklist(
     facility_assessment: Mapping[str, Any],
     facility_evidence_request: Mapping[str, Any] | None = None,
+    release_boundary_case_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return one actionable release-closure row for every facility case.
 
@@ -266,39 +267,88 @@ def build_release_closure_worklist(
         for request in _rows(request_root.get("case_requests", ()), "facility_evidence_request.case_requests"):
             requests_by_key[_identity(request)] = request
 
+    # The closure worklist owns termination/isolation/inventory accounting.
+    # When the case-level boundary audit is supplied, join its observations by
+    # the same explicit event/condition/branch key.  This never infers a
+    # boundary result; an absent or duplicate audit row remains unjoined.
+    boundary_by_key: dict[tuple[str, str, str], Mapping[str, Any]] = {}
+    boundary_duplicate_keys: set[tuple[str, str, str]] = set()
+    if release_boundary_case_audit is not None:
+        boundary_root = _mapping(
+            release_boundary_case_audit, "release_boundary_case_audit"
+        )
+        boundary_rows = _rows(
+            boundary_root.get("rows", ()),
+            "release_boundary_case_audit.rows",
+        )
+        for boundary_row in boundary_rows:
+            key = _identity(boundary_row)
+            if key in boundary_by_key:
+                boundary_duplicate_keys.add(key)
+            else:
+                boundary_by_key[key] = boundary_row
+
     cases: list[dict[str, Any]] = []
     for row in sorted(source_rows, key=_identity):
         request = requests_by_key.get(_identity(row))
         closure = _case_closure(row, request)
+        boundary = boundary_by_key.get(_identity(row))
         identity = row.get("provider") if isinstance(row.get("provider"), Mapping) else {}
-        cases.append(
-            {
-                "request_id": (
-                    request.get("request_id")
-                    if request is not None
-                    else "/".join(_identity(row))
-                ),
-                "event_id": row.get("event_id"),
-                "asset_id": row.get("asset_id"),
-                "component_id": (
-                    identity.get("component_id")
-                    or (request.get("component_id") if request is not None else None)
-                    or row.get("component_id")
-                ),
-                "release_branch_id": row.get("release_branch_id"),
-                "annual_condition_id": row.get("annual_condition_id"),
-                "scenario_families": list(request.get("scenario_families", ()))
+        case = {
+            "request_id": (
+                request.get("request_id")
                 if request is not None
-                else [],
-                "current_status": row.get("status"),
-                "initiating_frequency_per_year": row.get("initiating_frequency_per_year"),
-                "release_branch_probability": row.get("release_branch_probability"),
-                "isolation_status": row.get("isolation_status"),
-                "inventory_status": row.get("inventory_status"),
-                "provider_packet_identity_present": bool(identity),
-                **closure,
+                else "/".join(_identity(row))
+            ),
+            "event_id": row.get("event_id"),
+            "asset_id": row.get("asset_id"),
+            "component_id": (
+                identity.get("component_id")
+                or (request.get("component_id") if request is not None else None)
+                or row.get("component_id")
+            ),
+            "release_branch_id": row.get("release_branch_id"),
+            "annual_condition_id": row.get("annual_condition_id"),
+            "scenario_families": list(request.get("scenario_families", ()))
+            if request is not None
+            else [],
+            "current_status": row.get("status"),
+            "initiating_frequency_per_year": row.get("initiating_frequency_per_year"),
+            "release_branch_probability": row.get("release_branch_probability"),
+            "isolation_status": row.get("isolation_status"),
+            "inventory_status": row.get("inventory_status"),
+            "provider_packet_identity_present": bool(identity),
+            **closure,
+        }
+        if boundary is not None:
+            case["boundary_audit_join"] = {
+                "matched": _identity(boundary) not in boundary_duplicate_keys,
+                "numerical_release_closed": boundary.get("numerical_release_closed"),
+                "numerical_closure_status": boundary.get("numerical_closure_status"),
+                "provider_termination_evidence_status": boundary.get(
+                    "provider_termination_evidence_status"
+                ),
+                "strict_release_boundary_eligible": boundary.get(
+                    "strict_release_boundary_eligible"
+                ),
+                "strict_release_boundary_status": boundary.get(
+                    "strict_release_boundary_status"
+                ),
+                "release_boundary_blocking_reasons": list(
+                    _as_list(boundary.get("release_boundary_blocking_reasons"))
+                ),
             }
-        )
+        else:
+            case["boundary_audit_join"] = {
+                "matched": False,
+                "numerical_release_closed": None,
+                "numerical_closure_status": None,
+                "provider_termination_evidence_status": None,
+                "strict_release_boundary_eligible": None,
+                "strict_release_boundary_status": None,
+                "release_boundary_blocking_reasons": [],
+            }
+        cases.append(case)
 
     status_counts = Counter(str(row["closure_status"]) for row in cases)
     gap_counts = Counter(
@@ -313,6 +363,29 @@ def build_release_closure_worklist(
     isolation_counts = Counter(str(row["release_boundary"].get("isolation_status", "not_declared")) for row in cases)
     inventory_counts = Counter(str(row["release_boundary"].get("inventory_status", "not_declared")) for row in cases)
     open_cases = [row for row in cases if row["closure_status"] != "READY_FOR_STRICT_REVIEW"]
+    joined_boundary_rows = [
+        row["boundary_audit_join"]
+        for row in cases
+        if row["boundary_audit_join"].get("matched") is True
+    ]
+    numerical_closure_counts = Counter(
+        str(row.get("numerical_closure_status"))
+        for row in joined_boundary_rows
+        if row.get("numerical_closure_status") is not None
+    )
+    termination_evidence_counts = Counter(
+        str(row.get("provider_termination_evidence_status"))
+        for row in joined_boundary_rows
+        if row.get("provider_termination_evidence_status") is not None
+    )
+    operator_review_count = sum(
+        row.get("numerical_closure_status") == "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED"
+        for row in joined_boundary_rows
+    )
+    strict_eligible_count = sum(
+        row.get("strict_release_boundary_eligible") is True
+        for row in joined_boundary_rows
+    )
     return {
         "schema_version": SCHEMA,
         "facility_id": assessment.get("facility_id"),
@@ -332,6 +405,25 @@ def build_release_closure_worklist(
             "isolation_open_case_count": gap_counts.get("ISOLATION_OPEN", 0),
             "termination_open_case_count": gap_counts.get("TERMINATION_OPEN", 0),
             "inventory_closure_open_case_count": gap_counts.get("INVENTORY_CLOSURE_OPEN", 0),
+            "boundary_audit_join_case_count": len(joined_boundary_rows),
+            "boundary_audit_unmatched_case_count": len(cases) - len(joined_boundary_rows),
+            "boundary_audit_duplicate_key_count": len(boundary_duplicate_keys),
+            "numerical_closure_status_counts": dict(sorted(numerical_closure_counts.items())),
+            "numerically_closed_case_count": sum(
+                count for status, count in numerical_closure_counts.items()
+                if status.startswith("NUMERICALLY_CLOSED")
+            ),
+            "numerically_open_case_count": numerical_closure_counts.get(
+                "NUMERICALLY_OPEN", 0
+            ),
+            "operator_review_required_case_count": operator_review_count,
+            "provider_termination_evidence_status_counts": dict(
+                sorted(termination_evidence_counts.items())
+            ),
+            "strict_release_boundary_eligible_case_count": strict_eligible_count,
+            "strict_release_boundary_blocked_case_count": (
+                len(joined_boundary_rows) - strict_eligible_count
+            ),
         },
         "promotion_gates": {
             "release_boundary_promotion_allowed": False,
@@ -345,7 +437,14 @@ def build_release_closure_worklist(
             "isolation_is_not_inferred": True,
             "inventory_depletion_is_not_inferred": True,
             "mass_residual_tolerance_kg": MASS_RESIDUAL_TOLERANCE_KG,
+            "boundary_audit_join_is_observational": True,
+            "boundary_audit_missing_rows_are_not_inferred": True,
         },
+        "boundary_audit_record": (
+            release_boundary_case_audit.get("_record_path")
+            if isinstance(release_boundary_case_audit, Mapping)
+            else None
+        ),
         "cases": cases,
     }
 

@@ -38,6 +38,14 @@ site-specific boundary data.
 | Facility IR/F-N promotion | `false` |
 | Frequency inference or sensor learning | `false` |
 
+The current release-closure worklist also joins the case-level boundary audit
+by the explicit `event_id × annual_condition_id × release_branch_id` key. Its
+44/44 join reproduces 42 numerically closed cases, 2 numerically open cases,
+29 operator-review cases, 42 valid and 2 invalid termination-evidence rows,
+and 13 strict-boundary-eligible cases. A missing or duplicate join is reported
+as unmatched; no duration, isolation, inventory, frequency, or qualification
+value is inferred.
+
 The external-model intake now inventories seven release-shaped exports from the
 `lh2dt` equipment model root (layered tank, dynamic pipe, mapped pump, valve,
 vaporizer, reliquefier, and vent). They carry equipment/port identity and
@@ -147,7 +155,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N. The saved facility assessment now consumes the validation-evidence matrix explicitly: its physical-validation gate is `RESTRICTED_EVIDENCE_MATRIX` with decision `FACILITY_QRA_WITHHELD`, and its `physical_validation_gate_complete` flag is `false`.
 
-The current status ledger records **1,472 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,473 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The current validation matrix includes the hash-reverified PRESLHY Trial 10
 outdoor observation bundle and a measured-source SLABx comparison. It is
@@ -181,6 +189,22 @@ and family-specific stopping checks enter that catalog.  The handoff does not
 rebind a campaign packet or rerun SLABx-LH2; a changed provider-result digest
 therefore remains blocked until an explicit packet rebind and consequence
 rerun are supplied.
+
+The current worklist can also join the case-level boundary audit with the
+explicit `event_id × annual_condition_id × release_branch_id` key:
+
+```powershell
+python scripts/build_release_closure_worklist.py `
+  --facility-assessment results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json `
+  --facility-evidence-request results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json `
+  --release-boundary-case-audit results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json `
+  --output results/20261115/release_closure_worklist_current.json
+```
+
+This join is observational: it reports 44/44 matched cases and exposes the
+42/44 numerical closure, 2/44 numerical-open, 29/44 operator-review, 42 valid
+and 2 invalid termination-evidence, and 13/44 strict-boundary-eligible counts.
+It does not infer a missing boundary or promote a provider.
 
 The union evidence binder now passes the uncertainty ledger, provider worklist,
 adapter registry, facility assessment, and domain-recovery record by named

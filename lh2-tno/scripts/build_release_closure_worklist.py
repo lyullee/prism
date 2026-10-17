@@ -22,10 +22,22 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--facility-assessment", type=Path, required=True)
     parser.add_argument("--facility-evidence-request", type=Path)
+    parser.add_argument("--release-boundary-case-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     request = _load(args.facility_evidence_request) if args.facility_evidence_request else None
-    report = build_release_closure_worklist(_load(args.facility_assessment), request)
+    boundary_audit = (
+        _load(args.release_boundary_case_audit)
+        if args.release_boundary_case_audit
+        else None
+    )
+    if boundary_audit is not None:
+        boundary_audit["_record_path"] = str(args.release_boundary_case_audit)
+    report = build_release_closure_worklist(
+        _load(args.facility_assessment),
+        request,
+        boundary_audit,
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
