@@ -1,0 +1,38 @@
+{
+  "schema_version": "prism.repository_state_recheck.v1",
+  "checked_at": "2026-10-18",
+  "local_head": "3a66c8307eda22dcb2466fd11d5e4a6a1f200fb4",
+  "remote_main": "3a66c8307eda22dcb2466fd11d5e4a6a1f200fb4",
+  "local_remote_match": true,
+  "tracked_worktree_clean_before_recheck": true,
+  "local_test_count": 1498,
+  "local_test_status": "PASS",
+  "pytest_warning_count": 1,
+  "latest_executable_github_actions": {
+    "run_number": 1380,
+    "status": "completed",
+    "conclusion": "success",
+    "commit": "6cad2b16d3225751f9c6a64caa6be93fdbed40e6",
+    "url": "https://github.com/lyullee/prism/actions/runs/39062708240"
+  },
+  "latest_executable_action_is_current_head": false,
+  "current_head_action_behavior": "EXPECTED_SKIP; current head contains documentation/results-only changes covered by paths-ignore",
+  "package_version": "0.6.3",
+  "github_release": "v0.6.3",
+  "pypi_version": "0.6.3",
+  "slabx_lh2_status": "FROZEN_VALIDATED_EXTERNAL_CONSEQUENCE_COMPONENT",
+  "slabx_lh2_code_changed_in_recheck": false,
+  "current_diagnostic_campaign": {
+    "events": 24,
+    "cases": 24,
+    "risk_atoms": 96,
+    "facility_total_risk_available": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false
+  },
+  "current_ijhe_boundary": "INCOMPLETE_EVIDENCE; facility IR/F-N, qualified provider packets, independent full-chain physical validation and declared-scope closure remain blocked",
+  "stale_records_corrected": [
+    "CURRENT_STATUS.json",
+    "DEVELOPMENT_GOAL.json"
+  ]
+}
