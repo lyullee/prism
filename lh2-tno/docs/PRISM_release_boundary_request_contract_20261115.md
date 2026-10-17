@@ -32,6 +32,25 @@ and `vertical-handoff-vent` (10/10 operator-limited). The pressure-relief vent a
 their unsupported termination bases visible as blocked instead of being silently
 converted to an inventory or isolation event.
 
+## Provider qualification request status
+
+The provider-qualification catalog carries a `closure_status` alongside the
+request's own `status` field. `status=OPEN` means that reviewed evidence has not
+yet been accepted; it does not describe the physical end of the release.
+
+- `closure_status=CLOSURE_READY_FOR_QUALIFICATION` means that the packet already
+  contains a structurally closed, provider-owned termination or isolation
+  ledger. It still needs an exact `prism.provider_qualification_evidence.v1`
+  sidecar and independent validation evidence before it can be promoted.
+- `closure_status=CLOSURE_EVIDENCE_OPEN` means that duration, isolation,
+  inventory depletion, relief capacity, or another release-boundary item is
+  still missing. A sidecar alone cannot qualify this packet.
+
+The native full-scope catalog currently reports 7 release identities in the
+first category and 19 in the second. The audit keeps these counts separate
+while `qualified_provider_packet_count=0`, `frequency_inference_allowed=false`,
+and `facility_qra_allowed=false` remain enforced.
+
 ## Reproduce
 
 From the `lh2-tno` package directory:
