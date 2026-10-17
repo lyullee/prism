@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1419 passed, 1 warning",
+  "latest_local_full_test_run": "1423 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -3854,7 +3854,7 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "75 HAZOP, realtime bridge, consequence and campaign tests passed; full suite 1270 passed separately",
   "latest_remote_verified_commit": "75844cfb",
-  "latest_remote_ci_run": "run 38944379188 completed successfully",
+  "latest_remote_ci_run": "run 1319 completed successfully",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
   "v060_readiness_frequency_port_binding_evidence_request_fallback_implemented": true,
@@ -5480,7 +5480,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "954d51c7",
+  "latest_local_full_test_run_commit": "d0f747fc",
   "current_union_ijhe_objective_coverage_audit_check_count": 33,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -5999,10 +5999,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1318,
+    "run_number": 1319,
     "status": "success",
-    "commit": "22c76c8a6c6c1b80732b7a78de6d07a84a92bd04",
-    "url": "https://github.com/lyullee/prism/actions/runs/39024839242"
+    "commit": "d0f747fcbe66c2342121c7db6ee504cab3c88dcc",
+    "url": "https://github.com/lyullee/prism/actions/runs/39025319661"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
