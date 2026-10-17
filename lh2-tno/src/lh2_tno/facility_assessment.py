@@ -268,6 +268,29 @@ def build_facility_assessment(
         )
         timing["stage_elapsed_ms"] = _stage_timing(case_rows)
         ledger["timing"] = timing
+    # ``fresh_physics_executed`` below deliberately describes this assessment
+    # call: facility_assessment only merges saved campaign outputs and must not
+    # be mistaken for a new SLABx/provider solve.  Preserve the independent
+    # fact that the supplied campaign records may themselves contain fresh
+    # physics cases so downstream digital-twin consumers can distinguish the
+    # two execution boundaries without inferring one from the other.
+    source_fresh_physics_cases = timing.get("fresh_physics_cases")
+    if isinstance(source_fresh_physics_cases, bool) or not isinstance(
+        source_fresh_physics_cases, int
+    ) or source_fresh_physics_cases < 0:
+        source_fresh_physics_cases = None
+    source_campaign_physics = {
+        "executed": (
+            isinstance(source_fresh_physics_cases, int)
+            and source_fresh_physics_cases > 0
+        ),
+        "fresh_physics_cases": source_fresh_physics_cases,
+        "campaign_count": timing.get("campaign_count"),
+        "meaning": (
+            "copied from supplied campaign timing; this facility assessment "
+            "does not rerun provider, SLABx, weather, ignition or population physics"
+        ),
+    }
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -350,6 +373,7 @@ def build_facility_assessment(
             },
         ),
         "timing": timing,
+        "source_campaign_physics": source_campaign_physics,
         "facility_risk_ledger": ledger,
         "frequency_uncertainty": uncertainty,
         "fresh_physics_executed": False,
@@ -382,6 +406,11 @@ def build_facility_assessment(
             "timing": (
                 "facility timing preserves observed whole-case and stage elapsed values; "
                 "it does not claim repeated-run throughput or fresh-physics 1 Hz service"
+            ),
+            "source_campaign_physics": (
+                "source_campaign_physics reports fresh physics already performed by "
+                "the supplied campaign records; fresh_physics_executed remains false "
+                "for this merge-only assessment call"
             ),
         },
     }

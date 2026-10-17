@@ -57,6 +57,14 @@ evidence is recorded in:
 - [`facility_campaign_verification.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_campaign_verification.json)
 - [`facility_risk_summary.json`](../results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_risk_summary.json)
 
+The facility assessment now reports two separate execution boundaries. Its
+`fresh_physics_executed=false` flag means that the merge and frequency
+sensitivity step did not rerun a provider or SLABx-LH2 solve. The companion
+`source_campaign_physics` record reports that the supplied campaign contained
+24 already executed fresh-physics cases. This distinction prevents the
+assessment-layer flag from being misread as evidence that the upstream
+campaign was cache-only.
+
 The risk summary preserves the actual conditional facility connection: one
 synthetic outdoor receptor, three literature-frequency scenarios, explicit
 weather/population and ignition cross-products, component ranking, release

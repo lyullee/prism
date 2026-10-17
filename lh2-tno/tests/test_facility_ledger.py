@@ -899,6 +899,15 @@ def test_facility_assessment_combines_ledger_and_frequency_scenarios():
         "facility_risk_ledger"
     ]["known_contribution_annual_ir_low_high"]
     assert assessment["fresh_physics_executed"] is False
+    assert assessment["source_campaign_physics"] == {
+        "executed": True,
+        "fresh_physics_cases": 1,
+        "campaign_count": 1,
+        "meaning": (
+            "copied from supplied campaign timing; this facility assessment "
+            "does not rerun provider, SLABx, weather, ignition or population physics"
+        ),
+    }
     assert assessment["frequency_uncertainty"]["fresh_physics_executed"] is False
     assert assessment["frequency_port_binding"]["status"] == "ALIGNED"
     assert assessment["frequency_port_binding"] == assessment["facility_risk_ledger"]["frequency_port_binding"]

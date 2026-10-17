@@ -5963,11 +5963,14 @@
   "external_lh2dt_native_clean_full_scope_isolation_replay_frequency_inference_performed": false,
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_qra_claim": false,
   "external_lh2dt_native_clean_full_scope_isolation_replay_isolation_requested": true,
-  "external_lh2dt_native_clean_full_scope_isolation_replay_limitation": "The isolation branch proves only the external model's commanded zero-opening and zero-flow observation for synthetic diagnostics; it does not infer field isolation reliability, provider qualification, physical validation, facility IR/F-N, or facility QRA."
-  ,"external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_record": "results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_risk_summary.json",
-  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_sha256": "10fd5bbbe5dd1aa497d65ffad9fabf3ce04237798889edba49c967f75d4f0ace",
+  "external_lh2dt_native_clean_full_scope_isolation_replay_limitation": "The isolation branch proves only the external model's commanded zero-opening and zero-flow observation for synthetic diagnostics; it does not infer field isolation reliability, provider qualification, physical validation, facility IR/F-N, or facility QRA.",
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_record": "results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_risk_summary.json",
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_sha256": "6944d3c58239226015a5297a2819fba7fb04a186e36400f9f95a604b63443138",
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_valid": true,
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_ir_fn_status": "CONDITIONAL_DIAGNOSTIC_AVAILABLE; 3 literature-frequency scenarios; one synthetic outdoor receptor; facility total/QRA remains withheld",
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_scenario_count": 3,
-  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count": 1
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count": 1,
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_physics_executed": true,
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_fresh_physics_cases": 24,
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_assessment_fresh_physics_executed": false
 }

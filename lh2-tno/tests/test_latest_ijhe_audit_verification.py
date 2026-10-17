@@ -204,6 +204,11 @@ def _native_clean_full_scope_isolation_replay() -> dict:
             "scenario_count": 3,
             "receptor_count": 1,
             "frequency_reallocation_performed": False,
+            "execution_boundary": {
+                "assessment_fresh_physics_executed": False,
+                "source_campaign_physics_executed": True,
+                "source_campaign_fresh_physics_cases": 24,
+            },
         },
         "packet_catalog": {
             "event_count": 24,
@@ -260,6 +265,9 @@ def test_latest_ijhe_audit_verification_binds_clean_isolation_replay(tmp_path: P
         "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_sha256": "c" * 64,
         "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_scenario_count": 3,
         "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count": 1,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_physics_executed": True,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_fresh_physics_cases": 24,
+        "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_assessment_fresh_physics_executed": False,
         "external_lh2dt_native_clean_full_scope_isolation_replay_packet_count": 24,
         "external_lh2dt_native_clean_full_scope_isolation_replay_executed_case_count": 24,
         "external_lh2dt_native_clean_full_scope_isolation_replay_uncomputed_case_count": 0,

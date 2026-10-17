@@ -163,6 +163,11 @@ population, release-termination and ignition branch accounting, and the
 component ranking. For the recorded synthetic condition, the worker receptor
 diagnostic annual IR is `3.37e-6`; the value remains conditional and does not
 open the facility-QRA gate.
+The summary also separates execution boundaries: `fresh_physics_executed=false`
+means the assessment merge did not rerun physics, while
+`source_campaign_physics.executed=true` and
+`source_campaign_physics.fresh_physics_cases=24` record the upstream campaign
+solves that supplied the saved atoms.
 
 To apply the audit gate to a saved facility assessment without rerunning
 physics, use:

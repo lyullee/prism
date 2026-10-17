@@ -74,11 +74,18 @@
   ],
   "facility_risk_summary": {
     "path": "results/20261115/native_external_facility_full_scope_clean_source_isolation_replay_20261017/facility_risk_summary.json",
-    "sha256": "10fd5bbbe5dd1aa497d65ffad9fabf3ce04237798889edba49c967f75d4f0ace",
+    "sha256": "6944d3c58239226015a5297a2819fba7fb04a186e36400f9f95a604b63443138",
     "conditional_diagnostic_facility_risk_available": true,
     "facility_total_risk_available": false,
     "scenario_count": 3,
     "receptor_count": 1,
-    "frequency_reallocation_performed": false
+    "frequency_reallocation_performed": false,
+    "source_campaign_physics_executed": true,
+    "source_campaign_fresh_physics_cases": 24,
+    "execution_boundary": {
+      "assessment_fresh_physics_executed": false,
+      "source_campaign_physics_executed": true,
+      "source_campaign_fresh_physics_cases": 24
+    }
   }
 }

@@ -103,6 +103,7 @@ def main() -> int:
         "scope_matrix_count": len(assessment["facility_risk_ledger"]["scope_matrix_digests"]),
         "frequency_scenario_count": len(uncertainty["scenarios"]) if uncertainty else 0,
         "fresh_physics_executed": assessment["fresh_physics_executed"],
+        "source_campaign_physics": assessment["source_campaign_physics"],
         "provider_qualification_coverage_complete": (
             assessment["provider_qualification_coverage"]["complete"]
             if assessment["provider_qualification_coverage"] is not None

@@ -36,6 +36,11 @@ def _assessment() -> dict:
         "component_risk_ranking": {"status": "AVAILABLE", "rows": []},
         "scenario_branch_accounting": {"status": "EXPLICIT_BRANCH_ACCOUNTING"},
         "release_termination_inventory_ledger": {"status": "AVAILABLE"},
+        "source_campaign_physics": {
+            "executed": True,
+            "fresh_physics_cases": 3,
+            "campaign_count": 1,
+        },
         "conditional_diagnostic_facility_coverage": {
             "risk_atom_count": 4,
             "case_count": 3,
@@ -62,6 +67,7 @@ def test_view_keeps_conditional_risk_and_qualification_separate() -> None:
     assert view["status"] == "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK"
     assert view["conditional_annual_ir_low_high"]["worker-01"] == [1.0e-6, 2.0e-6]
     assert view["risk_atom_count"] == 4
+    assert view["source_campaign_physics"]["fresh_physics_cases"] == 3
     assert view["component_contributions"]["tank-01"]["risk_atom_count"] == 4
     assert view["qualification"]["facility_total_risk_available"] is False
     assert view["qualification"]["promotion_allowed"] is False

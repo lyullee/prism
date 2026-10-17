@@ -549,6 +549,11 @@ def verify_latest_ijhe_audit(
         campaign = isolation_scope_value.get("facility_campaign")
         adapter = isolation_scope_value.get("adapter")
         facility_risk_summary = isolation_scope_value.get("facility_risk_summary")
+        facility_execution_boundary = (
+            facility_risk_summary.get("execution_boundary")
+            if isinstance(facility_risk_summary, Mapping)
+            else None
+        )
         isolation_scope_valid = (
             isolation_scope_value.get("schema_version")
             == "prism.native_external_facility_full_scope_clean_source_isolation_replay.v1"
@@ -571,6 +576,10 @@ def verify_latest_ijhe_audit(
             and facility_risk_summary.get("scenario_count") == 3
             and facility_risk_summary.get("receptor_count") == 1
             and facility_risk_summary.get("frequency_reallocation_performed") is False
+            and isinstance(facility_execution_boundary, Mapping)
+            and facility_execution_boundary.get("assessment_fresh_physics_executed") is False
+            and facility_execution_boundary.get("source_campaign_physics_executed") is True
+            and facility_execution_boundary.get("source_campaign_fresh_physics_cases") == 24
             and isinstance(packet_catalog, Mapping)
             and packet_catalog.get("event_count") == 24
             and packet_catalog.get("exact_native_packet_count") == 24
@@ -640,6 +649,18 @@ def verify_latest_ijhe_audit(
             (
                 "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count",
                 facility_risk_summary.get("receptor_count") if isinstance(facility_risk_summary, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_physics_executed",
+                facility_execution_boundary.get("source_campaign_physics_executed") if isinstance(facility_execution_boundary, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_fresh_physics_cases",
+                facility_execution_boundary.get("source_campaign_fresh_physics_cases") if isinstance(facility_execution_boundary, Mapping) else None,
+            ),
+            (
+                "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_assessment_fresh_physics_executed",
+                facility_execution_boundary.get("assessment_fresh_physics_executed") if isinstance(facility_execution_boundary, Mapping) else None,
             ),
         ):
             expected = status.get(status_key)

@@ -592,6 +592,7 @@ def build_conditional_facility_risk_view(
             "conditional_diagnostic_facility_expected_death_fn_diagnostics"
         ),
         "timing": source.get("timing"),
+        "source_campaign_physics": source.get("source_campaign_physics"),
         "component_contributions": dict(component_contributions),
         "component_risk_ranking": source.get("component_risk_ranking"),
         "scenario_family_contributions": dict(family_contributions),

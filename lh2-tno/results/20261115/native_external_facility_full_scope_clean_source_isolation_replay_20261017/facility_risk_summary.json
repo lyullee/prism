@@ -1211,6 +1211,12 @@
     "facility_case_packet_coverage": "exact facility case identity must be qualified before the facility QRA gate can open; missing cases remain explicit and do not infer frequency or physical validation",
     "scenario_branch_accounting": "annual-condition weather, release/termination, and ignition branches are preserved over the same validated atoms; no frequency inference or branch reallocation is performed",
     "release_termination_inventory": "case-level provider duration, termination, isolation, inventory and mass closure are carried through the merged facility ledger without filling missing branch values",
-    "timing": "facility timing preserves observed whole-case and stage elapsed values; it does not claim repeated-run throughput or fresh-physics 1 Hz service"
+    "timing": "campaign timing preserves the 24 upstream fresh-physics cases; facility assessment and frequency sensitivity do not rerun physics and do not claim fresh-physics 1 Hz service"
+  },
+  "execution_boundary": {
+    "assessment_fresh_physics_executed": false,
+    "source_campaign_physics_executed": true,
+    "source_campaign_fresh_physics_cases": 24,
+    "meaning": "The facility assessment merges supplied campaign outputs; the 24 fresh-physics cases were executed upstream by the campaign and are not rerun during assessment or frequency sensitivity."
   }
 }
