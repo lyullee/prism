@@ -2,9 +2,10 @@
 
 The campaign and facility ledgers retain the provider's explicit dynamic
 state closure status.  This module recomputes those counts from the raw case
-rows and compares them with every stored coverage view.  It is an accounting
-diagnostic only: it never infers closure from a scalar mass balance and never
-promotes a facility QRA claim.
+rows and compares them with every stored coverage view.  A stale published
+test-count or evidence snapshot therefore cannot hide a ledger mismatch.  It
+is an accounting diagnostic only: it never infers closure from a scalar mass
+balance and never promotes a facility QRA claim.
 """
 from __future__ import annotations
 
