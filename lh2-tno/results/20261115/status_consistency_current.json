@@ -18,20 +18,20 @@
       "status": "PASS",
       "evidence": {
         "current": {
-          "run_number": 1363,
+          "run_number": 1364,
           "status": "completed",
           "conclusion": "success",
-          "commit": "5b32e341782584814a8fbeb376a33d31140e1abc",
-          "url": "https://github.com/lyullee/prism/actions/runs/39048133511"
+          "commit": "87ff14f6b8ac55d12665df81db9644704dff9569",
+          "url": "https://github.com/lyullee/prism/actions/runs/39048781768"
         },
         "development_goal": {
-          "run_number": 1363,
+          "run_number": 1364,
           "status": "completed",
           "conclusion": "success",
-          "commit": "5b32e341782584814a8fbeb376a33d31140e1abc",
-          "url": "https://github.com/lyullee/prism/actions/runs/39048133511"
+          "commit": "87ff14f6b8ac55d12665df81db9644704dff9569",
+          "url": "https://github.com/lyullee/prism/actions/runs/39048781768"
         },
-        "latest_remote_verified_commit": "5b32e341"
+        "latest_remote_verified_commit": "87ff14f6"
       }
     },
     {
