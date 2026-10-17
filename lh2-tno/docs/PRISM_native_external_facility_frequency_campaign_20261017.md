@@ -86,6 +86,25 @@ physics, and the campaign still withholds facility-wide QRA promotion. If the
 binding file is omitted, modes remain absent; no mode is inferred from a
 component name, pressure, or leak size.
 
+### Current clean-source HAZOP binding
+
+The old 2026-11-12 binding is retained as historical evidence. It contains an
+earlier `instantaneous_inventory` label for vaporizer G1 and must not be reused
+with the current bounded `inventory_over_600s` packet. The reproducible current
+binding is generated directly from the reviewed frequency plan:
+
+```powershell
+python scripts/build_hazop_event_mode_binding_from_frequency_plan.py `
+  --frequency-plan results/20261115/native_external_facility_full_scope_campaign_current/frequency_plan.json `
+  --output results/20261115/native_external_facility_full_scope_campaign_current/hazop_event_mode_binding_clean_source.json
+```
+
+The generated file has 24 exact rows and is consumed by the clean external
+source replay. The generator fails closed when an event lacks an explicit
+component, release mode, operating mode, or HAZOP scenario ID. It performs no
+mode inference and does not change frequency, provider qualification, physical
+validation, or the facility-QRA gate.
+
 ## Full-scope packet replay (2026-11-15)
 
 The tracked full-scope replay is saved under

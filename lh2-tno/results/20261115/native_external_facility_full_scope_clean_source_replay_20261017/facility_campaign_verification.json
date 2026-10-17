@@ -1,0 +1,1038 @@
+{
+  "schema_version": "prism.native_provider_multi_equipment_facility_campaign.v1",
+  "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-full-scope-example",
+  "component_ids": [
+    "ambient-vaporizer-01",
+    "liquid-transfer-line-01",
+    "liquid-transfer-pump-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01",
+    "transfer-valve-01"
+  ],
+  "packet_count": 24,
+  "matched_event_ids": [
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G5"
+  ],
+  "matched_event_case_chain_closed": true,
+  "matched_event_risk_atom_chain_closed": true,
+  "matched_event_chain_closed": true,
+  "matched_event_executed_case_count": 24,
+  "matched_event_case_record_count": 24,
+  "matched_event_uncomputed_case_count": 0,
+  "matched_event_failed_case_count": 0,
+  "matched_event_withheld_case_count": 22,
+  "matched_event_risk_atom_event_count": 24,
+  "event_count": 24,
+  "case_count": 24,
+  "executed_case_count": 24,
+  "uncomputed_case_count": 0,
+  "failed_case_count": 0,
+  "operator_limited_case_count": 22,
+  "withheld_case_count": 22,
+  "risk_atom_count": 96,
+  "conditional_diagnostic_facility_risk_available": true,
+  "facility_total_risk_available": false,
+  "facility_qra_blocking_reasons": [
+    "campaign 851498149d3861554d4a721355842e9782f2e52f86caadaaaac30d849795dac3: declared scope is incomplete",
+    "campaign 851498149d3861554d4a721355842e9782f2e52f86caadaaaac30d849795dac3: uncomputed cases remain",
+    "campaign 851498149d3861554d4a721355842e9782f2e52f86caadaaaac30d849795dac3: excluded components remain",
+    "missing expected components: receiving-boundary-01",
+    "component ambient-vaporizer-01: PARTIAL",
+    "component liquid-transfer-line-01: PARTIAL",
+    "component liquid-transfer-pump-01: PARTIAL",
+    "component pressure-relief-vent-01: PARTIAL",
+    "component receiving-boundary-01: EXCLUDED",
+    "component reliquefier-01: PARTIAL",
+    "component storage-tank-01: PARTIAL",
+    "component transfer-valve-01: PARTIAL",
+    "facility case-risk trace: 88 risk atoms are linked to non-EXECUTED case status",
+    "campaign 851498149d3861554d4a721355842e9782f2e52f86caadaaaac30d849795dac3: qualified provider packet promotion is unavailable",
+    "campaign 851498149d3861554d4a721355842e9782f2e52f86caadaaaac30d849795dac3: provider packet evidence does not match all consumed packets",
+    "independent physical validation claim is absent"
+  ],
+  "frequency_scenario_count": 3,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "hazop_event_mode_binding": {
+    "status": "EXACT_REVIEWED_BINDING",
+    "path": ".tmp_native_external_hazop_binding_clean_16f7a4b.json",
+    "bound_event_count": 24,
+    "unbound_event_count": 0,
+    "orphan_binding_count": 0,
+    "binding_digest": "6c529b22954a4751ad9ec0d8baa57790f469ae88525fbc67658e05567e69e205"
+  },
+  "campaign_elapsed_ms": 416823.56900000013,
+  "packet_digests": [
+    {
+      "component_id": "storage-tank-01",
+      "port_id": "tank-accident-out",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.012700000000000001,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.05,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 0.01241267193666256,
+      "integrated_mass_kg": 0.01241267193666256,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "289b07c8c7e9b21c274b2ab560b8b422a3f308e7211ef1617236acc0defb5787",
+      "provider_result_digest": "672ee1db2b363e6f06067234343ca80bf77565860f7ba8a4665ccea2c723d546",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/000_storage-tank-01_AREA_0.01pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "LayeredTank finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "e61a7d4f2b2d3cba7a80b90733d4326e7c1a78db0def35fe8d8350e357edd734",
+        "max_abs_inventory_residual_kg": 5.684341886080802e-14,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
+    },
+    {
+      "component_id": "storage-tank-01",
+      "port_id": "tank-accident-out",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.040160926284138414,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.05,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 0.12412352847734287,
+      "integrated_mass_kg": 0.12412352847734287,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "0c1125997d434d0bf7f63c9583e2fe6da85f4ee21b33b2d7d425310d2407c047",
+      "provider_result_digest": "56573fb4896b9d6d9fed5a5adc7eb5d4467ed5bdeb3680648527a7e88d99f7e0",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/001_storage-tank-01_AREA_0.1pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "LayeredTank finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "aec624d2f7a4101bb28db17c97e7543af4a0768783c74e040866d6406e845467",
+        "max_abs_inventory_residual_kg": 5.684341886080802e-14,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
+    },
+    {
+      "component_id": "storage-tank-01",
+      "port_id": "tank-accident-out",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.127,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.05,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 1.24091699837946,
+      "integrated_mass_kg": 1.24091699837946,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "d30e07f13621fbf527df8ea347e1170fc4da5d5e30df7d7d640f8e3d70f0d204",
+      "provider_result_digest": "617d7fce90759a148ed2afd43702de773d0128228dd80b39c6dfa569638293a9",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/002_storage-tank-01_AREA_1pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "LayeredTank finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "9956e3f4f5abccdb47fe2d148ee4b47763c09b5c2e386e48ff74f1c410226298",
+        "max_abs_inventory_residual_kg": 1.1368683772161603e-13,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
+    },
+    {
+      "component_id": "storage-tank-01",
+      "port_id": "tank-accident-out",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.4016092628413842,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.05,
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 12.377363581166982,
+      "integrated_mass_kg": 12.377363581166982,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "0f6e723e68a51dcf704d7187b3836966c21df768cd1cb7b72910a6b7ced21475",
+      "provider_result_digest": "563972cbf1e885d7957820b9768abc7381e6df048a3bef76f4992ced61cef632",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/003_storage-tank-01_AREA_10pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "LayeredTank finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "6bc21448975f76c7b23469c4d3963ec8907f5d28e115aa588039909c21546df1",
+        "max_abs_inventory_residual_kg": 5.684341886080802e-14,
+        "inventory_tolerance_kg": 4.3450988152270015e-07,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 5e-05,
+        "provenance": "LayeredTank recomputed common pressure from its finite-volume cell mass, enthalpy, and wall-temperature state during every native outlet evaluation; the digest covers the initial and terminal provider state history."
+      }
+    },
+    {
+      "component_id": "storage-tank-01",
+      "port_id": "tank-accident-out",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 1.27,
+      "failure_opening_diameters_m": null,
+      "duration_s": 1e-06,
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.0016625666208320196,
+      "integrated_mass_kg": 0.0016625666208320196,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "4fed6dac5690d6228ce567a6888a08eff94b6cab2895e27946f33f3c43e986e0",
+      "provider_result_digest": "38e5a14636e83ab52356d707165abf9aef96a49dfcc7825a340dc577dbf3f7ec",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/004_storage-tank-01_AREA_100pct/resolved_release.json",
+      "termination_basis": "inventory_depletion",
+      "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          5.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.00025,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.0010000000000000002,
+      "available_mass_kg": 3.4802029894759985e-06,
+      "cumulative_mass_out_kg": 2.014140456353654e-08,
+      "integrated_mass_kg": 2.0141404563536547e-08,
+      "mass_residual_kg": -6.617444900424222e-24,
+      "provider_packet_digest": "6f676544acb0ff2a54a35c674b36e1940d04f58bec0b0adbf71cde917dae8833",
+      "provider_result_digest": "a06d547702a02349eab9d52dbae0ffd45d19eb8257e2350dd38dd1b1aa730093",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          5.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.0007905694150420948,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.0010000000000000002,
+      "available_mass_kg": 3.480202989475999e-05,
+      "cumulative_mass_out_kg": 4.4338658741797916e-07,
+      "integrated_mass_kg": 4.4338658741797916e-07,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "76f78cc92c18ed0ea3e76cf85cacafba5763f096615fef1a9a5b7daa1edb1b12",
+      "provider_result_digest": "769aec23bf446d9895223a46de0d78552a4bd36d43779da0ac4dcead2d124e83",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          5.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.0025000000000000005,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.0010000000000000002,
+      "available_mass_kg": 0.00034802029894760006,
+      "cumulative_mass_out_kg": 1.1651055997280421e-06,
+      "integrated_mass_kg": 1.1651055997280423e-06,
+      "mass_residual_kg": -2.117582368135751e-22,
+      "provider_packet_digest": "9a5b503120c4a6dedcc14b3f1cf581479f9cb1bb10251d6754805e724a3e7f42",
+      "provider_result_digest": "492824c8b067146ac32bd4a60c71334a9f04a83ce8c48b8c9fca1cedccf1301e",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          5.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.00790569415042095,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.0010000000000000002,
+      "available_mass_kg": 0.0034802029894759993,
+      "cumulative_mass_out_kg": 2.1053319426559835e-05,
+      "integrated_mass_kg": 2.1053319426559842e-05,
+      "mass_residual_kg": -6.776263578034403e-21,
+      "provider_packet_digest": "d3c97a70392c75e31b15311fce2e206fa451c5da3f41ede389ba3c337909f428",
+      "provider_result_digest": "8a83fb2d409a0ee94b58f8d7fa5b68d881c0ca787b84e034fbf96925a6681aa1",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "port_id": "line-accident-out",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          5.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.025,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.0001,
+      "available_mass_kg": 0.034802029894759993,
+      "cumulative_mass_out_kg": 0.00040250847725729254,
+      "integrated_mass_kg": 0.00040250847725729254,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "46f1f055441d474b5e38679c365f9f9d50defc897fdf97c239363a245228a67b",
+      "provider_result_digest": "ad2778d7bb0415700859ef8653364d9eee48f91a7a8f7b0d6a90a8f7831b3df2",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "port_id": "valve-accident-out",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          7.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.00025,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 3.797180625577987e-05,
+      "cumulative_mass_out_kg": 3.164317187981656e-05,
+      "integrated_mass_kg": 3.164317187981656e-05,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "456d963b1f2b890d3ea364d86fbca56e40a06e1bd73894683a00445f4a16d7b5",
+      "provider_result_digest": "4c0073d3b2157e12d3bd1be4b2158cbda1063ff45be89cd3f1b3566595179aba",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "port_id": "valve-accident-out",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          7.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.0007905694150420948,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 0.0003797180625577988,
+      "cumulative_mass_out_kg": 0.0003164317187981657,
+      "integrated_mass_kg": 0.0003164317187981657,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "e5b8803b7ad5ce6ebc01da3bf37f8fcbe3cf2ec129a76b83036bf8825f5129e8",
+      "provider_result_digest": "fd208ee2d9c56623c05bd4a662338223ff7da2d8cadd022a4da00dde1c6a2f47",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "port_id": "valve-accident-out",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          7.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.0025000000000000005,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 0.0037971806255779894,
+      "cumulative_mass_out_kg": 0.003164317187981658,
+      "integrated_mass_kg": 0.003164317187981658,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "18adb231b5599072930cba4e5d5e59c3cf50bdf258a3eb40316760476e07efd2",
+      "provider_result_digest": "adbb8108a65888e3ee5409aa8e062ac763c61b892de15b34b145f289912d0dba",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/012_transfer-valve-01_AREA_1pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "port_id": "valve-accident-out",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          7.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.00790569415042095,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 0.03797180625577989,
+      "cumulative_mass_out_kg": 0.03164317187981657,
+      "integrated_mass_kg": 0.03164317187981657,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "ef2d4b9756953fca02ea2159f100d81970fe64e3118e66bb060ac0ceccdd8c2e",
+      "provider_result_digest": "401e6b27e60fa8d757b33cbb971a94e00c4526900da67b2759b6d42f303bccb0",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/013_transfer-valve-01_AREA_10pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "port_id": "valve-accident-out",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          7.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.025,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 0.3797180625577988,
+      "cumulative_mass_out_kg": 0.3164317187981657,
+      "integrated_mass_kg": 0.3164317187981657,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "afed1bc9539ba7a2f9dcd4e24a9781da4273a6a3c3ecddb17fd8559a725baa64",
+      "provider_result_digest": "be31b1b3a0f0dd5602c8b6e53556165cd3cf6c48bba83adb69a6a549301c122e",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/014_transfer-valve-01_AREA_100pct/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "pressure-relief-vent-01",
+      "port_id": "vent-accident-out",
+      "port_ids": [
+        "vent-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "release_kind": "gas",
+      "event_kind": "emergency_relief",
+      "position_enu_m": [
+        0.0,
+        3.0,
+        5.0
+      ],
+      "positions_enu_m": [
+        [
+          0.0,
+          3.0,
+          5.0
+        ]
+      ],
+      "failure_opening_diameter_m": null,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.5,
+      "available_mass_kg": 0.0008087150217064195,
+      "cumulative_mass_out_kg": 0.0006739291847553497,
+      "integrated_mass_kg": 0.0006739291847553497,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "e864ef56533b169a70961461f6feed6a00889fb969ac7706f8557370f5fb5c34",
+      "provider_result_digest": "bcc7de8e55110c5505253179bfe37de5a47a045ece56f6221c007948763eca77",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/015_pressure-relief-vent-01_G1/resolved_release.json",
+      "termination_basis": "emergency_relief_discharge",
+      "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "port_id": "pump-accident-out",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        6.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          6.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.025,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 0.00048,
+      "cumulative_mass_out_kg": 0.0004,
+      "integrated_mass_kg": 0.0004,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "02e6636071a3e73600ec16fb7510176bf33d3bddd548c6b102b60f149b3c2173",
+      "provider_result_digest": "e19e7f7dd1fce72e17a9823c2c3bdf80a1d39c1ac57d9034d8dea803ae1658d4",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/016_liquid-transfer-pump-01_G1/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external MappedPump H-Q-N point and matched atmospheric valve over bounded feed-through horizon",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "port_id": "pump-accident-out",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "release_kind": "liquid",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        6.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          6.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.0025000000000000005,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.2,
+      "available_mass_kg": 0.00048,
+      "cumulative_mass_out_kg": 0.0004,
+      "integrated_mass_kg": 0.0004,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "84ffbc0e365432595e53c0aac22349087cc0ea70e40c63db1ff7176d27034854",
+      "provider_result_digest": "033043091cac0505c1952972878ba24e140d7acdb07783912a53e5f18f69af17",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/017_liquid-transfer-pump-01_G2/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external MappedPump H-Q-N point and matched atmospheric valve over bounded feed-through horizon",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "ambient-vaporizer-01",
+      "port_id": "vaporizer-accident-out",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "release_kind": "gas",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          10.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": null,
+      "failure_opening_diameters_m": null,
+      "duration_s": 600.0,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 4.956379784841932e-06,
+      "integrated_mass_kg": 4.956379784841932e-06,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "673575fbce162dfad0bb7a95c19334ee54b3399f7b5b38465db58108360f0cc4",
+      "provider_result_digest": "00f32dac69a2ff3e2ff78e735902ac5509e80c02115af5363a4410bb715be526",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/018_ambient-vaporizer-01_G1/resolved_release.json",
+      "termination_basis": "inventory_over_600s",
+      "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+        "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+      }
+    },
+    {
+      "component_id": "ambient-vaporizer-01",
+      "port_id": "vaporizer-accident-out",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "release_kind": "gas",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          10.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": null,
+      "failure_opening_diameters_m": null,
+      "duration_s": 600.0,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 4.956379784841932e-06,
+      "integrated_mass_kg": 4.956379784841932e-06,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "d50fd0eb35369f271253f6e591cbc426d065a57d22612b0e5fe67d9c3c788263",
+      "provider_result_digest": "21d76ed5a59fb17afc98416fd9f73989e45cd0482a8a15cab37ba42ee338d7b0",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/019_ambient-vaporizer-01_G2/resolved_release.json",
+      "termination_basis": "inventory_over_600s",
+      "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+        "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+      }
+    },
+    {
+      "component_id": "ambient-vaporizer-01",
+      "port_id": "vaporizer-accident-out",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "release_kind": "gas",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          10.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.01,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.5,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.221896865709533e-06,
+      "integrated_mass_kg": 7.221896865709533e-06,
+      "mass_residual_kg": 0.0,
+      "provider_packet_digest": "41acae86b9eaafb22e4b9e4ec9064326e814cbc918a1dbfd3016a3d32aa13497",
+      "provider_result_digest": "b0e6caf8a01a6dabd4ea8fc7c3596d089e1b287344e540689a1f384a235f5301",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/020_ambient-vaporizer-01_G3/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume state with explicit valve; residual inventory retained at synthetic horizon",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "12ba50fe7a6d1e28e26cec1c09f3e516801a58abbe1d8f7e6a584cb52e23ac52",
+        "max_abs_inventory_residual_kg": 0.0,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each native outlet evaluation; the digest covers the complete provider history."
+      }
+    },
+    {
+      "component_id": "reliquefier-01",
+      "port_id": "reliquefier-accident-out-1",
+      "port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "release_kind": "gas",
+      "event_kind": "accidental_leak",
+      "position_enu_m": [
+        13.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          13.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": 0.0025000000000000005,
+      "failure_opening_diameters_m": null,
+      "duration_s": 0.5,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 5.226060443124568e-06,
+      "integrated_mass_kg": 5.226060443124566e-06,
+      "mass_residual_kg": 1.6940658945086007e-21,
+      "provider_packet_digest": "920ebb1499a57eb4859a6529e68dfa8497ed8fe58782a1efe2a0700de982f88a",
+      "provider_result_digest": "99722578acd069a5a27289cf34ae70a6a2b733d9bb1219325e46449a06b013b7",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/023_reliquefier-01_G6/resolved_release.json",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "termination_provenance": "external lh2dt.DynamicReliquefier finite-volume state with explicit valve; residual inventory retained at synthetic horizon",
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "a41da6762c94d33cf850ffaee8dfb8b0f60745231ae085eb49d4c3fd46983366",
+        "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicReliquefier recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each native outlet evaluation; the digest covers the complete provider history."
+      }
+    },
+    {
+      "component_id": "reliquefier-01",
+      "port_id": null,
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "release_kind": "gas",
+      "event_kind": "two_sided_rupture",
+      "position_enu_m": [
+        13.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          13.0,
+          0.0,
+          1.0
+        ],
+        [
+          13.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": null,
+      "failure_opening_diameters_m": [
+        0.025,
+        0.025
+      ],
+      "duration_s": 1e-05,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.191692033908254e-08,
+      "integrated_mass_kg": 7.191692033908256e-08,
+      "mass_residual_kg": -1.3234889800848443e-23,
+      "provider_packet_digest": "fc28ac672e05a19ad352262e8d33a59a695d98fc0c3025924df62072a8a0c84f",
+      "provider_result_digest": "1b9937eef5f3cdf9ffbf2faa0aabcd824af04c44d94e6354ee02bb66741c466a",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/021_reliquefier-01_G4/resolved_release_set.json",
+      "termination_basis": "two_sided_rupture",
+      "termination_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
+      "dynamic_state_closure": null
+    },
+    {
+      "component_id": "reliquefier-01",
+      "port_id": null,
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "release_kind": "gas",
+      "event_kind": "two_sided_rupture",
+      "position_enu_m": [
+        13.0,
+        0.0,
+        1.0
+      ],
+      "positions_enu_m": [
+        [
+          13.0,
+          0.0,
+          1.0
+        ],
+        [
+          13.5,
+          0.0,
+          1.0
+        ]
+      ],
+      "failure_opening_diameter_m": null,
+      "failure_opening_diameters_m": [
+        0.025,
+        0.025
+      ],
+      "duration_s": 1e-05,
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.191692033908254e-08,
+      "integrated_mass_kg": 7.191692033908256e-08,
+      "mass_residual_kg": -1.3234889800848443e-23,
+      "provider_packet_digest": "21a207af469484990b72e4309095ba0d039c5475d2585dc5505debaa8f8d9d0e",
+      "provider_result_digest": "c26d5bbed7dee148f14db2eeb3fb4d0bf67c3c48ab2eaae66896433f96178681",
+      "packet_path": ".tmp_native_generic_scope_packets_clean_16f7a4b_noiso/events/022_reliquefier-01_G5/resolved_release_set.json",
+      "termination_basis": "two_sided_rupture",
+      "termination_provenance": "external DynamicReliquefier shared finite-volume inventory and two explicit rupture endpoints",
+      "dynamic_state_closure": null
+    }
+  ],
+  "limitations": [
+    "provider packets, facility geometry, weather and population remain synthetic or diagnostic",
+    "unmatched frequency opening bins remain UNCOMPUTED and are not assigned zero risk",
+    "pump catalogue rates without p05/p95 bounds remain fixed rather than receiving invented uncertainty",
+    "provider qualification and independent physical validation are not claimed",
+    "facility IR/F-N promotion remains closed"
+  ]
+}

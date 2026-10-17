@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,401 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,409 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -138,6 +138,16 @@ remain `TEMPLATE_ONLY`; replacing a placeholder with a reviewed
 `prism.provider_qualification_evidence.v1` sidecar is required before a
 provider result can be qualified. This workflow never infers frequency from
 signals and never enables facility QRA by itself.
+
+The clean-source replay of the same 24-event scope is documented in the
+[clean-source full-scope replay record](docs/PRISM_native_clean_full_scope_replay_20261017.md).
+It uses `lh2dt_models@16f7a4b`, matches and executes all 24 packet identities,
+and records a 416.8 s offline diagnostic runtime. Twenty-two cases remain
+operator-limited/withheld, so the result is a traceable conditional diagnostic
+view rather than a facility-QRA claim. The exact HAZOP mode binding is
+generated from the reviewed frequency plan by
+`scripts/build_hazop_event_mode_binding_from_frequency_plan.py`; missing mode
+or scenario fields fail closed.
 
 To apply the audit gate to a saved facility assessment without rerunning
 physics, use:

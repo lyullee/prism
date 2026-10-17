@@ -1,0 +1,70 @@
+{
+  "schema_version": "prism.native_external_facility_full_scope_clean_source_replay.v1",
+  "status": "EXECUTED_DIAGNOSTIC_CLEAN_EXTERNAL_SOURCE",
+  "purpose": "full 24-event generic outdoor LH2 facility diagnostic replay using clean lh2dt_models source",
+  "source": {
+    "repository": "https://github.com/lyullee/lh2dt_models",
+    "commit": "16f7a4b",
+    "source_tree_sha256": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+    "source_record": "clean archive exported from origin/main; no provider promotion"
+  },
+  "packet_catalog": {
+    "manifest": "examples\\generic_lh2_full_scope_manifest.json",
+    "frequency_plan": "results\\20261115\\native_external_facility_full_scope_campaign_current\\frequency_plan.json",
+    "event_count": 24,
+    "exact_native_packet_count": 24,
+    "uncomputed_event_count": 0,
+    "retry_succeeded_event_count": 2,
+    "termination_basis_counts": {
+      "synthetic_diagnostic_horizon": 18,
+      "inventory_depletion": 1,
+      "emergency_relief_discharge": 1,
+      "inventory_over_600s": 2,
+      "none": 2
+    },
+    "isolation_requested": false,
+    "verification_sha256": "fd4230f709b74e7fa1435209fc8acbf7a754d744cd23c038d8876d474ac43363",
+    "state_snapshot_binding_status": "PARTIAL_STATE_SNAPSHOT_BINDING",
+    "state_snapshot_bound_count": 20
+  },
+  "facility_campaign": {
+    "packet_count": 24,
+    "event_count": 24,
+    "matched_event_case_record_count": 24,
+    "matched_event_executed_case_count": 24,
+    "matched_event_uncomputed_case_count": 0,
+    "matched_event_failed_case_count": 0,
+    "matched_event_withheld_case_count": 22,
+    "risk_atom_count": 96,
+    "operator_limited_case_count": 22,
+    "conditional_diagnostic_facility_risk_available": true,
+    "facility_total_risk_available": false,
+    "facility_qra_claim": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "hazop_event_mode_binding": {
+      "status": "EXACT_REVIEWED_BINDING",
+      "path": ".tmp_native_external_hazop_binding_clean_16f7a4b.json",
+      "bound_event_count": 24,
+      "unbound_event_count": 0,
+      "orphan_binding_count": 0,
+      "binding_digest": "6c529b22954a4751ad9ec0d8baa57790f469ae88525fbc67658e05567e69e205"
+    },
+    "campaign_elapsed_ms": 416823.56900000013,
+    "campaign_result_sha256": "ada0396bea533df08c3881a8a7f9cebccd55cc3f0644023ec559735bc0359dc5",
+    "verification_sha256": "19fbb29e8730eb9a4b4f78393391926b8f7fdec2cafe0ae2e6ebff45f4148a90"
+  },
+  "reproduction": {
+    "packet_catalog_command": "python scripts/build_native_generic_scope_packet_catalog.py --lh2dt-root <clean lh2dt_models@16f7a4b> --manifest examples/generic_lh2_full_scope_manifest.json --frequency-plan results/20261115/native_external_facility_full_scope_campaign_current/frequency_plan.json --output-dir <packet-output>",
+    "hazop_binding_command": "python scripts/build_hazop_event_mode_binding_from_frequency_plan.py --frequency-plan results/20261115/native_external_facility_full_scope_campaign_current/frequency_plan.json --output results/20261115/native_external_facility_full_scope_campaign_current/hazop_event_mode_binding_clean_source.json",
+    "facility_campaign_command": "python scripts/run_native_provider_facility_campaign.py --packets <24 resolved packet paths> --request-context examples/compressible_plane_chain_context.json --manifest examples/generic_lh2_full_scope_manifest.json --frequency-plan results/20261115/native_external_facility_full_scope_campaign_current/frequency_plan.json --annual-conditions examples/generic_lh2_full_scope_annual_conditions.json --backend-config results/20261009/equipment_campaign/backend_config.json --hazop-event-mode-binding results/20261115/native_external_facility_full_scope_campaign_current/hazop_event_mode_binding_clean_source.json --output-dir <campaign-output> --maximum-physics-cases 30"
+  },
+  "limitations": [
+    "generic manifest, weather, population and facility geometry are synthetic diagnostic inputs",
+    "the packet catalog was run without isolation qualification; valve isolation gaps remain explicit",
+    "22 of 24 case records are operator-limited/withheld by the strict facility gate",
+    "literature frequencies are used as supplied; no sensor frequency inference was performed",
+    "provider qualification, independent physical validation and facility-wide IR/F-N promotion remain false",
+    "the excluded receiving boundary remains outside the accident equipment scope"
+  ]
+}
