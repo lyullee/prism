@@ -92,6 +92,11 @@ def test_reconstructed_three_component_facility_bridge_executes_selected_supply_
     assert sequence["observed_operational_close_threshold_candidate_pa"] == 600000.0
     assert sequence["release_boundary_closed"] is False
     assert result["facility_bridge_audit"]["operation_sequence_evidence_bound"] is True
+    dynamic_closure = result["facility_bridge_audit"]["provider_dynamic_state_closure"]
+    assert dynamic_closure["ready"] is False
+    assert "provider dynamic pressure/inventory closure evidence is missing" in dynamic_closure[
+        "blocking_reasons"
+    ]
     mapping = result["facility_bridge_audit"]["explicit_provider_component_mapping"]
     assert mapping["observed_component_id"] == "lh2-supply-vaporizer-boundary"
     assert mapping["provider_component_id"] == "ambient-vaporizer-01"

@@ -29,6 +29,10 @@ and reports two closure-ready scenarios and one blocked scenario in its facility
 audit. This is a visibility and traceability improvement; it does not change
 the qualification gate.
 
+The reconstructed single-supply inspection-centre bridge now exposes the same
+audit in its branch and facility records, so current-state and header-bound
+runtime paths use one closure-status vocabulary.
+
 The earlier 2026-10-18 replay used the older packet root and classified all three components as operator-limited because the dynamic closure field was absent. That older result remains the authoritative replay record. The new run is a candidate comparison, so it does not silently replace the authoritative union assessment.
 
 ## Interpretation

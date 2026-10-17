@@ -37,6 +37,7 @@ from lh2_tno.observed_hazop_consequence_chain import (  # noqa: E402
 )
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import provider_release_resolver_from_packet  # noqa: E402
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status  # noqa: E402
 from lh2_tno.state_snapshot import EquipmentStateSnapshot  # noqa: E402
 from lh2_tno.service import (  # noqa: E402
     ConsequenceService,
@@ -162,6 +163,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     packet_path = Path(str(provider_row["provider_packet_path"]))
     packet = _object(packet_path)
+    provider_dynamic_state_closure = dynamic_state_closure_status(packet)
     defaults = _request_defaults(
         provider_row,
         liquid_defaults=_object(args.provider_defaults_liquid),
@@ -276,6 +278,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             }
         )
     result = dict(result)
+    for component in result.get("components", {}).values():
+        if not isinstance(component, Mapping):
+            continue
+        for branch in component.get("branches", ()):
+            if isinstance(branch, dict) and str(branch.get("scenario_id") or "") == scenario_id:
+                branch["provider_dynamic_state_closure"] = copy.deepcopy(
+                    provider_dynamic_state_closure
+                )
     result.update(
         {
             "schema_version": "prism.inspection_center_facility_hazop_bridge.v1",
@@ -319,6 +329,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "frequency_inference_performed": False,
                 "sensor_frequency_learning_used": False,
                 "provider_release_created_by_prism": False,
+                "provider_dynamic_state_closure": copy.deepcopy(
+                    provider_dynamic_state_closure
+                ),
                 "facility_annual_ir_available": False,
                 "facility_fn_available": False,
                 "facility_qra_claim": False,
