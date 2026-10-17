@@ -38,6 +38,13 @@ site-specific boundary data.
 | Facility IR/F-N promotion | `false` |
 | Frequency inference or sensor learning | `false` |
 
+The unified facility-QRA gate summary is now bound to the same authoritative
+34-event/44-case union assessment and scope matrix:
+[`facility_qra_gate_summary.json`](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_qra_gate_summary.json).
+It reports `FACILITY_QRA_WITHHELD` with five incomplete gates and 50 explicit
+blocking reasons. The summary is a structural promotion control; it does not
+convert the conditional IR/F-N ledger into a qualified facility QRA.
+
 The current release-closure worklist also joins the case-level boundary audit
 by the explicit `event_id × annual_condition_id × release_branch_id` key. Its
 44/44 join reproduces 42 numerically closed cases, 2 numerically open cases,
