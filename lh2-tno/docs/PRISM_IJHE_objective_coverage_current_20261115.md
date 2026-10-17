@@ -1,6 +1,6 @@
 # PRISM IJHE objective coverage audit (15 November 2026)
 
-This record is the current requirement-level audit for the generic outdoor liquid-hydrogen facility scope. It is deliberately separate from the 54-check completion audit: the completion audit checks the executable facility handoff, while this objective audit checks whether the IJHE claims are supported by the current evidence package.
+This record is the current requirement-level audit for the generic outdoor liquid-hydrogen facility scope. It is deliberately separate from the 56-check completion audit: the completion audit checks the executable facility handoff, while this objective audit checks whether the IJHE claims are supported by the current evidence package.
 
 ## Current decision
 
@@ -11,7 +11,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 | Objective rows | 33 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
-| Completion-audit result | `INCOMPLETE_EVIDENCE` (55 checks: 50 PASS, 5 BLOCKED) |
+| Completion-audit result | `INCOMPLETE_EVIDENCE` (56 checks: 51 PASS, 5 BLOCKED) |
 | Facility IR/F-N promotion | withheld |
 | Physical-validation claim | withheld |
 | Fresh-physics 1 Hz claim | withheld |
@@ -30,7 +30,7 @@ The current chain is explicit and auditable:
 6. Literature-based frequency ports and uncertainty cases are retained in the same event/case identity.
 7. The monitor path distinguishes `cached_diagnostic_1hz` from `fresh_physics_background`; the benchmark records both timings and makes no fresh-physics 1 Hz claim.
 
-The latest 55-check audit also includes the forecast facility-campaign evidence gate. The two forecast requests remain withheld because their quantitative evidence coverage is incomplete. The inspection-center handoff and receptor-geometry comparisons remain separate diagnostic records; a near-receptor result must not be substituted for the declared facility receptor geometry.
+The latest 56-check audit also includes the forecast facility-campaign evidence gate. The two forecast requests remain withheld because their quantitative evidence coverage is incomplete. The inspection-center handoff and receptor-geometry comparisons remain separate diagnostic records; a near-receptor result must not be substituted for the declared facility receptor geometry.
 
 The inspection-centre source boundary is documented separately in
 [`PRISM_inspection_center_source_suitability_20261115.md`](PRISM_inspection_center_source_suitability_20261115.md).
