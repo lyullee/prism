@@ -4,7 +4,7 @@
 
 The seven-equipment runner was repeated against a clean archive of the
 upstream `lh2dt_models` `main` commit `16f7a4b` (source-tree digest
-`81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648`). All
+`cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843`). All
 seven native exporters completed and their state-snapshot digests matched the
 PRISM request identities. The result is still diagnostic:
 
@@ -86,6 +86,10 @@ and `facility_qra_claim: false`. Independent packet qualification, measured
 facility state, literature-frequency selection, SLABx-LH2 physical validation,
 and facility IR/F-N promotion remain separate evidence gates. No sensor-based
 frequency learning is introduced.
+
+## Fresh source and chain comparison (2026-11-15)
+
+The native exporter and consequence-chain runners were executed again against the same `lh2dt_models@16f7a4b` source. The source digest, all seven provider result digests, termination bases, durations, chain statuses, provider durations, and mass residuals matched the saved 2026-11-15 records. The comparison is recorded in [`recheck_comparison_current.json`](../results/20261115/native_external_multi_equipment_recheck_current/recheck_comparison_current.json). This confirms reproducibility only; the four promotion flags remain false.
 
 ## Consequence-chain replay
 

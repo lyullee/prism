@@ -1,0 +1,100 @@
+{
+  "schema_version": "prism.native_external_multi_equipment_recheck_comparison.v1",
+  "status": "MATCHED_CURRENT_EXTERNAL_SOURCE_AND_CHAIN",
+  "source_repository": "lyullee/lh2dt_models",
+  "source_commit": "16f7a4b",
+  "external_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "previous_manifest": "results/20261115/native_external_multi_equipment_recheck_current/manifest.json",
+  "current_manifest_digest": "327cf4cdbaf0a292d305b7150e52a02631978f9ea186fb0b8d74927daef77468",
+  "previous_chain_manifest": "results/20261115/native_external_multi_equipment_chain_recheck_current/manifest.json",
+  "current_chain_manifest_digest": "125e99192ef466f835d8be814cbe33a72188c657911a9f98f24ff0de4bb36fb4",
+  "equipment_count": 7,
+  "rows": [
+    {
+      "equipment": "dynamic_pipe",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "dynamic_reliquefier",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "dynamic_vaporizer",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "layered_tank",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "mapped_pump",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "stroke_limited_valve",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    },
+    {
+      "equipment": "vent_stack",
+      "provider_result_digest_match": true,
+      "termination_basis_match": true,
+      "duration_match": true,
+      "state_snapshot_digest_match_old": true,
+      "state_snapshot_digest_match_new": true,
+      "chain_status_match": true,
+      "chain_provider_duration_match": true,
+      "chain_mass_residual_match": true
+    }
+  ],
+  "all_provider_result_digests_match": true,
+  "all_chain_statuses_match": true,
+  "all_chain_durations_match": true,
+  "all_mass_residuals_match": true,
+  "provider_packet_promoted_count": 0,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "interpretation": "The current external model source and PRISM replay reproduce the previous diagnostic result. This is a provenance/reproducibility check and does not qualify provider packets or open facility QRA."
+}

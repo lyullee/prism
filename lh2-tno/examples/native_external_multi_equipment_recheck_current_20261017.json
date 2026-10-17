@@ -2,7 +2,7 @@
   "schema_version": "prism.native_external_multi_equipment_recheck_compact.v1",
   "source_repository": "lyullee/lh2dt_models",
   "source_commit": "16f7a4b",
-  "external_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+  "external_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
   "status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC",
   "equipment_count": 7,
   "equipment": [
