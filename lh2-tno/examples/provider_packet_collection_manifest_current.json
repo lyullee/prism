@@ -4,6 +4,15 @@
   "facility_id": "generic-lh2-full-scope-example",
   "source_evidence_request_schema": "prism.facility_evidence_request.v1",
   "source_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
+  "provider_input_origin_policy": {
+    "required_for_qualification": "reviewed_measurement",
+    "accepted_for_diagnostic_only": [
+      "synthetic",
+      "model_prediction"
+    ],
+    "frequency_inference_allowed": false,
+    "policy": "Synthetic and model-prediction packets may be executed diagnostically, but only reviewed_measurement packets can enter qualified provider promotion."
+  },
   "promotion_gate": {
     "qualified_provider_packet_required": true,
     "provider_packet_evidence_schema": "prism.provider_packet_evidence.v1",
@@ -38,6 +47,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -60,6 +70,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -103,6 +114,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -125,6 +137,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -168,6 +181,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -190,6 +204,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -233,6 +248,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -255,6 +271,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -298,6 +315,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -320,6 +338,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -363,6 +382,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -385,6 +405,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -428,6 +449,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -450,6 +472,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -493,6 +516,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -515,6 +539,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -558,6 +583,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -580,6 +606,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -623,6 +650,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -645,6 +673,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -689,6 +718,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -711,6 +741,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -758,6 +789,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -780,6 +812,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -827,6 +860,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -849,6 +883,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -896,6 +931,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -918,6 +954,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -965,6 +1002,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -987,6 +1025,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1034,6 +1073,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1056,6 +1096,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1103,6 +1144,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1125,6 +1167,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1172,6 +1215,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1194,6 +1238,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1241,6 +1286,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1263,6 +1309,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1310,6 +1357,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1332,6 +1380,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1377,6 +1426,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1399,6 +1449,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1440,6 +1491,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1462,6 +1514,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1503,6 +1556,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1525,6 +1579,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1566,6 +1621,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1588,6 +1644,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1629,6 +1686,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1655,6 +1713,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1699,6 +1758,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1725,6 +1785,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1769,6 +1830,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1791,6 +1853,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1834,6 +1897,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1856,6 +1920,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1903,6 +1968,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1925,6 +1991,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -1972,6 +2039,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -1994,6 +2062,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2042,6 +2111,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2064,6 +2134,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2112,6 +2183,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2134,6 +2206,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2182,6 +2255,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2204,6 +2278,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2251,6 +2326,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2273,6 +2349,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2320,6 +2397,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2342,6 +2420,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2389,6 +2468,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2411,6 +2491,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2458,6 +2539,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2480,6 +2562,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2527,6 +2610,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2549,6 +2633,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2596,6 +2681,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2618,6 +2704,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2665,6 +2752,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2687,6 +2775,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2734,6 +2823,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2756,6 +2846,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2803,6 +2894,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2825,6 +2917,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2872,6 +2965,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2894,6 +2988,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -2941,6 +3036,7 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "required_input_origin": "reviewed_measurement",
       "current_case_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
       "exact_match_required": {
@@ -2963,6 +3059,7 @@
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "input_origin=reviewed_measurement with source-owner review and provenance",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
@@ -3001,6 +3098,7 @@
     "frequency_is_not_assigned": true,
     "release_packet_is_not_created": true,
     "qualification_is_not_inferred": true,
+    "required_provider_input_origin": "reviewed_measurement",
     "facility_ir_fn_promotion": false,
     "closed_only_by": "audit_provider_packet_inputs plus exact facility case coverage and independent validation"
   }

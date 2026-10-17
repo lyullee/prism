@@ -34,6 +34,9 @@ def test_current_facility_requests_become_open_case_rows() -> None:
     assert all(row["release_path"] is None for row in report["rows"])
     assert all(row["qualification_path"] is None for row in report["rows"])
     assert all(row["strict_gate_requirements"] for row in report["rows"])
+    assert report["provider_input_origin_policy"]["required_for_qualification"] == "reviewed_measurement"
+    assert all(row["required_input_origin"] == "reviewed_measurement" for row in report["rows"])
+    assert report["promotion_policy"]["required_provider_input_origin"] == "reviewed_measurement"
     assert report["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert report["strict_gate_catalog"]["MISSING_PROVIDER_CASES"]
     assert all(row["event_id"] and row["component_id"] for row in report["rows"])

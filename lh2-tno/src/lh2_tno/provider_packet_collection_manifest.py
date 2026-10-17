@@ -7,6 +7,7 @@ from typing import Any
 
 SCHEMA = "prism.provider_packet_collection_manifest.v1"
 REQUEST_SCHEMA = "prism.facility_evidence_request.v1"
+REQUIRED_PROVIDER_INPUT_ORIGIN = "reviewed_measurement"
 
 
 def _rows(value: Any, label: str) -> list[Mapping[str, Any]]:
@@ -80,6 +81,9 @@ def build_provider_packet_collection_manifest(
             "scenario_families": _list(request.get("scenario_families", [])),
             "request_kind": request.get("request_kind"),
             "qualification_required": request.get("qualification_required") is True,
+            "required_input_origin": str(
+                request.get("required_input_origin") or REQUIRED_PROVIDER_INPUT_ORIGIN
+            ).strip(),
             "current_case_status": request.get("current_status"),
             "gap_class": request.get("gap_class"),
             "exact_match_required": dict(identity),
@@ -103,6 +107,15 @@ def build_provider_packet_collection_manifest(
         "facility_id": evidence_request.get("facility_id"),
         "source_evidence_request_schema": evidence_request.get("schema_version"),
         "source_evidence_request_status": evidence_request.get("status"),
+        "provider_input_origin_policy": (
+            dict(evidence_request["provider_input_origin_policy"])
+            if isinstance(evidence_request.get("provider_input_origin_policy"), Mapping)
+            else {
+                "required_for_qualification": REQUIRED_PROVIDER_INPUT_ORIGIN,
+                "accepted_for_diagnostic_only": ["synthetic", "model_prediction"],
+                "frequency_inference_allowed": False,
+            }
+        ),
         "promotion_gate": promotion_gate,
         "strict_gate_catalog": dict(evidence_request.get("strict_gate_catalog", {}))
         if isinstance(evidence_request.get("strict_gate_catalog"), Mapping)
@@ -116,10 +129,16 @@ def build_provider_packet_collection_manifest(
             "frequency_is_not_assigned": True,
             "release_packet_is_not_created": True,
             "qualification_is_not_inferred": True,
+            "required_provider_input_origin": REQUIRED_PROVIDER_INPUT_ORIGIN,
             "facility_ir_fn_promotion": False,
             "closed_only_by": "audit_provider_packet_inputs plus exact facility case coverage and independent validation",
         },
     }
 
 
-__all__ = ["REQUEST_SCHEMA", "SCHEMA", "build_provider_packet_collection_manifest"]
+__all__ = [
+    "REQUEST_SCHEMA",
+    "SCHEMA",
+    "REQUIRED_PROVIDER_INPUT_ORIGIN",
+    "build_provider_packet_collection_manifest",
+]
