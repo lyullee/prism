@@ -165,3 +165,11 @@ qualification-only sidecars, while 11 candidates first need release-closure
 evidence and then qualification evidence. The catalog is an intake worksheet,
 not a promotion step. It keeps qualified-provider count at zero and leaves
 frequency inference, independent physical validation and facility QRA disabled.
+
+A fillable sidecar manifest is also generated at
+[`provider_qualification_sidecar_manifest_template.json`](../results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json).
+It contains 26 release identities grouped from the 24 event rows, preserves
+source/result digests and packet indexes, and gives each identity a placeholder
+sidecar path. Placeholder paths are never treated as evidence; a reviewed
+`prism.provider_qualification_evidence.v1` file is required before the audit can
+qualify a provider packet.

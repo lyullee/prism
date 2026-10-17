@@ -32,19 +32,53 @@ def _safe_name(path: str) -> str:
     return value or "provider_packet"
 
 
+def _flatten_requests(catalogue: dict[str, Any]) -> list[dict[str, Any]]:
+    """Normalize legacy and native full-scope request catalogues.
+
+    The native facility campaign groups one or more release requests under an
+    event row so that the row can retain readiness blockers.  The generic
+    catalogue is already flat.  The sidecar manifest needs the same flat
+    packet identity list for both forms.
+    """
+    schema = catalogue.get("schema_version")
+    if schema == "prism.generic_provider_evidence_requests.v1":
+        requests = catalogue.get("requests")
+        if not isinstance(requests, list):
+            raise ValueError("catalogue requests must be an array")
+        return [raw for raw in requests if isinstance(raw, dict)]
+    if schema == "prism.native_full_scope_provider_qualification_requests.v1":
+        rows = catalogue.get("requests")
+        if not isinstance(rows, list):
+            raise ValueError("native request rows must be an array")
+        flattened: list[dict[str, Any]] = []
+        for row_index, row in enumerate(rows):
+            if not isinstance(row, dict):
+                raise ValueError(f"native request row {row_index} must be an object")
+            nested = row.get("requests")
+            if not isinstance(nested, list):
+                raise ValueError(f"native request row {row_index} lacks requests")
+            for request_index, raw in enumerate(nested):
+                if not isinstance(raw, dict):
+                    raise ValueError(
+                        f"native request row {row_index} item {request_index} must be an object"
+                    )
+                current = raw.get("current_packet")
+                if not isinstance(current, dict):
+                    raise ValueError(
+                        f"native request row {row_index} item {request_index} lacks current_packet"
+                    )
+                flattened.append(raw)
+        return flattened
+    raise ValueError("unsupported provider evidence catalogue schema")
+
+
 def build_manifest_template(catalogue_path: str | Path) -> dict[str, Any]:
     path = Path(catalogue_path).resolve()
     catalogue = _load(path)
-    if catalogue.get("schema_version") != "prism.generic_provider_evidence_requests.v1":
-        raise ValueError("unsupported provider evidence catalogue schema")
-    requests = catalogue.get("requests")
-    if not isinstance(requests, list):
-        raise ValueError("catalogue requests must be an array")
+    requests = _flatten_requests(catalogue)
     entries: list[dict[str, Any]] = []
     group_paths: dict[str, str] = {}
     for index, raw in enumerate(requests):
-        if not isinstance(raw, dict):
-            raise ValueError(f"catalogue request {index} must be an object")
         current = raw.get("current_packet")
         if not isinstance(current, dict):
             raise ValueError(f"catalogue request {index} lacks current_packet")

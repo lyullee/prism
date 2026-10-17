@@ -1,0 +1,430 @@
+{
+  "schema_version": "prism.provider_qualification_sidecar_manifest.v1",
+  "status": "TEMPLATE_ONLY",
+  "catalogue_schema_version": "prism.native_full_scope_provider_qualification_requests.v1",
+  "catalogue_sha256": "4a6bfa88e721592fa602c9d6c9103cb02a7929d45e2a1cd601a68f9ee1fb771d",
+  "entry_count": 26,
+  "entries": [
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_000_storage-tank-01_AREA_0.01pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "5863a731614c1a73be2e62a46bf5a5f8fc71e91a04c7ef2d0dda0d6f052c45bc"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_001_storage-tank-01_AREA_0.1pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "f711f513da677f4ffe18e5efd49663adfe201d707135c2cb9b129cc651ad7b1c"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_002_storage-tank-01_AREA_1pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "1eaa94922fdc4ac8b42af4a9c54813d325985eaad91615ca8b672fbd636e6ace"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_003_storage-tank-01_AREA_10pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "2be9e9cf952732799314261fe32152fc0186b9a4d94cf79c26e6cede4ba7d7c1"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_004_storage-tank-01_AREA_100pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "f496c26fe539baa1af17f069ec0e5e930f90569d8ac781f38d409914564c5979"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_005_liquid-transfer-line-01_AREA_0.01pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_006_liquid-transfer-line-01_AREA_0.1pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "6be9f88022775f524497a9aebcb3532a05732f5a9aebe345e4a6db4294de9641"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_007_liquid-transfer-line-01_AREA_1pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\007_liquid-transfer-line-01_AREA_1pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "efba22e90663c30f75720d190c181d1142757b2dcaa0d46e4b2dfe187ac701a3"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_008_liquid-transfer-line-01_AREA_10pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\008_liquid-transfer-line-01_AREA_10pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "e1a0ee052be9d2e17932952a2f1b01ae48b3aa6be0b136085fa0342ecbff09f0"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_009_liquid-transfer-line-01_AREA_100pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\009_liquid-transfer-line-01_AREA_100pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_010_transfer-valve-01_AREA_0.01pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\010_transfer-valve-01_AREA_0.01pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "adad11219a7fac005ba8888fb3ae6c9c03822c2abd5faa4a8d5d4eb1f9624541"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_011_transfer-valve-01_AREA_0.1pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\011_transfer-valve-01_AREA_0.1pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "7e29e7aff1519ea3537c14dbfcf2a76fc0722cf78ad8289dbbff00b0a090f956"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_012_transfer-valve-01_AREA_1pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\012_transfer-valve-01_AREA_1pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "5a9b1bb78bb5c069350c1f1ce0e318a7a4ebb8186d13415139a94b7908e70b6e"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_013_transfer-valve-01_AREA_10pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\013_transfer-valve-01_AREA_10pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "349de3d158514b1ecfab6ff631e94161797c72aefa6b8655e2405ce0abf3b3f2"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_014_transfer-valve-01_AREA_100pct_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\014_transfer-valve-01_AREA_100pct\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "28be80a5f895589fb5f3ffa12c0cc385befbad509a705bac34cf3c384ad280f5"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_015_pressure-relief-vent-01_G1_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\015_pressure-relief-vent-01_G1\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "port_id": "vent-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_016_liquid-transfer-pump-01_G1_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\016_liquid-transfer-pump-01_G1\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "port_id": "pump-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "bb2f9d2b69bee2e61c287134daa3bea1128267dfed1ec5eea382815dd6739c36"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_017_liquid-transfer-pump-01_G2_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\017_liquid-transfer-pump-01_G2\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "port_id": "pump-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "f56da7352098b4e13910a123c133d7a865b791086b11ce3e87cf37c98ac1841c"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_018_ambient-vaporizer-01_G1_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\018_ambient-vaporizer-01_G1\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "d4da7db31ed1d41128a344e5df09ef6814d993822d7677be28edec0179a9fb54"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_019_ambient-vaporizer-01_G2_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\019_ambient-vaporizer-01_G2\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_020_ambient-vaporizer-01_G3_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\020_ambient-vaporizer-01_G3\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_021_reliquefier-01_G4_resolved_release_set.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "c4851ed57197c9dcb52bc0a64449c1109e8262ee5b99c58724c2c5d881b53bb6"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_021_reliquefier-01_G4_resolved_release_set.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
+      "packet_index": 1,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-2",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "8845cfc0ee3841f2c6edf55049bfec8d13b7cda55cdc1b5da9f543072b890897"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_022_reliquefier-01_G5_resolved_release_set.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "8c247b5c1f9ddeaaacf1b7e81032118369bac1a2ba1944fadf901ce1eb391a5f"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_022_reliquefier-01_G5_resolved_release_set.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
+      "packet_index": 1,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-2",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "34aff9548a174db1b0bb49d96a2cfcbc4c8bb194caf1947feca4822fe84fe928"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_023_reliquefier-01_G6_resolved_release.json.json",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\023_reliquefier-01_G6\\resolved_release.json",
+      "packet_index": 0,
+      "request_kind": "qualification_only",
+      "closure_status": null,
+      "expected_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+        "provider_result_digest": "4ecf333fee42ddb55fe619d2496e0eeb106d90e4cd0c3a36103d6dafc1e1eb14"
+      },
+      "reviewer_action": "Replace the placeholder path with a reviewed prism.provider_qualification_evidence.v1 file. For an ordered release set, use the same sidecar path for every request sharing packet_path."
+    }
+  ],
+  "diagnostic_only": true,
+  "frequency_inference_allowed": false,
+  "facility_qra_allowed": false,
+  "promotion_allowed": false,
+  "interpretation": "This file is a submission template, not qualification evidence. Placeholder paths must be replaced with reviewed sidecars before audit."
+}

@@ -158,3 +158,9 @@ It separates 13 exact packet rows that need qualification sidecars from 11 rows
 that first need release-closure evidence. This catalog preserves packet identity
 and blocking reasons; it does not infer rates, physical validation or facility
 IR/F-N.
+
+The same request catalog can be converted into a fillable sidecar manifest with
+`scripts/build_provider_sidecar_manifest_template.py`. The current native
+full-scope template has 26 release identities from 24 event rows; all entries
+remain `TEMPLATE_ONLY` and `promotion_allowed=false` until a reviewed sidecar
+binds the exact packet digests and independent validation evidence.

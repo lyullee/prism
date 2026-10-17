@@ -43,3 +43,36 @@ def test_template_preserves_request_identity_and_groups_packet_paths(tmp_path):
     assert result["entries"][0]["qualification_sidecar_path"] == result["entries"][1]["qualification_sidecar_path"]
     assert result["entries"][0]["expected_identity"]["provider_source_digest"] == "a" * 64
     assert result["promotion_allowed"] is False
+
+
+def test_template_flattens_native_full_scope_request_rows(tmp_path):
+    packet_path = tmp_path / "resolved_release.json"
+    catalogue = tmp_path / "native_requests.json"
+    current = {
+        "event_id": "native-event",
+        "component_id": "native-component",
+        "port_id": "out",
+        "provider_source_digest": "c" * 64,
+        "provider_result_digest": "d" * 64,
+    }
+    catalogue.write_text(json.dumps({
+        "schema_version": "prism.native_full_scope_provider_qualification_requests.v1",
+        "requests": [{
+            "event_id": "native-event",
+            "component_id": "native-component",
+            "packet_path": str(packet_path),
+            "requests": [{
+                "request_schema": "prism.provider_qualification_request.v1",
+                "request_id": "native-event",
+                "request_kind": "qualification_only",
+                "current_packet": current,
+            }],
+        }],
+    }), encoding="utf-8")
+    result = build_manifest_template(catalogue)
+    assert result["catalogue_schema_version"] == (
+        "prism.native_full_scope_provider_qualification_requests.v1"
+    )
+    assert result["entry_count"] == 1
+    assert result["entries"][0]["expected_identity"]["component_id"] == "native-component"
+    assert result["promotion_allowed"] is False
