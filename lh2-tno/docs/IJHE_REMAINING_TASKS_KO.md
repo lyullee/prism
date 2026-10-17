@@ -19,6 +19,7 @@
 - 상태 스냅샷의 재고량과 provider 질량수지의 초기 재고량을 44개 케이스에서 수치 대조했다. 8개가 비교 가능했고 7개는 일치했지만, `storage-shell/AREA_0.01%` 한 건은 0.02849 kg 대 71.76440 kg으로 99.96% 차이가 났다. 나머지 36개는 비교 필드가 없어 일치로 세지 않았다. 이 결과는 `diagnostic_state_release_mass_consistency`에 기록했으며 값을 임의 보정하거나 provider/QRA로 승격하지 않는다.
 - 위 불일치가 다시 계산 체인으로 통과하지 않도록 `ConsequenceRequest.valid()`에 fail-closed 수치 게이트를 추가했다. 상태 스냅샷과 provider 초기/가용 재고가 모두 있을 때 두 값이 허용 오차 안에서 일치하지 않으면 피해영향 계산 전에 요청을 거부한다. 기존 `storage-shell/AREA_0.01%` 산출물은 새 게이트 이전에 만들어졌으므로, 설비 모델이 일치하는 상태 스냅샷을 포함해 재수출하기 전까지 계속 검토 대상으로 둔다.
 - `storage-shell/AREA_0.01%` native frequency case는 현재 설비 초기화에서 직접 생성한 상태 스냅샷으로 재수출했다. 새 snapshot/provider 재고는 모두 `71.76440057 kg`로 일치하며, 이전 `0.02849206 kg` 값과 digest는 verification 기록에 보존했다. 이 한 건의 diagnostic mismatch는 닫혔지만, 44개 권위 union 전체에는 아직 이전 packet이 남아 있어 전체 provider catalog 재수출 전까지 전체 판정은 보류한다.
+- 상태 스냅샷을 campaign request에 삽입하는 `scripts/bind_native_campaign_state_snapshots.py`도 같은 수치 검사를 수행한다. digest만 일치하고 재고 경계가 다른 packet은 campaign compilation 단계에서 거부된다.
 
 ## 남은 게이트
 

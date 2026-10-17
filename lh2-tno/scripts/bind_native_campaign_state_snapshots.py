@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -52,6 +53,35 @@ def _packet_result_digests(request: dict[str, Any]) -> tuple[str, ...]:
     if not digests or len(digests) != len(releases):
         raise ValueError("every resolved release must carry provider_result_digest")
     return digests
+
+
+def _provider_inventory_masses(request: dict[str, Any]) -> tuple[float, ...]:
+    """Return provider-declared initial inventories for all release owners."""
+
+    releases: list[dict[str, Any]] = []
+    for key in ("resolved_release", "resolved_liquid_release"):
+        value = request.get(key)
+        if isinstance(value, dict):
+            releases.append(value)
+    release_set = request.get("resolved_release_set")
+    if isinstance(release_set, dict):
+        values = release_set.get("releases")
+        if not isinstance(values, list):
+            raise ValueError("resolved_release_set.releases must be an array")
+        releases.extend(value for value in values if isinstance(value, dict))
+    masses: list[float] = []
+    for release in releases:
+        value = release.get("available_mass_kg")
+        if value is None:
+            continue
+        try:
+            mass = float(value)
+        except (TypeError, ValueError) as error:
+            raise ValueError("provider available_mass_kg must be numeric") from error
+        if not math.isfinite(mass) or mass < 0.0:
+            raise ValueError("provider available_mass_kg must be finite and non-negative")
+        masses.append(mass)
+    return tuple(masses)
 
 
 def _echoes(verification: dict[str, Any], digest: str) -> tuple[str, ...]:
@@ -153,6 +183,25 @@ def bind(campaign: dict[str, Any], packet_root: Path) -> tuple[dict[str, Any], d
         record = next(iter(unique.values()))
         if record["component_id"] != request.get("component_id"):
             raise ValueError(f"state snapshot component mismatch: {event_id}")
+        provider_masses = _provider_inventory_masses(request)
+        snapshot_mass = record["snapshot"].get("mass_kg")
+        if snapshot_mass is not None and provider_masses:
+            try:
+                snapshot_mass_value = float(snapshot_mass)
+            except (TypeError, ValueError) as error:
+                raise ValueError(f"state snapshot mass must be numeric: {event_id}") from error
+            if any(
+                not math.isclose(
+                    snapshot_mass_value,
+                    provider_mass,
+                    rel_tol=1.0e-9,
+                    abs_tol=1.0e-12,
+                )
+                for provider_mass in provider_masses
+            ):
+                raise ValueError(
+                    f"state snapshot mass and provider initial inventory disagree: {event_id}"
+                )
         echoes = tuple(record["provider_echo_digests"])
         if len(echoes) != len(digests):
             raise ValueError(

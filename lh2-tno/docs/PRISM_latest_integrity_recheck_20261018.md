@@ -17,6 +17,11 @@ kg` snapshot digest and value as an explicit rebaseline record. This closes the
 single-case diagnostic mismatch; the authoritative 44-case union still retains
 its legacy mismatch until the full provider catalog is re-exported.
 
+The campaign state-snapshot binder now applies the same numeric check before it
+embeds a provider snapshot into a campaign request. A stale snapshot therefore
+fails compilation instead of reaching the consequence chain with a valid digest
+but an invalid inventory boundary.
+
 The updated authoritative audit is therefore `INCOMPLETE_EVIDENCE` with 60 checks: 55 PASS and 5 BLOCKED. The facility QRA claim, independent physical-validation claim, provider-packet promotion, and sensor-derived frequency inference remain false.
 
 ## SLABx-LH2 boundary
@@ -27,7 +32,7 @@ SLABx-LH2 remains a frozen, validated consequence component. Its existing 5/5 co
 
 The external `lh2dt` Python source tree was rechecked at source commit `7072374c59b726f4e938cd37e7695684ddc70b68` with source-tree digest `3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74`. Its full suite passed `377` tests with one warning. The workspace has one untracked benchmark document, `docs/benchmarks/nasa_tn_d4171_hem_validation.md`; this is documentation intake, not a source-code change.
 
-PRISM's full portable suite passed `1526` tests with one warning after the numeric boundary and provider-state rebaseline changes. The audit artifact remains fail-closed and diagnostic-only.
+PRISM's full portable suite passed `1527` tests with one warning after the numeric boundary, provider-state rebaseline and campaign-binder gate changes. The audit artifact remains fail-closed and diagnostic-only.
 
 ## Continuous integration
 
