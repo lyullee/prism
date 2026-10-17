@@ -2,7 +2,7 @@
   "schema_version": "prism.provider_qualification_sidecar_manifest.v1",
   "status": "TEMPLATE_ONLY",
   "catalogue_schema_version": "prism.native_full_scope_provider_qualification_requests.v1",
-  "catalogue_sha256": "4a6bfa88e721592fa602c9d6c9103cb02a7929d45e2a1cd601a68f9ee1fb771d",
+  "catalogue_sha256": "638fe309ce525ed7a82c554bc3eb2223a50e2fae82c6bbaec82b0f6257329646",
   "entry_count": 26,
   "entries": [
     {
@@ -11,7 +11,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
@@ -27,7 +27,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
         "component_id": "storage-tank-01",
@@ -43,7 +43,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
         "component_id": "storage-tank-01",
@@ -59,7 +59,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
         "component_id": "storage-tank-01",
@@ -74,8 +74,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_004_storage-tank-01_AREA_100pct_resolved_release.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
       "packet_index": 0,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
         "component_id": "storage-tank-01",
@@ -91,7 +91,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
         "component_id": "liquid-transfer-line-01",
@@ -107,7 +107,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
         "component_id": "liquid-transfer-line-01",
@@ -123,7 +123,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\007_liquid-transfer-line-01_AREA_1pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
@@ -139,7 +139,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\008_liquid-transfer-line-01_AREA_10pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
         "component_id": "liquid-transfer-line-01",
@@ -155,7 +155,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\009_liquid-transfer-line-01_AREA_100pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
         "component_id": "liquid-transfer-line-01",
@@ -171,7 +171,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\010_transfer-valve-01_AREA_0.01pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
@@ -187,7 +187,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\011_transfer-valve-01_AREA_0.1pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
         "component_id": "transfer-valve-01",
@@ -203,7 +203,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\012_transfer-valve-01_AREA_1pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
         "component_id": "transfer-valve-01",
@@ -219,7 +219,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\013_transfer-valve-01_AREA_10pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
         "component_id": "transfer-valve-01",
@@ -235,7 +235,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\014_transfer-valve-01_AREA_100pct\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
         "component_id": "transfer-valve-01",
@@ -250,8 +250,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_015_pressure-relief-vent-01_G1_resolved_release.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\015_pressure-relief-vent-01_G1\\resolved_release.json",
       "packet_index": 0,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
@@ -267,7 +267,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\016_liquid-transfer-pump-01_G1\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
         "component_id": "liquid-transfer-pump-01",
@@ -283,7 +283,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\017_liquid-transfer-pump-01_G2\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "release_closure_and_qualification",
-      "closure_status": null,
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
@@ -298,8 +298,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_018_ambient-vaporizer-01_G1_resolved_release.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\018_ambient-vaporizer-01_G1\\resolved_release.json",
       "packet_index": 0,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
         "component_id": "ambient-vaporizer-01",
@@ -314,8 +314,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_019_ambient-vaporizer-01_G2_resolved_release.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\019_ambient-vaporizer-01_G2\\resolved_release.json",
       "packet_index": 0,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
         "component_id": "ambient-vaporizer-01",
@@ -331,7 +331,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\020_ambient-vaporizer-01_G3\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
@@ -346,8 +346,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_021_reliquefier-01_G4_resolved_release_set.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
       "packet_index": 0,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
         "component_id": "reliquefier-01",
@@ -362,8 +362,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_021_reliquefier-01_G4_resolved_release_set.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
       "packet_index": 1,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
         "component_id": "reliquefier-01",
@@ -378,8 +378,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_022_reliquefier-01_G5_resolved_release_set.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
       "packet_index": 0,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
         "component_id": "reliquefier-01",
@@ -394,8 +394,8 @@
       "qualification_sidecar_path": "REPLACE_WITH_REVIEWED_SIDECARS/C_Users_lyul_Documents_ChatGPT_TNO_lh2-tno_results_20261115_native_external_facility_full_scope_packets_current_events_022_reliquefier-01_G5_resolved_release_set.json.json",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
       "packet_index": 1,
-      "request_kind": "qualification_only",
-      "closure_status": null,
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
         "component_id": "reliquefier-01",
@@ -411,7 +411,7 @@
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current\\events\\023_reliquefier-01_G6\\resolved_release.json",
       "packet_index": 0,
       "request_kind": "qualification_only",
-      "closure_status": null,
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "expected_identity": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",

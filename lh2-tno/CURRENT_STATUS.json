@@ -5882,7 +5882,7 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_frequency_inference_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_facility_qra_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_status": "TEMPLATE_ONLY; 26 release identities grouped from 24 event rows; placeholder paths require reviewed prism.provider_qualification_evidence.v1 sidecars; promotion false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_status": "TEMPLATE_ONLY; 26 release identities grouped from 24 event rows; explicit closure status 7 CLOSURE_READY_FOR_QUALIFICATION and 19 CLOSURE_EVIDENCE_OPEN; placeholder paths require reviewed prism.provider_qualification_evidence.v1 sidecars; promotion false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_entry_count": 26,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_promotion_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
@@ -6108,6 +6108,10 @@
     "CLOSURE_READY_FOR_QUALIFICATION": 7
   },
   "external_lh2dt_native_facility_full_scope_provider_qualification_audit_closure_status_counts": {
+    "CLOSURE_EVIDENCE_OPEN": 19,
+    "CLOSURE_READY_FOR_QUALIFICATION": 7
+  },
+  "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_closure_status_counts": {
     "CLOSURE_EVIDENCE_OPEN": 19,
     "CLOSURE_READY_FOR_QUALIFICATION": 7
   }
