@@ -66,6 +66,32 @@ def _native_catalogue(tmp_path, *, with_sidecar: bool):
     return catalogue, manifest
 
 
+def _closed_packet(packet):
+    packet = dict(packet)
+    packet.update(
+        {
+            "termination_basis": "model_pressure_equalization",
+            "provider_mass_balance": {
+                "initial_mass_kg": 10.0,
+                "cumulative_mass_in_kg": 0.0,
+                "cumulative_mass_out_kg": 1.0,
+                "final_mass_kg": 9.0,
+                "derived_accounting_residual_kg": 0.0,
+                "dynamic_state_closure": {
+                    "inventory_feedback_closed": True,
+                    "pressure_feedback_closed": True,
+                    "state_history_digest": "c" * 64,
+                    "max_abs_inventory_residual_kg": 0.0,
+                    "inventory_tolerance_kg": 1.0e-6,
+                    "max_abs_pressure_residual_pa": 0.0,
+                    "pressure_tolerance_pa": 1.0,
+                },
+            },
+        }
+    )
+    return packet
+
+
 def test_native_catalogue_is_flattened_and_missing_sidecar_is_blocked(tmp_path):
     catalogue, manifest = _native_catalogue(tmp_path, with_sidecar=False)
     report = audit_native_full_scope_provider_qualification(
@@ -106,3 +132,28 @@ def test_native_exact_sidecar_is_qualified_when_ready_closure_is_explicit(tmp_pa
     assert report["qualified_provider_packet_count"] == 1
     assert report["closure_status_counts"] == {"CLOSURE_READY_FOR_QUALIFICATION": 1}
     assert report["rows"][0]["qualified_provider_packet"] is True
+
+
+def test_native_packet_closure_overrides_stale_open_request_status(tmp_path):
+    catalogue, manifest = _native_catalogue(tmp_path, with_sidecar=False)
+    value = json.loads(catalogue.read_text(encoding="utf-8"))
+    packet = _closed_packet(value["requests"][0]["requests"][0]["current_packet"])
+    packet_path = tmp_path / "event" / "resolved_release.json"
+    packet_path.write_text(json.dumps(packet), encoding="utf-8")
+    value["requests"][0]["packet_path"] = str(packet_path)
+    value["requests"][0]["requests"][0]["packet_path"] = str(packet_path)
+    value["requests"][0]["requests"][0]["current_packet"] = packet
+    catalogue.write_text(json.dumps(value), encoding="utf-8")
+
+    report = audit_native_full_scope_provider_qualification(
+        catalogue, sidecar_manifest=manifest
+    )
+
+    assert report["closure_status_counts"] == {
+        "CLOSURE_READY_FOR_QUALIFICATION": 1
+    }
+    assert report["rows"][0]["closure_status"] == (
+        "CLOSURE_READY_FOR_QUALIFICATION"
+    )
+    # A closure-ready packet still needs a real qualification sidecar.
+    assert report["qualified_provider_packet_count"] == 0

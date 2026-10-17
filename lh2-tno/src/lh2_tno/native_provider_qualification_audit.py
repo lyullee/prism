@@ -16,6 +16,7 @@ import re
 from typing import Any
 
 from .generic_provider_evidence_audit import audit_generic_provider_evidence
+from .resolved_liquid_worker import dynamic_state_closure_status
 
 
 SCHEMA = "prism.native_full_scope_provider_qualification_audit.v1"
@@ -46,6 +47,29 @@ def _resolve_packet(raw: str, *, catalogue_path: Path, packet_root: Path | None)
         if candidate.is_file():
             return candidate.resolve()
     return value
+
+
+def _packet_closure_status(packet_path: Path) -> str | None:
+    """Return an evidence-backed closure status for a resolved packet.
+
+    The native request catalogue is generated before qualification auditing and
+    may contain a conservative placeholder status.  The resolved packet is
+    the authoritative source for dynamic closure, so re-check it here.  Any
+    missing, malformed, or non-ready packet remains open; this helper never
+    promotes a packet from a sidecar or from a request hint alone.
+    """
+
+    try:
+        packet = _load(packet_path)
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(packet, Mapping):
+        return None
+    try:
+        status = dynamic_state_closure_status(dict(packet))
+    except (TypeError, ValueError):
+        return None
+    return "CLOSURE_READY_FOR_QUALIFICATION" if status.get("ready") is True else "CLOSURE_EVIDENCE_OPEN"
 
 
 def _native_to_generic(
@@ -88,11 +112,22 @@ def _native_to_generic(
             # A future provider export may carry an explicit closure status; the
             # current catalog defaults to an open closure so an exact sidecar
             # remains diagnostic-only.
-            normalized["closure_status"] = str(
+            requested_closure_status = str(
                 request.get("closure_status")
                 or row.get("closure_status")
                 or "CLOSURE_EVIDENCE_OPEN"
             )
+            packet_closure_status = _packet_closure_status(Path(normalized["packet_path"]))
+            # Preserve explicit non-open classifications, but correct the
+            # common stale-open placeholder when the packet itself proves
+            # dynamic pressure/inventory closure.
+            if (
+                requested_closure_status == "CLOSURE_EVIDENCE_OPEN"
+                and packet_closure_status is not None
+            ):
+                normalized["closure_status"] = packet_closure_status
+            else:
+                normalized["closure_status"] = requested_closure_status
             kind = str(request.get("request_kind") or row.get("request_kind") or "unknown")
             request_kind_counts[kind] = request_kind_counts.get(kind, 0) + 1
             flattened.append(normalized)
