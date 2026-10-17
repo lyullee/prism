@@ -14,7 +14,7 @@ The handoff path is:
 |---|---:|
 | Audit record | [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json) |
 | Overall status | `INCOMPLETE_EVIDENCE` |
-| Checks | 57 total: 52 pass, 5 blocked |
+| Checks | 60 total: 55 pass, 5 blocked |
 | Facility handoff diagnostic check | `PASS` (`diagnostic_only=true`) |
 | Qualified provider packets | 0 |
 | Independent full-chain physical validation | Not claimed |

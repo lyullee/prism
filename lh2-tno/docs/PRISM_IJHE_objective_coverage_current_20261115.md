@@ -1,6 +1,6 @@
 # PRISM IJHE objective coverage audit (15 November 2026)
 
-This record is the current requirement-level audit for the generic outdoor liquid-hydrogen facility scope. It is deliberately separate from the 57-check completion audit: the completion audit checks the executable facility handoff, while this objective audit checks whether the IJHE claims are supported by the current evidence package.
+This record is the current requirement-level audit for the generic outdoor liquid-hydrogen facility scope. It is deliberately separate from the 60-check completion audit: the completion audit checks the executable facility handoff, while this objective audit checks whether the IJHE claims are supported by the current evidence package.
 
 ## Current decision
 
@@ -11,7 +11,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 | Objective rows | 38 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
-| Completion-audit result | `INCOMPLETE_EVIDENCE` (57 checks: 52 PASS, 5 BLOCKED) |
+| Completion-audit result | `INCOMPLETE_EVIDENCE` (60 checks: 55 PASS, 5 BLOCKED) |
 | Facility IR/F-N promotion | withheld |
 | Physical-validation claim | withheld |
 | Fresh-physics 1 Hz claim | withheld |
