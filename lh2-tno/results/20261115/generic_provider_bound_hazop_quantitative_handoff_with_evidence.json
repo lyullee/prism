@@ -1739,7 +1739,8 @@
     "facility_ir_fn_calculated": false,
     "diagnostic_quantitative_evidence_reused": true,
     "facility_qra_promotion": false,
-    "diagnostic_only": true
+    "diagnostic_only": true,
+    "physical_validation_claim": false
   },
   "interpretation": "This record proves the generic facility state -> operating-mode -> HAZOP scenario -> quantitative request connection. Each request remains withheld until reviewed provider, frequency, SLABx-LH2 and facility-condition evidence is supplied."
 }

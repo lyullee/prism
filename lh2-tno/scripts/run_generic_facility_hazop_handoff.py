@@ -461,6 +461,7 @@ def build_handoff(
                 current_diagnostic_evaluation["summary"]["diagnostic_chain_attached_count"]
                 or forecast_diagnostic_evaluation["summary"]["diagnostic_chain_attached_count"]
             ),
+            "physical_validation_claim": False,
             "facility_qra_promotion": False,
             "diagnostic_only": True,
         },

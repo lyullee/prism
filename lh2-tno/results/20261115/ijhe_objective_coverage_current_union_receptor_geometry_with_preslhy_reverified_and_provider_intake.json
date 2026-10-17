@@ -71,6 +71,9 @@
         "results\\20261115\\slabx_lh2_validation_audit_current_recheck.json"
       ],
       "observed": {
+        "scope_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
+        "active_development_in_scope": false,
+        "remaining_task": false,
         "slabx_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
         "check_count": 5,
         "ffi_case_count": 6,
@@ -78,10 +81,7 @@
         "pool_radius_median_ratio": 1.0305005693059233,
         "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
         "runtime_repeat_inventory_difference_kg": 0.0,
-        "physical_validation_claim": false,
-        "scope_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
-        "active_development_in_scope": false,
-        "remaining_task": false
+        "physical_validation_claim": false
       },
       "blocking_reason": null,
       "interpretation": "SLABx-LH2는 검증 완료 후 고정된 외부 피해영향 구성요소로 소비한다. PRISM의 남은 개발은 입력·단위·시간축·실패처리 handoff에 한정하며, 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다."
@@ -1074,7 +1074,7 @@
       "requirement": "일반 옥외 LH2의 현재·예측 HAZOP 요청이 동일한 설비별 provider·SLABx-LH2 정량 증거로 연결되어야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "results/20261115/generic_provider_bound_hazop_quantitative_handoff_with_evidence.json"
+        "results\\20261115\\generic_provider_bound_hazop_quantitative_handoff_with_evidence.json"
       ],
       "observed": {
         "current_status": "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE",
@@ -1121,7 +1121,7 @@
       "requirement": "A newer external-base full-scope replay must be compared with the authoritative union without silently replacing the release-level ledger or promoting facility QRA.",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/native_external_base_recheck_summary.json"
+        "results\\20261115\\native_full_scope_union_assessment_external_base_recheck_current\\native_external_base_recheck_summary.json"
       ],
       "observed": {
         "schema_version": "prism.native_external_base_recheck.v1",
@@ -1140,8 +1140,8 @@
         "new_reclassification_candidate_count": 9,
         "qualified_provider_packet_case_count": 0,
         "authoritative_union_replaced": false,
-        "physical_validation_claim": false,
         "facility_qra_claim": false,
+        "physical_validation_claim": false,
         "conditional_annual_ir_low_high": {
           "worker-01": [
             3.7804000000730242e-06,

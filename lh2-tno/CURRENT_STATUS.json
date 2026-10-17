@@ -5520,7 +5520,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "latest_ijhe_objective_coverage_audit_sha256": "dc07fe8bc3fbcd98974e8ed4c00b9afb17ed8fa82123c6f33f7e02287746e251",
+  "latest_ijhe_objective_coverage_audit_sha256": "a2b16ad71bd08c5f89d0888eacc483a08c3d7f7c587c52aba4bddd571ae2b25b",
   "conditional_facility_risk_interpretation_doc": "docs/PRISM_conditional_facility_risk_interpretation_20261115.md",
   "inventory_termination_margin_probe_record": "results/20261115/inventory_termination_margin_probe.json",
   "inventory_termination_margin_probe_doc": "docs/PRISM_inventory_termination_margin_20261115.md",

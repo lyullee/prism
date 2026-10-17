@@ -2741,19 +2741,33 @@ def build_ijhe_objective_coverage_audit(
         )
         rows.append(_row(
             "diagnostic_native_external_base_recheck",
-            "최신 외부 설비 방출 종료 근거 후보를 기존 시설 union과 비교하되 권위 원장과 QRA 승격을 분리해야 한다",
+            "A newer external-base full-scope replay must be compared with the authoritative union without silently replacing the release-level ledger or promoting facility QRA.",
             "CONDITIONALLY_COMPLETE" if candidate_ok else "BLOCKED_EVIDENCE",
             evidence_paths=(native_external_base_recheck_path,),
             observed={
+                "schema_version": native_external_base_recheck.get("schema_version") if isinstance(native_external_base_recheck, Mapping) else None,
+                "status": native_external_base_recheck.get("status") if isinstance(native_external_base_recheck, Mapping) else None,
+                "event_count": native_external_base_recheck.get("event_count") if isinstance(native_external_base_recheck, Mapping) else None,
+                "case_count": native_external_base_recheck.get("case_count") if isinstance(native_external_base_recheck, Mapping) else None,
+                "risk_atom_count": native_external_base_recheck.get("risk_atom_count") if isinstance(native_external_base_recheck, Mapping) else None,
                 "candidate_status_counts": dict(candidate_counts) if isinstance(candidate_counts, Mapping) else None,
                 "authoritative_status_counts": dict(authoritative_counts) if isinstance(authoritative_counts, Mapping) else None,
                 "new_reclassification_candidate_count": native_external_base_recheck.get("new_reclassification_candidate_count") if isinstance(native_external_base_recheck, Mapping) else None,
                 "qualified_provider_packet_case_count": native_external_base_recheck.get("qualified_provider_packet_case_count") if isinstance(native_external_base_recheck, Mapping) else None,
                 "authoritative_union_replaced": native_external_base_recheck.get("authoritative_union_replaced") if isinstance(native_external_base_recheck, Mapping) else None,
                 "facility_qra_claim": native_external_base_recheck.get("facility_qra_claim") if isinstance(native_external_base_recheck, Mapping) else None,
+                "physical_validation_claim": native_external_base_recheck.get("physical_validation_claim") if isinstance(native_external_base_recheck, Mapping) else None,
+                "conditional_annual_ir_low_high": native_external_base_recheck.get("conditional_annual_ir_low_high") if isinstance(native_external_base_recheck, Mapping) else None,
             },
             blocking_reason=None if candidate_ok else "외부 provider 종료 후보 재검증 원장이 없거나 diagnostic-only 승격 경계를 만족하지 않는다",
-            interpretation="최신 provider campaign은 EXECUTED 23건과 operator-limited 21건을 진단적으로 보여주지만, digest·state snapshot·qualification 검토가 끝나기 전에는 기존 union을 대체하지 않고 시설 QRA를 승격하지 않는다.",
+            interpretation=(
+                "The newer external-base replay provides a reproducible diagnostic comparison "
+                "and reduces operator-limited cases from 29 to 21 in the candidate ledger, "
+                "but differing provider result digests and unrequalified base state snapshots "
+                "keep the authoritative union unchanged. No provider qualification, "
+                "independent physical validation, frequency inference, or facility-QRA "
+                "promotion is claimed."
+            ),
         ))
 
     # The header-bound bridge is the executable monitoring-path demonstration:
@@ -2878,6 +2892,19 @@ def build_ijhe_objective_coverage_audit(
     )
     if not isinstance(generic_policy, Mapping):
         generic_policy = {}
+    # The handoff record originally called this policy flag
+    # ``evidence_reused_without_new_physics``.  Current records use the more
+    # explicit ``diagnostic_quantitative_evidence_reused`` name.  Accept both
+    # spellings so a regenerated objective audit does not misclassify an
+    # otherwise valid diagnostic handoff as blocked solely because the record
+    # schema evolved.
+    evidence_reused_without_new_physics = generic_policy.get(
+        "evidence_reused_without_new_physics"
+    )
+    if evidence_reused_without_new_physics is None:
+        evidence_reused_without_new_physics = generic_policy.get(
+            "diagnostic_quantitative_evidence_reused"
+        )
     generic_diag_ok = (
         isinstance(generic_diagnostic_quantitative_evaluation, Mapping)
         and generic_diagnostic_quantitative_evaluation.get("schema_version")
@@ -2890,7 +2917,7 @@ def build_ijhe_objective_coverage_audit(
         and generic_current_summary.get("request_count", 0) > 0
         and isinstance(generic_forecast_summary.get("request_count"), int)
         and generic_forecast_summary.get("request_count", 0) > 0
-        and generic_policy.get("evidence_reused_without_new_physics") is True
+        and evidence_reused_without_new_physics is True
         and generic_policy.get("frequency_inference_performed") is False
         and generic_policy.get("sensor_frequency_learning_used") is False
         and generic_policy.get("facility_ir_fn_calculated") is False
@@ -2925,6 +2952,20 @@ def build_ijhe_objective_coverage_audit(
             ),
         ))
 
+    # Keep diagnostic rows in a stable order so regenerated evidence can be
+    # compared directly with the checked-in objective artifact.  The first
+    # 15 rows are the established core/strict gates and must not move.
+    diagnostic_order = {
+        "diagnostic_header_bound_monitoring_to_consequence_bridge": 0,
+        "diagnostic_generic_current_forecast_quantitative_evaluation": 1,
+        "diagnostic_facility_evidence_worklist": 2,
+        "diagnostic_native_external_base_recheck": 3,
+    }
+    newly_appended_ids = set(diagnostic_order)
+    established_rows = [row for row in rows if row["id"] not in newly_appended_ids]
+    diagnostic_rows = [row for row in rows if row["id"] in newly_appended_ids]
+    diagnostic_rows.sort(key=lambda row: diagnostic_order[row["id"]])
+    rows = established_rows + diagnostic_rows
     core_rows = rows[:8]
     # The first 15 rows are the established core/strict gates.  The external
     # observation row above is diagnostic-only and must not change either
@@ -2989,7 +3030,8 @@ def build_ijhe_objective_coverage_audit(
         "interpretation": (
             "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN은 상태 snapshot→native 방출→"
             "consequence→조건부 IR/F-N 연결이 닫혔다는 뜻이다. qualified provider, 독립 물리검증, "
-            "엄격한 전체범위가 확보되기 전에는 시설 전체 QRA로 승격하지 않는다."
+            "엄격한 전체범위가 확보되기 전에는 시설 전체 QRA로 승격하지 않는다. "
+            "시설 evidence worklist의 44개 case 요구사항 정합성도 별도 진단 행으로 기록한다."
         ),
     }
 
