@@ -119,7 +119,10 @@ The corresponding `verification.json` therefore reports
 `matched_event_failed_case_count=0`,
 `matched_event_withheld_case_count=11`,
 `conditional_diagnostic_facility_risk_available=true`, and
-`facility_qra_claim=false`. This is a coverage and handoff audit, not a claim
+`facility_qra_claim=false`. The regenerated `facility_assessment.json` now also
+lists the strict QRA blocking reasons directly: incomplete declared scope,
+withheld/non-EXECUTED case traces, absent qualified provider promotion, and
+absent independent physical-validation evidence. This is a coverage and handoff audit, not a claim
 that the generic facility has a complete annual IR/F-N result. The next
 qualification step is to replace the remaining operator-limited provider
 branches with provider-owned closure evidence and independently validate the

@@ -518,6 +518,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "risk_atom_count": len(result.get("risk_atoms", [])),
         "conditional_diagnostic_facility_risk_available": assessment.get("conditional_diagnostic_facility_risk_available"),
         "facility_total_risk_available": assessment.get("facility_total_risk_available"),
+        "facility_qra_blocking_reasons": assessment.get(
+            "qualified_facility_qra_blocking_reasons", []
+        ),
         "frequency_scenario_count": len(assessment.get("frequency_uncertainty", {}).get("scenarios", [])),
         "provider_packet_promoted": False,
         "physical_validation_claim": False,

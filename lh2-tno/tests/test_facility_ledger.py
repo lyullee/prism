@@ -103,6 +103,13 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["provider_packet_promoted"] is False
     assert result["qualified_facility_qra_available"] is False
     assert result["provider_qualification_blocking_reasons"]
+    assert result["qualified_facility_qra_blocking_reasons"]
+    assert any("qualified provider packet promotion" in reason for reason in result[
+        "qualified_facility_qra_blocking_reasons"
+    ])
+    assert any("physical validation" in reason for reason in result[
+        "qualified_facility_qra_blocking_reasons"
+    ])
     assert result["known_contribution_annual_ir_low_high"]["receptor-a"] == pytest.approx(
         [0.0014, 0.0016]
     )

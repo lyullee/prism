@@ -1649,18 +1649,33 @@ def merge_facility_campaign_results(
     frequency_port_qra_allowed = bool(
         frequency_port_binding.get("facility_qra_allowed") is True
     )
-    qualified_facility_qra_blocking_reasons: list[str] = []
+    # Keep a dedicated, machine-readable explanation for the strict facility
+    # QRA gate.  ``blocking_reasons`` is the broader campaign/scope audit, but
+    # consumers of the assessment need the same gate decision and its causes
+    # without having to infer them from several independent fields.
+    unique_blocking = list(dict.fromkeys(blocking_reasons))
+    qualified_facility_qra_blocking_reasons: list[str] = list(unique_blocking)
+    if not provider_packet_promoted:
+        qualified_facility_qra_blocking_reasons.extend(
+            provider_qualification_blocking_reasons
+        )
+    if not source_physical_validation:
+        qualified_facility_qra_blocking_reasons.append(
+            "independent physical validation claim is absent"
+        )
     if not frequency_port_qra_allowed:
         qualified_facility_qra_blocking_reasons.append(
             "facility frequency port binding is incomplete; reviewed accident ports are required for every event"
         )
+    qualified_facility_qra_blocking_reasons = list(
+        dict.fromkeys(qualified_facility_qra_blocking_reasons)
+    )
     qualified_facility_qra_available = (
         total_available
         and provider_packet_promoted
         and source_physical_validation
         and frequency_port_qra_allowed
     )
-    unique_blocking = list(dict.fromkeys(blocking_reasons))
     timing = {
         "campaign_count": len(campaign_rows),
         "fresh_physics_cases": sum(fresh_physics_case_counts),

@@ -1066,5 +1066,26 @@
     "pump catalogue rates without p05/p95 bounds remain fixed rather than receiving invented uncertainty",
     "provider qualification and independent physical validation are not claimed",
     "facility IR/F-N promotion remains closed"
-  ]
+  ],
+  "facility_qra_blocking_reasons": [
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: declared scope is incomplete",
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: uncomputed cases remain",
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: excluded components remain",
+    "missing expected components: receiving-boundary-01",
+    "component liquid-transfer-pump-01: PARTIAL",
+    "component pressure-relief-vent-01: PARTIAL",
+    "component receiving-boundary-01: EXCLUDED",
+    "component reliquefier-01: PARTIAL",
+    "component storage-tank-01: PARTIAL",
+    "component transfer-valve-01: PARTIAL",
+    "facility case-risk trace: 44 risk atoms are linked to non-EXECUTED case status",
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: qualified provider packet promotion is unavailable",
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: provider packet evidence does not match all consumed packets",
+    "independent physical validation claim is absent"
+  ],
+  "provider_qualification_blocking_reasons": [
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: qualified provider packet promotion is unavailable",
+    "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: provider packet evidence does not match all consumed packets"
+  ],
+  "facility_assessment_digest": "4154464cfd6c4095e75001a5b0fb0c014f3022d2f44ff645635811a5e1ec9e7f"
 }
