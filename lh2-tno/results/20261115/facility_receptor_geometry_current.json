@@ -1,0 +1,40 @@
+{
+  "schema_version": "prism.facility_receptor_geometry.v1",
+  "status": "EXPLICIT_FACILITY_RECEPTOR_GEOMETRY",
+  "facility_id": "generic-lh2-full-scope-example",
+  "environment": "outdoor",
+  "receptor_count": 1,
+  "receptors": [
+    {
+      "receptor_id": "worker-01",
+      "position_enu_m": [
+        20.0,
+        0.0,
+        1.0
+      ],
+      "nearest_component_id": "reliquefier-01",
+      "nearest_component_distance_m": 7.0
+    }
+  ],
+  "population_contract": {
+    "status": "EXPLICIT_RECEPTOR_POPULATION_CLOSED",
+    "annual_condition_count": 5,
+    "population_row_count": 5,
+    "expected_receptor_ids": [
+      "worker-01"
+    ],
+    "mismatched_condition_ids": {},
+    "invalid_population_rows": {},
+    "zero_population_rows_must_be_explicit": true,
+    "frequency_inference_performed": false
+  },
+  "semantics": "receptor positions are facility coordinates; nearest component is a geometry diagnostic; annual-condition population is the only occupancy input and is never inferred",
+  "source_paths": {
+    "facility_manifest": "examples/generic_lh2_full_scope_manifest.json",
+    "campaign_result": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json"
+  },
+  "source_sha256": {
+    "facility_manifest": "bb227b1e8dd3d9681c51d1a7fca0d78bd1b7d02ba0f4933854ac32667b170ca1",
+    "campaign_result": "1ab4a16858105924cfe2f28f8986182aa3f84e091baa2d6ad51cf833ef4ab730"
+  }
+}

@@ -344,6 +344,9 @@ def run(raw=None,fault=None):
 def test_frequency_weather_barrier_ignition_each_weighted_once():
     r,b=run()
     rid=b.facility.receptors[0].id
+    assert r['facility_receptor_geometry']['schema_version'] == 'prism.facility_receptor_geometry.v1'
+    assert r['facility_receptor_geometry']['receptor_count'] == len(b.facility.receptors)
+    assert r['facility_receptor_geometry']['population_contract']['status'] == 'EXPLICIT_RECEPTOR_POPULATION_CLOSED'
     assert r['known_contribution_annual_ir_low_high'][rid]==pytest.approx([1.61e-6,2.485e-6])
     assert len(b.requests)==4
     assert all(q['occupancy_probability']==1.0 for q in b.requests)

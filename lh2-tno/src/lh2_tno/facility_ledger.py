@@ -952,8 +952,25 @@ def merge_facility_campaign_results(
     event_accounting: dict[str, dict[str, int]] = {}
     merged_annual_conditions: dict[str, dict[str, Any]] = {}
     event_port_ids: dict[str, tuple[str, ...] | None] = {}
+    facility_receptor_geometry: Mapping[str, Any] | None = None
 
     for campaign_id, result in campaign_rows:
+        geometry = result.get("facility_receptor_geometry")
+        if geometry is not None:
+            if not isinstance(geometry, Mapping):
+                raise FacilityLedgerError(
+                    f"campaign {campaign_id} facility_receptor_geometry must be an object"
+                )
+            if geometry.get("schema_version") != "prism.facility_receptor_geometry.v1":
+                raise FacilityLedgerError(
+                    f"campaign {campaign_id} facility_receptor_geometry has an unexpected schema"
+                )
+            if facility_receptor_geometry is None:
+                facility_receptor_geometry = dict(geometry)
+            elif canonical_digest(facility_receptor_geometry) != canonical_digest(geometry):
+                raise FacilityLedgerError(
+                    "facility campaigns contain conflicting receptor geometry contracts"
+                )
         events = result.get("events")
         if not isinstance(events, Sequence) or isinstance(events, (str, bytes)):
             raise FacilityLedgerError(f"campaign {campaign_id} has no event list")
@@ -1766,6 +1783,7 @@ def merge_facility_campaign_results(
             merged_annual_conditions[condition_id]
             for condition_id in sorted(merged_annual_conditions)
         ],
+        "facility_receptor_geometry": facility_receptor_geometry,
         "annual_condition_count": population_accounting["annual_condition_count"],
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,

@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "prism.receptor_geometry_interpretation.v1"
+FACILITY_GEOMETRY_SCHEMA = "prism.facility_receptor_geometry.v1"
 
 
 def _read_object(path: Path) -> dict[str, Any]:
@@ -73,6 +74,104 @@ def _nearest_component(
     if not candidates:
         raise ValueError("manifest components have no usable positions")
     return min(candidates, key=lambda item: (item[1], item[0]))
+
+
+def build_facility_receptor_geometry(
+    facility: Mapping[str, Any] | Any,
+    *,
+    annual_conditions: Sequence[Mapping[str, Any]] = (),
+) -> dict[str, Any]:
+    """Build the explicit receptor/population contract carried by a facility result.
+
+    The consequence backend already evaluates every declared receptor.  This
+    sidecar makes the geometry and annual-condition population closure
+    inspectable at the same boundary, so a zero IR/F-N value cannot be
+    mistaken for a missing receptor or an implicitly invented population.
+    It is descriptive only and never changes risk, frequency, or promotion
+    state.
+    """
+    if hasattr(facility, "model_dump"):
+        facility = facility.model_dump(mode="json")
+    if not isinstance(facility, Mapping):
+        raise ValueError("facility must be a mapping or a model with model_dump")
+    receptor_ids, receptor_positions = _positions(
+        {
+            "receptors": facility.get("receptors"),
+        }
+    )
+    rows: list[dict[str, Any]] = []
+    for receptor_id, position in zip(receptor_ids, receptor_positions):
+        component_id, distance = _nearest_component(facility, position)
+        rows.append(
+            {
+                "receptor_id": receptor_id,
+                "position_enu_m": position,
+                "nearest_component_id": component_id,
+                "nearest_component_distance_m": distance,
+            }
+        )
+
+    condition_rows: list[dict[str, Any]] = []
+    mismatch_ids: dict[str, dict[str, list[str]]] = {}
+    invalid_rows: dict[str, list[int]] = {}
+    population_row_count = 0
+    expected = set(receptor_ids)
+    for condition in annual_conditions:
+        if not isinstance(condition, Mapping):
+            continue
+        condition_id = str(condition.get("id", ""))
+        population = condition.get("population")
+        observed: list[str] = []
+        if isinstance(population, Sequence) and not isinstance(population, (str, bytes)):
+            for index, row in enumerate(population):
+                if not isinstance(row, Mapping) or not row.get("receptor_id"):
+                    invalid_rows.setdefault(condition_id, []).append(index)
+                    continue
+                receptor_id = str(row["receptor_id"])
+                observed.append(receptor_id)
+                population_row_count += 1
+        observed_set = set(observed)
+        if observed_set != expected or len(observed) != len(observed_set):
+            mismatch_ids[condition_id] = {
+                "expected": sorted(expected),
+                "observed": sorted(observed_set),
+            }
+        condition_rows.append(
+            {
+                "condition_id": condition_id,
+                "annual_probability": condition.get("annual_probability"),
+                "population_receptor_ids": sorted(observed_set),
+                "population_row_count": len(observed),
+                "population_provenance": condition.get("provenance"),
+            }
+        )
+    population_status = (
+        "EXPLICIT_RECEPTOR_POPULATION_CLOSED"
+        if condition_rows and not mismatch_ids and not invalid_rows
+        else "RECEPTOR_POPULATION_REVIEW_REQUIRED"
+    )
+    return {
+        "schema_version": FACILITY_GEOMETRY_SCHEMA,
+        "status": "EXPLICIT_FACILITY_RECEPTOR_GEOMETRY",
+        "facility_id": facility.get("id", facility.get("facility_id")),
+        "environment": facility.get("environment"),
+        "receptor_count": len(rows),
+        "receptors": rows,
+        "population_contract": {
+            "status": population_status,
+            "annual_condition_count": len(condition_rows),
+            "population_row_count": population_row_count,
+            "expected_receptor_ids": sorted(expected),
+            "mismatched_condition_ids": mismatch_ids,
+            "invalid_population_rows": invalid_rows,
+            "zero_population_rows_must_be_explicit": True,
+            "frequency_inference_performed": False,
+        },
+        "semantics": (
+            "receptor positions are facility coordinates; nearest component is a geometry diagnostic; "
+            "annual-condition population is the only occupancy input and is never inferred"
+        ),
+    }
 
 
 def _ir_values(assessment: Mapping[str, Any]) -> list[float]:

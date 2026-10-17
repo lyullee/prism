@@ -62,6 +62,19 @@ The current chain is explicit and auditable:
 6. Literature-based frequency ports and uncertainty cases are retained in the same event/case identity.
 7. The monitor path distinguishes `cached_diagnostic_1hz` from `fresh_physics_background`; the benchmark records both timings and makes no fresh-physics 1 Hz claim.
 
+Every campaign result now also carries a `prism.facility_receptor_geometry.v1`
+contract. It records each receptor coordinate, the nearest non-boundary
+component used for geometry interpretation, and the annual-condition population
+set. The contract requires zero-population rows to be explicit and marks a
+population-set mismatch as review-required. Facility-ledger merging preserves
+one identical geometry contract across equipment campaigns and rejects
+conflicting geometry instead of silently combining incompatible IR/F-N results.
+The current union-side diagnostic record is
+[`facility_receptor_geometry_current.json`](../results/20261115/facility_receptor_geometry_current.json);
+it has one declared receptor and a closed population set for the synthetic
+annual conditions. This is a traceability improvement and does not close the
+independent validation, qualified-provider, strict-scope, or facility-QRA gates.
+
 The latest 57-check audit also includes the forecast facility-campaign evidence gate. The two forecast requests remain withheld because their quantitative evidence coverage is incomplete. The inspection-center handoff and receptor-geometry comparisons remain separate diagnostic records; a near-receptor result must not be substituted for the declared facility receptor geometry.
 
 The inspection-centre source boundary is documented separately in

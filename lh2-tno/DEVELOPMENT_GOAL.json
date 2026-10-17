@@ -2475,6 +2475,12 @@
   "facility_population_accounting_implemented": true,
   "facility_population_accounting_output": "population_accounting on facility ledger and assessment",
   "facility_population_accounting_latest_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC; 3 annual conditions, 29 events, 34 cases, 136 risk atoms; vertical many-to-one receptor collapse remains diagnostic",
+  "facility_receptor_geometry_contract_implemented": true,
+  "facility_receptor_geometry_contract_module": "src/lh2_tno/receptor_geometry_interpretation.py",
+  "facility_receptor_geometry_contract_function": "build_facility_receptor_geometry",
+  "facility_receptor_geometry_contract_schema": "prism.facility_receptor_geometry.v1",
+  "facility_receptor_geometry_contract_latest_record": "results/20261115/facility_receptor_geometry_current.json",
+  "facility_receptor_geometry_contract_status": "EXPLICIT_FACILITY_RECEPTOR_GEOMETRY; explicit zero-population rows required; diagnostic only; no frequency inference or promotion",
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": [

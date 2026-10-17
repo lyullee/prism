@@ -21,6 +21,7 @@ from .accident_scenario_catalog import (
     scenario_families_for_request,
 )
 from .release_ledger import build_release_termination_inventory_ledger
+from .receptor_geometry_interpretation import build_facility_receptor_geometry
 
 IGNITION_KEYS = {'direct_fire', 'delayed_flash_fire', 'delayed_explosion', 'no_ignition'}
 
@@ -760,6 +761,13 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     )
     return {'status':'DECLARED_SCOPE_EXECUTED' if scope_complete else 'PARTIAL_DECLARED_SCOPE',
         'facility_id': f.id, 'facility_digest': f.digest(), 'campaign_digest': campaign.digest(),
+        'facility_receptor_geometry': build_facility_receptor_geometry(
+            f,
+            annual_conditions=tuple(
+                condition.model_dump(mode='json')
+                for condition in campaign.annual_conditions
+            ),
+        ),
         'scope_provenance': campaign.scope_provenance, 'events':event_rows,
         'event_catalog': {
             'mode': event_catalog_mode,

@@ -6144,5 +6144,9 @@
   "inspection_center_receiving_hazop_runtime_replay_operating_mode_taken_from_input": true,
   "inspection_center_receiving_hazop_runtime_replay_operating_mode_inferred": false,
   "inspection_center_receiving_hazop_runtime_replay_frequency_inference": false,
-  "actual_ffi_high_resolution_recheck_latest_accepted": true
+  "actual_ffi_high_resolution_recheck_latest_accepted": true,
+  "facility_receptor_geometry_contract_latest": "results/20261115/facility_receptor_geometry_current.json",
+  "facility_receptor_geometry_contract_schema": "prism.facility_receptor_geometry.v1",
+  "facility_receptor_geometry_contract_status": "EXPLICIT_FACILITY_RECEPTOR_GEOMETRY; population set closed for current synthetic annual conditions; diagnostic only",
+  "facility_receptor_geometry_contract_sha256": "ddf1cf2d6f5180652c64c834442ead356073c2081817bc13bb7356b5ded3ba0f"
 }

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from lh2_tno.receptor_geometry_interpretation import build_receptor_geometry_interpretation
+from lh2_tno.receptor_geometry_interpretation import (
+    build_facility_receptor_geometry,
+    build_receptor_geometry_interpretation,
+)
 
 
 def _manifest(facility_id: str, receptor_position: list[float]) -> dict:
@@ -70,3 +73,54 @@ def test_geometry_comparison_does_not_accept_zero_near_receptor() -> None:
     )
     assert result["status"] == "BLOCKED_METADATA"
     assert any(item["id"] == "near_receptor_diagnostic_is_nonzero" and item["status"] == "BLOCKED" for item in result["checks"])
+
+
+def test_facility_geometry_contract_closes_multiple_receptors_and_population() -> None:
+    facility = {
+        "id": "facility-multi",
+        "environment": "outdoor",
+        "components": [
+            {"id": "tank", "kind": "storage_tank", "position_enu_m": [0.0, 0.0, 1.0]},
+            {"id": "boundary", "kind": "boundary", "position_enu_m": [0.1, 0.0, 1.0]},
+        ],
+        "receptors": [
+            {"id": "near", "position_enu_m": [1.0, 0.0, 1.0]},
+            {"id": "public", "position_enu_m": [20.0, 0.0, 1.0]},
+        ],
+    }
+    geometry = build_facility_receptor_geometry(
+        facility,
+        annual_conditions=[
+            {
+                "id": "weather-1",
+                "annual_probability": 1.0,
+                "provenance": "reviewed population fixture",
+                "population": [
+                    {"receptor_id": "near", "persons": 2.0, "presence_probability": 1.0},
+                    {"receptor_id": "public", "persons": 0.0, "presence_probability": 1.0},
+                ],
+            }
+        ],
+    )
+    assert geometry["schema_version"] == "prism.facility_receptor_geometry.v1"
+    assert geometry["receptor_count"] == 2
+    assert geometry["receptors"][0]["nearest_component_id"] == "tank"
+    assert geometry["population_contract"]["status"] == "EXPLICIT_RECEPTOR_POPULATION_CLOSED"
+    assert geometry["population_contract"]["zero_population_rows_must_be_explicit"] is True
+
+
+def test_facility_geometry_contract_blocks_population_set_drift() -> None:
+    facility = {
+        "id": "facility-multi",
+        "environment": "outdoor",
+        "components": [{"id": "tank", "kind": "storage_tank", "position_enu_m": [0.0, 0.0, 1.0]}],
+        "receptors": [{"id": "near", "position_enu_m": [1.0, 0.0, 1.0]}],
+    }
+    geometry = build_facility_receptor_geometry(
+        facility,
+        annual_conditions=[
+            {"id": "weather-1", "population": [], "annual_probability": 1.0}
+        ],
+    )
+    assert geometry["population_contract"]["status"] == "RECEPTOR_POPULATION_REVIEW_REQUIRED"
+    assert geometry["population_contract"]["mismatched_condition_ids"]

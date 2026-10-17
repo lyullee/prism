@@ -174,6 +174,63 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     }
 
 
+def test_facility_ledger_preserves_one_receptor_geometry_contract_across_campaigns():
+    geometry = {
+        "schema_version": "prism.facility_receptor_geometry.v1",
+        "facility_id": "facility-1",
+        "receptor_count": 2,
+        "receptors": [],
+        "population_contract": {"status": "EXPLICIT_RECEPTOR_POPULATION_CLOSED"},
+    }
+    first = _result(
+        event_id="event-geometry-a",
+        asset_id="asset-geometry-a",
+        component_id="tank-geometry-a",
+        frequency=1e-3,
+    )
+    second = _result(
+        event_id="event-geometry-b",
+        asset_id="asset-geometry-b",
+        component_id="tank-geometry-b",
+        frequency=2e-3,
+    )
+    first["facility_receptor_geometry"] = geometry
+    second["facility_receptor_geometry"] = dict(geometry)
+    merged = merge_facility_campaign_results(
+        [first, second], expected_component_ids=("tank-geometry-a", "tank-geometry-b")
+    )
+    assert merged["facility_receptor_geometry"] == geometry
+
+
+def test_facility_ledger_rejects_conflicting_receptor_geometry_contracts():
+    first = _result(
+        event_id="event-geometry-conflict-a",
+        asset_id="asset-geometry-conflict-a",
+        component_id="tank-geometry-conflict-a",
+        frequency=1e-3,
+    )
+    second = _result(
+        event_id="event-geometry-conflict-b",
+        asset_id="asset-geometry-conflict-b",
+        component_id="tank-geometry-conflict-b",
+        frequency=2e-3,
+    )
+    first["facility_receptor_geometry"] = {
+        "schema_version": "prism.facility_receptor_geometry.v1",
+        "facility_id": "facility-1",
+        "receptor_count": 1,
+    }
+    second["facility_receptor_geometry"] = {
+        "schema_version": "prism.facility_receptor_geometry.v1",
+        "facility_id": "facility-1",
+        "receptor_count": 2,
+    }
+    with pytest.raises(FacilityLedgerError, match="conflicting receptor geometry"):
+        merge_facility_campaign_results(
+            [first, second], expected_component_ids=("tank-geometry-conflict-a", "tank-geometry-conflict-b")
+        )
+
+
 def test_facility_assessment_exposes_state_origin_without_frequency_learning():
     result = _result(
         event_id="event-state-origin",
