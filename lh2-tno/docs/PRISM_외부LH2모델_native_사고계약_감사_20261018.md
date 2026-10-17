@@ -116,3 +116,27 @@ python scripts/audit_lh2dt_native_contract.py `
 이를 구분하기 위해 `prism.resolved_pool_footprint.v1` 계약을 추가했다. provider가 `origin=provider_resolved`, 충돌 위치, 반경, 근거, `provider_result_digest`와 같은 결과 digest를 반환하면 PRISM adapter가 thermal pool context의 반경과 provenance를 덮어쓴다. digest가 다르거나 thermal pool context가 없으면 요청을 거부한다. `reviewed_design`·`measured`도 provenance 없이는 받을 수 없다. 기존 packet에 footprint가 없으면 declared-sensitivity 진단만 허용되며, qualified 승격으로 바뀌지 않는다.
 
 이 경계는 풀 solver가 provider의 실제 바닥 형상을 대신 계산한다는 뜻이 아니다. 향후 provider가 위치별 wet area, 표면 재질, 배수·방호 형상을 함께 내보낼 때 확장할 수 있는 최소 계약이며, 현재 native LayeredTank·DynamicHEMPipe 결과는 해당 footprint를 제공하지 않아 `operator-limited` 상태로 남는다.
+
+## 2026-10-18 최신 DynamicHEMPipe facility ledger 재검증
+
+기존 실행기의 전체 캠페인 입력에는 다른 설비의 `precomputed_events`와 저장탱크 성공·실패 분기가 함께 들어 있었다. 배관 단일 진단에서 이 행을 그대로 사용하면 제외된 설비가 선택 범위에 다시 들어가거나, 저장탱크 분기 결과를 배관 결과로 잘못 해석할 수 있다. 실행기를 다음처럼 보완했다.
+
+- 배관만 선택한 frequency scope에 맞춰 다른 설비의 사전 계산 행을 명시적으로 제거한다.
+- 전체 시설 manifest에 없는 제외 component를 frequency plan에서 제거한다.
+- 저장탱크 분기 중 첫 번째 명시적 request는 배관 consequence request의 형식 템플릿으로만 복사하고, 저장탱크 결과·확률·고장 상태를 계산하거나 합치지 않는다.
+- 선택 branch ID와 scope filtering provenance를 결과에 기록한다.
+
+전용 단일 설비 manifest로 최신 외부 commit `7072374`를 재실행한 결과는 [machine-readable verification](../examples/native_dynamic_pipe_full_bore_facility_frequency_case_recheck_20261018.json)에 보존했다.
+
+| 항목 | 결과 |
+|---|---:|
+| provider termination | `model_pressure_equalization` |
+| provider duration | `0.03141380098 s` |
+| pressure-equalization observation | `0.2 s`, post-stop max flow `0 kg/s` |
+| mass residual | `−1.73×10⁻¹⁸ kg` |
+| literature frequency | `1.9×10⁻⁷ year⁻¹`, LH2_PIPE AREA_100% exact match |
+| facility campaign | 5 opening bins, 1 executed, 4 `UNCOMPUTED` |
+| risk atoms | 4 conditional atoms |
+| facility total IR/F-N | withheld |
+
+이 재검증은 “문헌 빈도 → provider 자연 종료 방출 → PRISM release ledger → SLABx-LH2/TNO 피해 chain → 설비 campaign risk atom”의 실행을 확인한다. 합성 배관·수용점·초기상태와 provider qualification sidecar가 사용되지 않았으므로 시설 전체 QRA나 현장 사고빈도 승인으로 승격하지 않는다.

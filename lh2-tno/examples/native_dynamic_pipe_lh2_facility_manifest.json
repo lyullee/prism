@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "facility_id": "generic-lh2-full-scope-example",
+  "environment": "outdoor",
+  "configuration_origin": "synthetic",
+  "components": [
+    {
+      "id": "liquid-transfer-line-01",
+      "kind": "pipe",
+      "position_enu_m": [5.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 10.0,
+        "diameter_m": 0.025
+      },
+      "source_status": "declared",
+      "source_provenance": "synthetic single-component manifest for native DynamicHEMPipe diagnostic"
+    }
+  ],
+  "ports": [
+    {
+      "id": "line-accident-out",
+      "component_id": "liquid-transfer-line-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [5.0, 0.0, 1.0],
+      "source_status": "declared",
+      "source_provenance": "native DynamicHEMPipe atmospheric accidental outlet"
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {
+      "id": "receptor-01",
+      "position_enu_m": [20.0, 0.0, 1.0]
+    }
+  ]
+}

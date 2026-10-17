@@ -137,10 +137,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     pipe_route = next((row for row in routes if row.get("event_id") == event_id), None)
     if not isinstance(source_route, dict) or not isinstance(pipe_route, dict):
         raise ValueError("compiled campaign lacks storage and transfer-line routes")
-    source_branches = [row for row in source_route.get("branches", []) if row.get("request") is not None]
-    if len(source_branches) != 1 or not isinstance(source_branches[0].get("request"), dict):
-        raise ValueError("storage route must provide one request template")
+    source_branches = [
+        row for row in source_route.get("branches", [])
+        if isinstance(row, dict) and isinstance(row.get("request"), dict)
+    ]
+    if not source_branches:
+        raise ValueError("storage route must provide at least one request template")
+    # The storage route can legitimately contain success and failure branch
+    # requests.  This diagnostic needs only a request-shaped consequence
+    # template for the independent transfer-line packet; it must not merge,
+    # select by probability, or infer a storage failure outcome.  Keep the
+    # deterministic first request and record that choice in the provenance
+    # below so the branch is auditable and cannot be mistaken for a storage
+    # campaign result.
     current_request = source_branches[0]["request"]
+    source_branch_template_id = source_branches[0].get("id")
 
     source_digest = _tree_digest(external_root)
     state_digest = canonical_digest({
@@ -190,10 +201,38 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     }
     manifest = EquipmentManifest.from_json(args.manifest)
     campaign_raw = copy.deepcopy(compiled)
-    campaign_raw["frequency_plan"]["assets"] = [
+    selected_assets = [
         asset for asset in campaign_raw["frequency_plan"].get("assets", [])
         if asset.get("id") == "transfer-line"
     ]
+    campaign_raw["frequency_plan"]["assets"] = selected_assets
+    # The full compiled catalogue may carry precomputed rows for every
+    # equipment family.  Once this diagnostic narrows the selected frequency
+    # scope to the transfer line, retain only rows owned by that selected
+    # component.  Dropping rows for excluded components is explicit scope
+    # filtering; it is not a substitution or a frequency inference.
+    selected_component_ids = {
+        asset.get("model_component_id")
+        for asset in selected_assets
+        if isinstance(asset, dict) and isinstance(asset.get("model_component_id"), str)
+    }
+    frequency_plan = campaign_raw["frequency_plan"]
+    precomputed_events = frequency_plan.get("precomputed_events")
+    precomputed_event_count_before_scope_filter = (
+        len(precomputed_events) if isinstance(precomputed_events, list) else None
+    )
+    precomputed_event_count_after_scope_filter = precomputed_event_count_before_scope_filter
+    if isinstance(precomputed_events, list):
+        frequency_plan["precomputed_events"] = [
+            event for event in precomputed_events
+            if isinstance(event, dict)
+            and event.get("model_component_id") in selected_component_ids
+        ]
+        precomputed_event_count_after_scope_filter = len(frequency_plan["precomputed_events"])
+        if not frequency_plan["precomputed_events"]:
+            frequency_plan.pop("precomputed_events", None)
+            frequency_plan.pop("precomputed_events_provenance", None)
+            precomputed_event_count_after_scope_filter = 0
     for asset in campaign_raw["frequency_plan"]["assets"]:
         # LH2_PIPE is a length-based catalogue.  Allocate the 10 m segment to
         # one reviewed outlet so the bound event is not silently assigned to
@@ -207,7 +246,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "branches": [branch],
     }]
     manifest_raw = json.loads(args.manifest.read_text(encoding="utf-8"))
+    known_component_ids = {
+        component.get("id")
+        for component in manifest_raw.get("components", [])
+        if isinstance(component, dict) and isinstance(component.get("id"), str)
+    }
     excluded = campaign_raw["frequency_plan"].setdefault("excluded_model_components", {})
+    # Remove exclusions inherited from the full-facility catalogue when the
+    # supplied diagnostic manifest intentionally contains only one component.
+    # An exclusion for a component absent from the live manifest is itself an
+    # invalid frequency-plan reference.
+    campaign_raw["frequency_plan"]["excluded_model_components"] = {
+        component_id: reason
+        for component_id, reason in excluded.items()
+        if component_id in known_component_ids and component_id not in selected_component_ids
+    }
+    excluded = campaign_raw["frequency_plan"]["excluded_model_components"]
     for component in manifest_raw.get("components", []):
         component_id = component.get("id")
         if component_id and component_id != "liquid-transfer-line-01":
@@ -237,7 +291,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     ]
     campaign_raw["scope_provenance"] = (
         "single native DynamicHEMPipe liquid/two-phase LH2_PIPE frequency diagnostic; "
-        "synthetic geometry and declared sensitivity pool footprint"
+        "synthetic geometry and declared sensitivity pool footprint; "
+        f"request template copied from storage route branch {source_branch_template_id!r}; "
+        "storage branch outcome is not evaluated or merged"
     )
     campaign = RiskCampaign.model_validate_json(json.dumps(campaign_raw, ensure_ascii=False, allow_nan=False))
 
@@ -316,6 +372,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         ),
         "frequency_applied": True,
         "frequency_exact_opening_match": release.failure_opening_diameter_m == 0.025,
+        "request_template_source_branch_id": source_branch_template_id,
+        "frequency_scope_filtering": {
+            "selected_component_ids": sorted(selected_component_ids),
+            "precomputed_event_count_before": precomputed_event_count_before_scope_filter,
+            "precomputed_event_count_after": precomputed_event_count_after_scope_filter,
+            "excluded_components_outside_manifest_removed": True,
+            "storage_branch_outcome_evaluated": False,
+        },
         "provider_packet_promoted": adapted.provider_packet_promoted,
         "qualified_provider_packet_count": 0,
         "native_export_elapsed_ms": export_elapsed_ms,
