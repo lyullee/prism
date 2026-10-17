@@ -1,0 +1,66 @@
+{
+  "schema_version": "prism.native_dynamic_pipe_exact_area100_qualification_intake_recheck.v1",
+  "status": "QUALIFICATION_INTAKE_DIAGNOSTIC_RECHECK",
+  "recheck_date_kst": "2026-10-18",
+  "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+  "external_model_commit": "7072374",
+  "current_packet": {
+    "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "provider_result_digest": "4100182fdb209f3e264dcc750c8aeefa01973c61ecb41012d9ddc7e74e58ee3f",
+    "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+    "termination_basis": "model_pressure_equalization",
+    "provider_duration_s": 0.24005155145460036,
+    "mass_residual_kg": 1.3877787807814457e-17
+  },
+  "saved_authoritative_request_packet": {
+    "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+    "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
+    "closure_status": "CLOSURE_READY_FOR_QUALIFICATION"
+  },
+  "digest_drift_against_saved_request": {
+    "provider_source_digest_changed": true,
+    "provider_result_digest_changed": true,
+    "requires_request_rebaseline": true,
+    "reason": "The current external source replay is newer than the saved full-scope packet request; it must not be silently substituted into the authoritative campaign."
+  },
+  "intake_audit": {
+    "artifact_file_count": 1,
+    "release_row_count": 1,
+    "closure_ready_row_count": 1,
+    "qualified_sidecar_row_count": 0,
+    "actual_origin_row_count": 0,
+    "synthetic_or_model_prediction_row_count": 1,
+    "provider_response_normalized_count": 1,
+    "provider_response_mismatch_count": 0,
+    "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+    "provider_response_binding_status": "NORMALIZED_PROVIDER_RESPONSE",
+    "provider_response_checks": {
+      "identity_matches": true,
+      "clock_matches": true,
+      "available_mass_matches": true,
+      "released_mass_matches": true,
+      "termination_basis_matches": true,
+      "termination_provenance_matches": true,
+      "source_digest_matches": true,
+      "state_snapshot_digest_present": true,
+      "result_digest_rebound": true,
+      "mass_ledger_present": true,
+      "mass_ledger_closed": true,
+      "isolation_evidence_present": true,
+      "isolation_clock_valid": false
+    },
+    "blocking_reasons": [
+      "native isolation evidence is absent or outside the release clock",
+      "input origin remains diagnostic and is not qualified actual evidence"
+    ]
+  },
+  "promotion": {
+    "provider_packet_promoted": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "authoritative_campaign_rebaseline_performed": false,
+    "slabx_lh2_modified": false
+  },
+  "interpretation": "The latest packet is structurally closure-ready and its canonical provider response digest is bound, but qualification remains withheld because the input origin is model_prediction, the qualification sidecar is absent, and the native isolation evidence is not a successful release-boundary closure."
+}
