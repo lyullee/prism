@@ -18,6 +18,26 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 The result means that the software can execute the declared conditional chain and can provide a fast cached diagnostic response. It does not mean that every facility case has a qualified release provider, that all outdoor accident families are physically validated, or that a facility-wide regulatory QRA is complete.
 
+## Current native external full-scope replay
+
+The latest native `lh2dt` replay is kept as a separate diagnostic supplement to
+the authoritative 34-event/44-case union above. Its tracked records are
+[`campaign_result.json`](../results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json),
+[`facility_assessment.json`](../results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json),
+and the packet set in
+[`native_external_facility_full_scope_packets_current`](../results/20261115/native_external_facility_full_scope_packets_current/).
+It covers 24 reviewed literature events and produces 24 case rows and 96 risk
+atoms. All 24 cases reach the consequence path; 13 have a ready diagnostic
+dynamic-closure record and 11 remain explicitly operator-limited/withheld.
+The conditional facility risk view is available, while
+`facility_total_risk_available=false` and `facility_qra_claim=false` remain in
+the saved assessment. The ambient-vaporizer G1 case was corrected from an
+invalid instantaneous-depletion interpretation to an explicit
+`inventory_over_600s` bounded history with residual inventory retained. This
+replay strengthens the state-to-release-to-consequence evidence, but it does
+not replace the authoritative union audit or close provider qualification,
+independent physical validation, or strict facility-QRA gates.
+
 ## What is connected
 
 The current chain is explicit and auditable:
