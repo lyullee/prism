@@ -741,6 +741,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Inventory termination margin diagnostic](docs/PRISM_inventory_termination_margin_20261115.md)
 - [FFI Test 6 actual-source numerical gate](docs/PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md)
 - [FFI Test 6 high-resolution numerical recheck](docs/PRISM_FFI_Test6_high_resolution_recheck_20261017.md)
+- [SLABx-LH2 pseudo-source numerical sensitivity](docs/PRISM_slabx_lh2_pseudosource_numerical_sensitivity_20261115.md)
 - [SLABx-LH2 component evidence and current matrix](docs/PRISM_slabx_component_evidence_20261115_en.md)
 - [Inspection-centre source suitability boundary](docs/PRISM_inspection_center_source_suitability_20261115.md)
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)

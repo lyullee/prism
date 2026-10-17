@@ -1,0 +1,49 @@
+{
+  "schema_version": "prism.slabx_lh2_pseudosource_numerical_sensitivity.v1",
+  "status": "DIAGNOSTIC_PSEUDOSOURCE_CONVERGENCE_ACCEPTED",
+  "scope": "separate pseudo-source numerical convergence diagnostic; not the actual FFI Test 6 source and not physical validation",
+  "criterion": "last two refinements <2% for all monitored values",
+  "levels": [
+    640,
+    1280,
+    2560,
+    5120
+  ],
+  "last_pair": {
+    "from_n_field_steps": 2560,
+    "to_n_field_steps": 5120
+  },
+  "relative_changes": {
+    "H2_vol_pct_at_30_m": 5.097767821168394E-06,
+    "centre_height_m_at_30_m": 7.072957715432721E-07,
+    "cloud_depth_m_at_30_m": 1.0933796487483373E-05,
+    "temperature_K_at_30_m": 1.277817290368297E-07
+  },
+  "accepted": true,
+  "source": {
+    "ledger_role": "FFI Test 6 published cold H2-air pseudo-source numerical ledger",
+    "rate_kg_s": 0.8,
+    "h2_mass_fraction": 0.37,
+    "density_kg_m3": 2.4,
+    "velocity_m_s": 70.0,
+    "duration_s": 120.0,
+    "height_m": 0.5,
+    "temperature_K": 25.0,
+    "liquid_fraction": 0.0,
+    "source_ledger_sha256": "fdd5cfa932de7f3f2c0b811ee836cf13b7b9b91d81dbb2104b7dc856e7542ed3"
+  },
+  "reproduction": {
+    "script": "run_test6_high_resolution_20261115.py",
+    "script_sha256": "e8614cd9859b9854908de9f73a80a3abdac48cff9305869e5853dbaf4bbc2d36",
+    "refinement_csv_sha256": "5c799390a179178c32e55298f5e934a4bb034d0010a7363a2300113f91436de0",
+    "external_output_path": "external/SLAB_rebuild/model-comparison/outputs/test6_pseudosource_gate_high_resolution_20261115/refinement.csv"
+  },
+  "promotion_policy": {
+    "actual_ffi_test6_source_gate_closed": false,
+    "independent_physical_validation_claim": false,
+    "equipment_release_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_inference_performed": false,
+    "interpretation": "This record demonstrates numerical convergence for the separately declared pseudo-source only. It must not replace the unresolved 0.8317 kg/s actual FFI source gate or be used as a physical-validation claim."
+  }
+}

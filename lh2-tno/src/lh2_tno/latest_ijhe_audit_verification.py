@@ -704,6 +704,37 @@ def verify_latest_ijhe_audit(
                 if not refinement_path.exists():
                     reasons.append("actual FFI numerical gate refinement record does not exist")
 
+    # A separately declared pseudo-source convergence record may accompany the
+    # actual FFI gate.  It is useful numerical evidence, but it must remain
+    # explicitly non-promoting and must never be accepted as the actual source.
+    pseudo_record_value = status.get("slabx_lh2_pseudosource_numerical_sensitivity_record")
+    pseudo_record: dict[str, Any] = {}
+    pseudo_path: Path | None = None
+    if pseudo_record_value is not None:
+        if not isinstance(pseudo_record_value, str) or not pseudo_record_value.strip():
+            reasons.append("pseudo-source numerical sensitivity pointer is not a non-empty string")
+        else:
+            pseudo_path = _relative_or_absolute(pseudo_record_value, root=base)
+            if not pseudo_path.exists():
+                reasons.append("pseudo-source numerical sensitivity record does not exist")
+            else:
+                pseudo_record = _read_object(pseudo_path)
+                if pseudo_record.get("schema_version") != (
+                    "prism.slabx_lh2_pseudosource_numerical_sensitivity.v1"
+                ):
+                    reasons.append("pseudo-source numerical sensitivity schema is not the declared schema")
+                if pseudo_record.get("status") != "DIAGNOSTIC_PSEUDOSOURCE_CONVERGENCE_ACCEPTED":
+                    reasons.append("pseudo-source numerical sensitivity status is not accepted diagnostic evidence")
+                if pseudo_record.get("accepted") is not True:
+                    reasons.append("pseudo-source numerical sensitivity must have accepted=true")
+                policy = pseudo_record.get("promotion_policy")
+                if not isinstance(policy, Mapping) or policy.get("actual_ffi_test6_source_gate_closed") is not False:
+                    reasons.append("pseudo-source evidence must keep the actual FFI source gate open")
+                if not isinstance(policy, Mapping) or policy.get("independent_physical_validation_claim") is not False:
+                    reasons.append("pseudo-source evidence must keep physical_validation_claim=false")
+                if not isinstance(policy, Mapping) or policy.get("facility_qra_claim") is not False:
+                    reasons.append("pseudo-source evidence must keep facility_qra_claim=false")
+
     status_value = "PASS" if not reasons else "BLOCKED_AUDIT_METADATA"
     scope_status = scope_value.get("status") if scope_value else None
     if scope_value and scope_status is None:
@@ -731,6 +762,9 @@ def verify_latest_ijhe_audit(
         "actual_ffi_numerical_gate_record": str(gate_path) if gate_path else None,
         "actual_ffi_numerical_gate_status": gate_record.get("status") if gate_record else gate_status_value,
         "actual_ffi_numerical_gate_accepted": gate_record.get("accepted") if gate_record else gate_accepted_value,
+        "pseudo_source_numerical_sensitivity_record": str(pseudo_path) if pseudo_path else None,
+        "pseudo_source_numerical_sensitivity_status": pseudo_record.get("status") if pseudo_record else status.get("slabx_lh2_pseudosource_numerical_sensitivity_status"),
+        "pseudo_source_numerical_sensitivity_accepted": pseudo_record.get("accepted") if pseudo_record else status.get("slabx_lh2_pseudosource_numerical_sensitivity_accepted"),
         "facility_scope_matrix_record": str(scope_path) if scope_path else None,
         "facility_scope_matrix_status": scope_status,
         "facility_scope_matrix_case_count": scope_value.get("case_count") if scope_value else None,

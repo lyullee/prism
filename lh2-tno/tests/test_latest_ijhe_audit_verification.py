@@ -548,6 +548,51 @@ def test_latest_ijhe_audit_verification_rejects_gate_acceptance_drift(tmp_path: 
     assert any("gate status" in reason or "acceptance" in reason for reason in result["blocking_reasons"])
 
 
+def test_latest_ijhe_audit_verification_accepts_nonpromoting_pseudosource_record(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    pseudo = {
+        "schema_version": "prism.slabx_lh2_pseudosource_numerical_sensitivity.v1",
+        "status": "DIAGNOSTIC_PSEUDOSOURCE_CONVERGENCE_ACCEPTED",
+        "accepted": True,
+        "promotion_policy": {
+            "actual_ffi_test6_source_gate_closed": False,
+            "independent_physical_validation_claim": False,
+            "facility_qra_claim": False,
+        },
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "pseudo.json", pseudo)
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "slabx_lh2_pseudosource_numerical_sensitivity_record": "pseudo.json",
+        "slabx_lh2_pseudosource_numerical_sensitivity_status": "DIAGNOSTIC_PSEUDOSOURCE_CONVERGENCE_ACCEPTED",
+        "slabx_lh2_pseudosource_numerical_sensitivity_accepted": True,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["pseudo_source_numerical_sensitivity_accepted"] is True
+
+
 def test_latest_ijhe_audit_verification_binds_scope_and_release_ledgers(tmp_path: Path):
     audit = {
         "status": "INCOMPLETE_EVIDENCE",

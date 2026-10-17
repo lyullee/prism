@@ -5972,5 +5972,23 @@
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_receptor_count": 1,
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_physics_executed": true,
   "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_source_campaign_fresh_physics_cases": 24,
-  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_assessment_fresh_physics_executed": false
+  "external_lh2dt_native_clean_full_scope_isolation_replay_facility_risk_summary_assessment_fresh_physics_executed": false,
+  "slabx_lh2_pseudosource_numerical_sensitivity_record": "results/20261115/slabx_lh2_pseudosource_numerical_sensitivity_high_resolution/provenance.json",
+  "slabx_lh2_pseudosource_numerical_sensitivity_status": "DIAGNOSTIC_PSEUDOSOURCE_CONVERGENCE_ACCEPTED",
+  "slabx_lh2_pseudosource_numerical_sensitivity_accepted": true,
+  "slabx_lh2_pseudosource_numerical_sensitivity_levels": [
+    640,
+    1280,
+    2560,
+    5120
+  ],
+  "slabx_lh2_pseudosource_numerical_sensitivity_last_pair_relative_changes": {
+    "H2_vol_pct_at_30_m": 5.097767821168394e-06,
+    "centre_height_m_at_30_m": 7.072957715432721e-07,
+    "cloud_depth_m_at_30_m": 1.0933796487483373e-05,
+    "temperature_K_at_30_m": 1.277817290368297e-07
+  },
+  "slabx_lh2_pseudosource_numerical_sensitivity_actual_ffi_gate_closed": false,
+  "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
+  "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false
 }
