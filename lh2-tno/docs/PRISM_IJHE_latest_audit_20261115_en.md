@@ -38,6 +38,20 @@ site-specific boundary data.
 | Facility IR/F-N promotion | `false` |
 | Frequency inference or sensor learning | `false` |
 
+These closure counts are intentionally different views of the same 44-case
+union. The release-boundary audit reports 42/44 numerically closed and 2/44
+numerically open; its stricter promotion gate accepts 13/44 cases. The facility
+assessment release ledger separately reports 15 complete rows and 29
+`EXECUTED_OPERATOR_LIMITED` rows. The latter is the state used for the
+conditional facility view and is not a provider-qualification result. No count
+is silently substituted for another.
+
+The conditional facility chain has 44 evaluated cases and 176 risk atoms. At
+the declared 20 m worker receptor, all 176 atoms have zero harm in this union,
+so the conditional IR/F-N arrays contain no positive point. This result is
+retained as a geometry-bound diagnostic output; the qualified facility IR/F-N
+claim remains withheld.
+
 The unified facility-QRA gate summary is now bound to the same authoritative
 34-event/44-case union assessment and scope matrix:
 [`facility_qra_gate_summary.json`](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_qra_gate_summary.json).
@@ -149,6 +163,12 @@ Initiating frequencies come from the reviewed literature catalogue and are bound
 
 The realtime benchmark separates cached results from fresh physics. Cached monitor evaluation meets the declared low-latency target in the stored benchmark; fresh provider/consequence calculations are slower and are intended for background or risk-triggered execution. Each case records wall time and quantitative-evaluation time so that a deployment can set a deadline without silently substituting an old result.
 
+For the current 44-case facility diagnostic campaign, fresh physics has a
+case median/p95/p99 of **2.193/10.400/12.738 s**. The three-campaign wall
+totals have median/p95/p99 of **19.298/134.471/144.709 s**. These values
+exclude the cached monitor path and do not support a 1 Hz fresh-physics claim.
+
+
 ## Reproduce the current metadata check
 
 Run from the package directory:
@@ -221,7 +241,18 @@ provider worklist as frequency evidence. The regression contract is
 `tests/test_bind_native_full_scope_union_evidence.py`; when rebuilding a union,
 include `--domain-recovery-audit results/20261024/domain_recovery_audit_flammability_gate_v2.json`.
 
+## Frequency-uncertainty evidence
+
+The authoritative `facility_frequency_uncertainty_audit.json` closes the
+diagnostic sensitivity ledger for **five explicit literature scenarios** with
+zero recomputation mismatches across 176 risk atoms. It includes central,
+literature P05/P95, and independent event-bound P05/P95 scenarios; 34 events
+use independent bounds and nine events retain fixed catalogue rates. The record
+sets `frequency_inference_performed=false`, `facility_credible_interval=false`,
+and `provider_packet_promoted=false`. Thus the calculation reports literature
+frequency sensitivity without learning frequencies from sensors or normal
+operation data.
+
 ## Evidence needed for a strict IJHE claim
 
 For each facility case, provide an exact asset/port identity, initial state, time-resolved release history, isolation command and response, termination basis, mass/energy residuals, and a qualification sidecar. Separately provide an independent holdout comparison for the relevant source and consequence domains, plus reviewed receptor geometry, weather, ignition, and population data. Once those records are supplied, the existing fail-closed gates can be rerun without changing the frequency or consequence algorithms.
-
