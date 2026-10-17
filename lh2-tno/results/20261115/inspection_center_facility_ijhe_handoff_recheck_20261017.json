@@ -1,0 +1,306 @@
+{
+  "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+  "status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "checks": [
+    {
+      "id": "facility_bridge_schema",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "schema_version": "prism.inspection_center_facility_hazop_bridge.v1"
+      }
+    },
+    {
+      "id": "facility_bridge_component_partition",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "component_count": 3,
+        "selected_component_ids": [
+          "lh2-supply-vaporizer-boundary"
+        ],
+        "withheld_component_ids": [
+          "lh2-intake-tank",
+          "lh2-storage-vent"
+        ]
+      }
+    },
+    {
+      "id": "explicit_provider_component_mapping",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "mapping": {
+          "observed_component_id": "lh2-supply-vaporizer-boundary",
+          "provider_component_id": "ambient-vaporizer-01",
+          "provider_port_id": "vaporizer-accident-out",
+          "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+          "mapping_digest": "4056ff85ba0bdf8e09168e3be1ab36f57e254c167f45118c4fe0bd449fc47402"
+        }
+      }
+    },
+    {
+      "id": "state_snapshot_handoff_boundary",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "row_count": 3,
+        "provider_state_snapshot_echoes": 0
+      }
+    },
+    {
+      "id": "major_accident_scope_explicit",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "declared_family_count": 12,
+        "selected_families": [
+          "vaporizer_hole"
+        ],
+        "not_evaluated_family_count": 11,
+        "implicit_substitution_performed": false
+      }
+    },
+    {
+      "id": "processing_time_evidence",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "processing_time": {
+          "facility_bridge_wall_elapsed_ms": 1533.3750999998301,
+          "campaign_case_min_ms": 1499.203099985607,
+          "campaign_case_max_ms": 1499.203099985607,
+          "campaign_elapsed_ms": null,
+          "case_stage_elapsed_ms": {
+            "source": 689.508300012676,
+            "pool": 0.0052000104915350676,
+            "near_field_and_dispersion": 384.7513999789953,
+            "cloud_observation": 90.32799999113195,
+            "fire_explosion_damage_risk": 67.91439998778515
+          },
+          "fresh_physics_claim": false
+        }
+      }
+    },
+    {
+      "id": "conditional_facility_ir_fn_aggregation",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "conditional_risk_available": true,
+        "conditional_ir": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        },
+        "conditional_fn": [
+          {
+            "expected_deaths": [],
+            "cumulative_frequency_per_year": []
+          },
+          {
+            "expected_deaths": [],
+            "cumulative_frequency_per_year": []
+          }
+        ],
+        "qualified_total_ir_available": false,
+        "qualified_total_fn_available": false
+      }
+    },
+    {
+      "id": "facility_handoff_schema",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "schema_version": "prism.inspection_center_facility_campaign_handoff.v1"
+      }
+    },
+    {
+      "id": "explicit_annual_condition_population",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "status": "EXPLICIT_CONDITION_POPULATION"
+      }
+    },
+    {
+      "id": "diagnostic_qra_boundary",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "handoff_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "ledger_status": "PARTIAL_FACILITY_SCOPE",
+        "facility_ir_available": false,
+        "facility_fn_available": false
+      }
+    },
+    {
+      "id": "literature_frequency_sensitivity_boundary",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "schema_version": "prism.facility_frequency_sensitivity.v1",
+        "status": "LITERATURE_SCENARIO_SENSITIVITY_AVAILABLE",
+        "row_count": 3,
+        "marginal_p05_per_year": null,
+        "marginal_p95_per_year": null
+      }
+    },
+    {
+      "id": "no_qualification_or_physical_validation_claim",
+      "status": "PASS",
+      "passed": true,
+      "blocking_reason": null,
+      "evidence": {
+        "provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      }
+    }
+  ],
+  "blocking_reasons": [],
+  "qualification_boundary": {
+    "facility_ir_fn_available": false,
+    "provider_packet_qualification": "UNQUALIFIED_DIAGNOSTIC",
+    "physical_validation_claim": false,
+    "interpretation": "Structural traceability passes only when all checks pass; this record does not close the full IJHE evidence audit or promote facility QRA."
+  },
+  "major_accident_scope": {
+    "schema_version": "prism.facility_major_accident_scope_status.v1",
+    "catalog_schema": "prism.accident_scenario_catalog.v1",
+    "declared_family_count": 12,
+    "selected_family_count": 1,
+    "selected_families": [
+      "vaporizer_hole"
+    ],
+    "not_evaluated_families": [
+      "vessel_hole",
+      "pipe_hole",
+      "valve_hole",
+      "vent_hole",
+      "pump_hole",
+      "reliquefier_hole",
+      "liquid_two_phase",
+      "inventory_depletion",
+      "inventory_over_600s",
+      "two_sided_rupture",
+      "vertical_handoff"
+    ],
+    "rows": [
+      {
+        "family": "vessel_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved vessel accident history is required"
+      },
+      {
+        "family": "pipe_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved pipe accident history is required"
+      },
+      {
+        "family": "valve_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved valve accident history is required"
+      },
+      {
+        "family": "vent_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "qualified relief set-point and discharge history are required"
+      },
+      {
+        "family": "pump_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved pump accident history is required"
+      },
+      {
+        "family": "vaporizer_hole",
+        "status": "DIAGNOSTIC_SELECTED_RUNTIME_BRANCH",
+        "reason": "one explicit HAZOP-selected branch reached the consequence chain"
+      },
+      {
+        "family": "reliquefier_hole",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider-resolved reliquefier accident history is required"
+      },
+      {
+        "family": "liquid_two_phase",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "liquid outlet packet with phase and enthalpy ledger is required"
+      },
+      {
+        "family": "inventory_depletion",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider packet must close the mass inventory at depletion"
+      },
+      {
+        "family": "inventory_over_600s",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "provider must supply exactly 600 s and a closed mass ledger"
+      },
+      {
+        "family": "two_sided_rupture",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "two endpoint packets and shared inventory closure are required"
+      },
+      {
+        "family": "vertical_handoff",
+        "status": "NOT_EVALUATED_EXPLICIT",
+        "reason": "validated vertical free-jet and handoff state are required"
+      }
+    ],
+    "implicit_substitution_performed": false,
+    "facility_qra_promotion": false,
+    "interpretation": "Only the explicitly selected runtime branch is calculated. Every other catalogue family is retained as an explicit not-evaluated scope row; no unsupported accident is replaced by another family."
+  },
+  "processing_time": {
+    "facility_bridge_wall_elapsed_ms": 1533.3750999998301,
+    "campaign_case_min_ms": 1499.203099985607,
+    "campaign_case_max_ms": 1499.203099985607,
+    "campaign_elapsed_ms": null,
+    "case_stage_elapsed_ms": {
+      "source": 689.508300012676,
+      "pool": 0.0052000104915350676,
+      "near_field_and_dispersion": 384.7513999789953,
+      "cloud_observation": 90.32799999113195,
+      "fire_explosion_damage_risk": 67.91439998778515
+    },
+    "fresh_physics_claim": false
+  },
+  "conditional_facility_risk": {
+    "available": true,
+    "annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "expected_death_fn_low_high": [
+      {
+        "expected_deaths": [],
+        "cumulative_frequency_per_year": []
+      },
+      {
+        "expected_deaths": [],
+        "cumulative_frequency_per_year": []
+      }
+    ],
+    "qualified_total_withheld": true,
+    "basis": "linear sum of validated risk atoms from the evaluated equipment campaigns; scope blockers are retained and this view is not a qualified facility total"
+  },
+  "input_evidence": {
+    "bridge": "examples\\inspection_center_facility_hazop_bridge.json",
+    "handoff": "examples\\inspection_center_facility_campaign_handoff.json"
+  }
+}
