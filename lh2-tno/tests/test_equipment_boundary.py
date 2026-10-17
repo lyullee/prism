@@ -672,6 +672,35 @@ def test_resolved_liquid_dynamic_state_closure_releases_operator_limit():
     ]
 
 
+def test_bounded_inventory_over_600s_closure_is_distinct_from_depletion():
+    d = liquid_packet()
+    d.update(
+        input_origin='model_prediction',
+        termination_basis='inventory_over_600s',
+        provider_mass_balance={
+            'schema_version': 'prism.provider_mass_balance.v1',
+            'initial_mass_kg': 5.0,
+            'cumulative_mass_out_kg': d['cumulative_mass_out_kg'],
+            'final_mass_kg': 5.0 - d['cumulative_mass_out_kg'],
+            'derived_accounting_residual_kg': 0.0,
+            'dynamic_state_closure': {
+                'schema_version': 'prism.provider_dynamic_state_closure.v1',
+                'inventory_feedback_closed': True,
+                'pressure_feedback_closed': True,
+                'state_history_digest': 'd' * 64,
+                'max_abs_inventory_residual_kg': 0.0,
+                'inventory_tolerance_kg': 1.0e-8,
+                'max_abs_pressure_residual_pa': 0.0,
+                'pressure_tolerance_pa': 10.0,
+                'provenance': 'synthetic bounded inventory closure test',
+            },
+        },
+    )
+    release = ResolvedLiquidRelease.model_validate_json(json.dumps(d))
+    _, history = resolve_liquid_rows(release.model_dump(mode='json'), 101325.)
+    assert history['dynamic_state_closure']['ready'] is True
+
+
 def test_resolved_liquid_provider_rejects_airborne_liquid_without_adapter():
     d = liquid_packet()
     d['steps'][0]['airborne_liquid_mass_flow_kg_s'] = .001

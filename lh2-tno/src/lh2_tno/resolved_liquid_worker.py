@@ -13,6 +13,9 @@ import re
 _DYNAMIC_TERMINATION_BASES = {
     'reviewed_isolation_success',
     'inventory_depletion',
+    # A provider-owned finite 600 s history is a valid bounded diagnostic
+    # closure, but it is not equivalent to full inventory depletion.
+    'inventory_over_600s',
     'emergency_relief_discharge',
     # DynamicHEMPipe may terminate when its provider-owned finite-volume
     # pressure reaches the declared boundary.  This is a physical closure

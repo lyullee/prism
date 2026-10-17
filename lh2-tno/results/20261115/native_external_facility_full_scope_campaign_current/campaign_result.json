@@ -2,7 +2,7 @@
   "status": "PARTIAL_DECLARED_SCOPE",
   "facility_id": "generic-lh2-full-scope-example",
   "facility_digest": "83f86daba9d58f4fd243b05290d65d58b4b0c3b9637b75df845eade6e73e1c15",
-  "campaign_digest": "59ebabd630041fce1a89f50a61f388ead07389fb3d54dc7d2213621a769a0a37",
+  "campaign_digest": "98c8c0a67ca171ad14065c7591194b7f2ff7b182de622bab23490504a31ed099",
   "scope_provenance": "multiple native provider packets bound to exact facility events; unmatched bins remain withheld",
   "events": [
     {
@@ -1160,17 +1160,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 111982.99720001523,
+      "elapsed_ms": 112506.9982999994,
       "request_digest": "31d13f523dd1337bbf49d8f47873114b2f633af52ad85e13e00e9e780f1f6f54",
-      "result_digest": "4a20bde7d754dbafd16f698e3e6864c54e14e388b83c7ac46639bde03cdf5203",
+      "result_digest": "cfc8e43e13ee48fc4f462a4a9f0b4e95c85b276f6ab241743b3e88fbda21ed7d",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 696.5115999919362,
-        "pool": 33179.13470001076,
-        "near_field_and_dispersion": 75023.94730001106,
-        "cloud_observation": 2602.928599982988,
-        "fire_explosion_damage_risk": 113.12749999342486
+        "source": 693.7208000163082,
+        "pool": 33956.44259999972,
+        "near_field_and_dispersion": 74701.02589999442,
+        "cloud_observation": 2721.970499987947,
+        "fire_explosion_damage_risk": 113.55290000210516
       },
       "mass_ledger": {
         "released_kg": 0.07406123870834073,
@@ -1284,17 +1284,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 75656.45400001085,
+      "elapsed_ms": 76173.19110000972,
       "request_digest": "307e1e934c5299f1f537a595d010d6797e98bfb5d7f2ab52c0eaad9168b9e31a",
-      "result_digest": "8e60cd82e688ed5c9ce401b70fd8240448cccd47119a8b73e3c01230b5cf780e",
+      "result_digest": "6c1992c1b23ebae7cc92dcc8641d34ed4285073f9a68510d58d0fc3f7d03869d",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 703.8569000142161,
-        "pool": 386.06439999421127,
-        "near_field_and_dispersion": 70963.38830000605,
-        "cloud_observation": 3022.483700013254,
-        "fire_explosion_damage_risk": 156.99079999467358
+        "source": 697.9454999964219,
+        "pool": 395.85979998810217,
+        "near_field_and_dispersion": 71896.8942000065,
+        "cloud_observation": 2718.667800014373,
+        "fire_explosion_damage_risk": 127.02980000176467
       },
       "mass_ledger": {
         "released_kg": 0.7404876048198742,
@@ -1408,17 +1408,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 60986.90910000005,
+      "elapsed_ms": 63109.6683999931,
       "request_digest": "087e7b337ccdab856a397d4e611a0bb2278573764bbc82a6c7ffb456fa36cd64",
-      "result_digest": "bd9d86aef1000af806af556a335c52f8e49415b64d7caabcbe805d978a61def2",
+      "result_digest": "54730e42264f74c6bb36aa8f3696e065f140a9b89e82bb42a414c0e9d6dc6004",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 707.8596000210382,
-        "pool": 429.5508999784943,
-        "near_field_and_dispersion": 56614.91560001741,
-        "cloud_observation": 2638.5605999967083,
-        "fire_explosion_damage_risk": 154.7372999775689
+        "source": 724.7170999762602,
+        "pool": 596.78829999757,
+        "near_field_and_dispersion": 58671.011200000066,
+        "cloud_observation": 2618.6287000018638,
+        "fire_explosion_damage_risk": 143.7597000040114
       },
       "mass_ledger": {
         "released_kg": 7.392533571775646,
@@ -1532,17 +1532,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 61760.98110000021,
+      "elapsed_ms": 68049.62899998645,
       "request_digest": "41186afb92f94c506aa25bf2c80d4ce100d84569117d8324ddc49d32163d2ce8",
-      "result_digest": "1a63b18f9f81ba9ef65e3ad1e4fd331840b1157023d99b74c5de892443860cb0",
+      "result_digest": "8423f5be92e4aafc85a240bac88ec529afbd7eeab45a38681b22e1e4aa0d9e8d",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 844.8230999929365,
-        "pool": 613.9751999871805,
-        "near_field_and_dispersion": 56932.19079999835,
-        "cloud_observation": 2751.748899987433,
-        "fire_explosion_damage_risk": 156.19800001149997
+        "source": 703.5077000036836,
+        "pool": 610.4286999907345,
+        "near_field_and_dispersion": 63432.52390000271,
+        "cloud_observation": 2753.658400004497,
+        "fire_explosion_damage_risk": 156.64049997576512
       },
       "mass_ledger": {
         "released_kg": 72.70350391264752,
@@ -1631,17 +1631,17 @@
         "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5485.077099991031,
+      "elapsed_ms": 6104.280200001085,
       "request_digest": "e61732606fa30981db9d617cc7c157b9030df628e299fcb80960c073d3ad4cba",
-      "result_digest": "3801e9009c25eb6dd527f6eb5f378b9a54002e00664297f4161e09674e09f89d",
+      "result_digest": "64ebcb1843a02ff11fe0059e5daa1a1c9dfe423137ee364c81fdcc3cae9eca41",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 701.296099985484,
-        "pool": 2058.0023000075016,
-        "near_field_and_dispersion": 2199.5903000060935,
-        "cloud_observation": 105.79339999821968,
-        "fire_explosion_damage_risk": 82.15070000733249
+        "source": 688.9822999946773,
+        "pool": 1858.5391000087839,
+        "near_field_and_dispersion": 3000.8019999950193,
+        "cloud_observation": 121.47380001260899,
+        "fire_explosion_damage_risk": 106.80480001610704
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -1760,17 +1760,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 81656.78359998856,
+      "elapsed_ms": 78306.57559999963,
       "request_digest": "98a555222f3e8894f14cd00b72882f22ca444eb742f30bb7690f02b6fd0a7c1c",
-      "result_digest": "ff7a45602b53687ae2029cb55fbc6c7ce2a741643731fad8fa56876c0540b2a9",
+      "result_digest": "619bd3c0cd10cdfc318d42f2e40006774f9188355531cab864ae7110e3145147",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 709.1719000018202,
-        "pool": 67445.37490000948,
-        "near_field_and_dispersion": 12680.21689998568,
-        "cloud_observation": 356.35389998788014,
-        "fire_explosion_damage_risk": 117.24500000127591
+        "source": 756.257499975618,
+        "pool": 65070.13999999617,
+        "near_field_and_dispersion": 11682.37239998416,
+        "cloud_observation": 350.18249999848194,
+        "fire_explosion_damage_risk": 119.12279998068698
       },
       "mass_ledger": {
         "released_kg": 1.5142271983109373e-05,
@@ -1884,17 +1884,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 17388.25079999515,
+      "elapsed_ms": 14171.292699989863,
       "request_digest": "367593dfc79e7bb2db4533c5163d31db94a1cb1e63d94d29578f81a1bafa987c",
-      "result_digest": "c2c61b09ed8e43abe0648ca49325f5c67a9956ab630d9b5022e0ca0efcc527d3",
+      "result_digest": "d7247da1258f9131a5e582d56ecd7bc0602ecaeaab641dcf6d9cc3e72c22ecff",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 707.4858999985736,
-        "pool": 652.5503000011668,
-        "near_field_and_dispersion": 15190.997900004731,
-        "cloud_observation": 374.8417999886442,
-        "fire_explosion_damage_risk": 109.01889999513514
+        "source": 705.4708999930881,
+        "pool": 647.1219999948516,
+        "near_field_and_dispersion": 12078.75720001175,
+        "cloud_observation": 277.5864000141155,
+        "fire_explosion_damage_risk": 107.1996999962721
       },
       "mass_ledger": {
         "released_kg": 0.0001513433127012609,
@@ -2008,17 +2008,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 23920.65580000053,
+      "elapsed_ms": 20397.82019998529,
       "request_digest": "f71488ec339b67d0004654bf8cc027cf82b282762609f41d0166e8ce95ffd552",
-      "result_digest": "924a46fcdba0b386d2a11df90b089a30fcb9d978752b53b1903b9968ba477042",
+      "result_digest": "e89766cad4b47263ddaf8f425982d693028d79b2ba8c95be505d2434e3859e1a",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 725.6853000144474,
-        "pool": 2953.4000999992713,
-        "near_field_and_dispersion": 19316.67379999999,
-        "cloud_observation": 431.96759998681955,
-        "fire_explosion_damage_risk": 121.47619997267611
+        "source": 693.8345000089612,
+        "pool": 2530.619700002717,
+        "near_field_and_dispersion": 16362.562900001649,
+        "cloud_observation": 352.3718999931589,
+        "fire_explosion_damage_risk": 102.093599998625
       },
       "mass_ledger": {
         "released_kg": 0.0015054887924872244,
@@ -2132,17 +2132,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 39161.34029999375,
+      "elapsed_ms": 37594.17719999328,
       "request_digest": "419ed5131c17963005836a54735bbf28ea9573201c9a6a289124d299a3226572",
-      "result_digest": "24f669f4c1431e2f1c44ffdfba02b2d3e420c2e11d9c66c6eeac2b21a08bb496",
+      "result_digest": "45baa32d5005859f0e36501388a1c7d374e7875704e98c1b345cbbdbb921965c",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 719.2446000117343,
-        "pool": 12959.211500012316,
-        "near_field_and_dispersion": 24491.791100008413,
-        "cloud_observation": 477.20910000498407,
-        "fire_explosion_damage_risk": 123.73099999967963
+        "source": 690.5948999919929,
+        "pool": 11994.865299988305,
+        "near_field_and_dispersion": 24152.697199984686,
+        "cloud_observation": 352.7710000053048,
+        "fire_explosion_damage_risk": 94.18379998533055
       },
       "mass_ledger": {
         "released_kg": 0.014281290905359737,
@@ -2256,17 +2256,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 53489.082899992354,
+      "elapsed_ms": 51579.955399996834,
       "request_digest": "2f4a2210dd6f2e3d1a373069b8cc072758baf828e3faf4dc26453b0afd9dd567",
-      "result_digest": "0df2f02b0276e067f215342902a4f71f84740a938e55d385e6597d23bf170d1d",
+      "result_digest": "9c8d85995b5219613a2a9c52700019e1a27b652ea82463cd3aa5623371221007",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 717.9509999987204,
-        "pool": 25661.210699996445,
-        "near_field_and_dispersion": 26195.151299994905,
-        "cloud_observation": 389.86530000693165,
-        "fire_explosion_damage_risk": 122.64329998288304
+        "source": 707.6523999858182,
+        "pool": 25532.213099999353,
+        "near_field_and_dispersion": 24624.96679998003,
+        "cloud_observation": 305.4609000100754,
+        "fire_explosion_damage_risk": 108.89140001381747
       },
       "mass_ledger": {
         "released_kg": 0.06826147353425362,
@@ -2370,17 +2370,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 133844.00270000333,
+      "elapsed_ms": 129072.35989999026,
       "request_digest": "f9b4dc1b05965485367013ac4dcf93a91ebb01b085f3d8bce15757be063a9a00",
-      "result_digest": "8c7ba5e789a4fc4774c5ade50f323171fb01812a0f8f532bba05e91791a804ad",
+      "result_digest": "7c0f011228e97da37bbb4b4a6bc209fec7a3c7418a64b472b31c98b3b4591d10",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 716.5974999952596,
-        "pool": 125049.11459999857,
-        "near_field_and_dispersion": 7417.488499981118,
-        "cloud_observation": 226.38390000793152,
-        "fire_explosion_damage_risk": 97.26370000862516
+        "source": 703.4026999899652,
+        "pool": 120938.40189999901,
+        "near_field_and_dispersion": 6803.865899972152,
+        "cloud_observation": 191.0201999999117,
+        "fire_explosion_damage_risk": 113.14370000036433
       },
       "mass_ledger": {
         "released_kg": 4.746475781972484e-05,
@@ -2487,17 +2487,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 12766.553300025407,
+      "elapsed_ms": 11919.514200009871,
       "request_digest": "ed97072969b28f274ab65e39e24cbb6bef752dce4371715c0fd47575e04e0950",
-      "result_digest": "1faa0c1e92024a81f8461142596cd5ee4c1f653abb79558eb808b8811bc28709",
+      "result_digest": "a8004c7d56c248f54cb7547c9361e92504c417d3f79e893422149931cce40311",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 715.6851000036113,
-        "pool": 1548.0846000136808,
-        "near_field_and_dispersion": 9673.024200019427,
-        "cloud_observation": 261.0434000089299,
-        "fire_explosion_damage_risk": 115.94580000382848
+        "source": 713.0975000036415,
+        "pool": 1487.775599991437,
+        "near_field_and_dispersion": 9097.951600007946,
+        "cloud_observation": 200.3040000272449,
+        "fire_explosion_damage_risk": 113.31060001975857
       },
       "mass_ledger": {
         "released_kg": 0.00047464757819724846,
@@ -2604,17 +2604,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 20393.165799992858,
+      "elapsed_ms": 17988.77870000433,
       "request_digest": "7a636fdc540894721cf5251049f13cc77940a909da06204f90d642a8d522ffb9",
-      "result_digest": "8f787ce59abcf117a4f6a961bc3b5915ee7e0d4e09aad0740720f7470f615a16",
+      "result_digest": "cf0801b93d091866d4a7b0693c2c1533f2e69b50e9d4715dd02493a24bc891cb",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 738.53189998772,
-        "pool": 7793.2634000026155,
-        "near_field_and_dispersion": 11084.517099981895,
-        "cloud_observation": 293.357400019886,
-        "fire_explosion_damage_risk": 117.01040001935326
+        "source": 720.9348000178579,
+        "pool": 7383.973400021205,
+        "near_field_and_dispersion": 9204.880400007823,
+        "cloud_observation": 267.7788999862969,
+        "fire_explosion_damage_risk": 87.53650001017377
       },
       "mass_ledger": {
         "released_kg": 0.004746475781972487,
@@ -2721,17 +2721,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 37593.09909999138,
+      "elapsed_ms": 40045.10649997974,
       "request_digest": "a7dcef5c41cac3c98ca334ac1ad3fdd40eba991853368f51ad7b5dd0356de1a2",
-      "result_digest": "e7cb72d9b50bcd9f5e2dc840ab72fe67dc1c071b0078313f1f3fb7a80a91b2a4",
+      "result_digest": "d44027af30ffd9dd6a9221805c0580fc5705930201475ca9d1d60e6131226415",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 709.7960999817587,
-        "pool": 26538.82600000361,
-        "near_field_and_dispersion": 9538.363400002709,
-        "cloud_observation": 356.71199997887015,
-        "fire_explosion_damage_risk": 121.79370000376366
+        "source": 700.944599986542,
+        "pool": 28899.461599998176,
+        "near_field_and_dispersion": 9771.357500023441,
+        "cloud_observation": 270.86329998564906,
+        "fire_explosion_damage_risk": 68.02629999583587
       },
       "mass_ledger": {
         "released_kg": 0.04746475781972485,
@@ -2838,17 +2838,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 9834.134400007315,
+      "elapsed_ms": 9424.721200019121,
       "request_digest": "ab1560f6d46ab6ecd8357ba32f8f35a89164a0792cb0cc7c600662820acd49b9",
-      "result_digest": "704cb53957659ee30071179a3d9aceac60023719859dae50a5965fc5d2d43332",
+      "result_digest": "6b040537774eb64125273bd473761509ed14aff47d181453d73cd66a546b0c3b",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 705.7888999988791,
-        "pool": 385.47209999524057,
-        "near_field_and_dispersion": 8053.251599980285,
-        "cloud_observation": 264.51719997567125,
-        "fire_explosion_damage_risk": 98.85890001896769
+        "source": 764.6468000020832,
+        "pool": 376.0642999841366,
+        "near_field_and_dispersion": 7555.60280001373,
+        "cloud_observation": 260.4595999873709,
+        "fire_explosion_damage_risk": 108.31539999344386
       },
       "mass_ledger": {
         "released_kg": 0.47464757819724845,
@@ -2938,17 +2938,17 @@
         "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4096.703100018203,
+      "elapsed_ms": 4305.83509997814,
       "request_digest": "65cfef29a2968e5769439e5c77d55d145494c56caf07f2e9a8eaef14dd9a18dd",
-      "result_digest": "f968cf79467cd5bcf259ef343b5906530175d074c341bbec8cd534f6eb07a98f",
+      "result_digest": "8d6c7ebd6b0cd70147a548488a672f544ed3c64241f670a6b053632f485c74ae",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 713.5997000150383,
-        "pool": 0.005599984433501959,
-        "near_field_and_dispersion": 2609.754700009944,
-        "cloud_observation": 333.7570000148844,
-        "fire_explosion_damage_risk": 109.9926000169944
+        "source": 716.2784000101965,
+        "pool": 0.006100017344579101,
+        "near_field_and_dispersion": 2861.33789998712,
+        "cloud_observation": 276.00399998482317,
+        "fire_explosion_damage_risk": 113.74519998207688
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -3055,17 +3055,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 9412.577100010822,
+      "elapsed_ms": 9276.889799977653,
       "request_digest": "72ef6d267f8501756c8e77fd973bf043cca6cf7e35d2a659bef9d3e9021cec10",
-      "result_digest": "11c29ab62fcc85c19c9aeebf0d70823ae0ecf935f2743b418ef584f69cadbe50",
+      "result_digest": "c721776de89f9d61ef2e5a602bb0749c92727951413ca08656f4212b60ffb4e5",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 705.1910999871325,
-        "pool": 477.9225999955088,
-        "near_field_and_dispersion": 7582.874400017317,
-        "cloud_observation": 219.09329999471083,
-        "fire_explosion_damage_risk": 97.59789999225177
+        "source": 692.9933999781497,
+        "pool": 479.00949997710995,
+        "near_field_and_dispersion": 7441.577999998117,
+        "cloud_observation": 217.9797000135295,
+        "fire_explosion_damage_risk": 96.91570000723004
       },
       "mass_ledger": {
         "released_kg": 0.16819897139324907,
@@ -3172,17 +3172,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 14128.935400018236,
+      "elapsed_ms": 16322.258800006239,
       "request_digest": "95cce6d7a0fc00f959c58da094bf3f8d1a85e297a7db4113cae37db86e6df76e",
-      "result_digest": "8aa89e65935ef7f8afc03374572094f10c94a9707de097a9aa73a74995b78a7c",
+      "result_digest": "47d051279c7d4384142be0ef7006ba27827b11e67a8271a95561fa2e78385e17",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 706.6858999896795,
-        "pool": 3431.0689000121783,
-        "near_field_and_dispersion": 9233.577100007096,
-        "cloud_observation": 283.562799973879,
-        "fire_explosion_damage_risk": 111.17320001358166
+        "source": 688.6211999808438,
+        "pool": 3452.524499996798,
+        "near_field_and_dispersion": 11524.30310001364,
+        "cloud_observation": 237.65340002137236,
+        "fire_explosion_damage_risk": 107.8175000147894
       },
       "mass_ledger": {
         "released_kg": 0.0016819897139324915,
@@ -3242,7 +3242,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+          "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -3282,22 +3282,32 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4761.9507999916095,
-      "request_digest": "8998fcdf34aecbd833f9c42ebe4af746b08ca96a18d45d25d0fa6be22cc6bc4d",
-      "result_digest": "c5359a62a34e3fb024eda95a8269dca570c51872799971bed1e036e96b7cb709",
+      "elapsed_ms": 4464.921000006143,
+      "request_digest": "4a38d703a150b0d3ab59e7cecabb7a7bafd3809fa450862ef4f97c43f977ecb6",
+      "result_digest": "de1502dced22a7233709968f5ea24564d0f09894aca080e8c11ac7de42cc7771",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 704.3342999822926,
-        "pool": 0.006499991286545992,
-        "near_field_and_dispersion": 3171.692300005816,
-        "cloud_observation": 431.0096999979578,
-        "fire_explosion_damage_risk": 110.98709999350831
+        "source": 700.0403999991249,
+        "pool": 0.006400019628927112,
+        "near_field_and_dispersion": 2918.4645999921486,
+        "cloud_observation": 409.50310000334866,
+        "fire_explosion_damage_risk": 108.54079999262467
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -3318,7 +3328,7 @@
       "dynamic_state_closure_status": "BLOCKED",
       "dynamic_state_closure_ready": false,
       "dynamic_state_closure_blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
+        "inventory depletion requires provider final mass at or below tolerance"
       ],
       "domain_assessment": {
         "domain_truncated": false,
@@ -3357,7 +3367,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
+          "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -3397,22 +3407,32 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
-      "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2068.3176999737043,
-      "request_digest": "de9f17c61487181f96bc643bc4d2acdec41a3b4dec6b2e81915d805b9d922a61",
-      "result_digest": "45886f7ef0eb6ae707b59766e21a95714ea7391095303a076a0be1a909ec62bb",
+      "status": "EXECUTED",
+      "elapsed_ms": 1925.2919999998994,
+      "request_digest": "51bc2db2df4a6535d5f9f86bad90a62afad7eeda13b10de800a7344914470c71",
+      "result_digest": "97d888a2c813e3405b7de82eb38978ebf3822ea573696a057b08f096ae689b3e",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 737.3117000097409,
-        "pool": 0.022299995180219412,
-        "near_field_and_dispersion": 252.5012000114657,
-        "cloud_observation": 649.5916999992914,
-        "fire_explosion_damage_risk": 76.94769999943674
+        "source": 722.3337999894284,
+        "pool": 0.02120001590810716,
+        "near_field_and_dispersion": 255.21809997735545,
+        "cloud_observation": 569.6536999894306,
+        "fire_explosion_damage_risk": 72.44489999720827
       },
       "mass_ledger": {
         "released_kg": 4.956379784841932e-06,
@@ -3430,11 +3450,9 @@
         "time_s": 600.0,
         "provenance": "native provider inventory termination retained for multi-packet facility diagnostic"
       },
-      "dynamic_state_closure_status": "BLOCKED",
-      "dynamic_state_closure_ready": false,
-      "dynamic_state_closure_blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
+      "dynamic_state_closure_status": "READY",
+      "dynamic_state_closure_ready": true,
+      "dynamic_state_closure_blocking_reasons": [],
       "domain_assessment": {
         "domain_truncated": false,
         "inventory_outside_domain": false,
@@ -3442,8 +3460,7 @@
         "outside_domain_mole_fraction_upper_bound_at_ignition": 0.00042248254846273845,
         "outside_domain_flammability_proven_at_ignition": true,
         "domain_truncation_reasons": []
-      },
-      "reason": "source operator has declared constant-state or open physical closure limitations"
+      }
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -3527,17 +3544,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1617.4329999776091,
+      "elapsed_ms": 1584.6590000146534,
       "request_digest": "ad0f17351b3802b95df9ea90f5d3b1265b1ff507a387918636b80ce4da250288",
-      "result_digest": "9b09e638cca1003d8c8594b03239701bfe490bdc94cbc633a28f72a6faecf1a0",
+      "result_digest": "5997f747ddfcf8db1fff957b0d4954a12ed91e2a482eb9731be76c5c28ca02fe",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 756.5796000126284,
-        "pool": 0.006500020390376449,
-        "near_field_and_dispersion": 392.3419000057038,
-        "cloud_observation": 120.83810000331141,
-        "fire_explosion_damage_risk": 68.31909998436458
+        "source": 699.973000009777,
+        "pool": 0.005700014298781753,
+        "near_field_and_dispersion": 385.5324999894947,
+        "cloud_observation": 119.41829998977482,
+        "fire_explosion_damage_risk": 66.96349999401718
       },
       "mass_ledger": {
         "released_kg": 7.221896865709533e-06,
@@ -3636,15 +3653,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6573.488900001394,
+      "elapsed_ms": 6629.177399998298,
       "request_digest": "23b4e7de552dfd0c6bff5729e7f13ed2df25aecd893eb98e816ab776a7c40130",
-      "result_digest": "f98a43fea23bbc928eb9f95ea0e2ef9b5fea0293ac7c16cea8d31da7c424b3c4",
+      "result_digest": "60e7e57266430942fdac44eada72cdc84cbe5c18a056d0ee90e2bf9bcb36f134",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "endpoint_a": 3195.4837999946903,
-        "endpoint_b": 3376.2119000020903,
-        "endpoint_aggregation": 6572.9138999886345
+        "endpoint_a": 3230.465800006641,
+        "endpoint_b": 3396.4575999998488,
+        "endpoint_aggregation": 6628.469100018265
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -3744,15 +3761,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6540.267699980177,
+      "elapsed_ms": 6850.9438000037335,
       "request_digest": "de49767b99e40cf1efe84a6a1fdfbe05a08a16f5399bf4d87ca4194c8cfcdd96",
-      "result_digest": "ab6c941b4770a8556fb881c6b49d934f61a85ec7beebe2a7f314b30b879c29c2",
+      "result_digest": "423d879ac73f7b16f2d13dafcc0c8f5cbe807eb5b2338a11940a3d0b7d06c624",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "endpoint_a": 3265.380800003186,
-        "endpoint_b": 3273.261599999387,
-        "endpoint_aggregation": 6539.831000001868
+        "endpoint_a": 3515.932599984808,
+        "endpoint_b": 3332.894800027134,
+        "endpoint_aggregation": 6850.220699998317
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -3865,17 +3882,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 3604.307300003711,
+      "elapsed_ms": 3438.1622999790125,
       "request_digest": "72a223435fe4148aa98469cbc2251a843ef3a9cbb452dbd6ecc634dfb656cfbc",
-      "result_digest": "4f55d5290290c7cdc5a63e966d9fa76d99e96b207a7a4f96a63636981f73fcd0",
+      "result_digest": "892150ac44ccb867ca1abb20ee0b283f81e3f8220198814908446b0f5aad2f1b",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 726.9842999812681,
-        "pool": 0.005799985956400633,
-        "near_field_and_dispersion": 2100.910600012867,
-        "cloud_observation": 361.60770000424236,
-        "fire_explosion_damage_risk": 96.74549999181181
+        "source": 707.9366999969352,
+        "pool": 0.005699985194951296,
+        "near_field_and_dispersion": 2029.3382999952883,
+        "cloud_observation": 260.6433999899309,
+        "fire_explosion_damage_risk": 105.55989999556914
       },
       "mass_ledger": {
         "released_kg": 5.131372693670884e-06,
@@ -3966,17 +3983,17 @@
         "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5485.077099991031,
+      "elapsed_ms": 6104.280200001085,
       "request_digest": "e61732606fa30981db9d617cc7c157b9030df628e299fcb80960c073d3ad4cba",
-      "result_digest": "3801e9009c25eb6dd527f6eb5f378b9a54002e00664297f4161e09674e09f89d",
+      "result_digest": "64ebcb1843a02ff11fe0059e5daa1a1c9dfe423137ee364c81fdcc3cae9eca41",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 701.296099985484,
-        "pool": 2058.0023000075016,
-        "near_field_and_dispersion": 2199.5903000060935,
-        "cloud_observation": 105.79339999821968,
-        "fire_explosion_damage_risk": 82.15070000733249
+        "source": 688.9822999946773,
+        "pool": 1858.5391000087839,
+        "near_field_and_dispersion": 3000.8019999950193,
+        "cloud_observation": 121.47380001260899,
+        "fire_explosion_damage_risk": 106.80480001610704
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -4085,17 +4102,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 133844.00270000333,
+      "elapsed_ms": 129072.35989999026,
       "request_digest": "f9b4dc1b05965485367013ac4dcf93a91ebb01b085f3d8bce15757be063a9a00",
-      "result_digest": "8c7ba5e789a4fc4774c5ade50f323171fb01812a0f8f532bba05e91791a804ad",
+      "result_digest": "7c0f011228e97da37bbb4b4a6bc209fec7a3c7418a64b472b31c98b3b4591d10",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 716.5974999952596,
-        "pool": 125049.11459999857,
-        "near_field_and_dispersion": 7417.488499981118,
-        "cloud_observation": 226.38390000793152,
-        "fire_explosion_damage_risk": 97.26370000862516
+        "source": 703.4026999899652,
+        "pool": 120938.40189999901,
+        "near_field_and_dispersion": 6803.865899972152,
+        "cloud_observation": 191.0201999999117,
+        "fire_explosion_damage_risk": 113.14370000036433
       },
       "mass_ledger": {
         "released_kg": 4.746475781972484e-05,
@@ -4202,17 +4219,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 12766.553300025407,
+      "elapsed_ms": 11919.514200009871,
       "request_digest": "ed97072969b28f274ab65e39e24cbb6bef752dce4371715c0fd47575e04e0950",
-      "result_digest": "1faa0c1e92024a81f8461142596cd5ee4c1f653abb79558eb808b8811bc28709",
+      "result_digest": "a8004c7d56c248f54cb7547c9361e92504c417d3f79e893422149931cce40311",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 715.6851000036113,
-        "pool": 1548.0846000136808,
-        "near_field_and_dispersion": 9673.024200019427,
-        "cloud_observation": 261.0434000089299,
-        "fire_explosion_damage_risk": 115.94580000382848
+        "source": 713.0975000036415,
+        "pool": 1487.775599991437,
+        "near_field_and_dispersion": 9097.951600007946,
+        "cloud_observation": 200.3040000272449,
+        "fire_explosion_damage_risk": 113.31060001975857
       },
       "mass_ledger": {
         "released_kg": 0.00047464757819724846,
@@ -4319,17 +4336,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 20393.165799992858,
+      "elapsed_ms": 17988.77870000433,
       "request_digest": "7a636fdc540894721cf5251049f13cc77940a909da06204f90d642a8d522ffb9",
-      "result_digest": "8f787ce59abcf117a4f6a961bc3b5915ee7e0d4e09aad0740720f7470f615a16",
+      "result_digest": "cf0801b93d091866d4a7b0693c2c1533f2e69b50e9d4715dd02493a24bc891cb",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 738.53189998772,
-        "pool": 7793.2634000026155,
-        "near_field_and_dispersion": 11084.517099981895,
-        "cloud_observation": 293.357400019886,
-        "fire_explosion_damage_risk": 117.01040001935326
+        "source": 720.9348000178579,
+        "pool": 7383.973400021205,
+        "near_field_and_dispersion": 9204.880400007823,
+        "cloud_observation": 267.7788999862969,
+        "fire_explosion_damage_risk": 87.53650001017377
       },
       "mass_ledger": {
         "released_kg": 0.004746475781972487,
@@ -4436,17 +4453,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 37593.09909999138,
+      "elapsed_ms": 40045.10649997974,
       "request_digest": "a7dcef5c41cac3c98ca334ac1ad3fdd40eba991853368f51ad7b5dd0356de1a2",
-      "result_digest": "e7cb72d9b50bcd9f5e2dc840ab72fe67dc1c071b0078313f1f3fb7a80a91b2a4",
+      "result_digest": "d44027af30ffd9dd6a9221805c0580fc5705930201475ca9d1d60e6131226415",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 709.7960999817587,
-        "pool": 26538.82600000361,
-        "near_field_and_dispersion": 9538.363400002709,
-        "cloud_observation": 356.71199997887015,
-        "fire_explosion_damage_risk": 121.79370000376366
+        "source": 700.944599986542,
+        "pool": 28899.461599998176,
+        "near_field_and_dispersion": 9771.357500023441,
+        "cloud_observation": 270.86329998564906,
+        "fire_explosion_damage_risk": 68.02629999583587
       },
       "mass_ledger": {
         "released_kg": 0.04746475781972485,
@@ -4553,17 +4570,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 9834.134400007315,
+      "elapsed_ms": 9424.721200019121,
       "request_digest": "ab1560f6d46ab6ecd8357ba32f8f35a89164a0792cb0cc7c600662820acd49b9",
-      "result_digest": "704cb53957659ee30071179a3d9aceac60023719859dae50a5965fc5d2d43332",
+      "result_digest": "6b040537774eb64125273bd473761509ed14aff47d181453d73cd66a546b0c3b",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 705.7888999988791,
-        "pool": 385.47209999524057,
-        "near_field_and_dispersion": 8053.251599980285,
-        "cloud_observation": 264.51719997567125,
-        "fire_explosion_damage_risk": 98.85890001896769
+        "source": 764.6468000020832,
+        "pool": 376.0642999841366,
+        "near_field_and_dispersion": 7555.60280001373,
+        "cloud_observation": 260.4595999873709,
+        "fire_explosion_damage_risk": 108.31539999344386
       },
       "mass_ledger": {
         "released_kg": 0.47464757819724845,
@@ -4653,17 +4670,17 @@
         "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4096.703100018203,
+      "elapsed_ms": 4305.83509997814,
       "request_digest": "65cfef29a2968e5769439e5c77d55d145494c56caf07f2e9a8eaef14dd9a18dd",
-      "result_digest": "f968cf79467cd5bcf259ef343b5906530175d074c341bbec8cd534f6eb07a98f",
+      "result_digest": "8d6c7ebd6b0cd70147a548488a672f544ed3c64241f670a6b053632f485c74ae",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 713.5997000150383,
-        "pool": 0.005599984433501959,
-        "near_field_and_dispersion": 2609.754700009944,
-        "cloud_observation": 333.7570000148844,
-        "fire_explosion_damage_risk": 109.9926000169944
+        "source": 716.2784000101965,
+        "pool": 0.006100017344579101,
+        "near_field_and_dispersion": 2861.33789998712,
+        "cloud_observation": 276.00399998482317,
+        "fire_explosion_damage_risk": 113.74519998207688
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -4770,17 +4787,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 9412.577100010822,
+      "elapsed_ms": 9276.889799977653,
       "request_digest": "72ef6d267f8501756c8e77fd973bf043cca6cf7e35d2a659bef9d3e9021cec10",
-      "result_digest": "11c29ab62fcc85c19c9aeebf0d70823ae0ecf935f2743b418ef584f69cadbe50",
+      "result_digest": "c721776de89f9d61ef2e5a602bb0749c92727951413ca08656f4212b60ffb4e5",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 705.1910999871325,
-        "pool": 477.9225999955088,
-        "near_field_and_dispersion": 7582.874400017317,
-        "cloud_observation": 219.09329999471083,
-        "fire_explosion_damage_risk": 97.59789999225177
+        "source": 692.9933999781497,
+        "pool": 479.00949997710995,
+        "near_field_and_dispersion": 7441.577999998117,
+        "cloud_observation": 217.9797000135295,
+        "fire_explosion_damage_risk": 96.91570000723004
       },
       "mass_ledger": {
         "released_kg": 0.16819897139324907,
@@ -4887,17 +4904,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 14128.935400018236,
+      "elapsed_ms": 16322.258800006239,
       "request_digest": "95cce6d7a0fc00f959c58da094bf3f8d1a85e297a7db4113cae37db86e6df76e",
-      "result_digest": "8aa89e65935ef7f8afc03374572094f10c94a9707de097a9aa73a74995b78a7c",
+      "result_digest": "47d051279c7d4384142be0ef7006ba27827b11e67a8271a95561fa2e78385e17",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 706.6858999896795,
-        "pool": 3431.0689000121783,
-        "near_field_and_dispersion": 9233.577100007096,
-        "cloud_observation": 283.562799973879,
-        "fire_explosion_damage_risk": 111.17320001358166
+        "source": 688.6211999808438,
+        "pool": 3452.524499996798,
+        "near_field_and_dispersion": 11524.30310001364,
+        "cloud_observation": 237.65340002137236,
+        "fire_explosion_damage_risk": 107.8175000147894
       },
       "mass_ledger": {
         "released_kg": 0.0016819897139324915,
@@ -4957,7 +4974,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+          "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -4997,22 +5014,32 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4761.9507999916095,
-      "request_digest": "8998fcdf34aecbd833f9c42ebe4af746b08ca96a18d45d25d0fa6be22cc6bc4d",
-      "result_digest": "c5359a62a34e3fb024eda95a8269dca570c51872799971bed1e036e96b7cb709",
+      "elapsed_ms": 4464.921000006143,
+      "request_digest": "4a38d703a150b0d3ab59e7cecabb7a7bafd3809fa450862ef4f97c43f977ecb6",
+      "result_digest": "de1502dced22a7233709968f5ea24564d0f09894aca080e8c11ac7de42cc7771",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "source": 704.3342999822926,
-        "pool": 0.006499991286545992,
-        "near_field_and_dispersion": 3171.692300005816,
-        "cloud_observation": 431.0096999979578,
-        "fire_explosion_damage_risk": 110.98709999350831
+        "source": 700.0403999991249,
+        "pool": 0.006400019628927112,
+        "near_field_and_dispersion": 2918.4645999921486,
+        "cloud_observation": 409.50310000334866,
+        "fire_explosion_damage_risk": 108.54079999262467
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -5033,128 +5060,13 @@
       "dynamic_state_closure_status": "BLOCKED",
       "dynamic_state_closure_ready": false,
       "dynamic_state_closure_blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
+        "inventory depletion requires provider final mass at or below tolerance"
       ],
       "domain_assessment": {
         "domain_truncated": false,
         "inventory_outside_domain": false,
         "outside_domain_h2_kg_at_ignition": 8.470329472543003e-22,
         "outside_domain_mole_fraction_upper_bound_at_ignition": 1.0,
-        "outside_domain_flammability_proven_at_ignition": true,
-        "domain_truncation_reasons": []
-      },
-      "reason": "source operator has declared constant-state or open physical closure limitations"
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
-      "asset_id": "ambient-vaporizer",
-      "release_branch_id": "native-provider-gas-packet",
-      "frequency_port_ids": [
-        "vaporizer-accident-out"
-      ],
-      "annual_condition_id": "synthetic-generic-worker-west-3ms",
-      "initiating_frequency_per_year": 5e-05,
-      "release_branch_probability": 1.0,
-      "annual_condition_probability": 1.0,
-      "scenario_families": [
-        "inventory_over_600s"
-      ],
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
-      "provider_packet_identity": {
-        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
-        "component_id": "ambient-vaporizer-01",
-        "provider_export_schema": "prism.resolved_release.v1",
-        "port_ids": [
-          "vaporizer-accident-out"
-        ],
-        "provider_source_digests": [
-          "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
-        ],
-        "provider_result_digests": [
-          "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
-        ],
-        "provider_boundary_references": [
-          "lh2dt.DynamicVaporizer explicit inventory outlet"
-        ],
-        "termination_bases": [
-          "inventory_over_600s"
-        ],
-        "termination_provenances": [
-          "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon"
-        ],
-        "event_kinds": [
-          "accidental_leak"
-        ],
-        "input_origins": [
-          "model_prediction"
-        ],
-        "duration_s": [
-          600.0
-        ],
-        "available_mass_kg": [
-          0.0008238536226639276
-        ],
-        "cumulative_mass_out_kg": [
-          4.956379784841932e-06
-        ],
-        "operating_mode": "supply",
-        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
-        "provider_mass_balances": [
-          {
-            "schema_version": "prism.provider_mass_balance.v1",
-            "initial_mass_kg": 0.0008238536226639276,
-            "cumulative_mass_in_kg": null,
-            "cumulative_mass_out_kg": 4.956379784841932e-06,
-            "final_mass_kg": 0.0008188972428790857,
-            "reported_residual_mass_kg": -4.0657581468206416e-20,
-            "derived_accounting_residual_kg": 0.0,
-            "isolation_time_s": null,
-            "post_isolation_observation_s": null,
-            "isolation_success": null,
-            "dynamic_state_closure": null
-          }
-        ]
-      },
-      "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2068.3176999737043,
-      "request_digest": "de9f17c61487181f96bc643bc4d2acdec41a3b4dec6b2e81915d805b9d922a61",
-      "result_digest": "45886f7ef0eb6ae707b59766e21a95714ea7391095303a076a0be1a909ec62bb",
-      "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
-      "stage_elapsed_ms": {
-        "source": 737.3117000097409,
-        "pool": 0.022299995180219412,
-        "near_field_and_dispersion": 252.5012000114657,
-        "cloud_observation": 649.5916999992914,
-        "fire_explosion_damage_risk": 76.94769999943674
-      },
-      "mass_ledger": {
-        "released_kg": 4.956379784841932e-06,
-        "direct_gas_kg": 4.956379784841932e-06,
-        "ground_inflow_kg": 0.0,
-        "pool_evaporated_kg": 0.0,
-        "pool_remaining_kg": 0.0,
-        "pool_domain_escape_kg": 0.0,
-        "ground_liquid_in_flight_kg": 0.0,
-        "pool_numerical_adjustment_kg": 0.0,
-        "end_to_end_residual_kg": 0.0
-      },
-      "termination": {
-        "basis": "inventory_over_600s",
-        "time_s": 600.0,
-        "provenance": "native provider inventory termination retained for multi-packet facility diagnostic"
-      },
-      "dynamic_state_closure_status": "BLOCKED",
-      "dynamic_state_closure_ready": false,
-      "dynamic_state_closure_blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "domain_assessment": {
-        "domain_truncated": false,
-        "inventory_outside_domain": false,
-        "outside_domain_h2_kg_at_ignition": 1.0587911840678754e-22,
-        "outside_domain_mole_fraction_upper_bound_at_ignition": 0.00042248254846273845,
         "outside_domain_flammability_proven_at_ignition": true,
         "domain_truncation_reasons": []
       },
@@ -5229,15 +5141,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6573.488900001394,
+      "elapsed_ms": 6629.177399998298,
       "request_digest": "23b4e7de552dfd0c6bff5729e7f13ed2df25aecd893eb98e816ab776a7c40130",
-      "result_digest": "f98a43fea23bbc928eb9f95ea0e2ef9b5fea0293ac7c16cea8d31da7c424b3c4",
+      "result_digest": "60e7e57266430942fdac44eada72cdc84cbe5c18a056d0ee90e2bf9bcb36f134",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "endpoint_a": 3195.4837999946903,
-        "endpoint_b": 3376.2119000020903,
-        "endpoint_aggregation": 6572.9138999886345
+        "endpoint_a": 3230.465800006641,
+        "endpoint_b": 3396.4575999998488,
+        "endpoint_aggregation": 6628.469100018265
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -5337,15 +5249,15 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6540.267699980177,
+      "elapsed_ms": 6850.9438000037335,
       "request_digest": "de49767b99e40cf1efe84a6a1fdfbe05a08a16f5399bf4d87ca4194c8cfcdd96",
-      "result_digest": "ab6c941b4770a8556fb881c6b49d934f61a85ec7beebe2a7f314b30b879c29c2",
+      "result_digest": "423d879ac73f7b16f2d13dafcc0c8f5cbe807eb5b2338a11940a3d0b7d06c624",
       "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
-      "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
+      "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
       "stage_elapsed_ms": {
-        "endpoint_a": 3265.380800003186,
-        "endpoint_b": 3273.261599999387,
-        "endpoint_aggregation": 6539.831000001868
+        "endpoint_a": 3515.932599984808,
+        "endpoint_b": 3332.894800027134,
+        "endpoint_aggregation": 6850.220699998317
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -6691,7 +6603,7 @@
             "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
           ],
           "provider_result_digests": [
-            "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+            "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
           ],
           "provider_boundary_references": [
             "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -6720,7 +6632,17 @@
               "isolation_time_s": null,
               "post_isolation_observation_s": null,
               "isolation_success": null,
-              "dynamic_state_closure": null
+              "dynamic_state_closure": {
+                "schema_version": "prism.provider_dynamic_state_closure.v1",
+                "inventory_feedback_closed": true,
+                "pressure_feedback_closed": true,
+                "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+                "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+                "inventory_tolerance_kg": 1e-10,
+                "max_abs_pressure_residual_pa": 0.0,
+                "pressure_tolerance_pa": 1.02e-05,
+                "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+              }
             }
           ],
           "provider_mass_balance_statuses": [
@@ -6738,9 +6660,9 @@
         "asset_id": "ambient-vaporizer",
         "release_branch_id": "native-provider-gas-packet",
         "annual_condition_id": "synthetic-generic-worker-west-3ms",
-        "status": "EXECUTED_OPERATOR_LIMITED",
-        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
-        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "status": "EXECUTED",
+        "ledger_status": "COMPLETE",
+        "reason": null,
         "release_branch_probability": 1.0,
         "initiating_frequency_per_year": 5e-05,
         "termination": {
@@ -6759,7 +6681,7 @@
             "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
           ],
           "provider_result_digests": [
-            "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
+            "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
           ],
           "provider_boundary_references": [
             "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -6788,7 +6710,17 @@
               "isolation_time_s": null,
               "post_isolation_observation_s": null,
               "isolation_success": null,
-              "dynamic_state_closure": null
+              "dynamic_state_closure": {
+                "schema_version": "prism.provider_dynamic_state_closure.v1",
+                "inventory_feedback_closed": true,
+                "pressure_feedback_closed": true,
+                "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+                "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+                "inventory_tolerance_kg": 1e-10,
+                "max_abs_pressure_residual_pa": 0.0,
+                "pressure_tolerance_pa": 1.02e-05,
+                "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+              }
             }
           ],
           "provider_mass_balance_statuses": [
@@ -7079,8 +7011,8 @@
     "summary": {
       "case_count": 24,
       "ledger_status_counts": {
-        "COMPLETE": 11,
-        "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 13
+        "COMPLETE": 12,
+        "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 12
       },
       "termination_basis_counts": {
         "emergency_relief_discharge": 1,
@@ -7090,17 +7022,17 @@
         "reviewed_isolation_success": 17,
         "two_sided_rupture": 2
       },
-      "complete_row_count": 11,
-      "operator_limited_or_domain_incomplete_row_count": 13,
+      "complete_row_count": 12,
+      "operator_limited_or_domain_incomplete_row_count": 12,
       "domain_incomplete_row_count": 0,
       "uncomputed_row_count": 0,
       "incomplete_row_count": 0,
       "provider_packet_consumed_row_count": 24,
-      "withheld_case_count": 13,
+      "withheld_case_count": 12,
       "withheld_case_status_counts": {
-        "EXECUTED_OPERATOR_LIMITED": 13
+        "EXECUTED_OPERATOR_LIMITED": 12
       },
-      "withheld_operator_limited_case_count": 13,
+      "withheld_operator_limited_case_count": 12,
       "withheld_domain_incomplete_case_count": 0
     },
     "semantics": {
@@ -7114,18 +7046,18 @@
   },
   "coverage": {
     "generated_initiation_frequency_per_year": 0.0138259,
-    "fully_executed_case_weighted_frequency_per_year": 0.0118875,
-    "fraction_of_generated_initiation_frequency": 0.8597993620668456,
+    "fully_executed_case_weighted_frequency_per_year": 0.0119375,
+    "fraction_of_generated_initiation_frequency": 0.8634157631691246,
     "not_numerically_executed_case_count": 0,
-    "qualified_evidence_withheld_case_count": 13,
+    "qualified_evidence_withheld_case_count": 12,
     "numerically_executed_case_count": 24,
     "dynamic_state_closure_status_counts": {
-      "BLOCKED": 11,
+      "BLOCKED": 10,
       "NOT_DECLARED": 2,
-      "READY": 11
+      "READY": 12
     },
-    "dynamic_state_closure_ready_case_count": 11,
-    "dynamic_state_closure_blocked_case_count": 11,
+    "dynamic_state_closure_ready_case_count": 12,
+    "dynamic_state_closure_blocked_case_count": 10,
     "external_catalogue_scope_gap_component_count": 0,
     "meaning": "frequency coverage only; not fraction of risk captured, not physical validation",
     "by_component": [
@@ -7292,19 +7224,19 @@
         "generated_initiation_frequency_per_year": 0.0011,
         "campaign_case_count": 3,
         "executed_case_count": 3,
-        "fully_validated_case_count": 1,
-        "operator_limited_case_count": 2,
+        "fully_validated_case_count": 2,
+        "operator_limited_case_count": 1,
         "domain_incomplete_case_count": 0,
-        "uncomputed_case_count": 2,
+        "uncomputed_case_count": 1,
         "not_numerically_executed_case_count": 0,
-        "qualified_evidence_withheld_case_count": 2,
+        "qualified_evidence_withheld_case_count": 1,
         "numerically_executed_case_count": 3,
         "dynamic_state_closure_status_counts": {
-          "BLOCKED": 2,
-          "READY": 1
+          "BLOCKED": 1,
+          "READY": 2
         },
-        "dynamic_state_closure_ready_case_count": 1,
-        "dynamic_state_closure_blocked_case_count": 2,
+        "dynamic_state_closure_ready_case_count": 2,
+        "dynamic_state_closure_blocked_case_count": 1,
         "uncomputed_reasons": [
           "source operator has declared constant-state or open physical closure limitations"
         ]
@@ -13726,7 +13658,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+          "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -13766,7 +13698,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -13808,7 +13750,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+          "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -13848,7 +13790,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -13890,7 +13842,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+          "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -13930,7 +13882,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -13972,7 +13934,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e"
+          "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -14012,7 +13974,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -14054,7 +14026,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
+          "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -14094,7 +14066,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -14136,7 +14118,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
+          "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -14176,7 +14158,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -14218,7 +14210,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
+          "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -14258,7 +14250,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -14300,7 +14302,7 @@
           "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843"
         ],
         "provider_result_digests": [
-          "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6"
+          "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
         ],
         "provider_boundary_references": [
           "lh2dt.DynamicVaporizer explicit inventory outlet"
@@ -14340,7 +14342,17 @@
             "isolation_time_s": null,
             "post_isolation_observation_s": null,
             "isolation_success": null,
-            "dynamic_state_closure": null
+            "dynamic_state_closure": {
+              "schema_version": "prism.provider_dynamic_state_closure.v1",
+              "inventory_feedback_closed": true,
+              "pressure_feedback_closed": true,
+              "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+              "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+              "inventory_tolerance_kg": 1e-10,
+              "max_abs_pressure_residual_pa": 0.0,
+              "pressure_tolerance_pa": 1.02e-05,
+              "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+            }
           }
         ]
       },
@@ -15735,21 +15747,21 @@
         "scipy": "1.18.1"
       }
     },
-    "request_digest": "933b727100fabd096a1d097251d8b85dc09aaba0d9a0ff142212dcf0e8ab2422",
+    "request_digest": "65bb169670ef72a368e5cc7a6f679f8ee402b9ea7c4325fd4826473232c716a7",
     "backend_config_digest": "2465e943ae20e62abdcd1793befb06395ff6f95afdd7de85eb887f0f27565d19",
     "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-    "adapter_source_digest": "0ace197e0f4021a1295ab62fe1eb2d8eeda38282a5c9af84e557a78e491f4c95",
-    "elapsed_ms": 300.64479997963645,
+    "adapter_source_digest": "5a03ba343f8bc8ef08971ae93247b8d6834bbc2bd811f900b25994541f00c8c6",
+    "elapsed_ms": 308.51740000071004,
     "physical_validation_claim": false
   },
   "timing": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 1617.4329999776091,
-    "case_median_ms": 15758.593100006692,
-    "case_max_ms": 133844.00270000333,
-    "case_p95_ms": 107434.06516001117,
-    "case_p99_ms": 128815.97143500605,
-    "campaign_elapsed_ms": 799134.6805999929,
+    "case_min_ms": 1584.6590000146534,
+    "case_median_ms": 15246.77574999805,
+    "case_max_ms": 129072.35989999026,
+    "case_p95_ms": 107376.93489499936,
+    "case_p99_ms": 125262.32673199236,
+    "campaign_elapsed_ms": 791658.6038000241,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "semantics": {

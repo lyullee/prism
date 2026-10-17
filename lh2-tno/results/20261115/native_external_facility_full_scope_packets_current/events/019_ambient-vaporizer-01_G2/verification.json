@@ -2,7 +2,7 @@
   "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
   "provider_model": "lh2dt.DynamicVaporizer",
   "release_mode": "inventory_over_600s",
-  "provider_result_digest": "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6",
+  "provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73",
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "ambient-vaporizer-01",
@@ -36,6 +36,13 @@
   "physical_validation_claim": false,
   "frequency_inference": false,
   "facility_qra_claim": false,
+  "dynamic_state_closure": {
+    "ready": false,
+    "blocking_reasons": [
+      "dynamic source requires a reviewed isolation, inventory depletion, or relief termination basis"
+    ],
+    "provider_record_present": true
+  },
   "limitations": [
     "synthetic dynamic gas-unit inventory and diagnostic valve area",
     "no failure opening is attached",

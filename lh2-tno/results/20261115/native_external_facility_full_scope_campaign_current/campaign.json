@@ -12747,7 +12747,7 @@
                 "energy_reference": "CoolProp-HEOS:Hydrogen:native"
               },
               "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
-              "provider_result_digest": "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e",
+              "provider_result_digest": "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce",
               "provider_boundary_reference": "lh2dt.DynamicVaporizer explicit inventory outlet",
               "input_origin": "model_prediction",
               "position_enu_m": [
@@ -13213,7 +13213,17 @@
                 "isolation_time_s": null,
                 "post_isolation_observation_s": null,
                 "isolation_success": null,
-                "dynamic_state_closure": null
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+                  "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+                  "inventory_tolerance_kg": 1e-10,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 1.02e-05,
+                  "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+                }
               },
               "vertical_handoff": null,
               "compressible_plane_handoff": null,
@@ -13351,7 +13361,7 @@
                 "energy_reference": "CoolProp-HEOS:Hydrogen:native"
               },
               "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
-              "provider_result_digest": "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6",
+              "provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73",
               "provider_boundary_reference": "lh2dt.DynamicVaporizer explicit inventory outlet",
               "input_origin": "model_prediction",
               "position_enu_m": [
@@ -15977,7 +15987,17 @@
                 "isolation_time_s": null,
                 "post_isolation_observation_s": null,
                 "isolation_success": null,
-                "dynamic_state_closure": null
+                "dynamic_state_closure": {
+                  "schema_version": "prism.provider_dynamic_state_closure.v1",
+                  "inventory_feedback_closed": true,
+                  "pressure_feedback_closed": true,
+                  "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+                  "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+                  "inventory_tolerance_kg": 1e-10,
+                  "max_abs_pressure_residual_pa": 0.0,
+                  "pressure_tolerance_pa": 1.02e-05,
+                  "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+                }
               },
               "vertical_handoff": null,
               "compressible_plane_handoff": null,

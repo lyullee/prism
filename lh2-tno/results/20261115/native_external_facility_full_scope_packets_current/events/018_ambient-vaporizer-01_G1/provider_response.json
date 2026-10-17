@@ -443,7 +443,18 @@
       "diagnostic_valve_area_m2": 7.853981633974482e-07,
       "diagnostic_valve_area_is_not_failure_opening": true,
       "raw_interval_count": 16,
-      "packet_interval_count": 16
+      "packet_interval_count": 16,
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+        "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+      }
     }
   }
 }

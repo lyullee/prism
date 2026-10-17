@@ -45,15 +45,15 @@
   "matched_event_case_record_count": 24,
   "matched_event_uncomputed_case_count": 0,
   "matched_event_failed_case_count": 0,
-  "matched_event_withheld_case_count": 13,
+  "matched_event_withheld_case_count": 12,
   "matched_event_risk_atom_event_count": 24,
   "event_count": 24,
   "case_count": 24,
   "executed_case_count": 24,
   "uncomputed_case_count": 0,
   "failed_case_count": 0,
-  "operator_limited_case_count": 13,
-  "withheld_case_count": 13,
+  "operator_limited_case_count": 12,
+  "withheld_case_count": 12,
   "risk_atom_count": 96,
   "conditional_diagnostic_facility_risk_available": true,
   "facility_total_risk_available": false,
@@ -69,7 +69,7 @@
     "orphan_binding_count": 0,
     "binding_digest": "c0a22d6b0268dd8c41f7551f97a4263f65c305664b8759dce2f9256db07f1158"
   },
-  "campaign_elapsed_ms": 799135.2226999879,
+  "campaign_elapsed_ms": 791659.1148000152,
   "packet_digests": [
     {
       "component_id": "storage-tank-01",
@@ -819,12 +819,22 @@
       "cumulative_mass_out_kg": 4.956379784841932e-06,
       "integrated_mass_kg": 4.956379784841933e-06,
       "mass_residual_kg": -8.470329472543003e-22,
-      "provider_packet_digest": "4993f1cd2d37e4a4618bee7f38771cb193b87a51282846aece187fc2123a45f8",
-      "provider_result_digest": "32b340905cc8c4de27f92e2e49623b192f7b48a417c39ffccdc1319dbaaf255e",
+      "provider_packet_digest": "d72fc77ebbf091c41fc989a79a298d049acaa4887d94ed51fd71b7625765aad1",
+      "provider_result_digest": "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce",
       "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/018_ambient-vaporizer-01_G1/resolved_release.json",
       "termination_basis": "inventory_depletion",
       "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume releasable-inventory ledger; atmospheric-pressure equilibrium residual is retained",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "46cdf1c7b5e1470a90fc230bd06da419adc4cae989c3a3b637e4730917e9019a",
+        "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+      }
     },
     {
       "component_id": "ambient-vaporizer-01",
@@ -854,12 +864,22 @@
       "cumulative_mass_out_kg": 4.956379784841932e-06,
       "integrated_mass_kg": 4.956379784841932e-06,
       "mass_residual_kg": 0.0,
-      "provider_packet_digest": "054c3ecf821bee7e7cddf65d2c14c1528e12d715f57db0caafbc1ab3053f2362",
-      "provider_result_digest": "eb167aa43523a3fca27c88a4a04526ee9655818d62e076c59d2eb6c750ad5dc6",
+      "provider_packet_digest": "11a7b0d6a1873ec954a573b35878c312c175248c0d1d0b009cc0cc17dd2fcff4",
+      "provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73",
       "packet_path": "results/20261115/native_external_facility_full_scope_packets_current/events/019_ambient-vaporizer-01_G2/resolved_release.json",
       "termination_basis": "inventory_over_600s",
       "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
-      "dynamic_state_closure": null
+      "dynamic_state_closure": {
+        "schema_version": "prism.provider_dynamic_state_closure.v1",
+        "inventory_feedback_closed": true,
+        "pressure_feedback_closed": true,
+        "state_history_digest": "353ce12d77bae83081b45ef327e0059f4b9764e795812c90687e02f03fa47e44",
+        "max_abs_inventory_residual_kg": 1.0842021724855044e-19,
+        "inventory_tolerance_kg": 1e-10,
+        "max_abs_pressure_residual_pa": 0.0,
+        "pressure_tolerance_pa": 1.02e-05,
+        "provenance": "lh2dt.DynamicVaporizer recomputed pressure from its finite-volume mass, internal-energy, and wall-temperature state before each inventory outlet evaluation; the digest covers the complete provider history."
+      }
     },
     {
       "component_id": "ambient-vaporizer-01",
