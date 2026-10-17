@@ -19,8 +19,9 @@ The calculation therefore has the following explicit split:
 
 - 44 conditional consequence executions are available for diagnostic review.
 - 29 cases remain `EXECUTED_OPERATOR_LIMITED` for strict evidence purposes.
-- 12 cases remain numerically open at the release-boundary audit because the
-  termination basis or residual inventory is not closed.
+- 2 cases remain numerically open at the release-boundary audit because the
+  provider termination evidence is invalid; the other 42 cases are numerically
+  closed, with 29 still requiring operator review for strict qualification.
 - No missing case is silently replaced by another accident family or another
   provider packet.
 
