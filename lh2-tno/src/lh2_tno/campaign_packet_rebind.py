@@ -189,18 +189,37 @@ def _request_from_selected_packet(
     # metadata only; it does not infer a duration, mass, frequency, or QRA
     # result.
     source_operator_by_basis = {
-            "inventory_depletion": "equipment_inventory_depletion",
-            "inventory_over_600s": "equipment_inventory_over_600s",
-            "two_sided_rupture": "equipment_two_sided_rupture",
-            "emergency_relief_discharge": "equipment_emergency_relief",
+        "inventory_depletion": (
+            "equipment_liquid_release"
+            if isinstance(release, ResolvedLiquidRelease)
+            else "equipment_inventory_depletion"
+        ),
+        "inventory_over_600s": (
+            "equipment_liquid_over_600s"
+            if isinstance(release, ResolvedLiquidRelease)
+            else "equipment_inventory_over_600s"
+        ),
+        "two_sided_rupture": "equipment_two_sided_rupture",
+        "emergency_relief_discharge": "equipment_emergency_relief",
     }
-    source_operator = source_operator_by_basis.get(
-        getattr(release, "termination_basis", None)
-    )
-    if source_operator is not None and defaults.get("source_operator") in {
-        None,
-        "integrated_transient",
-    }:
+    # A pressure-equalisation packet owns its natural stop time.  Older
+    # campaign templates usually carry the generic declared-duration context;
+    # retaining that context makes the provider packet fail validation even
+    # though the packet itself is complete.  Bind the explicit operator and
+    # duration mode from the provider termination basis.  This only changes
+    # request identity metadata; the provider duration and mass ledger remain
+    # authoritative.
+    if getattr(release, "termination_basis", None) == "model_pressure_equalization":
+        defaults["source_duration_mode"] = "model_natural"
+        if isinstance(release, ResolvedLiquidRelease):
+            defaults["source_operator"] = "equipment_liquid_release"
+        else:
+            defaults["source_operator"] = "equipment_pressure_equalization"
+    source_operator = source_operator_by_basis.get(getattr(release, "termination_basis", None))
+    if source_operator is not None:
+        # The provider termination basis determines which explicit equipment
+        # operator is contract-compatible.  Rebinding an exact packet must
+        # repair stale template metadata as well as replace the packet.
         defaults["source_operator"] = source_operator
     if getattr(release, "event_kind", None) == "emergency_relief":
         defaults["release_termination"] = {

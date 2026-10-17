@@ -102,6 +102,16 @@ def test_rebind_binds_equipment_inventory_source_operator_from_provider_basis():
     assert rebound["release_termination"]["basis"] == "inventory_depletion"
 
 
+def test_rebind_binds_pressure_equalization_operator_and_natural_duration():
+    release = _release().model_copy(update={"termination_basis": "model_pressure_equalization"})
+
+    rebound = _request_from_selected_packet(_request(), release)
+
+    assert rebound["source_operator"] == "equipment_pressure_equalization"
+    assert rebound["source_duration_mode"] == "model_natural"
+    assert rebound["release_termination"]["basis"] == "model_pressure_equalization"
+
+
 def test_selected_packet_state_snapshot_is_loaded_from_verification_sidecar(tmp_path):
     packet_path = tmp_path / "resolved_release.json"
     packet_path.write_text("{}\n", encoding="utf-8")

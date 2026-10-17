@@ -1,0 +1,11 @@
+{
+  "schema_version": "prism.campaign_packet_rebind_compatibility_candidate.v1",
+  "status": "CANDIDATE_LATEST_EXTERNAL_PACKET_ROOT_WITH_ONE_FREQUENCY_INCOMPATIBLE_EVENT",
+  "latest_packet_root": "results/20261115/native_external_facility_full_scope_packets_current",
+  "excluded_latest_event": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "excluded_latest_termination_basis": "inventory_over_600s",
+  "frequency_catalogue_mode": "instantaneous_inventory",
+  "reason": "latest provider packet termination basis is incompatible with the existing frequency event mode; no frequency semantics were changed",
+  "fallback_packet": "existing authority campaign request retained for this one event only",
+  "promotion_policy": "diagnostic comparison only; not a latest-root facility result"
+}

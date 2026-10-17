@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,497 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,498 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -1018,6 +1018,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Native external provider closure recheck (diagnostic candidate)](docs/PRISM_native_external_base_recheck_20261018.md)
 - [External evidence workspace recheck](docs/PRISM_external_evidence_recheck_20261018.md)
 - [External LH2 model change recheck and latest packet replay](docs/PRISM_external_model_change_recheck_20261018_en.md)
+- [Latest external model compatibility recheck](docs/PRISM_latest_external_model_compatibility_recheck_20261018_en.md)
 - [Partial inspection-centre boundary evidence audit](docs/PRISM_partial_LH2_boundary_evidence_en.md)
 - [Partial boundary evidence record](results/20261117/inspection_center_partial_boundary_evidence.json)
 - [v0.6.3 distribution record (English)](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
