@@ -5804,5 +5804,11 @@
   "external_lh2dt_native_multi_equipment_recheck_equipment_count": 7,
   "external_lh2dt_native_multi_equipment_recheck_dynamic_closure_ready_count": 4,
   "external_lh2dt_native_multi_equipment_recheck_provider_packet_promoted_count": 0,
-  "external_lh2dt_native_multi_equipment_recheck_facility_qra_claim": false
+  "external_lh2dt_native_multi_equipment_recheck_facility_qra_claim": false,
+  "external_lh2dt_native_multi_equipment_chain_recheck_record": "results/20261115/native_external_multi_equipment_chain_recheck_current/manifest.json",
+  "external_lh2dt_native_multi_equipment_chain_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_CHAIN_EXECUTED_DIAGNOSTIC; 7 resolved-release packets replayed through 6 SLABx-LH2 paths and 1 compressible-plane path; provider closure carried for 4 dynamic rows; no frequency, qualification, physical validation or facility IR/F-N promotion",
+  "external_lh2dt_native_multi_equipment_chain_recheck_chain_count": 7,
+  "external_lh2dt_native_multi_equipment_chain_recheck_dynamic_closure_carried_count": 4,
+  "external_lh2dt_native_multi_equipment_chain_recheck_provider_packet_promoted_count": 0,
+  "external_lh2dt_native_multi_equipment_chain_recheck_facility_qra_claim": false
 }

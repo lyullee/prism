@@ -65,6 +65,28 @@ def _load(path: Path) -> dict[str, Any]:
     return value
 
 
+def _provider_closure(packet_path: Path) -> dict[str, Any] | None:
+    """Read the provider-owned closure beside a resolved release packet.
+
+    The consequence-chain verification file intentionally describes the chain
+    only.  Closure evidence belongs to the upstream provider response, so the
+    recheck manifest carries the exact object without treating it as a
+    qualification or facility-QRA claim.
+    """
+    response_path = packet_path.parent / "provider_response.json"
+    if not response_path.exists():
+        return None
+    response = _load(response_path)
+    data = response.get("data")
+    if not isinstance(data, dict):
+        return None
+    provider_meta = data.get("provider_meta")
+    if not isinstance(provider_meta, dict):
+        return None
+    closure = provider_meta.get("dynamic_state_closure")
+    return dict(closure) if isinstance(closure, dict) else None
+
+
 def run(
     *,
     packet_root: Path,
@@ -106,6 +128,17 @@ def run(
                 )
                 if key in verification
             })
+        packet_folder = "valve" if name == "valve_compressible" else {
+            "tank": "tank",
+            "pipe": "pipe",
+            "pump": "pump",
+            "vaporizer": "vaporizer",
+            "reliquefier": "reliquefier",
+            "vent": "vent",
+        }[name]
+        closure = _provider_closure(packet_root / packet_folder / "resolved_release.json")
+        if closure is not None:
+            record["dynamic_state_closure"] = closure
         chains.append(record)
         if completed.returncode != 0 or not verification_path.exists():
             raise RuntimeError(f"{name} chain failed: {completed.stdout}{completed.stderr}")

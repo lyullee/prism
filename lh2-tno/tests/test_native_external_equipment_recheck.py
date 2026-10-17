@@ -8,7 +8,10 @@ from scripts.run_native_external_equipment_recheck import (
     summarise_packet,
     tree_digest,
 )
-from scripts.run_native_external_equipment_chain_recheck import chain_commands
+from scripts.run_native_external_equipment_chain_recheck import (
+    _provider_closure,
+    chain_commands,
+)
 
 
 def test_exporter_commands_cover_all_declared_native_equipment() -> None:
@@ -79,3 +82,27 @@ def test_chain_commands_keep_high_speed_valve_on_compressible_path() -> None:
     assert "run_compressible_plane_chain.py" in commands["valve_compressible"][1]
     assert "--handoff" in commands["valve_compressible"]
     assert "validate_lh2dt_prism_packet_chain.py" in commands["tank"][1]
+
+
+def test_provider_closure_is_carried_from_upstream_response(tmp_path: Path) -> None:
+    packet_dir = tmp_path / "pipe"
+    packet_dir.mkdir()
+    (packet_dir / "resolved_release.json").write_text("{}", encoding="utf-8")
+    (packet_dir / "provider_response.json").write_text(
+        json.dumps({
+            "data": {
+                "provider_meta": {
+                    "dynamic_state_closure": {
+                        "schema_version": "prism.provider_dynamic_state_closure.v1",
+                        "ready": True,
+                        "state_history_digest": "a" * 64,
+                    }
+                }
+            }
+        }),
+        encoding="utf-8",
+    )
+    closure = _provider_closure(packet_dir / "resolved_release.json")
+    assert closure is not None
+    assert closure["ready"] is True
+    assert closure["state_history_digest"] == "a" * 64

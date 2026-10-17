@@ -91,6 +91,14 @@ The seven-equipment recheck in
 shows the same handoff across the dynamic pipe, layered tank, vaporizer, and
 reliquefier. Fixed-source valve, pump, and vent-stack rows remain explicitly
 diagnostic or operator-limited.
+The follow-on chain replay is recorded in
+`results/20261115/native_external_multi_equipment_chain_recheck_current/manifest.json`.
+It consumes the same seven resolved-release packets, runs six SLABx-LH2 paths
+and one compressible-plane path, and carries the provider dynamic-state
+closure object for the tank, pipe, vaporizer, and reliquefier rows. The replay
+is end-to-end diagnostic evidence only: no initiating frequency, provider
+qualification, independent physical validation, or facility IR/F-N claim is
+created.
 
 To check that these status counts remain consistent after campaign merging,
 run the independent cross-ledger audit. Supply every campaign used in the

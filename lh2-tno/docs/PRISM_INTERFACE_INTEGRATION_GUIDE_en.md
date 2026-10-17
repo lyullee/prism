@@ -278,6 +278,16 @@ provider digest and report `READY` for source dynamics after reviewed
 isolation. The records are still synthetic and do not promote frequency,
 physical validation, or facility IR/F-N claims.
 
+The seven-equipment replay at
+`results/20261115/native_external_multi_equipment_chain_recheck_current/manifest.json`
+consumes those resolved-release packets through the ordinary SLABx-LH2 path
+for six equipment rows and the compressible-plane adapter for the valve row.
+The manifest copies the provider-owned closure object for the four dynamic
+equipment rows so a downstream audit can verify the exact state-history
+digest. This is an end-to-end diagnostic replay; it does not create an
+initiating frequency or open provider, physical-validation, or facility-QRA
+promotion gates.
+
 ## 6. Python resolver example
 
 ```python
