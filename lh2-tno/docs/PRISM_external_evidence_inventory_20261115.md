@@ -10,6 +10,7 @@ packet, infer a frequency, or open the facility IR/F-N result.
 | Workspace | Scan result | JSON artifacts | Supporting files | Provider responses | Qualification records | Physical-validation claims | Complete facility-QRA claims |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `_external_lh2dt_models_20261016` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 1 | 2 | 0 | 0 | 0 | 0 |
+| `_prism_clean_lh2dt_models_16f7a4b` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 1 | 2 | 0 | 0 | 0 | 0 |
 | `SLABx_LH2/.release-work/DynamicLH2PoolX-review` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 40 | 15 | 0 | 0 | 0 | 0 |
 | `액화수소검사지원센터 데이터` | `NO_EXTERNAL_JSON_ARTIFACTS` | 0 | 24 | 0 | 0 | 0 | 0 |
 
@@ -55,9 +56,15 @@ operator-limited releases to a qualified facility QRA.
 
 ## Reproduction
 
-Run from the `lh2-tno` package directory:
+Run from the `lh2-tno` package directory. The current four-root combined
+recheck is stored at
+`results/20261115/external_provider_workspace_roots_inventory_current.json`.
 
 ```powershell
+python scripts/audit_provider_artifact_workspace_roots.py `
+  --root prism_clean_lh2dt="C:\Users\lyul\Desktop\DocuData\_prism_clean_lh2dt_models_16f7a4b" `
+  --output results/20261115/prism_clean_lh2dt_provider_artifact_inventory_current.json
+
 python scripts/audit_provider_artifact_workspace_roots.py `
   --root external_lh2dt="C:\Users\lyul\Desktop\DocuData\_external_lh2dt_models_20261016" `
   --output results/20261115/external_lh2dt_provider_artifact_inventory_current.json
