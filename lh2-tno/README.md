@@ -849,6 +849,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 ## Documentation
 
+- [IJHE remaining tasks and promotion gates (Korean)](docs/IJHE_REMAINING_TASKS_KO.md)
+
 - [Current IJHE objective coverage](docs/PRISM_IJHE_objective_coverage_current_20261115.md)
 - [Conditional facility IR/F-N interpretation](docs/PRISM_conditional_facility_risk_interpretation_20261115.md)
 - [Inventory termination margin diagnostic](docs/PRISM_inventory_termination_margin_20261115.md)
