@@ -272,6 +272,7 @@ To verify the latest pointer and its fail-closed FFI gate metadata:
 python scripts/verify_latest_ijhe_audit.py `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --release-boundary results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json `
+  --facility-qra-gate-summary results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json `
   --output results/20261115/latest_ijhe_audit_verification.json
 ```
 

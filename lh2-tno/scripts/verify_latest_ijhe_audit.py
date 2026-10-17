@@ -19,6 +19,7 @@ def main() -> int:
     parser.add_argument("--receptor-geometry-interpretation", type=Path)
     parser.add_argument("--scope-matrix", type=Path)
     parser.add_argument("--release-boundary", type=Path)
+    parser.add_argument("--facility-qra-gate-summary", type=Path)
     parser.add_argument("--native-external-multi-equipment-recheck", type=Path)
     parser.add_argument("--native-external-clean-full-scope-replay", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -30,6 +31,7 @@ def main() -> int:
     geometry_path = args.receptor_geometry_interpretation.resolve() if args.receptor_geometry_interpretation else None
     scope_path = args.scope_matrix.resolve() if args.scope_matrix else None
     release_path = args.release_boundary.resolve() if args.release_boundary else None
+    gate_path = args.facility_qra_gate_summary.resolve() if args.facility_qra_gate_summary else None
     native_recheck_path = (
         args.native_external_multi_equipment_recheck.resolve()
         if args.native_external_multi_equipment_recheck
@@ -48,6 +50,7 @@ def main() -> int:
         receptor_geometry=geometry_path,
         scope_matrix=scope_path,
         release_boundary=release_path,
+        facility_qra_gate_summary=gate_path,
         native_external_multi_equipment_recheck=native_recheck_path,
         native_external_clean_full_scope_replay=clean_scope_path,
     )

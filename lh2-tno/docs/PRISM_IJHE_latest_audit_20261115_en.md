@@ -150,12 +150,13 @@ Run from the package directory:
 python scripts/verify_latest_ijhe_audit.py `
   --scope-matrix results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/scope_matrix.json `
   --release-boundary results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json `
+  --facility-qra-gate-summary results/20261115/native_external_facility_full_scope_campaign_current/facility_qra_gate_summary.json `
   --output results/20261115/latest_ijhe_audit_verification.json
 ```
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N. The saved facility assessment now consumes the validation-evidence matrix explicitly: its physical-validation gate is `RESTRICTED_EVIDENCE_MATRIX` with decision `FACILITY_QRA_WITHHELD`, and its `physical_validation_gate_complete` flag is `false`.
 
-The current status ledger records **1,475 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,477 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The current validation matrix includes the hash-reverified PRESLHY Trial 10
 outdoor observation bundle and a measured-source SLABx comparison. It is

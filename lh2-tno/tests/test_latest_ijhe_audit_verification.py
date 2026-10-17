@@ -164,6 +164,74 @@ def test_latest_ijhe_audit_verification_checks_boundary_join_summary(tmp_path: P
     assert any("closed/open counts" in reason for reason in drifted["blocking_reasons"])
 
 
+def test_latest_ijhe_audit_verification_binds_facility_qra_gate_summary(tmp_path: Path):
+    gate = {
+        "schema_version": "prism.facility_qra_gate_summary.v1",
+        "status": "FACILITY_QRA_WITHHELD",
+        "promotion_allowed": False,
+        "facility_qra_claim": False,
+        "gates": {
+            "facility_scope": {"complete": False},
+            "frequency_port_binding": {"complete": True},
+        },
+        "blocking_reasons": ["scope"],
+    }
+    _write(tmp_path / "gate.json", gate)
+    _write(
+        tmp_path / "audit.json",
+        {
+            "status": "INCOMPLETE_EVIDENCE",
+            "checks": [
+                {"status": "PASS"},
+                {
+                    "name": "facility_qra_gate_summary",
+                    "status": "PASS",
+                    "evidence": {
+                        "status": "FACILITY_QRA_WITHHELD",
+                        "promotion_allowed": False,
+                        "facility_qra_claim": False,
+                        "gate_names": ["facility_scope", "frequency_port_binding"],
+                        "incomplete_gate_count": 1,
+                        "blocking_reason_count": 1,
+                    },
+                },
+            ],
+            "blocking_reasons": [],
+            "complete_facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+    )
+    _write(
+        tmp_path / "handoff.json",
+        {
+            "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+            "status": "PASS_WITH_SCOPE_LIMITATIONS",
+            "checks": [{"status": "PASS"}],
+            "qualification_boundary": {
+                "facility_ir_fn_available": False,
+                "physical_validation_claim": False,
+            },
+        },
+    )
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 2,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "facility_qra_gate_summary_record": "gate.json",
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["facility_qra_gate_summary_blocking_reason_count"] == 1
+
+    gate["blocking_reasons"].append("provider")
+    _write(tmp_path / "gate.json", gate)
+    drifted = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert drifted["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("facility QRA gate blocking_reason_count" in reason for reason in drifted["blocking_reasons"])
+
+
 def test_latest_ijhe_audit_verification_passes_without_opening_qualification(tmp_path: Path):
     audit = {
         "status": "INCOMPLETE_EVIDENCE",

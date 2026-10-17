@@ -35,6 +35,7 @@ def verify_latest_ijhe_audit(
     receptor_geometry: Mapping[str, Any] | Path | None = None,
     scope_matrix: Mapping[str, Any] | Path | None = None,
     release_boundary: Mapping[str, Any] | Path | None = None,
+    facility_qra_gate_summary: Mapping[str, Any] | Path | None = None,
     release_closure_worklist: Mapping[str, Any] | Path | None = None,
     native_external_multi_equipment_recheck: Mapping[str, Any] | Path | None = None,
     native_external_clean_full_scope_replay: Mapping[str, Any] | Path | None = None,
@@ -171,6 +172,10 @@ def verify_latest_ijhe_audit(
         release_boundary,
         ("latest_release_boundary_case_audit",),
     )
+    gate_value, gate_path, gate_present = _load_optional(
+        facility_qra_gate_summary,
+        ("facility_qra_gate_summary_record",),
+    )
     if scope_present:
         if scope_value.get("schema_version") != "prism.major_accident_scope.v1":
             reasons.append("latest facility scope matrix schema is not the declared PRISM schema")
@@ -185,6 +190,54 @@ def verify_latest_ijhe_audit(
         expected_cases = status.get("latest_union_case_count")
         if expected_cases is not None and scope_value.get("case_count") != expected_cases:
             reasons.append("latest facility scope matrix case count disagrees with status ledger")
+    if gate_present:
+        if gate_value.get("schema_version") != "prism.facility_qra_gate_summary.v1":
+            reasons.append("latest facility QRA gate summary schema is not the declared PRISM schema")
+        embedded_gate = next(
+            (
+                item
+                for item in checks
+                if isinstance(item, Mapping)
+                and item.get("name") == "facility_qra_gate_summary"
+            ),
+            None,
+        )
+        embedded_evidence = (
+            embedded_gate.get("evidence")
+            if isinstance(embedded_gate, Mapping)
+            else None
+        )
+        if not isinstance(embedded_evidence, Mapping):
+            reasons.append("latest audit has no embedded facility QRA gate summary evidence")
+        else:
+            source_gates = gate_value.get("gates")
+            source_gate_names = (
+                sorted(source_gates.keys())
+                if isinstance(source_gates, Mapping)
+                else None
+            )
+            expected_incomplete = (
+                sum(not row.get("complete", False) for row in source_gates.values())
+                if isinstance(source_gates, Mapping)
+                else None
+            )
+            comparisons = {
+                "status": gate_value.get("status"),
+                "promotion_allowed": gate_value.get("promotion_allowed"),
+                "facility_qra_claim": gate_value.get("facility_qra_claim"),
+                "gate_names": source_gate_names,
+                "incomplete_gate_count": expected_incomplete,
+                "blocking_reason_count": (
+                    len(gate_value.get("blocking_reasons", []))
+                    if isinstance(gate_value.get("blocking_reasons"), list)
+                    else None
+                ),
+            }
+            for key, expected in comparisons.items():
+                if embedded_evidence.get(key) != expected:
+                    reasons.append(
+                        f"latest audit embedded facility QRA gate {key} disagrees with source summary"
+                    )
     if release_present:
         if release_value.get("schema_version") != "prism.release_boundary_case_audit.v1":
             reasons.append("latest release-boundary audit schema is not the declared PRISM schema")
@@ -913,6 +966,21 @@ def verify_latest_ijhe_audit(
         "facility_scope_matrix_record": str(scope_path) if scope_path else None,
         "facility_scope_matrix_status": scope_status,
         "facility_scope_matrix_case_count": scope_value.get("case_count") if scope_value else None,
+        "facility_qra_gate_summary_record": str(gate_path) if gate_path else None,
+        "facility_qra_gate_summary_status": gate_value.get("status") if gate_value else None,
+        "facility_qra_gate_summary_incomplete_gate_count": (
+            sum(
+                not row.get("complete", False)
+                for row in gate_value.get("gates", {}).values()
+            )
+            if gate_value and isinstance(gate_value.get("gates"), Mapping)
+            else None
+        ),
+        "facility_qra_gate_summary_blocking_reason_count": (
+            len(gate_value.get("blocking_reasons", []))
+            if gate_value and isinstance(gate_value.get("blocking_reasons"), list)
+            else None
+        ),
         "release_boundary_audit_record": str(release_path) if release_path else None,
         "release_boundary_audit_status": release_value.get("status") if release_value else None,
         "release_boundary_case_count": release_value.get("case_count") if release_value else None,
