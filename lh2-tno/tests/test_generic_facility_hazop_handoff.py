@@ -89,3 +89,39 @@ def test_evidence_coverage_rejects_extra_attachment_keys():
     coverage = result["current_evidence_coverage"]
     assert coverage["status"] == "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING"
     assert coverage["summary"]["extra_attachment_key_count"] == 1
+
+
+def test_attached_provider_chain_is_exposed_without_frequency_inference():
+    frames, _, current_frames = _inputs()
+    tables = json.loads(
+        (ROOT / "examples/generic_provider_bound_hazop_tables.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    current = json.loads(
+        (ROOT / "results/20261115/generic_current_quantitative_attachments.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    forecast = json.loads(
+        (ROOT / "results/20261115/generic_forecast_quantitative_attachments.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    result = build_handoff(frames, tables, current_frames, current, forecast)
+    current_eval = result["current_diagnostic_evaluation"]
+    forecast_eval = result["forecast_diagnostic_evaluation"]
+    assert current_eval["status"] == "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE"
+    assert forecast_eval["status"] == "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE"
+    assert current_eval["summary"]["request_count"] == 3
+    assert forecast_eval["summary"]["request_count"] == 3
+    assert current_eval["summary"]["diagnostic_chain_attached_count"] == 3
+    assert forecast_eval["summary"]["diagnostic_chain_attached_count"] == 3
+    assert current_eval["summary"]["frequency_value_withheld_count"] == 1
+    assert forecast_eval["summary"]["frequency_value_withheld_count"] == 1
+    storage_row = next(
+        row for row in current_eval["rows"] if row["component_id"] == "storage-tank-01"
+    )
+    assert storage_row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD"
+    assert storage_row["frequency_inference_performed"] is False
+    assert storage_row["facility_qra_promotion"] is False

@@ -249,6 +249,119 @@ def _evidence_coverage(
     }
 
 
+def _diagnostic_quantitative_evaluation(
+    requests: list[Mapping[str, Any]],
+    attachments: Any | None,
+    *,
+    path: str,
+) -> dict[str, Any]:
+    """Expose exact attached consequence results at the generic facility seam.
+
+    This is an evidence-bound handoff, not a new physics calculation.  The
+    provider and consequence records are copied only after the same request
+    key has passed the four-block coverage contract.  A missing literature
+    rate remains visible; it is never replaced with a value inferred from a
+    sensor or from a neighbouring event.
+    """
+    attachments = attachments if isinstance(attachments, Mapping) else {}
+    rows: list[dict[str, Any]] = []
+    for request in requests:
+        request_id = str(request.get("request_id") or "")
+        attachment = attachments.get(request_id)
+        evidence = attachment.get("evidence") if isinstance(attachment, Mapping) else None
+        provider = evidence.get("provider_release_packet") if isinstance(evidence, Mapping) else None
+        frequency = evidence.get("frequency_binding") if isinstance(evidence, Mapping) else None
+        consequence = evidence.get("slabx_lh2_consequence") if isinstance(evidence, Mapping) else None
+        facility = evidence.get("facility_condition_binding") if isinstance(evidence, Mapping) else None
+        outputs = consequence.get("receptor_damage_or_harm_outputs") if isinstance(consequence, Mapping) else None
+        complete = (
+            isinstance(provider, Mapping)
+            and isinstance(frequency, Mapping)
+            and isinstance(consequence, Mapping)
+            and isinstance(facility, Mapping)
+            and isinstance(outputs, Mapping)
+        )
+        chain_executed = bool(outputs.get("full_chain_executed")) if isinstance(outputs, Mapping) else False
+        annual_frequency = frequency.get("annual_frequency") if isinstance(frequency, Mapping) else None
+        frequency_bound = isinstance(annual_frequency, (int, float)) and not isinstance(annual_frequency, bool)
+        if not complete:
+            status = "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING"
+        elif not chain_executed:
+            status = "WITHHELD_CONSEQUENCE_CHAIN_NOT_EXECUTED"
+        elif not frequency_bound:
+            status = "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD"
+        else:
+            status = "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED"
+        rows.append({
+            "path": path,
+            "request_id": request_id,
+            "component_id": request.get("component_id"),
+            "scenario_id": request.get("scenario_id"),
+            "operating_mode": request.get("operating_mode"),
+            "scenario_family": request.get("scenario_family"),
+            "status": status,
+            "provider_source_digest": provider.get("source_digest") if isinstance(provider, Mapping) else None,
+            "provider_release_boundary": {
+                key: provider.get(key)
+                for key in (
+                    "release_start_s", "release_end_s", "duration_s",
+                    "termination_basis", "isolation_time_s",
+                    "inventory_initial_kg", "inventory_out_kg", "mass_residual_kg",
+                    "inventory_status",
+                )
+            } if isinstance(provider, Mapping) else None,
+            "literature_event_id": frequency.get("literature_event_id") if isinstance(frequency, Mapping) else None,
+            "annual_frequency": annual_frequency,
+            "frequency_source_provenance": frequency.get("source_provenance") if isinstance(frequency, Mapping) else None,
+            "frequency_inference_performed": bool(frequency.get("frequency_inference_performed")) if isinstance(frequency, Mapping) else False,
+            "slabx_lh2_result_digest": consequence.get("result_digest") if isinstance(consequence, Mapping) else None,
+            "weather_condition_id": consequence.get("weather_condition_id") if isinstance(consequence, Mapping) else None,
+            "ignition_branch_id": consequence.get("ignition_branch_id") if isinstance(consequence, Mapping) else None,
+            "chain_stages": list(outputs.get("stages", ())) if isinstance(outputs, Mapping) else [],
+            "processing_time_ms": consequence.get("processing_time_ms") if isinstance(consequence, Mapping) else None,
+            "facility_ir_fn_available": bool(facility.get("facility_ir_fn_available")) if isinstance(facility, Mapping) else False,
+            "facility_qra_promotion": bool(facility.get("facility_qra_promotion")) if isinstance(facility, Mapping) else False,
+            "physical_validation_claim": bool(outputs.get("physical_validation_claim")) if isinstance(outputs, Mapping) else False,
+            "diagnostic_only": True,
+        })
+    status_counts = {}
+    for row in rows:
+        status_counts[row["status"]] = status_counts.get(row["status"], 0) + 1
+    attached_count = sum(
+        row["status"] in {
+            "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED",
+            "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD",
+        }
+        for row in rows
+    )
+    return {
+        "schema_version": "prism.generic_diagnostic_quantitative_evaluation.v1",
+        "path": path,
+        "status": (
+            "CONDITIONAL_DIAGNOSTIC_EVALUATION_AVAILABLE"
+            if attached_count
+            else "WITHHELD_QUANTITATIVE_EVALUATION"
+        ),
+        "rows": rows,
+        "summary": {
+            "request_count": len(rows),
+            "diagnostic_chain_attached_count": attached_count,
+            "frequency_bound_count": sum(row["status"] == "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED" for row in rows),
+            "frequency_value_withheld_count": sum(row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD" for row in rows),
+            "status_counts": status_counts,
+        },
+        "policy": {
+            "evidence_reused_without_new_physics": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_ir_fn_calculated": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+            "diagnostic_only": True,
+        },
+    }
+
+
 def build_handoff(
     frames: Any,
     tables: Mapping[str, Any],
@@ -317,6 +430,12 @@ def build_handoff(
     forecast_coverage = _evidence_coverage(
         handoff["requests"], forecast_attachments
     )
+    current_diagnostic_evaluation = _diagnostic_quantitative_evaluation(
+        current_handoff["requests"], current_attachments, path="current"
+    )
+    forecast_diagnostic_evaluation = _diagnostic_quantitative_evaluation(
+        handoff["requests"], forecast_attachments, path="forecast"
+    )
     return {
         "schema_version": SCHEMA,
         "facility_id": facility_id,
@@ -328,6 +447,8 @@ def build_handoff(
         "current_state_handoff": current_handoff,
         "current_evidence_coverage": current_coverage,
         "forecast_evidence_coverage": forecast_coverage,
+        "current_diagnostic_evaluation": current_diagnostic_evaluation,
+        "forecast_diagnostic_evaluation": forecast_diagnostic_evaluation,
         "policy": {
             "operating_mode_taken_from_forecast_input": True,
             "operating_mode_inferred": False,
@@ -336,6 +457,10 @@ def build_handoff(
             "provider_release_created": False,
             "slabx_lh2_calculated": False,
             "facility_ir_fn_calculated": False,
+            "diagnostic_quantitative_evidence_reused": bool(
+                current_diagnostic_evaluation["summary"]["diagnostic_chain_attached_count"]
+                or forecast_diagnostic_evaluation["summary"]["diagnostic_chain_attached_count"]
+            ),
             "facility_qra_promotion": False,
             "diagnostic_only": True,
         },

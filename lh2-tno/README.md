@@ -505,9 +505,15 @@ python scripts/run_generic_facility_hazop_handoff.py `
 
 Both coverage gates then report `QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE` for
 the three current and three forecast requests. The handoff evaluator remains
-diagnostic and keeps `facility_ir_fn_calculated` and `facility_qra_promotion`
-false until qualified provider evidence, independent validation and complete
-facility scope are available.
+diagnostic and now exposes the matched provider release boundary, frequency
+identity, SLABx-LH2 chain stages, weather/ignition binding and processing time
+under `current_diagnostic_evaluation` and `forecast_diagnostic_evaluation`.
+The storage-tank row keeps its missing frequency value explicitly withheld;
+the line and vent rows expose their attached conditional chain results. The
+adapter reuses evidence and does not run new physics, infer frequency, or
+promote `facility_ir_fn_calculated` or `facility_qra_promotion` until qualified
+provider evidence, independent validation and complete facility scope are
+available.
 
 The orchestration seam can be timed separately from fresh provider and SLABx-LH2
 physics with [`scripts/benchmark_generic_hazop_handoff.py`](scripts/benchmark_generic_hazop_handoff.py):

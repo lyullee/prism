@@ -98,20 +98,28 @@ four required blocks with
 and forecast maps, then pass them to `run_generic_facility_hazop_handoff.py`
 using `--current-attachments` and `--forecast-attachments`. The resulting
 record reports `QUANTITATIVE_EVIDENCE_COVERAGE_COMPLETE` for all six requests,
-while its evaluator policy still keeps fresh release creation, facility IR/F-N
-calculation and facility-QRA promotion false. Coverage completeness therefore
-means that every evidence block is present and traceable; it does not mean
-that the provider or facility has been qualified.
+and adds `current_diagnostic_evaluation` and
+`forecast_diagnostic_evaluation` rows. These rows expose the exact provider
+release boundary, literature-frequency identity, SLABx-LH2 chain stages,
+weather/ignition binding, and processing time already present in the attached
+record. A row with a missing annual frequency is explicitly reported as
+`CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD`; PRISM does not infer a
+rate from the state frame. The evaluator reuses attached evidence and does not
+run fresh release or consequence physics. Its policy keeps facility IR/F-N
+calculation, independent physical validation, and facility-QRA promotion false.
+Coverage completeness therefore means that every evidence block is present and
+traceable; it does not mean that the provider or facility has been qualified.
 
 ## What this proves and what it does not
 
 The replay proves that a multi-equipment forecast can preserve component
 identity and operating mode, select the correct HAZOP row, and produce a
-separate quantitative work item for each newly reached condition. The
-quantitative evaluator is intentionally absent, so the record reports three
-withheld evaluations. It creates no release packet, does not infer an annual
-frequency from the forecast, does not run SLABx-LH2, and does not calculate or
-promote facility IR/F-N.
+separate quantitative work item for each newly reached condition. When exact
+provider-chain evidence is attached, the diagnostic evaluator exposes the
+existing consequence result for each matched current and forecast request. It
+creates no release packet, does not infer an annual frequency from the
+forecast, does not rerun SLABx-LH2, and does not calculate or promote a
+facility-wide IR/F-N total.
 
 To use a real digital-twin source, replace the synthetic frame and table files
 with reviewed process-model exports. Keep the explicit component IDs, units,
