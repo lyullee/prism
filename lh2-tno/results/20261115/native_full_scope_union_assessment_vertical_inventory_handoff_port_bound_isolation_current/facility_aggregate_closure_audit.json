@@ -45,6 +45,5 @@
   "facility_total_risk_available": false,
   "facility_qra_claim": false,
   "interpretation": "The stored conditional facility IR/F-N is independently reproduced from the saved risk atoms. This closes numerical aggregation for the declared diagnostic ledger; it does not close missing provider evidence, physical validation, scope, or QRA gates.",
-  "source_facility_assessment": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-  "source_facility_assessment_sha256": "92315c2cd334b7f9d1374692bebc1d5c58f1d40f8cdd6eb717fbe04ae641d415"
+  "_record_path": ".tmp_union_emergency_relief_current\\facility_aggregate_closure_audit.json"
 }

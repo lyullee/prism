@@ -19,6 +19,10 @@ RELEASE_BOUNDARY_GATE_SCHEMA = "prism.facility_release_boundary_gate.v1"
 _ALLOWED_STRICT_TERMINATION_BASES = {
     "reviewed_isolation_success",
     "inventory_depletion",
+    # A pressure-relief discharge has its own provider-owned termination
+    # evidence.  It is not a hole event and therefore has no isolation or
+    # inventory-depletion step to declare.
+    "emergency_relief_discharge",
 }
 _STRICT_RESIDUAL_TOLERANCE_KG = 1e-8
 
@@ -99,6 +103,8 @@ def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
 def _isolation_status(termination_basis: str | None) -> str:
     if termination_basis == "reviewed_isolation_success":
         return "provider_declared_isolation_success"
+    if termination_basis == "emergency_relief_discharge":
+        return "not_applicable"
     return "not_declared"
 
 
@@ -107,6 +113,8 @@ def _inventory_status(termination_basis: str | None) -> str:
         return "provider_declared_inventory_depletion"
     if termination_basis == "inventory_over_600s":
         return "provider_declared_inventory_over_600s"
+    if termination_basis == "emergency_relief_discharge":
+        return "not_applicable"
     return "not_inventory_termination"
 
 
@@ -319,6 +327,15 @@ def evaluate_facility_release_boundary(
             if row.get("inventory_status") != "provider_declared_inventory_depletion":
                 checks["all_isolation_or_inventory_statuses_closed"] = False
                 blocking.append(f"{label}: inventory depletion status is not declared")
+        elif basis == "emergency_relief_discharge":
+            if (
+                row.get("isolation_status") != "not_applicable"
+                or row.get("inventory_status") != "not_applicable"
+            ):
+                checks["all_isolation_or_inventory_statuses_closed"] = False
+                blocking.append(
+                    f"{label}: emergency-relief isolation and inventory statuses must be not_applicable"
+                )
 
         mass = row.get("mass_ledger")
         mass = mass if isinstance(mass, Mapping) else {}

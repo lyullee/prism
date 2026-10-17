@@ -1403,5 +1403,6 @@
     "exact_case_identity_required": true,
     "physical_validation_claim": false,
     "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates"
-  }
+  },
+  "_record_path": ".tmp_union_emergency_relief_current\\facility_case_packet_coverage.json"
 }

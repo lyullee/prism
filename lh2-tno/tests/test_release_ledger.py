@@ -142,6 +142,30 @@ def test_facility_release_boundary_gate_accepts_reviewed_isolation_with_closed_m
     assert gate["provider_qualification_evaluated"] is False
 
 
+def test_release_ledger_treats_emergency_relief_as_a_distinct_non_isolation_boundary():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "vent/emergency-relief",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "emergency_relief_discharge",
+                "time_s": 0.5,
+                "provenance": "provider relief discharge history",
+            },
+            "mass_ledger": {
+                "released_kg": 0.25,
+                "end_to_end_residual_kg": 0.0,
+            },
+        }]
+    )
+    row = ledger["rows"][0]
+    assert row["isolation_status"] == "not_applicable"
+    assert row["inventory_status"] == "not_applicable"
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is True
+    assert gate["blocking_reasons"] == []
+
+
 def test_provider_mass_balance_is_carried_and_blocks_unbalanced_promotion():
     ledger = build_release_termination_inventory_ledger(
         [{

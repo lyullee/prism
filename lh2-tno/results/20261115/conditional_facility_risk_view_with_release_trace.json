@@ -3,7 +3,7 @@
   "status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK",
   "facility_id": "generic-lh2-full-scope-example",
   "source_assessment_schema": "prism.facility_assessment.v1",
-  "source_assessment_digest": "59ea13d170217d25e0843bc893cf17b8cc61b3a2ea5ae5386bf506ef81f0007c",
+  "source_assessment_digest": "b94f9f8d7f0286c710e92d78c5e6589eb007cda9f42fda4b5606ea401d3f3185",
   "event_count": 34,
   "case_count": 44,
   "risk_atom_count": 176,
@@ -185,6 +185,11 @@
         "case_status_counts": {
           "EXECUTED": 3
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 3
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -239,6 +244,11 @@
         "case_status_counts": {
           "EXECUTED": 10
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 10
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -309,6 +319,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -375,6 +390,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 2
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
@@ -438,6 +458,11 @@
         "case_status_counts": {
           "EXECUTED": 1
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 1
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -503,6 +528,11 @@
           "EXECUTED": 1,
           "EXECUTED_OPERATOR_LIMITED": 2
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 3
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
@@ -578,6 +608,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -653,6 +688,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -712,6 +752,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 10
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 10
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 10
         },
@@ -2839,8 +2884,8 @@
           "time_s": 0.5,
           "provenance": "selected exact strict emergency-relief worklist packet; provider clock retained"
         },
-        "isolation_status": "not_declared",
-        "inventory_status": "not_inventory_termination",
+        "isolation_status": "not_applicable",
+        "inventory_status": "not_applicable",
         "provider": {
           "packet_consumed": true,
           "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -6160,8 +6205,8 @@
         "residual_fraction": [
           0.1666666666666666
         ],
-        "isolation_status": "not_declared",
-        "inventory_status": "not_inventory_termination",
+        "isolation_status": "not_applicable",
+        "inventory_status": "not_applicable",
         "end_to_end_residual_kg": 0.0,
         "release_termination_reasons": [
           "provider_termination_evidence_invalid"
@@ -30517,6 +30562,10 @@
     "conditional_uncomputed_case_count": 0,
     "overlapping_case_uncomputed_count": 29,
     "risk_atom_count": 176,
+    "zero_harm_atom_count": 176,
+    "positive_harm_atom_count": 0,
+    "zero_expected_death_atom_count": 176,
+    "positive_expected_death_atom_count": 0,
     "annual_condition_count": 5,
     "population_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
     "population_row_count": 5,
@@ -30618,6 +30667,11 @@
       "EXECUTED": 15,
       "EXECUTED_OPERATOR_LIMITED": 29
     },
+    "dynamic_state_closure_status_counts": {
+      "NOT_DECLARED": 44
+    },
+    "dynamic_state_closure_ready_case_count": 0,
+    "dynamic_state_closure_blocked_case_count": 0,
     "uncomputed_status_counts": {
       "EXECUTED_OPERATOR_LIMITED": 29
     },
@@ -30628,6 +30682,37 @@
     "not_numerically_executed_case_count": 0,
     "qualified_evidence_withheld_case_count": 29,
     "numerically_executed_case_count": 44,
+    "risk_atom_case_traceability": {
+      "schema_version": "prism.facility_case_risk_atom_trace.v1",
+      "status": "CLOSED",
+      "risk_atom_count": 176,
+      "matched_risk_atom_count": 176,
+      "exact_case_match_count": 0,
+      "case_parent_no_ignition_match_count": 176,
+      "legacy_event_only_match_count": 0,
+      "eligible_risk_atom_count": 60,
+      "withheld_risk_atom_count": 116,
+      "unmatched_risk_atom_count": 0,
+      "ambiguous_risk_atom_count": 0,
+      "uncomputed_case_row_count": 29,
+      "case_status_atom_counts": {
+        "EXECUTED": 60,
+        "EXECUTED_OPERATOR_LIMITED": 116
+      },
+      "case_match_kind_counts": {
+        "CASE_PARENT_NO_IGNITION": 176
+      },
+      "strict_facility_qra_promotion_blocked": true,
+      "blocking_reasons": [
+        "116 risk atoms are linked to non-EXECUTED case status"
+      ],
+      "policy": {
+        "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
+        "withheld_case_atoms_excluded_from_strict_facility_qra": true,
+        "missing_case_status_is_not_inferred": true,
+        "frequency_reallocation_performed": false
+      }
+    },
     "observed_component_count": 9,
     "expected_component_count": 9,
     "component_status_counts": {
@@ -30667,6 +30752,11 @@
         "case_status_counts": {
           "EXECUTED": 3
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 3
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -30698,6 +30788,11 @@
         "case_status_counts": {
           "EXECUTED": 10
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 10
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -30737,6 +30832,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -30775,6 +30875,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 2
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
@@ -30811,6 +30916,11 @@
         "case_status_counts": {
           "EXECUTED": 1
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 1
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -30834,6 +30944,9 @@
         "numerically_executed_case_count": 0,
         "risk_atom_count": 0,
         "case_status_counts": {},
+        "dynamic_state_closure_status_counts": {},
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [
           "FAMILY_SCOPE_PARTIAL"
@@ -30872,6 +30985,11 @@
           "EXECUTED": 1,
           "EXECUTED_OPERATOR_LIMITED": 2
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 3
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
@@ -30916,6 +31034,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -30960,6 +31083,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -30996,6 +31124,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 10
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 10
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 10
         },
@@ -31007,42 +31140,7 @@
       }
     },
     "required_accident_family_count": 12,
-    "scope_blocker_count": 20,
-    "risk_atom_case_traceability": {
-      "schema_version": "prism.facility_case_risk_atom_trace.v1",
-      "status": "CLOSED",
-      "risk_atom_count": 176,
-      "matched_risk_atom_count": 176,
-      "exact_case_match_count": 0,
-      "case_parent_no_ignition_match_count": 176,
-      "legacy_event_only_match_count": 0,
-      "eligible_risk_atom_count": 60,
-      "withheld_risk_atom_count": 116,
-      "unmatched_risk_atom_count": 0,
-      "ambiguous_risk_atom_count": 0,
-      "uncomputed_case_row_count": 29,
-      "case_status_atom_counts": {
-        "EXECUTED": 60,
-        "EXECUTED_OPERATOR_LIMITED": 116
-      },
-      "case_match_kind_counts": {
-        "CASE_PARENT_NO_IGNITION": 176
-      },
-      "strict_facility_qra_promotion_blocked": true,
-      "blocking_reasons": [
-        "116 risk atoms are linked to non-EXECUTED case status"
-      ],
-      "policy": {
-        "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
-        "withheld_case_atoms_excluded_from_strict_facility_qra": true,
-        "missing_case_status_is_not_inferred": true,
-        "frequency_reallocation_performed": false
-      }
-    },
-    "zero_harm_atom_count": 176,
-    "positive_harm_atom_count": 0,
-    "zero_expected_death_atom_count": 176,
-    "positive_expected_death_atom_count": 0
+    "scope_blocker_count": 21
   },
   "strict_release_boundary": {
     "schema_version": "prism.facility_release_boundary_gate.v1",
@@ -31116,7 +31214,6 @@
         "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
         "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
         "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
-        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
         "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
         "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
         "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
@@ -31189,7 +31286,7 @@
     "promotion": "this envelope is diagnostic-only until qualified provider coverage, strict scope, and independent physical validation gates close"
   },
   "source_assessment_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-  "source_assessment_sha256": "dc936b601472f31629a8c1de3958f8eb6fe15383ef7559335ba6aacdc7a92e83",
+  "source_assessment_sha256": "99f2d305f1f12b425de228286f8c9acdc7f267c78b99a8d604b5df56924aeebc",
   "release_boundary_case_audit_path": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "release_boundary_case_audit_sha256": "2ac40f904314c4348421c7c5f549334cb969ea8be72fb697fbd37f3ebe04381a"
+  "release_boundary_case_audit_sha256": "841a4cf93b5eb512537ad5e30b654446718c137acd0a8f6f0686efa21a807494"
 }

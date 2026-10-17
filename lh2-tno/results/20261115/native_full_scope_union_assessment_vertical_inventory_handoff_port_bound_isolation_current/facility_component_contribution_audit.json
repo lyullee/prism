@@ -15,6 +15,7 @@
     "transfer-valve-01",
     "vertical-handoff-terminal-pipe-01"
   ],
+  "partial_scope": true,
   "recomputed_component_contributions": {
     "storage-tank-01": {
       "component_id": "storage-tank-01",
@@ -275,6 +276,11 @@
         "case_status_counts": {
           "EXECUTED": 3
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 3
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -329,6 +335,11 @@
         "case_status_counts": {
           "EXECUTED": 10
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 10
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -399,6 +410,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -465,6 +481,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 2
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
@@ -528,6 +549,11 @@
         "case_status_counts": {
           "EXECUTED": 1
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 1
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {},
         "strict_gate_categories": [],
         "frequency_is_not_reallocated": true
@@ -593,6 +619,11 @@
           "EXECUTED": 1,
           "EXECUTED_OPERATOR_LIMITED": 2
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 3
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 2
         },
@@ -668,6 +699,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -743,6 +779,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 5
         },
@@ -802,6 +843,11 @@
         "case_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 10
         },
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 10
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
         "strict_uncomputed_status_counts": {
           "EXECUTED_OPERATOR_LIMITED": 10
         },
@@ -844,5 +890,5 @@
   "physical_validation_claim": false,
   "facility_qra_claim": false,
   "interpretation": "Equipment-level IR/F-N contributions and the diagnostic risk ranking are independently reproduced from risk atoms. Missing equipment cases and provider evidence remain gates.",
-  "_record_path": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_component_contribution_audit.json"
+  "_record_path": ".tmp_union_emergency_relief_current\\facility_component_contribution_audit.json"
 }

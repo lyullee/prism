@@ -1541,8 +1541,16 @@ def _strict_realtime_release_boundary_gate(
             "release path contains undeclared component(s): " + ", ".join(extra)
         )
 
-    allowed_termination = {"reviewed_isolation_success", "inventory_depletion"}
-    allowed_isolation = {"ISOLATION_SUCCESS_DECLARED", "INVENTORY_TERMINATION"}
+    allowed_termination = {
+        "reviewed_isolation_success",
+        "inventory_depletion",
+        "emergency_relief_discharge",
+    }
+    allowed_isolation = {
+        "ISOLATION_SUCCESS_DECLARED",
+        "INVENTORY_TERMINATION",
+        "EMERGENCY_RELIEF_TERMINATION",
+    }
     allowed_inventory = {"MASS_BALANCE_CLOSED", "INVENTORY_DEPLETED"}
     for component_id in sorted(component_set):
         row = release_path_component_rows.get(component_id)
