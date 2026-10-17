@@ -4846,5 +4846,9 @@
   "facility_evidence_worklist_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_worklist.json",
   "facility_evidence_worklist_status": "OPEN_PROVIDER_EVIDENCE_WORKLIST; 44/44 case rows have explicit qualification, release-closure and independent-validation requirements; qualified provider 0; facility QRA promotion false",
   "facility_evidence_worklist_qualified_provider_packet_case_count": 0,
-  "facility_evidence_worklist_facility_promotion_allowed_now": false
+  "facility_evidence_worklist_facility_promotion_allowed_now": false,
+  "slabx_lh2_scope_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
+  "slabx_lh2_active_development_in_scope": false,
+  "slabx_lh2_active_development_policy": "Do not modify or revalidate SLABx-LH2 in the remaining PRISM objective; retain only the explicit input/unit/clock/failure handoff contract. Do not use the component record to infer frequency, provider qualification, physical full-chain validation, or facility IR/F-N/QRA.",
+  "slabx_lh2_scope_decision_basis": "User-confirmed component validation and publication; current 5/5 component audit remains the provenance record."
 }

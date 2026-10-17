@@ -114,12 +114,13 @@ The finite-inventory termination margin probe is documented in
 it confirms that the remaining open inventory cases cannot be closed by
 extrapolating the current provider horizon.
 
-SLABx-LH2 is treated as a validated consequence-model component. Its current
-source recheck is recorded in
+SLABx-LH2 is treated as a **frozen validated external consequence component**,
+outside the active PRISM development backlog. Its current source recheck is recorded in
 [`PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md`](PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md).
-The component recheck is complete; no additional SLABx task is open. Facility
-provider qualification and full release-to-damage validation remain separate
-gates.
+The component recheck is complete; no additional SLABx development or
+validation task is open. PRISM only maintains the explicit handoff contract
+and does not alter the validated SLABx result. Facility provider qualification
+and full release-to-damage validation remain separate gates.
 
 ## Open evidence gates
 

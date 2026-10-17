@@ -167,12 +167,20 @@ exact identity in the request.
 
 ### SLABx-LH2 validation boundary
 
-SLABx-LH2 is treated as a validated consequence-model component in the current
-development plan. A fresh source recheck is recorded in
+SLABx-LH2 is a **frozen, validated external consequence-model component**. It
+is not an active PRISM development task and is not re-trained or re-validated
+by the remaining PRISM work. A source recheck is recorded in
 [`slabx_lh2_validation_audit_current_recheck.json`](results/20261115/slabx_lh2_validation_audit_current_recheck.json):
 all 5/5 checks pass, with 6 FFI cases, 6 FLACS comparison rows, a pool-radius
 median ratio of 1.0305, a maximum mass residual of `1.77e-12 kg`, and zero
-repeat-run inventory difference. No additional SLABx validation task is open.
+repeat-run inventory difference. No additional SLABx development or validation
+task is open.
+
+PRISM consumes this fixed component through its declared consequence handoff.
+Future work may test the handoff contract (units, clocks, source identity and
+failure handling), but must not silently change the SLABx result or use SLABx
+as evidence for provider qualification, initiating frequency, or facility
+IR/F-N/QRA.
 
 This closes the SLABx component task only. Facility provider qualification,
 release termination and isolation evidence, full declared accident scope, and
