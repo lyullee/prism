@@ -248,6 +248,77 @@ def test_objective_audit_blocks_misaligned_facility_provider_intake():
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
 
 
+def test_objective_audit_records_facility_evidence_worklist_without_promotion():
+    inputs = _inputs()
+    inputs["facility_evidence_worklist"] = {
+        "schema_version": "prism.facility_evidence_worklist.v1",
+        "status": "OPEN_PROVIDER_EVIDENCE_WORKLIST",
+        "case_count": 2,
+        "promotion_policy": {
+            "frequency_is_not_assigned": True,
+            "sensor_frequency_learning": False,
+            "missing_evidence_is_not_zero_risk": True,
+            "facility_qra_promotion": False,
+        },
+        "current_assessment": {
+            "case_count": 2,
+            "strict_uncomputed_case_count": 1,
+            "qualified_provider_packet_case_count": 0,
+            "facility_total_risk_available": False,
+            "qualified_facility_qra_available": False,
+            "facility_promotion_allowed_now": False,
+        },
+        "case_rows": [
+            {
+                "request_kind": "QUALIFIED_PROVIDER_PACKET",
+                "qualification_required": True,
+                "required_provider_evidence": ["provider result digest"],
+                "blocking_reasons": ["qualified packet missing"],
+            },
+            {
+                "request_kind": "QUALIFIED_PROVIDER_PACKET",
+                "qualification_required": True,
+                "required_provider_evidence": ["closure audit"],
+                "blocking_reasons": ["independent review missing"],
+            },
+        ],
+        "_record_path": "facility-evidence-worklist.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_facility_evidence_worklist"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["case_count"] == 2
+    assert check["observed"]["facility_promotion_allowed_now"] is False
+    assert "diagnostic_facility_evidence_worklist" not in report["strict_blocking_check_ids"]
+
+
+def test_objective_audit_blocks_incomplete_facility_evidence_worklist():
+    inputs = _inputs()
+    inputs["facility_evidence_worklist"] = {
+        "schema_version": "prism.facility_evidence_worklist.v1",
+        "status": "OPEN_PROVIDER_EVIDENCE_WORKLIST",
+        "case_count": 2,
+        "promotion_policy": {"facility_qra_promotion": False},
+        "current_assessment": {"case_count": 2},
+        "case_rows": [{
+            "request_kind": "QUALIFIED_PROVIDER_PACKET",
+            "qualification_required": True,
+            "required_provider_evidence": [],
+            "blocking_reasons": [],
+        }],
+        "_record_path": "facility-evidence-worklist.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_facility_evidence_worklist"
+    )
+    assert check["status"] == "BLOCKED_EVIDENCE"
+
+
 def test_objective_audit_records_header_bound_monitoring_consequence_bridge():
     inputs = _inputs()
     inputs["header_bound_facility_bridge"] = {

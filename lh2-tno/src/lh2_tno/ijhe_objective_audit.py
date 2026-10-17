@@ -78,6 +78,7 @@ def build_ijhe_objective_coverage_audit(
     inventory_termination_margin_probe: Mapping[str, Any] | None = None,
     external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_provider_intake_audit: Mapping[str, Any] | None = None,
+    facility_evidence_worklist: Mapping[str, Any] | None = None,
     header_bound_facility_bridge: Mapping[str, Any] | None = None,
     generic_diagnostic_quantitative_evaluation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -140,6 +141,9 @@ def build_ijhe_objective_coverage_audit(
     )
     facility_provider_intake_audit_path = _record_path(
         facility_provider_intake_audit, None
+    )
+    facility_evidence_worklist_path = _record_path(
+        facility_evidence_worklist, None
     )
     header_bound_facility_bridge_path = _record_path(
         header_bound_facility_bridge, None
@@ -2602,6 +2606,97 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "이 행은 provider 자료 제출 전 intake 계약만 검증한다. "
                 "정렬 PASS는 provider packet 도착, 빈도 승격, 물리검증 또는 시설 QRA 완료를 뜻하지 않는다."
+            ),
+        ))
+
+    # Keep the case-level evidence worklist separate from the aligned intake
+    # template.  The template proves that rows can be submitted; this worklist
+    # proves that every declared case still has explicit qualification and
+    # closure requirements.  It must never promote a provider or facility QRA.
+    worklist_policy = (
+        facility_evidence_worklist.get("promotion_policy", {})
+        if isinstance(facility_evidence_worklist, Mapping)
+        else {}
+    )
+    if not isinstance(worklist_policy, Mapping):
+        worklist_policy = {}
+    worklist_assessment = (
+        facility_evidence_worklist.get("current_assessment", {})
+        if isinstance(facility_evidence_worklist, Mapping)
+        else {}
+    )
+    if not isinstance(worklist_assessment, Mapping):
+        worklist_assessment = {}
+    worklist_rows = (
+        facility_evidence_worklist.get("case_rows", [])
+        if isinstance(facility_evidence_worklist, Mapping)
+        else []
+    )
+    if not isinstance(worklist_rows, list):
+        worklist_rows = []
+    worklist_case_count = (
+        _int(facility_evidence_worklist.get("case_count"))
+        if isinstance(facility_evidence_worklist, Mapping)
+        else None
+    )
+    worklist_row_contract_ok = bool(worklist_rows) and all(
+        isinstance(row, Mapping)
+        and row.get("request_kind") == "QUALIFIED_PROVIDER_PACKET"
+        and row.get("qualification_required") is True
+        and isinstance(row.get("required_provider_evidence"), list)
+        and len(row.get("required_provider_evidence", [])) > 0
+        and isinstance(row.get("blocking_reasons"), list)
+        and len(row.get("blocking_reasons", [])) > 0
+        for row in worklist_rows
+    )
+    worklist_ok = (
+        isinstance(facility_evidence_worklist, Mapping)
+        and facility_evidence_worklist.get("schema_version")
+        == "prism.facility_evidence_worklist.v1"
+        and facility_evidence_worklist.get("status")
+        == "OPEN_PROVIDER_EVIDENCE_WORKLIST"
+        and worklist_case_count is not None
+        and worklist_case_count > 0
+        and len(worklist_rows) == worklist_case_count
+        and worklist_row_contract_ok
+        and worklist_assessment.get("case_count") == worklist_case_count
+        and worklist_assessment.get("qualified_provider_packet_case_count") == 0
+        and worklist_assessment.get("facility_total_risk_available") is False
+        and worklist_assessment.get("qualified_facility_qra_available") is False
+        and worklist_assessment.get("facility_promotion_allowed_now") is False
+        and worklist_policy.get("frequency_is_not_assigned") is True
+        and worklist_policy.get("sensor_frequency_learning") is False
+        and worklist_policy.get("missing_evidence_is_not_zero_risk") is True
+        and worklist_policy.get("facility_qra_promotion") is False
+    )
+    if facility_evidence_worklist is not None:
+        rows.append(_row(
+            "diagnostic_facility_evidence_worklist",
+            "선언한 시설 case마다 provider 자격·방출 closure·독립검증 요구사항이 명시되고 누락 case가 없어야 한다",
+            "PASS" if worklist_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(facility_evidence_worklist_path,),
+            observed={
+                "status": facility_evidence_worklist.get("status"),
+                "case_count": worklist_case_count,
+                "case_row_count": len(worklist_rows),
+                "case_row_contract_ok": worklist_row_contract_ok,
+                "strict_uncomputed_case_count": worklist_assessment.get(
+                    "strict_uncomputed_case_count"
+                ),
+                "qualified_provider_packet_case_count": worklist_assessment.get(
+                    "qualified_provider_packet_case_count"
+                ),
+                "facility_promotion_allowed_now": worklist_assessment.get(
+                    "facility_promotion_allowed_now"
+                ),
+                "promotion_policy": dict(worklist_policy),
+            },
+            blocking_reason=None if worklist_ok else (
+                "시설 증거 worklist가 1:1 case coverage, 요구 증거 또는 승격 차단 정책을 만족하지 않는다"
+            ),
+            interpretation=(
+                "worklist PASS는 44개 case의 제출 요구사항이 정합하다는 뜻이다. "
+                "실제 qualified provider packet이나 시설 IR/F-N 승격을 의미하지 않는다."
             ),
         ))
 

@@ -8,7 +8,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 36 |
+| Objective rows | 37 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (57 checks: 52 PASS, 5 BLOCKED) |
@@ -135,6 +135,12 @@ The provider intake alignment row is diagnostic-only: the current
 shows 44/44 request-template entries aligned, while qualified provider packet
 coverage remains 0/44.
 
+The current [facility evidence worklist](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_worklist.json) is checked as a separate diagnostic
+row. It covers all 44 declared cases with explicit qualified-provider,
+release-closure, and independent-validation requirements. It reports zero
+qualified packets and keeps facility-QRA promotion disabled; it is a submission
+checklist, not qualification evidence.
+
 The current evidence package closes the inspection-centre source suitability diagnostic, observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. Two non-strict diagnostic rows remain visibly blocked because the latest 44-case completion audit still contains an open release-closure worklist and does not align with a strict full-completion claim. They do not disappear from the record and they do not promote facility QRA.
 
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
@@ -181,7 +187,7 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore confirms numerical-gate consistency; it does not mean that
 independent physical validation or facility QRA is complete.
 
-The current objective ledger contains 36 checks after reconciling the latest completion audit and
+The current objective ledger contains 37 checks after reconciling the latest completion audit and
 independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.
 The external-release inventory remains a separate optional diagnostic row when it is not embedded
 in the completion audit.
@@ -237,3 +243,9 @@ python scripts/verify_latest_ijhe_audit.py `
 ## Scope exclusions
 
 This audit does not claim field-frequency learning, indoor dispersion, detonation, or a complete domino analysis. Those are explicit follow-up scopes. The current paper claim should remain limited to the declared generic outdoor LH2 diagnostic chain and its evidence-qualified boundaries.
+
+The current facility evidence worklist is also checked as a separate
+diagnostic row. It covers all 44 declared cases with explicit qualified-provider,
+release-closure, and independent-validation requirements. The worklist reports
+zero qualified packets and keeps facility-QRA promotion disabled; it is a
+submission checklist, not qualification evidence.

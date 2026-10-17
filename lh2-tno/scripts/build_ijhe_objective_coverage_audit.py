@@ -59,6 +59,7 @@ def main() -> int:
     parser.add_argument("--inventory-termination-margin-probe", type=Path)
     parser.add_argument("--external-release-artifact-intake", type=Path)
     parser.add_argument("--facility-provider-intake-audit", type=Path)
+    parser.add_argument("--facility-evidence-worklist", type=Path)
     parser.add_argument("--header-bound-facility-bridge", type=Path)
     parser.add_argument("--generic-diagnostic-quantitative-evaluation", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -196,6 +197,11 @@ def main() -> int:
             facility_provider_intake_audit=(
                 _object(args.facility_provider_intake_audit)
                 if args.facility_provider_intake_audit
+                else None
+            ),
+            facility_evidence_worklist=(
+                _object(args.facility_evidence_worklist)
+                if args.facility_evidence_worklist
                 else None
             ),
             header_bound_facility_bridge=(

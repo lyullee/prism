@@ -1087,6 +1087,31 @@
       },
       "blocking_reason": null,
       "interpretation": "현재·예측 경로의 provider/SLABx 결과를 exact request key로 재사용하는 진단 연결이다. 새 물리계산이나 빈도 추론을 수행하지 않으며, 시설 IR/F-N·QRA 승격은 계속 보류한다."
+    },
+    {
+      "id": "diagnostic_facility_evidence_worklist",
+      "requirement": "선언한 시설 case마다 provider 자격·방출 closure·독립검증 요구사항이 명시되고 누락 case가 없어야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_evidence_worklist.json"
+      ],
+      "observed": {
+        "status": "OPEN_PROVIDER_EVIDENCE_WORKLIST",
+        "case_count": 44,
+        "case_row_count": 44,
+        "case_row_contract_ok": true,
+        "strict_uncomputed_case_count": 29,
+        "qualified_provider_packet_case_count": 0,
+        "facility_promotion_allowed_now": false,
+        "promotion_policy": {
+          "frequency_is_not_assigned": true,
+          "sensor_frequency_learning": false,
+          "missing_evidence_is_not_zero_risk": true,
+          "facility_qra_promotion": false
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "worklist PASS는 44개 case의 제출 요구사항이 정합하다는 뜻이다. 실제 qualified provider packet이나 시설 IR/F-N 승격을 의미하지 않는다."
     }
   ],
   "core_chain_check_ids": [
@@ -1212,5 +1237,5 @@
     "detonation_or_DDT",
     "full_domino_escalation"
   ],
-  "interpretation": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN은 상태 snapshot→native 방출→consequence→조건부 IR/F-N 연결이 닫혔다는 뜻이다. qualified provider, 독립 물리검증, 엄격한 전체범위가 확보되기 전에는 시설 전체 QRA로 승격하지 않는다."
+  "interpretation": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN은 상태 snapshot→native 방출→consequence→조건부 IR/F-N 연결이 닫혔다는 뜻이다. qualified provider, 독립 물리검증, 엄격한 전체범위가 확보되기 전에는 시설 전체 QRA로 승격하지 않는다. 시설 evidence worklist의 44개 case 요구사항 정합성도 별도 진단 행으로 기록한다."
 }
