@@ -3,7 +3,7 @@
   "status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK",
   "facility_id": "generic-lh2-full-scope-example",
   "source_assessment_schema": "prism.facility_assessment.v1",
-  "source_assessment_digest": "61464d1e4476c3f0a6802d1384bdf89b8eb830db7c814b11627d7bd339690c87",
+  "source_assessment_digest": "59ea13d170217d25e0843bc893cf17b8cc61b3a2ea5ae5386bf506ef81f0007c",
   "event_count": 34,
   "case_count": 44,
   "risk_atom_count": 176,
@@ -118,6 +118,12 @@
       }
     },
     "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+  },
+  "source_campaign_physics": {
+    "executed": true,
+    "fresh_physics_cases": 44,
+    "campaign_count": 3,
+    "meaning": "copied from supplied campaign timing; this facility assessment does not rerun provider, SLABx, weather, ignition or population physics"
   },
   "component_contributions": {
     "ambient-vaporizer-01": {
@@ -6158,7 +6164,7 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "release_termination_reasons": [
-          "termination_basis_emergency_relief_discharge_is_not_allowed"
+          "provider_termination_evidence_invalid"
         ],
         "operational_execution_reasons": [],
         "consequence_domain_reasons": [],
@@ -6177,18 +6183,32 @@
           "provider_result_digest_matches": true,
           "available_mass_matches": true,
           "cumulative_release_matches": true,
-          "supported_basis": false,
+          "supported_basis": true,
+          "event_kind_is_emergency_relief": true,
+          "source_operator_is_emergency_relief": false,
+          "failure_opening_not_declared": true,
+          "positive_duration_present": true,
+          "termination_history_present": true,
+          "relief_setpoint_present": false,
+          "relief_capacity_present": false,
+          "discharge_complete_declared": false,
+          "termination_provenance_present": true,
+          "mass_residual_closed": false,
           "boundary_closed": false
         },
         "provider_termination_evidence_blocking_reasons": [
-          "provider_termination_evidence_supported_basis",
+          "provider_termination_evidence_source_operator_is_emergency_relief",
+          "provider_termination_evidence_relief_setpoint_present",
+          "provider_termination_evidence_relief_capacity_present",
+          "provider_termination_evidence_discharge_complete_declared",
+          "provider_termination_evidence_mass_residual_closed",
           "provider_termination_evidence_boundary_closed"
         ],
         "residual_closure_basis": "provider_residual_mass",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
         "release_boundary_blocking_reasons": [
-          "termination_basis_emergency_relief_discharge_is_not_allowed"
+          "provider_termination_evidence_invalid"
         ],
         "provider_qualification_status": "BLOCKED",
         "provider_qualification_blocking_reasons": [
@@ -8877,7 +8897,7 @@
   "frequency_uncertainty": {
     "schema_version": "prism.conditional_facility_frequency_trace.v1",
     "campaign_digest": "d911e0a81b5a54a1997c487a78bf3924962ed484a86a830eea0f3f6ea1903069",
-    "physical_risk_atoms_digest": "f81cb717d61a364eb7753050c1c4247716840c8db7532251db8272514cffee18",
+    "physical_risk_atoms_digest": "aba841c1850f1449a434c3730e3c8896e5e199d57aa4c2f2e9854930e21d4cab",
     "scenario_count": 5,
     "scenario_ids": [
       "native-full-scope-literature-central",
@@ -30987,7 +31007,42 @@
       }
     },
     "required_accident_family_count": 12,
-    "scope_blocker_count": 20
+    "scope_blocker_count": 20,
+    "risk_atom_case_traceability": {
+      "schema_version": "prism.facility_case_risk_atom_trace.v1",
+      "status": "CLOSED",
+      "risk_atom_count": 176,
+      "matched_risk_atom_count": 176,
+      "exact_case_match_count": 0,
+      "case_parent_no_ignition_match_count": 176,
+      "legacy_event_only_match_count": 0,
+      "eligible_risk_atom_count": 60,
+      "withheld_risk_atom_count": 116,
+      "unmatched_risk_atom_count": 0,
+      "ambiguous_risk_atom_count": 0,
+      "uncomputed_case_row_count": 29,
+      "case_status_atom_counts": {
+        "EXECUTED": 60,
+        "EXECUTED_OPERATOR_LIMITED": 116
+      },
+      "case_match_kind_counts": {
+        "CASE_PARENT_NO_IGNITION": 176
+      },
+      "strict_facility_qra_promotion_blocked": true,
+      "blocking_reasons": [
+        "116 risk atoms are linked to non-EXECUTED case status"
+      ],
+      "policy": {
+        "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
+        "withheld_case_atoms_excluded_from_strict_facility_qra": true,
+        "missing_case_status_is_not_inferred": true,
+        "frequency_reallocation_performed": false
+      }
+    },
+    "zero_harm_atom_count": 176,
+    "positive_harm_atom_count": 0,
+    "zero_expected_death_atom_count": 176,
+    "positive_expected_death_atom_count": 0
   },
   "strict_release_boundary": {
     "schema_version": "prism.facility_release_boundary_gate.v1",
@@ -31010,8 +31065,8 @@
       "no_withheld_cases": false
     },
     "blocking_reasons": [
+      "provider_termination_evidence_invalid",
       "status_executed_operator_limited",
-      "termination_basis_emergency_relief_discharge_is_not_allowed",
       "termination_basis_inventory_over_600s_is_not_allowed"
     ],
     "residual_tolerance_kg": 1e-08,
@@ -31134,7 +31189,7 @@
     "promotion": "this envelope is diagnostic-only until qualified provider coverage, strict scope, and independent physical validation gates close"
   },
   "source_assessment_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-  "source_assessment_sha256": "92315c2cd334b7f9d1374692bebc1d5c58f1d40f8cdd6eb717fbe04ae641d415",
+  "source_assessment_sha256": "dc936b601472f31629a8c1de3958f8eb6fe15383ef7559335ba6aacdc7a92e83",
   "release_boundary_case_audit_path": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "release_boundary_case_audit_sha256": "e8916a7eb42b8da0aa03ffa8ffe2d14b517872c3416d77fcd41d06234f8e1d73"
+  "release_boundary_case_audit_sha256": "2ac40f904314c4348421c7c5f549334cb969ea8be72fb697fbd37f3ebe04381a"
 }
