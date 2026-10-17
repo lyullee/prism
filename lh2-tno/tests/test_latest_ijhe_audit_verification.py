@@ -303,6 +303,47 @@ def _native_multi_equipment_recheck() -> dict:
     }
 
 
+def _native_multi_equipment_recheck_comparison() -> dict:
+    return {
+        "schema_version": "prism.native_external_multi_equipment_recheck_comparison.v1",
+        "status": "MATCHED_CURRENT_EXTERNAL_SOURCE_AND_CHAIN",
+        "external_source_digest": "a" * 64,
+        "equipment_count": 2,
+        "rows": [
+            {
+                "equipment": "layered_tank",
+                "provider_result_digest_match": True,
+                "termination_basis_match": True,
+                "duration_match": True,
+                "state_snapshot_digest_match_old": True,
+                "state_snapshot_digest_match_new": True,
+                "chain_status_match": True,
+                "chain_provider_duration_match": True,
+                "chain_mass_residual_match": True,
+            },
+            {
+                "equipment": "vent_stack",
+                "provider_result_digest_match": True,
+                "termination_basis_match": True,
+                "duration_match": True,
+                "state_snapshot_digest_match_old": True,
+                "state_snapshot_digest_match_new": True,
+                "chain_status_match": True,
+                "chain_provider_duration_match": True,
+                "chain_mass_residual_match": True,
+            },
+        ],
+        "all_provider_result_digests_match": True,
+        "all_chain_statuses_match": True,
+        "all_chain_durations_match": True,
+        "all_mass_residuals_match": True,
+        "provider_packet_promoted_count": 0,
+        "physical_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _native_clean_full_scope_replay() -> dict:
     return {
         "schema_version": "prism.native_external_facility_full_scope_clean_source_replay.v1",
@@ -537,6 +578,82 @@ def test_latest_ijhe_audit_verification_binds_clean_native_multi_equipment_reche
     assert result["native_external_multi_equipment_recheck_valid"] is True
     assert result["native_external_multi_equipment_recheck_equipment_count"] == 2
     assert result["native_external_multi_equipment_recheck_dynamic_closure_ready_count"] == 1
+
+
+def test_latest_ijhe_audit_verification_binds_native_recheck_comparison(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "native_recheck.json", _native_multi_equipment_recheck())
+    _write(tmp_path / "comparison.json", _native_multi_equipment_recheck_comparison())
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "external_lh2dt_native_multi_equipment_recheck_compact_record": "native_recheck.json",
+        "external_lh2dt_native_multi_equipment_recheck_comparison_record": "comparison.json",
+        "external_lh2dt_native_multi_equipment_recheck_comparison_status": "MATCHED_CURRENT_EXTERNAL_SOURCE_AND_CHAIN",
+        "external_lh2dt_native_multi_equipment_recheck_comparison_all_provider_result_digests_match": True,
+        "external_lh2dt_native_multi_equipment_recheck_comparison_all_chain_statuses_match": True,
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "PASS"
+    assert result["native_external_multi_equipment_recheck_comparison_valid"] is True
+    assert result["native_external_multi_equipment_recheck_comparison_equipment_count"] == 2
+
+
+def test_latest_ijhe_audit_verification_blocks_native_recheck_comparison_mismatch(tmp_path: Path):
+    audit = {
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"status": "PASS"}],
+        "blocking_reasons": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    handoff = {
+        "schema_version": "prism.inspection_center_facility_ijhe_audit.v1",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "checks": [{"status": "PASS"}],
+        "qualification_boundary": {
+            "facility_ir_fn_available": False,
+            "physical_validation_claim": False,
+        },
+    }
+    bad = _native_multi_equipment_recheck_comparison()
+    bad["all_chain_statuses_match"] = False
+    _write(tmp_path / "audit.json", audit)
+    _write(tmp_path / "handoff.json", handoff)
+    _write(tmp_path / "native_recheck.json", _native_multi_equipment_recheck())
+    _write(tmp_path / "comparison.json", bad)
+    status = {
+        "latest_ijhe_completion_audit_record": "audit.json",
+        "latest_ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
+        "latest_ijhe_completion_audit_check_count": 1,
+        "latest_ijhe_completion_audit_blocking_reason_count": 0,
+        "inspection_center_facility_ijhe_handoff_audit_record": "handoff.json",
+        "external_lh2dt_native_multi_equipment_recheck_compact_record": "native_recheck.json",
+        "external_lh2dt_native_multi_equipment_recheck_comparison_record": "comparison.json",
+    }
+    result = verify_latest_ijhe_audit(status, root=tmp_path)
+    assert result["status"] == "BLOCKED_AUDIT_METADATA"
+    assert any("recheck comparison" in reason for reason in result["blocking_reasons"])
 
 
 def test_latest_ijhe_audit_verification_blocks_native_recheck_promotion_flags(tmp_path: Path):

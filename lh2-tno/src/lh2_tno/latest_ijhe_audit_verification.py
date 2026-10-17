@@ -629,6 +629,85 @@ def verify_latest_ijhe_audit(
                     f"status ledger {status_key} disagrees with native external recheck"
                 )
 
+    # Bind the fresh exporter/chain comparison when the status ledger points
+    # to one.  This is provenance evidence only: it proves reproducibility of
+    # the diagnostic replay and never promotes a provider packet or facility
+    # QRA result.
+    native_comparison_value: dict[str, Any] = {}
+    native_comparison_path: Path | None = None
+    native_comparison_pointer = status.get(
+        "external_lh2dt_native_multi_equipment_recheck_comparison_record"
+    )
+    if isinstance(native_comparison_pointer, str):
+        native_comparison_path = _relative_or_absolute(native_comparison_pointer, root=base)
+        if not native_comparison_path.exists():
+            reasons.append(
+                "native external multi-equipment comparison record does not exist"
+            )
+        else:
+            native_comparison_value = _read_object(native_comparison_path)
+        rows = native_comparison_value.get("rows")
+        comparison_valid = (
+            native_comparison_value.get("schema_version")
+            == "prism.native_external_multi_equipment_recheck_comparison.v1"
+            and native_comparison_value.get("status")
+            == "MATCHED_CURRENT_EXTERNAL_SOURCE_AND_CHAIN"
+            and isinstance(native_comparison_value.get("equipment_count"), int)
+            and native_comparison_value.get("equipment_count") > 0
+            and isinstance(rows, list)
+            and len(rows) == native_comparison_value.get("equipment_count")
+            and all(
+                isinstance(row, Mapping)
+                and row.get("provider_result_digest_match") is True
+                and row.get("termination_basis_match") is True
+                and row.get("duration_match") is True
+                and row.get("state_snapshot_digest_match_old") is True
+                and row.get("state_snapshot_digest_match_new") is True
+                and row.get("chain_status_match") is True
+                and row.get("chain_provider_duration_match") is True
+                and row.get("chain_mass_residual_match") is True
+                for row in rows
+            )
+            and native_comparison_value.get("all_provider_result_digests_match") is True
+            and native_comparison_value.get("all_chain_statuses_match") is True
+            and native_comparison_value.get("all_chain_durations_match") is True
+            and native_comparison_value.get("all_mass_residuals_match") is True
+            and native_comparison_value.get("provider_packet_promoted_count") == 0
+            and native_comparison_value.get("physical_validation_claim") is False
+            and native_comparison_value.get("frequency_inference_performed") is False
+            and native_comparison_value.get("facility_qra_claim") is False
+        )
+        if native_recheck_value.get("external_source_digest") and native_comparison_value.get(
+            "external_source_digest"
+        ) != native_recheck_value.get("external_source_digest"):
+            comparison_valid = False
+            reasons.append(
+                "native external recheck comparison source digest disagrees with compact recheck"
+            )
+        if not comparison_valid:
+            reasons.append(
+                "native external multi-equipment recheck comparison is malformed or permits unsafe promotion"
+            )
+        for status_key, record_key in (
+            (
+                "external_lh2dt_native_multi_equipment_recheck_comparison_status",
+                "status",
+            ),
+            (
+                "external_lh2dt_native_multi_equipment_recheck_comparison_all_provider_result_digests_match",
+                "all_provider_result_digests_match",
+            ),
+            (
+                "external_lh2dt_native_multi_equipment_recheck_comparison_all_chain_statuses_match",
+                "all_chain_statuses_match",
+            ),
+        ):
+            expected = status.get(status_key)
+            if expected is not None and native_comparison_value.get(record_key) != expected:
+                reasons.append(
+                    f"status ledger {status_key} disagrees with native recheck comparison"
+                )
+
     # The clean-source full-scope replay binds all 24 generic outdoor LH2
     # event identities to the facility consequence runner.  It is still a
     # diagnostic record: the verifier checks the complete handoff and all
@@ -1065,6 +1144,18 @@ def verify_latest_ijhe_audit(
         ),
         "native_external_multi_equipment_recheck_valid": (
             native_recheck_valid if native_recheck_pointer is not None or native_external_multi_equipment_recheck is not None else None
+        ),
+        "native_external_multi_equipment_recheck_comparison_record": (
+            str(native_comparison_path) if native_comparison_path else None
+        ),
+        "native_external_multi_equipment_recheck_comparison_status": (
+            native_comparison_value.get("status") if native_comparison_value else None
+        ),
+        "native_external_multi_equipment_recheck_comparison_equipment_count": (
+            native_comparison_value.get("equipment_count") if native_comparison_value else None
+        ),
+        "native_external_multi_equipment_recheck_comparison_valid": (
+            comparison_valid if native_comparison_pointer is not None else None
         ),
         "native_external_clean_full_scope_replay_record": (
             str(clean_scope_path) if clean_scope_path else None
