@@ -28,6 +28,7 @@ from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
     EquipmentStateSnapshot,
 )
+from lh2_tno.resolved_liquid_worker import dynamic_state_closure_status  # noqa: E402
 
 
 def _tree_digest(root: Path) -> str:
@@ -207,6 +208,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     data = native_response["data"]
     provider_meta = data.get("provider_meta") if isinstance(data.get("provider_meta"), Mapping) else {}
+    closure_audit = dynamic_state_closure_status(
+        result.release.model_dump(mode="json")
+    )
+    declared_closure = provider_meta.get("dynamic_state_closure")
     verification = {
         "schema_version": "prism.native_lh2dt_dynamic_pipe_packet_verification.v1",
         "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
@@ -232,6 +237,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "available_mass_kg": data.get("available_mass_kg"),
         "cumulative_mass_out_kg": data.get("cumulative_mass_out_kg"),
         "mass_residual_kg": provider_meta.get("residual_mass_kg"),
+        "dynamic_state_closure": {
+            "declared_by_provider": isinstance(declared_closure, Mapping),
+            "prism_source_dynamics_status": (
+                "READY" if closure_audit.get("ready") is True else "BLOCKED"
+            ),
+            "ready": closure_audit.get("ready"),
+            "blocking_reasons": closure_audit.get("blocking_reasons", []),
+            "state_history_digest": (
+                declared_closure.get("state_history_digest")
+                if isinstance(declared_closure, Mapping)
+                else None
+            ),
+        },
         "isolation_time_s": provider_meta.get("isolation_time_s"),
         "post_isolation_observation_s": provider_meta.get("post_isolation_observation_s"),
         "isolation_success": provider_meta.get("isolation_success"),
