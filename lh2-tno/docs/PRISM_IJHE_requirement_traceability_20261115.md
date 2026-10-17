@@ -164,3 +164,10 @@ The same request catalog can be converted into a fillable sidecar manifest with
 full-scope template has 26 release identities from 24 event rows; all entries
 remain `TEMPLATE_ONLY` and `promotion_allowed=false` until a reviewed sidecar
 binds the exact packet digests and independent validation evidence.
+
+The native request catalog now has a direct audit adapter at
+`scripts/audit_native_full_scope_provider_qualification.py`. It flattens grouped
+event rows into release identities without changing packet data, then reuses
+the exact digest and sidecar checks. The current audit reports 24 rows, 26
+release identities, 0 exact matches and 26 missing sidecars; it keeps frequency
+inference and facility QRA disabled.

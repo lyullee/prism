@@ -173,3 +173,8 @@ source/result digests and packet indexes, and gives each identity a placeholder
 sidecar path. Placeholder paths are never treated as evidence; a reviewed
 `prism.provider_qualification_evidence.v1` file is required before the audit can
 qualify a provider packet.
+
+The native request catalog is audited directly by
+`scripts/audit_native_full_scope_provider_qualification.py`. The current audit
+record is
+`results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json`: 24 event rows and 26 release identities are checked, all 26 sidecars are currently missing, and the qualified-provider count is zero. An exact sidecar match would still remain diagnostic until its release-closure status and independent validation evidence are present.
