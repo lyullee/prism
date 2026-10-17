@@ -5508,7 +5508,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "current_union_ijhe_objective_coverage_audit_sha256": "1489ce4fdd07c904fab0612da2a851367d27e98dead556333bc641b2efc80a21",
+  "current_union_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
   "current_union_ijhe_objective_coverage_audit_realtime_status": "CONDITIONALLY_COMPLETE; cached_diagnostic_1hz meets benchmark, fresh_physics_background is explicitly not a 1 Hz claim",
   "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
   "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 37 checks; core blockers 0; strict blockers 4; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
@@ -5520,7 +5520,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "latest_ijhe_objective_coverage_audit_sha256": "1489ce4fdd07c904fab0612da2a851367d27e98dead556333bc641b2efc80a21",
+  "latest_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
   "conditional_facility_risk_interpretation_doc": "docs/PRISM_conditional_facility_risk_interpretation_20261115.md",
   "inventory_termination_margin_probe_record": "results/20261115/inventory_termination_margin_probe.json",
   "inventory_termination_margin_probe_doc": "docs/PRISM_inventory_termination_margin_20261115.md",

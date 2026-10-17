@@ -342,6 +342,9 @@ def build_ijhe_objective_coverage_audit(
         "CONDITIONALLY_COMPLETE" if slabx_ok else "BLOCKED_EVIDENCE",
         evidence_paths=(slabx_path,),
         observed={
+            "scope_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
+            "active_development_in_scope": False,
+            "remaining_task": False,
             "slabx_status": slabx_validation_evidence.get("status") if isinstance(slabx_validation_evidence, Mapping) else None,
             "check_count": len(slabx_checks) if isinstance(slabx_checks, list) else None,
             "ffi_case_count": slabx_metrics.get("ffi_case_count"),
@@ -352,7 +355,7 @@ def build_ijhe_objective_coverage_audit(
             "physical_validation_claim": slabx_validation_evidence.get("physical_validation_claim") if isinstance(slabx_validation_evidence, Mapping) else None,
         },
         blocking_reason=None if slabx_ok else "SLABx-LH2 구성요소 검증 장부가 없거나 restricted claim 경계를 만족하지 않는다",
-        interpretation="구성요소 비교·재현성 근거는 피해영향 모델의 제한된 근거로 사용하지만 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다.",
+        interpretation="SLABx-LH2는 검증 완료 후 고정된 외부 피해영향 구성요소로 소비한다. PRISM의 남은 개발은 입력·단위·시간축·실패처리 handoff에 한정하며, 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다.",
     ))
 
     frequency_ok = uncertainty_scenarios > 0 and facility_assessment.get("physical_validation_claim") is False

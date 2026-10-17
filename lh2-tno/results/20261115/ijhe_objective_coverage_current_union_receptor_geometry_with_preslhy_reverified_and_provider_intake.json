@@ -78,10 +78,13 @@
         "pool_radius_median_ratio": 1.0305005693059233,
         "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
         "runtime_repeat_inventory_difference_kg": 0.0,
-        "physical_validation_claim": false
+        "physical_validation_claim": false,
+        "scope_role": "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT",
+        "active_development_in_scope": false,
+        "remaining_task": false
       },
       "blocking_reason": null,
-      "interpretation": "구성요소 비교·재현성 근거는 피해영향 모델의 제한된 근거로 사용하지만 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다."
+      "interpretation": "SLABx-LH2는 검증 완료 후 고정된 외부 피해영향 구성요소로 소비한다. PRISM의 남은 개발은 입력·단위·시간축·실패처리 handoff에 한정하며, 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다."
     },
     {
       "id": "literature_frequency_uncertainty",

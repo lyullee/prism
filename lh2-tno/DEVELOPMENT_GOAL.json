@@ -4548,7 +4548,7 @@
     "commit": "2ada9a1c8d6d9a4ccc9d9fe1422987ac7f599eca",
     "url": "https://github.com/lyullee/prism/actions/runs/39042218958"
   },
-  "current_union_ijhe_objective_coverage_audit_sha256": "1489ce4fdd07c904fab0612da2a851367d27e98dead556333bc641b2efc80a21",
+  "current_union_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
   "actual_ffi_high_resolution_recheck_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN; 5120->10240 relative changes remain 9.070% H2 concentration, 3.757% centre height, 2.232% cloud depth, 0.132% temperature, 1.843% MAE and 0.198% RMSE; worst quantity H2_vol_pct_at_30_m",
   "actual_ffi_high_resolution_recheck_levels": [
@@ -4833,7 +4833,7 @@
   "facility_provider_intake_audit_template_entry_count": 44,
   "facility_provider_intake_audit_aligned_entry_count": 44,
   "facility_provider_intake_audit_blocking_reason_count": 0,
-  "latest_ijhe_objective_coverage_audit_sha256": "1489ce4fdd07c904fab0612da2a851367d27e98dead556333bc641b2efc80a21",
+  "latest_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
   "ijhe_completion_audit_latest_verification_after_provider_intake_record": "results/20261115/latest_ijhe_audit_verification_after_provider_intake.json",
   "ijhe_completion_audit_latest_verification_after_provider_intake_status": "PASS",
   "ijhe_completion_audit_latest_verification_after_provider_intake_blocking_reason_count": 0,

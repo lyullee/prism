@@ -166,6 +166,13 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
     assert "release_to_final_damage" not in report["core_blocking_check_ids"]
     assert "slabx_lh2_component_consequence_validation" not in report["core_blocking_check_ids"]
+    slabx_check = next(
+        row for row in report["checks"]
+        if row["id"] == "slabx_lh2_component_consequence_validation"
+    )
+    assert slabx_check["observed"]["scope_role"] == "FROZEN_EXTERNAL_VALIDATED_CONSEQUENCE_COMPONENT"
+    assert slabx_check["observed"]["active_development_in_scope"] is False
+    assert slabx_check["observed"]["remaining_task"] is False
     scope_check = next(row for row in report["checks"] if row["id"] == "generic_lh2_scope")
     assert scope_check["observed"]["scope_gap_summary"]["qualification_gap_family_count"] == 1
     assert scope_check["observed"]["scope_gap_rows"][0]["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
