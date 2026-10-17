@@ -6435,5 +6435,11 @@
   "latest_native_external_full_scope_provider_request_rebaseline_event_count": 26,
   "latest_native_external_full_scope_provider_request_rebaseline_identity_match_count": 26,
   "latest_native_external_full_scope_provider_request_rebaseline_result_digest_changed_count": 26,
-  "latest_native_external_full_scope_provider_request_rebaseline_facility_qra_allowed": false
+  "latest_native_external_full_scope_provider_request_rebaseline_facility_qra_allowed": false,
+  "latest_inspection_center_current_source_recheck_record": "examples/inspection_center_current_source_recheck_20261018.json",
+  "latest_inspection_center_current_source_recheck_status": "UNCHANGED_FROM_PRIOR_RECHECK; 6 core scenario files and external lh2dt source digest unchanged; 52 scenario rows/41 outdoor candidates/11 out-of-scope; 17 workbooks/78 sheets/8,955 samples/522 units unconfirmed",
+  "latest_inspection_center_current_source_recheck_core_summary_matches_prior": true,
+  "latest_inspection_center_current_source_recheck_provider_qualification_claim": false,
+  "latest_inspection_center_current_source_recheck_frequency_inference": false,
+  "latest_inspection_center_current_source_recheck_facility_qra_claim": false
 }

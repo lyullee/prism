@@ -1,0 +1,136 @@
+{
+  "schema_version": "prism.inspection_center_current_source_recheck.v1",
+  "status": "UNCHANGED_FROM_PRIOR_RECHECK",
+  "checked_on": "2026-10-18",
+  "source_root_label": "액화수소검사지원센터 데이터",
+  "source_root": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터",
+  "comparison_basis": {
+    "prior_scenario_reaudit": "results/20261115/inspection_center_evidence_reaudit_current.json",
+    "prior_header_bound_state": "results/20261017/inspection_center_header_bound_state_evidence_current.json",
+    "prior_source_tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+  },
+  "external_lh2dt_source": {
+    "commit": "7072374",
+    "tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "changed_from_prior": false
+  },
+  "data_files": [
+    {
+      "path": "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+      "mode": "receiving",
+      "kind": "model_prediction",
+      "sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "run_count": 10,
+      "row_count_excluding_headers": 13680,
+      "sheet_count": 11,
+      "headers": [
+        [
+          "회차",
+          "from_step",
+          "to_step",
+          "progress_pct",
+          "at_step",
+          "action",
+          "PT1206",
+          "PT1111",
+          "PT1105A",
+          "PT1105B",
+          "TT1106",
+          "TT1111",
+          "TT1112",
+          "DPT1101",
+          "DPT1102"
+        ]
+      ]
+    },
+    {
+      "path": "1. 액화수소 인수 시나리오 데이터/액화수소인수_운전시퀀스.csv",
+      "mode": "receiving",
+      "kind": "diagnostic_sequence",
+      "sha256": "24d0c165dbb3b5c1af1b2645b3e25b6ab2f8e5e337d0d7e8ded3ae901a465232",
+      "row_count": 19
+    },
+    {
+      "path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "mode": "vent",
+      "kind": "model_prediction",
+      "sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "run_count": 10,
+      "row_count_excluding_headers": 6730,
+      "sheet_count": 10,
+      "headers": [
+        [
+          "회차",
+          "timestamp",
+          "t1_seq",
+          "t2_seq",
+          "PT1105A",
+          "DPT1101",
+          "PT1105B",
+          "DPT1102"
+        ]
+      ]
+    },
+    {
+      "path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소저장벤트_운전시퀀스.csv",
+      "mode": "vent",
+      "kind": "diagnostic_sequence",
+      "sha256": "58bd97776b98dd8c2c29222452eb8661b4a6ce6dccc1f6dc1f73c0409b7981b4",
+      "row_count": 3
+    },
+    {
+      "path": "3. 액화수소 공급 시나리오 데이터/수소공급_운전시퀀스.csv",
+      "mode": "supply",
+      "kind": "diagnostic_sequence",
+      "sha256": "1e0c48044349a6d753ab9ba18ae95a6b3a5e93b1928dd40bdf562bec944582e1",
+      "row_count": 30
+    },
+    {
+      "path": "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+      "mode": "supply",
+      "kind": "model_prediction",
+      "sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "run_count": 10,
+      "row_count_excluding_headers": 14420,
+      "sheet_count": 10,
+      "headers": [
+        [
+          "회차",
+          "from_step",
+          "to_step",
+          "progress_pct",
+          "at_step",
+          "action",
+          "PT1101",
+          "PT1106",
+          "PT1107",
+          "PT1105A",
+          "PT1105B",
+          "TT1116",
+          "DPT1101",
+          "DPT1102"
+        ]
+      ]
+    }
+  ],
+  "recomputed_summary": {
+    "scenario_file_count": 3,
+    "scenario_record_count": 52,
+    "outdoor_candidate_count": 41,
+    "out_of_scope_count": 11,
+    "workbook_count": 17,
+    "sheet_count": 78,
+    "sample_count": 8955,
+    "numeric_signal_unit_unconfirmed_count": 522,
+    "read_error_count": 0,
+    "core_summary_matches_prior": true
+  },
+  "promotion_policy": {
+    "provider_qualification_claim": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "reason": "The recheck reproduces the prior evidence ledger; it does not add engineering-unit, tag-mapping, calibration, accident-release, or independent-validation evidence."
+  }
+}

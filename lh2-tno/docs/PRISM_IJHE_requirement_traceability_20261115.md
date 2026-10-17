@@ -223,3 +223,17 @@ Every one of the 24 provider result digests changed relative to the stored campa
 The full campaign rebaseline contract was then applied with explicit previous and current source-tree digests. All 24 event/component/port identities matched and all 24 current result digests were rebound in a diagnostic record. The previous digest map remains embedded for audit, while the authoritative union was deliberately left unchanged and all promotion flags remain false. The applied record is [`examples/native_external_full_scope_campaign_rebaseline_20261018.json`](../examples/native_external_full_scope_campaign_rebaseline_20261018.json); the reusable implementation is `src/lh2_tno/facility_campaign_rebaseline.py` with CLI `scripts/rebaseline_facility_campaign.py`.
 
 The provider qualification request catalog was also rebound at request granularity. The batch contract updated 24 event requests plus the two reliquefier endpoint requests (26 identity matches) to the current provider digests. It preserves the prior catalog as the source of the rebaseline, creates no qualification sidecar, and leaves frequency and facility-QRA promotion false. The compact audit record is [`examples/native_external_full_scope_provider_request_rebaseline_20261018.json`](../examples/native_external_full_scope_provider_request_rebaseline_20261018.json); the full generated catalog is retained in the local intake workspace for evidence review.
+
+## 2026-10-18 inspection-centre source recheck
+
+The current inspection-centre files were hashed and re-audited against the prior
+read-only evidence records. The three operating-sequence CSV files and three
+ten-run workbooks have the same hashes as the previous check. The external
+`lh2dt` source tree also remains unchanged at commit `7072374` and digest
+`3b186dff…`. The recomputed summary remains 52 scenario rows (41 outdoor
+screening candidates and 11 outside the declared outdoor scope), 17 workbooks,
+78 sheets, 8,955 state samples, and 522 numeric signals with unconfirmed
+engineering units. The core summary matches the stored evidence ledger and no
+new release, frequency, provider-qualification, physical-validation, or
+facility-QRA evidence was found. The machine-readable record is
+[`examples/inspection_center_current_source_recheck_20261018.json`](../examples/inspection_center_current_source_recheck_20261018.json).
