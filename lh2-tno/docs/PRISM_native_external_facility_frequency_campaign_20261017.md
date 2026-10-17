@@ -97,18 +97,27 @@ transfer-line openings, five transfer-valve openings, one relief discharge,
 two pump cases, three vaporizer cases, and three reliquefier cases including
 two-sided rupture sets. Every packet matched a frequency event and received a
 case record. After regenerating the packets with the manifest port coordinates,
-all 24 cases executed through the consequence path. The resulting 12
+all 24 cases executed through the consequence path. The resulting 11
 operator-limited records remain explicit withheld assessments; they are not
-converted to zero risk. Twelve cases have a fully closed diagnostic consequence
-chain. The 100% tank opening uses the previously validated inventory-depletion
-packet because both tank solvers lose finite positive pressure at that declared
-full-bore geometry; this fallback is recorded in the catalog audit.
+converted to zero risk. Thirteen cases have a fully closed diagnostic
+consequence chain. The 100% tank opening uses the previously validated
+inventory-depletion packet because both tank solvers lose finite positive
+pressure at that declared full-bore geometry; this fallback is recorded in the
+catalog audit.
+
+The ambient-vaporizer G1 packet was separately rechecked after the provider
+reached atmospheric zero flow while retaining inventory. PRISM now rejects
+that state as false `inventory_depletion` evidence. G1 is replayed as an
+explicit `inventory_over_600s` bounded history, with the frequency event,
+HAZOP release-mode binding, provider packet, and consequence case updated
+together. The residual inventory remains visible and the case is diagnostic;
+it is not promoted to a full-depletion claim.
 
 The corresponding `verification.json` therefore reports
 `matched_event_case_record_count=24`,
 `matched_event_executed_case_count=24`,
 `matched_event_failed_case_count=0`,
-`matched_event_withheld_case_count=12`,
+`matched_event_withheld_case_count=11`,
 `conditional_diagnostic_facility_risk_available=true`, and
 `facility_qra_claim=false`. This is a coverage and handoff audit, not a claim
 that the generic facility has a complete annual IR/F-N result. The next

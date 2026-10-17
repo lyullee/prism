@@ -1,8 +1,8 @@
 {
-  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
   "provider_model": "lh2dt.DynamicVaporizer",
-  "release_mode": "instantaneous_inventory",
-  "provider_result_digest": "1f453eb9bef960c9f2f7770e9325813c7183fc2e5eb2777a60da4ed69b054bce",
+  "release_mode": "inventory_over_600s",
+  "provider_result_digest": "d4da7db31ed1d41128a344e5df09ef6814d993822d7677be28edec0179a9fb54",
   "state_snapshot": {
     "schema_version": "prism.equipment_state_snapshot.v1",
     "component_id": "ambient-vaporizer-01",
@@ -28,19 +28,17 @@
     "provider_echo_digest": "0f0b749d9314a8ca5f7303e7f35802eb2a9114c6295f6043b7ae715f193571e0",
     "digest_match": true
   },
-  "strict_packet_duration_s": 1.6000000000000003,
-  "strict_packet_interval_count": 16,
-  "strict_packet_mass_residual_kg": -8.470329472543003e-22,
+  "strict_packet_duration_s": 600.0,
+  "strict_packet_interval_count": 96,
+  "strict_packet_mass_residual_kg": 0.0,
   "strict_packet_energy_residual_j": 0.0,
   "provider_packet_promoted": false,
   "physical_validation_claim": false,
   "frequency_inference": false,
   "facility_qra_claim": false,
   "dynamic_state_closure": {
-    "ready": false,
-    "blocking_reasons": [
-      "inventory depletion requires provider final mass at or below tolerance"
-    ],
+    "ready": true,
+    "blocking_reasons": [],
     "provider_record_present": true
   },
   "limitations": [

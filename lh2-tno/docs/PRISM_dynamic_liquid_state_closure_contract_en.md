@@ -163,7 +163,7 @@ inferred while unwrapping.
 The latest native external full-scope campaign is recorded in
 `results/20261115/native_external_facility_full_scope_campaign_current/`.
 It matches and executes all 24 declared event packets and records 96 risk
-atoms. Twelve cases remain explicitly operator-limited; the conditional
+atoms. Eleven cases remain explicitly operator-limited; the conditional
 diagnostic facility IR/F-N view is available, while facility-wide QRA,
 provider qualification, and physical validation remain false. Its current
 cross-ledger report is

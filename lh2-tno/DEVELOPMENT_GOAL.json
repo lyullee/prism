@@ -4350,7 +4350,7 @@
   "external_lh2dt_native_facility_campaign_hazop_binding_digest": "c0a22d6b0268dd8c41f7551f97a4263f65c305664b8759dce2f9256db07f1158",
   "external_lh2dt_native_facility_full_scope_packet_record": "results/20261115/native_external_facility_full_scope_packets_current/",
   "external_lh2dt_native_facility_full_scope_campaign_record": "results/20261115/native_external_facility_full_scope_campaign_current/verification.json",
-  "external_lh2dt_native_facility_full_scope_campaign_status": "FULL_SCOPE_PACKET_MATCHED_AND_EXECUTED_PARTIAL_CONSEQUENCE; 24/24 events matched and executed through the consequence path, 12 operator-limited assessments explicitly withheld; conditional diagnostic facility risk is available, while facility-wide QRA promotion remains withheld",
+  "external_lh2dt_native_facility_full_scope_campaign_status": "FULL_SCOPE_PACKET_MATCHED_AND_EXECUTED_PARTIAL_CONSEQUENCE; 24/24 events matched and executed through the consequence path, 11 operator-limited assessments explicitly withheld; G1 is now explicitly bounded at 600 s after residual-inventory audit; conditional diagnostic facility risk is available, while facility-wide QRA promotion remains withheld",
   "external_lh2dt_native_facility_full_scope_packet_count": 24,
   "external_lh2dt_native_facility_full_scope_case_record_count": 24,
   "external_lh2dt_native_facility_full_scope_executed_case_count": 24,
@@ -4359,12 +4359,13 @@
   "external_lh2dt_native_facility_full_scope_facility_qra_claim": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_claim": false,
   "external_lh2dt_native_facility_full_scope_physical_validation_claim": false,
-  "external_lh2dt_native_facility_full_scope_withheld_assessment_count": 12,
-  "external_lh2dt_native_facility_full_scope_campaign_elapsed_ms": 791659.114800015,
-  "external_lh2dt_native_facility_full_scope_operator_limited_case_count": 12,
+  "external_lh2dt_native_facility_full_scope_withheld_assessment_count": 11,
+  "external_lh2dt_native_facility_full_scope_campaign_elapsed_ms": 814290.9996999952,
+  "external_lh2dt_native_facility_full_scope_operator_limited_case_count": 11,
   "external_lh2dt_native_facility_full_scope_conditional_diagnostic_facility_risk_available": true,
-  "external_lh2dt_native_facility_full_scope_dynamic_closure_ready_case_count": 12,
-  "external_lh2dt_native_facility_full_scope_dynamic_closure_blocked_case_count": 10,
+  "external_lh2dt_native_facility_full_scope_dynamic_closure_ready_case_count": 13,
+  "external_lh2dt_native_facility_full_scope_dynamic_closure_blocked_case_count": 9,
   "external_lh2dt_native_facility_full_scope_adapter_update": "DynamicVaporizer/DynamicReliquefier isolation branches now preserve provider state-history digest and pressure/inventory residual closure; bounded 600 s inventory history is accepted as a distinct diagnostic closure; DynamicHEMPipe pressure-equalization termination is retained as a natural-duration closure; full depletion and reliquefier two-sided branches remain explicitly limited.",
-  "external_lh2dt_native_facility_full_scope_dynamic_closure_not_declared_case_count": 2
+  "external_lh2dt_native_facility_full_scope_dynamic_closure_not_declared_case_count": 2,
+  "external_lh2dt_native_facility_full_scope_g1_residual_inventory_correction_status": "CORRECTED_AND_REPLAYED_DIAGNOSTIC_ONLY; the previous instantaneous_inventory packet reached atmospheric zero flow with residual provider mass, so it is rejected fail-closed; G1 now uses an explicit inventory_over_600s event, packet, HAZOP binding and facility replay; provider qualification, physical validation and facility QRA remain withheld"
 }

@@ -8,14 +8,14 @@
       "name": "campaign.coverage.dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "stored": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "reason": null
     },
@@ -23,12 +23,10 @@
       "name": "campaign.coverage.by_component[ambient-vaporizer-01].dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "stored": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "reason": null
     },
@@ -106,14 +104,14 @@
       "name": "facility.conditional_diagnostic_facility_coverage.dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "stored": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "reason": null
     },
@@ -121,12 +119,10 @@
       "name": "facility.component_coverage[ambient-vaporizer-01].dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "stored": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "reason": null
     },
@@ -134,12 +130,10 @@
       "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[ambient-vaporizer-01].dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "stored": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "reason": null
     },
@@ -287,14 +281,14 @@
       "name": "cross_ledger.global_dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "stored": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "reason": null
     },
@@ -325,12 +319,10 @@
       "name": "cross_ledger.component[ambient-vaporizer-01].dynamic_state_closure_status_counts",
       "status": "PASS",
       "expected": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "stored": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "reason": null
     },
@@ -411,14 +403,13 @@
   "campaign_audits": [
     {
       "status_counts": {
-        "BLOCKED": 10,
+        "BLOCKED": 9,
         "NOT_DECLARED": 2,
-        "READY": 12
+        "READY": 13
       },
       "component_status_counts": {
         "ambient-vaporizer-01": {
-          "BLOCKED": 1,
-          "READY": 2
+          "READY": 3
         },
         "liquid-transfer-line-01": {
           "READY": 5
@@ -445,14 +436,13 @@
   ],
   "facility_audit": {
     "status_counts": {
-      "BLOCKED": 10,
+      "BLOCKED": 9,
       "NOT_DECLARED": 2,
-      "READY": 12
+      "READY": 13
     },
     "component_status_counts": {
       "ambient-vaporizer-01": {
-        "BLOCKED": 1,
-        "READY": 2
+        "READY": 3
       },
       "liquid-transfer-line-01": {
         "READY": 5
@@ -485,8 +475,8 @@
     "results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json"
   ],
   "source_campaign_sha256": [
-    "5ab51358a9d86fbca982269321f6bdd71524611de9886349760b669ead069d71"
+    "04195ff116f1b2be42f8e1aabc0f494f4739ca4f4b9c4530eb9230c33f961329"
   ],
   "source_facility": "results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json",
-  "source_facility_sha256": "5dbfe055876071dd838a3bfa3237295962a1c5087a73b02f3fb38e208e607a4d"
+  "source_facility_sha256": "ead847f9c833fdf9f3ee6a137e95b90630cb011e27f2a15b00f14885ede41a6a"
 }
