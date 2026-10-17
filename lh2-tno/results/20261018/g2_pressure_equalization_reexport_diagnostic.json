@@ -1,0 +1,54 @@
+{
+  "schema_version": "prism.pressure_equalization_reexport_diagnostic.v1",
+  "created_at": "2026-10-18",
+  "status": "DIAGNOSTIC_REEXPORT_NOT_CURRENT_CAMPAIGN",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "provider_model": "lh2dt.DynamicVaporizer",
+  "model_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "provider_result_digest": "b59fefcf3f795250e7fcef7858d5f7e678157e814b9c7db2ace6b38c498d29e8",
+  "termination": {
+    "basis": "model_pressure_equalization",
+    "duration_s": 600.0,
+    "interval_count": 96,
+    "pressure_equalization_time_s": 6.300000000000004,
+    "post_pressure_equalization_observation_s": 6.300000000000015,
+    "terminal_source_pressure_pa_abs": 100915.01974604816,
+    "ambient_pressure_pa_abs": 101325.0,
+    "max_post_pressure_equalization_flow_kg_s": 0.0
+  },
+  "mass_and_dynamic_closure": {
+    "available_mass_kg": 0.0008238536226639276,
+    "cumulative_mass_out_kg": 4.968659729146261e-06,
+    "final_mass_kg": 0.0008188849629347813,
+    "reported_mass_residual_kg": 1.0333801956502464e-19,
+    "dynamic_state_closure_ready": true,
+    "dynamic_inventory_residual_kg": 1.0842021724855044e-19,
+    "dynamic_pressure_residual_pa": 0.0
+  },
+  "state_snapshot_handoff": {
+    "digest": "0f0b749d9314a8ca5f7303e7f35802eb2a9114c6295f6043b7ae715f193571e0",
+    "provider_echo_digest": "0f0b749d9314a8ca5f7303e7f35802eb2a9114c6295f6043b7ae715f193571e0",
+    "digest_match": true
+  },
+  "promotion_gates": {
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "frequency_inference": false,
+    "facility_qra_claim": false
+  },
+  "current_authority_binding": {
+    "authority_record": "results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json",
+    "current_authority_provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73",
+    "digest_match": false,
+    "rebind_required": true,
+    "reason": "The explicit pressure-equalization re-export is a diagnostic candidate. Exact digest binding prevents it from silently replacing the current G2 campaign packet."
+  },
+  "limitations": [
+    "synthetic dynamic gas-unit inventory and diagnostic valve area",
+    "no failure opening is attached",
+    "no site calibration, isolation reliability or independent physical validation",
+    "not a facility QRA result"
+  ]
+}

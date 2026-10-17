@@ -102,6 +102,79 @@ def _coarsen_steps(steps: list[dict[str, Any]], *, duration_s: float, maximum_st
     return compact
 
 
+def _pressure_equalization_metadata(
+    steps: list[dict[str, Any]],
+    *,
+    duration_s: float,
+    ambient_pressure_pa_abs: float,
+    minimum_zero_flow_intervals: int = 2,
+) -> dict[str, Any]:
+    """Return explicit provider-owned natural-stop evidence for a coarse packet.
+
+    The provider history is already coarsened with mass-preserving interval
+    averages.  This check therefore uses the packet rows that PRISM will
+    consume, rather than reconstructing a stop from a bounded clock.  It
+    requires a positive-flow row immediately before the first non-outward
+    zero-flow row and a non-zero observation tail.
+    """
+    if len(steps) < minimum_zero_flow_intervals + 1:
+        raise ValueError("pressure_equalization requires a provider observation tail")
+    candidate_index = None
+    for index, row in enumerate(steps):
+        if index == 0:
+            continue
+        flow = float(row["mass_flow_kg_s"])
+        previous_flow = float(steps[index - 1]["mass_flow_kg_s"])
+        source = row.get("provider_source_state")
+        pressure = (
+            float(source["source_pressure_pa_abs"])
+            if isinstance(source, Mapping) and source.get("source_pressure_pa_abs") is not None
+            else None
+        )
+        if (
+            pressure is not None
+            and flow <= 1.0e-12
+            and previous_flow > 1.0e-12
+            and pressure <= ambient_pressure_pa_abs + 1.0e-3
+        ):
+            candidate_index = index
+            break
+    if candidate_index is None:
+        raise ValueError(
+            "pressure_equalization requires positive flow followed by non-outward zero flow"
+        )
+    tail = steps[candidate_index : candidate_index + minimum_zero_flow_intervals]
+    if len(tail) < minimum_zero_flow_intervals or any(
+        float(row["mass_flow_kg_s"]) > 1.0e-12 for row in tail
+    ):
+        raise ValueError("pressure_equalization requires a complete zero-flow observation tail")
+    first = tail[0]
+    last = tail[-1]
+    first_source = first.get("provider_source_state")
+    last_source = last.get("provider_source_state")
+    if not isinstance(first_source, Mapping) or not isinstance(last_source, Mapping):
+        raise ValueError("pressure_equalization requires provider source-state metadata")
+    pressure = float(last_source["source_pressure_pa_abs"])
+    if pressure > ambient_pressure_pa_abs + 1.0e-3:
+        raise ValueError("pressure_equalization terminal source pressure remains outward")
+    time_s = float(first["time_s"])
+    observation_s = max(0.0, float(last["time_s"]) - time_s)
+    if observation_s <= 0.0:
+        raise ValueError("pressure_equalization observation interval must be positive")
+    return {
+        "pressure_equalization_time_s": time_s,
+        "post_pressure_equalization_observation_s": observation_s,
+        "pressure_equalization_success": True,
+        "terminal_source_pressure_pa_abs": pressure,
+        "ambient_pressure_pa_abs": float(ambient_pressure_pa_abs),
+        "max_post_pressure_equalization_flow_kg_s": max(
+            float(row["mass_flow_kg_s"]) for row in tail
+        ),
+        "pressure_equalization_observation_intervals": len(tail),
+        "pressure_equalization_clock_duration_s": float(duration_s),
+    }
+
+
 def _request(*, source_digest: str, component_id: str, event_id: str | None,
              port_id: str | None, mode: str, state_snapshot: EquipmentStateSnapshot,
              height_m: float, position_enu_m: list[float], model_class: str, revision: str,
@@ -160,12 +233,16 @@ class DynamicGasInventoryProvider:
         self.stroke_time_s = float(stroke_time_s)
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
-        if self.release_mode not in {"instantaneous_inventory", "inventory_over_600s"}:
+        if self.release_mode not in {
+            "instantaneous_inventory",
+            "inventory_over_600s",
+            "pressure_equalization",
+        }:
             raise ValueError("unsupported inventory release mode")
         if self.duration_s <= 0.0 or self.time_step_s <= 0.0 or self.fluid_volume_m3 <= 0.0:
             raise ValueError("inventory diagnostic inputs must be positive")
-        if self.release_mode == "inventory_over_600s" and not math.isclose(self.duration_s, 600.0, rel_tol=0.0, abs_tol=1.0e-9):
-            raise ValueError("inventory_over_600s provider duration must be exactly 600 s")
+        if self.release_mode in {"inventory_over_600s", "pressure_equalization"} and not math.isclose(self.duration_s, 600.0, rel_tol=0.0, abs_tol=1.0e-9):
+            raise ValueError("bounded 600 s inventory provider duration must be exactly 600 s")
         sys.path.insert(0, str(self.root / "src"))
         from lh2dt.properties import HydrogenProperties
         from lh2dt.valve import StrokeLimitedCommandedValve, Valve
@@ -297,15 +374,30 @@ class DynamicGasInventoryProvider:
             if self.release_mode == "instantaneous_inventory" and state.mass_kg <= 1.0e-10:
                 terminated = True
                 break
-            if self.release_mode == "inventory_over_600s" and state.mass_kg <= 1.0e-10:
-                raise ValueError("inventory_over_600s provider depleted before 600 s")
+            if self.release_mode in {"inventory_over_600s", "pressure_equalization"} and state.mass_kg <= 1.0e-10:
+                raise ValueError("bounded inventory provider depleted before 600 s")
         if self.release_mode == "instantaneous_inventory" and not terminated:
             raise ValueError("instantaneous inventory provider did not deplete within diagnostic horizon")
-        if self.release_mode == "inventory_over_600s" and not math.isclose(time_s, 600.0, rel_tol=0.0, abs_tol=1.0e-8):
-            raise ValueError("inventory_over_600s provider clock disagrees with 600 s")
-        basis = "inventory_depletion" if self.release_mode == "instantaneous_inventory" else "inventory_over_600s"
-        declared_duration = 600.0 if self.release_mode == "inventory_over_600s" else time_s
+        if self.release_mode in {"inventory_over_600s", "pressure_equalization"} and not math.isclose(time_s, 600.0, rel_tol=0.0, abs_tol=1.0e-8):
+            raise ValueError("bounded inventory provider clock disagrees with 600 s")
+        basis = (
+            "inventory_depletion"
+            if self.release_mode == "instantaneous_inventory"
+            else "model_pressure_equalization"
+            if self.release_mode == "pressure_equalization"
+            else "inventory_over_600s"
+        )
+        declared_duration = 600.0 if self.release_mode in {"inventory_over_600s", "pressure_equalization"} else time_s
         packet_steps = _coarsen_steps(steps, duration_s=declared_duration)
+        pressure_equalization = (
+            _pressure_equalization_metadata(
+                packet_steps,
+                duration_s=declared_duration,
+                ambient_pressure_pa_abs=ambient_pressure,
+            )
+            if self.release_mode == "pressure_equalization"
+            else {}
+        )
         packet_mass = sum(
             float(row["mass_flow_kg_s"]) * (
                 float(packet_steps[index + 1]["time_s"]) if index + 1 < len(packet_steps) else declared_duration
@@ -366,6 +458,8 @@ class DynamicGasInventoryProvider:
                     f"external {model_class} finite-volume releasable-inventory ledger; "
                     "atmospheric-pressure equilibrium residual is retained"
                     if self.release_mode == "instantaneous_inventory"
+                    else f"external {model_class} source pressure reached the non-outward atmospheric boundary and remained at zero flow through the provider observation tail"
+                    if self.release_mode == "pressure_equalization"
                     else f"external {model_class} finite-volume inventory ledger over declared 600 s horizon"
                 ),
                 "termination_basis": basis,
@@ -387,6 +481,7 @@ class DynamicGasInventoryProvider:
                     "raw_interval_count": len(steps),
                     "packet_interval_count": len(packet_steps),
                     "dynamic_state_closure": dynamic_closure,
+                    **pressure_equalization,
                 },
             },
         }
@@ -477,7 +572,11 @@ def main() -> int:
     parser.add_argument("--lh2dt-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--mode", choices=("vaporizer", "reliquefier"), default="vaporizer")
-    parser.add_argument("--release-mode", choices=("instantaneous_inventory", "inventory_over_600s"), required=True)
+    parser.add_argument(
+        "--release-mode",
+        choices=("instantaneous_inventory", "inventory_over_600s", "pressure_equalization"),
+        required=True,
+    )
     parser.add_argument("--duration-s", type=float, default=0.5)
     parser.add_argument("--time-step-s", type=float, default=0.1)
     parser.add_argument("--fluid-volume-m3", type=float, default=0.01)

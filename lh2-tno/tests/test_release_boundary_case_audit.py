@@ -89,6 +89,43 @@ def test_case_audit_accepts_explicit_pressure_equalization_boundary():
     assert report["rows"][0]["strict_release_boundary_status"] == "ELIGIBLE"
 
 
+def test_case_audit_accepts_pressure_equalization_overlay_for_bounded_history():
+    case = _case("bounded-pressure-eq")
+    row = _ledger_row("bounded-pressure-eq", basis="inventory_over_600s")
+    evidence = {
+        "schema_version": "prism.provider_termination_evidence_catalog.v1",
+        "rows": [{
+            "event_id": "bounded-pressure-eq",
+            "provider_result_digest": "result",
+            "termination_basis": "model_pressure_equalization",
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 3.0,
+            "pressure_equalization_time_s": 0.2,
+            "post_pressure_equalization_observation_s": 0.2,
+            "pressure_equalization_success": True,
+            "terminal_source_pressure_pa_abs": 101324.0,
+            "ambient_pressure_pa_abs": 101325.0,
+            "max_post_pressure_equalization_flow_kg_s": 0.0,
+            "termination_provenance": "provider source pressure reached ambient and remained flow-free",
+            "provider_residual_mass_kg": 0.0,
+            "max_abs_mass_residual_kg": 0.0,
+        }],
+    }
+
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "VALID"
+    assert result["provider_termination_evidence_basis"] == "model_pressure_equalization"
+    assert result["termination"]["basis"] == "inventory_over_600s"
+    assert result["numerical_release_closed"] is True
+    assert result["release_termination_reasons"] == []
+    assert result["strict_release_boundary_eligible"] is True
+
+
 def test_case_audit_rechecks_literature_frequency_event_and_port_binding():
     case = _case("event-1")
     row = _ledger_row("event-1")

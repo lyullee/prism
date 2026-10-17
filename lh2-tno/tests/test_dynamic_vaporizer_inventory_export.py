@@ -3,6 +3,9 @@ import pytest
 from scripts.export_lh2dt_dynamic_vaporizer_prism_packet import (
     _annotate_inventory_depletion_response,
 )
+from scripts.export_lh2dt_dynamic_vaporizer_inventory_prism_packet import (
+    _pressure_equalization_metadata,
+)
 
 
 def test_inventory_depletion_annotation_preserves_native_ledger_and_stop_rule():
@@ -52,3 +55,32 @@ def test_inventory_depletion_annotation_rejects_incomplete_or_invalid_ledger(
         _annotate_inventory_depletion_response(
             response, initial_mass_kg=initial_mass
         )
+
+
+def test_pressure_equalization_metadata_requires_explicit_zero_flow_tail():
+    steps = [
+        {
+            "time_s": 0.0,
+            "mass_flow_kg_s": 1.0,
+            "provider_source_state": {"source_pressure_pa_abs": 102000.0},
+        },
+        {
+            "time_s": 6.3,
+            "mass_flow_kg_s": 0.0,
+            "provider_source_state": {"source_pressure_pa_abs": 101000.0},
+        },
+        {
+            "time_s": 12.6,
+            "mass_flow_kg_s": 0.0,
+            "provider_source_state": {"source_pressure_pa_abs": 100900.0},
+        },
+    ]
+
+    metadata = _pressure_equalization_metadata(
+        steps, duration_s=600.0, ambient_pressure_pa_abs=101325.0
+    )
+
+    assert metadata["pressure_equalization_success"] is True
+    assert metadata["pressure_equalization_time_s"] == 6.3
+    assert metadata["post_pressure_equalization_observation_s"] == 6.3
+    assert metadata["terminal_source_pressure_pa_abs"] == 100900.0

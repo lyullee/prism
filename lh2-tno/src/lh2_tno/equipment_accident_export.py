@@ -676,7 +676,11 @@ class InventoryReleaseExportRequest:
             raise EquipmentAccidentExportError("inventory release request has an invalid schema_version")
         if payload.get("event_kind") != "accidental_leak":
             raise EquipmentAccidentExportError("inventory release request requires event_kind=accidental_leak")
-        if payload.get("release_mode") not in {"instantaneous_inventory", "inventory_over_600s"}:
+        if payload.get("release_mode") not in {
+            "instantaneous_inventory",
+            "inventory_over_600s",
+            "pressure_equalization",
+        }:
             raise EquipmentAccidentExportError("inventory release request has an unsupported release_mode")
         if payload.get("provider_termination_required") is not True:
             raise EquipmentAccidentExportError("inventory release request must explicitly set provider_termination_required=true")
@@ -1082,6 +1086,44 @@ def export_equipment_inventory_release_history(
     if scenario.release_mode == "instantaneous_inventory":
         if basis != "inventory_depletion":
             raise EquipmentAccidentExportError("instantaneous inventory export requires inventory_depletion termination")
+    elif scenario.release_mode == "pressure_equalization":
+        if basis != "model_pressure_equalization":
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires model_pressure_equalization termination"
+            )
+        meta = data.get("provider_meta")
+        if not isinstance(meta, Mapping):
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires provider_meta"
+            )
+        required = (
+            "pressure_equalization_time_s",
+            "post_pressure_equalization_observation_s",
+            "pressure_equalization_success",
+            "terminal_source_pressure_pa_abs",
+            "ambient_pressure_pa_abs",
+            "max_post_pressure_equalization_flow_kg_s",
+        )
+        if not all(key in meta for key in required):
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires explicit pressure boundary metadata"
+            )
+        if meta.get("pressure_equalization_success") is not True:
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires pressure_equalization_success=true"
+            )
+        if float(meta["post_pressure_equalization_observation_s"]) <= 0.0:
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires a positive observation interval"
+            )
+        if float(meta["max_post_pressure_equalization_flow_kg_s"]) > 1.0e-12:
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires a closed post-stop flow"
+            )
+        if float(meta["terminal_source_pressure_pa_abs"]) > float(meta["ambient_pressure_pa_abs"]) + 1.0e-3:
+            raise EquipmentAccidentExportError(
+                "pressure-equalization inventory export requires a non-outward terminal pressure"
+            )
     elif basis != "inventory_over_600s" or not math.isclose(float(data.get("duration_s", -1.0)), 600.0, rel_tol=0.0, abs_tol=1.0e-9):
         raise EquipmentAccidentExportError("inventory_over_600s export requires a 600 s inventory_over_600s history")
     common = {

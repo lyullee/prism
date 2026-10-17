@@ -442,6 +442,74 @@ def test_inventory_export_requires_provider_owned_inventory_termination():
     assert result.release.event_kind == "accidental_leak"
 
 
+def test_inventory_export_accepts_explicit_pressure_equalization_termination():
+    class PressureEqualizationProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response(request)
+            response["data"]["duration_s"] = 600.0
+            response["data"]["termination_basis"] = "model_pressure_equalization"
+            response["data"]["steps"] = [
+                {
+                    **response["data"]["steps"][0],
+                    "time_s": 0.0,
+                    "mass_flow_kg_s": 0.015,
+                    "velocity_m_s": 7.5,
+                },
+                {
+                    **response["data"]["steps"][1],
+                    "time_s": 1.0,
+                    "mass_flow_kg_s": 0.0,
+                    "velocity_m_s": 0.0,
+                },
+            ]
+            response["data"]["provider_meta"] = {
+                "initial_mass_kg": 1.0,
+                "final_mass_kg": 0.985,
+                "residual_mass_kg": 0.0,
+                "derived_accounting_residual_kg": 0.0,
+                "pressure_equalization_time_s": 1.0,
+                "post_pressure_equalization_observation_s": 1.0,
+                "pressure_equalization_success": True,
+                "terminal_source_pressure_pa_abs": 99999.0,
+                "ambient_pressure_pa_abs": 100000.0,
+                "max_post_pressure_equalization_flow_kg_s": 0.0,
+            }
+            return response
+
+    payload = {
+        "schema_version": "prism.equipment_inventory_export_request.v1",
+        "event_kind": "accidental_leak",
+        "component_id": "vaporizer-1",
+        "port_id": "vaporizer-1.out",
+        "event_id": "vaporizer-1/pressure-equalization",
+        "release_mode": "pressure_equalization",
+        "horizon_s": 600.0,
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "ambient_pressure_pa_abs": 100000.0,
+        "ambient_temperature_k": 288.15,
+        "provider_source_digest": "a" * 64,
+        "provider_boundary_reference": "inventory pressure-equalization outlet",
+        "input_origin": "model_prediction",
+        "model_package": "lh2dt",
+        "model_class": "DynamicVaporizer",
+        "model_revision": "test-revision",
+        "state_snapshot_digest": "b" * 64,
+        "evidence_status": "synthetic_diagnostic",
+        "scenario_provenance": "explicit pressure-equalization diagnostic",
+        "provider_termination_required": True,
+    }
+
+    request = InventoryReleaseExportRequest.from_mapping(payload)
+    result = export_equipment_inventory_release_history(
+        PressureEqualizationProvider(), request
+    )
+
+    assert result.release.termination_basis == "model_pressure_equalization"
+    assert result.release.failure_opening_diameter_m is None
+    assert result.provider_packet_promoted is False
+
+
 def test_inventory_export_preserves_explicit_hole_opening_with_provider_depletion():
     payload = {
         "schema_version": "prism.equipment_inventory_export_request.v1",

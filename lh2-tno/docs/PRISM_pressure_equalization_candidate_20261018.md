@@ -34,15 +34,23 @@ pressure-equalization boundary.  The audit sets
 `packet_mutation_allowed=false`, `qualified_provider_packet_allowed=false`,
 `frequency_inference_allowed=false`, and `facility_qra_allowed=false`.
 
-The dynamic-vaporizer adapter now also accepts an explicit
-`--termination-mode pressure_equalization` export.  Its provider metadata
-records the equalization time, the post-equalization observation interval, the
+The inventory dynamic-vaporizer adapter now also accepts an explicit
+`--release-mode pressure_equalization` export.  Its provider metadata records
+the equalization time, the post-equalization observation interval, the
 terminal source pressure, the ambient pressure, and the maximum observed
-post-stop flow.  A synthetic diagnostic run with the current external model
-source produced an 84-interval, 12.6 s packet whose provider closure audit was
-`CLOSURE_READY_FOR_QUALIFICATION`; it remains diagnostic because its initial
-state and geometry are synthetic and no qualification sidecar or independent
-facility validation is present.
+post-stop flow.  A diagnostic re-export against the current external model
+source produced a 96-interval, 600 s packet with a 6.3 s equalization time;
+its provider closure audit was `CLOSURE_READY_FOR_QUALIFICATION`.
+
+The exact result is recorded in
+[`results/20261018/g2_pressure_equalization_reexport_diagnostic.json`](../results/20261018/g2_pressure_equalization_reexport_diagnostic.json).
+The re-export digest is `b59fefcf...`, while the current authoritative G2
+facility record is bound to `67353da6...`.  Because PRISM selects provider
+evidence by exact result digest, the new packet is intentionally not consumed
+by the current campaign.  A campaign rebind and a new facility audit are
+required before it can affect any release-boundary count.  The initial state,
+geometry, and valve area are synthetic, so the packet remains diagnostic and
+does not claim physical validation, frequency inference, or facility QRA.
 
 The implementation is [`src/lh2_tno/pressure_equalization.py`](../src/lh2_tno/pressure_equalization.py), with the command-line wrapper
 [`scripts/audit_provider_pressure_equalization.py`](../scripts/audit_provider_pressure_equalization.py).

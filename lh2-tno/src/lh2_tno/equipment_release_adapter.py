@@ -339,7 +339,7 @@ def build_resolved_gas_release_from_provider_response(
         )
     if event_kind not in {"accidental_leak", "emergency_relief"}:
         raise EquipmentReleaseExportError("unsupported gas provider event kind")
-    if event_kind == "accidental_leak" and failure_opening_diameter_m is None and data.get("termination_basis") not in {"inventory_depletion", "inventory_over_600s"}:
+    if event_kind == "accidental_leak" and failure_opening_diameter_m is None and data.get("termination_basis") not in {"inventory_depletion", "inventory_over_600s", "model_pressure_equalization"}:
         raise EquipmentReleaseExportError(
             "accidental gas release without an opening requires inventory termination basis"
         )
@@ -502,7 +502,7 @@ def build_resolved_liquid_release_from_provider_response(
         raise EquipmentReleaseExportError(
             "provider data must explicitly declare event_kind=accidental_leak"
         )
-    if failure_opening_diameter_m is None and data.get("termination_basis") not in {"inventory_depletion", "inventory_over_600s"}:
+    if failure_opening_diameter_m is None and data.get("termination_basis") not in {"inventory_depletion", "inventory_over_600s", "model_pressure_equalization"}:
         raise EquipmentReleaseExportError(
             "accidental liquid release without an opening requires inventory termination basis"
         )

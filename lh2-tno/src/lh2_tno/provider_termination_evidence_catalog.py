@@ -198,6 +198,33 @@ def _storage_rows(catalog_dir: Path) -> tuple[list[dict[str, Any]], list[str]]:
                                 "remaining_mass_kg": data.get("remaining_inventory_kg"),
                                 "max_abs_mass_residual_kg": data.get("max_total_mass_residual_kg"),
                             })
+                    elif termination_basis == "model_pressure_equalization":
+                        row.update({
+                            "pressure_equalization_time_s": provider_meta.get(
+                                "pressure_equalization_time_s"
+                            ),
+                            "post_pressure_equalization_observation_s": provider_meta.get(
+                                "post_pressure_equalization_observation_s"
+                            ),
+                            "pressure_equalization_success": provider_meta.get(
+                                "pressure_equalization_success"
+                            ),
+                            "terminal_source_pressure_pa_abs": provider_meta.get(
+                                "terminal_source_pressure_pa_abs"
+                            ),
+                            "ambient_pressure_pa_abs": provider_meta.get(
+                                "ambient_pressure_pa_abs"
+                            ) or data.get("ambient_pressure_pa_abs"),
+                            "max_post_pressure_equalization_flow_kg_s": provider_meta.get(
+                                "max_post_pressure_equalization_flow_kg_s"
+                            ),
+                            "provider_residual_mass_kg": provider_meta.get(
+                                "residual_mass_kg"
+                            ),
+                            "max_abs_mass_residual_kg": provider_meta.get(
+                                "derived_accounting_residual_kg"
+                            ),
+                        })
                     rows.append(row)
                     continue
                 except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:

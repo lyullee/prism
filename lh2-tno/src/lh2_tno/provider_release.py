@@ -91,7 +91,7 @@ def load_provider_release(packet: Mapping[str, Any] | str | Path) -> ProviderRel
             "only event_kind=accidental_leak can enter a random-release catalog"
         )
     if value.get("failure_opening_diameter_m") is None and value.get("termination_basis") not in {
-        "inventory_depletion", "inventory_over_600s"
+        "inventory_depletion", "inventory_over_600s", "model_pressure_equalization"
     }:
         raise ProviderReleaseContractError(
             "accidental release without an opening requires inventory termination basis"

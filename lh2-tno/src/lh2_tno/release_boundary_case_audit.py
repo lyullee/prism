@@ -30,6 +30,7 @@ _TERMINATION_EVIDENCE_BASES = {
     "reviewed_isolation_success",
     "inventory_depletion_positive_threshold",
     "inventory_depletion_releasable_mass",
+    "model_pressure_equalization",
     "two_sided_rupture",
     "emergency_relief_discharge",
 }
@@ -381,6 +382,49 @@ def _audit_termination_evidence(
                 "mass_residual_closed",
             )
         )
+    elif basis == "model_pressure_equalization":
+        equalization_time = _finite(candidate.get("pressure_equalization_time_s"))
+        observation = _finite(candidate.get("post_pressure_equalization_observation_s"))
+        terminal_pressure = _finite(candidate.get("terminal_source_pressure_pa_abs"))
+        ambient_pressure = _finite(candidate.get("ambient_pressure_pa_abs"))
+        max_flow = _finite(candidate.get("max_post_pressure_equalization_flow_kg_s"))
+        checks["pressure_equalization_success_declared"] = (
+            candidate.get("pressure_equalization_success") is True
+        )
+        checks["pressure_equalization_time_present"] = (
+            equalization_time is not None and equalization_time >= 0.0
+        )
+        checks["pressure_equalization_observation_present"] = (
+            observation is not None and observation > 0.0
+        )
+        checks["pressure_equalization_flow_closed"] = (
+            max_flow is not None and max_flow <= 1.0e-12
+        )
+        checks["pressure_equalization_pressure_boundary_closed"] = (
+            terminal_pressure is not None
+            and ambient_pressure is not None
+            and terminal_pressure <= ambient_pressure + 1.0e-3
+        )
+        checks["termination_provenance_present"] = (
+            isinstance(candidate.get("termination_provenance"), str)
+            and bool(candidate.get("termination_provenance", "").strip())
+        )
+        checks["mass_residual_closed"] = (
+            provider_residual is not None
+            and abs(provider_residual) <= residual_tolerance_kg
+        )
+        checks["boundary_closed"] = all(
+            checks[name]
+            for name in (
+                "pressure_equalization_success_declared",
+                "pressure_equalization_time_present",
+                "pressure_equalization_observation_present",
+                "pressure_equalization_flow_closed",
+                "pressure_equalization_pressure_boundary_closed",
+                "termination_provenance_present",
+                "mass_residual_closed",
+            )
+        )
     else:
         checks["boundary_closed"] = False
     for name, ok in checks.items():
@@ -522,11 +566,23 @@ def _case_reasons(
         reasons.append(f"status_{status.lower()}")
     termination = _as_mapping(row.get("termination"))
     basis = termination.get("basis")
-    if basis not in _ALLOWED_BASES:
+    evidence_basis = (
+        termination_evidence_audit.get("basis")
+        if isinstance(termination_evidence_audit, Mapping)
+        and termination_evidence_audit.get("status") == "VALID"
+        else None
+    )
+    effective_basis = (
+        evidence_basis
+        if basis == "inventory_over_600s"
+        and evidence_basis == "model_pressure_equalization"
+        else basis
+    )
+    if effective_basis not in _ALLOWED_BASES:
         reasons.append(f"termination_basis_{basis or 'not_declared'}_is_not_allowed")
     if basis == "reviewed_isolation_success" and row.get("isolation_status") != "provider_declared_isolation_success":
         reasons.append("isolation_success_not_declared")
-    if basis == "model_pressure_equalization" and not _pressure_equalization_evidence_valid(case, row):
+    if effective_basis == "model_pressure_equalization" and basis == "model_pressure_equalization" and not _pressure_equalization_evidence_valid(case, row):
         reasons.append("provider_pressure_equalization_evidence_not_supplied")
     if basis == "inventory_depletion":
         if row.get("inventory_status") != "provider_declared_inventory_depletion":
@@ -606,11 +662,23 @@ def _termination_reasons(
     reasons: list[str] = []
     termination = _as_mapping(row.get("termination"))
     basis = termination.get("basis")
-    if basis not in _ALLOWED_BASES:
+    evidence_basis = (
+        termination_evidence_audit.get("basis")
+        if isinstance(termination_evidence_audit, Mapping)
+        and termination_evidence_audit.get("status") == "VALID"
+        else None
+    )
+    effective_basis = (
+        evidence_basis
+        if basis == "inventory_over_600s"
+        and evidence_basis == "model_pressure_equalization"
+        else basis
+    )
+    if effective_basis not in _ALLOWED_BASES:
         reasons.append(f"termination_basis_{basis or 'not_declared'}_is_not_allowed")
     if basis == "reviewed_isolation_success" and row.get("isolation_status") != "provider_declared_isolation_success":
         reasons.append("isolation_success_not_declared")
-    if basis == "model_pressure_equalization" and not _pressure_equalization_evidence_valid(case, row):
+    if effective_basis == "model_pressure_equalization" and basis == "model_pressure_equalization" and not _pressure_equalization_evidence_valid(case, row):
         reasons.append("provider_pressure_equalization_evidence_not_supplied")
     if basis == "inventory_depletion":
         if row.get("inventory_status") != "provider_declared_inventory_depletion":
