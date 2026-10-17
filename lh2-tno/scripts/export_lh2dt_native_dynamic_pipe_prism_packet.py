@@ -276,7 +276,7 @@ def main() -> int:
     parser.add_argument("--component-id", default="native-dynamic-pipe-diagnostic")
     parser.add_argument("--port-id", default="native-dynamic-pipe-out")
     parser.add_argument("--event-id", default="native-dynamic-pipe/accidental-leak-001")
-    parser.add_argument("--model-revision", default="external-library-native-export-0.1.1")
+    parser.add_argument("--model-revision", default="external-library-native-export-0.1.2")
     parser.add_argument("--length-m", type=float, default=10.0)
     parser.add_argument("--pipe-diameter-m", type=float, default=0.1)
     parser.add_argument("--roughness-m", type=float, default=1.0e-6)
