@@ -5875,10 +5875,10 @@
   "external_lh2dt_native_facility_full_scope_provider_qualification_exact_match_event_count": 13,
   "external_lh2dt_native_facility_full_scope_provider_qualification_qualified_count": 0,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json",
-  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 requests: 13 exact diagnostic packets need qualification-only evidence and 11 candidates need release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_status": "OPEN_PROVIDER_QUALIFICATION_REQUESTS; 24 identity-preserving requests: 7 packets have a structurally closed termination ledger and need qualification-only evidence; 19 require release-closure plus qualification evidence; qualified provider packets 0; frequency inference and facility QRA remain false",
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_count": 24,
-  "external_lh2dt_native_facility_full_scope_provider_qualification_only_request_count": 13,
-  "external_lh2dt_native_facility_full_scope_provider_closure_and_qualification_request_count": 11,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_only_request_count": 7,
+  "external_lh2dt_native_facility_full_scope_provider_closure_and_qualification_request_count": 19,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_frequency_inference_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_request_facility_qra_allowed": false,
   "external_lh2dt_native_facility_full_scope_provider_qualification_sidecar_manifest_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_sidecar_manifest_template.json",
@@ -6092,5 +6092,10 @@
   "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_audit_status": "PASS_DIAGNOSTIC_ONLY; population-bound replay reconciled with the same 1/2 frequency-bound coverage",
   "ijhe_completion_audit_latest_verification_after_frequency_audit_record": "results/20261017/latest_ijhe_audit_verification_after_frequency_audit.json",
   "ijhe_completion_audit_latest_verification_after_frequency_audit_status": "PASS; latest audit pointer and 57-check INCOMPLETE_EVIDENCE ledger remain internally consistent; no promotion claim",
-  "ijhe_completion_audit_latest_verification_after_frequency_audit_blocking_reason_count": 0
+  "ijhe_completion_audit_latest_verification_after_frequency_audit_blocking_reason_count": 0,
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_policy": "Qualification-only is assigned only when the resolved packet carries a family-specific closed termination ledger; bounded horizons, missing relief evidence, and incomplete isolation ledgers remain release-closure-and-qualification requests.",
+  "ijhe_completion_audit_latest_verification_after_termination_request_fix_record": "results/20261017/latest_ijhe_audit_verification_after_termination_request_fix.json",
+  "ijhe_completion_audit_latest_verification_after_termination_request_fix_status": "PASS; release-closure request tightening leaves the latest 57-check audit internally consistent; facility QRA remains withheld",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_audit.json",
+  "external_lh2dt_native_facility_full_scope_provider_qualification_request_audit_status": "NO_QUALIFIED_PROVIDER_EVIDENCE; 26 release identities audited, 0 exact qualified sidecars; request kinds now reflect termination-ledger closure"
 }

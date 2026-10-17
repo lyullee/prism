@@ -154,10 +154,12 @@ case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했�
 The current full-scope readiness audit now emits a provider-qualification request
 catalog at
 `results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json`.
-It separates 13 exact packet rows that need qualification sidecars from 11 rows
-that first need release-closure evidence. This catalog preserves packet identity
-and blocking reasons; it does not infer rates, physical validation or facility
-IR/F-N.
+The readiness audit found 13 exact packet rows, but the request builder now
+checks each packet's family-specific termination ledger before assigning the
+qualification-only label. The current catalog therefore has 7 qualification-only
+requests and 19 rows that first need release-closure evidence. This catalog
+preserves packet identity and blocking reasons; it does not infer rates,
+physical validation or facility IR/F-N.
 
 The same request catalog can be converted into a fillable sidecar manifest with
 `scripts/build_provider_sidecar_manifest_template.py`. The current native

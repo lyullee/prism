@@ -129,10 +129,12 @@ The current 24-event native full-scope replay is stored under
 `results/20261115/native_external_facility_full_scope_campaign_current/`. It
 retains 24 exact packet matches, 96 conditional risk atoms, and 11
 operator-limited case assessments. The companion
-`provider_qualification_requests.json` is the provider handoff worksheet: 13
-exact packets need qualification sidecars and 11 candidates need release
-closure plus qualification evidence. Generate the fillable sidecar manifest
-with:
+`provider_qualification_requests.json` is the provider handoff worksheet. The
+readiness audit found 13 exact diagnostic packet matches, but the request
+builder now checks the packet's family-specific termination ledger before
+calling a request qualification-only. The current worksheet therefore has 7
+qualification-only requests and 19 requests that still need release closure
+plus qualification evidence. Generate the fillable sidecar manifest with:
 
 ```powershell
 python scripts/build_provider_sidecar_manifest_template.py `

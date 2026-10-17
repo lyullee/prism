@@ -179,9 +179,13 @@ campaign measurements. The cached monitoring path has a separate
 
 The next evidence intake is compiled in
 [`provider_qualification_requests.json`](../results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_requests.json).
-It contains 24 identity-preserving requests: 13 exact diagnostic packets need
-qualification-only sidecars, while 11 candidates first need release-closure
-evidence and then qualification evidence. The catalog is an intake worksheet,
+It contains 24 identity-preserving requests. Although the readiness audit found
+13 exact diagnostic matches, the request builder independently checks the
+family-specific termination ledger. The current catalog has 7
+qualification-only requests and 19 requests that first need release-closure
+evidence and then qualification evidence. A bounded horizon or an
+emergency-relief packet without its setpoint/capacity and end-event evidence is
+placed in the latter group. The catalog is an intake worksheet,
 not a promotion step. It keeps qualified-provider count at zero and leaves
 frequency inference, independent physical validation and facility QRA disabled.
 

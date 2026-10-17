@@ -4,6 +4,7 @@ from scripts.export_generic_provider_evidence_requests import (
     _qualification_sidecar_group,
     export_requests,
 )
+from lh2_tno.generic_provider_release_closure import build_provider_qualification_request
 
 
 def _packet(*, event_id: str, termination_basis: str) -> dict:
@@ -60,6 +61,7 @@ def _packet(*, event_id: str, termination_basis: str) -> dict:
             "reported_residual_mass_kg": 0.0,
             "derived_accounting_residual_kg": 0.0,
             "isolation_time_s": 0.1,
+            "post_isolation_observation_s": 0.2,
             "isolation_success": True,
         },
     }
@@ -112,6 +114,16 @@ def test_two_sided_provider_packets_share_an_ordered_sidecar_contract():
     assert group["port_ids"] == ["out-1", "out-2"]
     assert group["provider_result_digests"] == ["b" * 64, "c" * 64]
     assert group["exact_digest_binding"] is True
+
+
+def test_qualification_request_does_not_claim_bounded_horizon_is_closed():
+    packet = _packet(
+        event_id="bounded-event",
+        termination_basis="inventory_over_600s",
+    )
+    request = build_provider_qualification_request(packet)
+    assert request["acceptance"]["termination_evidence_already_closed"] is False
+    assert request["acceptance"]["termination_evidence_review_required"] is True
 
 
 def _write_verification(directory, packet, basis):

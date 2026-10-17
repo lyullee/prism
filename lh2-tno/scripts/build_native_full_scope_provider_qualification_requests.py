@@ -2,8 +2,9 @@
 
 The output is an evidence-intake catalog.  It never changes a release packet,
 assigns a frequency, or promotes a provider result.  Exact diagnostic packets
-receive a qualification-only request; candidates that did not pass the strict
-packet check receive a closure-and-qualification request.
+receive a qualification-only request only when the packet carries the
+family-specific closed termination ledger; every other packet receives a
+closure-and-qualification request.
 """
 from __future__ import annotations
 
@@ -71,15 +72,10 @@ def build_requests(readiness: Mapping[str, Any], *, readiness_path: Path) -> dic
         if not isinstance(packet, Mapping):
             raise ValueError(f"resolved packet must be an object: {packet_path}")
         exact = row.get("status") == "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC"
-        kind = "qualification_only" if exact else "release_closure_and_qualification"
-        if exact:
-            qualification_only_count += 1
-        else:
-            closure_open_count += 1
         generated: list[dict[str, Any]] = []
         for index, release in enumerate(_releases(packet)):
             if exact:
-                request = build_provider_qualification_request(
+                qualification_request = build_provider_qualification_request(
                     release,
                     event_id=row.get("event_id"),
                     event_kind=release.get("event_kind"),
@@ -87,6 +83,21 @@ def build_requests(readiness: Mapping[str, Any], *, readiness_path: Path) -> dic
                         "blockers", ()
                     ),
                 )
+                if qualification_request["acceptance"].get(
+                    "termination_evidence_already_closed"
+                ) is True:
+                    request = qualification_request
+                    kind = "qualification_only"
+                else:
+                    request = build_provider_release_closure_request(
+                        release,
+                        event_id=row.get("event_id"),
+                        event_kind=release.get("event_kind"),
+                        blocking_reasons=(evidence.get("qualification_readiness", {}) or {}).get(
+                            "blockers", ()
+                        ),
+                    )
+                    kind = "release_closure_and_qualification"
             else:
                 request = build_provider_release_closure_request(
                     release,
@@ -96,6 +107,11 @@ def build_requests(readiness: Mapping[str, Any], *, readiness_path: Path) -> dic
                         "blockers", ()
                     ),
                 )
+                kind = "release_closure_and_qualification"
+            if kind == "qualification_only":
+                qualification_only_count += 1
+            else:
+                closure_open_count += 1
             request["request_kind"] = kind
             request["readiness_status"] = row.get("status")
             request["packet_path"] = str(packet_path)
@@ -111,7 +127,9 @@ def build_requests(readiness: Mapping[str, Any], *, readiness_path: Path) -> dic
                     (evidence.get("qualification_readiness", {}) or {}).get("blockers", ())
                 ),
                 "packet_path": str(packet_path),
-                "request_kind": kind,
+                "request_kind": (
+                    generated[0]["request_kind"] if generated else "release_closure_and_qualification"
+                ),
                 "requests": generated,
             }
         )

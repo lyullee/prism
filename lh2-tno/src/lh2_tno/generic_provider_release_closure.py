@@ -23,6 +23,50 @@ from .provider_release_closure import (
 SCHEMA = "prism.generic_provider_release_closure_audit.v1"
 
 
+def _termination_evidence_is_structurally_closed(packet: Mapping[str, Any]) -> bool:
+    """Return true only when the packet itself carries a closed stop ledger.
+
+    A qualification request must not describe a bounded horizon or an absent
+    relief ledger as an already-closed release boundary. This is deliberately
+    stricter than checking that a packet has a positive duration: the provider
+    must expose the family-specific stop evidence that the facility boundary
+    audit can independently reconcile.
+    """
+    basis = packet.get("termination_basis")
+    provenance = packet.get("termination_provenance")
+    duration = packet.get("duration_s")
+    if (
+        not isinstance(provenance, str)
+        or not provenance.strip()
+        or not isinstance(duration, (int, float))
+        or isinstance(duration, bool)
+        or duration <= 0.0
+    ):
+        return False
+    if basis == "reviewed_isolation_success":
+        mass_balance = packet.get("provider_mass_balance")
+        if not isinstance(mass_balance, Mapping):
+            return False
+        isolation_time = mass_balance.get("isolation_time_s")
+        observation = mass_balance.get("post_isolation_observation_s")
+        return (
+            mass_balance.get("isolation_success") is True
+            and isinstance(isolation_time, (int, float))
+            and not isinstance(isolation_time, bool)
+            and isolation_time >= 0.0
+            and isinstance(observation, (int, float))
+            and not isinstance(observation, bool)
+            and observation > 0.0
+            and isinstance(mass_balance.get("reported_residual_mass_kg"), (int, float))
+            and isinstance(mass_balance.get("derived_accounting_residual_kg"), (int, float))
+        )
+    # Inventory and relief packets need their family-specific evidence sidecar
+    # (threshold, releasable ledger, relief setpoint/capacity, or endpoint
+    # history). A resolved-release packet alone cannot prove that boundary.
+    evidence = packet.get("termination_evidence")
+    return isinstance(evidence, Mapping) and evidence.get("status") == "VALID"
+
+
 _COMMON_CLOSURE_REQUEST_FIELDS = (
     {
         "field": "input_origin",
@@ -232,6 +276,7 @@ def build_provider_qualification_request(
         "provider_result_digests": [packet.get("provider_result_digest")],
         "exact_digest_binding": True,
     }
+    termination_evidence_closed = _termination_evidence_is_structurally_closed(packet)
     return {
         "request_schema": "prism.provider_qualification_request.v1",
         "request_id": str(resolved_event_id),
@@ -263,7 +308,8 @@ def build_provider_qualification_request(
         "qualification_sidecar_required": sidecar,
         "acceptance": {
             "exact_event_component_port_match": True,
-            "termination_evidence_already_closed": True,
+            "termination_evidence_already_closed": termination_evidence_closed,
+            "termination_evidence_review_required": not termination_evidence_closed,
             "qualification_sidecar_digest_bound": True,
             "frequency_inference_allowed": False,
             "facility_qra_allowed": False,
