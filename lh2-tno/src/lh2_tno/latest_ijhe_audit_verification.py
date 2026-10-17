@@ -355,6 +355,100 @@ def verify_latest_ijhe_audit(
             ):
                 if field in closure_value and summary.get(field) != closure_value.get(field):
                     reasons.append(f"release-closure worklist {field} disagrees with summary")
+            # Newer worklists optionally join the case-level release-boundary
+            # audit.  Validate the join accounting when present, while
+            # retaining compatibility with older worklist snapshots.
+            if "boundary_audit_join_case_count" in summary:
+                join_count = summary.get("boundary_audit_join_case_count")
+                unmatched_count = summary.get("boundary_audit_unmatched_case_count")
+                duplicate_count = summary.get("boundary_audit_duplicate_key_count")
+                numerical_counts = summary.get("numerical_closure_status_counts")
+                evidence_counts = summary.get(
+                    "provider_termination_evidence_status_counts"
+                )
+                numerical_closed = summary.get("numerically_closed_case_count")
+                numerical_open = summary.get("numerically_open_case_count")
+                operator_review = summary.get("operator_review_required_case_count")
+                strict_eligible = summary.get(
+                    "strict_release_boundary_eligible_case_count"
+                )
+                strict_blocked = summary.get(
+                    "strict_release_boundary_blocked_case_count"
+                )
+                integer_fields = {
+                    "boundary_audit_join_case_count": join_count,
+                    "boundary_audit_unmatched_case_count": unmatched_count,
+                    "boundary_audit_duplicate_key_count": duplicate_count,
+                    "numerically_closed_case_count": numerical_closed,
+                    "numerically_open_case_count": numerical_open,
+                    "operator_review_required_case_count": operator_review,
+                    "strict_release_boundary_eligible_case_count": strict_eligible,
+                    "strict_release_boundary_blocked_case_count": strict_blocked,
+                }
+                if any(
+                    not isinstance(value, int) or value < 0
+                    for value in integer_fields.values()
+                ):
+                    reasons.append("release-closure boundary-join summary has invalid counts")
+                if isinstance(join_count, int) and join_count != case_count:
+                    reasons.append("release-closure boundary-join count disagrees with case_count")
+                if isinstance(unmatched_count, int) and unmatched_count != 0:
+                    reasons.append("release-closure boundary-join has unmatched cases")
+                if isinstance(duplicate_count, int) and duplicate_count != 0:
+                    reasons.append("release-closure boundary-join has duplicate keys")
+                if not isinstance(numerical_counts, Mapping) or not isinstance(
+                    evidence_counts, Mapping
+                ):
+                    reasons.append("release-closure boundary-join status counts are missing")
+                else:
+                    numerical_total = sum(
+                        value for value in numerical_counts.values()
+                        if isinstance(value, int) and value >= 0
+                    )
+                    evidence_total = sum(
+                        value for value in evidence_counts.values()
+                        if isinstance(value, int) and value >= 0
+                    )
+                    if numerical_total != join_count or evidence_total != join_count:
+                        reasons.append(
+                            "release-closure boundary-join status counts do not cover every case"
+                        )
+                    if all(
+                        isinstance(value, int) and value >= 0
+                        for value in (
+                            join_count,
+                            numerical_closed,
+                            numerical_open,
+                            operator_review,
+                            strict_eligible,
+                            strict_blocked,
+                        )
+                    ):
+                        if numerical_closed + numerical_open != join_count:
+                            reasons.append(
+                                "release-closure numerical closed/open counts do not cover every case"
+                            )
+                        if operator_review > numerical_closed:
+                            reasons.append(
+                                "release-closure operator-review count exceeds numerical closure count"
+                            )
+                        if strict_eligible + strict_blocked != join_count:
+                            reasons.append(
+                                "release-closure strict eligible/blocked counts do not cover every case"
+                            )
+                joined_rows = [
+                    row.get("boundary_audit_join")
+                    for row in cases
+                    if isinstance(row, Mapping)
+                    and isinstance(row.get("boundary_audit_join"), Mapping)
+                    and row["boundary_audit_join"].get("matched") is True
+                ]
+                if isinstance(join_count, int) and len(joined_rows) != join_count:
+                    reasons.append(
+                        "release-closure boundary-join row count disagrees with summary"
+                    )
+                if not isinstance(closure_value.get("boundary_audit_record"), str):
+                    reasons.append("release-closure boundary-audit record pointer is missing")
         promotion = closure_value.get("promotion_gates")
         if not isinstance(promotion, Mapping) or any(
             promotion.get(key) is not False
@@ -851,6 +945,33 @@ def verify_latest_ijhe_audit(
         ),
         "release_closure_worklist_inventory_open_case_count": (
             closure_value.get("summary", {}).get("inventory_closure_open_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_boundary_join_case_count": (
+            closure_value.get("summary", {}).get("boundary_audit_join_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_numerically_closed_case_count": (
+            closure_value.get("summary", {}).get("numerically_closed_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_numerically_open_case_count": (
+            closure_value.get("summary", {}).get("numerically_open_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_operator_review_required_case_count": (
+            closure_value.get("summary", {}).get("operator_review_required_case_count")
+            if closure_value and isinstance(closure_value.get("summary"), Mapping)
+            else None
+        ),
+        "release_closure_worklist_strict_boundary_eligible_case_count": (
+            closure_value.get("summary", {}).get(
+                "strict_release_boundary_eligible_case_count"
+            )
             if closure_value and isinstance(closure_value.get("summary"), Mapping)
             else None
         ),
