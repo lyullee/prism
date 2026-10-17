@@ -10,6 +10,7 @@ def _request(event_id: str = "event-01", condition: str = "D-3ms-west") -> dict:
         "annual_condition_id": condition,
         "release_branch_id": "release-01",
         "component_id": "pipe-01",
+        "scenario_families": ["pipe_hole"],
         "exact_match_required": {
             "event_id": event_id,
             "component_id": "pipe-01",
@@ -43,6 +44,9 @@ def test_empty_catalog_reports_every_case_missing_without_inference():
     assert report["qualified_provider_case_count"] == 0
     assert report["status_counts"] == {"MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1}
     assert report["promotion_policy"]["frequency_is_not_assigned"] is True
+    assert report["status_counts_by_component"] == {"pipe-01": {"MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1}}
+    assert report["status_counts_by_family"] == {"pipe_hole": {"MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1}}
+    assert report["unclassified_family_case_count"] == 0
 
 
 def test_one_provider_event_can_cover_multiple_weather_cases_exactly():

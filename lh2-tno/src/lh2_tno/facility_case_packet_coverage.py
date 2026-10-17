@@ -54,6 +54,27 @@ def _evidence_identity(evidence: ProviderPacketEvidence) -> dict[str, Any]:
     }
 
 
+def _declared_families(request: Mapping[str, Any]) -> tuple[str, ...]:
+    """Read only explicit scenario-family labels from a case request.
+
+    Coverage reporting must not derive a family from an event-id string.  A
+    missing label is retained as an unclassified case so the summary cannot
+    hide an incomplete request contract.
+    """
+
+    raw = request.get("scenario_families")
+    if not isinstance(raw, Sequence) or isinstance(raw, (str, bytes)):
+        return ()
+    return tuple(sorted({str(value).strip() for value in raw if str(value).strip()}))
+
+
+def _sorted_status_counts(values: Mapping[str, Counter[str]]) -> dict[str, dict[str, int]]:
+    return {
+        str(key): dict(sorted(counter.items()))
+        for key, counter in sorted(values.items())
+    }
+
+
 def _identity_reasons(
     requested: Mapping[str, Any],
     evidence: Mapping[str, Any],
@@ -113,6 +134,10 @@ def audit_facility_case_packet_coverage(
 
     rows: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
+    component_status_counts: dict[str, Counter[str]] = {}
+    family_status_counts: dict[str, Counter[str]] = {}
+    release_branch_status_counts: dict[str, Counter[str]] = {}
+    unclassified_family_case_count = 0
     matched_case_ids: set[str] = set()
     matched_events: set[str] = set()
     for index, request in enumerate(requests):
@@ -156,12 +181,23 @@ def audit_facility_case_packet_coverage(
                 if isinstance(event_id, str):
                     matched_events.add(event_id)
         status_counts[status] += 1
+        component_key = str(requested.get("component_id") or "<missing-component>")
+        component_status_counts.setdefault(component_key, Counter())[status] += 1
+        branch_key = str(request.get("release_branch_id") or "<missing-release-branch>")
+        release_branch_status_counts.setdefault(branch_key, Counter())[status] += 1
+        families = _declared_families(request)
+        if not families:
+            unclassified_family_case_count += 1
+            families = ("<undeclared-family>",)
+        for family in families:
+            family_status_counts.setdefault(family, Counter())[status] += 1
         rows.append({
             "request_id": request_id,
             "event_id": event_id,
             "annual_condition_id": request.get("annual_condition_id"),
             "release_branch_id": request.get("release_branch_id"),
             "component_id": requested.get("component_id"),
+            "scenario_families": list(_declared_families(request)),
             "status": status,
             "requested_identity": {
                 **requested,
@@ -213,6 +249,10 @@ def audit_facility_case_packet_coverage(
         "extra_provider_event_count": len(extra_evidence_events),
         "extra_provider_events": extra_evidence_events,
         "status_counts": dict(sorted(status_counts.items())),
+        "status_counts_by_component": _sorted_status_counts(component_status_counts),
+        "status_counts_by_family": _sorted_status_counts(family_status_counts),
+        "status_counts_by_release_branch": _sorted_status_counts(release_branch_status_counts),
+        "unclassified_family_case_count": unclassified_family_case_count,
         "blocking_reasons": blockers,
         "case_rows": rows,
         "promotion_policy": {

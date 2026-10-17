@@ -131,6 +131,14 @@ The current evidence package closes the inspection-centre source suitability dia
 
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
 
+The latest case-coverage record is
+[`facility_case_packet_coverage.json`](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_case_packet_coverage.json).
+It contains 44 exact case rows, with zero qualified provider matches and zero
+unclassified family rows. The record now reports the missing-evidence counts
+by component, release branch, and explicitly declared scenario family. This is
+an actionable provider handoff ledger; it does not derive a family from an
+event-id string, assign frequency, or promote facility IR/F-N.
+
 ## Completion criteria
 
 The audit uses the following five criteria:
