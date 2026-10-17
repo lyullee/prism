@@ -78,6 +78,11 @@ The runner writes the same schemas consumed by the audit script. A run that
 does not meet the two-percent criterion exits nonzero and remains diagnostic;
 it cannot be replaced by the earlier pseudo-source refinement record.
 
+The audit output also reports `worst_quantity` and `worst_relative_change`,
+which identify the monitored quantity that keeps the numerical gate open. This
+prevents a low-error temperature or RMSE value from hiding the larger source
+concentration or plume-height change.
+
 ## Reproducibility recheck (640 -> 1280)
 
 On 2026-10-17, the external runner was executed again with the actual FFI

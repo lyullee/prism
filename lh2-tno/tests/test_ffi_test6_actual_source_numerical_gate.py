@@ -58,6 +58,8 @@ def test_actual_source_gate_remains_open_when_refinement_exceeds_tolerance(tmp_p
     assert result["physical_validation_claim"] is False
     assert result["facility_qra_claim"] is False
     assert result["last_pair_relative_changes"][MONITORED[0]] >= 0.02
+    assert result["worst_quantity"] == MONITORED[0]
+    assert result["worst_relative_change"] == result["last_pair_relative_changes"][MONITORED[0]]
 
 
 def test_actual_source_gate_accepts_only_when_all_monitored_values_converge(tmp_path: Path):
@@ -66,6 +68,8 @@ def test_actual_source_gate_accepts_only_when_all_monitored_values_converge(tmp_
     assert result["status"] == "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_ACCEPTED"
     assert result["accepted"] is True
     assert result["blocking_reasons"] == []
+    assert result["worst_quantity"] == MONITORED[0]
+    assert result["worst_relative_change"] < 0.02
     assert result["physical_validation_claim"] is False
     assert result["facility_qra_claim"] is False
 

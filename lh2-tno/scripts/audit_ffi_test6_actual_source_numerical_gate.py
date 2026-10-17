@@ -82,8 +82,17 @@ def audit(path: str | Path, *, tolerance: float = 0.02) -> dict[str, Any]:
                     last_pair[key] = _relative(float(before[key]), float(after[key]))
                 except (KeyError, TypeError, ValueError):
                     reasons.append(f"last refinement value is missing or non-numeric: {key}")
+    worst_quantity = max(last_pair, key=last_pair.get) if last_pair else None
+    worst_relative_change = last_pair.get(worst_quantity) if worst_quantity else None
     if last_pair and any(value >= tolerance for value in last_pair.values()):
-        reasons.append("last refinement pair exceeds the declared tolerance")
+        reasons.append(
+            "last refinement pair exceeds the declared tolerance"
+            + (
+                f"; worst quantity={worst_quantity} ({worst_relative_change:.3%})"
+                if worst_quantity is not None and worst_relative_change is not None
+                else ""
+            )
+        )
     accepted = bool(last_pair) and all(value < tolerance for value in last_pair.values()) and not reasons
     return {
         "schema_version": SCHEMA,
@@ -93,6 +102,8 @@ def audit(path: str | Path, *, tolerance: float = 0.02) -> dict[str, Any]:
         "levels": [row.get("n_field_steps") for row in levels if isinstance(row, Mapping)],
         "criterion": f"last two refinements < {tolerance:.0%} for all monitored values",
         "last_pair_relative_changes": last_pair,
+        "worst_quantity": worst_quantity,
+        "worst_relative_change": worst_relative_change,
         "accepted": accepted,
         "physical_validation_claim": False,
         "facility_qra_claim": False,
