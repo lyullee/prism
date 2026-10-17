@@ -153,6 +153,43 @@ def test_completion_audit_handles_frequency_audit_without_optional_closure_input
     assert "diagnostic_facility_ir_fn_aggregate_closure" not in names
 
 
+def test_completion_audit_accepts_closed_frequency_audit_as_uncertainty_evidence():
+    frequency_audit = {
+        "schema_version": "prism.facility_frequency_uncertainty_audit.v1",
+        "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+        "scenario_count": 5,
+        "risk_atom_count": 176,
+        "mismatch_count": 0,
+        "blocking_reasons": [],
+        "frequency_inference_performed": False,
+        "facility_credible_interval": False,
+        "statistical_confidence_interval": False,
+        "fresh_physics_executed": False,
+        "provider_packet_promoted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "diagnostic_only": True,
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_frequency_uncertainty_audit=frequency_audit,
+    )
+    diagnostic = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_frequency_uncertainty_evidence"
+    )
+    reported = next(
+        item for item in report["checks"]
+        if item["name"] == "frequency_uncertainty_reported"
+    )
+    assert diagnostic["status"] == "PASS"
+    assert reported["status"] == "PASS"
+    assert reported["evidence"]["conditional_frequency_uncertainty"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def _scenario_trace(status="HAZOP_SCENARIO_TRACE_COMPLETE"):
     return {
         "schema_version": "prism.hazop_scenario_trace_audit.v1",

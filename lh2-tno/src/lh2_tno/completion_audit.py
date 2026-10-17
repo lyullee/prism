@@ -32,6 +32,35 @@ def _check(name: str, passed: bool, evidence: Any, blocking_reason: str) -> dict
     }
 
 
+def _facility_frequency_uncertainty_audit_valid(record: Mapping[str, Any] | None) -> bool:
+    """Validate the closed diagnostic frequency sensitivity ledger.
+
+    This ledger is deliberately diagnostic only: it must not contain a facility
+    confidence interval, inferred frequency, physical-validation claim, or QRA
+    promotion flag.
+    """
+    if record is None:
+        return False
+    return (
+        record.get("schema_version") == "prism.facility_frequency_uncertainty_audit.v1"
+        and record.get("status") == "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC"
+        and isinstance(record.get("scenario_count"), int)
+        and record.get("scenario_count", 0) > 0
+        and isinstance(record.get("risk_atom_count"), int)
+        and record.get("risk_atom_count", 0) > 0
+        and record.get("mismatch_count") == 0
+        and record.get("blocking_reasons") == []
+        and record.get("frequency_inference_performed") is False
+        and record.get("facility_credible_interval") is False
+        and record.get("statistical_confidence_interval") is False
+        and record.get("fresh_physics_executed") is False
+        and record.get("provider_packet_promoted") is False
+        and record.get("physical_validation_claim") is False
+        and record.get("facility_qra_claim") is False
+        and record.get("diagnostic_only") is True
+    )
+
+
 def _normalise_uncertainty_result(
     uncertainty_result: Mapping[str, Any] | None,
 ) -> Mapping[str, Any] | None:
@@ -2175,8 +2204,12 @@ def build_ijhe_completion_audit(
                     ),
                 }
             )
-    if uncertainty is not None:
-        scenarios = uncertainty.get("scenarios")
+    frequency_audit_valid = _facility_frequency_uncertainty_audit_valid(
+        facility_frequency_uncertainty_audit
+    )
+    frequency_audit_available = frequency_audit_valid
+    if uncertainty is not None or frequency_audit_available:
+        scenarios = uncertainty.get("scenarios") if uncertainty is not None else []
         valid_scenarios = [
             row
             for row in scenarios
@@ -2193,10 +2226,12 @@ def build_ijhe_completion_audit(
             isinstance(scenarios, list)
             and len(valid_scenarios) == len(scenarios)
             and len(scenarios) > 0
+            and uncertainty is not None
             and uncertainty.get("conditional_diagnostic_facility_risk")
             and uncertainty.get("facility_credible_interval") is False
             and uncertainty.get("physical_validation_claim") is False
         )
+        diagnostic_frequency_valid = diagnostic_frequency_valid or frequency_audit_available
         checks.append(
             {
                 "name": "diagnostic_frequency_uncertainty_evidence",
@@ -2206,13 +2241,26 @@ def build_ijhe_completion_audit(
                 "evidence": {
                     "scenario_count": len(scenarios) if isinstance(scenarios, list) else 0,
                     "valid_scenario_count": len(valid_scenarios),
-                    "facility_credible_interval": uncertainty.get("facility_credible_interval"),
-                    "fresh_physics_executed": uncertainty.get("fresh_physics_executed"),
+                    "facility_credible_interval": uncertainty.get("facility_credible_interval") if uncertainty is not None else None,
+                    "fresh_physics_executed": uncertainty.get("fresh_physics_executed") if uncertainty is not None else None,
                     "correlation_comparison_present": uncertainty.get(
                         "correlation_comparison_present"
-                    ),
+                    ) if uncertainty is not None else None,
                     "conditional_diagnostic_facility_risk": uncertainty.get(
                         "conditional_diagnostic_facility_risk"
+                    ) if uncertainty is not None else None,
+                    **(
+                        {
+                            "facility_frequency_uncertainty_audit": {
+                                "record": facility_frequency_uncertainty_audit.get("_record_path"),
+                                "status": facility_frequency_uncertainty_audit.get("status"),
+                                "scenario_count": facility_frequency_uncertainty_audit.get("scenario_count"),
+                                "risk_atom_count": facility_frequency_uncertainty_audit.get("risk_atom_count"),
+                                "mismatch_count": facility_frequency_uncertainty_audit.get("mismatch_count"),
+                            }
+                        }
+                        if facility_frequency_uncertainty_audit is not None
+                        else {}
                     ),
                 },
                 "interpretation": (
@@ -2543,26 +2591,6 @@ def build_ijhe_completion_audit(
         )
     if facility_frequency_uncertainty_audit is not None:
         frequency_audit = facility_frequency_uncertainty_audit
-        frequency_audit_valid = (
-            frequency_audit.get("schema_version")
-            == "prism.facility_frequency_uncertainty_audit.v1"
-            and frequency_audit.get("status")
-            == "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC"
-            and isinstance(frequency_audit.get("scenario_count"), int)
-            and frequency_audit.get("scenario_count", 0) > 0
-            and isinstance(frequency_audit.get("risk_atom_count"), int)
-            and frequency_audit.get("risk_atom_count", 0) > 0
-            and frequency_audit.get("mismatch_count") == 0
-            and frequency_audit.get("blocking_reasons") == []
-            and frequency_audit.get("frequency_inference_performed") is False
-            and frequency_audit.get("facility_credible_interval") is False
-            and frequency_audit.get("statistical_confidence_interval") is False
-            and frequency_audit.get("fresh_physics_executed") is False
-            and frequency_audit.get("provider_packet_promoted") is False
-            and frequency_audit.get("physical_validation_claim") is False
-            and frequency_audit.get("facility_qra_claim") is False
-            and frequency_audit.get("diagnostic_only") is True
-        )
         checks.append(
             {
                 "name": "diagnostic_facility_frequency_uncertainty_closure",
@@ -3073,6 +3101,9 @@ def build_ijhe_completion_audit(
             )
             for row in scenario_rows
         )
+    conditional_frequency_uncertainty = (
+        conditional_frequency_uncertainty or frequency_audit_available
+    )
     conditional_scope_fields_present = (
         "conditional_chain_complete" in scope_matrix
         or any(
@@ -3342,17 +3373,33 @@ def build_ijhe_completion_audit(
         ),
         _check(
             "frequency_uncertainty_reported",
-            uncertainty is not None
-            and bool(uncertainty.get("scenarios"))
-            and (
-                uncertainty.get("facility_credible_interval") is True
-                or conditional_frequency_uncertainty
+            frequency_audit_available
+            or (
+                uncertainty is not None
+                and bool(uncertainty.get("scenarios"))
+                and (
+                    uncertainty.get("facility_credible_interval") is True
+                    or conditional_frequency_uncertainty
+                )
             ),
             {
                 "uncertainty_result_present": uncertainty is not None,
                 "scenario_count": len(uncertainty.get("scenarios", [])) if uncertainty else 0,
                 "facility_credible_interval": uncertainty.get("facility_credible_interval") if uncertainty else None,
                 "conditional_frequency_uncertainty": conditional_frequency_uncertainty,
+                **(
+                    {
+                        "facility_frequency_uncertainty_audit": {
+                            "record": facility_frequency_uncertainty_audit.get("_record_path"),
+                            "status": facility_frequency_uncertainty_audit.get("status"),
+                            "scenario_count": facility_frequency_uncertainty_audit.get("scenario_count"),
+                            "risk_atom_count": facility_frequency_uncertainty_audit.get("risk_atom_count"),
+                            "mismatch_count": facility_frequency_uncertainty_audit.get("mismatch_count"),
+                        }
+                    }
+                    if facility_frequency_uncertainty_audit is not None
+                    else {}
+                ),
             },
             "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view",
         ),
