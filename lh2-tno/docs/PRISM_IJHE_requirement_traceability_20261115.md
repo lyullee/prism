@@ -96,6 +96,28 @@ gas handoff packet을 사용한다. 두 packet의 component·port·개구가 문
 이 결과는 다설비 연결과 fail-closed 누락 회계를 검증하는 진단 증거이며,
 qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미하지 않는다.
 
+## 최신 native full-scope replay 추적
+
+별도 최신 replay는 generic outdoor manifest의 24개 reviewed event를 모두
+case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했다.
+13개 case는 동적 종료 원장이 준비된 진단 행이고 11개는
+`EXECUTED_OPERATOR_LIMITED`로 보류된다. G1은 잔류 재고가 있는 상태를
+잘못된 `inventory_depletion`으로 해석하지 않고 `inventory_over_600s`로
+재생했다. 이 결과의 범위·family·case별 증거요청은 다음 원장에 고정했다.
+
+| 증거 | 최신 결과 |
+|---|---:|
+| native full-scope event / case / risk atom | 24 / 24 / 96 |
+| dynamic closure ready / operator-limited | 13 / 11 |
+| scope matrix | 12 family, 9 family blockers |
+| facility evidence request | 24 case requests, 12 family requests |
+| strict facility QRA | `false`, 14 explicit blockers |
+| processing-time record | 24 fresh-physics cases, total 814,290.39 ms, case p95 105,548.90 ms |
+
+이 replay는 기존 34-event/44-case 권위 union의 보완 진단 원장이다. 두 원장을
+혼합해 사건 빈도를 중복 합산하지 않으며, provider qualification·독립 물리검증·
+시설 IR/F-N 승격을 열지 않는다.
+
 ## 해석 규칙
 
 - `EXECUTED`는 계산 경로가 실행되었다는 뜻이고, 실제 시설에 검증된 모델이라는 뜻이 아니다.
@@ -118,6 +140,10 @@ qualified provider·독립 물리검증·시설 전체 IR/F-N 승격을 의미�
 - 종료경계 응답 intake 계약: [`PRISM_release_boundary_response_intake_en.md`](PRISM_release_boundary_response_intake_en.md)
 - 최신 case-level release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
 - 현재·예측 HAZOP 연결 계약: [`PRISM_current_forecast_hazop_contract_en.md`](PRISM_current_forecast_hazop_contract_en.md)
+- 최신 native full-scope campaign: `results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json`
+- native full-scope scope matrix: `results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json`
+- native full-scope evidence request: `results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json`
+- native full-scope processing-time record: `results/20261115/native_external_facility_full_scope_campaign_current/processing_time_summary.json`
 - 현재 상태 원장: `CURRENT_STATUS.json`
 
 이 표는 완료를 선언하는 문서가 아니라, 계산 연결과 승격 증거를 한눈에 구분하는 IJHE 제출용 추적성 문서다.
