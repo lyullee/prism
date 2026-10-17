@@ -1478,13 +1478,13 @@
   "current_union_ijhe_audit_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "current_union_external_equipment_model_contract_audit_record": "results/20261026/native_full_scope_union_assessment/external_lh2dt_model_contract_audit.json",
   "current_union_external_equipment_model_contract_audit_status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND; 7/7 external lh2dt component classes expose export_accident_history(request); native methods use component thermodynamic/hydraulic state and explicit mass/energy/termination ledgers; 7 PRISM diagnostic adapters verified; no qualified packet promotion",
-  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 29 checks, 23 PASS, 6 BLOCKED; latest 24-case isolation-rebound assessment, exact case coverage and diagnostic SLABx/Hazop chain are connected; provider qualification, release boundary, scope completeness, independent validation and facility IR/F-N remain withheld",
+  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 57 checks, 52 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "current_union_facility_assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
-  "current_union_full_test_count": 1353,
-  "current_union_ijhe_objective_coverage_audit_record": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 33 objective checks including generic-facility scenario/frequency, release-closure, independent facility IR/F-N closure, observed-state-model-binding and completion-alignment diagnostic rows; core blockers 0 and strict evidence gates 4 remain blocked; 44/44 release-closure cases remain open",
+  "current_union_full_test_count": 1413,
+  "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 33 objective checks, core blockers 0, strict evidence gates 4 remain blocked; completion-alignment diagnostic now consumes the authoritative 57-check audit",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_frequency_uncertainty_audit.json",
   "current_union_facility_frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC; 5 literature scenarios reproduce the 96-atom conditional ledger; no frequency inference, credible interval or facility QRA",
   "current_union_facility_component_contribution_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_component_audit.json",
@@ -4517,5 +4517,6 @@
     "conclusion": "success",
     "url": "https://github.com/lyullee/prism/actions/runs/39016979143",
     "verified_kst": "2026-10-17"
-  }
+  },
+  "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6"
 }

@@ -427,7 +427,7 @@
       "evidence_paths": [
         "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\native_state_snapshot_campaign_ledger.json",
         "results\\20261110\\native_generic_scope_packets_latest2\\native_generic_scope_worklist_packet_evidence_latest.json",
-        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json"
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "provider_packet_case_count": 24,
@@ -443,7 +443,7 @@
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
         "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\scope_matrix.json",
-        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json"
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "scope_matrix_complete": false,
@@ -468,7 +468,7 @@
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
         "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current\\facility_assessment.json",
-        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json"
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "facility_total_risk_available": false,
@@ -1005,21 +1005,21 @@
       "requirement": "최신 시설 전체 완료감사의 case·구조적 작업목록·진단 검사·차단 이유를 IJHE 목표 원장과 일치시켜야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current_with_receptor_geometry.json"
+        "results\\20261115\\ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
       ],
       "observed": {
         "schema_version": "prism.ijhe_completion_audit.v1",
         "status": "INCOMPLETE_EVIDENCE",
-        "check_count": 49,
+        "check_count": 57,
         "required_diagnostic_statuses": {
           "diagnostic_worklist_packet_coverage_evidence": "PASS",
           "diagnostic_release_trace_coverage": "PASS",
           "diagnostic_numerical_scope_coverage": "PASS",
           "diagnostic_facility_frequency_port_binding": "PASS",
           "diagnostic_facility_evidence_request_coverage": "PASS",
-          "diagnostic_external_release_artifact_intake": null
+          "diagnostic_external_release_artifact_intake": "PASS"
         },
-        "blocking_reason_count": 4,
+        "blocking_reason_count": 5,
         "physical_validation_claim": false,
         "complete_facility_qra_claim": false,
         "alignment_valid": true
