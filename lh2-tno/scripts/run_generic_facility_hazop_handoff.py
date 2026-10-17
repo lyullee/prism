@@ -20,10 +20,31 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.forecast_handoff import build_forecast_quantitative_handoff  # noqa: E402
+from lh2_tno.hazop import evaluate_hazop  # noqa: E402
 from lh2_tno.hazop_forecast import run_hazop_forecast_risk_scan  # noqa: E402
 
 
 SCHEMA = "prism.generic_outdoor_facility_hazop_handoff.v1"
+
+_REQUIRED_CONTRACT = {
+    "provider_release_packet": [
+        "source_digest", "release_start_s", "release_end_s", "duration_s",
+        "termination_basis", "isolation_time_s", "post_isolation_observation_s",
+        "inventory_initial_kg", "inventory_out_kg", "mass_residual_kg",
+    ],
+    "frequency_binding": [
+        "literature_event_id", "annual_frequency", "annual_frequency_low",
+        "annual_frequency_high", "source_provenance",
+    ],
+    "slabx_lh2_consequence": [
+        "result_digest", "weather_condition_id", "ignition_branch_id",
+        "receptor_damage_or_harm_outputs", "processing_time_ms",
+    ],
+    "facility_condition_binding": [
+        "population_condition_id", "weather_condition_id", "ignition_branch_id",
+        "facility_port_or_endpoint_id",
+    ],
+}
 
 
 def _load(path: Path) -> Any:
@@ -39,7 +60,104 @@ def _frames(value: Any) -> list[Mapping[str, Any]]:
     return list(value)
 
 
-def build_handoff(frames: Any, tables: Mapping[str, Any]) -> dict[str, Any]:
+def _current_quantitative_handoff(
+    frames: Any,
+    tables: Mapping[str, Any],
+    *,
+    expected_component_ids: list[str],
+) -> dict[str, Any]:
+    """Select current-state scenarios and turn them into explicit work items."""
+    rows = _frames(frames)
+    seen_components: set[str] = set()
+    requests: list[dict[str, Any]] = []
+    selections: list[dict[str, Any]] = []
+    for index, frame in enumerate(rows):
+        component_id = str(frame.get("component_id") or "")
+        if component_id not in expected_component_ids:
+            raise ValueError(f"current frame {index} references an unexpected component: {component_id}")
+        if component_id in seen_components:
+            raise ValueError(f"current frames must contain one frame per component: {component_id}")
+        seen_components.add(component_id)
+        if frame.get("origin") == "model_prediction" or frame.get("input_origin") == "model_prediction":
+            raise ValueError("current frames must not use origin='model_prediction'")
+        # Runtime envelopes may carry origin and component identity inside a
+        # measurement.  The strict HAZOP state contract keeps those fields at
+        # the frame level, so remove only the envelope metadata before the
+        # qualitative selector runs.
+        state = {
+            key: value
+            for key, value in frame.items()
+            if key not in {"origin", "input_origin", "forecast_time_s"}
+        }
+        if isinstance(state.get("values"), Mapping):
+            state["values"] = {
+                tag: {
+                    key: value
+                    for key, value in raw.items()
+                    if key != "component_id"
+                }
+                if isinstance(raw, Mapping) else raw
+                for tag, raw in state["values"].items()
+            }
+        selection = evaluate_hazop(tables[component_id], state)
+        selections.append(selection)
+        for scenario in selection.get("selected_scenarios", ()):
+            scenario_id = str(scenario["scenario_id"])
+            captured_at_s = float(frame["captured_at_s"])
+            request_id = f"current|{component_id}|{scenario_id}|{captured_at_s:g}"
+            requests.append({
+                "request_id": request_id,
+                "facility_id": selection["facility_id"],
+                "component_id": component_id,
+                "scenario_id": scenario_id,
+                "captured_at_s": captured_at_s,
+                "operating_mode": scenario["operating_mode"],
+                "scenario_family": scenario["scenario_family"],
+                "release_mode": scenario["release_mode"],
+                "source_trigger_type": "CURRENT_HAZOP_DEVIATION",
+                "current_evaluation_status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
+                "required_inputs": [
+                    "qualified_provider_release_packet",
+                    "reviewed_literature_frequency_binding",
+                    "SLABx-LH2_consequence_result",
+                    "facility_annual_condition_population_ignition_binding",
+                ],
+                "required_contract": _REQUIRED_CONTRACT,
+                "status": "READY_FOR_QUANTITATIVE_EVALUATION",
+            })
+    missing = sorted(set(expected_component_ids) - seen_components)
+    if missing:
+        raise ValueError(f"current frames are missing components: {missing}")
+    return {
+        "status": "CURRENT_HAZOP_SELECTION_COMPLETE",
+        "component_count": len(expected_component_ids),
+        "selected_scenario_count": len(requests),
+        "selections": selections,
+        "requests": requests,
+        "summary": {
+            "request_count": len(requests),
+            "ready_for_quantitative_evaluation_count": len(requests),
+            "review_required_count": 0,
+        },
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "operating_mode_inferred": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created": False,
+            "slabx_lh2_calculated": False,
+            "facility_ir_fn_calculated": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+    }
+
+
+def build_handoff(
+    frames: Any,
+    tables: Mapping[str, Any],
+    current_frames: Any | None = None,
+) -> dict[str, Any]:
     """Build a generic multi-component HAZOP scan and quantitative worklist."""
     rows = _frames(frames)
     if not isinstance(tables, Mapping) or not tables:
@@ -64,6 +182,37 @@ def build_handoff(frames: Any, tables: Mapping[str, Any]) -> dict[str, Any]:
         expected_component_ids=component_ids,
     )
     handoff = build_forecast_quantitative_handoff(scan)
+    current_handoff = (
+        _current_quantitative_handoff(
+            current_frames,
+            tables,
+            expected_component_ids=component_ids,
+        )
+        if current_frames is not None
+        else {
+            "status": "CURRENT_HAZOP_INPUT_NOT_SUPPLIED",
+            "component_count": 0,
+            "selected_scenario_count": 0,
+            "selections": [],
+            "requests": [],
+            "summary": {
+                "request_count": 0,
+                "ready_for_quantitative_evaluation_count": 0,
+                "review_required_count": 0,
+            },
+            "policy": {
+                "operating_mode_taken_from_input": False,
+                "operating_mode_inferred": False,
+                "frequency_inference_performed": False,
+                "sensor_frequency_learning_used": False,
+                "provider_release_created": False,
+                "slabx_lh2_calculated": False,
+                "facility_ir_fn_calculated": False,
+                "facility_qra_promotion": False,
+                "diagnostic_only": True,
+            },
+        }
+    )
     return {
         "schema_version": SCHEMA,
         "facility_id": facility_id,
@@ -72,6 +221,7 @@ def build_handoff(frames: Any, tables: Mapping[str, Any]) -> dict[str, Any]:
         "forecast_time_grid_s": sorted({float(row["forecast_time_s"]) for row in rows}),
         "scan": scan,
         "quantitative_handoff": handoff,
+        "current_state_handoff": current_handoff,
         "policy": {
             "operating_mode_taken_from_forecast_input": True,
             "operating_mode_inferred": False,
@@ -96,9 +246,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--frames", type=Path, required=True)
     parser.add_argument("--tables", type=Path, required=True)
+    parser.add_argument(
+        "--current-frames",
+        type=Path,
+        help="optional historian/runtime state frames; one explicit frame per component",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    result = build_handoff(_load(args.frames), _load(args.tables))
+    result = build_handoff(
+        _load(args.frames),
+        _load(args.tables),
+        _load(args.current_frames) if args.current_frames is not None else None,
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     scan = result["scan"]
@@ -110,6 +269,7 @@ def main() -> int:
         "trigger_count": scan["trigger_count"],
         "withheld_count": scan["withheld_count"],
         "quantitative_request_count": handoff["summary"]["request_count"],
+        "current_quantitative_request_count": result["current_state_handoff"]["summary"]["request_count"],
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))
     return 0

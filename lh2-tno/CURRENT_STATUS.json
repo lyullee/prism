@@ -6184,5 +6184,10 @@
   "generic_outdoor_facility_hazop_handoff_provider_release_created": false,
   "generic_outdoor_facility_hazop_handoff_slabx_lh2_calculated": false,
   "generic_outdoor_facility_hazop_handoff_facility_ir_fn_calculated": false,
-  "generic_outdoor_facility_hazop_handoff_facility_qra_claim": false
+  "generic_outdoor_facility_hazop_handoff_facility_qra_claim": false,
+  "generic_outdoor_facility_hazop_handoff_current_state_status": "CURRENT_HAZOP_SELECTION_COMPLETE; 3 explicit historian-style frames, 3 mode-bound triggers, 3 requests withheld pending quantitative evidence",
+  "generic_outdoor_facility_hazop_handoff_current_state_request_count": 3,
+  "generic_outdoor_facility_hazop_handoff_current_state_operating_mode_taken_from_input": true,
+  "generic_outdoor_facility_hazop_handoff_current_state_frequency_inference_performed": false,
+  "generic_outdoor_facility_hazop_handoff_current_state_facility_qra_claim": false
 }

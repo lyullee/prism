@@ -1,0 +1,56 @@
+[
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "operating_mode": "receiving",
+    "captured_at_s": 10.0,
+    "origin": "historian_measured",
+    "values": {
+      "tank_pressure": {
+        "component_id": "storage-tank-01",
+        "quantity": "pressure",
+        "value_si": 650000.0,
+        "sensor_location": "storage-tank-01.vapour",
+        "quality": "valid"
+      }
+    },
+    "source_provenance": "synthetic historian frame for generic outdoor facility; replace with verified telemetry"
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "liquid-transfer-line-01",
+    "operating_mode": "supply",
+    "captured_at_s": 10.0,
+    "origin": "historian_measured",
+    "values": {
+      "transfer_flow": {
+        "component_id": "liquid-transfer-line-01",
+        "quantity": "mass_flow",
+        "value_si": 0.01,
+        "sensor_location": "liquid-transfer-line-01",
+        "quality": "valid"
+      }
+    },
+    "source_provenance": "synthetic historian frame for generic outdoor facility; replace with verified telemetry"
+  },
+  {
+    "schema_version": "prism.hazop_state_frame.v1",
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "pressure-relief-vent-01",
+    "operating_mode": "standby",
+    "captured_at_s": 10.0,
+    "origin": "historian_measured",
+    "values": {
+      "vent_pressure": {
+        "component_id": "pressure-relief-vent-01",
+        "quantity": "pressure",
+        "value_si": 750000.0,
+        "sensor_location": "pressure-relief-vent-01.inlet",
+        "quality": "valid"
+      }
+    },
+    "source_provenance": "synthetic historian frame for generic outdoor facility; replace with verified telemetry"
+  }
+]

@@ -383,6 +383,10 @@ For a facility-neutral end-to-end handoff example, run
 [`scripts/run_generic_facility_hazop_handoff.py`](scripts/run_generic_facility_hazop_handoff.py)
 with [`examples/generic_facility_forecast_frames.json`](examples/generic_facility_forecast_frames.json)
 and [`examples/generic_facility_hazop_tables.json`](examples/generic_facility_hazop_tables.json).
+Add [`examples/generic_facility_current_frames.json`](examples/generic_facility_current_frames.json)
+with `--current-frames` to exercise the monitoring path at the same facility
+state. The output then contains separate current-state and predicted-state
+quantitative worklists, both preserving the explicit operating mode.
 The replay covers a storage tank, transfer line, and relief vent on one exact
 forecast grid and keeps `receiving`, `supply`, and `standby` in the input
 frames. It emits one quantitative request when each HAZOP deviation is first

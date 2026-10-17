@@ -19,6 +19,7 @@ From the `lh2-tno` directory:
 python scripts/run_generic_facility_hazop_handoff.py `
   --frames examples/generic_facility_forecast_frames.json `
   --tables examples/generic_facility_hazop_tables.json `
+  --current-frames examples/generic_facility_current_frames.json `
   --output results/20261115/generic_outdoor_facility_hazop_quantitative_handoff.json
 ```
 
@@ -40,6 +41,13 @@ downstream evidence required before quantitative evaluation:
 - reviewed literature frequency and uncertainty bounds;
 - SLABx-LH2 consequence output; and
 - facility weather, ignition, population, and endpoint bindings.
+
+The optional current-state file contains one historian-style frame per
+component at the same active deviations. Those selections are written to a
+separate current-state worklist with `CURRENT_HAZOP_DEVIATION` request keys.
+The current and predicted worklists share the same component, scenario-family,
+operating-mode, and evidence contracts, so a control-room monitor and a
+process-model forecast can feed the same downstream quantitative adapter.
 
 ## What this proves and what it does not
 

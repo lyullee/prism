@@ -719,7 +719,7 @@
     "facility_annual_ir_available": false,
     "facility_fn_available": false,
     "timing": {
-      "wall_elapsed_ms": 1.257600000826642,
+      "wall_elapsed_ms": 1.0941000073216856,
       "quantitative_evaluation_elapsed_ms": 0.0,
       "trigger_count": 3,
       "evaluated_count": 0,
@@ -907,7 +907,7 @@
     ],
     "timing": {
       "source_scan_timing": {
-        "wall_elapsed_ms": 1.257600000826642,
+        "wall_elapsed_ms": 1.0941000073216856,
         "quantitative_evaluation_elapsed_ms": 0.0,
         "trigger_count": 3,
         "evaluated_count": 0,
@@ -933,6 +933,373 @@
       "diagnostic_only": true
     },
     "interpretation": "Each predicted HAZOP condition is an explicit quantitative work item. The handoff requests reviewed provider, frequency, SLABx-LH2 and facility bindings but creates none of them."
+  },
+  "current_state_handoff": {
+    "status": "CURRENT_HAZOP_SELECTION_COMPLETE",
+    "component_count": 3,
+    "selected_scenario_count": 3,
+    "selections": [
+      {
+        "schema_version": "prism.hazop_operating_mode_selection.v1",
+        "status": "SCENARIOS_SELECTED",
+        "facility_id": "generic-outdoor-lh2",
+        "table_id": "generic-outdoor-lh2-hazop-v1-storage-tank-01",
+        "table_digest": "4fa804d46aad56fb9aca82bbfbca650e6f4625e01ec204eb68fe650f92b500b1",
+        "state_digest": "12dd836d4c4824c80760e8efd8d0801e07a96d474dae1dbfd4b59049b564b71e",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "captured_at_s": 10.0,
+        "applicable_row_count": 1,
+        "active_deviation_count": 1,
+        "selected_scenario_count": 1,
+        "checks": [
+          {
+            "row_id": "TK01-receiving-high-pressure",
+            "component_id": "storage-tank-01",
+            "operating_mode": "receiving",
+            "variable_tag": "tank_pressure",
+            "deviation": "high pressure",
+            "trigger": "at_or_above",
+            "scenario_family": "vessel_hole",
+            "release_mode": "hole",
+            "status": "DEVIATION",
+            "value_si": 650000.0,
+            "quantity": "pressure",
+            "threshold_low_si": null,
+            "threshold_high_si": 600000.0
+          }
+        ],
+        "selected_scenarios": [
+          {
+            "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+            "hazop_row_id": "TK01-receiving-high-pressure",
+            "component_id": "storage-tank-01",
+            "component_kind": "storage_tank",
+            "operating_mode": "receiving",
+            "scenario_family": "vessel_hole",
+            "release_mode": "hole",
+            "priority": "high",
+            "measured_value_si": 650000.0,
+            "trigger": "at_or_above",
+            "threshold_low_si": null,
+            "threshold_high_si": 600000.0,
+            "provider_release_status": "REQUIRED_NOT_CREATED",
+            "provider_release_required": true,
+            "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+            "source": "synthetic diagnostic HAZOP row"
+          }
+        ],
+        "blocking_reasons": [],
+        "policy": {
+          "operating_mode_taken_from_input": true,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "release_packet_created": false,
+          "consequence_calculated": false,
+          "facility_qra_claim": false
+        },
+        "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+      },
+      {
+        "schema_version": "prism.hazop_operating_mode_selection.v1",
+        "status": "SCENARIOS_SELECTED",
+        "facility_id": "generic-outdoor-lh2",
+        "table_id": "generic-outdoor-lh2-hazop-v1-liquid-transfer-line-01",
+        "table_digest": "c7ddc5c9176ef3f4fd3bf19cc112d3544d3279c20015f2758f54e9732283e126",
+        "state_digest": "141e627ae4ded78097b9928d2e866280853c258f621d56a086c6009a552ff553",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "captured_at_s": 10.0,
+        "applicable_row_count": 1,
+        "active_deviation_count": 1,
+        "selected_scenario_count": 1,
+        "checks": [
+          {
+            "row_id": "LINE01-supply-low-flow",
+            "component_id": "liquid-transfer-line-01",
+            "operating_mode": "supply",
+            "variable_tag": "transfer_flow",
+            "deviation": "low flow",
+            "trigger": "below",
+            "scenario_family": "pipe_hole",
+            "release_mode": "hole",
+            "status": "DEVIATION",
+            "value_si": 0.01,
+            "quantity": "mass_flow",
+            "threshold_low_si": 0.05,
+            "threshold_high_si": null
+          }
+        ],
+        "selected_scenarios": [
+          {
+            "scenario_id": "LINE01-supply-low-flow:supply:pipe_hole",
+            "hazop_row_id": "LINE01-supply-low-flow",
+            "component_id": "liquid-transfer-line-01",
+            "component_kind": "pipe",
+            "operating_mode": "supply",
+            "scenario_family": "pipe_hole",
+            "release_mode": "hole",
+            "priority": "high",
+            "measured_value_si": 0.01,
+            "trigger": "below",
+            "threshold_low_si": 0.05,
+            "threshold_high_si": null,
+            "provider_release_status": "REQUIRED_NOT_CREATED",
+            "provider_release_required": true,
+            "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+            "source": "synthetic diagnostic HAZOP row"
+          }
+        ],
+        "blocking_reasons": [],
+        "policy": {
+          "operating_mode_taken_from_input": true,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "release_packet_created": false,
+          "consequence_calculated": false,
+          "facility_qra_claim": false
+        },
+        "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+      },
+      {
+        "schema_version": "prism.hazop_operating_mode_selection.v1",
+        "status": "SCENARIOS_SELECTED",
+        "facility_id": "generic-outdoor-lh2",
+        "table_id": "generic-outdoor-lh2-hazop-v1-pressure-relief-vent-01",
+        "table_digest": "6e0d5c42c9a27c38128f69a282ebd950e9e8bfe1193a3e10c59039ffbe99b96f",
+        "state_digest": "b9757d367daa9b8e6a23133f01b954da18318b707fedcc3836273b7fb4e0ddc1",
+        "component_id": "pressure-relief-vent-01",
+        "operating_mode": "standby",
+        "captured_at_s": 10.0,
+        "applicable_row_count": 1,
+        "active_deviation_count": 1,
+        "selected_scenario_count": 1,
+        "checks": [
+          {
+            "row_id": "VENT01-standby-high-pressure",
+            "component_id": "pressure-relief-vent-01",
+            "operating_mode": "standby",
+            "variable_tag": "vent_pressure",
+            "deviation": "high relief pressure",
+            "trigger": "at_or_above",
+            "scenario_family": "vent_hole",
+            "release_mode": "maximum_relief_discharge",
+            "status": "DEVIATION",
+            "value_si": 750000.0,
+            "quantity": "pressure",
+            "threshold_low_si": null,
+            "threshold_high_si": 700000.0
+          }
+        ],
+        "selected_scenarios": [
+          {
+            "scenario_id": "VENT01-standby-high-pressure:standby:vent_hole",
+            "hazop_row_id": "VENT01-standby-high-pressure",
+            "component_id": "pressure-relief-vent-01",
+            "component_kind": "vent_stack",
+            "operating_mode": "standby",
+            "scenario_family": "vent_hole",
+            "release_mode": "maximum_relief_discharge",
+            "priority": "critical",
+            "measured_value_si": 750000.0,
+            "trigger": "at_or_above",
+            "threshold_low_si": null,
+            "threshold_high_si": 700000.0,
+            "provider_release_status": "REQUIRED_NOT_CREATED",
+            "provider_release_required": true,
+            "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+            "source": "synthetic diagnostic HAZOP row"
+          }
+        ],
+        "blocking_reasons": [],
+        "policy": {
+          "operating_mode_taken_from_input": true,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "release_packet_created": false,
+          "consequence_calculated": false,
+          "facility_qra_claim": false
+        },
+        "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+      }
+    ],
+    "requests": [
+      {
+        "request_id": "current|storage-tank-01|TK01-receiving-high-pressure:receiving:vessel_hole|10",
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "storage-tank-01",
+        "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+        "captured_at_s": 10.0,
+        "operating_mode": "receiving",
+        "scenario_family": "vessel_hole",
+        "release_mode": "hole",
+        "source_trigger_type": "CURRENT_HAZOP_DEVIATION",
+        "current_evaluation_status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
+        "required_inputs": [
+          "qualified_provider_release_packet",
+          "reviewed_literature_frequency_binding",
+          "SLABx-LH2_consequence_result",
+          "facility_annual_condition_population_ignition_binding"
+        ],
+        "required_contract": {
+          "provider_release_packet": [
+            "source_digest",
+            "release_start_s",
+            "release_end_s",
+            "duration_s",
+            "termination_basis",
+            "isolation_time_s",
+            "post_isolation_observation_s",
+            "inventory_initial_kg",
+            "inventory_out_kg",
+            "mass_residual_kg"
+          ],
+          "frequency_binding": [
+            "literature_event_id",
+            "annual_frequency",
+            "annual_frequency_low",
+            "annual_frequency_high",
+            "source_provenance"
+          ],
+          "slabx_lh2_consequence": [
+            "result_digest",
+            "weather_condition_id",
+            "ignition_branch_id",
+            "receptor_damage_or_harm_outputs",
+            "processing_time_ms"
+          ],
+          "facility_condition_binding": [
+            "population_condition_id",
+            "weather_condition_id",
+            "ignition_branch_id",
+            "facility_port_or_endpoint_id"
+          ]
+        },
+        "status": "READY_FOR_QUANTITATIVE_EVALUATION"
+      },
+      {
+        "request_id": "current|liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10",
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "liquid-transfer-line-01",
+        "scenario_id": "LINE01-supply-low-flow:supply:pipe_hole",
+        "captured_at_s": 10.0,
+        "operating_mode": "supply",
+        "scenario_family": "pipe_hole",
+        "release_mode": "hole",
+        "source_trigger_type": "CURRENT_HAZOP_DEVIATION",
+        "current_evaluation_status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
+        "required_inputs": [
+          "qualified_provider_release_packet",
+          "reviewed_literature_frequency_binding",
+          "SLABx-LH2_consequence_result",
+          "facility_annual_condition_population_ignition_binding"
+        ],
+        "required_contract": {
+          "provider_release_packet": [
+            "source_digest",
+            "release_start_s",
+            "release_end_s",
+            "duration_s",
+            "termination_basis",
+            "isolation_time_s",
+            "post_isolation_observation_s",
+            "inventory_initial_kg",
+            "inventory_out_kg",
+            "mass_residual_kg"
+          ],
+          "frequency_binding": [
+            "literature_event_id",
+            "annual_frequency",
+            "annual_frequency_low",
+            "annual_frequency_high",
+            "source_provenance"
+          ],
+          "slabx_lh2_consequence": [
+            "result_digest",
+            "weather_condition_id",
+            "ignition_branch_id",
+            "receptor_damage_or_harm_outputs",
+            "processing_time_ms"
+          ],
+          "facility_condition_binding": [
+            "population_condition_id",
+            "weather_condition_id",
+            "ignition_branch_id",
+            "facility_port_or_endpoint_id"
+          ]
+        },
+        "status": "READY_FOR_QUANTITATIVE_EVALUATION"
+      },
+      {
+        "request_id": "current|pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10",
+        "facility_id": "generic-outdoor-lh2",
+        "component_id": "pressure-relief-vent-01",
+        "scenario_id": "VENT01-standby-high-pressure:standby:vent_hole",
+        "captured_at_s": 10.0,
+        "operating_mode": "standby",
+        "scenario_family": "vent_hole",
+        "release_mode": "maximum_relief_discharge",
+        "source_trigger_type": "CURRENT_HAZOP_DEVIATION",
+        "current_evaluation_status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
+        "required_inputs": [
+          "qualified_provider_release_packet",
+          "reviewed_literature_frequency_binding",
+          "SLABx-LH2_consequence_result",
+          "facility_annual_condition_population_ignition_binding"
+        ],
+        "required_contract": {
+          "provider_release_packet": [
+            "source_digest",
+            "release_start_s",
+            "release_end_s",
+            "duration_s",
+            "termination_basis",
+            "isolation_time_s",
+            "post_isolation_observation_s",
+            "inventory_initial_kg",
+            "inventory_out_kg",
+            "mass_residual_kg"
+          ],
+          "frequency_binding": [
+            "literature_event_id",
+            "annual_frequency",
+            "annual_frequency_low",
+            "annual_frequency_high",
+            "source_provenance"
+          ],
+          "slabx_lh2_consequence": [
+            "result_digest",
+            "weather_condition_id",
+            "ignition_branch_id",
+            "receptor_damage_or_harm_outputs",
+            "processing_time_ms"
+          ],
+          "facility_condition_binding": [
+            "population_condition_id",
+            "weather_condition_id",
+            "ignition_branch_id",
+            "facility_port_or_endpoint_id"
+          ]
+        },
+        "status": "READY_FOR_QUANTITATIVE_EVALUATION"
+      }
+    ],
+    "summary": {
+      "request_count": 3,
+      "ready_for_quantitative_evaluation_count": 3,
+      "review_required_count": 0
+    },
+    "policy": {
+      "operating_mode_taken_from_input": true,
+      "operating_mode_inferred": false,
+      "frequency_inference_performed": false,
+      "sensor_frequency_learning_used": false,
+      "provider_release_created": false,
+      "slabx_lh2_calculated": false,
+      "facility_ir_fn_calculated": false,
+      "facility_qra_promotion": false,
+      "diagnostic_only": true
+    }
   },
   "policy": {
     "operating_mode_taken_from_forecast_input": true,
