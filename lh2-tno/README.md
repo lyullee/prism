@@ -399,6 +399,14 @@ The result also contains separate exact-key evidence coverage for the current
 and forecast worklists. Missing or extra attachments keep the corresponding
 coverage gate withheld and are never converted to zero risk.
 
+An operator-limited provider-chain example is also shipped for the
+`storage-tank-01` `liquid_two_phase` request. Run
+[`scripts/attach_generic_provider_chain.py`](scripts/attach_generic_provider_chain.py)
+with the provider evidence summary to attach one exact current request and one
+exact forecast request. The adapter records the provider release boundary,
+inventory termination, SLABx-LH2/TNO chain stages, conditional IR, and timing;
+the remaining four requests stay uncomputed.
+
 ### Importing process-model forecast workbooks
 
 Process-model exports can be converted into the same forecast frames with

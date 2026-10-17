@@ -57,6 +57,26 @@ attachment maps can be supplied with `--current-attachments` and
 `--forecast-attachments`; extra keys and missing fields remain visible as gate
 failures rather than being reassigned or treated as zero risk.
 
+## Provider-bound diagnostic attachment
+
+The generic facility package also includes a compact evidence summary for one
+explicit `storage-tank-01` liquid/two-phase provider packet. It records the
+provider-owned duration and inventory boundary, the `SLABx_dispersion` and TNO
+damage stages, one current-weather conditional IR contribution, and the fresh
+diagnostic elapsed time. Use the exact-match adapter:
+
+```powershell
+python scripts/attach_generic_provider_chain.py `
+  --handoff results/20261115/generic_provider_bound_hazop_quantitative_handoff.json `
+  --evidence results/20261115/generic_storage_provider_bound_hazop_evidence_summary.json `
+  --output results/20261115/generic_provider_chain_attachment.json
+```
+
+The attachment matches one current and one forecast request. The other four
+requests remain uncomputed. The provider packet is synthetic/model-prediction
+diagnostic evidence, so the attachment does not claim provider qualification,
+independent physical validation, facility IR/F-N closure, or facility QRA.
+
 ## What this proves and what it does not
 
 The replay proves that a multi-equipment forecast can preserve component

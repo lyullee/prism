@@ -1,0 +1,93 @@
+{
+  "schema_version": "prism.generic_provider_chain_attachment.v1",
+  "status": "PROVIDER_CHAIN_ATTACHED_OPERATOR_LIMITED",
+  "facility_id": "generic-outdoor-lh2",
+  "matched_requests": [
+    {
+      "path": "current",
+      "request_id": "current|storage-tank-01|TK01-receiving-liquid-hole:receiving:liquid_two_phase|10",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "scenario_family": "liquid_two_phase"
+    },
+    {
+      "path": "forecast",
+      "request_id": "storage-tank-01|TK01-receiving-liquid-hole:receiving:liquid_two_phase|10",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "scenario_family": "liquid_two_phase"
+    }
+  ],
+  "uncomputed_request_ids": [
+    "current|liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10",
+    "current|pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10",
+    "liquid-transfer-line-01|LINE01-supply-low-flow:supply:pipe_hole|10",
+    "pressure-relief-vent-01|VENT01-standby-high-pressure:standby:vent_hole|10"
+  ],
+  "provider_evidence": {
+    "source_record": "lh2-tno/results/20261115/generic_storage_provider_bound_hazop_diagnostic.json",
+    "source_sha256": "4a6badffceacf76c7a7a345487bd7027579855814c5aaecf45e6e43b45ac0661",
+    "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "provider_port_id": "tank-accident-out",
+    "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+    "provider_result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7",
+    "release_boundary": {
+      "boundary_kind": "resolved_atmospheric_liquid_exit",
+      "phase_basis": "liquid",
+      "duration_s": 0.05,
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.008231481218448094,
+      "termination_basis": "inventory_depletion",
+      "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+      "isolation_status": "INVENTORY_TERMINATION",
+      "inventory_status": "INVENTORY_NOT_CLOSED",
+      "mass_residual_kg": 0.020260580681161662
+    },
+    "consequence_chain": {
+      "handoffs": [],
+      "full_chain_executed": true,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "stages": [
+        "equipment_resolved_liquid_two_phase_exit",
+        "rainout_and_dynamic_pool",
+        "vector_cryogenic_near_field",
+        "SLABx_dispersion",
+        "finite_inventory_cloud",
+        "ignition_branches",
+        "fire_radiation",
+        "multi_energy_blast_zones",
+        "TNO_human_damage",
+        "conditional_risk"
+      ],
+      "operator_limited": true
+    },
+    "facility_campaign": {
+      "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+      "conditional_diagnostic_ir_available": true,
+      "qualified_facility_qra_available": false
+    },
+    "timing": {
+      "wall_elapsed_ms": 23172.54870000761,
+      "fresh_physics_claim": null
+    }
+  },
+  "summary": {
+    "current_request_count": 3,
+    "forecast_request_count": 3,
+    "matched_request_count": 2,
+    "uncomputed_request_count": 4,
+    "provider_chain_stage_count": 10
+  },
+  "policy": {
+    "exact_component_mode_family_match_required": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_qualification_claim": false,
+    "physical_validation_claim": false,
+    "facility_ir_fn_claim": false,
+    "facility_qra_promotion": false,
+    "uncomputed_cases_assigned_zero": false,
+    "diagnostic_only": true
+  }
+}

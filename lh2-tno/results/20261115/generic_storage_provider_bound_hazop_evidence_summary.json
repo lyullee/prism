@@ -1,0 +1,82 @@
+{
+  "schema_version": "prism.generic_provider_chain_evidence_summary.v1",
+  "source_record": "lh2-tno/results/20261115/generic_storage_provider_bound_hazop_diagnostic.json",
+  "source_sha256": "4a6badffceacf76c7a7a345487bd7027579855814c5aaecf45e6e43b45ac0661",
+  "scope": "synthetic generic outdoor storage-tank provider-bound diagnostic; operator-limited",
+  "exact_identity": {
+    "facility_id": "generic-outdoor-lh2",
+    "component_id": "storage-tank-01",
+    "hazop_scenario_family": "liquid_two_phase",
+    "operating_mode": "receiving",
+    "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "provider_port_id": "tank-accident-out",
+    "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+    "provider_result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7"
+  },
+  "current_path": {
+    "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+    "risk_atom_count": 1,
+    "conditional_current_weather_risk_status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "forecast_path": {
+    "status": "FORECAST_RISK_SCAN_COMPLETE",
+    "trigger_count": 1,
+    "evaluated_count": 1,
+    "withheld_count": 0,
+    "facility_annual_ir_available": false,
+    "facility_fn_available": false
+  },
+  "provider_release_boundary": {
+    "boundary_kind": "resolved_atmospheric_liquid_exit",
+    "phase_basis": "liquid",
+    "duration_s": 0.05,
+    "available_mass_kg": 0.028492061899609754,
+    "cumulative_mass_out_kg": 0.008231481218448094,
+    "termination_basis": "inventory_depletion",
+    "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+    "isolation_status": "INVENTORY_TERMINATION",
+    "inventory_status": "INVENTORY_NOT_CLOSED",
+    "mass_residual_kg": 0.020260580681161662
+  },
+  "consequence_chain": {
+    "handoffs": [],
+    "full_chain_executed": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "stages": [
+      "equipment_resolved_liquid_two_phase_exit",
+      "rainout_and_dynamic_pool",
+      "vector_cryogenic_near_field",
+      "SLABx_dispersion",
+      "finite_inventory_cloud",
+      "ignition_branches",
+      "fire_radiation",
+      "multi_energy_blast_zones",
+      "TNO_human_damage",
+      "conditional_risk"
+    ],
+    "operator_limited": true
+  },
+  "facility_campaign": {
+    "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+    "conditional_diagnostic_ir_available": true,
+    "qualified_facility_qra_available": false
+  },
+  "timing": {
+    "wall_elapsed_ms": 23172.54870000761,
+    "fresh_physics_claim": null
+  },
+  "policy": {
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_promotion": false,
+    "provider_qualification_claim": false
+  },
+  "limitations": [
+    "provider packet origin is synthetic/model-prediction diagnostic evidence",
+    "current and forecast results are conditional and operator-limited",
+    "other generic facility requests remain uncomputed until exact provider evidence is attached"
+  ]
+}
