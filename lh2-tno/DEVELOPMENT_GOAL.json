@@ -2489,7 +2489,7 @@
     "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
     "NO_RISK_ATOMS"
   ],
-  "full_portable_test_count_latest": 1337,
+  "full_portable_test_count_latest": 1441,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": [
@@ -2898,7 +2898,7 @@
   "ijhe_objective_coverage_audit_with_external_field_record": "results/20261103/ijhe_objective_coverage_audit_with_external_field.json",
   "ijhe_objective_coverage_audit_with_external_field_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 16 checks, core blockers 0, strict blockers 4; external field row PASS as diagnostic-only with hash drift retained",
   "ijhe_objective_coverage_audit_external_field_diagnostic_policy": "External outdoor observations are audited separately and cannot promote provider release, accident frequency, physical validation or facility QRA; current bundle has source_boundary/weather/common_clock hash drift",
-  "full_portable_test_status_latest": "1337 passed, 1 warning",
+  "full_portable_test_status_latest": "1441 passed, 1 warning",
   "external_field_model_comparison_contract_implemented": true,
   "external_field_model_comparison_module": "src/lh2_tno/field_model_comparison.py",
   "external_field_model_comparison_schema": "prism.external_field_model_comparison.v1",
@@ -3227,7 +3227,7 @@
   "generic_provider_evidence_sidecar_manifest_template_entry_count": 26,
   "generic_provider_evidence_sidecar_manifest_template_promotion_allowed": false,
   "ci_local_reproduction_record": "results/20261106/ci_local_reproduction_current.json",
-  "ci_local_reproduction_status": "LOCAL_WORKFLOW_EQUIVALENT_PASS; current package workflow reproduced with 1337 passed, 1 warning and wheel contract verified; remote Actions status is tracked in the repository run history",
+  "ci_local_reproduction_status": "LOCAL_WORKFLOW_EQUIVALENT_PASS; current package workflow reproduced with 1441 passed, 1 warning and wheel contract verified; remote Actions status is tracked in the repository run history",
   "ci_local_reproduction_wheel_sha256": "5764e3a081af95c8f7a392107b11fafbdef25c7427e658eba29de9effb114902",
   "ci_local_reproduction_github_actions_claim": false,
   "ci_local_reproduction_github_actions_run_id": null,
