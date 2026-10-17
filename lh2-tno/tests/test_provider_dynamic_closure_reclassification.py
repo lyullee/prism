@@ -1,6 +1,8 @@
 from lh2_tno.provider_dynamic_closure_reclassification import (
     build_dynamic_closure_reclassification_audit,
 )
+from pathlib import Path
+import json
 
 
 def _row(event_id: str, status: str, *, ready=None, mode="receiving"):
@@ -43,3 +45,20 @@ def test_blocked_or_missing_candidate_is_not_eligible():
     assert report["matched_case_count"] == 1
     assert report["unmatched_candidate_case_count"] == 1
     assert all(not row["candidate_eligible_for_reclassification"] for row in report["rows"])
+
+
+def test_persisted_current_union_audit_keeps_promotion_closed():
+    root = Path(__file__).parents[1]
+    path = root / (
+        "results/20261115/native_full_scope_union_assessment_"
+        "vertical_inventory_handoff_port_bound_isolation_current/"
+        "dynamic_closure_reclassification_audit.json"
+    )
+    record = json.loads(path.read_text(encoding="utf-8"))
+    assert record["status"] == "ADVISORY_RECLASSIFICATION_CANDIDATES"
+    assert record["current_case_count"] == 44
+    assert record["candidate_case_count"] == 24
+    assert record["candidate_eligible_case_count"] == 13
+    assert record["new_reclassification_candidate_count"] == 9
+    assert record["promotion_allowed"] is False
+    assert record["reclassification_applied"] is False
