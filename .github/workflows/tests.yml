@@ -16,6 +16,10 @@ on:
       - 'lh2-tno/CURRENT_STATUS.json'
       - 'lh2-tno/DEVELOPMENT_GOAL.json'
       - 'lh2-tno/README.md'
+      - 'lh2-tno/README_ko.md'
+      - 'lh2-tno/CITATION.cff'
+      - 'lh2-tno/LICENSE'
+      - 'lh2-tno/.zenodo.json'
       # Keep the filters robust if the package is checked out as the
       # repository root rather than under the lh2-tno/ subdirectory.
       - 'results/**'
@@ -23,6 +27,10 @@ on:
       - 'CURRENT_STATUS.json'
       - 'DEVELOPMENT_GOAL.json'
       - 'README.md'
+      - 'README_ko.md'
+      - 'CITATION.cff'
+      - 'LICENSE'
+      - '.zenodo.json'
   pull_request:
     branches:
       - main
@@ -32,11 +40,19 @@ on:
       - 'lh2-tno/CURRENT_STATUS.json'
       - 'lh2-tno/DEVELOPMENT_GOAL.json'
       - 'lh2-tno/README.md'
+      - 'lh2-tno/README_ko.md'
+      - 'lh2-tno/CITATION.cff'
+      - 'lh2-tno/LICENSE'
+      - 'lh2-tno/.zenodo.json'
       - 'results/**'
       - 'docs/**'
       - 'CURRENT_STATUS.json'
       - 'DEVELOPMENT_GOAL.json'
       - 'README.md'
+      - 'README_ko.md'
+      - 'CITATION.cff'
+      - 'LICENSE'
+      - '.zenodo.json'
 
 permissions:
   contents: read
