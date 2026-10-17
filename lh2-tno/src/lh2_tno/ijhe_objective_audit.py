@@ -77,6 +77,7 @@ def build_ijhe_objective_coverage_audit(
     release_closure_worklist: Mapping[str, Any] | None = None,
     inventory_termination_margin_probe: Mapping[str, Any] | None = None,
     external_release_artifact_intake: Mapping[str, Any] | None = None,
+    facility_provider_intake_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -134,6 +135,9 @@ def build_ijhe_objective_coverage_audit(
     )
     external_release_artifact_intake_path = _record_path(
         external_release_artifact_intake, None
+    )
+    facility_provider_intake_audit_path = _record_path(
+        facility_provider_intake_audit, None
     )
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
@@ -2549,6 +2553,47 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "이 행은 최신 전체 감사가 구조적 연결을 확인했는지 검증한다. "
                 "PASS는 시설 QRA 완료를 뜻하지 않으며, 실제 provider·물리검증·범위 gate는 별도로 열린다."
+            ),
+        ))
+
+    if facility_provider_intake_audit is not None:
+        intake_alignment_ok = (
+            facility_provider_intake_audit.get("schema_version")
+            == "prism.facility_provider_intake_audit.v1"
+            and facility_provider_intake_audit.get("status")
+            == "ALIGNED_TEMPLATE_ONLY"
+            and isinstance(facility_provider_intake_audit.get("request_case_count"), int)
+            and facility_provider_intake_audit.get("request_case_count") > 0
+            and facility_provider_intake_audit.get("template_entry_count")
+            == facility_provider_intake_audit.get("request_case_count")
+            and facility_provider_intake_audit.get("aligned_entry_count")
+            == facility_provider_intake_audit.get("request_case_count")
+            and facility_provider_intake_audit.get("blocking_reasons") == []
+            and facility_provider_intake_audit.get("promotion_policy", {}).get(
+                "facility_qra_allowed"
+            ) is False
+        )
+        rows.append(_row(
+            "diagnostic_facility_provider_intake_alignment",
+            "시설 증거 요청 44개와 provider 제출 템플릿의 설비·사건·포트·digest 기준이 일치해야 한다",
+            "PASS" if intake_alignment_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(facility_provider_intake_audit_path,),
+            observed={
+                "request_case_count": facility_provider_intake_audit.get("request_case_count"),
+                "template_entry_count": facility_provider_intake_audit.get("template_entry_count"),
+                "aligned_entry_count": facility_provider_intake_audit.get("aligned_entry_count"),
+                "mismatch_entry_count": facility_provider_intake_audit.get("mismatch_entry_count"),
+                "blocking_reasons": facility_provider_intake_audit.get("blocking_reasons", []),
+                "facility_qra_allowed": facility_provider_intake_audit.get(
+                    "promotion_policy", {}
+                ).get("facility_qra_allowed"),
+            },
+            blocking_reason=None if intake_alignment_ok else (
+                "시설 evidence request와 provider intake template의 exact-match 정렬이 확인되지 않았다"
+            ),
+            interpretation=(
+                "이 행은 provider 자료 제출 전 intake 계약만 검증한다. "
+                "정렬 PASS는 provider packet 도착, 빈도 승격, 물리검증 또는 시설 QRA 완료를 뜻하지 않는다."
             ),
         ))
 

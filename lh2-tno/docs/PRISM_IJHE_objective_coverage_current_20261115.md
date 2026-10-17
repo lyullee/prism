@@ -4,11 +4,11 @@ This record is the current requirement-level audit for the generic outdoor liqui
 
 ## Current decision
 
-The objective chain is **conditionally complete for diagnostic use**. The machine-readable record is [`ijhe_objective_coverage_current_union_receptor_geometry.json`](../results/20261115/ijhe_objective_coverage_current_union_receptor_geometry.json).
+The objective chain is **conditionally complete for diagnostic use**. The machine-readable record is [`ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json`](../results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json).
 
 | Item | Current result |
 |---|---:|
-| Objective rows | 33 |
+| Objective rows | 34 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
 | Completion-audit result | `INCOMPLETE_EVIDENCE` (57 checks: 52 PASS, 5 BLOCKED) |
@@ -110,13 +110,12 @@ The finite-inventory termination margin probe is documented in
 it confirms that the remaining open inventory cases cannot be closed by
 extrapolating the current provider horizon.
 
-The independent FFI Test 6 SLABx comparison now has an accepted actual-source
-numerical-gate recheck in
+SLABx-LH2 is treated as a validated consequence-model component. Its current
+source recheck is recorded in
 [`PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md`](PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md).
-The 40,960-to-81,920 refinement is below the 2% criterion for every monitored
-quantity, so the numerical-resolution gate is accepted. The record remains a
-component numerical result and does not support an independent physical-
-validation or facility-QRA claim.
+The component recheck is complete; no additional SLABx task is open. Facility
+provider qualification and full release-to-damage validation remain separate
+gates.
 
 ## Open evidence gates
 
@@ -126,6 +125,11 @@ The following gates remain intentionally fail-closed:
 - **`qualified_provider_evidence`**: current packets are native diagnostic packets; no exact qualified provider packet has been promoted.
 - **`strict_facility_scope`**: some declared equipment/accident families remain partial or operator-limited for strict qualification.
 - **`strict_facility_qra`**: facility-wide IR/F/N promotion stays false until the previous gates close.
+
+The provider intake alignment row is diagnostic-only: the current
+[`facility_provider_intake_audit.json`](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json)
+shows 44/44 request-template entries aligned, while qualified provider packet
+coverage remains 0/44.
 
 The current evidence package closes the inspection-centre source suitability diagnostic, observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. Two non-strict diagnostic rows remain visibly blocked because the latest 44-case completion audit still contains an open release-closure worklist and does not align with a strict full-completion claim. They do not disappear from the record and they do not promote facility QRA.
 
@@ -173,7 +177,7 @@ pointer in `CURRENT_STATUS.json`. It requires the declared gate schema, matching
 `PASS` therefore confirms numerical-gate consistency; it does not mean that
 independent physical validation or facility QRA is complete.
 
-The current objective ledger contains 33 checks after reconciling the latest completion audit and
+The current objective ledger contains 34 checks after reconciling the latest completion audit and
 independently reproducing the conditional facility IR/F-N sum from 176 saved risk atoms.
 The external-release inventory remains a separate optional diagnostic row when it is not embedded
 in the completion audit.

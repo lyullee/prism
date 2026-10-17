@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,463 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,465 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -934,6 +934,9 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [FFI Test 6 high-resolution numerical recheck](docs/PRISM_FFI_Test6_high_resolution_recheck_20261017.md)
 - [SLABx-LH2 pseudo-source numerical sensitivity](docs/PRISM_slabx_lh2_pseudosource_numerical_sensitivity_20261115.md)
 - [SLABx-LH2 component evidence and current matrix](docs/PRISM_slabx_component_evidence_20261115_en.md)
+- [SLABx-LH2 validation status (closed component task)](docs/SLABx_LH2_VALIDATION_STATUS_20261115_KO.md)
+- [Facility provider intake audit](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json)
+- [IJHE objective audit with provider-intake alignment](results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json)
 - [Inspection-centre source suitability boundary](docs/PRISM_inspection_center_source_suitability_20261115.md)
 - [English user manual](docs/PRISM_USER_MANUAL_en.md)
 - [English interface integration guide](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)

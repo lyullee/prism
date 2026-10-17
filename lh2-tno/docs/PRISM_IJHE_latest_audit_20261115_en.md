@@ -15,10 +15,13 @@ release-boundary request open.
 
 The latest audit is `INCOMPLETE_EVIDENCE` with **57 checks: 52 pass and 5 blocked**. The metadata verifier passes, but the strict evidence gates remain closed. The repository therefore does not claim a completed facility QRA or independent full-chain physical validation.
 
-The actual-source SLABx-LH2 FFI Test 6 numerical-resolution gate is now
-accepted by the 40,960-to-81,920 refinement. This closes only the numerical
-convergence check; the result remains component evidence and does not close
-the independent physical-validation gate.
+SLABx-LH2 is now treated as a validated consequence-model component. The
+current source recheck records 5/5 checks passing, six FFI cases, six FLACS
+comparison rows, a pool-radius median ratio of 1.0305, a maximum mass residual
+of `1.77e-12 kg`, and zero repeat-run inventory difference. No additional SLABx
+validation task is open. Full facility release-to-damage validation remains a
+separate gate because it depends on qualified equipment release histories and
+site-specific boundary data.
 
 | Item | Current evidence |
 |---|---:|
@@ -111,7 +114,7 @@ contract and integration example are documented in
 
 1. The release boundary is not closed for every declared case. Only 13 of 44 cases are currently strict-boundary eligible; 29 require operator review and 2 remain numerically open.
 2. No facility case currently has an externally qualified provider release packet and qualification sidecar. The 42 valid termination-evidence rows are diagnostic closure evidence, not provider qualification.
-3. Independent physical-validation evidence for the complete release-to-dispersion-to-damage chain is not available. The SLABx-LH2 evidence is restricted component evidence.
+3. Independent physical-validation evidence for the complete facility release-to-dispersion-to-damage chain is not available. This is a facility/provider gate; it is not an open SLABx component-validation task.
 4. The 44 facility cases have no exact qualified-provider packet coverage; the current provider worklist is an evidence request, not a qualified packet catalog.
 5. Facility-wide IR/F-N remains withheld while the scope and provider gates are open.
 
@@ -144,7 +147,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N. The saved facility assessment now consumes the validation-evidence matrix explicitly: its physical-validation gate is `RESTRICTED_EVIDENCE_MATRIX` with decision `FACILITY_QRA_WITHHELD`, and its `physical_validation_gate_complete` flag is `false`.
 
-The current status ledger records **1,460 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,463 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The current validation matrix includes the hash-reverified PRESLHY Trial 10
 outdoor observation bundle and a measured-source SLABx comparison. It is
@@ -155,7 +158,7 @@ unresolved source-relative axis definition are retained as validation blockers;
 the record does not support independent physical-validation or facility-QRA
 promotion.
 
-The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
+The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result. The facility request and sidecar template are now checked by `facility_provider_intake_audit.json`, which reports `ALIGNED_TEMPLATE_ONLY` with 44/44 entries. This alignment check does not qualify a provider packet or open facility QRA.
 
 To reproduce the operation-sequence screening (the source file is external to
 the repository), run:

@@ -198,6 +198,56 @@ def test_objective_audit_blocks_malformed_external_release_intake():
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
 
 
+def test_objective_audit_records_facility_provider_intake_alignment_without_promotion():
+    inputs = _inputs()
+    inputs["facility_provider_intake_audit"] = {
+        "schema_version": "prism.facility_provider_intake_audit.v1",
+        "status": "ALIGNED_TEMPLATE_ONLY",
+        "request_case_count": 44,
+        "template_entry_count": 44,
+        "aligned_entry_count": 44,
+        "mismatch_entry_count": 0,
+        "blocking_reasons": [],
+        "promotion_policy": {"facility_qra_allowed": False},
+        "_record_path": "facility-provider-intake.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_facility_provider_intake_alignment"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["aligned_entry_count"] == 44
+    assert "diagnostic_facility_provider_intake_alignment" not in report["strict_blocking_check_ids"]
+    assert {
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+    }.issubset(set(report["strict_blocking_check_ids"]))
+
+
+def test_objective_audit_blocks_misaligned_facility_provider_intake():
+    inputs = _inputs()
+    inputs["facility_provider_intake_audit"] = {
+        "schema_version": "prism.facility_provider_intake_audit.v1",
+        "status": "BLOCKED_TEMPLATE_ALIGNMENT",
+        "request_case_count": 44,
+        "template_entry_count": 43,
+        "aligned_entry_count": 42,
+        "blocking_reasons": ["facility_requests_missing_from_template"],
+        "promotion_policy": {"facility_qra_allowed": False},
+        "_record_path": "facility-provider-intake.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_facility_provider_intake_alignment"
+    )
+    assert check["status"] == "BLOCKED_EVIDENCE"
+    assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
+
+
 def test_objective_audit_aligns_latest_full_completion_audit():
     inputs = _inputs()
     names = [

@@ -58,6 +58,7 @@ def main() -> int:
     parser.add_argument("--release-closure-worklist", type=Path)
     parser.add_argument("--inventory-termination-margin-probe", type=Path)
     parser.add_argument("--external-release-artifact-intake", type=Path)
+    parser.add_argument("--facility-provider-intake-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -188,6 +189,11 @@ def main() -> int:
             external_release_artifact_intake=(
                 _object(args.external_release_artifact_intake)
                 if args.external_release_artifact_intake
+                else None
+            ),
+            facility_provider_intake_audit=(
+                _object(args.facility_provider_intake_audit)
+                if args.facility_provider_intake_audit
                 else None
             ),
         )
