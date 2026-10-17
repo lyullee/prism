@@ -1864,6 +1864,51 @@ def build_ijhe_completion_audit(
                 }
             )
         coverage = assessment.get("conditional_diagnostic_facility_coverage")
+        risk_atom_case_trace = assessment.get("risk_atom_case_traceability")
+        if not isinstance(risk_atom_case_trace, Mapping) and isinstance(coverage, Mapping):
+            risk_atom_case_trace = coverage.get("risk_atom_case_traceability")
+        # A saved facility assessment may predate the case-to-risk-atom trace.
+        # Preserve the historical audit shape for those records, but validate
+        # the trace whenever it is present so a stale or hand-edited trace
+        # cannot be mistaken for closed facility evidence.
+        risk_atom_trace_valid = True
+        if isinstance(risk_atom_case_trace, Mapping):
+            trace_policy = risk_atom_case_trace.get("policy")
+            trace_policy = trace_policy if isinstance(trace_policy, Mapping) else {}
+            risk_atom_count = risk_atom_case_trace.get("risk_atom_count")
+            matched_atom_count = risk_atom_case_trace.get("matched_risk_atom_count")
+            eligible_atom_count = risk_atom_case_trace.get("eligible_risk_atom_count")
+            withheld_atom_count = risk_atom_case_trace.get("withheld_risk_atom_count")
+            unmatched_atom_count = risk_atom_case_trace.get("unmatched_risk_atom_count")
+            ambiguous_atom_count = risk_atom_case_trace.get("ambiguous_risk_atom_count")
+            risk_atom_trace_valid = (
+                risk_atom_case_trace.get("schema_version")
+                == "prism.facility_case_risk_atom_trace.v1"
+                and risk_atom_case_trace.get("status") in {"CLOSED", "BLOCKED"}
+                and all(
+                    isinstance(value, int) and value >= 0
+                    for value in (
+                        risk_atom_count,
+                        matched_atom_count,
+                        eligible_atom_count,
+                        withheld_atom_count,
+                        unmatched_atom_count,
+                        ambiguous_atom_count,
+                    )
+                )
+                and matched_atom_count + unmatched_atom_count + ambiguous_atom_count
+                == risk_atom_count
+                and eligible_atom_count + withheld_atom_count == risk_atom_count
+                and (
+                    risk_atom_case_trace.get("status") == "CLOSED"
+                    if unmatched_atom_count == 0 and ambiguous_atom_count == 0
+                    else risk_atom_case_trace.get("status") == "BLOCKED"
+                )
+                and trace_policy.get("missing_case_status_is_not_inferred") is True
+                and trace_policy.get("frequency_reallocation_performed") is False
+                and trace_policy.get("withheld_case_atoms_excluded_from_strict_facility_qra")
+                is True
+            )
         conditional_ir = assessment.get("conditional_diagnostic_facility_annual_ir_low_high")
         conditional_fn = assessment.get(
             "conditional_diagnostic_facility_expected_death_fn_low_high"
@@ -1883,6 +1928,7 @@ def build_ijhe_completion_audit(
             and coverage.get("risk_atom_count") > 0
             and assessment.get("facility_total_risk_available") is False
             and assessment.get("complete_facility_qra_claim") is not True
+            and risk_atom_trace_valid
         )
         checks.append(
             {
@@ -1914,11 +1960,15 @@ def build_ijhe_completion_audit(
                     "complete_facility_qra_claim": assessment.get(
                         "complete_facility_qra_claim"
                     ),
+                    "risk_atom_case_traceability": risk_atom_case_trace,
+                    "risk_atom_case_traceability_valid": risk_atom_trace_valid,
                 },
                 "interpretation": (
                     "The facility IR/F-N aggregation is present as a conditional diagnostic view "
                     "over the saved risk atoms; withheld total-facility qualification and the "
-                    "remaining scope, provider, frequency, and validation gates are preserved."
+                    "remaining scope, provider, frequency, and validation gates are preserved. "
+                    "When present, the case-to-risk-atom trace is schema-checked and its policy "
+                    "does not infer missing status or reallocate frequency."
                 ),
             }
         )

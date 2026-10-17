@@ -4822,9 +4822,41 @@
           "scope_blocker_count": 20
         },
         "facility_total_risk_available": false,
-        "complete_facility_qra_claim": false
+        "complete_facility_qra_claim": false,
+        "risk_atom_case_traceability": {
+          "schema_version": "prism.facility_case_risk_atom_trace.v1",
+          "status": "CLOSED",
+          "risk_atom_count": 176,
+          "matched_risk_atom_count": 176,
+          "exact_case_match_count": 0,
+          "case_parent_no_ignition_match_count": 176,
+          "legacy_event_only_match_count": 0,
+          "eligible_risk_atom_count": 60,
+          "withheld_risk_atom_count": 116,
+          "unmatched_risk_atom_count": 0,
+          "ambiguous_risk_atom_count": 0,
+          "uncomputed_case_row_count": 29,
+          "case_status_atom_counts": {
+            "EXECUTED": 60,
+            "EXECUTED_OPERATOR_LIMITED": 116
+          },
+          "case_match_kind_counts": {
+            "CASE_PARENT_NO_IGNITION": 176
+          },
+          "strict_facility_qra_promotion_blocked": true,
+          "blocking_reasons": [
+            "116 risk atoms are linked to non-EXECUTED case status"
+          ],
+          "policy": {
+            "non_executed_case_atoms_remain_in_conditional_diagnostic_sum": true,
+            "withheld_case_atoms_excluded_from_strict_facility_qra": true,
+            "missing_case_status_is_not_inferred": true,
+            "frequency_reallocation_performed": false
+          }
+        },
+        "risk_atom_case_traceability_valid": true
       },
-      "interpretation": "The facility IR/F-N aggregation is present as a conditional diagnostic view over the saved risk atoms; withheld total-facility qualification and the remaining scope, provider, frequency, and validation gates are preserved."
+      "interpretation": "The facility IR/F-N aggregation is present as a conditional diagnostic view over the saved risk atoms; withheld total-facility qualification and the remaining scope, provider, frequency, and validation gates are preserved. When present, the case-to-risk-atom trace is schema-checked and its policy does not infer missing status or reallocate frequency."
     },
     {
       "name": "diagnostic_facility_frequency_port_binding",

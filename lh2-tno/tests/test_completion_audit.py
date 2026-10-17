@@ -1546,6 +1546,36 @@ def test_completion_audit_blocks_unbound_facility_frequency_ports():
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_reconciles_facility_case_risk_atom_traceability():
+    trace = {
+        "schema_version": "prism.facility_case_risk_atom_trace.v1",
+        "status": "CLOSED",
+        "risk_atom_count": 4,
+        "matched_risk_atom_count": 4,
+        "eligible_risk_atom_count": 1,
+        "withheld_risk_atom_count": 3,
+        "unmatched_risk_atom_count": 0,
+        "ambiguous_risk_atom_count": 0,
+        "policy": {
+            "missing_case_status_is_not_inferred": True,
+            "frequency_reallocation_performed": False,
+            "withheld_case_atoms_excluded_from_strict_facility_qra": True,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(False), _matrix(False), _campaign_result(False),
+        facility_assessment=_facility_assessment(
+            risk_atom_case_traceability=trace,
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_conditional_facility_risk_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["risk_atom_case_traceability_valid"] is True
+
+
 def test_completion_audit_accepts_restricted_component_evidence_without_promoting_full_chain():
     status = _status(False)
     status.update({
