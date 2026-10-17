@@ -1,0 +1,134 @@
+{
+  "schema_version": "prism.inspection_center_header_bound_facility_hazop_bridge_recheck.v1",
+  "status": "CURRENT_REPLAY_DIAGNOSTIC; STRUCTURAL_CHAIN_REPRODUCED; QUALIFICATION_WITHHELD",
+  "source_runtime_record": "examples/inspection_center_header_bound_runtime_frames_20261115.json",
+  "component_count": 3,
+  "risk_atom_count": 3,
+  "selected_component_count": 3,
+  "executed_component_count": 3,
+  "operating_mode_taken_from_explicit_input": true,
+  "component_rows": [
+    {
+      "component_id": "lh2-intake-tank",
+      "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "operating_mode": "receiving",
+      "provider_component_id": null,
+      "provider_port_id": null,
+      "operator_limited": true,
+      "risk_status": null
+    },
+    {
+      "component_id": "lh2-storage-vent",
+      "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "operating_mode": "standby",
+      "provider_component_id": null,
+      "provider_port_id": null,
+      "operator_limited": true,
+      "risk_status": null
+    },
+    {
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "operating_mode": "supply",
+      "provider_component_id": null,
+      "provider_port_id": null,
+      "operator_limited": true,
+      "risk_status": null
+    }
+  ],
+  "operator_limited_component_count": 3,
+  "conditional_current_weather_ir": {
+    "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+    "annual_ir_low_high_by_receptor": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "risk_atom_count": 3,
+    "frequency_learning": false,
+    "interpretation": "sum of explicitly bound HAZOP-selected component contributions for the current weather only; this is not a full facility annual IR/F-N result"
+  },
+  "conditional_current_weather_fn": {
+    "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN",
+    "expected_death_fn_low_high": [
+      0.0,
+      0.0
+    ],
+    "frequency_sensitivity_expected_death_fn_low_high": null,
+    "population_provenance": "synthetic generic outdoor worker receptor; diagnostic F/N chain only; not site occupancy data",
+    "population_source_digest": "4913e4d883f2fb9c986406e6392fbcde2030a1e4c30465197930b9be0dfbf3a0",
+    "population_receptor_count": 1,
+    "frequency_learning": false,
+    "reason": "explicit receptor population was multiplied by the reviewed literature frequency and current-weather consequence harm; full-facility F/N remains withheld"
+  },
+  "frequency_uncertainty": {
+    "schema_version": "prism.header_bound_frequency_uncertainty.v1",
+    "status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+    "risk_atom_count": 3,
+    "frequency_bound_scenario_count": 1,
+    "frequency_unbound_scenario_count": 2,
+    "frequency_bound_scenario_ids": [
+      "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+    ],
+    "frequency_unbound_scenario_ids": [
+      "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+    ],
+    "complete": false,
+    "current_weather_annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "bounded_current_weather_ir_low_high": {
+      "p05": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "published": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "p95": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "frequency_inference_performed": false,
+    "missing_bounds_imputed": false,
+    "interpretation": "p05/published/p95 values are summed only for branches whose provider frequency binding exposes all three explicit bounds; branches without bounds remain visible and are not assigned an assumed interval"
+  },
+  "frequency_inference_performed": false,
+  "sensor_frequency_learning_used": false,
+  "provider_packets_qualified": false,
+  "facility_annual_ir_available": false,
+  "facility_fn_available": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "wall_elapsed_ms": 12826.962699997239,
+  "measurement_policy": "diagnostic synchronous wall-clock timing for this batch; not a fresh-physics 1 Hz guarantee",
+  "new_candidate_sha256": "27562cd47ee9bf525ce22bec73cc6696718891db2fed87074c529d430039f0b4",
+  "previous_authoritative_record": "results/20261115/header_bound_facility_bridge_runtime.json",
+  "previous_authoritative_sha256": "1df1f5f3d198cc995058ced15ef6eb80f7d05104ef9826976f1bdb68c8f198a8",
+  "replay_comparison": {
+    "same_component_scenario_count": false,
+    "new_adapter_source_digests": [
+      "ec0c5c1d22e3515c62823233fb3474c38fea0d40278ba680973b83345b9b8184"
+    ],
+    "previous_adapter_source_digests": [
+      "33f991399b74559178e36ba9dca9d32d637028af945cdbd8482bdb32cc794ff3"
+    ],
+    "adapter_source_digest_changed": true,
+    "previous_authoritative_replaced": false,
+    "interpretation": "The current code replay preserves component, operating-mode, HAZOP, and provider-port identities. Its stricter dynamic-state-closure contract marks all three branches operator-limited; the older authoritative runtime is retained and no facility-QRA promotion is inferred."
+  },
+  "authoritative_replacement_allowed": false
+}

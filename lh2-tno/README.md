@@ -1003,6 +1003,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Case-status trace from facility cases to risk atoms](docs/PRISM_case_status_risk_atom_trace_20261017.md)
 - [Header-bound facility bridge summary](results/20261115/header_bound_facility_bridge_summary.json)
 - [Header-bound facility bridge runtime record](results/20261115/header_bound_facility_bridge_runtime.json)
+- [Header-bound facility bridge current replay recheck](docs/PRISM_header_bound_facility_bridge_current_recheck_20261018.md)
 - [Current header-bound bridge replay record](docs/PRISM_header_bound_current_bridge_20261017.md)
 - [Current header-bound bridge replay summary](results/20261017/header_bound_facility_bridge_current_summary.json)
 - [Current header-bound frequency-uncertainty audit](results/20261017/header_bound_frequency_uncertainty_audit_current.json)
