@@ -111,6 +111,7 @@ case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했�
 | dynamic closure ready / operator-limited | 13 / 11 |
 | scope matrix | 12 family, 9 family blockers |
 | facility evidence request | 24 case requests, 12 family requests |
+| provider qualification readiness | 24 packet candidates, 13 exact diagnostic matches, 0 qualified packets |
 | strict facility QRA | `false`, 14 explicit blockers |
 | processing-time record | 24 fresh-physics cases, total 814,290.39 ms, case p95 105,548.90 ms |
 
@@ -143,6 +144,7 @@ case로 만들고, 각 방출을 SLABx-LH2/TNO consequence path까지 전달했�
 - 최신 native full-scope campaign: `results/20261115/native_external_facility_full_scope_campaign_current/campaign_result.json`
 - native full-scope scope matrix: `results/20261115/native_external_facility_full_scope_campaign_current/scope_matrix.json`
 - native full-scope evidence request: `results/20261115/native_external_facility_full_scope_campaign_current/facility_evidence_request.json`
+- native full-scope provider qualification readiness: `results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_readiness.json`
 - native full-scope processing-time record: `results/20261115/native_external_facility_full_scope_campaign_current/processing_time_summary.json`
 - 현재 상태 원장: `CURRENT_STATUS.json`
 

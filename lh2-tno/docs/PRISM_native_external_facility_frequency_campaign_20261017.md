@@ -142,6 +142,14 @@ Its promotion policy continues to forbid frequency inference from sensors and
 keeps facility QRA promotion closed until the provider and validation gates are
 actually satisfied.
 
+The packet qualification readiness audit is saved in
+[`provider_qualification_readiness.json`](../results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_readiness.json).
+It finds 24 packet candidates and 13 exact strict diagnostic matches, but zero
+qualified provider packets. The exact matches remain `BLOCKED_REVIEW` because
+qualification sidecars and independent physical-validation evidence are absent;
+the remaining candidates are retained as non-promoted packet evidence. This
+audit does not turn an exact digest match into a qualified accident release.
+
 Processing-time evidence is saved in
 [`processing_time_summary.json`](../results/20261115/native_external_facility_full_scope_campaign_current/processing_time_summary.json).
 The 24-case fresh-physics replay took 814,290.39 ms in total; case p95 was

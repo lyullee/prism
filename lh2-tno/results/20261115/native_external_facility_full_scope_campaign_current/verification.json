@@ -1102,5 +1102,16 @@
   "processing_time_case_count": 24,
   "processing_time_campaign_elapsed_ms": 814290.3899999801,
   "processing_time_case_p95_ms": 105548.89806998684,
-  "processing_time_fresh_physics_1hz_claim": false
+  "processing_time_fresh_physics_1hz_claim": false,
+  "provider_qualification_readiness_record": "results/20261115/native_external_facility_full_scope_campaign_current/provider_qualification_readiness.json",
+  "provider_qualification_readiness_status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
+  "provider_qualification_candidate_event_count": 24,
+  "provider_qualification_exact_match_event_count": 13,
+  "provider_qualification_qualified_provider_packet_count": 0,
+  "provider_qualification_blocker_counts": {
+    "operator_limited_input": 10,
+    "physical_validation_evidence_missing": 13,
+    "qualification_sidecar_missing": 13,
+    "synthetic_or_screening_boundary_declared": 13
+  }
 }
