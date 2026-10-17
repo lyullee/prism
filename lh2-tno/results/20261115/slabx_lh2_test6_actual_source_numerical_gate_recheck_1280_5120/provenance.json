@@ -1,0 +1,42 @@
+{
+  "schema_version": "prism.slabx_lh2_ffi_test6_actual_source_numerical_gate.v1",
+  "scope": "actual FFI Test 6 HorizontalJet source; no sensor fitting",
+  "criterion": "last two refinements <2% for all monitored values",
+  "levels": [
+    1280,
+    2560,
+    5120
+  ],
+  "last_pair": {
+    "from_n_field_steps": 2560,
+    "to_n_field_steps": 5120
+  },
+  "relative_changes": {
+    "H2_vol_pct_at_30_m": 0.15193296324388933,
+    "centre_height_m_at_30_m": 0.19167055123865753,
+    "cloud_depth_m_at_30_m": 0.03499360961209171,
+    "temperature_K_at_30_m": 0.0020550054411409037,
+    "MAE_vol_pct": 0.03957034538934947,
+    "RMSE_vol_pct": 0.0026278941767780197
+  },
+  "accepted": false,
+  "status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN",
+  "source": {
+    "rate_kg_s": 0.8317,
+    "nozzle_diameter_m": 0.0254,
+    "liquid_mass_fraction": 0.559,
+    "height_m": 0.5,
+    "duration_s": 120.0,
+    "temperature_K": 20.37
+  },
+  "execution": {
+    "slabx_src": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\slabx\\src",
+    "slabx_lh2_src": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2\\source\\slabx-lh2",
+    "extensions": "native SLABx source; SLABx-LH2 plume-width/ice extensions disabled",
+    "puff_steps": 120,
+    "substeps": 3,
+    "out_of_domain_observation_policy": "zero"
+  },
+  "physical_validation_claim": false,
+  "facility_qra_claim": false
+}

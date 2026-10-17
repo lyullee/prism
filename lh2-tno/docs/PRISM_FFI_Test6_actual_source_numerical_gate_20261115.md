@@ -101,3 +101,21 @@ Machine-readable recheck records:
 
 - `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_640_1280/refinement.json`
 - `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_640_1280/provenance.json`
+
+## Higher-resolution recheck (1280 -> 2560 -> 5120)
+
+The same actual source was rerun at 1280, 2560, and 5120 field steps with
+`puff_steps=120`, `substeps=3`, and the native SLABx path.  The final
+2560 -> 5120 changes were 15.193% for hydrogen volume fraction, 19.167% for
+centre height, 3.499% for cloud depth, 0.206% for temperature, 3.957% for
+sensor MAE, and 0.263% for sensor RMSE.  The result therefore remains outside
+the 2% all-quantity criterion; the denser grid does not close the numerical
+gate.  The new records are:
+
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_1280_5120/refinement.json`
+- `results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_1280_5120/provenance.json`
+
+This recheck strengthens the unresolved-evidence record but keeps
+`accepted=false`, `physical_validation_claim=false`, and
+`facility_qra_claim=false`.  It must not be replaced by the converged
+pseudo-source record.

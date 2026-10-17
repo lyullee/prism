@@ -4092,6 +4092,9 @@
   "slabx_lh2_test6_actual_source_numerical_gate_physical_validation_claim": false,
   "slabx_lh2_test6_actual_source_numerical_gate_facility_qra_claim": false,
   "slabx_lh2_test6_actual_source_numerical_gate_doc": "docs/PRISM_FFI_Test6_actual_source_numerical_gate_20261115.md",
+  "slabx_lh2_test6_actual_source_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_1280_5120/provenance.json",
+  "slabx_lh2_test6_actual_source_high_resolution_recheck_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN; 1280/2560/5120 run; 2560->5120 relative changes remain 15.193% H2 concentration, 19.167% centre height, 3.499% cloud depth, 0.206% temperature, 3.957% MAE and 0.263% RMSE",
+  "slabx_lh2_test6_actual_source_high_resolution_recheck_accepted": false,
   "slabx_lh2_test6_actual_source_numerical_gate_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.19719025825722364,
     "centre_height_m_at_30_m": 0.3118763594546088,

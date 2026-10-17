@@ -92,3 +92,20 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
             )
         if "ijhe_audit_latest_record" in status:
             assert status["ijhe_audit_latest_record"].endswith(AUDIT_PATH.name)
+        high_resolution_record = status.get(
+            "actual_ffi_high_resolution_recheck_record",
+            status.get("slabx_lh2_test6_actual_source_high_resolution_recheck_record"),
+        )
+        assert high_resolution_record is not None
+        assert high_resolution_record.endswith(
+            "slabx_lh2_test6_actual_source_numerical_gate_recheck_1280_5120/provenance.json"
+        )
+        high_resolution_status = status.get(
+            "actual_ffi_high_resolution_recheck_status",
+            status.get("slabx_lh2_test6_actual_source_high_resolution_recheck_status", ""),
+        )
+        assert "15.193% H2 concentration" in high_resolution_status
+        assert status.get(
+            "actual_ffi_high_resolution_recheck_accepted",
+            status.get("slabx_lh2_test6_actual_source_high_resolution_recheck_accepted"),
+        ) is False
