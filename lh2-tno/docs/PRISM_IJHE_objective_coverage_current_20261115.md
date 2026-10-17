@@ -210,8 +210,9 @@ The external-release inventory remains a separate optional diagnostic row when i
 in the completion audit.
 
 The verifier now also binds the latest union facility scope matrix and release-boundary
-case audit. It cross-checks the 44-case count and the 15 eligible/29 blocked release
-split against `CURRENT_STATUS.json`, requires the declared scope matrix and audit
+case audit. It cross-checks the 44-case campaign status split (15 `EXECUTED`,
+29 `EXECUTED_OPERATOR_LIMITED`) and separately retains the release-boundary
+triage split (13 strict-eligible, 31 blocked) in `CURRENT_STATUS.json`, requires the declared scope matrix and audit
 schemas, and keeps facility IR/F-N, provider qualification, and physical-validation
 claims false. This prevents a stale scope or release ledger from being mistaken for
 the current IJHE evidence package.
