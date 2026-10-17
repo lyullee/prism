@@ -77,7 +77,7 @@
   "realtime_monitor_implemented": true,
   "realtime_monitor_module": "src/lh2_tno/service.py",
   "realtime_monitor_policy": "Normalize each frame, run the declared consequence service, and record deadline status, input age, exact-cache/fresh-physics mode; never infer leak size or initiating frequency and never substitute stale output after a deadline miss.",
-  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1500 passed, 1 warning; GitHub Actions run 39062708240 (6cad2b16) completed successfully.",
+  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1500 passed, 1 warning; GitHub Actions run 39064681662 (f1f93084) completed successfully.",
   "realtime_monitor_one_hz_claim": false,
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
@@ -2159,7 +2159,7 @@
   "external_scenario_evidence_scope": "facility-neutral screening only; outdoor candidate rows retained; indoor/semi-enclosed/test-building rows outside declared outdoor scope",
   "external_scenario_evidence_test_status": "scenario importer and IJHE diagnostic evidence check passed; full portable suite 441 passed",
   "ijhe_completion_audit_latest_scenario_evidence_status": "PASS diagnostic-only; 52 records from 3 CSVs, 41 outdoor candidates and 11 out-of-scope rows",
-  "full_test_suite_status": "local full suite after current packet/campaign reconciliation: 1500 passed, 1 warning; latest executable-code GitHub Actions run #1380 (6cad2b16) completed successfully",
+  "full_test_suite_status": "local full suite after current packet/campaign reconciliation: 1500 passed, 1 warning; latest executable-code GitHub Actions run #1381 (f1f93084) completed successfully",
   "diagnostic_campaign_binding_latest_record": "results/20261018/generic_lh2_diagnostic_campaign_binding_current.json",
   "diagnostic_campaign_binding_latest_status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING; structural event/case/risk-atom binding complete",
   "diagnostic_campaign_binding_latest_packet_event_count": 24,
@@ -6014,11 +6014,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1380,
+    "run_number": 1381,
     "status": "completed",
     "conclusion": "success",
-    "commit": "6cad2b16d3225751f9c6a64caa6be93fdbed40e6",
-    "url": "https://github.com/lyullee/prism/actions/runs/39062708240"
+    "commit": "f1f930849aea4a09d2856f59cc586c7078d4f3d1",
+    "url": "https://github.com/lyullee/prism/actions/runs/39064681662"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
@@ -6266,7 +6266,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "Actions #1380 success; commit 6cad2b16 validated; current local full suite 1500 passed, 1 warning",
+  "latest_ci_validation": "Actions #1381 success; commit f1f93084 validated; current local full suite 1500 passed, 1 warning",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
