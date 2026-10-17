@@ -6420,5 +6420,14 @@
   "latest_native_external_full_scope_latest_source_recheck_operator_limited_case_count": 11,
   "latest_native_external_full_scope_latest_source_recheck_risk_atom_count": 96,
   "latest_native_external_full_scope_latest_source_recheck_provider_result_digest_changed_count": 24,
-  "latest_native_external_full_scope_latest_source_recheck_authoritative_rebound": false
+  "latest_native_external_full_scope_latest_source_recheck_authoritative_rebound": false,
+  "latest_native_external_full_scope_campaign_rebaseline_record": "examples/native_external_full_scope_campaign_rebaseline_20261018.json",
+  "latest_native_external_full_scope_campaign_rebaseline_status": "CAMPAIGN_REBASELINE_APPLIED_DIAGNOSTIC; 24/24 event-component-port identities matched; 24 result digests rebound; previous/current source digests explicit; authoritative union unchanged; facility QRA false",
+  "latest_native_external_full_scope_campaign_rebaseline_previous_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+  "latest_native_external_full_scope_campaign_rebaseline_current_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "latest_native_external_full_scope_campaign_rebaseline_event_count": 24,
+  "latest_native_external_full_scope_campaign_rebaseline_identity_match_count": 24,
+  "latest_native_external_full_scope_campaign_rebaseline_result_digest_changed_count": 24,
+  "latest_native_external_full_scope_campaign_rebaseline_authoritative_union_rebound": false,
+  "latest_native_external_full_scope_campaign_rebaseline_facility_qra_allowed": false
 }

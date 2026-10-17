@@ -1,0 +1,543 @@
+{
+  "schema_version": "prism.native_external_facility_campaign_rebaseline.v1",
+  "status": "CAMPAIGN_REBASELINE_APPLIED_DIAGNOSTIC",
+  "acknowledged": true,
+  "previous": {
+    "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_campaign_current\\verification.json",
+    "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+    "event_count": 24,
+    "case_count": 24,
+    "executed_case_count": 24,
+    "uncomputed_case_count": 0,
+    "failed_case_count": 0,
+    "operator_limited_case_count": 11,
+    "withheld_case_count": 11,
+    "risk_atom_count": 96,
+    "facility_total_risk_available": false,
+    "facility_qra_claim": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "conditional_diagnostic_facility_risk_available": true,
+    "frequency_scenario_count": 3,
+    "campaign_elapsed_ms": 814290.9996999952
+  },
+  "current": {
+    "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\.tmp_native_external_facility_full_scope_campaign_latest_isolation_20261018\\verification.json",
+    "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+    "event_count": 24,
+    "case_count": 24,
+    "executed_case_count": 24,
+    "uncomputed_case_count": 0,
+    "failed_case_count": 0,
+    "operator_limited_case_count": 11,
+    "withheld_case_count": 11,
+    "risk_atom_count": 96,
+    "facility_total_risk_available": false,
+    "facility_qra_claim": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "conditional_diagnostic_facility_risk_available": true,
+    "frequency_scenario_count": 3,
+    "campaign_elapsed_ms": 574318.1869999971
+  },
+  "event_count": 24,
+  "identity_match_count": 24,
+  "digest_comparison": {
+    "source_digest_changed_count": 24,
+    "result_digest_changed_count": 24,
+    "rows": [
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "identity": {
+          "component_id": "ambient-vaporizer-01",
+          "port_id": "vaporizer-accident-out",
+          "port_ids": [
+            "vaporizer-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "d4da7db31ed1d41128a344e5df09ef6814d993822d7677be28edec0179a9fb54",
+        "current_provider_result_digest": "ed5834cf6bc19e46030f9f4e10e570a74cee905619f3df17ee7f603471c02191",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "inventory_over_600s",
+        "current_duration_s": 600.0
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "identity": {
+          "component_id": "ambient-vaporizer-01",
+          "port_id": "vaporizer-accident-out",
+          "port_ids": [
+            "vaporizer-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73",
+        "current_provider_result_digest": "d6378341caeaa7443d469562b05647b635f4abed6faa2b74ff93eca3d41d0af0",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "inventory_over_600s",
+        "current_duration_s": 600.0
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "identity": {
+          "component_id": "ambient-vaporizer-01",
+          "port_id": "vaporizer-accident-out",
+          "port_ids": [
+            "vaporizer-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971",
+        "current_provider_result_digest": "42975a24fe5deca3557dbe9b047160747307db4f955b6112c375b29a62bb3cce",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.7
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "identity": {
+          "component_id": "pressure-relief-vent-01",
+          "port_id": "vent-accident-out",
+          "port_ids": [
+            "vent-accident-out"
+          ],
+          "event_kind": "emergency_relief",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f",
+        "current_provider_result_digest": "badfbee5d0680a9c73c246c76c39d18b0578258f9aa29c8b5fced5e2c81d210b",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "emergency_relief_discharge",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "identity": {
+          "component_id": "reliquefier-01",
+          "port_id": null,
+          "port_ids": [
+            "reliquefier-accident-out-1",
+            "reliquefier-accident-out-2"
+          ],
+          "event_kind": "two_sided_rupture",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "6961c654f42c9e8c09999bd19afe3111bcaabc635cc71869836b7cd746d2534c",
+        "current_provider_result_digest": "c318a8d46ed2ebbf23debf01ea970dfff93c518a740adf11b4f7b5bb0e9fce56",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "two_sided_rupture",
+        "current_duration_s": 1e-05
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "identity": {
+          "component_id": "reliquefier-01",
+          "port_id": null,
+          "port_ids": [
+            "reliquefier-accident-out-1",
+            "reliquefier-accident-out-2"
+          ],
+          "event_kind": "two_sided_rupture",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "1a8e898b20cf57e3a7767489d4b29acb024f72e0d9fd42c5436c24b3eb3c2e62",
+        "current_provider_result_digest": "a140eaeb620484fe55d6d6d2cd8099b973dd41cbd32a00309226cd74a882b1dd",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "two_sided_rupture",
+        "current_duration_s": 1e-05
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "identity": {
+          "component_id": "reliquefier-01",
+          "port_id": "reliquefier-accident-out-1",
+          "port_ids": [
+            "reliquefier-accident-out-1"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "gas"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "4ecf333fee42ddb55fe619d2496e0eeb106d90e4cd0c3a36103d6dafc1e1eb14",
+        "current_provider_result_digest": "ec6104dc52a2d3cfeb1712f8adf95aba0a33e030fa07cfe3a5b545b0561b5d04",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.7
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "identity": {
+          "component_id": "storage-tank-01",
+          "port_id": "tank-accident-out",
+          "port_ids": [
+            "tank-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "5863a731614c1a73be2e62a46bf5a5f8fc71e91a04c7ef2d0dda0d6f052c45bc",
+        "current_provider_result_digest": "bb2d048ef038b2a7ebf3c810eb74cbb110a309e42dcb14bd78325d518ef363df",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "identity": {
+          "component_id": "storage-tank-01",
+          "port_id": "tank-accident-out",
+          "port_ids": [
+            "tank-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "f711f513da677f4ffe18e5efd49663adfe201d707135c2cb9b129cc651ad7b1c",
+        "current_provider_result_digest": "1b72ccf0669a5de8a0e01fe420cc4ce4ccaa132efc433cfd6449037be9c5da39",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "identity": {
+          "component_id": "storage-tank-01",
+          "port_id": "tank-accident-out",
+          "port_ids": [
+            "tank-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "1eaa94922fdc4ac8b42af4a9c54813d325985eaad91615ca8b672fbd636e6ace",
+        "current_provider_result_digest": "a93c107ac43e81b912e79cd0934ca7b148386d93a5cd9797b67673e3880ff269",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "identity": {
+          "component_id": "storage-tank-01",
+          "port_id": "tank-accident-out",
+          "port_ids": [
+            "tank-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "2be9e9cf952732799314261fe32152fc0186b9a4d94cf79c26e6cede4ba7d7c1",
+        "current_provider_result_digest": "72121a7cb7a6059c7df52eff5f5135c423d24892804c3fe9bef33b62b323eae2",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "identity": {
+          "component_id": "storage-tank-01",
+          "port_id": "tank-accident-out",
+          "port_ids": [
+            "tank-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "f496c26fe539baa1af17f069ec0e5e930f90569d8ac781f38d409914564c5979",
+        "current_provider_result_digest": "e2dca3dacce169fff97204845758642ef19a26557b726b73e0cfad3d1e980181",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "inventory_depletion",
+        "current_duration_s": 1e-06
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "identity": {
+          "component_id": "liquid-transfer-line-01",
+          "port_id": "line-accident-out",
+          "port_ids": [
+            "line-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4",
+        "current_provider_result_digest": "7f53fb80f7659f7d50f934ebfff6990b2f5c217d583157c67b6d5c0155b8ca09",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.49999999999999994
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "identity": {
+          "component_id": "liquid-transfer-line-01",
+          "port_id": "line-accident-out",
+          "port_ids": [
+            "line-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "6be9f88022775f524497a9aebcb3532a05732f5a9aebe345e4a6db4294de9641",
+        "current_provider_result_digest": "67d1b9141a6e9bfc0fd8e3b52f812c48da1dfc324844ea2c8c0349641c79bc2f",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.49999999999999994
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "identity": {
+          "component_id": "liquid-transfer-line-01",
+          "port_id": "line-accident-out",
+          "port_ids": [
+            "line-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "efba22e90663c30f75720d190c181d1142757b2dcaa0d46e4b2dfe187ac701a3",
+        "current_provider_result_digest": "d16448ab9eb97147ff5296c5db37a937a89a76ff0b30d96e530a50166977fecd",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.49999999999999994
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "identity": {
+          "component_id": "liquid-transfer-line-01",
+          "port_id": "line-accident-out",
+          "port_ids": [
+            "line-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "e1a0ee052be9d2e17932952a2f1b01ae48b3aa6be0b136085fa0342ecbff09f0",
+        "current_provider_result_digest": "ae638774c3530d70fefb270791df12a2377f358ae31eb94f91b40fa65066d37c",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.49999999999999994
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "identity": {
+          "component_id": "liquid-transfer-line-01",
+          "port_id": "line-accident-out",
+          "port_ids": [
+            "line-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
+        "current_provider_result_digest": "50e22d0bbf00484bd0abcf0aa3dafc9fe33d3a20c3433d0a23c99bbb16dde019",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "identity": {
+          "component_id": "liquid-transfer-pump-01",
+          "port_id": "pump-accident-out",
+          "port_ids": [
+            "pump-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "bb2f9d2b69bee2e61c287134daa3bea1128267dfed1ec5eea382815dd6739c36",
+        "current_provider_result_digest": "4dd3764d3309dee34b165ceaea79e8f38f57fb4d86a6b65aed45f8c8f9711090",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "identity": {
+          "component_id": "liquid-transfer-pump-01",
+          "port_id": "pump-accident-out",
+          "port_ids": [
+            "pump-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "f56da7352098b4e13910a123c133d7a865b791086b11ce3e87cf37c98ac1841c",
+        "current_provider_result_digest": "71c7f59fbd77c939f19f9f064966b4996534ed629ae01969cbde5144319d857c",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "identity": {
+          "component_id": "transfer-valve-01",
+          "port_id": "valve-accident-out",
+          "port_ids": [
+            "valve-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "adad11219a7fac005ba8888fb3ae6c9c03822c2abd5faa4a8d5d4eb1f9624541",
+        "current_provider_result_digest": "f4939c5b39c76a1049949698c5cdbcb238f1b36e90a302298caafdddc0c935fe",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "identity": {
+          "component_id": "transfer-valve-01",
+          "port_id": "valve-accident-out",
+          "port_ids": [
+            "valve-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "7e29e7aff1519ea3537c14dbfcf2a76fc0722cf78ad8289dbbff00b0a090f956",
+        "current_provider_result_digest": "8f7cd799a0866eaa982b3a7685e6b7782a8c93abc454747f2335fc5ef1ae2467",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "identity": {
+          "component_id": "transfer-valve-01",
+          "port_id": "valve-accident-out",
+          "port_ids": [
+            "valve-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "5a9b1bb78bb5c069350c1f1ce0e318a7a4ebb8186d13415139a94b7908e70b6e",
+        "current_provider_result_digest": "749d800e8f0aae1bf870c26e62dcab75cf6d70ed8e6da3cc482bf41de426e197",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "identity": {
+          "component_id": "transfer-valve-01",
+          "port_id": "valve-accident-out",
+          "port_ids": [
+            "valve-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "349de3d158514b1ecfab6ff631e94161797c72aefa6b8655e2405ce0abf3b3f2",
+        "current_provider_result_digest": "4d45d4081583c03365e12f3225898912622a1169ea126db58ba18dcfe3a07106",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "identity": {
+          "component_id": "transfer-valve-01",
+          "port_id": "valve-accident-out",
+          "port_ids": [
+            "valve-accident-out"
+          ],
+          "event_kind": "accidental_leak",
+          "release_kind": "liquid"
+        },
+        "previous_provider_source_digest": "81aa33dd24531f3d661617b49a2d6b830a9a36212d725282404e759ea48a9648",
+        "current_provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+        "previous_provider_result_digest": "28be80a5f895589fb5f3ffa12c0cc385befbad509a705bac34cf3c384ad280f5",
+        "current_provider_result_digest": "33fe57831137424dba1125c4b151da94a5e21ea172323990d3843defe12f687e",
+        "source_digest_changed": true,
+        "result_digest_changed": true,
+        "current_termination_basis": "reviewed_isolation_success",
+        "current_duration_s": 0.5
+      }
+    ]
+  },
+  "promotion": {
+    "campaign_rebaseline_applied": true,
+    "authoritative_union_rebound": false,
+    "provider_packet_promoted": false,
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_qra_allowed": false,
+    "slabx_lh2_modified": false
+  },
+  "interpretation": "The current campaign matches the previous event/component/port identity set and may be used as a digest-rebased diagnostic record. Previous digests remain preserved; no provider qualification or facility-QRA promotion is inferred."
+}
