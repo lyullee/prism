@@ -80,6 +80,11 @@ and for each component. This makes it possible to see which equipment can
 support a dynamic release calculation without mistaking a conditional
 diagnostic total for a qualified facility QRA.
 
+The standalone provider mass-balance audit reports the same status for each
+external response before campaign execution. A scalar `CLOSED` mass ledger
+with no explicit pressure/inventory feedback record is still reported as
+`BLOCKED` for an accidental or relief release.
+
 ## What this does not qualify
 
 This contract closes one source-model connection for the selected accident

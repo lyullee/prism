@@ -40,12 +40,30 @@ def test_audit_distinguishes_closed_partial_and_unbalanced_provider_ledgers():
                 },
             },
         },
+        {
+            "provider_model": "accident-without-dynamic-closure",
+            "data": {
+                "event_id": "accident-missing-closure",
+                "component_id": "tank-1",
+                "event_kind": "accidental_leak",
+                "termination_basis": "reviewed_isolation_success",
+                "cumulative_mass_out_kg": 0.1,
+                "provider_meta": {
+                    "initial_mass_kg": 2.0,
+                    "final_mass_kg": 1.9,
+                    "isolation_success": True,
+                },
+            },
+        },
     ]
     report = audit_provider_mass_balance_records(records)
     assert report["status_counts"] == {
-        "CLOSED": 1,
+        "CLOSED": 2,
         "PARTIAL": 1,
         "UNBALANCED": 1,
     }
     assert report["promotion_allowed"] is False
     assert report["rows"][2]["provider_mass_balance"]["derived_accounting_residual_kg"] == pytest.approx(0.2)
+    assert report["rows"][3]["dynamic_state_closure_status"] == "BLOCKED"
+    assert "provider dynamic pressure/inventory closure evidence is missing" in report["rows"][3]["dynamic_state_closure_audit"]["blocking_reasons"]
+    assert report["dynamic_state_closure_blocked_record_count"] == 1

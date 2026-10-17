@@ -12,6 +12,7 @@ import math
 from typing import Any
 
 from .equipment_boundary import ProviderMassBalance
+from .resolved_liquid_worker import dynamic_state_closure_status
 
 
 PROVIDER_MASS_BALANCE_AUDIT_SCHEMA = "prism.provider_mass_balance_audit.v1"
@@ -86,6 +87,22 @@ def audit_provider_mass_balance_records(
             status = "CLOSED"
         else:
             status = "UNBALANCED"
+        event_kind = data.get("event_kind")
+        if event_kind in {"accidental_leak", "emergency_relief"}:
+            dynamic_audit = dynamic_state_closure_status(
+                {
+                    "provider_mass_balance": payload,
+                    "termination_basis": data.get("termination_basis"),
+                }
+            )
+            dynamic_status = "READY" if dynamic_audit["ready"] else "BLOCKED"
+        else:
+            dynamic_audit = {
+                "ready": None,
+                "checks": {},
+                "blocking_reasons": [],
+            }
+            dynamic_status = "NOT_APPLICABLE"
         rows.append(
             {
                 "record_index": index,
@@ -100,6 +117,8 @@ def audit_provider_mass_balance_records(
                 ),
                 "status": status,
                 "validation_error": validation_error,
+                "dynamic_state_closure_status": dynamic_status,
+                "dynamic_state_closure_audit": dynamic_audit,
             }
         )
 
@@ -107,11 +126,18 @@ def audit_provider_mass_balance_records(
     for row in rows:
         status = str(row["status"])
         status_counts[status] = status_counts.get(status, 0) + 1
+    dynamic_status_counts: dict[str, int] = {}
+    for row in rows:
+        status = str(row["dynamic_state_closure_status"])
+        dynamic_status_counts[status] = dynamic_status_counts.get(status, 0) + 1
     return {
         "schema_version": PROVIDER_MASS_BALANCE_AUDIT_SCHEMA,
         "source_root": source_root,
         "record_count": len(rows),
         "status_counts": dict(sorted(status_counts.items())),
+        "dynamic_state_closure_status_counts": dict(sorted(dynamic_status_counts.items())),
+        "dynamic_state_closure_ready_record_count": dynamic_status_counts.get("READY", 0),
+        "dynamic_state_closure_blocked_record_count": dynamic_status_counts.get("BLOCKED", 0),
         "closed_record_count": status_counts.get("CLOSED", 0),
         "unbalanced_record_count": status_counts.get("UNBALANCED", 0),
         "diagnostic_only": True,
