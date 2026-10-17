@@ -817,7 +817,7 @@
       "requirement": "방출 종료·격리·재고 소진·질량잔차의 provider closure를 사건별로 추적하고 미해결 항목을 표시해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261106\\release_closure_worklist.json"
+        "results\\20261115\\release_closure_worklist_current.json"
       ],
       "observed": {
         "schema_version": "prism.release_closure_worklist.v1",
@@ -827,15 +827,14 @@
         "closure_input_valid": true,
         "closure_closed": false,
         "closure_gap_counts": {
-          "INVENTORY_CLOSURE_OPEN": 15,
-          "ISOLATION_OPEN": 44,
-          "PROVIDER_QUALIFICATION_OPEN": 44,
-          "TERMINATION_OPEN": 24
+          "INVENTORY_CLOSURE_OPEN": 24,
+          "ISOLATION_OPEN": 29,
+          "PROVIDER_QUALIFICATION_OPEN": 44
         },
         "mass_closure_open_case_count": 0,
-        "isolation_open_case_count": 44,
-        "termination_open_case_count": 24,
-        "inventory_closure_open_case_count": 15,
+        "isolation_open_case_count": 29,
+        "termination_open_case_count": 0,
+        "inventory_closure_open_case_count": 24,
         "provider_packet_required_case_count": 44,
         "promotion_gates": {
           "release_boundary_promotion_allowed": false,

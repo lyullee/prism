@@ -150,7 +150,7 @@ release-closure, and independent-validation requirements. It reports zero
 qualified packets and keeps facility-QRA promotion disabled; it is a submission
 checklist, not qualification evidence.
 
-The current evidence package closes the inspection-centre source suitability diagnostic, observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. One non-strict diagnostic row, `diagnostic_release_closure_worklist`, remains visibly blocked because the latest 44-case completion audit still contains an open release-closure worklist and does not align with a strict full-completion claim. It does not disappear from the record and it does not promote facility QRA.
+The current evidence package closes the inspection-centre source suitability diagnostic, observed-state replay, runtime-frame, external-equipment-readiness and provider-request diagnostics. One non-strict diagnostic row, `diagnostic_release_closure_worklist`, remains visibly blocked because the current 44-case worklist still has 44 provider-qualification gaps, 29 isolation gaps and 24 inventory-closure gaps. Its termination-closure open count and end-to-end mass-residual open count are both zero. The row does not disappear from the record and it does not promote facility QRA.
 
 These are evidence gaps, not silent software substitutions. A missing release boundary, physical validation record, or runtime frame remains visible as blocked.
 

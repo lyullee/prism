@@ -14,6 +14,7 @@
 - 최신 union campaign의 사례 상태는 `EXECUTED` 15건과 `EXECUTED_OPERATOR_LIMITED` 29건이다. 별도의 release-boundary 엄격 triage는 13건 strict-eligible와 31건 blocked로 집계되며, 이 두 수치는 서로 다른 gate를 나타낸다.
 - 더 최신 외부-base 재실행은 진단 후보로 23건 `EXECUTED`, 21건 `EXECUTED_OPERATOR_LIMITED`를 보여 주었지만, provider/source digest와 base state-snapshot qualification이 권위 원장과 달라 union을 교체하지 않았다. 비교 기록은 [`PRISM_native_external_base_recheck_20261018.md`](PRISM_native_external_base_recheck_20261018.md)에 있다.
 - 권위 union의 176개 risk atom은 계산 경로에 도달했지만 선언된 synthetic receptor에서 `zero_harm_atom_count=176`, `positive_harm_atom_count=0`, 조건부 IR `[0.0, 0.0]/년`으로 기록된다. 이는 계산 누락이 아니라 해당 수용점에서의 명시적 0 영향 결과다. 비영 조건부 IR을 보인 외부-base 후보는 provider/state identity가 달라 권위 원장에 대체하지 않는다.
+- 최신 44-case release-closure worklist를 권위 시설평가와 다시 맞췄다. 종료 closure 미종료는 0건, 질량잔차 미종료도 0건이며, provider qualification 44건·격리 29건·재고 closure 24건은 증거가 없어 계속 보류된다.
 
 ## 남은 게이트
 
