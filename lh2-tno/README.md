@@ -453,6 +453,26 @@ diagnostic and keeps `facility_ir_fn_calculated` and `facility_qra_promotion`
 false until qualified provider evidence, independent validation and complete
 facility scope are available.
 
+The orchestration seam can be timed separately from fresh provider and SLABx-LH2
+physics with [`scripts/benchmark_generic_hazop_handoff.py`](scripts/benchmark_generic_hazop_handoff.py):
+
+```powershell
+python scripts/benchmark_generic_hazop_handoff.py `
+  --frames examples/generic_facility_forecast_frames.json `
+  --tables examples/generic_provider_bound_hazop_tables.json `
+  --current-frames examples/generic_facility_current_frames.json `
+  --current-attachments results/20261115/generic_current_quantitative_attachments.json `
+  --forecast-attachments results/20261115/generic_forecast_quantitative_attachments.json `
+  --repetitions 20 `
+  --output results/20261115/generic_hazop_handoff_timing.json
+```
+
+The recorded 20-run diagnostic is p50 1.019 ms, p95 1.084 ms and p99
+1.084 ms for three components and six requests. It measures state-to-HAZOP
+selection and exact evidence lookup only; the result explicitly excludes
+provider release physics, SLABx-LH2, ignition/damage, facility IR/F-N and any
+fresh-physics 1 Hz service claim.
+
 ### Importing process-model forecast workbooks
 
 Process-model exports can be converted into the same forecast frames with

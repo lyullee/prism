@@ -6231,5 +6231,13 @@
   "generic_quantitative_evidence_coverage_facility_qra_claim": false,
   "generic_quantitative_evidence_coverage_physical_validation_claim": false,
   "generic_outdoor_facility_hazop_handoff_quantitative_evidence_coverage_record": "results/20261115/generic_outdoor_facility_hazop_quantitative_handoff.json",
-  "generic_outdoor_facility_hazop_handoff_quantitative_evaluator_withheld_count": 3
+  "generic_outdoor_facility_hazop_handoff_quantitative_evaluator_withheld_count": 3,
+  "generic_outdoor_facility_hazop_handoff_timing_record": "results/20261115/generic_hazop_handoff_timing.json",
+  "generic_outdoor_facility_hazop_handoff_timing_status": "ORCHESTRATION_ONLY_DIAGNOSTIC; 20 repeats; p50=1.019 ms; p95=1.084 ms; p99=1.084 ms; fresh provider/SLABx physics excluded",
+  "generic_outdoor_facility_hazop_handoff_timing_p50_ms": 1.0189999884460121,
+  "generic_outdoor_facility_hazop_handoff_timing_p95_ms": 1.0837000154424459,
+  "generic_outdoor_facility_hazop_handoff_timing_p99_ms": 1.0837000154424459,
+  "generic_outdoor_facility_hazop_handoff_timing_provider_physics_included": false,
+  "generic_outdoor_facility_hazop_handoff_timing_slabx_lh2_included": false,
+  "generic_outdoor_facility_hazop_handoff_timing_one_hz_claim": false
 }

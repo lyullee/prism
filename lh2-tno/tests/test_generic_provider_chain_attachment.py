@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from attach_generic_provider_chain import attach, attach_many
 from build_generic_campaign_provider_evidence import build
 from build_generic_quantitative_attachments import build as build_quantitative_attachments
+from benchmark_generic_hazop_handoff import benchmark as benchmark_generic_handoff
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,3 +124,21 @@ def test_published_generic_handoff_consumes_quantitative_evidence_coverage():
     # Evidence coverage does not promote the absent evaluator, facility IR/F-N, or QRA.
     assert published["policy"]["facility_ir_fn_calculated"] is False
     assert published["policy"]["facility_qra_promotion"] is False
+
+
+def test_generic_handoff_timing_is_orchestration_only():
+    result = benchmark_generic_handoff(
+        ROOT / "examples/generic_facility_forecast_frames.json",
+        ROOT / "examples/generic_provider_bound_hazop_tables.json",
+        ROOT / "examples/generic_facility_current_frames.json",
+        ROOT / "results/20261115/generic_current_quantitative_attachments.json",
+        ROOT / "results/20261115/generic_forecast_quantitative_attachments.json",
+        repetitions=2,
+        warmup=0,
+    )
+    assert result["current_evidence_complete_count"] == 3
+    assert result["forecast_evidence_complete_count"] == 3
+    assert result["p50_ms"] <= result["p95_ms"] <= result["p99_ms"]
+    assert result["measurement"]["provider_release_physics_included"] is False
+    assert result["measurement"]["slabx_lh2_physics_included"] is False
+    assert result["policy"]["one_hz_service_level_claim"] is False

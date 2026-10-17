@@ -1,0 +1,69 @@
+{
+  "schema_version": "prism.generic_hazop_handoff_timing.v1",
+  "facility_id": "generic-outdoor-lh2",
+  "component_count": 3,
+  "operating_modes": [
+    "receiving",
+    "standby",
+    "supply"
+  ],
+  "current_request_count": 3,
+  "forecast_request_count": 3,
+  "current_evidence_complete_count": 3,
+  "forecast_evidence_complete_count": 3,
+  "repetitions": 20,
+  "warmup": 2,
+  "elapsed_ms_values": [
+    1.0408000089228153,
+    1.0837000154424459,
+    1.041999988956377,
+    1.0177000076510012,
+    1.0224999859929085,
+    1.031499996315688,
+    1.039499999023974,
+    1.0023000068031251,
+    0.9706999990157783,
+    0.9706999990157783,
+    0.9845999884419143,
+    1.0195999930147082,
+    1.0058000043500215,
+    1.0050999990198761,
+    1.0297000117134303,
+    1.0189999884460121,
+    0.9989000100176781,
+    0.9971999970730394,
+    0.993099994957447,
+    1.0242999996989965
+  ],
+  "min_ms": 0.9706999990157783,
+  "p50_ms": 1.0189999884460121,
+  "p95_ms": 1.0837000154424459,
+  "p99_ms": 1.0837000154424459,
+  "max_ms": 1.0837000154424459,
+  "input_sha256": {
+    "frames": "72a82cfe6165461e3468ecb59d8f8e5b2186cb2d508e73ce9dd1fe1931298841",
+    "tables": "d972bfc3a652350d63adb53a5b9e1a67dfcfbd65db343731ef8261cb99c62f9f",
+    "current_frames": "3889b465b01b52a738b88e9f28bd2fbecd0769daa2bca95b5b4bac600441534f",
+    "current_attachments": "b2fbcb7533261e8947c1e7a5d31f588ba3ef4a1e13cc81f6b6b0366b299b8fe4",
+    "forecast_attachments": "66db66eb4aa886e5821b127fc6d5b6371eb0958d1635ecba6b9dd3ed75410a19"
+  },
+  "measurement": {
+    "clock": "time.perf_counter",
+    "unit": "ms",
+    "scope": "state frames -> operating mode -> HAZOP selection -> four-block evidence coverage",
+    "same_process_repeated_calls": true,
+    "provider_release_physics_included": false,
+    "slabx_lh2_physics_included": false,
+    "ignition_damage_physics_included": false,
+    "facility_ir_fn_included": false
+  },
+  "policy": {
+    "fresh_physics_realtime_claim": false,
+    "one_hz_service_level_claim": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Timing covers orchestration and exact evidence lookup only. It must not be used as a fresh provider/SLABx-LH2 or facility-QRA latency guarantee."
+}
