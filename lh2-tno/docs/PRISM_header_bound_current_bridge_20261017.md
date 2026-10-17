@@ -64,6 +64,19 @@ The full population-bound replay is
 the compact record is
 `results/20261017/header_bound_facility_bridge_current_population_diagnostic_summary.json`.
 
+### Frequency uncertainty coverage
+
+The current bridge now reports frequency uncertainty coverage explicitly in
+`conditional_current_weather_frequency_uncertainty`. One of the three selected
+branches (`receiving`/`vessel_hole`) has an explicit literature p05/published/p95
+binding. The `standby` vent and `supply` vaporizer branches have a published
+frequency but do not yet carry all three reviewed bounds. The summary therefore
+reports `PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY` with one bounded and two
+unbounded scenarios. Missing bounds are kept visible and are not replaced by a
+default interval, a zero-width interval, or an inferred value. A complete
+facility uncertainty interval requires reviewed p05/p95 evidence for the two
+remaining event bindings.
+
 The following gates remain deliberately closed:
 
 - provider qualification and independent physical validation;

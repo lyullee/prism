@@ -1,6 +1,7 @@
 {
-  "schema_version": "prism.header_bound_facility_bridge_population_summary.v1",
+  "schema_version": "prism.header_bound_facility_bridge_population_summary.v2",
   "source_record": "results/20261017/header_bound_facility_bridge_current_population_diagnostic.json",
+  "provider_binding_record": "results\\20261017\\inspection_center_header_bound_provider_binding_current.json",
   "population_binding": "examples\\inspection_center_header_bound_population_binding_diagnostic.json",
   "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
   "facility_id": "generic-outdoor-lh2-diagnostic",
@@ -9,10 +10,15 @@
   "executed_component_count": 3,
   "ready_provider_scenario_count": 3,
   "withheld_provider_scenario_count": 0,
-  "risk_atom_count": 3,
   "preflight_status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_READY",
+  "risk_atom_count": 3,
   "facility_annual_ir_available": false,
   "facility_fn_available": false,
+  "provider_packets_qualified": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "sensor_frequency_learning_used": false,
+  "population_binding_supplied": true,
   "conditional_current_weather_expected_death_fn": {
     "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN",
     "expected_death_fn_low_high": [
@@ -26,18 +32,58 @@
     "frequency_learning": false,
     "reason": "explicit receptor population was multiplied by the reviewed literature frequency and current-weather consequence harm; full-facility F/N remains withheld"
   },
-  "population_binding_supplied": true,
-  "provider_packets_qualified": false,
-  "physical_validation_claim": false,
-  "frequency_inference_performed": false,
-  "sensor_frequency_learning_used": false,
+  "frequency_uncertainty": {
+    "schema_version": "prism.header_bound_frequency_uncertainty.v1",
+    "status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+    "risk_atom_count": 3,
+    "frequency_bound_scenario_count": 1,
+    "frequency_unbound_scenario_count": 2,
+    "frequency_bound_scenario_ids": [
+      "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+    ],
+    "frequency_unbound_scenario_ids": [
+      "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+    ],
+    "complete": false,
+    "current_weather_annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "bounded_current_weather_ir_low_high": {
+      "p05": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "published": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "p95": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "frequency_inference_performed": false,
+    "missing_bounds_imputed": false,
+    "interpretation": "p05/published/p95 values are summed only for branches whose provider frequency binding exposes all three explicit bounds; branches without bounds remain visible and are not assigned an assumed interval"
+  },
   "diagnostic_only": true,
-  "wall_elapsed_ms": 12212.423599994509,
+  "wall_elapsed_ms": 11917.880600027274,
   "rows": [
     {
       "observed_component_id": "lh2-intake-tank",
       "operating_mode": "receiving",
       "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+      "scenario_family": "vessel_hole",
       "provider_component_id": "storage-tank-01",
       "provider_port_id": "tank-accident-out",
       "provider_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -50,7 +96,8 @@
       "isolation_status": "ISOLATION_SUCCESS_DECLARED",
       "mass_status": "MASS_BALANCE_CLOSED",
       "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "slabx_service_elapsed_ms": 5847.3004999978,
+      "slabx_service_elapsed_ms": 5874.998899991624,
+      "realtime_deadline_status": "MET",
       "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
       "conditional_current_weather_ir": {
         "worker-01": [
@@ -65,6 +112,7 @@
       "observed_component_id": "lh2-storage-vent",
       "operating_mode": "standby",
       "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "scenario_family": "vent_hole",
       "provider_component_id": "pressure-relief-vent-01",
       "provider_port_id": "vent-accident-out",
       "provider_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
@@ -77,7 +125,8 @@
       "isolation_status": "EMERGENCY_RELIEF_TERMINATION",
       "mass_status": "MASS_BALANCE_CLOSED",
       "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "slabx_service_elapsed_ms": 4482.455699995626,
+      "slabx_service_elapsed_ms": 4268.477999983588,
+      "realtime_deadline_status": "MET",
       "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
       "conditional_current_weather_ir": {
         "worker-01": [
@@ -92,6 +141,7 @@
       "observed_component_id": "lh2-supply-vaporizer-boundary",
       "operating_mode": "supply",
       "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+      "scenario_family": "vaporizer_hole",
       "provider_component_id": "ambient-vaporizer-01",
       "provider_port_id": "vaporizer-accident-out",
       "provider_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
@@ -104,7 +154,8 @@
       "isolation_status": "ISOLATION_SUCCESS_DECLARED",
       "mass_status": "MASS_BALANCE_CLOSED",
       "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "slabx_service_elapsed_ms": 1837.133900000481,
+      "slabx_service_elapsed_ms": 1728.6638999939896,
+      "realtime_deadline_status": "MET",
       "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
       "conditional_current_weather_ir": {
         "worker-01": [
@@ -116,5 +167,5 @@
       "frequency_is_not_inferred": true
     }
   ],
-  "interpretation": "An explicit synthetic receptor population was carried into the current-weather expected-death F/N diagnostic. The zero-valued conditional curve reflects the supplied worker receptor and current-weather harm endpoints; it is not a site-qualified facility F/N result. Annual facility IR/F-N promotion remains closed because provider qualification, independent physical validation, and complete facility scope are not established."
+  "interpretation": "Fresh observed-state -> explicit operating mode -> HAZOP -> provider release -> SLABx-LH2 consequence -> literature frequency binding was replayed for three equipment branches. Frequency uncertainty is partial because only one of three literature events supplies p05/p95 bounds; no interval was imputed. The output remains diagnostic and must not be promoted to annual facility IR/F-N. An explicit synthetic receptor population also exercises conditional current-weather expected-death F/N; site occupancy qualification remains open."
 }

@@ -1739,11 +1739,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 782.9827000095975,
-                  "pool": 0.0043000036384910345,
-                  "near_field_and_dispersion": 4516.524400009075,
-                  "cloud_observation": 137.61119998525828,
-                  "fire_explosion_damage_risk": 77.62649998767301
+                  "source": 775.6889000011142,
+                  "pool": 0.0042000028770416975,
+                  "near_field_and_dispersion": 4552.802799997153,
+                  "cloud_observation": 137.32880001771264,
+                  "fire_explosion_damage_risk": 78.41560000088066
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -1787,14 +1787,14 @@
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
               "adapter_source_digest": "d29fb0750a948459ffa425ee876a5b6de723021843871b9c7390d99affd96f57",
-              "elapsed_ms": 5811.038999992888,
+              "elapsed_ms": 5832.279199996265,
               "physical_validation_claim": false,
               "facility_digest": "af4f6d8bfc1734a134d5dab210c157ca190cccb1450fb15e91883bf80a9ab147",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 5847.3004999978,
-                "physics_run_elapsed_ms": 5811.038999992888,
+                "service_elapsed_ms": 5874.998899991624,
+                "physics_run_elapsed_ms": 5832.279199996265,
                 "cache_key": "6fa16f6f70a444cbd428c6ff7c410ad85e93a19e8a67aa4c6e0f74c4ca321759",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
@@ -1812,8 +1812,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.8447000000160187,
-                "state_update_elapsed_ms": 5848.187900002813
+                "state_resolution_elapsed_ms": 1.1459000234026462,
+                "state_update_elapsed_ms": 5876.201000006404
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -1889,7 +1889,7 @@
                 "data_age_s": 13162.0,
                 "frame_digest": "bf96d47b0fb1bd7006f94ab9e9d71454092ce239737287bb69d1106b5230e99d",
                 "mapping_digest": "0fd49baebaa7fb5958f5e6b6154dd65f3a8a55b3196217814ed7446ef289080e",
-                "data_age_at_output_s": 13167.848269500013,
+                "data_age_at_output_s": 13167.876320499985,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "34096ccc0061e1965da47927829e7ce6410dc7da401fcc6acfa9f578dfd427cd",
@@ -1902,7 +1902,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 5.848269500012975,
+                "service_elapsed_s": 5.876320499985013,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -1924,10 +1924,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 5.848269500012975,
-                "normalization_elapsed_s": 6.400002166628838e-05,
-                "state_resolution_elapsed_s": 0.0008447000000160187,
-                "consequence_service_elapsed_s": 5.8473004999978,
+                "update_elapsed_s": 5.876320499985013,
+                "normalization_elapsed_s": 0.00010219999239780009,
+                "state_resolution_elapsed_s": 0.0011459000234026462,
+                "consequence_service_elapsed_s": 5.874998899991624,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -4486,11 +4486,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 888.6396999878343,
-                  "pool": 0.006099988240748644,
-                  "near_field_and_dispersion": 2881.2941999931354,
-                  "cloud_observation": 275.0796000182163,
-                  "fire_explosion_damage_risk": 83.77960001234896
+                  "source": 795.5339000036474,
+                  "pool": 0.005999987479299307,
+                  "near_field_and_dispersion": 2824.0793000150006,
+                  "cloud_observation": 249.09769999794662,
+                  "fire_explosion_damage_risk": 82.88040000479668
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -4534,14 +4534,14 @@
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
               "adapter_source_digest": "d29fb0750a948459ffa425ee876a5b6de723021843871b9c7390d99affd96f57",
-              "elapsed_ms": 4444.2677999904845,
+              "elapsed_ms": 4232.200700003887,
               "physical_validation_claim": false,
               "facility_digest": "af4f6d8bfc1734a134d5dab210c157ca190cccb1450fb15e91883bf80a9ab147",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 4482.455699995626,
-                "physics_run_elapsed_ms": 4444.2677999904845,
+                "service_elapsed_ms": 4268.477999983588,
+                "physics_run_elapsed_ms": 4232.200700003887,
                 "cache_key": "bc099d3ead215b6b62dc971742623bb40f5173bb4bbac8142ed8bbddd7eb7ff5",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
@@ -4559,8 +4559,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.7854999857954681,
-                "state_update_elapsed_ms": 4483.281499997247
+                "state_resolution_elapsed_ms": 0.7106999983079731,
+                "state_update_elapsed_ms": 4269.229500001529
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -4641,7 +4641,7 @@
                 "data_age_s": 9920.0,
                 "frame_digest": "06fec304183b32bb2d35814ba9875e1185f40a83356d99ba45464fdf9b813c37",
                 "mapping_digest": "0fd49baebaa7fb5958f5e6b6154dd65f3a8a55b3196217814ed7446ef289080e",
-                "data_age_at_output_s": 9924.483349099988,
+                "data_age_at_output_s": 9924.2692982,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "9ad98cbafb6acb67149d3728c54a02481052001ec1ddec791aa739b80459ceeb",
@@ -4654,7 +4654,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 4.483349099988118,
+                "service_elapsed_s": 4.269298200000776,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -4676,10 +4676,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 4.483349099988118,
-                "normalization_elapsed_s": 5.169998621568084e-05,
-                "state_resolution_elapsed_s": 0.0007854999857954681,
-                "consequence_service_elapsed_s": 4.482455699995626,
+                "update_elapsed_s": 4.269298200000776,
+                "normalization_elapsed_s": 5.2800023695454e-05,
+                "state_resolution_elapsed_s": 0.0007106999983079731,
+                "consequence_service_elapsed_s": 4.268477999983588,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -7065,11 +7065,11 @@
                   }
                 ],
                 "stage_elapsed_ms": {
-                  "source": 784.9337999941781,
-                  "pool": 0.005999987479299307,
-                  "near_field_and_dispersion": 466.6935999994166,
-                  "cloud_observation": 134.31080000009388,
-                  "fire_explosion_damage_risk": 87.90329998009838
+                  "source": 785.9658999950625,
+                  "pool": 0.006099988240748644,
+                  "near_field_and_dispersion": 435.1518000185024,
+                  "cloud_observation": 103.19940000772476,
+                  "fire_explosion_damage_risk": 82.12899998761714
                 },
                 "risk_semantics": {
                   "observed_release": "conditional harm, no initiating-frequency multiplier",
@@ -7113,14 +7113,14 @@
               "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
               "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
               "adapter_source_digest": "d29fb0750a948459ffa425ee876a5b6de723021843871b9c7390d99affd96f57",
-              "elapsed_ms": 1795.0285999977496,
+              "elapsed_ms": 1690.881199989235,
               "physical_validation_claim": false,
               "facility_digest": "af4f6d8bfc1734a134d5dab210c157ca190cccb1450fb15e91883bf80a9ab147",
               "service": {
                 "exact_cache_hit": false,
                 "fresh_physics_this_update": true,
-                "service_elapsed_ms": 1837.133900000481,
-                "physics_run_elapsed_ms": 1795.0285999977496,
+                "service_elapsed_ms": 1728.6638999939896,
+                "physics_run_elapsed_ms": 1690.881199989235,
                 "cache_key": "bb2a79a9b3248e5ab3cf9868486a081785cbed63f6ba90eef7599b046d55c75a",
                 "backend_mode": "isolated_process",
                 "realtime_fresh_physics_claim": false,
@@ -7138,8 +7138,8 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "state_resolution_elapsed_ms": 0.7680999988224357,
-                "state_update_elapsed_ms": 1837.9722000099719
+                "state_resolution_elapsed_ms": 0.7236000092234462,
+                "state_update_elapsed_ms": 1729.4416000077035
               },
               "equipment_release_path": {
                 "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
@@ -7232,7 +7232,7 @@
                 "data_age_s": 18560.0,
                 "frame_digest": "cb866029272bd9105c01f3a6b78770d0ad4555db92f75f855253761e488e4519",
                 "mapping_digest": "0fd49baebaa7fb5958f5e6b6154dd65f3a8a55b3196217814ed7446ef289080e",
-                "data_age_at_output_s": 18561.838065599994,
+                "data_age_at_output_s": 18561.729533900012,
                 "equipment_release_resolved": true,
                 "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
                 "state_snapshot_digest": "73a6c0adab300125b56eac2b880dff2c577742af5b52f493232183879a36855c",
@@ -7245,7 +7245,7 @@
                 "deadline_s": 180.0,
                 "deadline_status": "MET",
                 "deadline_met": true,
-                "service_elapsed_s": 1.8380655999935698,
+                "service_elapsed_s": 1.7295339000120293,
                 "source_interval_s": null,
                 "fresh_physics_this_update": true,
                 "exact_cache_hit": false,
@@ -7267,10 +7267,10 @@
                   "release_inference": false,
                   "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
                 },
-                "update_elapsed_s": 1.8380655999935698,
-                "normalization_elapsed_s": 6.839999696239829e-05,
-                "state_resolution_elapsed_s": 0.0007680999988224357,
-                "consequence_service_elapsed_s": 1.837133900000481,
+                "update_elapsed_s": 1.7295339000120293,
+                "normalization_elapsed_s": 6.430002395063639e-05,
+                "state_resolution_elapsed_s": 0.0007236000092234462,
+                "consequence_service_elapsed_s": 1.7286638999939896,
                 "timing_scope": "normalization + equipment release resolution + consequence service + result assembly"
               }
             },
@@ -7551,6 +7551,50 @@
     "branch_results_auto_merged": false,
     "conditional_expected_death_fn_calculated": true
   },
+  "conditional_current_weather_frequency_uncertainty": {
+    "schema_version": "prism.header_bound_frequency_uncertainty.v1",
+    "status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+    "risk_atom_count": 3,
+    "frequency_bound_scenario_count": 1,
+    "frequency_unbound_scenario_count": 2,
+    "frequency_bound_scenario_ids": [
+      "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+    ],
+    "frequency_unbound_scenario_ids": [
+      "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+    ],
+    "complete": false,
+    "current_weather_annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "bounded_current_weather_ir_low_high": {
+      "p05": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "published": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "p95": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "frequency_inference_performed": false,
+    "missing_bounds_imputed": false,
+    "interpretation": "p05/published/p95 values are summed only for branches whose provider frequency binding exposes all three explicit bounds; branches without bounds remain visible and are not assigned an assumed interval"
+  },
   "input_evidence": {
     "runtime_frames": "results\\20261017\\inspection_center_header_bound_runtime_frames_current.json",
     "observed_hazop_runtime_audit": "results\\20261017\\inspection_center_header_bound_hazop_runtime_current.json",
@@ -7792,8 +7836,12 @@
       "reason": "explicit receptor population was multiplied by the reviewed literature frequency and current-weather consequence harm; full-facility F/N remains withheld"
     },
     "conditional_current_weather_expected_death_fn_available": true,
+    "frequency_uncertainty_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+    "frequency_uncertainty_complete": false,
+    "frequency_bound_scenario_count": 1,
+    "frequency_unbound_scenario_count": 2,
     "diagnostic_only": true,
-    "wall_elapsed_ms": 12212.423599994509,
+    "wall_elapsed_ms": 11917.880600027274,
     "measurement_policy": "diagnostic synchronous wall-clock timing for this batch; not a fresh-physics 1 Hz guarantee"
   },
   "interpretation": "Explicit header-bound state frames for all declared components entered one facility HAZOP runtime batch. Each selected mode/scenario retained its own provider component, port, release history, SLABx-LH2 consequence and literature frequency binding. The output is a current-weather diagnostic view; model-prediction packets, missing qualification and physical validation keep annual facility IR/F-N promotion withheld."

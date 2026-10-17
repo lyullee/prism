@@ -1,7 +1,8 @@
 {
-  "schema_version": "prism.header_bound_facility_bridge_summary.v2",
+  "schema_version": "prism.header_bound_facility_bridge_summary.v3",
   "source_record": "results/20261017/header_bound_facility_bridge_current.json",
   "provider_binding_record": "results\\20261017\\inspection_center_header_bound_provider_binding_current.json",
+  "population_binding": null,
   "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
   "facility_id": "generic-outdoor-lh2-diagnostic",
   "component_count": 3,
@@ -17,8 +18,59 @@
   "physical_validation_claim": false,
   "frequency_inference_performed": false,
   "sensor_frequency_learning_used": false,
+  "population_binding_supplied": false,
+  "conditional_current_weather_expected_death_fn": {
+    "status": "WITHHELD_MISSING_POPULATION_LEDGER",
+    "expected_death_fn_low_high": null,
+    "frequency_sensitivity_expected_death_fn_low_high": null,
+    "reason": "explicit receptor population ledger was not supplied"
+  },
+  "frequency_uncertainty": {
+    "schema_version": "prism.header_bound_frequency_uncertainty.v1",
+    "status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+    "risk_atom_count": 3,
+    "frequency_bound_scenario_count": 1,
+    "frequency_unbound_scenario_count": 2,
+    "frequency_bound_scenario_ids": [
+      "inspection-intake-receiving-high-pressure:receiving:vessel_hole"
+    ],
+    "frequency_unbound_scenario_ids": [
+      "inspection-storage-standby-vent-pressure:standby:vent_hole",
+      "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+    ],
+    "complete": false,
+    "current_weather_annual_ir_low_high": {
+      "worker-01": [
+        0.0,
+        0.0
+      ]
+    },
+    "bounded_current_weather_ir_low_high": {
+      "p05": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "published": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "p95": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "frequency_inference_performed": false,
+    "missing_bounds_imputed": false,
+    "interpretation": "p05/published/p95 values are summed only for branches whose provider frequency binding exposes all three explicit bounds; branches without bounds remain visible and are not assigned an assumed interval"
+  },
   "diagnostic_only": true,
-  "wall_elapsed_ms": 11396.32430000347,
+  "wall_elapsed_ms": 11975.336000003153,
   "rows": [
     {
       "observed_component_id": "lh2-intake-tank",
@@ -37,7 +89,7 @@
       "isolation_status": "ISOLATION_SUCCESS_DECLARED",
       "mass_status": "MASS_BALANCE_CLOSED",
       "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "slabx_service_elapsed_ms": 5108.748099999502,
+      "slabx_service_elapsed_ms": 5798.416400008136,
       "realtime_deadline_status": "MET",
       "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
       "conditional_current_weather_ir": {
@@ -66,7 +118,7 @@
       "isolation_status": "EMERGENCY_RELIEF_TERMINATION",
       "mass_status": "MASS_BALANCE_CLOSED",
       "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "slabx_service_elapsed_ms": 4607.965300005162,
+      "slabx_service_elapsed_ms": 4411.9295999989845,
       "realtime_deadline_status": "MET",
       "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
       "conditional_current_weather_ir": {
@@ -95,7 +147,7 @@
       "isolation_status": "ISOLATION_SUCCESS_DECLARED",
       "mass_status": "MASS_BALANCE_CLOSED",
       "consequence_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "slabx_service_elapsed_ms": 1638.2671000028495,
+      "slabx_service_elapsed_ms": 1720.2527999761514,
       "realtime_deadline_status": "MET",
       "risk_status": "AVAILABLE_CURRENT_WEATHER_IR",
       "conditional_current_weather_ir": {
@@ -108,5 +160,5 @@
       "frequency_is_not_inferred": true
     }
   ],
-  "interpretation": "Fresh observed-state -> explicit operating mode -> HAZOP -> provider release -> SLABx-LH2 consequence -> literature frequency binding was replayed for three equipment branches. All branches are diagnostic because the provider input origin is model_prediction and provider qualification, independent physical validation, and complete facility boundary evidence remain open. The result must not be promoted to annual facility IR/F-N."
+  "interpretation": "Fresh observed-state -> explicit operating mode -> HAZOP -> provider release -> SLABx-LH2 consequence -> literature frequency binding was replayed for three equipment branches. Frequency uncertainty is partial because only one of three literature events supplies p05/p95 bounds; no interval was imputed. The output remains diagnostic and must not be promoted to annual facility IR/F-N."
 }

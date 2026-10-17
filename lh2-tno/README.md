@@ -118,6 +118,13 @@ produces a conditional IR/F-N view across three literature-frequency
 scenarios. Facility-wide QRA promotion remains closed until the missing
 provider, release-boundary, physical-validation and scope evidence is supplied.
 
+The smaller current header-bound replay is documented in the
+[current header-bound bridge record](docs/PRISM_header_bound_current_bridge_20261017.md).
+Its summary exposes frequency-uncertainty coverage per selected event: the
+current diagnostic has one explicit p05/published/p95 binding and two branches
+whose bounds are still missing. PRISM keeps those two gaps visible and does not
+impute an interval or infer a frequency from monitoring signals.
+
 The current 24-event native full-scope replay is stored under
 `results/20261115/native_external_facility_full_scope_campaign_current/`. It
 retains 24 exact packet matches, 96 conditional risk atoms, and 11

@@ -6051,7 +6051,7 @@
   "inspection_center_header_bound_facility_bridge_current_physical_validation_claim": false,
   "inspection_center_header_bound_facility_bridge_current_frequency_inference_performed": false,
   "inspection_center_header_bound_facility_bridge_current_sensor_frequency_learning_used": false,
-  "inspection_center_header_bound_facility_bridge_current_wall_elapsed_ms": 11396.32430000347,
+  "inspection_center_header_bound_facility_bridge_current_wall_elapsed_ms": 11975.336000003153,
   "inspection_center_header_bound_facility_bridge_current_promotion_allowed": false,
   "inspection_center_header_bound_facility_bridge_current_promotion_reason": "model_prediction provider origin, provider qualification and independent physical validation remain open; facility IR/F-N withheld",
   "inspection_center_header_bound_provider_binding_current_record": "results/20261017/inspection_center_header_bound_provider_binding_current.json",
@@ -6068,5 +6068,21 @@
   "inspection_center_header_bound_facility_bridge_population_qualification_status": "DIAGNOSTIC_SYNTHETIC_POPULATION",
   "inspection_center_header_bound_facility_bridge_population_promotion_allowed": false,
   "inspection_center_header_bound_facility_bridge_population_promotion_reason": "synthetic worker receptor only; site occupancy and complete facility QRA evidence remain open",
-  "inspection_center_header_bound_facility_bridge_population_bound_wall_elapsed_ms": 12212.423599994509
+  "inspection_center_header_bound_facility_bridge_population_bound_wall_elapsed_ms": 11917.880600027274,
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_record": "results/20261017/header_bound_facility_bridge_current_summary.json",
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+  "inspection_center_header_bound_facility_bridge_frequency_uncertainty_complete": false,
+  "inspection_center_header_bound_facility_bridge_frequency_bound_scenario_count": 1,
+  "inspection_center_header_bound_facility_bridge_frequency_unbound_scenario_count": 2,
+  "inspection_center_header_bound_facility_bridge_frequency_unbound_scenario_ids": [
+    "inspection-storage-standby-vent-pressure:standby:vent_hole",
+    "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole"
+  ],
+  "inspection_center_header_bound_facility_bridge_frequency_bounds_imputed": false,
+  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_record": "results/20261017/header_bound_facility_bridge_current_population_diagnostic_summary.json",
+  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_status": "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY",
+  "inspection_center_header_bound_facility_bridge_population_frequency_uncertainty_complete": false,
+  "inspection_center_header_bound_facility_bridge_population_frequency_bound_scenario_count": 1,
+  "inspection_center_header_bound_facility_bridge_population_frequency_unbound_scenario_count": 2,
+  "inspection_center_header_bound_facility_bridge_population_frequency_bounds_imputed": false
 }

@@ -106,6 +106,99 @@ def _frame_index(runtime_frames: Mapping[str, Any]) -> dict[str, Mapping[str, An
     return result
 
 
+def _aggregate_frequency_uncertainty(
+    components: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Aggregate explicit current-weather IR bounds without imputing missing bounds.
+
+    The provider consequence already carries p05/published/p95 IR maps when the
+    literature catalogue supplies marginal frequency bounds.  This helper sums
+    only those explicit maps and reports the scenario IDs that have no bounds.
+    It never substitutes a default interval or treats a missing interval as
+    zero uncertainty.
+    """
+    scenarios: list[tuple[str, Mapping[str, Any]]] = []
+    published_totals: dict[str, list[float]] = {}
+    bounded_totals: dict[str, dict[str, list[float]]] = {
+        "p05": {},
+        "published": {},
+        "p95": {},
+    }
+    bounded_ids: list[str] = []
+    missing_ids: list[str] = []
+    for component_id, component in sorted(components.items()):
+        if not isinstance(component, Mapping):
+            continue
+        for branch in component.get("branches", ()):
+            if not isinstance(branch, Mapping):
+                continue
+            scenario_id = str(branch.get("scenario_id") or "")
+            risk = branch.get("risk")
+            if not scenario_id or not isinstance(risk, Mapping):
+                continue
+            if risk.get("status") != "AVAILABLE_CURRENT_WEATHER_IR":
+                continue
+            scenarios.append((scenario_id, risk))
+            annual_ir = risk.get("annual_ir_low_high")
+            if isinstance(annual_ir, Mapping):
+                for receptor_id, endpoints in annual_ir.items():
+                    if (
+                        isinstance(endpoints, (list, tuple))
+                        and len(endpoints) == 2
+                    ):
+                        total = published_totals.setdefault(str(receptor_id), [0.0, 0.0])
+                        total[0] += float(endpoints[0])
+                        total[1] += float(endpoints[1])
+            sensitivity = risk.get("frequency_sensitivity_current_weather_ir_low_high")
+            if not isinstance(sensitivity, Mapping) or not all(
+                isinstance(sensitivity.get(key), Mapping)
+                for key in ("p05", "published", "p95")
+            ):
+                missing_ids.append(scenario_id)
+                continue
+            bounded_ids.append(scenario_id)
+            for scenario_name in ("p05", "published", "p95"):
+                scenario_ir = sensitivity[scenario_name]
+                for receptor_id, endpoints in scenario_ir.items():
+                    if (
+                        isinstance(endpoints, (list, tuple))
+                        and len(endpoints) == 2
+                    ):
+                        total = bounded_totals[scenario_name].setdefault(
+                            str(receptor_id), [0.0, 0.0]
+                        )
+                        total[0] += float(endpoints[0])
+                        total[1] += float(endpoints[1])
+    complete = bool(scenarios) and not missing_ids and len(bounded_ids) == len(scenarios)
+    return {
+        "schema_version": "prism.header_bound_frequency_uncertainty.v1",
+        "status": (
+            "COMPLETE_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY"
+            if complete
+            else "PARTIAL_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY"
+            if bounded_ids
+            else "WITHHELD_CURRENT_WEATHER_FREQUENCY_UNCERTAINTY"
+        ),
+        "risk_atom_count": len(scenarios),
+        "frequency_bound_scenario_count": len(bounded_ids),
+        "frequency_unbound_scenario_count": len(missing_ids),
+        "frequency_bound_scenario_ids": bounded_ids,
+        "frequency_unbound_scenario_ids": missing_ids,
+        "complete": complete,
+        "current_weather_annual_ir_low_high": published_totals or None,
+        "bounded_current_weather_ir_low_high": (
+            bounded_totals if bounded_ids else None
+        ),
+        "frequency_inference_performed": False,
+        "missing_bounds_imputed": False,
+        "interpretation": (
+            "p05/published/p95 values are summed only for branches whose provider "
+            "frequency binding exposes all three explicit bounds; branches without "
+            "bounds remain visible and are not assigned an assumed interval"
+        ),
+    }
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     started = time.perf_counter()
     runtime_frames_record = _object(args.runtime_frames)
@@ -263,6 +356,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         mapping_digest=canonical_digest(binding_audit),
         population_binding=population_binding,
     )
+    frequency_uncertainty = _aggregate_frequency_uncertainty(
+        result.get("components", {})
+    )
+    result["conditional_current_weather_frequency_uncertainty"] = frequency_uncertainty
     elapsed_ms = (time.perf_counter() - started) * 1000.0
     component_rows = result.get("components", {})
     selected_count = sum(
@@ -352,6 +449,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     "status"
                 ) == "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
             ),
+            "frequency_uncertainty_status": frequency_uncertainty["status"],
+            "frequency_uncertainty_complete": frequency_uncertainty["complete"],
+            "frequency_bound_scenario_count": frequency_uncertainty[
+                "frequency_bound_scenario_count"
+            ],
+            "frequency_unbound_scenario_count": frequency_uncertainty[
+                "frequency_unbound_scenario_count"
+            ],
             "diagnostic_only": True,
             "wall_elapsed_ms": elapsed_ms,
             "measurement_policy": (
