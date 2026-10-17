@@ -29,6 +29,7 @@ from lh2_tno.provider_release import (
     provider_release_resolver_from_provider,
     provider_release_set_resolver_from_packet,
 )
+from lh2_tno.state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot
 
 
 def _release() -> ResolvedGasRelease:
@@ -201,6 +202,28 @@ def test_provider_release_catalog_and_request_adapter_preserve_context(tmp_path)
     assert request.resolved_release.duration_s == 0.2
     assert request.source_input is None
     assert request.annual_frequency_per_year is None
+
+
+def test_provider_request_rejects_state_inventory_mismatch():
+    defaults = _defaults()
+    snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="storage-tank-01",
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=200000.0,
+        temperature_k=22.0,
+        mass_kg=2.0,
+    )
+    digest = snapshot.digest()
+    defaults.update(
+        state_snapshot=snapshot.model_dump(mode="json"),
+        state_snapshot_digest=digest,
+        provider_state_snapshot_digest=digest,
+        provider_state_snapshot_digests=[digest],
+    )
+    with pytest.raises(ProviderReleaseContractError, match="state snapshot mass"):
+        build_consequence_request_from_provider_release(_release(), defaults)
 
 
 def test_provider_resolved_pool_footprint_is_digest_bound_and_consumed():

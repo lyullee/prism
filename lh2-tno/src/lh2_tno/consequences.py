@@ -195,6 +195,25 @@ class ConsequenceRequest(Contract):
         release=self.resolved_release
         release_set=self.resolved_release_set
         liquid_release=self.resolved_liquid_release
+        # When a snapshot carries an inventory, it must describe the same
+        # equipment boundary as the provider release packet.  Reject stale or
+        # unit-mismatched snapshots before any consequence calculation rather
+        # than silently choosing one inventory value.
+        if self.state_snapshot is not None and self.state_snapshot.mass_kg is not None:
+            provider_inventory = None
+            if release is not None:
+                provider_inventory = release.available_mass_kg
+            elif release_set is not None:
+                provider_inventory = release_set.available_mass_kg
+            elif liquid_release is not None:
+                provider_inventory = liquid_release.available_mass_kg
+            if provider_inventory is not None and not math.isclose(
+                float(self.state_snapshot.mass_kg),
+                float(provider_inventory),
+                rel_tol=1.0e-9,
+                abs_tol=1.0e-12,
+            ):
+                raise ValueError('state snapshot mass and provider initial inventory disagree')
         if release_set is not None:
             source=resolved_source_context(release_set.releases[0],self.weather)
         elif liquid_release is not None:

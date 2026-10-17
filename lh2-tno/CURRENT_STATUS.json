@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1524 passed, 1 warning",
+  "latest_local_full_test_run": "1525 passed, 1 warning",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -6266,7 +6266,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "Actions run 1401 success; commit c8ec1cf2 validated; current local full suite 1524 passed, 1 warning; external lh2dt suite 377 passed, 1 warning",
+  "latest_ci_validation": "Local full suite 1525 passed, 1 warning after runtime inventory gate; remote Actions validation pending for the next commit; external lh2dt suite 377 passed, 1 warning",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
@@ -6477,5 +6477,11 @@
   "ci_recheck_20261018_status": "PASS; GitHub Actions run 1401 completed successfully for numeric state-to-release mass audit; no CI failure remains",
   "ci_recheck_20261018_record": "https://github.com/lyullee/prism/actions/runs/39076616325",
   "ijhe_completion_audit_latest_recheck_20261018_state_release_mass_consistency_status": "MASS_STATE_CONSISTENCY_REVIEW_REQUIRED; 44 cases, 8 comparable, 7 matched, 1 mismatch, 36 not comparable; promotion false",
-  "ijhe_completion_audit_latest_recheck_20261018_state_release_mass_consistency_record": "examples/state_release_mass_consistency_audit_20261018.json"
+  "ijhe_completion_audit_latest_recheck_20261018_state_release_mass_consistency_record": "examples/state_release_mass_consistency_audit_20261018.json",
+  "state_release_mass_consistency_runtime_gate_implemented": true,
+  "state_release_mass_consistency_runtime_gate_module": "src/lh2_tno/consequences.py::ConsequenceRequest.valid",
+  "state_release_mass_consistency_runtime_gate_policy": "When both values are present, state snapshot mass must match provider initial/available inventory within rel_tol=1e-9 and abs_tol=1e-12; mismatch rejects the request before consequence evaluation; no correction or QRA promotion.",
+  "state_release_mass_consistency_runtime_gate_current_mismatch_count": 1,
+  "state_release_mass_consistency_runtime_gate_promotion_allowed": false,
+  "state_release_mass_consistency_runtime_gate_test": "test_provider_request_rejects_state_inventory_mismatch"
 }
