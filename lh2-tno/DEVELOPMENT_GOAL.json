@@ -295,7 +295,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1442 passed, 1 warning",
+  "latest_local_full_test_run": "1448 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -4543,10 +4543,10 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
     "workflow": "Python contracts and numerical checks",
-    "run_number": 1338,
+    "run_number": 1339,
     "status": "success",
-    "commit": "d45f27cf",
-    "url": "https://github.com/lyullee/prism/actions/runs/39035804290"
+    "commit": "d02b279d",
+    "url": "https://github.com/lyullee/prism/actions/runs/39036183037"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "F05636F7ECBCE2B5856F86AD210FEF545ADE17DD0366BC7DF2CC737D09B222F6",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
