@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,477 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,496 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -1025,7 +1025,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 - [GitHub Release v0.6.3](https://github.com/lyullee/prism/releases/tag/v0.6.3)
 - [PyPI prism-risk 0.6.3](https://pypi.org/project/prism-risk/0.6.3/)
-- [Reserved Zenodo v0.6.3 DOI](https://doi.org/10.5281/zenodo.23387052) (resolves after final publication)
+- [Zenodo v0.6.3 publication status](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md) (version DOI pending publication)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
 - [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/38689574587)
 
@@ -1058,9 +1058,12 @@ python scripts/audit_partial_lh2_boundary_evidence.py `
 
 ## License and citation
 
-PRISM is released under the MIT License. Please cite the version DOI after the Zenodo draft is finally published:
+PRISM is released under the MIT License. Cite the concept DOI until the version-specific v0.6.3 Zenodo record is published:
 
 ```text
 Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.3.
-Reserved DOI: https://doi.org/10.5281/zenodo.23387052
+Concept DOI: https://doi.org/10.5281/zenodo.23241358
 ```
+
+
+
