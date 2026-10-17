@@ -4548,7 +4548,7 @@
     "commit": "8032dd6f8484c61f9526aa89d070d38fb366b43e",
     "url": "https://github.com/lyullee/prism/actions/runs/39042851848"
   },
-  "current_union_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
+  "current_union_ijhe_objective_coverage_audit_sha256": "dc07fe8bc3fbcd98974e8ed4c00b9afb17ed8fa82123c6f33f7e02287746e251",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
   "actual_ffi_high_resolution_recheck_status": "ACTUAL_FFI_SOURCE_NUMERICAL_GATE_OPEN; 5120->10240 relative changes remain 9.070% H2 concentration, 3.757% centre height, 2.232% cloud depth, 0.132% temperature, 1.843% MAE and 0.198% RMSE; worst quantity H2_vol_pct_at_30_m",
   "actual_ffi_high_resolution_recheck_levels": [
@@ -4805,8 +4805,8 @@
   "validation_evidence_matrix_with_preslhy_reverified_latest_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/validation_evidence_matrix_with_preslhy_reverified.json",
   "validation_evidence_matrix_with_preslhy_reverified_status": "RESTRICTED_EVIDENCE_MATRIX; 11 domains; FACILITY_QRA_WITHHELD; physical validation false",
   "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
-  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 37 checks; core blockers 0; strict blockers 4; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
-  "latest_ijhe_objective_coverage_audit_check_count": 37,
+  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 38 checks; native external-base recheck diagnostic; core blockers 0; strict blockers 4; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
+  "latest_ijhe_objective_coverage_audit_check_count": 38,
   "latest_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "latest_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
@@ -4833,11 +4833,11 @@
   "facility_provider_intake_audit_template_entry_count": 44,
   "facility_provider_intake_audit_aligned_entry_count": 44,
   "facility_provider_intake_audit_blocking_reason_count": 0,
-  "latest_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
+  "latest_ijhe_objective_coverage_audit_sha256": "dc07fe8bc3fbcd98974e8ed4c00b9afb17ed8fa82123c6f33f7e02287746e251",
   "ijhe_completion_audit_latest_verification_after_provider_intake_record": "results/20261115/latest_ijhe_audit_verification_after_provider_intake.json",
   "ijhe_completion_audit_latest_verification_after_provider_intake_status": "PASS",
   "ijhe_completion_audit_latest_verification_after_provider_intake_blocking_reason_count": 0,
-  "current_union_ijhe_objective_coverage_audit_check_count": 37,
+  "current_union_ijhe_objective_coverage_audit_check_count": 38,
   "header_bound_facility_bridge_objective_audit_check_id": "diagnostic_header_bound_monitoring_to_consequence_bridge",
   "header_bound_facility_bridge_objective_audit_status": "PASS; 3/3 equipment branches executed from explicit state and operating mode through HAZOP, provider release, SLABx-LH2 consequence and conditional risk; diagnostic-only",
   "header_bound_facility_bridge_objective_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
@@ -4863,5 +4863,7 @@
   "latest_native_external_base_recheck_facility_qra_claim": false,
   "latest_native_external_base_recheck_authoritative_union_replaced": false,
   "latest_native_external_base_recheck_reason": "Candidate provider result digests differ from the authoritative union and base state-snapshot binding was not requalified; retain as diagnostic evidence only.",
-  "latest_native_external_base_recheck_verification_sha256": "8c1f484e25d0852cd3e4618bf67c5920e3371bdbfac00dee65239fd66b71ca53"
+  "latest_native_external_base_recheck_verification_sha256": "8c1f484e25d0852cd3e4618bf67c5920e3371bdbfac00dee65239fd66b71ca53",
+  "latest_native_external_base_recheck_summary": "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/native_external_base_recheck_summary.json",
+  "latest_native_external_base_recheck_summary_status": "DIAGNOSTIC_CANDIDATE; 34 events, 44 cases, 176 risk atoms; 23 EXECUTED, 21 EXECUTED_OPERATOR_LIMITED; authoritative union unchanged"
 }

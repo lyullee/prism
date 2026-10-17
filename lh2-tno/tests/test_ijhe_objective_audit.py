@@ -1410,3 +1410,31 @@ def test_objective_audit_records_open_inventory_termination_margin_without_subst
     assert check["status"] == "PASS"
     assert check["observed"]["depleted_case_count"] == 0
     assert report["strict_facility_qra_claim"] is False
+
+
+def test_objective_audit_records_external_base_recheck_without_replacing_union():
+    inputs = _inputs()
+    inputs["native_external_base_recheck"] = {
+        "schema_version": "prism.native_external_base_recheck.v1",
+        "status": "DIAGNOSTIC_CANDIDATE",
+        "event_count": 34,
+        "case_count": 44,
+        "risk_atom_count": 176,
+        "candidate_status_counts": {"EXECUTED": 23, "EXECUTED_OPERATOR_LIMITED": 21},
+        "authoritative_status_counts": {"EXECUTED": 15, "EXECUTED_OPERATOR_LIMITED": 29},
+        "new_reclassification_candidate_count": 9,
+        "qualified_provider_packet_case_count": 0,
+        "authoritative_union_replaced": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "_record_path": "native-external-base-recheck.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_native_external_base_recheck"
+    )
+    assert check["status"] == "CONDITIONALLY_COMPLETE"
+    assert check["observed"]["new_reclassification_candidate_count"] == 9
+    assert check["observed"]["authoritative_union_replaced"] is False
+    assert report["strict_facility_qra_claim"] is False

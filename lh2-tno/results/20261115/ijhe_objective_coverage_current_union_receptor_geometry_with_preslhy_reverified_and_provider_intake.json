@@ -1115,6 +1115,42 @@
       },
       "blocking_reason": null,
       "interpretation": "worklist PASS는 44개 case의 제출 요구사항이 정합하다는 뜻이다. 실제 qualified provider packet이나 시설 IR/F-N 승격을 의미하지 않는다."
+    },
+    {
+      "id": "diagnostic_native_external_base_recheck",
+      "requirement": "A newer external-base full-scope replay must be compared with the authoritative union without silently replacing the release-level ledger or promoting facility QRA.",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/native_external_base_recheck_summary.json"
+      ],
+      "observed": {
+        "schema_version": "prism.native_external_base_recheck.v1",
+        "status": "DIAGNOSTIC_CANDIDATE",
+        "event_count": 34,
+        "case_count": 44,
+        "risk_atom_count": 176,
+        "candidate_status_counts": {
+          "EXECUTED": 23,
+          "EXECUTED_OPERATOR_LIMITED": 21
+        },
+        "authoritative_status_counts": {
+          "EXECUTED": 15,
+          "EXECUTED_OPERATOR_LIMITED": 29
+        },
+        "new_reclassification_candidate_count": 9,
+        "qualified_provider_packet_case_count": 0,
+        "authoritative_union_replaced": false,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false,
+        "conditional_annual_ir_low_high": {
+          "worker-01": [
+            3.7804000000730242e-06,
+            3.780422204259991e-06
+          ]
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "The newer external-base replay provides a reproducible diagnostic comparison and reduces operator-limited cases from 29 to 21 in the candidate ledger, but differing provider result digests and unrequalified base state snapshots keep the authoritative union unchanged. No provider qualification, independent physical validation, frequency inference, or facility-QRA promotion is claimed."
     }
   ],
   "core_chain_check_ids": [

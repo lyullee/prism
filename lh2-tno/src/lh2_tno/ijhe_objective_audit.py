@@ -79,6 +79,7 @@ def build_ijhe_objective_coverage_audit(
     external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_provider_intake_audit: Mapping[str, Any] | None = None,
     facility_evidence_worklist: Mapping[str, Any] | None = None,
+    native_external_base_recheck: Mapping[str, Any] | None = None,
     header_bound_facility_bridge: Mapping[str, Any] | None = None,
     generic_diagnostic_quantitative_evaluation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -144,6 +145,9 @@ def build_ijhe_objective_coverage_audit(
     )
     facility_evidence_worklist_path = _record_path(
         facility_evidence_worklist, None
+    )
+    native_external_base_recheck_path = _record_path(
+        native_external_base_recheck, None
     )
     header_bound_facility_bridge_path = _record_path(
         header_bound_facility_bridge, None
@@ -2701,6 +2705,55 @@ def build_ijhe_objective_coverage_audit(
                 "worklist PASS는 44개 case의 제출 요구사항이 정합하다는 뜻이다. "
                 "실제 qualified provider packet이나 시설 IR/F-N 승격을 의미하지 않는다."
             ),
+        ))
+
+    if native_external_base_recheck is not None:
+        candidate_counts = (
+            native_external_base_recheck.get("candidate_status_counts", {})
+            if isinstance(native_external_base_recheck, Mapping)
+            else {}
+        )
+        authoritative_counts = (
+            native_external_base_recheck.get("authoritative_status_counts", {})
+            if isinstance(native_external_base_recheck, Mapping)
+            else {}
+        )
+        candidate_ok = (
+            isinstance(native_external_base_recheck, Mapping)
+            and native_external_base_recheck.get("schema_version")
+            == "prism.native_external_base_recheck.v1"
+            and native_external_base_recheck.get("status")
+            == "DIAGNOSTIC_CANDIDATE"
+            and _int(native_external_base_recheck.get("event_count")) == 34
+            and _int(native_external_base_recheck.get("case_count")) == 44
+            and _int(native_external_base_recheck.get("risk_atom_count")) == 176
+            and isinstance(candidate_counts, Mapping)
+            and candidate_counts.get("EXECUTED") == 23
+            and candidate_counts.get("EXECUTED_OPERATOR_LIMITED") == 21
+            and isinstance(authoritative_counts, Mapping)
+            and authoritative_counts.get("EXECUTED") == 15
+            and authoritative_counts.get("EXECUTED_OPERATOR_LIMITED") == 29
+            and _int(native_external_base_recheck.get("new_reclassification_candidate_count")) == 9
+            and _int(native_external_base_recheck.get("qualified_provider_packet_case_count")) == 0
+            and native_external_base_recheck.get("authoritative_union_replaced") is False
+            and native_external_base_recheck.get("facility_qra_claim") is False
+            and native_external_base_recheck.get("physical_validation_claim") is False
+        )
+        rows.append(_row(
+            "diagnostic_native_external_base_recheck",
+            "최신 외부 설비 방출 종료 근거 후보를 기존 시설 union과 비교하되 권위 원장과 QRA 승격을 분리해야 한다",
+            "CONDITIONALLY_COMPLETE" if candidate_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(native_external_base_recheck_path,),
+            observed={
+                "candidate_status_counts": dict(candidate_counts) if isinstance(candidate_counts, Mapping) else None,
+                "authoritative_status_counts": dict(authoritative_counts) if isinstance(authoritative_counts, Mapping) else None,
+                "new_reclassification_candidate_count": native_external_base_recheck.get("new_reclassification_candidate_count") if isinstance(native_external_base_recheck, Mapping) else None,
+                "qualified_provider_packet_case_count": native_external_base_recheck.get("qualified_provider_packet_case_count") if isinstance(native_external_base_recheck, Mapping) else None,
+                "authoritative_union_replaced": native_external_base_recheck.get("authoritative_union_replaced") if isinstance(native_external_base_recheck, Mapping) else None,
+                "facility_qra_claim": native_external_base_recheck.get("facility_qra_claim") if isinstance(native_external_base_recheck, Mapping) else None,
+            },
+            blocking_reason=None if candidate_ok else "외부 provider 종료 후보 재검증 원장이 없거나 diagnostic-only 승격 경계를 만족하지 않는다",
+            interpretation="최신 provider campaign은 EXECUTED 23건과 operator-limited 21건을 진단적으로 보여주지만, digest·state snapshot·qualification 검토가 끝나기 전에는 기존 union을 대체하지 않고 시설 QRA를 승격하지 않는다.",
         ))
 
     # The header-bound bridge is the executable monitoring-path demonstration:

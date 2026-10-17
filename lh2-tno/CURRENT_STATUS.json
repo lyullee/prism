@@ -5500,7 +5500,7 @@
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
   "latest_local_full_test_run_commit": "8032dd6f",
-  "current_union_ijhe_objective_coverage_audit_check_count": 37,
+  "current_union_ijhe_objective_coverage_audit_check_count": 38,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
@@ -5508,11 +5508,11 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "current_union_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
+  "current_union_ijhe_objective_coverage_audit_sha256": "dc07fe8bc3fbcd98974e8ed4c00b9afb17ed8fa82123c6f33f7e02287746e251",
   "current_union_ijhe_objective_coverage_audit_realtime_status": "CONDITIONALLY_COMPLETE; cached_diagnostic_1hz meets benchmark, fresh_physics_background is explicitly not a 1 Hz claim",
   "latest_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
-  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 37 checks; core blockers 0; strict blockers 4; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
-  "latest_ijhe_objective_coverage_audit_check_count": 37,
+  "latest_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 38 checks; native external-base recheck diagnostic; core blockers 0; strict blockers 4; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
+  "latest_ijhe_objective_coverage_audit_check_count": 38,
   "latest_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "latest_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
     "independent_physical_validation",
@@ -5520,7 +5520,7 @@
     "strict_facility_scope",
     "strict_facility_qra"
   ],
-  "latest_ijhe_objective_coverage_audit_sha256": "1bdd6e0e43ba44a63941b064000e64df67dbf928e178f26eb7d779ca92e687cb",
+  "latest_ijhe_objective_coverage_audit_sha256": "dc07fe8bc3fbcd98974e8ed4c00b9afb17ed8fa82123c6f33f7e02287746e251",
   "conditional_facility_risk_interpretation_doc": "docs/PRISM_conditional_facility_risk_interpretation_20261115.md",
   "inventory_termination_margin_probe_record": "results/20261115/inventory_termination_margin_probe.json",
   "inventory_termination_margin_probe_doc": "docs/PRISM_inventory_termination_margin_20261115.md",
@@ -6304,5 +6304,7 @@
   "latest_native_external_base_recheck_facility_qra_claim": false,
   "latest_native_external_base_recheck_authoritative_union_replaced": false,
   "latest_native_external_base_recheck_reason": "Candidate provider result digests differ from the authoritative union and base state-snapshot binding was not requalified; retain as diagnostic evidence only.",
-  "latest_native_external_base_recheck_verification_sha256": "8c1f484e25d0852cd3e4618bf67c5920e3371bdbfac00dee65239fd66b71ca53"
+  "latest_native_external_base_recheck_verification_sha256": "8c1f484e25d0852cd3e4618bf67c5920e3371bdbfac00dee65239fd66b71ca53",
+  "latest_native_external_base_recheck_summary": "results/20261115/native_full_scope_union_assessment_external_base_recheck_current/native_external_base_recheck_summary.json",
+  "latest_native_external_base_recheck_summary_status": "DIAGNOSTIC_CANDIDATE; 34 events, 44 cases, 176 risk atoms; 23 EXECUTED, 21 EXECUTED_OPERATOR_LIMITED; authoritative union unchanged"
 }

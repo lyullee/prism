@@ -60,6 +60,7 @@ def main() -> int:
     parser.add_argument("--external-release-artifact-intake", type=Path)
     parser.add_argument("--facility-provider-intake-audit", type=Path)
     parser.add_argument("--facility-evidence-worklist", type=Path)
+    parser.add_argument("--native-external-base-recheck", type=Path)
     parser.add_argument("--header-bound-facility-bridge", type=Path)
     parser.add_argument("--generic-diagnostic-quantitative-evaluation", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -202,6 +203,11 @@ def main() -> int:
             facility_evidence_worklist=(
                 _object(args.facility_evidence_worklist)
                 if args.facility_evidence_worklist
+                else None
+            ),
+            native_external_base_recheck=(
+                _object(args.native_external_base_recheck)
+                if args.native_external_base_recheck
                 else None
             ),
             header_bound_facility_bridge=(
