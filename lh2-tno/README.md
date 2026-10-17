@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,365 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,371 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -578,6 +578,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [Equipment provider state handoff](docs/PRISM_equipment_provider_state_handoff_20261115.md)
 - [Current external release-artifact intake](docs/PRISM_external_release_artifact_intake_20261016.md)
 - [External release-response normalization](docs/PRISM_external_release_response_normalization_en.md)
+- [Restricted anonymized LH2 model-validation evidence](docs/PRISM_anonymized_model_validation_evidence_en.md)
+- [Anonymized model-validation summary](results/20261115/external_anonymized_model_validation_summary.json)
 - [Multi-root external provider audit (English)](docs/PRISM_external_provider_roots_audit_20261017_en.md)
 - [Multi-root external provider audit record](examples/provider_artifact_roots_recheck_20261017.json)
 - [Inspection-centre reviewed-unit re-audit](docs/PRISM_검사센터_검토단위_재감사_20261016.md)

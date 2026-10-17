@@ -60,6 +60,16 @@ cannot use atmospheric packet velocity as a substitute. Liquid/two-phase
 layered-tank, pipe, and pump exports are recorded as outside this optional gas
 handoff and are not silently recast as gas.
 
+An additional digest-bound record now captures restricted anonymized model
+validation from `sci_minimal_release_packet.json`. It reports blind, held-out
+validation for 3 independently scored units out of 12 declared units, with an
+observed-unit macro accuracy of 95.4155462264504 percent. The unscored units are
+not imputed and the full-unit target remains false. This is process-state model
+evidence only: it does not qualify an accident-release provider, supply a
+literature frequency, close facility IR/F-N, or establish independent
+end-to-end physical validation. The promotion boundary is recorded in
+[`external_anonymized_model_validation_summary.json`](../results/20261115/external_anonymized_model_validation_summary.json).
+
 The nine point-rate-only events retain their published point rate and are represented in the five-scenario sensitivity ledger. PRISM does not invent confidence intervals for them.
 
 ## Connected calculation path
@@ -114,7 +124,7 @@ python scripts/verify_latest_ijhe_audit.py `
 
 The current verification result is `PASS` with zero metadata-consistency blockers. This verifier confirms that the latest status pointers and gate counts agree; it does not promote provider qualification, physical validation, or facility IR/F-N.
 
-The current status ledger records **1,370 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
+The current status ledger records **1,371 passed and 1 warning** for the full local regression suite. The warning is a Python 3.14 deprecation warning from `pytest-asyncio` and is separate from a failing contract. Re-run the suite before publication because the stored count is provenance, not a substitute for a fresh run.
 
 The latest provider collection manifest is `examples/provider_packet_collection_manifest_current.json` (generated from the latest 2026-11-15 evidence request). It contains 44 exact case rows, all currently `OPEN`; it is an intake worksheet and contains no provider release or qualification result.
 
