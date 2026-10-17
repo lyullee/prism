@@ -4914,6 +4914,23 @@
   "native_dynamic_pipe_exact_area100_candidate_facility_qra_claim": false,
   "native_dynamic_pipe_exact_area100_candidate_physical_validation_claim": false,
   "native_dynamic_pipe_exact_area100_candidate_authoritative_campaign_rebound": false,
-  "native_dynamic_pipe_exact_area100_candidate_recheck_note": "Latest external provider replay matches the authoritative state snapshot and provider result digest; reduced grid executed 1 case/4 risk atoms. Full-grid attempt remained bounded by the 180 s backend deadline. SLABx-LH2 was not modified."
+  "native_dynamic_pipe_exact_area100_candidate_recheck_note": "Latest external provider replay matches the authoritative state snapshot and provider result digest; reduced grid executed 1 case/4 risk atoms. Full-grid attempt remained bounded by the 180 s backend deadline. SLABx-LH2 was not modified.",
+
+  "latest_native_external_multi_equipment_recheck_status": "PASS_DIAGNOSTIC_ONLY; latest lh2dt_models source exported 7 equipment packets and all 7 reached the PRISM consequence chain",
+  "latest_native_external_multi_equipment_recheck_record": "examples/native_external_multi_equipment_latest_recheck_20261018.json",
+  "latest_native_external_multi_equipment_recheck_script": "scripts/run_native_external_equipment_recheck.py and scripts/run_native_external_equipment_chain_recheck.py",
+  "latest_native_external_multi_equipment_recheck_external_commit": "7072374",
+  "latest_native_external_multi_equipment_recheck_external_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "latest_native_external_multi_equipment_recheck_provider_equipment_count": 7,
+  "latest_native_external_multi_equipment_recheck_chain_executed_count": 7,
+  "latest_native_external_multi_equipment_recheck_dynamic_state_closure_ready_count": 4,
+  "latest_native_external_multi_equipment_recheck_explicit_isolation_success_count": 4,
+  "latest_native_external_multi_equipment_recheck_synthetic_horizon_count": 2,
+  "latest_native_external_multi_equipment_recheck_operator_limited_chain_count": 1,
+  "latest_native_external_multi_equipment_recheck_runner_elapsed_ms": 88516.79149997653,
+  "latest_native_external_multi_equipment_recheck_frequency_inference": false,
+  "latest_native_external_multi_equipment_recheck_physical_validation_claim": false,
+  "latest_native_external_multi_equipment_recheck_facility_qra_claim": false,
+  "latest_native_external_multi_equipment_recheck_slabx_lh2_modified": false
 
 }

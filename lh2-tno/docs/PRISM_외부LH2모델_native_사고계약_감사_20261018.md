@@ -148,3 +148,11 @@ python scripts/audit_lh2dt_native_contract.py `
 재생성 packet은 PRISM strict release adapter를 통과한 뒤, 단일 사건 `RiskCampaign`에 연결했다. 축소 선언 감도 격자에서 1개 event·1개 case·4개 risk atom이 `DECLARED_SCOPE_EXECUTED`로 완료되었고, 이번 실행의 연결 처리시간은 약 `29.07 s`였다. 기록은 [machine-readable candidate](../examples/native_dynamic_pipe_exact_area100_reduced_grid_candidate_20261018.json), 실행기는 [`run_lh2dt_native_dynamic_pipe_exact_area100_candidate.py`](../scripts/run_lh2dt_native_dynamic_pipe_exact_area100_candidate.py)이다.
 
 이 결과는 최신 외부 provider가 동일 권위 상태를 재현하고 방출→PRISM release ledger→SLABx-LH2/풀→피해 risk atom 경로를 소비한다는 진단 증거다. 축소 격자, 합성 수용점·기상, qualification sidecar 부재 때문에 시설 전체 IR/F-N·QRA나 물리검증으로 승격하지 않는다. 대형 격자 재실행은 backend `180 s` 실행 한계에 도달했으므로 full-grid 처리시간으로 사용하지 않는다. 현재 권위 24-event campaign은 변경하거나 새 digest로 묵시적 재결합하지 않았고, SLABx-LH2 소스도 수정하지 않았다.
+
+## 2026-10-18 최신 7개 설비 모델의 방출→피해 chain 재검증
+
+외부 `lh2dt_models` 최신 커밋 `7072374`와 source digest `3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74`를 다시 읽어 탱크, 배관, 밸브, 펌프, 기화기, 재액화기, 벤트의 7개 packet을 생성했다. 각 packet은 PRISM strict adapter를 거쳐 실제 consequence runner에 전달되었고, 7/7 건이 `END_TO_END_DIAGNOSTIC_EXECUTED` chain에 도달했다. 결과 요약은 [latest seven-equipment recheck](../examples/native_external_multi_equipment_latest_recheck_20261018.json)이다.
+
+이번 실행에서 동적 상태 폐쇄가 명시적으로 `READY`인 설비는 탱크·배관·기화기·재액화기 4개였고, 명시적 격리 성공도 4개 packet에서 확인됐다. 펌프는 격리 종료 basis는 반환했지만 이 exporter 경로에서 별도 isolation-success echo가 없어 READY로 세지 않았다. 밸브와 벤트는 `synthetic_diagnostic_horizon`을 사용했으며, 밸브 compressible-plane chain은 provider handoff를 소비했지만 operator-limited로 남겼다. 전체 chain runner 시간은 약 `88.52 s`였다.
+
+이 재검증은 최신 설비 모델이 PRISM의 방출 지속시간·종료 basis·질량 잔차·동적 상태 폐쇄 정보를 피해영향 chain까지 전달하는 것을 확인한다. 이 실행에는 문헌 빈도를 적용하지 않았고, 설비 형상·수용점·기상·점화 조건은 진단용이다. 따라서 provider 적격성, 독립 물리검증, 시설 전체 IR/F-N/QRA를 열지 않으며, SLABx-LH2 소스는 수정하지 않았다.

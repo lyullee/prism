@@ -12,6 +12,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -106,6 +107,7 @@ def run(
         context=context,
     )
     chains: list[dict[str, Any]] = []
+    started = time.perf_counter()
     for name, command in commands.items():
         completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
         result_dir = output_root / ("valve_compressible" if name == "valve_compressible" else name)
@@ -147,6 +149,7 @@ def run(
         "schema_version": "prism.native_external_multi_equipment_chain_recheck.v1",
         "status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_CHAIN_EXECUTED_DIAGNOSTIC",
         "chain_count": len(chains),
+        "runner_elapsed_ms": (time.perf_counter() - started) * 1000.0,
         "chains": chains,
         "provider_packet_promoted_count": sum(bool(row.get("provider_packet_promoted")) for row in chains),
         "physical_validation_claim": False,
@@ -187,6 +190,7 @@ def main() -> int:
     print(json.dumps({
         "status": manifest["status"],
         "chain_count": manifest["chain_count"],
+        "runner_elapsed_ms": manifest["runner_elapsed_ms"],
         "provider_packet_promoted_count": manifest["provider_packet_promoted_count"],
         "output": str(args.output_dir.resolve()),
     }, ensure_ascii=False))
