@@ -112,6 +112,13 @@ JSON containing an explicit `facility_risk_ledger` object. Campaign inputs may
 likewise be direct ledgers or an explicit `result` wrapper; no fields are
 inferred while unwrapping.
 
+The latest saved 44-case union snapshot was re-audited in
+`results/20261115/dynamic_state_closure_ledger_audit_current.json`. It is
+`BLOCKED` (40 checks, 29 blockers) because that snapshot predates the explicit
+dynamic-state coverage fields. The record is retained as an evidence gap; it
+does not convert the numerical release/consequence results into a qualified
+facility result.
+
 Attach the same report to the IJHE completion audit with
 `--dynamic-state-closure-ledger-audit`. The completion audit records a
 separate diagnostic check; a ledger-consistency pass never becomes a provider

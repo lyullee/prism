@@ -1,0 +1,522 @@
+{
+  "schema_version": "prism.dynamic_state_closure_ledger_audit.v1",
+  "status": "BLOCKED",
+  "campaign_count": 1,
+  "facility_supplied": true,
+  "checks": [
+    {
+      "name": "campaign.coverage.dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 44
+      },
+      "stored": null,
+      "reason": "campaign.coverage.dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[ambient-vaporizer-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[ambient-vaporizer-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[inventory-depletion-pipe-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[inventory-depletion-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[liquid-transfer-line-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[liquid-transfer-line-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[liquid-transfer-pump-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 2
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[liquid-transfer-pump-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[pressure-relief-vent-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 1
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[pressure-relief-vent-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[reliquefier-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[reliquefier-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[storage-tank-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[storage-tank-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[transfer-valve-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[transfer-valve-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "campaign.coverage.by_component[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": null,
+      "reason": "campaign.coverage.by_component[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 44
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[ambient-vaporizer-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[ambient-vaporizer-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[ambient-vaporizer-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[ambient-vaporizer-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[inventory-depletion-pipe-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[inventory-depletion-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[inventory-depletion-pipe-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[inventory-depletion-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[liquid-transfer-line-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[liquid-transfer-line-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[liquid-transfer-line-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[liquid-transfer-line-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[liquid-transfer-pump-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 2
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[liquid-transfer-pump-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[liquid-transfer-pump-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 2
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[liquid-transfer-pump-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[pressure-relief-vent-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 1
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[pressure-relief-vent-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[pressure-relief-vent-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 1
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[pressure-relief-vent-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[reliquefier-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[reliquefier-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[reliquefier-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[reliquefier-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[storage-tank-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[storage-tank-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[storage-tank-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[storage-tank-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[transfer-valve-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[transfer-valve-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[transfer-valve-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[transfer-valve-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.component_coverage[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": null,
+      "reason": "facility.component_coverage[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts",
+      "status": "BLOCKED",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": null,
+      "reason": "facility.conditional_diagnostic_facility_coverage.component_case_accounting[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+    },
+    {
+      "name": "cross_ledger.global_dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 44
+      },
+      "stored": {
+        "NOT_DECLARED": 44
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component_id_counts",
+      "status": "PASS",
+      "expected": {
+        "ambient-vaporizer-01": 1,
+        "inventory-depletion-pipe-01": 1,
+        "liquid-transfer-line-01": 1,
+        "liquid-transfer-pump-01": 1,
+        "pressure-relief-vent-01": 1,
+        "reliquefier-01": 1,
+        "storage-tank-01": 1,
+        "transfer-valve-01": 1,
+        "vertical-handoff-terminal-pipe-01": 1
+      },
+      "stored": {
+        "ambient-vaporizer-01": 1,
+        "inventory-depletion-pipe-01": 1,
+        "liquid-transfer-line-01": 1,
+        "liquid-transfer-pump-01": 1,
+        "pressure-relief-vent-01": 1,
+        "reliquefier-01": 1,
+        "storage-tank-01": 1,
+        "transfer-valve-01": 1,
+        "vertical-handoff-terminal-pipe-01": 1
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[ambient-vaporizer-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": {
+        "NOT_DECLARED": 3
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[inventory-depletion-pipe-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": {
+        "NOT_DECLARED": 10
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[liquid-transfer-line-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": {
+        "NOT_DECLARED": 5
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[liquid-transfer-pump-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 2
+      },
+      "stored": {
+        "NOT_DECLARED": 2
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[pressure-relief-vent-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 1
+      },
+      "stored": {
+        "NOT_DECLARED": 1
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[reliquefier-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 3
+      },
+      "stored": {
+        "NOT_DECLARED": 3
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[storage-tank-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": {
+        "NOT_DECLARED": 5
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[transfer-valve-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 5
+      },
+      "stored": {
+        "NOT_DECLARED": 5
+      },
+      "reason": null
+    },
+    {
+      "name": "cross_ledger.component[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts",
+      "status": "PASS",
+      "expected": {
+        "NOT_DECLARED": 10
+      },
+      "stored": {
+        "NOT_DECLARED": 10
+      },
+      "reason": null
+    }
+  ],
+  "check_count": 40,
+  "blocking_reason_count": 29,
+  "blocking_reasons": [
+    "campaign.coverage.dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[ambient-vaporizer-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[inventory-depletion-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[liquid-transfer-line-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[liquid-transfer-pump-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[pressure-relief-vent-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[reliquefier-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[storage-tank-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[transfer-valve-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "campaign.coverage.by_component[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[ambient-vaporizer-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[ambient-vaporizer-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[inventory-depletion-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[inventory-depletion-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[liquid-transfer-line-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[liquid-transfer-line-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[liquid-transfer-pump-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[liquid-transfer-pump-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[pressure-relief-vent-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[pressure-relief-vent-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[reliquefier-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[reliquefier-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[storage-tank-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[storage-tank-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[transfer-valve-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[transfer-valve-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.component_coverage[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities",
+    "facility.conditional_diagnostic_facility_coverage.component_case_accounting[vertical-handoff-terminal-pipe-01].dynamic_state_closure_status_counts differs from recomputed case identities"
+  ],
+  "campaign_audits": [
+    {
+      "status_counts": {
+        "NOT_DECLARED": 44
+      },
+      "component_status_counts": {
+        "ambient-vaporizer-01": {
+          "NOT_DECLARED": 3
+        },
+        "inventory-depletion-pipe-01": {
+          "NOT_DECLARED": 10
+        },
+        "liquid-transfer-line-01": {
+          "NOT_DECLARED": 5
+        },
+        "liquid-transfer-pump-01": {
+          "NOT_DECLARED": 2
+        },
+        "pressure-relief-vent-01": {
+          "NOT_DECLARED": 1
+        },
+        "reliquefier-01": {
+          "NOT_DECLARED": 3
+        },
+        "storage-tank-01": {
+          "NOT_DECLARED": 5
+        },
+        "transfer-valve-01": {
+          "NOT_DECLARED": 5
+        },
+        "vertical-handoff-terminal-pipe-01": {
+          "NOT_DECLARED": 10
+        }
+      }
+    }
+  ],
+  "facility_audit": {
+    "status_counts": {
+      "NOT_DECLARED": 44
+    },
+    "component_status_counts": {
+      "ambient-vaporizer-01": {
+        "NOT_DECLARED": 3
+      },
+      "inventory-depletion-pipe-01": {
+        "NOT_DECLARED": 10
+      },
+      "liquid-transfer-line-01": {
+        "NOT_DECLARED": 5
+      },
+      "liquid-transfer-pump-01": {
+        "NOT_DECLARED": 2
+      },
+      "pressure-relief-vent-01": {
+        "NOT_DECLARED": 1
+      },
+      "reliquefier-01": {
+        "NOT_DECLARED": 3
+      },
+      "storage-tank-01": {
+        "NOT_DECLARED": 5
+      },
+      "transfer-valve-01": {
+        "NOT_DECLARED": 5
+      },
+      "vertical-handoff-terminal-pipe-01": {
+        "NOT_DECLARED": 10
+      }
+    }
+  },
+  "diagnostic_only": true,
+  "frequency_reallocation_performed": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "interpretation": "Counts are recomputed from explicit case status fields and case identities. A PASS proves ledger accounting consistency only; it does not qualify provider packets, physical validation, accident scope, or facility QRA.",
+  "source_campaigns": [
+    "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json"
+  ],
+  "source_campaign_sha256": [
+    "1ab4a16858105924cfe2f28f8986182aa3f84e091baa2d6ad51cf833ef4ab730"
+  ],
+  "source_facility": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
+  "source_facility_sha256": "5525860026d604464a32d8e5c8de8233d1168e9e0b0c4521fc991c0c4a2bcbb2"
+}
