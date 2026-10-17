@@ -6409,5 +6409,16 @@
   "latest_native_dynamic_pipe_exact_area100_request_rebaseline_previous_request_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
   "latest_native_dynamic_pipe_exact_area100_request_rebaseline_previous_request_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218",
   "latest_native_dynamic_pipe_exact_area100_request_rebaseline_provider_packet_promoted": false,
-  "latest_native_dynamic_pipe_exact_area100_request_rebaseline_facility_qra_allowed": false
+  "latest_native_dynamic_pipe_exact_area100_request_rebaseline_facility_qra_allowed": false,
+  "latest_native_external_full_scope_latest_source_recheck_record": "examples/native_external_full_scope_latest_source_recheck_20261018.json",
+  "latest_native_external_full_scope_latest_source_recheck_status": "LATEST_EXTERNAL_SOURCE_RECHECK_DIAGNOSTIC; 24 exact packets; isolation branch reproduces 13 EXECUTED/11 EXECUTED_OPERATOR_LIMITED and 96 risk atoms; all 24 provider result digests changed; authoritative campaign not rebound",
+  "latest_native_external_full_scope_latest_source_recheck_external_commit": "7072374",
+  "latest_native_external_full_scope_latest_source_recheck_external_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "latest_native_external_full_scope_latest_source_recheck_packet_count": 24,
+  "latest_native_external_full_scope_latest_source_recheck_executed_case_count": 24,
+  "latest_native_external_full_scope_latest_source_recheck_fully_executed_case_count": 13,
+  "latest_native_external_full_scope_latest_source_recheck_operator_limited_case_count": 11,
+  "latest_native_external_full_scope_latest_source_recheck_risk_atom_count": 96,
+  "latest_native_external_full_scope_latest_source_recheck_provider_result_digest_changed_count": 24,
+  "latest_native_external_full_scope_latest_source_recheck_authoritative_rebound": false
 }
