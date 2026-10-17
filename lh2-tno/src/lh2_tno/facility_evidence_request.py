@@ -703,6 +703,12 @@ def build_facility_evidence_request(
             "complete_facility_qra_claim": ledger.get(
                 "complete_facility_qra_claim", False
             ),
+            "qualified_facility_qra_blocking_reasons": list(
+                assessment.get(
+                    "qualified_facility_qra_blocking_reasons",
+                    ledger.get("qualified_facility_qra_blocking_reasons", ()),
+                )
+            ),
             "facility_promotion_allowed_now": facility_promotion_gate,
             "strict_gate_categories": gate_categories,
         },

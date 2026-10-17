@@ -14,6 +14,10 @@ def _assessment() -> dict:
             "risk_atoms": [{"x": 1}],
             "facility_total_risk_available": False,
             "physical_validation_claim": False,
+            "qualified_facility_qra_blocking_reasons": [
+                "operator-limited cases remain",
+                "independent physical validation claim is absent",
+            ],
             "blocking_reasons": ["family pipe_hole: PARTIAL", "family pipe_hole: PARTIAL"],
             "component_statuses": {"pipe-01": "PARTIAL", "vent-01": "EXECUTED", "boundary-01": "EXCLUDED"},
             "component_coverage": {
@@ -74,6 +78,10 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     assert len(report["family_requests"][0]["strict_gate_requirements"]) == 2
     assert report["current_assessment"]["strict_gate_categories"] == [
         "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
+    ]
+    assert report["current_assessment"]["qualified_facility_qra_blocking_reasons"] == [
+        "operator-limited cases remain",
+        "independent physical validation claim is absent",
     ]
     assert report["family_requests"][0]["family_scope_ready"] is False
     assert report["family_requests"][0]["facility_promotion_allowed_now"] is False
