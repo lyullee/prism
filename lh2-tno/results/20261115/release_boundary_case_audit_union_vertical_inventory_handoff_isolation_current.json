@@ -255,6 +255,8 @@
       "residual_fraction": [
         0.9999999813220918
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 3.490159347696789e-21,
@@ -376,6 +378,8 @@
       "residual_fraction": [
         0.9964699666146127
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -2.14806397370833e-20,
@@ -495,6 +499,8 @@
       "residual_fraction": [
         0.9964699056164507
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -5.902760851178405e-20,
@@ -614,6 +620,8 @@
       "residual_fraction": [
         0.9941189404615177
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -1.0577323928838075e-19,
@@ -733,6 +741,8 @@
       "residual_fraction": [
         0.9416480763417551
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -8.673617379884035e-19,
@@ -852,6 +862,8 @@
       "residual_fraction": [
         0.9999551983547716
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -1.4427299128566867e-22,
@@ -973,6 +985,8 @@
       "residual_fraction": [
         0.9995520568309514
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -8.525477135461645e-21,
@@ -1094,6 +1108,8 @@
       "residual_fraction": [
         0.9955278976846159
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 6.542689745034449e-20,
@@ -1215,6 +1231,8 @@
       "residual_fraction": [
         0.9560062513316624
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -8.673617379884035e-18,
@@ -1336,6 +1354,8 @@
       "residual_fraction": [
         0.5789187435345342
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -6.245004513516506e-17,
@@ -1457,6 +1477,8 @@
       "residual_fraction": [
         0.16666666666666663
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.7617023488948199e-22,
@@ -1578,6 +1600,8 @@
       "residual_fraction": [
         0.16666666666666666
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -2.1647729574584157e-19,
@@ -1699,6 +1723,8 @@
       "residual_fraction": [
         0.16666666666666666
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -3.888421754884625e-18,
@@ -1820,6 +1846,8 @@
       "residual_fraction": [
         0.16666666666666669
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -3.122502256758253e-17,
@@ -1941,6 +1969,8 @@
       "residual_fraction": [
         0.1666666666666666
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 2.7755575615628914e-16,
@@ -2060,6 +2090,8 @@
       "residual_fraction": [
         0.1666666666666666
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_applicable",
       "inventory_status": "not_applicable",
       "end_to_end_residual_kg": 0.0,
@@ -2191,6 +2223,8 @@
       "residual_fraction": [
         0.9439336762022503
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.5959455978986625e-16,
@@ -2312,6 +2346,8 @@
       "residual_fraction": [
         0.9994393367620225
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.8202184342472387e-18,
@@ -2431,6 +2467,8 @@
       "residual_fraction": [
         1.7089750665289536e-16
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -2541,6 +2579,8 @@
       "residual_fraction": [
         0.9939839072761306
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_over_600s",
       "end_to_end_residual_kg": 0.0,
@@ -2656,6 +2696,8 @@
       "residual_fraction": [
         0.9912340048437761
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
@@ -2777,6 +2819,8 @@
         0.9999563533385296,
         0.9999563533385296
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
@@ -2901,6 +2945,8 @@
         0.9999563533385296,
         0.9999563533385296
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
@@ -3017,6 +3063,8 @@
       "residual_fraction": [
         0.9979601867927743
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
@@ -3132,6 +3180,8 @@
       "residual_fraction": [
         0.9990962333424837
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3251,6 +3301,8 @@
       "residual_fraction": [
         0.9990962333424837
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3370,6 +3422,8 @@
       "residual_fraction": [
         0.9970022483665517
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3489,6 +3543,8 @@
       "residual_fraction": [
         0.9970022483665517
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3608,6 +3664,8 @@
       "residual_fraction": [
         0.9804598671531414
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3727,6 +3785,8 @@
       "residual_fraction": [
         0.9804598671531414
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3846,6 +3906,8 @@
       "residual_fraction": [
         0.8424332524992445
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -3965,6 +4027,8 @@
       "residual_fraction": [
         0.8424332524992445
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4084,6 +4148,8 @@
       "residual_fraction": [
         0.8044520812127326
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4203,6 +4269,8 @@
       "residual_fraction": [
         0.8044520812127326
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4321,6 +4389,8 @@
       "residual_fraction": [
         0.9990962333424837
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4433,6 +4503,8 @@
       "residual_fraction": [
         0.9990962333424837
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4545,6 +4617,8 @@
       "residual_fraction": [
         0.9970022483665517
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4657,6 +4731,8 @@
       "residual_fraction": [
         0.9970022483665517
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4769,6 +4845,8 @@
       "residual_fraction": [
         0.9804598671531414
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4881,6 +4959,8 @@
       "residual_fraction": [
         0.9804598671531414
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -4993,6 +5073,8 @@
       "residual_fraction": [
         0.8424332524992445
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -5105,6 +5187,8 @@
       "residual_fraction": [
         0.8424332524992445
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -5217,6 +5301,8 @@
       "residual_fraction": [
         0.8044520812127326
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
@@ -5329,6 +5415,8 @@
       "residual_fraction": [
         0.8044520812127326
       ],
+      "provider_mass_basis_ids": [],
+      "provider_mass_basis_status": "UNDECLARED",
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,

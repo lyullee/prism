@@ -136,6 +136,8 @@ def _build_release_trace(
         "provider_termination_evidence_digest",
         "provider_termination_evidence_checks",
         "provider_termination_evidence_blocking_reasons",
+        "provider_mass_basis_ids",
+        "provider_mass_basis_status",
         "residual_closure_basis",
         "strict_release_boundary_eligible",
         "strict_release_boundary_status",

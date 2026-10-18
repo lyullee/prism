@@ -273,6 +273,70 @@ def test_provider_mass_balance_is_carried_and_blocks_unbalanced_promotion():
     assert gate["checks"]["all_provider_mass_balances_closed"] is False
 
 
+def test_provider_mass_basis_is_exposed_and_mismatch_blocks_release_boundary():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "pipe/basis-mismatch",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "reviewed_isolation_success",
+                "time_s": 0.25,
+            },
+            "provider_packet_identity": {
+                "provider_mass_balances": [
+                    {
+                        "mass_basis_id": "upstream-reserve",
+                        "initial_mass_kg": 2.0,
+                        "cumulative_mass_out_kg": 1.0,
+                        "final_mass_kg": 1.0,
+                    },
+                    {
+                        "mass_basis_id": "local-pipe-inventory",
+                        "initial_mass_kg": 1.0,
+                        "cumulative_mass_out_kg": 0.5,
+                        "final_mass_kg": 0.5,
+                    },
+                ]
+            },
+            "mass_ledger": {
+                "released_kg": 1.5,
+                "end_to_end_residual_kg": 0.0,
+            },
+        }]
+    )
+    row = ledger["rows"][0]
+    assert row["provider"]["provider_mass_basis_ids"] == [
+        "upstream-reserve",
+        "local-pipe-inventory",
+    ]
+    assert row["provider"]["provider_mass_basis_status"] == "EXPLICIT_MISMATCH"
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is False
+    assert gate["checks"]["all_provider_mass_bases_aligned"] is False
+    assert any("mass basis is explicit_mismatch" in reason for reason in gate["blocking_reasons"])
+
+
+def test_legacy_provider_mass_basis_remains_undeclared_without_inference():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "tank/legacy",
+            "status": "EXECUTED",
+            "termination": {"basis": "reviewed_isolation_success", "time_s": 0.2},
+            "provider_packet_identity": {
+                "provider_mass_balances": [{
+                    "initial_mass_kg": 1.0,
+                    "cumulative_mass_out_kg": 1.0,
+                    "final_mass_kg": 0.0,
+                }]
+            },
+            "mass_ledger": {"released_kg": 1.0, "end_to_end_residual_kg": 0.0},
+        }]
+    )
+    row = ledger["rows"][0]
+    assert row["provider"]["provider_mass_basis_ids"] == []
+    assert row["provider"]["provider_mass_basis_status"] == "UNDECLARED"
+
+
 def test_facility_release_boundary_gate_rejects_synthetic_and_withheld_rows():
     ledger = build_release_termination_inventory_ledger(
         [{

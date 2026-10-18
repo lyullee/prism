@@ -4763,6 +4763,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -4860,6 +4862,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -4957,6 +4961,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5054,6 +5060,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5151,6 +5159,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5250,6 +5260,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5349,6 +5361,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5448,6 +5462,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5547,6 +5563,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5646,6 +5664,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5745,6 +5765,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5844,6 +5866,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -5943,6 +5967,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6042,6 +6068,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6141,6 +6169,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6249,6 +6279,8 @@
           "provider_termination_evidence_mass_residual_closed",
           "provider_termination_evidence_boundary_closed"
         ],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "provider_residual_mass",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6348,6 +6380,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6447,6 +6481,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6539,6 +6575,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_releasable_mass",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -6631,6 +6669,8 @@
           "provider_termination_evidence_supported_basis",
           "provider_termination_evidence_boundary_closed"
         ],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "provider_residual_mass",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6726,6 +6766,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -6824,6 +6866,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "two_sided_rupture",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -6922,6 +6966,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "two_sided_rupture",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7015,6 +7061,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "reviewed_isolation_success",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -7110,6 +7158,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7207,6 +7257,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7304,6 +7356,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7401,6 +7455,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7498,6 +7554,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7595,6 +7653,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7692,6 +7752,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7789,6 +7851,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7886,6 +7950,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -7983,6 +8049,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": false,
         "strict_release_boundary_status": "PROMOTION_BLOCKED",
@@ -8077,6 +8145,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8169,6 +8239,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8261,6 +8333,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8353,6 +8427,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8445,6 +8521,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8537,6 +8615,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8629,6 +8709,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8721,6 +8803,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8813,6 +8897,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -8905,6 +8991,8 @@
           "boundary_closed": true
         },
         "provider_termination_evidence_blocking_reasons": [],
+        "provider_mass_basis_ids": [],
+        "provider_mass_basis_status": "UNDECLARED",
         "residual_closure_basis": "inventory_depletion_positive_threshold",
         "strict_release_boundary_eligible": true,
         "strict_release_boundary_status": "ELIGIBLE",
@@ -31288,5 +31376,5 @@
   "source_assessment_path": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "source_assessment_sha256": "140632cdcfc543387d96149bc3e1d398ff2cd61b8589aeff97b41c8ece0eec36",
   "release_boundary_case_audit_path": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json",
-  "release_boundary_case_audit_sha256": "841a4cf93b5eb512537ad5e30b654446718c137acd0a8f6f0686efa21a807494"
+  "release_boundary_case_audit_sha256": "a62f9e2a03f1f9de4889e03aeec9a643e31155357eb85937e2836745195eccbe"
 }

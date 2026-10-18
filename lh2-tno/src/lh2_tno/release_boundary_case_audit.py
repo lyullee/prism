@@ -556,7 +556,8 @@ def _provider_blockers(case: Mapping[str, Any], ledger_row: Mapping[str, Any]) -
         reasons.append("provider_source_or_result_digest_missing")
     # A provider mass balance can close numerically while the packet is still
     # model-prediction evidence.  Keep those concepts separate.
-    statuses = _as_mapping(ledger_row.get("provider")).get("provider_mass_balance_statuses")
+    provider = _as_mapping(ledger_row.get("provider"))
+    statuses = provider.get("provider_mass_balance_statuses")
     if (
         isinstance(statuses, Sequence)
         and not isinstance(statuses, (str, bytes))
@@ -564,6 +565,9 @@ def _provider_blockers(case: Mapping[str, Any], ledger_row: Mapping[str, Any]) -
         and any(status != "CLOSED" for status in statuses)
     ):
         reasons.append("provider_mass_balance_not_closed")
+    mass_basis_status = provider.get("provider_mass_basis_status")
+    if mass_basis_status in {"EXPLICIT_MISMATCH", "MALFORMED", "PARTIAL"}:
+        reasons.append(f"provider_mass_basis_{str(mass_basis_status).lower()}")
     return list(dict.fromkeys(reasons))
 
 
@@ -654,6 +658,9 @@ def _case_reasons(
     domain = _as_mapping(case.get("domain_assessment"))
     if domain.get("domain_truncated") is True:
         reasons.append("consequence_domain_truncated")
+    mass_basis_status = _as_mapping(row.get("provider")).get("provider_mass_basis_status")
+    if mass_basis_status in {"EXPLICIT_MISMATCH", "MALFORMED", "PARTIAL"}:
+        reasons.append(f"provider_mass_basis_{str(mass_basis_status).lower()}")
     return list(dict.fromkeys(reasons))
 
 
@@ -747,6 +754,9 @@ def _termination_reasons(
         or any(status != "CLOSED" for status in balances)
     ):
         reasons.append("provider_mass_balance_not_closed")
+    mass_basis_status = _as_mapping(row.get("provider")).get("provider_mass_basis_status")
+    if mass_basis_status in {"EXPLICIT_MISMATCH", "MALFORMED", "PARTIAL"}:
+        reasons.append(f"provider_mass_basis_{str(mass_basis_status).lower()}")
     return list(dict.fromkeys(reasons))
 
 
@@ -776,6 +786,11 @@ def _release_metrics(row: Mapping[str, Any]) -> dict[str, Any]:
         "cumulative_mass_out_kg": released,
         "residual_mass_kg": residual,
         "residual_fraction": residual_fraction,
+        "provider_mass_basis_ids": list(provider.get("provider_mass_basis_ids", []))
+        if isinstance(provider.get("provider_mass_basis_ids"), Sequence)
+        and not isinstance(provider.get("provider_mass_basis_ids"), (str, bytes))
+        else [],
+        "provider_mass_basis_status": provider.get("provider_mass_basis_status", "UNDECLARED"),
     }
 
 

@@ -77,6 +77,38 @@ def _provider_mass_balances(identity: Mapping[str, Any]) -> tuple[list[dict[str,
     return rows, statuses
 
 
+def _mass_basis_summary(
+    balances: Sequence[Mapping[str, Any]],
+) -> tuple[list[str], str]:
+    """Summarize explicit provider inventory ownership without inferring it."""
+
+    if not balances:
+        return [], "UNDECLARED"
+    basis_ids: list[str] = []
+    missing = False
+    malformed = False
+    for balance in balances:
+        raw = balance.get("mass_basis_id")
+        if raw is None:
+            missing = True
+            continue
+        if not isinstance(raw, str) or not raw.strip():
+            malformed = True
+            continue
+        value = raw.strip()
+        if value not in basis_ids:
+            basis_ids.append(value)
+    if malformed:
+        return basis_ids, "MALFORMED"
+    if len(basis_ids) > 1:
+        return basis_ids, "EXPLICIT_MISMATCH"
+    if missing and basis_ids:
+        return basis_ids, "PARTIAL"
+    if not basis_ids:
+        return [], "UNDECLARED"
+    return basis_ids, "EXPLICIT_ALIGNED"
+
+
 def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
     if not isinstance(identity, Mapping):
         return {
@@ -86,6 +118,8 @@ def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
             "residual_mass_kg": None,
             "mass_balances": [],
             "mass_balance_statuses": [],
+            "mass_basis_ids": [],
+            "mass_basis_status": "UNDECLARED",
         }
     available = _float_list(identity.get("available_mass_kg"))
     released = _float_list(identity.get("cumulative_mass_out_kg"))
@@ -93,6 +127,7 @@ def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
     if available is not None and released is not None and len(available) == len(released):
         residual = [a - r for a, r in zip(available, released)]
     mass_balances, mass_balance_statuses = _provider_mass_balances(identity)
+    mass_basis_ids, mass_basis_status = _mass_basis_summary(mass_balances)
     return {
         "packet_consumed": bool(identity.get("provider_result_digests")),
         "available_mass_kg": available,
@@ -100,6 +135,8 @@ def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
         "residual_mass_kg": residual,
         "mass_balances": mass_balances,
         "mass_balance_statuses": mass_balance_statuses,
+        "mass_basis_ids": mass_basis_ids,
+        "mass_basis_status": mass_basis_status,
     }
 
 
@@ -235,6 +272,8 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
             "residual_mass_kg": provider_inventory["residual_mass_kg"],
             "provider_mass_balances": provider_inventory["mass_balances"],
             "provider_mass_balance_statuses": provider_inventory["mass_balance_statuses"],
+            "provider_mass_basis_ids": provider_inventory["mass_basis_ids"],
+            "provider_mass_basis_status": provider_inventory["mass_basis_status"],
         },
         "mass_ledger": {
             "released_kg": _finite(mass_ledger.get("released_kg")),
@@ -345,6 +384,7 @@ def evaluate_facility_release_boundary(
         "all_isolation_or_inventory_statuses_closed": True,
         "all_mass_residuals_closed": True,
         "all_provider_mass_balances_closed": True,
+        "all_provider_mass_bases_aligned": True,
         "no_withheld_cases": True,
     }
     withheld_count = summary.get("withheld_case_count", 0)
@@ -441,6 +481,12 @@ def evaluate_facility_release_boundary(
                 blocking.append(
                     f"{label}: provider mass-balance evidence is not closed"
                 )
+        basis_status = provider.get("provider_mass_basis_status")
+        if basis_status in {"EXPLICIT_MISMATCH", "MALFORMED", "PARTIAL"}:
+            checks["all_provider_mass_bases_aligned"] = False
+            blocking.append(
+                f"{label}: provider mass basis is {str(basis_status).lower()}"
+            )
 
     unique_blocking = list(dict.fromkeys(blocking))
     return {

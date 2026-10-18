@@ -23,6 +23,17 @@ declared tokens is reported as `MASS_BASIS_ID_MISMATCH_REVIEW_REQUIRED`.
 Neither classification changes a mass, promotes a provider packet, assigns a
 frequency, or opens facility IR/F-N/QRA.
 
+## Facility trace output
+
+When a provider mass balance reaches the facility release ledger, the ledger
+preserves `provider_mass_basis_ids` and a diagnostic
+`provider_mass_basis_status` for each case. The status is one of
+`EXPLICIT_ALIGNED`, `EXPLICIT_MISMATCH`, `PARTIAL`, `MALFORMED`, or
+`UNDECLARED`. The case-level release-boundary audit and conditional facility
+risk trace expose the same fields. `EXPLICIT_MISMATCH`, `PARTIAL`, and
+`MALFORMED` block that case's strict release boundary; `UNDECLARED` remains a
+review flag for legacy packets and is never filled by inference.
+
 This contract closes an input ambiguity in the digital-twin handoff. It does
 not claim that the current 44-case facility campaign has qualified provider
 packets; the existing campaign-level release and qualification gates remain
