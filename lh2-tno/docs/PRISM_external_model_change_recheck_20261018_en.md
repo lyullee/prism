@@ -42,3 +42,28 @@ The model has changed in a useful way: the tank and vaporizer branches now provi
 The change does not by itself provide a qualified provider packet, a facility frequency, independent physical validation, a site population basis, or facility IR/F-N. Those gates remain closed. SLABx-LH2 stays outside active development and remains the frozen validated consequence component requested by the project.
 
 Machine-readable details are in [`external_model_change_recheck_20261018.json`](../results/20261018/external_model_change_recheck_20261018.json). The candidate bridge output is [`header_bound_facility_bridge_latest_packets_recheck.json`](../results/20261018/header_bound_facility_bridge_latest_packets_recheck.json).
+
+
+## Current-source recheck after the 7072374 update (2026-10-18)
+
+The external checkout advanced after the earlier comparison above. Its current
+`HEAD` is `7072374c59b726f4e938cd37e7695684ddc70b68` with source digest
+`3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74`. I
+reran the native exporters and the PRISM consequence-chain runner against this
+checkout. All seven provider result identities and all seven chain outcomes
+match the latest committed diagnostic manifest; four packets report dynamic
+state closure ready, four report explicit isolation success, two retain a
+synthetic horizon, and one remains operator-limited.
+
+The external worktree has two untracked benchmark files
+(`docs/benchmarks/nasa_tn_d4171_hem_results.json` and
+`docs/benchmarks/nasa_tn_d4171_hem_validation.md`). They were not used to
+change the PRISM packet or authoritative facility assessment. The machine-readable
+current-source record is [`external_lh2dt_current_source_recheck_20261018.json`](../examples/external_lh2dt_current_source_recheck_20261018.json),
+and the seven-equipment result remains
+[`native_external_multi_equipment_latest_recheck_20261018.json`](../examples/native_external_multi_equipment_latest_recheck_20261018.json).
+
+This update changes the source version recorded for reproducibility; it does
+not open provider qualification, frequency learning, independent physical
+validation, facility IR/F-N, or facility QRA. SLABx-LH2 remains the frozen
+validated consequence component and was not modified.

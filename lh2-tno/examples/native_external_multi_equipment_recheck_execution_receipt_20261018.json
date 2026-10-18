@@ -3,8 +3,8 @@
   "status": "CURRENT_SOURCE_AND_CHAIN_REPLAY_MATCHED",
   "execution_date": "2026-10-18",
   "source_repository": "lyullee/lh2dt_models",
-  "source_commit": "16f7a4b38d16295ad481492ec90af7903125d4ee",
-  "external_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "source_commit": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "external_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
   "equipment_count": 7,
   "rows": [
     {
@@ -84,5 +84,10 @@
   "frequency_inference_performed": false,
   "physical_validation_claim": false,
   "facility_qra_claim": false,
-  "interpretation": "The external source tree and the seven-equipment exporter plus PRISM consequence-chain replay were executed again. All recorded provider and chain identity fields match the committed diagnostic manifests. This confirms reproducibility only; it does not qualify provider packets or open facility QRA."
+  "interpretation": "The current external source at 7072374 and the seven-equipment exporter plus PRISM consequence-chain replay were executed again. All seven provider identities and all seven chain outcomes match the latest committed diagnostic manifest. The source changed since the earlier 16f7a4b comparison, so this record supersedes that older reproducibility receipt. This confirms current-source reproducibility only; it does not qualify provider packets or open facility QRA.",
+  "prior_source_commit": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+  "prior_external_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "current_source_changed_since_prior_recheck": true,
+  "current_source_matches_latest_committed_manifest": true,
+  "slabx_lh2_status": "CLOSED_VALIDATED_COMPONENT; no code or validation change"
 }

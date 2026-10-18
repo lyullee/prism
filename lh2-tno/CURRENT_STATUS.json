@@ -6612,13 +6612,13 @@
   "hazop_event_mode_binding_current_recheck_extension_only_excluded_overlap_conflict_count": 1,
   "hazop_event_mode_binding_current_recheck_extension_only_sha256": "60e2b0d9cc6a800c7ea17263b98e1966549b3e3f26d2a1dc5f4bfc8580008f89",
   "current_external_source_recheck_20261018_record": "examples/external_lh2dt_current_source_recheck_20261018.json",
-  "current_external_source_recheck_20261018_status": "UNCHANGED_FROM_RECORDED_EXTERNAL_RECHECK_DIAGNOSTIC",
-  "current_external_source_recheck_20261018_external_head": "16f7a4b38d16295ad481492ec90af7903125d4ee",
-  "current_external_source_recheck_20261018_source_digest": "d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce",
-  "current_external_source_recheck_20261018_git_head_unchanged": true,
-  "current_external_source_recheck_20261018_source_digest_unchanged": true,
-  "current_external_source_recheck_20261018_tracked_dirty_path_count": 2,
-  "current_external_source_recheck_20261018_untracked_path_count": 150,
+  "current_external_source_recheck_20261018_status": "CURRENT_SOURCE_CHANGED_AND_RECHECKED_MATCHED_LATEST_COMMITTED_MANIFEST; external source advanced from 16f7a4b to 7072374, and fresh 7-packet/7-chain replay matched the latest committed diagnostic manifest; two untracked benchmark files remain in the external worktree; no qualification or facility QRA promotion",
+  "current_external_source_recheck_20261018_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "current_external_source_recheck_20261018_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "current_external_source_recheck_20261018_git_head_unchanged": false,
+  "current_external_source_recheck_20261018_source_digest_unchanged": false,
+  "current_external_source_recheck_20261018_tracked_dirty_path_count": 0,
+  "current_external_source_recheck_20261018_untracked_path_count": 2,
   "current_external_source_recheck_20261018_native_contract_status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
   "current_external_source_recheck_20261018_promotion": {
     "provider_packet_promoted": false,
@@ -6682,7 +6682,11 @@
   "external_equipment_model_provider_response_mass_ledger_present_count": 4,
   "external_equipment_model_provider_response_qualification_sidecar_count": 0,
   "external_equipment_model_provider_response_origin_metadata_missing_count": 7,
-  "external_equipment_model_provider_response_termination_basis_counts": {"inventory_depletion": 1, "reviewed_isolation_success": 1, "synthetic_diagnostic_horizon": 5},
+  "external_equipment_model_provider_response_termination_basis_counts": {
+    "inventory_depletion": 1,
+    "reviewed_isolation_success": 1,
+    "synthetic_diagnostic_horizon": 5
+  },
   "external_equipment_model_provider_response_packet_promoted": false,
   "external_equipment_model_provider_response_frequency_inference": false,
   "external_equipment_model_provider_response_physical_validation_claim": false,
@@ -6704,5 +6708,12 @@
   "external_equipment_model_release_rebind_frequency_inference": false,
   "external_equipment_model_release_rebind_physical_validation_claim": false,
   "external_equipment_model_release_rebind_facility_qra_allowed": false,
-  "external_equipment_model_release_rebind_policy": "Rebound release mappings are diagnostic copies only; no residual inventory repair, frequency assignment, provider qualification, physical validation, facility IR/F-N, or SLABx-LH2 modification."
+  "external_equipment_model_release_rebind_policy": "Rebound release mappings are diagnostic copies only; no residual inventory repair, frequency assignment, provider qualification, physical validation, facility IR/F-N, or SLABx-LH2 modification.",
+  "current_external_source_recheck_20261018_recorded_external_head": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+  "current_external_source_recheck_20261018_source_change_detected": true,
+  "current_external_source_recheck_20261018_recorded_source_digest": "d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce",
+  "current_external_source_recheck_20261018_latest_committed_manifest_match": true,
+  "current_external_source_recheck_20261018_provider_result_digest_match_count": 7,
+  "current_external_source_recheck_20261018_chain_match_count": 7,
+  "current_external_source_recheck_20261018_worktree_clean": false
 }
