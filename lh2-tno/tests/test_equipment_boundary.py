@@ -432,6 +432,9 @@ def test_equipment_inventory_depletion_operator_requires_resolved_release_and_st
     }
     request = ConsequenceRequest.model_validate_json(json.dumps(d))
     assert request.source_operator == 'equipment_inventory_depletion'
+    d['release_termination']['basis'] = 'inventory_depletion_positive_threshold'
+    threshold_request = ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert threshold_request.release_termination.basis == 'inventory_depletion_positive_threshold'
     d['release_termination']['basis'] = 'synthetic_diagnostic_horizon'
     with pytest.raises(ValueError, match='inventory-depletion termination'):
         ConsequenceRequest.model_validate_json(json.dumps(d))

@@ -151,6 +151,8 @@ def _isolation_status(termination_basis: str | None) -> str:
 def _inventory_status(termination_basis: str | None) -> str:
     if termination_basis == "inventory_depletion":
         return "provider_declared_inventory_depletion"
+    if termination_basis == "inventory_depletion_positive_threshold":
+        return "provider_declared_inventory_positive_threshold"
     if termination_basis == "inventory_over_600s":
         return "provider_declared_inventory_over_600s"
     if termination_basis == "emergency_relief_discharge":

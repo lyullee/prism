@@ -57,7 +57,7 @@ def _load_selected_release(
     opening_match = evidence.get("exact_opening_match") is True
     inventory_identity_match = (
         evidence.get("event_identity_match") is True
-        and evidence.get("termination_basis") in {"inventory_depletion", "inventory_over_600s"}
+        and evidence.get("termination_basis") in {"inventory_depletion", "inventory_depletion_positive_threshold", "inventory_over_600s"}
     )
     if (not opening_match and not inventory_identity_match) or evidence.get("strict_packet_valid") is not True:
         raise ProviderReleaseContractError(f"worklist evidence is not exact/strict: {event_id}")
@@ -204,6 +204,11 @@ def _request_from_selected_packet(
             if isinstance(release, ResolvedLiquidRelease)
             else "equipment_inventory_depletion"
         ),
+        "inventory_depletion_positive_threshold": (
+            "equipment_liquid_release"
+            if isinstance(release, ResolvedLiquidRelease)
+            else "equipment_inventory_depletion"
+        ),
         "inventory_over_600s": (
             "equipment_liquid_over_600s"
             if isinstance(release, ResolvedLiquidRelease)
@@ -229,6 +234,7 @@ def _request_from_selected_packet(
         "reviewed_isolation_success",
         "reviewed_isolation_failure",
         "inventory_depletion",
+        "inventory_depletion_positive_threshold",
         "inventory_over_600s",
         "emergency_relief_discharge",
         "two_sided_rupture",

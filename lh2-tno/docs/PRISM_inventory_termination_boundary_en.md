@@ -5,6 +5,13 @@ proves its declared stopping condition. It does not turn a positive numerical
 threshold into a claim that the vessel is empty, and it never extends the last
 flow value after the provider horizon.
 
+The provider basis `inventory_depletion_positive_threshold` is reserved for a
+diagnostic that stops after reaching a positive remaining-mass threshold. It
+preserves the provider's stopping rule while explicitly avoiding a zero-
+inventory claim. The consequence chain may consume such a packet when its
+other contract fields are valid, but the basis is excluded from the strict
+facility release-boundary gate and cannot promote facility IR/F-N.
+
 ## Reproducible probe
 
 The current diagnostic uses the same `lh2dt` backend configuration as the

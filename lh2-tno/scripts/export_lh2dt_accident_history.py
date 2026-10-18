@@ -180,7 +180,14 @@ def export_history(
     )
     if termination_threshold_mass_kg is not None and not inventory_depletion_detected:
         raise RuntimeError("declared inventory threshold was not reached within the diagnostic horizon")
-    termination_basis = "inventory_depletion" if inventory_depletion_detected else "synthetic_diagnostic_horizon"
+    # A positive threshold closes the diagnostic integration clock, but it is
+    # not zero inventory. Keep this basis distinct so downstream audits never
+    # mistake a short diagnostic for full inventory depletion.
+    termination_basis = (
+        "inventory_depletion_positive_threshold"
+        if inventory_depletion_detected
+        else "synthetic_diagnostic_horizon"
+    )
     export = {
         "schema_version": "lh2dt.external_accident_export.diagnostic.v1",
         "event_kind": "accidental_leak",
@@ -267,7 +274,7 @@ def main() -> int:
         "--termination-threshold-mass-kg",
         type=float,
         default=None,
-        help="optional positive provider inventory threshold; its crossing declares inventory_depletion",
+        help="optional positive provider inventory threshold; its crossing declares inventory_depletion_positive_threshold",
     )
     args = parser.parse_args()
     try:

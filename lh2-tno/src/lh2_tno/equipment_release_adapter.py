@@ -128,6 +128,7 @@ def _termination_basis(value: Any, field: str) -> ProviderTerminationBasis | Non
         "synthetic_diagnostic_horizon",
         "reviewed_isolation_success",
         "inventory_depletion",
+        "inventory_depletion_positive_threshold",
         "inventory_over_600s",
         "model_pressure_equalization",
         "two_sided_rupture",

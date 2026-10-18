@@ -104,7 +104,7 @@ class SpatialDomain(Contract):
 
 
 class ReleaseTermination(Contract):
-    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_over_600s', 'model_pressure_equalization', 'two_sided_rupture', 'emergency_relief_discharge']
+    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_depletion_positive_threshold', 'inventory_over_600s', 'model_pressure_equalization', 'two_sided_rupture', 'emergency_relief_discharge']
     time_s: Positive
     provenance: Name
 
@@ -250,7 +250,7 @@ class ConsequenceRequest(Contract):
                 raise ValueError('inventory_liquid_jet requires an integrated source_input')
             if self.source_duration_mode != 'declared':
                 raise ValueError('inventory_liquid_jet uses its declared depletion horizon')
-            if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
+            if self.release_termination is None or self.release_termination.basis not in {'inventory_depletion', 'inventory_depletion_positive_threshold'}:
                 raise ValueError('inventory_liquid_jet requires inventory-depletion termination provenance')
             if source['tank'].get('vapour_quality') != 0:
                 raise ValueError('inventory_liquid_jet requires a declared liquid inlet state')
@@ -270,7 +270,7 @@ class ConsequenceRequest(Contract):
                 raise ValueError('equipment_inventory_depletion requires an accidental-leak resolved release')
             if self.source_duration_mode != 'declared':
                 raise ValueError('equipment_inventory_depletion uses its declared provider horizon')
-            if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
+            if self.release_termination is None or self.release_termination.basis not in {'inventory_depletion', 'inventory_depletion_positive_threshold'}:
                 raise ValueError('equipment_inventory_depletion requires inventory-depletion termination provenance')
         elif self.source_operator == 'equipment_inventory_over_600s':
             if release is None:
@@ -304,7 +304,7 @@ class ConsequenceRequest(Contract):
             if self.source_duration_mode not in {'declared', 'model_natural'}:
                 raise ValueError('equipment_liquid_release uses a provider-declared or provider-natural horizon')
             if self.release_termination is None or self.release_termination.basis not in {
-                'inventory_depletion', 'reviewed_isolation_success', 'synthetic_diagnostic_horizon',
+                'inventory_depletion', 'inventory_depletion_positive_threshold', 'reviewed_isolation_success', 'synthetic_diagnostic_horizon',
                 'model_pressure_equalization',
             }:
                 raise ValueError(
@@ -367,7 +367,7 @@ class ConsequenceRequest(Contract):
                 raise ValueError('inventory_over_600s requires an inventory-over-600s termination provenance')
             if not math.isclose(duration, 600.0, rel_tol=0, abs_tol=1e-9):
                 raise ValueError('inventory_over_600s requires exactly 600 s of source history')
-        elif self.release_termination is not None and self.release_termination.basis == 'inventory_depletion':
+        elif self.release_termination is not None and self.release_termination.basis in {'inventory_depletion', 'inventory_depletion_positive_threshold'}:
             raise ValueError('inventory-depletion termination requires an explicit inventory source operator')
         elif self.release_termination is not None and self.release_termination.basis == 'inventory_over_600s':
             raise ValueError('inventory-over-600s termination requires the inventory_over_600s source operator')
@@ -459,7 +459,7 @@ class ConsequenceRequest(Contract):
                         'frequency event port_ids must exactly match the provider-resolved accident exit(s)'
                     )
             if event.release.mode == 'instantaneous_inventory':
-                if self.source_operator not in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'} or self.release_termination.basis != 'inventory_depletion':
+                if self.source_operator not in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'} or self.release_termination.basis not in {'inventory_depletion', 'inventory_depletion_positive_threshold'}:
                     raise ValueError('instantaneous inventory event requires an inventory-depletion operator')
             elif event.release.mode == 'inventory_over_600s':
                 if self.source_operator not in {'inventory_over_600s', 'equipment_inventory_over_600s', 'equipment_liquid_over_600s', 'equipment_pressure_equalization'} or self.release_termination.basis not in {'inventory_over_600s', 'model_pressure_equalization'}:
