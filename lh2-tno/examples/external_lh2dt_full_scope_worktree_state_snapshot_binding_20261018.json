@@ -1,0 +1,616 @@
+{
+  "schema_version": "prism.state_snapshot_binding_audit.v1",
+  "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+  "policy": {
+    "canonical_schema": "prism.equipment_state_snapshot.v1",
+    "digest_only_is_binding": false,
+    "provider_echo_required": true,
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "record_count": 24,
+  "bound_count": 24,
+  "echo_match_count": 24,
+  "digest_mismatch_count": 0,
+  "declared_digest_only_count": 0,
+  "unbound_count": 0,
+  "snapshot_requested_no_echo_count": 0,
+  "status_counts": {
+    "BOUND_AND_ECHOED": 24
+  },
+  "event_count": 24,
+  "rows": [
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "43f6b509dd9f6f11479b78a223cb5927c50aa632929af4a4c198c16f322c98cb",
+      "provider_result_digests": [
+        "43f6b509dd9f6f11479b78a223cb5927c50aa632929af4a4c198c16f322c98cb"
+      ],
+      "state_snapshot_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_state_snapshot_digests": [
+        "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "computed_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_echo_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "6405f66a78c440c1e45f5d4c2ebc2073f2047f80906ea961e83d6cae89b08173",
+      "provider_result_digests": [
+        "6405f66a78c440c1e45f5d4c2ebc2073f2047f80906ea961e83d6cae89b08173"
+      ],
+      "state_snapshot_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_state_snapshot_digests": [
+        "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "computed_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_echo_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "71f4ef9a51b5be89aaf072fdeb312acde7a5883966814dfee9fdce0073859d21",
+      "provider_result_digests": [
+        "71f4ef9a51b5be89aaf072fdeb312acde7a5883966814dfee9fdce0073859d21"
+      ],
+      "state_snapshot_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_state_snapshot_digests": [
+        "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "computed_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_echo_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "b6a70ca44bb0a627d538170214c1a73f85b640e10ffc52732184ceaf695a77f9",
+      "provider_result_digests": [
+        "b6a70ca44bb0a627d538170214c1a73f85b640e10ffc52732184ceaf695a77f9"
+      ],
+      "state_snapshot_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_state_snapshot_digests": [
+        "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "computed_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_echo_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "provider_result_digest": "cf678759a1ef37e52962ca2453bd75bcc0c86d975504ffe0c880286e16f280b8",
+      "provider_result_digests": [
+        "cf678759a1ef37e52962ca2453bd75bcc0c86d975504ffe0c880286e16f280b8"
+      ],
+      "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_state_snapshot_digests": [
+        "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "computed_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "fd4cb8cd764434fc204bbfe0c97b572a17c62b72bd590768b8975b4db1cfef7f",
+      "provider_result_digests": [
+        "fd4cb8cd764434fc204bbfe0c97b572a17c62b72bd590768b8975b4db1cfef7f"
+      ],
+      "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_state_snapshot_digests": [
+        "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "computed_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "528b6265d9ce7123c9ee4877163119e71ed5b5676060e49ef82684af55c7567a",
+      "provider_result_digests": [
+        "528b6265d9ce7123c9ee4877163119e71ed5b5676060e49ef82684af55c7567a"
+      ],
+      "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_state_snapshot_digests": [
+        "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "computed_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "d75086d512981d6809e207b1fc5f11de0d82d34612c55dec248742d18784fe28",
+      "provider_result_digests": [
+        "d75086d512981d6809e207b1fc5f11de0d82d34612c55dec248742d18784fe28"
+      ],
+      "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_state_snapshot_digests": [
+        "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "computed_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "9e966a40fac3b83c200d2ab61b0a3601e0664067df29130c6fe884afe2d199fe",
+      "provider_result_digests": [
+        "9e966a40fac3b83c200d2ab61b0a3601e0664067df29130c6fe884afe2d199fe"
+      ],
+      "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_state_snapshot_digests": [
+        "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "computed_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "provider_result_digest": "46e56062594fd6e086d78e84773385d06dceb9aca6568cf921dbd74ad2093638",
+      "provider_result_digests": [
+        "46e56062594fd6e086d78e84773385d06dceb9aca6568cf921dbd74ad2093638"
+      ],
+      "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_state_snapshot_digests": [
+        "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "computed_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "a12a9d9c969b45d16386488f92ecb2a6ed003cb5c3a88c76c8deb9ee3576aa17",
+      "provider_result_digests": [
+        "a12a9d9c969b45d16386488f92ecb2a6ed003cb5c3a88c76c8deb9ee3576aa17"
+      ],
+      "state_snapshot_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_state_snapshot_digests": [
+        "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "computed_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_echo_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "af03a1693f67799156da03a90e36161a036f012dc70edee3a73d023306311190",
+      "provider_result_digests": [
+        "af03a1693f67799156da03a90e36161a036f012dc70edee3a73d023306311190"
+      ],
+      "state_snapshot_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_state_snapshot_digests": [
+        "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "computed_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_echo_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "de8a16b8bc21470a8dd192f46686639d3184715deec7ca2f5ed85de60e2780af",
+      "provider_result_digests": [
+        "de8a16b8bc21470a8dd192f46686639d3184715deec7ca2f5ed85de60e2780af"
+      ],
+      "state_snapshot_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_state_snapshot_digests": [
+        "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "computed_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_echo_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "5c97a1d4ac387477e1849ab141d3c791f976027030276b74c7af5bae84079991",
+      "provider_result_digests": [
+        "5c97a1d4ac387477e1849ab141d3c791f976027030276b74c7af5bae84079991"
+      ],
+      "state_snapshot_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_state_snapshot_digests": [
+        "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "computed_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_echo_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "provider_result_digest": "3e3107156eea8fae5321879af50ec1abd3307613b4a0d28138aa413294df93e3",
+      "provider_result_digests": [
+        "3e3107156eea8fae5321879af50ec1abd3307613b4a0d28138aa413294df93e3"
+      ],
+      "state_snapshot_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_state_snapshot_digests": [
+        "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "computed_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_echo_digest": "02e1d932d2282eebe5f3832e9155f73c3ab6d2dc7f8fcc14786c99d3ce82520f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\015_pressure-relief-vent-01_G1\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "provider_result_digest": "b8df85337e238e0a69d844d14f1977b5b03d645824c076a9340e2b96204dc9f9",
+      "provider_result_digests": [
+        "b8df85337e238e0a69d844d14f1977b5b03d645824c076a9340e2b96204dc9f9"
+      ],
+      "state_snapshot_digest": "f2a34c34d2f11d9d39af7a80b47909c237faf5ea9679d58a1a7de99db4a35591",
+      "provider_state_snapshot_digests": [
+        "f2a34c34d2f11d9d39af7a80b47909c237faf5ea9679d58a1a7de99db4a35591"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\015_pressure-relief-vent-01_G1\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "f2a34c34d2f11d9d39af7a80b47909c237faf5ea9679d58a1a7de99db4a35591",
+      "computed_digest": "f2a34c34d2f11d9d39af7a80b47909c237faf5ea9679d58a1a7de99db4a35591",
+      "provider_echo_digest": "f2a34c34d2f11d9d39af7a80b47909c237faf5ea9679d58a1a7de99db4a35591",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "provider_result_digest": "09aec688228fdc4c8cff55fd86833a9240c228fb076e84e9ec29eb73a1a993ca",
+      "provider_result_digests": [
+        "09aec688228fdc4c8cff55fd86833a9240c228fb076e84e9ec29eb73a1a993ca"
+      ],
+      "state_snapshot_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "provider_state_snapshot_digests": [
+        "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "computed_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "provider_echo_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "provider_result_digest": "d651b1b29a3b3e41561b0c37989a00e2d8ed4e909a465546d2ceb4b1fb664964",
+      "provider_result_digests": [
+        "d651b1b29a3b3e41561b0c37989a00e2d8ed4e909a465546d2ceb4b1fb664964"
+      ],
+      "state_snapshot_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "provider_state_snapshot_digests": [
+        "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "computed_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "provider_echo_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\018_ambient-vaporizer-01_G1\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "provider_result_digest": "c8bf1467b8d52f13a17327ce5c74d022f07084e1f8ef9455c061805932264930",
+      "provider_result_digests": [
+        "c8bf1467b8d52f13a17327ce5c74d022f07084e1f8ef9455c061805932264930"
+      ],
+      "state_snapshot_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_state_snapshot_digests": [
+        "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\018_ambient-vaporizer-01_G1\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "computed_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_echo_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\019_ambient-vaporizer-01_G2\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "provider_result_digest": "4b1350720bd61b22a8105594a8f8a38e95dac69c2b9c1953f9e477f29e9afca7",
+      "provider_result_digests": [
+        "4b1350720bd61b22a8105594a8f8a38e95dac69c2b9c1953f9e477f29e9afca7"
+      ],
+      "state_snapshot_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_state_snapshot_digests": [
+        "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\019_ambient-vaporizer-01_G2\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "computed_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_echo_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\020_ambient-vaporizer-01_G3\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "provider_result_digest": "f98eca244a0440e6b99a877de2d560e55903b6cc80be9802bdc280302bf42061",
+      "provider_result_digests": [
+        "f98eca244a0440e6b99a877de2d560e55903b6cc80be9802bdc280302bf42061"
+      ],
+      "state_snapshot_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_state_snapshot_digests": [
+        "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\020_ambient-vaporizer-01_G3\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "computed_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_echo_digest": "7e4eccb173e887bdde7d23c06616a2491a071619532d7a02f2a93cac6fe23e9f",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\021_reliquefier-01_G4\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "provider_result_digest": null,
+      "provider_result_digests": [
+        "ec9d5199377b8d95ed1e52b57fb1ba721b24483e4286a6ddfb4642ab1f0be75c",
+        "5d253b39141a2b85b7606dc1b9f284ea079830657b55b8de1102795ae263ba71"
+      ],
+      "state_snapshot_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_state_snapshot_digests": [
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\021_reliquefier-01_G4\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "computed_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_echo_digest": [
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de"
+      ],
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\022_reliquefier-01_G5\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "provider_result_digest": null,
+      "provider_result_digests": [
+        "b0294fe86a9be823caef55a9bb290a3865c6f95688f1ead2e0e6f7cefa05c495",
+        "ef836aa8f950b3b4dc729d064c6da1a28baa733bded9ce7279f2746b78e81ae2"
+      ],
+      "state_snapshot_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_state_snapshot_digests": [
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\022_reliquefier-01_G5\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "computed_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_echo_digest": [
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de"
+      ],
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    },
+    {
+      "source": "diagnostic_record",
+      "record": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\023_reliquefier-01_G6\\verification.json",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "provider_result_digest": "f15a0717da33f2f246817ab75f700bcb024198e3ad5bdc1dbcc494edc7cbc4b4",
+      "provider_result_digests": [
+        "f15a0717da33f2f246817ab75f700bcb024198e3ad5bdc1dbcc494edc7cbc4b4"
+      ],
+      "state_snapshot_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_state_snapshot_digests": [
+        "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de"
+      ],
+      "verification_path": "C:\\Temp\\prism_lh2dt_full_scope_worktree_catalog_current_20261018\\events\\023_reliquefier-01_G6\\verification.json",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "computed_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_echo_digest": "146e4af0d2aaf7fbd4350e469de85f30b9f48d645bed654ae0629ab0745b93de",
+      "provider_source_digest": null,
+      "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
+    }
+  ],
+  "diagnostic_only": true,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "facility_qra_claim": false,
+  "interpretation": "Canonical equipment state snapshots and provider echoes are carried into the native consequence requests. This proves request-level state identity; it does not qualify the provider packet or create an independent physical validation."
+}

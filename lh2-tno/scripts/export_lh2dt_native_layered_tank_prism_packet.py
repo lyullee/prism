@@ -232,6 +232,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "post_isolation_observation_s": provider_meta.get("post_isolation_observation_s"),
         "isolation_success": provider_meta.get("isolation_success"),
         "state_snapshot_digest_match": native_response.get("provider_state_snapshot_digest") == snapshot.digest(),
+        # Keep the canonical process-state payload beside the provider packet.
+        # The generic scope catalog consumes this verification record to bind
+        # the release back to the exact initial tank state.  A digest alone is
+        # deliberately insufficient for that audit, so the payload and the
+        # provider echo are both persisted here.
+        "state_snapshot": snapshot.to_mapping(),
+        "state_snapshot_handoff": {
+            "present": True,
+            "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+            "digest": snapshot.digest(),
+            "provider_echo_digest": native_response.get("provider_state_snapshot_digest"),
+            "digest_match": native_response.get("provider_state_snapshot_digest") == snapshot.digest(),
+        },
         "physical_validation_claim": False,
         "frequency_inference_performed": False,
         "facility_qra_claim": False,

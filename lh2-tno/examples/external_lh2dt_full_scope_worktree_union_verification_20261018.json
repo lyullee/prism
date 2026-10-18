@@ -1,0 +1,21 @@
+{
+  "schema_version": "prism.external_lh2dt_full_scope_worktree_union_recheck.v1",
+  "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
+  "source_record": "results\\20261115\\native_full_scope_union_assessment_current_source_diagnostic_20261018\\verification.json",
+  "diagnostic_only": true,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "merged_event_count": 34,
+  "merged_case_count": 44,
+  "merged_risk_atom_count": 176,
+  "base_state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+  "base_state_snapshot_binding_record_count": 24,
+  "base_state_snapshot_binding_bound_count": 24,
+  "base_result_state_snapshot_binding_status": "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED",
+  "base_result_state_snapshot_binding_case_count": 35,
+  "base_result_state_snapshot_binding_risk_atom_count": 96,
+  "facility_total_risk_available": false,
+  "vertical_handoff_status": "PARTIAL",
+  "inventory_depletion_status": "PARTIAL",
+  "interpretation": "The current dirty external source is structurally reconnectable to the existing vertical-handoff and inventory-depletion diagnostic extensions. The union remains diagnostic; provider qualification, independent full-chain validation, complete release scope, and facility IR/F-N remain withheld."
+}

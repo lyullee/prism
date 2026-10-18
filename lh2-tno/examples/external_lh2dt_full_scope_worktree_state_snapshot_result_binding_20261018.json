@@ -1,0 +1,12 @@
+{
+  "schema_version": "prism.state_snapshot_result_binding.v1",
+  "status": "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED",
+  "event_count": 24,
+  "bound_case_count": 35,
+  "bound_risk_atom_count": 96,
+  "audit_event_count": 24,
+  "diagnostic_only": true,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "Exact canonical equipment-state snapshots were copied from state-bound campaign requests into compact result identities after provider echo audit. No state was reconstructed from release values."
+}

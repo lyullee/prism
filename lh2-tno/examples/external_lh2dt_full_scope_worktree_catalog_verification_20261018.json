@@ -53,10 +53,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 39.48966270004166
+          "elapsed_s": 41.42060329997912
         }
       ],
-      "elapsed_s": 39.48966270004166,
+      "elapsed_s": 41.42060329997912,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -108,10 +108,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 39.66418819996761
+          "elapsed_s": 40.40576819999842
         }
       ],
-      "elapsed_s": 39.66418819996761,
+      "elapsed_s": 40.40576819999842,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -163,10 +163,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 61.917636100028176
+          "elapsed_s": 59.65953989996342
         }
       ],
-      "elapsed_s": 61.917636100028176,
+      "elapsed_s": 59.65953989996342,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -218,10 +218,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 58.59947150002699
+          "elapsed_s": 58.825176000013016
         }
       ],
-      "elapsed_s": 58.59947150002699,
+      "elapsed_s": 58.825176000013016,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -271,7 +271,7 @@
           ],
           "returncode": 1,
           "stderr_tail": "LayeredTank PRISM accident export failed: pressure_Pa must be finite and positive\n",
-          "elapsed_s": 1.7286602999665774
+          "elapsed_s": 1.4864703000057489
         },
         {
           "attempt_index": 1,
@@ -305,10 +305,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 4.092905899975449
+          "elapsed_s": 3.7835132000618614
         }
       ],
-      "elapsed_s": 4.092905899975449,
+      "elapsed_s": 3.7835132000618614,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": true,
@@ -372,10 +372,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.929485000029672
+          "elapsed_s": 1.7937538999831304
         }
       ],
-      "elapsed_s": 1.929485000029672,
+      "elapsed_s": 1.7937538999831304,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -439,10 +439,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.9797956999973394
+          "elapsed_s": 1.7973846000386402
         }
       ],
-      "elapsed_s": 1.9797956999973394,
+      "elapsed_s": 1.7973846000386402,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -506,10 +506,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.874767699977383
+          "elapsed_s": 1.8037368000368588
         }
       ],
-      "elapsed_s": 1.874767699977383,
+      "elapsed_s": 1.8037368000368588,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -573,10 +573,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.9440843999618664
+          "elapsed_s": 1.7990957000292838
         }
       ],
-      "elapsed_s": 1.9440843999618664,
+      "elapsed_s": 1.7990957000292838,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -640,10 +640,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.8676559000159614
+          "elapsed_s": 1.852188799995929
         }
       ],
-      "elapsed_s": 1.8676559000159614,
+      "elapsed_s": 1.852188799995929,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -697,10 +697,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.5451198000228032
+          "elapsed_s": 1.5566911000059918
         }
       ],
-      "elapsed_s": 1.5451198000228032,
+      "elapsed_s": 1.5566911000059918,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -754,10 +754,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.5443274000426754
+          "elapsed_s": 1.5969717999687418
         }
       ],
-      "elapsed_s": 1.5443274000426754,
+      "elapsed_s": 1.5969717999687418,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -811,10 +811,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.5976678000297397
+          "elapsed_s": 1.5953175000031479
         }
       ],
-      "elapsed_s": 1.5976678000297397,
+      "elapsed_s": 1.5953175000031479,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -868,10 +868,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.531304000003729
+          "elapsed_s": 1.5921499999822117
         }
       ],
-      "elapsed_s": 1.531304000003729,
+      "elapsed_s": 1.5921499999822117,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -925,10 +925,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.562517599959392
+          "elapsed_s": 1.5637474000104703
         }
       ],
-      "elapsed_s": 1.562517599959392,
+      "elapsed_s": 1.5637474000104703,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -970,10 +970,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.414917099988088
+          "elapsed_s": 1.4342354999971576
         }
       ],
-      "elapsed_s": 1.414917099988088,
+      "elapsed_s": 1.4342354999971576,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1027,10 +1027,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.5681473999866284
+          "elapsed_s": 1.5300963000045158
         }
       ],
-      "elapsed_s": 1.5681473999866284,
+      "elapsed_s": 1.5300963000045158,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1084,10 +1084,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.570226999989245
+          "elapsed_s": 1.524937099951785
         }
       ],
-      "elapsed_s": 1.570226999989245,
+      "elapsed_s": 1.524937099951785,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1135,10 +1135,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 31.48922400001902
+          "elapsed_s": 30.348163799964823
         }
       ],
-      "elapsed_s": 31.48922400001902,
+      "elapsed_s": 30.348163799964823,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1186,10 +1186,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 32.21623290004209
+          "elapsed_s": 30.888952500012238
         }
       ],
-      "elapsed_s": 32.21623290004209,
+      "elapsed_s": 30.888952500012238,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1241,10 +1241,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.467017000017222
+          "elapsed_s": 1.5209848000085913
         }
       ],
-      "elapsed_s": 1.467017000017222,
+      "elapsed_s": 1.5209848000085913,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1289,10 +1289,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 2.203911099990364
+          "elapsed_s": 2.165037199971266
         }
       ],
-      "elapsed_s": 2.203911099990364,
+      "elapsed_s": 2.165037199971266,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "two_sided",
       "retry_used": false,
@@ -1337,10 +1337,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 2.133700000005774
+          "elapsed_s": 2.2196162999607623
         }
       ],
-      "elapsed_s": 2.133700000005774,
+      "elapsed_s": 2.2196162999607623,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "two_sided",
       "retry_used": false,
@@ -1392,10 +1392,10 @@
           ],
           "returncode": 0,
           "stderr_tail": "",
-          "elapsed_s": 1.7144176000147127
+          "elapsed_s": 1.7518326000426896
         }
       ],
-      "elapsed_s": 1.7144176000147127,
+      "elapsed_s": 1.7518326000426896,
       "status": "EXACT_NATIVE_PACKET",
       "packet_kind": "release",
       "retry_used": false,
@@ -1417,9 +1417,9 @@
   },
   "state_snapshot_binding": {
     "audit": "state_snapshot_binding_audit.json",
-    "status": "PARTIAL_STATE_SNAPSHOT_BINDING",
+    "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
     "record_count": 24,
-    "bound_count": 20,
+    "bound_count": 24,
     "unbound_count": 0,
     "digest_mismatch_count": 0
   },
@@ -1441,32 +1441,32 @@
   },
   "timing": {
     "event_elapsed_s": {
-      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": 39.48966270004166,
-      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": 39.66418819996761,
-      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": 61.917636100028176,
-      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": 58.59947150002699,
-      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": 4.092905899975449,
-      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": 1.929485000029672,
-      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": 1.9797956999973394,
-      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": 1.874767699977383,
-      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": 1.9440843999618664,
-      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": 1.8676559000159614,
-      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": 1.5451198000228032,
-      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": 1.5443274000426754,
-      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": 1.5976678000297397,
-      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": 1.531304000003729,
-      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": 1.562517599959392,
-      "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": 1.414917099988088,
-      "generic-lh2-full-scope-frequency-example/transfer-pump/G1": 1.5681473999866284,
-      "generic-lh2-full-scope-frequency-example/transfer-pump/G2": 1.570226999989245,
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": 31.48922400001902,
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": 32.21623290004209,
-      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": 1.467017000017222,
-      "generic-lh2-full-scope-frequency-example/reliquefier/G4": 2.203911099990364,
-      "generic-lh2-full-scope-frequency-example/reliquefier/G5": 2.133700000005774,
-      "generic-lh2-full-scope-frequency-example/reliquefier/G6": 1.7144176000147127
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": 41.42060329997912,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": 40.40576819999842,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": 59.65953989996342,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": 58.825176000013016,
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": 3.7835132000618614,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": 1.7937538999831304,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": 1.7973846000386402,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": 1.8037368000368588,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": 1.7990957000292838,
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": 1.852188799995929,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": 1.5566911000059918,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": 1.5969717999687418,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": 1.5953175000031479,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": 1.5921499999822117,
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": 1.5637474000104703,
+      "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": 1.4342354999971576,
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G1": 1.5300963000045158,
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G2": 1.524937099951785,
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": 30.348163799964823,
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": 30.888952500012238,
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": 1.5209848000085913,
+      "generic-lh2-full-scope-frequency-example/reliquefier/G4": 2.165037199971266,
+      "generic-lh2-full-scope-frequency-example/reliquefier/G5": 2.2196162999607623,
+      "generic-lh2-full-scope-frequency-example/reliquefier/G6": 1.7518326000426896
     },
-    "total_elapsed_s": 296.9183838001336,
+    "total_elapsed_s": 294.42949429998407,
     "measurement": "wall-clock subprocess time; diagnostic exporter execution only"
   }
 }

@@ -30,6 +30,21 @@ Dynamic state closure is visible in the current ledger. The base campaign contai
 
 These are diagnostic comparison outputs. `facility_total_risk_available=false`, `qualified_facility_qra_available=false`, `provider_packet_promoted=false`, and `physical_validation_claim=false` remain enforced. The remaining work is evidence qualification and facility-scope closure, not packet/frequency identity reconciliation.
 
+## Current dirty-worktree recheck
+
+The external worktree was rechecked again after the latest source changes. The
+24-event catalog still produced 24 exact packets with zero uncomputed events.
+The native layered-tank adapter now stores the canonical equipment-state
+payload in its verification sidecar as well as the provider echo digest. The
+state audit therefore reports **24/24 `BOUND_AND_ECHOED`**, with zero unbound
+or digest-mismatch rows. A fresh 24-case facility replay completed all 24
+diagnostic chains, produced 96 risk atoms, retained 11 operator-limited cases,
+and took 603.72 s. This is a traceability improvement; the external worktree
+is still dirty, all packets remain synthetic diagnostic evidence, and the
+facility IR/F-N and qualification gates remain closed.
+
+The updated compact records are [`external_lh2dt_full_scope_worktree_catalog_verification_20261018.json`](../examples/external_lh2dt_full_scope_worktree_catalog_verification_20261018.json), [`external_lh2dt_full_scope_worktree_campaign_verification_20261018.json`](../examples/external_lh2dt_full_scope_worktree_campaign_verification_20261018.json), and [`external_lh2dt_full_scope_worktree_state_snapshot_binding_20261018.json`](../examples/external_lh2dt_full_scope_worktree_state_snapshot_binding_20261018.json).
+
 ## Code change made during the check
 
 The campaign packet rebind adapter now maps provider termination metadata to the contract-compatible equipment operator. It also sets `source_duration_mode=model_natural` for pressure-equalisation packets and selects the liquid or gas operator as appropriate for inventory boundaries. This prevents stale campaign templates from rejecting a valid provider packet while preserving provider duration, mass, and frequency ownership.

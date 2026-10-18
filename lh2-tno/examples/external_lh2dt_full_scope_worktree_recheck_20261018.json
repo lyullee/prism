@@ -21,10 +21,11 @@
       "two_sided_rupture": 2
     },
     "state_snapshot_record_count": 24,
-    "state_snapshot_bound_count": 20,
+    "state_snapshot_bound_count": 24,
     "state_snapshot_unbound_count": 0,
     "state_snapshot_digest_mismatch_count": 0,
-    "all_event_rows_exact_native_packet": true
+    "all_event_rows_exact_native_packet": true,
+    "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED"
   },
   "campaign": {
     "status": "NATIVE_PROVIDER_MULTI_EQUIPMENT_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
@@ -38,7 +39,7 @@
     "matched_event_chain_closed": true,
     "matched_event_risk_atom_chain_closed": true,
     "frequency_scenario_count": 3,
-    "campaign_elapsed_ms": 504688.6607000488,
+    "campaign_elapsed_ms": 603721.2017999846,
     "known_contribution_annual_ir_low_high": {
       "worker-01": [
         3.7804000000000134e-06,
@@ -323,10 +324,17 @@
     "provider_packet_missing_evidence_case_count": 24,
     "provider_packet_promoted": false,
     "physical_validation_claim": false,
-    "facility_qra_claim": false
+    "facility_qra_claim": false,
+    "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+    "state_snapshot_binding_record_count": 24,
+    "state_snapshot_binding_bound_count": 24,
+    "state_snapshot_binding_unbound_count": 0,
+    "state_snapshot_binding_digest_mismatch_count": 0,
+    "state_snapshot_result_binding_status": "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED",
+    "state_snapshot_result_binding_record": "examples/external_lh2dt_full_scope_worktree_state_snapshot_result_binding_20261018.json"
   },
   "interpretation": [
-    "Current dirty external source and current reviewed plan produce an exact 24/24 packet catalog and 24/24 diagnostic consequence chains with 96 risk atoms.",
+    "Current dirty external source and current reviewed plan produce an exact 24/24 packet catalog, 24/24 bound-and-echoed state snapshots, and 24/24 diagnostic consequence chains with 96 risk atoms.",
     "Execution closure does not equal qualified evidence: 11 cases remain operator-limited/withheld and provider qualification is 0/24.",
     "Conditional known-contribution IR is available only for the executed diagnostic subset; declared-scope and total-facility IR/F-N remain withheld.",
     "Do not replace the authoritative 34-event/44-case/176-risk-atom union with this recheck. Rebind only after the external source is committed, qualification sidecars and independent validation are supplied, and scope closure is reviewed."
@@ -340,6 +348,9 @@
   },
   "source_artifacts": {
     "catalog_verification": "examples/external_lh2dt_full_scope_worktree_catalog_verification_20261018.json",
-    "campaign_verification": "examples/external_lh2dt_full_scope_worktree_campaign_verification_20261018.json"
+    "campaign_verification": "examples/external_lh2dt_full_scope_worktree_campaign_verification_20261018.json",
+    "state_snapshot_binding": "examples/external_lh2dt_full_scope_worktree_state_snapshot_binding_20261018.json",
+    "state_snapshot_result_binding": "examples/external_lh2dt_full_scope_worktree_state_snapshot_result_binding_20261018.json",
+    "current_union_diagnostic": "results/20261115/native_full_scope_union_assessment_current_source_diagnostic_20261018/verification.json"
   }
 }
