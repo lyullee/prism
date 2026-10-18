@@ -2212,6 +2212,22 @@ def build_ijhe_completion_audit(
     )
     frequency_audit_available = frequency_audit_valid
     if uncertainty is not None or frequency_audit_available:
+        # The current facility assessment stores the five literature and
+        # independent-event scenarios in a dedicated audit record.  When the
+        # older conditional result is absent, expose that count directly
+        # instead of reporting a misleading zero in the completion receipt.
+        frequency_audit_scenario_count = (
+            facility_frequency_uncertainty_audit.get("scenario_count")
+            if isinstance(facility_frequency_uncertainty_audit, Mapping)
+            and isinstance(facility_frequency_uncertainty_audit.get("scenario_count"), int)
+            else 0
+        )
+        effective_scenario_count = (
+            len(uncertainty.get("scenarios", []))
+            if isinstance(uncertainty, Mapping)
+            and isinstance(uncertainty.get("scenarios"), list)
+            else frequency_audit_scenario_count
+        )
         scenarios = uncertainty.get("scenarios") if uncertainty is not None else []
         valid_scenarios = [
             row
@@ -2242,7 +2258,12 @@ def build_ijhe_completion_audit(
                 "diagnostic_only": True,
                 "blocking_reason": None,
                 "evidence": {
-                    "scenario_count": len(scenarios) if isinstance(scenarios, list) else 0,
+                    "scenario_count": effective_scenario_count,
+                    "scenario_source": (
+                        "conditional_diagnostic_result"
+                        if isinstance(scenarios, list) and scenarios
+                        else "facility_frequency_uncertainty_audit"
+                    ),
                     "valid_scenario_count": len(valid_scenarios),
                     "facility_credible_interval": uncertainty.get("facility_credible_interval") if uncertainty is not None else None,
                     "fresh_physics_executed": uncertainty.get("fresh_physics_executed") if uncertainty is not None else None,
@@ -3138,8 +3159,10 @@ def build_ijhe_completion_audit(
         else []
     )
     slabx_component_validation_closed = (
-        current_status.get("slabx_lh2_validation_current_status")
-        == "CLOSED_VALIDATED_COMPONENT"
+        isinstance(current_status.get("slabx_lh2_validation_current_status"), str)
+        and current_status["slabx_lh2_validation_current_status"].startswith(
+            "CLOSED_VALIDATED_COMPONENT"
+        )
     )
     facility_full_chain_validation_status = current_status.get(
         "facility_full_chain_physical_validation_status",
@@ -3410,7 +3433,16 @@ def build_ijhe_completion_audit(
             ),
             {
                 "uncertainty_result_present": uncertainty is not None,
-                "scenario_count": len(uncertainty.get("scenarios", [])) if uncertainty else 0,
+                "scenario_count": (
+                    len(uncertainty.get("scenarios", []))
+                    if isinstance(uncertainty, Mapping)
+                    and isinstance(uncertainty.get("scenarios"), list)
+                    else (
+                        facility_frequency_uncertainty_audit.get("scenario_count")
+                        if isinstance(facility_frequency_uncertainty_audit, Mapping)
+                        else 0
+                    )
+                ),
                 "facility_credible_interval": uncertainty.get("facility_credible_interval") if uncertainty else None,
                 "conditional_frequency_uncertainty": conditional_frequency_uncertainty,
                 **(

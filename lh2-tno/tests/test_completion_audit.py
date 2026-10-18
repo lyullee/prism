@@ -155,6 +155,29 @@ def test_completion_audit_excludes_closed_slabx_component_from_open_scope_gate()
         if item["name"] == "physical_validation_evidence"
     )
     assert physical["evidence"]["slabx_component_gate_closed"] is True
+
+
+def test_completion_audit_accepts_annotated_closed_slabx_status():
+    status = _status(False)
+    status["slabx_lh2_validation_current_status"] = (
+        "CLOSED_VALIDATED_COMPONENT; 5/5 checks pass; no additional SLABx task"
+    )
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        validation_evidence_matrix={
+            "status": "RESTRICTED_EVIDENCE_MATRIX",
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+        },
+    )
+    physical = next(
+        item for item in report["checks"]
+        if item["name"] == "physical_validation_evidence"
+    )
+    assert physical["evidence"]["slabx_component_gate_closed"] is True
     assert physical["evidence"]["facility_full_chain_validation_status"] == "OPEN"
 
 
@@ -2622,6 +2645,46 @@ def test_completion_audit_records_diagnostic_frequency_uncertainty():
     assert frequency_check["status"] == "PASS"
     assert frequency_check["evidence"]["conditional_frequency_uncertainty"] is True
     assert len(report["blocking_reasons"]) == 5
+
+
+def test_completion_audit_exposes_facility_frequency_audit_scenario_count():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        facility_frequency_uncertainty_audit={
+            "schema_version": "prism.facility_frequency_uncertainty_audit.v1",
+            "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+            "scenario_count": 5,
+            "risk_atom_count": 176,
+            "mismatch_count": 0,
+            "blocking_reasons": [],
+            "frequency_inference_performed": False,
+            "facility_credible_interval": False,
+            "statistical_confidence_interval": False,
+            "fresh_physics_executed": False,
+            "provider_packet_promoted": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    )
+    diagnostic = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_frequency_uncertainty_evidence"
+    )
+    reported = next(
+        item for item in report["checks"]
+        if item["name"] == "frequency_uncertainty_reported"
+    )
+    assert diagnostic["status"] == "PASS"
+    assert diagnostic["evidence"]["scenario_count"] == 5
+    assert diagnostic["evidence"]["scenario_source"] == (
+        "facility_frequency_uncertainty_audit"
+    )
+    assert reported["status"] == "PASS"
+    assert reported["evidence"]["scenario_count"] == 5
 
 
 def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_promotion():

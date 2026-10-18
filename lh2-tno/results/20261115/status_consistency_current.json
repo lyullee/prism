@@ -38,12 +38,12 @@
       "name": "latest_local_full_suite_pointer",
       "status": "PASS",
       "evidence": {
-        "current_count": 1556,
-        "development_goal_count": 1556,
-        "current_status": "1556 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "development_goal_status": "1556 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "current_record": "python -m pytest -q; 1556 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "development_goal_record": "python -m pytest -q; 1556 passed, 1 warning; mass-basis drift fail-closed regression recheck"
+        "current_count": 1559,
+        "development_goal_count": 1559,
+        "current_status": "1559 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "development_goal_status": "1559 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "current_record": "python -m pytest -q; 1559 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "development_goal_record": "python -m pytest -q; 1559 passed, 1 warning; mass-basis drift fail-closed regression recheck"
       }
     },
     {

@@ -39,10 +39,8 @@ SLABx-LH2 remains a frozen, validated consequence component. Its existing 5/5 co
 
 The external `lh2dt` Python source tree was rechecked at source commit `7072374c59b726f4e938cd37e7695684ddc70b68` with source-tree digest `3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74`. Its full suite passed `377` tests with one warning. The workspace has one untracked benchmark document, `docs/benchmarks/nasa_tn_d4171_hem_validation.md`; this is documentation intake, not a source-code change.
 
-PRISM's full portable suite passed `1556` tests with one warning after the numeric boundary, provider-state rebaseline, campaign-binder gate, mass-basis facility-trace, case-boundary regression, explicit provider-ownership request, manifest-synchronization regression, and mass-basis drift fail-closed regression changes. The audit artifact remains fail-closed and diagnostic-only.
+PRISM's full portable suite passed `1559` tests with one warning after the numeric boundary, provider-state rebaseline, campaign-binder gate, mass-basis facility-trace, case-boundary regression, explicit provider-ownership request, manifest-synchronization regression, and mass-basis drift fail-closed regression changes. The audit artifact remains fail-closed and diagnostic-only.
 
 ## Continuous integration
 
 GitHub Actions run #1446 for commit `d254016c` completed successfully after the mass-basis drift fail-closed regression was added. The API record is the authoritative status; the web page may briefly show a stale in-progress view during the recheck.
-
-

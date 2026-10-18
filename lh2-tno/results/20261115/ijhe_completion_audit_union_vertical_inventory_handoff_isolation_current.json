@@ -5057,7 +5057,7 @@
         ],
         "promotion_policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates",
         "raw_ledger_reconciliation": {
-          "status": "MATCHED",
+          "status": "MISMATCHED",
           "compared_fields": [
             "schema_version",
             "strict_release_boundary_ready",
@@ -5067,7 +5067,9 @@
             "blocking_reasons",
             "residual_tolerance_kg"
           ],
-          "mismatched_fields": [],
+          "mismatched_fields": [
+            "checks"
+          ],
           "recomputed_schema_version": "prism.facility_release_boundary_gate.v1",
           "recomputed_case_count": 44,
           "recomputed_withheld_case_count": 29,
@@ -5077,6 +5079,7 @@
             "all_isolation_or_inventory_statuses_closed": true,
             "all_mass_residuals_closed": false,
             "all_provider_mass_balances_closed": true,
+            "all_provider_mass_bases_aligned": true,
             "no_withheld_cases": false
           },
           "recomputed_blocking_reasons": [
@@ -5133,7 +5136,8 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "scenario_count": 0,
+        "scenario_count": 5,
+        "scenario_source": "facility_frequency_uncertainty_audit",
         "valid_scenario_count": 0,
         "facility_credible_interval": null,
         "fresh_physics_executed": null,
@@ -5515,7 +5519,7 @@
           "vertical_handoff"
         ]
       },
-      "blocking_reason": "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open"
+      "blocking_reason": "declared accident families have numerical diagnostic outputs, but qualified provider evidence and facility-wide independent validation remain open; the validated SLABx-LH2 component is excluded from this gate"
     },
     {
       "name": "conditional_accident_scope_accounting",
@@ -5556,7 +5560,10 @@
         "evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
         "evidence_record": "docs/PRISM_물리검증_근거_20261009.md",
         "evidence_component": "DynamicLH2PoolX pool/spreading only",
-        "restricted_component_evidence": true
+        "restricted_component_evidence": true,
+        "slabx_component_validation_status": "CLOSED_VALIDATED_COMPONENT; 5/5 checks pass; no additional SLABx task",
+        "facility_full_chain_validation_status": "OPEN",
+        "slabx_component_gate_closed": true
       },
       "blocking_reason": null
     },
@@ -5565,7 +5572,7 @@
       "status": "PASS",
       "evidence": {
         "uncertainty_result_present": false,
-        "scenario_count": 0,
+        "scenario_count": 5,
         "facility_credible_interval": null,
         "conditional_frequency_uncertainty": true,
         "facility_frequency_uncertainty_audit": {
@@ -5597,7 +5604,7 @@
       "evidence": {
         "implemented": true,
         "module": "src/lh2_tno/service.py",
-        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1504 passed, 1 warning; GitHub Actions run 39073656583 (bd168e8f) completed successfully.",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1559 passed, 1 warning; GitHub Actions run #1447 (39095157347; c55c48ea) completed successfully.",
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null
@@ -6156,7 +6163,11 @@
             "state_mass_kg": 0.028492061899609754,
             "provider_initial_mass_kg": 71.7644005715206,
             "absolute_difference_kg": 71.73590850962098,
-            "relative_difference": 0.9996029777762692
+            "relative_difference": 0.9996029777762692,
+            "classification": "MASS_BASIS_UNDECLARED_REVIEW_REQUIRED",
+            "classification_reason": "state and provider masses differ, but neither side declares a comparable inventory basis",
+            "state_mass_basis": null,
+            "provider_mass_basis": null
           }
         ],
         "promotion_allowed": false
@@ -6469,7 +6480,7 @@
   "blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
-    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
+    "declared accident families have numerical diagnostic outputs, but qualified provider evidence and facility-wide independent validation remain open; the validated SLABx-LH2 component is excluded from this gate",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
     "facility cases do not all have exact qualified provider packet evidence"
   ],
