@@ -59,6 +59,48 @@ def _has_unsafe_facility_claim(campaign: Mapping[str, Any]) -> bool:
     return any(source.get(flag) is True for source in sources for flag in blocked_flags)
 
 
+def _facility_gate_summary(campaign: Mapping[str, Any]) -> dict[str, Any]:
+    """Expose the facility promotion gates without hiding missing evidence."""
+    ledger = campaign.get("facility_ledger")
+    ledger = ledger if isinstance(ledger, Mapping) else None
+    policy = campaign.get("policy")
+    policy = policy if isinstance(policy, Mapping) else {}
+
+    def optional_bool(source: Mapping[str, Any] | None, key: str) -> bool | None:
+        if source is None or not isinstance(source.get(key), bool):
+            return None
+        return bool(source[key])
+
+    return {
+        "campaign_status": str(campaign.get("status", "")),
+        "facility_ledger_present": ledger is not None,
+        "provider_release_boundary_case_count": (
+            ledger.get("provider_release_boundary_case_count") if ledger is not None else None
+        ),
+        "provider_release_boundary_ready": optional_bool(
+            ledger, "provider_release_boundary_ready"
+        ),
+        "conditional_diagnostic_facility_risk_available": optional_bool(
+            ledger, "conditional_diagnostic_facility_risk_available"
+        ),
+        "conditional_diagnostic_facility_fn_available": (
+            ledger.get("conditional_diagnostic_facility_expected_death_fn_low_high")
+            is not None
+            if ledger is not None
+            else None
+        ),
+        "facility_total_risk_available": optional_bool(
+            ledger, "facility_total_risk_available"
+        ),
+        "qualified_facility_qra_available": optional_bool(
+            ledger, "qualified_facility_qra_available"
+        ),
+        "facility_qra_promotion": policy.get("facility_qra_promotion") is True,
+        "frequency_inference_performed": policy.get("frequency_inference_performed") is True,
+        "physical_validation_claim": policy.get("physical_validation_claim") is True,
+    }
+
+
 def _forecast_trigger_key(component_id: str, scenario_id: str, forecast_time_s: float) -> str:
     """Return the JSON-safe identity for one forecast quantitative trigger."""
 
@@ -743,6 +785,10 @@ def run_hazop_integrated_risk(
         "forecast": forecast,
         "facility_campaign": facility_campaign,
         "forecast_facility_campaign": forecast_facility_campaign,
+        "facility_gate_summary": {
+            "current": _facility_gate_summary(facility_campaign),
+            "forecast": _facility_gate_summary(forecast_facility_campaign),
+        },
         "forecast_evidence_gate": forecast_evidence_gate,
         "linkage": {
             "current_component_ids": sorted(current_frames),

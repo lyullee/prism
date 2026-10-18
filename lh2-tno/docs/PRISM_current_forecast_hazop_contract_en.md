@@ -35,6 +35,14 @@ it may contain a conditional current-weather IR and expected-death F/N
 contribution. This is a response-screen result; it is not the all-weather
 annual facility F/N curve.
 
+The returned `facility_gate_summary.current` and
+`facility_gate_summary.forecast` objects are the compact display contract for
+a digital-twin UI. They expose the provider release-boundary case count,
+boundary readiness, conditional diagnostic IR/F-N availability, strict
+facility-total availability, and qualified-QRA availability without requiring
+the UI to traverse the full campaign ledger. A missing field is reported as
+`null`; it is never changed to an available or zero-risk result.
+
 `forecast` contains one row per predicted component and time. A quantitative
 evaluator is called only when a new HAZOP condition is reached (`entry`) or at
 every active step (`each_step`). The evaluator owns the equipment release,
