@@ -32,6 +32,32 @@ class IntegratedRiskError(ValueError):
     """Raised when the current/forecast integration contract is incomplete."""
 
 
+def _facility_ledgers(campaign: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Collect direct and per-forecast facility ledgers from one campaign."""
+    ledgers: list[Mapping[str, Any]] = []
+    direct = campaign.get("facility_ledger")
+    if isinstance(direct, Mapping):
+        ledgers.append(direct)
+        return ledgers
+
+    nested = campaign.get("campaigns")
+    if not isinstance(nested, Sequence) or isinstance(nested, (str, bytes)):
+        return ledgers
+    for item in nested:
+        if not isinstance(item, Mapping):
+            continue
+        nested_ledger = item.get("facility_ledger")
+        if isinstance(nested_ledger, Mapping):
+            ledgers.append(nested_ledger)
+            continue
+        nested_result = item.get("result")
+        if isinstance(nested_result, Mapping) and isinstance(
+            nested_result.get("facility_ledger"), Mapping
+        ):
+            ledgers.append(nested_result["facility_ledger"])
+    return ledgers
+
+
 def _has_unsafe_facility_claim(campaign: Mapping[str, Any]) -> bool:
     """Return whether a supplied campaign claims a facility-QRA promotion.
 
@@ -42,10 +68,7 @@ def _has_unsafe_facility_claim(campaign: Mapping[str, Any]) -> bool:
     but reject qualification, provider-promotion, inference, and validation
     claims at both levels.
     """
-    sources: list[Mapping[str, Any]] = [campaign]
-    ledger = campaign.get("facility_ledger")
-    if isinstance(ledger, Mapping):
-        sources.append(ledger)
+    sources: list[Mapping[str, Any]] = [campaign, *_facility_ledgers(campaign)]
     blocked_flags = (
         "facility_qra_promotion",
         "qualified_facility_qra_available",
@@ -61,29 +84,10 @@ def _has_unsafe_facility_claim(campaign: Mapping[str, Any]) -> bool:
 
 def _facility_gate_summary(campaign: Mapping[str, Any]) -> dict[str, Any]:
     """Expose the facility promotion gates without hiding missing evidence."""
-    ledger = campaign.get("facility_ledger")
-    ledger = ledger if isinstance(ledger, Mapping) else None
-    ledgers: list[Mapping[str, Any]] = []
-    if ledger is not None:
-        ledgers.append(ledger)
-    else:
-        # Forecast evaluators may retain one facility ledger per prediction
-        # time under ``campaigns``.  Do not report null simply because the
-        # evaluator uses that explicit nested representation.
-        nested = campaign.get("campaigns")
-        if isinstance(nested, Sequence) and not isinstance(nested, (str, bytes)):
-            for item in nested:
-                if not isinstance(item, Mapping):
-                    continue
-                nested_ledger = item.get("facility_ledger")
-                if isinstance(nested_ledger, Mapping):
-                    ledgers.append(nested_ledger)
-                else:
-                    nested_result = item.get("result")
-                    if isinstance(nested_result, Mapping) and isinstance(
-                        nested_result.get("facility_ledger"), Mapping
-                    ):
-                        ledgers.append(nested_result["facility_ledger"])
+    # Forecast evaluators may retain one facility ledger per prediction time
+    # under ``campaigns``.  Do not report null simply because the evaluator
+    # uses that explicit nested representation.
+    ledgers = _facility_ledgers(campaign)
     policy = campaign.get("policy")
     policy = policy if isinstance(policy, Mapping) else {}
 

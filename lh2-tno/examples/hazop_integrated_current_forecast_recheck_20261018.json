@@ -2,7 +2,7 @@
   "schema_version": "prism.hazop_integrated_current_forecast_recheck_receipt.v1",
   "generated_at_utc": "2026-10-18T02:10:31.330649+00:00",
   "source_record": "results/20261018/hazop_provider_bound_integrated_risk_recheck_20261018.json",
-  "source_record_sha256": "8c9f3a6108d06a27a2d3ec8ff3a6aa11c06d6c6b754c39aa1100dc780b9789c5",
+  "source_record_sha256": "0513753bc0ec26b91862cd804e73c569bbe6b540ac7c9112d04b2b5c14329139",
   "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "current": {
@@ -92,7 +92,7 @@
     "frequency_inference_performed": false
   },
   "timing": {
-    "wall_elapsed_ms": 20974.717000033706,
+    "wall_elapsed_ms": 21483.089400047902,
     "interpretation": "Measured for this invocation; not an operating 1 Hz guarantee."
   },
   "policy": {
