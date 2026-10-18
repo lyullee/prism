@@ -402,11 +402,36 @@ def build_diagnostic_release_rebind(
         if existing is None:
             rebound["provider_mass_balance"] = copy.deepcopy(candidate)
             mass_balance_attached = True
-        elif existing != candidate:
-            raise ExternalReleaseNormalizationError(
-                "release provider_mass_balance disagrees with the normalized provider response"
-            )
         else:
+            if not isinstance(existing, Mapping):
+                raise ExternalReleaseNormalizationError(
+                    "release provider_mass_balance is not an object"
+                )
+            merged = copy.deepcopy(dict(existing))
+            disagreements: list[str] = []
+            for key, value in candidate.items():
+                if key not in merged or merged[key] is None:
+                    merged[key] = copy.deepcopy(value)
+                    continue
+                # A missing cumulative inflow is the legacy spelling of an
+                # explicitly zero-inflow boundary.  Treat those two forms as
+                # equivalent while keeping the provider-derived value in the
+                # rebound copy.  Other fields still require exact agreement.
+                if (
+                    key == "cumulative_mass_in_kg"
+                    and ((merged[key] is None and value == 0.0) or
+                         (value is None and merged[key] == 0.0))
+                ):
+                    merged[key] = copy.deepcopy(value)
+                    continue
+                if merged[key] != value:
+                    disagreements.append(key)
+            if disagreements:
+                raise ExternalReleaseNormalizationError(
+                    "release provider_mass_balance disagrees with the normalized "
+                    "provider response for: " + ", ".join(disagreements)
+                )
+            rebound["provider_mass_balance"] = merged
             mass_balance_attached = True
 
     return {

@@ -323,6 +323,54 @@ def test_diagnostic_release_rebind_attaches_only_exported_mass_ledger() -> None:
     assert rebound["promotion"]["frequency_inference_allowed"] is False
 
 
+def test_diagnostic_release_rebind_merges_legacy_mass_balance_shape() -> None:
+    """A legacy packet may carry a partial ledger alongside the same provider response."""
+    release = _release("model_prediction")
+    release.update({
+        "termination_provenance": "native model ledger",
+        "cumulative_mass_out_kg": 2.0,
+        "provider_mass_balance": {
+            "schema_version": "prism.provider_mass_balance.v1",
+            "initial_mass_kg": 10.0,
+            "cumulative_mass_in_kg": None,
+            "cumulative_mass_out_kg": 2.0,
+            "final_mass_kg": 8.0,
+            "reported_residual_mass_kg": 0.0,
+            "derived_accounting_residual_kg": 0.0,
+        },
+    })
+    response = {
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "provider_model": "native-test-model",
+        "provider_source_digest": "a" * 64,
+        "data": {
+            "event_id": release["event_id"],
+            "component_id": release["component_id"],
+            "port_id": release["port_id"],
+            "duration_s": release["duration_s"],
+            "available_mass_kg": release["available_mass_kg"],
+            "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+            "termination_basis": release["termination_basis"],
+            "termination_provenance": release["termination_provenance"],
+            "provider_meta": {
+                "native_inventory_owner": "native-test-model",
+                "initial_mass_kg": 10.0,
+                "final_mass_kg": 8.0,
+                "residual_mass_kg": 0.0,
+                "cumulative_mass_out_kg": 2.0,
+            },
+        },
+    }
+    release["provider_result_digest"] = canonical_digest(response)
+
+    rebound = build_diagnostic_release_rebind(release, response)
+
+    assert rebound["mass_balance_attached"] is True
+    merged = rebound["release"]["provider_mass_balance"]
+    assert merged["mass_basis_id"] == "native-test-model"
+    assert merged["cumulative_mass_in_kg"] == 0.0
+
+
 def test_external_release_response_marks_optional_gas_handoff_blocked_without_source_state() -> None:
     release = _release("model_prediction")
     release.update(

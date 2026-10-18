@@ -128,3 +128,16 @@ These packets remain diagnostic and unqualified.
 ## Current IJHE audit pointer
 
 The current-source G1 rebind is consumed by [`ijhe_completion_audit_rebuilt_current.json`](../results/20261115/ijhe_completion_audit_rebuilt_current.json). The latest run contains 49 checks: 44 pass and 5 strict blockers. Diagnostic state-to-release, HAZOP mode/scenario binding, frequency uncertainty, chain closure, timing, and the frozen SLABx-LH2 evidence pass; qualified provider release, complete release-boundary closure, qualified case coverage, declared-scope qualification, and facility IR/F-N remain withheld.
+
+## Current provider-release rebind audit
+
+The current external-source packet set was rechecked with the provider response and
+resolved-release records paired by exact event identity. The audit is stored in
+[`native_full_scope_release_rebind_audit_current_20261018.json`](../examples/native_full_scope_release_rebind_audit_current_20261018.json).
+It covers 22 paired release/response artifacts: 21 satisfy the strict release
+contract, 20 retain an attached provider mass ledger, and 18 have an allowed
+termination basis. The dynamic-state ledger reports 13 `READY`, 8 blocked rows,
+and one emergency-relief row outside the random-release contract. The revised
+normalizer merges legacy partial-ledger shapes semantically and preserves all
+provider residuals; it does not infer a missing inventory, frequency, physical
+validation, or qualification sidecar.
