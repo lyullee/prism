@@ -5041,7 +5041,7 @@
   "ijhe_completion_audit_latest_recheck_20261018_slabx_status": "CLOSED_VALIDATED_COMPONENT; no SLABx-LH2 code or validation change",
   "ci_recheck_20261018_status": "PASS; GitHub Actions run 1405 completed successfully for explicit state-release reconciliation audit; no CI failure remains",
   "ci_recheck_20261018_record": "https://github.com/lyullee/prism/actions/runs/39078396095",
-  "ijhe_completion_audit_latest_recheck_20261018_state_release_mass_consistency_status": "MASS_STATE_CONSISTENCY_REVIEW_REQUIRED; 44 cases, 8 comparable, 7 matched, 1 mismatch, 36 not comparable; promotion false",
+  "ijhe_completion_audit_latest_recheck_20261018_state_release_mass_consistency_status": "MASS_STATE_CONSISTENCY_REVIEW_REQUIRED; 44 cases, 8 comparable, 7 matched, 1 mismatch (MASS_BASIS_UNDECLARED_REVIEW_REQUIRED), 36 not comparable; promotion false",
   "ijhe_completion_audit_latest_recheck_20261018_state_release_mass_consistency_record": "examples/state_release_mass_consistency_audit_20261018.json",
   "latest_ijhe_audit_metadata_verifier_check_count": 60,
   "latest_ijhe_audit_metadata_verifier_status": "PASS",

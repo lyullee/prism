@@ -15,6 +15,19 @@ from typing import Any
 
 AUDIT_SCHEMA = "prism.state_release_mass_consistency_audit.v1"
 
+# These are intentionally explicit contract fields.  The audit must not infer
+# that two masses share an inventory basis merely because their component IDs
+# happen to match: a provider may report an upstream reserve while the state
+# snapshot reports the local vessel inventory.
+_MASS_BASIS_KEYS = (
+    "mass_basis_id",
+    "inventory_owner_id",
+    "inventory_scope",
+    "mass_scope",
+    "provider_mass_basis_id",
+    "provider_inventory_owner_id",
+)
+
 
 def _finite_nonnegative(value: Any) -> bool:
     return (
@@ -33,6 +46,20 @@ def _case_label(case: Mapping[str, Any]) -> str:
     if isinstance(case_id, str) and case_id:
         return case_id
     return "<unidentified-case>"
+
+
+def _explicit_mass_basis(*mappings: Mapping[str, Any] | None) -> str | None:
+    """Return a declared mass-basis token, without guessing one."""
+    for mapping in mappings:
+        if not isinstance(mapping, Mapping):
+            continue
+        for key in _MASS_BASIS_KEYS:
+            value = mapping.get(key)
+            if isinstance(value, (str, int, float)) and not isinstance(value, bool):
+                token = str(value).strip()
+                if token:
+                    return token
+    return None
 
 
 def build_state_release_mass_consistency_audit(
@@ -57,6 +84,7 @@ def build_state_release_mass_consistency_audit(
         raise ValueError("campaign_result.cases must be a list")
 
     mismatch_rows: list[dict[str, Any]] = []
+    mismatch_classification_counts: dict[str, int] = {}
     not_comparable_case_ids: list[str] = []
     comparable = matched = 0
     for raw_case in cases:
@@ -80,6 +108,21 @@ def build_state_release_mass_consistency_audit(
         if math.isclose(state_value, initial_value, rel_tol=float(relative_tolerance), abs_tol=float(absolute_tolerance)):
             matched += 1
             continue
+        state_basis = _explicit_mass_basis(snapshot)
+        provider_basis = _explicit_mass_basis(balance, packet)
+        if state_basis is None and provider_basis is None:
+            classification = "MASS_BASIS_UNDECLARED_REVIEW_REQUIRED"
+            classification_reason = (
+                "state and provider masses differ, but neither side declares a comparable "
+                "inventory basis"
+            )
+        elif state_basis is not None and provider_basis is not None and state_basis != provider_basis:
+            classification = "MASS_BASIS_ID_MISMATCH_REVIEW_REQUIRED"
+            classification_reason = "state and provider declare different inventory-basis tokens"
+        else:
+            classification = "MASS_VALUE_MISMATCH_REVIEW_REQUIRED"
+            classification_reason = "both masses declare a comparable basis, but their values differ"
+        mismatch_classification_counts[classification] = mismatch_classification_counts.get(classification, 0) + 1
         mismatch_rows.append({
             "case_id": label,
             "event_id": raw_case.get("event_id"),
@@ -89,6 +132,10 @@ def build_state_release_mass_consistency_audit(
             "provider_initial_mass_kg": initial_value,
             "absolute_difference_kg": abs(state_value - initial_value),
             "relative_difference": abs(state_value - initial_value) / max(abs(initial_value), 1e-300),
+            "classification": classification,
+            "classification_reason": classification_reason,
+            "state_mass_basis": state_basis,
+            "provider_mass_basis": provider_basis,
         })
 
     mismatch_count = len(mismatch_rows)
@@ -104,6 +151,14 @@ def build_state_release_mass_consistency_audit(
         "comparable_case_count": comparable,
         "matched_case_count": matched,
         "mismatch_case_count": mismatch_count,
+        "mismatch_classification_counts": mismatch_classification_counts,
+        "mass_basis_review_required_case_count": sum(
+            count for classification, count in mismatch_classification_counts.items()
+            if classification in {
+                "MASS_BASIS_UNDECLARED_REVIEW_REQUIRED",
+                "MASS_BASIS_ID_MISMATCH_REVIEW_REQUIRED",
+            }
+        ),
         "not_comparable_case_count": len(not_comparable_case_ids),
         "relative_tolerance": float(relative_tolerance),
         "absolute_tolerance_kg": float(absolute_tolerance),
@@ -117,7 +172,8 @@ def build_state_release_mass_consistency_audit(
         "promotion_allowed": False,
         "interpretation": (
             "This is a numeric boundary diagnostic. A mismatch or missing field is retained as an "
-            "open model-input issue; no mass is corrected, and no provider packet, frequency, "
+            "open model-input issue. Mass-basis classifications use only explicit contract fields; "
+            "no inventory owner or scope is inferred from component IDs. No mass is corrected, and no provider packet, frequency, "
             "physical-validation, or facility-QRA claim is promoted."
         ),
     }

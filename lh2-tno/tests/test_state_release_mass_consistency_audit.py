@@ -35,6 +35,8 @@ def test_mismatch_is_explicit_and_never_corrected() -> None:
     assert report["mismatch_case_count"] == 1
     assert report["mismatch_rows"][0]["case_id"] == "tank/hole"
     assert report["mismatch_rows"][0]["relative_difference"] > 0.99
+    assert report["mismatch_rows"][0]["classification"] == "MASS_BASIS_UNDECLARED_REVIEW_REQUIRED"
+    assert report["mass_basis_review_required_case_count"] == 1
     assert report["provider_packet_promoted"] is False
     assert report["facility_qra_claim"] is False
 
@@ -45,3 +47,15 @@ def test_missing_mass_is_not_counted_as_a_match() -> None:
     assert report["matched_case_count"] == 0
     assert report["mismatch_case_count"] == 0
     assert report["not_comparable_case_count"] == 1
+
+
+def test_explicitly_different_mass_basis_tokens_are_not_inferred_as_equal() -> None:
+    campaign = _campaign(2.0, 3.0)
+    identity = campaign["cases"][0]["provider_packet_identity"]
+    identity["state_snapshot"]["mass_basis_id"] = "local-vessel-inventory"
+    identity["provider_mass_balances"][0]["mass_basis_id"] = "upstream-reserve"
+    report = build_state_release_mass_consistency_audit(campaign)
+    row = report["mismatch_rows"][0]
+    assert row["classification"] == "MASS_BASIS_ID_MISMATCH_REVIEW_REQUIRED"
+    assert row["state_mass_basis"] == "local-vessel-inventory"
+    assert row["provider_mass_basis"] == "upstream-reserve"

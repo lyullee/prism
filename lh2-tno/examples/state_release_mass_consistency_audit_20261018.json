@@ -5,6 +5,10 @@
   "comparable_case_count": 8,
   "matched_case_count": 7,
   "mismatch_case_count": 1,
+  "mismatch_classification_counts": {
+    "MASS_BASIS_UNDECLARED_REVIEW_REQUIRED": 1
+  },
+  "mass_basis_review_required_case_count": 1,
   "not_comparable_case_count": 36,
   "relative_tolerance": 1e-06,
   "absolute_tolerance_kg": 1e-09,
@@ -17,7 +21,11 @@
       "state_mass_kg": 0.028492061899609754,
       "provider_initial_mass_kg": 71.7644005715206,
       "absolute_difference_kg": 71.73590850962098,
-      "relative_difference": 0.9996029777762692
+      "relative_difference": 0.9996029777762692,
+      "classification": "MASS_BASIS_UNDECLARED_REVIEW_REQUIRED",
+      "classification_reason": "state and provider masses differ, but neither side declares a comparable inventory basis",
+      "state_mass_basis": null,
+      "provider_mass_basis": null
     }
   ],
   "not_comparable_case_ids": [
@@ -64,5 +72,5 @@
   "facility_qra_claim": false,
   "frequency_inference_performed": false,
   "promotion_allowed": false,
-  "interpretation": "This is a numeric boundary diagnostic. A mismatch or missing field is retained as an open model-input issue; no mass is corrected, and no provider packet, frequency, physical-validation, or facility-QRA claim is promoted."
+  "interpretation": "This is a numeric boundary diagnostic. A mismatch or missing field is retained as an open model-input issue. Mass-basis classifications use only explicit contract fields; no inventory owner or scope is inferred from component IDs. No mass is corrected, and no provider packet, frequency, physical-validation, or facility-QRA claim is promoted."
 }
