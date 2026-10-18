@@ -1,0 +1,241 @@
+{
+  "schema_version": "prism.external_provider_response_gap_audit.v1",
+  "status": "PROVIDER_RESPONSE_GAP_AUDIT_DIAGNOSTIC_ONLY",
+  "root_label": "equipment_contract",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract",
+  "provider_response_count": 7,
+  "strict_termination_candidate_count": 2,
+  "mass_ledger_present_count": 4,
+  "qualification_sidecar_count": 0,
+  "origin_metadata_missing_count": 7,
+  "termination_basis_counts": {
+    "inventory_depletion": 1,
+    "reviewed_isolation_success": 1,
+    "synthetic_diagnostic_horizon": 5
+  },
+  "rows": [
+    {
+      "file": "layered/provider_response.json",
+      "sha256": "84b251fe554ff1df85edc4a7f71c46b56dafe9b8f24804a9920503bc3ef40185",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.LayeredTank",
+      "provider_source_digest": "9e519a13debf758e5b4b8ba5c1326bc17af882d5f58fbbc50d4260a4fb8b174d",
+      "event_id": "native-layered-tank/accidental-leak-001",
+      "component_id": "native-layered-tank-diagnostic",
+      "port_id": "native-layered-tank-liquid-out",
+      "termination_basis": "inventory_depletion",
+      "duration_s": 0.1,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": true,
+      "mass_ledger": {
+        "initial_mass_kg": 434.50988152270014,
+        "final_mass_kg": 434.50972805700695,
+        "cumulative_mass_out_kg": 0.00015346569325836357,
+        "residual_mass_kg": 5.684341886080802e-14
+      },
+      "strict_termination_candidate": true,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response"
+      ]
+    },
+    {
+      "file": "pipe/provider_response.json",
+      "sha256": "ec4867234d23f7a6975c1ccf9e545b8f6533c92bb723cfb9e55bb771d8663fa7",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.DynamicHEMPipe",
+      "provider_source_digest": "a34b691dc221fc1b0ba176a9f0c489c0a62eb9b8e4fa66e15d904c725238cdcb",
+      "event_id": "native-dynamic-pipe/accidental-leak-001",
+      "component_id": "native-dynamic-pipe-diagnostic",
+      "port_id": "native-dynamic-pipe-out",
+      "termination_basis": "reviewed_isolation_success",
+      "duration_s": 0.07500000000000001,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": true,
+      "mass_ledger": {
+        "initial_mass_kg": 2.5156266507964498,
+        "final_mass_kg": 1.093854225801009,
+        "cumulative_mass_out_kg": 2.5156266507964498,
+        "residual_mass_kg": 1.0938542258010093
+      },
+      "strict_termination_candidate": true,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response"
+      ]
+    },
+    {
+      "file": "pump/provider_response.json",
+      "sha256": "216f3e32799855d00452016907e758ef1be89ab71bb161b4cb82f9e3caf05c62",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.MappedPump",
+      "provider_source_digest": "6451b1521ceb0a3e8c1b8f0946bcdf789c5f14102763d7783c0577e27be3cb0f",
+      "event_id": "native-mapped-pump/accidental-leak-001",
+      "component_id": "native-mapped-pump-diagnostic",
+      "port_id": "native-mapped-pump-liquid-out",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": false,
+      "mass_ledger": {
+        "initial_mass_kg": null,
+        "final_mass_kg": null,
+        "cumulative_mass_out_kg": 0.0014578333333333336,
+        "residual_mass_kg": 0.9985421666666666
+      },
+      "strict_termination_candidate": false,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon",
+        "complete initial/final/cumulative/residual mass ledger is missing"
+      ]
+    },
+    {
+      "file": "reliquefier/provider_response.json",
+      "sha256": "2fde978357072b8fcd96ea3f00b96c5c1c68117efbd5bc9dacb4724afa571525",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.DynamicReliquefier",
+      "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+      "event_id": "native-reliquefier/accidental-leak-001",
+      "component_id": "native-reliquefier-diagnostic",
+      "port_id": "native-reliquefier-gas-out",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": true,
+      "mass_ledger": {
+        "initial_mass_kg": 0.0008198175196090351,
+        "final_mass_kg": 0.0008187667132294561,
+        "cumulative_mass_out_kg": 1.0508063795789736e-06,
+        "residual_mass_kg": 0.0
+      },
+      "strict_termination_candidate": false,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon"
+      ]
+    },
+    {
+      "file": "valve/provider_response.json",
+      "sha256": "40484dbd89ed5eaf3455b0c9a4b051c004cece52457fb588f931f82d5e7a539f",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+      "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+      "event_id": "native-stroke-valve/accidental-leak-001",
+      "component_id": "native-stroke-valve-diagnostic",
+      "port_id": "native-stroke-valve-gas-out",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": false,
+      "mass_ledger": {
+        "initial_mass_kg": null,
+        "final_mass_kg": null,
+        "cumulative_mass_out_kg": 0.00012111170779661987,
+        "residual_mass_kg": 99.9998788882922
+      },
+      "strict_termination_candidate": false,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon",
+        "complete initial/final/cumulative/residual mass ledger is missing"
+      ]
+    },
+    {
+      "file": "vaporizer/provider_response.json",
+      "sha256": "54c9d2b160a3e151d4a6deb93b2839198c7cffe40fffc60d0eda2d01a2d6e8a7",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.DynamicVaporizer",
+      "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+      "event_id": "native-vaporizer/accidental-leak-001",
+      "component_id": "native-vaporizer-diagnostic",
+      "port_id": "native-vaporizer-gas-out",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": true,
+      "mass_ledger": {
+        "initial_mass_kg": 0.0008198175196090351,
+        "final_mass_kg": 0.0008187667132294561,
+        "cumulative_mass_out_kg": 1.0508063795789736e-06,
+        "residual_mass_kg": 0.0
+      },
+      "strict_termination_candidate": false,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon"
+      ]
+    },
+    {
+      "file": "vent/provider_response.json",
+      "sha256": "94e649101fd72d5f5aba5dde8c71129a31ae334bd3262bcd0bab926dea39d947",
+      "provider_export_schema": "prism.external_accident_history.v1",
+      "provider_model": "lh2dt.VentStack",
+      "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+      "event_id": "native-vent-stack/accidental-leak-001",
+      "component_id": "native-vent-stack-diagnostic",
+      "port_id": "native-vent-stack-gas-out",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.1,
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "mass_ledger_present": false,
+      "mass_ledger": {
+        "initial_mass_kg": null,
+        "final_mass_kg": null,
+        "cumulative_mass_out_kg": 3.827489552640163e-05,
+        "residual_mass_kg": 0.9999617251044736
+      },
+      "strict_termination_candidate": false,
+      "promotion_allowed": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon",
+        "complete initial/final/cumulative/residual mass ledger is missing"
+      ]
+    }
+  ],
+  "promotion": {
+    "provider_packet_promoted": false,
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "policy": {
+    "missing_fields_are_not_inferred": true,
+    "normal_state_or_model_prediction_is_not_qualification": true,
+    "frequency_is_not_learned_from_provider_response": true,
+    "facility_ir_fn_remains_withheld": true
+  }
+}

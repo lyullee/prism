@@ -29,6 +29,14 @@ It includes seven native equipment-model provider responses from the contract
 workspace. They have no qualification sidecar, independent physical-validation
 claim, or facility-QRA claim, so they remain diagnostic inputs only.
 
+The seven response files were re-audited against that current five-root scan in
+`results/20261115/external_equipment_model_provider_response_gap_audit_recheck_20261018.json`
+(SHA-256 `e7bc82a95664914f20fdaab7deaba0dd547266117d18079d52d9a8da477917a0`).
+The result is unchanged: two strict termination candidates, five synthetic
+diagnostic horizons, four responses with a complete mass ledger, seven missing
+origin/evidence fields, and zero qualification sidecars. The recheck is a
+current-source evidence refresh, not a promotion.
+
 ## Promotion boundary
 
 The inventory keeps the following gates closed:
