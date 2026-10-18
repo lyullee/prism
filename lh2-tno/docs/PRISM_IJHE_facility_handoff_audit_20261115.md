@@ -14,7 +14,7 @@ The handoff path is:
 |---|---:|
 | Audit record | [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json) |
 | Overall status | `INCOMPLETE_EVIDENCE` |
-| Checks | 60 total: 55 pass, 5 blocked |
+| Checks | 62 total: 57 pass, 5 blocked |
 | Facility handoff diagnostic check | `PASS` (`diagnostic_only=true`) |
 | Qualified provider packets | 0 |
 | Independent full-chain physical validation | Not claimed |
@@ -80,3 +80,22 @@ python scripts/verify_latest_ijhe_audit.py `
 ```
 
 A `PASS` result means that `CURRENT_STATUS.json` points to the stored audit, the check and blocker counts agree, and the facility handoff remains diagnostic-only. It does not mean that the five strict IJHE gates are open.
+
+## Current union packet-identity re-audit
+
+The current 34-event union was independently scanned using exact event identity
+and `provider_result_digest` matching. The saved records are
+[`facility_chain_packet_evidence_scan_current.json`](../results/20261115/facility_chain_packet_evidence_scan_current.json)
+and [`facility_chain_closure_audit_current_union.json`](../results/20261115/facility_chain_closure_audit_current_union.json).
+
+The scan found six exact packet identities. One event passed the complete
+chain-closure check; 33 event rows were mismatched and 28 campaign events had
+no exact packet identity. Conditional IR/F-N aggregation remains a diagnostic
+calculation, while facility total QRA, provider qualification, frequency
+binding from qualified packets, and independent facility validation remain
+withheld. This current-union record supersedes the historical 24-event chain
+record for current status reporting.
+
+SLABx-LH2 is treated as the frozen validated consequence component. The open
+gates concern equipment release evidence, termination/inventory closure, and
+facility-level qualification around that fixed component.\n

@@ -1,0 +1,366 @@
+{
+  "schema_version": "prism.facility_chain_packet_evidence_scan.v1",
+  "status": "SCANNED_DIAGNOSTIC",
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/native_lh2dt_frequency_case_isolation_current/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.01/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.1/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_1/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_10/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_100/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [],
+        "exact_opening_match": false,
+        "strict_packet_valid": false
+      }
+    }
+  ],
+  "event_count": 34,
+  "matched_event_count": 6,
+  "missing_event_ids": [
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%"
+  ],
+  "qualified_provider_packet_count": 0,
+  "frequency_bound": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "audit_scope": "current_union_campaign_exact_packet_scan",
+  "campaign_result": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
+  "scan_root": ".",
+  "exact_digest_match_only": true,
+  "supersedes_historical_record": "results/20261024/native_generic_scope_vertical_chain_closure_v1.json",
+  "interpretation": "The scan searched saved JSON artifacts for exact event/provider result digest identities. It found 6 exact packet identities among 34 campaign events; the chain audit closed only 1 event and found 28 events without exact packet evidence. Missing rows were not backfilled from stale packets. This is diagnostic evidence only: provider qualification, physical validation, frequency binding, and facility QRA remain false."
+}

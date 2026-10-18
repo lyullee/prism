@@ -5380,5 +5380,18 @@
   "external_model_native_model_root_review_current_facility_qra_claim": false,
   "external_model_recheck_status_consistency_record": "results/20261115/status_consistency_external_model_recheck_20261018.json",
   "external_model_recheck_status_consistency_status": "CONSISTENT; 22 checks; 0 blockers; facility IR/F-N promotion false"
+,
+  "current_union_facility_chain_closure_audit_record": "results/20261115/facility_chain_closure_audit_current_union.json",
+  "current_union_facility_chain_closure_audit_status": "BLOCKED_CHAIN_CLOSURE; 34 campaign events, 6 exact packet identities scanned, 1 event chain closed, 33 mismatched, 28 without exact packet evidence; conditional IR/F-N aggregates closed; facility total QRA false",
+  "current_union_facility_chain_campaign_event_count": 34,
+  "current_union_facility_chain_packet_event_count": 6,
+  "current_union_facility_chain_packet_chain_closed_event_count": 1,
+  "current_union_facility_chain_packet_chain_mismatch_event_count": 33,
+  "current_union_facility_chain_campaign_events_without_packet_count": 28,
+  "current_union_facility_chain_facility_ir_aggregate_closed": true,
+  "current_union_facility_chain_facility_fn_aggregate_closed": true,
+  "current_union_facility_chain_facility_total_risk_available": false,
+  "current_union_facility_chain_complete_facility_qra_claim": false,
+  "current_union_facility_chain_packet_scan_record": "results/20261115/facility_chain_packet_evidence_scan_current.json",
+  "current_union_facility_chain_packet_scan_status": "SCANNED_DIAGNOSTIC; exact event/provider digest matching only; 6/34 matched; no provider qualification or QRA promotion"
 }
-

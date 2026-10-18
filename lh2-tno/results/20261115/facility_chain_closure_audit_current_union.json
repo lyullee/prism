@@ -1,0 +1,509 @@
+{
+  "schema_version": "prism.facility_chain_closure_audit.v1",
+  "diagnostic_only": true,
+  "status": "BLOCKED_CHAIN_CLOSURE",
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_event_count": 34,
+  "campaign_case_count": 44,
+  "campaign_risk_atom_count": 176,
+  "packet_event_count": 6,
+  "packet_chain_closed_event_count": 1,
+  "packet_chain_mismatch_event_count": 33,
+  "packet_chain_mismatch_event_ids": [
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+    "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+  ],
+  "campaign_events_without_packet_count": 28,
+  "event_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "case[0] termination_bases differs from packet",
+        "case[1] termination_bases differs from packet"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "case[0] termination_bases differs from packet",
+        "case[1] termination_bases differs from packet"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "case[0] termination_bases differs from packet",
+        "case[1] termination_bases differs from packet"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "case[0] termination_bases differs from packet",
+        "case[1] termination_bases differs from packet"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "case[0] termination_bases differs from packet",
+        "case[1] termination_bases differs from packet"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    }
+  ],
+  "facility_ir_aggregate_closed": true,
+  "facility_fn_aggregate_closed": true,
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "qualified_provider_packet_count": 0,
+  "frequency_from_provider_packet": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "Current 34-event union re-audit: only exact event/provider digest identities were accepted. One event is diagnostically closed, 33 have packet mismatch or missing evidence, and 28 campaign events have no exact packet identity. Conditional IR/F-N sums remain available; facility total QRA remains withheld. This record does not qualify a provider or promote synthetic evidence.",
+  "audit_scope": "current_union_campaign_exact_packet_scan",
+  "campaign_result": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
+  "packet_evidence_scan": "results/20261115/facility_chain_packet_evidence_scan_current.json",
+  "exact_digest_match_only": true,
+  "supersedes_historical_record": "results/20261024/native_generic_scope_vertical_chain_closure_v1.json"
+}
