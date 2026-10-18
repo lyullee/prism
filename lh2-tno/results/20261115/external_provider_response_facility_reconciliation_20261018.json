@@ -1,0 +1,173 @@
+{
+  "schema_version": "prism.provider_response_facility_reconciliation.v1",
+  "status": "DIAGNOSTIC_RESPONSE_CASE_RECONCILIATION",
+  "response_gap_audit_schema": "prism.external_provider_response_gap_audit.v1",
+  "facility_evidence_request_schema": "prism.facility_evidence_request.v1",
+  "response_count": 7,
+  "facility_case_count": 44,
+  "exact_case_match_count": 0,
+  "qualified_exact_case_match_count": 0,
+  "component_candidate_response_count": 0,
+  "no_exact_case_match_count": 7,
+  "rows": [
+    {
+      "file": "layered/provider_response.json",
+      "sha256": "84b251fe554ff1df85edc4a7f71c46b56dafe9b8f24804a9920503bc3ef40185",
+      "event_id": "native-layered-tank/accidental-leak-001",
+      "component_id": "native-layered-tank-diagnostic",
+      "port_id": "native-layered-tank-liquid-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    },
+    {
+      "file": "pipe/provider_response.json",
+      "sha256": "ec4867234d23f7a6975c1ccf9e545b8f6533c92bb723cfb9e55bb771d8663fa7",
+      "event_id": "native-dynamic-pipe/accidental-leak-001",
+      "component_id": "native-dynamic-pipe-diagnostic",
+      "port_id": "native-dynamic-pipe-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    },
+    {
+      "file": "pump/provider_response.json",
+      "sha256": "216f3e32799855d00452016907e758ef1be89ab71bb161b4cb82f9e3caf05c62",
+      "event_id": "native-mapped-pump/accidental-leak-001",
+      "component_id": "native-mapped-pump-diagnostic",
+      "port_id": "native-mapped-pump-liquid-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon",
+        "complete initial/final/cumulative/residual mass ledger is missing"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    },
+    {
+      "file": "reliquefier/provider_response.json",
+      "sha256": "2fde978357072b8fcd96ea3f00b96c5c1c68117efbd5bc9dacb4724afa571525",
+      "event_id": "native-reliquefier/accidental-leak-001",
+      "component_id": "native-reliquefier-diagnostic",
+      "port_id": "native-reliquefier-gas-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    },
+    {
+      "file": "valve/provider_response.json",
+      "sha256": "40484dbd89ed5eaf3455b0c9a4b051c004cece52457fb588f931f82d5e7a539f",
+      "event_id": "native-stroke-valve/accidental-leak-001",
+      "component_id": "native-stroke-valve-diagnostic",
+      "port_id": "native-stroke-valve-gas-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon",
+        "complete initial/final/cumulative/residual mass ledger is missing"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    },
+    {
+      "file": "vaporizer/provider_response.json",
+      "sha256": "54c9d2b160a3e151d4a6deb93b2839198c7cffe40fffc60d0eda2d01a2d6e8a7",
+      "event_id": "native-vaporizer/accidental-leak-001",
+      "component_id": "native-vaporizer-diagnostic",
+      "port_id": "native-vaporizer-gas-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    },
+    {
+      "file": "vent/provider_response.json",
+      "sha256": "94e649101fd72d5f5aba5dde8c71129a31ae334bd3262bcd0bab926dea39d947",
+      "event_id": "native-vent-stack/accidental-leak-001",
+      "component_id": "native-vent-stack-diagnostic",
+      "port_id": "native-vent-stack-gas-out",
+      "input_origin": null,
+      "evidence_status": null,
+      "qualification_sidecar_present": false,
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 sidecar",
+        "input_origin is missing from the provider response",
+        "evidence_status is missing from the provider response",
+        "termination basis is not a strict provider closure: synthetic_diagnostic_horizon",
+        "complete initial/final/cumulative/residual mass ledger is missing"
+      ],
+      "status": "NO_EXACT_CASE_MATCH",
+      "exact_case_candidates": [],
+      "component_case_candidates": [],
+      "promotion_allowed": false
+    }
+  ],
+  "promotion": {
+    "provider_packet_promoted": false,
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "policy": {
+    "exact_event_component_port_identity_required": true,
+    "qualification_sidecar_required": true,
+    "qualified_origin_required": [
+      "native_provider",
+      "provider_actual",
+      "reviewed_actual",
+      "reviewed_measurement"
+    ],
+    "missing_identity_is_not_inferred": true,
+    "facility_ir_fn_remains_withheld": true
+  }
+}

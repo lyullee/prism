@@ -37,6 +37,15 @@ diagnostic horizons, four responses with a complete mass ledger, seven missing
 origin/evidence fields, and zero qualification sidecars. The recheck is a
 current-source evidence refresh, not a promotion.
 
+Those seven responses were also reconciled against the current 44-case facility
+evidence worklist in
+`results/20261115/external_provider_response_facility_reconciliation_20261018.json`
+(SHA-256 `735eed72def9b09fd3c1535787da694b38fa03de1132e80fe82de13693b7326a`).
+The exact event/component/port comparison found zero case matches and zero
+qualified matches.  The native response component names therefore cannot be
+used as aliases for the generic facility cases; the result remains diagnostic
+and no frequency or facility risk is promoted.
+
 ## Promotion boundary
 
 The inventory keeps the following gates closed:

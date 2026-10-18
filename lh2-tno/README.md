@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,544 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,561 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -40,7 +40,7 @@ facility-QRA claim until every release boundary has qualified provider evidence
 and independent validation. See the [English readiness audit](docs/PRISM_IJHE_latest_audit_20261115_en.md) and the [IJHE requirements/evidence matrix](docs/PRISM_IJHE_requirements_matrix_en.md)
 for the current 44-case counts and open evidence requests.
 
-The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 27 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
+The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 28 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
 
 ## What PRISM is for
 
@@ -167,6 +167,21 @@ families. It is an evidence-intake document only: it does not assign
 frequency, infer a value from sensors, or promote facility QRA. A case remains
 open until a provider packet and its required qualification evidence match the
 exact identity in the request.
+
+To check whether external provider responses actually belong to those exact
+facility cases, run the non-promoting reconciliation audit:
+
+```powershell
+python scripts/reconcile_external_provider_responses.py `
+  --response-gap-audit results/20261115/external_equipment_model_provider_response_gap_audit_recheck_20261018.json `
+  --facility-evidence-request results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json `
+  --output results/20261115/external_provider_response_facility_reconciliation_20261018.json
+```
+
+The current seven native responses have zero exact matches among the 44
+facility cases. A component-name similarity is deliberately not treated as an
+alias for an event/component/port identity, and the command never assigns a
+frequency or opens facility IR/F-N.
 
 ### SLABx-LH2 validation boundary
 
