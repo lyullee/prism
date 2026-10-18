@@ -1,0 +1,4 @@
+# Runtime dependencies for the bundled PRISM QRA
+numpy>=1.26,<3
+scipy>=1.11,<2
+CoolProp>=6.6,<9

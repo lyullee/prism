@@ -1161,11 +1161,13 @@ Path("backend.json").write_text(
 
 ## 기본 분석 모드
 
-`standard`는 외부 엔진의 `qra.py` 명령을 그대로 전달합니다. 기존 CSV와 LH2 JSON 입력은 서로 다릅니다.
-backend에는 `tno` pin과 기존 엔진을 실행할 interpreter가 필요합니다.
+`standard`는 저장소에 포함된 프로젝트 작성 PRISM QRA의 `qra.py` 명령을 실행합니다. 기존 CSV와 LH2 JSON 입력은 서로 다릅니다.
+별도 검증본을 사용하려면 backend에 `prism_qra` pin과 실행 interpreter를 지정할 수 있습니다. 기존 설정의 `tno` pin도 호환성을 위해 읽지만 새 설정에는 사용하지 않습니다.
+
+IR(Individual Risk, 개인위험)은 특정 위치의 보호되지 않은 한 사람이 선언된 사고 시나리오 때문에 사망할 연간 확률입니다. 단위는 `year^-1`이며, 이미 누출이 발생한 뒤의 조건부 피해확률과는 다릅니다.
 
 ```powershell
-# 외부 엔진 옵션 확인
+# 표준 PRISM QRA 도움말 확인
 .venv\Scripts\python.exe prism.py --mode standard --backend standard_backend.json --help
 
 # CSV 템플릿 생성

@@ -29,14 +29,21 @@ Archive = "https://doi.org/10.5281/zenodo.23241358"
 [project.optional-dependencies]
 test = ["pytest>=8", "numpy>=1.26,<3", "CoolProp>=6.6,<9", "pypdf>=5,<7"]
 xlsx = ["openpyxl>=3.1,<4"]
+full = [
+    "numpy>=1.26,<3",
+    "scipy>=1.11,<2",
+    "CoolProp>=6.6,<9",
+    "slabx @ git+https://github.com/lyullee/slabx.git@820e368ba6454aad8627dac5967115d9648c80c7",
+    "slabx-lh2 @ git+https://github.com/lyullee/slabx-lh2.git@1ef613102819de1c2feebd062aff3b49997e1927",
+]
 
 [project.scripts]
-prism = "tno_host:main"
+prism = "prism_cli:main"
 lh2-tno = "lh2_tno.cli:main"
-tno = "tno_host:main"
+tno = "prism_cli:main"
 
 [tool.setuptools]
-py-modules = ["tno_host"]
+py-modules = ["prism_cli", "tno_host"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

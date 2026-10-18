@@ -32,7 +32,20 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,564 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The project-authored PRISM QRA is bundled in
+`src/prism_qra`. Install its runtime dependencies with
+`python -m pip install -e ".[full]"`; this installs the pinned public SLABx and
+SLABx-LH2 repositories and lets standard mode run without a private backend
+path. An explicit `--backend` remains available when a separately pinned
+engine is required for reproduction.
+
+The standard engine computes individual risk (IR) and societal-risk F/N
+quantities from the supplied facility tables. IR is the annual probability
+that an unprotected individual at a specified location dies because of the
+declared accident scenarios. It is reported in `year^-1` and must not be
+read as a conditional probability after a release has already been observed.
+
+The current checkout validation result is **1,577 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal

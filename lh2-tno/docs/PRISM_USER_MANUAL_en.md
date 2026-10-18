@@ -6,7 +6,7 @@ PRISM (Process Risk Integration and Scenario Modeling) connects equipment state,
 
 PRISM has two practical paths:
 
-1. **Standard mode** for generic process-risk contracts and existing TNO-style scenarios.
+1. **Standard mode** for generic process-risk contracts using the bundled, project-authored PRISM QRA implementation.
 2. **LH2 mode** for outdoor liquid-hydrogen scenarios. LH2 mode accepts an equipment state frame, selects a HAZOP scenario, consumes a qualified provider release history, and connects the release to the SLABx-LH2 consequence boundary when that provider is available.
 
 The package is a research diagnostic framework. It does not turn a few pressure or temperature readings into a leak size, an accident frequency, or a qualified facility QRA. A provider must supply the accident release history and its termination evidence. A separate `FrequencyPlan` supplies the literature frequency.
@@ -25,11 +25,15 @@ For a source checkout:
 
 ```powershell
 cd lh2-tno
-python -m pip install -e ".[test]"
+python -m pip install -e ".[full]"
 python -m pytest -q
 ```
 
-The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1326 passed, 1 warning**. The warning is reported separately from a failing contract.
+The published `0.6.3` wheel is the earlier baseline. The source checkout
+installation above is the recommended path for the current bundled PRISM QRA
+runtime and its public SLABx/SLABx-LH2 adapters.
+
+The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1,577 passed, 1 warning**. The warning is reported separately from a failing contract.
 
 ## 3. First five minutes
 

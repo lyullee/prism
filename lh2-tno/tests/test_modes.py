@@ -4,7 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 import pytest
-import tno_host
+import prism_cli as tno_host
 
 
 def backend(tmp_path,source=None):
