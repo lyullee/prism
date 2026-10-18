@@ -13,7 +13,7 @@ PRISM is a Python research framework for connecting process and equipment state,
 Install the latest published package:
 
 ```powershell
-python -m pip install "prism-risk[full]==0.6.6"
+python -m pip install "prism-risk[full]==0.6.7"
 prism --describe-modes
 ```
 
@@ -55,7 +55,7 @@ for the current 44-case counts and open evidence requests.
 
 The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 28 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
 
-[PRISM 0.6.5 distribution and verification record](docs/PRISM_v065_distribution_en.md); the current source patch is v0.6.6.
+[PRISM 0.6.5 distribution and verification record](docs/PRISM_v065_distribution_en.md); the current source patch is v0.6.7.
 
 For the exact public-repository, external-backend, and KGS interpretation
 boundary, see the [public/private boundary note](docs/PRISM_public_private_boundary_and_KGS_interpretation_20261018.md).
@@ -1119,9 +1119,9 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 ## Release links
 
-- [GitHub Release v0.6.6](https://github.com/lyullee/prism/releases/tag/v0.6.6)
-- [PyPI prism-risk 0.6.6](https://pypi.org/project/prism-risk/0.6.6/)
-- [Version DOI — PRISM 0.6.6](https://doi.org/10.5281/zenodo.23448891)
+- [GitHub Release v0.6.7](https://github.com/lyullee/prism/releases/tag/v0.6.7)
+- [PyPI prism-risk 0.6.7](https://pypi.org/project/prism-risk/0.6.7/)
+- [Version DOI — PRISM 0.6.7](https://doi.org/10.5281/zenodo.23448891)
 - [Positive inventory-threshold termination audit](docs/PRISM_positive_inventory_threshold_reclassification_20261018_en.md)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23448413)
 - [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/39109972574)
@@ -1143,7 +1143,7 @@ value is never substituted into the facility total. See
 
 ## Current qualification boundary
 
-PRISM v0.6.6 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
+PRISM v0.6.7 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
 
 The inspection-centre procedure audit is intentionally classified as **partial operational evidence**. It confirms procedure anchors for pressure monitoring, PSV response, isolation/vent commands, and an operating stage, but it does not supply a qualified release duration, termination event, relief setpoint/capacity, mass balance, or annual accident frequency. Those missing fields must be supplied by an equipment-provider packet before the affected cases can enter a promoted facility QRA. The audit script is reproducible with:
 
@@ -1158,6 +1158,6 @@ python scripts/audit_partial_lh2_boundary_evidence.py `
 PRISM is released under the MIT License. Cite the published version DOI for this release:
 
 ```text
-Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.6.
+Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.7.
 Version DOI: https://doi.org/10.5281/zenodo.23448891
 ```

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prism-risk"
-version = "0.6.6"
+version = "0.6.7"
 description = "PRISM: Process Risk Integration and Scenario Modeling with optional LH2 analysis"
 readme = "README.md"
 license = "MIT"
