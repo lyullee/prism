@@ -82,6 +82,10 @@ class ProviderMassBalance(Contract):
     schema_version: Literal['prism.provider_mass_balance.v1'] = (
         'prism.provider_mass_balance.v1'
     )
+    # Explicit inventory ownership/scope token.  This is optional for
+    # backwards compatibility, but when supplied it must be compared with a
+    # state snapshot token before the consequence chain is accepted.
+    mass_basis_id: Name | None = Field(default=None, exclude_if=lambda value: value is None)
     initial_mass_kg: Nonnegative | None = None
     cumulative_mass_in_kg: Nonnegative | None = None
     cumulative_mass_out_kg: Nonnegative | None = None
@@ -507,6 +511,14 @@ class ResolvedGasReleaseSet(Contract):
         if any(not math.isclose(release.available_mass_kg, self.available_mass_kg,
                                 rel_tol=1e-10, abs_tol=1e-12) for release in self.releases):
             raise ValueError('endpoint and shared available inventories disagree')
+        basis_ids = {
+            release.provider_mass_balance.mass_basis_id
+            for release in self.releases
+            if release.provider_mass_balance is not None
+            and release.provider_mass_balance.mass_basis_id is not None
+        }
+        if len(basis_ids) > 1:
+            raise ValueError('two-sided endpoints declare different mass bases')
         if any(not math.isclose(release.duration_s, self.duration_s,
                                 rel_tol=0, abs_tol=1e-12) for release in self.releases):
             raise ValueError('two-sided endpoints must share one release duration')

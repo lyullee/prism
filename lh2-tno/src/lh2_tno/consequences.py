@@ -201,12 +201,32 @@ class ConsequenceRequest(Contract):
         # than silently choosing one inventory value.
         if self.state_snapshot is not None and self.state_snapshot.mass_kg is not None:
             provider_inventory = None
+            provider_mass_basis_id = None
             if release is not None:
                 provider_inventory = release.available_mass_kg
+                if release.provider_mass_balance is not None:
+                    provider_mass_basis_id = release.provider_mass_balance.mass_basis_id
             elif release_set is not None:
                 provider_inventory = release_set.available_mass_kg
+                basis_ids = {
+                    endpoint.provider_mass_balance.mass_basis_id
+                    for endpoint in release_set.releases
+                    if endpoint.provider_mass_balance is not None
+                    and endpoint.provider_mass_balance.mass_basis_id is not None
+                }
+                if len(basis_ids) == 1:
+                    provider_mass_basis_id = next(iter(basis_ids))
             elif liquid_release is not None:
                 provider_inventory = liquid_release.available_mass_kg
+                if liquid_release.provider_mass_balance is not None:
+                    provider_mass_basis_id = liquid_release.provider_mass_balance.mass_basis_id
+            state_mass_basis_id = self.state_snapshot.mass_basis_id
+            if (
+                state_mass_basis_id is not None
+                and provider_mass_basis_id is not None
+                and state_mass_basis_id != provider_mass_basis_id
+            ):
+                raise ValueError('state snapshot mass basis and provider inventory basis disagree')
             if provider_inventory is not None and not math.isclose(
                 float(self.state_snapshot.mass_kg),
                 float(provider_inventory),

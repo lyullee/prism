@@ -293,6 +293,7 @@ def test_diagnostic_release_rebind_attaches_only_exported_mass_ledger() -> None:
                 "initial_mass_kg": 10.0,
                 "cumulative_mass_in_kg": 0.5,
                 "final_mass_kg": 8.5,
+                "native_inventory_owner": "DynamicHEMPipe",
                 "cumulative_mass_out_kg": 2.0,
                 "isolation_time_s": 0.5,
                 "post_isolation_observation_s": 0.25,
@@ -312,6 +313,7 @@ def test_diagnostic_release_rebind_attaches_only_exported_mass_ledger() -> None:
     assert rebound["status"] == "DIAGNOSTIC_RELEASE_REBOUND"
     assert rebound["mass_balance_attached"] is True
     assert rebound["release"]["provider_mass_balance"]["final_mass_kg"] == 8.5
+    assert rebound["release"]["provider_mass_balance"]["mass_basis_id"] == "DynamicHEMPipe"
     assert rebound["release"]["provider_mass_balance"]["cumulative_mass_in_kg"] == 0.5
     assert rebound["release"]["provider_mass_balance"]["pressure_equalization_success"] is True
     assert rebound["release"]["provider_mass_balance"]["pressure_equalization_time_s"] == 1.25

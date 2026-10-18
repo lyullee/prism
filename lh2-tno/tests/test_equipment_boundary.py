@@ -77,6 +77,33 @@ def two_sided_request_data():
     return d, release_set
 
 
+def test_two_sided_release_rejects_different_declared_mass_bases():
+    first = packet()
+    first.update(event_kind='accidental_leak', event_id='two-sided-basis-test',
+                 port_id='vent.a', failure_opening_diameter_m=.0254,
+                 provider_mass_balance={
+                     'schema_version': 'prism.provider_mass_balance.v1',
+                     'mass_basis_id': 'local-pipe-inventory',
+                     'initial_mass_kg': 5.0,
+                 })
+    second = copy.deepcopy(first)
+    second.update(port_id='vent.b', position_enu_m=[2., 0., 1.],
+                  provider_mass_balance={
+                      'schema_version': 'prism.provider_mass_balance.v1',
+                      'mass_basis_id': 'upstream-reserve',
+                      'initial_mass_kg': 5.0,
+                  })
+    with pytest.raises(ValueError, match='different mass bases'):
+        ResolvedGasReleaseSet.model_validate_json(json.dumps({
+            'event_id': 'two-sided-basis-test',
+            'component_id': 'vent',
+            'releases': [first, second],
+            'available_mass_kg': 5.,
+            'cumulative_mass_out_kg': first['cumulative_mass_out_kg'] + second['cumulative_mass_out_kg'],
+            'inventory_provenance': 'synthetic shared pipe inventory',
+        }))
+
+
 def liquid_packet():
     base = packet()
     steps = []

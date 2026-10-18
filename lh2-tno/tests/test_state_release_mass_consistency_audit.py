@@ -4,6 +4,7 @@ from lh2_tno.state_release_mass_consistency_audit import (
     AUDIT_SCHEMA,
     build_state_release_mass_consistency_audit,
 )
+from lh2_tno.state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot
 
 
 def _campaign(state_mass: object = 2.0, initial_mass: object = 2.0) -> dict:
@@ -59,3 +60,17 @@ def test_explicitly_different_mass_basis_tokens_are_not_inferred_as_equal() -> N
     assert row["classification"] == "MASS_BASIS_ID_MISMATCH_REVIEW_REQUIRED"
     assert row["state_mass_basis"] == "local-vessel-inventory"
     assert row["provider_mass_basis"] == "upstream-reserve"
+
+
+def test_absent_mass_basis_is_omitted_from_legacy_snapshot_wire_shape() -> None:
+    snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="tank-01",
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=200000.0,
+        mass_kg=2.0,
+    )
+    assert "mass_basis_id" not in snapshot.to_mapping()
+    with_basis = snapshot.model_copy(update={"mass_basis_id": "local-vessel-inventory"})
+    assert with_basis.to_mapping()["mass_basis_id"] == "local-vessel-inventory"

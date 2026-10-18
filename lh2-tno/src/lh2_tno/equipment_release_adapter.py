@@ -182,6 +182,7 @@ def _provider_mass_balance(
     if not isinstance(metadata, Mapping):
         return None
     recognized = (
+        "mass_basis_id",
         "initial_mass_kg",
         "cumulative_mass_in_kg",
         "final_mass_kg",
@@ -204,6 +205,11 @@ def _provider_mass_balance(
         "schema_version": "prism.provider_mass_balance.v1",
         "cumulative_mass_out_kg": cumulative_mass_out_kg,
     }
+    if metadata.get("mass_basis_id") is not None:
+        payload["mass_basis_id"] = _text(
+            metadata["mass_basis_id"],
+            "provider data.provider_meta.mass_basis_id",
+        )
     for key in (
         "initial_mass_kg",
         "cumulative_mass_in_kg",

@@ -226,6 +226,37 @@ def test_provider_request_rejects_state_inventory_mismatch():
         build_consequence_request_from_provider_release(_release(), defaults)
 
 
+def test_provider_request_rejects_explicit_mass_basis_mismatch():
+    defaults = _defaults()
+    snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="storage-tank-01",
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=200000.0,
+        temperature_k=22.0,
+        mass_kg=1.0,
+        mass_basis_id="local-vessel-inventory",
+    )
+    release_data = _release().model_dump(mode="json")
+    release_data["available_mass_kg"] = 1.0
+    release_data["provider_mass_balance"] = {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "mass_basis_id": "upstream-reserve",
+        "initial_mass_kg": 1.0,
+    }
+    release = ResolvedGasRelease.model_validate_json(json.dumps(release_data))
+    digest = snapshot.digest()
+    defaults.update(
+        state_snapshot=snapshot.model_dump(mode="json"),
+        state_snapshot_digest=digest,
+        provider_state_snapshot_digest=digest,
+        provider_state_snapshot_digests=[digest],
+    )
+    with pytest.raises(ProviderReleaseContractError, match="mass basis"):
+        build_consequence_request_from_provider_release(release, defaults)
+
+
 def test_provider_resolved_pool_footprint_is_digest_bound_and_consumed():
     release_data = _liquid_release().model_dump(mode="json")
     release_data["pool_footprint"] = {

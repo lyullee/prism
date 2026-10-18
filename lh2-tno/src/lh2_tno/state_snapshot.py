@@ -63,6 +63,12 @@ class EquipmentStateSnapshot(Contract):
     pressure_pa_abs: Positive | None = None
     temperature_k: Positive | None = None
     mass_kg: Nonnegative | None = None
+    # Optional explicit ownership/scope token for the inventory value.  It is
+    # excluded when absent so legacy snapshot digests remain stable.  A
+    # provider may report an upstream reserve while a state snapshot reports
+    # local vessel inventory; component identity alone cannot disambiguate
+    # those quantities.
+    mass_basis_id: Name | None = Field(default=None, exclude_if=lambda value: value is None)
     liquid_fraction: Fraction | None = None
     phase: _PHASES | None = None
     position_enu_m: Vector | None = None

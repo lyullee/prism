@@ -95,6 +95,14 @@ def _mass_ledger(meta: Mapping[str, Any], payload: Mapping[str, Any]) -> dict[st
         "derived_accounting_residual_kg": residual,
         "mass_balance_closed": abs(residual) <= MASS_TOLERANCE_KG,
     }
+    mass_basis_id = meta.get("mass_basis_id")
+    if mass_basis_id is None:
+        # ``native_inventory_owner`` is an explicit provider declaration in
+        # the external LH2 model response.  Preserve it as a basis token; do
+        # not infer ownership from component IDs or packet names.
+        mass_basis_id = meta.get("native_inventory_owner")
+    if isinstance(mass_basis_id, str) and mass_basis_id.strip():
+        ledger["mass_basis_id"] = mass_basis_id.strip()
     # These fields are provider observations, not PRISM estimates.  Preserve
     # them when present so downstream release and facility ledgers can retain
     # the explicit isolation/pressure-equalization closure basis.
@@ -367,6 +375,7 @@ def build_diagnostic_release_rebind(
         # keys when attaching the copied evidence.
         contract_mass_balance_keys = {
             "schema_version",
+            "mass_basis_id",
             "initial_mass_kg",
             "cumulative_mass_in_kg",
             "cumulative_mass_out_kg",
