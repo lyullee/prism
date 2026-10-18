@@ -543,6 +543,12 @@ Legacy campaign rows that contain no provider packet remain compatible with
 the older ledger contract and are still subject to the independent scope and
 qualification gates.
 
+The latest one-component current/forecast replay is summarized in
+[`hazop_integrated_current_forecast_recheck_20261018.json`](examples/hazop_integrated_current_forecast_recheck_20261018.json).
+It records one current evaluation and one forecast trigger, the three
+literature-frequency uncertainty scenarios, measured execution time, and the
+fail-closed facility-ledger results for both paths.
+
 The orchestration seam can be timed separately from fresh provider and SLABx-LH2
 physics with [`scripts/benchmark_generic_hazop_handoff.py`](scripts/benchmark_generic_hazop_handoff.py):
 
