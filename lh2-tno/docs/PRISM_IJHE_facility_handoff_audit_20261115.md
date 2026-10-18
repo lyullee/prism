@@ -100,6 +100,11 @@ packets, and independent facility validation remain withheld. This current-union
 record supersedes the historical 24-event chain record for current status
 reporting.
 
+The rebuilt union was also converted into a new facility assessment
+without rerunning provider or SLABx physics. It retains 34 events, 44 cases, and
+176 risk atoms, provides conditional diagnostic IR/F-N, and keeps total facility
+QRA withheld because the qualified case coverage is 0/44.
+
 The rebuilt packet catalog and machine-readable chain audit are
 [`native_full_scope_packet_catalog_current_rebuild`](../results/20261115/native_full_scope_packet_catalog_current_rebuild/)
 and [`facility_chain_closure_audit_rebuilt_current_union.json`](../results/20261115/facility_chain_closure_audit_rebuilt_current_union.json).

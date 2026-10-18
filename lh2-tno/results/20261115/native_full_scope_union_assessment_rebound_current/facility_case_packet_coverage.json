@@ -1,0 +1,1407 @@
+{
+  "schema": "prism.facility_case_provider_coverage.v1",
+  "status": "NO_CASE_MATCH",
+  "facility_id": "generic-lh2-full-scope-example",
+  "case_request_count": 44,
+  "qualified_provider_event_count": 0,
+  "qualified_provider_case_count": 0,
+  "provider_evidence_row_count": 0,
+  "extra_provider_event_count": 0,
+  "extra_provider_events": [],
+  "status_counts": {
+    "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 44
+  },
+  "status_counts_by_component": {
+    "ambient-vaporizer-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 3
+    },
+    "inventory-depletion-pipe-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 10
+    },
+    "liquid-transfer-line-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 5
+    },
+    "liquid-transfer-pump-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 2
+    },
+    "pressure-relief-vent-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1
+    },
+    "reliquefier-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 3
+    },
+    "storage-tank-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 5
+    },
+    "transfer-valve-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 5
+    },
+    "vertical-handoff-terminal-pipe-01": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 10
+    }
+  },
+  "status_counts_by_family": {
+    "inventory_depletion": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 38
+    },
+    "inventory_over_600s": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1
+    },
+    "liquid_two_phase": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 17
+    },
+    "pipe_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 25
+    },
+    "pump_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 2
+    },
+    "reliquefier_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1
+    },
+    "two_sided_rupture": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 2
+    },
+    "valve_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 5
+    },
+    "vaporizer_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1
+    },
+    "vent_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1
+    },
+    "vertical_handoff": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 10
+    },
+    "vessel_hole": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 5
+    }
+  },
+  "status_counts_by_release_branch": {
+    "matched-event-provider-request": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 24
+    },
+    "provider-inventory-depletion": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 10
+    },
+    "provider-vertical-handoff": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 10
+    }
+  },
+  "unclassified_family_case_count": 0,
+  "blocking_reasons": [
+    "one or more facility cases have no qualified provider evidence"
+  ],
+  "case_rows": [
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "component_id": "inventory-depletion-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "ambient-vaporizer-01",
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "provider_source_digests": [
+          "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22"
+        ],
+        "provider_result_digests": [
+          "ade32dda3c6911c1ed75aca690b3756ee86942a455086b155afffa38990c49d5"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "ambient-vaporizer-01",
+      "scenario_families": [
+        "inventory_over_600s"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "d6378341caeaa7443d469562b05647b635f4abed6faa2b74ff93eca3d41d0af0"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "ambient-vaporizer-01",
+      "scenario_families": [
+        "vaporizer_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "b6ce2184fa5bde2bace6e0d4636d3e844f941f8da20cec95d8b947dc8860f154"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "pressure-relief-vent-01",
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "port_ids": [
+          "vent-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "badfbee5d0680a9c73c246c76c39d18b0578258f9aa29c8b5fced5e2c81d210b"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "reliquefier-01",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "e96ad9e37244b48745b06ed49b1122acd5b6ecbff62aa52ac0ba757f1d028bbb",
+          "15abdc317c982164813d693348ee732716df87d7c26e3f847c17999603746fb0"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "reliquefier-01",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "d5ab539615e8b26bac1ce5bd4a93a531a1027297e1a4b631fe98d2fa704d8b0f",
+          "da12027fd84a9a589837b2b1f74f8e6e05176988dd38fea432c2354dea496044"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "reliquefier-01",
+      "scenario_families": [
+        "reliquefier_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "b170ad40fa59827cc6013b739acb7248489f658f61035b53b878383affde77a1"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "storage-tank-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "6e0e2e6ed4b37d139f76142d842954aac6ef1f12aa162da22a7aa0529d5d53e3"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "storage-tank-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "c4d839ab449631be155d6fb371614bf4843276fa08d8cc58822a9b35e9025c36"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "storage-tank-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "ff78425a9d3dff9d7d7d272c579b0e7892176d3cd1fb06398f953e5dd25248ce"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "storage-tank-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "c28c7a6a0c01ccc6a23b5cae5ab37d7913a566e295dde442c45b04330a5a2e26"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "storage-tank-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "component_id": "storage-tank-01",
+        "port_ids": [
+          "tank-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "e2dca3dacce169fff97204845758642ef19a26557b726b73e0cfad3d1e980181"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-line-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "aa301cfadf80ef927ca9eb15117796c7fd56913ea60f7f5d6554387887117e38"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-line-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "9bac2c191041a12752509336521c8f02b8d3b9a79e95a4dd9fce54eb12919029"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-line-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "9cf3d3bdde2acb73d50d5850dc1e9668456491aad1e4f25da59dd469c86468ed"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-line-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "1c66bda79cd434a056095e4dec2a931607da15cc1c00d2461cfd7cd36af019f2"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-line-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "port_ids": [
+          "line-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "14985896413879473f0c31c2852ea13192495f089dcfb1979b76ed8bd7295291"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-pump-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "port_ids": [
+          "pump-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "152e032746f5c542fa8e7c78189c5585b4c171ed2b09d38d391b8cb858780aae"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "liquid-transfer-pump-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "port_ids": [
+          "pump-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "d49090eb96aa5dde34a4da780a33d3349d722e340fceb9b75aa072f226711bf5"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "transfer-valve-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "5cd4064e8d5e4013d5396f4040189a7ae2fa57d4c3f81595f373b7bc9bff4ec0"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "transfer-valve-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "2ad2ed96cb1504afaa50d9045af0216262e052a428537a9c034f3670c0fcbe78"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "transfer-valve-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "df61075862082e8486ed11f21f33e9bd3b2fa71705c9345a33b01c7212f5e448"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "transfer-valve-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "98b996119eb6884448a67980e3c193475cb5090554a3e711267e931ac05dae5e"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "release_branch_id": "matched-event-provider-request",
+      "component_id": "transfer-valve-01",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "status": "MISSING_QUALIFIED_PROVIDER_EVIDENCE",
+      "requested_identity": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "port_ids": [
+          "valve-accident-out"
+        ],
+        "provider_source_digests": [
+          "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
+        ],
+        "provider_result_digests": [
+          "cff39efb49e0ec517cd098f26392e39a692c31efa806c94a7387f0e047cbc7eb"
+        ]
+      },
+      "evidence_identity": null,
+      "blocking_reasons": [
+        "no qualified provider evidence has this event_id"
+      ]
+    }
+  ],
+  "promotion_policy": {
+    "frequency_is_not_assigned": true,
+    "sensor_frequency_learning": false,
+    "exact_case_identity_required": true,
+    "physical_validation_claim": false,
+    "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates"
+  }
+}
