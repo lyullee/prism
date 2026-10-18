@@ -1121,7 +1121,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 - [GitHub Release v0.6.7](https://github.com/lyullee/prism/releases/tag/v0.6.7)
 - [PyPI prism-risk 0.6.7](https://pypi.org/project/prism-risk/0.6.7/)
-- [Version DOI — PRISM 0.6.7](https://doi.org/10.5281/zenodo.23448891)
+- [Version DOI — PRISM 0.6.7](https://doi.org/10.5281/zenodo.23449248)
 - [Positive inventory-threshold termination audit](docs/PRISM_positive_inventory_threshold_reclassification_20261018_en.md)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23448413)
 - [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/39109972574)
@@ -1159,5 +1159,5 @@ PRISM is released under the MIT License. Cite the published version DOI for this
 
 ```text
 Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.7.
-Version DOI: https://doi.org/10.5281/zenodo.23448891
+Version DOI: https://doi.org/10.5281/zenodo.23449248
 ```
