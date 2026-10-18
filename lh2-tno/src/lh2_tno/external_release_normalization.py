@@ -76,16 +76,48 @@ def _mass_ledger(meta: Mapping[str, Any], payload: Mapping[str, Any]) -> dict[st
     released = meta.get("cumulative_mass_out_kg", payload.get("cumulative_mass_out_kg"))
     if not all(_finite(value) for value in (initial, final, released)):
         return None
-    residual = float(final) + float(released) - float(initial)
-    return {
+    cumulative_in = meta.get("cumulative_mass_in_kg", 0.0)
+    if not _finite(cumulative_in):
+        cumulative_in = 0.0
+    residual = (
+        float(final)
+        + float(released)
+        - float(initial)
+        - float(cumulative_in)
+    )
+    ledger: dict[str, Any] = {
         "schema_version": "prism.provider_mass_balance.v1",
         "initial_mass_kg": float(initial),
+        "cumulative_mass_in_kg": float(cumulative_in),
         "cumulative_mass_out_kg": float(released),
         "final_mass_kg": float(final),
         "reported_residual_mass_kg": meta.get("residual_mass_kg"),
         "derived_accounting_residual_kg": residual,
         "mass_balance_closed": abs(residual) <= MASS_TOLERANCE_KG,
     }
+    # These fields are provider observations, not PRISM estimates.  Preserve
+    # them when present so downstream release and facility ledgers can retain
+    # the explicit isolation/pressure-equalization closure basis.
+    for key in (
+        "isolation_time_s",
+        "post_isolation_observation_s",
+        "pressure_equalization_time_s",
+        "post_pressure_equalization_observation_s",
+        "terminal_source_pressure_pa_abs",
+        "ambient_pressure_pa_abs",
+        "max_post_pressure_equalization_flow_kg_s",
+    ):
+        value = meta.get(key)
+        if _finite(value):
+            ledger[key] = float(value)
+    for key in ("isolation_success", "pressure_equalization_success"):
+        value = meta.get(key)
+        if isinstance(value, bool):
+            ledger[key] = value
+    dynamic_state_closure = meta.get("dynamic_state_closure")
+    if isinstance(dynamic_state_closure, Mapping):
+        ledger["dynamic_state_closure"] = copy.deepcopy(dict(dynamic_state_closure))
+    return ledger
 
 
 def _compressible_source_state_audit(payload: Mapping[str, Any]) -> dict[str, Any]:

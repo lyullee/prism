@@ -291,8 +291,17 @@ def test_diagnostic_release_rebind_attaches_only_exported_mass_ledger() -> None:
             "termination_provenance": release["termination_provenance"],
             "provider_meta": {
                 "initial_mass_kg": 10.0,
-                "final_mass_kg": 8.0,
+                "cumulative_mass_in_kg": 0.5,
+                "final_mass_kg": 8.5,
                 "cumulative_mass_out_kg": 2.0,
+                "isolation_time_s": 0.5,
+                "post_isolation_observation_s": 0.25,
+                "pressure_equalization_time_s": 1.25,
+                "post_pressure_equalization_observation_s": 0.75,
+                "pressure_equalization_success": True,
+                "terminal_source_pressure_pa_abs": 101325.0,
+                "ambient_pressure_pa_abs": 101325.0,
+                "max_post_pressure_equalization_flow_kg_s": 0.0,
             },
         },
     }
@@ -302,7 +311,11 @@ def test_diagnostic_release_rebind_attaches_only_exported_mass_ledger() -> None:
 
     assert rebound["status"] == "DIAGNOSTIC_RELEASE_REBOUND"
     assert rebound["mass_balance_attached"] is True
-    assert rebound["release"]["provider_mass_balance"]["final_mass_kg"] == 8.0
+    assert rebound["release"]["provider_mass_balance"]["final_mass_kg"] == 8.5
+    assert rebound["release"]["provider_mass_balance"]["cumulative_mass_in_kg"] == 0.5
+    assert rebound["release"]["provider_mass_balance"]["pressure_equalization_success"] is True
+    assert rebound["release"]["provider_mass_balance"]["pressure_equalization_time_s"] == 1.25
+    assert rebound["release"]["provider_mass_balance"]["max_post_pressure_equalization_flow_kg_s"] == 0.0
     assert rebound["release"]["termination_basis"] == "inventory_depletion"
     assert rebound["promotion"]["qualified_provider_packet_allowed"] is False
     assert rebound["promotion"]["frequency_inference_allowed"] is False

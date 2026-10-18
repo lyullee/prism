@@ -48,6 +48,9 @@ def audit_root(root: Path) -> dict:
             "status": "BLOCKED_MISSING_PROVIDER_RESPONSE",
             "structural_release_contract_valid": False,
             "mass_balance_attached": False,
+            "provider_mass_balance_fields": [],
+            "isolation_evidence_attached": False,
+            "pressure_equalization_evidence_attached": False,
             "termination_basis": None,
             "event_id": None,
             "blocking_reasons": [],
@@ -59,10 +62,31 @@ def audit_root(root: Path) -> dict:
         try:
             rebound = build_diagnostic_release_rebind(release_path, response_path)
             release = load_provider_release(rebound["release"])
+            mass_balance = getattr(release, "provider_mass_balance", None)
+            mass_balance_payload = (
+                mass_balance.model_dump(mode="json", exclude_none=True)
+                if mass_balance is not None
+                else {}
+            )
             row.update({
                 "status": rebound["status"],
                 "structural_release_contract_valid": True,
                 "mass_balance_attached": rebound["mass_balance_attached"],
+                "provider_mass_balance_fields": sorted(mass_balance_payload),
+                "isolation_evidence_attached": all(
+                    key in mass_balance_payload
+                    for key in ("isolation_time_s", "isolation_success")
+                ),
+                "pressure_equalization_evidence_attached": all(
+                    key in mass_balance_payload
+                    for key in (
+                        "pressure_equalization_time_s",
+                        "pressure_equalization_success",
+                        "terminal_source_pressure_pa_abs",
+                        "ambient_pressure_pa_abs",
+                        "max_post_pressure_equalization_flow_kg_s",
+                    )
+                ),
                 "termination_basis": release.termination_basis,
                 "event_id": release.event_id,
                 "provider_source_digest": release.provider_source_digest,
@@ -91,6 +115,12 @@ def audit_root(root: Path) -> dict:
             row["structural_release_contract_valid"] for row in rows
         ),
         "mass_balance_attached_count": sum(row["mass_balance_attached"] for row in rows),
+        "isolation_evidence_attached_count": sum(
+            row["isolation_evidence_attached"] for row in rows
+        ),
+        "pressure_equalization_evidence_attached_count": sum(
+            row["pressure_equalization_evidence_attached"] for row in rows
+        ),
         "strict_termination_candidate_count": sum(
             row["termination_basis"] in strict_bases for row in rows
         ),

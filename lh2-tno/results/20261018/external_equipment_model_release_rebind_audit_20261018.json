@@ -6,6 +6,8 @@
   "provider_response_pair_count": 7,
   "structural_release_contract_valid_count": 7,
   "mass_balance_attached_count": 4,
+  "isolation_evidence_attached_count": 1,
+  "pressure_equalization_evidence_attached_count": 0,
   "strict_termination_candidate_count": 2,
   "provider_packet_promoted": false,
   "frequency_inference_performed": false,
@@ -19,6 +21,17 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
+      "provider_mass_balance_fields": [
+        "cumulative_mass_in_kg",
+        "cumulative_mass_out_kg",
+        "derived_accounting_residual_kg",
+        "final_mass_kg",
+        "initial_mass_kg",
+        "reported_residual_mass_kg",
+        "schema_version"
+      ],
+      "isolation_evidence_attached": false,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "inventory_depletion",
       "event_id": "native-layered-tank/accidental-leak-001",
       "blocking_reasons": [
@@ -37,6 +50,19 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
+      "provider_mass_balance_fields": [
+        "cumulative_mass_in_kg",
+        "cumulative_mass_out_kg",
+        "derived_accounting_residual_kg",
+        "final_mass_kg",
+        "initial_mass_kg",
+        "isolation_success",
+        "isolation_time_s",
+        "reported_residual_mass_kg",
+        "schema_version"
+      ],
+      "isolation_evidence_attached": true,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "reviewed_isolation_success",
       "event_id": "native-dynamic-pipe/accidental-leak-001",
       "blocking_reasons": [
@@ -53,6 +79,9 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": false,
+      "provider_mass_balance_fields": [],
+      "isolation_evidence_attached": false,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "synthetic_diagnostic_horizon",
       "event_id": "native-mapped-pump/accidental-leak-001",
       "blocking_reasons": [
@@ -73,6 +102,17 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
+      "provider_mass_balance_fields": [
+        "cumulative_mass_in_kg",
+        "cumulative_mass_out_kg",
+        "derived_accounting_residual_kg",
+        "final_mass_kg",
+        "initial_mass_kg",
+        "reported_residual_mass_kg",
+        "schema_version"
+      ],
+      "isolation_evidence_attached": false,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "synthetic_diagnostic_horizon",
       "event_id": "native-reliquefier/accidental-leak-001",
       "blocking_reasons": [
@@ -91,6 +131,9 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": false,
+      "provider_mass_balance_fields": [],
+      "isolation_evidence_attached": false,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "synthetic_diagnostic_horizon",
       "event_id": "native-stroke-valve/accidental-leak-001",
       "blocking_reasons": [
@@ -112,6 +155,17 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
+      "provider_mass_balance_fields": [
+        "cumulative_mass_in_kg",
+        "cumulative_mass_out_kg",
+        "derived_accounting_residual_kg",
+        "final_mass_kg",
+        "initial_mass_kg",
+        "reported_residual_mass_kg",
+        "schema_version"
+      ],
+      "isolation_evidence_attached": false,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "synthetic_diagnostic_horizon",
       "event_id": "native-vaporizer/accidental-leak-001",
       "blocking_reasons": [
@@ -130,6 +184,9 @@
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": false,
+      "provider_mass_balance_fields": [],
+      "isolation_evidence_attached": false,
+      "pressure_equalization_evidence_attached": false,
       "termination_basis": "synthetic_diagnostic_horizon",
       "event_id": "native-vent-stack/accidental-leak-001",
       "blocking_reasons": [

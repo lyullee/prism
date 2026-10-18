@@ -56,11 +56,14 @@ The paired `resolved_release.json` records were also passed through the
 diagnostic rebind audit at
 `results/20261018/external_equipment_model_release_rebind_audit_20261018.json`
 (SHA-256
-`88A9D53C7852405ACABDADF0C7292087D0F47185CB6D6854067205C603CE0771`).
+`1CBD2CFEC8AA05658C9783A0A3BF512AAC99643E62539D5A3C6B6B52C461CA7C`).
 All seven pairs validate against the strict PRISM release contract, and the
-four available provider mass ledgers are attached to diagnostic copies. This
-is a structural handoff check only; it does not repair residual inventory or
-turn the five synthetic horizons into closed releases.
+four available provider mass ledgers are attached to diagnostic copies. One
+copy carries explicit isolation timing and success evidence; none of the
+seven exports carries the complete pressure-equalization observation set.
+These values are passed through exactly as provider observations. This is a
+structural handoff check only; it does not repair residual inventory or turn
+the five synthetic horizons into closed releases.
 
 ## Interpretation for the IJHE objective
 
