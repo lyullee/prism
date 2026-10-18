@@ -38,12 +38,12 @@
       "name": "latest_local_full_suite_pointer",
       "status": "PASS",
       "evidence": {
-        "current_count": 1561,
-        "development_goal_count": 1561,
-        "current_status": "1561 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "development_goal_status": "1561 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "current_record": "python -m pytest -q; 1561 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "development_goal_record": "python -m pytest -q; 1561 passed, 1 warning; mass-basis drift fail-closed regression recheck"
+        "current_count": 1564,
+        "development_goal_count": 1564,
+        "current_status": "1564 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "development_goal_status": "1564 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "current_record": "python -m pytest -q; 1564 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "development_goal_record": "python -m pytest -q; 1564 passed, 1 warning; mass-basis drift fail-closed regression recheck"
       }
     },
     {
@@ -284,7 +284,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1561
+        "full_portable_test_count": 1564
       }
     },
     {
@@ -315,7 +315,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1561
+        "full_portable_test_count": 1564
       }
     },
     {
