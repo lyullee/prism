@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from typing import Any, Mapping
 import sys
@@ -47,6 +48,7 @@ _REQUIRED_CONTRACT = {
 }
 
 _REQUIRED_EVIDENCE_BLOCKS = tuple(_REQUIRED_CONTRACT)
+_RELEASE_RESIDUAL_TOLERANCE_KG = 1.0e-8
 
 
 def _load(path: Path) -> Any:
@@ -249,6 +251,72 @@ def _evidence_coverage(
     }
 
 
+def _provider_release_boundary_audit(provider: Any) -> dict[str, Any]:
+    """Check the explicit release clock and termination evidence.
+
+    The generic attachment contains a provider-owned release summary rather
+    than the full strict release packet.  This audit therefore only checks
+    fields that are present; it never turns a residual inventory into zero or
+    infers pressure-equalization evidence from a short history.
+    """
+
+    if not isinstance(provider, Mapping):
+        return {
+            "status": "MISSING_PROVIDER_RELEASE_BOUNDARY",
+            "valid": False,
+            "blocking_reasons": ["provider_release_packet is missing"],
+        }
+    reasons: list[str] = []
+
+    def finite(value: Any) -> float | None:
+        if isinstance(value, bool):
+            return None
+        try:
+            number = float(value)
+        except (TypeError, ValueError):
+            return None
+        return number if math.isfinite(number) else None
+
+    start = finite(provider.get("release_start_s"))
+    end = finite(provider.get("release_end_s"))
+    duration = finite(provider.get("duration_s"))
+    if start is None or end is None or duration is None or duration <= 0.0:
+        reasons.append("release start/end/duration fields are incomplete or invalid")
+    elif not math.isclose(end - start, duration, rel_tol=0.0, abs_tol=1.0e-9):
+        reasons.append("release_end_s does not equal release_start_s + duration_s")
+
+    basis = provider.get("termination_basis")
+    if basis == "inventory_depletion":
+        inventory_status = provider.get("inventory_status")
+        if inventory_status != "INVENTORY_CLOSED":
+            reasons.append(
+                "inventory_depletion is declared but inventory_status is not INVENTORY_CLOSED"
+            )
+        residual = finite(provider.get("mass_residual_kg"))
+        if residual is not None and abs(residual) > _RELEASE_RESIDUAL_TOLERANCE_KG:
+            reasons.append(
+                "inventory_depletion is declared but mass_residual_kg remains above tolerance"
+            )
+    elif basis == "reviewed_isolation_success":
+        isolation = finite(provider.get("isolation_time_s"))
+        if isolation is None:
+            reasons.append("reviewed_isolation_success requires isolation_time_s")
+        elif duration is not None and isolation > duration + 1.0e-9:
+            reasons.append("isolation_time_s exceeds the provider release duration")
+    elif basis == "model_pressure_equalization":
+        reasons.append(
+            "model_pressure_equalization requires the explicit pressure-equalization observation set"
+        )
+    elif not isinstance(basis, str) or not basis.strip():
+        reasons.append("termination_basis is missing")
+
+    return {
+        "status": "VALID_DIAGNOSTIC_BOUNDARY" if not reasons else "BOUNDARY_EVIDENCE_WITHHELD",
+        "valid": not reasons,
+        "blocking_reasons": list(dict.fromkeys(reasons)),
+    }
+
+
 def _diagnostic_quantitative_evaluation(
     requests: list[Mapping[str, Any]],
     attachments: Any | None,
@@ -282,6 +350,7 @@ def _diagnostic_quantitative_evaluation(
             and isinstance(outputs, Mapping)
         )
         chain_executed = bool(outputs.get("full_chain_executed")) if isinstance(outputs, Mapping) else False
+        provider_boundary_audit = _provider_release_boundary_audit(provider)
         annual_frequency = frequency.get("annual_frequency") if isinstance(frequency, Mapping) else None
         frequency_bound = isinstance(annual_frequency, (int, float)) and not isinstance(annual_frequency, bool)
         if not complete:
@@ -310,6 +379,11 @@ def _diagnostic_quantitative_evaluation(
                     "inventory_status",
                 )
             } if isinstance(provider, Mapping) else None,
+            "provider_release_boundary_status": provider_boundary_audit["status"],
+            "provider_release_boundary_valid": provider_boundary_audit["valid"],
+            "provider_release_boundary_blocking_reasons": provider_boundary_audit[
+                "blocking_reasons"
+            ],
             "literature_event_id": frequency.get("literature_event_id") if isinstance(frequency, Mapping) else None,
             "annual_frequency": annual_frequency,
             "frequency_source_provenance": frequency.get("source_provenance") if isinstance(frequency, Mapping) else None,
@@ -348,6 +422,12 @@ def _diagnostic_quantitative_evaluation(
             "diagnostic_chain_attached_count": attached_count,
             "frequency_bound_count": sum(row["status"] == "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED" for row in rows),
             "frequency_value_withheld_count": sum(row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD" for row in rows),
+            "release_boundary_valid_count": sum(
+                row["provider_release_boundary_valid"] for row in rows
+            ),
+            "release_boundary_withheld_count": sum(
+                not row["provider_release_boundary_valid"] for row in rows
+            ),
             "status_counts": status_counts,
         },
         "policy": {

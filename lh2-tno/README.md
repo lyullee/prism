@@ -522,6 +522,10 @@ the three current and three forecast requests. The handoff evaluator remains
 diagnostic and now exposes the matched provider release boundary, frequency
 identity, SLABx-LH2 chain stages, weather/ignition binding and processing time
 under `current_diagnostic_evaluation` and `forecast_diagnostic_evaluation`.
+Each row also reports `provider_release_boundary_status` and explicit blocking
+reasons. A provider response that declares `inventory_depletion` while leaving
+nonzero residual mass remains visible as a diagnostic consequence chain, but
+its release boundary is withheld and the residual is never changed to zero.
 The storage-tank row keeps its missing frequency value explicitly withheld;
 the line and vent rows expose their attached conditional chain results. The
 adapter reuses evidence and does not run new physics, infer frequency, or

@@ -102,7 +102,12 @@ and adds `current_diagnostic_evaluation` and
 `forecast_diagnostic_evaluation` rows. These rows expose the exact provider
 release boundary, literature-frequency identity, SLABx-LH2 chain stages,
 weather/ignition binding, and processing time already present in the attached
-record. A row with a missing annual frequency is explicitly reported as
+record. Each row also carries `provider_release_boundary_status` and
+`provider_release_boundary_blocking_reasons`. For example, the shipped tank
+diagnostic declares `inventory_depletion` while retaining a nonzero residual
+mass, so its consequence chain remains visible but its release boundary is
+marked `BOUNDARY_EVIDENCE_WITHHELD`; PRISM does not silently convert that
+residual to zero. A row with a missing annual frequency is explicitly reported as
 `CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD`; PRISM does not infer a
 rate from the state frame. The evaluator reuses attached evidence and does not
 run fresh release or consequence physics. Its policy keeps facility IR/F-N

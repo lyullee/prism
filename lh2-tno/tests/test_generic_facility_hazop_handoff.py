@@ -119,9 +119,22 @@ def test_attached_provider_chain_is_exposed_without_frequency_inference():
     assert forecast_eval["summary"]["diagnostic_chain_attached_count"] == 3
     assert current_eval["summary"]["frequency_value_withheld_count"] == 1
     assert forecast_eval["summary"]["frequency_value_withheld_count"] == 1
+    assert current_eval["summary"]["release_boundary_valid_count"] == 2
+    assert current_eval["summary"]["release_boundary_withheld_count"] == 1
+    assert forecast_eval["summary"]["release_boundary_valid_count"] == 2
+    assert forecast_eval["summary"]["release_boundary_withheld_count"] == 1
     storage_row = next(
         row for row in current_eval["rows"] if row["component_id"] == "storage-tank-01"
     )
     assert storage_row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD"
     assert storage_row["frequency_inference_performed"] is False
+    assert storage_row["provider_release_boundary_valid"] is False
+    assert any(
+        "inventory_depletion" in reason
+        for reason in storage_row["provider_release_boundary_blocking_reasons"]
+    )
+    line_row = next(
+        row for row in current_eval["rows"] if row["component_id"] == "liquid-transfer-line-01"
+    )
+    assert line_row["provider_release_boundary_valid"] is True
     assert storage_row["facility_qra_promotion"] is False
