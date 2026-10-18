@@ -24,7 +24,7 @@ dependencies = ["pydantic>=2.10,<3"]
 Repository = "https://github.com/lyullee/prism"
 Documentation = "https://github.com/lyullee/prism/blob/main/README.md"
 Issues = "https://github.com/lyullee/prism/issues"
-Archive = "https://doi.org/10.5281/zenodo.23241358"
+Archive = "https://doi.org/10.5281/zenodo.23448413"
 
 [project.optional-dependencies]
 test = ["pytest>=8", "numpy>=1.26,<3", "CoolProp>=6.6,<9", "pypdf>=5,<7"]

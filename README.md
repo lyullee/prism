@@ -62,7 +62,7 @@ The detailed package documentation is in [`lh2-tno/README.md`](lh2-tno/README.md
 
 - [English user manual](lh2-tno/docs/PRISM_USER_MANUAL_en.md)
 - [English digital-twin interface guide](lh2-tno/docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
-- [English v0.6.3 distribution record](lh2-tno/docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md)
+- [English v0.6.4 distribution record](lh2-tno/docs/PRISM_v064_distribution_en.md)
 - [Korean package README](lh2-tno/README_ko.md)
 - [Korean source README](README_ko.md)
 
@@ -86,8 +86,9 @@ python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe
 - [GitHub Release v0.6.4](https://github.com/lyullee/prism/releases/tag/v0.6.4)
 - [PyPI: prism-risk 0.6.4](https://pypi.org/project/prism-risk/0.6.4/)
 - [PyPI workflow](https://github.com/lyullee/prism/actions/workflows/publish-pypi.yml)
-- [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
-- Use the concept DOI above until the v0.6.4 version record is publicly visible.
+- [PRISM concept DOI](https://doi.org/10.5281/zenodo.23448413)
+- [Version DOI — PRISM 0.6.4](https://doi.org/10.5281/zenodo.23448414)
+- [Previous archive series](https://doi.org/10.5281/zenodo.23241358)
 
 ## Reproducibility
 

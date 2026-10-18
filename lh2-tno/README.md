@@ -55,6 +55,8 @@ for the current 44-case counts and open evidence requests.
 
 The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 28 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
 
+[PRISM 0.6.4 distribution and verification record](docs/PRISM_v064_distribution_en.md).
+
 For the exact public-repository, external-backend, and KGS interpretation
 boundary, see the [public/private boundary note](docs/PRISM_public_private_boundary_and_KGS_interpretation_20261018.md).
 
@@ -1103,9 +1105,9 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 - [GitHub Release v0.6.4](https://github.com/lyullee/prism/releases/tag/v0.6.4)
 - [PyPI prism-risk 0.6.4](https://pypi.org/project/prism-risk/0.6.4/)
-- [Zenodo v0.6.3 publication status](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md) (version DOI pending publication)
-- [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
-- [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/38689574587)
+- [Version DOI — PRISM 0.6.4](https://doi.org/10.5281/zenodo.23448414)
+- [PRISM concept DOI](https://doi.org/10.5281/zenodo.23448413)
+- [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/39107880124)
 
 ## Reproducibility checklist
 
@@ -1136,9 +1138,9 @@ python scripts/audit_partial_lh2_boundary_evidence.py `
 
 ## License and citation
 
-PRISM is released under the MIT License. Cite the concept DOI until the version-specific v0.6.3 Zenodo record is published:
+PRISM is released under the MIT License. Cite the published version DOI for this release:
 
 ```text
 Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.4.
-Concept DOI: https://doi.org/10.5281/zenodo.23241358
+Version DOI: https://doi.org/10.5281/zenodo.23448414
 ```

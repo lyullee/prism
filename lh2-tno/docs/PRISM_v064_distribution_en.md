@@ -43,12 +43,22 @@ python -m pytest -q
 
 - Separate Python environment with public PyPI dependencies: 1,577 tests passed.
 - Both source distribution and wheel built successfully.
-- Strict package metadata check and installed-wheel standard-mode smoke test
-  are required before publication.
+- Strict package metadata check, dependency check, and installed-wheel
+  standard-mode calculation: passed.
 - GitHub release: https://github.com/lyullee/prism/releases/tag/v0.6.4
 - PyPI version: https://pypi.org/project/prism-risk/0.6.4/
 
-Publication evidence and the version DOI are recorded below once confirmed.
+Published version DOI: https://doi.org/10.5281/zenodo.23448414
+
+New GitHub-managed series DOI: https://doi.org/10.5281/zenodo.23448413
+
+GitHub CI: https://github.com/lyullee/prism/actions/runs/39107860644
+
+PyPI publishing workflow: https://github.com/lyullee/prism/actions/runs/39107880124
+
+The public PyPI wheel was downloaded, installed into a separate environment,
+and used to generate templates and calculate a standard result with
+`engine=bundled_prism_qra`. Both GitHub workflows completed successfully.
 
 ## Documentation
 
@@ -57,6 +67,11 @@ Publication evidence and the version DOI are recorded below once confirmed.
 - [Public source and execution boundary](PRISM_public_private_boundary_and_KGS_interpretation_20261018.md)
 
 The previous archive series is https://doi.org/10.5281/zenodo.23241358.
-The v0.6.4 GitHub-triggered archive must be cited using its confirmed version
-DOI after publication; a reserved or unresolvable identifier is not a published
-version DOI.
+Enabling GitHub automatic archiving created a new archive series. The previous
+record is linked with `isNewVersionOf`; its older concept DOI remains available
+for the historical releases. Use the v0.6.4 DOI above to cite this release.
+
+## Published file checksums
+
+- `prism_risk-0.6.4-py3-none-any.whl`: SHA-256 `ecdef4f75b1d7a55295b4ce99733c8ba484d366dd2f8cabe0edda197c4debbd6`
+- `prism_risk-0.6.4.tar.gz`: SHA-256 `ab8da776ff1c4b698ff44bd5395a3a608da7afeac6751669a481a1b4b3442f23`

@@ -1,0 +1,24 @@
+{
+  "version": "0.6.4",
+  "date_kst": "2026-10-18",
+  "github_release": "https://github.com/lyullee/prism/releases/tag/v0.6.4",
+  "version_doi": "10.5281/zenodo.23448414",
+  "concept_doi": "10.5281/zenodo.23448413",
+  "previous_concept_doi": "10.5281/zenodo.23241358",
+  "ci": "https://github.com/lyullee/prism/actions/runs/39107860644",
+  "pypi_workflow": "https://github.com/lyullee/prism/actions/runs/39107880124",
+  "pypi_files": [
+    {
+      "filename": "prism_risk-0.6.4-py3-none-any.whl",
+      "sha256": "ecdef4f75b1d7a55295b4ce99733c8ba484d366dd2f8cabe0edda197c4debbd6",
+      "url": "https://files.pythonhosted.org/packages/d6/27/598a83389d02bad25ccece6c5cfbbf9161eee51d983123a67ad517590775/prism_risk-0.6.4-py3-none-any.whl"
+    },
+    {
+      "filename": "prism_risk-0.6.4.tar.gz",
+      "sha256": "ab8da776ff1c4b698ff44bd5395a3a608da7afeac6751669a481a1b4b3442f23",
+      "url": "https://files.pythonhosted.org/packages/ca/93/960ec9f750ba971e76a2a39ec5670c3da53cc23d83867f8a297751ffcb96/prism_risk-0.6.4.tar.gz"
+    }
+  ],
+  "tests_passed": 1577,
+  "installed_pypi_standard_smoke": "PASSED"
+}
