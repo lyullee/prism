@@ -163,3 +163,19 @@ def test_unpacketised_handoff_is_reported_without_being_substituted(tmp_path: Pa
     assert report["campaign_events_without_packet_count"] == 1
     vertical = next(row for row in report["event_rows"] if row["event_id"] == "facility/vertical/G1")
     assert vertical["status"] == "HANDOFF_OR_PACKET_MISSING"
+
+def test_uncomputed_packet_evidence_row_documents_gap_without_blocking_closed_subset(tmp_path: Path):
+    packet = _packet_evidence(tmp_path)
+    packet["rows"].append({
+        "event_id": "facility/vaporizer/G1",
+        "status": "UNCOMPUTED_PROVIDER_PACKET",
+        "evidence": {},
+    })
+    campaign = _campaign()
+    campaign["events"].append({"id": "facility/vaporizer/G1", "model_component_id": "vaporizer-01"})
+    report = build_chain_closure_audit(campaign, packet_evidence=packet, packet_root=tmp_path)
+    assert report["status"] == "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED"
+    assert report["packet_chain_closed_event_count"] == 1
+    assert report["campaign_events_without_packet_count"] == 1
+    row = next(item for item in report["event_rows"] if item["event_id"] == "facility/vaporizer/G1")
+    assert row["status"] == "HANDOFF_OR_PACKET_MISSING"

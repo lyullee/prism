@@ -1,0 +1,19 @@
+{
+  "schema_version": "prism.equipment_state_snapshot.v1",
+  "component_id": "terminal_pipe",
+  "captured_at_s": 0.0,
+  "origin": "model_prediction",
+  "pressure_pa_abs": 101000.0,
+  "temperature_k": null,
+  "mass_kg": null,
+  "liquid_fraction": 0.0001,
+  "phase": null,
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "measurements": {},
+  "source_digest": null,
+  "quality": "valid"
+}

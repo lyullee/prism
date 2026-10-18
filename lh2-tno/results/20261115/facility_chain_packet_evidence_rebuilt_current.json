@@ -1,6 +1,6 @@
 {
   "schema_version": "prism.facility_chain_packet_evidence_scan.v2",
-  "status": "REBUILT_BASE_PLUS_VERTICAL_DIAGNOSTIC",
+  "status": "REBUILT_BASE_PLUS_VERTICAL_PLUS_INVENTORY_REBOUND_DIAGNOSTIC",
   "rows": [
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
@@ -1186,10 +1186,170 @@
         "exact_opening_match": true,
         "strict_packet_valid": true
       }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "REBOUND_PROVIDER_PACKET_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_01pct/provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_01pct/resolved_release.json"
+        ],
+        "state_snapshot_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_01pct/state_snapshot.json",
+        "verification_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_01pct/verification.json",
+        "provider_model": "lh2dt.DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "namespace_rebind": true,
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+        "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+      },
+      "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+      "namespace_rebind": true
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "REBOUND_PROVIDER_PACKET_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_1pct/provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_1pct/resolved_release.json"
+        ],
+        "state_snapshot_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_1pct/state_snapshot.json",
+        "verification_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_0_1pct/verification.json",
+        "provider_model": "lh2dt.DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "namespace_rebind": true,
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+        "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+      },
+      "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+      "namespace_rebind": true
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "REBOUND_PROVIDER_PACKET_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_1pct/provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_1pct/resolved_release.json"
+        ],
+        "state_snapshot_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_1pct/state_snapshot.json",
+        "verification_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_1pct/verification.json",
+        "provider_model": "lh2dt.DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "namespace_rebind": true,
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+        "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+      },
+      "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+      "namespace_rebind": true
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "REBOUND_PROVIDER_PACKET_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_10pct/provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_10pct/resolved_release.json"
+        ],
+        "state_snapshot_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_10pct/state_snapshot.json",
+        "verification_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_10pct/verification.json",
+        "provider_model": "lh2dt.DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "namespace_rebind": true,
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+        "provider_result_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+      },
+      "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+      "namespace_rebind": true
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "REBOUND_PROVIDER_PACKET_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_100pct/provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_100pct/resolved_release.json"
+        ],
+        "state_snapshot_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_100pct/state_snapshot.json",
+        "verification_path": "results/20261115/inventory_extension_packet_catalog_current_rebuild/events/AREA_100pct/verification.json",
+        "provider_model": "lh2dt.DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "namespace_rebind": true,
+        "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+        "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+        "provider_result_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+      },
+      "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+      "namespace_rebind": true
     }
   ],
   "event_count": 34,
-  "matched_event_count": 28,
+  "matched_event_count": 33,
   "qualified_provider_packet_count": 0,
   "frequency_bound": false,
   "physical_validation_claim": false,
@@ -1205,5 +1365,8 @@
   "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/campaign_result.json",
   "exact_digest_match_only": true,
   "diagnostic_only": true,
-  "interpretation": "Exact/strict packet identities were combined from the rebuilt 24-event base catalog and existing vertical-handoff evidence. The rebuilt base catalog has 23/24 packet exports; one ambient-vaporizer event remains uncomputed. Inventory-depletion extension events remain without exact packet evidence. The chain audit records basis aliases explicitly and does not qualify provider evidence or promote facility QRA."
+  "interpretation": "Exact/strict packet identities were combined from the rebuilt 24-event base catalog and existing vertical-handoff evidence. The rebuilt base catalog has 23/24 packet exports; one ambient-vaporizer event remains uncomputed. Inventory-depletion extension events remain without exact packet evidence. The chain audit records basis aliases explicitly and does not qualify provider evidence or promote facility QRA. Five inventory-depletion extension packets are now materialized from the source equipment campaign under an explicit namespace-rebind sidecar; source/result digests, duration, mass and termination provenance were checked before attachment. This closes diagnostic packet traceability only and does not qualify the provider or promote facility QRA.",
+  "inventory_extension_packet_catalog": "results/20261115/inventory_extension_packet_catalog_current_rebuild",
+  "inventory_extension_packet_catalog_event_count": 5,
+  "inventory_extension_packet_catalog_rebound_packet_count": 5
 }

@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "data": {
+    "event_kind": "accidental_leak",
+    "fluid": "ParaHydrogen",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 5.243303826564317e-06,
+        "pressure_pa_abs": 100000.0,
+        "specific_enthalpy_j_kg": 449858.79231673514,
+        "temperature_k": 20.56491222224236,
+        "density_kg_m3": 1.2950415387775165,
+        "effective_area_m2": 1.0000000000000001e-07,
+        "velocity_m_s": 40.48753394824579,
+        "area_provenance": "provider-owned inventory valve area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "upstream_pressure_pa_abs": 104249.29753622827,
+        "upstream_temperature_k": 20.741254163564868,
+        "interval_value_origin": "provider_interval_average_from_dynamic_network",
+        "valve_opening": 1.0
+      }
+    ],
+    "duration_s": 0.5,
+    "requested_duration_s": 40.0,
+    "time_step_s": 0.5,
+    "available_mass_kg": 0.00013416755831850078,
+    "remaining_inventory_kg": 0.00013154590640521862,
+    "depletion_threshold_kg": 0.00013405,
+    "inventory_depletion_detected": true,
+    "cumulative_mass_out_kg": 2.6216519132821583e-06,
+    "cumulative_static_enthalpy_out_j": 1.1793731635839697,
+    "max_total_mass_residual_kg": 2.117582368135751e-21,
+    "max_total_energy_residual_j": 7.904787935331115e-14,
+    "provider_intervals": 1,
+    "provider_terminal_area_m2": 1.0000000000000001e-07,
+    "provider_valve_area_m2": 1.0000000000000001e-07,
+    "provider_link_id": "inventory_valve",
+    "state_owner": "equipment_twin",
+    "discharge_owner": "equipment_twin",
+    "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+    "termination_basis": "inventory_depletion",
+    "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg",
+    "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "component_id": "inventory-depletion-pipe-01"
+  },
+  "limitation": "Provider-owned homogeneous finite-storage tank and commanded full-open valve. Depletion is an explicit positive-mass numerical threshold, not a claim that the external EOS admits a zero-mass state; no liquid two-phase tank feedback or plant calibration is inferred.",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "dependencies": {
+      "CoolProp": "8.0.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1"
+    }
+  },
+  "request_digest": "43f2ded2f9acf9e1fe61aa9c7100d1e4c196df0d3a1f36a6c8d66247d3c19974",
+  "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
+  "worker_sha256": "b2bfe2d57e393ad4641cb687d977c489162b270f70897a88ec4769c449a4b264",
+  "adapter_source_digest": "fb2d5aa9ec253da1dcdfba82a179a1b8add834192d8118f3e55cc5a5f75b3246",
+  "elapsed_ms": 1675.6084999069571,
+  "physical_validation_claim": false
+}

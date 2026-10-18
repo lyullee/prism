@@ -248,10 +248,20 @@ def build_chain_closure_audit(
             if loaded:
                 packet_rows_by_event[event_id] = loaded
 
+    # An evidence row may intentionally record an uncomputed event with an
+    # empty evidence object.  Such a row documents the gap; it is not a
+    # request to load a packet and must not turn an otherwise partial
+    # diagnostic chain into a false mismatch.  Rows with a non-empty path
+    # remain expected even when the path is missing, so broken references
+    # still fail closed.
     packet_expected_event_ids = {
         str(row.get("event_id"))
         for row in packet_evidence_rows
         if row.get("event_id")
+        and isinstance(row.get("evidence"), Mapping)
+        and isinstance(row["evidence"].get("resolved_packet_paths"), Sequence)
+        and not isinstance(row["evidence"].get("resolved_packet_paths"), (str, bytes))
+        and bool(row["evidence"].get("resolved_packet_paths"))
     }
     event_rows: list[dict[str, Any]] = []
     packet_chain_closed = 0

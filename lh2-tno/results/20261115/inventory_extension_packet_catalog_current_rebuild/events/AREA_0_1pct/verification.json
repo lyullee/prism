@@ -1,0 +1,37 @@
+{
+  "schema_version": "prism.inventory_extension_packet_verification.v1",
+  "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+  "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+  "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+  "component_id": "inventory-depletion-pipe-01",
+  "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+  "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+  "termination_basis": "inventory_depletion",
+  "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg",
+  "duration_s": 0.5,
+  "available_mass_kg": 0.00013416755831850078,
+  "cumulative_mass_out_kg": 4.022010171050504e-07,
+  "source_campaign_verification": "results\\20261009\\equipment_inventory_campaign\\verification.json",
+  "namespace_rebind": {
+    "source_facility_id": "equipment-inventory-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "source_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+    "target_event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "source_component_id": "terminal_pipe",
+    "target_component_id": "inventory-depletion-pipe-01",
+    "checks": {
+      "source_event_id_match": true,
+      "provider_source_digest_match": true,
+      "provider_result_digest_match": true,
+      "duration_match": true,
+      "available_mass_match": true,
+      "released_mass_match": true,
+      "termination_basis_match": true,
+      "termination_provenance_match": true
+    }
+  },
+  "provider_packet_promoted": false,
+  "frequency_inference": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false
+}

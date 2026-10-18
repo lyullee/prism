@@ -1,0 +1,58 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "inventory-depletion-pipe-01",
+  "port_id": "terminal_pipe.out",
+  "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "provider-owned homogeneous finite-storage tank and inventory valve",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "ParaHydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+  },
+  "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+  "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+  "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+  "input_origin": "synthetic",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 100000.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.5,
+  "available_mass_kg": 0.00013416755831850078,
+  "cumulative_mass_out_kg": 2.6216519132821583e-06,
+  "cumulative_static_enthalpy_out_j": 1.1793731635839697,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 5.243303826564317e-06,
+      "pressure_pa_abs": 100000.0,
+      "specific_enthalpy_j_kg": 449858.79231673514,
+      "temperature_k": 20.56491222224236,
+      "density_kg_m3": 1.2950415387775165,
+      "effective_area_m2": 1.0000000000000001e-07,
+      "velocity_m_s": 40.48753394824579,
+      "area_provenance": "provider-owned inventory valve area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    }
+  ],
+  "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg",
+  "termination_basis": "inventory_depletion",
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.00035682482323055425
+}

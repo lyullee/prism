@@ -1,0 +1,58 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "inventory-depletion-pipe-01",
+  "port_id": "terminal_pipe.out",
+  "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "provider-owned homogeneous finite-storage tank and inventory valve",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "ParaHydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+  },
+  "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+  "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+  "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+  "input_origin": "synthetic",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 100000.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.5,
+  "available_mass_kg": 0.00013416755831850078,
+  "cumulative_mass_out_kg": 4.022010171050504e-07,
+  "cumulative_static_enthalpy_out_j": 0.18128728205924324,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 8.044020342101007e-07,
+      "pressure_pa_abs": 100000.0,
+      "specific_enthalpy_j_kg": 450738.0000282125,
+      "temperature_k": 20.63898516268862,
+      "density_kg_m3": 1.289146808172709,
+      "effective_area_m2": 1e-08,
+      "velocity_m_s": 62.39801620036542,
+      "area_provenance": "provider-owned inventory valve area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    }
+  ],
+  "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg",
+  "termination_basis": "inventory_depletion",
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.00011283791670955126
+}

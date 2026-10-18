@@ -1,0 +1,84 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "inventory-depletion-pipe-01",
+  "port_id": "terminal_pipe.out",
+  "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "provider-owned homogeneous finite-storage tank and inventory valve",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "ParaHydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+  },
+  "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+  "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+  "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+  "input_origin": "synthetic",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 100000.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 1.5,
+  "available_mass_kg": 0.00013416755831850078,
+  "cumulative_mass_out_kg": 1.2125616572864818e-07,
+  "cumulative_static_enthalpy_out_j": 0.05463792450151787,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 8.28183191105064e-08,
+      "pressure_pa_abs": 100000.0,
+      "specific_enthalpy_j_kg": 450907.05085843545,
+      "temperature_k": 20.653245953270563,
+      "density_kg_m3": 1.28801930727492,
+      "effective_area_m2": 1e-09,
+      "velocity_m_s": 64.2989733482538,
+      "area_provenance": "provider-owned inventory valve area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    },
+    {
+      "time_s": 0.5,
+      "mass_flow_kg_s": 8.08180186165339e-08,
+      "pressure_pa_abs": 100000.0,
+      "specific_enthalpy_j_kg": 450587.6732768463,
+      "temperature_k": 20.62630883083045,
+      "density_kg_m3": 1.2901510247262165,
+      "effective_area_m2": 1e-09,
+      "velocity_m_s": 62.64229308633408,
+      "area_provenance": "provider-owned inventory valve area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    },
+    {
+      "time_s": 1.0,
+      "mass_flow_kg_s": 7.887599373025605e-08,
+      "pressure_pa_abs": 100000.0,
+      "specific_enthalpy_j_kg": 450287.6011940715,
+      "temperature_k": 20.601019152910823,
+      "density_kg_m3": 1.2921600837697826,
+      "effective_area_m2": 1e-09,
+      "velocity_m_s": 61.0419674164064,
+      "area_provenance": "provider-owned inventory valve area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    }
+  ],
+  "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg",
+  "termination_basis": "inventory_depletion",
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 3.5682482323055425e-05
+}

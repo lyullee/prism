@@ -1,6 +1,6 @@
 {
   "schema_version": "prism.inventory_extension_packet_gap_recheck.v1",
-  "status": "COMPUTED_EXTENSION_WITHOUT_MATERIALIZED_PACKET_EVIDENCE",
+  "status": "HISTORICAL_SUPERSEDED_BY_INVENTORY_PACKET_REBIND",
   "diagnostic_only": true,
   "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/inventory_depletion_rebound_result.json",
   "campaign_result_sha256": "ec90132c4b97597700c09e8d311ec1f1362a2310e8b0a5dedfc4ebb5c43947b5",
@@ -327,10 +327,11 @@
   "frequency_inference_performed": false,
   "physical_validation_claim": false,
   "facility_qra_claim": false,
-  "interpretation": "The extension campaign contains embedded provider packet identities and termination/mass ledger values, but no materialized resolved_release files or packet-evidence rows were found for the five inventory-depletion event identities. The values remain diagnostic and do not close the facility release-to-risk chain.",
+  "interpretation": "The extension campaign contains embedded provider packet identities and termination/mass ledger values, but no materialized resolved_release files or packet-evidence rows were found for the five inventory-depletion event identities. The values remain diagnostic and do not close the facility release-to-risk chain. This record is retained as the pre-materialization gap snapshot; the current packet evidence is recorded in the superseding rebind record.",
   "required_next_evidence": [
     "materialized prism.resolved_release.v1 file per area-bin event",
     "digest-bound provider verification/qualification sidecar",
     "independent facility release-to-damage validation"
-  ]
+  ],
+  "superseded_by": "results/20261115/inventory_extension_packet_rebind_recheck_current.json"
 }

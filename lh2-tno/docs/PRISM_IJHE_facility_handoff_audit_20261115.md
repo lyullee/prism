@@ -89,11 +89,11 @@ and `provider_result_digest` matching. The saved records are
 and [`facility_chain_closure_audit_current_union.json`](../results/20261115/facility_chain_closure_audit_current_union.json).
 
 The rebuilt base catalog contains 23 exact native packet exports out of 24
-declared base events. Combined with five existing vertical-handoff packets, 28
-of the 34 union event identities passed the complete chain-closure check. One
-base vaporizer event has no packet export and five inventory-depletion extension
-events have no exact materialized packet evidence (their embedded identities are
-not packet files). Ten explicit inventory-basis aliases were
+declared base events. Combined with five existing vertical-handoff packets and five explicit
+inventory namespace-rebound packets, 33 of the 34 union event identities pass
+the diagnostic chain-closure check. One ambient-vaporizer G1 event remains
+uncomputed. The inventory packets are source-traced diagnostic rebinds and do
+not count as qualified provider evidence. Ten explicit inventory-basis aliases were
 accepted only after duration, mass, and provenance checks and are recorded per
 event. Conditional IR/F-N aggregation remains a diagnostic calculation, while
 facility total QRA, provider qualification, frequency binding from qualified
@@ -114,9 +114,9 @@ SLABx-LH2 is treated as the frozen validated consequence component. The open
 gates concern equipment release evidence, termination/inventory closure, and
 facility-level qualification around that fixed component.\n
 
-The five inventory-depletion extension events were rechecked separately. Their
-10 weather cases carry embedded provider identities and mass/termination ledgers,
-but no materialized `prism.resolved_release.v1` files or packet-evidence rows
-were found. This is recorded in
-[`inventory_extension_packet_gap_recheck_current.json`](../results/20261115/inventory_extension_packet_gap_recheck_current.json)
-and leaves those event chains diagnostic-only.
+The initial inventory-extension scan found only embedded identities; that historical
+gap is preserved in [`inventory_extension_packet_gap_recheck_current.json`](../results/20261115/inventory_extension_packet_gap_recheck_current.json).
+The current recheck materializes five source-traced packets under an explicit
+namespace rebind, checks 40 identity/value fields, and records the result in
+[`inventory_extension_packet_rebind_recheck_current.json`](../results/20261115/inventory_extension_packet_rebind_recheck_current.json).
+These packets remain diagnostic and unqualified.
