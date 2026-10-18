@@ -23,5 +23,9 @@ cases remain explicit withheld/uncomputed results. The published artifacts are
 research software and do not by themselves constitute regulatory certification
 or a complete facility QRA.
 
-Release links will be added after the GitHub tag, PyPI workflow, and Zenodo
-version record have all completed and their identifiers have been verified.
+Release links:
+
+- GitHub: https://github.com/lyullee/prism/releases/tag/v0.6.5
+- PyPI: https://pypi.org/project/prism-risk/0.6.5/
+- Version DOI: https://doi.org/10.5281/zenodo.23448717
+- Concept DOI: https://doi.org/10.5281/zenodo.23448413

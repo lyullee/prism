@@ -1109,11 +1109,11 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 ## Release links
 
-- [GitHub Release v0.6.4](https://github.com/lyullee/prism/releases/tag/v0.6.4)
-- [PyPI prism-risk 0.6.4](https://pypi.org/project/prism-risk/0.6.4/)
-- [Version DOI — PRISM 0.6.4](https://doi.org/10.5281/zenodo.23448414)
+- [GitHub Release v0.6.5](https://github.com/lyullee/prism/releases/tag/v0.6.5)
+- [PyPI prism-risk 0.6.5](https://pypi.org/project/prism-risk/0.6.5/)
+- [Version DOI — PRISM 0.6.5](https://doi.org/10.5281/zenodo.23448717)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23448413)
-- [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/39107880124)
+- [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/39109972574)
 
 ## Reproducibility checklist
 
@@ -1132,7 +1132,7 @@ value is never substituted into the facility total. See
 
 ## Current qualification boundary
 
-PRISM v0.6.4 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
+PRISM v0.6.5 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
 
 The inspection-centre procedure audit is intentionally classified as **partial operational evidence**. It confirms procedure anchors for pressure monitoring, PSV response, isolation/vent commands, and an operating stage, but it does not supply a qualified release duration, termination event, relief setpoint/capacity, mass balance, or annual accident frequency. Those missing fields must be supplied by an equipment-provider packet before the affected cases can enter a promoted facility QRA. The audit script is reproducible with:
 
@@ -1147,6 +1147,6 @@ python scripts/audit_partial_lh2_boundary_evidence.py `
 PRISM is released under the MIT License. Cite the published version DOI for this release:
 
 ```text
-Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.4.
-Version DOI: https://doi.org/10.5281/zenodo.23448414
+Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.5.
+Version DOI: https://doi.org/10.5281/zenodo.23448717
 ```
