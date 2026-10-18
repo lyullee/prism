@@ -4,7 +4,7 @@
 > comparison. The latest external source is `lh2dt_models@7072374` (source
 > digest `3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74`).
 > Use [`native_external_full_scope_latest_source_recheck_20261018.json`](../examples/native_external_full_scope_latest_source_recheck_20261018.json)
-> for the current 24-packet replay. The current PRISM suite is 1,544 passed,
+> for the current 24-packet replay. The current PRISM suite is 1,545 passed,
 > 1 warning; SLABx-LH2 remains frozen and was not modified.
 
 ## Result
