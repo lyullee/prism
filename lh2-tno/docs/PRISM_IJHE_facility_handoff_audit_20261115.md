@@ -134,10 +134,25 @@ The current-source G1 rebind is consumed by [`ijhe_completion_audit_rebuilt_curr
 The current external-source packet set was rechecked with the provider response and
 resolved-release records paired by exact event identity. The audit is stored in
 [`native_full_scope_release_rebind_audit_current_20261018.json`](../examples/native_full_scope_release_rebind_audit_current_20261018.json).
-It covers 22 paired release/response artifacts: 21 satisfy the strict release
-contract, 20 retain an attached provider mass ledger, and 18 have an allowed
-termination basis. The dynamic-state ledger reports 13 `READY`, 8 blocked rows,
-and one emergency-relief row outside the random-release contract. The revised
+It covers 22 flat release/response pairs plus two explicit two-sided release sets.
+All 22 flat packets satisfy the strict release loader after the emergency-relief
+loader is selected by event kind; 20 retain an attached provider mass ledger and
+19 have an allowed termination basis. The two reliquefier sets validate as
+two-endpoint packets, with both endpoint response digests and the shared inventory
+ledger matched. The dynamic-state ledger remains diagnostic-only. The revised
 normalizer merges legacy partial-ledger shapes semantically and preserves all
 provider residuals; it does not infer a missing inventory, frequency, physical
 validation, or qualification sidecar.
+
+Re-run this diagnostic audit with:
+
+```powershell
+python scripts/audit_external_release_rebind.py `
+  --root results/20261115/native_external_facility_full_scope_packets_current `
+  --output examples/native_full_scope_release_rebind_audit_current_20261018.json
+```
+
+The audit treats `provider_response.json` as a single-release response and
+`provider_response_endpoints.json` as the endpoint map for a
+`resolved_release_set.json`; it never substitutes one endpoint for a missing
+two-sided response.

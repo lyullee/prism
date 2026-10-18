@@ -450,11 +450,180 @@ def build_diagnostic_release_rebind(
     }
 
 
+def audit_external_release_set_response(
+    resolved_release_set: Mapping[str, Any] | str | Path,
+    provider_response_endpoints: Mapping[str, Any] | str | Path,
+) -> dict[str, Any]:
+    """Audit a two-sided provider response without collapsing its endpoints.
+
+    A two-sided rupture owns one shared inventory but exports one response per
+    rupture endpoint.  This helper checks the endpoint identity/clock/digest
+    bindings and the provider-declared shared inventory ledger.  It does not
+    manufacture endpoint mass ledgers, frequencies, qualification, or a
+    facility QRA claim when those fields are absent.
+    """
+    release_set = _read(resolved_release_set, "resolved release set")
+    responses = _read(provider_response_endpoints, "provider endpoint responses")
+    if release_set.get("provider_export_schema") != "prism.resolved_release_set.v1":
+        raise ExternalReleaseNormalizationError(
+            "resolved release set must use prism.resolved_release_set.v1"
+        )
+    releases = release_set.get("releases")
+    if not isinstance(releases, list) or len(releases) != 2:
+        raise ExternalReleaseNormalizationError(
+            "two-sided release set must contain exactly two endpoint releases"
+        )
+    endpoint_audits: list[dict[str, Any]] = []
+    for release in releases:
+        if not isinstance(release, Mapping):
+            raise ExternalReleaseNormalizationError(
+                "two-sided release set endpoint must be an object"
+            )
+        port_id = release.get("port_id")
+        if not isinstance(port_id, str) or not port_id:
+            raise ExternalReleaseNormalizationError(
+                "two-sided release set endpoint must declare port_id"
+            )
+        response = responses.get(port_id)
+        if not isinstance(response, Mapping):
+            endpoint_audits.append({
+                "port_id": port_id,
+                "status": "MISSING_ENDPOINT_RESPONSE",
+                "checks": {},
+                "blocking_reasons": [
+                    f"provider endpoint response is missing for port {port_id}"
+                ],
+            })
+            continue
+        audit = audit_external_release_response(release, response)
+        endpoint_audits.append({
+            "port_id": port_id,
+            "status": audit["status"],
+            "checks": audit["checks"],
+            "provider_result_digest": release.get("provider_result_digest"),
+            "computed_provider_result_digest": audit.get("computed_provider_result_digest"),
+            "blocking_reasons": audit["blocking_reasons"],
+        })
+
+    def _number(value: Any) -> float | None:
+        return float(value) if _finite(value) else None
+
+    shared_initial: list[float] = []
+    shared_final: list[float] = []
+    shared_released: list[float] = []
+    snapshot_digests: list[str] = []
+    source_digests: list[str] = []
+    for release in releases:
+        port_id = release.get("port_id")
+        response = responses.get(port_id)
+        if not isinstance(response, Mapping):
+            continue
+        payload = _response_payload(response)
+        meta = payload.get("provider_meta")
+        if not isinstance(meta, Mapping):
+            continue
+        for key, target in (
+            ("shared_initial_mass_kg", shared_initial),
+            ("shared_final_mass_kg", shared_final),
+            ("shared_total_cumulative_mass_kg", shared_released),
+        ):
+            number = _number(meta.get(key))
+            if number is not None:
+                target.append(number)
+        snapshot = response.get("provider_state_snapshot_digest")
+        source = response.get("provider_source_digest")
+        if isinstance(snapshot, str) and snapshot:
+            snapshot_digests.append(snapshot)
+        if isinstance(source, str) and source:
+            source_digests.append(source)
+
+    set_available = _number(release_set.get("available_mass_kg"))
+    set_released = _number(release_set.get("cumulative_mass_out_kg"))
+    shared_inventory_checks = {
+        "shared_initial_mass_present": len(shared_initial) == 2,
+        "shared_final_mass_present": len(shared_final) == 2,
+        "shared_cumulative_mass_present": len(shared_released) == 2,
+        "shared_initial_mass_matches_set": (
+            set_available is not None
+            and len(shared_initial) == 2
+            and all(_same(value, set_available) for value in shared_initial)
+        ),
+        "shared_cumulative_mass_matches_set": (
+            set_released is not None
+            and len(shared_released) == 2
+            and all(_same(value, set_released) for value in shared_released)
+        ),
+        "shared_mass_closes": (
+            len(shared_initial) == 2
+            and len(shared_final) == 2
+            and len(shared_released) == 2
+            and all(
+                _same(initial - final, released)
+                for initial, final, released in zip(
+                    shared_initial, shared_final, shared_released
+                )
+            )
+        ),
+        "shared_snapshot_digest_same": len(snapshot_digests) == 2 and len(set(snapshot_digests)) == 1,
+        "shared_source_digest_same": len(source_digests) == 2 and len(set(source_digests)) == 1,
+    }
+    endpoint_required = (
+        "identity_matches",
+        "clock_matches",
+        "available_mass_matches",
+        "released_mass_matches",
+        "termination_basis_matches",
+        "termination_provenance_matches",
+        "source_digest_matches",
+        "result_digest_rebound",
+    )
+    endpoint_contracts_valid = all(
+        audit.get("status") == "NORMALIZED_PROVIDER_RESPONSE"
+        and all(audit.get("checks", {}).get(key) is True for key in endpoint_required)
+        for audit in endpoint_audits
+    ) and len(endpoint_audits) == 2
+    shared_inventory_ready = all(shared_inventory_checks.values())
+    return {
+        "schema_version": "prism.external_release_set_response_normalization.v1",
+        "status": (
+            "NORMALIZED_PROVIDER_RELEASE_SET"
+            if endpoint_contracts_valid and shared_inventory_ready
+            else "PROVIDER_RELEASE_SET_MISMATCH"
+        ),
+        "diagnostic_only": True,
+        "event_id": release_set.get("event_id"),
+        "component_id": release_set.get("component_id"),
+        "rupture_mode": release_set.get("rupture_mode"),
+        "endpoint_audits": endpoint_audits,
+        "endpoint_contracts_valid": endpoint_contracts_valid,
+        "shared_inventory_checks": shared_inventory_checks,
+        "shared_inventory_evidence_attached": shared_inventory_ready,
+        "blocking_reasons": list(dict.fromkeys(
+            [
+                reason
+                for audit in endpoint_audits
+                for reason in audit.get("blocking_reasons", [])
+            ]
+            + ([] if endpoint_contracts_valid else [
+                "two-sided endpoint response contracts are not all normalized"
+            ])
+            + ([] if shared_inventory_ready else [
+                "provider shared inventory ledger is incomplete or inconsistent"
+            ])
+        )),
+        "qualified_provider_packet_allowed": False,
+        "frequency_inference_allowed": False,
+        "physical_validation_claim": False,
+        "facility_qra_allowed": False,
+    }
+
+
 __all__ = [
     "SCHEMA",
     "MASS_TOLERANCE_KG",
     "COMPRESSIBLE_SOURCE_STATE_FIELDS",
     "ExternalReleaseNormalizationError",
     "audit_external_release_response",
+    "audit_external_release_set_response",
     "build_diagnostic_release_rebind",
 ]

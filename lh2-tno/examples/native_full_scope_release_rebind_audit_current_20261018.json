@@ -1,34 +1,35 @@
 {
-  "schema_version": "prism.native_full_scope_release_rebind_audit.v1",
+  "schema_version": "prism.external_release_rebind_audit.v1",
   "status": "DIAGNOSTIC_RELEASE_REBIND_ONLY",
-  "checked_at": "2026-10-18",
-  "source_root": "results/20261115/native_external_facility_full_scope_packets_current",
-  "source_external_commit": "7072374c59b726f4e938cd37e7695684ddc70b68",
-  "source_external_tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
-  "resolved_release_count": 22,
+  "root": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_packets_current",
+  "resolved_release_count": 24,
+  "resolved_release_file_count": 22,
+  "resolved_release_set_count": 2,
   "provider_response_pair_count": 22,
-  "structural_release_contract_valid_count": 21,
+  "provider_response_endpoint_pair_count": 2,
+  "structural_release_contract_valid_count": 22,
+  "structural_release_set_contract_valid_count": 2,
   "mass_balance_attached_count": 20,
-  "strict_termination_candidate_count": 18,
+  "shared_inventory_evidence_attached_count": 2,
+  "isolation_evidence_attached_count": 18,
+  "pressure_equalization_evidence_attached_count": 0,
+  "strict_termination_candidate_count": 21,
+  "flat_strict_termination_candidate_count": 19,
+  "release_set_strict_termination_candidate_count": 2,
   "dynamic_state_closure_status_counts": {
     "READY": 13,
-    "BLOCKED": 8,
-    "BLOCKED_RELEASE_CONTRACT": 1
+    "BLOCKED_RELEASE_CONTRACT": 1,
+    "BLOCKED": 8
   },
   "provider_packet_promoted": false,
   "frequency_inference_performed": false,
   "physical_validation_claim": false,
   "facility_qra_allowed": false,
-  "policy": {
-    "release_mapping_is_a_copy": true,
-    "residual_inventory_is_not_replaced_with_zero": true,
-    "missing_provider_ledger_is_not_inferred": true,
-    "slabx_lh2_is_not_modified": true
-  },
-  "interpretation": "The current 22 paired release/response artifacts were rechecked with the provider-owned ledger and dynamic-state closure fields. Legacy partial-ledger shapes are semantically merged without replacing residual inventory. This improves diagnostic boundary evidence only; qualification, frequency binding, physical validation and facility QRA remain closed.",
   "rows": [
     {
-      "resolved_release": "events/000_storage-tank-01_AREA_0.01pct/resolved_release.json",
+      "resolved_release": "events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
+      "provider_response": "events\\000_storage-tank-01_AREA_0.01pct\\provider_response.json",
+      "resolved_release_sha256": "091a6aced53f8ea2e585c81084ec0fa6eb9767d7feb3874be47687e9383ba311",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -48,6 +49,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
       "blocking_reasons": [
@@ -57,7 +59,9 @@
       "provider_result_digest": "5863a731614c1a73be2e62a46bf5a5f8fc71e91a04c7ef2d0dda0d6f052c45bc"
     },
     {
-      "resolved_release": "events/001_storage-tank-01_AREA_0.1pct/resolved_release.json",
+      "resolved_release": "events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
+      "provider_response": "events\\001_storage-tank-01_AREA_0.1pct\\provider_response.json",
+      "resolved_release_sha256": "2cc9d7e488ac6136070b0c2d46567c7be4bdfd6d6c2a8b20d7dce348a56c4a23",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -77,6 +81,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
       "blocking_reasons": [
@@ -86,7 +91,9 @@
       "provider_result_digest": "f711f513da677f4ffe18e5efd49663adfe201d707135c2cb9b129cc651ad7b1c"
     },
     {
-      "resolved_release": "events/002_storage-tank-01_AREA_1pct/resolved_release.json",
+      "resolved_release": "events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
+      "provider_response": "events\\002_storage-tank-01_AREA_1pct\\provider_response.json",
+      "resolved_release_sha256": "f3c007a5dd1befefd650874136c20a99f4c8851046fe5f27a9e366efbc924e5f",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -106,6 +113,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
       "blocking_reasons": [
@@ -115,7 +123,9 @@
       "provider_result_digest": "1eaa94922fdc4ac8b42af4a9c54813d325985eaad91615ca8b672fbd636e6ace"
     },
     {
-      "resolved_release": "events/003_storage-tank-01_AREA_10pct/resolved_release.json",
+      "resolved_release": "events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
+      "provider_response": "events\\003_storage-tank-01_AREA_10pct\\provider_response.json",
+      "resolved_release_sha256": "6f2bb8d483393a2f6ead3666647f8aa9f20c69ccadb02cb70fc5dd1b2b958aa3",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -135,6 +145,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
       "blocking_reasons": [
@@ -144,13 +155,16 @@
       "provider_result_digest": "2be9e9cf952732799314261fe32152fc0186b9a4d94cf79c26e6cede4ba7d7c1"
     },
     {
-      "resolved_release": "events/004_storage-tank-01_AREA_100pct/resolved_release.json",
+      "resolved_release": "events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
+      "provider_response": "events\\004_storage-tank-01_AREA_100pct\\provider_response.json",
+      "resolved_release_sha256": "47720b108312c213b33ea9001577a02e31fd8d7d302edf2df189a68c1d509e8c",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": false,
       "provider_mass_balance_fields": [],
       "isolation_evidence_attached": false,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED_RELEASE_CONTRACT",
       "termination_basis": "inventory_depletion",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
       "blocking_reasons": [
@@ -165,7 +179,9 @@
       "provider_result_digest": "f496c26fe539baa1af17f069ec0e5e930f90569d8ac781f38d409914564c5979"
     },
     {
-      "resolved_release": "events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json",
+      "resolved_release": "events\\005_liquid-transfer-line-01_AREA_0.01pct\\resolved_release.json",
+      "provider_response": "events\\005_liquid-transfer-line-01_AREA_0.01pct\\provider_response.json",
+      "resolved_release_sha256": "0d81dc6111e402c71458d497937e3869f44784f4c2feb09681e0917567ea9ea5",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -185,6 +201,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
       "blocking_reasons": [
@@ -194,7 +211,9 @@
       "provider_result_digest": "31c0841ddcf3caffb9d1e4b50f105a02c8f6f24882b5c17a802cc4473a804af4"
     },
     {
-      "resolved_release": "events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json",
+      "resolved_release": "events\\006_liquid-transfer-line-01_AREA_0.1pct\\resolved_release.json",
+      "provider_response": "events\\006_liquid-transfer-line-01_AREA_0.1pct\\provider_response.json",
+      "resolved_release_sha256": "cad45954ef02d440869c3709e457a1b94aa79c064eabe0fd8e524321590bc7db",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -214,6 +233,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
       "blocking_reasons": [
@@ -223,7 +243,9 @@
       "provider_result_digest": "6be9f88022775f524497a9aebcb3532a05732f5a9aebe345e4a6db4294de9641"
     },
     {
-      "resolved_release": "events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json",
+      "resolved_release": "events\\007_liquid-transfer-line-01_AREA_1pct\\resolved_release.json",
+      "provider_response": "events\\007_liquid-transfer-line-01_AREA_1pct\\provider_response.json",
+      "resolved_release_sha256": "002d20f89c45f103e314052a4bfdbd1a13b2e846482441217cb71f61ecde3b0d",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -243,6 +265,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
       "blocking_reasons": [
@@ -252,7 +275,9 @@
       "provider_result_digest": "efba22e90663c30f75720d190c181d1142757b2dcaa0d46e4b2dfe187ac701a3"
     },
     {
-      "resolved_release": "events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json",
+      "resolved_release": "events\\008_liquid-transfer-line-01_AREA_10pct\\resolved_release.json",
+      "provider_response": "events\\008_liquid-transfer-line-01_AREA_10pct\\provider_response.json",
+      "resolved_release_sha256": "82871580e08c692338139dfaae5f66763f0b376fca611ae81376722890c0edbd",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -272,6 +297,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
       "blocking_reasons": [
@@ -281,7 +307,9 @@
       "provider_result_digest": "e1a0ee052be9d2e17932952a2f1b01ae48b3aa6be0b136085fa0342ecbff09f0"
     },
     {
-      "resolved_release": "events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json",
+      "resolved_release": "events\\009_liquid-transfer-line-01_AREA_100pct\\resolved_release.json",
+      "provider_response": "events\\009_liquid-transfer-line-01_AREA_100pct\\provider_response.json",
+      "resolved_release_sha256": "4e221871e26df3edbbae27b53dd749f497de934dfb75b018d6e2999519de920a",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -301,6 +329,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "model_pressure_equalization",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
       "blocking_reasons": [
@@ -311,7 +340,9 @@
       "provider_result_digest": "b5be97f3949aff0b371da527b4bb0bf2ac3e50c901746291b1a5b99d0edc7218"
     },
     {
-      "resolved_release": "events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json",
+      "resolved_release": "events\\010_transfer-valve-01_AREA_0.01pct\\resolved_release.json",
+      "provider_response": "events\\010_transfer-valve-01_AREA_0.01pct\\provider_response.json",
+      "resolved_release_sha256": "5a7f5506247d7debeb4f9648d5f976b1f7b97c3832f1620b1c536c9a9d473f33",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -329,6 +360,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
       "blocking_reasons": [
@@ -338,7 +370,9 @@
       "provider_result_digest": "adad11219a7fac005ba8888fb3ae6c9c03822c2abd5faa4a8d5d4eb1f9624541"
     },
     {
-      "resolved_release": "events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json",
+      "resolved_release": "events\\011_transfer-valve-01_AREA_0.1pct\\resolved_release.json",
+      "provider_response": "events\\011_transfer-valve-01_AREA_0.1pct\\provider_response.json",
+      "resolved_release_sha256": "a3bd46adcc7b6e0ea6da39be84ae92a7dbbf1ce0bfa742a38b392e6c92e87508",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -356,6 +390,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
       "blocking_reasons": [
@@ -365,7 +400,9 @@
       "provider_result_digest": "7e29e7aff1519ea3537c14dbfcf2a76fc0722cf78ad8289dbbff00b0a090f956"
     },
     {
-      "resolved_release": "events/012_transfer-valve-01_AREA_1pct/resolved_release.json",
+      "resolved_release": "events\\012_transfer-valve-01_AREA_1pct\\resolved_release.json",
+      "provider_response": "events\\012_transfer-valve-01_AREA_1pct\\provider_response.json",
+      "resolved_release_sha256": "01e64b9a2b5453f59e4307f9e022e1e1c00f6f1950d624f2abd1a99786dfff2f",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -383,6 +420,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
       "blocking_reasons": [
@@ -392,7 +430,9 @@
       "provider_result_digest": "5a9b1bb78bb5c069350c1f1ce0e318a7a4ebb8186d13415139a94b7908e70b6e"
     },
     {
-      "resolved_release": "events/013_transfer-valve-01_AREA_10pct/resolved_release.json",
+      "resolved_release": "events\\013_transfer-valve-01_AREA_10pct\\resolved_release.json",
+      "provider_response": "events\\013_transfer-valve-01_AREA_10pct\\provider_response.json",
+      "resolved_release_sha256": "1093b4f51a7c5de5a47f6a8c5a0bc0d0e8587c97ccaa3d7f87ad5062e903000b",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -410,6 +450,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
       "blocking_reasons": [
@@ -419,7 +460,9 @@
       "provider_result_digest": "349de3d158514b1ecfab6ff631e94161797c72aefa6b8655e2405ce0abf3b3f2"
     },
     {
-      "resolved_release": "events/014_transfer-valve-01_AREA_100pct/resolved_release.json",
+      "resolved_release": "events\\014_transfer-valve-01_AREA_100pct\\resolved_release.json",
+      "provider_response": "events\\014_transfer-valve-01_AREA_100pct\\provider_response.json",
+      "resolved_release_sha256": "5fc698688fa19d9a6a10a723fa798ba524fa809fde6d0eab2538dd1a45954d41",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -437,6 +480,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
       "blocking_reasons": [
@@ -446,21 +490,33 @@
       "provider_result_digest": "28be80a5f895589fb5f3ffa12c0cc385befbad509a705bac34cf3c384ad280f5"
     },
     {
-      "resolved_release": "events/015_pressure-relief-vent-01_G1/resolved_release.json",
-      "status": "BLOCKED_REBIND",
-      "structural_release_contract_valid": false,
+      "resolved_release": "events\\015_pressure-relief-vent-01_G1\\resolved_release.json",
+      "provider_response": "events\\015_pressure-relief-vent-01_G1\\provider_response.json",
+      "resolved_release_sha256": "bd394d825d92711e8c706d04e8bc6182028caf7138d0c06f8029365e4e8276b1",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
       "mass_balance_attached": false,
       "provider_mass_balance_fields": [],
       "isolation_evidence_attached": false,
       "pressure_equalization_evidence_attached": false,
-      "termination_basis": null,
-      "event_id": null,
+      "dynamic_state_closure_status": "BLOCKED",
+      "termination_basis": "emergency_relief_discharge",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
       "blocking_reasons": [
-        "ProviderReleaseContractError: only event_kind=accidental_leak can enter a random-release catalog"
-      ]
+        "native provider response check failed: mass_ledger_present",
+        "native provider mass ledger does not close within tolerance",
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "input origin remains diagnostic and is not qualified actual evidence",
+        "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
+      ],
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "9ae37f4b79386763b8cd00fee3109b444faf96872dc6033a15ff86c8786dee8f"
     },
     {
-      "resolved_release": "events/016_liquid-transfer-pump-01_G1/resolved_release.json",
+      "resolved_release": "events\\016_liquid-transfer-pump-01_G1\\resolved_release.json",
+      "provider_response": "events\\016_liquid-transfer-pump-01_G1\\provider_response.json",
+      "resolved_release_sha256": "428e83228df62fb9b84137998c5c3625ee112dc747d57cb82a49c26afcf78a74",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -479,6 +535,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
       "blocking_reasons": [
@@ -488,7 +545,9 @@
       "provider_result_digest": "bb2f9d2b69bee2e61c287134daa3bea1128267dfed1ec5eea382815dd6739c36"
     },
     {
-      "resolved_release": "events/017_liquid-transfer-pump-01_G2/resolved_release.json",
+      "resolved_release": "events\\017_liquid-transfer-pump-01_G2\\resolved_release.json",
+      "provider_response": "events\\017_liquid-transfer-pump-01_G2\\provider_response.json",
+      "resolved_release_sha256": "ee218730579f6d52b86441c0c74bd636a25e5853660d2f7c757926f416ecaa60",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -507,6 +566,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "BLOCKED",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
       "blocking_reasons": [
@@ -516,7 +576,9 @@
       "provider_result_digest": "f56da7352098b4e13910a123c133d7a865b791086b11ce3e87cf37c98ac1841c"
     },
     {
-      "resolved_release": "events/018_ambient-vaporizer-01_G1/resolved_release.json",
+      "resolved_release": "events\\018_ambient-vaporizer-01_G1\\resolved_release.json",
+      "provider_response": "events\\018_ambient-vaporizer-01_G1\\provider_response.json",
+      "resolved_release_sha256": "9116811e72c28b647352f8e2d2ce165a4cce005bb40c07fd13a4ca6ec0901805",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -532,6 +594,7 @@
       ],
       "isolation_evidence_attached": false,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "inventory_over_600s",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "blocking_reasons": [
@@ -543,7 +606,9 @@
       "provider_result_digest": "d4da7db31ed1d41128a344e5df09ef6814d993822d7677be28edec0179a9fb54"
     },
     {
-      "resolved_release": "events/019_ambient-vaporizer-01_G2/resolved_release.json",
+      "resolved_release": "events\\019_ambient-vaporizer-01_G2\\resolved_release.json",
+      "provider_response": "events\\019_ambient-vaporizer-01_G2\\provider_response.json",
+      "resolved_release_sha256": "072728b71b7d581c202808596a8e0832e012c9686a635887983cc972e82ffa3b",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -559,6 +624,7 @@
       ],
       "isolation_evidence_attached": false,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "inventory_over_600s",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
       "blocking_reasons": [
@@ -570,7 +636,9 @@
       "provider_result_digest": "67353da6d5670d437289019b501e68e4e97525fbfb315d7e627f61e989dc1f73"
     },
     {
-      "resolved_release": "events/020_ambient-vaporizer-01_G3/resolved_release.json",
+      "resolved_release": "events\\020_ambient-vaporizer-01_G3\\resolved_release.json",
+      "provider_response": "events\\020_ambient-vaporizer-01_G3\\provider_response.json",
+      "resolved_release_sha256": "982ea2cfaa3706279b3d26dfab0a1abcfd6ae8fc87a1dd70a6c80d369a02e8a4",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -589,6 +657,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
       "blocking_reasons": [
@@ -598,7 +667,9 @@
       "provider_result_digest": "ad305c3a25fd266f8e47d6fa5e73ce206ca96707e636b8d28bbc8745e7031971"
     },
     {
-      "resolved_release": "events/023_reliquefier-01_G6/resolved_release.json",
+      "resolved_release": "events\\023_reliquefier-01_G6\\resolved_release.json",
+      "provider_response": "events\\023_reliquefier-01_G6\\provider_response.json",
+      "resolved_release_sha256": "f936c633379d6e24a4e67ec0cc62d8002211516571203cae3970a38df5495f7b",
       "status": "DIAGNOSTIC_RELEASE_REBOUND",
       "structural_release_contract_valid": true,
       "mass_balance_attached": true,
@@ -617,6 +688,7 @@
       ],
       "isolation_evidence_attached": true,
       "pressure_equalization_evidence_attached": false,
+      "dynamic_state_closure_status": "READY",
       "termination_basis": "reviewed_isolation_success",
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
       "blocking_reasons": [
@@ -624,197 +696,62 @@
       ],
       "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
       "provider_result_digest": "4ecf333fee42ddb55fe619d2496e0eeb106d90e4cd0c3a36103d6dafc1e1eb14"
+    },
+    {
+      "artifact_kind": "release_set",
+      "resolved_release_set": "events\\021_reliquefier-01_G4\\resolved_release_set.json",
+      "provider_response_endpoints": "events\\021_reliquefier-01_G4\\provider_response_endpoints.json",
+      "resolved_release_set_sha256": "b774ca9b5dd95bbf81726c3a5992471eeca173acf6f50eb4f8c1edcf85c49e56",
+      "status": "NORMALIZED_PROVIDER_RELEASE_SET",
+      "structural_release_set_contract_valid": true,
+      "endpoint_contracts_valid": true,
+      "endpoint_count": 2,
+      "endpoint_result_digest_bound_count": 2,
+      "shared_inventory_evidence_attached": true,
+      "termination_basis": "two_sided_rupture",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "blocking_reasons": [
+        "native provider response check failed: mass_ledger_present",
+        "native provider mass ledger does not close within tolerance",
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "input origin remains diagnostic and is not qualified actual evidence",
+        "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
+      ],
+      "dynamic_state_closure_status": "NOT_APPLICABLE_TWO_SIDED_SHARED_LEDGER",
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "6961c654f42c9e8c09999bd19afe3111bcaabc635cc71869836b7cd746d2534c"
+    },
+    {
+      "artifact_kind": "release_set",
+      "resolved_release_set": "events\\022_reliquefier-01_G5\\resolved_release_set.json",
+      "provider_response_endpoints": "events\\022_reliquefier-01_G5\\provider_response_endpoints.json",
+      "resolved_release_set_sha256": "489cedb73796bebd399486063762820f2870b59247a04cead6c96580de977b58",
+      "status": "NORMALIZED_PROVIDER_RELEASE_SET",
+      "structural_release_set_contract_valid": true,
+      "endpoint_contracts_valid": true,
+      "endpoint_count": 2,
+      "endpoint_result_digest_bound_count": 2,
+      "shared_inventory_evidence_attached": true,
+      "termination_basis": "two_sided_rupture",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "blocking_reasons": [
+        "native provider response check failed: mass_ledger_present",
+        "native provider mass ledger does not close within tolerance",
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "input origin remains diagnostic and is not qualified actual evidence",
+        "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
+      ],
+      "dynamic_state_closure_status": "NOT_APPLICABLE_TWO_SIDED_SHARED_LEDGER",
+      "provider_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+      "provider_result_digest": "1a8e898b20cf57e3a7767489d4b29acb024f72e0d9fd42c5436c24b3eb3c2e62"
     }
   ],
-  "dynamic_state_rows": [
-    {
-      "path": "events/000_storage-tank-01_AREA_0.01pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/001_storage-tank-01_AREA_0.1pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/002_storage-tank-01_AREA_1pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/003_storage-tank-01_AREA_10pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/004_storage-tank-01_AREA_100pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
-      "termination_basis": "inventory_depletion",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": false
-    },
-    {
-      "path": "events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
-      "termination_basis": "model_pressure_equalization",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/012_transfer-valve-01_AREA_1pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/013_transfer-valve-01_AREA_10pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/014_transfer-valve-01_AREA_100pct/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/015_pressure-relief-vent-01_G1/resolved_release.json",
-      "status": "BLOCKED_RELEASE_CONTRACT",
-      "error": "ProviderReleaseContractError: only event_kind=accidental_leak can enter a random-release catalog"
-    },
-    {
-      "path": "events/016_liquid-transfer-pump-01_G1/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/017_liquid-transfer-pump-01_G2/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "BLOCKED",
-      "blocking_reasons": [
-        "provider dynamic pressure/inventory closure evidence is missing"
-      ],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/018_ambient-vaporizer-01_G1/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
-      "termination_basis": "inventory_over_600s",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/019_ambient-vaporizer-01_G2/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
-      "termination_basis": "inventory_over_600s",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/020_ambient-vaporizer-01_G3/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    },
-    {
-      "path": "events/023_reliquefier-01_G6/resolved_release.json",
-      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
-      "termination_basis": "reviewed_isolation_success",
-      "dynamic_state_closure_status": "READY",
-      "blocking_reasons": [],
-      "provider_mass_balance_present": true
-    }
-  ]
+  "policy": {
+    "release_mapping_is_a_copy": true,
+    "residual_inventory_is_not_replaced_with_zero": true,
+    "missing_provider_ledger_is_not_inferred": true,
+    "slabx_lh2_is_not_modified": true
+  }
 }

@@ -6,6 +6,7 @@ from pathlib import Path
 from lh2_tno.external_release_artifact_intake import audit_external_release_artifacts
 from lh2_tno.external_release_normalization import (
     audit_external_release_response,
+    audit_external_release_set_response,
     build_diagnostic_release_rebind,
 )
 from lh2_tno.contracts import canonical_digest
@@ -369,6 +370,107 @@ def test_diagnostic_release_rebind_merges_legacy_mass_balance_shape() -> None:
     merged = rebound["release"]["provider_mass_balance"]
     assert merged["mass_basis_id"] == "native-test-model"
     assert merged["cumulative_mass_in_kg"] == 0.0
+
+
+def test_external_release_set_response_keeps_two_endpoints_and_shared_inventory() -> None:
+    endpoints = []
+    responses = {}
+    for port_id in ("pipe.out.a", "pipe.out.b"):
+        response = {
+            "provider_export_schema": "prism.external_accident_history.v1",
+            "provider_model": "native-two-sided-test",
+            "provider_source_digest": "a" * 64,
+            "provider_state_snapshot_digest": "c" * 64,
+            "data": {
+                "event_id": "pipe/rupture-1",
+                "component_id": "pipe-1",
+                "port_id": port_id,
+                "event_kind": "accidental_leak",
+                "duration_s": 2.0,
+                "available_mass_kg": 10.0,
+                "cumulative_mass_out_kg": 1.0,
+                "termination_basis": "two_sided_rupture",
+                "termination_provenance": "native shared inventory",
+                "provider_meta": {
+                    "shared_initial_mass_kg": 10.0,
+                    "shared_final_mass_kg": 8.0,
+                    "shared_total_cumulative_mass_kg": 2.0,
+                },
+            },
+        }
+        response_digest = canonical_digest(response)
+        endpoints.append({
+            "provider_export_schema": "prism.resolved_release.v1",
+            "event_id": "pipe/rupture-1",
+            "event_kind": "accidental_leak",
+            "boundary_kind": "resolved_atmospheric_gas_exit",
+            "component_id": "pipe-1",
+            "port_id": port_id,
+            "input_origin": "model_prediction",
+            "termination_basis": "two_sided_rupture",
+            "termination_provenance": "native shared inventory",
+            "failure_opening_diameter_m": 0.1,
+            "duration_s": 2.0,
+            "available_mass_kg": 10.0,
+            "cumulative_mass_out_kg": 1.0,
+            "provider_source_digest": "a" * 64,
+            "provider_result_digest": response_digest,
+            "steps": [],
+        })
+        responses[port_id] = response
+    release_set = {
+        "provider_export_schema": "prism.resolved_release_set.v1",
+        "event_id": "pipe/rupture-1",
+        "component_id": "pipe-1",
+        "rupture_mode": "two_sided_rupture",
+        "releases": endpoints,
+        "available_mass_kg": 10.0,
+        "cumulative_mass_out_kg": 2.0,
+        "provider_source_digest": "a" * 64,
+        "provider_result_digest": "b" * 64,
+    }
+
+    audit = audit_external_release_set_response(release_set, responses)
+
+    assert audit["status"] == "NORMALIZED_PROVIDER_RELEASE_SET"
+    assert audit["endpoint_contracts_valid"] is True
+    assert audit["shared_inventory_evidence_attached"] is True
+    assert audit["shared_inventory_checks"]["shared_mass_closes"] is True
+    assert audit["qualified_provider_packet_allowed"] is False
+    assert audit["facility_qra_allowed"] is False
+
+
+def test_external_release_set_response_missing_endpoint_is_fail_closed() -> None:
+    release = _release("model_prediction")
+    release.update({
+        "event_id": "pipe/rupture-2",
+        "component_id": "pipe-2",
+        "port_id": "pipe-2.out.a",
+        "termination_basis": "two_sided_rupture",
+        "termination_provenance": "native shared inventory",
+        "failure_opening_diameter_m": 0.1,
+    })
+    release["provider_result_digest"] = "b" * 64
+    other = dict(release, port_id="pipe-2.out.b")
+    release_set = {
+        "provider_export_schema": "prism.resolved_release_set.v1",
+        "event_id": "pipe/rupture-2",
+        "component_id": "pipe-2",
+        "rupture_mode": "two_sided_rupture",
+        "releases": [release, other],
+        "available_mass_kg": 10.0,
+        "cumulative_mass_out_kg": 2.0,
+    }
+
+    audit = audit_external_release_set_response(
+        release_set,
+        {"pipe-2.out.a": {}},
+    )
+
+    assert audit["status"] == "PROVIDER_RELEASE_SET_MISMATCH"
+    assert audit["endpoint_contracts_valid"] is False
+    assert audit["shared_inventory_evidence_attached"] is False
+    assert any("missing for port pipe-2.out.b" in reason for reason in audit["blocking_reasons"])
 
 
 def test_external_release_response_marks_optional_gas_handoff_blocked_without_source_state() -> None:
