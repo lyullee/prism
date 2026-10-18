@@ -1,0 +1,114 @@
+{
+  "schema_version": "prism.conditional_facility_risk_recheck_summary.v1",
+  "status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK",
+  "facility_id": "generic-lh2-full-scope-example",
+  "event_count": 24,
+  "case_count": 24,
+  "risk_atom_count": 96,
+  "source_assessment_sha256": "c21e6f0ba1eae9c541257fa872b0ad2e61b7a150e0ffa0333426b2067fe84314",
+  "source_assessment_path": "results/20261115/native_external_facility_full_scope_campaign_current/facility_assessment.json",
+  "qualification": {
+    "facility_total_risk_available": false,
+    "qualified_facility_qra_available": false,
+    "complete_facility_qra_claim": false,
+    "provider_packet_promoted": false,
+    "provider_packet_case_count": 24,
+    "qualified_provider_packet_case_count": 0,
+    "physical_validation_claim": false,
+    "synthetic_release_horizon_present": false,
+    "blocking_reasons": [
+      "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: qualified provider packet promotion is unavailable",
+      "campaign 4553bbe641cbe7829f6e2ba767828412d811e5c16846da60afc0fd664f988ae1: provider packet evidence does not match all consumed packets"
+    ],
+    "promotion_allowed": false,
+    "provider_mass_balance_promotion_allowed": false
+  },
+  "timing": {
+    "campaign_count": 1,
+    "fresh_physics_cases": 24,
+    "case_min_ms": 1662.1687000151724,
+    "case_median_ms": 16830.931650009006,
+    "case_max_ms": 143849.68819998903,
+    "case_p95_ms": 105548.89806998684,
+    "case_p99_ms": 136013.8801619882,
+    "campaign_elapsed_ms": 814290.3899999801,
+    "campaign_elapsed_ms_sum": 814290.3899999801,
+    "campaign_elapsed_ms_min": 814290.3899999801,
+    "campaign_elapsed_ms_median": 814290.3899999801,
+    "campaign_elapsed_ms_max": 814290.3899999801,
+    "campaign_elapsed_ms_p95": 814290.3899999801,
+    "campaign_elapsed_ms_p99": 814290.3899999801,
+    "stage_elapsed_ms": {
+      "cloud_observation": {
+        "sample_count": 22,
+        "sum_ms": 16301.727999991272,
+        "median_ms": 354.74265001539607,
+        "max_ms": 2947.522600006778,
+        "p95_ms": 2725.2325250112335,
+        "p99_ms": 2903.3590750076105
+      },
+      "endpoint_a": {
+        "sample_count": 2,
+        "sum_ms": 7070.997600007104,
+        "median_ms": 3535.498800003552,
+        "max_ms": 3554.5695000037085,
+        "p95_ms": 3552.662430003693,
+        "p99_ms": 3554.1880860037054
+      },
+      "endpoint_aggregation": {
+        "sample_count": 2,
+        "sum_ms": 14375.09279997903,
+        "median_ms": 7187.546399989515,
+        "max_ms": 7220.649199996842,
+        "p95_ms": 7217.338919996109,
+        "p99_ms": 7219.9871439966955
+      },
+      "endpoint_b": {
+        "sample_count": 2,
+        "sum_ms": 7301.13729997538,
+        "median_ms": 3650.56864998769,
+        "max_ms": 3664.4750999985263,
+        "p95_ms": 3663.0844549974427,
+        "p99_ms": 3664.1969709983096
+      },
+      "fire_explosion_damage_risk": {
+        "sample_count": 22,
+        "sum_ms": 2365.7086998864543,
+        "median_ms": 113.94094998831861,
+        "max_ms": 144.7586999856867,
+        "p95_ms": 124.75304501131177,
+        "p99_ms": 140.56237499142296
+      },
+      "near_field_and_dispersion": {
+        "sample_count": 22,
+        "sum_ms": 426535.7667999633,
+        "median_ms": 10673.968950010021,
+        "max_ms": 74089.84620001866,
+        "p95_ms": 64799.75698000635,
+        "p99_ms": 72197.11687201633
+      },
+      "pool": {
+        "sample_count": 22,
+        "sum_ms": 331075.01499998034,
+        "median_ms": 1144.2821499949787,
+        "max_ms": 135043.07220000192,
+        "p95_ms": 67136.7503050118,
+        "p99_ms": 121173.06015600386
+      },
+      "source": {
+        "sample_count": 22,
+        "sum_ms": 15667.469400039408,
+        "median_ms": 711.7807000031462,
+        "max_ms": 746.998699993128,
+        "p95_ms": 742.2438100067666,
+        "p99_ms": 746.1571249962435
+      }
+    },
+    "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+  },
+  "diagnostic_interpretation": {
+    "frequency_inference_performed": false,
+    "facility_qra_promotion": false,
+    "physical_validation_claim": false
+  }
+}
