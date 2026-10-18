@@ -3157,7 +3157,7 @@
     "facility_ir_fn_available"
   ],
   "full_portable_test_count_latest": 1529,
-  "full_portable_test_status_latest": "1529 passed, 1 warning",
+  "full_portable_test_status_latest": "1533 passed, 1 warning; current full local recheck after HAZOP merge audit",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -6608,5 +6608,23 @@
   "hazop_event_mode_binding_current_recheck_extension_only_event_count": 10,
   "hazop_event_mode_binding_current_recheck_extension_only_excluded_overlap_count": 24,
   "hazop_event_mode_binding_current_recheck_extension_only_excluded_overlap_conflict_count": 1,
-  "hazop_event_mode_binding_current_recheck_extension_only_sha256": "60e2b0d9cc6a800c7ea17263b98e1966549b3e3f26d2a1dc5f4bfc8580008f89"
+  "hazop_event_mode_binding_current_recheck_extension_only_sha256": "60e2b0d9cc6a800c7ea17263b98e1966549b3e3f26d2a1dc5f4bfc8580008f89",
+  "current_external_source_recheck_20261018_record": "examples/external_lh2dt_current_source_recheck_20261018.json",
+  "current_external_source_recheck_20261018_status": "UNCHANGED_FROM_RECORDED_EXTERNAL_RECHECK_DIAGNOSTIC",
+  "current_external_source_recheck_20261018_external_head": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+  "current_external_source_recheck_20261018_source_digest": "d7bec406d1c7b1a9c8b803b2dfd8a5c1f98a4c233c99b4330383ca08a4c462ce",
+  "current_external_source_recheck_20261018_git_head_unchanged": true,
+  "current_external_source_recheck_20261018_source_digest_unchanged": true,
+  "current_external_source_recheck_20261018_tracked_dirty_path_count": 2,
+  "current_external_source_recheck_20261018_untracked_path_count": 150,
+  "current_external_source_recheck_20261018_native_contract_status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
+  "current_external_source_recheck_20261018_promotion": {
+    "provider_packet_promoted": false,
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "current_external_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
+  "latest_local_full_suite_recheck_record": "python -m pytest -q; 1533 passed, 1 warning",
+  "latest_external_contract_recheck_record": "C:\\Temp\\prism_external_contract_recheck_20261018.json"
 }
