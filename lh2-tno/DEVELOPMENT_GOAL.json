@@ -3047,8 +3047,8 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "IJHE objective/provider-intake/worklist/verifier and native-recheck-comparison tests passed; full suite 1529 passed separately (1 pytest-asyncio deprecation warning)",
-  "latest_remote_verified_commit": "fe22b63e",
-  "latest_remote_ci_run": "run 1425 completed successfully for commit fe22b63e; Python contracts and numerical checks job succeeded",
+  "latest_remote_verified_commit": "3f185839",
+  "latest_remote_ci_run": "run 1426 completed successfully for commit 3f185839; Python contracts and numerical checks job succeeded",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
   "v060_readiness_frequency_port_binding_evidence_request_fallback_implemented": true,
@@ -4543,11 +4543,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1425,
+    "run_number": 1426,
     "status": "completed",
     "conclusion": "success",
-    "commit": "fe22b63eeea1c7092d9aef4fa6d84c271d72954d",
-    "url": "https://github.com/lyullee/prism/actions/runs/39088243155"
+    "commit": "3f1858390fe6eefc3569803c842a22bee119c625",
+    "url": "https://github.com/lyullee/prism/actions/runs/39088672624"
   },
   "current_union_ijhe_objective_coverage_audit_sha256": "025e99537e31ee1d951c0322374cf8d8e0772aa3c99edd7ceb85f8660e43e7e9",
   "actual_ffi_high_resolution_recheck_record": "results/20261115/slabx_lh2_test6_actual_source_numerical_gate_recheck_5120_10240/provenance.json",
@@ -5259,8 +5259,8 @@
   "external_equipment_model_provider_response_physical_validation_claim": false,
   "external_equipment_model_provider_response_facility_qra_claim": false,
   "external_equipment_model_provider_response_gap_policy": "Missing input_origin, evidence_status, qualification sidecars, non-strict termination, or mass-ledger fields are reported per response and never inferred; SLABx-LH2 remains a separate CLOSED_VALIDATED_COMPONENT.",
-  "latest_local_full_suite_recheck_count": 1540,
-  "latest_local_full_suite_recheck_status": "1540 passed, 1 warning; current local recheck after release-rebind audit",
+  "latest_local_full_suite_recheck_count": 1541,
+  "latest_local_full_suite_recheck_status": "1541 passed, 1 warning; equipment HAZOP release-boundary surface recheck",
   "external_equipment_model_release_rebind_audit_record": "results/20261018/external_equipment_model_release_rebind_audit_20261018.json",
   "external_equipment_model_release_rebind_audit_sha256": "1CBD2CFEC8AA05658C9783A0A3BF512AAC99643E62539D5A3C6B6B52C461CA7C",
   "external_equipment_model_release_rebind_audit_status": "DIAGNOSTIC_RELEASE_REBIND_ONLY; 7/7 strict release contracts validate; 4 provider mass ledgers attached; 1 isolation ledger attached; 0 pressure-equalization ledgers attached; 2 strict termination candidates; promotion withheld",
@@ -5294,5 +5294,13 @@
   "facility_ledger_provider_release_boundary_gate_implemented": true,
   "facility_ledger_provider_release_boundary_gate_module": "src/lh2_tno/facility_ledger.py::merge_facility_campaign_results",
   "facility_ledger_provider_release_boundary_gate_policy": "Provider-backed cases require strict release-boundary closure before facility total IR/F-N is available; diagnostic atoms remain visible; legacy rows without provider packets retain the older ledger contract; no frequency inference or QRA promotion is performed.",
-  "facility_ledger_provider_release_boundary_gate_test": "test_provider_release_boundary_blocks_facility_total_when_inventory_remains"
+  "facility_ledger_provider_release_boundary_gate_test": "test_provider_release_boundary_blocks_facility_total_when_inventory_remains",
+  "equipment_hazop_campaign_release_boundary_surface": {
+    "implemented": true,
+    "module": "src/lh2_tno/facility_ledger.py::merge_facility_campaign_results",
+    "output_fields": ["provider_release_boundary_case_count", "provider_release_boundary_ready"],
+    "policy": "Provider-backed HAZOP campaigns expose the strict release-boundary gate at the facility-ledger surface; an open boundary keeps facility_total_risk_available false while retaining diagnostic atoms.",
+    "test": "tests/test_equipment_hazop_campaign.py::test_equipment_hazop_quantitative_campaign_closes_explicit_identity_boundary",
+    "local_test_status": "1541 passed, 1 warning"
+  }
 }
