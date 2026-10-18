@@ -3161,10 +3161,10 @@ def build_ijhe_completion_audit(
         if isinstance(scope_gap_summary, Mapping)
         else []
     )
-        # The status ledger may append the component check summary after the
-        # canonical state token; accept that annotation while preserving the
-        # separate facility full-chain validation gate.
-        slabx_component_validation_closed = (
+    # The status ledger may append the component check summary after the
+    # canonical state token; accept that annotation while preserving the
+    # separate facility full-chain validation gate.
+    slabx_component_validation_closed = (
         isinstance(current_status.get("slabx_lh2_validation_current_status"), str)
         and current_status["slabx_lh2_validation_current_status"].startswith(
             "CLOSED_VALIDATED_COMPONENT"
