@@ -437,6 +437,37 @@ def test_provider_packet_collection_pointer_drift_is_blocked() -> None:
     assert report["status"] == "INCONSISTENT"
 
 
+def test_provider_packet_mass_basis_contract_drift_is_blocked() -> None:
+    manifest = deepcopy(load_json_object(CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST))
+    for row in manifest["rows"]:
+        row["required_provider_evidence"] = [
+            requirement
+            for requirement in row["required_provider_evidence"]
+            if "mass_basis_id" not in requirement
+            and "native_inventory_owner" not in requirement
+        ]
+    report = _report(
+        provider_packet_input_audit=load_json_object(CURRENT_PROVIDER_INPUT_AUDIT),
+        provider_packet_input_audit_filename=CURRENT_PROVIDER_INPUT_AUDIT.name,
+        observed_state_release_binding_audit=load_json_object(
+            CURRENT_STATE_RELEASE_BINDING_AUDIT
+        ),
+        observed_state_release_binding_audit_filename=CURRENT_STATE_RELEASE_BINDING_AUDIT.name,
+        consequence_backend_chain_audit=load_json_object(
+            CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT
+        ),
+        consequence_backend_chain_audit_filename=CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT.name,
+        provider_packet_collection_manifest=manifest,
+        provider_packet_collection_manifest_filename=CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST.name,
+    )
+    check = next(
+        row for row in report["checks"]
+        if row["name"] == "provider_packet_collection_manifest"
+    )
+    assert check["status"] == "FAIL"
+    assert report["status"] == "INCONSISTENT"
+
+
 def test_changed_case_coverage_cannot_pass() -> None:
     coverage = deepcopy(load_json_object(COVERAGE))
     coverage["qualified_provider_case_count"] = 1
