@@ -3870,7 +3870,7 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "IJHE objective/provider-intake/worklist/verifier and native-recheck-comparison tests passed; full suite 1529 passed separately (1 pytest-asyncio deprecation warning)",
   "latest_remote_verified_commit": "3f185839",
-  "latest_remote_ci_run": "run 1426 completed successfully for commit 3f185839; Python contracts and numerical checks job succeeded",
+  "latest_remote_ci_run": "run 1427 completed successfully for commit f7bf37df; Python contracts and numerical checks job succeeded",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
   "v060_readiness_frequency_port_binding_evidence_request_fallback_implemented": true,
@@ -6014,11 +6014,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1426,
+    "run_number": 1427,
     "status": "completed",
     "conclusion": "success",
-    "commit": "3f1858390fe6eefc3569803c842a22bee119c625",
-    "url": "https://github.com/lyullee/prism/actions/runs/39088672624"
+    "commit": "f7bf37df39a90e1b0ee598907088b5af4e9b7d4b",
+    "url": "https://github.com/lyullee/prism/actions/runs/39088948597"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
@@ -6727,5 +6727,20 @@
     "policy": "Provider-backed HAZOP campaigns expose the strict release-boundary gate at the facility-ledger surface; an open boundary keeps facility_total_risk_available false while retaining diagnostic atoms.",
     "test": "tests/test_equipment_hazop_campaign.py::test_equipment_hazop_quantitative_campaign_closes_explicit_identity_boundary",
     "local_test_status": "1541 passed, 1 warning"
+  },
+  "equipment_hazop_campaign_recheck_20261018": {
+    "record": "examples/equipment_hazop_quantitative_campaign_recheck_20261018.json",
+    "status": "EQUIPMENT_HAZOP_QUANTITATIVE_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+    "component_count": 1,
+    "risk_atom_count": 4,
+    "operating_mode": "receiving",
+    "hazop_scenario_id": "TK01-high-pressure-receiving",
+    "provider_release_boundary_case_count": 1,
+    "provider_release_boundary_ready": false,
+    "facility_total_risk_available": false,
+    "conditional_diagnostic_facility_risk_available": true,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false,
+    "interpretation": "Current monitoring state and explicit HAZOP mode reach the provider release ledger and conditional risk atoms; residual inventory keeps the facility total withheld."
   }
 }
