@@ -1119,6 +1119,7 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 - [GitHub Release v0.6.6](https://github.com/lyullee/prism/releases/tag/v0.6.6)
 - [PyPI prism-risk 0.6.6](https://pypi.org/project/prism-risk/0.6.6/)
 - [Version DOI — PRISM 0.6.6](https://doi.org/10.5281/zenodo.23448891)
+- [Positive inventory-threshold termination audit](docs/PRISM_positive_inventory_threshold_reclassification_20261018_en.md)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23448413)
 - [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/39109972574)
 
