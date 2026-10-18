@@ -126,6 +126,7 @@
         "open_request_count": 44,
         "qualified_packet_count": 0,
         "rows_valid": true,
+        "mass_basis_requirement_present": true,
         "record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/provider_packet_collection_manifest.json"
       }
     },

@@ -19,7 +19,11 @@ CURRENT_STATE_RELEASE_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope
 CURRENT_COMPONENT_MAPPING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json"
 CURRENT_STATE_MODEL_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json"
 CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json"
-CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json"
+CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST = ROOT / (
+    "results/20261115/"
+    "native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/"
+    "provider_packet_collection_manifest.json"
+)
 CURRENT_AUDIT = ROOT / "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
 CURRENT_ASSESSMENT = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json"
 CURRENT_EVIDENCE_REQUEST = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json"

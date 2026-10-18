@@ -627,6 +627,22 @@ def build_status_consistency_report(
                 for row in collection_rows
             )
         )
+        mass_basis_requirement_present = (
+            isinstance(collection_rows, Sequence)
+            and not isinstance(collection_rows, (str, bytes))
+            and all(
+                any(
+                    isinstance(requirement, str)
+                    and (
+                        "mass_basis_id" in requirement
+                        or "native_inventory_owner" in requirement
+                    )
+                    for requirement in row.get("required_provider_evidence", [])
+                )
+                for row in collection_rows
+                if isinstance(row, Mapping)
+            )
+        )
         _check(
             checks,
             "provider_packet_collection_manifest",
@@ -638,6 +654,7 @@ def build_status_consistency_report(
             and open_request_count == request_count
             and qualified_packet_count == 0
             and rows_valid
+            and mass_basis_requirement_present
             and provider_packet_collection_manifest.get("blocking_reasons") == []
             and provider_packet_collection_manifest.get("promotion_policy", {}).get(
                 "frequency_is_not_assigned"
@@ -668,6 +685,7 @@ def build_status_consistency_report(
                 "open_request_count": open_request_count,
                 "qualified_packet_count": qualified_packet_count,
                 "rows_valid": rows_valid,
+                "mass_basis_requirement_present": mass_basis_requirement_present,
                 "record": current_status.get(
                     "current_union_provider_packet_collection_manifest_record"
                 ),
