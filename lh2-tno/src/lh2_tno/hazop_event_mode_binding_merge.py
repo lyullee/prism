@@ -51,6 +51,25 @@ def _rewrite_event_id(event_id: str, replacements: Sequence[tuple[str, str]]) ->
     return result
 
 
+def _overlap_conflicts(
+    base: Mapping[str, Any], extension: Mapping[str, Any]
+) -> list[str]:
+    """Return critical identity fields that disagree on an overlap."""
+    fields = (
+        "component_id",
+        "operating_mode",
+        "hazop_scenario_id",
+        "release_mode",
+    )
+    conflicts: list[str] = []
+    for field in fields:
+        left = base.get(field)
+        right = extension.get(field)
+        if left is not None and right is not None and str(left) != str(right):
+            conflicts.append(field)
+    return conflicts
+
+
 def merge_hazop_event_mode_bindings(
     campaign_result: Mapping[str, Any],
     base_binding: Mapping[str, Any],
@@ -93,6 +112,12 @@ def merge_hazop_event_mode_bindings(
             event_id = row["event_id"]
             if event_id in merged_by_id:
                 if source_name == "extension" and overlap_policy == "base_wins":
+                    conflicts = _overlap_conflicts(merged_by_id[event_id], row)
+                    if conflicts:
+                        raise ValueError(
+                            "overlapping HAZOP binding conflicts with base identity "
+                            f"for {event_id}: {', '.join(conflicts)}"
+                        )
                     skipped_extension_overlap_count += 1
                     continue
                 previous = sources[event_id]

@@ -1068,14 +1068,9 @@
     "base_event_count": 24,
     "extension_event_count": 10,
     "merged_event_count": 34,
-    "overlap_policy": "base_wins",
-    "skipped_extension_overlap_count": 24,
-    "event_id_replacements": [
-      {
-        "from": "inventory-depletion/inventory-depletion/",
-        "to": "inventory-depletion/"
-      }
-    ],
+    "overlap_policy": "error",
+    "skipped_extension_overlap_count": 0,
+    "event_id_replacements": [],
     "source_by_event_id": {
       "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%": "extension",
       "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%": "extension",
@@ -1119,9 +1114,9 @@
     "facility_qra_promotion": false
   },
   "source_records": {
-    "campaign_result": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_full_scope_union_assessment_current_source_diagnostic_20261018\\campaign_result.json",
-    "base_binding": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_campaign_current\\hazop_event_mode_binding_clean_source.json",
-    "extension_binding": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261114\\hazop_extension_mode_binding_fullscope_hazop_port_bound\\hazop_mode_binding_extension_bound.json",
+    "campaign_result": "results\\20261115\\native_full_scope_union_assessment_current_source_diagnostic_20261018\\campaign_result.json",
+    "base_binding": "results\\20261115\\native_external_facility_full_scope_campaign_current\\hazop_event_mode_binding_clean_source.json",
+    "extension_binding": "examples\\external_lh2dt_hazop_mode_binding_extension_only_20261018.json",
     "provider_worklist": null
   }
 }

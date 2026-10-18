@@ -1,0 +1,262 @@
+{
+  "schema_version": "prism.hazop_event_mode_binding_extension_only.v1",
+  "status": "EXPLICIT_EXTENSION_ONLY",
+  "source_provenance": "Derived by explicit event-id set difference from the mixed extension export; no mode/scenario/release/frequency inference",
+  "source_records": {
+    "base_binding": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_campaign_current\\hazop_event_mode_binding_clean_source.json",
+    "mixed_extension_binding": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261114\\hazop_extension_mode_binding_fullscope_hazop_port_bound\\hazop_mode_binding_extension_bound.json"
+  },
+  "base_event_count": 24,
+  "mixed_extension_row_count": 34,
+  "extension_only_event_count": 10,
+  "excluded_overlap_count": 24,
+  "excluded_overlap_conflict_count": 1,
+  "excluded_overlaps": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "conflicts": [
+        "release_mode"
+      ],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "original_event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "conflicts": [],
+      "reason": "base_event_already_supplied; extension row excluded from extension-only input"
+    }
+  ],
+  "bindings": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+      "scenario_family": "vertical_handoff",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+      "scenario_family": "vertical_handoff",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+      "scenario_family": "vertical_handoff",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+      "scenario_family": "vertical_handoff",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+      "scenario_family": "vertical_handoff",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "hole",
+      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+    }
+  ],
+  "policy": {
+    "selection": "extension event IDs not present in normalized base event IDs",
+    "overlap_handling": "recorded exclusion, never silently selected",
+    "mode_inference_performed": false,
+    "scenario_inference_performed": false,
+    "frequency_inference_performed": false,
+    "facility_qra_promotion": false
+  }
+}

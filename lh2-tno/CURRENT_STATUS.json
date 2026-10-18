@@ -6602,6 +6602,11 @@
   "hazop_event_mode_binding_current_recheck_facility_qra_promotion": false,
   "hazop_event_mode_binding_current_recheck_provider_event_count": 0,
   "hazop_event_mode_binding_current_recheck_merge_record": "examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json",
-  "hazop_event_mode_binding_current_recheck_merge_status": "CANONICAL_AUDIT_REBUILT; base 24 + extension 10; 24 mixed-export overlaps explicitly base-wins; 34/34 event rows bound",
-  "hazop_event_mode_binding_current_recheck_sha256": "83d61a842c7ab6269b64957931c6789af612d38fcce8ecd031906bdf7ef02483"
+  "hazop_event_mode_binding_current_recheck_merge_status": "CANONICAL_AUDIT_REBUILT; base 24 + explicit extension-only 10; mixed-export overlap/conflict rows recorded separately; 34/34 event rows bound",
+  "hazop_event_mode_binding_current_recheck_sha256": "92b7fa8033b5b60002e5daf59550db7e81bd2e80cc654031db9942900d302223",
+  "hazop_event_mode_binding_current_recheck_extension_only_record": "examples/external_lh2dt_hazop_mode_binding_extension_only_20261018.json",
+  "hazop_event_mode_binding_current_recheck_extension_only_event_count": 10,
+  "hazop_event_mode_binding_current_recheck_extension_only_excluded_overlap_count": 24,
+  "hazop_event_mode_binding_current_recheck_extension_only_excluded_overlap_conflict_count": 1,
+  "hazop_event_mode_binding_current_recheck_extension_only_sha256": "60e2b0d9cc6a800c7ea17263b98e1966549b3e3f26d2a1dc5f4bfc8580008f89"
 }

@@ -96,3 +96,19 @@ def test_merge_can_explicitly_keep_base_when_extension_export_contains_copy():
     )
     assert report["event_count"] == 2
     assert report["merge"]["skipped_extension_overlap_count"] == 1
+
+
+def test_base_wins_still_rejects_conflicting_overlap_identity():
+    conflict = {
+        "bindings": [{
+            "event_id": "base/event",
+            "component_id": "other-component",
+            "operating_mode": "receiving",
+            "hazop_scenario_id": "tank-receiving",
+            "release_mode": "hole",
+        }]
+    }
+    with pytest.raises(ValueError, match="conflicts with base identity"):
+        merge_hazop_event_mode_bindings(
+            _campaign(), _base(), conflict, overlap_policy="base_wins"
+        )
