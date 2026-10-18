@@ -33,7 +33,7 @@ The `0.6.4` wheel includes the project-authored PRISM QRA runtime. Its `full`
 extra installs public PyPI versions `slabx==1.0.7` and `slabx-lh2==0.1.5`.
 Historical source-pinned calculations retain their original backend digests.
 
-The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1,577 passed, 1 warning**. The warning is reported separately from a failing contract.
+The v0.6.3 release baseline was **1214 passed, 1 warning**. The current development checkout validation is **1,587 passed** in the isolated public-dependency environment. Environment-specific warnings are reported separately from failing contracts.
 
 ## 3. First five minutes
 
