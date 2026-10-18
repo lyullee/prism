@@ -86,6 +86,14 @@ def test_equipment_hazop_quantitative_campaign_closes_explicit_identity_boundary
     assert result["policy"]["dispatch_performed"] is True
     assert result["policy"]["frequency_inference_performed"] is False
     assert result["policy"]["facility_qra_claim"] is False
+    ledger = result["facility_ledger"]
+    assert ledger["provider_release_boundary_case_count"] == 1
+    assert ledger["provider_release_boundary_ready"] is False
+    assert ledger["facility_total_risk_available"] is False
+    assert any(
+        "provider-backed release boundary is not closed" in reason
+        for reason in ledger["blocking_reasons"]
+    )
 
 
 def test_equipment_hazop_quantitative_campaign_blocks_identity_drift():

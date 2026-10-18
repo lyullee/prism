@@ -89,6 +89,14 @@ predicted simulation state, so an operator can see which branch was evaluated,
 what provider packet was consumed, and which strict evidence gate remains
 open.
 
+The returned `facility_ledger` exposes that release gate directly through
+`provider_release_boundary_case_count` and `provider_release_boundary_ready`.
+For provider-backed cases, a false readiness value keeps
+`facility_total_risk_available=false` and retains the blocking reason in the
+ledger. Diagnostic risk atoms remain available for review, but an open
+inventory, invalid isolation clock, or unsupported pressure-equalization claim
+cannot enter a facility total through this HAZOP path.
+
 ## Multiple equipment in one facility
 
 The same contract is applied independently to every declared component.  For

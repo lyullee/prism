@@ -1927,6 +1927,9 @@ def merge_facility_campaign_results(
         "release_termination_inventory_ledger": release_termination_inventory_ledger,
         "strict_release_boundary": strict_release_boundary,
         "provider_release_boundary_case_count": provider_boundary_case_count,
+        "provider_release_boundary_ready": strict_release_boundary[
+            "strict_release_boundary_ready"
+        ],
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,
