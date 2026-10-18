@@ -41,6 +41,13 @@ every active step (`each_step`). The evaluator owns the equipment release,
 isolation, inventory termination, SLABx-LH2 run, and any explicitly reviewed
 facility handoff.
 
+A current recheck receipt is available at
+[`examples/hazop_integrated_current_forecast_recheck_20261018.json`](../examples/hazop_integrated_current_forecast_recheck_20261018.json).
+It records one measured-state path and one forecast trigger using the same
+operating-mode HAZOP identity and facility-ledger gate. Both retain
+conditional diagnostic risk, while an open provider release boundary keeps the
+facility total IR/F-N unavailable.
+
 ## Why forecast facility F/N is withheld by default
 
 A predicted component frame is not enough to aggregate a facility risk. The

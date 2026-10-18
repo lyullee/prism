@@ -1,0 +1,79 @@
+{
+  "schema_version": "prism.hazop_integrated_current_forecast_recheck_receipt.v1",
+  "generated_at_utc": "2026-10-18T02:10:31.330649+00:00",
+  "source_record": "results/20261018/hazop_provider_bound_integrated_risk_recheck_20261018.json",
+  "source_record_sha256": "27682d121afe6a4668ff0802b0a8ef9c91b091c692856f19baaa545f0143b9fe",
+  "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "current": {
+    "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+    "component_count": 1,
+    "risk_atom_count": 1,
+    "facility_campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+    "facility_ledger_gate": {
+      "provider_release_boundary_case_count": 1,
+      "provider_release_boundary_ready": false,
+      "facility_total_risk_available": false,
+      "qualified_facility_qra_available": false,
+      "conditional_diagnostic_facility_risk_available": true,
+      "blocking_reasons": [
+        "campaign ca7c821f00ed59189098ea7e61266da3210ae2b684fbe91875b905e8a76eb85b: declared scope is incomplete",
+        "campaign ca7c821f00ed59189098ea7e61266da3210ae2b684fbe91875b905e8a76eb85b: uncomputed cases remain",
+        "provider-backed release boundary is not closed; facility total IR/F-N remains withheld",
+        "component storage-tank-01: PARTIAL",
+        "facility case-risk trace: 4 risk atoms are linked to non-EXECUTED case status"
+      ]
+    },
+    "facility_ledger_risk_atom_count": 4
+  },
+  "forecast": {
+    "status": "FORECAST_RISK_SCAN_COMPLETE",
+    "trigger_count": 1,
+    "evaluated_count": 1,
+    "withheld_count": 0,
+    "facility_campaign_status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+    "campaign_count": 1,
+    "forecast_times_s": [
+      10.0
+    ],
+    "facility_ledger_gates": [
+      {
+        "provider_release_boundary_case_count": 1,
+        "provider_release_boundary_ready": false,
+        "facility_total_risk_available": false,
+        "qualified_facility_qra_available": false,
+        "conditional_diagnostic_facility_risk_available": true,
+        "blocking_reasons": [
+          "campaign a36eef14b1543b7776d318f5ea4d615ad0742500c7c62beba354a8240d4b47d9: declared scope is incomplete",
+          "campaign a36eef14b1543b7776d318f5ea4d615ad0742500c7c62beba354a8240d4b47d9: uncomputed cases remain",
+          "provider-backed release boundary is not closed; facility total IR/F-N remains withheld",
+          "component storage-tank-01: PARTIAL",
+          "facility case-risk trace: 4 risk atoms are linked to non-EXECUTED case status"
+        ],
+        "facility_ledger_risk_atom_count": 4
+      }
+    ]
+  },
+  "frequency_uncertainty": {
+    "scenario_count": 3,
+    "scenario_ids": [
+      "hazop-provider-frequency-p05",
+      "hazop-provider-frequency-published",
+      "hazop-provider-frequency-p95"
+    ],
+    "frequency_inference_performed": false
+  },
+  "timing": {
+    "wall_elapsed_ms": 21260.473200003617,
+    "interpretation": "Measured for this invocation; not an operating 1 Hz guarantee."
+  },
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created_by_integration": false,
+    "facility_qra_promotion": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Current measured-state and forecast-state paths share explicit operating-mode HAZOP selection, provider release, literature-frequency uncertainty, consequence and facility-ledger contracts. The current and forecast diagnostic ledgers retain conditional risk atoms, but their open provider release boundaries and synthetic/operator-limited evidence keep facility total IR/F-N withheld. Forecast time is not treated as annual probability and no frequency is inferred."
+}
