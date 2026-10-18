@@ -13,7 +13,7 @@ PRISM is a Python research framework for connecting process and equipment state,
 Install the latest published package:
 
 ```powershell
-python -m pip install "prism-risk[full]==0.6.7"
+python -m pip install "prism-risk[full]==0.6.8"
 prism --describe-modes
 ```
 
@@ -55,7 +55,7 @@ for the current 44-case counts and open evidence requests.
 
 The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 28 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
 
-[PRISM 0.6.5 distribution and verification record](docs/PRISM_v065_distribution_en.md); the current source patch is v0.6.7.
+[PRISM 0.6.5 distribution and verification record](docs/PRISM_v065_distribution_en.md); the current source patch is v0.6.8.
 
 For the exact public-repository, external-backend, and KGS interpretation
 boundary, see the [public/private boundary note](docs/PRISM_public_private_boundary_and_KGS_interpretation_20261018.md).
