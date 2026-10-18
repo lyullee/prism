@@ -66,7 +66,7 @@ For the public LH2 backend and source-boundary guide, see [PRISM public LH2 back
 It configures the bundled QRA and source/transition interfaces from installed
 public packages, runs a real LH2 chain, and reports unavailable or timed-out
 cases explicitly. These additions are in the source checkout, beyond the
-immutable published v0.6.4 artifacts.
+immutable published v0.6.5 artifacts.
 
 PRISM helps an operator or researcher answer:
 

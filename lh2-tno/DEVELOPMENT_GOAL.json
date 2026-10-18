@@ -5466,7 +5466,7 @@
   "public_installed_backend_connection": {
     "date_kst": "2026-10-18",
     "status": "PUBLIC_SOURCE_TO_HARM_AND_KNOWN_CONTRIBUTION_IR_FN_EXECUTED; incomplete facility evidence",
-    "source_checkout_only_after_release": "0.6.4",
+    "source_checkout_only_after_release": "0.6.5",
     "module": "src/lh2_tno/public_backend.py",
     "bundled_qra_pin": "prism_qra",
     "bundled_source_transition_pin": "prism_lh2_models",

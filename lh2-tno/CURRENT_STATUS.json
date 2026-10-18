@@ -6913,10 +6913,28 @@
     "public_pypi_installed_smoke_test": "PASSED",
     "public_dependency_tests_passed": 1577
   },
+  "distribution_065": {
+    "date_kst": "2026-10-18",
+    "bundled_qra": true,
+    "standard_backend_required": false,
+    "pypi_runtime": {
+      "slabx": "1.0.7",
+      "slabx-lh2": "0.1.5"
+    },
+    "published": true,
+    "version_doi": "10.5281/zenodo.23448717",
+    "concept_doi": "10.5281/zenodo.23448413",
+    "release_commit": "ad940d76eb08352fbe929b0a84a28cb0917a6eec",
+    "github_release": "https://github.com/lyullee/prism/releases/tag/v0.6.5",
+    "pypi_release": "https://pypi.org/project/prism-risk/0.6.5/",
+    "pypi_workflow": "https://github.com/lyullee/prism/actions/runs/39109972574",
+    "ci_workflow": "https://github.com/lyullee/prism/actions/runs/39109809081",
+    "public_pypi_version_verified": "0.6.5"
+  },
   "public_installed_backend_connection": {
     "date_kst": "2026-10-18",
     "status": "PUBLIC_SOURCE_TO_HARM_AND_KNOWN_CONTRIBUTION_IR_FN_EXECUTED; incomplete facility evidence",
-    "source_checkout_only_after_release": "0.6.4",
+    "source_checkout_only_after_release": "0.6.5",
     "module": "src/lh2_tno/public_backend.py",
     "bundled_qra_pin": "prism_qra",
     "bundled_source_transition_pin": "prism_lh2_models",
