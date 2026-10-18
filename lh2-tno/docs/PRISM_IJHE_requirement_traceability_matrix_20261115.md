@@ -5,7 +5,7 @@ generic outdoor liquid-hydrogen facility. Diagnostic execution is kept
 separate from qualified facility-QRA promotion.
 
 The authoritative audit is [`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json).
-It currently reports **60 checks: 55 PASS and 5 BLOCKED** with overall status
+It currently reports **62 checks: 57 PASS and 5 BLOCKED** with overall status
 `INCOMPLETE_EVIDENCE`.
 
 ## Requirement matrix

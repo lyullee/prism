@@ -3491,6 +3491,82 @@ def test_completion_audit_blocks_external_lh2_model_root_promotion_claim():
     assert check["status"] == "BLOCKED"
 
 
+def test_completion_audit_records_provider_response_facility_reconciliation():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        provider_response_facility_reconciliation={
+            "schema_version": "prism.provider_response_facility_reconciliation.v1",
+            "status": "DIAGNOSTIC_RESPONSE_CASE_RECONCILIATION",
+            "response_count": 7,
+            "facility_case_count": 44,
+            "exact_case_match_count": 0,
+            "qualified_exact_case_match_count": 0,
+            "component_candidate_response_count": 0,
+            "no_exact_case_match_count": 7,
+            "rows": [{}] * 7,
+            "promotion": {
+                "provider_packet_promoted": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+                "facility_qra_claim": False,
+            },
+            "policy": {
+                "exact_event_component_port_identity_required": True,
+                "qualification_sidecar_required": True,
+                "missing_identity_is_not_inferred": True,
+                "facility_ir_fn_remains_withheld": True,
+            },
+            "_record_path": "provider-response-facility-reconciliation.json",
+        },
+    )
+    check = next(
+        item
+        for item in report["checks"]
+        if item["name"] == "diagnostic_external_provider_response_facility_reconciliation"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["exact_case_match_count"] == 0
+
+
+def test_completion_audit_blocks_provider_response_reconciliation_promotion_claim():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        provider_response_facility_reconciliation={
+            "schema_version": "prism.provider_response_facility_reconciliation.v1",
+            "status": "DIAGNOSTIC_RESPONSE_CASE_RECONCILIATION",
+            "response_count": 1,
+            "facility_case_count": 1,
+            "exact_case_match_count": 1,
+            "qualified_exact_case_match_count": 1,
+            "no_exact_case_match_count": 0,
+            "rows": [{}],
+            "promotion": {
+                "provider_packet_promoted": True,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+                "facility_qra_claim": False,
+            },
+            "policy": {
+                "exact_event_component_port_identity_required": True,
+                "qualification_sidecar_required": True,
+                "missing_identity_is_not_inferred": True,
+                "facility_ir_fn_remains_withheld": True,
+            },
+        },
+    )
+    check = next(
+        item
+        for item in report["checks"]
+        if item["name"] == "diagnostic_external_provider_response_facility_reconciliation"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _multi_equipment_diagnostic(**overrides):
     component_id = "storage-tank-01"
     branch = {

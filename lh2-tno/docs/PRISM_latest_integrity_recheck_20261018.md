@@ -29,7 +29,7 @@ resolved diagnostically while keeping `authoritative_campaign_replaced=false`.
 This distinction prevents a single re-export from being presented as a full
 44-case facility requalification.
 
-The updated authoritative audit is therefore `INCOMPLETE_EVIDENCE` with 60 checks: 55 PASS and 5 BLOCKED. The facility QRA claim, independent physical-validation claim, provider-packet promotion, and sensor-derived frequency inference remain false.
+The updated authoritative audit is therefore `INCOMPLETE_EVIDENCE` with 62 checks: 57 PASS and 5 BLOCKED. The facility QRA claim, independent physical-validation claim, provider-packet promotion, and sensor-derived frequency inference remain false.
 
 ## SLABx-LH2 boundary
 

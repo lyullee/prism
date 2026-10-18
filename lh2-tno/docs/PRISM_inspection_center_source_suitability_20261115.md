@@ -85,7 +85,7 @@ python scripts/build_inspection_center_source_inventory.py `
 
 The output is a suitability boundary record, not a QRA result. It is consumed
 alongside the current IJHE objective audit and the 60-check completion audit
-(55 PASS and 5 BLOCKED).
+(57 PASS and 5 BLOCKED).
 
 The sequence-only screen is reproducible with:
 

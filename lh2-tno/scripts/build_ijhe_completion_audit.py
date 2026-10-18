@@ -309,6 +309,11 @@ def main() -> int:
         help="optional provenance-only review of the external LH2 digital-twin model root",
     )
     parser.add_argument(
+        "--provider-response-facility-reconciliation",
+        type=Path,
+        help="optional exact reconciliation of external provider responses to facility cases",
+    )
+    parser.add_argument(
         "--facility-evidence-request",
         type=Path,
         help="optional exact facility-case evidence-request coverage audit",
@@ -849,6 +854,15 @@ def main() -> int:
         )
         if external_model_root_review is not None:
             external_model_root_review["_record_path"] = str(args.external_model_root_review)
+        provider_response_facility_reconciliation = (
+            _object(args.provider_response_facility_reconciliation)
+            if args.provider_response_facility_reconciliation
+            else None
+        )
+        if provider_response_facility_reconciliation is not None:
+            provider_response_facility_reconciliation["_record_path"] = str(
+                args.provider_response_facility_reconciliation
+            )
         facility_evidence_request = (
             _object(args.facility_evidence_request)
             if args.facility_evidence_request
@@ -914,6 +928,7 @@ def main() -> int:
             state_release_mass_consistency_audit=state_release_mass_consistency_audit,
             external_release_artifact_intake=external_release_artifact_intake,
             external_model_root_review=external_model_root_review,
+            provider_response_facility_reconciliation=provider_response_facility_reconciliation,
             hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,
             hazop_scope_worklist=hazop_scope_worklist,
             hazop_event_mode_binding=hazop_event_mode_binding,

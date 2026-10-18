@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT_PATH = ROOT / "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json"
 ASSESSMENT_PATH = ROOT / "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json"
+STATUS_PATH = ROOT / "CURRENT_STATUS.json"
 
 
 def _json(path: Path) -> dict:
@@ -32,7 +33,8 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
     assessment = _json(ASSESSMENT_PATH)
 
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 61
+    status = _json(STATUS_PATH)
+    assert len(audit["checks"]) == status["latest_ijhe_audit_metadata_verifier_check_count"]
     assert len(audit["blocking_reasons"]) == 5
     case_check = next(
         check for check in audit["checks"]

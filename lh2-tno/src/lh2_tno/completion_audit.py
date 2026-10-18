@@ -133,6 +133,7 @@ def build_ijhe_completion_audit(
     hazop_integrated_risk: Mapping[str, Any] | None = None,
     hazop_scenario_trace_audit: Mapping[str, Any] | None = None,
     external_model_root_review: Mapping[str, Any] | None = None,
+    provider_response_facility_reconciliation: Mapping[str, Any] | None = None,
     hazop_multiequipment_diagnostic: Mapping[str, Any] | None = None,
     hazop_scope_worklist: Mapping[str, Any] | None = None,
     hazop_event_mode_binding: Mapping[str, Any] | None = None,
@@ -5354,6 +5355,71 @@ def build_ijhe_completion_audit(
             "exact digest-bound qualification sidecar."
         )
         checks.append(model_review_check)
+    if provider_response_facility_reconciliation is not None:
+        reconciliation = provider_response_facility_reconciliation
+        promotion = reconciliation.get("promotion")
+        promotion = promotion if isinstance(promotion, Mapping) else {}
+        policy = reconciliation.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        response_count = reconciliation.get("response_count")
+        facility_case_count = reconciliation.get("facility_case_count")
+        exact_match_count = reconciliation.get("exact_case_match_count")
+        qualified_match_count = reconciliation.get("qualified_exact_case_match_count")
+        no_match_count = reconciliation.get("no_exact_case_match_count")
+        reconciliation_valid = (
+            reconciliation.get("schema_version")
+            == "prism.provider_response_facility_reconciliation.v1"
+            and reconciliation.get("status")
+            in {"DIAGNOSTIC_RESPONSE_CASE_RECONCILIATION", "QUALIFIED_RESPONSE_CASE_COVERAGE"}
+            and isinstance(response_count, int)
+            and response_count >= 0
+            and isinstance(facility_case_count, int)
+            and facility_case_count >= 0
+            and isinstance(exact_match_count, int)
+            and 0 <= exact_match_count <= response_count
+            and isinstance(qualified_match_count, int)
+            and 0 <= qualified_match_count <= exact_match_count
+            and isinstance(no_match_count, int)
+            and no_match_count + exact_match_count == response_count
+            and isinstance(reconciliation.get("rows"), list)
+            and len(reconciliation["rows"]) == response_count
+            and promotion.get("provider_packet_promoted") is False
+            and promotion.get("frequency_inference_performed") is False
+            and promotion.get("physical_validation_claim") is False
+            and promotion.get("facility_qra_claim") is False
+            and policy.get("exact_event_component_port_identity_required") is True
+            and policy.get("qualification_sidecar_required") is True
+            and policy.get("missing_identity_is_not_inferred") is True
+            and policy.get("facility_ir_fn_remains_withheld") is True
+        )
+        reconciliation_check = _check(
+            "diagnostic_external_provider_response_facility_reconciliation",
+            reconciliation_valid,
+            {
+                "record": reconciliation.get("_record_path"),
+                "schema_version": reconciliation.get("schema_version"),
+                "status": reconciliation.get("status"),
+                "response_count": response_count,
+                "facility_case_count": facility_case_count,
+                "exact_case_match_count": exact_match_count,
+                "qualified_exact_case_match_count": qualified_match_count,
+                "component_candidate_response_count": reconciliation.get(
+                    "component_candidate_response_count"
+                ),
+                "no_exact_case_match_count": no_match_count,
+                "promotion": dict(promotion),
+                "policy": dict(policy),
+            },
+            "external provider response reconciliation is missing, malformed, or carries an unsafe promotion claim",
+        )
+        reconciliation_check["diagnostic_only"] = True
+        reconciliation_check["interpretation"] = (
+            "External provider responses are compared with the exact facility event, component, "
+            "and port identities. A no-match or unqualified match remains an explicit evidence "
+            "gap; component-name similarity never repairs identity, and no frequency, physical "
+            "validation, or facility IR/F-N result is promoted."
+        )
+        checks.append(reconciliation_check)
     if external_release_artifact_intake is not None:
         intake = external_release_artifact_intake
         policy = intake.get("promotion_policy")

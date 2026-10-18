@@ -11,7 +11,7 @@ The objective chain is **conditionally complete for diagnostic use**. The machin
 | Objective rows | 38 |
 | Core blocking rows | 0 |
 | Strict evidence gates still open | 4 |
-| Completion-audit result | `INCOMPLETE_EVIDENCE` (60 checks: 55 PASS, 5 BLOCKED) |
+| Completion-audit result | `INCOMPLETE_EVIDENCE` (62 checks: 57 PASS, 5 BLOCKED) |
 | Facility IR/F-N promotion | withheld |
 | Physical-validation claim | withheld |
 | Fresh-physics 1 Hz claim | withheld |
