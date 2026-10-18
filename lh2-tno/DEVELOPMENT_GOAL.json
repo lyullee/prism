@@ -5349,4 +5349,4 @@
     "diagnostic_only": true,
     "policy": "Current and forecast paths share the explicit operating-mode HAZOP, provider, frequency uncertainty, consequence and facility-ledger contracts; open release boundaries keep facility total IR/F-N withheld."
   }
-}\n
+}
