@@ -1,6 +1,7 @@
 name: Python contracts and numerical checks
 
 on:
+  workflow_dispatch:
   # Validate the published branch on direct pushes. Development branches are
   # validated when opened or updated as pull requests, avoiding duplicate
   # runs when the release branch and a working branch are both pushed.
