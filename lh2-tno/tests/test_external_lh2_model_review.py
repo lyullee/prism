@@ -42,6 +42,22 @@ def test_external_model_root_review_is_fail_closed(tmp_path: Path) -> None:
     assert any("release-ready" in reason for reason in report["blocking_reasons"])
 
 
+def test_external_model_root_review_keeps_match_section_structured_without_closure_audit(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "empty-model"
+    root.mkdir()
+    report = review_external_lh2_model_root(root)
+    assert report["external_match_review"] == {
+        "status": "NOT_EVALUATED_NO_CLOSURE_AUDIT",
+        "candidate_count": 0,
+        "exact_match_count": 0,
+        "qualification_artifact_count": 0,
+        "physical_validation_artifact_count": 0,
+        "complete_facility_qra_artifact_count": 0,
+    }
+
+
 def test_anonymized_model_validation_is_recorded_without_qra_promotion(tmp_path: Path) -> None:
     root = tmp_path / "model"
     benchmark_dir = root / "docs" / "benchmarks"

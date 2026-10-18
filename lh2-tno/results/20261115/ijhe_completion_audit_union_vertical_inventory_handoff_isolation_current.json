@@ -6177,6 +6177,40 @@
       "interpretation": "This diagnostic checks numeric inventory continuity at the equipment-state to release boundary. Review-required mismatches remain visible and are not corrected or promoted into provider, frequency, physical-validation, or facility-QRA evidence."
     },
     {
+      "name": "diagnostic_external_lh2_model_root_review",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261115\\external_lh2_model_root_review_recheck_20261018.json",
+        "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
+        "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+        "provider_like_artifacts": {
+          "provider_response_count": 0,
+          "resolved_release_count": 0,
+          "verification_count": 0,
+          "provider_export_schemas": [],
+          "exact_generic_identity_match_count": 0,
+          "qualification_sidecar_count": 0,
+          "physical_validation_artifact_count": 0,
+          "complete_facility_qra_artifact_count": 0
+        },
+        "external_match_review": {
+          "status": "NOT_EVALUATED_NO_CLOSURE_AUDIT",
+          "candidate_count": 0,
+          "exact_match_count": 0,
+          "qualification_artifact_count": 0
+        },
+        "promotion": {
+          "provider_packet": false,
+          "frequency": false,
+          "facility_qra": false,
+          "physical_validation": false
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The external lh2dt model root is checked as topology and model-contract evidence. Its normal-state models, examples, or provider-like artifacts never become an accident release, literature frequency, physical-validation claim, or facility QRA without an exact digest-bound qualification sidecar."
+    },
+    {
       "name": "diagnostic_external_release_artifact_intake",
       "status": "PASS",
       "evidence": {

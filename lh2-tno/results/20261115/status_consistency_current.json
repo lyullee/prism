@@ -38,12 +38,12 @@
       "name": "latest_local_full_suite_pointer",
       "status": "PASS",
       "evidence": {
-        "current_count": 1559,
-        "development_goal_count": 1559,
-        "current_status": "1559 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "development_goal_status": "1559 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "current_record": "python -m pytest -q; 1559 passed, 1 warning; mass-basis drift fail-closed regression recheck",
-        "development_goal_record": "python -m pytest -q; 1559 passed, 1 warning; mass-basis drift fail-closed regression recheck"
+        "current_count": 1560,
+        "development_goal_count": 1560,
+        "current_status": "1560 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "development_goal_status": "1560 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "current_record": "python -m pytest -q; 1560 passed, 1 warning; mass-basis drift fail-closed regression recheck",
+        "development_goal_record": "python -m pytest -q; 1560 passed, 1 warning; mass-basis drift fail-closed regression recheck"
       }
     },
     {
@@ -63,7 +63,7 @@
       "status": "PASS",
       "evidence": {
         "status": "INCOMPLETE_EVIDENCE",
-        "check_count": 60,
+        "check_count": 61,
         "blocking_reason_count": 5
       }
     },
@@ -275,7 +275,7 @@
       "status": "PASS",
       "evidence": {
         "record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-        "check_count": 60,
+        "check_count": 61,
         "blocking_reason_count": 5
       }
     },
@@ -284,7 +284,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1559
+        "full_portable_test_count": 1560
       }
     },
     {
@@ -306,7 +306,7 @@
       "status": "PASS",
       "evidence": {
         "record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
-        "check_count": 60,
+        "check_count": 61,
         "blocking_reason_count": 5
       }
     },
@@ -315,7 +315,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
-        "full_portable_test_count": 1559
+        "full_portable_test_count": 1560
       }
     },
     {

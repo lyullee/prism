@@ -261,9 +261,21 @@ def review_external_lh2_model_root(
         if isinstance(value, Mapping) and isinstance(value.get("provider_export_schema"), str):
             schemas.add(value["provider_export_schema"])
 
-    match_review: dict[str, Any] | None = None
+    # Keep the match section structurally complete even when no closure audit
+    # was supplied.  A missing comparison is a diagnostic limitation, not a
+    # reason for the root-review record itself to become malformed.
+    match_review: dict[str, Any]
     if closure_audit is not None:
         match_review = audit_external_provider_artifact_matches(root, closure_audit)
+    else:
+        match_review = {
+            "status": "NOT_EVALUATED_NO_CLOSURE_AUDIT",
+            "candidate_count": 0,
+            "exact_match_count": 0,
+            "qualification_artifact_count": 0,
+            "physical_validation_artifact_count": 0,
+            "complete_facility_qra_artifact_count": 0,
+        }
 
     exact_count = int(match_review.get("exact_match_count", 0)) if match_review else 0
     qualification_count = int(match_review.get("qualification_artifact_count", 0)) if match_review else 0
