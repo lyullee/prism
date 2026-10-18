@@ -124,6 +124,40 @@ def test_completion_audit_distinguishes_numerical_scope_from_qualification_gap()
     assert check["evidence"]["families_with_numerical_case_gap"] == []
 
 
+def test_completion_audit_excludes_closed_slabx_component_from_open_scope_gate():
+    matrix = {
+        **_matrix(complete=False),
+        "gap_summary": {
+            "families_with_numerical_case_gap": [],
+            "families_with_qualification_gap": ["pipe_hole"],
+        },
+        "conditional_uncomputed_case_count": 0,
+    }
+    status = {
+        **_status(validated=False),
+        "slabx_lh2_validation_current_status": "CLOSED_VALIDATED_COMPONENT",
+        "facility_full_chain_physical_validation_status": "OPEN",
+    }
+    report = build_ijhe_completion_audit(
+        status,
+        matrix,
+        _campaign_result(total=False),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "declared_major_accident_scope"
+    )
+    assert check["status"] == "BLOCKED"
+    assert "qualified provider evidence" in check["blocking_reason"]
+    assert "validated SLABx-LH2 component is excluded" in check["blocking_reason"]
+    physical = next(
+        item for item in report["checks"]
+        if item["name"] == "physical_validation_evidence"
+    )
+    assert physical["evidence"]["slabx_component_gate_closed"] is True
+    assert physical["evidence"]["facility_full_chain_validation_status"] == "OPEN"
+
+
 def test_completion_audit_handles_frequency_audit_without_optional_closure_inputs():
     frequency_audit = {
         "schema_version": "prism.facility_frequency_uncertainty_audit.v1",

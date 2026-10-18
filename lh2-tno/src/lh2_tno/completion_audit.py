@@ -3137,16 +3137,34 @@ def build_ijhe_completion_audit(
         if isinstance(scope_gap_summary, Mapping)
         else []
     )
+    slabx_component_validation_closed = (
+        current_status.get("slabx_lh2_validation_current_status")
+        == "CLOSED_VALIDATED_COMPONENT"
+    )
+    facility_full_chain_validation_status = current_status.get(
+        "facility_full_chain_physical_validation_status",
+        "OPEN",
+    )
     if scope_numerical_gap_families or scope_matrix.get("conditional_uncomputed_case_count", 0):
         scope_blocking_reason = (
             "one or more declared accident families still have numerical case gaps or "
             "uncomputed cases"
         )
     elif scope_qualification_gap_families:
-        scope_blocking_reason = (
-            "declared accident families have numerical diagnostic outputs, but provider "
-            "qualification or independent physical-validation evidence remains open"
-        )
+        if (
+            slabx_component_validation_closed
+            and facility_full_chain_validation_status != "CLOSED"
+        ):
+            scope_blocking_reason = (
+                "declared accident families have numerical diagnostic outputs, but "
+                "qualified provider evidence and facility-wide independent validation "
+                "remain open; the validated SLABx-LH2 component is excluded from this gate"
+            )
+        else:
+            scope_blocking_reason = (
+                "declared accident families have numerical diagnostic outputs, but provider "
+                "qualification or independent physical-validation evidence remains open"
+            )
     else:
         scope_blocking_reason = "one or more declared accident families are missing, partial, or uncomputed"
     checks.extend([
@@ -3371,6 +3389,11 @@ def build_ijhe_completion_audit(
                 "evidence_record": restricted_physical_record,
                 "evidence_component": restricted_physical_component,
                 "restricted_component_evidence": restricted_physical_evidence,
+                "slabx_component_validation_status": current_status.get(
+                    "slabx_lh2_validation_current_status"
+                ),
+                "facility_full_chain_validation_status": facility_full_chain_validation_status,
+                "slabx_component_gate_closed": slabx_component_validation_closed,
             },
             "independent end-to-end physical validation or an auditable restricted component evidence record is missing",
         ),

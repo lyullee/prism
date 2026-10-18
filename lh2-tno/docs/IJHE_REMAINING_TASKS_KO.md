@@ -50,3 +50,9 @@
 ## 현재 판정
 
 현재 판정은 `INCOMPLETE_EVIDENCE`이다. HAZOP→운전모드→사고 요청→네 개 정량 증거 블록의 연결은 닫혔고 상태-방출 재고 불일치가 실행 전에 거부되도록 고정했지만, 해당 1건의 provider 재수출, qualified provider evidence, 독립 물리검증, strict facility scope, 시설 IR/F-N 승격 게이트가 남아 있다.
+
+## SLABx-LH2 검증 범위 분리(2026-10-18)
+
+SLABx-LH2의 구성요소 검증은 완료된 것으로 취급한다. PRISM의 완료 감사는 이제 `slabx_lh2_validation_current_status=CLOSED_VALIDATED_COMPONENT`와 `facility_full_chain_physical_validation_status=OPEN`을 별도로 읽는다. 따라서 사고군 차단 사유는 SLABx 검증 미완료가 아니라, 설비 provider 방출 패킷의 자격 증거와 시설 전체 release-to-damage 독립 검증이 남아 있다는 뜻이다.
+
+이 변경은 시설 IR/F-N을 자동으로 열지 않는다. 현재 44개 케이스의 수치 진단 연결, 문헌 빈도 민감도, 방출 종료·재고 장부와 처리시간은 계속 진단 결과로 보존하고, 실제 시설 QRA 승격은 기존의 qualified provider·완전한 범위·시설 전체 검증 게이트를 모두 요구한다.

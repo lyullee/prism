@@ -5079,7 +5079,7 @@
           "vertical_handoff"
         ]
       },
-      "blocking_reason": "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open"
+      "blocking_reason": "declared accident families have numerical diagnostic outputs, but qualified provider evidence and facility-wide independent validation remain open; the validated SLABx-LH2 component is excluded from this gate"
     },
     {
       "name": "conditional_accident_scope_accounting",
@@ -5121,9 +5121,13 @@
         "evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
         "evidence_record": "docs/PRISM_물리검증_근거_20261009.md",
         "evidence_component": "DynamicLH2PoolX pool/spreading only",
-        "restricted_component_evidence": true
+        "restricted_component_evidence": true,
+        "slabx_component_validation_status": "CLOSED_VALIDATED_COMPONENT",
+        "facility_full_chain_validation_status": "OPEN",
+        "slabx_component_gate_closed": true
       },
-      "blocking_reason": null
+      "blocking_reason": null,
+      "interpretation": "The validated SLABx-LH2 consequence component is treated as closed evidence. Facility-wide independent validation and qualified provider evidence remain separate open gates."
     },
     {
       "name": "frequency_uncertainty_reported",
@@ -5403,10 +5407,11 @@
   "blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
-    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
+    "declared accident families have numerical diagnostic outputs, but qualified provider evidence and facility-wide independent validation remain open; the validated SLABx-LH2 component is excluded from this gate",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
   ],
   "physical_validation_claim": false,
   "complete_facility_qra_claim": false,
-  "interpretation": "Readiness evidence gate; a blocked check is not treated as zero risk or as an implicit accident substitution."
+  "interpretation": "Readiness evidence gate; a blocked check is not treated as zero risk or as an implicit accident substitution.",
+  "slabx_scope_interpretation": "SLABx-LH2 component validation is closed and excluded from the remaining blocker; facility-wide release-to-damage validation and qualified provider evidence remain open."
 }
