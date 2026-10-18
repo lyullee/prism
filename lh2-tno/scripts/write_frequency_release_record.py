@@ -20,8 +20,11 @@ verification.update(unit_tests_passed=100,unit_tests_elapsed_s=.75,
     cli_actual_chain_elapsed_ms=cli['elapsed_ms'])
 (OUT/'verification.json').write_text(json.dumps(verification,ensure_ascii=False,indent=2),encoding='utf-8')
 
-data_root=Path(r'C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터')
-data_files=[str(p.relative_to(data_root)) for p in data_root.rglob('*') if p.is_file()]
+data_root=Path(__import__('os').environ['PRISM_FIELD_DATA_ROOT']) if __import__('os').environ.get('PRISM_FIELD_DATA_ROOT') else None
+if data_root is None or not data_root.is_dir():
+    data_files=[]
+else:
+    data_files=[str(p.relative_to(data_root)) for p in data_root.rglob('*') if p.is_file()]
 experience=dict(review='file inventory only; not a full audit of workbook contents',
     files=data_files,confirmed_leak_register_identified=False,
     component_year_or_metre_year_exposure_identified=False,
@@ -172,8 +175,8 @@ if policy not in readme:
     readme=readme.replace('## v0.3.0 빈도 모듈\n\n','## v0.3.0 빈도 모듈\n\n'+policy+'\n\n',1)
     readme_path.write_text(readme,encoding='utf-8')
 
-CODE=Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM\코드')
-archive=CODE/'개발기록_20261008/TNO_LH2_v030'
+CODE=ROOT/'docs'
+archive=CODE/'개발기록_20261008/PRISM_LH2_v030'
 archive.mkdir(parents=True,exist_ok=True)
 sources=[doc_path,ROOT/'docs/IJHE_연구프로토콜.md',status_path,OUT/'verification.json',OUT/'generic_events.json',OUT/'actual_g3_chain.json',
     OUT/'cli_actual_g3_chain.json',OUT/'field_experience_availability.json',OUT/'plan.json',OUT/'bound_request.json',

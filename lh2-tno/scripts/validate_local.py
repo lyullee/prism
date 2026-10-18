@@ -1,6 +1,6 @@
 """Run real local components without changing their source or frozen evidence."""
 from pathlib import Path
-import json, platform, sys
+import json, os, platform, sys
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from lh2_tno.backend import BackendConfig, IsolatedBackend, PackagePin, tree_digest
@@ -10,18 +10,20 @@ from lh2_tno.risk import FluxStep, thermal_dose
 from lh2_tno.pipeline import ResearchPipeline
 from dataclasses import asdict
 
-DOCU=Path(r'C:\Users\lyul\Desktop\DocuData')
+DOCU=Path(os.environ['PRISM_LOCAL_MODELS_ROOT']).expanduser() if os.environ.get('PRISM_LOCAL_MODELS_ROOT') else None
 OUTPUT=ROOT/'results'/'20261008'
 OUTPUT.mkdir(parents=True,exist_ok=True)
 
 def save(name,data):
     (OUTPUT/name).write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')
 
+if DOCU is None:
+    raise SystemExit('set PRISM_LOCAL_MODELS_ROOT to run this optional local-model audit')
 roots={
  'slabx_lh2':DOCU/'SLABx_LH2/slabx-lh2/source/slabx-lh2/slabx_lh2',
  'lh2dt':DOCU/'액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/src/lh2dt',
  'dynamiclh2poolx':DOCU/'SLABx_LH2/논문화/PSEP_rebuild_2026-10-01/unified_runtime_2026-10-07/dependencies/DynamicLH2PoolX/src/dynamiclh2poolx',
- 'tno':DOCU/'TNO_위험분석모듈/TNO_SYSTEM/코드'}
+ 'prism_qra':ROOT/'src/prism_qra'}
 config=BackendConfig(interpreter=str(DOCU/'SLABx_LH2/.venv-transfer/Scripts/python.exe'),
     packages=tuple(PackagePin(name=name,root=str(path),sha256=tree_digest(path)) for name,path in roots.items()),
     required_versions={'CoolProp':'8.0.0','numpy':'2.5.3','scipy':'1.18.1'},timeout_s=120.)

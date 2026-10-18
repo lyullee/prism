@@ -4,14 +4,14 @@ import hashlib
 import json
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT/'results/20261008/tno_function_inventory/frequency_library.json'
-BOOK = Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM\eBook___The_coloured_books\TheColouredBooks\PurpleBook.pdf')
-sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+AUDIT = ROOT/'results/20261008/prism_qra_function_inventory/frequency_library.json'
+BOOK = Path(__import__('os').environ['PRISM_PURPLE_BOOK']) if __import__('os').environ.get('PRISM_PURPLE_BOOK') else None
+sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest() if p and p.is_file() else None
 profiles = {}
 
 def add(name, rows, table, limitations, unit='item^-1 year^-1'):
     profiles[name] = dict(basis='TNO_PURPLE_LOC', statistic='published_default', unit=unit,
-        source=f'Purple Book Chapter 3 {table}; local original visually reviewed 2026-10-08',
+        source=f'Purple Book Chapter 3 {table}; published method reference',
         source_sha256=sha(BOOK), limitations=limitations + [
             'Generic industrial default, not an empirically validated LH2 failure rate.',
             'Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit.'],
@@ -82,7 +82,7 @@ out = dict(schema_version='1.0', reviewed_date_kst='2026-10-08',
     'atmospheric/membrane/multiple-containment storage', 'vacuum-loss initiation',
     'reliquefier special failure modes', 'normal control vent demands',
     'transfer/loading operational failures', 'cold-service sensor leaks'],
-    source_files=[dict(path=str(BOOK), sha256=sha(BOOK)), dict(path=str(AUDIT), sha256=sha(AUDIT))],
+    source_files=([dict(path=str(BOOK), sha256=sha(BOOK))] if BOOK else []) + [dict(path=str(AUDIT), sha256=sha(AUDIT))],
     interpretation='Source table snapshot, not universal facility certification or complete Purple Chapter 3.')
 target=ROOT/'src/lh2_tno/data/frequency_catalogue.json'
 target.parent.mkdir(exist_ok=True)

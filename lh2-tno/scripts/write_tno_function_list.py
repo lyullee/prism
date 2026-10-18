@@ -1,8 +1,8 @@
-"""Human-reviewed functionality matrix, anchored to the actual legacy code."""
+"""Human-reviewed functionality matrix, anchored to the bundled PRISM QRA."""
 from pathlib import Path
 import json,csv
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'results/20261008/tno_function_inventory'
+OUT=ROOT/'results/20261008/prism_qra_function_inventory'
 DOC=ROOT/'docs/TNO_위험성평가_구축기능_상세목록_20261008.md'
 inventory=json.loads((OUT/'code_inventory.json').read_text(encoding='utf-8'))
 byfile={x['file']:x for x in inventory['modules']}

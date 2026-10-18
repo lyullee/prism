@@ -53,7 +53,7 @@ python tno.py --config lh2-tno/examples/tno_lh2_mode.json lh2-tno/examples/stora
 
 패키지를 설치한 환경에서는 같은 명령을 `tno --mode ...`로 실행한다. 기존 `lh2-tno ...` 및 `python -m lh2_tno.cli ...` 호출도 유지한다.
 
-설정은 `{{"mode":"lh2"}}` 또는 `{{"mode":"standard","backend":"backend.json"}}`이다. 설정 파일의 backend 상대경로는 설정 파일 위치에서 해석한다. CLI에서 명시한 mode/backend가 설정값보다 우선한다. standard 물리 계산은 legacy interpreter와 `tno` root/SHA-256 pin이 있는 backend 설정이 필요하다. 입력 예제와 raw 결과는 보통 로컬 산출물이므로 다른 PC에서는 명시 경로를 새로 설정한다.
+설정은 `{{"mode":"lh2"}}` 또는 `{{"mode":"standard","backend":"backend.json"}}`이다. 설정 파일의 backend 상대경로는 설정 파일 위치에서 해석한다. CLI에서 명시한 mode/backend가 설정값보다 우선한다. standard 물리 계산은 기본적으로 저장소의 PRISM QRA를 사용하며, 별도 검증본은 `prism_qra` root/SHA-256 pin을 지정한다. 입력 예제와 raw 결과는 보통 로컬 산출물이므로 다른 PC에서는 명시 경로를 새로 설정한다.
 
 std mode 출력 JSON에는 `execution_mode=standard`와 엔진 소스 해시를 추가한다. 기존 수치·모델/근거 정책은 그대로 둔다. LH2 CLI 출력에는 `execution_mode=lh2`를 기록한다. `--describe-modes`는 설치/물리 검증 완료를 주장하는 기능이 아니다.
 
@@ -92,15 +92,15 @@ if '## Optional execution modes' not in text:
     text+='''\n## Optional execution modes
 
 Use `python tno.py --mode standard --backend backend.json <qra arguments>`
-for the pinned original TNO engine, or `python tno.py --mode lh2 <facility.json>`
+for an explicitly pinned PRISM QRA backend, or `prism --mode lh2 <facility.json>`
 for the LH2 extension. Standard is the default; modes never silently fall back.
 After installation, `tno --mode ...` provides the same launcher. Internal
 providers stay separated, and each mode retains its current input and physics
 limits. See [v0.5.0 mode record](lh2-tno/docs/TNO_LH2_v050_옵셔널모드_개발기록_20261008.md).
 '''
 root_readme_path.write_text(text,encoding='utf-8')
-CODE=Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM\코드')
-archive=CODE/'개발기록_20261008/TNO_LH2_v050';archive.mkdir(parents=True,exist_ok=True)
+CODE=ROOT/'docs'
+archive=CODE/'개발기록_20261008/PRISM_LH2_v050';archive.mkdir(parents=True,exist_ok=True)
 sources=[doc_path,status_path,OUT/'verification.json',OUT/'standard_result.json',OUT/'lh2_events.json',
          OUT/'lh2_result.json',OUT/'unit_tests.xml']
 records=[]

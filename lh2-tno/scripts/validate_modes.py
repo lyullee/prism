@@ -1,4 +1,4 @@
-"""Exercise unified standard/LH2 modes against the actual pinned engines."""
+"""Exercise unified standard/LH2 modes against the public PRISM paths."""
 from pathlib import Path
 import csv
 import io
@@ -11,7 +11,7 @@ from lh2_tno.backend import tree_digest
 
 OUT=ROOT/'results/20261008/mode_v050'
 OUT.mkdir(parents=True,exist_ok=True)
-host=ROOT.parent/'tno.py'
+host=ROOT/'src/prism_cli.py'
 def save(name,value):
     (OUT/name).write_text(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')
 def execute(label,args):
@@ -20,9 +20,9 @@ def execute(label,args):
     if completed.returncode:raise RuntimeError(f'{label} failed: {completed.stderr[-1500:]}')
     return completed
 
-engine=Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM\코드')
+engine=ROOT/'src/prism_qra'
 before=tree_digest(engine)
-config={'interpreter':sys.executable,'timeout_s':120.,'packages':[{'name':'tno','root':str(engine),'sha256':before}]}
+config={'interpreter':sys.executable,'timeout_s':120.,'packages':[{'name':'prism_qra','root':str(engine),'sha256':before}]}
 save('standard_backend.json',config)
 execute('standard_template',['--mode','standard','--backend',str(OUT/'standard_backend.json'),
     'template','--directory',str(OUT/'templates')])

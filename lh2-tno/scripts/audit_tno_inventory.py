@@ -1,10 +1,9 @@
-"""Inventory the existing TNO implementation, not just the LH2 wrapper."""
+"""Inventory the bundled PRISM QRA implementation."""
 from pathlib import Path
 import ast,hashlib,json,sys,platform
 ROOT=Path(__file__).resolve().parents[1]
-TNO=Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM')
-CODE=TNO/'코드'
-OUT=ROOT/'results/20261008/tno_function_inventory'
+CODE=ROOT/'src/prism_qra'
+OUT=ROOT/'results/20261008/prism_qra_function_inventory'
 OUT.mkdir(parents=True,exist_ok=True)
 sys.path.insert(0,str(CODE))
 import taxonomy as T
@@ -43,7 +42,7 @@ proof={'scope':'actual frequency resolver and scenario enumeration; not a physic
     'input_origin':'synthetic','component':'10 identical LH2 valves','nominal_bore_m':.025,
     'scenarios':[s.model_dump(mode='json') for s in rows],
     'automatic_frequency_lookup_and_count_scaling_passed':True,
-    'not_the_new_wrapper_frequency_path':True}
+    'bundled_prism_qra_frequency_path':True}
 (OUT/'actual_frequency_enumeration.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')
 print(json.dumps({'module_count':len(modules),'frequency_entries':len(frequency),
     'lh2_entries':sum(x['fuel']=='LH2' for x in frequency),'automatic_frequency_proof':True,

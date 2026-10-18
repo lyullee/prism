@@ -125,8 +125,8 @@ text=text.replace('Version 0.3.0 demonstrates one matching tank-hole event\'s au
     'Version 0.4.0 also connects native equipment-resolved horizontal atmospheric\nlow-Mach gas exits to dispersion and harm without recalculating discharge.\nThe v0.3.0 tank-hole frequency baseline is preserved on the initial main commit.')
 root_readme.write_text(text,encoding='utf-8')
 
-CODE=Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM\코드')
-archive=CODE/'개발기록_20261008/TNO_LH2_v040'
+CODE=ROOT/'docs'
+archive=CODE/'개발기록_20261008/PRISM_LH2_v040'
 archive.mkdir(parents=True,exist_ok=True)
 sources=[doc_file,status_file,OUT/'verification.json',OUT/'regression_verification.json',OUT/'actual_equipment_to_harm.json',
     OUT/'resolved_release.json',OUT/'high_pressure_plane_gate.json',OUT/'unit_tests.xml']

@@ -1,9 +1,13 @@
 from pathlib import Path
-import json,hashlib
+import argparse,json,hashlib
 from pypdf import PdfReader
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'results/20261008/tno_function_inventory'
-BOOK=Path(r'C:\Users\lyul\Desktop\DocuData\TNO_위험분석모듈\TNO_SYSTEM\eBook___The_coloured_books\TheColouredBooks\PurpleBook.pdf')
+OUT=ROOT/'results/20261008/prism_qra_function_inventory'
+parser=argparse.ArgumentParser(description='Extract a locally supplied reference PDF; no source PDF is bundled.')
+parser.add_argument('--book',type=Path,required=True,help='path to the legally available reference PDF')
+BOOK=parser.parse_args().book.expanduser().resolve()
+if not BOOK.is_file():
+    raise SystemExit(f'reference PDF not found: {BOOK}')
 reader=PdfReader(BOOK)
 pages=[]
 for i,page in enumerate(reader.pages):
