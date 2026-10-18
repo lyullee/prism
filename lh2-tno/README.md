@@ -72,6 +72,7 @@ Before a facility campaign, run the [backend runtime preflight](docs/PRISM_INTER
 It catches stale private or legacy source pins before a long campaign starts.
 The latest seven-equipment replay is recorded in the [public-backend chain recheck](docs/PRISM_public_backend_chain_recheck_20261018_en.md).
 The corresponding frequency-bound facility view is recorded in the [conditional facility risk recheck](docs/PRISM_conditional_facility_risk_recheck_20261018_en.md).
+The requirement-by-requirement status is summarized in the [IJHE progress snapshot](docs/PRISM_IJHE_progress_snapshot_20261018_en.md).
 
 PRISM helps an operator or researcher answer:
 
