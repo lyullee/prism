@@ -92,7 +92,8 @@ The rebuilt base catalog contains 23 exact native packet exports out of 24
 declared base events. Combined with five existing vertical-handoff packets, 28
 of the 34 union event identities passed the complete chain-closure check. One
 base vaporizer event has no packet export and five inventory-depletion extension
-events have no exact packet identity. Ten explicit inventory-basis aliases were
+events have no exact materialized packet evidence (their embedded identities are
+not packet files). Ten explicit inventory-basis aliases were
 accepted only after duration, mass, and provenance checks and are recorded per
 event. Conditional IR/F-N aggregation remains a diagnostic calculation, while
 facility total QRA, provider qualification, frequency binding from qualified
