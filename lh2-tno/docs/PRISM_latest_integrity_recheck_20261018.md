@@ -43,6 +43,6 @@ PRISM's full portable suite passed `1555` tests with one warning after the numer
 
 ## Continuous integration
 
-GitHub Actions run #1444 for commit `3d53c24b` completed successfully after the provider-packet collection manifest synchronization regression was added. The API record is the authoritative status; the web page may briefly show a stale in-progress view during the recheck.
+GitHub Actions run #1445 for commit `f245f457` completed successfully after the provider mass-basis contract audit was added. The API record is the authoritative status; the web page may briefly show a stale in-progress view during the recheck.
 
 

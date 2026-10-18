@@ -3869,8 +3869,8 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "IJHE objective/provider-intake/worklist/verifier and native-recheck-comparison tests passed; full suite 1555 passed separately (1 pytest-asyncio deprecation warning)",
-  "latest_remote_verified_commit": "3d53c24b",
-  "latest_remote_ci_run": "run 1444 completed successfully for commit 3d53c24b; Python contracts and numerical checks job succeeded",
+  "latest_remote_verified_commit": "f245f457",
+  "latest_remote_ci_run": "run 1445 completed successfully for commit f245f457; Python contracts and numerical checks job succeeded",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons",
   "v060_readiness_frequency_port_binding_evidence_request_fallback_implemented": true,
@@ -5496,7 +5496,7 @@
   "receptor_geometry_interpretation_scope": "The full union uses a synthetic worker receptor at [20, 0, 1] m and returns zero conditional IR/F-N; a separate [0.5, 0, 1] m replay reaches one positive harm atom. The records remain separate and neither opens facility QRA.",
   "receptor_geometry_interpretation_facility_total_risk_claim": false,
   "receptor_geometry_interpretation_physical_validation_claim": false,
-  "latest_local_full_test_run_commit": "3d53c24ba3829b7950e2a7be451ed7838d453b27",
+  "latest_local_full_test_run_commit": "f245f4576e9e6894586b86bd1a16ff2a2b9c196f",
   "current_union_ijhe_objective_coverage_audit_check_count": 38,
   "current_union_ijhe_objective_coverage_audit_core_blocking_check_ids": [],
   "current_union_ijhe_objective_coverage_audit_strict_blocking_check_ids": [
@@ -6014,11 +6014,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-    "run_number": 1444,
+    "run_number": 1445,
     "status": "completed",
     "conclusion": "success",
-    "commit": "3d53c24ba3829b7950e2a7be451ed7838d453b27",
-    "url": "https://github.com/lyullee/prism/actions/runs/39093993831"
+    "commit": "f245f4576e9e6894586b86bd1a16ff2a2b9c196f",
+    "url": "https://github.com/lyullee/prism/actions/runs/39094229498"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
@@ -6266,7 +6266,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "GitHub Actions run 1444 success; commit 3d53c24b validated; latest local full suite 1555 passed, 1 warning; latest IJHE verifier PASS",
+  "latest_ci_validation": "GitHub Actions run 1445 success; commit f245f457 validated; latest local full suite 1555 passed, 1 warning; latest IJHE verifier PASS",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
