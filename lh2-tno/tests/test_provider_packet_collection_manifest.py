@@ -15,6 +15,17 @@ ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_REQUEST = ROOT / (
     "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json"
 )
+CURRENT_EVIDENCE_REQUEST = ROOT / (
+    "results/20261115/"
+    "native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/"
+    "facility_evidence_request.json"
+)
+CURRENT_MANIFEST = ROOT / (
+    "results/20261115/"
+    "native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/"
+    "provider_packet_collection_manifest.json"
+)
+EXAMPLE_MANIFEST = ROOT / "examples/provider_packet_collection_manifest_current.json"
 
 
 def _request() -> dict:
@@ -62,3 +73,43 @@ def test_wrong_request_schema_is_rejected() -> None:
 
     with pytest.raises(ValueError, match="schema_version"):
         build_provider_packet_collection_manifest(request)
+
+
+def test_current_authoritative_and_example_manifests_match_contract() -> None:
+    """Keep the checked-in collection worksheet and its example synchronized."""
+    request = json.loads(CURRENT_EVIDENCE_REQUEST.read_text(encoding="utf-8"))
+    generated = build_provider_packet_collection_manifest(request)
+    authoritative = json.loads(CURRENT_MANIFEST.read_text(encoding="utf-8"))
+    example = json.loads(EXAMPLE_MANIFEST.read_text(encoding="utf-8"))
+
+    row_keys = (
+        "collection_id",
+        "event_id",
+        "component_id",
+        "release_branch_id",
+        "required_provider_evidence",
+        "strict_gate_requirements",
+        "exact_match_required",
+    )
+    assert authoritative["status"] == generated["status"] == example["status"]
+    assert (
+        authoritative["request_count"]
+        == generated["request_count"]
+        == example["request_count"]
+    )
+    assert (
+        authoritative["open_request_count"]
+        == generated["open_request_count"]
+        == example["open_request_count"]
+    )
+    assert (
+        authoritative["qualified_packet_count"]
+        == generated["qualified_packet_count"]
+        == example["qualified_packet_count"]
+    )
+    for generated_row, authoritative_row, example_row in zip(
+        generated["rows"], authoritative["rows"], example["rows"]
+    ):
+        for key in row_keys:
+            assert authoritative_row[key] == generated_row[key] == example_row[key]
+        assert any("mass_basis_id" in item for item in generated_row["required_provider_evidence"])
