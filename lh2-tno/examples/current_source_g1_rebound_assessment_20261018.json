@@ -81,6 +81,21 @@
     "base_campaign": "python scripts/run_native_full_scope_frequency_assessment.py --manifest examples/generic_lh2_full_scope_manifest.json --campaign .tmp_current_source_g1_campaign_rebound.json --backend-config results/20261009/backend_config_current.json --output-dir .tmp_current_source_707_assessment",
     "union": "python scripts/run_native_full_scope_union_assessment.py --base-dir .tmp_current_source_707_assessment ... --output-dir .tmp_current_source_707_union",
     "chain_audit": "python scripts/audit_facility_chain_closure.py --campaign-result .tmp_current_source_707_union/campaign_result.json --packet-evidence results/20261115/facility_chain_packet_evidence_rebuilt_current.json --output .tmp_current_source_707_union/chain_audit.json"
+  },
+  "ijhe_audit": {
+    "record": "results/20261115/ijhe_completion_audit_rebuilt_current.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "check_count": 49,
+    "pass_count": 44,
+    "blocked_count": 5,
+    "blocked_gates": [
+      "facility_release_boundary",
+      "actual_provider_release_packet",
+      "declared_major_accident_scope",
+      "facility_ir_fn_available",
+      "facility_case_provider_packet_coverage"
+    ],
+    "combined_chain_record": "results/20261115/combined_chain_closure_current_source_g1_rebound.json",
+    "combined_chain_status": "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED"
   }
 }
-

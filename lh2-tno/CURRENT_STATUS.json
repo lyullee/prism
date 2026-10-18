@@ -1182,7 +1182,7 @@
     "source": 686.7074000183493,
     "pool": 0.003800028935074806,
     "near_field_and_dispersion": 16389.494900009595,
-    "cloud_observation": 188.75780003145637,
+    "cloud_observation": 188.75780003145638,
     "fire_explosion_damage_risk": 135.96679992042482
   },
   "equipment_provider_release_worklist_synthetic_exact_packet_record": "results/20261014/combined_provider_catalog_family_coverage_v5.json",
@@ -1996,7 +1996,7 @@
   "current_union_facility_assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
-  "current_union_full_test_count": 1571,
+  "current_union_full_test_count": 1573,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
   "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 38 objective checks, core blockers 0, strict evidence gates 4 remain blocked; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
   "current_union_risk_atom_chain_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_chain_closure_audit.json",
@@ -2525,7 +2525,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1571 passed, 1 warning; recorded clean external lh2dt suite 377 passed, 1 warning; current uncommitted-worktree recheck 392 passed, 1 warning; facility QRA remains fail-closed.",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1573 passed, 1 warning; recorded clean external lh2dt suite 377 passed, 1 warning; current uncommitted-worktree recheck 392 passed, 1 warning; facility QRA remains fail-closed.",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -3156,8 +3156,8 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 1571,
-  "full_portable_test_status_latest": "1571 passed, 1 warning; authoritative union snapshot count; latest local full suite separately recorded as 1571 passed, 1 warning",
+  "full_portable_test_count_latest": 1573,
+  "full_portable_test_status_latest": "1573 passed, 1 warning; authoritative union snapshot count; latest local full suite separately recorded as 1573 passed, 1 warning",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -3496,7 +3496,7 @@
   "ijhe_audit_latest_record": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json",
   "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 62 checks, 57 PASS, 5 BLOCKED; current state/release/consequence union remains diagnostic-only; unified facility-QRA gate summary check PASS; forecast facility campaign evidence gate is withheld",
   "ijhe_audit_latest_check_count": 62,
-  "ijhe_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1571 passed, 1 warning; recorded clean external lh2dt suite 377 passed, 1 warning; current uncommitted-worktree recheck 392 passed, 1 warning; facility QRA remains fail-closed.",
+  "ijhe_audit_latest_test_status": "IJHE audit consumes the 44-case facility packet coverage and release-boundary ledgers; latest local full suite 1573 passed, 1 warning; recorded clean external lh2dt suite 377 passed, 1 warning; current uncommitted-worktree recheck 392 passed, 1 warning; facility QRA remains fail-closed.",
   "slabx_lh2_validation_evidence_implemented": true,
   "slabx_lh2_validation_evidence_module": "src/lh2_tno/slabx_validation_audit.py",
   "slabx_lh2_validation_evidence_script": "scripts/audit_slabx_lh2_validation.py",
@@ -3717,7 +3717,7 @@
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
     "facility cases do not all have exact qualified provider packet evidence"
   ],
-    "v060_ijhe_completion_audit_latest_check_count": 62,
+  "v060_ijhe_completion_audit_latest_check_count": 62,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 57,
     "BLOCKED": 5
@@ -5762,7 +5762,7 @@
   "process_forecast_quantitative_evidence_attachment_cli": "scripts/attach_forecast_quantitative_evidence.py",
   "process_forecast_quantitative_evidence_attachment_policy": "attachment keys must exactly match forecast request IDs and include provider_release_packet, frequency_binding, slabx_lh2_consequence and facility_condition_binding; no physics rerun, frequency inference, provider qualification or facility IR/F-N promotion",
   "process_forecast_quantitative_evidence_attachment_test": "tests/test_forecast_handoff.py",
-  "process_forecast_quantitative_evidence_attachment_test_status": "exact-key and required-block rejection covered; full local suite 1571 passed, 1 warning",
+  "process_forecast_quantitative_evidence_attachment_test_status": "exact-key and required-block rejection covered; full local suite 1573 passed, 1 warning",
   "process_forecast_quantitative_evidence_attachment_facility_qra_promotion": false,
   "process_forecast_quantitative_evidence_coverage_audit_implemented": true,
   "process_forecast_quantitative_evidence_coverage_audit_module": "lh2_tno.forecast_handoff.audit_forecast_quantitative_evidence_coverage",
@@ -6019,11 +6019,11 @@
   "slabx_lh2_pseudosource_numerical_sensitivity_physical_validation_claim": false,
   "slabx_lh2_pseudosource_numerical_sensitivity_facility_qra_claim": false,
   "latest_github_actions_run": {
-      "run_number": 1456,
+    "run_number": 1456,
     "status": "completed",
     "conclusion": "success",
-      "commit": "d00ad105561aaeed8eca6a8d61ec409d7d822204",
-      "url": "https://github.com/lyullee/prism/actions/runs/39098915658"
+    "commit": "d00ad105561aaeed8eca6a8d61ec409d7d822204",
+    "url": "https://github.com/lyullee/prism/actions/runs/39098915658"
   },
   "actual_ffi_high_resolution_recheck_last_pair_relative_changes": {
     "H2_vol_pct_at_30_m": 0.09070404482794678,
@@ -6271,7 +6271,7 @@
   "slabx_lh2_remaining_task": false,
   "slabx_lh2_facility_qra_promotion": false,
   "slabx_lh2_scope_note": "SLABx validation is closed as a component task. Facility provider qualification, release boundary, strict scope and facility IR/F-N/QRA remain separate gates.",
-  "latest_ci_validation": "GitHub Actions run 1456 success; commit d00ad105 validated; latest local full suite 1571 passed, 1 warning; latest IJHE verifier PASS",
+  "latest_ci_validation": "GitHub Actions run 1456 success; commit d00ad105 validated; latest local full suite 1573 passed, 1 warning; latest IJHE verifier PASS",
   "facility_provider_intake_audit_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_provider_intake_audit.json",
   "facility_provider_intake_audit_status": "ALIGNED_TEMPLATE_ONLY; 44/44 template entries match facility case requests; no provider packet or QRA promotion",
   "facility_provider_intake_audit_request_case_count": 44,
@@ -6488,9 +6488,18 @@
   "state_release_mass_consistency_runtime_gate_implemented": true,
   "state_release_mass_basis_contract_implemented": true,
   "facility_release_trace_mass_basis_fields_exposed": true,
-  "facility_release_trace_mass_basis_status_values": ["EXPLICIT_ALIGNED", "EXPLICIT_MISMATCH", "PARTIAL", "MALFORMED", "UNDECLARED"],
+  "facility_release_trace_mass_basis_status_values": [
+    "EXPLICIT_ALIGNED",
+    "EXPLICIT_MISMATCH",
+    "PARTIAL",
+    "MALFORMED",
+    "UNDECLARED"
+  ],
   "facility_release_trace_mass_basis_mismatch_policy": "EXPLICIT_MISMATCH, MALFORMED, and PARTIAL block the strict release boundary; UNDECLARED remains diagnostic for legacy packets",
-  "state_release_mass_basis_contract_fields": ["state_snapshot.mass_basis_id", "provider_mass_balance.mass_basis_id"],
+  "state_release_mass_basis_contract_fields": [
+    "state_snapshot.mass_basis_id",
+    "provider_mass_balance.mass_basis_id"
+  ],
   "state_release_mass_basis_runtime_gate_policy": "When both explicit mass-basis tokens are present, they must match before consequence evaluation; absent tokens remain diagnostic and are never inferred from component IDs.",
   "state_release_mass_basis_external_owner_mapping": "provider_meta.mass_basis_id or explicit provider_meta.native_inventory_owner is preserved as provider_mass_balance.mass_basis_id; no ownership is synthesized.",
   "state_release_mass_basis_test": "tests/test_provider_release.py::test_provider_request_rejects_explicit_mass_basis_mismatch",
@@ -6513,7 +6522,7 @@
   "native_lh2dt_frequency_case_current_mass_audit_promotion_allowed": false,
   "state_release_mass_consistency_runtime_gate_authoritative_union_mismatch_count": 1,
   "state_release_mass_consistency_runtime_gate_current_rebaseline_mismatch_count": 0,
-  "native_lh2dt_frequency_case_current_local_recheck_test_status": "1571 passed, 1 warning; provider-state rebaseline test included",
+  "native_lh2dt_frequency_case_current_local_recheck_test_status": "1573 passed, 1 warning; provider-state rebaseline test included",
   "state_release_mass_consistency_campaign_binding_gate_implemented": true,
   "state_release_mass_consistency_campaign_binding_gate_module": "scripts/bind_native_campaign_state_snapshots.py::bind",
   "state_release_mass_consistency_campaign_binding_gate_policy": "Before embedding a provider state snapshot into a campaign request, every declared snapshot mass must match every provider release available_mass_kg within rel_tol=1e-9 and abs_tol=1e-12; mismatch fails compilation.",
@@ -6710,7 +6719,7 @@
   "external_provider_response_facility_reconciliation_sha256": "42845280ccb433cd1ac3dd799e0d5d7107bc65c7f80fdcecb0b1285a3719e80c",
   "external_provider_response_facility_reconciliation_status": "DIAGNOSTIC_RESPONSE_CASE_RECONCILIATION; 7 external responses against 44 facility cases; 0 exact case matches; 0 qualified matches; inverse coverage 44 NO_PROVIDER_RESPONSE; ambiguous identity 0; no promotion",
   "external_provider_response_facility_reconciliation_policy": "Exact event/component/port identity is required; component names or accident-family similarity do not repair a mismatch; no frequency, physical-validation, or facility IR/F-N promotion.",
-  "latest_local_full_suite_recheck_count": 1571,
+  "latest_local_full_suite_recheck_count": 1573,
   "latest_local_full_suite_recheck_status": "1573 passed, 1 warning; mass-basis drift fail-closed regression recheck",
   "external_equipment_model_release_rebind_audit_record": "results/20261018/external_equipment_model_release_rebind_audit_20261018.json",
   "external_equipment_model_release_rebind_audit_sha256": "1CBD2CFEC8AA05658C9783A0A3BF512AAC99643E62539D5A3C6B6B52C461CA7C",
@@ -6804,8 +6813,7 @@
   "external_model_native_model_root_review_current_provider_packet_promoted": false,
   "external_model_native_model_root_review_current_facility_qra_claim": false,
   "external_model_recheck_status_consistency_record": "results/20261115/status_consistency_external_model_recheck_20261018.json",
-  "external_model_recheck_status_consistency_status": "CONSISTENT; 22 checks; 0 blockers; facility IR/F-N promotion false"
-,
+  "external_model_recheck_status_consistency_status": "CONSISTENT; 22 checks; 0 blockers; facility IR/F-N promotion false",
   "current_union_facility_chain_closure_audit_record": "results/20261115/facility_chain_closure_audit_rebuilt_current_union.json",
   "current_union_facility_chain_closure_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 34 campaign events, 34 materialized packet identities passed, 34 event chains closed, 0 packet mismatches, 0 events without packet evidence; conditional IR/F-N aggregates closed; facility total QRA false",
   "current_union_facility_chain_campaign_event_count": 34,
@@ -6818,14 +6826,12 @@
   "current_union_facility_chain_facility_total_risk_available": false,
   "current_union_facility_chain_complete_facility_qra_claim": false,
   "current_union_facility_chain_packet_scan_record": "results/20261115/facility_chain_packet_evidence_rebuilt_current.json",
-  "current_union_facility_chain_packet_scan_status": "REBUILT_BASE_G1_REBOUND_PLUS_VERTICAL_PLUS_INVENTORY_REBOUND_DIAGNOSTIC; 34/34 packet identities matched; ambient-vaporizer G1 uses explicit inventory_over_600s rebind; 5 inventory packets source-traced through explicit namespace rebind; no provider qualification or QRA promotion"
-  ,
+  "current_union_facility_chain_packet_scan_status": "REBUILT_BASE_G1_REBOUND_PLUS_VERTICAL_PLUS_INVENTORY_REBOUND_DIAGNOSTIC; 34/34 packet identities matched; ambient-vaporizer G1 uses explicit inventory_over_600s rebind; 5 inventory packets source-traced through explicit namespace rebind; no provider qualification or QRA promotion",
   "current_union_rebuilt_base_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
   "current_union_rebuilt_base_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
   "current_union_rebuilt_base_packet_count": 24,
   "current_union_rebuilt_base_uncomputed_event_count": 0,
-  "current_union_rebuilt_chain_termination_basis_alias_count": 10
-  ,
+  "current_union_rebuilt_chain_termination_basis_alias_count": 10,
   "current_union_rebuilt_facility_assessment_record": "results/20261115/native_full_scope_union_assessment_current_source_g1_rebound/facility_assessment.json",
   "current_union_rebuilt_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 34 events, 44 cases, 176 risk atoms; conditional diagnostic IR/F-N available; facility total QRA false",
   "current_union_rebuilt_facility_case_packet_coverage_record": "results/20261115/native_full_scope_union_assessment_current_source_g1_rebound/facility_case_packet_coverage.json",
@@ -6833,10 +6839,9 @@
   "current_union_rebuilt_facility_evidence_request_record": "results/20261115/native_full_scope_union_assessment_current_source_g1_rebound/facility_evidence_request.json",
   "current_union_rebuilt_facility_strict_uncomputed_case_count": 23,
   "current_union_rebuilt_facility_operator_limited_case_count": 21,
-  "current_union_rebuilt_facility_fresh_physics_executed": false
-  ,
+  "current_union_rebuilt_facility_fresh_physics_executed": false,
   "current_union_rebuilt_ijhe_audit_record": "results/20261115/ijhe_completion_audit_rebuilt_current.json",
-  "current_union_rebuilt_ijhe_audit_status": "INCOMPLETE_EVIDENCE; supplementary 21-check audit; 7 blockers; not the authoritative 62-check audit",
+  "current_union_rebuilt_ijhe_audit_status": "INCOMPLETE_EVIDENCE; current-source 49-check audit, 44 PASS and 5 BLOCKED; provider qualification, release-boundary closure, qualified case coverage, declared-scope qualification and facility IR/F-N remain withheld",
   "current_inventory_extension_packet_gap_recheck_record": "results/20261115/inventory_extension_packet_gap_recheck_current.json",
   "current_inventory_extension_packet_gap_recheck_status": "HISTORICAL_SUPERSEDED_BY_INVENTORY_PACKET_REBIND; initial scan recorded 5 events/10 cases before explicit source-to-target packet materialization",
   "current_inventory_extension_packet_gap_recheck_provider_identity_case_count": 10,
@@ -6864,5 +6869,9 @@
   "current_source_g1_rebound_full_suite_status": "1573 passed, 1 warning; external lh2dt 377 passed, 1 warning; targeted rebind 9 passed, 1 warning",
   "current_source_g1_rebound_facility_qra_claim": false,
   "current_source_g1_rebound_physical_validation_claim": false,
-  "current_source_g1_rebound_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no SLABx code or validation changed"
+  "current_source_g1_rebound_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no SLABx code or validation changed",
+  "current_source_g1_rebound_ijhe_audit_record": "results/20261115/ijhe_completion_audit_rebuilt_current.json",
+  "current_source_g1_rebound_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 49 checks, 44 PASS and 5 BLOCKED; diagnostic chain and HAZOP checks pass while strict provider/scope/IR-FN gates remain withheld",
+  "current_source_g1_rebound_combined_chain_closure_record": "results/20261115/combined_chain_closure_current_source_g1_rebound.json",
+  "current_source_g1_rebound_combined_chain_closure_status": "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED; 24 base packet-subset events plus 5 vertical events reach final-harm atoms; inventory extension remains separately represented in the 34-event union audit"
 }

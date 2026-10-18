@@ -1,6 +1,6 @@
 {
   "schema_version": "prism.native_generic_scope_packet_catalog.v1",
-  "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED_DIAGNOSTIC",
+  "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
   "manifest": "examples\\generic_lh2_full_scope_manifest.json",
   "frequency_plan": "examples\\generic_lh2_full_scope_frequency_plan.json",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
@@ -1476,5 +1476,6 @@
   "rebound_event_count": 1,
   "rebound_event_ids": [
     "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
-  ]
+  ],
+  "diagnostic_scope": "synthetic current-source diagnostic catalog; provider qualification and facility QRA remain false"
 }

@@ -123,3 +123,8 @@ The current recheck materializes five source-traced packets under an explicit
 namespace rebind, checks 40 identity/value fields, and records the result in
 [`inventory_extension_packet_rebind_recheck_current.json`](../results/20261115/inventory_extension_packet_rebind_recheck_current.json).
 These packets remain diagnostic and unqualified.
+
+
+## Current IJHE audit pointer
+
+The current-source G1 rebind is consumed by [`ijhe_completion_audit_rebuilt_current.json`](../results/20261115/ijhe_completion_audit_rebuilt_current.json). The latest run contains 49 checks: 44 pass and 5 strict blockers. Diagnostic state-to-release, HAZOP mode/scenario binding, frequency uncertainty, chain closure, timing, and the frozen SLABx-LH2 evidence pass; qualified provider release, complete release-boundary closure, qualified case coverage, declared-scope qualification, and facility IR/F-N remain withheld.
