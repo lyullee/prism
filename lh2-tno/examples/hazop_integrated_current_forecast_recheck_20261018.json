@@ -2,7 +2,7 @@
   "schema_version": "prism.hazop_integrated_current_forecast_recheck_receipt.v1",
   "generated_at_utc": "2026-10-18T02:10:31.330649+00:00",
   "source_record": "results/20261018/hazop_provider_bound_integrated_risk_recheck_20261018.json",
-  "source_record_sha256": "c881c80e1733ae39b7be84abd9781f1bf36019534bcdec311e09cb18ceec410b",
+  "source_record_sha256": "8c9f3a6108d06a27a2d3ec8ff3a6aa11c06d6c6b754c39aa1100dc780b9789c5",
   "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "current": {
@@ -28,6 +28,7 @@
     "facility_gate_summary": {
       "campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
       "facility_ledger_present": true,
+      "facility_ledger_count": 1,
       "provider_release_boundary_case_count": 1,
       "provider_release_boundary_ready": false,
       "conditional_diagnostic_facility_risk_available": true,
@@ -68,13 +69,14 @@
     ],
     "facility_gate_summary": {
       "campaign_status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
-      "facility_ledger_present": false,
-      "provider_release_boundary_case_count": null,
-      "provider_release_boundary_ready": null,
-      "conditional_diagnostic_facility_risk_available": null,
-      "conditional_diagnostic_facility_fn_available": null,
-      "facility_total_risk_available": null,
-      "qualified_facility_qra_available": null,
+      "facility_ledger_present": true,
+      "facility_ledger_count": 1,
+      "provider_release_boundary_case_count": 1,
+      "provider_release_boundary_ready": false,
+      "conditional_diagnostic_facility_risk_available": true,
+      "conditional_diagnostic_facility_fn_available": true,
+      "facility_total_risk_available": false,
+      "qualified_facility_qra_available": false,
       "facility_qra_promotion": false,
       "frequency_inference_performed": false,
       "physical_validation_claim": false
@@ -90,7 +92,7 @@
     "frequency_inference_performed": false
   },
   "timing": {
-    "wall_elapsed_ms": 21923.36479999358,
+    "wall_elapsed_ms": 20974.717000033706,
     "interpretation": "Measured for this invocation; not an operating 1 Hz guarantee."
   },
   "policy": {
@@ -106,6 +108,7 @@
     "current": {
       "campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
       "facility_ledger_present": true,
+      "facility_ledger_count": 1,
       "provider_release_boundary_case_count": 1,
       "provider_release_boundary_ready": false,
       "conditional_diagnostic_facility_risk_available": true,
@@ -118,13 +121,14 @@
     },
     "forecast": {
       "campaign_status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
-      "facility_ledger_present": false,
-      "provider_release_boundary_case_count": null,
-      "provider_release_boundary_ready": null,
-      "conditional_diagnostic_facility_risk_available": null,
-      "conditional_diagnostic_facility_fn_available": null,
-      "facility_total_risk_available": null,
-      "qualified_facility_qra_available": null,
+      "facility_ledger_present": true,
+      "facility_ledger_count": 1,
+      "provider_release_boundary_case_count": 1,
+      "provider_release_boundary_ready": false,
+      "conditional_diagnostic_facility_risk_available": true,
+      "conditional_diagnostic_facility_fn_available": true,
+      "facility_total_risk_available": false,
+      "qualified_facility_qra_available": false,
       "facility_qra_promotion": false,
       "frequency_inference_performed": false,
       "physical_validation_claim": false

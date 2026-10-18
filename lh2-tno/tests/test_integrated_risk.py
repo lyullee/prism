@@ -583,6 +583,56 @@ def test_integrated_risk_attaches_forecast_facility_campaign(monkeypatch):
     assert summary["qualified_facility_qra_available"] is False
 
 
+def test_facility_gate_summary_aggregates_nested_forecast_ledgers():
+    summary = integrated_risk._facility_gate_summary(
+        {
+            "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+            "campaigns": [
+                {
+                    "facility_ledger": {
+                        "provider_release_boundary_case_count": 1,
+                        "provider_release_boundary_ready": False,
+                        "conditional_diagnostic_facility_risk_available": True,
+                        "conditional_diagnostic_facility_expected_death_fn_low_high": [
+                            0.0,
+                            0.1,
+                        ],
+                        "facility_total_risk_available": False,
+                        "qualified_facility_qra_available": False,
+                    }
+                },
+                {
+                    "facility_ledger": {
+                        "provider_release_boundary_case_count": 2,
+                        "provider_release_boundary_ready": False,
+                        "conditional_diagnostic_facility_risk_available": True,
+                        "conditional_diagnostic_facility_expected_death_fn_low_high": [
+                            0.0,
+                            0.2,
+                        ],
+                        "facility_total_risk_available": False,
+                        "qualified_facility_qra_available": False,
+                    }
+                },
+            ],
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+    )
+
+    assert summary["facility_ledger_present"] is True
+    assert summary["facility_ledger_count"] == 2
+    assert summary["provider_release_boundary_case_count"] == 3
+    assert summary["provider_release_boundary_ready"] is False
+    assert summary["conditional_diagnostic_facility_risk_available"] is True
+    assert summary["conditional_diagnostic_facility_fn_available"] is True
+    assert summary["facility_total_risk_available"] is False
+    assert summary["qualified_facility_qra_available"] is False
+
+
 def test_integrated_risk_withholds_forecast_facility_campaign_when_scan_is_partial(monkeypatch):
     monkeypatch.setattr(
         integrated_risk,

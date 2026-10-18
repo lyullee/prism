@@ -63,37 +63,70 @@ def _facility_gate_summary(campaign: Mapping[str, Any]) -> dict[str, Any]:
     """Expose the facility promotion gates without hiding missing evidence."""
     ledger = campaign.get("facility_ledger")
     ledger = ledger if isinstance(ledger, Mapping) else None
+    ledgers: list[Mapping[str, Any]] = []
+    if ledger is not None:
+        ledgers.append(ledger)
+    else:
+        # Forecast evaluators may retain one facility ledger per prediction
+        # time under ``campaigns``.  Do not report null simply because the
+        # evaluator uses that explicit nested representation.
+        nested = campaign.get("campaigns")
+        if isinstance(nested, Sequence) and not isinstance(nested, (str, bytes)):
+            for item in nested:
+                if not isinstance(item, Mapping):
+                    continue
+                nested_ledger = item.get("facility_ledger")
+                if isinstance(nested_ledger, Mapping):
+                    ledgers.append(nested_ledger)
+                else:
+                    nested_result = item.get("result")
+                    if isinstance(nested_result, Mapping) and isinstance(
+                        nested_result.get("facility_ledger"), Mapping
+                    ):
+                        ledgers.append(nested_result["facility_ledger"])
     policy = campaign.get("policy")
     policy = policy if isinstance(policy, Mapping) else {}
 
-    def optional_bool(source: Mapping[str, Any] | None, key: str) -> bool | None:
-        if source is None or not isinstance(source.get(key), bool):
+    def aggregate_bool(key: str) -> bool | None:
+        values = [row[key] for row in ledgers if isinstance(row.get(key), bool)]
+        if not values:
             return None
-        return bool(source[key])
+        # An aggregate is available only when every nested campaign carries
+        # the gate and every one of those gates is open.  This is deliberately
+        # conservative for a facility-wide digital-twin summary.
+        return all(values)
+
+    def aggregate_case_count() -> int | None:
+        values = [
+            row["provider_release_boundary_case_count"]
+            for row in ledgers
+            if isinstance(row.get("provider_release_boundary_case_count"), int)
+            and not isinstance(row.get("provider_release_boundary_case_count"), bool)
+        ]
+        return sum(values) if values else None
+
+    def aggregate_fn_available() -> bool | None:
+        if not ledgers:
+            return None
+        return all(
+            row.get("conditional_diagnostic_facility_expected_death_fn_low_high")
+            is not None
+            for row in ledgers
+        )
 
     return {
         "campaign_status": str(campaign.get("status", "")),
-        "facility_ledger_present": ledger is not None,
-        "provider_release_boundary_case_count": (
-            ledger.get("provider_release_boundary_case_count") if ledger is not None else None
+        "facility_ledger_present": bool(ledgers),
+        "facility_ledger_count": len(ledgers),
+        "provider_release_boundary_case_count": aggregate_case_count(),
+        "provider_release_boundary_ready": aggregate_bool("provider_release_boundary_ready"),
+        "conditional_diagnostic_facility_risk_available": aggregate_bool(
+            "conditional_diagnostic_facility_risk_available"
         ),
-        "provider_release_boundary_ready": optional_bool(
-            ledger, "provider_release_boundary_ready"
-        ),
-        "conditional_diagnostic_facility_risk_available": optional_bool(
-            ledger, "conditional_diagnostic_facility_risk_available"
-        ),
-        "conditional_diagnostic_facility_fn_available": (
-            ledger.get("conditional_diagnostic_facility_expected_death_fn_low_high")
-            is not None
-            if ledger is not None
-            else None
-        ),
-        "facility_total_risk_available": optional_bool(
-            ledger, "facility_total_risk_available"
-        ),
-        "qualified_facility_qra_available": optional_bool(
-            ledger, "qualified_facility_qra_available"
+        "conditional_diagnostic_facility_fn_available": aggregate_fn_available(),
+        "facility_total_risk_available": aggregate_bool("facility_total_risk_available"),
+        "qualified_facility_qra_available": aggregate_bool(
+            "qualified_facility_qra_available"
         ),
         "facility_qra_promotion": policy.get("facility_qra_promotion") is True,
         "frequency_inference_performed": policy.get("frequency_inference_performed") is True,
