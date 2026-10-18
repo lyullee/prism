@@ -798,6 +798,12 @@ population, and protection inputs. See
 [`PRISM_equipment_HAZOP_quantitative_campaign_en.md`](docs/PRISM_equipment_HAZOP_quantitative_campaign_en.md)
 for the input schema and connector checklist.
 
+A reproducible one-component replay receipt is available at
+[`equipment_hazop_quantitative_campaign_recheck_20261018.json`](examples/equipment_hazop_quantitative_campaign_recheck_20261018.json).
+It records the selected operating mode, HAZOP scenario, provider release
+boundary status, diagnostic risk-atom count, and the explicit reason the
+facility total remains withheld.
+
 The inspection-centre source inventory is documented in
 [`PRISM_inspection_center_source_suitability_20261115.md`](docs/PRISM_inspection_center_source_suitability_20261115.md).
 It is a state/HAZOP diagnostic input boundary; it does not create accident
