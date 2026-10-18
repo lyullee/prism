@@ -5192,5 +5192,15 @@
   },
   "external_lh2dt_current_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
   "latest_full_portable_test_status": "1533 passed, 1 warning; current local recheck after HAZOP merge audit",
-  "latest_external_contract_recheck_record": "examples/external_lh2dt_current_source_recheck_20261018.json"
+  "latest_external_contract_recheck_record": "examples/external_lh2dt_current_source_recheck_20261018.json",
+  "external_provider_workspace_recheck_20261018_record": "results/20261018/external_provider_workspace_roots_inventory_current_recheck.json",
+  "external_provider_workspace_recheck_20261018_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+  "external_provider_workspace_recheck_20261018_root_count": 5,
+  "external_provider_workspace_recheck_20261018_artifact_count": 45,
+  "external_provider_workspace_recheck_20261018_supporting_file_count": 47,
+  "external_provider_workspace_recheck_20261018_provider_response_count": 0,
+  "external_provider_workspace_recheck_20261018_qualification_artifact_count": 0,
+  "external_provider_workspace_recheck_20261018_physical_validation_artifact_count": 0,
+  "external_provider_workspace_recheck_20261018_facility_ir_fn_allowed": false,
+  "external_provider_workspace_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; current root scan does not reopen SLABx work"
 }

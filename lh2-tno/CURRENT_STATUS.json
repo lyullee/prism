@@ -3157,7 +3157,7 @@
     "facility_ir_fn_available"
   ],
   "full_portable_test_count_latest": 1529,
-  "full_portable_test_status_latest": "1533 passed, 1 warning; current full local recheck after HAZOP merge audit",
+  "full_portable_test_status_latest": "1529 passed, 1 warning; authoritative union snapshot count; latest local recheck separately recorded as 1533 passed, 1 warning",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -6626,5 +6626,15 @@
   },
   "current_external_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
   "latest_local_full_suite_recheck_record": "python -m pytest -q; 1533 passed, 1 warning",
-  "latest_external_contract_recheck_record": "C:\\Temp\\prism_external_contract_recheck_20261018.json"
+  "latest_external_contract_recheck_record": "C:\\Temp\\prism_external_contract_recheck_20261018.json",
+  "current_external_provider_workspace_recheck_20261018_record": "results/20261018/external_provider_workspace_roots_inventory_current_recheck.json",
+  "current_external_provider_workspace_recheck_20261018_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+  "current_external_provider_workspace_recheck_20261018_root_count": 5,
+  "current_external_provider_workspace_recheck_20261018_artifact_count": 45,
+  "current_external_provider_workspace_recheck_20261018_supporting_file_count": 47,
+  "current_external_provider_workspace_recheck_20261018_provider_response_count": 0,
+  "current_external_provider_workspace_recheck_20261018_qualification_artifact_count": 0,
+  "current_external_provider_workspace_recheck_20261018_physical_validation_artifact_count": 0,
+  "current_external_provider_workspace_recheck_20261018_facility_ir_fn_allowed": false,
+  "current_external_provider_workspace_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; current root scan does not reopen SLABx work"
 }

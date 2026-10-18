@@ -1,21 +1,25 @@
 # PRISM external evidence recheck (2026-10-18)
 
-This is a read-only recheck of the four external workspaces used by the
+This is a read-only recheck of the five external workspaces used by the
 liquid-hydrogen facility objective. It checks whether new provider-release,
 qualification, or independent validation material appeared after the
-2026-11-15 intake ledger. It does not promote any artifact.
+2026-11-15 intake ledger. The current `lh2dt_models` worktree is included
+explicitly; it is a dirty diagnostic worktree and is not treated as a release.
+It does not promote any artifact.
 
 ## Result
 
 The workspace scan returned `prism.provider_artifact_roots_audit.v1` with
-`EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY`, four roots, 43 JSON artifacts, 43
+`EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY`, five roots, 45 JSON artifacts, 47
 supporting files, and zero qualification artifacts. Facility IR/F-N promotion
-remains false.
+remains false. The exact record is
+`results/20261018/external_provider_workspace_roots_inventory_current_recheck.json`.
 
 | Root | JSON artifacts | Supporting files | Provider responses | Qualification records | Physical-validation claims |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `_prism_clean_lh2dt_models_16f7a4b` | 1 | 2 | 0 | 0 | 0 |
 | `_external_lh2dt_models_20261016` | 2 | 2 | 0 | 0 | 0 |
+| current `액화수소 저장탱크_밴트 시스템/lh2dt_models` worktree | 2 | 4 | 0 | 0 | 0 |
 | `SLABx_LH2/.release-work/DynamicLH2PoolX-review` | 40 | 15 | 0 | 0 | 0 |
 | `액화수소검사지원센터 데이터` | 0 | 24 | 0 | 0 | 0 |
 
@@ -40,6 +44,11 @@ The current conditional diagnostic chain is therefore still the correct
 release interpretation. No frequency is learned from the inspection-centre
 signals, and no missing accident release is treated as zero risk.
 
+The current external worktree contains uncommitted Vaporizer design-point and
+integration changes, but its source digest and Git head match the earlier
+2026-10-18 diagnostic recheck. Those changes therefore do not change the
+authoritative PRISM union or open a strict gate.
+
 ## Reproduction
 
 Run from the `lh2-tno` package directory:
@@ -48,9 +57,10 @@ Run from the `lh2-tno` package directory:
 python scripts/audit_provider_artifact_workspace_roots.py `
   --root prism_clean_lh2dt="C:\Users\lyul\Desktop\DocuData\_prism_clean_lh2dt_models_16f7a4b" `
   --root external_lh2dt="C:\Users\lyul\Desktop\DocuData\_external_lh2dt_models_20261016" `
+  --root external_lh2dt_current="C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\lh2dt_models" `
   --root slabx_validation="C:\Users\lyul\Desktop\DocuData\SLABx_LH2\.release-work\DynamicLH2PoolX-review" `
   --root inspection_center="C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터" `
-  --output .tmp_external_inventory_recheck_20261018.json
+  --output results/20261018/external_provider_workspace_roots_inventory_current_recheck.json
 ```
 
 The generated local record is intentionally not used as a promotion input.
