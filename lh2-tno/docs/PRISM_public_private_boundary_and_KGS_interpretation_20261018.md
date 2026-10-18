@@ -42,6 +42,25 @@ the required external `tno` source/backend. It does not mean that the PRISM
 GitHub repository is private. The local TNO source directory is not a Git
 worktree and is not included in the public PRISM repository.
 
+## Why the TNO files were not copied into PRISM
+
+This was a distribution-boundary decision made when PRISM was packaged. The
+release records state that MIT applies to PRISM's own files and does not grant
+redistribution rights for external models, books, or raw data. The local TNO
+directory has no repository remote and no `LICENSE`, `COPYING`, or `NOTICE`
+file that would establish a public redistribution basis. One of its model
+files also records a deliberate effort to keep the implementation independent
+of GPL source. These facts do not prove that the TNO code is legally private;
+they do show that its ownership and redistribution permission were not
+documented well enough to copy it into a public MIT repository.
+
+Accordingly, the correct status is **external source not published with PRISM**,
+not “SLABx-LH2 is private” and not “PRISM is private”. If the TNO source is
+confirmed to be owned by the project and released under a compatible license,
+it can be published as a separately licensed public engine or added to a
+separate repository. Until then, PRISM's pinned-backend adapter is the safe
+public boundary.
+
 The public package does include `src/lh2_tno/risk.py`, but that file provides
 conditional probability and thermal-dose arithmetic with explicit inputs. It
 is not the legacy TNO facility QRA engine and does not replace `qra.py`.
