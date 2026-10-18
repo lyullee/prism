@@ -2216,6 +2216,9 @@ def build_ijhe_completion_audit(
         # independent-event scenarios in a dedicated audit record.  When the
         # older conditional result is absent, expose that count directly
         # instead of reporting a misleading zero in the completion receipt.
+        # A dedicated facility-frequency audit is still useful when the
+        # conditional risk trace is withheld: expose its scenario count so
+        # the report does not silently look like it had zero scenarios.
         frequency_audit_scenario_count = (
             facility_frequency_uncertainty_audit.get("scenario_count")
             if isinstance(facility_frequency_uncertainty_audit, Mapping)
@@ -3158,7 +3161,10 @@ def build_ijhe_completion_audit(
         if isinstance(scope_gap_summary, Mapping)
         else []
     )
-    slabx_component_validation_closed = (
+        # The status ledger may append the component check summary after the
+        # canonical state token; accept that annotation while preserving the
+        # separate facility full-chain validation gate.
+        slabx_component_validation_closed = (
         isinstance(current_status.get("slabx_lh2_validation_current_status"), str)
         and current_status["slabx_lh2_validation_current_status"].startswith(
             "CLOSED_VALIDATED_COMPONENT"
