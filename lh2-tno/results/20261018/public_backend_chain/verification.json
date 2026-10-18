@@ -1,0 +1,105 @@
+{
+  "schema_version": "prism.public_backend_chain_verification.v1",
+  "input_origin": "synthetic",
+  "backend_config_digest": "a3bdd014380d96c4f385ff3ae09f311af398214cf8b28bd70cd38f0003dee580",
+  "package_versions": {
+    "prism-risk": "0.6.4",
+    "slabx": "1.0.7",
+    "slabx-lh2": "0.1.5",
+    "numpy": "2.5.4",
+    "CoolProp": "8.0.0"
+  },
+  "risk_atom_count": 4,
+  "uncomputed_case_count": 5,
+  "independent_ir_max_absolute_error": 0.0,
+  "fresh_campaign_elapsed_ms": 123986.6975999903,
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "slabx_component_validation_reopened": false,
+  "known_contribution_annual_ir_low_high": {
+    "near_worker": [
+      8.600000000000001e-07,
+      8.600000000001008e-07
+    ],
+    "downwind_worker": [
+      5.000000000000001e-07,
+      5.000000000000001e-07
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "public_dependency_chain_executed": true,
+  "independent_fn_max_absolute_error": 0.0,
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [
+        5.0,
+        10.0
+      ],
+      "cumulative_frequency_per_year": [
+        8.600000000000001e-07,
+        5.000000000000001e-07
+      ]
+    },
+    {
+      "expected_deaths": [
+        5.0,
+        10.0
+      ],
+      "cumulative_frequency_per_year": [
+        8.600000000000001e-07,
+        5.000000000000001e-07
+      ]
+    }
+  ],
+  "uncomputed_cases": [
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "annual_condition_id": "west",
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "annual_condition_id": "south-west",
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "annual_condition_id": "west",
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "annual_condition_id": "south-west",
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "annual_condition_id": "south-west",
+      "status": "FAILED",
+      "reason": "BackendError: backend deadline exceeded; no result available",
+      "elapsed_ms": 120042.48450003797
+    }
+  ],
+  "installed_candidate_wheel_smoke": {
+    "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+    "elapsed_ms": 3049.144599994179,
+    "mass_residual_kg": 0.0,
+    "physical_validation_claim": false,
+    "published_pypi_artifact_replaced": false
+  }
+}

@@ -99,15 +99,14 @@ def _critical_from_provider_state(
 
 
 def evaluate_provider_state_partition(provider: dict, packet: dict) -> tuple[dict, dict]:
-    """Return one SLABx partition row and its upstream compatibility audit.
+    """Return one source partition row and its upstream compatibility audit.
 
-    The caller must have already put the external SLABx source tree on
-    ``sys.path``.  This keeps the optional dependency out of the normal PRISM
-    import path.
+    Source/transition interfaces are bundled with PRISM and imported lazily.
+    The validated SLABx dispersion core remains a separate dependency.
     """
 
     import CoolProp.CoolProp as CP
-    from slabx_lh2.integrated_lh2_source import (
+    from prism_lh2_models.integrated_lh2_source import (
         AmbientState,
         IntegratedSourceInput,
         ModelChoices,

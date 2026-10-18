@@ -211,6 +211,8 @@ The generic LH2 boundary is intended to connect tanks, pipes, valves, pumps, vap
 
 ## 14. Further reading
 
+- [Post-v0.6.4 public LH2 backend configuration and chain verification](PRISM_public_LH2_backend_20261018_en.md)
+
 - [Interface Integration Guide](PRISM_INTERFACE_INTEGRATION_GUIDE_en.md)
 - [Korean User Manual](PRISM_USER_MANUAL_ko.md)
 - [Korean Interface Guide](PRISM_INTERFACE_INTEGRATION_GUIDE_ko.md)

@@ -1,0 +1,1218 @@
+{
+  "status": "PARTIAL_DECLARED_SCOPE",
+  "facility_id": "storage_terminal",
+  "facility_digest": "0e4ae5a6e682f69c96f6c4f73e857bd55595ac4c33a3a2ed8b45470178316ec4",
+  "campaign_digest": "24883afff8b6c7560c395d3fb4ed1df6ea32a24b79e6b4f25063bda898d12142",
+  "facility_receptor_geometry": {
+    "schema_version": "prism.facility_receptor_geometry.v1",
+    "status": "EXPLICIT_FACILITY_RECEPTOR_GEOMETRY",
+    "facility_id": "storage_terminal",
+    "environment": "outdoor",
+    "receptor_count": 4,
+    "receptors": [
+      {
+        "receptor_id": "near_worker",
+        "position_enu_m": [
+          2.0,
+          0.0,
+          1.0
+        ],
+        "nearest_component_id": "transfer",
+        "nearest_component_distance_m": 1.0
+      },
+      {
+        "receptor_id": "downwind_worker",
+        "position_enu_m": [
+          10.0,
+          0.0,
+          0.1
+        ],
+        "nearest_component_id": "terminal",
+        "nearest_component_distance_m": 5.745432968889291
+      },
+      {
+        "receptor_id": "side_worker",
+        "position_enu_m": [
+          25.0,
+          4.0,
+          1.8
+        ],
+        "nearest_component_id": "terminal",
+        "nearest_component_distance_m": 18.714700104463336
+      },
+      {
+        "receptor_id": "distant_worker",
+        "position_enu_m": [
+          60.0,
+          0.0,
+          1.8
+        ],
+        "nearest_component_id": "terminal",
+        "nearest_component_distance_m": 53.09651589322975
+      }
+    ],
+    "population_contract": {
+      "status": "EXPLICIT_RECEPTOR_POPULATION_CLOSED",
+      "annual_condition_count": 2,
+      "population_row_count": 8,
+      "expected_receptor_ids": [
+        "distant_worker",
+        "downwind_worker",
+        "near_worker",
+        "side_worker"
+      ],
+      "mismatched_condition_ids": {},
+      "invalid_population_rows": {},
+      "zero_population_rows_must_be_explicit": true,
+      "frequency_inference_performed": false
+    },
+    "semantics": "receptor positions are facility coordinates; nearest component is a geometry diagnostic; annual-condition population is the only occupancy input and is never inferred"
+  },
+  "scope_provenance": "public installation and numerical coupling diagnostic; not a complete facility QRA",
+  "events": [
+    {
+      "id": "public-install/tank-shell/G1",
+      "asset_id": "tank-shell",
+      "model_component_id": "storage",
+      "port_ids": null,
+      "profile": "TNO_PRESSURE_VESSEL",
+      "loc": "G1",
+      "basis": "TNO_PURPLE_LOC",
+      "base_rate": 5e-07,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "annual_frequency_per_year": 5e-07,
+      "statistic": "published_default",
+      "marginal_p05_per_year": null,
+      "marginal_p95_per_year": null,
+      "frequency_distribution": "none",
+      "log_rate_mu": null,
+      "log_rate_sigma": null,
+      "source": "Purple Book Chapter 3 Tables 3.2/3.3, printed pp.3.2-3.4; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "instantaneous_inventory",
+        "hole_diameter_m": null,
+        "area_fraction": null,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic pressure vessel; applicability is not certified",
+      "limitations": [
+        "Includes vessel and associated instrumentation pipework; connected process pipes are separate.",
+        "External impact/operating error, when not excluded, adds 5e-6/year separately to G1 and G2.",
+        "Near-atmospheric cryogenic tanks must not automatically use the pressure-vessel profile.",
+        "No lower-frequency special-provision reduction implemented.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "physical_validation_claim": false
+    },
+    {
+      "id": "public-install/tank-shell/G2",
+      "asset_id": "tank-shell",
+      "model_component_id": "storage",
+      "port_ids": null,
+      "profile": "TNO_PRESSURE_VESSEL",
+      "loc": "G2",
+      "basis": "TNO_PURPLE_LOC",
+      "base_rate": 5e-07,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "annual_frequency_per_year": 5e-07,
+      "statistic": "published_default",
+      "marginal_p05_per_year": null,
+      "marginal_p95_per_year": null,
+      "frequency_distribution": "none",
+      "log_rate_mu": null,
+      "log_rate_sigma": null,
+      "source": "Purple Book Chapter 3 Tables 3.2/3.3, printed pp.3.2-3.4; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "inventory_over_600s",
+        "hole_diameter_m": null,
+        "area_fraction": null,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic pressure vessel; applicability is not certified",
+      "limitations": [
+        "Includes vessel and associated instrumentation pipework; connected process pipes are separate.",
+        "External impact/operating error, when not excluded, adds 5e-6/year separately to G1 and G2.",
+        "Near-atmospheric cryogenic tanks must not automatically use the pressure-vessel profile.",
+        "No lower-frequency special-provision reduction implemented.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "physical_validation_claim": false
+    },
+    {
+      "id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "model_component_id": "storage",
+      "port_ids": null,
+      "profile": "TNO_PRESSURE_VESSEL",
+      "loc": "G3",
+      "basis": "TNO_PURPLE_LOC",
+      "base_rate": 1e-05,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "annual_frequency_per_year": 1e-05,
+      "statistic": "published_default",
+      "marginal_p05_per_year": null,
+      "marginal_p95_per_year": null,
+      "frequency_distribution": "none",
+      "log_rate_mu": null,
+      "log_rate_sigma": null,
+      "source": "Purple Book Chapter 3 Tables 3.2/3.3, printed pp.3.2-3.4; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.01,
+        "area_fraction": null,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic pressure vessel; applicability is not certified",
+      "limitations": [
+        "Includes vessel and associated instrumentation pipework; connected process pipes are separate.",
+        "External impact/operating error, when not excluded, adds 5e-6/year separately to G1 and G2.",
+        "Near-atmospheric cryogenic tanks must not automatically use the pressure-vessel profile.",
+        "No lower-frequency special-provision reduction implemented.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "physical_validation_claim": false
+    }
+  ],
+  "event_catalog": {
+    "mode": "frequency_plan_catalogue",
+    "precomputed_event_count": 0,
+    "provenance": null,
+    "digest": null,
+    "rate_arithmetic_owner": "prism_frequency_catalogue",
+    "consequence_and_risk_owner": "prism_campaign_evaluator",
+    "scope_gap_component_ids": []
+  },
+  "annual_conditions": [
+    {
+      "id": "west",
+      "annual_probability": 0.5,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        }
+      ],
+      "provenance": "synthetic joint annual condition"
+    },
+    {
+      "id": "south-west",
+      "annual_probability": 0.5,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 225.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        }
+      ],
+      "provenance": "synthetic joint annual condition"
+    }
+  ],
+  "cases": [
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "south-west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "south-west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "release_branch_id": "declared-release",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "initiating_frequency_per_year": 1e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "status": "EXECUTED",
+      "elapsed_ms": 3628.4275999641977,
+      "request_digest": "dbda02b9a4407b9da45ce04daa595901d0f1998be04d914b03c42b57b2363601",
+      "result_digest": "4ee6a922fc18e7c5b1cce1690cc78413a259281064e00c98bbc610765e5729bf",
+      "backend_config_digest": "a3bdd014380d96c4f385ff3ae09f311af398214cf8b28bd70cd38f0003dee580",
+      "adapter_source_digest": "7b177b7d1bd3b9afcfbd91089360b7dc9504d0bcce3a01b3962bc66665378229",
+      "stage_elapsed_ms": {
+        "source": 966.3013000390492,
+        "pool": 0.004099973011761904,
+        "near_field_and_dispersion": 2106.383799982723,
+        "cloud_observation": 100.24339996743947,
+        "fire_explosion_damage_risk": 90.169099974446
+      },
+      "mass_ledger": {
+        "released_kg": 0.13040994065061204,
+        "direct_gas_kg": 0.13040994065061204,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.2,
+        "provenance": "public installation diagnostic; not a reviewed physical termination"
+      },
+      "dynamic_state_closure_status": "NOT_DECLARED",
+      "dynamic_state_closure_ready": null,
+      "dynamic_state_closure_blocking_reasons": [],
+      "domain_assessment": {
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 2.7755575615628914e-17,
+        "outside_domain_mole_fraction_upper_bound_at_ignition": 0.1931089945201232,
+        "outside_domain_flammability_proven_at_ignition": true,
+        "domain_truncation_reasons": []
+      }
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "release_branch_id": "declared-release",
+      "frequency_port_ids": null,
+      "annual_condition_id": "south-west",
+      "initiating_frequency_per_year": 1e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "status": "FAILED",
+      "reason": "BackendError: backend deadline exceeded; no result available",
+      "elapsed_ms": 120042.48450003797
+    }
+  ],
+  "uncomputed_cases": [
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "south-west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "asset_id": "tank-shell",
+      "release_branch_id": "uncomputed",
+      "frequency_port_ids": null,
+      "annual_condition_id": "south-west",
+      "initiating_frequency_per_year": 5e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "status": "UNCOMPUTED",
+      "reason": "no qualified full-inventory provider history in this installation diagnostic",
+      "elapsed_ms": 0.0
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "release_branch_id": "declared-release",
+      "frequency_port_ids": null,
+      "annual_condition_id": "south-west",
+      "initiating_frequency_per_year": 1e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.5,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "status": "FAILED",
+      "reason": "BackendError: backend deadline exceeded; no result available",
+      "elapsed_ms": 120042.48450003797
+    }
+  ],
+  "excluded_model_components": {
+    "isolation": "outside this public-install diagnostic",
+    "transfer": "outside this public-install diagnostic",
+    "terminal": "outside this public-install diagnostic"
+  },
+  "release_termination_inventory_ledger": {
+    "schema_version": "prism.release_termination_inventory_ledger.v1",
+    "rows": [
+      {
+        "event_id": "public-install/tank-shell/G1",
+        "asset_id": "tank-shell",
+        "release_branch_id": "uncomputed",
+        "annual_condition_id": "west",
+        "status": "UNCOMPUTED",
+        "ledger_status": "UNCOMPUTED",
+        "reason": "no qualified full-inventory provider history in this installation diagnostic",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 5e-07,
+        "termination": {
+          "basis": null,
+          "time_s": null,
+          "provenance": null
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
+        "provider": {
+          "packet_consumed": false,
+          "event_id": null,
+          "component_id": null,
+          "provider_export_schema": null,
+          "provider_source_digests": [],
+          "provider_result_digests": [],
+          "provider_boundary_references": [],
+          "duration_s": null,
+          "available_mass_kg": null,
+          "cumulative_mass_out_kg": null,
+          "residual_mass_kg": null,
+          "provider_mass_balances": [],
+          "provider_mass_balance_statuses": [],
+          "provider_mass_basis_ids": [],
+          "provider_mass_basis_status": "UNDECLARED"
+        },
+        "mass_ledger": {
+          "released_kg": null,
+          "end_to_end_residual_kg": null
+        },
+        "provider_termination_matches_request": false
+      },
+      {
+        "event_id": "public-install/tank-shell/G1",
+        "asset_id": "tank-shell",
+        "release_branch_id": "uncomputed",
+        "annual_condition_id": "south-west",
+        "status": "UNCOMPUTED",
+        "ledger_status": "UNCOMPUTED",
+        "reason": "no qualified full-inventory provider history in this installation diagnostic",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 5e-07,
+        "termination": {
+          "basis": null,
+          "time_s": null,
+          "provenance": null
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
+        "provider": {
+          "packet_consumed": false,
+          "event_id": null,
+          "component_id": null,
+          "provider_export_schema": null,
+          "provider_source_digests": [],
+          "provider_result_digests": [],
+          "provider_boundary_references": [],
+          "duration_s": null,
+          "available_mass_kg": null,
+          "cumulative_mass_out_kg": null,
+          "residual_mass_kg": null,
+          "provider_mass_balances": [],
+          "provider_mass_balance_statuses": [],
+          "provider_mass_basis_ids": [],
+          "provider_mass_basis_status": "UNDECLARED"
+        },
+        "mass_ledger": {
+          "released_kg": null,
+          "end_to_end_residual_kg": null
+        },
+        "provider_termination_matches_request": false
+      },
+      {
+        "event_id": "public-install/tank-shell/G2",
+        "asset_id": "tank-shell",
+        "release_branch_id": "uncomputed",
+        "annual_condition_id": "west",
+        "status": "UNCOMPUTED",
+        "ledger_status": "UNCOMPUTED",
+        "reason": "no qualified full-inventory provider history in this installation diagnostic",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 5e-07,
+        "termination": {
+          "basis": null,
+          "time_s": null,
+          "provenance": null
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
+        "provider": {
+          "packet_consumed": false,
+          "event_id": null,
+          "component_id": null,
+          "provider_export_schema": null,
+          "provider_source_digests": [],
+          "provider_result_digests": [],
+          "provider_boundary_references": [],
+          "duration_s": null,
+          "available_mass_kg": null,
+          "cumulative_mass_out_kg": null,
+          "residual_mass_kg": null,
+          "provider_mass_balances": [],
+          "provider_mass_balance_statuses": [],
+          "provider_mass_basis_ids": [],
+          "provider_mass_basis_status": "UNDECLARED"
+        },
+        "mass_ledger": {
+          "released_kg": null,
+          "end_to_end_residual_kg": null
+        },
+        "provider_termination_matches_request": false
+      },
+      {
+        "event_id": "public-install/tank-shell/G2",
+        "asset_id": "tank-shell",
+        "release_branch_id": "uncomputed",
+        "annual_condition_id": "south-west",
+        "status": "UNCOMPUTED",
+        "ledger_status": "UNCOMPUTED",
+        "reason": "no qualified full-inventory provider history in this installation diagnostic",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 5e-07,
+        "termination": {
+          "basis": null,
+          "time_s": null,
+          "provenance": null
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
+        "provider": {
+          "packet_consumed": false,
+          "event_id": null,
+          "component_id": null,
+          "provider_export_schema": null,
+          "provider_source_digests": [],
+          "provider_result_digests": [],
+          "provider_boundary_references": [],
+          "duration_s": null,
+          "available_mass_kg": null,
+          "cumulative_mass_out_kg": null,
+          "residual_mass_kg": null,
+          "provider_mass_balances": [],
+          "provider_mass_balance_statuses": [],
+          "provider_mass_basis_ids": [],
+          "provider_mass_basis_status": "UNDECLARED"
+        },
+        "mass_ledger": {
+          "released_kg": null,
+          "end_to_end_residual_kg": null
+        },
+        "provider_termination_matches_request": false
+      },
+      {
+        "event_id": "public-install/tank-shell/G3",
+        "asset_id": "tank-shell",
+        "release_branch_id": "declared-release",
+        "annual_condition_id": "west",
+        "status": "EXECUTED",
+        "ledger_status": "COMPLETE",
+        "reason": null,
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 1e-05,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.2,
+          "provenance": "public installation diagnostic; not a reviewed physical termination"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
+        "provider": {
+          "packet_consumed": false,
+          "event_id": null,
+          "component_id": null,
+          "provider_export_schema": null,
+          "provider_source_digests": [],
+          "provider_result_digests": [],
+          "provider_boundary_references": [],
+          "duration_s": null,
+          "available_mass_kg": null,
+          "cumulative_mass_out_kg": null,
+          "residual_mass_kg": null,
+          "provider_mass_balances": [],
+          "provider_mass_balance_statuses": [],
+          "provider_mass_basis_ids": [],
+          "provider_mass_basis_status": "UNDECLARED"
+        },
+        "mass_ledger": {
+          "released_kg": 0.13040994065061204,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": false
+      },
+      {
+        "event_id": "public-install/tank-shell/G3",
+        "asset_id": "tank-shell",
+        "release_branch_id": "declared-release",
+        "annual_condition_id": "south-west",
+        "status": "FAILED",
+        "ledger_status": "INCOMPLETE",
+        "reason": "BackendError: backend deadline exceeded; no result available",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 1e-05,
+        "termination": {
+          "basis": null,
+          "time_s": null,
+          "provenance": null
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "pressure_equalization_status": "not_declared",
+        "provider": {
+          "packet_consumed": false,
+          "event_id": null,
+          "component_id": null,
+          "provider_export_schema": null,
+          "provider_source_digests": [],
+          "provider_result_digests": [],
+          "provider_boundary_references": [],
+          "duration_s": null,
+          "available_mass_kg": null,
+          "cumulative_mass_out_kg": null,
+          "residual_mass_kg": null,
+          "provider_mass_balances": [],
+          "provider_mass_balance_statuses": [],
+          "provider_mass_basis_ids": [],
+          "provider_mass_basis_status": "UNDECLARED"
+        },
+        "mass_ledger": {
+          "released_kg": null,
+          "end_to_end_residual_kg": null
+        },
+        "provider_termination_matches_request": false
+      }
+    ],
+    "summary": {
+      "case_count": 6,
+      "ledger_status_counts": {
+        "COMPLETE": 1,
+        "INCOMPLETE": 1,
+        "UNCOMPUTED": 4
+      },
+      "termination_basis_counts": {
+        "synthetic_diagnostic_horizon": 1
+      },
+      "complete_row_count": 1,
+      "operator_limited_or_domain_incomplete_row_count": 0,
+      "domain_incomplete_row_count": 0,
+      "uncomputed_row_count": 4,
+      "incomplete_row_count": 1,
+      "provider_packet_consumed_row_count": 0,
+      "withheld_case_count": 5,
+      "withheld_case_status_counts": {
+        "FAILED": 1,
+        "UNCOMPUTED": 4
+      },
+      "withheld_operator_limited_case_count": 0,
+      "withheld_domain_incomplete_case_count": 0
+    },
+    "semantics": {
+      "one_row": "event × release branch × annual condition",
+      "isolation": "reported only when the provider termination basis explicitly says reviewed_isolation_success",
+      "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
+      "pressure_equalization": "closed only from explicit provider zero-flow, pressure and observation fields; never inferred from a bounded history",
+      "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
+      "operator_limited": "numerically executed but not qualified facility evidence",
+      "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"
+    }
+  },
+  "coverage": {
+    "generated_initiation_frequency_per_year": 1.1000000000000001e-05,
+    "fully_executed_case_weighted_frequency_per_year": 5e-06,
+    "fraction_of_generated_initiation_frequency": 0.45454545454545453,
+    "not_numerically_executed_case_count": 5,
+    "qualified_evidence_withheld_case_count": 0,
+    "numerically_executed_case_count": 1,
+    "dynamic_state_closure_status_counts": {
+      "NOT_DECLARED": 1,
+      "NOT_EVALUATED": 5
+    },
+    "dynamic_state_closure_ready_case_count": 0,
+    "dynamic_state_closure_blocked_case_count": 0,
+    "external_catalogue_scope_gap_component_count": 0,
+    "meaning": "frequency coverage only; not fraction of risk captured, not physical validation",
+    "by_component": [
+      {
+        "component_id": "storage",
+        "kind": "storage_tank",
+        "scope_status": "PARTIAL",
+        "excluded_reason": null,
+        "generated_event_count": 3,
+        "generated_port_scoped_event_count": 0,
+        "generated_port_unbound_event_count": 3,
+        "reviewed_accident_port_ids": [],
+        "generated_initiation_frequency_per_year": 1.1000000000000001e-05,
+        "campaign_case_count": 6,
+        "executed_case_count": 1,
+        "fully_validated_case_count": 1,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "uncomputed_case_count": 5,
+        "not_numerically_executed_case_count": 5,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 1,
+        "dynamic_state_closure_status_counts": {
+          "NOT_DECLARED": 1,
+          "NOT_EVALUATED": 5
+        },
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
+        "uncomputed_reasons": [
+          "BackendError: backend deadline exceeded; no result available",
+          "no qualified full-inventory provider history in this installation diagnostic"
+        ]
+      },
+      {
+        "component_id": "isolation",
+        "kind": "valve",
+        "scope_status": "EXCLUDED",
+        "excluded_reason": "outside this public-install diagnostic",
+        "generated_event_count": 0,
+        "generated_port_scoped_event_count": 0,
+        "generated_port_unbound_event_count": 0,
+        "reviewed_accident_port_ids": [],
+        "generated_initiation_frequency_per_year": 0,
+        "campaign_case_count": 0,
+        "executed_case_count": 0,
+        "fully_validated_case_count": 0,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "uncomputed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 0,
+        "dynamic_state_closure_status_counts": {},
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "component_id": "transfer",
+        "kind": "pipe",
+        "scope_status": "EXCLUDED",
+        "excluded_reason": "outside this public-install diagnostic",
+        "generated_event_count": 0,
+        "generated_port_scoped_event_count": 0,
+        "generated_port_unbound_event_count": 0,
+        "reviewed_accident_port_ids": [],
+        "generated_initiation_frequency_per_year": 0,
+        "campaign_case_count": 0,
+        "executed_case_count": 0,
+        "fully_validated_case_count": 0,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "uncomputed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 0,
+        "dynamic_state_closure_status_counts": {},
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "component_id": "terminal",
+        "kind": "vent_stack",
+        "scope_status": "EXCLUDED",
+        "excluded_reason": "outside this public-install diagnostic",
+        "generated_event_count": 0,
+        "generated_port_scoped_event_count": 0,
+        "generated_port_unbound_event_count": 0,
+        "reviewed_accident_port_ids": [],
+        "generated_initiation_frequency_per_year": 0,
+        "campaign_case_count": 0,
+        "executed_case_count": 0,
+        "fully_validated_case_count": 0,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "uncomputed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 0,
+        "dynamic_state_closure_status_counts": {},
+        "dynamic_state_closure_ready_case_count": 0,
+        "dynamic_state_closure_blocked_case_count": 0,
+        "uncomputed_reasons": []
+      }
+    ],
+    "scenario_family_event_counts": {
+      "inventory_depletion": 1,
+      "inventory_over_600s": 1,
+      "liquid_two_phase": 3,
+      "vessel_hole": 1
+    }
+  },
+  "frequency_port_binding": {
+    "schema_version": "prism.frequency_port_binding.v1",
+    "port_scoped_event_count": 0,
+    "port_unbound_event_count": 3,
+    "all_events_port_scoped": false,
+    "meaning": "port-scoped events are checked against provider-resolved accident exits; unbound legacy events remain component-level and are not upgraded by this ledger",
+    "strict_facility_qra_gate": false
+  },
+  "declared_scope_numerically_complete": false,
+  "synthetic_release_horizon_present": true,
+  "declared_scope_annual_ir_low_high": null,
+  "known_contribution_annual_ir_low_high": {
+    "near_worker": [
+      8.600000000000001e-07,
+      8.600000000001008e-07
+    ],
+    "downwind_worker": [
+      5.000000000000001e-07,
+      5.000000000000001e-07
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "declared_scope_expected_death_fn_low_high": null,
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [
+        5.0,
+        10.0
+      ],
+      "cumulative_frequency_per_year": [
+        8.600000000000001e-07,
+        5.000000000000001e-07
+      ]
+    },
+    {
+      "expected_deaths": [
+        5.0,
+        10.0
+      ],
+      "cumulative_frequency_per_year": [
+        8.600000000000001e-07,
+        5.000000000000001e-07
+      ]
+    }
+  ],
+  "total_facility_annual_ir_low_high": null,
+  "total_facility_expected_death_fn_low_high": null,
+  "risk_atoms": [
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "release_branch_id": "declared-release",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1e-05,
+      "conditional_weight": 0.036000000000000004,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          1.0,
+          1.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        5.0,
+        5.0
+      ]
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "release_branch_id": "declared-release",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1e-05,
+      "conditional_weight": 0.054000000000000006,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          1.865174681370263e-13
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        9.325873406851315e-13
+      ]
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "release_branch_id": "declared-release",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1e-05,
+      "conditional_weight": 0.05,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          1.0,
+          1.0
+        ],
+        "downwind_worker": [
+          1.0,
+          1.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "asset_id": "tank-shell",
+      "frequency_port_ids": null,
+      "annual_condition_id": "west",
+      "release_branch_id": "declared-release",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1e-05,
+      "conditional_weight": 0.36000000000000004,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "provider_packet_identity": null,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "aggregation_provenance": {
+    "ok": true,
+    "limitation": "PRISM QRA risk.total_individual_risk and risk.fn_curve; expected-death convention; physics/coverage must be checked separately.",
+    "environment": {
+      "python": "3.14.8 (tags/v3.14.8:8e6e75d, Sep 30 2026, 18:19:33) [MSC v.1944 64 bit (AMD64)]",
+      "dependencies": {
+        "pydantic": "2.14.1",
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "CoolProp": "8.0.0"
+      }
+    },
+    "request_digest": "0b9e91a0c031ad752076ce1fe8ad8c9ba2cbe7f4cbca08737c0a983a7b2f3c62",
+    "backend_config_digest": "a3bdd014380d96c4f385ff3ae09f311af398214cf8b28bd70cd38f0003dee580",
+    "worker_sha256": "66256a5c7599022615977e0491ae482a67e583d95fe7e1f56ec3763837b52e36",
+    "adapter_source_digest": "7b177b7d1bd3b9afcfbd91089360b7dc9504d0bcce3a01b3962bc66665378229",
+    "elapsed_ms": 308.58140002237633,
+    "physical_validation_claim": false
+  },
+  "timing": {
+    "fresh_physics_cases": 2,
+    "case_min_ms": 3628.4275999641977,
+    "case_median_ms": 61835.456050001085,
+    "case_max_ms": 120042.48450003797,
+    "case_p95_ms": 114221.78165503428,
+    "case_p99_ms": 118878.34393103723,
+    "campaign_elapsed_ms": 123982.50010004267,
+    "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+  },
+  "semantics": {
+    "individual_risk": "fixed person at each receptor; no population occupancy multiplier",
+    "societal_risk": "native legacy F-N of expected deaths per event/weather/barrier/ignition outcome; not a joint casualty distribution",
+    "weighting": "initiating frequency times annual joint condition times release/barrier branch times ignition; each once",
+    "endpoints": "two declared radiation sensitivities and within-branch harm union bounds; not frequency credible intervals",
+    "population": "disjoint outdoor groups at representative receptors; temporal presence in annual conditions"
+  },
+  "provider_packet_evidence": [],
+  "provider_packet_case_count": 0,
+  "qualified_provider_packet_case_count": 0,
+  "provider_packet_promoted": false,
+  "provider_packet_missing_evidence_cases": [],
+  "physical_validation_evidence": {
+    "status": "not_validated",
+    "evidence_id": null,
+    "evidence_digest": null
+  },
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "one_hz_fresh_physics_demonstrated": false
+}

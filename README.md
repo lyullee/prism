@@ -58,6 +58,12 @@ PRISM provides the orchestration and audit boundary for generic outdoor LH2 faci
 
 ## Documentation
 
+Current source development adds a public LH2 backend configurator and bundles
+the previously local source/transition interfaces. This work follows the
+published 0.6.4 baseline. See the [public LH2 backend guide](lh2-tno/docs/PRISM_public_LH2_backend_20261018_en.md)
+for reproducible commands, numerical evidence, and the explicit failed and
+uncomputed cases; it does not claim complete facility QRA.
+
 The detailed package documentation is in [`lh2-tno/README.md`](lh2-tno/README.md):
 
 - [English user manual](lh2-tno/docs/PRISM_USER_MANUAL_en.md)

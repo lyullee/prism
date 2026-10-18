@@ -62,6 +62,12 @@ boundary, see the [public/private boundary note](docs/PRISM_public_private_bound
 
 ## What PRISM is for
 
+For development after v0.6.4, see the [public LH2 backend guide](docs/PRISM_public_LH2_backend_20261018_en.md).
+It configures the bundled QRA and source/transition interfaces from installed
+public packages, runs a real LH2 chain, and reports unavailable or timed-out
+cases explicitly. These additions are in the source checkout, beyond the
+immutable published v0.6.4 artifacts.
+
 PRISM helps an operator or researcher answer:
 
 - Which HAZOP deviation is active for this equipment and operating mode?

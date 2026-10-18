@@ -26,6 +26,17 @@ POOL_CLOCK_ROUND_DIGITS=12
 POOL_CLOCK_EARLY_SHIFT_S=1.0e-9
 
 
+def source_interface(name, roots, module):
+    """Load only the explicitly pinned source/transition implementation.
+
+    Historical backends retain their original slabx_lh2 source tree. Public
+    backends name the bundled prism_lh2_models package explicitly; failure
+    of either selected implementation never triggers a fallback.
+    """
+    package='prism_lh2_models' if 'prism_lh2_models' in roots else 'slabx_lh2'
+    return module(f'{package}.{name}',roots[package])
+
+
 def _normalise_pool_clock_interval(start: float, end: float) -> tuple[float, float]:
     """Return a stable zero-order-hold interval for the external pool solver.
 
@@ -206,7 +217,7 @@ def run_chain(p,roots,module):
             termination_basis=release_termination.get('basis'),
             operator_limited=bool(source_history.get('operator_limited', True)))
     elif source_operator == 'inventory_liquid_jet':
-        jetmod=module('slabx_lh2.lh2_jet_source',roots['slabx_lh2'])
+        jetmod=source_interface('lh2_jet_source',roots,module)
         spray=source['liquid_jet']
         history=jetmod.evaluate_liquid_jet(
             jetmod.StorageState(pressure_pa=source['tank']['pressure_pa'],
@@ -239,7 +250,7 @@ def run_chain(p,roots,module):
                             p['available_mass_kg'],rel_tol=1e-6,abs_tol=1e-8):
             raise ValueError('inventory liquid-jet duration does not close the declared inventory')
     else:
-        srcmod=module('slabx_lh2.integrated_lh2_source',roots['slabx_lh2'])
+        srcmod=source_interface('integrated_lh2_source',roots,module)
         inp=srcmod.IntegratedSourceInput(srcmod.TankState(**source['tank']),
             tuple(srcmod.PipeSection(**x) for x in source['pipe_sections']),
             srcmod.NozzleGeometry(**source['nozzle']),srcmod.AmbientState(**source['ambient']),
@@ -484,8 +495,8 @@ def run_chain(p,roots,module):
     mark('pool',start)
     # Resolve vector bending and carrier entrainment before SLAB handoff.
     start=time.perf_counter()
-    transition=module('slabx_lh2.lh2_jet_cloud_transition',roots['slabx_lh2'])
-    handmod=module('slabx_lh2.freejet_handoff',roots['slabx_lh2'])
+    transition=source_interface('lh2_jet_cloud_transition',roots,module)
+    handmod=source_interface('freejet_handoff',roots,module)
     plume=module('slabx.core.plume',roots['slabx'])
     sourcemod=module('slabx.core.source',roots['slabx'])
     atm_mod=module('slabx.submodels.atmosphere',roots['slabx'])
@@ -883,8 +894,9 @@ def run_chain(p,roots,module):
         cloud.append(row);cloud_at[t]=(row,receptor_c)
         for i,c in enumerate(receptor_c):rec_history[i].append({'time_s':t,'h2_mole_fraction':float(c),'h2_volume_percent':float(c)*100})
     mark('cloud_observation',start)
-    # Physical fire radiation -> left-held dose -> TNO thermal probit.
-    start=time.perf_counter();fire=module('fire',roots['tno']);risk=module('risk',roots['tno']);ignmod=module('ignition',roots['tno']);damage=module('damage',roots['tno'])
+    # Physical fire radiation -> left-held dose -> PRISM QRA thermal probit.
+    qra_root=roots['prism_qra'] if 'prism_qra' in roots else roots['tno']
+    start=time.perf_counter();fire=module('fire',qra_root);risk=module('risk',qra_root);ignmod=module('ignition',qra_root);damage=module('damage',qra_root)
     ignition=p['ignition'];td=ignition['delayed_time_s'];burn=ignition['burn_back_duration_s']
     ign_cloud,ign_c=cloud_at[td]
     fm=ign_cloud['flammable_mass_in_domain_kg'];cloud_centre=np.asarray(ign_cloud['flammable_centroid_enu_m'])

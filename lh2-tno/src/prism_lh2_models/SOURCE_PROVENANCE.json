@@ -1,0 +1,65 @@
+{
+  "schema_version": "prism.bundled_lh2_models_provenance.v1",
+  "date_kst": "2026-10-18",
+  "source_distribution": "slabx-lh2 local integration source, version 0.1.4",
+  "source_license": "MIT",
+  "copyright": "2026 Korea Gas Safety Corporation",
+  "scope": "Unpublished source/transition interfaces already used by historical PRISM calculations; package namespace relocation only. Validated SLABx-LH2 core is installed separately.",
+  "physical_validation_claim": false,
+  "files": [
+    {
+      "file": "freejet_handoff.py",
+      "source_module": "slabx_lh2.freejet_handoff",
+      "utf8_lf_sha256": "f6719224115aff216deaf261b9fd21adf453a41a72aa9f25f6383765298c0480",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "lh2_jet_cloud_transition.py",
+      "source_module": "slabx_lh2.lh2_jet_cloud_transition",
+      "utf8_lf_sha256": "40685d7a1a5f9cbee6b65fb87e8425d53434472e0f286c670641cd3f31003594",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "cryogenic_air_phase.py",
+      "source_module": "slabx_lh2.cryogenic_air_phase",
+      "utf8_lf_sha256": "749b7fba40ac303b0bd0fc8e684a0770fce7e9254dea9c3bfac7a682dd743a43",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "cryogenic_exchange.py",
+      "source_module": "slabx_lh2.cryogenic_exchange",
+      "utf8_lf_sha256": "9925ddccdc8a4270b41590636b0ebbb534adb45f7113736986c33febed676c30",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "lh2_jet_source.py",
+      "source_module": "slabx_lh2.lh2_jet_source",
+      "utf8_lf_sha256": "cf7e0e55bf2f44fbf470da29e749f366246966fc38873edf0a0b3c7179b51b08",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "lh2_critical_flow.py",
+      "source_module": "slabx_lh2.lh2_critical_flow",
+      "utf8_lf_sha256": "66a6e3b0be43416598bf65554d25e576c64550890a829f239c48ad0a8e3efdc2",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "integrated_lh2_source.py",
+      "source_module": "slabx_lh2.integrated_lh2_source",
+      "utf8_lf_sha256": "3d3ffb7e3422bd2d72d2a754cbf22df96d0732746d7743630341dd62415a9367",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "rescigno_baseline.py",
+      "source_module": "slabx_lh2.rescigno_baseline",
+      "utf8_lf_sha256": "d343042fc58ef3904a6191a7822505e575f6a94ee2fd7072ae8bd423074d86a9",
+      "copied_without_physics_changes": true
+    },
+    {
+      "file": "horizontal_crosswind_extension.py",
+      "source_module": "slabx_lh2.horizontal_crosswind_extension",
+      "utf8_lf_sha256": "1cf91e18561cd5d4d190f5e134828bc0bdaaa29ac339a162886636087d169f09",
+      "copied_without_physics_changes": true
+    }
+  ]
+}

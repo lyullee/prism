@@ -23,16 +23,21 @@ def run(request):
         if importlib.metadata.version(name)!=version:
             raise ValueError(f"dependency version mismatch: {name}")
     roots={p["name"]:Path(p["root"]).resolve() for p in request["packages"]}
+    if "prism_qra" in roots and "tno" in roots:
+        raise ValueError("declare one PRISM QRA source pin; prism_qra and legacy tno aliases cannot be combined")
     # Preserve declared precedence. Putting site-packages first would hide a
     # pinned standalone source tree behind another installed pool version.
     for name,root in reversed(tuple(roots.items())):
-        sys.path.insert(0,str(root if name=="tno" else root.parent))
+        sys.path.insert(0,str(root if name in {"prism_qra", "tno"} else root.parent))
+    # Old manifests remain reproducible; new configurations use prism_qra.
+    if "tno" in roots:
+        roots["prism_qra"] = roots["tno"]
     p=request["payload"]; operation=request["operation"]
     if operation=="consequence_chain":
         from chain_worker import run_chain
         return run_chain(p,roots,module)
     if operation=='facility_risk_aggregate':
-        m=module('risk',roots['tno'])
+        m=module('risk',roots['prism_qra'])
         ids=p['receptor_ids']; atoms=p['atoms']
         ir={rid:[] for rid in ids}; curves=[]
         for index in range(2):
@@ -47,9 +52,10 @@ def run(request):
             ns,fs=m.fn_curve(outcomes)
             curves.append({'expected_deaths':ns.tolist(),'cumulative_frequency_per_year':fs.tolist()})
         return {'data':{'ir_low_high':ir,'fn_low_high':curves},
-            'limitation':'Native legacy risk.total_individual_risk and risk.fn_curve; expected-death convention; external physics/coverage must be checked separately.'}
+            'limitation':'PRISM QRA risk.total_individual_risk and risk.fn_curve; expected-death convention; physics/coverage must be checked separately.'}
     if operation=="integrated_source":
-        m=module("slabx_lh2.integrated_lh2_source",roots["slabx_lh2"])
+        from chain_worker import source_interface
+        m=source_interface("integrated_lh2_source",roots,module)
         duration=p["duration_s"]; dt=p["time_step_s"]
         if not 0<dt<=duration<=3600 or duration/dt>2000:
             raise ValueError("invalid source horizon or computation budget")
@@ -62,7 +68,8 @@ def run(request):
         return {"data":data,"energy_balance_scope":"latent_evaporation_accounting_only",
                 "limitation":"upstream transient/source model assumptions retained; downstream dispersion not computed"}
     if operation=="liquid_jet_source":
-        m=module("slabx_lh2.lh2_jet_source",roots["slabx_lh2"])
+        from chain_worker import source_interface
+        m=source_interface("lh2_jet_source",roots,module)
         from inventory_source import _json_safe
         spray=p["liquid_jet"]
         history=m.evaluate_liquid_jet(
@@ -448,7 +455,7 @@ def run(request):
         return {"data":result.to_dict(),"limitation":"declared ground inflow only; jet deposition/footprint not inferred",
                 "inflow_origin":p["inflow_origin"]}
     if operation=="assurance":
-        pa=module("physics_assurance",roots["tno"]); er=module("evidence_registry",roots["tno"])
+        pa=module("physics_assurance",roots["prism_qra"]); er=module("evidence_registry",roots["prism_qra"])
         outputs=[]
         for row in p["outputs"]:
             row=dict(row); row["status"]=pa.EvidenceStatus(row["status"])
@@ -466,13 +473,13 @@ def run(request):
         result=er.assess_registered_outputs(tuple(outputs),er.EvidenceRegistry(tuple(records)))
         return {"data":asdict(result),"limitation":"metadata qualification does not establish physical accuracy"}
     if operation=="thermal_damage":
-        m=module("risk",roots["tno"])
+        m=module("risk",roots["prism_qra"])
         flux=p["equivalent_heat_flux_w_m2"]; duration=p["exposure_s"]
         if not math.isfinite(flux) or flux<0 or not math.isfinite(duration) or duration<=0:
             raise ValueError("nonnegative flux and positive duration required")
         probit=None if flux==0 else m.ThermalProbit().probit(flux,duration)
         return {"data":{"harm_probability":0 if flux==0 else m.probit_to_probability(probit),"probit":probit},
-                "limitation":"TNO damage transformation only; input radiation and exposure require independent validation"}
+                "limitation":"PRISM QRA damage transformation only; input radiation and exposure require independent validation"}
     raise ValueError("unsupported operation")
 
 

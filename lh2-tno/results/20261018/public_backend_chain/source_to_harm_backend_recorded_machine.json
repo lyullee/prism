@@ -1,0 +1,32 @@
+{
+  "interpreter": "C:\\Temp\\prism_public_chain_env\\Scripts\\python.exe",
+  "packages": [
+    {
+      "name": "prism_qra",
+      "root": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\src\\prism_qra",
+      "sha256": "8bb3d4273264e74e2cc3f4908f87f228fd350c0eccdf3f2b6f5c8e3033b8d157"
+    },
+    {
+      "name": "prism_lh2_models",
+      "root": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\src\\prism_lh2_models",
+      "sha256": "c52155f9fa270a4a29800079c5785fd8e958da6a0950716b2ce164bd096671ab"
+    },
+    {
+      "name": "slabx",
+      "root": "C:\\Temp\\prism_public_chain_env\\Lib\\site-packages\\slabx",
+      "sha256": "569c97642f882e94a93d71a45dd5592027b479569d8cfaed3b70e5b16f085163"
+    },
+    {
+      "name": "slabx_lh2",
+      "root": "C:\\Temp\\prism_public_chain_env\\Lib\\site-packages\\slabx_lh2",
+      "sha256": "83e602053809940db1521287f2f71d6ee0040af65b3c3f98852c057ded377ec9"
+    }
+  ],
+  "timeout_s": 120.0,
+  "required_versions": {
+    "pydantic": "2.14.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "CoolProp": "8.0.0"
+  }
+}

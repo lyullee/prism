@@ -1,4 +1,4 @@
-"""Facility-aware source evaluation through the existing TNO evidence gate."""
+"""Facility-aware source evaluation through the PRISM QRA evidence gate."""
 from __future__ import annotations
 from dataclasses import dataclass
 from .backend import BackendLike
@@ -31,11 +31,11 @@ class ResearchPipeline:
         return generate_events(self.facility, plan)
 
     def legacy_frequency_events(self, scenarios, component_map, *, plan_id='legacy-tno',
-                                source='external legacy TNO taxonomy.enumerate_scenarios',
+                                source='PRISM QRA taxonomy.enumerate_scenarios',
                                 source_sha256, basis='TNO_PURPLE_LOC'):
-        """Consume a pinned legacy-TNO scenario export through the same event boundary.
+        """Consume a pinned QRA scenario export through the same event boundary.
 
-        The external taxonomy remains the owner of its frequency arithmetic.
+        The project-authored taxonomy owns its frequency arithmetic.
         This method only performs the explicit scenario-to-facility mapping and
         returns the bridge audit sidecar; it never fabricates a provider
         release or promotes a facility QRA.
@@ -52,7 +52,7 @@ class ResearchPipeline:
         )
 
     def legacy_frequency_plan(self, plan, scenarios, component_map, *, plan_id='legacy-tno',
-                              source='external legacy TNO taxonomy.enumerate_scenarios',
+                              source='PRISM QRA taxonomy.enumerate_scenarios',
                               source_sha256, basis='TNO_PURPLE_LOC'):
         """Build a campaign-ready plan from an explicit legacy event bridge.
 

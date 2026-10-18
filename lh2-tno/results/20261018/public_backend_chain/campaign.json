@@ -1,0 +1,253 @@
+{
+  "id": "public-install-lh2",
+  "frequency_plan": {
+    "id": "public-install",
+    "assets": [
+      {
+        "id": "tank-shell",
+        "model_component_id": "storage",
+        "profile": "TNO_PRESSURE_VESSEL",
+        "classification_basis": "synthetic pressure vessel; applicability is not certified",
+        "physical_scope_ids": [
+          "example-tank"
+        ],
+        "vessel_external_impact_or_operating_error": false
+      }
+    ],
+    "excluded_model_components": {
+      "isolation": "outside this public-install diagnostic",
+      "transfer": "outside this public-install diagnostic",
+      "terminal": "outside this public-install diagnostic"
+    }
+  },
+  "annual_conditions": [
+    {
+      "id": "west",
+      "annual_probability": 0.5,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        }
+      ],
+      "provenance": "synthetic joint annual condition"
+    },
+    {
+      "id": "south-west",
+      "annual_probability": 0.5,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 225.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor population"
+        }
+      ],
+      "provenance": "synthetic joint annual condition"
+    }
+  ],
+  "event_routes": [
+    {
+      "event_id": "public-install/tank-shell/G1",
+      "branches": [
+        {
+          "id": "uncomputed",
+          "probability_given_event": 1.0,
+          "provenance": "unsupported scope remains visible",
+          "uncomputed_reason": "no qualified full-inventory provider history in this installation diagnostic"
+        }
+      ]
+    },
+    {
+      "event_id": "public-install/tank-shell/G2",
+      "branches": [
+        {
+          "id": "uncomputed",
+          "probability_given_event": 1.0,
+          "provenance": "unsupported scope remains visible",
+          "uncomputed_reason": "no qualified full-inventory provider history in this installation diagnostic"
+        }
+      ]
+    },
+    {
+      "event_id": "public-install/tank-shell/G3",
+      "branches": [
+        {
+          "id": "declared-release",
+          "probability_given_event": 1.0,
+          "provenance": "synthetic finite release; no field isolation claim",
+          "request": {
+            "component_id": "storage",
+            "source_input": {
+              "tank": {
+                "pressure_pa": 600000.0,
+                "temperature_k": 20.893,
+                "volume_m3": 0.2,
+                "vapour_quality": 0.0,
+                "wall_heat_input_w": 0.0,
+                "fluid": "Hydrogen"
+              },
+              "pipe_sections": [],
+              "nozzle": {
+                "diameter_m": 0.01,
+                "length_m": 0.01,
+                "height_m": 0.05,
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "discharge_coefficient": 1.0,
+                "resistance_k": 0.0
+              },
+              "ambient": {
+                "pressure_pa": 101325.0,
+                "temperature_k": 288.15,
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0
+              },
+              "choices": {
+                "phase_model": "HEM",
+                "hnem_eta": null,
+                "fictitious_nozzle": "momentum_adiabatic",
+                "droplet_correlation": "rescigno_yellow_book",
+                "rescigno_quality_path": "printed_equation",
+                "distribution": "single_smd"
+              },
+              "duration_s": 0.2,
+              "time_step_s": 0.2
+            },
+            "available_mass_kg": 10.0,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              0.05
+            ],
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80,
+            "release_termination": {
+              "basis": "synthetic_diagnostic_horizon",
+              "time_s": 0.2,
+              "provenance": "public installation diagnostic; not a reviewed physical termination"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scope_provenance": "public installation and numerical coupling diagnostic; not a complete facility QRA"
+}

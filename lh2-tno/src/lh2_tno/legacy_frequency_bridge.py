@@ -1,8 +1,8 @@
-"""Bridge scenario output from the external legacy TNO taxonomy.
+"""Bridge scenario output from the project-authored PRISM QRA taxonomy.
 
-The legacy TNO implementation and the LH2 package deliberately remain
-separate distributions.  This module provides the narrow, auditable handoff
-between them: a caller runs the pinned legacy ``enumerate_scenarios`` and
+The standard QRA implementation and the LH2 integration ship together. This
+module provides their auditable handoff while retaining old export schemas:
+a caller runs the pinned ``enumerate_scenarios`` and
 passes its serialized scenario rows plus an explicit component map.  PRISM
 does not re-resolve a rate, infer a component from a name, or silently turn a
 legacy release path into a provider packet.
@@ -86,7 +86,7 @@ def bridge_legacy_scenarios(
     component_map: Mapping[str, str],
     *,
     plan_id: str = "legacy-tno",
-    source: str = "external legacy TNO taxonomy.enumerate_scenarios",
+    source: str = "PRISM QRA taxonomy.enumerate_scenarios",
     source_sha256: str,
     facility: Facility | None = None,
     basis: str | Mapping[str, str] = "TNO_PURPLE_LOC",
