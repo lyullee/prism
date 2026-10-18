@@ -1,0 +1,154 @@
+{
+  "schema_version": "prism.external_release_rebind_audit.v1",
+  "status": "DIAGNOSTIC_RELEASE_REBIND_ONLY",
+  "root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
+  "resolved_release_count": 7,
+  "provider_response_pair_count": 7,
+  "structural_release_contract_valid_count": 7,
+  "mass_balance_attached_count": 4,
+  "strict_termination_candidate_count": 2,
+  "provider_packet_promoted": false,
+  "frequency_inference_performed": false,
+  "physical_validation_claim": false,
+  "facility_qra_allowed": false,
+  "rows": [
+    {
+      "resolved_release": "tmp_native_contract\\layered\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\layered\\provider_response.json",
+      "resolved_release_sha256": "4cc42a2fc9fe9d15deda116215e39de1785a7b1c200c2ef62ed81f7f0686638c",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": true,
+      "termination_basis": "inventory_depletion",
+      "event_id": "native-layered-tank/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "native inventory still has residual mass; depletion is not proven",
+        "input origin remains diagnostic and is not qualified actual evidence"
+      ],
+      "provider_source_digest": "9e519a13debf758e5b4b8ba5c1326bc17af882d5f58fbbc50d4260a4fb8b174d",
+      "provider_result_digest": "b370d88d96ac9814a1c66e1035135980c8bce7f23d679a103bfa3d73e5f48da3"
+    },
+    {
+      "resolved_release": "tmp_native_contract\\pipe\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\pipe\\provider_response.json",
+      "resolved_release_sha256": "4224f8a27b35aa7778c63eab04d3da6ce6709fd8fe5286d30bb6cb4b9165933e",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": true,
+      "termination_basis": "reviewed_isolation_success",
+      "event_id": "native-dynamic-pipe/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider mass ledger does not close within tolerance",
+        "input origin remains diagnostic and is not qualified actual evidence"
+      ],
+      "provider_source_digest": "a34b691dc221fc1b0ba176a9f0c489c0a62eb9b8e4fa66e15d904c725238cdcb",
+      "provider_result_digest": "993c70ea51758a57e313d6f36b9c41721a6288e2ac775e6e4560561ce7197cd7"
+    },
+    {
+      "resolved_release": "tmp_native_contract\\pump\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\pump\\provider_response.json",
+      "resolved_release_sha256": "9ec47ffc5d7c60a93aef47625ccd7ad398bdaae87b30023676ae19f594750f7f",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": false,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "event_id": "native-mapped-pump/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider response check failed: mass_ledger_present",
+        "native provider mass ledger does not close within tolerance",
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "synthetic diagnostic horizon is not a release termination boundary",
+        "input origin remains diagnostic and is not qualified actual evidence"
+      ],
+      "provider_source_digest": "6451b1521ceb0a3e8c1b8f0946bcdf789c5f14102763d7783c0577e27be3cb0f",
+      "provider_result_digest": "ec86ecf9205976dc1184b026e94c418c4442305ceea98cf835e42ced4e6822ca"
+    },
+    {
+      "resolved_release": "tmp_native_contract\\reliquefier\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\reliquefier\\provider_response.json",
+      "resolved_release_sha256": "62918f2642e9cac63cbdacd1f3b361710b4312bb61398eac2c33e16cde037906",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": true,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "event_id": "native-reliquefier/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "synthetic diagnostic horizon is not a release termination boundary",
+        "input origin remains diagnostic and is not qualified actual evidence"
+      ],
+      "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+      "provider_result_digest": "247158fd9b8cc9b95cf0c835085670981fadcaff30cb9390499e7ed5f67d5fe7"
+    },
+    {
+      "resolved_release": "tmp_native_contract\\valve\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\valve\\provider_response.json",
+      "resolved_release_sha256": "b5268d51b502e8b7e86c4d79083e043eee88e4ecf18c26ffecc65bbe5ff940d3",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": false,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "event_id": "native-stroke-valve/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider response check failed: mass_ledger_present",
+        "native provider mass ledger does not close within tolerance",
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "synthetic diagnostic horizon is not a release termination boundary",
+        "input origin remains diagnostic and is not qualified actual evidence",
+        "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
+      ],
+      "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+      "provider_result_digest": "46ec14d5d00941ab941d00da2b1f9705e7f04662259744cfde93ee30fd4b038f"
+    },
+    {
+      "resolved_release": "tmp_native_contract\\vaporizer\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\vaporizer\\provider_response.json",
+      "resolved_release_sha256": "ab6867205c893105a423f388cbdba771a8f1576178246c50bb159c47e74c5e12",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": true,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "event_id": "native-vaporizer/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "synthetic diagnostic horizon is not a release termination boundary",
+        "input origin remains diagnostic and is not qualified actual evidence"
+      ],
+      "provider_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+      "provider_result_digest": "e727b58d83f5f074c37ca4c6c437ca76a0aa6b65e2df7cfa74ec630ba8daabf6"
+    },
+    {
+      "resolved_release": "tmp_native_contract\\vent\\resolved_release.json",
+      "provider_response": "tmp_native_contract\\vent\\provider_response.json",
+      "resolved_release_sha256": "787b4af38644ab0fcf6cbdb37625e5f9da4309557e0e347e1ab5e81ec0a13c52",
+      "status": "DIAGNOSTIC_RELEASE_REBOUND",
+      "structural_release_contract_valid": true,
+      "mass_balance_attached": false,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "event_id": "native-vent-stack/accidental-leak-001",
+      "blocking_reasons": [
+        "native provider response check failed: mass_ledger_present",
+        "native provider mass ledger does not close within tolerance",
+        "native provider response check failed: isolation_evidence_present",
+        "native isolation evidence is absent or outside the release clock",
+        "synthetic diagnostic horizon is not a release termination boundary",
+        "input origin remains diagnostic and is not qualified actual evidence",
+        "optional compressible handoff is blocked: provider_source_state is incomplete; atmospheric packet velocity cannot be substituted"
+      ],
+      "provider_source_digest": "16a8982ccc0c57eebb574538e7fd85ee2ddab87348aea24fd9c86921ca38faa6",
+      "provider_result_digest": "61054aa89cc3dade006c007b7224e736685a4598356974e1dc5bff919709987b"
+    }
+  ],
+  "policy": {
+    "release_mapping_is_a_copy": true,
+    "residual_inventory_is_not_replaced_with_zero": true,
+    "missing_provider_ledger_is_not_inferred": true,
+    "slabx_lh2_is_not_modified": true
+  }
+}

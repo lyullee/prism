@@ -3157,7 +3157,7 @@
     "facility_ir_fn_available"
   ],
   "full_portable_test_count_latest": 1529,
-  "full_portable_test_status_latest": "1529 passed, 1 warning; authoritative union snapshot count; latest local recheck separately recorded as 1538 passed, 1 warning",
+  "full_portable_test_status_latest": "1529 passed, 1 warning; authoritative union snapshot count; latest local recheck separately recorded as 1540 passed, 1 warning",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -6591,7 +6591,7 @@
   ],
   "ijhe_completion_audit_current_source_diagnostic_20261018_physical_validation_claim": false,
   "ijhe_completion_audit_current_source_diagnostic_20261018_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_current_source_diagnostic_20261018_sha256": "90C32A60C66457F2837CB35BE5EECDAD6AC71CFCAF5757CC8213C8C2CE137E72",
+  "ijhe_completion_audit_current_source_diagnostic_20261018_sha256": "9E0D00F0AE3851B5B9E86E0F39A49DA318BD0D6624C8DCBCDC1E407DE7A3B437",
   "hazop_event_mode_binding_current_recheck_record": "examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json",
   "hazop_event_mode_binding_current_recheck_status": "HAZOP_EVENT_MODE_BINDING_COMPLETE; 34/34 explicit rows; no mode/scenario/frequency inference",
   "hazop_event_mode_binding_current_recheck_event_count": 34,
@@ -6625,7 +6625,7 @@
     "facility_qra_claim": false
   },
   "current_external_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
-  "latest_local_full_suite_recheck_record": "python -m pytest -q; 1538 passed, 1 warning",
+  "latest_local_full_suite_recheck_record": "python -m pytest -q; 1540 passed, 1 warning",
   "latest_external_contract_recheck_record": "C:\\Temp\\prism_external_contract_recheck_20261018.json",
   "current_external_provider_workspace_recheck_20261018_record": "results/20261018/external_provider_workspace_roots_inventory_current_recheck.json",
   "current_external_provider_workspace_recheck_20261018_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
@@ -6687,5 +6687,20 @@
   "external_equipment_model_provider_response_facility_qra_claim": false,
   "external_equipment_model_provider_response_gap_policy": "Missing input_origin, evidence_status, qualification sidecars, non-strict termination, or mass-ledger fields are reported per response and never inferred; SLABx-LH2 remains a separate CLOSED_VALIDATED_COMPONENT.",
   "latest_local_full_suite_recheck_count": 1538,
-  "latest_local_full_suite_recheck_status": "1538 passed, 1 warning; current local recheck after six-root provider-response gap audit"
+  "latest_local_full_suite_recheck_status": "1540 passed, 1 warning; current local recheck after release-rebind audit",
+  "external_equipment_model_release_rebind_audit_record": "results/20261018/external_equipment_model_release_rebind_audit_20261018.json",
+  "external_equipment_model_release_rebind_audit_sha256": "88A9D53C7852405ACABDADF0C7292087D0F47185CB6D6854067205C603CE0771",
+  "external_equipment_model_release_rebind_audit_status": "DIAGNOSTIC_RELEASE_REBIND_ONLY; 7/7 strict release contracts validate; 4 provider mass ledgers attached; 2 strict termination candidates; promotion withheld",
+  "external_equipment_model_release_rebind_resolved_release_count": 7,
+  "external_equipment_model_release_rebind_provider_response_pair_count": 7,
+  "external_equipment_model_release_rebind_structural_release_contract_valid_count": 7,
+  "external_equipment_model_release_rebind_mass_balance_attached_count": 4,
+  "external_equipment_model_release_rebind_strict_termination_candidate_count": 2,
+  "external_equipment_model_release_rebind_provider_packet_promoted": false,
+  "external_equipment_model_release_rebind_frequency_inference": false,
+  "external_equipment_model_release_rebind_physical_validation_claim": false,
+  "external_equipment_model_release_rebind_facility_qra_allowed": false,
+  "external_equipment_model_release_rebind_policy": "Rebound release mappings are diagnostic copies only; no residual inventory repair, frequency assignment, provider qualification, physical validation, facility IR/F-N, or SLABx-LH2 modification.",
+  "latest_local_full_suite_recheck_count": 1540,
+  "latest_local_full_suite_recheck_status": "1540 passed, 1 warning; current local recheck after release-rebind audit"
 }

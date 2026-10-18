@@ -102,6 +102,21 @@ def test_external_equipment_provider_response_gap_audit_is_diagnostic_only() -> 
     assert record["promotion"]["facility_qra_claim"] is False
 
 
+def test_external_equipment_release_rebind_audit_preserves_promotion_gates() -> None:
+    status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    record = load_json_object(ROOT / status["external_equipment_model_release_rebind_audit_record"])
+    assert record["status"] == "DIAGNOSTIC_RELEASE_REBIND_ONLY"
+    assert record["resolved_release_count"] == 7
+    assert record["provider_response_pair_count"] == 7
+    assert record["structural_release_contract_valid_count"] == 7
+    assert record["mass_balance_attached_count"] == 4
+    assert record["strict_termination_candidate_count"] == 2
+    assert record["provider_packet_promoted"] is False
+    assert record["frequency_inference_performed"] is False
+    assert record["facility_qra_allowed"] is False
+    assert record["policy"]["residual_inventory_is_not_replaced_with_zero"] is True
+
+
 def test_latest_github_actions_run_is_bound_to_both_status_ledgers() -> None:
     report = _report()
     check = next(

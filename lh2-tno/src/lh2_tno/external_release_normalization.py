@@ -19,6 +19,7 @@ import json
 import math
 from pathlib import Path
 from typing import Any, Mapping
+import copy
 
 from .contracts import canonical_digest
 
@@ -295,10 +296,99 @@ def audit_external_release_response(
     }
 
 
+def build_diagnostic_release_rebind(
+    resolved_release: Mapping[str, Any] | str | Path,
+    provider_response: Mapping[str, Any] | str | Path,
+) -> dict[str, Any]:
+    """Attach explicitly exported provider ledger evidence to a release copy.
+
+    A native provider commonly writes a complete ``resolved_release.json`` and
+    a sibling ``provider_response.json``.  The two records are first checked
+    with :func:`audit_external_release_response`; only fields present in the
+    response are then copied into a new diagnostic release mapping.  In
+    particular, this helper never changes residual inventory to zero, changes
+    a termination basis, adds a frequency, or declares qualification.  The
+    returned mapping is intended for strict contract validation and downstream
+    diagnostic chain execution only.
+    """
+
+    release = dict(_read(resolved_release, "resolved release"))
+    response = _read(provider_response, "provider response")
+    audit = audit_external_release_response(release, response)
+    if audit.get("status") != "NORMALIZED_PROVIDER_RESPONSE":
+        raise ExternalReleaseNormalizationError(
+            "cannot rebind a mismatched provider response to a release boundary"
+        )
+    checks = audit.get("checks")
+    if not isinstance(checks, Mapping) or checks.get("result_digest_rebound") is not True:
+        raise ExternalReleaseNormalizationError(
+            "diagnostic release rebind requires the canonical provider result digest"
+        )
+
+    candidate = audit.get("provider_mass_balance_candidate")
+    rebound = copy.deepcopy(release)
+    mass_balance_attached = False
+    if candidate is not None:
+        # ``audit_external_release_response`` also exposes the convenience
+        # boolean ``mass_balance_closed``. It is audit metadata, not a field
+        # in the strict ProviderMassBalance contract, so keep only contract
+        # keys when attaching the copied evidence.
+        contract_mass_balance_keys = {
+            "schema_version",
+            "initial_mass_kg",
+            "cumulative_mass_in_kg",
+            "cumulative_mass_out_kg",
+            "final_mass_kg",
+            "reported_residual_mass_kg",
+            "derived_accounting_residual_kg",
+            "isolation_time_s",
+            "post_isolation_observation_s",
+            "isolation_success",
+            "pressure_equalization_time_s",
+            "post_pressure_equalization_observation_s",
+            "pressure_equalization_success",
+            "terminal_source_pressure_pa_abs",
+            "ambient_pressure_pa_abs",
+            "max_post_pressure_equalization_flow_kg_s",
+            "dynamic_state_closure",
+        }
+        candidate = {
+            key: copy.deepcopy(value)
+            for key, value in candidate.items()
+            if key in contract_mass_balance_keys
+        }
+        existing = rebound.get("provider_mass_balance")
+        if existing is None:
+            rebound["provider_mass_balance"] = copy.deepcopy(candidate)
+            mass_balance_attached = True
+        elif existing != candidate:
+            raise ExternalReleaseNormalizationError(
+                "release provider_mass_balance disagrees with the normalized provider response"
+            )
+        else:
+            mass_balance_attached = True
+
+    return {
+        "schema_version": "prism.external_release_diagnostic_rebind.v1",
+        "status": "DIAGNOSTIC_RELEASE_REBOUND",
+        "diagnostic_only": True,
+        "release": rebound,
+        "audit": audit,
+        "mass_balance_attached": mass_balance_attached,
+        "promotion": {
+            "qualified_provider_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "physical_validation_claim": False,
+            "facility_qra_allowed": False,
+        },
+    }
+
+
 __all__ = [
     "SCHEMA",
     "MASS_TOLERANCE_KG",
     "COMPRESSIBLE_SOURCE_STATE_FIELDS",
     "ExternalReleaseNormalizationError",
     "audit_external_release_response",
+    "build_diagnostic_release_rebind",
 ]

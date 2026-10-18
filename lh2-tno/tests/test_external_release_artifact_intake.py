@@ -4,7 +4,10 @@ import json
 from pathlib import Path
 
 from lh2_tno.external_release_artifact_intake import audit_external_release_artifacts
-from lh2_tno.external_release_normalization import audit_external_release_response
+from lh2_tno.external_release_normalization import (
+    audit_external_release_response,
+    build_diagnostic_release_rebind,
+)
 from lh2_tno.contracts import canonical_digest
 
 
@@ -265,6 +268,44 @@ def test_external_release_response_binds_canonical_result_digest() -> None:
     assert audit["checks"]["result_digest_rebound"] is True
     assert audit["provider_result_digest_binding"] == "canonical_response_digest"
     assert audit["computed_provider_result_digest"] == release["provider_result_digest"]
+
+
+def test_diagnostic_release_rebind_attaches_only_exported_mass_ledger() -> None:
+    release = _release("model_prediction")
+    release.update({
+        "termination_provenance": "native model ledger",
+        "cumulative_mass_out_kg": 2.0,
+    })
+    response = {
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "provider_model": "native-test-model",
+        "provider_source_digest": "a" * 64,
+        "data": {
+            "event_id": release["event_id"],
+            "component_id": release["component_id"],
+            "port_id": release["port_id"],
+            "duration_s": release["duration_s"],
+            "available_mass_kg": release["available_mass_kg"],
+            "cumulative_mass_out_kg": release["cumulative_mass_out_kg"],
+            "termination_basis": release["termination_basis"],
+            "termination_provenance": release["termination_provenance"],
+            "provider_meta": {
+                "initial_mass_kg": 10.0,
+                "final_mass_kg": 8.0,
+                "cumulative_mass_out_kg": 2.0,
+            },
+        },
+    }
+    release["provider_result_digest"] = canonical_digest(response)
+
+    rebound = build_diagnostic_release_rebind(release, response)
+
+    assert rebound["status"] == "DIAGNOSTIC_RELEASE_REBOUND"
+    assert rebound["mass_balance_attached"] is True
+    assert rebound["release"]["provider_mass_balance"]["final_mass_kg"] == 8.0
+    assert rebound["release"]["termination_basis"] == "inventory_depletion"
+    assert rebound["promotion"]["qualified_provider_packet_allowed"] is False
+    assert rebound["promotion"]["frequency_inference_allowed"] is False
 
 
 def test_external_release_response_marks_optional_gas_handoff_blocked_without_source_state() -> None:

@@ -52,6 +52,16 @@ final, cumulative-out, and residual mass ledger. All seven lack an explicit
 Therefore the ledger remains diagnostic-only: it does not promote a provider
 packet, infer frequency, claim physical validation, or enable facility IR/F-N.
 
+The paired `resolved_release.json` records were also passed through the
+diagnostic rebind audit at
+`results/20261018/external_equipment_model_release_rebind_audit_20261018.json`
+(SHA-256
+`88A9D53C7852405ACABDADF0C7292087D0F47185CB6D6854067205C603CE0771`).
+All seven pairs validate against the strict PRISM release contract, and the
+four available provider mass ledgers are attached to diagnostic copies. This
+is a structural handoff check only; it does not repair residual inventory or
+turn the five synthetic horizons into closed releases.
+
 ## Interpretation for the IJHE objective
 
 The recheck confirms that the external evidence state did not change in a way
