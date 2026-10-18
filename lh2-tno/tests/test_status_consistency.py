@@ -71,6 +71,23 @@ def test_current_status_aliases_match_authoritative_union_and_audit() -> None:
     assert f"{assessment['risk_atom_count']} risk atoms" in population_status
 
 
+def test_latest_external_evidence_recheck_includes_separate_equipment_model_root() -> None:
+    status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    record_path = ROOT / status["latest_external_evidence_recheck_record"]
+    record = load_json_object(record_path)
+    summary = record["summary"]
+    assert record["root_count"] == 6
+    assert summary["artifact_count"] == 707
+    assert summary["provider_response_count"] == 7
+    assert summary["qualification_artifact_count"] == 0
+    assert summary["physical_validation_artifact_count"] == 0
+    equipment_root = record["roots"]["inspection_center_equipment_model"]
+    assert equipment_root["artifact_count"] == 662
+    assert equipment_root["provider_response_count"] == 7
+    assert equipment_root["qualification_artifact_count"] == 0
+    assert status["latest_external_evidence_recheck_facility_ir_fn_allowed"] is False
+
+
 def test_latest_github_actions_run_is_bound_to_both_status_ledgers() -> None:
     report = _report()
     check = next(
