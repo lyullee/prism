@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from lh2_tno.campaign_packet_rebind import (
+    _load_selected_release,
     _load_selected_state_snapshot,
     _request_from_selected_packet,
     packet_rebind_provenance,
@@ -110,6 +111,49 @@ def test_rebind_binds_pressure_equalization_operator_and_natural_duration():
     assert rebound["source_operator"] == "equipment_pressure_equalization"
     assert rebound["source_duration_mode"] == "model_natural"
     assert rebound["release_termination"]["basis"] == "model_pressure_equalization"
+
+
+def test_rebind_refreshes_stale_natural_duration_for_finite_provider_clock():
+    request = _request()
+    request["source_duration_mode"] = "model_natural"
+    release = _release().model_copy(update={"termination_basis": "reviewed_isolation_success"})
+
+    rebound = _request_from_selected_packet(request, release)
+
+    assert rebound["source_duration_mode"] == "declared"
+
+
+def test_inventory_horizon_packet_can_bind_without_random_opening_match(tmp_path):
+    event_id = "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
+    packet = _release().model_copy(
+        update={
+            "event_id": event_id,
+            "termination_basis": "inventory_over_600s",
+            "termination_provenance": "finite provider inventory horizon",
+            "failure_opening_diameter_m": None,
+        }
+    )
+    packet_path = tmp_path / "resolved_release.json"
+    packet_path.write_text(
+        json.dumps(packet.model_dump(mode="json")), encoding="utf-8"
+    )
+
+    release = _load_selected_release(
+        event_id,
+        {
+            "evidence": {
+                "event_identity_match": True,
+                "exact_opening_match": False,
+                "termination_basis": "inventory_over_600s",
+                "strict_packet_valid": True,
+                "resolved_packet_paths": [str(packet_path)],
+            }
+        },
+        tmp_path,
+    )
+
+    assert release.event_id == event_id
+    assert release.termination_basis == "inventory_over_600s"
 
 
 def test_selected_packet_state_snapshot_is_loaded_from_verification_sidecar(tmp_path):

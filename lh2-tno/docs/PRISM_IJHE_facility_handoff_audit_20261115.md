@@ -85,26 +85,28 @@ A `PASS` result means that `CURRENT_STATUS.json` points to the stored audit, the
 
 The current 34-event union was independently scanned using exact event identity
 and `provider_result_digest` matching. The saved records are
-[`facility_chain_packet_evidence_scan_current.json`](../results/20261115/facility_chain_packet_evidence_scan_current.json)
-and [`facility_chain_closure_audit_current_union.json`](../results/20261115/facility_chain_closure_audit_current_union.json).
+[`facility_chain_packet_evidence_rebuilt_current.json`](../results/20261115/facility_chain_packet_evidence_rebuilt_current.json)
+and [`facility_chain_closure_audit_rebuilt_current_union.json`](../results/20261115/facility_chain_closure_audit_rebuilt_current_union.json).
 
-The rebuilt base catalog contains 23 exact native packet exports out of 24
-declared base events. Combined with five existing vertical-handoff packets and five explicit
-inventory namespace-rebound packets, 33 of the 34 union event identities pass
-the diagnostic chain-closure check. One ambient-vaporizer G1 event remains
-uncomputed. The inventory packets are source-traced diagnostic rebinds and do
-not count as qualified provider evidence. Ten explicit inventory-basis aliases were
-accepted only after duration, mass, and provenance checks and are recorded per
-event. Conditional IR/F-N aggregation remains a diagnostic calculation, while
+The rebuilt base catalog contains 24 exact native packet exports for all 24
+declared base events. The ambient-vaporizer G1 packet was materialized from the
+current external source with an explicit `inventory_over_600s` bounded horizon.
+Combined with five existing vertical-handoff packets and five explicit inventory
+namespace-rebound packets, all 34 of the 34 union event identities pass the
+diagnostic chain-closure check. The G1 and inventory packets are source-traced
+diagnostic rebinds and do not count as qualified provider evidence. Inventory
+aliases were accepted only after duration, mass, and provenance checks and are
+recorded per event. Conditional IR/F-N aggregation remains a diagnostic calculation, while
 facility total QRA, provider qualification, frequency binding from qualified
 packets, and independent facility validation remain withheld. This current-union
 record supersedes the historical 24-event chain record for current status
 reporting.
 
-The rebuilt union was also converted into a new facility assessment
-without rerunning provider or SLABx physics. It retains 34 events, 44 cases, and
-176 risk atoms, provides conditional diagnostic IR/F-N, and keeps total facility
-QRA withheld because the qualified case coverage is 0/44.
+The current-source base campaign was recomputed from the re-bound G1 packet and
+then merged with the vertical and inventory extensions. The resulting facility
+assessment retains 34 events, 44 cases, and 176 risk atoms, provides conditional
+diagnostic IR/F-N, and keeps total facility QRA withheld because the qualified
+case coverage is 0/44.
 
 The rebuilt packet catalog and machine-readable chain audit are
 [`native_full_scope_packet_catalog_current_rebuild`](../results/20261115/native_full_scope_packet_catalog_current_rebuild/)
@@ -112,7 +114,8 @@ and [`facility_chain_closure_audit_rebuilt_current_union.json`](../results/20261
 
 SLABx-LH2 is treated as the frozen validated consequence component. The open
 gates concern equipment release evidence, termination/inventory closure, and
-facility-level qualification around that fixed component.\n
+facility-level qualification around that fixed component.
+
 
 The initial inventory-extension scan found only embedded identities; that historical
 gap is preserved in [`inventory_extension_packet_gap_recheck_current.json`](../results/20261115/inventory_extension_packet_gap_recheck_current.json).

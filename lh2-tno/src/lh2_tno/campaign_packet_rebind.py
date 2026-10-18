@@ -49,7 +49,17 @@ def _load_selected_release(
     evidence = evidence_row.get("evidence")
     if not isinstance(evidence, dict):
         raise ProviderReleaseContractError(f"worklist evidence has no evidence object: {event_id}")
-    if evidence.get("exact_opening_match") is not True or evidence.get("strict_packet_valid") is not True:
+    # Inventory-horizon packets deliberately do not carry a random failure
+    # opening.  They still need an exact event identity and a strict packet
+    # contract before they can be rebound.  Keep the opening check for leak
+    # packets, while allowing the explicit inventory identity gate for these
+    # two provider-owned termination modes.
+    opening_match = evidence.get("exact_opening_match") is True
+    inventory_identity_match = (
+        evidence.get("event_identity_match") is True
+        and evidence.get("termination_basis") in {"inventory_depletion", "inventory_over_600s"}
+    )
+    if (not opening_match and not inventory_identity_match) or evidence.get("strict_packet_valid") is not True:
         raise ProviderReleaseContractError(f"worklist evidence is not exact/strict: {event_id}")
     paths = evidence.get("resolved_packet_paths")
     if not isinstance(paths, list) or len(paths) != 1 or not isinstance(paths[0], str):
@@ -215,6 +225,19 @@ def _request_from_selected_packet(
             defaults["source_operator"] = "equipment_liquid_release"
         else:
             defaults["source_operator"] = "equipment_pressure_equalization"
+    elif getattr(release, "termination_basis", None) in {
+        "reviewed_isolation_success",
+        "reviewed_isolation_failure",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "emergency_relief_discharge",
+        "two_sided_rupture",
+    }:
+        # A changed provider packet can carry a different termination basis
+        # from the older campaign template.  Explicit finite-horizon and
+        # inventory packets use the declared provider clock; retaining a
+        # stale model-natural mode would reject an otherwise valid packet.
+        defaults["source_duration_mode"] = "declared"
     source_operator = source_operator_by_basis.get(getattr(release, "termination_basis", None))
     if source_operator is not None:
         # The provider termination basis determines which explicit equipment

@@ -1,18 +1,16 @@
 {
   "schema_version": "prism.native_full_scope_packet_catalog_rebuild.v1",
-  "status": "PARTIAL_DIAGNOSTIC_CATALOG",
+  "status": "EXECUTED_DIAGNOSTIC_CATALOG_WITH_G1_REBIND",
   "external_source_root": "C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016",
   "external_source_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
   "external_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
   "frequency_event_count": 24,
-  "exact_native_packet_count": 23,
-  "uncomputed_event_count": 1,
-  "uncomputed_event_ids": [
-    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
-  ],
+  "exact_native_packet_count": 24,
+  "uncomputed_event_count": 0,
+  "uncomputed_event_ids": [],
   "catalog_rebuild_command": "python scripts/build_native_generic_scope_packet_catalog.py --lh2dt-root C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016 --manifest examples/generic_lh2_full_scope_manifest.json --frequency-plan examples/generic_lh2_full_scope_frequency_plan.json --output-dir .tmp_native_catalog_current_rebuild --isolation-time-s 0.1 --post-isolation-observation-s 0.2",
-  "stored_file_count": 51,
-  "stored_resolved_packet_count": 23,
+  "stored_file_count": 54,
+  "stored_resolved_packet_count": 24,
   "stored_sha256": {
     "accidental_catalog.json": "b1942712bc53651b93a5a9698a0b7a7ce63c269d5c2a5f8337b5692385730fa1",
     "emergency_relief_catalog.json": "6f749a55561af5d1231a7073de620ab207ca2aef55921064cbf507e89b86fcfe",
@@ -52,6 +50,9 @@
     "events/016_liquid-transfer-pump-01_G1/verification.json": "fbfadbb61e16682973bf6df567fac7c3c838d931007aaed2f9ab3435d0fc8bf1",
     "events/017_liquid-transfer-pump-01_G2/resolved_release.json": "18bd12589cb66ad01cb193d9fd8f86e70b0be3fcb262293ad1f2282e8bcbe5b1",
     "events/017_liquid-transfer-pump-01_G2/verification.json": "d38ebdc0a89ab440e63ba9faf3ea1f01e942f7703d708373d0eb321420b292e9",
+    "events/018_ambient-vaporizer-01_G1/provider_response.json": "3a8eb32accb303cf8e3f35fc78ec2184c6083179a4e9b82c2785dc5a30bf954b",
+    "events/018_ambient-vaporizer-01_G1/resolved_release.json": "0f15481eb1b861e40a79506f5542c65a9aa23645dae6c78c36907343d4269894",
+    "events/018_ambient-vaporizer-01_G1/verification.json": "8ed6c820e022e27d674b320758d11f5ec5310a74d3136b9769367e8072bcc680",
     "events/019_ambient-vaporizer-01_G2/resolved_release.json": "4a6ccca092a65bca15e129d87932d8e6b5e945fd379ccc6a110c88bb1cfe4b6e",
     "events/019_ambient-vaporizer-01_G2/verification.json": "819189e9dd49bac24d23d5a2af2426e16bc480d6c01ff41c348db4a8e9d8f36c",
     "events/020_ambient-vaporizer-01_G3/resolved_release.json": "fb7cc18c907846d242463219f0050e3edf7a73e84d012cb8acc86224e91b769a",
@@ -62,14 +63,16 @@
     "events/022_reliquefier-01_G5/verification.json": "38bd22f5348efec7f25ad125e5067fbaebe0666f5b4516eac284b63f571ac19a",
     "events/023_reliquefier-01_G6/resolved_release.json": "f74b6539fb9cb63fc8bddfb86b80f606b6ddd1acd4a5c0810109963ba7fc9953",
     "events/023_reliquefier-01_G6/verification.json": "1148c54e3cf6cf91f142e0fa27d22392a81f68762b54ad74ab012262b854c5db",
-    "state_snapshot_binding_audit.json": "7b7dfee6bc61010675ea9fff5a882505f609f34d20eb28ea6d3e0b95dca74975",
+    "state_snapshot_binding_audit.json": "bce491c9bfe82152a1cdc74cd87f7d0eb3e3133e398df5db3de52200968b0268",
     "two_sided_catalog.json": "c761235e3cbaffdd6430eb3722ba4e357cce675c59e0a8fd601c02add0776d5d",
-    "verification.json": "270b595b900016f5f53fdd4ddeebb147900856ac18451b05c05bd4fa92fdef4e"
+    "verification.json": "b4331a35f0f2527b7d521331809b44bbfb0597adea4a5af94e81c45802c8e791"
   },
   "qualified_provider_packet_count": 0,
   "frequency_bound": false,
   "physical_validation_claim": false,
   "facility_qra_claim": false,
   "diagnostic_only": true,
-  "interpretation": "The catalog was regenerated from the latest external model source. It is a structural diagnostic catalog; synthetic geometry and model-prediction inputs remain unqualified."
+  "interpretation": "The catalog was regenerated from external source 7072374c and the remaining ambient-vaporizer G1 packet was materialized by an explicit current-source inventory_over_600s bounded-horizon rebind. All 24 events have diagnostic packets and state snapshot echoes; synthetic geometry, model-prediction inputs, qualification, physical validation, frequency binding and facility QRA remain withheld.",
+  "catalog_rebind_provenance": "examples/native_full_scope_g1_current_source_rebind_20261018.json",
+  "catalog_rebind_command": "python scripts/export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py --lh2dt-root C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016 --output-dir .tmp_current_g1_707_retry --component-id ambient-vaporizer-01 --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 --mode vaporizer --release-mode inventory_over_600s --duration-s 600.0 --time-step-s 0.1 --port-id vaporizer-accident-out --position-enu-m 10.0 0.0 1.0"
 }

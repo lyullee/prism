@@ -1,6 +1,6 @@
 {
   "schema_version": "prism.facility_chain_packet_evidence_scan.v2",
-  "status": "REBUILT_BASE_PLUS_VERTICAL_PLUS_INVENTORY_REBOUND_DIAGNOSTIC",
+  "status": "REBUILT_BASE_G1_REBOUND_PLUS_VERTICAL_PLUS_INVENTORY_REBOUND_DIAGNOSTIC",
   "rows": [
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
@@ -886,9 +886,58 @@
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/provider-release",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "component_id": "ambient-vaporizer-01",
-      "status": "UNCOMPUTED_PROVIDER_PACKET",
-      "candidate_count": 0,
-      "evidence": null
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/018_ambient-vaporizer-01_G1/provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/018_ambient-vaporizer-01_G1/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.DynamicVaporizer",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": false,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "rebind_provenance": "examples/native_full_scope_g1_current_source_rebind_20261018.json",
+        "termination_basis": "inventory_over_600s",
+        "duration_s": 600.0,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 4.956379784841932e-06,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared",
+            "bounded_horizon_not_full_inventory_depletion"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "inventory_over_600s"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic dynamic gas-unit inventory and diagnostic valve area",
+            "no failure opening is attached",
+            "no site calibration, isolation reliability or independent validation",
+            "600 s bounded horizon is not full inventory depletion"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        },
+        "event_identity_match": true,
+        "opening_match_policy": "not_applicable_for_explicit_inventory_horizon"
+      }
     },
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/provider-release",
@@ -1349,7 +1398,7 @@
     }
   ],
   "event_count": 34,
-  "matched_event_count": 33,
+  "matched_event_count": 34,
   "qualified_provider_packet_count": 0,
   "frequency_bound": false,
   "physical_validation_claim": false,
@@ -1359,13 +1408,13 @@
   "base_packet_catalog_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
   "base_packet_catalog_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
   "base_packet_catalog_event_count": 24,
-  "base_packet_catalog_exact_packet_count": 23,
+  "base_packet_catalog_exact_packet_count": 24,
   "vertical_packet_catalog": "results/20261115/vertical_inventory_handoff_campaign/termination_evidence",
   "vertical_packet_catalog_event_count": 5,
-  "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/campaign_result.json",
+  "campaign_result": "results/20261115/native_full_scope_union_assessment_current_source_g1_rebound/campaign_result.json",
   "exact_digest_match_only": true,
   "diagnostic_only": true,
-  "interpretation": "Exact/strict packet identities were combined from the rebuilt 24-event base catalog and existing vertical-handoff evidence. The rebuilt base catalog has 23/24 packet exports; one ambient-vaporizer event remains uncomputed. Inventory-depletion extension events remain without exact packet evidence. The chain audit records basis aliases explicitly and does not qualify provider evidence or promote facility QRA. Five inventory-depletion extension packets are now materialized from the source equipment campaign under an explicit namespace-rebind sidecar; source/result digests, duration, mass and termination provenance were checked before attachment. This closes diagnostic packet traceability only and does not qualify the provider or promote facility QRA.",
+  "interpretation": "The current external source recheck materialized the ambient-vaporizer G1 packet with an explicit inventory_over_600s bounded horizon. The fresh 24-event base campaign and 34-event union were recomputed from current-source packets; all 34 packet identities are exact diagnostic matches, with provider qualification and facility QRA still withheld.",
   "inventory_extension_packet_catalog": "results/20261115/inventory_extension_packet_catalog_current_rebuild",
   "inventory_extension_packet_catalog_event_count": 5,
   "inventory_extension_packet_catalog_rebound_packet_count": 5

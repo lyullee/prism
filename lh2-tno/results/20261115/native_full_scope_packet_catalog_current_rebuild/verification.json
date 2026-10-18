@@ -1,13 +1,13 @@
 {
   "schema_version": "prism.native_generic_scope_packet_catalog.v1",
-  "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_PARTIAL",
+  "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED_DIAGNOSTIC",
   "manifest": "examples\\generic_lh2_full_scope_manifest.json",
   "frequency_plan": "examples\\generic_lh2_full_scope_frequency_plan.json",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
   "external_model_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
   "frequency_event_count": 24,
-  "exact_native_packet_count": 23,
-  "uncomputed_event_count": 1,
+  "exact_native_packet_count": 24,
+  "uncomputed_event_count": 0,
   "retry_succeeded_event_count": 1,
   "event_rows": [
     {
@@ -1100,10 +1100,10 @@
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "component_id": "ambient-vaporizer-01",
       "profile": "TNO_HX_OUTSIDE_TUBES",
-      "mode": "instantaneous_inventory",
+      "mode": "inventory_over_600s",
       "script": "export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py",
       "event_dir": "events/018_ambient-vaporizer-01_G1",
-      "returncode": 1,
+      "returncode": 0,
       "attempts": [
         {
           "attempt_index": 0,
@@ -1139,8 +1139,16 @@
         }
       ],
       "elapsed_s": 1.9389387999544851,
-      "status": "UNCOMPUTED_EXPORT_FAILED",
-      "stderr_tail": "dynamic LH2 inventory export failed: provider accident export failed: ValueError: instantaneous inventory provider reached zero flow before inventory depletion; use an explicit bounded horizon or a provider depletion mechanism\n"
+      "status": "EXACT_NATIVE_PACKET",
+      "stderr_tail": "dynamic LH2 inventory export failed: provider accident export failed: ValueError: instantaneous inventory provider reached zero flow before inventory depletion; use an explicit bounded horizon or a provider depletion mechanism\n",
+      "packet_kind": "release",
+      "retry_used": false,
+      "rebind_used": true,
+      "rebind_provenance": "examples/native_full_scope_g1_current_source_rebind_20261018.json",
+      "diagnostic_termination_basis": "inventory_over_600s",
+      "diagnostic_duration_s": 600.0,
+      "isolation_requested": false,
+      "isolation_success": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
@@ -1401,7 +1409,7 @@
     }
   ],
   "catalog_counts": {
-    "accidental_release": 20,
+    "accidental_release": 21,
     "emergency_relief": 1,
     "two_sided_rupture": 2
   },
@@ -1412,11 +1420,12 @@
   },
   "state_snapshot_binding": {
     "audit": "state_snapshot_binding_audit.json",
-    "status": "PARTIAL_STATE_SNAPSHOT_BINDING",
+    "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
     "record_count": 24,
-    "bound_count": 23,
-    "unbound_count": 1,
-    "digest_mismatch_count": 0
+    "bound_count": 24,
+    "unbound_count": 0,
+    "digest_mismatch_count": 0,
+    "echo_match_count": 24
   },
   "provider_packet_promoted": false,
   "frequency_inference_performed": false,
@@ -1426,7 +1435,7 @@
     "generic manifest and all exporter states are synthetic diagnostic inputs",
     "frequency remains in the separate literature frequency plan",
     "packet identity coverage does not establish qualified provider evidence or facility IR/F-N",
-    "failed exports remain explicit uncomputed worklist events"
+    "G1 uses an explicit 600 s bounded inventory horizon; this is diagnostic termination evidence, not full inventory depletion or provider qualification."
   ],
   "isolation_branch": {
     "requested": true,
@@ -1463,5 +1472,9 @@
     },
     "total_elapsed_s": 208.21854319993872,
     "measurement": "wall-clock subprocess time; diagnostic exporter execution only"
-  }
+  },
+  "rebound_event_count": 1,
+  "rebound_event_ids": [
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
+  ]
 }

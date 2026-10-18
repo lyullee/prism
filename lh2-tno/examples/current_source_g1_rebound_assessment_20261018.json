@@ -1,0 +1,86 @@
+{
+  "schema_version": "prism.current_source_g1_rebound_assessment.v1",
+  "status": "CURRENT_SOURCE_G1_REBOUND_AND_FULL_CHAIN_RECHECKED_DIAGNOSTIC",
+  "checked_at": "2026-10-18",
+  "external_source": {
+    "root": "C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016",
+    "head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+    "source_tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "tracked_dirty_path_count": 0,
+    "untracked_benchmark_path_count": 2
+  },
+  "catalog_recheck": {
+    "record": "results/20261115/native_full_scope_packet_catalog_current_rebuild/catalog_rebuild_summary.json",
+    "declared_frequency_event_count": 24,
+    "exact_native_packet_count": 24,
+    "uncomputed_event_count": 0,
+    "g1_rebind_record": "examples/native_full_scope_g1_current_source_rebind_20261018.json"
+  },
+  "g1_rebind": {
+    "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "prior_termination_basis": "instantaneous_inventory",
+    "termination_basis": "inventory_over_600s",
+    "duration_s": 600.0,
+    "available_mass_kg": 0.0008238536226639276,
+    "cumulative_mass_out_kg": 4.956379784841932e-06,
+    "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "provider_result_digest": "ed5834cf6bc19e46030f9f4e10e570a74cee905619f3df17ee7f603471c02191",
+    "dynamic_state_closure_status": "READY",
+    "status": "EXECUTED",
+    "opening_match_policy": "not_applicable_for_explicit_inventory_horizon"
+  },
+  "fresh_base_campaign": {
+    "record": "results/20261115/native_full_scope_frequency_assessment_current_source_g1_rebound/campaign_result.json",
+    "status": "NATIVE_FULL_SCOPE_FREQUENCY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+    "event_count": 24,
+    "case_count": 24,
+    "risk_atom_count": 96,
+    "executed_case_count": 24,
+    "operator_limited_case_count": 11,
+    "strict_uncomputed_case_count": 13,
+    "facility_total_risk_available": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "runner_elapsed_ms": 455412.5312999822
+  },
+  "merged_union": {
+    "record": "results/20261115/native_full_scope_union_assessment_current_source_g1_rebound/campaign_result.json",
+    "verification_record": "results/20261115/native_full_scope_union_assessment_current_source_g1_rebound/verification.json",
+    "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
+    "event_count": 34,
+    "case_count": 44,
+    "risk_atom_count": 176,
+    "facility_total_risk_available": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "chain_closure": {
+    "record": "results/20261115/facility_chain_closure_audit_rebuilt_current_union.json",
+    "status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+    "packet_event_count": 34,
+    "packet_chain_closed_event_count": 34,
+    "campaign_events_without_packet_count": 0,
+    "packet_chain_mismatch_event_count": 0,
+    "facility_ir_aggregate_closed": true,
+    "facility_fn_aggregate_closed": true
+  },
+  "tests": {
+    "prism_full_suite": "1573 passed, 1 warning",
+    "external_lh2dt_suite": "377 passed, 1 warning",
+    "packet_rebind_targeted": "9 passed, 1 warning"
+  },
+  "interpretation": [
+    "The current source changed relative to the prior recorded source and was rechecked before use.",
+    "The missing ambient-vaporizer G1 packet is now materialized by an explicit 600 s bounded-horizon inventory rebind and reaches the consequence chain.",
+    "All 34 union event identities are chain-closed diagnostically with zero packet mismatches.",
+    "The 600 s packet is not full inventory depletion, and synthetic geometry, literature applicability, provider qualification, independent physical validation and facility QRA remain withheld.",
+    "SLABx-LH2 remains a frozen validated consequence component; no SLABx code or validation was changed."
+  ],
+  "reproduction": {
+    "g1_packet": "python scripts/export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py --lh2dt-root C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016 --output-dir .tmp_current_g1_707_retry --component-id ambient-vaporizer-01 --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 --mode vaporizer --release-mode inventory_over_600s --duration-s 600.0 --time-step-s 0.1 --port-id vaporizer-accident-out --position-enu-m 10.0 0.0 1.0",
+    "base_campaign": "python scripts/run_native_full_scope_frequency_assessment.py --manifest examples/generic_lh2_full_scope_manifest.json --campaign .tmp_current_source_g1_campaign_rebound.json --backend-config results/20261009/backend_config_current.json --output-dir .tmp_current_source_707_assessment",
+    "union": "python scripts/run_native_full_scope_union_assessment.py --base-dir .tmp_current_source_707_assessment ... --output-dir .tmp_current_source_707_union",
+    "chain_audit": "python scripts/audit_facility_chain_closure.py --campaign-result .tmp_current_source_707_union/campaign_result.json --packet-evidence results/20261115/facility_chain_packet_evidence_rebuilt_current.json --output .tmp_current_source_707_union/chain_audit.json"
+  }
+}
+

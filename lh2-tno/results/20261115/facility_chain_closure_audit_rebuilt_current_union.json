@@ -6,11 +6,11 @@
   "campaign_event_count": 34,
   "campaign_case_count": 44,
   "campaign_risk_atom_count": 176,
-  "packet_event_count": 33,
-  "packet_chain_closed_event_count": 33,
+  "packet_event_count": 34,
+  "packet_chain_closed_event_count": 34,
   "packet_chain_mismatch_event_count": 0,
   "packet_chain_mismatch_event_ids": [],
-  "campaign_events_without_packet_count": 1,
+  "campaign_events_without_packet_count": 0,
   "event_rows": [
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
@@ -190,10 +190,10 @@
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "component_id": "ambient-vaporizer-01",
-      "packet_row_count": 0,
+      "packet_row_count": 1,
       "case_count": 1,
       "risk_atom_count": 4,
-      "status": "HANDOFF_OR_PACKET_MISSING",
+      "status": "CLOSED_DIAGNOSTIC",
       "blocking_reasons": [],
       "termination_basis_aliases_applied": [],
       "qualified_provider_packet": false,
@@ -485,16 +485,5 @@
   "frequency_from_provider_packet": false,
   "physical_validation_claim": false,
   "facility_qra_claim": false,
-  "interpretation": "The event rows prove that packet release aggregates reached termination/inventory cases, risk atoms carried final harm fields, and the conditional facility IR/F-N sum was independently recomputed. Missing handoff packets, provider qualification, scope completeness, and physical validation remain promotion gates. Known inventory-basis aliases are recorded per event and do not alter the provider duration, mass, or provenance checks.",
-  "audit_scope": "rebuilt generic LH2 full-scope union with source-traced inventory namespace-rebound packets",
-  "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/campaign_result.json",
-  "packet_evidence_scan": "results/20261115/facility_chain_packet_evidence_rebuilt_current.json",
-  "packet_root": ".",
-  "base_packet_catalog_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
-  "base_packet_catalog_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
-  "base_packet_catalog_exact_packet_count": 23,
-  "base_packet_catalog_uncomputed_event_count": 1,
-  "inventory_extension_packet_catalog": "results/20261115/inventory_extension_packet_catalog_current_rebuild",
-  "inventory_extension_packet_rebind_record": "results/20261115/inventory_extension_packet_rebind_recheck_current.json",
-  "supersedes_previous_record": "results/20261115/facility_chain_closure_audit_current_union.json"
+  "interpretation": "The event rows prove that packet release aggregates reached termination/inventory cases, risk atoms carried final harm fields, and the conditional facility IR/F-N sum was independently recomputed. Missing handoff packets, provider qualification, scope completeness, and physical validation remain promotion gates. Known inventory-basis aliases are recorded per event and do not alter the provider duration, mass, or provenance checks."
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "prism.state_snapshot_binding_audit.v1",
-  "status": "PARTIAL_STATE_SNAPSHOT_BINDING",
+  "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
   "policy": {
     "canonical_schema": "prism.equipment_state_snapshot.v1",
     "digest_only_is_binding": false,
@@ -10,15 +10,14 @@
     "facility_qra_claim": false
   },
   "record_count": 24,
-  "bound_count": 23,
-  "echo_match_count": 23,
+  "bound_count": 24,
+  "echo_match_count": 24,
   "digest_mismatch_count": 0,
   "declared_digest_only_count": 0,
-  "unbound_count": 1,
+  "unbound_count": 0,
   "snapshot_requested_no_echo_count": 0,
   "status_counts": {
-    "BOUND_AND_ECHOED": 23,
-    "UNBOUND": 1
+    "BOUND_AND_ECHOED": 24
   },
   "rows": [
     {
@@ -314,16 +313,16 @@
       "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\.tmp_native_catalog_current_rebuild\\events\\018_ambient-vaporizer-01_G1\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "component_id": "ambient-vaporizer-01",
-      "status": "UNBOUND",
-      "snapshot_present": false,
-      "snapshot_schema_version": null,
-      "declared_digest": null,
-      "computed_digest": null,
-      "provider_echo_digest": null,
-      "provider_source_digest": null,
-      "provider_result_digest": null,
-      "digest_match": false,
-      "reason": "no canonical equipment state snapshot or state digest was recorded"
+      "status": "BOUND_AND_ECHOED",
+      "snapshot_present": true,
+      "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
+      "declared_digest": "ac69fdaa3d2def1c231be4150170db7b5e48f5b9a1b8c28433a9505c529b4177",
+      "computed_digest": "ac69fdaa3d2def1c231be4150170db7b5e48f5b9a1b8c28433a9505c529b4177",
+      "provider_echo_digest": "ac69fdaa3d2def1c231be4150170db7b5e48f5b9a1b8c28433a9505c529b4177",
+      "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+      "provider_result_digest": "ed5834cf6bc19e46030f9f4e10e570a74cee905619f3df17ee7f603471c02191",
+      "digest_match": true,
+      "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
@@ -414,7 +413,7 @@
   ],
   "physical_validation_claim": false,
   "facility_qra_claim": false,
-  "interpretation": "Only a validated canonical equipment state payload with a matching provider echo counts as bound. This ledger does not qualify the model, assign frequency, or promote facility risk.",
+  "interpretation": "All 24 native events have a canonical state snapshot with a matching provider echo. This ledger remains diagnostic and does not qualify the model, assign frequency, or promote facility risk.",
   "inputs": {
     "verification_records": [
       "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\.tmp_native_catalog_current_rebuild\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",

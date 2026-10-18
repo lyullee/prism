@@ -1,0 +1,47 @@
+{
+  "schema_version": "prism.native_full_scope_g1_current_source_rebind.v1",
+  "status": "CURRENT_SOURCE_G1_REBOUND_DIAGNOSTIC",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "component_id": "ambient-vaporizer-01",
+  "external_source_root": "C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016",
+  "external_source_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "external_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "prior_declared_mode": "instantaneous_inventory",
+  "prior_declared_export_status": "UNCOMPUTED_EXPORT_FAILED",
+  "rebound_mode": "inventory_over_600s",
+  "rebound_reason": "current source provider reached zero flow before instantaneous inventory depletion; explicit bounded horizon was selected and recorded rather than substituting a short release",
+  "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "provider_result_digest": "ed5834cf6bc19e46030f9f4e10e570a74cee905619f3df17ee7f603471c02191",
+  "duration_s": 600.0,
+  "available_mass_kg": 0.0008238536226639276,
+  "cumulative_mass_out_kg": 4.956379784841932e-06,
+  "termination_basis": "inventory_over_600s",
+  "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
+  "strict_packet_duration_s": 600.0,
+  "strict_packet_interval_count": 96,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 0.0,
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "ac69fdaa3d2def1c231be4150170db7b5e48f5b9a1b8c28433a9505c529b4177",
+    "provider_echo_digest": "ac69fdaa3d2def1c231be4150170db7b5e48f5b9a1b8c28433a9505c529b4177",
+    "digest_match": true
+  },
+  "promotion": {
+    "provider_packet_promoted": false,
+    "frequency_inference": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "limitations": [
+    "synthetic dynamic gas-unit inventory and diagnostic valve area",
+    "no failure opening is attached",
+    "no site calibration, isolation reliability or independent validation"
+  ],
+  "reproduction_command": "python scripts/export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py --lh2dt-root C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016 --output-dir .tmp_current_g1_707_retry --component-id ambient-vaporizer-01 --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 --mode vaporizer --release-mode inventory_over_600s --duration-s 600.0 --time-step-s 0.1 --port-id vaporizer-accident-out --position-enu-m 10.0 0.0 1.0",
+  "artifact_paths": {
+    "resolved_release": "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/018_ambient-vaporizer-01_G1/resolved_release.json",
+    "provider_response": "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/018_ambient-vaporizer-01_G1/provider_response.json",
+    "verification": "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/018_ambient-vaporizer-01_G1/verification.json"
+  }
+}
