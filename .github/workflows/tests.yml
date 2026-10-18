@@ -73,12 +73,12 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Install package and test dependencies
-        run: python -m pip install -e './lh2-tno[test]' setuptools wheel
+      - name: Install package and public runtime dependencies
+        run: python -m pip install -e './lh2-tno[full]' setuptools wheel
       - name: Run portable tests
         working-directory: lh2-tno
         run: python -m pytest -q
       - name: Verify frequency catalogue is shipped in the wheel
         run: |
           python -m pip wheel --no-deps --no-build-isolation ./lh2-tno -w wheelhouse
-          python -c "import glob,zipfile; z=zipfile.ZipFile(glob.glob('wheelhouse/prism_risk-*.whl')[0]); assert 'lh2_tno/data/frequency_catalogue.json' in z.namelist(); assert 'tno_host.py' in z.namelist(); ep=z.read(next(n for n in z.namelist() if n.endswith('.dist-info/entry_points.txt'))).decode(); assert 'prism = tno_host:main' in ep"
+          python -c "import glob,zipfile; z=zipfile.ZipFile(glob.glob('wheelhouse/prism_risk-*.whl')[0]); assert 'lh2_tno/data/frequency_catalogue.json' in z.namelist(); assert 'prism_qra/qra.py' in z.namelist(); assert 'prism_cli.py' in z.namelist(); ep=z.read(next(n for n in z.namelist() if n.endswith('.dist-info/entry_points.txt'))).decode(); assert 'prism = prism_cli:main' in ep"
