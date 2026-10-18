@@ -130,6 +130,58 @@ def test_forecast_facility_campaign_binds_each_trigger_without_inference(monkeyp
     assert captured["campaigns"][0]["campaign_id"] == "forecast:TK-01|TK-01-pressure|12"
 
 
+def test_forecast_facility_campaign_preserves_provider_release_boundary_gate():
+    campaign = _forecast_campaign()
+    identity = {
+        "event_id": "forecast-event-tank",
+        "component_id": "TK-01",
+        "provider_result_digests": ["c" * 64],
+        "termination_bases": ["inventory_depletion"],
+        "duration_s": [1.0],
+        "available_mass_kg": [10.0],
+        "cumulative_mass_out_kg": [9.0],
+        "provider_mass_balances": [{
+            "initial_mass_kg": 10.0,
+            "final_mass_kg": 1.0,
+            "cumulative_mass_out_kg": 9.0,
+        }],
+    }
+    campaign["cases"][0].update({
+        "termination": {
+            "basis": "inventory_depletion",
+            "time_s": 1.0,
+            "provenance": "forecast provider inventory ledger",
+        },
+        "mass_ledger": {"released_kg": 9.0, "end_to_end_residual_kg": 0.0},
+        "provider_packet_identity": identity,
+    })
+    campaign["risk_atoms"][0]["provider_packet_identity"] = identity
+
+    result = build_hazop_forecast_facility_campaign_result(
+        _forecast_campaign_scan(),
+        campaign_bindings={
+            "TK-01|TK-01-pressure|12": {
+                "component_id": "TK-01",
+                "scenario_id": "TK-01-pressure",
+                "forecast_time_s": 12.0,
+                "operating_mode": "receiving",
+                "campaign": campaign,
+            }
+        },
+        expected_component_ids=("TK-01",),
+    )
+
+    ledger = result["facility_ledger"]
+    assert ledger["provider_release_boundary_case_count"] == 1
+    assert ledger["provider_release_boundary_ready"] is False
+    assert ledger["facility_total_risk_available"] is False
+    assert ledger["conditional_diagnostic_facility_risk_available"] is True
+    assert any(
+        "provider-backed release boundary is not closed" in reason
+        for reason in ledger["blocking_reasons"]
+    )
+
+
 def test_forecast_facility_campaign_rejects_missing_trigger_binding():
     with pytest.raises(IntegratedRiskError, match="cover exactly every quantitative trigger"):
         build_hazop_forecast_facility_campaign_result(
