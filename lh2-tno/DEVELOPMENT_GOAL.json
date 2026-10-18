@@ -5202,5 +5202,16 @@
   "external_provider_workspace_recheck_20261018_qualification_artifact_count": 0,
   "external_provider_workspace_recheck_20261018_physical_validation_artifact_count": 0,
   "external_provider_workspace_recheck_20261018_facility_ir_fn_allowed": false,
-  "external_provider_workspace_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; current root scan does not reopen SLABx work"
+  "external_provider_workspace_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; current root scan does not reopen SLABx work",
+  "external_lh2dt_equipment_project_recheck_20261018_record": "examples/external_lh2dt_equipment_project_recheck_20261018.json",
+  "external_lh2dt_equipment_project_recheck_20261018_status": "CURRENT_SEPARATE_EQUIPMENT_SOURCE_RECHECK_BASELINE_ONLY",
+  "external_lh2dt_equipment_project_recheck_20261018_source_digest": "e5e65214ce3869e1bd57438380014d81dc1ef13d7258372a2490b5a9d74bb2a8",
+  "external_lh2dt_equipment_project_recheck_20261018_package_file_count": 28,
+  "external_lh2dt_equipment_project_recheck_20261018_package_hashes_match": true,
+  "external_lh2dt_equipment_project_recheck_20261018_artifact_count": 13,
+  "external_lh2dt_equipment_project_recheck_20261018_unique_tests_passed": 327,
+  "external_lh2dt_equipment_project_recheck_20261018_unique_tests_failed": 0,
+  "external_lh2dt_equipment_project_recheck_20261018_field_score_promoted": false,
+  "external_lh2dt_equipment_project_recheck_20261018_facility_qra_claim": false,
+  "external_lh2dt_equipment_project_recheck_20261018_change_detection": "BASELINE_RECHECK_ONLY; previous digest unavailable"
 }

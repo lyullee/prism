@@ -1,0 +1,50 @@
+{
+  "schema_version": "prism.external_lh2dt_equipment_project_recheck.v1",
+  "recheck_date_kst": "2026-10-18",
+  "status": "CURRENT_SEPARATE_EQUIPMENT_SOURCE_RECHECK_BASELINE_ONLY",
+  "project_title": "액화수소 설비 디지털 트윈 모델링#2",
+  "project_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt",
+  "source_digest_sha256": "e5e65214ce3869e1bd57438380014d81dc1ef13d7258372a2490b5a9d74bb2a8",
+  "previous_recorded_source_digest_available": false,
+  "change_detection": "BASELINE_RECHECK_ONLY; PRISM has no earlier digest for this separate engineering project, so no change claim is made beyond this current baseline",
+  "audit_record": "results/20261008/equipment_coupling_review/deliverable_audit.json",
+  "package_manifest_verification": "results/20261008/equipment_coupling_review/package_manifest_verification.json",
+  "package": {
+    "scope": [
+      "TK-1101",
+      "TK-1102"
+    ],
+    "file_count": 28,
+    "all_hashes_match": true
+  },
+  "artifact_snapshot_count": 13,
+  "source_regression_snapshot": {
+    "unique_testcase_count": 327,
+    "passed": 327,
+    "failed": 0,
+    "skipped": 0,
+    "field_score_promoted": false,
+    "actual_event_times_assigned": 0,
+    "full_unit_mean_accuracy_percent": null
+  },
+  "coupling_assessment": {
+    "separate_project_modified_by_prism_reviewer": false,
+    "equipment_outputs_are_reviewed_snapshots": true,
+    "native_prism_provider_qualification_claim": false,
+    "facility_ir_fn_or_qra_claim": false,
+    "field_physical_validation_claim": false,
+    "inspection_center_parameters_promoted": false,
+    "sensor_feedback_into_forward_run_claim": false,
+    "actual_event_times_inferred": false,
+    "interpretation": "The separate equipment model remains a reviewed state/port/export source. Its current artifacts support interface review and diagnostic replay; they do not close provider qualification, field validation, accident frequency, or facility QRA gates."
+  },
+  "slabx_lh2_policy": "CLOSED_VALIDATED_COMPONENT; this recheck neither changes nor reopens SLABx-LH2 code or validation.",
+  "promotion": {
+    "source_promoted_to_authoritative_facility_union": false,
+    "provider_packet_promoted": false,
+    "frequency_inference": false,
+    "physical_validation": false,
+    "facility_qra": false
+  }
+}
