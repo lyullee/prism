@@ -5157,7 +5157,7 @@
   ],
   "ijhe_completion_audit_current_source_diagnostic_20261018_physical_validation_claim": false,
   "ijhe_completion_audit_current_source_diagnostic_20261018_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_current_source_diagnostic_20261018_sha256": "CB2EFBE5E79CB2F3AC2ACE6DB79BAE76B2A5233A5B876492E66B2C299BB76D3A",
+  "ijhe_completion_audit_current_source_diagnostic_20261018_sha256": "44CEF5966E84C56CF74BECB32C81A8D19CDF0E7BB274BCE757CA18AF7107B105",
   "hazop_event_mode_binding_current_recheck_record": "examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json",
   "hazop_event_mode_binding_current_recheck_status": "HAZOP_EVENT_MODE_BINDING_COMPLETE; 34/34 explicit rows; no mode/scenario/frequency inference",
   "hazop_event_mode_binding_current_recheck_event_count": 34,
@@ -5191,7 +5191,7 @@
     "facility_qra_claim": false
   },
   "external_lh2dt_current_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
-  "latest_full_portable_test_status": "1533 passed, 1 warning; current local recheck after HAZOP merge audit",
+  "latest_full_portable_test_status": "1534 passed, 1 warning; current local recheck after SLABx scope-gate audit",
   "latest_external_contract_recheck_record": "examples/external_lh2dt_current_source_recheck_20261018.json",
   "external_provider_workspace_recheck_20261018_record": "results/20261018/external_provider_workspace_roots_inventory_current_recheck.json",
   "external_provider_workspace_recheck_20261018_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
@@ -5217,5 +5217,7 @@
   "facility_full_chain_physical_validation_status": "OPEN",
   "facility_full_chain_physical_validation_policy": "SLABx-LH2 component validation is closed; only facility-wide independent release-to-damage validation remains open",
   "ijhe_completion_audit_current_source_diagnostic_20261018_slabx_component_gate": "CLOSED_VALIDATED_COMPONENT; excluded from remaining blocker",
-  "ijhe_completion_audit_current_source_diagnostic_20261018_facility_full_chain_validation_status": "OPEN"
+  "ijhe_completion_audit_current_source_diagnostic_20261018_facility_full_chain_validation_status": "OPEN",
+  "latest_local_full_suite_recheck_record": "python -m pytest -q; 1534 passed, 1 warning",
+  "latest_local_full_suite_recheck_commit": "33ffaf85"
 }
