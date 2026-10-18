@@ -12,7 +12,7 @@
   "searches": [
     {
       "label": "current external digital-twin provider",
-      "root": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델",
+      "root": "<external-lh2dt-model-root>",
       "source_digest": "4564f6d7941f68b4abe8eab1af645e4d08074f9fec62158a1e0aa67c78983f70",
       "json_files_scanned": 559,
       "normal_or_screening_flow_files": 24,
@@ -23,7 +23,7 @@
     },
     {
       "label": "legacy PRISM IJHE step-1 outputs",
-      "root": "C:/Users/lyul/Desktop/DocuData/TNO_위험분석모듈/TNO_SYSTEM/코드/개발기록_20261009/PRISM_IJHE_step1",
+      "root": "<external-evidence-root>",
       "inventory_digest": "2fc8fa9745ee87796b2ad2820e309a0f0a52ad537e580481f62313f41a238973",
       "json_files_scanned": 84,
       "accident_release_candidate_files": 42,

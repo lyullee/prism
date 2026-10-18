@@ -3,7 +3,7 @@
   "status": "CURRENT_SOURCE_G1_REBOUND_AND_FULL_CHAIN_RECHECKED_DIAGNOSTIC",
   "checked_at": "2026-10-18",
   "external_source": {
-    "root": "C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016",
+    "root": "<external-lh2dt-model-root>",
     "head": "7072374c59b726f4e938cd37e7695684ddc70b68",
     "source_tree_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
     "tracked_dirty_path_count": 0,
@@ -77,7 +77,7 @@
     "SLABx-LH2 remains a frozen validated consequence component; no SLABx code or validation was changed."
   ],
   "reproduction": {
-    "g1_packet": "python scripts/export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py --lh2dt-root C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016 --output-dir .tmp_current_g1_707_retry --component-id ambient-vaporizer-01 --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 --mode vaporizer --release-mode inventory_over_600s --duration-s 600.0 --time-step-s 0.1 --port-id vaporizer-accident-out --position-enu-m 10.0 0.0 1.0",
+    "g1_packet": "python scripts/export_lh2dt_dynamic_vaporizer_inventory_prism_packet.py --lh2dt-root <external-lh2dt-model-root> --output-dir build/g1_packet --component-id ambient-vaporizer-01 --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 --mode vaporizer --release-mode inventory_over_600s --duration-s 600.0 --time-step-s 0.1 --port-id vaporizer-accident-out --position-enu-m 10.0 0.0 1.0",
     "base_campaign": "python scripts/run_native_full_scope_frequency_assessment.py --manifest examples/generic_lh2_full_scope_manifest.json --campaign .tmp_current_source_g1_campaign_rebound.json --backend-config results/20261009/backend_config_current.json --output-dir .tmp_current_source_707_assessment",
     "union": "python scripts/run_native_full_scope_union_assessment.py --base-dir .tmp_current_source_707_assessment ... --output-dir .tmp_current_source_707_union",
     "chain_audit": "python scripts/audit_facility_chain_closure.py --campaign-result .tmp_current_source_707_union/campaign_result.json --packet-evidence results/20261115/facility_chain_packet_evidence_rebuilt_current.json --output .tmp_current_source_707_union/chain_audit.json"

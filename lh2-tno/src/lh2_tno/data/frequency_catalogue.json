@@ -807,11 +807,11 @@
   ],
   "source_files": [
     {
-      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\TNO_위험분석모듈\\TNO_SYSTEM\\eBook___The_coloured_books\\TheColouredBooks\\PurpleBook.pdf",
+      "path": "PurpleBook.pdf (reviewed source; local copy not required at runtime)",
       "sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796"
     },
     {
-      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261008\\tno_function_inventory\\frequency_library.json",
+      "path": "results/20261008/tno_function_inventory/frequency_library.json (project snapshot)",
       "sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b"
     }
   ],

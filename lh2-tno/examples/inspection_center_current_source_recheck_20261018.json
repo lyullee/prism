@@ -3,7 +3,7 @@
   "status": "UNCHANGED_FROM_PRIOR_RECHECK",
   "checked_on": "2026-10-18",
   "source_root_label": "액화수소검사지원센터 데이터",
-  "source_root": "C:/Users/lyul/Desktop/DocuData/액화수소검사지원센터 데이터",
+  "source_root": "<inspection-centre-data-root>",
   "comparison_basis": {
     "prior_scenario_reaudit": "results/20261115/inspection_center_evidence_reaudit_current.json",
     "prior_header_bound_state": "results/20261017/inspection_center_header_bound_state_evidence_current.json",

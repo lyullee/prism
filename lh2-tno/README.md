@@ -13,7 +13,7 @@ PRISM is a Python research framework for connecting process and equipment state,
 Install the latest published package:
 
 ```powershell
-python -m pip install "prism-risk[full]==0.6.4"
+python -m pip install "prism-risk[full]==0.6.5"
 prism --describe-modes
 ```
 
@@ -55,14 +55,14 @@ for the current 44-case counts and open evidence requests.
 
 The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 28 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
 
-[PRISM 0.6.4 distribution and verification record](docs/PRISM_v064_distribution_en.md).
+[PRISM 0.6.5 distribution and verification record](docs/PRISM_v065_distribution_en.md).
 
 For the exact public-repository, external-backend, and KGS interpretation
 boundary, see the [public/private boundary note](docs/PRISM_public_private_boundary_and_KGS_interpretation_20261018.md).
 
 ## What PRISM is for
 
-For development after v0.6.4, see the [public LH2 backend guide](docs/PRISM_public_LH2_backend_20261018_en.md).
+For the public LH2 backend and source-boundary guide, see [PRISM public LH2 backend](docs/PRISM_public_LH2_backend_20261018_en.md).
 It configures the bundled QRA and source/transition interfaces from installed
 public packages, runs a real LH2 chain, and reports unavailable or timed-out
 cases explicitly. These additions are in the source checkout, beyond the
@@ -634,7 +634,7 @@ operating mode; it records the workbook digest and marks the rows as
 
 ```powershell
 python scripts/build_process_forecast_frames.py `
-  --source "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터\3. 액화수소 공급 시나리오 데이터\액화수소_공급_예측데이터_10회차.xlsx" `
+  --source "path/to/your/process_forecast.xlsx" `
   --sheet-index 0 `
   --mapping examples/inspection_center_supply_forecast_mapping.json `
   --facility-id inspection-centre-diagnostic `
@@ -800,8 +800,8 @@ an annual facility QRA result.
 
 It sends receiving, standby, and supply frames as one batch. The first two
 remain `WITHHELD_HAZOP_NO_DEVIATION`; only the explicitly mapped supply
-vaporizer branch reaches the provider packet and SLABx-LH2/TNO consequence
-chain. The generated record is
+vaporizer branch reaches the provider packet and the PRISM consequence
+chain (including the optional SLABx-LH2 dispersion adapter). The generated record is
 `examples/inspection_center_facility_hazop_bridge.json`, with the method,
 evidence boundary, and interpretation documented in
 [`PRISM_검사센터_시설HAZOP_브리지_20261017.md`](docs/PRISM_검사센터_시설HAZOP_브리지_20261017.md).
@@ -875,7 +875,7 @@ run the combined read-only command below:
 
 ```powershell
 python scripts/build_inspection_center_evidence_reaudit.py `
-  --source-root "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터" `
+  --source-root "path/to/your/inspection-centre-data" `
   --output results/20261115/inspection_center_evidence_reaudit_current.json `
   --scenario-audit-output results/20261115/inspection_center_scenario_evidence_current.json `
   --scenario-import-output results/20261115/inspection_center_scenario_import_current.json `
@@ -899,7 +899,7 @@ relief release-boundary gate remains closed. Rebuild it with:
 
 ```powershell
 python scripts/build_inspection_center_sequence_evidence.py `
-  --source "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터\2. 액화수소 저장(벤트) 시나리오 데이터\액화수소저장벤트_운전시퀀스.csv" `
+  --source "path/to/your/vent-operation-sequence.csv" `
   --scenario "액화수소 저장(벤트)" `
   --output results/20261115/inspection_center_operation_sequence_evidence.json
 ```

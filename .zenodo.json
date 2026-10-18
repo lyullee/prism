@@ -1,7 +1,7 @@
 {
-  "title": "PRISM: Process Risk Integration and Scenario Modeling (v0.6.4)",
+  "title": "PRISM: Process Risk Integration and Scenario Modeling (v0.6.5)",
   "upload_type": "software",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "publication_date": "2026-10-18",
   "creators": [
     {
@@ -11,7 +11,7 @@
   ],
   "access_right": "open",
   "license": "mit",
-  "description": "<p>PRISM 0.6.4 bundles the project-authored standard quantitative risk assessment implementation and public Python installation dependencies. It connects facility inputs, literature frequencies, release and consequence calculations, ignition and harm models, and conditional IR/F-N outputs. The optional LH2 workflow integrates equipment digital twins and public consequence providers through explicit contracts. This release removes the dependency on an unpublished local QRA folder. Complete facility qualification, independent full-chain validation, and fresh-physics real-time performance remain subject to the documented evidence gates.</p>",
+  "description": "<p>PRISM 0.6.5 bundles the project-authored standard quantitative risk assessment implementation and public Python installation dependencies. It connects facility inputs, literature frequencies, release and consequence calculations, ignition and harm models, and conditional IR/F-N outputs. The optional LH2 workflow integrates equipment digital twins and public consequence providers through explicit contracts. This release removes machine-specific source paths from the public runtime and examples. Complete facility qualification, independent full-chain validation, and fresh-physics real-time performance remain subject to the documented evidence gates.</p>",
   "keywords": [
     "liquid hydrogen",
     "quantitative risk assessment",
@@ -20,12 +20,12 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/lyullee/prism/tree/v0.6.4",
+      "identifier": "https://github.com/lyullee/prism/tree/v0.6.5",
       "relation": "isSupplementTo",
       "scheme": "url"
     },
     {
-      "identifier": "https://pypi.org/project/prism-risk/0.6.4/",
+      "identifier": "https://pypi.org/project/prism-risk/0.6.5/",
       "relation": "isIdenticalTo",
       "scheme": "url"
     },

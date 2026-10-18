@@ -2,7 +2,7 @@
   "schema": "prism.external_lh2dt_screening_evidence.v1",
   "snapshot_date": "2026-10-09",
   "source": {
-    "project_root": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델",
+    "project_root": "<external-lh2dt-model-root>",
     "thread_title": "액화수소 설비 디지털 트윈 모델링#2",
     "thread_id": "01a0ef39-9210-7213-b372-8c7f666a39b1",
     "machine_status_recorded_date": "2026-10-06",
@@ -41,7 +41,7 @@
     "parameter_fitting_or_inverse_estimation": false
   },
   "process_extension_catalog_evidence": {
-    "source_path": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/tmp/process_extension/extension_data.json",
+    "source_path": "<external-lh2dt-model-root>/tmp/process_extension/extension_data.json",
     "sha256": "c31f6aa9a7e1690db9ec54a24e40cb1ff4fd661d373c06625a8f1ca584afdade",
     "failure_mode_count": 444,
     "family_count": 31,
