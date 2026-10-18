@@ -11,6 +11,7 @@ packet, infer a frequency, or open the facility IR/F-N result.
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `_external_lh2dt_models_20261016` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 1 | 2 | 0 | 0 | 0 | 0 |
 | `_prism_clean_lh2dt_models_16f7a4b` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 1 | 2 | 0 | 0 | 0 | 0 |
+| `06_액화수소_디지털트윈_물리모델/tmp_native_contract` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 22 | 0 | 7 | 0 | 0 | 0 |
 | `SLABx_LH2/.release-work/DynamicLH2PoolX-review` | `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY` | 40 | 15 | 0 | 0 | 0 | 0 |
 | `액화수소검사지원센터 데이터` | `NO_EXTERNAL_JSON_ARTIFACTS` | 0 | 24 | 0 | 0 | 0 | 0 |
 
@@ -21,6 +22,12 @@ tables, and the SLABx workspace contains validation CSVs;
 the separate high-resolution comparison audit is still treated as component
 comparison evidence.  It is not an end-to-end accident-release validation
 packet.
+
+The current five-root recheck is recorded in
+`results/20261115/external_provider_workspace_roots_recheck_20261018_current.json`.
+It includes seven native equipment-model provider responses from the contract
+workspace. They have no qualification sidecar, independent physical-validation
+claim, or facility-QRA claim, so they remain diagnostic inputs only.
 
 ## Promotion boundary
 

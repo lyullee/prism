@@ -1,0 +1,1014 @@
+{
+  "schema_version": "prism.provider_artifact_roots_audit.v1",
+  "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+  "root_count": 5,
+  "roots": {
+    "prism_clean_lh2dt": {
+      "schema_version": "prism.provider_artifact_audit.v1",
+      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+      "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\_prism_clean_lh2dt_models_16f7a4b",
+      "artifact_count": 1,
+      "supporting_file_count": 2,
+      "supporting_files": [
+        {
+          "file": "src/lh2dt/data/nasa_tn_d4171_table1.csv",
+          "suffix": ".csv",
+          "size_bytes": 1636,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "src/lh2dt/data/nasa_tn_d4171_table2.csv",
+          "suffix": ".csv",
+          "size_bytes": 1406,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        }
+      ],
+      "provider_response_count": 0,
+      "verification_artifact_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 1,
+      "artifacts": [
+        {
+          "file": ".zenodo.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      ],
+      "errors": [],
+      "promotion_policy": {
+        "frequency_assigned": false,
+        "provider_release_packet_promoted": false,
+        "physical_validation_promoted": false,
+        "facility_qra_promoted": false,
+        "supporting_documents_are_not_qualification_evidence": true,
+        "qualification_requires_separate_exact_digest_bound_evidence": true
+      },
+      "blocking_reasons": [
+        "no provider_response.json artifact was found",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    },
+    "external_lh2dt": {
+      "schema_version": "prism.provider_artifact_audit.v1",
+      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+      "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
+      "artifact_count": 2,
+      "supporting_file_count": 2,
+      "supporting_files": [
+        {
+          "file": "src/lh2dt/data/nasa_tn_d4171_table1.csv",
+          "suffix": ".csv",
+          "size_bytes": 1636,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "src/lh2dt/data/nasa_tn_d4171_table2.csv",
+          "suffix": ".csv",
+          "size_bytes": 1406,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        }
+      ],
+      "provider_response_count": 0,
+      "verification_artifact_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 2,
+      "artifacts": [
+        {
+          "file": ".zenodo.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "docs/benchmarks/nasa_tn_d4171_hem_results.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      ],
+      "errors": [],
+      "promotion_policy": {
+        "frequency_assigned": false,
+        "provider_release_packet_promoted": false,
+        "physical_validation_promoted": false,
+        "facility_qra_promoted": false,
+        "supporting_documents_are_not_qualification_evidence": true,
+        "qualification_requires_separate_exact_digest_bound_evidence": true
+      },
+      "blocking_reasons": [
+        "no provider_response.json artifact was found",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    },
+    "equipment_contract": {
+      "schema_version": "prism.provider_artifact_audit.v1",
+      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+      "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract",
+      "artifact_count": 22,
+      "supporting_file_count": 0,
+      "supporting_files": [],
+      "provider_response_count": 7,
+      "verification_artifact_count": 7,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 22,
+      "artifacts": [
+        {
+          "file": "layered/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "layered/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "layered/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "pipe/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "pipe/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "pipe/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "pump/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "pump/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "pump/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "reliquefier/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "reliquefier/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "reliquefier/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "valve/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "valve/provider_response_strict.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "valve/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "valve/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "vaporizer/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "vaporizer/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "vaporizer/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "vent/provider_response.json",
+          "kind": "provider_response",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "vent/resolved_release.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "vent/verification.json",
+          "kind": "verification",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      ],
+      "errors": [],
+      "promotion_policy": {
+        "frequency_assigned": false,
+        "provider_release_packet_promoted": false,
+        "physical_validation_promoted": false,
+        "facility_qra_promoted": false,
+        "supporting_documents_are_not_qualification_evidence": true,
+        "qualification_requires_separate_exact_digest_bound_evidence": true
+      },
+      "blocking_reasons": [
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    },
+    "slabx_validation": {
+      "schema_version": "prism.provider_artifact_audit.v1",
+      "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+      "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review",
+      "artifact_count": 40,
+      "supporting_file_count": 15,
+      "supporting_files": [
+        {
+          "file": "data/hse_rr985_test6_radius.csv",
+          "suffix": ".csv",
+          "size_bytes": 1521,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "data/juel3155_radius_observations.csv",
+          "suffix": ".csv",
+          "size_bytes": 2723,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/juel_metrics.csv",
+          "suffix": ".csv",
+          "size_bytes": 473,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/juel_parameter_sensitivity.csv",
+          "suffix": ".csv",
+          "size_bytes": 346,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/juel_radius_comparison.csv",
+          "suffix": ".csv",
+          "size_bytes": 3456,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/juel_trajectories.csv",
+          "suffix": ".csv",
+          "size_bytes": 92301,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/matched_source_comparison.csv",
+          "suffix": ".csv",
+          "size_bytes": 81077,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/output_resolution_check.csv",
+          "suffix": ".csv",
+          "size_bytes": 545,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/scenario_summary.csv",
+          "suffix": ".csv",
+          "size_bytes": 2249,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/scenario_trajectories.csv",
+          "suffix": ".csv",
+          "size_bytes": 2713622,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/data/sensitivity_summary.csv",
+          "suffix": ".csv",
+          "size_bytes": 1742,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/hse_rr985_test6_radius.csv",
+          "suffix": ".csv",
+          "size_bytes": 1521,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/juel3155_radius_observations.csv",
+          "suffix": ".csv",
+          "size_bytes": 2723,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/hse_validation/radius_comparison.csv",
+          "suffix": ".csv",
+          "size_bytes": 2385,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/hse_validation/trajectory.csv",
+          "suffix": ".csv",
+          "size_bytes": 436411,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        }
+      ],
+      "provider_response_count": 0,
+      "verification_artifact_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 40,
+      "artifacts": [
+        {
+          "file": ".zenodo.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "data/dynamic_validation_protocol.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "data/source_manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "data/stage_c_evidence.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "data/stage_c_protocol.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "data/validation_manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "outputs/stage_c/convergence/manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/code/protocol.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/dynamic_validation_protocol.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/source_manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/stage_c_evidence.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/stage_c_protocol.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/data/validation_manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/model_snapshot/dynamiclh2poolx/outputs/stage_c/convergence/manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/audit.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/calculation_manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/figure_sha256.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/figure_sha256_original.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/fine_dr_dt.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/front_0.5mm.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/front_1.0mm.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/hse_validation/manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/juel_replay_manifest.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/k_0.744.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/k_1.116.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/model_snapshot_sha256.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/output_dt_0.5s.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/runtime_repeats.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.03535_stop180.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.03535_stop561.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.03535_stop60.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.07070_stop180.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.07070_stop561.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.07070_stop60.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.14140_stop180.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.14140_stop561.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/scenario_q0.14140_stop60.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/T0_256K.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/results/T0_276K.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        },
+        {
+          "file": "research/post_shutoff_20261009/SHA256.json",
+          "kind": "other_json",
+          "qualification_evidence_present": false,
+          "physical_validation_claim": false,
+          "complete_facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      ],
+      "errors": [],
+      "promotion_policy": {
+        "frequency_assigned": false,
+        "provider_release_packet_promoted": false,
+        "physical_validation_promoted": false,
+        "facility_qra_promoted": false,
+        "supporting_documents_are_not_qualification_evidence": true,
+        "qualification_requires_separate_exact_digest_bound_evidence": true
+      },
+      "blocking_reasons": [
+        "no provider_response.json artifact was found",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    },
+    "inspection_center": {
+      "schema_version": "prism.provider_artifact_audit.v1",
+      "status": "NO_EXTERNAL_JSON_ARTIFACTS",
+      "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+      "artifact_count": 0,
+      "supporting_file_count": 24,
+      "supporting_files": [
+        {
+          "file": "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 835400,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "1. 액화수소 인수 시나리오 데이터/액화수소인수_운전시퀀스.csv",
+          "suffix": ".csv",
+          "size_bytes": 18283,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 289206,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소저장벤트_운전시퀀스.csv",
+          "suffix": ".csv",
+          "size_bytes": 3249,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "3. 액화수소 공급 시나리오 데이터/수소공급_운전시퀀스.csv",
+          "suffix": ".csv",
+          "size_bytes": 24269,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 932028,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "NASA 극저온 수소 피스톤펌프 시험자료.pdf",
+          "suffix": ".pdf",
+          "size_bytes": 1603845,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "NASA 액화수소 원심펌프 시험자료.pdf",
+          "suffix": ".pdf",
+          "size_bytes": 2533906,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "액화수소 인수·저장(벤트)·공급 시나리오 설명자료.pdf",
+          "suffix": ".pdf",
+          "size_bytes": 678003,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "액화수소 인수·저장(벤트)·공급 시나리오 설명자료.pptx",
+          "suffix": ".pptx",
+          "size_bytes": 1249201,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 50603,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/1. 저장탱크 인수 시나리오/1월23일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 92664,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/1. 저장탱크 인수 시나리오/3월24일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 105378,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/1. 저장탱크 인수 시나리오/4월16일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 105564,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/1. 저장탱크 인수 시나리오/5월29일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 107200,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/1. 저장탱크 인수 시나리오/7월23일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 99380,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/2. 저장탱크 벤트 시나리오/저장탱크 데이터.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 5602415,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월15일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 112529,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월21일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 86649,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/4월22일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 80019,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월17일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 82324,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월22일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 78662,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월29일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 81696,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        },
+        {
+          "file": "원본 학습데이터/3. 저장탱크 공급 시나리오/6월4일.xlsx",
+          "suffix": ".xlsx",
+          "size_bytes": 86639,
+          "qualification_evidence_present": false,
+          "provider_release_promoted": false
+        }
+      ],
+      "provider_response_count": 0,
+      "verification_artifact_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "diagnostic_artifact_count": 0,
+      "artifacts": [],
+      "errors": [],
+      "promotion_policy": {
+        "frequency_assigned": false,
+        "provider_release_packet_promoted": false,
+        "physical_validation_promoted": false,
+        "facility_qra_promoted": false,
+        "supporting_documents_are_not_qualification_evidence": true,
+        "qualification_requires_separate_exact_digest_bound_evidence": true
+      },
+      "blocking_reasons": [
+        "no provider_response.json artifact was found",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    }
+  },
+  "summary": {
+    "artifact_count": 65,
+    "provider_response_count": 7,
+    "verification_artifact_count": 7,
+    "qualification_artifact_count": 0,
+    "physical_validation_artifact_count": 0,
+    "complete_facility_qra_artifact_count": 0,
+    "diagnostic_artifact_count": 65,
+    "supporting_file_count": 43,
+    "qualification_evidence_present": false,
+    "independent_physical_validation_present": false,
+    "complete_facility_qra_claim_present": false,
+    "facility_ir_fn_allowed": false
+  },
+  "blocking_reasons": [
+    "no artifact claims a complete facility QRA",
+    "no artifact claims independent physical validation",
+    "no prism.provider_qualification_evidence.v1 record was found",
+    "no provider_response.json artifact was found"
+  ],
+  "promotion_policy": {
+    "roots_remain_separate": true,
+    "frequency_assigned": false,
+    "provider_release_packet_promoted": false,
+    "physical_validation_promoted": false,
+    "facility_qra_promoted": false,
+    "supporting_documents_are_not_qualification_evidence": true,
+    "qualification_requires_separate_exact_digest_bound_evidence": true
+  }
+}
