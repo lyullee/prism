@@ -115,3 +115,10 @@ exercises this two-equipment contract.  It verifies that `TK-01` remains in
 stay separate.  This is an integration-contract test with synthetic provider
 records; it is not evidence that a real terminal's provider packets are
 qualified.
+
+A current one-component replay receipt is stored at
+[`examples/equipment_hazop_quantitative_campaign_recheck_20261018.json`](../examples/equipment_hazop_quantitative_campaign_recheck_20261018.json).
+It shows the explicit `receiving` state and HAZOP scenario reaching one
+provider-backed case and four diagnostic risk atoms.  Its residual inventory
+keeps `provider_release_boundary_ready=false`, so the facility total remains
+withheld as required by the fail-closed policy.

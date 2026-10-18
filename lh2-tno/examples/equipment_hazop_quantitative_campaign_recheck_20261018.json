@@ -1,0 +1,72 @@
+{
+  "schema_version": "prism.equipment_hazop_quantitative_campaign_recheck_receipt.v1",
+  "generated_at_utc": "2026-10-18T11:06:59.408686+09:00",
+  "source_manifest": "examples/equipment_hazop_quantitative_campaign.json",
+  "source_manifest_sha256": "5510bfe0c7c3b635b2dd7450506b2b04263741f3eba1adb515944aa9cea1eda1",
+  "status": "EQUIPMENT_HAZOP_QUANTITATIVE_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+  "facility_id": "generic-outdoor-lh2",
+  "component_count": 1,
+  "risk_atom_count": 4,
+  "scenario_identity_crosswalk": {
+    "schema_version": "prism.equipment_hazop_scenario_identity_crosswalk.v1",
+    "status": "SCENARIO_IDENTITY_CROSSWALK_ALIGNED",
+    "selected_qualitative_scenario_count": 1,
+    "crosswalk_row_count": 1,
+    "matched_row_count": 1,
+    "rows": [
+      {
+        "component_id": "TK-01",
+        "qualitative_scenario_id": "high-pressure:receiving:vessel_hole",
+        "quantitative_scenario_id": "TK01-high-pressure-receiving"
+      }
+    ],
+    "blocking_reasons": [],
+    "policy": {
+      "qualitative_scenario_identity_inferred": false,
+      "quantitative_scenario_identity_inferred": false,
+      "component_identity_inferred": false,
+      "mode_identity_inferred": false
+    }
+  },
+  "selected_path": {
+    "component_id": "TK-01",
+    "operating_mode": "receiving",
+    "hazop_scenario_id": "TK01-high-pressure-receiving",
+    "event_id": "evt-tk01-hole",
+    "status": "EXECUTED_OPERATOR_LIMITED",
+    "termination": {
+      "basis": "model_pressure_equalization",
+      "time_s": 2.0,
+      "provenance": "reviewed provider packet"
+    },
+    "mass_ledger": {
+      "released_kg": 80.0,
+      "end_to_end_residual_kg": 20.0
+    }
+  },
+  "facility_ledger_gate": {
+    "provider_release_boundary_case_count": 1,
+    "provider_release_boundary_ready": false,
+    "facility_total_risk_available": false,
+    "qualified_facility_qra_available": false,
+    "conditional_diagnostic_facility_risk_available": true,
+    "blocking_reasons": [
+      "campaign e909333726fa7d697da2bd1d33aabdd90fcebf1e6822228a4592fa281c738861: declared scope is incomplete",
+      "campaign e909333726fa7d697da2bd1d33aabdd90fcebf1e6822228a4592fa281c738861: uncomputed cases remain",
+      "provider-backed release boundary is not closed; facility total IR/F-N remains withheld",
+      "component TK-01: PARTIAL",
+      "facility case-risk trace: 4 risk atoms are linked to non-EXECUTED case status"
+    ]
+  },
+  "policy": {
+    "dispatch_performed": true,
+    "release_created_by_prism": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "slabx_lh2_executed": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false,
+    "downstream_values_are_explicit_provider_and_literature_inputs": true
+  },
+  "interpretation": "Synthetic integration-manifest replay only. The monitoring state and receiving-mode HAZOP identity reach the provider-bound release ledger and conditional risk atoms. The open provider release boundary and incomplete scope keep facility total IR/F-N withheld; no frequency or consequence value is inferred."
+}
