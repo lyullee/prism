@@ -89,6 +89,22 @@ def test_case_audit_accepts_explicit_pressure_equalization_boundary():
     assert report["rows"][0]["strict_release_boundary_status"] == "ELIGIBLE"
 
 
+def test_case_audit_blocks_explicit_provider_mass_basis_mismatch():
+    case = _case("basis-mismatch")
+    row = _ledger_row("basis-mismatch")
+    row["provider"].update({
+        "provider_mass_basis_ids": ["upstream-reserve", "local-pipe-inventory"],
+        "provider_mass_basis_status": "EXPLICIT_MISMATCH",
+    })
+    report = build_release_boundary_case_audit(_assessment([case], [row]))
+    audited = report["rows"][0]
+    assert audited["provider_mass_basis_status"] == "EXPLICIT_MISMATCH"
+    assert audited["strict_release_boundary_status"] == "PROMOTION_BLOCKED"
+    assert "provider_mass_basis_explicit_mismatch" in audited[
+        "release_boundary_blocking_reasons"
+    ]
+
+
 def test_case_audit_accepts_pressure_equalization_overlay_for_bounded_history():
     case = _case("bounded-pressure-eq")
     row = _ledger_row("bounded-pressure-eq", basis="inventory_over_600s")
