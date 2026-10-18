@@ -533,6 +533,16 @@ promote `facility_ir_fn_calculated` or `facility_qra_promotion` until qualified
 provider evidence, independent validation and complete facility scope are
 available.
 
+When a provider packet is consumed by the facility ledger, the same release
+boundary audit is applied again at facility scope. A provider-backed case with
+an open inventory residual, an invalid isolation clock, or incomplete
+pressure-equalization evidence makes `provider_release_boundary_ready` false
+and keeps the facility total IR/F-N fields withheld. The diagnostic risk atoms
+remain visible for review, but they cannot silently open the facility total.
+Legacy campaign rows that contain no provider packet remain compatible with
+the older ledger contract and are still subject to the independent scope and
+qualification gates.
+
 The orchestration seam can be timed separately from fresh provider and SLABx-LH2
 physics with [`scripts/benchmark_generic_hazop_handoff.py`](scripts/benchmark_generic_hazop_handoff.py):
 

@@ -1353,6 +1353,26 @@ def merge_facility_campaign_results(
     strict_release_boundary = evaluate_facility_release_boundary(
         release_termination_inventory_ledger
     )
+    # A provider-backed campaign must carry a closed release boundary before
+    # its facility total can be treated as numerically complete.  Legacy
+    # campaign rows without a provider packet remain compatible with the
+    # historical ledger contract; they are still subject to the other scope
+    # and qualification gates.  This prevents an attached provider result
+    # with residual inventory, an invalid isolation clock, or missing
+    # pressure-equalization evidence from entering a facility IR/F-N total.
+    provider_boundary_case_count = sum(
+        bool((row.get("provider") or {}).get("packet_consumed"))
+        for row in release_termination_inventory_ledger["rows"]
+        if isinstance(row, Mapping)
+    )
+    if (
+        provider_boundary_case_count
+        and not strict_release_boundary["strict_release_boundary_ready"]
+    ):
+        source_complete = False
+        blocking_reasons.append(
+            "provider-backed release boundary is not closed; facility total IR/F-N remains withheld"
+        )
     expected_components = {str(component_id) for component_id in expected_component_ids}
     observed_components = set(seen_components)
     if not expected_components:
@@ -1843,6 +1863,10 @@ def merge_facility_campaign_results(
         "release_termination_inventory_summary": release_termination_inventory_ledger[
             "summary"
         ],
+        "provider_release_boundary_case_count": provider_boundary_case_count,
+        "provider_release_boundary_ready": strict_release_boundary[
+            "strict_release_boundary_ready"
+        ],
         "stage_timing": timing["stage_elapsed_ms"],
         "case_status_counts": dict(sorted(case_status_counts.items())),
         "dynamic_state_closure_status_counts": dict(
@@ -1902,6 +1926,7 @@ def merge_facility_campaign_results(
         "scenario_branch_accounting": scenario_branch_accounting,
         "release_termination_inventory_ledger": release_termination_inventory_ledger,
         "strict_release_boundary": strict_release_boundary,
+        "provider_release_boundary_case_count": provider_boundary_case_count,
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,

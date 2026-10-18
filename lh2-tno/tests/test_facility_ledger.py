@@ -903,6 +903,52 @@ def test_facility_ledger_carries_release_duration_isolation_and_inventory_rows()
     assert row["provider"]["residual_mass_kg"] == [9.8]
 
 
+def test_provider_release_boundary_blocks_facility_total_when_inventory_remains():
+    result = _result(
+        event_id="event-provider-inventory-open",
+        asset_id="asset-provider-inventory-open",
+        component_id="tank-provider-inventory-open",
+        frequency=1e-3,
+    )
+    identity = {
+        "event_id": "event-provider-inventory-open",
+        "component_id": "tank-provider-inventory-open",
+        "provider_result_digests": ["c" * 64],
+        "termination_bases": ["inventory_depletion"],
+        "duration_s": [1.0],
+        "available_mass_kg": [10.0],
+        "cumulative_mass_out_kg": [9.0],
+        "provider_mass_balances": [{
+            "initial_mass_kg": 10.0,
+            "final_mass_kg": 1.0,
+            "cumulative_mass_out_kg": 9.0,
+        }],
+    }
+    result["cases"][0].update({
+        "termination": {
+            "basis": "inventory_depletion",
+            "time_s": 1.0,
+            "provenance": "provider inventory ledger",
+        },
+        "mass_ledger": {"released_kg": 9.0, "end_to_end_residual_kg": 0.0},
+        "provider_packet_identity": identity,
+    })
+    result["risk_atoms"][0]["provider_packet_identity"] = identity
+
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-provider-inventory-open",)
+    )
+
+    assert merged["strict_release_boundary"]["strict_release_boundary_ready"] is False
+    assert merged["provider_release_boundary_case_count"] == 1
+    assert merged["facility_total_risk_available"] is False
+    assert merged["total_facility_annual_ir_low_high"] is None
+    assert any(
+        "provider-backed release boundary is not closed" in reason
+        for reason in merged["blocking_reasons"]
+    )
+
+
 def test_facility_ledger_preserves_stage_timing_without_one_hz_claim():
     result = _result(
         event_id="event-stage-timing", asset_id="asset-stage-timing",

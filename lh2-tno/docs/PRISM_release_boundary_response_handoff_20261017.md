@@ -37,6 +37,14 @@ reports `facility_qra_promotion_allowed: false`; the completion audit can
 consume its `case_audit` as diagnostic evidence. Provider qualification and
 independent physical validation remain separate gates.
 
+The downstream `facility_ledger` applies the release-boundary decision again
+for provider-backed cases. If the provider packet was consumed but its strict
+termination ledger is not closed, the ledger records the blocking reasons and
+sets `facility_total_risk_available` to false. This prevents a diagnostic
+provider result with residual inventory or incomplete isolation evidence from
+entering the facility IR/F-N total while retaining the case and its known
+contribution for audit.
+
 The integration is covered by
 `tests/test_release_boundary_evidence_intake.py` and preserves the existing
 fail-closed behavior for missing, duplicated, stale, or invalid responses.
