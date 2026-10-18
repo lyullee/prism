@@ -58,6 +58,20 @@ def test_external_model_root_review_keeps_match_section_structured_without_closu
     }
 
 
+def test_external_model_root_review_evaluates_empty_closure_audit_fail_closed(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "empty-model"
+    root.mkdir()
+    report = review_external_lh2_model_root(root, closure_audit={})
+    match = report["external_match_review"]
+    assert match["status"] == "NO_EXACT_QUALIFIED_MATCH"
+    assert match["candidate_count"] == 0
+    assert match["exact_match_count"] == 0
+    assert match["qualification_artifact_count"] == 0
+    assert all(value is False for value in match["promotion"].values())
+
+
 def test_anonymized_model_validation_is_recorded_without_qra_promotion(tmp_path: Path) -> None:
     root = tmp_path / "model"
     benchmark_dir = root / "docs" / "benchmarks"

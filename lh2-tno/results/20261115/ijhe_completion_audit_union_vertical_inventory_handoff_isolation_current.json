@@ -5604,7 +5604,7 @@
       "evidence": {
         "implemented": true,
         "module": "src/lh2_tno/service.py",
-        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1559 passed, 1 warning; GitHub Actions run #1450 (39096007309; 73c0884c) completed successfully.",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger, population-evidence gate and promotion-block assertions; latest local full suite 1560 passed, 1 warning; GitHub Actions run #1451 (39096697016; 6c8ddbcd) completed successfully.",
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null
@@ -6194,7 +6194,7 @@
           "complete_facility_qra_artifact_count": 0
         },
         "external_match_review": {
-          "status": "NOT_EVALUATED_NO_CLOSURE_AUDIT",
+          "status": "NO_EXACT_QUALIFIED_MATCH",
           "candidate_count": 0,
           "exact_match_count": 0,
           "qualification_artifact_count": 0
