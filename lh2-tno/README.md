@@ -70,6 +70,7 @@ immutable published v0.6.5 artifacts.
 
 Before a facility campaign, run the [backend runtime preflight](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md#0-public-backend-runtime-preflight).
 It catches stale private or legacy source pins before a long campaign starts.
+The latest seven-equipment replay is recorded in the [public-backend chain recheck](docs/PRISM_public_backend_chain_recheck_20261018_en.md).
 
 PRISM helps an operator or researcher answer:
 
