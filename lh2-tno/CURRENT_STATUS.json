@@ -2012,7 +2012,7 @@
   "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v11.json",
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "current_union_status_consistency_record": "results/20261115/status_consistency_current.json",
-  "current_union_status_consistency_status": "CONSISTENT; 27 checks, 0 blockers; current union audit, assessment, evidence request, campaign ledger, facility case coverage and latest GitHub Actions pointers reconcile; facility IR/F-N remains withheld",
+  "current_union_status_consistency_status": "CONSISTENT; 28 checks, 0 blockers; current union audit, assessment, evidence request, campaign ledger, facility case coverage, latest test-suite pointers and latest GitHub Actions pointers reconcile; facility IR/F-N remains withheld",
   "diagnostic_union_chain_closure_audit_implemented": true,
   "diagnostic_union_chain_closure_audit_policy": "The completion audit may close the declared diagnostic chain from the exact packet subset plus a separately identified vertical-handoff subset when the combined closure proves exact union identity, event-count equality, no mismatches, and packet-subset identity consumption. This is diagnostic-only and cannot qualify providers, infer frequency, or promote facility IR/F-N.",
   "ijhe_completion_audit_latest_check_status_counts": {
@@ -6635,7 +6635,7 @@
     "facility_qra_claim": false
   },
   "current_external_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
-  "latest_local_full_suite_recheck_record": "python -m pytest -q; 1551 passed, 1 warning",
+  "latest_local_full_suite_recheck_record": "python -m pytest -q; 1556 passed, 1 warning; mass-basis drift fail-closed regression recheck",
   "latest_external_contract_recheck_record": "C:\\Temp\\prism_external_contract_recheck_20261018.json",
   "current_external_provider_workspace_recheck_20261018_record": "results/20261018/external_provider_workspace_roots_inventory_current_recheck.json",
   "current_external_provider_workspace_recheck_20261018_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",

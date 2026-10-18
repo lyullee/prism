@@ -151,6 +151,46 @@ def build_status_consistency_report(
         },
     )
 
+    # The status ledgers retain historical test counts, but their explicitly
+    # named latest-suite pointers must agree.  A stale prose field is easy to
+    # miss because the numeric count can still look correct elsewhere; fail
+    # closed when either ledger describes a different latest run.
+    latest_suite_count = current_status.get("latest_local_full_suite_recheck_count")
+    goal_suite_count = development_goal.get("latest_local_full_suite_recheck_count")
+    latest_suite_status = current_status.get("latest_local_full_suite_recheck_status")
+    goal_suite_status = development_goal.get("latest_local_full_suite_recheck_status")
+    latest_suite_record = current_status.get("latest_local_full_suite_recheck_record")
+    goal_suite_record = development_goal.get("latest_local_full_suite_recheck_record")
+    latest_suite_pointer_ok = (
+        isinstance(latest_suite_count, int)
+        and not isinstance(latest_suite_count, bool)
+        and latest_suite_count > 0
+        and latest_suite_count == goal_suite_count
+        and isinstance(latest_suite_status, str)
+        and str(latest_suite_count) in latest_suite_status
+        and isinstance(goal_suite_status, str)
+        and str(goal_suite_count) in goal_suite_status
+        and latest_suite_status == goal_suite_status
+        and isinstance(latest_suite_record, str)
+        and str(latest_suite_count) in latest_suite_record
+        and isinstance(goal_suite_record, str)
+        and str(goal_suite_count) in goal_suite_record
+        and latest_suite_record == goal_suite_record
+    )
+    _check(
+        checks,
+        "latest_local_full_suite_pointer",
+        latest_suite_pointer_ok,
+        {
+            "current_count": latest_suite_count,
+            "development_goal_count": goal_suite_count,
+            "current_status": latest_suite_status,
+            "development_goal_status": goal_suite_status,
+            "current_record": latest_suite_record,
+            "development_goal_record": goal_suite_record,
+        },
+    )
+
     audit_checks = audit.get("checks")
     audit_case_check = next(
         (
