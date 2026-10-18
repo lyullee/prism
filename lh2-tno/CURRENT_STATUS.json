@@ -192,7 +192,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1542 passed, 1 warning; forecast facility release-boundary gate recheck",
+  "latest_local_full_test_run": "1544 passed, 1 warning; nested facility promotion-claim guard recheck",
   "native_external_multi_equipment_recheck_record": "results/20261017/native_external_multi_equipment_recheck_20261017/manifest.json",
   "native_external_multi_equipment_recheck_status": "NATIVE_EXTERNAL_MULTI_EQUIPMENT_RECHECK_EXECUTED_DIAGNOSTIC; 7/7 native equipment exporters executed; provider promotion 0; physical validation false; facility IR/F-N false",
   "native_external_multi_equipment_chain_recheck_record": "results/20261017/native_external_multi_equipment_chain_recheck_20261017/manifest.json",
@@ -6692,8 +6692,8 @@
   "external_equipment_model_provider_response_physical_validation_claim": false,
   "external_equipment_model_provider_response_facility_qra_claim": false,
   "external_equipment_model_provider_response_gap_policy": "Missing input_origin, evidence_status, qualification sidecars, non-strict termination, or mass-ledger fields are reported per response and never inferred; SLABx-LH2 remains a separate CLOSED_VALIDATED_COMPONENT.",
-  "latest_local_full_suite_recheck_count": 1542,
-  "latest_local_full_suite_recheck_status": "1542 passed, 1 warning; forecast facility release-boundary gate recheck",
+  "latest_local_full_suite_recheck_count": 1544,
+  "latest_local_full_suite_recheck_status": "1544 passed, 1 warning; nested facility promotion-claim guard recheck",
   "external_equipment_model_release_rebind_audit_record": "results/20261018/external_equipment_model_release_rebind_audit_20261018.json",
   "external_equipment_model_release_rebind_audit_sha256": "1CBD2CFEC8AA05658C9783A0A3BF512AAC99643E62539D5A3C6B6B52C461CA7C",
   "external_equipment_model_release_rebind_audit_status": "DIAGNOSTIC_RELEASE_REBIND_ONLY; 7/7 strict release contracts validate; 4 provider mass ledgers attached; 1 isolation ledger attached; 0 pressure-equalization ledgers attached; 2 strict termination candidates; promotion withheld",
@@ -6729,7 +6729,7 @@
     ],
     "policy": "Provider-backed HAZOP campaigns expose the strict release-boundary gate at the facility-ledger surface; an open boundary keeps facility_total_risk_available false while retaining diagnostic atoms.",
     "test": "tests/test_equipment_hazop_campaign.py::test_equipment_hazop_quantitative_campaign_closes_explicit_identity_boundary",
-    "local_test_status": "1542 passed, 1 warning; forecast facility release-boundary gate recheck"
+    "local_test_status": "1544 passed, 1 warning; nested facility promotion-claim guard recheck"
   },
   "equipment_hazop_campaign_recheck_20261018": {
     "record": "examples/equipment_hazop_quantitative_campaign_recheck_20261018.json",
