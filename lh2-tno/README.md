@@ -79,6 +79,13 @@ PRISM helps an operator or researcher answer:
 
 The framework supports generic outdoor LH2 facilities, including tanks, transfer lines, valves, pumps, vaporizers, and vents. It is designed to connect to an existing process digital twin. The equipment model remains the owner of thermodynamics, inventory, isolation, and accident release history.
 
+Provider-specific replay scripts under `scripts/` do not contain a bundled
+equipment checkout. Set `PRISM_LH2DT_ROOT`, `PRISM_LH2DT_SRC_ROOT`,
+`PRISM_SLABX_ROOT`, or `PRISM_SLABX_LH2_ROOT` explicitly when a diagnostic
+needs one of those external models. The scripts fail with a clear message when
+the requested input is absent; the normal packaged PRISM and public LH2 paths
+do not depend on a user-specific filesystem location.
+
 For inspection-centre or historian signals, PRISM records the unit carried by
 the source column separately from a procedure or setpoint comparison unit. See
 the [unit-role guide](docs/PRISM_source_vs_comparison_unit_roles_20261017.md).

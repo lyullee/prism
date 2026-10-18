@@ -3,11 +3,12 @@ from pathlib import Path
 import hashlib,json,zipfile
 import xml.etree.ElementTree as ET
 import sys
+from external_paths import required_external_path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from lh2_tno.backend import tree_digest
 
-MODEL=Path(r'C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델')
+MODEL=required_external_path('PRISM_LH2DT_ROOT', 'the equipment digital-twin model root')
 OUT=ROOT/'results/20261008/equipment_coupling_review'
 OUT.mkdir(parents=True,exist_ok=True)
 def save(name,obj):

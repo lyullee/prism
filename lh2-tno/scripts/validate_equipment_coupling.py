@@ -12,6 +12,7 @@ import sys
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 import CoolProp.CoolProp as CP
+from external_paths import required_external_path
 from lh2_tno.backend import BackendConfig,PackagePin,tree_digest,IsolatedBackend,BackendError
 from lh2_tno.contracts import Facility,canonical_digest
 from lh2_tno.consequences import ConsequenceRequest
@@ -23,7 +24,7 @@ OUT.mkdir(parents=True,exist_ok=True)
 def save(name,value):
     (OUT/name).write_text(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')
 
-provider=Path(r'C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델\src\lh2dt')
+provider=required_external_path('PRISM_LH2DT_SRC_ROOT', 'the optional equipment digital-twin source root')
 provider_digest=tree_digest(provider)
 raw=json.loads((ROOT/'results/20261008/full_chain/backend_config.json').read_text(encoding='utf-8'))
 raw['packages']=[p for p in raw['packages'] if p['name']!='lh2dt']

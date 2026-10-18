@@ -3,6 +3,7 @@ from pathlib import Path
 import copy
 import json
 import sys
+from external_paths import required_external_path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from lh2_tno.backend import BackendConfig,PackagePin,tree_digest,IsolatedBackend
@@ -20,7 +21,7 @@ def prepare():
     # This chain does not invoke lh2dt. Pin only the libraries actually used;
     # retain the previous component-only config and its evidence unchanged.
     old['packages']=[p for p in old['packages'] if p['name']!='lh2dt']
-    root=Path(r'C:\Users\lyul\Desktop\DocuData\SLABx_LH2\.venv-transfer\Lib\site-packages\slabx')
+    root=required_external_path('PRISM_SLABX_ROOT', 'the optional SLABx installation root')
     old['packages'].append(PackagePin(name='slabx',root=str(root),sha256=tree_digest(root)).model_dump())
     old['timeout_s']=180.
     config=BackendConfig.model_validate_json(json.dumps(old))

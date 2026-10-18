@@ -11,6 +11,7 @@ from __future__ import annotations
 import copy
 import json
 from pathlib import Path
+from external_paths import required_external_path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,9 +47,8 @@ def _save(path: Path, value: object) -> None:
 
 def _backend(timeout_s: float | None = None) -> tuple[BackendConfig, Path]:
     raw = _load(ROOT / "results/20261009/backend_config_current.json")
-    provider = Path(
-        r"C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템"
-        r"\06_액화수소_디지털트윈_물리모델\src\lh2dt"
+    provider = required_external_path(
+        "PRISM_LH2DT_SRC_ROOT", "the optional equipment digital-twin source root"
     )
     raw["packages"] = [p for p in raw["packages"] if p["name"] != "lh2dt"]
     raw["packages"].append({"name": "lh2dt", "root": str(provider), "sha256": tree_digest(provider)})

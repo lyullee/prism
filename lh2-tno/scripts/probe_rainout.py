@@ -1,8 +1,9 @@
 from pathlib import Path
 from dataclasses import asdict
 import copy,json,sys
+from external_paths import required_external_path
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,r'C:\Users\lyul\Desktop\DocuData\SLABx_LH2\slabx-lh2\source\slabx-lh2')
+sys.path.insert(0,str(required_external_path('PRISM_SLABX_LH2_ROOT', 'the optional SLABx-LH2 source root')))
 from slabx_lh2.integrated_lh2_source import *
 common=json.loads((ROOT/'results/20261008/source_request.json').read_text(encoding='utf-8'))
 records=[]

@@ -106,8 +106,8 @@ body=f'''# PRISM QRA 개발 현황 — 먼저 읽기
 | 새 LH2 물리 계산 연결 | [chain_worker.py](<{(ROOT/'src/lh2_tno/chain_worker.py').as_posix()}>) |
 | 센서 상태 갱신·정확 일치 캐시 | [service.py](<{(ROOT/'src/lh2_tno/service.py').as_posix()}>) |
 | 외부 모델 버전 고정·격리 실행 | [backend.py](<{(ROOT/'src/lh2_tno/backend.py').as_posix()}>) |
-| 별도 설비 모델 | `C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델/src/lh2dt` |
-| SLABx-LH2 | `C:/Users/lyul/Desktop/DocuData/SLABx_LH2/slabx-lh2/source/slabx-lh2/slabx_lh2` |
+| 별도 설비 모델 | `PRISM_LH2DT_ROOT` 환경변수로 지정하는 외부 모델 checkout |
+| SLABx-LH2 | 설치된 public `slabx-lh2` package 또는 명시한 external source checkout |
 
 새 코드는 링크한 lh2-tno 위치가 정본이다. 이 개발기록 폴더는 문서·상태·검증 증거의 보관본이며 실행 코드 복제본이 아니다. 외부 설비 모델의 개발을 여기서 중복 수행하지 않는다.
 

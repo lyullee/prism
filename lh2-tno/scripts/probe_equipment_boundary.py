@@ -2,12 +2,13 @@
 from pathlib import Path
 from dataclasses import asdict
 import contextlib,io,json,runpy,sys,hashlib
+from external_paths import required_external_path
 ROOT=Path(__file__).resolve().parents[1]
-MODEL=Path(r'C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델')
+MODEL=required_external_path('PRISM_LH2DT_ROOT', 'the equipment digital-twin model root')
 PACKAGE=MODEL/'outputs/lh2dt_test_package_20261008'
 OUT=ROOT/'results/20261008/equipment_coupling_review'
 sys.path.insert(0,str(PACKAGE/'src'))
-sys.path.insert(0,r'C:\Users\lyul\Desktop\DocuData\SLABx_LH2\slabx-lh2\source\slabx-lh2')
+sys.path.insert(0,str(required_external_path('PRISM_SLABX_LH2_ROOT', 'the optional SLABx-LH2 source root')))
 from lh2dt import HydrogenProperties,HorizontalVesselGeometry,LayeredTank,LayeredTankParameters
 from slabx_lh2.lh2_critical_flow import CriticalFlowInput,hem_critical_flow
 import lh2dt
