@@ -1,701 +1,1127 @@
 {
   "schema_version": "prism.hazop_event_mode_binding_audit.v1",
-  "facility_id": "generic-lh2-full-scope-frequency-example",
   "status": "HAZOP_EVENT_MODE_BINDING_COMPLETE",
-  "source_provenance": "current 24-event reviewed frequency plan plus explicit extension HAZOP mode rows; no mode or scenario inferred",
-  "operating_modes": [
-    "receiving",
-    "supply",
-    "standby"
-  ],
-  "bindings": [
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
-      "component_id": "storage-tank-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
-      "component_id": "storage-tank-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
-      "component_id": "storage-tank-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
-      "component_id": "storage-tank-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
-      "component_id": "storage-tank-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
-      "component_id": "liquid-transfer-line-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
-      "component_id": "liquid-transfer-line-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
-      "component_id": "liquid-transfer-line-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
-      "component_id": "liquid-transfer-line-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
-      "component_id": "liquid-transfer-line-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
-      "component_id": "transfer-valve-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
-      "component_id": "transfer-valve-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
-      "component_id": "transfer-valve-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
-      "component_id": "transfer-valve-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
-      "component_id": "transfer-valve-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
-      "component_id": "pressure-relief-vent-01",
-      "operating_mode": "standby",
-      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
-      "release_mode": "maximum_relief_discharge",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
-      "component_id": "liquid-transfer-pump-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
-      "component_id": "liquid-transfer-pump-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
-      "component_id": "ambient-vaporizer-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
-      "release_mode": "inventory_over_600s",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
-      "component_id": "ambient-vaporizer-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
-      "release_mode": "inventory_over_600s",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
-      "component_id": "ambient-vaporizer-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
-      "component_id": "reliquefier-01",
-      "operating_mode": "standby",
-      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
-      "release_mode": "two_sided_rupture",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
-      "component_id": "reliquefier-01",
-      "operating_mode": "standby",
-      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
-      "release_mode": "two_sided_rupture",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
-      "component_id": "reliquefier-01",
-      "operating_mode": "standby",
-      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
-      "mode_inference_performed": false,
-      "scenario_inference_performed": false
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
-      "component_id": "vertical-handoff-terminal-pipe-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
-      "component_id": "vertical-handoff-terminal-pipe-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
-      "component_id": "vertical-handoff-terminal-pipe-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
-      "component_id": "vertical-handoff-terminal-pipe-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
-      "component_id": "vertical-handoff-terminal-pipe-01",
-      "operating_mode": "receiving",
-      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
-      "component_id": "inventory-depletion-pipe-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
-      "component_id": "inventory-depletion-pipe-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
-      "component_id": "inventory-depletion-pipe-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
-      "component_id": "inventory-depletion-pipe-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
-    },
-    {
-      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
-      "component_id": "inventory-depletion-pipe-01",
-      "operating_mode": "supply",
-      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
-    }
-  ],
-  "policy": {
-    "matching": "exact event_id/component_id/release_mode",
-    "mode_inference_performed": false,
-    "scenario_inference_performed": false,
-    "physical_validation_claim": false,
-    "facility_qra_claim": false,
-    "operating_mode_taken_from_input": true,
-    "missing_mode_withheld": true,
-    "frequency_inference_performed": false,
-    "facility_qra_promotion": false
-  },
   "event_count": 34,
-  "bound_event_count": 34,
-  "unbound_event_count": 0,
-  "orphan_event_count": 0,
-  "missing_event_ids": [],
-  "orphan_event_ids": [],
   "mode_bound_event_count": 34,
   "mode_required_event_count": 0,
   "scenario_id_required_event_count": 0,
   "mode_conflict_event_count": 0,
-  "provider_event_count": 34,
+  "provider_event_count": 0,
   "orphan_mode_binding_count": 0,
-  "error_count": 0,
-  "errors": [],
-  "binding_source": "explicit reviewed HAZOP/event binding records",
   "event_rows": [
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
       "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00065,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "receiving"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%"
+      ],
+      "risk_atom_modes": [
+        "receiving"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
       "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00014,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "receiving"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%"
+      ],
+      "risk_atom_modes": [
+        "receiving"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
       "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 2.8e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "receiving"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%"
+      ],
+      "risk_atom_modes": [
+        "receiving"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
       "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 5.7e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "receiving"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%"
+      ],
+      "risk_atom_modes": [
+        "receiving"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
       "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.2e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "receiving"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
+      ],
+      "risk_atom_modes": [
+        "receiving"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
       "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.4e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
       "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.6e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
       "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 8e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
       "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.9e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
       "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.9e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
       "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00012,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
       "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 5.2e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
       "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 2.2e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
       "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 9.3e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
       "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.9e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
       "component_id": "pressure-relief-vent-01",
+      "profile": "TNO_RELIEF_DEVICE",
+      "release_mode": "maximum_relief_discharge",
+      "annual_frequency_per_year": 2e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "standby",
       "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
-      "release_mode": "maximum_relief_discharge",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "standby"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
+      ],
+      "risk_atom_modes": [
+        "standby"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
       "component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.0001,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
       "component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.0005,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "release_mode": "inventory_over_600s",
+      "annual_frequency_per_year": 5e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
-      "release_mode": "inventory_over_600s",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
       "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "release_mode": "inventory_over_600s",
+      "annual_frequency_per_year": 5e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
-      "release_mode": "inventory_over_600s",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
       "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.001,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "supply"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3"
+      ],
+      "risk_atom_modes": [
+        "supply"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
       "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "release_mode": "two_sided_rupture",
+      "annual_frequency_per_year": 1e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "standby",
       "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
-      "release_mode": "two_sided_rupture",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "standby"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4"
+      ],
+      "risk_atom_modes": [
+        "standby"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
       "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "release_mode": "two_sided_rupture",
+      "annual_frequency_per_year": 0.001,
+      "status": "MODE_BOUND",
       "operating_mode": "standby",
       "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
-      "release_mode": "two_sided_rupture",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "standby"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5"
+      ],
+      "risk_atom_modes": [
+        "standby"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
       "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.01,
+      "status": "MODE_BOUND",
       "operating_mode": "standby",
       "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
-      "release_mode": "hole",
-      "source_provenance": "current reviewed frequency plan; no mode inference",
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "case_modes": [
+        "standby"
+      ],
+      "case_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6"
+      ],
+      "risk_atom_modes": [
+        "standby"
+      ],
+      "risk_atom_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6"
+      ],
+      "missing_case_mode_count": 0,
+      "missing_case_scenario_count": 0,
+      "missing_risk_atom_mode_count": 0,
+      "missing_risk_atom_scenario_count": 0,
+      "provider_event_declared": null,
       "mode_inference_performed": false,
       "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
       "component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00012,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
       "component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 5.2e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
       "component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 2.2e-05,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
       "component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 9.3e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
       "component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.9e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "receiving",
       "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
-      "scenario_family": "vertical_handoff",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
       "component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.4e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
       "component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.6e-06,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
       "component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 8e-07,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
       "component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.9e-07,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     },
     {
       "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
       "component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.9e-07,
+      "status": "MODE_BOUND",
       "operating_mode": "supply",
       "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
-      "scenario_family": "inventory_depletion",
-      "release_mode": "hole",
-      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      "binding_source": "explicit_mode_binding",
+      "binding_errors": [],
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "case_modes": [],
+      "case_scenario_ids": [],
+      "risk_atom_modes": [],
+      "risk_atom_scenario_ids": [],
+      "missing_case_mode_count": 2,
+      "missing_case_scenario_count": 2,
+      "missing_risk_atom_mode_count": 8,
+      "missing_risk_atom_scenario_count": 8,
+      "provider_event_declared": null,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false
     }
-  ]
+  ],
+  "errors": [],
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "mode_inference_performed": false,
+    "scenario_inference_performed": false,
+    "missing_mode_withheld": true,
+    "frequency_inference_performed": false,
+    "facility_qra_promotion": false,
+    "physical_validation_claim": false
+  },
+  "interpretation": "Every campaign event has an explicit HAZOP operating-mode/scenario binding.",
+  "merge": {
+    "schema_version": "prism.hazop_event_mode_binding_merge.v1",
+    "base_event_count": 24,
+    "extension_event_count": 10,
+    "merged_event_count": 34,
+    "overlap_policy": "base_wins",
+    "skipped_extension_overlap_count": 24,
+    "event_id_replacements": [
+      {
+        "from": "inventory-depletion/inventory-depletion/",
+        "to": "inventory-depletion/"
+      }
+    ],
+    "source_by_event_id": {
+      "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%": "extension",
+      "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%": "extension",
+      "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%": "extension",
+      "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%": "extension",
+      "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%": "extension",
+      "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%": "extension",
+      "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%": "extension",
+      "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%": "extension",
+      "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%": "extension",
+      "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%": "extension",
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": "base",
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": "base",
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": "base",
+      "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": "base",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G4": "base",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G5": "base",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G6": "base",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": "base",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": "base",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": "base",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": "base",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G1": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G2": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": "base",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": "base"
+    },
+    "duplicate_policy": "reject_duplicate_event_ids_after_normalization",
+    "mode_inference_performed": false,
+    "scenario_inference_performed": false,
+    "frequency_inference_performed": false,
+    "facility_qra_promotion": false
+  },
+  "source_records": {
+    "campaign_result": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_full_scope_union_assessment_current_source_diagnostic_20261018\\campaign_result.json",
+    "base_binding": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261115\\native_external_facility_full_scope_campaign_current\\hazop_event_mode_binding_clean_source.json",
+    "extension_binding": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261114\\hazop_extension_mode_binding_fullscope_hazop_port_bound\\hazop_mode_binding_extension_bound.json",
+    "provider_worklist": null
+  }
 }

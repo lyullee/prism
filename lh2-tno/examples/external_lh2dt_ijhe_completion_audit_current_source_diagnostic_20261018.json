@@ -5262,18 +5262,16 @@
         "mode_required_event_count": 0,
         "scenario_id_required_event_count": 0,
         "mode_conflict_event_count": 0,
-        "provider_event_count": 34,
+        "provider_event_count": 0,
         "error_count": 0,
         "policy": {
-          "matching": "exact event_id/component_id/release_mode",
+          "operating_mode_taken_from_input": true,
           "mode_inference_performed": false,
           "scenario_inference_performed": false,
-          "physical_validation_claim": false,
-          "facility_qra_claim": false,
-          "operating_mode_taken_from_input": true,
           "missing_mode_withheld": true,
           "frequency_inference_performed": false,
-          "facility_qra_promotion": false
+          "facility_qra_promotion": false,
+          "physical_validation_claim": false
         }
       },
       "blocking_reason": null,

@@ -98,3 +98,19 @@ python scripts/run_native_full_scope_union_assessment.py `
 ## Current-source completion-gate recheck
 
 The current-source IJHE completion audit was rebuilt after the release-boundary catalog was corrected. It consumes the latest 34-event union and 44-case boundary audit and records **30 PASS / 4 BLOCKED** checks. The HAZOP event-mode contract is now complete for all 34 rows: each row is explicitly bound to a component, operating mode, scenario, and release mode, with mode/scenario/frequency inference disabled and missing modes withheld. The four remaining blockers are release-boundary closure, qualified provider release packets, independent provider/physical-validation evidence, and facility IR/F-N availability. See [`external_lh2dt_ijhe_completion_audit_current_source_diagnostic_20261018.json`](../examples/external_lh2dt_ijhe_completion_audit_current_source_diagnostic_20261018.json) and [`external_lh2dt_hazop_mode_binding_recheck_20261018.json`](../examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json). This record is diagnostic and does not promote facility QRA.
+## Reproducible HAZOP binding merge
+
+The current 34-event HAZOP record is produced by `scripts/merge_hazop_event_mode_binding_audit.py`. It joins the 24-row base binding and the mixed extension export, applies one explicit inventory-path replacement, and records `overlap_policy=base_wins` for the 24 extension rows that repeat base events. The canonical audit still reports 34/34 bound rows and disables mode, scenario, and frequency inference. The merge metadata keeps the source split and skipped-overlap count so the result is reviewable.
+### Reproduction command
+
+```powershell
+python scripts/merge_hazop_event_mode_binding_audit.py `
+  --campaign-result results/20261115/native_full_scope_union_assessment_current_source_diagnostic_20261018/campaign_result.json `
+  --base-binding results/20261115/native_external_facility_full_scope_campaign_current/hazop_event_mode_binding_clean_source.json `
+  --extension-binding results/20261114/hazop_extension_mode_binding_fullscope_hazop_port_bound/hazop_mode_binding_extension_bound.json `
+  --replace-event-id inventory-depletion/inventory-depletion/=inventory-depletion/ `
+  --overlap-policy base_wins `
+  --output examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json
+```
+
+The expected result is 34/34 mode-bound rows. The output records the 24 repeated base rows as an explicit skipped-overlap count.
