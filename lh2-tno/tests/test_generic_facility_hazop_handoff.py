@@ -126,7 +126,7 @@ def test_attached_provider_chain_is_exposed_without_frequency_inference():
     storage_row = next(
         row for row in current_eval["rows"] if row["component_id"] == "storage-tank-01"
     )
-    assert storage_row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD"
+    assert storage_row["status"] == "WITHHELD_RELEASE_BOUNDARY_EVIDENCE"
     assert storage_row["frequency_inference_performed"] is False
     assert storage_row["provider_release_boundary_valid"] is False
     assert any(

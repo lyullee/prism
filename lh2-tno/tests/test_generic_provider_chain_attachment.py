@@ -8,6 +8,7 @@ from attach_generic_provider_chain import attach, attach_many
 from build_generic_campaign_provider_evidence import build
 from build_generic_quantitative_attachments import build as build_quantitative_attachments
 from benchmark_generic_hazop_handoff import benchmark as benchmark_generic_handoff
+from run_generic_facility_hazop_handoff import _diagnostic_quantitative_evaluation
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -142,3 +143,52 @@ def test_generic_handoff_timing_is_orchestration_only():
     assert result["measurement"]["provider_release_physics_included"] is False
     assert result["measurement"]["slabx_lh2_physics_included"] is False
     assert result["policy"]["one_hz_service_level_claim"] is False
+
+
+def test_invalid_provider_release_boundary_withholds_attached_quantitative_risk():
+    request = {
+        "request_id": "current|tank|scenario|10",
+        "component_id": "tank",
+        "scenario_id": "scenario",
+        "operating_mode": "receiving",
+        "scenario_family": "liquid_two_phase",
+    }
+    attachment = {
+        "evidence": {
+            "provider_release_packet": {
+                "source_digest": "provider",
+                "release_start_s": 0.0,
+                "release_end_s": 1.0,
+                "duration_s": 1.0,
+                "termination_basis": "inventory_depletion",
+                "isolation_time_s": 1.0,
+                "post_isolation_observation_s": 0.0,
+                "inventory_initial_kg": 10.0,
+                "inventory_out_kg": 9.0,
+                "mass_residual_kg": 1.0,
+                "inventory_status": "INVENTORY_NOT_CLOSED",
+            },
+            "frequency_binding": {"annual_frequency": 1.0},
+            "slabx_lh2_consequence": {
+                "result_digest": "consequence",
+                "weather_condition_id": "weather",
+                "ignition_branch_id": "ignition",
+                "processing_time_ms": 1.0,
+                "receptor_damage_or_harm_outputs": {
+                    "full_chain_executed": True,
+                    "stages": ["SLABx_dispersion"],
+                },
+            },
+            "facility_condition_binding": {
+                "facility_ir_fn_available": False,
+                "facility_qra_promotion": False,
+            },
+        }
+    }
+    result = _diagnostic_quantitative_evaluation(
+        [request], {request["request_id"]: attachment}, path="current"
+    )
+    assert result["rows"][0]["status"] == "WITHHELD_RELEASE_BOUNDARY_EVIDENCE"
+    assert result["summary"]["diagnostic_chain_attached_count"] == 1
+    assert result["summary"]["release_boundary_withheld_count"] == 1
+    assert result["policy"]["facility_qra_promotion"] is False

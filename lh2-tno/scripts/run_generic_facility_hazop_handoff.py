@@ -355,6 +355,10 @@ def _diagnostic_quantitative_evaluation(
         frequency_bound = isinstance(annual_frequency, (int, float)) and not isinstance(annual_frequency, bool)
         if not complete:
             status = "WITHHELD_QUANTITATIVE_EVIDENCE_MISSING"
+        elif not provider_boundary_audit["valid"]:
+            # Keep the consequence chain visible, but never label it as
+            # quantitative risk while the provider release boundary is open.
+            status = "WITHHELD_RELEASE_BOUNDARY_EVIDENCE"
         elif not chain_executed:
             status = "WITHHELD_CONSEQUENCE_CHAIN_NOT_EXECUTED"
         elif not frequency_bound:
@@ -405,6 +409,7 @@ def _diagnostic_quantitative_evaluation(
         row["status"] in {
             "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED",
             "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD",
+            "WITHHELD_RELEASE_BOUNDARY_EVIDENCE",
         }
         for row in rows
     )
@@ -421,7 +426,18 @@ def _diagnostic_quantitative_evaluation(
             "request_count": len(rows),
             "diagnostic_chain_attached_count": attached_count,
             "frequency_bound_count": sum(row["status"] == "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED" for row in rows),
-            "frequency_value_withheld_count": sum(row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD" for row in rows),
+            "frequency_value_withheld_count": sum(
+                row["status"] == "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD"
+                or (
+                    row["status"] == "WITHHELD_RELEASE_BOUNDARY_EVIDENCE"
+                    and row["annual_frequency"] is None
+                )
+                for row in rows
+            ),
+            "release_boundary_withheld_count": sum(
+                row["status"] == "WITHHELD_RELEASE_BOUNDARY_EVIDENCE"
+                for row in rows
+            ),
             "release_boundary_valid_count": sum(
                 row["provider_release_boundary_valid"] for row in rows
             ),

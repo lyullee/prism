@@ -719,7 +719,7 @@
     "facility_annual_ir_available": false,
     "facility_fn_available": false,
     "timing": {
-      "wall_elapsed_ms": 1.0718999546952546,
+      "wall_elapsed_ms": 1.1698000016622245,
       "quantitative_evaluation_elapsed_ms": 0.0,
       "trigger_count": 3,
       "evaluated_count": 0,
@@ -907,7 +907,7 @@
     ],
     "timing": {
       "source_scan_timing": {
-        "wall_elapsed_ms": 1.0718999546952546,
+        "wall_elapsed_ms": 1.1698000016622245,
         "quantitative_evaluation_elapsed_ms": 0.0,
         "trigger_count": 3,
         "evaluated_count": 0,
@@ -1423,7 +1423,7 @@
         "scenario_id": "TK01-receiving-liquid-hole:receiving:liquid_two_phase",
         "operating_mode": "receiving",
         "scenario_family": "liquid_two_phase",
-        "status": "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD",
+        "status": "WITHHELD_RELEASE_BOUNDARY_EVIDENCE",
         "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
         "provider_release_boundary": {
           "release_start_s": 0.0,
@@ -1567,10 +1567,10 @@
       "diagnostic_chain_attached_count": 3,
       "frequency_bound_count": 2,
       "frequency_value_withheld_count": 1,
-      "release_boundary_valid_count": 2,
       "release_boundary_withheld_count": 1,
+      "release_boundary_valid_count": 2,
       "status_counts": {
-        "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD": 1,
+        "WITHHELD_RELEASE_BOUNDARY_EVIDENCE": 1,
         "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED": 2
       }
     },
@@ -1690,7 +1690,7 @@
         "scenario_id": "TK01-receiving-liquid-hole:receiving:liquid_two_phase",
         "operating_mode": "receiving",
         "scenario_family": "liquid_two_phase",
-        "status": "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD",
+        "status": "WITHHELD_RELEASE_BOUNDARY_EVIDENCE",
         "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
         "provider_release_boundary": {
           "release_start_s": 0.0,
@@ -1740,11 +1740,11 @@
       "diagnostic_chain_attached_count": 3,
       "frequency_bound_count": 2,
       "frequency_value_withheld_count": 1,
-      "release_boundary_valid_count": 2,
       "release_boundary_withheld_count": 1,
+      "release_boundary_valid_count": 2,
       "status_counts": {
         "CONDITIONAL_QUANTITATIVE_RISK_ATTACHED": 2,
-        "CONDITIONAL_CHAIN_ATTACHED_FREQUENCY_VALUE_WITHHELD": 1
+        "WITHHELD_RELEASE_BOUNDARY_EVIDENCE": 1
       }
     },
     "policy": {

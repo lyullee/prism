@@ -114,6 +114,11 @@ run fresh release or consequence physics. Its policy keeps facility IR/F-N
 calculation, independent physical validation, and facility-QRA promotion false.
 Coverage completeness therefore means that every evidence block is present and
 traceable; it does not mean that the provider or facility has been qualified.
+If all four evidence blocks are present but the provider termination or
+inventory boundary is open, the row is reported as
+`WITHHELD_RELEASE_BOUNDARY_EVIDENCE`. The consequence chain remains visible for
+diagnostics, while the row is excluded from the attached quantitative-risk
+count.
 
 ## What this proves and what it does not
 
