@@ -40,10 +40,10 @@ not reopen its validation task.
 ### Provider-response gap ledger
 
 The seven response files in the separate equipment-model root were checked
-individually with
-`results/20261018/external_equipment_model_provider_response_gap_audit_20261018.json`
+individually against the current five-root scan with
+`results/20261115/external_equipment_model_provider_response_gap_audit_recheck_20261018.json`
 (SHA-256
-`F64332F643427918281E062C41DB0833750188AC291C96008793EA2E961A2C9A`).
+`e7bc82a95664914f20fdaab7deaba0dd547266117d18079d52d9a8da477917a0`).
 Two responses declare a strict termination basis (`inventory_depletion` or
 `reviewed_isolation_success`); five still use
 `synthetic_diagnostic_horizon`. Four responses contain a complete initial,
@@ -51,6 +51,11 @@ final, cumulative-out, and residual mass ledger. All seven lack an explicit
 `input_origin` and `evidence_status`, and none has a qualification sidecar.
 Therefore the ledger remains diagnostic-only: it does not promote a provider
 packet, infer frequency, claim physical validation, or enable facility IR/F-N.
+
+The earlier six-root record and its original gap ledger remain preserved as
+historical evidence. The current five-root refresh found the same seven files
+and the same per-file SHA-256 values; only the source-root-relative paths and
+authoritative pointer were refreshed.
 
 The paired `resolved_release.json` records were also passed through the
 diagnostic rebind audit at
