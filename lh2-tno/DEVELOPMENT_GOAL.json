@@ -5206,7 +5206,7 @@
     "facility_qra_claim": false
   },
   "external_lh2dt_current_source_recheck_20261018_slabx_policy": "CLOSED_VALIDATED_COMPONENT; no code or validation change",
-  "latest_full_portable_test_status": "1540 passed, 1 warning; current local recheck after release-rebind audit",
+  "latest_full_portable_test_status": "1561 passed, 1 warning; current local recheck after external model and provider workspace recheck",
   "latest_external_contract_recheck_record": "examples/external_lh2dt_current_source_recheck_20261018.json",
   "external_provider_workspace_recheck_20261018_record": "results/20261115/external_provider_workspace_roots_recheck_20261018_current.json",
   "external_provider_workspace_recheck_20261018_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
