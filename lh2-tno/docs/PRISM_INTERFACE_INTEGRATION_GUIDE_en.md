@@ -2,6 +2,36 @@
 
 This guide defines the boundary between an equipment digital twin, HAZOP logic, a release provider, PRISM, and the SLABx-LH2 consequence model. It is intended for an integration engineer building a monitoring or simulation connector for a generic outdoor LH2 facility.
 
+## 0. Public backend runtime preflight
+
+PRISM can run with the public `prism_qra` source tree and explicitly supplied
+external provider trees. Older diagnostic manifests may contain a legacy
+`tno` package pin. That pin is not required by the public package and can fail
+with `revision mismatch: tno` when it points to an obsolete development
+checkout. Build a fresh configuration before starting a facility campaign.
+
+```powershell
+python scripts/build_backend_config.py `
+  --interpreter "C:\path\to\python.exe" `
+  --package slabx_lh2="C:\path\to\slabx_lh2" `
+  --package dynamiclh2poolx="C:\path\to\dynamiclh2poolx" `
+  --package slabx="C:\path\to\slabx" `
+  --output results/backend_config.json
+
+python scripts/check_backend_runtime.py `
+  --backend-config results/backend_config.json `
+  --output results/backend_runtime_check.json
+```
+
+`prism_qra` is automatically pinned from the current public checkout. The
+repeatable `--package name=path` options are for provider or consequence
+packages that an integrator owns or is licensed to use; their source trees are
+not copied into this repository. The preflight checks source digests,
+dependency versions, and a minimal isolated worker request. It performs no
+risk calculation, does not infer frequencies, and never promotes provider or
+facility evidence. Continue to a campaign only when the result is
+`BACKEND_RUNTIME_READY`.
+
 ## 1. Responsibility boundary
 
 The equipment model owns thermodynamics, hydraulics, inventory, isolation behavior, and the accident release history. PRISM owns HAZOP scenario selection, literature frequency binding, consequence orchestration, ignition/weather/population branches, and risk ledgers.

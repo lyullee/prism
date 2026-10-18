@@ -68,6 +68,9 @@ public packages, runs a real LH2 chain, and reports unavailable or timed-out
 cases explicitly. These additions are in the source checkout, beyond the
 immutable published v0.6.5 artifacts.
 
+Before a facility campaign, run the [backend runtime preflight](docs/PRISM_INTERFACE_INTEGRATION_GUIDE_en.md#0-public-backend-runtime-preflight).
+It catches stale private or legacy source pins before a long campaign starts.
+
 PRISM helps an operator or researcher answer:
 
 - Which HAZOP deviation is active for this equipment and operating mode?
