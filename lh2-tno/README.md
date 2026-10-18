@@ -128,6 +128,15 @@ current diagnostic has one explicit p05/published/p95 binding and two branches
 whose bounds are still missing. PRISM keeps those two gaps visible and does not
 impute an interval or infer a frequency from monitoring signals.
 
+The current 44-case union also has a frequency-only distribution diagnostic at
+[`frequency_distribution_uncertainty_current.json`](results/20261115/frequency_distribution_uncertainty_current.json).
+It samples the reviewed lognormal literature distributions under shared-asset
+and independent-event correlation assumptions (1,000 deterministic draws per
+scenario) while holding the saved physical risk atoms fixed. It reports a
+frequency-model credible interval for the known contribution only; the
+facility-wide credible interval remains disabled while provider qualification
+and scope evidence are incomplete.
+
 The current 24-event native full-scope replay is stored under
 `results/20261115/native_external_facility_full_scope_campaign_current/`. It
 retains 24 exact packet matches, 96 conditional risk atoms, and 11

@@ -5366,5 +5366,9 @@
     "facility_qra_promotion": false,
     "diagnostic_only": true,
     "policy": "Current and forecast paths share the explicit operating-mode HAZOP, provider, frequency uncertainty, consequence and facility-ledger contracts; open release boundaries keep facility total IR/F-N withheld."
-  }
+  },
+  "literature_frequency_distribution_current_record": "results/20261115/frequency_distribution_uncertainty_current.json",
+  "literature_frequency_distribution_current_status": "DIAGNOSTIC_FREQUENCY_DISTRIBUTION_COMPLETED; two correlation scenarios; 1000 deterministic draws; frequency-model credible interval true; facility credible interval false; fresh physics false",
+  "literature_frequency_distribution_current_sha256": "5c4b35889117bc977a15ae06a70838c8c34fc8b23d53eb06801cea8d9d4bd334",
+  "literature_frequency_distribution_current_policy": "Reweight saved risk atoms using reviewed catalogue lognormal distributions; hold fixed events at published rates; no field-frequency inference, provider qualification, physical-validation promotion, or facility IR/F-N promotion."
 }
