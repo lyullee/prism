@@ -5253,7 +5253,7 @@
   "external_equipment_model_provider_response_physical_validation_claim": false,
   "external_equipment_model_provider_response_facility_qra_claim": false,
   "external_equipment_model_provider_response_gap_policy": "Missing input_origin, evidence_status, qualification sidecars, non-strict termination, or mass-ledger fields are reported per response and never inferred; SLABx-LH2 remains a separate CLOSED_VALIDATED_COMPONENT.",
-  "latest_local_full_suite_recheck_count": 1538,
+  "latest_local_full_suite_recheck_count": 1540,
   "latest_local_full_suite_recheck_status": "1540 passed, 1 warning; current local recheck after release-rebind audit",
   "external_equipment_model_release_rebind_audit_record": "results/20261018/external_equipment_model_release_rebind_audit_20261018.json",
   "external_equipment_model_release_rebind_audit_sha256": "88A9D53C7852405ACABDADF0C7292087D0F47185CB6D6854067205C603CE0771",
@@ -5267,7 +5267,5 @@
   "external_equipment_model_release_rebind_frequency_inference": false,
   "external_equipment_model_release_rebind_physical_validation_claim": false,
   "external_equipment_model_release_rebind_facility_qra_allowed": false,
-  "external_equipment_model_release_rebind_policy": "Rebound release mappings are diagnostic copies only; no residual inventory repair, frequency assignment, provider qualification, physical validation, facility IR/F-N, or SLABx-LH2 modification.",
-  "latest_local_full_suite_recheck_count": 1540,
-  "latest_local_full_suite_recheck_status": "1540 passed, 1 warning; current local recheck after release-rebind audit"
+  "external_equipment_model_release_rebind_policy": "Rebound release mappings are diagnostic copies only; no residual inventory repair, frequency assignment, provider qualification, physical validation, facility IR/F-N, or SLABx-LH2 modification."
 }
