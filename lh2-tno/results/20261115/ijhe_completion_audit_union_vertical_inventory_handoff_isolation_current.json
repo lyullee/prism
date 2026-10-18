@@ -6541,6 +6541,7 @@
             "reviewed_measurement"
           ],
           "missing_identity_is_not_inferred": true,
+          "ambiguous_case_identity_is_not_promoted": true,
           "facility_ir_fn_remains_withheld": true
         }
       },

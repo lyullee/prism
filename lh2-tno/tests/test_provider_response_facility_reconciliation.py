@@ -77,6 +77,24 @@ def test_unrepresented_facility_case_is_explicitly_open():
     assert report["facility_case_exact_response_count"] == 0
 
 
+def test_multiple_cases_are_not_covered_by_one_unscoped_response():
+    report = reconcile_provider_responses(
+        _audit([_response()]),
+        _request_doc([
+            _request(),
+            {**_request(), "request_id": "request-2", "annual_condition_id": "weather-2"},
+        ]),
+    )
+    assert report["ambiguous_case_match_count"] == 1
+    assert report["response_accounting_complete"] is True
+    assert report["rows"][0]["status"] == "AMBIGUOUS_CASE_MATCH"
+    assert all(
+        row["status"] == "AMBIGUOUS_RESPONSE_IDENTITY"
+        for row in report["facility_case_rows"]
+    )
+    assert report["facility_case_ambiguous_response_identity_count"] == 2
+
+
 def test_qualified_exact_match_requires_all_explicit_fields():
     response = _response(
         input_origin="reviewed_measurement",

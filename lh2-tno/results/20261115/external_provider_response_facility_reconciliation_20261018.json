@@ -7,8 +7,10 @@
   "facility_case_count": 44,
   "exact_case_match_count": 0,
   "qualified_exact_case_match_count": 0,
+  "ambiguous_case_match_count": 0,
   "component_candidate_response_count": 0,
   "no_exact_case_match_count": 7,
+  "response_accounting_complete": true,
   "rows": [
     {
       "file": "layered/provider_response.json",
@@ -166,6 +168,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -182,6 +185,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -198,6 +202,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -214,6 +219,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -230,6 +236,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -246,6 +253,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -262,6 +270,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -278,6 +287,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -294,6 +304,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -310,6 +321,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -326,6 +338,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -342,6 +355,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -358,6 +372,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -374,6 +389,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -390,6 +406,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -406,6 +423,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -422,6 +440,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -438,6 +457,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -454,6 +474,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -470,6 +491,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -486,6 +508,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -502,6 +525,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -518,6 +542,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -534,6 +559,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -551,6 +577,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -568,6 +595,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -584,6 +612,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -600,6 +629,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -616,6 +646,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -632,6 +663,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -648,6 +680,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -664,6 +697,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -680,6 +714,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -696,6 +731,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -712,6 +748,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -728,6 +765,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -744,6 +782,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -760,6 +799,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -776,6 +816,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -792,6 +833,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -808,6 +850,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -824,6 +867,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -840,6 +884,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     },
@@ -856,6 +901,7 @@
       "exact_response_files": [],
       "exact_response_digests": [],
       "qualified_response_files": [],
+      "ambiguous_response_files": [],
       "component_candidate_response_files": [],
       "promotion_allowed": false
     }
@@ -864,12 +910,14 @@
     "QUALIFIED_RESPONSE": 0,
     "UNQUALIFIED_RESPONSE": 0,
     "COMPONENT_CANDIDATE_ONLY": 0,
-    "NO_PROVIDER_RESPONSE": 44
+    "NO_PROVIDER_RESPONSE": 44,
+    "AMBIGUOUS_RESPONSE_IDENTITY": 0
   },
   "facility_case_exact_response_count": 0,
   "facility_case_qualified_response_count": 0,
   "facility_case_component_candidate_only_count": 0,
   "facility_case_no_provider_response_count": 44,
+  "facility_case_ambiguous_response_identity_count": 0,
   "promotion": {
     "provider_packet_promoted": false,
     "frequency_inference_performed": false,
@@ -886,6 +934,7 @@
       "reviewed_measurement"
     ],
     "missing_identity_is_not_inferred": true,
+    "ambiguous_case_identity_is_not_promoted": true,
     "facility_ir_fn_remains_withheld": true
   }
 }

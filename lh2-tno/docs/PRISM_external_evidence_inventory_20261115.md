@@ -45,6 +45,8 @@ The record now includes both directions of the audit. In the current snapshot
 all 44 requested facility cases are explicitly `NO_PROVIDER_RESPONSE`; this is
 diagnostic coverage accounting only and does not promote a provider packet or
 facility IR/F-N.
+An unscoped response that could match multiple requested cases is classified
+as `AMBIGUOUS_CASE_MATCH` and cannot cover any of them.
 (SHA-256 `4a48096acb5e07d772b97197da0fb5311906589c39342d6b58d65dce8518267c`).
 The exact event/component/port comparison found zero case matches and zero
 qualified matches.  The native response component names therefore cannot be

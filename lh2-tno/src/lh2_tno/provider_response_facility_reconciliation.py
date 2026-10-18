@@ -81,6 +81,7 @@ def reconcile_provider_responses(
     exact_match_count = 0
     qualified_match_count = 0
     no_match_count = 0
+    ambiguous_match_count = 0
     component_candidate_count = 0
     for response in responses:
         candidates: list[dict[str, Any]] = []
@@ -100,6 +101,11 @@ def reconcile_provider_responses(
         if not candidates:
             status = "NO_EXACT_CASE_MATCH"
             no_match_count += 1
+        elif len(candidates) > 1:
+            # One provider response must not silently cover multiple facility
+            # cases. A case-specific release branch or condition is required.
+            status = "AMBIGUOUS_CASE_MATCH"
+            ambiguous_match_count += 1
         else:
             exact_match_count += 1
             qualified = (
@@ -129,10 +135,15 @@ def reconcile_provider_responses(
         "UNQUALIFIED_RESPONSE": 0,
         "COMPONENT_CANDIDATE_ONLY": 0,
         "NO_PROVIDER_RESPONSE": 0,
+        "AMBIGUOUS_RESPONSE_IDENTITY": 0,
     }
     for request in requests:
         exact_rows = [
             row for row in response_rows
+            if row["status"] in {
+                "QUALIFIED_EXACT_CASE_MATCH",
+                "EXACT_CASE_MATCH_UNQUALIFIED",
+            }
             if any(candidate.get("request_id") == request["request_id"]
                    for candidate in row["exact_case_candidates"])
         ]
@@ -145,10 +156,18 @@ def reconcile_provider_responses(
             row for row in exact_rows
             if row["status"] == "QUALIFIED_EXACT_CASE_MATCH"
         ]
+        ambiguous_rows = [
+            row for row in response_rows
+            if row["status"] == "AMBIGUOUS_CASE_MATCH"
+            and any(candidate.get("request_id") == request["request_id"]
+                    for candidate in row["exact_case_candidates"])
+        ]
         if qualified_rows:
             status = "QUALIFIED_RESPONSE"
         elif exact_rows:
             status = "UNQUALIFIED_RESPONSE"
+        elif ambiguous_rows:
+            status = "AMBIGUOUS_RESPONSE_IDENTITY"
         elif component_rows:
             status = "COMPONENT_CANDIDATE_ONLY"
         else:
@@ -160,6 +179,7 @@ def reconcile_provider_responses(
             "exact_response_files": [row.get("file") for row in exact_rows],
             "exact_response_digests": [row.get("sha256") for row in exact_rows],
             "qualified_response_files": [row.get("file") for row in qualified_rows],
+            "ambiguous_response_files": [row.get("file") for row in ambiguous_rows],
             "component_candidate_response_files": [row.get("file") for row in component_rows],
             "promotion_allowed": False,
         })
@@ -173,8 +193,12 @@ def reconcile_provider_responses(
         "facility_case_count": len(requests),
         "exact_case_match_count": exact_match_count,
         "qualified_exact_case_match_count": qualified_match_count,
+        "ambiguous_case_match_count": ambiguous_match_count,
         "component_candidate_response_count": component_candidate_count,
         "no_exact_case_match_count": no_match_count,
+        "response_accounting_complete": (
+            no_match_count + exact_match_count + ambiguous_match_count == len(responses)
+        ),
         "rows": response_rows,
         "facility_case_rows": facility_case_rows,
         "facility_case_status_counts": facility_case_status_counts,
@@ -191,6 +215,9 @@ def reconcile_provider_responses(
         "facility_case_no_provider_response_count": facility_case_status_counts[
             "NO_PROVIDER_RESPONSE"
         ],
+        "facility_case_ambiguous_response_identity_count": facility_case_status_counts[
+            "AMBIGUOUS_RESPONSE_IDENTITY"
+        ],
         "promotion": {
             "provider_packet_promoted": False,
             "frequency_inference_performed": False,
@@ -202,6 +229,7 @@ def reconcile_provider_responses(
             "qualification_sidecar_required": True,
             "qualified_origin_required": sorted(QUALIFIED_ORIGINS),
             "missing_identity_is_not_inferred": True,
+            "ambiguous_case_identity_is_not_promoted": True,
             "facility_ir_fn_remains_withheld": True,
         },
     }

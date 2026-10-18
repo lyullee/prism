@@ -185,6 +185,9 @@ frequency or opens facility IR/F-N. The inverse facility-case view is also
 written: the current snapshot marks all 44 requested cases as
 `NO_PROVIDER_RESPONSE`, so an apparently successful component response cannot
 hide an uncovered case.
+If one response matches more than one requested case, it is reported as
+`AMBIGUOUS_CASE_MATCH` and none of those cases is covered until the provider
+supplies a case-specific identity.
 
 ### SLABx-LH2 validation boundary
 

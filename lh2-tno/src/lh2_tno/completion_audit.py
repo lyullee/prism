@@ -5365,6 +5365,7 @@ def build_ijhe_completion_audit(
         facility_case_count = reconciliation.get("facility_case_count")
         exact_match_count = reconciliation.get("exact_case_match_count")
         qualified_match_count = reconciliation.get("qualified_exact_case_match_count")
+        ambiguous_match_count = reconciliation.get("ambiguous_case_match_count")
         no_match_count = reconciliation.get("no_exact_case_match_count")
         facility_case_rows = reconciliation.get("facility_case_rows")
         facility_case_status_counts = reconciliation.get("facility_case_status_counts")
@@ -5380,6 +5381,7 @@ def build_ijhe_completion_audit(
                 "UNQUALIFIED_RESPONSE",
                 "COMPONENT_CANDIDATE_ONLY",
                 "NO_PROVIDER_RESPONSE",
+                "AMBIGUOUS_RESPONSE_IDENTITY",
             )
         )
         reconciliation_valid = (
@@ -5395,8 +5397,11 @@ def build_ijhe_completion_audit(
             and 0 <= exact_match_count <= response_count
             and isinstance(qualified_match_count, int)
             and 0 <= qualified_match_count <= exact_match_count
+            and isinstance(ambiguous_match_count, int)
+            and 0 <= ambiguous_match_count <= response_count
             and isinstance(no_match_count, int)
-            and no_match_count + exact_match_count == response_count
+            and no_match_count + exact_match_count + ambiguous_match_count == response_count
+            and reconciliation.get("response_accounting_complete") is True
             and isinstance(reconciliation.get("rows"), list)
             and len(reconciliation["rows"]) == response_count
             and isinstance(facility_case_rows, list)
@@ -5420,6 +5425,7 @@ def build_ijhe_completion_audit(
                     "UNQUALIFIED_RESPONSE",
                     "COMPONENT_CANDIDATE_ONLY",
                     "NO_PROVIDER_RESPONSE",
+                    "AMBIGUOUS_RESPONSE_IDENTITY",
                 )
             )
             and facility_case_coverage_count == facility_case_count
@@ -5430,6 +5436,7 @@ def build_ijhe_completion_audit(
             and policy.get("exact_event_component_port_identity_required") is True
             and policy.get("qualification_sidecar_required") is True
             and policy.get("missing_identity_is_not_inferred") is True
+            and policy.get("ambiguous_case_identity_is_not_promoted") is True
             and policy.get("facility_ir_fn_remains_withheld") is True
         )
         reconciliation_check = _check(
@@ -5443,6 +5450,7 @@ def build_ijhe_completion_audit(
                 "facility_case_count": facility_case_count,
                 "exact_case_match_count": exact_match_count,
                 "qualified_exact_case_match_count": qualified_match_count,
+                "ambiguous_case_match_count": ambiguous_match_count,
                 "component_candidate_response_count": reconciliation.get(
                     "component_candidate_response_count"
                 ),
@@ -5459,6 +5467,9 @@ def build_ijhe_completion_audit(
                 ),
                 "facility_case_no_provider_response_count": reconciliation.get(
                     "facility_case_no_provider_response_count"
+                ),
+                "facility_case_ambiguous_response_identity_count": reconciliation.get(
+                    "facility_case_ambiguous_response_identity_count"
                 ),
                 "promotion": dict(promotion),
                 "policy": dict(policy),
