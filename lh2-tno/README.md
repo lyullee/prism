@@ -32,7 +32,7 @@ Try the equipment boundary check:
 lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/manifest_check.json
 ```
 
-The current checkout validation result is **1,500 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
+The current checkout validation result is **1,544 passed, 1 warning**. The warning is a Python 3.14 deprecation warning from `pytest-asyncio`; it is reported separately from a failing contract.
 
 The latest IJHE readiness record is intentionally fail-closed: it reports the
 diagnostic chain and its conditional IR/F-N view, while withholding a formal
@@ -79,7 +79,8 @@ closure status per case and per equipment component.
 The companion [`lh2dt_models`](https://github.com/lyullee/lh2dt_models)
 package now emits the closure object from its finite-volume
 `DynamicHEMPipe`, `LayeredTank`, and `DynamicVaporizer` accident exporters
-(commit [`16f7a4b`](https://github.com/lyullee/lh2dt_models/commit/16f7a4b)).
+(latest rechecked source commit
+[`7072374`](https://github.com/lyullee/lh2dt_models/commit/7072374c59b726f4e938cd37e7695684ddc70b68)).
 Those exporters hash the provider state history and report inventory and
 pressure residuals. Fixed-source valves, pumps, and vent stacks deliberately
 remain operator-limited until an upstream dynamic inventory owner is attached.
@@ -206,7 +207,7 @@ that facility QRA is available.
 
 The clean-source replay of the same 24-event scope is documented in the
 [clean-source full-scope replay record](docs/PRISM_native_clean_full_scope_replay_20261017.md).
-It uses `lh2dt_models@16f7a4b`, matches and executes all 24 packet identities,
+It uses the rechecked `lh2dt_models@7072374`, matches and executes all 24 packet identities,
 and records a 416.8 s offline diagnostic runtime. Twenty-two cases remain
 operator-limited/withheld, so the result is a traceable conditional diagnostic
 view rather than a facility-QRA claim. The exact HAZOP mode binding is

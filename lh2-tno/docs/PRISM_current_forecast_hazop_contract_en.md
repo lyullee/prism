@@ -64,6 +64,12 @@ The optional `forecast_facility_campaign_evaluator` in
 `run_hazop_integrated_risk` is the explicit handoff point for that future
 aggregation. Its output is still guarded against frequency inference,
 physical-validation claims, and premature facility-QRA promotion.
+The guard checks both the callback's top-level fields and any nested
+`facility_ledger`. A callback that reports `qualified_facility_qra_available`,
+`provider_packet_promoted`, or an equivalent promotion/inference flag inside
+that ledger is returned as
+`WITHHELD_UNSAFE_FORECAST_FACILITY_CAMPAIGN_RESULT`; conditional numerical
+totals remain visible only when they are not presented as a qualified QRA.
 
 For a structured handoff, use `forecast_campaign_bindings=...` with
 `run_hazop_integrated_risk` or call

@@ -32,6 +32,33 @@ class IntegratedRiskError(ValueError):
     """Raised when the current/forecast integration contract is incomplete."""
 
 
+def _has_unsafe_facility_claim(campaign: Mapping[str, Any]) -> bool:
+    """Return whether a supplied campaign claims a facility-QRA promotion.
+
+    Evaluator callbacks may expose a nested facility ledger.  Checking only
+    the callback's top-level policy leaves a fail-open path where a ledger can
+    claim qualified QRA or provider promotion while the wrapper still labels
+    the result operator-limited.  Keep numerical conditional totals visible,
+    but reject qualification, provider-promotion, inference, and validation
+    claims at both levels.
+    """
+    sources: list[Mapping[str, Any]] = [campaign]
+    ledger = campaign.get("facility_ledger")
+    if isinstance(ledger, Mapping):
+        sources.append(ledger)
+    blocked_flags = (
+        "facility_qra_promotion",
+        "qualified_facility_qra_available",
+        "complete_facility_qra_claim",
+        "provider_packet_promoted",
+        "facility_qra_claim",
+        "frequency_inference_performed",
+        "sensor_frequency_learning_used",
+        "physical_validation_claim",
+    )
+    return any(source.get(flag) is True for source in sources for flag in blocked_flags)
+
+
 def _forecast_trigger_key(component_id: str, scenario_id: str, forecast_time_s: float) -> str:
     """Return the JSON-safe identity for one forecast quantitative trigger."""
 
@@ -181,13 +208,7 @@ def build_hazop_forecast_facility_campaign_result(
             raise IntegratedRiskError(f"campaign facility identity mismatch: {entry['key']}")
         policy = campaign.get("policy")
         policy = policy if isinstance(policy, Mapping) else {}
-        if (
-            policy.get("frequency_inference_performed") is True
-            or policy.get("sensor_frequency_learning_used") is True
-            or policy.get("facility_qra_promotion") is True
-            or policy.get("physical_validation_claim") is True
-            or campaign.get("complete_facility_qra_claim") is True
-        ):
+        if _has_unsafe_facility_claim(campaign):
             raise IntegratedRiskError(f"unsafe promotion or inference claim in forecast campaign: {entry['key']}")
         event_ids = {
             str(event.get("id"))
@@ -582,12 +603,7 @@ def run_hazop_integrated_risk(
                     if isinstance(forecast_campaign_policy, Mapping)
                     else {}
                 )
-                unsafe = (
-                    forecast_campaign_policy.get("facility_qra_promotion") is True
-                    or forecast_campaign_policy.get("frequency_inference_performed") is True
-                    or forecast_campaign_policy.get("physical_validation_claim") is True
-                    or forecast_campaign.get("complete_facility_qra_claim") is True
-                )
+                unsafe = _has_unsafe_facility_claim(forecast_campaign)
                 if unsafe:
                     forecast_facility_campaign = {
                         "status": "WITHHELD_UNSAFE_FORECAST_FACILITY_CAMPAIGN_RESULT",
@@ -662,12 +678,7 @@ def run_hazop_integrated_risk(
                 campaign = copy.deepcopy(dict(raw_campaign))
                 campaign_policy = campaign.get("policy")
                 campaign_policy = campaign_policy if isinstance(campaign_policy, Mapping) else {}
-                unsafe = (
-                    campaign_policy.get("facility_qra_promotion") is True
-                    or campaign_policy.get("frequency_inference_performed") is True
-                    or campaign_policy.get("physical_validation_claim") is True
-                    or campaign.get("complete_facility_qra_claim") is True
-                )
+                unsafe = _has_unsafe_facility_claim(campaign)
                 if unsafe:
                     facility_campaign = {
                         "status": "WITHHELD_UNSAFE_FACILITY_CAMPAIGN_RESULT",

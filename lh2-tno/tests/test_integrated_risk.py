@@ -494,6 +494,31 @@ def test_integrated_risk_withholds_unsafe_facility_campaign_claim(monkeypatch):
     assert result["facility_campaign"]["policy"]["facility_qra_promotion"] is False
 
 
+def test_integrated_risk_withholds_nested_unsafe_facility_ledger_claim(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        facility_campaign_evaluator=lambda current: {
+            "status": "FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+            "facility_ledger": {"qualified_facility_qra_available": True},
+            "policy": {"facility_qra_promotion": False},
+        },
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
+    assert result["facility_campaign"]["status"] == (
+        "WITHHELD_UNSAFE_FACILITY_CAMPAIGN_RESULT"
+    )
+    assert result["facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
 def test_integrated_risk_attaches_forecast_facility_campaign(monkeypatch):
     monkeypatch.setattr(
         integrated_risk,
@@ -596,6 +621,38 @@ def test_integrated_risk_withholds_unsafe_forecast_facility_campaign(monkeypatch
             "status": "READY_FOR_IJHE_SCOPE",
             "complete_facility_qra_claim": True,
             "policy": {"facility_qra_promotion": True},
+        },
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
+    assert result["forecast_facility_campaign"]["status"] == (
+        "WITHHELD_UNSAFE_FORECAST_FACILITY_CAMPAIGN_RESULT"
+    )
+    assert result["forecast_facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
+def test_integrated_risk_withholds_nested_unsafe_forecast_facility_ledger_claim(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_forecast_risk_scan",
+        lambda **kwargs: {**_forecast_result(), "withheld_count": 0},
+    )
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        forecast_frames=[{"component_id": "TK-01", "origin": "model_prediction"}],
+        forecast_tables_by_component={"TK-01": {"rows": []}},
+        forecast_facility_campaign_evaluator=lambda forecast: {
+            "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+            "facility_ledger": {"provider_packet_promoted": True},
+            "policy": {"facility_qra_promotion": False},
         },
     )
     assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
