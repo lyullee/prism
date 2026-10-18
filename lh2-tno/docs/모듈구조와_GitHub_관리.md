@@ -1,7 +1,7 @@
 # PRISM 구조와 GitHub 관리
 
 2026-10-08, v0.6.0. 정식 이름 **PRISM (Process Risk Integration and Scenario Modeling)**.
-새 비공개 저장소는 https://github.com/lyullee/prism 이며 최신 배포 기준은 `main`입니다.
+공개 저장소는 https://github.com/lyullee/prism 이며 최신 배포 기준은 `main`입니다. 외부 TNO 위험계산 엔진 소스는 이 저장소에 포함되지 않고 별도 backend로 핀 고정합니다.
 
 ## 실행 구조
 

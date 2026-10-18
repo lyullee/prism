@@ -42,6 +42,9 @@ for the current 44-case counts and open evidence requests.
 
 The latest cross-artifact consistency check is [`status_consistency_current.json`](results/20261115/status_consistency_current.json): 28 checks pass with zero pointer, ledger or CI blockers. It confirms that the current audit, facility assessment, evidence request, campaign ledger, and case-coverage records refer to the same diagnostic union; it does not promote provider qualification or facility IR/F-N.
 
+For the exact public-repository, external-backend, and KGS interpretation
+boundary, see the [public/private boundary note](docs/PRISM_public_private_boundary_and_KGS_interpretation_20261018.md).
+
 ## What PRISM is for
 
 PRISM helps an operator or researcher answer:

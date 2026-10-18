@@ -807,7 +807,7 @@ HyRAM을 현재 LH2 전체 경로에 도입했다고 주장하지 않습니다. 
 
 ### 설치
 
-GitHub 접근 권한이 있는 계정으로 새 비공개 저장소를 복제합니다. **Python 3.12 이상**이 필요합니다.
+공개 GitHub 저장소를 복제합니다. **Python 3.12 이상**이 필요합니다.
 아래는 Windows PowerShell 기준이며 명령은 저장소 루트에서 실행합니다.
 
 ```powershell
@@ -820,7 +820,7 @@ python -m venv .venv
 배포 이름은 `prism-risk`, 실행 명령은 `prism`입니다. PyPI 설치 명령은 `python -m pip install prism-risk==0.6.2`입니다.
 
 개발 환경에서 테스트를 실행할 때는 `python -m pip install -e ".[test]"`를 사용합니다. 이 extra에는 수소 물성 계산과 native LH2 packet 테스트에 필요한 `CoolProp`도 포함됩니다.
-공개 배포 파일에는 외부 물리 모델이 포함되지 않습니다. GitHub는 비공개이며 접근 권한이 필요합니다.
+공개 배포 파일에는 외부 물리 모델 소스가 모두 포함되지 않습니다. GitHub 저장소는 공개이지만, 표준 정량경로와 LH2 consequence/facility campaign을 실행하려면 별도로 제공된 외부 backend와 핀 고정된 모델 경로가 필요합니다. 자세한 경계는 [공개·외부 backend·KGS 결과 해석 기록](docs/PRISM_public_private_boundary_and_KGS_interpretation_20261018.md)을 참조합니다.
 
 ### 설비 매니페스트 사전 점검
 
