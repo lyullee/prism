@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prism-risk"
-version = "0.6.3"
+version = "0.6.4"
 description = "PRISM: Process Risk Integration and Scenario Modeling with optional LH2 analysis"
 readme = "README.md"
 license = "MIT"
@@ -33,8 +33,8 @@ full = [
     "numpy>=1.26,<3",
     "scipy>=1.11,<2",
     "CoolProp>=6.6,<9",
-    "slabx @ git+https://github.com/lyullee/slabx.git@820e368ba6454aad8627dac5967115d9648c80c7",
-    "slabx-lh2 @ git+https://github.com/lyullee/slabx-lh2.git@1ef613102819de1c2feebd062aff3b49997e1927",
+    "slabx==1.0.7",
+    "slabx-lh2==0.1.5",
 ]
 
 [project.scripts]

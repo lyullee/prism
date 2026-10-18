@@ -1,8 +1,8 @@
 {
-  "title": "PRISM: Process Risk Integration and Scenario Modeling",
+  "title": "PRISM: Process Risk Integration and Scenario Modeling (v0.6.4)",
   "upload_type": "software",
-  "version": "0.6.2",
-  "publication_date": "2026-10-09",
+  "version": "0.6.4",
+  "publication_date": "2026-10-18",
   "creators": [
     {
       "name": "Lee, Ugwiyeon",
@@ -11,23 +11,28 @@
   ],
   "access_right": "open",
   "license": "mit",
-  "description": "Research-grade generic LH2 risk integration with standard/LH2 mode selection, auditable contracts, literature frequencies, equipment boundary and telemetry interfaces, and diagnostic source-to-harm orchestration. Complete facility QRA, independent facility validation and 1 Hz fresh-physics performance remain incomplete or unverified. External physics providers are not included.",
+  "description": "<p>PRISM 0.6.4 bundles the project-authored standard quantitative risk assessment implementation and public Python installation dependencies. It connects facility inputs, literature frequencies, release and consequence calculations, ignition and harm models, and conditional IR/F-N outputs. The optional LH2 workflow integrates equipment digital twins and public consequence providers through explicit contracts. This release removes the dependency on an unpublished local QRA folder. Complete facility qualification, independent full-chain validation, and fresh-physics real-time performance remain subject to the documented evidence gates.</p>",
   "keywords": [
     "liquid hydrogen",
-    "risk assessment",
+    "quantitative risk assessment",
     "digital twin",
     "consequence modeling"
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/lyullee/prism",
+      "identifier": "https://github.com/lyullee/prism/tree/v0.6.4",
       "relation": "isSupplementTo",
       "scheme": "url"
     },
     {
-      "identifier": "https://pypi.org/project/prism-risk/",
+      "identifier": "https://pypi.org/project/prism-risk/0.6.4/",
       "relation": "isIdenticalTo",
       "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23246944",
+      "relation": "isNewVersionOf",
+      "scheme": "doi"
     }
   ]
 }

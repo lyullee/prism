@@ -13,7 +13,7 @@ PRISM is a Python research framework for connecting process and equipment state,
 Install the latest published package:
 
 ```powershell
-python -m pip install "prism-risk[test]==0.6.3"
+python -m pip install "prism-risk[full]==0.6.4"
 prism --describe-modes
 ```
 
@@ -21,7 +21,7 @@ From a source checkout:
 
 ```powershell
 cd lh2-tno
-python -m pip install -e ".[test]"
+python -m pip install -e ".[full,test]"
 python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe_audit_verification.json
 python -m pytest -q
 ```
@@ -34,8 +34,8 @@ lh2-tno --equipment-manifest examples/equipment_manifest.json --output build/man
 
 The project-authored PRISM QRA is bundled in
 `src/prism_qra`. Install its runtime dependencies with
-`python -m pip install -e ".[full]"`; this installs the pinned public SLABx and
-SLABx-LH2 repositories and lets standard mode run without a private backend
+`python -m pip install -e ".[full]"`; this installs the public PyPI packages
+`slabx==1.0.7` and `slabx-lh2==0.1.5` and lets standard mode run without a private backend
 path. An explicit `--backend` remains available when a separately pinned
 engine is required for reproduction.
 
@@ -1101,8 +1101,8 @@ Show the facility, component, port, operating mode, HAZOP deviation, current/pre
 
 ## Release links
 
-- [GitHub Release v0.6.3](https://github.com/lyullee/prism/releases/tag/v0.6.3)
-- [PyPI prism-risk 0.6.3](https://pypi.org/project/prism-risk/0.6.3/)
+- [GitHub Release v0.6.4](https://github.com/lyullee/prism/releases/tag/v0.6.4)
+- [PyPI prism-risk 0.6.4](https://pypi.org/project/prism-risk/0.6.4/)
 - [Zenodo v0.6.3 publication status](docs/PRISM_v063_PyPI_DOI_DISTRIBUTION_RECORD_20261015.md) (version DOI pending publication)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
 - [PyPI workflow run](https://github.com/lyullee/prism/actions/runs/38689574587)
@@ -1124,7 +1124,7 @@ value is never substituted into the facility total. See
 
 ## Current qualification boundary
 
-PRISM v0.6.3 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
+PRISM v0.6.4 is research software for a diagnostic risk chain. It is not a regulatory certification, a complete facility QRA, an independent physical validation, or a claim of fresh physics at 1 Hz. The current IJHE audit remains fail-closed: five evidence gates are blocked and facility IR/F-N promotion is false. The status is recorded in `CURRENT_STATUS.json` and the audit documents.
 
 The inspection-centre procedure audit is intentionally classified as **partial operational evidence**. It confirms procedure anchors for pressure monitoring, PSV response, isolation/vent commands, and an operating stage, but it does not supply a qualified release duration, termination event, relief setpoint/capacity, mass balance, or annual accident frequency. Those missing fields must be supplied by an equipment-provider packet before the affected cases can enter a promoted facility QRA. The audit script is reproducible with:
 
@@ -1139,6 +1139,6 @@ python scripts/audit_partial_lh2_boundary_evidence.py `
 PRISM is released under the MIT License. Cite the concept DOI until the version-specific v0.6.3 Zenodo record is published:
 
 ```text
-Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.3.
+Lee, Ugwiyeon. PRISM: Process Risk Integration and Scenario Modeling, v0.6.4.
 Concept DOI: https://doi.org/10.5281/zenodo.23241358
 ```

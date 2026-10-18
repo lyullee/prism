@@ -11,7 +11,7 @@ runtime packages remain under their own licenses.
 Run from the PRISM repository root:
 
 ```powershell
-python -m pip install -e ".[full]"  # installs the pinned public SLABx and SLABx-LH2 sources
+python -m pip install -e ".[full]"  # installs public PyPI SLABx and SLABx-LH2 packages
 prism --mode standard template --directory standard_inputs
 prism --mode standard run --name my-facility `
   --sections standard_inputs/sections.csv `

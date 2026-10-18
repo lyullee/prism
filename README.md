@@ -11,7 +11,7 @@ PRISM is an auditable research framework for connecting process and equipment st
 Install the published Python package:
 
 ```powershell
-python -m pip install "prism-risk[test]==0.6.3"
+python -m pip install "prism-risk[full]==0.6.4"
 prism --describe-modes
 ```
 
@@ -20,11 +20,20 @@ Or clone the public repository and run the test suite:
 ```powershell
 git clone https://github.com/lyullee/prism.git
 cd prism\lh2-tno
-python -m pip install -e ".[test]"
+python -m pip install -e ".[full,test]"
 python -m pytest -q
 ```
 
-The package name is `prism-risk`; the command-line entry point is `prism`. Python 3.12 or newer is recommended.
+The package name is `prism-risk`; the command-line entry point is `prism`. Python 3.12 or newer is required. Version 0.6.4 bundles the project-authored PRISM QRA runtime, including `qra.py`, `risk.py`, `damage.py`, `fire.py`, and `ignition.py`. Standard mode runs without a private backend or a developer-specific folder.
+
+Generate example facility tables, review them, then calculate:
+
+```powershell
+prism --mode standard template --directory standard_inputs
+prism --mode standard run --name demo --sections standard_inputs/sections.csv --components standard_inputs/components.csv --assemblies standard_inputs/assemblies.csv --ignition purple --blocking none --samples 0 --extent 100 --cell 25 --out standard_result.json
+```
+
+The `full` extra installs the public PyPI versions `slabx==1.0.7` and `slabx-lh2==0.1.5`. Historical source-pinned research results retain their original backend digests; installing this release does not regenerate or requalify those results.
 
 ## What the framework connects
 
@@ -65,7 +74,7 @@ The latest generic outdoor LH2 union audit is [`INCOMPLETE_EVIDENCE`](lh2-tno/do
 
 The machine-readable receptor comparison is [`PRISM_receptor_geometry_interpretation_20261115.md`](lh2-tno/docs/PRISM_receptor_geometry_interpretation_20261115.md). It explains why the declared 20 m full-scope receptor can have zero conditional IR/F-N while a separate 0.5 m diagnostic reaches one harm atom. The records remain separate and neither opens facility-QRA promotion.
 
-The local portable suite currently reports **1244 passed, 1 warning**. The metadata check can be rerun with:
+The portable suite at the release preparation point reports **1,577 passed** (one environment-specific deprecation warning in the original development environment). The metadata check can be rerun with:
 
 ```powershell
 cd prism\lh2-tno
@@ -74,11 +83,11 @@ python scripts/verify_latest_ijhe_audit.py --output results/20261115/latest_ijhe
 
 ## Release links
 
-- [GitHub Release v0.6.3](https://github.com/lyullee/prism/releases/tag/v0.6.3)
-- [PyPI: prism-risk 0.6.3](https://pypi.org/project/prism-risk/0.6.3/)
-- [PyPI workflow](https://github.com/lyullee/prism/actions/runs/38689574587)
+- [GitHub Release v0.6.4](https://github.com/lyullee/prism/releases/tag/v0.6.4)
+- [PyPI: prism-risk 0.6.4](https://pypi.org/project/prism-risk/0.6.4/)
+- [PyPI workflow](https://github.com/lyullee/prism/actions/workflows/publish-pypi.yml)
 - [PRISM concept DOI](https://doi.org/10.5281/zenodo.23241358)
-- [Reserved v0.6.3 Zenodo DOI](https://doi.org/10.5281/zenodo.23387052) — resolves after final publication
+- Use the concept DOI above until the v0.6.4 version record is publicly visible.
 
 ## Reproducibility
 

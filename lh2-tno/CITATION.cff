@@ -6,8 +6,8 @@ authors:
   - family-names: "Lee"
     given-names: "Ugwiyeon"
     affiliation: "Korea Gas Safety Corporation"
-version: "0.6.3"
-date-released: 2026-10-15
+version: "0.6.4"
+date-released: 2026-10-18
 doi: "10.5281/zenodo.23241358"
 repository-code: "https://github.com/lyullee/prism"
 url: "https://pypi.org/project/prism-risk/"
@@ -23,4 +23,5 @@ abstract: >-
   telemetry and conditional human-harm evaluation. Numerical diagnostic chain
   implementation is distinguished from complete facility QRA, independent physical
   validation and fresh-physics real-time performance, which remain incomplete or
-  unverified. External physics providers are required and distributed separately.
+  unverified. The project-authored standard QRA implementation is bundled;
+  optional equipment and consequence providers retain their own licenses.

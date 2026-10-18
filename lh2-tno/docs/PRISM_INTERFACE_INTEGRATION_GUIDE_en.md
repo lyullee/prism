@@ -1,4 +1,4 @@
-# PRISM Equipment and Digital-Twin Interface Guide (v0.6.3)
+# PRISM Equipment and Digital-Twin Interface Guide (v0.6.4)
 
 This guide defines the boundary between an equipment digital twin, HAZOP logic, a release provider, PRISM, and the SLABx-LH2 consequence model. It is intended for an integration engineer building a monitoring or simulation connector for a generic outdoor LH2 facility.
 

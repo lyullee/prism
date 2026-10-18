@@ -1,8 +1,8 @@
 {
   "date_kst": "2026-11-15",
-  "package_version": "0.6.3",
-  "release_candidate": "v0.6.3",
-  "release_status": "github_release_published_pypi_0.6.3_zenodo_version_doi_reserved_pending_final_publish",
+  "package_version": "0.6.4",
+  "release_candidate": "v0.6.4",
+  "release_status": "v0.6.4_prepared_pending_pypi_and_zenodo_publication",
   "latest_ijhe_requirement_traceability": "docs/PRISM_IJHE_requirement_traceability_20261115.md",
   "equipment_provider_state_handoff_record": "docs/PRISM_equipment_provider_state_handoff_20261115.md",
   "equipment_provider_port_and_source_state_preserved": true,
@@ -432,7 +432,7 @@
   "zenodo_publication_status": "published_and_doi_resolver_verified",
   "public_artifacts_scope": "PRISM own source, examples, tests, documentation and wheel; external providers and raw field data excluded",
   "zenodo_concept_doi": "10.5281/zenodo.23241358",
-  "github_release_url": "https://github.com/lyullee/prism/releases/tag/v0.6.3",
+  "github_release_url": "https://github.com/lyullee/prism/releases/tag/v0.6.4",
   "release_git_commit": "783b8860c709fd0b7d944b0fe5e9b19d5cd95e15",
   "publication_workflow_run": "https://github.com/lyullee/prism/actions/runs/37833213191",
   "publication_record": "docs/PRISM_v062_PyPI_DOI_배포기록_20261009.md",
@@ -5258,7 +5258,7 @@
   "latest_native_multi_equipment_facility_campaign_provider_packet_promoted": false,
   "latest_native_multi_equipment_facility_campaign_physical_validation_claim": false,
   "latest_native_multi_equipment_facility_campaign_facility_qra_claim": false,
-  "pypi_release_url": "https://pypi.org/project/prism-risk/0.6.3/",
+  "pypi_release_url": "https://pypi.org/project/prism-risk/0.6.4/",
   "zenodo_v063_version_doi_status": "reserved_pending_final_publish_confirmation",
   "zenodo_v063_version_doi": "10.5281/zenodo.23387052",
   "latest_english_user_manual": "docs/PRISM_USER_MANUAL_en.md",
@@ -6893,5 +6893,15 @@
   "native_full_scope_release_rebind_audit_current_provider_packet_promoted": false,
   "native_full_scope_release_rebind_audit_current_facility_qra_claim": false,
   "native_full_scope_release_rebind_audit_current_frequency_inference_performed": false,
-  "native_full_scope_release_rebind_audit_current_physical_validation_claim": false
+  "native_full_scope_release_rebind_audit_current_physical_validation_claim": false,
+  "distribution_064": {
+    "date_kst": "2026-10-18",
+    "bundled_qra": true,
+    "standard_backend_required": false,
+    "pypi_runtime": {
+      "slabx": "1.0.7",
+      "slabx-lh2": "0.1.5"
+    },
+    "historical_backend_results_requalified": false
+  }
 }

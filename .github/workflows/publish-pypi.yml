@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install build and verification tools
-        run: python -m pip install build twine pytest pypdf './lh2-tno[full]'
+        run: python -m pip install build twine './lh2-tno[full,test,xlsx]'
       - name: Match version to the reviewed tag
         env:
           RELEASE_REF: ${{ inputs.release_ref }}

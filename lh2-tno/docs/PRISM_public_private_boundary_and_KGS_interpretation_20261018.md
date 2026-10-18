@@ -34,7 +34,7 @@ dispersion dependencies with:
 python -m pip install -e ".[full]"
 ```
 
-The `full` extra pins the public `slabx` and `slabx-lh2` repositories. An
+The `full` extra installs pinned public PyPI distributions of `slabx` and `slabx-lh2`. An
 explicit `--backend` remains available for a separately pinned research model.
 The LH2 facility consequence path can also require public equipment models such
 as `lh2dt` and a declared pool model, together with the facility configuration

@@ -1,4 +1,4 @@
-# PRISM User Manual (v0.6.3)
+# PRISM User Manual (v0.6.4)
 
 PRISM (Process Risk Integration and Scenario Modeling) connects equipment state, HAZOP selection, literature-based initiating frequency, release history, consequence models, and facility risk ledgers. This manual is written for an engineer who wants to run the package and understand each result.
 
@@ -16,7 +16,7 @@ The package is a research diagnostic framework. It does not turn a few pressure 
 Python 3.12 or newer is required.
 
 ```powershell
-python -m pip install "prism-risk[test]==0.6.3"
+python -m pip install "prism-risk[full]==0.6.4"
 prism --describe-modes
 lh2-tno --help
 ```
@@ -25,13 +25,13 @@ For a source checkout:
 
 ```powershell
 cd lh2-tno
-python -m pip install -e ".[full]"
+python -m pip install -e ".[full,test]"
 python -m pytest -q
 ```
 
-The published `0.6.3` wheel is the earlier baseline. The source checkout
-installation above is the recommended path for the current bundled PRISM QRA
-runtime and its public SLABx/SLABx-LH2 adapters.
+The `0.6.4` wheel includes the project-authored PRISM QRA runtime. Its `full`
+extra installs public PyPI versions `slabx==1.0.7` and `slabx-lh2==0.1.5`.
+Historical source-pinned calculations retain their original backend digests.
 
 The v0.6.3 release baseline was **1214 passed, 1 warning**. The current checkout validation is **1,577 passed, 1 warning**. The warning is reported separately from a failing contract.
 

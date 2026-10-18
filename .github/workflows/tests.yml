@@ -74,7 +74,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install package and public runtime dependencies
-        run: python -m pip install -e './lh2-tno[full]' pytest pypdf setuptools wheel
+        run: python -m pip install -e './lh2-tno[full,test,xlsx]' setuptools wheel
       - name: Run portable tests
         working-directory: lh2-tno
         run: python -m pytest -q
