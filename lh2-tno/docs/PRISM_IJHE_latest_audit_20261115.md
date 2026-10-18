@@ -36,6 +36,7 @@ The latest audit consumes the inspection-center facility handoff as a diagnostic
 
 ## 주요 산출물
 
+- [IJHE requirement-to-evidence matrix](PRISM_IJHE_requirement_traceability_matrix_20261115.md)
 - [최신 union 시설평가](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json)
 - [케이스별 방출 경계 감사](../results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json)
 - [조건부 시설 risk view](../results/20261115/conditional_facility_risk_view_with_release_trace.json)
