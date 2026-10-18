@@ -152,6 +152,724 @@
       "promotion_allowed": false
     }
   ],
+  "facility_case_rows": [
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-3ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "port_ids": [
+        "terminal_pipe.out"
+      ],
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "generic-lh2-full-scope-example/vertical-handoff/D-4ms-west",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "port_ids": [
+        "vent-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    },
+    {
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "release_branch_id": "matched-event-provider-request",
+      "annual_condition_id": "synthetic-generic-worker-west-3ms",
+      "status": "NO_PROVIDER_RESPONSE",
+      "exact_response_files": [],
+      "exact_response_digests": [],
+      "qualified_response_files": [],
+      "component_candidate_response_files": [],
+      "promotion_allowed": false
+    }
+  ],
+  "facility_case_status_counts": {
+    "QUALIFIED_RESPONSE": 0,
+    "UNQUALIFIED_RESPONSE": 0,
+    "COMPONENT_CANDIDATE_ONLY": 0,
+    "NO_PROVIDER_RESPONSE": 44
+  },
+  "facility_case_exact_response_count": 0,
+  "facility_case_qualified_response_count": 0,
+  "facility_case_component_candidate_only_count": 0,
+  "facility_case_no_provider_response_count": 44,
   "promotion": {
     "provider_packet_promoted": false,
     "frequency_inference_performed": false,

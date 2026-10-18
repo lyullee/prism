@@ -3506,6 +3506,19 @@ def test_completion_audit_records_provider_response_facility_reconciliation():
             "component_candidate_response_count": 0,
             "no_exact_case_match_count": 7,
             "rows": [{}] * 7,
+            "facility_case_rows": [
+                {"status": "NO_PROVIDER_RESPONSE", "promotion_allowed": False}
+            ] * 44,
+            "facility_case_status_counts": {
+                "QUALIFIED_RESPONSE": 0,
+                "UNQUALIFIED_RESPONSE": 0,
+                "COMPONENT_CANDIDATE_ONLY": 0,
+                "NO_PROVIDER_RESPONSE": 44,
+            },
+            "facility_case_exact_response_count": 0,
+            "facility_case_qualified_response_count": 0,
+            "facility_case_component_candidate_only_count": 0,
+            "facility_case_no_provider_response_count": 44,
             "promotion": {
                 "provider_packet_promoted": False,
                 "frequency_inference_performed": False,
@@ -3545,6 +3558,17 @@ def test_completion_audit_blocks_provider_response_reconciliation_promotion_clai
             "qualified_exact_case_match_count": 1,
             "no_exact_case_match_count": 0,
             "rows": [{}],
+            "facility_case_rows": [{"status": "QUALIFIED_RESPONSE", "promotion_allowed": False}],
+            "facility_case_status_counts": {
+                "QUALIFIED_RESPONSE": 1,
+                "UNQUALIFIED_RESPONSE": 0,
+                "COMPONENT_CANDIDATE_ONLY": 0,
+                "NO_PROVIDER_RESPONSE": 0,
+            },
+            "facility_case_exact_response_count": 1,
+            "facility_case_qualified_response_count": 1,
+            "facility_case_component_candidate_only_count": 0,
+            "facility_case_no_provider_response_count": 0,
             "promotion": {
                 "provider_packet_promoted": True,
                 "frequency_inference_performed": False,

@@ -50,6 +50,8 @@ def test_exact_identity_match_stays_unqualified_without_sidecar():
     assert report["qualified_exact_case_match_count"] == 0
     assert report["rows"][0]["status"] == "EXACT_CASE_MATCH_UNQUALIFIED"
     assert report["promotion"]["provider_packet_promoted"] is False
+    assert report["facility_case_rows"][0]["status"] == "UNQUALIFIED_RESPONSE"
+    assert report["facility_case_exact_response_count"] == 1
 
 
 def test_missing_event_or_port_is_not_repaired_by_component_name():
@@ -61,6 +63,18 @@ def test_missing_event_or_port_is_not_repaired_by_component_name():
     assert report["exact_case_match_count"] == 0
     assert report["no_exact_case_match_count"] == 1
     assert report["rows"][0]["status"] == "NO_EXACT_CASE_MATCH"
+    assert report["facility_case_rows"][0]["status"] == "COMPONENT_CANDIDATE_ONLY"
+    assert report["facility_case_component_candidate_only_count"] == 1
+
+
+def test_unrepresented_facility_case_is_explicitly_open():
+    report = reconcile_provider_responses(
+        _audit([_response(event_id="other-event", component_id="other-component", port_id="other-port")]),
+        _request_doc([_request()]),
+    )
+    assert report["facility_case_rows"][0]["status"] == "NO_PROVIDER_RESPONSE"
+    assert report["facility_case_no_provider_response_count"] == 1
+    assert report["facility_case_exact_response_count"] == 0
 
 
 def test_qualified_exact_match_requires_all_explicit_fields():

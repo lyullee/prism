@@ -40,7 +40,12 @@ current-source evidence refresh, not a promotion.
 Those seven responses were also reconciled against the current 44-case facility
 evidence worklist in
 `results/20261115/external_provider_response_facility_reconciliation_20261018.json`
-(SHA-256 `735eed72def9b09fd3c1535787da694b38fa03de1132e80fe82de13693b7326a`).
+
+The record now includes both directions of the audit. In the current snapshot
+all 44 requested facility cases are explicitly `NO_PROVIDER_RESPONSE`; this is
+diagnostic coverage accounting only and does not promote a provider packet or
+facility IR/F-N.
+(SHA-256 `4a48096acb5e07d772b97197da0fb5311906589c39342d6b58d65dce8518267c`).
 The exact event/component/port comparison found zero case matches and zero
 qualified matches.  The native response component names therefore cannot be
 used as aliases for the generic facility cases; the result remains diagnostic

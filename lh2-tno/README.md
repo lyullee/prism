@@ -181,7 +181,10 @@ python scripts/reconcile_external_provider_responses.py `
 The current seven native responses have zero exact matches among the 44
 facility cases. A component-name similarity is deliberately not treated as an
 alias for an event/component/port identity, and the command never assigns a
-frequency or opens facility IR/F-N.
+frequency or opens facility IR/F-N. The inverse facility-case view is also
+written: the current snapshot marks all 44 requested cases as
+`NO_PROVIDER_RESPONSE`, so an apparently successful component response cannot
+hide an uncovered case.
 
 ### SLABx-LH2 validation boundary
 

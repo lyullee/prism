@@ -5366,6 +5366,22 @@ def build_ijhe_completion_audit(
         exact_match_count = reconciliation.get("exact_case_match_count")
         qualified_match_count = reconciliation.get("qualified_exact_case_match_count")
         no_match_count = reconciliation.get("no_exact_case_match_count")
+        facility_case_rows = reconciliation.get("facility_case_rows")
+        facility_case_status_counts = reconciliation.get("facility_case_status_counts")
+        facility_case_status_counts = (
+            facility_case_status_counts
+            if isinstance(facility_case_status_counts, Mapping)
+            else {}
+        )
+        facility_case_coverage_count = sum(
+            facility_case_status_counts.get(status, 0)
+            for status in (
+                "QUALIFIED_RESPONSE",
+                "UNQUALIFIED_RESPONSE",
+                "COMPONENT_CANDIDATE_ONLY",
+                "NO_PROVIDER_RESPONSE",
+            )
+        )
         reconciliation_valid = (
             reconciliation.get("schema_version")
             == "prism.provider_response_facility_reconciliation.v1"
@@ -5383,6 +5399,30 @@ def build_ijhe_completion_audit(
             and no_match_count + exact_match_count == response_count
             and isinstance(reconciliation.get("rows"), list)
             and len(reconciliation["rows"]) == response_count
+            and isinstance(facility_case_rows, list)
+            and len(facility_case_rows) == facility_case_count
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status") in {
+                    "QUALIFIED_RESPONSE",
+                    "UNQUALIFIED_RESPONSE",
+                    "COMPONENT_CANDIDATE_ONLY",
+                    "NO_PROVIDER_RESPONSE",
+                }
+                and row.get("promotion_allowed") is False
+                for row in facility_case_rows
+            )
+            and all(
+                isinstance(facility_case_status_counts.get(status), int)
+                and facility_case_status_counts.get(status, -1) >= 0
+                for status in (
+                    "QUALIFIED_RESPONSE",
+                    "UNQUALIFIED_RESPONSE",
+                    "COMPONENT_CANDIDATE_ONLY",
+                    "NO_PROVIDER_RESPONSE",
+                )
+            )
+            and facility_case_coverage_count == facility_case_count
             and promotion.get("provider_packet_promoted") is False
             and promotion.get("frequency_inference_performed") is False
             and promotion.get("physical_validation_claim") is False
@@ -5407,6 +5447,19 @@ def build_ijhe_completion_audit(
                     "component_candidate_response_count"
                 ),
                 "no_exact_case_match_count": no_match_count,
+                "facility_case_status_counts": dict(facility_case_status_counts),
+                "facility_case_exact_response_count": reconciliation.get(
+                    "facility_case_exact_response_count"
+                ),
+                "facility_case_qualified_response_count": reconciliation.get(
+                    "facility_case_qualified_response_count"
+                ),
+                "facility_case_component_candidate_only_count": reconciliation.get(
+                    "facility_case_component_candidate_only_count"
+                ),
+                "facility_case_no_provider_response_count": reconciliation.get(
+                    "facility_case_no_provider_response_count"
+                ),
                 "promotion": dict(promotion),
                 "policy": dict(policy),
             },

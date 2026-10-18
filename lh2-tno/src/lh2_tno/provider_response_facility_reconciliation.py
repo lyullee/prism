@@ -119,6 +119,51 @@ def reconcile_provider_responses(
             "promotion_allowed": status == "QUALIFIED_EXACT_CASE_MATCH",
         })
 
+    # Keep the inverse view as well.  A response-centric report can hide a
+    # missing facility case when several responses happen to describe the
+    # same component.  The facility case ledger is the authoritative unit for
+    # QRA coverage, so every requested case gets an explicit status here.
+    facility_case_rows: list[dict[str, Any]] = []
+    facility_case_status_counts = {
+        "QUALIFIED_RESPONSE": 0,
+        "UNQUALIFIED_RESPONSE": 0,
+        "COMPONENT_CANDIDATE_ONLY": 0,
+        "NO_PROVIDER_RESPONSE": 0,
+    }
+    for request in requests:
+        exact_rows = [
+            row for row in response_rows
+            if any(candidate.get("request_id") == request["request_id"]
+                   for candidate in row["exact_case_candidates"])
+        ]
+        component_rows = [
+            row for row in response_rows
+            if any(candidate.get("request_id") == request["request_id"]
+                   for candidate in row["component_case_candidates"])
+        ]
+        qualified_rows = [
+            row for row in exact_rows
+            if row["status"] == "QUALIFIED_EXACT_CASE_MATCH"
+        ]
+        if qualified_rows:
+            status = "QUALIFIED_RESPONSE"
+        elif exact_rows:
+            status = "UNQUALIFIED_RESPONSE"
+        elif component_rows:
+            status = "COMPONENT_CANDIDATE_ONLY"
+        else:
+            status = "NO_PROVIDER_RESPONSE"
+        facility_case_status_counts[status] += 1
+        facility_case_rows.append({
+            **request,
+            "status": status,
+            "exact_response_files": [row.get("file") for row in exact_rows],
+            "exact_response_digests": [row.get("sha256") for row in exact_rows],
+            "qualified_response_files": [row.get("file") for row in qualified_rows],
+            "component_candidate_response_files": [row.get("file") for row in component_rows],
+            "promotion_allowed": False,
+        })
+
     return {
         "schema_version": SCHEMA,
         "status": "QUALIFIED_RESPONSE_CASE_COVERAGE" if qualified_match_count == len(responses) and responses else "DIAGNOSTIC_RESPONSE_CASE_RECONCILIATION",
@@ -131,6 +176,21 @@ def reconcile_provider_responses(
         "component_candidate_response_count": component_candidate_count,
         "no_exact_case_match_count": no_match_count,
         "rows": response_rows,
+        "facility_case_rows": facility_case_rows,
+        "facility_case_status_counts": facility_case_status_counts,
+        "facility_case_exact_response_count": sum(
+            value for key, value in facility_case_status_counts.items()
+            if key in {"QUALIFIED_RESPONSE", "UNQUALIFIED_RESPONSE"}
+        ),
+        "facility_case_qualified_response_count": facility_case_status_counts[
+            "QUALIFIED_RESPONSE"
+        ],
+        "facility_case_component_candidate_only_count": facility_case_status_counts[
+            "COMPONENT_CANDIDATE_ONLY"
+        ],
+        "facility_case_no_provider_response_count": facility_case_status_counts[
+            "NO_PROVIDER_RESPONSE"
+        ],
         "promotion": {
             "provider_packet_promoted": False,
             "frequency_inference_performed": False,
