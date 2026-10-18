@@ -511,6 +511,27 @@ def main() -> int:
         raise SystemExit(f"HAZOP LH2 provider diagnostic failed: {error}") from error
     current = result["current"]
     forecast = result["forecast"]
+    current_facility_ledger = result.get("facility_campaign", {}).get(
+        "facility_ledger", {}
+    )
+    forecast_campaigns = result.get("forecast_facility_campaign", {}).get(
+        "campaigns", []
+    )
+    forecast_ledgers = [
+        row.get("facility_ledger", {})
+        for row in forecast_campaigns
+        if isinstance(row, dict) and isinstance(row.get("facility_ledger"), dict)
+    ]
+    forecast_boundary_ready = (
+        None
+        if not forecast_ledgers
+        else all(row.get("provider_release_boundary_ready") is True for row in forecast_ledgers)
+    )
+    forecast_facility_total_available = (
+        None
+        if not forecast_ledgers
+        else all(row.get("facility_total_risk_available") is True for row in forecast_ledgers)
+    )
     print(
         json.dumps(
             {
@@ -523,6 +544,14 @@ def main() -> int:
                 "forecast_withheld_count": forecast.get("withheld_count"),
                 "facility_qra_promotion": result["policy"]["facility_qra_promotion"],
                 "frequency_inference_performed": result["policy"]["frequency_inference_performed"],
+                "current_provider_release_boundary_ready": current_facility_ledger.get(
+                    "provider_release_boundary_ready"
+                ),
+                "current_facility_total_risk_available": current_facility_ledger.get(
+                    "facility_total_risk_available"
+                ),
+                "forecast_provider_release_boundary_ready": forecast_boundary_ready,
+                "forecast_facility_total_risk_available": forecast_facility_total_available,
                 "output": str(args.output.resolve()),
             },
             ensure_ascii=False,

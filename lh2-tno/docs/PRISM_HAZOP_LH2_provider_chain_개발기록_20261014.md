@@ -35,6 +35,11 @@ python scripts/run_hazop_lh2_provider_diagnostic.py `
   --output results/20261014/hazop_provider_bound_integrated_risk.json
 ```
 
+The command summary now prints the current and forecast
+`provider_release_boundary_ready` and `facility_total_risk_available` values
+alongside the HAZOP and forecast counts. This makes an open release boundary
+visible in a terminal run without requiring the full JSON to be inspected.
+
 입력은 다음 네 가지를 명시한다.
 
 1. `generic_hazop_tables_by_component_provider_bound.json`: `receiving` 모드의 압력 이탈과 `liquid_two_phase` 사고 family.
