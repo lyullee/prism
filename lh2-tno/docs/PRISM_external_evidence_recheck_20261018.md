@@ -37,6 +37,21 @@ or an independent release-to-damage observation bundle. The SLABx workspace
 remains the already-closed validated consequence component; this recheck does
 not reopen its validation task.
 
+### Provider-response gap ledger
+
+The seven response files in the separate equipment-model root were checked
+individually with
+`results/20261018/external_equipment_model_provider_response_gap_audit_20261018.json`
+(SHA-256
+`F64332F643427918281E062C41DB0833750188AC291C96008793EA2E961A2C9A`).
+Two responses declare a strict termination basis (`inventory_depletion` or
+`reviewed_isolation_success`); five still use
+`synthetic_diagnostic_horizon`. Four responses contain a complete initial,
+final, cumulative-out, and residual mass ledger. All seven lack an explicit
+`input_origin` and `evidence_status`, and none has a qualification sidecar.
+Therefore the ledger remains diagnostic-only: it does not promote a provider
+packet, infer frequency, claim physical validation, or enable facility IR/F-N.
+
 ## Interpretation for the IJHE objective
 
 The recheck confirms that the external evidence state did not change in a way

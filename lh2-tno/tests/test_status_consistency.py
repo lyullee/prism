@@ -88,6 +88,20 @@ def test_latest_external_evidence_recheck_includes_separate_equipment_model_root
     assert status["latest_external_evidence_recheck_facility_ir_fn_allowed"] is False
 
 
+def test_external_equipment_provider_response_gap_audit_is_diagnostic_only() -> None:
+    status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    record = load_json_object(ROOT / status["external_equipment_model_provider_response_gap_audit_record"])
+    assert record["status"] == "PROVIDER_RESPONSE_GAP_AUDIT_DIAGNOSTIC_ONLY"
+    assert record["provider_response_count"] == status["external_equipment_model_provider_response_count"] == 7
+    assert record["strict_termination_candidate_count"] == status["external_equipment_model_provider_response_strict_termination_candidate_count"] == 2
+    assert record["mass_ledger_present_count"] == status["external_equipment_model_provider_response_mass_ledger_present_count"] == 4
+    assert record["qualification_sidecar_count"] == 0
+    assert record["origin_metadata_missing_count"] == 7
+    assert record["promotion"]["provider_packet_promoted"] is False
+    assert record["promotion"]["frequency_inference_performed"] is False
+    assert record["promotion"]["facility_qra_claim"] is False
+
+
 def test_latest_github_actions_run_is_bound_to_both_status_ledgers() -> None:
     report = _report()
     check = next(
