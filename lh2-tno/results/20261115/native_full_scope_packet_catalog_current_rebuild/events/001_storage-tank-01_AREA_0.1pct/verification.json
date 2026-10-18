@@ -1,0 +1,74 @@
+{
+  "schema_version": "prism.native_lh2dt_layered_tank_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "provider_result_digest": "c4d839ab449631be155d6fb371614bf4843276fa08d8cc58822a9b35e9025c36",
+  "provider_method": "export_accident_history",
+  "provider_packet_promoted": false,
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.30000000000000004,
+  "available_mass_kg": 434.50988152270014,
+  "cumulative_mass_out_kg": 0.2523762550585231,
+  "mass_residual_kg": 1.1368683772161603e-13,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "READY",
+    "ready": true,
+    "blocking_reasons": [],
+    "state_history_digest": "dd1d1a6a28c49d1afe689b52af666674414d2ac9c6bfe0bd22766b4f13de5437"
+  },
+  "distributed_boiling_model": "phase_change_complementarity",
+  "isolation_time_s": 0.1,
+  "post_isolation_observation_s": 0.2,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "storage-tank-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 500000.0,
+    "temperature_k": 27.112088459199715,
+    "mass_kg": 434.50988152270014,
+    "liquid_fraction": null,
+    "phase": "liquid",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 500000.0,
+        "sensor_location": "storage-tank-01.liquid_inventory",
+        "quality": "valid"
+      },
+      "liquid_volume_fraction": {
+        "quantity": "level_fraction",
+        "value_si": 0.43,
+        "sensor_location": "storage-tank-01.liquid_inventory",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+    "provider_echo_digest": "1f05f1e8417a93b336edc389eeaa43ee7da82a124f4c5342d4437ed636dbbf1a",
+    "digest_match": true
+  },
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic geometry, inventory and atmospheric boundary",
+    "native provider history is diagnostic evidence until independent qualification is supplied",
+    "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+  ]
+}

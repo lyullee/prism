@@ -1,0 +1,57 @@
+{
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.DynamicReliquefier",
+  "mode": "reliquefier",
+  "termination_mode": "synthetic_horizon",
+  "provider_result_digest": "b170ad40fa59827cc6013b739acb7248489f658f61035b53b878383affde77a1",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "reliquefier-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 300.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      13.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {},
+    "source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "43eb3423fc781276b0b7e68d8c9e603b71c9662619f616c6ec5e3395c5ae07f3",
+    "provider_echo_digest": "43eb3423fc781276b0b7e68d8c9e603b71c9662619f616c6ec5e3395c5ae07f3",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.5,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": -2.117582368135751e-22,
+  "strict_packet_energy_residual_j": -1.7763568394002505e-15,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "dynamic_state_closure": {
+    "ready": true,
+    "blocking_reasons": [],
+    "provider_record_present": true
+  },
+  "termination_basis": "reviewed_isolation_success",
+  "isolation": {
+    "requested": true,
+    "isolation_time_s": 0.1,
+    "post_isolation_observation_s": 0.2,
+    "provider_isolation_success": true
+  },
+  "limitations": [
+    "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
+    "isolation command is a diagnostic provider contract, not field isolation reliability",
+    "no site calibration, failure frequency or independent physical validation"
+  ]
+}

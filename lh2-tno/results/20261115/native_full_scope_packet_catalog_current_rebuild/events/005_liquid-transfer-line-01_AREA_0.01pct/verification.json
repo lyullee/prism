@@ -1,0 +1,76 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "provider_result_digest": "aa301cfadf80ef927ca9eb15117796c7fd56913ea60f7f5d6554387887117e38",
+  "provider_packet_promoted": false,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "liquid-transfer-line-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 250000.0,
+    "temperature_k": 23.859662429550244,
+    "mass_kg": 0.10622803086219497,
+    "liquid_fraction": null,
+    "phase": "two_phase",
+    "position_enu_m": [
+      5.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 250000.0,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      },
+      "initial_quality": {
+        "quantity": "level_fraction",
+        "value_si": 0.1,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+  "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+    "provider_echo_digest": "37a284a47ad8c32a3d81f3c5685fc55b3e7aa37f9c02a84a170e4827c32e4194",
+    "digest_match": true
+  },
+  "phase_basis": "two_phase",
+  "source_phase": "twophase",
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.3,
+  "available_mass_kg": 0.10622803086219497,
+  "cumulative_mass_out_kg": 4.7591905520014575e-06,
+  "mass_residual_kg": 0.0,
+  "dynamic_state_closure": {
+    "declared_by_provider": true,
+    "prism_source_dynamics_status": "READY",
+    "ready": true,
+    "blocking_reasons": [],
+    "state_history_digest": "74408e8d46a3a1f8b4039f79f369b0c818018cb13bdf3693d024a3283cd649a1"
+  },
+  "isolation_time_s": 0.1,
+  "post_isolation_observation_s": 0.2,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+    "native provider history remains diagnostic until independent qualification is supplied",
+    "airborne liquid remains zero under the native provider contract"
+  ]
+}

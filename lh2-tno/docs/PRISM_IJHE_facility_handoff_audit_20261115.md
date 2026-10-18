@@ -88,13 +88,21 @@ and `provider_result_digest` matching. The saved records are
 [`facility_chain_packet_evidence_scan_current.json`](../results/20261115/facility_chain_packet_evidence_scan_current.json)
 and [`facility_chain_closure_audit_current_union.json`](../results/20261115/facility_chain_closure_audit_current_union.json).
 
-The scan found six exact packet identities. One event passed the complete
-chain-closure check; 33 event rows were mismatched and 28 campaign events had
-no exact packet identity. Conditional IR/F-N aggregation remains a diagnostic
-calculation, while facility total QRA, provider qualification, frequency
-binding from qualified packets, and independent facility validation remain
-withheld. This current-union record supersedes the historical 24-event chain
-record for current status reporting.
+The rebuilt base catalog contains 23 exact native packet exports out of 24
+declared base events. Combined with five existing vertical-handoff packets, 28
+of the 34 union event identities passed the complete chain-closure check. One
+base vaporizer event has no packet export and five inventory-depletion extension
+events have no exact packet identity. Ten explicit inventory-basis aliases were
+accepted only after duration, mass, and provenance checks and are recorded per
+event. Conditional IR/F-N aggregation remains a diagnostic calculation, while
+facility total QRA, provider qualification, frequency binding from qualified
+packets, and independent facility validation remain withheld. This current-union
+record supersedes the historical 24-event chain record for current status
+reporting.
+
+The rebuilt packet catalog and machine-readable chain audit are
+[`native_full_scope_packet_catalog_current_rebuild`](../results/20261115/native_full_scope_packet_catalog_current_rebuild/)
+and [`facility_chain_closure_audit_rebuilt_current_union.json`](../results/20261115/facility_chain_closure_audit_rebuilt_current_union.json).
 
 SLABx-LH2 is treated as the frozen validated consequence component. The open
 gates concern equipment release evidence, termination/inventory closure, and

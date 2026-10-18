@@ -119,6 +119,40 @@ def test_known_contribution_fn_fallback_is_recomputed(tmp_path: Path):
     assert report["facility_fn_aggregate_closed"] is True
 
 
+def test_inventory_provider_basis_alias_is_explicitly_recorded(tmp_path: Path):
+    campaign = _campaign()
+    campaign["cases"][0]["provider_packet_identity"]["termination_bases"] = [
+        "inventory_depletion"
+    ]
+    campaign["cases"][0]["provider_packet_identity"]["termination_provenances"] = [
+        "provider closed inventory"
+    ]
+    campaign["cases"][0]["termination"] = {
+        "time_s": 2.0,
+        "basis": "inventory_depletion",
+        "provenance": "provider closed inventory",
+    }
+    campaign["risk_atoms"][0]["provider_packet_identity"] = dict(
+        campaign["cases"][0]["provider_packet_identity"]
+    )
+    packet = _packet_evidence(tmp_path)
+    packet_path = Path(packet["rows"][0]["evidence"]["resolved_packet_paths"][0])
+    payload = json.loads(packet_path.read_text(encoding="utf-8"))
+    payload["termination_basis"] = "inventory_depletion_positive_threshold"
+    payload["termination_provenance"] = "provider closed inventory"
+    packet_path.write_text(json.dumps(payload), encoding="utf-8")
+    report = build_chain_closure_audit(
+        campaign, packet_evidence=packet, packet_root=tmp_path
+    )
+    assert report["status"] == "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED"
+    assert report["termination_basis_alias_count"] == 1
+    assert report["event_rows"][0]["termination_basis_aliases_applied"] == [{
+        "case_index": 0,
+        "packet_basis": "inventory_depletion_positive_threshold",
+        "campaign_basis": "inventory_depletion",
+    }]
+
+
 def test_unpacketised_handoff_is_reported_without_being_substituted(tmp_path: Path):
     campaign = _campaign()
     campaign["events"].append({"id": "facility/vertical/G1", "model_component_id": "vent-01"})

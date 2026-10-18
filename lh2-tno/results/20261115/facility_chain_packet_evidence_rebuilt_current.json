@@ -1,0 +1,1209 @@
+{
+  "schema_version": "prism.facility_chain_packet_evidence_scan.v2",
+  "status": "REBUILT_BASE_PLUS_VERTICAL_DIAGNOSTIC",
+  "rows": [
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\000_storage-tank-01_AREA_0.01pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/000_storage-tank-01_AREA_0.01pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.layered_tank.LayeredTank",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic geometry, inventory and atmospheric boundary",
+            "native provider history is diagnostic evidence until independent qualification is supplied",
+            "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\001_storage-tank-01_AREA_0.1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/001_storage-tank-01_AREA_0.1pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.layered_tank.LayeredTank",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic geometry, inventory and atmospheric boundary",
+            "native provider history is diagnostic evidence until independent qualification is supplied",
+            "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\002_storage-tank-01_AREA_1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/002_storage-tank-01_AREA_1pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.layered_tank.LayeredTank",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic geometry, inventory and atmospheric boundary",
+            "native provider history is diagnostic evidence until independent qualification is supplied",
+            "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\003_storage-tank-01_AREA_10pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/003_storage-tank-01_AREA_10pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.layered_tank.LayeredTank",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic geometry, inventory and atmospheric boundary",
+            "native provider history is diagnostic evidence until independent qualification is supplied",
+            "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\004_storage-tank-01_AREA_100pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/004_storage-tank-01_AREA_100pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "inventory_depletion"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic LayeredTank geometry, opening and atmospheric boundary",
+            "liquid-port ground interception is explicit; flash and airborne-liquid physics are not supplied",
+            "provider packet remains synthetic_diagnostic and is not a qualified facility release"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+            "native provider history remains diagnostic until independent qualification is supplied",
+            "airborne liquid remains zero under the native provider contract"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+            "native provider history remains diagnostic until independent qualification is supplied",
+            "airborne liquid remains zero under the native provider contract"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\007_liquid-transfer-line-01_AREA_1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+            "native provider history remains diagnostic until independent qualification is supplied",
+            "airborne liquid remains zero under the native provider contract"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\008_liquid-transfer-line-01_AREA_10pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+            "native provider history remains diagnostic until independent qualification is supplied",
+            "airborne liquid remains zero under the native provider contract"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\009_liquid-transfer-line-01_AREA_100pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+            "native provider history remains diagnostic until independent qualification is supplied",
+            "airborne liquid remains zero under the native provider contract"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\010_transfer-valve-01_AREA_0.01pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic liquid state and explicit external valve boundary",
+            "valve owns no inventory; available mass is explicit feed-through reserve",
+            "actuator closure is a diagnostic command contract, not field isolation reliability",
+            "no field frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\011_transfer-valve-01_AREA_0.1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic liquid state and explicit external valve boundary",
+            "valve owns no inventory; available mass is explicit feed-through reserve",
+            "actuator closure is a diagnostic command contract, not field isolation reliability",
+            "no field frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\012_transfer-valve-01_AREA_1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/012_transfer-valve-01_AREA_1pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic liquid state and explicit external valve boundary",
+            "valve owns no inventory; available mass is explicit feed-through reserve",
+            "actuator closure is a diagnostic command contract, not field isolation reliability",
+            "no field frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\013_transfer-valve-01_AREA_10pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/013_transfer-valve-01_AREA_10pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic liquid state and explicit external valve boundary",
+            "valve owns no inventory; available mass is explicit feed-through reserve",
+            "actuator closure is a diagnostic command contract, not field isolation reliability",
+            "no field frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\014_transfer-valve-01_AREA_100pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/014_transfer-valve-01_AREA_100pct/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic liquid state and explicit external valve boundary",
+            "valve owns no inventory; available mass is explicit feed-through reserve",
+            "actuator closure is a diagnostic command contract, not field isolation reliability",
+            "no field frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\015_pressure-relief-vent-01_G1\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/015_pressure-relief-vent-01_G1/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.VentStack",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "emergency_relief_discharge"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "steady VentStack two-port result repeated over a synthetic diagnostic horizon",
+            "synthetic upstream pressure/temperature, geometry and atmospheric boundary",
+            "no tank inventory feedback, relief setpoint or site calibration"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\016_liquid-transfer-pump-01_G1\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/016_liquid-transfer-pump-01_G1/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.pump.MappedPump",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic liquid source state, H-Q-N map, atmospheric opening and upstream reserve",
+            "MappedPump owns no finite inventory, seal failure model or isolation reliability",
+            "airborne liquid remains zero under the native provider contract",
+            "bounded feed-through horizon is diagnostic and not a qualified facility frequency case",
+            "explicit isolation is an actuator/zero-flow diagnostic contract; field valve closure reliability is not inferred"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "status": "PROVIDER_PACKET_CANDIDATE_REJECTED",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\017_liquid-transfer-pump-01_G2\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/017_liquid-transfer-pump-01_G2/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.pump.MappedPump",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+        "verification_ok": false,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic liquid source state, H-Q-N map, atmospheric opening and upstream reserve",
+            "MappedPump owns no finite inventory, seal failure model or isolation reliability",
+            "airborne liquid remains zero under the native provider contract",
+            "bounded feed-through horizon is diagnostic and not a qualified facility frequency case",
+            "explicit isolation is an actuator/zero-flow diagnostic contract; field valve closure reliability is not inferred"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "candidate_count": 0,
+      "evidence": null
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\019_ambient-vaporizer-01_G2\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/019_ambient-vaporizer-01_G2/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.DynamicVaporizer",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "inventory_over_600s"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic dynamic gas-unit inventory and diagnostic valve area",
+            "no failure opening is attached",
+            "no site calibration, isolation reliability or independent validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\020_ambient-vaporizer-01_G3\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/020_ambient-vaporizer-01_G3/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.DynamicVaporizer",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
+            "isolation command is a diagnostic provider contract, not field isolation reliability",
+            "no site calibration, failure frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 2,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\021_reliquefier-01_G4\\provider_response_endpoints.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/021_reliquefier-01_G4/resolved_release_set.json"
+        ],
+        "provider_model": "lh2dt.DynamicReliquefier",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "two_sided_rupture"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic shared inventory, full-bore endpoints and bounded horizon",
+            "two-sided endpoints are diagnostic and not field-calibrated",
+            "no facility frequency or independent validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 2,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\022_reliquefier-01_G5\\provider_response_endpoints.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/022_reliquefier-01_G5/resolved_release_set.json"
+        ],
+        "provider_model": "lh2dt.DynamicReliquefier",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "operator_limited_input",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "two_sided_rupture"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+          "verification_limitations": [
+            "synthetic shared inventory, full-bore endpoints and bounded horizon",
+            "two-sided endpoints are diagnostic and not field-calibrated",
+            "no facility frequency or independent validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "worklist_item_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": ".tmp_native_catalog_current_rebuild\\events\\023_reliquefier-01_G6\\provider_response.json",
+        "resolved_packet_paths": [
+          "results/20261115/native_full_scope_packet_catalog_current_rebuild/events/023_reliquefier-01_G6/resolved_release.json"
+        ],
+        "provider_model": "lh2dt.DynamicReliquefier",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status": "BLOCKED_REVIEW",
+          "blockers": [
+            "qualification_sidecar_missing",
+            "physical_validation_evidence_missing",
+            "synthetic_or_screening_boundary_declared"
+          ],
+          "input_origins": [
+            "model_prediction"
+          ],
+          "termination_bases": [
+            "reviewed_isolation_success"
+          ],
+          "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_DIAGNOSTIC",
+          "verification_limitations": [
+            "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
+            "isolation command is a diagnostic provider contract, not field isolation reliability",
+            "no site calibration, failure frequency or independent physical validation"
+          ],
+          "qualification_sidecar_present": false,
+          "qualification_sidecar_path": null,
+          "physical_validation_evidence_present": false,
+          "physical_validation_evidence_path": null
+        }
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.01/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.1/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_1/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_10/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "evidence": {
+        "resolved_packet_paths": [
+          "results/20261115/vertical_inventory_handoff_campaign/termination_evidence/events/generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_100/resolved_release.json"
+        ],
+        "exact_opening_match": true,
+        "strict_packet_valid": true
+      }
+    }
+  ],
+  "event_count": 34,
+  "matched_event_count": 28,
+  "qualified_provider_packet_count": 0,
+  "frequency_bound": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "base_packet_catalog": "results/20261115/native_full_scope_packet_catalog_current_rebuild",
+  "base_packet_catalog_rebuild_source": "C:/Users/lyul/Desktop/DocuData/_external_lh2dt_models_20261016",
+  "base_packet_catalog_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "base_packet_catalog_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "base_packet_catalog_event_count": 24,
+  "base_packet_catalog_exact_packet_count": 23,
+  "vertical_packet_catalog": "results/20261115/vertical_inventory_handoff_campaign/termination_evidence",
+  "vertical_packet_catalog_event_count": 5,
+  "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/campaign_result.json",
+  "exact_digest_match_only": true,
+  "diagnostic_only": true,
+  "interpretation": "Exact/strict packet identities were combined from the rebuilt 24-event base catalog and existing vertical-handoff evidence. The rebuilt base catalog has 23/24 packet exports; one ambient-vaporizer event remains uncomputed. Inventory-depletion extension events remain without exact packet evidence. The chain audit records basis aliases explicitly and does not qualify provider evidence or promote facility QRA."
+}

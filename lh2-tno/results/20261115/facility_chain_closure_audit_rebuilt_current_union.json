@@ -1,0 +1,502 @@
+{
+  "schema_version": "prism.facility_chain_closure_audit.v1",
+  "diagnostic_only": true,
+  "status": "BLOCKED_CHAIN_CLOSURE",
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_event_count": 34,
+  "campaign_case_count": 44,
+  "campaign_risk_atom_count": 176,
+  "packet_event_count": 28,
+  "packet_chain_closed_event_count": 28,
+  "packet_chain_mismatch_event_count": 1,
+  "packet_chain_mismatch_event_ids": [
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
+  ],
+  "campaign_events_without_packet_count": 6,
+  "event_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "HANDOFF_OR_PACKET_MISSING",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "HANDOFF_OR_PACKET_MISSING",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "HANDOFF_OR_PACKET_MISSING",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "HANDOFF_OR_PACKET_MISSING",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "packet_row_count": 0,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "HANDOFF_OR_PACKET_MISSING",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [
+        {
+          "case_index": 0,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        },
+        {
+          "case_index": 1,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        }
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [
+        {
+          "case_index": 0,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        },
+        {
+          "case_index": 1,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        }
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [
+        {
+          "case_index": 0,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        },
+        {
+          "case_index": 1,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        }
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [
+        {
+          "case_index": 0,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        },
+        {
+          "case_index": 1,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        }
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "packet_row_count": 1,
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [
+        {
+          "case_index": 0,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        },
+        {
+          "case_index": 1,
+          "packet_basis": "inventory_depletion_positive_threshold",
+          "campaign_basis": "inventory_depletion"
+        }
+      ],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "packet_row_count": 0,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CHAIN_MISMATCH",
+      "blocking_reasons": [
+        "no packet evidence"
+      ],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "packet_row_count": 2,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "packet_row_count": 2,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "packet_row_count": 1,
+      "case_count": 1,
+      "risk_atom_count": 4,
+      "status": "CLOSED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "termination_basis_aliases_applied": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false
+    }
+  ],
+  "facility_ir_aggregate_closed": true,
+  "facility_fn_aggregate_closed": true,
+  "termination_basis_alias_count": 10,
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "qualified_provider_packet_count": 0,
+  "frequency_from_provider_packet": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The current 34-event union was audited against a newly rebuilt base packet catalog plus existing vertical-handoff packet evidence. Twenty-eight packet event identities passed the release-to-risk chain; one base vaporizer event is mismatched because no packet was exported, and five inventory-depletion extension events have no exact packet evidence. Ten explicit inventory-basis aliases were accepted only after duration, mass, and provenance checks and are listed per event. Conditional IR/F-N aggregates remain closed; provider qualification, physical validation, and facility total QRA remain withheld.",
+  "audit_scope": "current_union_rebuilt_base_plus_vertical_exact_packet_scan",
+  "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/campaign_result.json",
+  "packet_evidence_scan": "results/20261115/facility_chain_packet_evidence_rebuilt_current.json",
+  "packet_root": ".",
+  "base_packet_catalog_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "base_packet_catalog_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "base_packet_catalog_exact_packet_count": 23,
+  "base_packet_catalog_uncomputed_event_count": 1,
+  "supersedes_previous_record": "results/20261115/facility_chain_closure_audit_current_union.json"
+}

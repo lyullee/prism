@@ -1,0 +1,83 @@
+{
+  "schema_version": "prism.native_lh2dt_mapped_pump_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.pump.MappedPump",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "provider_result_digest": "d49090eb96aa5dde34a4da780a33d3349d722e340fceb9b75aa072f226711bf5",
+  "provider_packet_promoted": false,
+  "phase_basis": "liquid",
+  "termination_basis": "reviewed_isolation_success",
+  "isolation": {
+    "requested": true,
+    "isolation_success": true,
+    "isolation_time_s": 0.1,
+    "post_isolation_observation_s": 0.2,
+    "zero_flow_kg_s": 0.0,
+    "termination_basis": "reviewed_isolation_success"
+  },
+  "duration_s": 0.30000000000000004,
+  "available_mass_kg": 1.0,
+  "cumulative_mass_out_kg": 0.0005606632379774973,
+  "upstream_reserve_remaining_kg": 0.9994393367620225,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "liquid-transfer-pump-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 120000.0,
+    "temperature_k": 20.0,
+    "mass_kg": 1.0,
+    "liquid_fraction": null,
+    "phase": "liquid",
+    "position_enu_m": [
+      6.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "upstream_pressure": {
+        "quantity": "pressure",
+        "value_si": 120000.0,
+        "sensor_location": "liquid-transfer-pump-01.suction",
+        "quality": "valid"
+      },
+      "upstream_temperature": {
+        "quantity": "temperature",
+        "value_si": 20.0,
+        "sensor_location": "liquid-transfer-pump-01.suction",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+  "provider_echo_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+    "provider_echo_digest": "bec85ccd59d809210bbccbcabaa92c67d14c137ebb37817bab54a6694a6c8fca",
+    "digest_match": true
+  },
+  "pump_operating_point": {
+    "mass_flow_kg_s": 0.013333333333333332,
+    "pressure_rise_pa": 100000.0,
+    "map_head_pressure_rise_pa": 100000.0,
+    "map_limited": false,
+    "cavitation_margin_m": null
+  },
+  "state_snapshot_digest_match": true,
+  "strict_packet_mass_residual_kg": 0.0,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic liquid source state, H-Q-N map, atmospheric opening and upstream reserve",
+    "MappedPump owns no finite inventory, seal failure model or isolation reliability",
+    "airborne liquid remains zero under the native provider contract",
+    "bounded feed-through horizon is diagnostic and not a qualified facility frequency case",
+    "explicit isolation is an actuator/zero-flow diagnostic contract; field valve closure reliability is not inferred"
+  ]
+}

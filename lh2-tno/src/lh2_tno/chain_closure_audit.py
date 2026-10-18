@@ -20,6 +20,16 @@ from .facility_ledger import _fn_curve
 
 CHAIN_CLOSURE_SCHEMA = "prism.facility_chain_closure_audit.v1"
 
+# Some legacy isolation adapters intentionally normalize a provider's more
+# specific inventory-stop label to the public campaign basis.  The alias is
+# accepted only when the packet keeps the same duration, mass ledger, and
+# termination provenance; it is recorded in the audit so the normalization
+# cannot be mistaken for a different release boundary.
+_TERMINATION_BASIS_ALIASES = {
+    "inventory_depletion_positive_threshold": "inventory_depletion",
+    "inventory_depletion_releasable_mass": "inventory_depletion",
+}
+
 
 class ChainClosureAuditError(ValueError):
     """Raised when a chain-closure input is malformed."""
@@ -123,7 +133,11 @@ def _packet_value_mismatches(
                 mismatches.append(f"case[{case_index}] {field} differs from packet")
         packet_bases = [row.get("termination_basis") for row in rows]
         case_bases = identity.get("termination_bases")
-        if list(packet_bases) != list(case_bases or ()):
+        normalized_packet_bases = [
+            _TERMINATION_BASIS_ALIASES.get(str(value), value)
+            for value in packet_bases
+        ]
+        if list(normalized_packet_bases) != list(case_bases or ()):
             mismatches.append(f"case[{case_index}] termination_bases differs from packet")
         packet_provenance = [row.get("termination_provenance") for row in rows]
         case_provenance = identity.get("termination_provenances")
@@ -242,12 +256,14 @@ def build_chain_closure_audit(
     event_rows: list[dict[str, Any]] = []
     packet_chain_closed = 0
     mismatch_event_ids: list[str] = []
+    termination_basis_alias_count = 0
     for event_id in sorted(event_by_id):
         event_cases = cases_by_event.get(event_id, [])
         event_atoms = atoms_by_event.get(event_id, [])
         packet_rows = packet_rows_by_event.get(event_id, [])
         packet_required = event_id in packet_expected_event_ids
         reasons: list[str] = []
+        basis_aliases: list[dict[str, Any]] = []
         if packet_required:
             if not event_cases:
                 reasons.append("no executed case")
@@ -262,6 +278,20 @@ def build_chain_closure_audit(
             reasons.append(packet_load_errors.get(event_id, "no packet evidence"))
         if packet_rows and packet_required:
             reasons.extend(_packet_value_mismatches(packet_rows, event_cases))
+            for case_index, case in enumerate(event_cases):
+                identity = case.get("provider_packet_identity")
+                case_bases = identity.get("termination_bases") if isinstance(identity, Mapping) else ()
+                if not isinstance(case_bases, Sequence) or isinstance(case_bases, (str, bytes)):
+                    case_bases = ()
+                packet_bases = [row.get("termination_basis") for row in packet_rows]
+                for packet_basis, case_basis in zip(packet_bases, case_bases):
+                    normalized = _TERMINATION_BASIS_ALIASES.get(str(packet_basis), packet_basis)
+                    if packet_basis != normalized and normalized == case_basis:
+                        basis_aliases.append({
+                            "case_index": case_index,
+                            "packet_basis": packet_basis,
+                            "campaign_basis": case_basis,
+                        })
         if event_cases and packet_required:
             for atom in event_atoms:
                 if not any(_atom_identity_matches_case(atom, case) for case in event_cases):
@@ -289,6 +319,7 @@ def build_chain_closure_audit(
             "risk_atom_count": len(event_atoms),
             "status": status,
             "blocking_reasons": list(dict.fromkeys(reasons)),
+            "termination_basis_aliases_applied": basis_aliases,
             "qualified_provider_packet": False,
             "frequency_from_provider_packet": False,
         })
@@ -336,6 +367,10 @@ def build_chain_closure_audit(
         "event_rows": event_rows,
         "facility_ir_aggregate_closed": ir_closed,
         "facility_fn_aggregate_closed": fn_closed,
+        "termination_basis_alias_count": sum(
+            len(row["termination_basis_aliases_applied"])
+            for row in event_rows
+        ),
         "facility_total_risk_available": campaign_result.get("facility_total_risk_available") is True,
         "complete_facility_qra_claim": campaign_result.get("complete_facility_qra_claim") is True,
         "qualified_provider_packet_count": (
@@ -350,7 +385,9 @@ def build_chain_closure_audit(
             "The event rows prove that packet release aggregates reached termination/inventory "
             "cases, risk atoms carried final harm fields, and the conditional facility IR/F-N "
             "sum was independently recomputed. Missing handoff packets, provider qualification, "
-            "scope completeness, and physical validation remain promotion gates."
+            "scope completeness, and physical validation remain promotion gates. "
+            "Known inventory-basis aliases are recorded per event and do not alter "
+            "the provider duration, mass, or provenance checks."
         ),
     }
 

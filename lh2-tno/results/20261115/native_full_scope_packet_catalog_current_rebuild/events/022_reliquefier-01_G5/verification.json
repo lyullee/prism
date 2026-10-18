@@ -1,0 +1,44 @@
+{
+  "status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.DynamicReliquefier",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "reliquefier-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 300.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      13.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {},
+    "source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "43eb3423fc781276b0b7e68d8c9e603b71c9662619f616c6ec5e3395c5ae07f3",
+    "provider_echo_digest": [
+      "43eb3423fc781276b0b7e68d8c9e603b71c9662619f616c6ec5e3395c5ae07f3",
+      "43eb3423fc781276b0b7e68d8c9e603b71c9662619f616c6ec5e3395c5ae07f3"
+    ],
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 1e-05,
+  "strict_packet_endpoint_count": 2,
+  "strict_packet_mass_residual_kg": -1.3234889800848443e-23,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic shared inventory, full-bore endpoints and bounded horizon",
+    "two-sided endpoints are diagnostic and not field-calibrated",
+    "no facility frequency or independent validation"
+  ]
+}
