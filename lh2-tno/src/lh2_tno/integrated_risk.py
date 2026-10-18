@@ -92,22 +92,21 @@ def _facility_gate_summary(campaign: Mapping[str, Any]) -> dict[str, Any]:
     policy = policy if isinstance(policy, Mapping) else {}
 
     def aggregate_bool(key: str) -> bool | None:
-        values = [row[key] for row in ledgers if isinstance(row.get(key), bool)]
-        if not values:
+        if not ledgers or any(not isinstance(row.get(key), bool) for row in ledgers):
             return None
         # An aggregate is available only when every nested campaign carries
         # the gate and every one of those gates is open.  This is deliberately
         # conservative for a facility-wide digital-twin summary.
-        return all(values)
+        return all(row[key] for row in ledgers)
 
     def aggregate_case_count() -> int | None:
-        values = [
-            row["provider_release_boundary_case_count"]
+        if not ledgers or any(
+            not isinstance(row.get("provider_release_boundary_case_count"), int)
+            or isinstance(row.get("provider_release_boundary_case_count"), bool)
             for row in ledgers
-            if isinstance(row.get("provider_release_boundary_case_count"), int)
-            and not isinstance(row.get("provider_release_boundary_case_count"), bool)
-        ]
-        return sum(values) if values else None
+        ):
+            return None
+        return sum(row["provider_release_boundary_case_count"] for row in ledgers)
 
     def aggregate_fn_available() -> bool | None:
         if not ledgers:

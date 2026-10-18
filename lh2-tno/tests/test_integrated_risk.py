@@ -582,6 +582,17 @@ def test_integrated_risk_attaches_forecast_facility_campaign(monkeypatch):
     assert summary["facility_total_risk_available"] is False
     assert summary["qualified_facility_qra_available"] is False
 
+    incomplete = integrated_risk._facility_gate_summary(
+        {
+            "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+            "campaigns": [{"facility_ledger": {"facility_total_risk_available": False}}],
+        }
+    )
+    assert incomplete["facility_ledger_present"] is True
+    assert incomplete["provider_release_boundary_case_count"] is None
+    assert incomplete["provider_release_boundary_ready"] is None
+    assert incomplete["facility_total_risk_available"] is False
+
 
 def test_facility_gate_summary_aggregates_nested_forecast_ledgers():
     summary = integrated_risk._facility_gate_summary(
