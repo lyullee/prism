@@ -2,7 +2,7 @@
   "schema_version": "prism.hazop_integrated_current_forecast_recheck_receipt.v1",
   "generated_at_utc": "2026-10-18T02:10:31.330649+00:00",
   "source_record": "results/20261018/hazop_provider_bound_integrated_risk_recheck_20261018.json",
-  "source_record_sha256": "27682d121afe6a4668ff0802b0a8ef9c91b091c692856f19baaa545f0143b9fe",
+  "source_record_sha256": "c881c80e1733ae39b7be84abd9781f1bf36019534bcdec311e09cb18ceec410b",
   "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "current": {
@@ -24,7 +24,20 @@
         "facility case-risk trace: 4 risk atoms are linked to non-EXECUTED case status"
       ]
     },
-    "facility_ledger_risk_atom_count": 4
+    "facility_ledger_risk_atom_count": 4,
+    "facility_gate_summary": {
+      "campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+      "facility_ledger_present": true,
+      "provider_release_boundary_case_count": 1,
+      "provider_release_boundary_ready": false,
+      "conditional_diagnostic_facility_risk_available": true,
+      "conditional_diagnostic_facility_fn_available": true,
+      "facility_total_risk_available": false,
+      "qualified_facility_qra_available": false,
+      "facility_qra_promotion": false,
+      "frequency_inference_performed": false,
+      "physical_validation_claim": false
+    }
   },
   "forecast": {
     "status": "FORECAST_RISK_SCAN_COMPLETE",
@@ -52,7 +65,20 @@
         ],
         "facility_ledger_risk_atom_count": 4
       }
-    ]
+    ],
+    "facility_gate_summary": {
+      "campaign_status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+      "facility_ledger_present": false,
+      "provider_release_boundary_case_count": null,
+      "provider_release_boundary_ready": null,
+      "conditional_diagnostic_facility_risk_available": null,
+      "conditional_diagnostic_facility_fn_available": null,
+      "facility_total_risk_available": null,
+      "qualified_facility_qra_available": null,
+      "facility_qra_promotion": false,
+      "frequency_inference_performed": false,
+      "physical_validation_claim": false
+    }
   },
   "frequency_uncertainty": {
     "scenario_count": 3,
@@ -64,7 +90,7 @@
     "frequency_inference_performed": false
   },
   "timing": {
-    "wall_elapsed_ms": 21260.473200003617,
+    "wall_elapsed_ms": 21923.36479999358,
     "interpretation": "Measured for this invocation; not an operating 1 Hz guarantee."
   },
   "policy": {
@@ -75,5 +101,33 @@
     "facility_qra_promotion": false,
     "diagnostic_only": true
   },
-  "interpretation": "Current measured-state and forecast-state paths share explicit operating-mode HAZOP selection, provider release, literature-frequency uncertainty, consequence and facility-ledger contracts. The current and forecast diagnostic ledgers retain conditional risk atoms, but their open provider release boundaries and synthetic/operator-limited evidence keep facility total IR/F-N withheld. Forecast time is not treated as annual probability and no frequency is inferred."
+  "interpretation": "Current and forecast HAZOP paths were rerun after the integrated facility gate summary change. The compact receipt exposes the same gate values as the full diagnostic output; open provider boundaries keep facility IR/F-N withheld.",
+  "facility_gate_summary": {
+    "current": {
+      "campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+      "facility_ledger_present": true,
+      "provider_release_boundary_case_count": 1,
+      "provider_release_boundary_ready": false,
+      "conditional_diagnostic_facility_risk_available": true,
+      "conditional_diagnostic_facility_fn_available": true,
+      "facility_total_risk_available": false,
+      "qualified_facility_qra_available": false,
+      "facility_qra_promotion": false,
+      "frequency_inference_performed": false,
+      "physical_validation_claim": false
+    },
+    "forecast": {
+      "campaign_status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+      "facility_ledger_present": false,
+      "provider_release_boundary_case_count": null,
+      "provider_release_boundary_ready": null,
+      "conditional_diagnostic_facility_risk_available": null,
+      "conditional_diagnostic_facility_fn_available": null,
+      "facility_total_risk_available": null,
+      "qualified_facility_qra_available": null,
+      "facility_qra_promotion": false,
+      "frequency_inference_performed": false,
+      "physical_validation_claim": false
+    }
+  }
 }
