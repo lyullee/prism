@@ -225,6 +225,20 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
     identity = case.get("provider_packet_identity")
     identity = identity if isinstance(identity, Mapping) else None
     provider_inventory = _provider_inventory(identity)
+    residuals = provider_inventory["residual_mass_kg"]
+    positive_residual_inventory = (
+        basis == "inventory_depletion"
+        and isinstance(residuals, list)
+        and bool(residuals)
+        and any(value > _STRICT_RESIDUAL_TOLERANCE_KG for value in residuals)
+    )
+    inventory_termination_semantics = (
+        "positive_threshold_candidate"
+        if positive_residual_inventory
+        else "zero_inventory_claim"
+        if basis == "inventory_depletion"
+        else "not_inventory_depletion"
+    )
     pressure_equalization_status = _pressure_equalization_status(identity)
     provider_durations = (
         identity.get("duration_s") if isinstance(identity, Mapping) else None
@@ -259,6 +273,7 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
         },
         "isolation_status": _isolation_status(basis),
         "inventory_status": _inventory_status(basis),
+        "inventory_termination_semantics": inventory_termination_semantics,
         "pressure_equalization_status": pressure_equalization_status,
         "provider": {
             "packet_consumed": provider_inventory["packet_consumed"],
@@ -469,7 +484,8 @@ def evaluate_facility_release_boundary(
             ):
                 checks["all_mass_residuals_closed"] = False
                 blocking.append(
-                    f"{label}: provider inventory residual is not depleted within {tolerance:g} kg"
+                    f"{label}: provider inventory residual is not depleted within {tolerance:g} kg; "
+                    "positive-threshold candidate cannot be treated as zero inventory"
                 )
         provider_balance_statuses = provider.get("provider_mass_balance_statuses")
         if provider_balance_statuses:

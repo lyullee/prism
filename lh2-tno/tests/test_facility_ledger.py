@@ -941,6 +941,9 @@ def test_provider_release_boundary_blocks_facility_total_when_inventory_remains(
 
     assert merged["strict_release_boundary"]["strict_release_boundary_ready"] is False
     assert merged["provider_release_boundary_case_count"] == 1
+    assert merged["release_termination_inventory_ledger"]["rows"][0][
+        "inventory_termination_semantics"
+    ] == "positive_threshold_candidate"
     assert merged["facility_total_risk_available"] is False
     assert merged["total_facility_annual_ir_low_high"] is None
     assert any(
