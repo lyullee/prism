@@ -8,7 +8,7 @@ authors:
     affiliation: "Korea Gas Safety Corporation"
 version: "0.6.8"
 date-released: 2026-10-18
-doi: "10.5281/zenodo.23449248"
+doi: "10.5281/zenodo.23449555"
 repository-code: "https://github.com/lyullee/prism"
 url: "https://pypi.org/project/prism-risk/"
 license: MIT
@@ -25,3 +25,4 @@ abstract: >-
   validation and fresh-physics real-time performance, which remain incomplete or
   unverified. The project-authored standard QRA implementation is bundled;
   optional equipment and consequence providers retain their own licenses.
+
