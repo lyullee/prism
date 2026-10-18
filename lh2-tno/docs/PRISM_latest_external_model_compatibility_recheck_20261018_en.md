@@ -45,6 +45,19 @@ facility IR/F-N and qualification gates remain closed.
 
 The updated compact records are [`external_lh2dt_full_scope_worktree_catalog_verification_20261018.json`](../examples/external_lh2dt_full_scope_worktree_catalog_verification_20261018.json), [`external_lh2dt_full_scope_worktree_campaign_verification_20261018.json`](../examples/external_lh2dt_full_scope_worktree_campaign_verification_20261018.json), and [`external_lh2dt_full_scope_worktree_state_snapshot_binding_20261018.json`](../examples/external_lh2dt_full_scope_worktree_state_snapshot_binding_20261018.json).
 
+## Release-boundary recheck
+
+The provider termination catalog was also rebuilt from the current 24-packet
+worktree catalog plus the existing vertical-handoff and inventory-depletion
+extension records. It contains 35 packet rows covering 34 event IDs with no
+catalog errors. Re-running the case-level release-boundary audit increased
+strictly eligible cases from 13 to **21 of 44** and reduced blocked cases from
+31 to **23**. The result remains partial because 20 cases require operator
+review, three cases have numerically open boundaries, provider qualification is
+still absent, and facility IR/F-N promotion remains closed. The records are
+[`external_lh2dt_provider_termination_catalog_recheck_20261018.json`](../examples/external_lh2dt_provider_termination_catalog_recheck_20261018.json)
+and [`external_lh2dt_release_boundary_audit_recheck_20261018.json`](../examples/external_lh2dt_release_boundary_audit_recheck_20261018.json).
+
 ## Code change made during the check
 
 The campaign packet rebind adapter now maps provider termination metadata to the contract-compatible equipment operator. It also sets `source_duration_mode=model_natural` for pressure-equalisation packets and selects the liquid or gas operator as appropriate for inventory boundaries. This prevents stale campaign templates from rejecting a valid provider packet while preserving provider duration, mass, and frequency ownership.
