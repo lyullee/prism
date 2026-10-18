@@ -183,6 +183,7 @@ def test_two_sided_request_exposes_joint_interaction_evidence_gap():
         },
     )
     required = report["family_requests"][0]["required_provider_evidence"]
+    assert any("mass_basis_id" in item for item in required)
     assert any("paired plume/pressure/inventory interaction" in item for item in required)
 
 

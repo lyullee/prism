@@ -23,6 +23,7 @@ _COMMON_REQUIREMENTS = (
     "exact component_id, accident port, event_id, opening geometry, position and direction",
     "provider-owned time history with start/end clock and explicit termination basis",
     "provider mass and energy closure with residuals and initial/final inventory",
+    "explicit mass_basis_id (or provider_meta.native_inventory_owner) for every provider mass ledger; inventory ownership must not be inferred",
     "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
     "independent physical validation or a declared validation gap for the release boundary",
 )
