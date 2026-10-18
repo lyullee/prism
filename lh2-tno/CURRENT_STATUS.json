@@ -1996,7 +1996,7 @@
   "current_union_facility_assessment_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json",
-  "current_union_full_test_count": 1529,
+  "current_union_full_test_count": 1559,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261115/ijhe_objective_coverage_current_union_receptor_geometry_with_preslhy_reverified_and_provider_intake.json",
   "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 38 objective checks, core blockers 0, strict evidence gates 4 remain blocked; provider intake 44/44, facility evidence worklist 44/44, header-bound bridge and generic current/forecast quantitative evaluation PASS",
   "current_union_risk_atom_chain_audit_record": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_chain_closure_audit.json",
@@ -3156,7 +3156,7 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 1529,
+  "full_portable_test_count_latest": 1559,
   "full_portable_test_status_latest": "1559 passed, 1 warning; authoritative union snapshot count; latest local full suite separately recorded as 1559 passed, 1 warning",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
