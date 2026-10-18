@@ -6834,4 +6834,7 @@
   "current_union_rebuilt_facility_strict_uncomputed_case_count": 23,
   "current_union_rebuilt_facility_operator_limited_case_count": 22,
   "current_union_rebuilt_facility_fresh_physics_executed": false
+  ,
+  "current_union_rebuilt_ijhe_audit_record": "results/20261115/ijhe_completion_audit_rebuilt_current.json",
+  "current_union_rebuilt_ijhe_audit_status": "INCOMPLETE_EVIDENCE; supplementary 21-check audit; 7 blockers; not the authoritative 62-check audit"
 }
