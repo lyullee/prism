@@ -112,3 +112,10 @@ and [`facility_chain_closure_audit_rebuilt_current_union.json`](../results/20261
 SLABx-LH2 is treated as the frozen validated consequence component. The open
 gates concern equipment release evidence, termination/inventory closure, and
 facility-level qualification around that fixed component.\n
+
+The five inventory-depletion extension events were rechecked separately. Their
+10 weather cases carry embedded provider identities and mass/termination ledgers,
+but no materialized `prism.resolved_release.v1` files or packet-evidence rows
+were found. This is recorded in
+[`inventory_extension_packet_gap_recheck_current.json`](../results/20261115/inventory_extension_packet_gap_recheck_current.json)
+and leaves those event chains diagnostic-only.

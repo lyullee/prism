@@ -1,0 +1,336 @@
+{
+  "schema_version": "prism.inventory_extension_packet_gap_recheck.v1",
+  "status": "COMPUTED_EXTENSION_WITHOUT_MATERIALIZED_PACKET_EVIDENCE",
+  "diagnostic_only": true,
+  "campaign_result": "results/20261115/native_full_scope_union_assessment_rebound_current/inventory_depletion_rebound_result.json",
+  "campaign_result_sha256": "ec90132c4b97597700c09e8d311ec1f1362a2310e8b0a5dedfc4ebb5c43947b5",
+  "campaign_status": "DECLARED_SCOPE_EXECUTED",
+  "event_count": 5,
+  "case_count": 10,
+  "provider_packet_identity_case_count": 10,
+  "provider_packet_evidence_entry_count": 0,
+  "qualified_provider_packet_case_count": 0,
+  "provider_packet_promoted": false,
+  "inventory_event_ids": [
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%"
+  ],
+  "case_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+      ],
+      "duration_s": [
+        1.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        1.2125616572864818e-07
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+      ],
+      "duration_s": [
+        1.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        1.2125616572864818e-07
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+      ],
+      "duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        4.022010171050504e-07
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+      ],
+      "duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        4.022010171050504e-07
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+      ],
+      "duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6216519132821583e-06
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+      ],
+      "duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6216519132821583e-06
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+      ],
+      "duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.1140345784364108e-05
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+      ],
+      "duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.1140345784364108e-05
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+      ],
+      "duration_s": [
+        0.0625
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6236186797952155e-05
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "annual_condition_id": "generic-lh2-full-scope-example/inventory-depletion/D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+      ],
+      "duration_s": [
+        0.0625
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6236186797952155e-05
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "termination_provenances": [
+        "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+      ],
+      "embedded_packet_identity_present": true,
+      "materialized_resolved_release_file_found": false,
+      "packet_evidence_entry_present": false
+    }
+  ],
+  "catalog_scan": "results/20261115/facility_chain_packet_evidence_rebuilt_current.json",
+  "catalog_scan_status": "REBUILT_BASE_PLUS_VERTICAL_DIAGNOSTIC",
+  "catalog_scan_event_count": 34,
+  "catalog_scan_matched_event_count": 28,
+  "catalog_scan_missing_inventory_event_count": 5,
+  "catalog_scan_missing_event_ids": [
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%"
+  ],
+  "source_model_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "source_model_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "frequency_inference_performed": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The extension campaign contains embedded provider packet identities and termination/mass ledger values, but no materialized resolved_release files or packet-evidence rows were found for the five inventory-depletion event identities. The values remain diagnostic and do not close the facility release-to-risk chain.",
+  "required_next_evidence": [
+    "materialized prism.resolved_release.v1 file per area-bin event",
+    "digest-bound provider verification/qualification sidecar",
+    "independent facility release-to-damage validation"
+  ]
+}

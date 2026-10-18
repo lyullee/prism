@@ -5411,5 +5411,11 @@
   "current_union_rebuilt_facility_fresh_physics_executed": false
   ,
   "current_union_rebuilt_ijhe_audit_record": "results/20261115/ijhe_completion_audit_rebuilt_current.json",
-  "current_union_rebuilt_ijhe_audit_status": "INCOMPLETE_EVIDENCE; supplementary 21-check audit; 7 blockers; not the authoritative 62-check audit"
+  "current_union_rebuilt_ijhe_audit_status": "INCOMPLETE_EVIDENCE; supplementary 21-check audit; 7 blockers; not the authoritative 62-check audit",
+  "current_inventory_extension_packet_gap_recheck_record": "results/20261115/inventory_extension_packet_gap_recheck_current.json",
+  "current_inventory_extension_packet_gap_recheck_status": "COMPUTED_EXTENSION_WITHOUT_MATERIALIZED_PACKET_EVIDENCE; 5 events/10 cases contain embedded provider identities and mass ledgers, but 0 packet-evidence rows and 0 materialized resolved_release files; facility chain remains open",
+  "current_inventory_extension_packet_gap_recheck_provider_identity_case_count": 10,
+  "current_inventory_extension_packet_gap_recheck_materialized_packet_count": 0,
+  "current_inventory_extension_packet_gap_recheck_source_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "current_inventory_extension_packet_gap_recheck_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74"
 }
