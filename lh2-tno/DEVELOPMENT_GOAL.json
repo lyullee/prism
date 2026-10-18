@@ -702,8 +702,8 @@
   "external_model_native_contract_audit_provider_packet_promoted": false,
   "external_model_native_contract_audit_frequency_inference": false,
   "external_model_native_contract_audit_facility_qra_claim": false,
-  "external_model_native_contract_audit_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
-  "external_model_native_contract_audit_test_status": "7 native exports; 7 adapter contracts; external model source HEAD 16f7a4b38d16295ad481492ec90af7903125d4ee; worktree dirty; no qualified packet promotion",
+  "external_model_native_contract_audit_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "external_model_native_contract_audit_test_status": "7 native exports; 7 adapter contracts; external model source HEAD 7072374c59b726f4e938cd37e7695684ddc70b68; worktree dirty; no qualified packet promotion",
   "equipment_state_snapshot_contract_implemented": true,
   "equipment_state_snapshot_contract_module": "src/lh2_tno/state_snapshot.py",
   "equipment_state_snapshot_contract_schema": "prism.equipment_state_snapshot.v1",
@@ -1671,7 +1671,7 @@
   "diagnostic_campaign_binding_latest_test_status": "latest refined campaign binding regenerated; structural event/case/risk-atom check passed; packet digest equality proven for 18/24 events",
   "ijhe_completion_audit_latest_diagnostic_binding_status": "PASS diagnostic-only; current 24-event campaign structurally reaches 24 cases and 96 risk atoms; packet identity consumed false",
   "external_model_native_contract_audit_native_accident_export_missing_components": [],
-  "external_model_native_contract_audit_external_source_commit": "16f7a4b",
+  "external_model_native_contract_audit_external_source_commit": "7072374",
   "lh2dt_native_accident_export_implementation_status": "DynamicVaporizer, DynamicReliquefier, StrokeLimitedCommandedValve, VentStack, LayeredTank, DynamicHEMPipe and MappedPump native export_accident_history(request) implemented; all seven bound external equipment classes have an explicit accident boundary, while qualified provider promotion remains withheld",
   "lh2dt_native_accident_export_schema": "prism.external_accident_history.v1",
   "lh2dt_native_accident_export_external_repository_commit": "3d9b982",
@@ -5370,5 +5370,15 @@
   "literature_frequency_distribution_current_record": "results/20261115/frequency_distribution_uncertainty_current.json",
   "literature_frequency_distribution_current_status": "DIAGNOSTIC_FREQUENCY_DISTRIBUTION_COMPLETED; two correlation scenarios; 1000 deterministic draws; frequency-model credible interval true; facility credible interval false; fresh physics false",
   "literature_frequency_distribution_current_sha256": "5c4b35889117bc977a15ae06a70838c8c34fc8b23d53eb06801cea8d9d4bd334",
-  "literature_frequency_distribution_current_policy": "Reweight saved risk atoms using reviewed catalogue lognormal distributions; hold fixed events at published rates; no field-frequency inference, provider qualification, physical-validation promotion, or facility IR/F-N promotion."
+  "literature_frequency_distribution_current_policy": "Reweight saved risk atoms using reviewed catalogue lognormal distributions; hold fixed events at published rates; no field-frequency inference, provider qualification, physical-validation promotion, or facility IR/F-N promotion.",
+  "external_model_native_contract_audit_current_recheck_record": "results/20261115/lh2dt_native_contract_audit_7072374_recheck.json",
+  "external_model_native_contract_audit_current_recheck_external_head": "7072374c59b726f4e938cd37e7695684ddc70b68",
+  "external_model_native_contract_audit_current_recheck_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
+  "external_model_native_model_root_review_current_record": "results/20261115/external_lh2_model_root_review_current_7072374.json",
+  "external_model_native_model_root_review_current_status": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+  "external_model_native_model_root_review_current_provider_packet_promoted": false,
+  "external_model_native_model_root_review_current_facility_qra_claim": false,
+  "external_model_recheck_status_consistency_record": "results/20261115/status_consistency_external_model_recheck_20261018.json",
+  "external_model_recheck_status_consistency_status": "CONSISTENT; 22 checks; 0 blockers; facility IR/F-N promotion false"
 }
+

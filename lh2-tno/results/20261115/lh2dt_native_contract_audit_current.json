@@ -2,17 +2,17 @@
   "schema_version": "prism.external_model_contract_audit.v1",
   "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\_external_lh2dt_models_20261016",
-  "external_model_source_digest": "cef8e1965e54a1156cc914518fadf5aa955683b22f30212b6f85cf67400d1843",
+  "external_model_source_digest": "3b186dff343bd787567033e13b62954a748bce0f12ba26b981d03bafe3d02d74",
   "external_model_git_provenance": {
     "repository_detected": true,
-    "head": "16f7a4b38d16295ad481492ec90af7903125d4ee",
+    "head": "7072374c59b726f4e938cd37e7695684ddc70b68",
     "worktree_clean": false,
     "dirty_paths": [
       "docs/benchmarks/nasa_tn_d4171_hem_validation.md"
     ],
     "status": "GIT_WORKTREE_DIRTY"
   },
-  "binding_catalog_sha256": "a697d0b63853aef660ad4b27bb8fe1bc2a63e0b8bec4d2dd99a43f433f3c3461",
+  "binding_catalog_sha256": "0756bc3b172f88263e9ecc3594dee818478d5a9d10c2397790bb960a17ed2025",
   "binding_count": 8,
   "native_accident_export_component_count": 7,
   "native_accident_export_missing_components": [],
