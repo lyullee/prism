@@ -5130,7 +5130,12 @@
   "external_lh2dt_release_boundary_audit_recheck_blocked_case_count": 23,
   "external_lh2dt_release_boundary_audit_recheck_provider_qualification_claim": false,
   "external_lh2dt_release_boundary_audit_recheck_facility_qra_promotion": false,
-  "external_lh2dt_full_scope_worktree_recheck_known_contribution_annual_ir_low_high": {"worker-01":[3.7804000000000134e-06,3.7804000662898812e-06]},
+  "external_lh2dt_full_scope_worktree_recheck_known_contribution_annual_ir_low_high": {
+    "worker-01": [
+      3.7804000000000134e-06,
+      3.7804000662898812e-06
+    ]
+  },
   "external_lh2dt_full_scope_worktree_recheck_declared_scope_ir_available": false,
   "external_lh2dt_full_scope_worktree_recheck_total_facility_ir_available": false,
   "external_lh2dt_full_scope_worktree_recheck_provider_qualified_case_count": 0,
@@ -5138,6 +5143,27 @@
   "external_lh2dt_full_scope_worktree_recheck_physical_validation_claim": false,
   "external_lh2dt_full_scope_worktree_recheck_facility_qra_claim": false,
   "external_lh2dt_full_scope_worktree_recheck_authoritative_union_rebound": false,
-  "external_lh2dt_full_scope_worktree_recheck_policy": "Record the current dirty-source/full-scope replay as diagnostic evidence only; do not replace the authoritative 34-event/44-case/176-risk-atom union or promote facility QRA until source commit, provider qualification sidecars, independent physical validation and scope closure are complete."
-
+  "external_lh2dt_full_scope_worktree_recheck_policy": "Record the current dirty-source/full-scope replay as diagnostic evidence only; do not replace the authoritative 34-event/44-case/176-risk-atom union or promote facility QRA until source commit, provider qualification sidecars, independent physical validation and scope closure are complete.",
+  "ijhe_completion_audit_current_source_diagnostic_20261018_record": "examples/external_lh2dt_ijhe_completion_audit_current_source_diagnostic_20261018.json",
+  "ijhe_completion_audit_current_source_diagnostic_20261018_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_current_source_diagnostic_20261018_check_count": 34,
+  "ijhe_completion_audit_current_source_diagnostic_20261018_pass_count": 30,
+  "ijhe_completion_audit_current_source_diagnostic_20261018_blocked_count": 4,
+  "ijhe_completion_audit_current_source_diagnostic_20261018_blocking_reasons": [
+    "facility release boundary is not closed across all declared cases",
+    "only synthetic or screening provider releases are available for this campaign",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ],
+  "ijhe_completion_audit_current_source_diagnostic_20261018_physical_validation_claim": false,
+  "ijhe_completion_audit_current_source_diagnostic_20261018_complete_facility_qra_claim": false,
+  "ijhe_completion_audit_current_source_diagnostic_20261018_sha256": "ba0848353a05665a5ea8cff0d9c74bf24f7e2b77a497888edd9a45ae08035924",
+  "hazop_event_mode_binding_current_recheck_record": "examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json",
+  "hazop_event_mode_binding_current_recheck_status": "HAZOP_EVENT_MODE_BINDING_COMPLETE; 34/34 explicit rows; no mode/scenario/frequency inference",
+  "hazop_event_mode_binding_current_recheck_event_count": 34,
+  "hazop_event_mode_binding_current_recheck_mode_bound_event_count": 34,
+  "hazop_event_mode_binding_current_recheck_mode_inference_performed": false,
+  "hazop_event_mode_binding_current_recheck_scenario_inference_performed": false,
+  "hazop_event_mode_binding_current_recheck_frequency_inference_performed": false,
+  "hazop_event_mode_binding_current_recheck_facility_qra_promotion": false
 }

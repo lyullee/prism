@@ -95,3 +95,6 @@ python scripts/run_native_full_scope_union_assessment.py `
   --extension-state-snapshot-audit results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/extension_state_snapshot_coverage.json `
   --output-dir results/20261115/native_full_scope_union_assessment_external_base_recheck_current
 ```
+## Current-source completion-gate recheck
+
+The current-source IJHE completion audit was rebuilt after the release-boundary catalog was corrected. It consumes the latest 34-event union and 44-case boundary audit and records **30 PASS / 4 BLOCKED** checks. The HAZOP event-mode contract is now complete for all 34 rows: each row is explicitly bound to a component, operating mode, scenario, and release mode, with mode/scenario/frequency inference disabled and missing modes withheld. The four remaining blockers are release-boundary closure, qualified provider release packets, independent provider/physical-validation evidence, and facility IR/F-N availability. See [`external_lh2dt_ijhe_completion_audit_current_source_diagnostic_20261018.json`](../examples/external_lh2dt_ijhe_completion_audit_current_source_diagnostic_20261018.json) and [`external_lh2dt_hazop_mode_binding_recheck_20261018.json`](../examples/external_lh2dt_hazop_mode_binding_recheck_20261018.json). This record is diagnostic and does not promote facility QRA.
