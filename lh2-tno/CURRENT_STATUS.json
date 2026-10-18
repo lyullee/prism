@@ -3157,7 +3157,7 @@
     "facility_ir_fn_available"
   ],
   "full_portable_test_count_latest": 1529,
-  "full_portable_test_status_latest": "1529 passed, 1 warning; authoritative union snapshot count; latest local recheck separately recorded as 1540 passed, 1 warning",
+  "full_portable_test_status_latest": "1529 passed, 1 warning; authoritative union snapshot count; latest local full suite separately recorded as 1556 passed, 1 warning",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -6701,7 +6701,7 @@
   "external_equipment_model_provider_response_facility_qra_claim": false,
   "external_equipment_model_provider_response_gap_policy": "Missing input_origin, evidence_status, qualification sidecars, non-strict termination, or mass-ledger fields are reported per response and never inferred; SLABx-LH2 remains a separate CLOSED_VALIDATED_COMPONENT.",
   "latest_local_full_suite_recheck_count": 1556,
-  "latest_local_full_suite_recheck_status": "1555 passed, 1 warning; provider manifest synchronization regression recheck",
+  "latest_local_full_suite_recheck_status": "1556 passed, 1 warning; mass-basis drift fail-closed regression recheck",
   "external_equipment_model_release_rebind_audit_record": "results/20261018/external_equipment_model_release_rebind_audit_20261018.json",
   "external_equipment_model_release_rebind_audit_sha256": "1CBD2CFEC8AA05658C9783A0A3BF512AAC99643E62539D5A3C6B6B52C461CA7C",
   "external_equipment_model_release_rebind_audit_status": "DIAGNOSTIC_RELEASE_REBIND_ONLY; 7/7 strict release contracts validate; 4 provider mass ledgers attached; 1 isolation ledger attached; 0 pressure-equalization ledgers attached; 2 strict termination candidates; promotion withheld",
