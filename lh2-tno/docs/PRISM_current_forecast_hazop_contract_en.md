@@ -43,6 +43,12 @@ facility-total availability, and qualified-QRA availability without requiring
 the UI to traverse the full campaign ledger. A missing field is reported as
 `null`; it is never changed to an available or zero-risk result.
 
+When a forecast evaluator stores one ledger inside each predicted campaign,
+the forecast summary collects those nested ledgers and requires every nested
+gate to be open before reporting an aggregate `true`. It also reports the
+ledger count and sums the explicitly declared provider-boundary case counts;
+missing nested ledgers remain visible rather than being treated as zero.
+
 `forecast` contains one row per predicted component and time. A quantitative
 evaluator is called only when a new HAZOP condition is reached (`entry`) or at
 every active step (`each_step`). The evaluator owns the equipment release,
